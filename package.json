@@ -2,7 +2,7 @@
   "name": "vue-form-craft",
   "version": "0.0.0",
   "private": true,
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -29,6 +29,8 @@
     "eslint-plugin-vue": "^9.17.0",
     "less": "^4.2.0",
     "prettier": "^3.0.3",
-    "vite": "^5.0.10"
+    "vite": "^5.0.10",
+    "ora": "^5.1.0",
+    "scp2": "^0.5.0"
   }
 }
