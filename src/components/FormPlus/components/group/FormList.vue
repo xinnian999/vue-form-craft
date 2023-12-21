@@ -1,7 +1,7 @@
 <template>
   <div id="formList">
     <template v-if="mode === 'inline'">
-      <el-form-item v-for="item in list" :key="item.key" class="list-item">
+      <el-form-item v-for="(item, index) in list" :key="item.key" class="list-item">
         <div class="list-item-content">
           <el-space>
             <form-item
@@ -15,7 +15,7 @@
 
           <el-button
             v-if="allowReduce"
-            @click="reduce(item)"
+            @click="handleReduceItem(index)"
             :icon="Minus"
             circle
             type="primary"
@@ -32,7 +32,7 @@
             <span>{{ title + index }}</span>
             <el-button
               v-if="allowReduce"
-              @click="reduce(item)"
+              @click="handleReduceItem(index)"
               :icon="Minus"
               circle
               type="primary"
@@ -50,11 +50,7 @@
       </el-card>
     </template>
 
-    <el-table
-      :data="list"
-      style="width: 100%"
-      v-if="mode === 'table' && list.length"
-    >
+    <el-table :data="list" style="width: 100%" v-if="mode === 'table' && list.length">
       <el-table-column
         :prop="item.name"
         :label="item.label"
@@ -66,7 +62,7 @@
         <template #default="record">
           <el-button
             v-if="allowReduce"
-            @click="reduce(record.row)"
+            @click="handleReduceItem(record.$index)"
             :icon="Minus"
             circle
             type="primary"
@@ -79,7 +75,7 @@
     <div>
       <el-button
         v-if="allowAdd && !isMax"
-        @click="add"
+        @click="handleAddItem"
         :icon="Plus"
         circle
         type="primary"
@@ -90,66 +86,70 @@
 </template>
 
 <script setup lang="jsx">
-import { computed, defineProps, defineEmits } from "vue";
-import { Plus, Minus } from "@element-plus/icons-vue";
-import { getRandomId } from "../../utils";
-import FormItem from "../FormItem.vue";
+import { computed, defineProps, defineEmits } from 'vue'
+import { Plus, Minus } from '@element-plus/icons-vue'
+import { getRandomId } from '../../utils'
+import FormItem from '../FormItem.vue'
 
 const props = defineProps({
   modelValue: Array,
   children: Array,
   allowAdd: {
     default: true,
-    type: Boolean,
+    type: Boolean
   },
   allowReduce: {
     default: true,
-    type: Boolean,
+    type: Boolean
   },
   defaultLineCount: {
     default: 0,
-    type: Number,
+    type: Number
   },
   maxLines: {
     default: 999,
-    type: Number,
+    type: Number
   },
   mode: {
-    default: "table",
-    type: String,
+    default: 'table',
+    type: String
   },
   title: {
-    default: "卡片",
-    type: String,
+    default: '卡片',
+    type: String
   },
-});
-const emit = defineEmits(["update:modelValue"]);
+  newItemDefaults: {
+    type: Function,
+    default: () => ({})
+  }
+})
+const emit = defineEmits(['update:modelValue'])
 
 const list = computed({
   get() {
-    return props.modelValue || [];
+    return props.modelValue || []
   },
   set(val) {
-    console.log(val);
-    emit("update:modelValue", val);
-  },
-});
+    console.log(val)
+    emit('update:modelValue', val)
+  }
+})
 
 const isMax = computed(() => {
-  return list.value.length >= props.maxLines;
-});
+  return list.value.length >= props.maxLines
+})
 
-const add = () => {
+const handleAddItem = () => {
   if (isMax.value) {
-    return;
+    return
   }
-  emit("update:modelValue", [...list.value, { key: getRandomId(10) }]);
-};
+  emit('update:modelValue', [...list.value, props.newItemDefaults(list.value.length)])
+}
 
-const reduce = (item) => {
-  const newData = list.value.filter((v) => v.key !== item.key);
-  emit("update:modelValue", newData);
-};
+const handleReduceItem = (index) => {
+  const newData = list.value.filter((v, i) => i !== index)
+  emit('update:modelValue', newData)
+}
 
 const formatter = (item, data) => {
   return (
@@ -160,8 +160,8 @@ const formatter = (item, data) => {
       onUpdate:modelValue={(newValue) => (data[item.name] = newValue)}
       style={{ marginBottom: 0 }}
     />
-  );
-};
+  )
+}
 </script>
 
 <style lang="less">
