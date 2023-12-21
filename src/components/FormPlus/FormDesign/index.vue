@@ -72,12 +72,33 @@ provide('$schema', schema)
 </script>
 
 <style lang="less">
+::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width: 7px;
+  /*高宽分别对应横竖滚动条的尺寸*/
+  background-color: #fff;
+  // position: fixed;
+}
+
+::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  box-shadow: none;
+  background: transparent;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 10px;
+  background-color: #ccc;
+}
 #formDesign {
   display: flex;
   height: 100%;
+  box-sizing: border-box;
 
   .formItemList {
-    width: 300px;
+    width: 20%;
     padding: 10px;
     background-color: #fff;
   }
@@ -93,7 +114,7 @@ provide('$schema', schema)
     padding-bottom: 20px;
   }
   .formItemOptions {
-    width: 400px;
+    width: 25%;
     overflow: auto;
     padding: 20px;
     background-color: #fff;
