@@ -26,68 +26,68 @@
       fallback-class="fallback"
       handle=".canvas-move"
     >
-      <template #item="{ element, index }">
-        <CanvasRender :element="element" :index="index" />
+      <template #item="{ element }">
+        <CanvasRender :element="element" />
       </template>
     </draggable>
   </el-form>
 </template>
 
 <script setup lang="jsx">
-import { computed, provide, inject, ref } from "vue";
-import draggable from "vuedraggable";
-import { Plus } from "@element-plus/icons-vue";
-import { changeItems } from "../../utils";
-import CanvasRender from "./CanvasRender.vue";
+import { computed, provide, inject, ref } from 'vue'
+import draggable from 'vuedraggable'
+import { Plus } from '@element-plus/icons-vue'
+import { changeItems } from '../../utils'
+import CanvasRender from './CanvasRender.vue'
 
-const schema = inject("$schema");
+const schema = inject('$schema')
 
-const current = inject("$current");
+const current = inject('$current')
 
-const hoverId = ref("");
+const hoverId = ref('')
 
-provide("hoverId", hoverId);
+provide('hoverId', hoverId)
 
 const list = computed({
   get() {
-    return schema.items;
+    return schema.items
   },
   set(value) {
-    Object.assign(schema, { items: value });
-  },
-});
+    Object.assign(schema, { items: value })
+  }
+})
 
 const handleAdd = () => {
-  list.value = changeItems(list.value);
-};
+  list.value = changeItems(list.value)
+}
 
 const filterId = (items, elementId) => {
   const data = items.filter((item) => {
-    return item.onlyId !== elementId;
-  });
+    return item.onlyId !== elementId
+  })
 
   return data.map((item) => {
     if (item.children) {
       return {
         ...item,
-        children: filterId(item.children, elementId),
-      };
+        children: filterId(item.children, elementId)
+      }
     }
-    return item;
-  });
-};
+    return item
+  })
+}
 
 const handleDelete = (element) => {
-  list.value = filterId(list.value, element.onlyId);
-};
+  list.value = filterId(list.value, element.onlyId)
+}
 
 const handleSelect = (element) => {
-  current.value = element;
-};
+  current.value = element
+}
 
-provide("handleAdd", handleAdd);
-provide("handleSelect", handleSelect);
-provide("handleDelete", handleDelete);
+provide('handleAdd', handleAdd)
+provide('handleSelect', handleSelect)
+provide('handleDelete', handleDelete)
 </script>
 
 <style lang="less">

@@ -6,12 +6,7 @@
     @mouseleave.stop="handleHoverLeave"
   >
     <div class="actions-left-top" v-if="element.onlyId === current.onlyId">
-      <el-button
-        class="canvas-move"
-        :icon="Pointer"
-        size="small"
-        type="primary"
-      ></el-button>
+      <el-button class="canvas-move" :icon="Pointer" size="small" type="primary"></el-button>
     </div>
     <div class="actions-right-bottom" v-if="element.onlyId === current.onlyId">
       <el-button
@@ -24,52 +19,46 @@
 
     <canvas-group v-if="element.children" v-bind="element" :hidden="false" />
 
-    <form-item
-      v-else
-      v-bind="element"
-      :props="checkProps(element.props)"
-      class="form-item-btn"
-    />
+    <form-item v-else v-bind="element" :props="checkProps(element.props)" class="form-item-btn" />
   </div>
 </template>
 
 <script setup lang="jsx">
-import { defineProps, inject, computed } from "vue";
-import { omit } from "lodash";
-import { Delete, Pointer } from "@element-plus/icons-vue";
-import CanvasGroup from "./CanvasGroup.vue";
-import { FormItem } from "../../components";
+import { defineProps, inject, computed } from 'vue'
+import { omit } from 'lodash'
+import { Delete, Pointer } from '@element-plus/icons-vue'
+import CanvasGroup from './CanvasGroup.vue'
+import { FormItem } from '../../components'
 
 const props = defineProps({
-  element: Object,
-  index: null,
-});
+  element: Object
+})
 
-const current = inject("$current");
+const current = inject('$current')
 
-const handleSelect = inject("handleSelect");
+const handleSelect = inject('handleSelect')
 
-const handleDelete = inject("handleDelete");
+const handleDelete = inject('handleDelete')
 
-const hoverId = inject("hoverId");
+const hoverId = inject('hoverId')
 
 const canvasItemClass = computed(() => ({
-  "canvas-item": true,
+  'canvas-item': true,
   active: props.element.onlyId === current.value.onlyId,
-  hover: props.element.onlyId === hoverId.value,
-}));
+  hover: props.element.onlyId === hoverId.value
+}))
 
 const handleHoverEnter = () => {
-  hoverId.value = props.element.onlyId;
-};
+  hoverId.value = props.element.onlyId
+}
 
 const handleHoverLeave = () => {
-  hoverId.value = "";
-};
+  hoverId.value = ''
+}
 
 const checkProps = (props) => {
-  return omit(props, ["multiple", "autoSelectedFirst"]);
-};
+  return omit(props, ['multiple', 'autoSelectedFirst'])
+}
 </script>
 
 <style lang="less">

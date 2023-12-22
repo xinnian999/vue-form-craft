@@ -72,26 +72,6 @@ provide('$schema', schema)
 </script>
 
 <style lang="less">
-::-webkit-scrollbar {
-  /*滚动条整体样式*/
-  width: 7px;
-  /*高宽分别对应横竖滚动条的尺寸*/
-  background-color: #fff;
-  // position: fixed;
-}
-
-::-webkit-scrollbar-track {
-  /*滚动条里面轨道*/
-  box-shadow: none;
-  background: transparent;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  /*滚动条里面小方块*/
-  border-radius: 10px;
-  background-color: #ccc;
-}
 #formDesign {
   display: flex;
   height: 100%;
@@ -123,5 +103,26 @@ provide('$schema', schema)
   .editor {
     height: 70vh;
   }
+}
+
+::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width: 7px;
+  /*高宽分别对应横竖滚动条的尺寸*/
+  background-color: #fff;
+  // position: fixed;
+}
+
+::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  box-shadow: none;
+  background: transparent;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 10px;
+  background-color: #ccc;
 }
 </style>
