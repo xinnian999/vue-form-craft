@@ -11,7 +11,7 @@ const props = defineProps({
 
 const icon = ref(null)
 
-import(`../icons/${props.name}.vue`).then((module) => {
+import(`./icons/${props.name}.vue`).then((module) => {
   icon.value = module.default
 })
 </script>

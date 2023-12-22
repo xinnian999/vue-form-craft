@@ -1,9 +1,6 @@
 <template>
   <div class="attrForm">
-    <schema-form
-      v-model="current"
-      :schema="attrs[current.component]"
-    ></schema-form>
+    <schema-form v-model="current" :schema="attrs[current.component]"></schema-form>
 
     <div>
       <el-button @click="handleEdit">编辑配置文本</el-button>
@@ -23,18 +20,18 @@
 </template>
 
 <script setup lang="jsx">
-import { inject, ref } from "vue";
-import JsonEditorVue from "json-editor-vue3";
-import * as attrs from "./attrs";
-import { SchemaForm } from "../../components";
+import { inject, ref } from 'vue'
+import JsonEditorVue from 'json-editor-vue3'
+import * as attrs from '../Menus/attrs'
+import { SchemaForm } from '../../components'
 
-const current = inject("$current");
+const current = inject('$current')
 
-const editVisible = ref(false);
+const editVisible = ref(false)
 
 const handleEdit = () => {
-  editVisible.value = true;
-};
+  editVisible.value = true
+}
 </script>
 
 <style scoped lang="less">
@@ -44,3 +41,4 @@ const handleEdit = () => {
   }
 }
 </style>
+../Menus/attrs

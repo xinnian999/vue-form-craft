@@ -24,7 +24,7 @@
 <script setup lang="jsx">
 import draggable from 'vuedraggable'
 import menus from './menus'
-import { IconRender } from '../../components'
+import IconRender from './IconRender.vue'
 </script>
 
 <style scoped lang="less">

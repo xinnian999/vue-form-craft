@@ -5,20 +5,21 @@
 </template>
 
 <script setup lang="jsx">
-import { computed, inject, ref } from "vue";
-import { SchemaForm } from "../../components";
-import formOptions from "./formOptions";
+import { computed, inject } from 'vue'
+import { SchemaForm } from '../../components'
+import formOptions from './formOptions'
 
-const schema = inject("$schema");
+const schema = inject('$schema')
 
+//修改schema除了items的其他属性
 const form = computed({
   get() {
-    return schema;
+    return schema
   },
   set(value) {
-    Object.assign(schema, value);
-  },
-});
+    Object.assign(schema, value)
+  }
+})
 </script>
 
 <style scoped lang="less">
