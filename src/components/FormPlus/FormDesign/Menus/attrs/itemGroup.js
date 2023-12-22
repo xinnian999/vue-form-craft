@@ -1,3 +1,3 @@
 export default {
-  items: [{ label: "字段name", component: "input", name: "name" }],
-};
+  items: [{ label: '字段标识', component: 'input', name: 'name' }]
+}

@@ -9,13 +9,13 @@ export default {
       onlyId: 'form-AC1d'
     },
     {
-      label: '字段name',
+      label: '字段标识',
       component: 'input',
       name: 'name',
       onlyId: 'form-mb7V'
     },
     {
-      label: '默认值',
+      label: '初始值',
       component: 'input',
       name: 'initialValue',
       onlyId: 'form-4MUd'
