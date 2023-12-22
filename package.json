@@ -2,7 +2,7 @@
   "name": "vue-form-craft",
   "version": "0.0.0",
   "private": true,
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -32,5 +32,16 @@
     "vite": "^5.0.10",
     "ora": "^5.1.0",
     "scp2": "^0.5.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/vue-form-craft.umd.js",
+  "module": "./dist/vue-form-craft.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/vue-form-craft.es.js",
+      "require": "./dist/vue-form-craft.umd.js"
+    }
   }
 }

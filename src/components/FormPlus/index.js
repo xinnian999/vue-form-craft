@@ -1,6 +1,6 @@
-import { SchemaForm } from "./components";
-import FormDesign from "./FormDesign";
+import { SchemaForm } from './components'
+import FormDesign from './FormDesign/index.vue'
 
-export { SchemaForm, FormDesign };
+export { SchemaForm, FormDesign }
 
-export default SchemaForm;
+export default SchemaForm
