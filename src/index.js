@@ -12,7 +12,7 @@ const install = function (App) {
   App.use(ElementPlus)
 
   components.forEach((component) => {
-    App.component(component.name, component)
+    App.component(component.__name, component)
   })
 }
 export default { install }
