@@ -35,7 +35,7 @@
 
 <script setup lang="jsx">
 import { computed, provide, inject, ref } from 'vue'
-import draggable from 'vuedraggable'
+import draggable from 'vuedraggable-es'
 import { Plus } from '@element-plus/icons-vue'
 import { changeItems } from '../../utils'
 import CanvasRender from './CanvasRender.vue'

@@ -22,117 +22,108 @@
 </template>
 
 <script setup>
-import {
-  defineProps,
-  defineEmits,
-  ref,
-  reactive,
-  computed,
-  watch,
-  onMounted,
-  inject,
-} from "vue";
-import { isEqual, isPlainObject, debounce } from "lodash";
-import request from "@/utils/request";
+import { defineProps, defineEmits, ref, reactive, computed, watch, onMounted, inject } from 'vue'
+import { isEqual, isPlainObject, debounce } from 'lodash'
+const request = () => {}
 
 const props = defineProps({
   modelValue: {},
   options: {
     type: Array,
-    default: () => [],
+    default: () => []
   },
   placeholder: {
     type: String,
-    default: "请选择",
+    default: '请选择'
   },
   disabled: {
     type: Boolean,
-    default: false,
+    default: false
   },
   multiple: {
     type: Boolean,
-    default: false,
+    default: false
   },
   mode: {
     type: String,
-    default: "static",
+    default: 'static'
   },
   labelKey: {
     type: String,
-    default: "label",
+    default: 'label'
   },
   valueKey: {
     type: String,
-    default: "value",
+    default: 'value'
   },
   autoSelectedFirst: {
     type: Boolean,
-    default: false,
+    default: false
   },
   api: Object,
   name: String,
   size: {
     type: String,
-    default: "default",
+    default: 'default'
   },
   style: null,
-  filterKey: { default: "filter", type: String },
+  filterKey: { default: 'filter', type: String },
   formatter: Function,
-  sort: Boolean,
-});
+  sort: Boolean
+})
 
-const emits = defineEmits(["update:modelValue", "onChangeSelect"]);
+const emits = defineEmits(['update:modelValue', 'onChangeSelect'])
 
 const selectVal = computed({
   get() {
-    return props.modelValue;
+    return props.modelValue
   },
   set(val) {
-    emits("update:modelValue", val);
-  },
-});
+    emits('update:modelValue', val)
+  }
+})
 
-const selectOptions = ref([]);
+const selectOptions = ref([])
 
-const loading = ref(false);
+const loading = ref(false)
 
 const stateParams = reactive({
   // pageNum: 1,
   // pageSize: 10,
   // filters: {},
   // orderBys: {},
-});
+})
 
 const fetchData = debounce(async () => {
-  const { baseURL, url, method, params, data } = props.api;
-  loading.value = true;
+  const { baseURL, url, method, params, data } = props.api
+  loading.value = true
 
   const { list } = await request({
     baseURL,
     url,
     method,
     params: { ...params, ...stateParams },
-    data: { ...data, ...stateParams },
-  });
+    data: { ...data, ...stateParams }
+  })
 
   selectOptions.value = list.map((item) => {
     if (isPlainObject(item)) {
-      return item;
+      return item
     }
-    return { label: item, value: item };
-  });
-  loading.value = false;
-}, 300);
+    return { label: item, value: item }
+  })
+  loading.value = false
+}, 300)
 
 onMounted(() => {
-  const { mode, options } = props;
-  if (mode === "static") {
-    selectOptions.value = options;
+  const { mode, options } = props
+  if (mode === 'static') {
+    selectOptions.value = options
   }
-  if (mode === "remote") {
-    fetchData();
+  if (mode === 'remote') {
+    fetchData()
   }
-});
+})
 
 watch(
   () => props.api,
@@ -140,60 +131,57 @@ watch(
     //bug：这里发生只api内存地址变化，实际api无变化也会触发监听。暂时使用深层对比解决
     if (!isEqual(newVal, oldVal)) {
       // console.log(newVal, oldVal);
-      fetchData();
+      fetchData()
     }
   }
-);
+)
 
 watch(selectOptions, (newVal) => {
-  const { autoSelectedFirst, modelValue, valueKey, multiple, sort } = props;
+  const { autoSelectedFirst, modelValue, valueKey, multiple, sort } = props
   // console.log(newVal);
   // 自动选中第一项
   if (autoSelectedFirst && newVal.length && !modelValue?.length) {
-    emits(
-      "update:modelValue",
-      multiple ? [newVal[0][valueKey]] : newVal[0][valueKey]
-    );
-    selectChange(multiple ? [newVal[0][valueKey]] : newVal[0][valueKey]);
+    emits('update:modelValue', multiple ? [newVal[0][valueKey]] : newVal[0][valueKey])
+    selectChange(multiple ? [newVal[0][valueKey]] : newVal[0][valueKey])
   }
 
   if (sort) {
-    selectOptions.value = selectOptions.value.sort((a, b) => a.value - b.value);
+    selectOptions.value = selectOptions.value.sort((a, b) => a.value - b.value)
   }
-});
+})
 
 watch(
   () => props.options,
   (newVal) => {
-    if (props.mode === "static") {
-      selectOptions.value = newVal;
+    if (props.mode === 'static') {
+      selectOptions.value = newVal
     }
   }
-);
+)
 
-const $selectData = inject("$selectData");
+const $selectData = inject('$selectData')
 
 const selectChange = (val) => {
-  const { name, valueKey, multiple } = props;
+  const { name, valueKey, multiple } = props
 
-  let selectData = {};
+  let selectData = {}
 
   if (multiple) {
     //多选就过滤出vals对应的源数据
     selectData = selectOptions.value.filter((item) => {
-      return val.includes(item[valueKey]);
-    });
+      return val.includes(item[valueKey])
+    })
   } else {
     //单选找到单项对应的源数据
-    selectData = selectOptions.value.find((item) => item[valueKey] === val);
+    selectData = selectOptions.value.find((item) => item[valueKey] === val)
   }
 
   //如果接到了$selectData，给顶级组件保存当前值对应得数据源
   if ($selectData) {
-    $selectData[name] = selectData;
+    $selectData[name] = selectData
   }
-  emits("onChangeSelect", selectData);
-};
+  emits('onChangeSelect', selectData)
+}
 </script>
 
 <style lang="scss" scoped></style>

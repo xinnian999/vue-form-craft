@@ -30,7 +30,8 @@
 <script setup>
 import { defineProps, defineEmits, ref, computed, watch, inject, onMounted } from 'vue'
 import { isString, isEqual } from 'lodash'
-import request from '@/utils/request'
+
+const request = () => {}
 
 const props = defineProps({
   modelValue: {},

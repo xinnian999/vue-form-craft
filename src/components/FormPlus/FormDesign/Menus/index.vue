@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="jsx">
-import draggable from 'vuedraggable'
+import draggable from 'vuedraggable-es'
 import menus from './menus'
 import IconRender from './IconRender.vue'
 </script>
