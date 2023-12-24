@@ -132,7 +132,7 @@ export default {
               label: 'url',
               component: 'input',
               name: 'url',
-              initialValue: 'https://hyl999.co/api/current/query/article',
+              initialValue: '/current/query/article',
               onlyId: 'form-UrE8'
             },
             {
@@ -168,7 +168,7 @@ export default {
               label: '数据路径',
               component: 'input',
               name: 'dataPath',
-              initialValue: 'data.data',
+              initialValue: 'data',
               onlyId: 'form-UrE8'
             }
           ],

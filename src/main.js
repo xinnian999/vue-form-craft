@@ -7,6 +7,7 @@ import router from './router'
 import 'element-plus/dist/index.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import VueFormCraft from './index'
+import request from '@/utils/request'
 
 const app = createApp(App)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
@@ -15,6 +16,6 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 
 app.use(router)
 // app.use(ElementPlus)
-app.use(VueFormCraft)
+app.use(VueFormCraft, { request })
 
 app.mount('#app')

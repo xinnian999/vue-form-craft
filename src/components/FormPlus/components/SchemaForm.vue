@@ -89,7 +89,5 @@ watch(
 provide('$schema', props.schema)
 provide('$selectData', selectData)
 
-provide('$request', props.request)
-
 defineExpose({ submit, selectData })
 </script>

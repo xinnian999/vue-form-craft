@@ -112,7 +112,6 @@ const fetchData = debounce(async () => {
 
   const resData = getDataByPath(res, dataPath)
 
-  console.log(resData)
   selectOptions.value = resData.map((item) => {
     if (isPlainObject(item)) {
       return item
