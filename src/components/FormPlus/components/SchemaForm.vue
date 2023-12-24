@@ -21,6 +21,7 @@ import {
   watch
 } from 'vue'
 import { ElMessage } from 'element-plus'
+import axios from 'axios'
 import { handleLinkages, deepParse } from '../utils'
 import FormRender from './FormRender.vue'
 
@@ -35,6 +36,10 @@ const props = defineProps({
   schema: {
     type: Object,
     default: () => ({ items: [] })
+  },
+  request: {
+    type: Function,
+    default: axios
   }
 })
 
@@ -83,6 +88,8 @@ watch(
 
 provide('$schema', props.schema)
 provide('$selectData', selectData)
+
+provide('$request', props.request)
 
 defineExpose({ submit, selectData })
 </script>

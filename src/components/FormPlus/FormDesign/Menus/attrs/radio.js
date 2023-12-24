@@ -39,13 +39,13 @@ export default {
           initialValue: 0
         },
         {
-          label: 'labelKey',
+          label: '标签key',
           component: 'input',
           name: 'labelKey',
           initialValue: 'label'
         },
         {
-          label: 'valueKey',
+          label: '值key',
           component: 'input',
           name: 'valueKey',
           initialValue: 'value'

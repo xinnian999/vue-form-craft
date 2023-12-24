@@ -60,14 +60,14 @@ export default {
           onlyId: 'form-LPpx'
         },
         {
-          label: 'labelKey',
+          label: '标签key',
           component: 'input',
           name: 'labelKey',
           initialValue: 'label',
           onlyId: 'form-X6hs'
         },
         {
-          label: 'valueKey',
+          label: '值Key',
           component: 'input',
           name: 'valueKey',
           initialValue: 'value',
@@ -132,7 +132,7 @@ export default {
               label: 'url',
               component: 'input',
               name: 'url',
-              initialValue: '/iac/api/',
+              initialValue: 'https://hyl999.co/api/current/query/article',
               onlyId: 'form-UrE8'
             },
             {
@@ -163,6 +163,13 @@ export default {
                 optionType: 'button'
               },
               onlyId: 'form-nOpD'
+            },
+            {
+              label: '数据路径',
+              component: 'input',
+              name: 'dataPath',
+              initialValue: 'data.data',
+              onlyId: 'form-UrE8'
             }
           ],
           onlyId: 'form-O8yj'

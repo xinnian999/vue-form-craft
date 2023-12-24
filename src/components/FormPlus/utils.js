@@ -1,31 +1,28 @@
-import { isString, isPlainObject, isArray, cloneDeep, isEqual } from "lodash";
+import { isString, isPlainObject, isArray, cloneDeep, isEqual } from 'lodash'
 
 //模板转换函数，将一个由双大括号包裹的字符串，转化为js表达式并返回结果（context限制变量范围）
 export const templateParse = (str, context) => {
-  if (!str) return str;
-  if (typeof str !== "string") return str;
+  if (!str) return str
+  if (typeof str !== 'string') return str
 
-  const template = str.match(/{{(.+?)}}/);
+  const template = str.match(/{{(.+?)}}/)
   if (template) {
     try {
-      const parse = new Function(
-        Object.keys(context).join(","),
-        "return " + template[1]
-      );
+      const parse = new Function(Object.keys(context).join(','), 'return ' + template[1])
 
-      return parse(...Object.values(context));
+      return parse(...Object.values(context))
     } catch (e) {
-      console.log(str, "模板转换错误：", e);
-      return str;
+      console.log(str, '模板转换错误：', e)
+      return str
     }
   } else {
-    return str;
+    return str
   }
-};
+}
 
 export const deepParse = (prop, context) => {
   if (isString(prop)) {
-    return templateParse(prop, context);
+    return templateParse(prop, context)
   }
   if (isPlainObject(prop)) {
     return Object.keys(prop).reduce((all, key) => {
@@ -34,24 +31,24 @@ export const deepParse = (prop, context) => {
           ...all,
           [key]: deepParse(prop[key], {
             ...context,
-            $value: context.$form[prop.name],
-          }),
-        };
+            $value: context.$form[prop.name]
+          })
+        }
       }
-      return { ...all, [key]: deepParse(prop[key], context) };
-    }, {});
+      return { ...all, [key]: deepParse(prop[key], context) }
+    }, {})
   }
   if (isArray(prop)) {
     return prop
       .filter((item) => !templateParse(item.hidden, context))
-      .map((item) => deepParse(item, context));
+      .map((item) => deepParse(item, context))
   }
 
-  return prop;
-};
+  return prop
+}
 
 export const handleLinkages = ({ newVal, oldVal, form, formItems }) => {
-  const formValue = cloneDeep(form.value);
+  const formValue = cloneDeep(form.value)
 
   for (const item of formItems) {
     //TODO：bug。自增组件使用linkage无效，因为新旧val一样不知什么原因
@@ -62,59 +59,76 @@ export const handleLinkages = ({ newVal, oldVal, form, formItems }) => {
 
     if (item.linkage && !isEqual(newVal[item.name], oldVal[item.name])) {
       item.linkage.forEach((v) => {
-        const [name, path, child] = v.target.split(".");
+        const [name, path, child] = v.target.split('.')
 
         if (v.value != null) {
           // 有路径视为自增组件
-          if (path && path === "*" && isArray(formValue[name])) {
+          if (path && path === '*' && isArray(formValue[name])) {
             formValue[name] = formValue[name].map((item) => ({
               ...item,
-              [child]: v.value,
-            }));
+              [child]: v.value
+            }))
           } else {
-            formValue[name] = v.value;
+            formValue[name] = v.value
           }
         }
-      });
+      })
 
-      form.value = formValue;
+      form.value = formValue
     }
 
     if (item.children) {
-      handleLinkages({ newVal, oldVal, form, formItems: item.children });
+      handleLinkages({ newVal, oldVal, form, formItems: item.children })
     }
   }
-};
+}
 
 //可指定长度，生成随机id
 export const getRandomId = (length) => {
-  const characters =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  let randomId = "";
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  let randomId = ''
 
   for (let i = 0; i < length; i++) {
-    const randomIndex = Math.floor(Math.random() * characters.length);
-    randomId += characters.charAt(randomIndex);
+    const randomIndex = Math.floor(Math.random() * characters.length)
+    randomId += characters.charAt(randomIndex)
   }
 
-  return randomId;
-};
+  return randomId
+}
 
 export const changeItems = (items) => {
   return items.map((item) => {
     const data = {
       ...item,
       onlyId: item.onlyId || `form-${getRandomId(4)}`,
-      name: item.name || getRandomId(6),
-    };
-    if (item.children) {
-      data.children = changeItems(item.children);
+      name: item.name || getRandomId(6)
     }
-    return data;
-  });
-};
+    if (item.children) {
+      data.children = changeItems(item.children)
+    }
+    return data
+  })
+}
 
 export const componentNames = {
-  formList: "自增容器",
-  itemGroup: "字段组",
-};
+  formList: '自增容器',
+  itemGroup: '字段组'
+}
+
+export const getDataByPath = (obj, path) => {
+  // 使用正则表达式分割路径字符串
+  const keys = path.split('.')
+
+  // 遍历路径，逐层深入对象
+  let result = obj
+  for (const key of keys) {
+    if (result && typeof result === 'object' && key in result) {
+      result = result[key]
+    } else {
+      // 如果路径无效，返回 undefined 或者其他默认值
+      return undefined
+    }
+  }
+
+  return result
+}

@@ -24,7 +24,7 @@
 <script setup>
 import { defineProps, defineEmits, ref, reactive, computed, watch, onMounted, inject } from 'vue'
 import { isEqual, isPlainObject, debounce } from 'lodash'
-const request = () => {}
+import { getDataByPath } from '../../utils'
 
 const props = defineProps({
   modelValue: {},
@@ -74,6 +74,10 @@ const props = defineProps({
 
 const emits = defineEmits(['update:modelValue', 'onChangeSelect'])
 
+const $selectData = inject('$selectData')
+
+const $request = inject('$request')
+
 const selectVal = computed({
   get() {
     return props.modelValue
@@ -95,10 +99,10 @@ const stateParams = reactive({
 })
 
 const fetchData = debounce(async () => {
-  const { baseURL, url, method, params, data } = props.api
+  const { baseURL, url, method, params, data, dataPath } = props.api
   loading.value = true
 
-  const { list } = await request({
+  const res = await $request({
     baseURL,
     url,
     method,
@@ -106,7 +110,10 @@ const fetchData = debounce(async () => {
     data: { ...data, ...stateParams }
   })
 
-  selectOptions.value = list.map((item) => {
+  const resData = getDataByPath(res, dataPath)
+
+  console.log(resData)
+  selectOptions.value = resData.map((item) => {
     if (isPlainObject(item)) {
       return item
     }
@@ -158,8 +165,6 @@ watch(
     }
   }
 )
-
-const $selectData = inject('$selectData')
 
 const selectChange = (val) => {
   const { name, valueKey, multiple } = props
