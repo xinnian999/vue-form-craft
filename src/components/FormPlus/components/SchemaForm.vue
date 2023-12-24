@@ -22,7 +22,7 @@ import {
 } from 'vue'
 import { ElMessage } from 'element-plus'
 import axios from 'axios'
-import { handleLinkages, deepParse } from '../utils'
+import { handleLinkages, deepParse } from '@/utils'
 import FormRender from './FormRender.vue'
 
 const formRef = ref(null)

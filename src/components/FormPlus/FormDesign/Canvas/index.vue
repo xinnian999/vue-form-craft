@@ -37,7 +37,7 @@
 import { computed, provide, inject, ref } from 'vue'
 import draggable from 'vuedraggable-es'
 import { Plus } from '@element-plus/icons-vue'
-import { changeItems } from '../../utils'
+import { changeItems } from '@/utils'
 import CanvasRender from './CanvasRender.vue'
 
 const schema = inject('$schema')

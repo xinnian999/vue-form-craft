@@ -24,7 +24,7 @@
 <script setup>
 import { defineProps, defineEmits, ref, reactive, computed, watch, onMounted, inject } from 'vue'
 import { isEqual, isPlainObject, debounce } from 'lodash'
-import { getDataByPath } from '../../utils'
+import { getDataByPath } from '@/utils'
 
 const props = defineProps({
   modelValue: {},
