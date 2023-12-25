@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
-    "build:release": "vite build --mode release",
+    "build:release": "vite build --mode release && npm version patch && npm publish",
     "build:deploy": "vite build && node ./deploy.js"
   },
   "dependencies": {
