@@ -1,3 +1,4 @@
+import linkageAttr from './common/linkageAttr'
 export default {
   items: [
     { label: '字段label', component: 'input', name: 'label' },
@@ -26,6 +27,7 @@ export default {
           initialValue: 0
         }
       ]
-    }
+    },
+    ...linkageAttr
   ]
 }
