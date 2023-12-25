@@ -1,3 +1,5 @@
+import getRandomId from './getRandomId'
+
 const changeItems = (items) => {
   return items.map((item) => {
     const data = {

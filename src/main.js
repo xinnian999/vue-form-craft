@@ -6,7 +6,8 @@ import router from './router'
 // import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-import VueFormCraft from './index'
+// import VueFormCraft from '../dist/vue-form-craft.mjs'
+import VueFormCraft from './release'
 import request from '@/utils/request'
 
 const app = createApp(App)
