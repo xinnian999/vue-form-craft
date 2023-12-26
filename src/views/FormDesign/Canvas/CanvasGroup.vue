@@ -39,7 +39,6 @@
 import { defineProps, inject } from 'vue'
 import draggable from 'vuedraggable-es'
 import CanvasRender from './CanvasRender.vue'
-import { componentNames } from '../../utils'
 
 defineProps({
   label: String,
@@ -51,6 +50,11 @@ defineProps({
   children: Array,
   componentName: String
 })
+
+const componentNames = {
+  formList: '自增容器',
+  itemGroup: '字段组'
+}
 
 const handleAdd = inject('handleAdd')
 </script>

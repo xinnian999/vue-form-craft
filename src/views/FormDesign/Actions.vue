@@ -42,7 +42,7 @@
 import { ref, computed, inject } from 'vue'
 import JsonEditorVue from 'json-editor-vue3'
 import { ElMessageBox } from 'element-plus'
-import { SchemaForm } from '../components'
+import { SchemaForm } from '@/components'
 import { changeItems } from '@/utils'
 
 const schema = inject('$schema')

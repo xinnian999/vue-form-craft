@@ -23,7 +23,7 @@
 import { inject, ref } from 'vue'
 import JsonEditorVue from 'json-editor-vue3'
 import * as attrs from '../Menus/attrs'
-import { SchemaForm } from '../../components'
+import { SchemaForm } from '@/components'
 
 const current = inject('$current')
 

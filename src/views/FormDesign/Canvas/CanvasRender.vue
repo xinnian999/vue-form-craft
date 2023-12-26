@@ -28,7 +28,7 @@ import { defineProps, inject, computed } from 'vue'
 import { omit } from 'lodash'
 import { Delete, Pointer } from '@element-plus/icons-vue'
 import CanvasGroup from './CanvasGroup.vue'
-import { FormItem } from '../../components'
+import { FormItem } from '@/components'
 
 const props = defineProps({
   element: Object

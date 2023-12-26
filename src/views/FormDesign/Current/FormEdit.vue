@@ -6,7 +6,7 @@
 
 <script setup lang="jsx">
 import { computed, inject } from 'vue'
-import { SchemaForm } from '../../components'
+import { SchemaForm } from '@/components'
 import formOptions from './formOptions'
 
 const schema = inject('$schema')
