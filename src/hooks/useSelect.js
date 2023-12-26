@@ -75,8 +75,10 @@ const useSelect = (props, emits) => {
     const { autoSelectedFirst, modelValue, valueKey, multiple, sort } = props
     // 自动选中第一项
     if (autoSelectedFirst && newVal.length && !modelValue?.length) {
-      emits('update:modelValue', multiple ? [newVal[0][valueKey]] : newVal[0][valueKey])
-      selectChange(multiple ? [newVal[0][valueKey]] : newVal[0][valueKey])
+      const firstValue = multiple ? [newVal[0][valueKey]] : newVal[0][valueKey]
+      console.log(multiple, firstValue)
+      emits('update:modelValue', firstValue)
+      selectChange(firstValue)
     }
 
     if (sort) {

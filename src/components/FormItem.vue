@@ -51,6 +51,8 @@
 
     <radio-plus v-model="value" v-bind="props" v-if="currentComponent === 'radio'" :name="name" />
 
+    <Checkbox v-if="currentComponent === 'checkbox'" v-model="value" v-bind="props" :name="name" />
+
     <el-color-picker v-if="currentComponent === 'colorPicker'" v-model="value" v-bind="props" />
 
     <el-switch v-if="currentComponent === 'switch'" v-model="value" v-bind="props" />
@@ -69,6 +71,7 @@ import { isString } from 'lodash'
 import SelectPlus from './basic/SelectPlus.vue'
 import RadioPlus from './basic/RadioPlus.vue'
 import NumberInput from './basic/NumberInput.vue'
+import Checkbox from './basic/Checkbox.vue'
 
 const thisProps = defineProps({
   label: String,
