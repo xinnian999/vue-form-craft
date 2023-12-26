@@ -1,10 +1,8 @@
-import { defineEmits, ref, reactive, computed, watch, onMounted, inject } from 'vue'
+import { ref, reactive, computed, watch, onMounted, inject } from 'vue'
 import { isEqual, isPlainObject, debounce } from 'lodash'
 import { getDataByPath } from '@/utils'
 
-const useSelect = (props) => {
-  const emits = defineEmits(['update:modelValue', 'onChangeSelect'])
-
+const useSelect = (props, emits) => {
   const $selectData = inject('$selectData')
 
   const $request = inject('$request')
@@ -23,8 +21,8 @@ const useSelect = (props) => {
   const loading = ref(false)
 
   const stateParams = reactive({
-    // pageNum: 1,
-    // pageSize: 10,
+    pageNum: 1,
+    pageSize: 10
     // filters: {},
     // orderBys: {},
   })
@@ -75,7 +73,6 @@ const useSelect = (props) => {
 
   watch(selectOptions, (newVal) => {
     const { autoSelectedFirst, modelValue, valueKey, multiple, sort } = props
-    // console.log(newVal);
     // 自动选中第一项
     if (autoSelectedFirst && newVal.length && !modelValue?.length) {
       emits('update:modelValue', multiple ? [newVal[0][valueKey]] : newVal[0][valueKey])
@@ -118,7 +115,7 @@ const useSelect = (props) => {
     emits('onChangeSelect', selectData)
   }
 
-  return { selectVal, selectChange, selectOptions }
+  return { selectVal, selectChange, selectOptions, loading }
 }
 
 export default useSelect
