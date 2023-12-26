@@ -53,6 +53,8 @@
 
     <Checkbox v-if="currentComponent === 'checkbox'" v-model="value" v-bind="props" :name="name" />
 
+    <Cascader v-if="currentComponent === 'cascader'" v-model="value" v-bind="props" :name="name" />
+
     <el-color-picker v-if="currentComponent === 'colorPicker'" v-model="value" v-bind="props" />
 
     <el-switch v-if="currentComponent === 'switch'" v-model="value" v-bind="props" />
@@ -72,6 +74,7 @@ import SelectPlus from './basic/SelectPlus.vue'
 import RadioPlus from './basic/RadioPlus.vue'
 import NumberInput from './basic/NumberInput.vue'
 import Checkbox from './basic/Checkbox.vue'
+import Cascader from './basic/Cascader.vue'
 
 const thisProps = defineProps({
   label: String,

@@ -47,6 +47,10 @@ export default [
           ]
         }
       },
+      {
+        label: '级联选择器',
+        component: 'cascader'
+      },
       { label: '计数器', component: 'inputNumber' },
       { label: '开关', component: 'switch' }
     ]

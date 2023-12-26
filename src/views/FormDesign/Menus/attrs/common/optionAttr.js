@@ -49,7 +49,6 @@ export default [
     }
   },
   {
-    label: '',
     component: 'itemGroup',
     name: 'api',
     hidden: '{{$form.props.mode==="static"}}',
