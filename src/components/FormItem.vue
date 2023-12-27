@@ -55,6 +55,8 @@
 
     <Cascader v-if="currentComponent === 'cascader'" v-model="value" v-bind="props" :name="name" />
 
+    <JsonEdit v-if="currentComponent === 'jsonEdit'" v-model="value" :name="name" />
+
     <el-color-picker v-if="currentComponent === 'colorPicker'" v-model="value" v-bind="props" />
 
     <el-switch v-if="currentComponent === 'switch'" v-model="value" v-bind="props" />
@@ -75,6 +77,7 @@ import RadioPlus from './basic/RadioPlus.vue'
 import NumberInput from './basic/NumberInput.vue'
 import Checkbox from './basic/Checkbox.vue'
 import Cascader from './basic/Cascader.vue'
+import JsonEdit from './basic/JsonEdit.vue'
 
 const thisProps = defineProps({
   label: String,

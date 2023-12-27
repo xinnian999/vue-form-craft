@@ -1,9 +1,9 @@
 <template>
-  <el-button @click="handlePreviewExec">预览脚本</el-button>
+  <el-button @click="handlePreviewExec">{{ title }}</el-button>
 
   <el-dialog
     v-model="execVisible"
-    title="预览脚本"
+    :title="title"
     width="70%"
     class="dialog"
     center
@@ -28,17 +28,31 @@ import { ElMessageBox } from 'element-plus'
 import { changeItems } from '@/utils'
 
 const props = defineProps({
-  modelValue: {}
+  modelValue: {},
+  name: String,
+  title: {
+    type: String,
+    default: '编辑'
+  }
 })
 
 const emits = defineEmits(['update:modelValue'])
 
 const json = computed({
   get() {
+    const { name, modelValue } = props
+    if (name) {
+      return modelValue ? { [name]: modelValue } : { [name]: [] }
+    }
     return props.modelValue
   },
   set(val) {
-    emits('update:modelValue', val)
+    const { name } = props
+    if (name) {
+      emits('update:modelValue', val[props.name])
+    } else {
+      emits('update:modelValue', val)
+    }
   }
 })
 

@@ -52,7 +52,8 @@ export default [
         component: 'cascader'
       },
       { label: '计数器', component: 'inputNumber' },
-      { label: '开关', component: 'switch' }
+      { label: '开关', component: 'switch' },
+      { label: 'JSON编辑器', component: 'jsonEdit' }
     ]
   },
   {

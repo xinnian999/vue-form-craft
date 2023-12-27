@@ -91,31 +91,25 @@ export default {
         {
           label: '静态选项',
           name: 'options',
-          component: 'formList',
+          component: 'jsonEdit',
           hidden: '{{$form.props.mode!=="static"}}',
-          children: [
+          initialValue: [
             {
-              label: '选项名',
-              name: 'label',
-              component: 'input',
-              props: {
-                placeholder: '请输入...'
-              },
-              onlyId: 'form-LnGh'
+              label: 666,
+              value: 666,
+              children: [
+                {
+                  label: '666a',
+                  value: '666a'
+                }
+              ]
             },
             {
-              label: '选项值',
-              name: 'value',
-              component: 'input',
-              props: {},
-              onlyId: 'form-HYtW'
+              label: 777,
+              value: 777
             }
           ],
-          onlyId: 'form-Iwpd',
-          props: {
-            mode: 'table',
-            newItemDefaults: (index) => ({ label: `选项${index + 1}`, value: `value${index + 1}` })
-          }
+          onlyId: 'form-Iwpd'
         },
         {
           component: 'itemGroup',
