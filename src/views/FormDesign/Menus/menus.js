@@ -49,11 +49,31 @@ export default [
       },
       {
         label: '级联选择器',
-        component: 'cascader'
+        component: 'cascader',
+        props: {
+          mode: 'static',
+          options: [
+            {
+              label: 666,
+              value: 666,
+              children: [
+                {
+                  label: '666a',
+                  value: '666a'
+                }
+              ]
+            },
+            {
+              label: 777,
+              value: 777
+            }
+          ]
+        }
       },
       { label: '计数器', component: 'inputNumber' },
       { label: '开关', component: 'switch' },
-      { label: 'JSON编辑器', component: 'jsonEdit' }
+      { label: 'JSON编辑器', component: 'jsonEdit' },
+      { label: '颜色选择器', component: 'colorPicker' }
     ]
   },
   {

@@ -93,22 +93,6 @@ export default {
           name: 'options',
           component: 'jsonEdit',
           hidden: '{{$form.props.mode!=="static"}}',
-          initialValue: [
-            {
-              label: 666,
-              value: 666,
-              children: [
-                {
-                  label: '666a',
-                  value: '666a'
-                }
-              ]
-            },
-            {
-              label: 777,
-              value: 777
-            }
-          ],
           onlyId: 'form-Iwpd'
         },
         {
