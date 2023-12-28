@@ -1,9 +1,17 @@
 <template>
-  <el-cascader v-model="value" :options="options" @change="handleChange" />
+  <el-cascader
+    v-model="value"
+    :options="selectOptions"
+    :loading="loading"
+    :show-all-levels="!takeLastLevel"
+    :props="{
+      multiple
+    }"
+  />
 </template>
 
 <script setup lang="jsx">
-import { defineProps, defineEmits } from 'vue'
+import { defineProps, defineEmits, computed } from 'vue'
 import useSelect from '@/hooks/useSelect'
 
 const props = defineProps({
@@ -36,10 +44,6 @@ const props = defineProps({
     type: String,
     default: 'value'
   },
-  autoSelectedFirst: {
-    type: Boolean,
-    default: false
-  },
   api: Object,
   name: String,
   size: {
@@ -47,14 +51,28 @@ const props = defineProps({
     default: 'default'
   },
   style: null,
-  filterKey: { default: 'filter', type: String },
-  formatter: Function,
-  sort: Boolean
+  takeLastLevel: {
+    type: Boolean,
+    default: false
+  }
 })
 
 const emits = defineEmits(['update:modelValue', 'onChangeSelect'])
 
-const { selectVal, selectOptions, selectChange, loading } = useSelect(props, emits)
+const value = computed({
+  get() {
+    return props.modelValue
+  },
+  set(val) {
+    if (props.takeLastLevel) {
+      emits('update:modelValue', val[val.length - 1])
+    } else {
+      emits('update:modelValue', val)
+    }
+  }
+})
+
+const { selectOptions, selectChange, loading } = useSelect(props, emits)
 </script>
 
 <style></style>

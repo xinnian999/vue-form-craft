@@ -1,6 +1,5 @@
-import optionAttr from './common/optionAttr'
 import linkageAttr from './common/linkageAttr'
-
+import apiAttr from './common/apiAttr'
 export default {
   items: [
     {
@@ -44,6 +43,7 @@ export default {
           initialValue: '请选择...',
           onlyId: 'form-ekRL'
         },
+
         {
           label: '选择模式',
           component: 'switch',
@@ -53,6 +53,14 @@ export default {
             'inactive-text': '单选'
           },
           onlyId: 'form-eTxc'
+        },
+
+        {
+          label: '只取最后一级',
+          component: 'switch',
+          name: 'takeLastLevel',
+          onlyId: 'form-kJ7K222',
+          hidden: '{{$form.props.multiple}}'
         },
         {
           label: '标签key',
@@ -95,57 +103,7 @@ export default {
           hidden: '{{$form.props.mode!=="static"}}',
           onlyId: 'form-Iwpd'
         },
-        {
-          component: 'itemGroup',
-          name: 'api',
-          hidden: '{{$form.props.mode==="static"}}',
-          children: [
-            {
-              label: 'url',
-              component: 'input',
-              name: 'url',
-              initialValue: '/current/query/article',
-              onlyId: 'form-UrE8'
-            },
-            {
-              label: '请求方式',
-              component: 'radio',
-              name: 'method',
-              props: {
-                mode: 'static',
-                autoSelectedFirst: true,
-                options: [
-                  {
-                    label: 'GET',
-                    value: 'GET'
-                  },
-                  {
-                    label: 'POST',
-                    value: 'POST'
-                  },
-                  {
-                    label: 'PUT',
-                    value: 'PUT'
-                  },
-                  {
-                    label: 'DELETE',
-                    value: 'DELETE'
-                  }
-                ],
-                optionType: 'button'
-              },
-              onlyId: 'form-nOpD'
-            },
-            {
-              label: '数据路径',
-              component: 'input',
-              name: 'dataPath',
-              initialValue: 'data',
-              onlyId: 'form-UrE8'
-            }
-          ],
-          onlyId: 'form-O8yj'
-        }
+        apiAttr
       ],
       onlyId: 'form-qYXT'
     },

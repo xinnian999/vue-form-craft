@@ -1,3 +1,5 @@
+import apiAttr from './apiAttr'
+
 export default [
   {
     label: '数据模式',
@@ -48,55 +50,5 @@ export default [
       newItemDefaults: (index) => ({ label: `选项${index + 1}`, value: `value${index + 1}` })
     }
   },
-  {
-    component: 'itemGroup',
-    name: 'api',
-    hidden: '{{$form.props.mode==="static"}}',
-    children: [
-      {
-        label: 'url',
-        component: 'input',
-        name: 'url',
-        initialValue: '/current/query/article',
-        onlyId: 'form-UrE8'
-      },
-      {
-        label: '请求方式',
-        component: 'radio',
-        name: 'method',
-        props: {
-          mode: 'static',
-          autoSelectedFirst: true,
-          options: [
-            {
-              label: 'GET',
-              value: 'GET'
-            },
-            {
-              label: 'POST',
-              value: 'POST'
-            },
-            {
-              label: 'PUT',
-              value: 'PUT'
-            },
-            {
-              label: 'DELETE',
-              value: 'DELETE'
-            }
-          ],
-          optionType: 'button'
-        },
-        onlyId: 'form-nOpD'
-      },
-      {
-        label: '数据路径',
-        component: 'input',
-        name: 'dataPath',
-        initialValue: 'data',
-        onlyId: 'form-UrE8'
-      }
-    ],
-    onlyId: 'form-O8yj'
-  }
+  apiAttr
 ]
