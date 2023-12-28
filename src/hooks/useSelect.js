@@ -16,7 +16,7 @@ const useSelect = (props, emits) => {
     }
   })
 
-  const selectOptions = ref([])
+  const currentOptions = ref([])
 
   const loading = ref(false)
 
@@ -41,7 +41,7 @@ const useSelect = (props, emits) => {
 
     const resData = getDataByPath(res, dataPath)
 
-    selectOptions.value = resData.map((item) => {
+    currentOptions.value = resData.map((item) => {
       if (isPlainObject(item)) {
         return item
       }
@@ -53,7 +53,7 @@ const useSelect = (props, emits) => {
   onMounted(() => {
     const { mode, options } = props
     if (mode === 'static') {
-      selectOptions.value = options
+      currentOptions.value = options
     }
     if (mode === 'remote') {
       fetchData()
@@ -71,18 +71,17 @@ const useSelect = (props, emits) => {
     }
   )
 
-  watch(selectOptions, (newVal) => {
+  watch(currentOptions, (newVal) => {
     const { autoSelectedFirst, modelValue, valueKey, multiple, sort } = props
     // 自动选中第一项
     if (autoSelectedFirst && newVal.length && !modelValue?.length) {
       const firstValue = multiple ? [newVal[0][valueKey]] : newVal[0][valueKey]
-      console.log(multiple, firstValue)
       emits('update:modelValue', firstValue)
       selectChange(firstValue)
     }
 
     if (sort) {
-      selectOptions.value = selectOptions.value.sort((a, b) => a.value - b.value)
+      currentOptions.value = currentOptions.value.sort((a, b) => a.value - b.value)
     }
   })
 
@@ -90,7 +89,19 @@ const useSelect = (props, emits) => {
     () => props.options,
     (newVal) => {
       if (props.mode === 'static') {
-        selectOptions.value = newVal
+        currentOptions.value = newVal
+      }
+    }
+  )
+
+  watch(
+    () => props.mode,
+    (newVal) => {
+      if (newVal === 'static') {
+        currentOptions.value = props.options
+      }
+      if (newVal === 'remote') {
+        fetchData()
       }
     }
   )
@@ -102,12 +113,12 @@ const useSelect = (props, emits) => {
 
     if (multiple) {
       //多选就过滤出vals对应的源数据
-      selectData = selectOptions.value.filter((item) => {
+      selectData = currentOptions.value.filter((item) => {
         return val.includes(item[valueKey])
       })
     } else {
       //单选找到单项对应的源数据
-      selectData = selectOptions.value.find((item) => item[valueKey] === val)
+      selectData = currentOptions.value.find((item) => item[valueKey] === val)
     }
 
     //如果接到了$selectData，给顶级组件保存当前值对应得数据源
@@ -117,7 +128,7 @@ const useSelect = (props, emits) => {
     emits('onChangeSelect', selectData)
   }
 
-  return { selectVal, selectChange, selectOptions, loading }
+  return { selectVal, selectChange, currentOptions, loading }
 }
 
 export default useSelect

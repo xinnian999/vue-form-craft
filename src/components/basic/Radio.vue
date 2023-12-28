@@ -8,7 +8,7 @@
   >
     <template v-if="optionType === 'circle' || optionType === 'border'">
       <el-radio
-        v-for="item in selectOptions"
+        v-for="item in currentOptions"
         :key="item[valueKey]"
         :label="item[valueKey]"
         :border="optionType === 'border'"
@@ -18,7 +18,7 @@
 
     <el-space v-if="optionType === 'button'" wrap :size="[space, space]">
       <el-radio-button
-        v-for="item in selectOptions"
+        v-for="item in currentOptions"
         :key="item[valueKey]"
         :label="item[valueKey]"
         size="large"
@@ -76,7 +76,7 @@ const props = defineProps({
 
 const emits = defineEmits(['update:modelValue', 'onChangeSelect'])
 
-const { selectVal, selectOptions, selectChange, loading } = useSelect(props, emits)
+const { selectVal, currentOptions, selectChange, loading } = useSelect(props, emits)
 </script>
 
 <style lang="scss" scoped></style>

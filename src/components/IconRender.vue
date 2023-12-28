@@ -3,13 +3,13 @@
 </template>
 
 <script setup lang="jsx">
-import { defineProps, ref } from 'vue'
+import { defineProps, shallowRef } from 'vue'
 
 const props = defineProps({
   name: String
 })
 
-const icon = ref(null)
+const icon = shallowRef(null)
 
 import(`../icons/${props.name}.vue`).then((module) => {
   icon.value = module.default

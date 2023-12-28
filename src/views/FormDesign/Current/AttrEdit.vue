@@ -1,6 +1,10 @@
 <template>
   <div class="attrForm">
-    <schema-form v-model="current" :schema="attrs[current.component]"></schema-form>
+    <schema-form
+      :key="current.onlyId"
+      v-model="current"
+      :schema="attrs[current.component]"
+    ></schema-form>
 
     <div>
       <el-button @click="handleEdit">编辑配置文本</el-button>

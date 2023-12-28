@@ -9,6 +9,7 @@
       ghost-class="ghost"
       drag-class="drag"
       fallback-class="fallback"
+      item-key="onlyId"
     >
       <template #item="{ element }">
         <li class="form-item-btn">

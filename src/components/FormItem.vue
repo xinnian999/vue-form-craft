@@ -47,9 +47,9 @@
 
     <number-input v-model="value" v-bind="props" v-if="currentComponent === 'inputNumber'" />
 
-    <select-plus v-if="currentComponent === 'select'" v-model="value" v-bind="props" :name="name" />
+    <Select v-if="currentComponent === 'select'" v-model="value" v-bind="props" :name="name" />
 
-    <radio-plus v-model="value" v-bind="props" v-if="currentComponent === 'radio'" :name="name" />
+    <Radio v-model="value" v-bind="props" v-if="currentComponent === 'radio'" :name="name" />
 
     <Checkbox v-if="currentComponent === 'checkbox'" v-model="value" v-bind="props" :name="name" />
 
@@ -72,8 +72,8 @@
 <script setup lang="jsx">
 import { computed, defineProps, defineEmits, onMounted, inject } from 'vue'
 import { isString } from 'lodash'
-import SelectPlus from './basic/SelectPlus.vue'
-import RadioPlus from './basic/RadioPlus.vue'
+import Select from './basic/Select.vue'
+import Radio from './basic/Radio.vue'
 import NumberInput from './basic/NumberInput.vue'
 import Checkbox from './basic/Checkbox.vue'
 import Cascader from './basic/Cascader.vue'

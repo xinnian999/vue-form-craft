@@ -12,7 +12,7 @@
     :loading="loading"
   >
     <el-option
-      v-for="item in selectOptions"
+      v-for="item in currentOptions"
       :key="item[valueKey]"
       :label="item[labelKey]"
       :value="item[valueKey]"
@@ -74,7 +74,7 @@ const props = defineProps({
 
 const emits = defineEmits(['update:modelValue', 'onChangeSelect'])
 
-const { selectVal, selectOptions, selectChange, loading } = useSelect(props, emits)
+const { selectVal, currentOptions, selectChange, loading } = useSelect(props, emits)
 </script>
 
 <style lang="scss" scoped></style>

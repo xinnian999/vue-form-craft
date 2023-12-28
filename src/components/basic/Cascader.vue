@@ -1,7 +1,7 @@
 <template>
   <el-cascader
     v-model="value"
-    :options="selectOptions"
+    :options="currentOptions"
     :loading="loading"
     :show-all-levels="!takeLastLevel"
     :props="{
@@ -72,7 +72,7 @@ const value = computed({
   }
 })
 
-const { selectOptions, selectChange, loading } = useSelect(props, emits)
+const { currentOptions, selectChange, loading } = useSelect(props, emits)
 </script>
 
 <style></style>

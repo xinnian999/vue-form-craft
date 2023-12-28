@@ -23,11 +23,13 @@ import Current from './Current/index.vue'
 import Actions from './Actions.vue'
 
 const schema = reactive({
-  labelWidth: '150px',
+  labelWidth: 150,
   labelAlign: 'right',
   size: 'default',
   items: []
 })
+
+const selectData = reactive({})
 
 const currentId = ref('')
 
@@ -69,6 +71,7 @@ const current = computed({
 
 provide('$current', current)
 provide('$schema', schema)
+provide('$selectData', selectData)
 </script>
 
 <style lang="less">
