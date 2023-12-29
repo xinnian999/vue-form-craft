@@ -7,9 +7,7 @@
   >
     <div class="tip" v-if="!list.length">
       <div class="ico">
-        <el-icon>
-          <Plus />
-        </el-icon>
+        <icon-render name="add" />
       </div>
       <div class="text">请从左侧拖拽字段来组成表单</div>
     </div>
@@ -36,7 +34,6 @@
 <script setup lang="jsx">
 import { computed, provide, inject, ref } from 'vue'
 import draggable from 'vuedraggable-es'
-import { Plus } from '@element-plus/icons-vue'
 import { changeItems } from '@/utils'
 import CanvasRender from './CanvasRender.vue'
 

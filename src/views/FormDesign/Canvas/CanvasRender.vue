@@ -6,14 +6,15 @@
     @mouseleave.stop="handleHoverLeave"
   >
     <div class="actions-left-top" v-if="element.onlyId === current.onlyId">
-      <el-button class="canvas-move" :icon="Pointer" size="small" type="primary"></el-button>
+      <el-button class="canvas-move" size="small" type="primary">
+        <template #icon>
+          <icon-render name="move"></icon-render>
+        </template>
+      </el-button>
     </div>
     <div class="actions-right-bottom" v-if="element.onlyId === current.onlyId">
-      <el-button
-        :icon="Delete"
-        size="small"
-        type="primary"
-        @click.stop="handleDelete(element)"
+      <el-button size="small" type="primary" @click.stop="handleDelete(element)">
+        <template #icon> <icon-render name="delete"></icon-render> </template
       ></el-button>
     </div>
 
@@ -26,7 +27,6 @@
 <script setup lang="jsx">
 import { defineProps, inject, computed } from 'vue'
 import { omit } from 'lodash'
-import { Delete, Pointer } from '@element-plus/icons-vue'
 import CanvasGroup from './CanvasGroup.vue'
 import { FormItem } from '@/components'
 
@@ -74,10 +74,13 @@ const checkProps = (props) => {
 
   .actions-left-top {
     position: absolute;
-    left: 0;
-    top: 0;
+    left: -1px;
+    top: -1px;
     z-index: 20;
     background-color: var(--el-color-primary);
+    .canvas-move {
+      font-size: 16px;
+    }
   }
   .actions-right-bottom {
     position: absolute;
@@ -90,10 +93,21 @@ const checkProps = (props) => {
 
 .hover {
   border: 2px solid var(--el-color-primary-light-5);
+  &::before {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    content: '';
+    background-color: transparent;
+    z-index: 15;
+  }
 }
 
 .active {
   border: 2px solid var(--el-color-primary) !important;
+
   &:hover {
     border: 2px solid var(--el-color-primary) !important;
   }

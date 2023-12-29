@@ -1,12 +1,16 @@
 <template>
-  <component class="svg-icon" :is="icon" />
+  <component class="svg-icon" :is="icon" :style="{ color }" />
 </template>
 
 <script setup lang="jsx">
 import { defineProps, shallowRef } from 'vue'
 
 const props = defineProps({
-  name: String
+  name: String,
+  color: {
+    type: String,
+    default: ''
+  }
 })
 
 const icon = shallowRef(null)

@@ -14,7 +14,6 @@
     "build:deploy": "vite build && node ./deploy.js"
   },
   "dependencies": {
-    "@element-plus/icons-vue": "^2.3.1",
     "@originjs/vite-plugin-commonjs": "^1.0.3",
     "axios": "^1.6.2",
     "element-plus": "^2.4.4",

@@ -3,10 +3,11 @@ import 'element-plus/dist/index.css'
 import ElementPlus from 'element-plus'
 import axios from 'axios'
 import FormDesign from '@/views/FormDesign/index.vue'
+import IconRender from '@/components/IconRender.vue'
 
 FormDesign.__name = 'FormDesign'
 
-const components = [SchemaForm, FormDesign] // 将来如果有其它组件,都可以写到这个数组里
+const components = [SchemaForm, FormDesign, IconRender] // 将来如果有其它组件,都可以写到这个数组里
 
 const install = function (app, options) {
   app.use(ElementPlus)

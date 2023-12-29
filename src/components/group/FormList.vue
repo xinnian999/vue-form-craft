@@ -16,10 +16,11 @@
           <el-button
             v-if="allowReduce"
             @click="handleReduceItem(index)"
-            :icon="Minus"
             circle
             type="primary"
             class="list-btn"
+          >
+            <template #icon> <icon-render name="reduce" color="#fff" /> </template
           ></el-button>
         </div>
       </el-form-item>
@@ -33,11 +34,12 @@
             <el-button
               v-if="allowReduce"
               @click="handleReduceItem(index)"
-              :icon="Minus"
               circle
               type="primary"
               class="list-btn"
-            ></el-button>
+            >
+              <template #icon> <icon-render name="reduce" color="#fff" /> </template>
+            </el-button>
           </div>
         </template>
         <form-item
@@ -63,10 +65,11 @@
           <el-button
             v-if="allowReduce"
             @click="handleReduceItem(record.$index)"
-            :icon="Minus"
             circle
             type="primary"
             class="list-btn"
+          >
+            <template #icon> <icon-render name="reduce" color="#fff" /> </template
           ></el-button>
         </template>
       </el-table-column>
@@ -76,18 +79,18 @@
       <el-button
         v-if="allowAdd && !isMax"
         @click="handleAddItem"
-        :icon="Plus"
         circle
         type="primary"
         class="list-btn addBtn"
-      ></el-button>
+      >
+        <template #icon> <icon-render name="add" color="#fff" /></template>
+      </el-button>
     </div>
   </div>
 </template>
 
 <script setup lang="jsx">
 import { computed, defineProps, defineEmits } from 'vue'
-import { Plus, Minus } from '@element-plus/icons-vue'
 import FormItem from '../FormItem.vue'
 
 const props = defineProps({
