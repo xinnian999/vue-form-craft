@@ -12,7 +12,7 @@
         <div>{{ label }}</div>
         <div class="ico" v-if="help">
           <el-tooltip class="box-item" effect="dark" :content="help">
-            <el-icon><QuestionFilled /></el-icon>
+            <icon-render name="help" />
           </el-tooltip>
         </div>
       </div>
@@ -137,9 +137,8 @@ onMounted(() => {
     position: relative;
     .ico {
       margin-left: 3px;
-      font-size: 16px;
+      font-size: 15px;
       position: relative;
-      top: 2px;
     }
   }
 }
