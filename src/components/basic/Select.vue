@@ -11,14 +11,22 @@
     filterable
     :loading="loading"
   >
-    <el-option
-      v-for="item in currentOptions"
-      :key="item[valueKey]"
-      :label="item[labelKey]"
-      :value="item[valueKey]"
-    >
-      {{ formatter ? formatter(item[labelKey]) : item[labelKey] }}
-    </el-option>
+    <template #empty v-if="tableDrop">
+      <el-table :data="currentOptions">
+        <el-table-column :prop="item.dataIndex" :label="item.title" v-for="item in columns" />
+      </el-table>
+    </template>
+
+    <template v-if="!tableDrop">
+      <el-option
+        v-for="item in currentOptions"
+        :key="item[valueKey]"
+        :label="item[labelKey]"
+        :value="item[valueKey]"
+      >
+        {{ formatter ? formatter(item[labelKey]) : item[labelKey] }}
+      </el-option>
+    </template>
   </el-select>
 </template>
 
@@ -69,7 +77,9 @@ const props = defineProps({
   style: null,
   filterKey: { default: 'filter', type: String },
   formatter: Function,
-  sort: Boolean
+  sort: Boolean,
+  tableDrop: Boolean,
+  columns: { default: [], type: Array }
 })
 
 const emits = defineEmits(['update:modelValue', 'onChangeSelect'])

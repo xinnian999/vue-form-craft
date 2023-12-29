@@ -61,6 +61,19 @@ export default {
           onlyId: 'form-LPpx'
         },
         {
+          label: '表格模式',
+          component: 'switch',
+          name: 'tableDrop',
+          onlyId: 'form-LPpx'
+        },
+        {
+          label: '表格列配置',
+          name: 'columns',
+          component: 'jsonEdit',
+          hidden: '{{!$form.props.tableDrop}}',
+          onlyId: 'form-Iwpd'
+        },
+        {
           label: '标签key',
           component: 'input',
           name: 'labelKey',
