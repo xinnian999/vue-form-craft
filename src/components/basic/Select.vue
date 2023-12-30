@@ -10,16 +10,22 @@
     clearable
     filterable
     :loading="loading"
+    ref="selectRef"
   >
     <template #empty v-if="tableDrop">
       <el-table :data="currentOptions" @current-change="handleCurrentChange">
         <el-table-column v-if="!multiple" width="40px">
           <template #default="scope">
-            <el-radio v-model="tableRadio" :label="scope.row">&nbsp;</el-radio>
+            <el-radio v-model="selectVal" :label="scope.row[valueKey]">&nbsp;</el-radio>
           </template>
         </el-table-column>
 
-        <el-table-column :prop="item.dataIndex" :label="item.title" v-for="item in columns" />
+        <el-table-column
+          :prop="item.dataIndex"
+          :label="item.title"
+          v-for="item in columns"
+          :key="item.dataIndex"
+        />
       </el-table>
     </template>
 
@@ -85,23 +91,21 @@ const props = defineProps({
   formatter: Function,
   sort: Boolean,
   tableDrop: Boolean,
-  columns: { default: [], type: Array }
+  columns: { default: () => [], type: Array }
 })
 
 const emits = defineEmits(['update:modelValue', 'onChangeSelect'])
 
-const tableRadio = ref(null)
+const selectRef = ref(null)
 
 const { selectVal, currentOptions, selectChange, loading } = useSelect(props, emits)
 
 //table单选回调
 const handleCurrentChange = (row) => {
-  // console.log(row, props.modelValue)
-  // if (row && !props.multiple) {
-  //   tableRadio.value = row
-  //   selectChange(row[props.valueKey])
-  //   emits('update:modelValue', row[props.valueKey])
-  // }
+  if (row) {
+    emits('update:modelValue', row[props.valueKey])
+    selectRef.value.blur()
+  }
 }
 </script>
 
