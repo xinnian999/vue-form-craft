@@ -12,7 +12,13 @@
     :loading="loading"
   >
     <template #empty v-if="tableDrop">
-      <el-table :data="currentOptions">
+      <el-table :data="currentOptions" @current-change="handleCurrentChange">
+        <el-table-column v-if="!multiple" width="40px">
+          <template #default="scope">
+            <el-radio v-model="tableRadio" :label="scope.row">&nbsp;</el-radio>
+          </template>
+        </el-table-column>
+
         <el-table-column :prop="item.dataIndex" :label="item.title" v-for="item in columns" />
       </el-table>
     </template>
@@ -31,7 +37,7 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits } from 'vue'
+import { defineProps, defineEmits, ref } from 'vue'
 import useSelect from '@/hooks/useSelect'
 
 const props = defineProps({
@@ -84,7 +90,19 @@ const props = defineProps({
 
 const emits = defineEmits(['update:modelValue', 'onChangeSelect'])
 
+const tableRadio = ref(null)
+
 const { selectVal, currentOptions, selectChange, loading } = useSelect(props, emits)
+
+//table单选回调
+const handleCurrentChange = (row) => {
+  // console.log(row, props.modelValue)
+  // if (row && !props.multiple) {
+  //   tableRadio.value = row
+  //   selectChange(row[props.valueKey])
+  //   emits('update:modelValue', row[props.valueKey])
+  // }
+}
 </script>
 
 <style lang="scss" scoped></style>
