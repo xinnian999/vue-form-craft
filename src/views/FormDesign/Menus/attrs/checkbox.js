@@ -39,18 +39,6 @@ export default {
           },
           initialValue: 0
         },
-        {
-          label: '标签key',
-          component: 'input',
-          name: 'labelKey',
-          initialValue: 'label'
-        },
-        {
-          label: '值key',
-          component: 'input',
-          name: 'valueKey',
-          initialValue: 'value'
-        },
         ...optionAttr
       ]
     }

@@ -9,11 +9,17 @@
     :style="style"
     clearable
     filterable
-    :loading="loading"
     ref="selectRef"
+    :teleported="false"
+    v-selectLoadMore="fetchData"
   >
     <template #empty v-if="tableDrop">
-      <el-table :data="currentOptions" @current-change="handleCurrentChange">
+      <el-table
+        v-tableLoadMore="fetchData"
+        :data="currentOptions"
+        max-height="250"
+        @current-change="handleCurrentChange"
+      >
         <el-table-column v-if="!multiple" width="40px">
           <template #default="scope">
             <el-radio v-model="selectVal" :label="scope.row[valueKey]">&nbsp;</el-radio>
@@ -23,6 +29,7 @@
         <el-table-column
           :prop="item.dataIndex"
           :label="item.title"
+          :width="item.width"
           v-for="item in columns"
           :key="item.dataIndex"
         />
@@ -38,6 +45,12 @@
       >
         {{ formatter ? formatter(item[labelKey]) : item[labelKey] }}
       </el-option>
+    </template>
+
+    <template #footer>
+      <div class="footer" v-loading="loading">
+        {{ isMax ? '没有更多选项了' : loading ? '加载中' : '滚动到底加载更多选项' }}
+      </div>
     </template>
   </el-select>
 </template>
@@ -98,7 +111,10 @@ const emits = defineEmits(['update:modelValue', 'onChangeSelect'])
 
 const selectRef = ref(null)
 
-const { selectVal, currentOptions, selectChange, loading } = useSelect(props, emits)
+const { selectVal, currentOptions, selectChange, loading, fetchData, isMax } = useSelect(
+  props,
+  emits
+)
 
 //table单选回调
 const handleCurrentChange = (row) => {
@@ -107,6 +123,14 @@ const handleCurrentChange = (row) => {
     selectRef.value.blur()
   }
 }
+
+const handleSelectLoadMore = () => {
+  console.log('触底')
+}
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="less" scoped>
+.footer {
+  text-align: center;
+}
+</style>

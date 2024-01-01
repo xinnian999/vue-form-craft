@@ -73,20 +73,7 @@ export default {
           hidden: '{{!$form.props.tableDrop}}',
           onlyId: 'form-Iwpd'
         },
-        {
-          label: '标签key',
-          component: 'input',
-          name: 'labelKey',
-          initialValue: 'label',
-          onlyId: 'form-X6hs'
-        },
-        {
-          label: '值Key',
-          component: 'input',
-          name: 'valueKey',
-          initialValue: 'value',
-          onlyId: 'form-STkl'
-        },
+
         ...optionAttr
       ],
       onlyId: 'form-qYXT'

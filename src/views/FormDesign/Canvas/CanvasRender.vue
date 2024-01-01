@@ -57,7 +57,7 @@ const handleHoverLeave = () => {
 }
 
 const checkProps = (props) => {
-  return omit(props, ['multiple', 'autoSelectedFirst'])
+  return omit(props, ['multiple', 'autoSelectedFirst', 'api'])
 }
 </script>
 

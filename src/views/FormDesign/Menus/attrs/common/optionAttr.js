@@ -2,6 +2,20 @@ import apiAttr from './apiAttr'
 
 export default [
   {
+    label: '标签key',
+    component: 'input',
+    name: 'labelKey',
+    initialValue: 'label',
+    onlyId: 'form-X6hs'
+  },
+  {
+    label: '值Key',
+    component: 'input',
+    name: 'valueKey',
+    initialValue: 'value',
+    onlyId: 'form-STkl'
+  },
+  {
     label: '数据模式',
     component: 'radio',
     name: 'mode',

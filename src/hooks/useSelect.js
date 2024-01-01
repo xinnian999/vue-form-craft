@@ -20,15 +20,19 @@ const useSelect = (props, emits) => {
 
   const loading = ref(false)
 
+  const isMax = ref(false)
+
   const stateParams = reactive({
     pageNum: 1,
     pageSize: 10
     // filters: {},
-    // orderBys: {},
   })
 
   const fetchData = debounce(async () => {
+    if (isMax.value) return
+
     const { baseURL, url, method, params, data, dataPath } = props.api
+
     loading.value = true
 
     const res = await $request({
@@ -41,12 +45,21 @@ const useSelect = (props, emits) => {
 
     const resData = getDataByPath(res, dataPath)
 
-    currentOptions.value = resData.map((item) => {
+    if (resData.length !== stateParams.pageSize) {
+      isMax.value = true
+    }
+
+    const resDataParse = resData.map((item) => {
       if (isPlainObject(item)) {
         return item
       }
       return { label: item, value: item }
     })
+
+    currentOptions.value = [...currentOptions.value, ...resDataParse]
+
+    stateParams.pageNum++
+
     loading.value = false
   }, 300)
 
@@ -54,6 +67,7 @@ const useSelect = (props, emits) => {
     const { mode, options } = props
     if (mode === 'static') {
       currentOptions.value = options
+      isMax.value = true
     }
     if (mode === 'remote') {
       fetchData()
@@ -128,7 +142,7 @@ const useSelect = (props, emits) => {
     emits('onChangeSelect', selectData)
   }
 
-  return { selectVal, selectChange, currentOptions, loading }
+  return { selectVal, selectChange, currentOptions, loading, fetchData, isMax }
 }
 
 export default useSelect
