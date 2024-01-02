@@ -41,6 +41,7 @@ const actions = [
   },
   {
     name: '使用文档',
+    link: '/document',
     icon: 'document'
   },
   {
@@ -53,18 +54,18 @@ const actions = [
 const infos = [
   {
     title: '最大化减少表单开发成本',
-    desc: '使用表单设计器 + 表单渲染器，拖拽即可组成各种复杂表单',
+    desc: '使用表单设计器 + 表单渲染器，拖拽即可组成各种复杂表单json',
+    icon: 'design'
+  },
+  {
+    title: '强大的联动系统',
+    desc: 'json的任何字段都支持动态配置，表单联动更简单且高效',
     icon: 'design'
   },
   {
     title: '丰富的组件库',
     desc: '内置20多种表单组件和丰富的容器组件，支持添加自定义组件。',
     icon: 'library'
-  },
-  {
-    title: '强大的联动系统',
-    desc: 'json的任何字段都支持动态配置，表单联动更简单且高效',
-    icon: 'design'
   }
 ]
 
