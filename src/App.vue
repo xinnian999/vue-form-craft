@@ -1,8 +1,8 @@
 <template>
   <div id="container">
     <header id="header">
-      <div class="logo">vue-form-craft</div>
-      <el-menu mode="horizontal" class="nav" router>
+      <div class="logo"><img src="./assets/logo.png" alt="" /></div>
+      <el-menu mode="horizontal" class="nav" router :default-active="route.path">
         <el-menu-item index="/">首页</el-menu-item>
         <el-menu-item index="/formDesign">表单设计</el-menu-item>
       </el-menu>
@@ -13,7 +13,10 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { useRoute } from 'vue-router'
+const route = useRoute()
+</script>
 
 <style lang="less">
 @font-face {
@@ -42,21 +45,23 @@ html {
   #header {
     display: flex;
     width: 100%;
+    height: 60px;
     justify-content: space-between;
     border-bottom: 1px solid #eee;
     .logo {
-      width: 220px;
-      font-family: 'font';
-      font-size: 23px;
-      text-align: center;
-      line-height: 60px;
+      width: 200px;
+      img {
+        width: 100%;
+        height: 100%;
+      }
     }
     .nav {
       min-width: 250px;
     }
   }
   #content {
-    flex: 1;
+    // flex: 1;
+    height: calc(100% - 61px);
   }
 }
 </style>

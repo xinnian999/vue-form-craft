@@ -10,6 +10,7 @@
       class="dialog"
       center
       destroy-on-close
+      top="10vh"
     >
       <json-editor-vue
         class="editor"
@@ -29,6 +30,7 @@
       class="dialog"
       destroy-on-close
       center
+      top="10vh"
     >
       <schema-form v-model="form" :schema="schema" ref="formRef" />
       <div>
