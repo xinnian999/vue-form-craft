@@ -34,6 +34,11 @@ export const routes = [
     path: '/formDesign',
     name: '表单设计',
     component: import('@/views/FormDesign/index.vue')
+  },
+  {
+    path: '/test',
+    name: '测试',
+    component: import('@/views/Test.vue')
   }
 ]
 
