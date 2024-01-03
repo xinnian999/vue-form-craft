@@ -1,14 +1,41 @@
-<template><MdEditor class="markdown" v-model="text" /></template>
+<template>
+  <div id="Document" :gutter="24">
+    <div class="sideBar">
+      <el-menu :default-active="route.path" class="sideBar-menu" router>
+        <el-menu-item :index="path" :key="path" v-for="{ name, path } in menus">
+          {{ name }}
+        </el-menu-item>
+      </el-menu>
+    </div>
+    <div class="content"><router-view /></div>
+  </div>
+</template>
 
-<script setup lang="jsx">
-import { MdEditor } from 'md-editor-v3'
-import { ref } from 'vue'
-import 'md-editor-v3/lib/style.css'
+<script setup>
+import { useRoute } from 'vue-router'
 
-const text = ref('Hello Editor!')
+const route = useRoute()
+
+const menus = route.matched[0].children
 </script>
 
-<style>
+<style lang="less">
+#Document {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  .sideBar {
+    width: 250px;
+    .sideBar-menu {
+      height: 100%;
+    }
+  }
+  .content {
+    width: calc(100% - 260px);
+    height: 100%;
+    overflow: hidden;
+  }
+}
 .markdown {
   height: 100%;
 }

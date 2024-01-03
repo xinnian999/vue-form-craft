@@ -1,23 +1,39 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '@/views/Home.vue'
-import FormDesign from '@/views/FormDesign/index.vue'
-import Document from '@/views/Document/index.vue'
 
 export const routes = [
   {
     path: '/',
     name: '首页',
-    component: Home
+    component: import('@/views/Home.vue')
   },
   {
     path: '/document',
     name: '文档',
-    component: Document
+    component: () => import('@/views/Document/index.vue'),
+    redirect: '/document/start',
+    children: [
+      {
+        path: '/document/start',
+        name: '快速开始',
+        component: import('@/views/Document/Start.vue'),
+        meta: {
+          md: 'start.md'
+        }
+      },
+      {
+        path: '/document/schemaFormDoc',
+        name: 'SchemaForm（表单渲染器）',
+        component: import('@/views/Document/Start.vue'),
+        meta: {
+          md: 'schemaFormDoc.md'
+        }
+      }
+    ]
   },
   {
     path: '/formDesign',
     name: '表单设计',
-    component: FormDesign
+    component: import('@/views/FormDesign/index.vue')
   }
 ]
 
