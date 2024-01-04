@@ -1,9 +1,12 @@
 <template>
-  <schema-form v-model="form" :schema="schema" @submit="handleSubmit" />
+  <schema-form :schema="schema" @submit="handleSubmit" ref="formRef" />
+  <el-button @click="formRef.reset()"> 重置</el-button>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+
+const formRef = ref(null)
 
 const schema = {
   labelWidth: 150,
@@ -17,6 +20,7 @@ const schema = {
         placeholder: '请输入...'
       },
       required: true,
+      initialValue: 3307578337,
       onlyId: 'form-0lHT',
       name: 'username'
     },
@@ -26,6 +30,7 @@ const schema = {
       props: {
         placeholder: '请输入...'
       },
+      initialValue: 991015,
       required: true,
       onlyId: 'form-xiFZ',
       name: 'password'
@@ -39,8 +44,6 @@ const schema = {
     }
   ]
 }
-
-const form = ref({})
 
 const handleSubmit = (values) => {
   alert(JSON.stringify(values))

@@ -40,12 +40,15 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue', 'submit'])
 
+const stateForm = ref({})
+
 const form = computed({
   get() {
-    return props.modelValue
+    return props.modelValue || stateForm.value
   },
   set(val) {
     emit('update:modelValue', val)
+    stateForm.value = val
   }
 })
 
@@ -83,10 +86,16 @@ const submit = async () => {
   }
 }
 
+const getFormValues = () => ({ ...form.value })
+const setFormValues = (values) => {
+  form.value = { ...form.value, ...values }
+}
+
+const reset = () => formRef.value.resetFields()
+
 provide('$schema', props.schema)
 provide('$selectData', selectData)
-
 provide('$submit', submit)
 
-defineExpose({ submit, validate, selectData })
+defineExpose({ submit, validate, selectData, getFormValues, setFormValues, reset })
 </script>
