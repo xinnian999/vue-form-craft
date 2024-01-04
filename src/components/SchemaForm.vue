@@ -21,7 +21,6 @@ import {
   watch
 } from 'vue'
 import { ElMessage } from 'element-plus'
-import axios from 'axios'
 import { handleLinkages, deepParse } from '@/utils'
 import FormRender from './FormRender.vue'
 
@@ -35,15 +34,11 @@ const props = defineProps({
   // 表单JSON配置
   schema: {
     type: Object,
-    default: () => ({ items: [] })
-  },
-  request: {
-    type: Function,
-    default: axios
+    default: () => ({ labelWidth: 150, labelAlign: 'right', size: 'default', items: [] })
   }
 })
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'submit'])
 
 const form = computed({
   get() {
@@ -67,17 +62,6 @@ const formItems = computed(() => {
   return deepParse(props.schema.items, context)
 })
 
-const submit = async () => {
-  try {
-    await formRef.value.validate()
-    //转化成普通对象，便于阅读
-    return { ...form.value }
-  } catch (e) {
-    ElMessage.error('表单填写校验不通过！')
-    return Promise.reject(e)
-  }
-}
-
 watch(
   form,
   (newVal, oldVal) => {
@@ -86,8 +70,23 @@ watch(
   { deep: true }
 )
 
+const validate = () => formRef.value.validate()
+
+const submit = async () => {
+  try {
+    await validate()
+    emit('submit', form.value)
+    return form.value
+  } catch (e) {
+    ElMessage.error('表单填写校验不通过！')
+    return Promise.reject(e)
+  }
+}
+
 provide('$schema', props.schema)
 provide('$selectData', selectData)
 
-defineExpose({ submit, selectData })
+provide('$submit', submit)
+
+defineExpose({ submit, validate, selectData })
 </script>

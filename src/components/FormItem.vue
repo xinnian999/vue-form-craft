@@ -4,7 +4,7 @@
     :style="style"
     :key="name"
     :prop="name"
-    :label-width="label ? schema.labelWidth : '0'"
+    :label-width="hideLabel ? '0' : schema.labelWidth"
     :rules="required ? { required: true, message: `请输入${label}`, trigger: 'blur' } : null"
   >
     <template #label>
@@ -61,6 +61,14 @@
 
     <el-switch v-if="currentComponent === 'switch'" v-model="value" v-bind="props" />
 
+    <el-button
+      v-if="currentComponent === 'submitButton'"
+      type="primary"
+      v-bind="props"
+      @click="handleSubmit"
+      >{{ props.title }}</el-button
+    >
+
     <div v-if="currentComponent === 'text'">
       {{ props.formatter || value }}
     </div>
@@ -89,12 +97,15 @@ const thisProps = defineProps({
   initialValue: null,
   style: Object,
   help: String,
-  children: Array
+  children: Array,
+  hideLabel: Boolean
 })
 
 const emit = defineEmits(['update:modelValue'])
 
 const schema = inject('$schema')
+
+const handleSubmit = inject('$submit')
 
 const value = computed({
   get() {

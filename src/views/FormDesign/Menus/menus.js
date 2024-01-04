@@ -104,5 +104,17 @@ export default [
         children: []
       }
     ]
+  },
+  {
+    title: '功能字段',
+    children: [
+      {
+        label: '提交按钮',
+        component: 'submitButton',
+        props: {
+          title: '提交'
+        }
+      }
+    ]
   }
 ]

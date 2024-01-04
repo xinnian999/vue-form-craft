@@ -1,6 +1,5 @@
 <template>
-  <schema-form v-model="form" :schema="schema" ref="formRef" />
-  <el-button @click="handleSubmit">提交</el-button>
+  <schema-form v-model="form" :schema="schema" @submit="handleSubmit" />
 </template>
 
 <script setup>
@@ -17,6 +16,7 @@ const schema = {
       props: {
         placeholder: '请输入...'
       },
+      required: true,
       onlyId: 'form-0lHT',
       name: 'username'
     },
@@ -26,19 +26,23 @@ const schema = {
       props: {
         placeholder: '请输入...'
       },
+      required: true,
       onlyId: 'form-xiFZ',
       name: 'password'
+    },
+    {
+      component: 'submitButton',
+      props: {
+        title: '提交'
+      },
+      onlyId: 'form-xiFZsss'
     }
   ]
 }
 
-const formRef = ref(null)
-
 const form = ref({})
 
-const handleSubmit = async () => {
-  //校验表单
-  await formRef.value.submit()
-  console.log('表单值', form.value)
+const handleSubmit = (values) => {
+  alert(JSON.stringify(values))
 }
 </script>
