@@ -1,10 +1,10 @@
 import optionAttr from './common/optionAttr'
+import basic from './common/basic'
+
 export default {
   items: [
-    { label: '字段label', component: 'input', name: 'label' },
-    { label: '字段标识', component: 'input', name: 'name' },
-    { label: '初始值', component: 'input', name: 'initialValue' },
-    { label: '是否必填', component: 'switch', name: 'required' },
+    ...basic,
+    // { label: '初始值', component: 'input', name: 'initialValue' },
     {
       label: 'props',
       component: 'itemGroup',

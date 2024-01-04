@@ -1,32 +1,10 @@
 import optionAttr from './common/optionAttr'
 import linkageAttr from './common/linkageAttr'
+import basic from './common/basic'
 
 export default {
   items: [
-    {
-      label: '字段label',
-      component: 'input',
-      name: 'label',
-      onlyId: 'form-AC1d'
-    },
-    {
-      label: '字段标识',
-      component: 'input',
-      name: 'name',
-      onlyId: 'form-mb7V'
-    },
-    {
-      label: '初始值',
-      component: 'input',
-      name: 'initialValue',
-      onlyId: 'form-4MUd'
-    },
-    {
-      label: '是否必填',
-      component: 'switch',
-      name: 'required',
-      onlyId: 'form-iXcI'
-    },
+    ...basic,
     {
       component: 'itemGroup',
       name: 'props',

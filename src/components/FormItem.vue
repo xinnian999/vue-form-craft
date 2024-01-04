@@ -7,7 +7,7 @@
     :label-width="hideLabel ? '0' : schema.labelWidth"
     :rules="required ? { required: true, message: `请输入${label}`, trigger: 'blur' } : null"
   >
-    <template #label>
+    <template #label v-if="!hideLabel">
       <div class="form-item-label">
         <div>{{ label }}</div>
         <div class="ico" v-if="help">

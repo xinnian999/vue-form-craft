@@ -1,8 +1,12 @@
+import basic from './common/basic'
 export default {
   items: [
-    { label: '字段label', component: 'input', name: 'label' },
-    { label: '字段标识', component: 'input', name: 'name' },
-    { label: '是否必填', component: 'switch', name: 'required' },
+    ...basic,
+    {
+      label: '初始值',
+      component: 'jsonEdit',
+      name: 'initialValue'
+    },
     {
       label: 'props',
       component: 'itemGroup',
