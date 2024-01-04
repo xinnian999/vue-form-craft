@@ -1,11 +1,11 @@
 <template>
-  <el-button v-bind="props" @click="handleSubmit">{{ name }}</el-button>
+  <el-button v-bind="props" @click="onClick">{{ name }}</el-button>
 </template>
 
 <script setup>
 import { defineProps, inject } from 'vue'
 
-const handleSubmit = inject('$submit')
+const formEvents = inject('$formEvents')
 
 const props = defineProps({
   name: String,
@@ -13,6 +13,16 @@ const props = defineProps({
   type: {
     type: String,
     default: 'primary'
-  }
+  },
+  clickEvent: String
 })
+
+const onClick = () => {
+  if (props.clickEvent === 'submitForm') {
+    formEvents.submit()
+  }
+  if (props.clickEvent === 'resetForm') {
+    formEvents.reset()
+  }
+}
 </script>

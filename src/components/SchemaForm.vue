@@ -95,7 +95,7 @@ const reset = () => formRef.value.resetFields()
 
 provide('$schema', props.schema)
 provide('$selectData', selectData)
-provide('$submit', submit)
+provide('$formEvents', { submit, validate, getFormValues, setFormValues, reset })
 
 defineExpose({ submit, validate, selectData, getFormValues, setFormValues, reset })
 </script>
