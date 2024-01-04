@@ -109,10 +109,10 @@ export default [
     title: '功能字段',
     children: [
       {
-        label: '提交按钮',
-        component: 'submitButton',
+        label: '按钮',
+        component: 'button',
         props: {
-          title: '提交'
+          name: '提交'
         }
       }
     ]

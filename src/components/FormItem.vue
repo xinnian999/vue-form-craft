@@ -61,12 +61,12 @@
 
     <el-switch v-if="currentComponent === 'switch'" v-model="value" v-bind="props" />
 
-    <el-button
-      v-if="currentComponent === 'submitButton'"
+    <Button
+      v-if="currentComponent === 'button'"
       type="primary"
       v-bind="props"
       @click="handleSubmit"
-      >{{ props.title }}</el-button
+      >{{ label }}</Button
     >
 
     <div v-if="currentComponent === 'text'">
@@ -86,6 +86,7 @@ import NumberInput from './basic/NumberInput.vue'
 import Checkbox from './basic/Checkbox.vue'
 import Cascader from './basic/Cascader.vue'
 import JsonEdit from './basic/JsonEdit.vue'
+import Button from './basic/Button.vue'
 
 const thisProps = defineProps({
   label: String,
@@ -104,8 +105,6 @@ const thisProps = defineProps({
 const emit = defineEmits(['update:modelValue'])
 
 const schema = inject('$schema')
-
-const handleSubmit = inject('$submit')
 
 const value = computed({
   get() {

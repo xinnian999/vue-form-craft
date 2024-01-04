@@ -23,6 +23,7 @@
       drag-class="drag"
       fallback-class="fallback"
       handle=".canvas-move"
+      :animation="300"
     >
       <template #item="{ element }">
         <CanvasRender :element="element" />
