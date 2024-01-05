@@ -13,9 +13,8 @@
     >
       <template #item="{ element }">
         <li class="form-item-btn">
-          <div class="ico"><IconRender :name="element.component" /></div>
-
-          <div class="name">{{ element.label }}</div>
+          <div class="ico"><IconRender :name="element.initialValues.component" /></div>
+          <div class="name">{{ element.name }}</div>
         </li>
       </template>
     </draggable>

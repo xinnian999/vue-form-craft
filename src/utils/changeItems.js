@@ -2,13 +2,15 @@ import getRandomId from './getRandomId'
 
 const changeItems = (items) => {
   return items.map((item) => {
+    const config = item.initialValues || item
+
     const data = {
-      ...item,
-      onlyId: item.onlyId || `form-${getRandomId(4)}`,
-      name: item.name || getRandomId(6)
+      ...config,
+      onlyId: config.onlyId || `form-${getRandomId(4)}`,
+      name: config.name || getRandomId(6)
     }
-    if (item.children) {
-      data.children = changeItems(item.children)
+    if (config.children) {
+      data.children = changeItems(config.children)
     }
     return data
   })

@@ -17,7 +17,6 @@ export default [
           options: [
             { label: '提交表单', value: 'submitForm' },
             { label: '重置表单', value: 'resetForm' }
-            // { label: '按钮', value: 'button' }
           ]
         },
         initialValue: 'submitForm'
