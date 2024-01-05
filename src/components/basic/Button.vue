@@ -1,5 +1,5 @@
 <template>
-  <el-button v-bind="props" @click="onClick">{{ name }}</el-button>
+  <el-button v-bind="{ ...$attrs, ...props }" @click="onClick">{{ name }}</el-button>
 </template>
 
 <script setup>

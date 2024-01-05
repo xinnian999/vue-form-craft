@@ -45,7 +45,7 @@
       class="form-item-input"
     />
 
-    <number-input v-model="value" v-bind="props" v-if="currentComponent === 'inputNumber'" />
+    <InputNumber v-model="value" v-bind="props" v-if="currentComponent === 'inputNumber'" />
 
     <Select v-if="currentComponent === 'select'" v-model="value" v-bind="props" :name="name" />
 
@@ -82,7 +82,7 @@ import { computed, defineProps, defineEmits, onMounted, inject } from 'vue'
 import { isString } from 'lodash'
 import Select from './basic/Select.vue'
 import Radio from './basic/Radio.vue'
-import NumberInput from './basic/NumberInput.vue'
+import InputNumber from './basic/InputNumber.vue'
 import Checkbox from './basic/Checkbox.vue'
 import Cascader from './basic/Cascader.vue'
 import JsonEdit from './basic/JsonEdit.vue'

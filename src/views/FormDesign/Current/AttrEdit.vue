@@ -30,7 +30,13 @@ const current = inject('$current')
 const editVisible = ref(false)
 
 const attrSchema = computed(() => {
-  return { size: 'small', items: attrs[current.value.component]?.items || [] }
+  const attr = attrs[current.value.component]
+
+  if (attr) {
+    return { size: 'small', items: attr }
+  }
+
+  return { size: 'small', items: [] }
 })
 
 const handleEdit = () => {

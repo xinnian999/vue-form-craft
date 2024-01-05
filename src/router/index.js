@@ -4,7 +4,7 @@ export const routes = [
   {
     path: '/',
     name: '首页',
-    component: import('@/views/Home.vue')
+    component: () => import('@/views/Home.vue')
   },
   {
     path: '/document',
@@ -15,7 +15,7 @@ export const routes = [
       {
         path: '/document/start',
         name: '快速开始',
-        component: import('@/views/Document/Start.vue'),
+        component: () => import('@/views/Document/Start.vue'),
         meta: {
           md: 'start.md'
         }
@@ -23,7 +23,7 @@ export const routes = [
       {
         path: '/document/schemaFormDoc',
         name: 'SchemaForm（表单渲染器）',
-        component: import('@/views/Document/Start.vue'),
+        component: () => import('@/views/Document/Start.vue'),
         meta: {
           md: 'schemaFormDoc.md'
         }
@@ -33,12 +33,12 @@ export const routes = [
   {
     path: '/formDesign',
     name: '表单设计',
-    component: import('@/views/FormDesign/index.vue')
+    component: () => import('@/views/FormDesign/index.vue')
   },
   {
     path: '/test',
     name: '测试',
-    component: import('@/views/Test.vue')
+    component: () => import('@/views/Test.vue')
   }
 ]
 
