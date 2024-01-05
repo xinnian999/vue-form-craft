@@ -45,7 +45,8 @@ const hoverId = inject('hoverId')
 const canvasItemClass = computed(() => ({
   'canvas-item': true,
   active: props.element.onlyId === current.value.onlyId,
-  hover: props.element.onlyId === hoverId.value
+  hover: props.element.onlyId === hoverId.value,
+  mask: props.element.onlyId === hoverId.value && !props.element.children
 }))
 
 const handleHoverEnter = () => {
@@ -93,6 +94,9 @@ const checkProps = (props) => {
 
 .hover {
   border: 2px solid var(--el-color-primary-light-5);
+}
+
+.mask {
   &::before {
     position: absolute;
     height: 100%;
