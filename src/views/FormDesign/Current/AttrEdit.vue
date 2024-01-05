@@ -22,7 +22,7 @@
 <script setup lang="jsx">
 import { computed, inject, ref } from 'vue'
 import JsonEditorVue from 'json-editor-vue3'
-import * as attrs from '../Menus/attrs'
+import * as menus from '../Menus/list'
 import { SchemaForm } from '@/components'
 
 const current = inject('$current')
@@ -30,10 +30,10 @@ const current = inject('$current')
 const editVisible = ref(false)
 
 const attrSchema = computed(() => {
-  const attr = attrs[current.value.component]
+  const config = menus[current.value.component]
 
-  if (attr) {
-    return { size: 'small', items: attr }
+  if (config) {
+    return { size: 'small', items: config.attr }
   }
 
   return { size: 'small', items: [] }
