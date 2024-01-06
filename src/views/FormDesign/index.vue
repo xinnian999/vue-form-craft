@@ -16,11 +16,15 @@
 </template>
 
 <script setup lang="jsx">
-import { ref, provide, reactive, computed } from 'vue'
+import { ref, provide, reactive, computed, defineProps, watch } from 'vue'
 import Menus from './Menus.vue'
 import Canvas from './Canvas/index.vue'
 import Current from './Current/index.vue'
 import Actions from './Actions.vue'
+
+const props = defineProps({
+  defaultSchema: Object
+})
 
 const schema = reactive({
   labelWidth: 150,
@@ -68,6 +72,13 @@ const current = computed({
     schema.items = set(schema.items)
   }
 })
+
+watch(
+  () => props.defaultSchema,
+  (newVal) => {
+    newVal && Object.assign(schema, newVal)
+  }
+)
 
 provide('$current', current)
 provide('$schema', schema)
