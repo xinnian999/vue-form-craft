@@ -42,6 +42,6 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/vue-form-craft.js",
-  "module": "./dist/vue-form-craft.js"
+  "main": "./dist/vue-form-craft.mjs",
+  "module": "./dist/vue-form-craft.mjs"
 }
