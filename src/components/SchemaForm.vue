@@ -38,7 +38,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['update:modelValue', 'submit'])
+const emit = defineEmits(['update:modelValue', 'onSubmit'])
 
 const stateForm = ref({})
 
@@ -78,7 +78,7 @@ const validate = () => formRef.value.validate()
 const submit = async () => {
   try {
     await validate()
-    emit('submit', form.value)
+    emit('onSubmit', form.value)
     return form.value
   } catch (e) {
     ElMessage.error('表单填写校验不通过！')

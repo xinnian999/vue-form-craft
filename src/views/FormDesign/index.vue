@@ -17,7 +17,7 @@
 
 <script setup lang="jsx">
 import { ref, provide, reactive, computed } from 'vue'
-import Menus from './Menus/index.vue'
+import Menus from './Menus.vue'
 import Canvas from './Canvas/index.vue'
 import Current from './Current/index.vue'
 import Actions from './Actions.vue'

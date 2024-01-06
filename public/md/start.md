@@ -23,13 +23,10 @@ app.mount('#app')
 
 ```vue
 <template>
-  <schema-form v-model="form" :schema="schema" ref="formRef" />
-  <el-button @click="handleSubmit">提交</el-button>
+  <schema-form :schema="schema" @onSubmit="onSubmit" />
 </template>
 
 <script setup>
-import { ref } from 'vue'
-
 const schema = {
   labelWidth: 150,
   labelAlign: 'right',
@@ -39,31 +36,34 @@ const schema = {
       label: '用户名',
       component: 'input',
       props: {
-        placeholder: '请输入...'
+        placeholder: '请输入用户名'
       },
-      onlyId: 'form-0lHT',
+      onlyId: 'form-eNR0',
       name: 'username'
     },
     {
       label: '密码',
       component: 'password',
       props: {
-        placeholder: '请输入...'
+        placeholder: '请输入密码'
       },
-      onlyId: 'form-xiFZ',
+      onlyId: 'form-D1x7',
       name: 'password'
+    },
+    {
+      component: 'button',
+      props: {
+        name: '提交',
+        clickEvent: 'submitForm'
+      },
+      onlyId: 'form-aBMY',
+      name: 'submit'
     }
   ]
 }
 
-const formRef = ref(null)
-
-const form = ref({})
-
-const handleSubmit = async () => {
-  //校验表单
-  await formRef.value.submit()
-  console.log('表单值', form.value)
+const onSubmit = (values) => {
+  alert(JSON.stringify(values))
 }
 </script>
 

@@ -1,13 +1,8 @@
 <template>
-  <schema-form :schema="schema" @submit="handleSubmit" ref="formRef" />
-  <el-button @click="formRef.reset()"> 重置</el-button>
+  <schema-form :schema="schema" @onSubmit="onSubmit" />
 </template>
 
 <script setup>
-import { ref } from 'vue'
-
-const formRef = ref(null)
-
 const schema = {
   labelWidth: 150,
   labelAlign: 'right',
@@ -17,35 +12,33 @@ const schema = {
       label: '用户名',
       component: 'input',
       props: {
-        placeholder: '请输入...'
+        placeholder: '请输入用户名'
       },
-      required: true,
-      initialValue: 3307578337,
-      onlyId: 'form-0lHT',
+      onlyId: 'form-eNR0',
       name: 'username'
     },
     {
       label: '密码',
       component: 'password',
       props: {
-        placeholder: '请输入...'
+        placeholder: '请输入密码'
       },
-      initialValue: 991015,
-      required: true,
-      onlyId: 'form-xiFZ',
+      onlyId: 'form-D1x7',
       name: 'password'
     },
     {
-      component: 'submitButton',
+      component: 'button',
       props: {
-        title: '提交'
+        name: '提交',
+        clickEvent: 'submitForm'
       },
-      onlyId: 'form-xiFZsss'
+      onlyId: 'form-aBMY',
+      name: 'submit'
     }
   ]
 }
 
-const handleSubmit = (values) => {
+const onSubmit = (values) => {
   alert(JSON.stringify(values))
 }
 </script>

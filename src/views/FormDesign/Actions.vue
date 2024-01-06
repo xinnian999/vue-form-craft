@@ -36,10 +36,10 @@
         v-model="form"
         :schema="schema"
         ref="formRef"
-        @submit="ElMessageBox.alert(JSON.stringify(form), '模拟提交')"
+        @onSubmit="ElMessageBox.alert(JSON.stringify(form), '模拟提交')"
       />
       <div>
-        <el-button @click="handleSubmit">模拟提交</el-button>
+        <el-button @click="formRef.submit()">模拟提交</el-button>
       </div>
     </el-dialog>
   </div>
@@ -88,11 +88,6 @@ const onBlur = async (editor) => {
     parse.items = changeItems(parse.items)
     json.value = parse
   }
-}
-
-const handleSubmit = async () => {
-  await formRef.value.submit()
-  ElMessageBox.alert(JSON.stringify(form.value), '模拟提交')
 }
 </script>
 
