@@ -14,10 +14,10 @@ const schema = inject('$schema')
 //修改schema除了items的其他属性
 const form = computed({
   get() {
-    return schema
+    return schema.value
   },
   set(value) {
-    Object.assign(schema, value)
+    schema.value = value
   }
 })
 </script>

@@ -1,8 +1,7 @@
-import { SchemaForm } from '@/components' // 引入封装好的组件
 import 'element-plus/dist/index.css'
 import ElementPlus from 'element-plus'
 import axios from 'axios'
-import FormDesign from '@/views/FormDesign/index.vue'
+import { FormDesign, SchemaForm } from '@/components'
 import IconRender from '@/components/IconRender.vue'
 import * as Directives from '@/directive'
 

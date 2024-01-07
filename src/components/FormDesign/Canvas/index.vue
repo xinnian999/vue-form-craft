@@ -48,10 +48,10 @@ provide('hoverId', hoverId)
 
 const list = computed({
   get() {
-    return schema.items
+    return schema.value.items
   },
   set(value) {
-    Object.assign(schema, { items: value })
+    schema.value = { ...schema.value, items: value }
   }
 })
 

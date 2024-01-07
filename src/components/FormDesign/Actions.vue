@@ -2,6 +2,7 @@
   <div class="formDesign-actions">
     <el-button @click="handlePreviewExec">预览脚本</el-button>
     <el-button @click="handlePreviewForm">预览表单</el-button>
+    <el-button @click="handleSave" type="primary">保存</el-button>
 
     <el-dialog
       v-model="execVisible"
@@ -53,13 +54,14 @@ import { SchemaForm } from '@/components'
 import { changeItems } from '@/utils'
 
 const schema = inject('$schema')
+const emit = inject('$emit')
 
 const json = computed({
   get() {
-    return schema
+    return schema.value
   },
   set(value) {
-    Object.assign(schema, value)
+    schema.value = value
   }
 })
 
@@ -88,6 +90,10 @@ const onBlur = async (editor) => {
     parse.items = changeItems(parse.items)
     json.value = parse
   }
+}
+
+const handleSave = () => {
+  emit('onSave', schema.value)
 }
 </script>
 

@@ -16,26 +16,38 @@
 </template>
 
 <script setup lang="jsx">
-import { ref, provide, reactive, computed, defineProps, watch } from 'vue'
+import { ref, provide, reactive, computed, defineProps, defineEmits } from 'vue'
 import Menus from './Menus.vue'
 import Canvas from './Canvas/index.vue'
 import Current from './Current/index.vue'
 import Actions from './Actions.vue'
 
 const props = defineProps({
-  defaultSchema: Object
+  modelValue: Object
 })
 
-const schema = reactive({
+const emit = defineEmits(['update:modelValue', 'onSave'])
+
+const selectData = reactive({})
+
+const currentId = ref('')
+
+const stateSchema = ref({
   labelWidth: 150,
   labelAlign: 'right',
   size: 'default',
   items: []
 })
 
-const selectData = reactive({})
-
-const currentId = ref('')
+const schema = computed({
+  get() {
+    return props.modelValue || stateSchema.value
+  },
+  set(val) {
+    emit('update:modelValue', val)
+    stateSchema.value = val
+  }
+})
 
 const current = computed({
   get() {
@@ -52,7 +64,7 @@ const current = computed({
         return all
       }, null)
     }
-    return findItem(schema.items) || {}
+    return findItem(schema.value.items) || {}
   },
   set(element) {
     currentId.value = element.onlyId
@@ -69,20 +81,15 @@ const current = computed({
       })
     }
 
-    schema.items = set(schema.items)
+    schema.value = { ...schema.value, items: set(schema.value.items) }
   }
 })
-
-watch(
-  () => props.defaultSchema,
-  (newVal) => {
-    newVal && Object.assign(schema, newVal)
-  }
-)
 
 provide('$current', current)
 provide('$schema', schema)
 provide('$selectData', selectData)
+
+provide('$emit', emit)
 </script>
 
 <style lang="less">

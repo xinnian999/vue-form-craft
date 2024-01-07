@@ -61,13 +61,7 @@
 
     <el-switch v-if="currentComponent === 'switch'" v-model="value" v-bind="props" />
 
-    <Button
-      v-if="currentComponent === 'button'"
-      type="primary"
-      v-bind="props"
-      @click="handleSubmit"
-      >{{ label }}</Button
-    >
+    <Button v-if="currentComponent === 'button'" type="primary" v-bind="props">{{ label }}</Button>
 
     <div v-if="currentComponent === 'text'">
       {{ props.formatter || value }}
