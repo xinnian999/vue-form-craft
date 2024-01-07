@@ -4,6 +4,7 @@
 
 <script setup>
 import { defineProps, inject } from 'vue'
+import { ElButton } from 'element-plus'
 
 const formEvents = inject('$formEvents')
 

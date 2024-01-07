@@ -21,7 +21,7 @@ import {
   watch,
   watchEffect
 } from 'vue'
-import { ElMessage } from 'element-plus'
+import { ElForm, ElMessage } from 'element-plus'
 import { handleLinkages, deepParse } from '@/utils'
 import FormRender from './FormRender.vue'
 

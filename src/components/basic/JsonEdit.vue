@@ -24,7 +24,7 @@
 <script setup lang="jsx">
 import { ref, computed } from 'vue'
 import JsonEditorVue from 'json-editor-vue3'
-import { ElMessageBox } from 'element-plus'
+import { ElButton, ElDialog } from 'element-plus'
 import { changeItems } from '@/utils'
 
 const props = defineProps({

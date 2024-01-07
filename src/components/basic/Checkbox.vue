@@ -30,6 +30,7 @@
 
 <script setup>
 import { defineProps, defineEmits } from 'vue'
+import { ElCheckboxGroup, ElCheckbox, ElCheckboxButton, ElSpace } from 'element-plus'
 import useSelect from '@/hooks/useSelect'
 
 const props = defineProps({

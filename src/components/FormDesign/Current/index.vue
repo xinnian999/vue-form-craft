@@ -10,8 +10,10 @@
 </template>
 
 <script setup>
-import AttrEdit from "./AttrEdit.vue";
-import FormEdit from "./FormEdit.vue";
+import { ElTabs, ElTabPane } from 'element-plus'
+
+import AttrEdit from './AttrEdit.vue'
+import FormEdit from './FormEdit.vue'
 </script>
 
 <style></style>

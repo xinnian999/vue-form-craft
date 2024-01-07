@@ -1,5 +1,4 @@
 import 'element-plus/dist/index.css'
-import ElementPlus from 'element-plus'
 import axios from 'axios'
 import { FormDesign, SchemaForm } from '@/components'
 import IconRender from '@/components/IconRender.vue'
@@ -7,10 +6,9 @@ import * as Directives from '@/directive'
 
 FormDesign.__name = 'FormDesign'
 
-const components = [SchemaForm, FormDesign, IconRender] // 将来如果有其它组件,都可以写到这个数组里
+const components = [SchemaForm, FormDesign, IconRender] // 全局组件列表
 
 const install = function (app, options) {
-  app.use(ElementPlus)
   app.provide('$request', options.request || axios)
   // 注册组件
   components.forEach((component) => {

@@ -35,6 +35,7 @@
 <script setup lang="jsx">
 import { computed, provide, inject, ref } from 'vue'
 import draggable from 'vuedraggable-es'
+import { ElForm } from 'element-plus'
 import { changeItems } from '@/utils'
 import CanvasRender from './CanvasRender.vue'
 

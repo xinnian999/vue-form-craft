@@ -7,6 +7,7 @@
 
 <script setup>
 import { defineProps, defineEmits, computed } from 'vue'
+import { ElInputNumber } from 'element-plus'
 
 const props = defineProps({
   modelValue: Number,

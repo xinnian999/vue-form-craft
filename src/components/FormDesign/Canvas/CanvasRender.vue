@@ -27,6 +27,7 @@
 <script setup lang="jsx">
 import { defineProps, inject, computed } from 'vue'
 import { omit } from 'lodash'
+import { ElButton } from 'element-plus'
 import CanvasGroup from './CanvasGroup.vue'
 import { FormItem } from '@/components'
 

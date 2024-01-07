@@ -38,6 +38,7 @@
 <script setup lang="jsx">
 import { defineProps, inject } from 'vue'
 import draggable from 'vuedraggable-es'
+import { ElCard } from 'element-plus'
 import CanvasRender from './CanvasRender.vue'
 
 defineProps({

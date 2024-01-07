@@ -49,7 +49,7 @@
 <script setup lang="jsx">
 import { ref, computed, inject } from 'vue'
 import JsonEditorVue from 'json-editor-vue3'
-import { ElMessageBox } from 'element-plus'
+import { ElMessageBox, ElButton, ElDialog } from 'element-plus'
 import { SchemaForm } from '@/components'
 import { changeItems } from '@/utils'
 

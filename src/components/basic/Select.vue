@@ -57,6 +57,7 @@
 
 <script setup>
 import { defineProps, defineEmits, ref } from 'vue'
+import { ElSelect, ElRadio, ElTable, ElOption, ElTableColumn } from 'element-plus'
 import useSelect from '@/hooks/useSelect'
 
 const props = defineProps({

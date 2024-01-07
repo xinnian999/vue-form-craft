@@ -13,6 +13,7 @@
 
 <script setup>
 import { useRoute } from 'vue-router'
+import { ElMenu, ElMenuItem } from 'element-plus'
 
 const route = useRoute()
 

@@ -73,6 +73,7 @@
 
 <script setup lang="jsx">
 import { computed, defineProps, defineEmits, onMounted, inject } from 'vue'
+import { ElFormItem, ElInput, ElTooltip, ElColorPicker, ElSwitch } from 'element-plus'
 import { isString } from 'lodash'
 import Select from './basic/Select.vue'
 import Radio from './basic/Radio.vue'

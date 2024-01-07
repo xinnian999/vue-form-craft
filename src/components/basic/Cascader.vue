@@ -12,6 +12,7 @@
 
 <script setup lang="jsx">
 import { defineProps, defineEmits, computed } from 'vue'
+import { ElCascader } from 'element-plus'
 import useSelect from '@/hooks/useSelect'
 
 const props = defineProps({

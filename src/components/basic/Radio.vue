@@ -30,6 +30,7 @@
 
 <script setup>
 import { defineProps, defineEmits } from 'vue'
+import { ElRadioGroup, ElRadio, ElRadioButton, ElSpace } from 'element-plus'
 import useSelect from '@/hooks/useSelect'
 
 const props = defineProps({

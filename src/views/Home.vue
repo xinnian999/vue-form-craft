@@ -31,6 +31,7 @@
 
 <script setup lang="jsx">
 import { useRouter } from 'vue-router'
+import { ElButton, ElRow, ElCol } from 'element-plus'
 
 const router = useRouter()
 const actions = [
