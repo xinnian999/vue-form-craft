@@ -18,7 +18,8 @@ import {
   computed,
   reactive,
   provide,
-  watch
+  watch,
+  watchEffect
 } from 'vue'
 import { ElMessage } from 'element-plus'
 import { handleLinkages, deepParse } from '@/utils'
@@ -39,6 +40,8 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['update:modelValue', 'onSubmit'])
+
+const currentSchema = ref({})
 
 const stateForm = ref({})
 
@@ -93,7 +96,11 @@ const setFormValues = (values) => {
 
 const reset = () => formRef.value.resetFields()
 
-provide('$schema', props.schema)
+watchEffect(() => {
+  currentSchema.value = props.schema
+})
+
+provide('$schema', currentSchema)
 provide('$selectData', selectData)
 provide('$formEvents', { submit, validate, getFormValues, setFormValues, reset })
 
