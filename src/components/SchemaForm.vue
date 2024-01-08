@@ -52,6 +52,8 @@ const currentSchema = ref({})
 
 const stateForm = ref({})
 
+const initialValues = reactive({})
+
 const selectData = reactive({})
 
 const getSchema = inject('$getSchema')
@@ -117,6 +119,7 @@ onMounted(async () => {
 })
 
 provide('$schema', currentSchema)
+provide('$initialValues', initialValues)
 provide('$selectData', selectData)
 provide('$formEvents', { submit, validate, getFormValues, setFormValues, reset })
 
