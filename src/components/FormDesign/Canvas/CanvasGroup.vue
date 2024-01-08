@@ -53,11 +53,6 @@ defineProps({
   componentName: String
 })
 
-const componentNames = {
-  formList: '自增容器',
-  itemGroup: '字段组'
-}
-
 const handleAdd = inject('handleAdd')
 </script>
 
