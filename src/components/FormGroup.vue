@@ -8,6 +8,10 @@
       <form-list v-model="formValues[name]" v-bind="props" :children="children" :title="label" />
     </form-item>
 
+    <form-item v-if="component === 'inline'" v-bind="thisProps">
+      <FormRender v-model="form" :formItems="children" />
+    </form-item>
+
     <item-group v-if="component === 'itemGroup'" v-model="formValues[name]" :children="children">
     </item-group>
   </div>
@@ -29,7 +33,8 @@ const thisProps = defineProps({
   props: Object,
   modelValue: null,
   initialValue: null,
-  children: Array
+  children: Array,
+  hideLabel: Boolean
 })
 
 const emit = defineEmits(['update:modelValue'])

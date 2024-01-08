@@ -39,7 +39,11 @@ const props = defineProps({
     type: Object,
     default: () => ({ labelWidth: 150, labelAlign: 'right', size: 'default', items: [] })
   },
-  schemaId: [String, Number]
+  schemaId: [String, Number],
+  schemaContext: {
+    type: Object,
+    default: () => ({})
+  }
 })
 
 const emit = defineEmits(['update:modelValue', 'onSubmit'])
@@ -68,7 +72,8 @@ const formItems = computed(() => {
     $values: form.value,
     $form: form.value,
     $selectData: selectData,
-    $utils: {}
+    $utils: {},
+    ...props.schemaContext
   }
   return deepParse(currentSchema.value.items, context)
 })

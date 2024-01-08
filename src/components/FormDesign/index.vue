@@ -5,7 +5,7 @@
     </div>
 
     <div class="formRender">
-      <Actions />
+      <Actions :previewSchemaContext="previewSchemaContext" />
       <Canvas />
     </div>
 
@@ -24,7 +24,11 @@ import Actions from './Actions.vue'
 
 const props = defineProps({
   modelValue: Object,
-  schemaId: [String, Number]
+  schemaId: [String, Number],
+  previewSchemaContext: {
+    type: Object,
+    default: () => ({})
+  }
 })
 
 const emit = defineEmits(['update:modelValue', 'onSave'])

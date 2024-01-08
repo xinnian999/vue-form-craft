@@ -39,7 +39,8 @@ import {
   itemGroup,
   button,
   card,
-  password
+  password,
+  inline
 } from './elements'
 
 const menus = [
@@ -65,7 +66,7 @@ const menus = [
   },
   {
     title: '布局字段',
-    children: [card]
+    children: [card, inline]
   },
   {
     title: '功能字段',

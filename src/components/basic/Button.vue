@@ -15,7 +15,8 @@ const props = defineProps({
     type: String,
     default: 'primary'
   },
-  clickEvent: String
+  clickEvent: String,
+  customEvent: Function
 })
 
 const onClick = () => {
@@ -24,6 +25,9 @@ const onClick = () => {
   }
   if (props.clickEvent === 'resetForm') {
     formEvents.reset()
+  }
+  if (props.clickEvent === 'custom') {
+    props.customEvent()
   }
 }
 </script>
