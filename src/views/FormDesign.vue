@@ -17,5 +17,3 @@ const onSave = (schema) => {
   console.log(schema)
 }
 </script>
-
-<style></style>
