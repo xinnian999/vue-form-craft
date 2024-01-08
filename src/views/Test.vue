@@ -1,5 +1,9 @@
 <template>
-  <schema-form :schema="schema" @onSubmit="onSubmit" />
+  <schema-form
+    :schema="schema"
+    :schemaContext="{ onTest: () => console.log(666) }"
+    @onSubmit="onSubmit"
+  />
 </template>
 
 <script setup>
@@ -27,13 +31,36 @@ const schema = {
       name: 'password'
     },
     {
-      component: 'button',
-      props: {
-        name: '提交',
-        clickEvent: 'submitForm'
-      },
-      onlyId: 'form-aBMY',
-      name: 'submit'
+      label: '',
+      component: 'inline',
+      children: [
+        {
+          component: 'button',
+          props: {
+            name: '提交',
+            clickEvent: 'submitForm'
+          },
+          onlyId: 'form-aBMY',
+          name: 'submit',
+          hideLabel: true
+        },
+        {
+          component: 'button',
+          props: {
+            name: '自定义事件按钮',
+            clickEvent: 'custom',
+            customEvent: '{{onTest}}',
+            style: {
+              marginLeft: '30px'
+            }
+          },
+          onlyId: 'form-mtnY',
+          name: 'IxjeOB',
+          hideLabel: true
+        }
+      ],
+      onlyId: 'form-0dVt',
+      name: 'j0rCIj'
     }
   ]
 }

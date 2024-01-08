@@ -91,7 +91,7 @@
 
 <script setup lang="jsx">
 import { computed, defineProps, defineEmits } from 'vue'
-import { ElFormItem, ElSpace, ElButton, ElCard, ElTableColumn } from 'element-plus'
+import { ElFormItem, ElSpace, ElButton, ElCard, ElTableColumn, ElTable } from 'element-plus'
 import FormItem from '../FormItem.vue'
 
 const props = defineProps({

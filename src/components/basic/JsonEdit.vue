@@ -1,31 +1,35 @@
 <template>
-  <el-button @click="handlePreviewExec">{{ title }}</el-button>
+  <template v-if="mode === 'dialog'">
+    <el-button @click="handlePreviewExec">{{ title }}</el-button>
 
-  <el-dialog
-    v-model="execVisible"
-    :title="title"
-    width="70%"
-    class="dialog"
-    center
-    destroy-on-close
-  >
+    <el-dialog v-model="execVisible" :title="title" width="70%" center destroy-on-close>
+      <json-editor-vue
+        class="editor-dialog"
+        v-model="json"
+        currentMode="code"
+        :modeList="['text', 'view', 'tree', 'code', 'form']"
+        :options="{ search: true, history: true }"
+        language="zh"
+      />
+    </el-dialog>
+  </template>
+
+  <template v-if="mode === 'direct'">
     <json-editor-vue
-      class="editor"
+      class="editor-direct"
       v-model="json"
       currentMode="code"
       :modeList="['text', 'view', 'tree', 'code', 'form']"
       :options="{ search: true, history: true }"
       language="zh"
-      @blur="onBlur"
     />
-  </el-dialog>
+  </template>
 </template>
 
 <script setup lang="jsx">
-import { ref, computed } from 'vue'
+import { ref, computed, watchEffect } from 'vue'
 import JsonEditorVue from 'json-editor-vue3'
 import { ElButton, ElDialog } from 'element-plus'
-import { changeItems } from '@/utils'
 
 const props = defineProps({
   modelValue: {},
@@ -33,9 +37,15 @@ const props = defineProps({
   title: {
     type: String,
     default: '编辑'
+  },
+  mode: {
+    type: String,
+    default: 'dialog'
   }
 })
-
+watchEffect(() => {
+  console.log(props)
+})
 const emits = defineEmits(['update:modelValue'])
 
 const json = computed({
@@ -61,21 +71,20 @@ const execVisible = ref(false)
 const handlePreviewExec = () => {
   execVisible.value = true
 }
-
-const onBlur = async (editor) => {
-  const res = await editor.validate()
-  if (res.length) {
-    let parse = editor.getText()
-    parse = new Function('return ' + parse)()
-    parse.items = changeItems(parse.items)
-    json.value = parse
-  }
-}
 </script>
 
 <style>
 .formDesign-actions {
   padding: 10px;
   text-align: right;
+}
+
+.editor-direct {
+  max-height: 350px;
+  width: 100%;
+}
+
+.editor-dialog {
+  width: 100%;
 }
 </style>

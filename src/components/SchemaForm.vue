@@ -1,8 +1,8 @@
 <template>
   <el-form
     :model="form"
-    :label-position="props.schema?.labelAlign"
-    :size="props.schema?.size"
+    :label-position="currentSchema.labelAlign"
+    :size="currentSchema.size"
     ref="formRef"
   >
     <FormRender v-model="form" :formItems="formItems" />
@@ -19,7 +19,9 @@ import {
   reactive,
   provide,
   watch,
-  watchEffect
+  watchEffect,
+  inject,
+  onMounted
 } from 'vue'
 import { ElForm, ElMessage } from 'element-plus'
 import { handleLinkages, deepParse } from '@/utils'
@@ -36,6 +38,11 @@ const props = defineProps({
   schema: {
     type: Object,
     default: () => ({ labelWidth: 150, labelAlign: 'right', size: 'default', items: [] })
+  },
+  schemaId: [String, Number],
+  schemaContext: {
+    type: Object,
+    default: () => ({})
   }
 })
 
@@ -44,6 +51,10 @@ const emit = defineEmits(['update:modelValue', 'onSubmit'])
 const currentSchema = ref({})
 
 const stateForm = ref({})
+
+const selectData = reactive({})
+
+const getSchema = inject('$getSchema')
 
 const form = computed({
   get() {
@@ -55,17 +66,16 @@ const form = computed({
   }
 })
 
-const selectData = reactive({})
-
 // 转换为动态配置
 const formItems = computed(() => {
   const context = {
     $values: form.value,
     $form: form.value,
     $selectData: selectData,
-    $utils: {}
+    $utils: {},
+    ...props.schemaContext
   }
-  return deepParse(props.schema.items, context)
+  return deepParse(currentSchema.value.items, context)
 })
 
 watch(
@@ -98,6 +108,12 @@ const reset = () => formRef.value.resetFields()
 
 watchEffect(() => {
   currentSchema.value = props.schema
+})
+
+onMounted(async () => {
+  if (props.schemaId) {
+    currentSchema.value = await getSchema(props.schemaId)
+  }
 })
 
 provide('$schema', currentSchema)

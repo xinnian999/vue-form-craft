@@ -24,10 +24,26 @@ export default {
             mode: 'static',
             options: [
               { label: '提交表单', value: 'submitForm' },
-              { label: '重置表单', value: 'resetForm' }
+              { label: '重置表单', value: 'resetForm' },
+              { label: '自定义', value: 'custom' }
             ]
           },
           initialValue: 'submitForm'
+        },
+        {
+          label: '自定义事件',
+          component: 'input',
+          name: 'customEvent',
+          hidden: '{{$form.props.clickEvent!=="custom"}}'
+        },
+        {
+          label: '样式',
+          component: 'jsonEdit',
+          name: 'style',
+          initialValue: {},
+          props: {
+            mode: 'direct'
+          }
         }
       ]
     }

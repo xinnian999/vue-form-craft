@@ -37,6 +37,7 @@
         v-model="form"
         :schema="schema"
         ref="formRef"
+        :schemaContext="previewSchemaContext"
         @onSubmit="ElMessageBox.alert(JSON.stringify(form), '模拟提交')"
       />
       <div>
@@ -47,11 +48,18 @@
 </template>
 
 <script setup lang="jsx">
-import { ref, computed, inject } from 'vue'
+import { ref, computed, inject, defineProps } from 'vue'
 import JsonEditorVue from 'json-editor-vue3'
 import { ElMessageBox, ElButton, ElDialog } from 'element-plus'
 import { SchemaForm } from '@/components'
 import { changeItems } from '@/utils'
+
+defineProps({
+  previewSchemaContext: {
+    type: Object,
+    default: () => ({})
+  }
+})
 
 const schema = inject('$schema')
 const emit = inject('$emit')

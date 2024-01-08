@@ -55,7 +55,7 @@
 
     <Cascader v-if="currentComponent === 'cascader'" v-model="value" v-bind="props" :name="name" />
 
-    <JsonEdit v-if="currentComponent === 'jsonEdit'" v-model="value" :name="name" />
+    <JsonEdit v-if="currentComponent === 'jsonEdit'" v-model="value" v-bind="props" :name="name" />
 
     <el-color-picker v-if="currentComponent === 'colorPicker'" v-model="value" v-bind="props" />
 

@@ -1,5 +1,5 @@
 <template>
-  <el-tabs>
+  <el-tabs class="current-config">
     <el-tab-pane label="字段配置">
       <AttrEdit />
     </el-tab-pane>
@@ -16,4 +16,10 @@ import AttrEdit from './AttrEdit.vue'
 import FormEdit from './FormEdit.vue'
 </script>
 
-<style></style>
+<style lang="less">
+.current-config {
+  .el-tabs__content {
+    overflow: visible;
+  }
+}
+</style>
