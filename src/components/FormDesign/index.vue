@@ -16,14 +16,15 @@
 </template>
 
 <script setup lang="jsx">
-import { ref, provide, reactive, computed, defineProps, defineEmits } from 'vue'
+import { ref, provide, reactive, onMounted, inject, computed, defineProps, defineEmits } from 'vue'
 import Menus from './Menus.vue'
 import Canvas from './Canvas/index.vue'
 import Current from './Current/index.vue'
 import Actions from './Actions.vue'
 
 const props = defineProps({
-  modelValue: Object
+  modelValue: Object,
+  schemaId: [String, Number]
 })
 
 const emit = defineEmits(['update:modelValue', 'onSave'])
@@ -32,20 +33,22 @@ const selectData = reactive({})
 
 const currentId = ref('')
 
-const stateSchema = ref({
+const currentSchema = ref({
   labelWidth: 150,
   labelAlign: 'right',
   size: 'default',
   items: []
 })
 
+const getSchema = inject('$getSchema')
+
 const schema = computed({
   get() {
-    return props.modelValue || stateSchema.value
+    return props.modelValue || currentSchema.value
   },
   set(val) {
     emit('update:modelValue', val)
-    stateSchema.value = val
+    currentSchema.value = val
   }
 })
 
@@ -82,6 +85,12 @@ const current = computed({
     }
 
     schema.value = { ...schema.value, items: set(schema.value.items) }
+  }
+})
+
+onMounted(async () => {
+  if (props.schemaId) {
+    currentSchema.value = await getSchema(props.schemaId)
   }
 })
 
