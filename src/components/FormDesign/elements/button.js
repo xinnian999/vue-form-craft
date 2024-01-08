@@ -36,7 +36,15 @@ export default {
           name: 'customEvent',
           hidden: '{{$form.props.clickEvent!=="custom"}}'
         },
-        { label: '样式', component: 'jsonEdit', name: 'style' }
+        {
+          label: '样式',
+          component: 'jsonEdit',
+          name: 'style',
+          initialValue: {},
+          props: {
+            mode: 'direct'
+          }
+        }
       ]
     }
   ]
