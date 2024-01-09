@@ -19,7 +19,8 @@ const schema = {
         placeholder: '请输入用户名'
       },
       onlyId: 'form-eNR0',
-      name: 'username'
+      name: 'username',
+      initialValue: 10
     },
     {
       label: '密码',
@@ -47,9 +48,8 @@ const schema = {
         {
           component: 'button',
           props: {
-            name: '自定义事件按钮',
-            clickEvent: 'custom',
-            customEvent: '{{onTest}}',
+            name: '重置',
+            clickEvent: 'resetForm',
             style: {
               marginLeft: '30px'
             }

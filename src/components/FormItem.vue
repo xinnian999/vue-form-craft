@@ -72,7 +72,7 @@
 </template>
 
 <script setup lang="jsx">
-import { computed, defineProps, defineEmits, onMounted, inject } from 'vue'
+import { computed, defineProps, defineEmits, onBeforeMount, onMounted, inject } from 'vue'
 import { ElFormItem, ElInput, ElTooltip, ElColorPicker, ElSwitch } from 'element-plus'
 import { isString } from 'lodash'
 import Select from './basic/Select.vue'
@@ -119,13 +119,10 @@ const currentComponent = computed(() => {
   return thisProps.component
 })
 
-onMounted(() => {
-  //TODO：初始值：这里由于onMounted时v-model还没有挂载完成，所以转为异步更新暂时解决
-  setTimeout(() => {
-    if (!value.value && (thisProps.initialValue || thisProps.initialValue === 0)) {
-      emit('update:modelValue', thisProps.initialValue)
-    }
-  })
+onBeforeMount(() => {
+  if (!value.value && (thisProps.initialValue || thisProps.initialValue === 0)) {
+    emit('update:modelValue', thisProps.initialValue)
+  }
 })
 </script>
 

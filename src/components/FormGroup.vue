@@ -31,6 +31,7 @@
 <script setup lang="jsx">
 import { defineProps, computed, defineEmits } from 'vue'
 import { ElCard } from 'element-plus'
+import { merge } from 'lodash'
 import FormList from './group/FormList.vue'
 import ItemGroup from './group/ItemGroup.vue'
 import FormRender from './FormRender.vue'
@@ -63,8 +64,7 @@ const form = computed({
 const formValues = computed(() => {
   return new Proxy(thisProps.modelValue, {
     set(target, key, value) {
-      // console.log(target, key, value);
-      emit('update:modelValue', { ...target, [key]: value })
+      emit('update:modelValue', merge(target, { [key]: value }))
       return true
     }
   })

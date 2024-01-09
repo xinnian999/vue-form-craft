@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="jsx">
-import { defineProps, defineEmits, computed, inject } from 'vue'
+import { defineProps, defineEmits, computed } from 'vue'
 import FormItem from './FormItem.vue'
 import FormGroup from './FormGroup.vue'
 
@@ -24,8 +24,6 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue'])
 
-const initialValues = inject('$initialValues')
-
 //原form总数据源
 const form = computed({
   get() {
@@ -33,7 +31,6 @@ const form = computed({
   },
   set(val) {
     emit('update:modelValue', val)
-    Object.assign(props.modelValue, val)
   }
 })
 
@@ -43,7 +40,6 @@ const formValues = computed(() => {
     set(target, key, value) {
       // console.log(target, key, value);
       emit('update:modelValue', { ...target, [key]: value })
-      initialValues[key] = value
       return true
     }
   })

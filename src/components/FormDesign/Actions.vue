@@ -40,9 +40,10 @@
         :schemaContext="previewSchemaContext"
         @onSubmit="ElMessageBox.alert(JSON.stringify(form), '模拟提交')"
       />
-      <div>
-        <el-button @click="formRef.submit()">模拟提交</el-button>
-      </div>
+      <template #footer>
+        <el-button @click="formRef.submit()" type="primary">模拟提交</el-button>
+        <el-button @click="formRef.reset()" type="primary">重置</el-button>
+      </template>
     </el-dialog>
   </div>
 </template>
