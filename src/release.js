@@ -1,6 +1,7 @@
 import 'element-plus/dist/index.css'
 import axios from 'axios'
-import { FormDesign, SchemaForm } from '@/components'
+import { SchemaForm } from '@/components'
+import FormDesign from './FormDesign/index.vue'
 import IconRender from '@/components/IconRender.vue'
 import * as Directives from '@/directive'
 

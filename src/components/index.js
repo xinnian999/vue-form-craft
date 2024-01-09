@@ -4,7 +4,6 @@ import Select from './basic/Select.vue'
 import Radio from './basic/Radio.vue'
 import FormList from './group/FormList.vue'
 import FormItem from './FormItem.vue'
-import FormDesign from './FormDesign/index.vue'
 import SchemaForm from './SchemaForm.vue'
 
-export { ItemGroup, InputNumber, Select, Radio, FormItem, FormList, FormDesign, SchemaForm }
+export { ItemGroup, InputNumber, Select, Radio, FormItem, FormList, SchemaForm }

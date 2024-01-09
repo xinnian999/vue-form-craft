@@ -8,7 +8,6 @@
 
 <script setup>
 import { ref } from 'vue'
-import { FormDesign } from '@/components'
 
 const schema = ref({
   labelWidth: 150,
