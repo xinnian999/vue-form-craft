@@ -17,7 +17,7 @@
 
 <script setup lang="jsx">
 import { ref, provide, reactive, onMounted, inject, computed, defineProps, defineEmits } from 'vue'
-import Menus from './Menus.vue'
+import Menus from './Menus/index.vue'
 import Canvas from './Canvas/index.vue'
 import Current from './Current/index.vue'
 import Actions from './Actions.vue'
@@ -115,6 +115,7 @@ provide('$emit', emit)
     width: 20%;
     padding: 10px;
     background-color: #fff;
+    position: relative;
   }
   .formRender {
     flex: 1;
