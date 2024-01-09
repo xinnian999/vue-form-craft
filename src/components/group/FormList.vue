@@ -9,7 +9,8 @@
               v-model="item[field.name]"
               v-bind="field"
               :key="field.label"
-              label=""
+              :prop="`${name}.${index}.${field.name}`"
+              hideLabel
             />
           </el-space>
 
@@ -48,6 +49,7 @@
           v-bind="field"
           :key="field.label"
           class="list-card-item"
+          :prop="`${name}.${index}.${field.name}`"
         />
       </el-card>
     </template>
@@ -58,7 +60,7 @@
         :label="item.label"
         :key="item.name"
         v-for="item in children"
-        :formatter="($event) => formatter(item, $event)"
+        :formatter="(row, _, __, index) => formatter(item, row, index)"
       />
       <el-table-column fixed="right" min-width="60">
         <template #default="record">
@@ -90,7 +92,7 @@
 </template>
 
 <script setup lang="jsx">
-import { computed, defineProps, defineEmits, watch } from 'vue'
+import { computed, defineProps, defineEmits } from 'vue'
 import { ElFormItem, ElSpace, ElButton, ElCard, ElTableColumn, ElTable } from 'element-plus'
 import FormItem from '../FormItem.vue'
 
@@ -124,18 +126,19 @@ const props = defineProps({
   newItemDefaults: {
     type: Function,
     default: () => ({})
-  }
+  },
+  name: String
 })
 const emit = defineEmits(['update:modelValue'])
 
-const list = computed({
-  get() {
-    return props.modelValue || []
-  },
-  set(val) {
-    console.log(val)
-    emit('update:modelValue', val)
-  }
+const list = computed(() => {
+  return new Proxy(props.modelValue || [], {
+    set(target, key, value) {
+      target[key] = value
+      emit('update:modelValue', target)
+      return true
+    }
+  })
 })
 
 const isMax = computed(() => {
@@ -154,14 +157,15 @@ const handleReduceItem = (index) => {
   emit('update:modelValue', newData)
 }
 
-const formatter = (item, data) => {
+const formatter = (item, data, index) => {
   return (
     <FormItem
       {...item}
-      label=""
-      modelValue={data[item.name]} // 设置 value 属性
+      hideLabel
+      modelValue={data[item.name]}
       onUpdate:modelValue={(newValue) => (data[item.name] = newValue)}
       style={{ marginBottom: 0 }}
+      prop={`${props.name}.${index}.${item.name}`}
     />
   )
 }
@@ -190,9 +194,6 @@ const formatter = (item, data) => {
   }
   .list-btn {
     margin-left: 10px;
-  }
-
-  .addBtn {
   }
 }
 </style>

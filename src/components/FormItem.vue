@@ -3,7 +3,7 @@
     id="form-item"
     :style="style"
     :key="name"
-    :prop="name"
+    :prop="prop || name"
     :label-width="hideLabel ? '0' : schema.labelWidth"
     :rules="required ? { required: true, message: `请输入${label}`, trigger: 'blur' } : null"
   >
@@ -94,7 +94,8 @@ const thisProps = defineProps({
   style: Object,
   help: String,
   children: Array,
-  hideLabel: Boolean
+  hideLabel: Boolean,
+  prop: String
 })
 
 const emit = defineEmits(['update:modelValue'])

@@ -5,14 +5,25 @@
     </el-card>
 
     <form-item v-if="component === 'formList'" v-bind="thisProps">
-      <form-list v-model="formValues[name]" v-bind="props" :children="children" :title="label" />
+      <form-list
+        v-model="formValues[name]"
+        v-bind="props"
+        :children="children"
+        :title="label"
+        :name="name"
+      />
     </form-item>
 
     <form-item v-if="component === 'inline'" v-bind="thisProps">
       <FormRender v-model="form" :formItems="children" />
     </form-item>
 
-    <item-group v-if="component === 'itemGroup'" v-model="formValues[name]" :children="children">
+    <item-group
+      v-if="component === 'itemGroup'"
+      v-model="formValues[name]"
+      :children="children"
+      :name="name"
+    >
     </item-group>
   </div>
 </template>

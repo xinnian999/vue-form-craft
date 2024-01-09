@@ -2,7 +2,12 @@
   <template v-for="item in formItems" :key="item.name">
     <form-group v-if="item.children" v-model="form" v-bind="item" />
 
-    <form-item v-else v-model="formValues[item.name]" v-bind="item" />
+    <form-item
+      v-else
+      v-model="formValues[item.name]"
+      v-bind="item"
+      :prop="name && `${name}.${item.name}`"
+    />
   </template>
 </template>
 
@@ -13,7 +18,8 @@ import FormGroup from './FormGroup.vue'
 
 const props = defineProps({
   modelValue: Object,
-  formItems: Array
+  formItems: Array,
+  name: String
 })
 
 const emit = defineEmits(['update:modelValue'])
