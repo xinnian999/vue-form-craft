@@ -26,6 +26,11 @@ export default {
           initialValue: '请输入...'
         },
         {
+          label: '最长字数',
+          component: 'inputNumber',
+          name: 'maxlength'
+        },
+        {
           component: 'itemGroup',
           name: 'autosize',
           children: [

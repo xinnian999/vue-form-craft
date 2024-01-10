@@ -13,6 +13,7 @@ export default {
       name: 'props',
       children: [
         { label: '是否禁用', component: 'switch', name: 'disabled' },
+        { label: '显示清除按钮', component: 'switch', name: 'clearable' },
         {
           label: '占位提示',
           component: 'input',

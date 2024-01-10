@@ -3,6 +3,7 @@ import { nextTick } from 'vue'
 const loadMore = (app) => {
   app.directive('selectLoadMore', {
     mounted: function (el, binding) {
+      console.dir(el)
       nextTick(() => {
         const dom = el.querySelector('.el-select-dropdown .el-select-dropdown__wrap') // 获取下拉框元素
         dom.addEventListener('scroll', function () {

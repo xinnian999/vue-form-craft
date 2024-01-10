@@ -5,7 +5,7 @@
     :key="name"
     :prop="prop || name"
     :label-width="hideLabel ? '0' : schema.labelWidth"
-    :rules="required ? { required: true, message: `请输入${label}`, trigger: 'blur' } : null"
+    :rules="computeRules"
   >
     <template #label v-if="!hideLabel">
       <div class="form-item-label">
@@ -24,6 +24,8 @@
       autocomplete="off"
       v-bind="props"
       class="form-item-input"
+      showWordLimit
+      type="text"
     />
 
     <el-input
@@ -33,6 +35,7 @@
       show-password
       v-bind="props"
       type="password"
+      showWordLimit
       class="form-item-input"
     />
 
@@ -42,6 +45,7 @@
       autocomplete="off"
       v-bind="props"
       type="textarea"
+      showWordLimit
       class="form-item-input"
     />
 
@@ -82,6 +86,7 @@ import Checkbox from './basic/Checkbox.vue'
 import Cascader from './basic/Cascader.vue'
 import JsonEdit from './basic/JsonEdit.vue'
 import Button from './basic/Button.vue'
+import { isRegexString } from '@/utils'
 
 const thisProps = defineProps({
   label: String,
@@ -95,7 +100,8 @@ const thisProps = defineProps({
   help: String,
   children: Array,
   hideLabel: Boolean,
-  prop: String
+  prop: String,
+  rules: Array
 })
 
 const emit = defineEmits(['update:modelValue'])
@@ -109,6 +115,38 @@ const value = computed({
   set(val) {
     emit('update:modelValue', val)
   }
+})
+
+const computeRules = computed(() => {
+  const { rules, required } = thisProps
+
+  const ruleData = []
+
+  if (required) {
+    ruleData.push({ required: true, message: '该字段是必填字段', trigger: 'blur' })
+  }
+
+  if (rules) {
+    const ruleParse = rules.map(({ type, message, trigger }) => {
+      const ruleDef = {
+        message,
+        trigger
+      }
+      if (['email'].includes(type)) {
+        return { ...ruleDef, type }
+      }
+      if (isRegexString(type)) {
+        return {
+          ...ruleDef,
+          pattern: type
+        }
+      }
+      return {}
+    })
+    return [...ruleData, ...ruleParse]
+  }
+
+  return ruleData
 })
 
 const currentComponent = computed(() => {

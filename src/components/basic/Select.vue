@@ -10,7 +10,6 @@
     clearable
     filterable
     ref="selectRef"
-    :teleported="false"
     v-selectLoadMore="fetchData"
   >
     <template #empty v-if="tableDrop">
@@ -123,10 +122,6 @@ const handleCurrentChange = (row) => {
     emits('update:modelValue', row[props.valueKey])
     selectRef.value.blur()
   }
-}
-
-const handleSelectLoadMore = () => {
-  console.log('触底')
 }
 </script>
 
