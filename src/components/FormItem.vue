@@ -67,6 +67,10 @@
 
     <Button v-if="currentComponent === 'button'" type="primary" v-bind="props">{{ label }}</Button>
 
+    <MdEditor v-if="currentComponent === 'markdown'" v-model="value" v-bind="props" />
+
+    <el-alert v-if="currentComponent === 'alert'" v-bind="props" />
+
     <div v-if="currentComponent === 'text'">
       {{ props.formatter || value }}
     </div>
@@ -76,9 +80,10 @@
 </template>
 
 <script setup lang="jsx">
-import { computed, defineProps, defineEmits, onBeforeMount, onMounted, inject } from 'vue'
-import { ElFormItem, ElInput, ElTooltip, ElColorPicker, ElSwitch } from 'element-plus'
+import { computed, defineProps, defineEmits, onBeforeMount, inject } from 'vue'
+import { ElFormItem, ElInput, ElTooltip, ElColorPicker, ElSwitch, ElAlert } from 'element-plus'
 import { isString } from 'lodash'
+import { MdEditor } from 'md-editor-v3'
 import Select from './basic/Select.vue'
 import Radio from './basic/Radio.vue'
 import InputNumber from './basic/InputNumber.vue'

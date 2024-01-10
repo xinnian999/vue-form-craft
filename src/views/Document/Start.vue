@@ -10,9 +10,7 @@
 </template>
 
 <script setup>
-import { MdPreview, MdCatalog } from 'md-editor-v3'
 import { watchEffect, ref } from 'vue'
-import 'md-editor-v3/lib/style.css'
 import axios from 'axios'
 import { useRoute } from 'vue-router'
 

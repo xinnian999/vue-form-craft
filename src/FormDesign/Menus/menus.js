@@ -14,7 +14,9 @@ import {
   button,
   card,
   password,
-  inline
+  inline,
+  markdown,
+  alert
 } from '../elements'
 
 const menus = [
@@ -31,7 +33,8 @@ const menus = [
       inputNumber,
       switchConfig,
       jsonEdit,
-      colorPicker
+      colorPicker,
+      markdown
     ]
   },
   {
@@ -44,7 +47,7 @@ const menus = [
   },
   {
     title: '功能字段',
-    children: [button]
+    children: [button, alert]
   }
 ]
 
