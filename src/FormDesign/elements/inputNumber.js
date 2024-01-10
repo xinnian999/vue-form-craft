@@ -1,5 +1,6 @@
 import linkageAttr from './commonAttr/linkageAttr'
 import basic from './commonAttr/basic'
+import props from './commonAttr/props'
 export default {
   name: '计数器',
   initialValues: { label: '计数器', component: 'inputNumber' },
@@ -15,6 +16,7 @@ export default {
       component: 'itemGroup',
       name: 'props',
       children: [
+        ...props,
         { label: '是否禁用', component: 'switch', name: 'disabled' },
         {
           label: '按钮位置',

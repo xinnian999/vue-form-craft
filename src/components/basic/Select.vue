@@ -10,7 +10,9 @@
     clearable
     filterable
     ref="selectRef"
-    v-selectLoadMore="fetchData"
+    v-selectLoadMore:[popperClass]="fetchData"
+    :popper-class="popperClass"
+    :class="props.class"
   >
     <template #empty v-if="tableDrop">
       <el-table
@@ -58,6 +60,7 @@
 import { defineProps, defineEmits, ref } from 'vue'
 import { ElSelect, ElRadio, ElTable, ElOption, ElTableColumn } from 'element-plus'
 import useSelect from '@/hooks/useSelect'
+import { getRandomId } from '@/utils'
 
 const props = defineProps({
   modelValue: {},
@@ -104,12 +107,15 @@ const props = defineProps({
   formatter: Function,
   sort: Boolean,
   tableDrop: Boolean,
-  columns: { default: () => [], type: Array }
+  columns: { default: () => [], type: Array },
+  class: String
 })
 
 const emits = defineEmits(['update:modelValue', 'onChangeSelect'])
 
 const selectRef = ref(null)
+
+const popperClass = getRandomId(8) + '-popper'
 
 const { selectVal, currentOptions, selectChange, loading, fetchData, isMax } = useSelect(
   props,

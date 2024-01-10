@@ -1,5 +1,6 @@
 import linkageAttr from './commonAttr/linkageAttr'
 import basic from './commonAttr/basic'
+import props from './commonAttr/props'
 
 export default {
   name: '密码输入框',
@@ -12,6 +13,7 @@ export default {
       component: 'itemGroup',
       name: 'props',
       children: [
+        ...props,
         { label: '是否禁用', component: 'switch', name: 'disabled' },
         { label: '显示清除按钮', component: 'switch', name: 'clearable' },
         {

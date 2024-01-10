@@ -1,5 +1,6 @@
 import linkageAttr from './commonAttr/linkageAttr'
 import basic from './commonAttr/basic'
+import props from './commonAttr/props'
 export default {
   name: 'JSON编辑器',
   initialValues: { label: 'JSON编辑器', component: 'jsonEdit' },
@@ -11,6 +12,7 @@ export default {
       component: 'itemGroup',
       name: 'props',
       children: [
+        ...props,
         {
           label: '显示模式',
           component: 'radio',

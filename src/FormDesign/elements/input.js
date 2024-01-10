@@ -1,4 +1,5 @@
 import basic from './commonAttr/basic'
+import props from './commonAttr/props'
 import linkageAttr from './commonAttr/linkageAttr'
 
 export default {
@@ -16,6 +17,7 @@ export default {
       component: 'itemGroup',
       name: 'props',
       children: [
+        ...props,
         { label: '是否禁用', component: 'switch', name: 'disabled' },
         { label: '显示清除按钮', component: 'switch', name: 'clearable' },
         {

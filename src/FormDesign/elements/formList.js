@@ -1,4 +1,5 @@
 import basic from './commonAttr/basic'
+import props from './commonAttr/props'
 export default {
   name: '自增容器',
   initialValues: {
@@ -18,6 +19,7 @@ export default {
       component: 'itemGroup',
       name: 'props',
       children: [
+        ...props,
         {
           label: '显示模式',
           component: 'radio',

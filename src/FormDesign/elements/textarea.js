@@ -1,5 +1,6 @@
 import linkageAttr from './commonAttr/linkageAttr'
 import basic from './commonAttr/basic'
+import props from './commonAttr/props'
 
 export default {
   name: '多行文本',
@@ -18,6 +19,7 @@ export default {
       component: 'itemGroup',
       name: 'props',
       children: [
+        ...props,
         { label: '是否禁用', component: 'switch', name: 'disabled' },
         {
           label: '占位提示',

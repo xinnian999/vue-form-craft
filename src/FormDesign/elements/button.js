@@ -1,3 +1,4 @@
+import props from './commonAttr/props'
 export default {
   name: '按钮',
   initialValues: {
@@ -15,6 +16,7 @@ export default {
       component: 'itemGroup',
       name: 'props',
       children: [
+        ...props,
         { label: '按钮名称', component: 'input', name: 'name' },
         {
           label: '点击事件',

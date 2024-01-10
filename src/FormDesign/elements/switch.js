@@ -1,5 +1,6 @@
 import linkageAttr from './commonAttr/linkageAttr'
 import basic from './commonAttr/basic'
+import props from './commonAttr/props'
 
 export default {
   name: '开关',
@@ -16,6 +17,7 @@ export default {
       component: 'itemGroup',
       name: 'props',
       children: [
+        ...props,
         { label: '是否禁用', component: 'switch', name: 'disabled' },
         { label: '打开时描述', component: 'input', name: 'active-text' },
         { label: '关闭时描述', component: 'input', name: 'inactive-text' },

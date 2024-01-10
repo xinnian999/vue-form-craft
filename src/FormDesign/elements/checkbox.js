@@ -1,5 +1,6 @@
 import optionAttr from './commonAttr/optionAttr'
 import basic from './commonAttr/basic'
+import props from './commonAttr/props'
 
 export default {
   name: '多选框组',
@@ -23,6 +24,7 @@ export default {
       component: 'itemGroup',
       name: 'props',
       children: [
+        ...props,
         { label: '是否禁用', component: 'switch', name: 'disabled' },
         {
           label: '自动选中第一项',
