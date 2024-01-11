@@ -71,6 +71,8 @@
 
     <el-alert v-if="currentComponent === 'alert'" v-bind="props" />
 
+    <el-date-picker v-if="currentComponent === 'datePicker'" v-model="value" v-bind="props" />
+
     <div v-if="currentComponent === 'text'">
       {{ props.formatter || value }}
     </div>
@@ -81,7 +83,15 @@
 
 <script setup lang="jsx">
 import { computed, defineProps, defineEmits, onBeforeMount, inject } from 'vue'
-import { ElFormItem, ElInput, ElTooltip, ElColorPicker, ElSwitch, ElAlert } from 'element-plus'
+import {
+  ElFormItem,
+  ElInput,
+  ElTooltip,
+  ElColorPicker,
+  ElSwitch,
+  ElAlert,
+  ElDatePicker
+} from 'element-plus'
 import { isString } from 'lodash'
 import { MdEditor } from 'md-editor-v3'
 import Select from './basic/Select.vue'

@@ -7,7 +7,8 @@ export default {
       title: '提示信息',
       type: 'info',
       effect: 'light',
-      description: '这是一个描述'
+      description: '这是一个描述',
+      closable: true
     }
   },
   attr: [
@@ -20,6 +21,7 @@ export default {
       children: [
         { label: '标题', component: 'input', name: 'title' },
         { label: '描述', component: 'textarea', name: 'description' },
+        { label: '是否可关闭', component: 'switch', name: 'closable' },
         {
           label: '类型',
           component: 'radio',

@@ -16,7 +16,8 @@ import {
   password,
   inline,
   markdown,
-  alert
+  alert,
+  datePicker
 } from '../elements'
 
 const menus = [
@@ -34,6 +35,7 @@ const menus = [
       switchConfig,
       jsonEdit,
       colorPicker,
+      datePicker,
       markdown
     ]
   },
