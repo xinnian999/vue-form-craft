@@ -5,5 +5,6 @@ import Radio from './basic/Radio.vue'
 import FormList from './group/FormList.vue'
 import FormItem from './FormItem.vue'
 import SchemaForm from './SchemaForm.vue'
+import JsonEdit from './basic/JsonEdit.vue'
 
-export { ItemGroup, InputNumber, Select, Radio, FormItem, FormList, SchemaForm }
+export { ItemGroup, JsonEdit, InputNumber, Select, Radio, FormItem, FormList, SchemaForm }

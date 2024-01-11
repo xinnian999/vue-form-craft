@@ -66,16 +66,17 @@ const form = computed({
   }
 })
 
+const context = computed(() => ({
+  $values: form.value,
+  $form: form.value,
+  $selectData: selectData,
+  $utils: {},
+  ...props.schemaContext
+}))
+
 // 转换为动态配置
 const formItems = computed(() => {
-  const context = {
-    $values: form.value,
-    $form: form.value,
-    $selectData: selectData,
-    $utils: {},
-    ...props.schemaContext
-  }
-  return deepParse(currentSchema.value.items, context)
+  return deepParse(currentSchema.value.items, context.value)
 })
 
 watch(
@@ -120,5 +121,5 @@ provide('$schema', currentSchema)
 provide('$selectData', selectData)
 provide('$formEvents', { submit, validate, getFormValues, setFormValues, reset })
 
-defineExpose({ submit, validate, selectData, getFormValues, setFormValues, reset })
+defineExpose({ submit, validate, selectData, getFormValues, setFormValues, reset, context })
 </script>

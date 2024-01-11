@@ -43,6 +43,12 @@
       <template #footer>
         <el-button @click="formRef.submit()" type="primary">模拟提交</el-button>
         <el-button @click="formRef.reset()" type="primary">重置</el-button>
+        <JsonEdit
+          v-model="formContext"
+          height="400px"
+          title="上下文"
+          description="实时预览表单上下文，调试联动"
+        />
       </template>
     </el-dialog>
   </div>
@@ -52,7 +58,7 @@
 import { ref, computed, inject, defineProps } from 'vue'
 import JsonEditorVue from 'json-editor-vue3'
 import { ElMessageBox, ElButton, ElDialog } from 'element-plus'
-import { SchemaForm } from '@/components'
+import { SchemaForm, JsonEdit } from '@/components'
 import { changeItems } from '@/utils'
 
 defineProps({
@@ -77,6 +83,8 @@ const json = computed({
 const formRef = ref(null)
 
 const form = ref({})
+
+const formContext = computed(() => formRef.value?.context)
 
 const execVisible = ref(false)
 

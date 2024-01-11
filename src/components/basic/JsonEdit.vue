@@ -3,6 +3,7 @@
     <el-button @click="handlePreviewExec">{{ title }}</el-button>
 
     <el-dialog v-model="execVisible" :title="title" width="70%" center destroy-on-close>
+      <div>{{ description }}</div>
       <json-editor-vue
         class="editor-dialog"
         v-model="json"
@@ -10,6 +11,7 @@
         :modeList="['text', 'view', 'tree', 'code', 'form']"
         :options="{ search: true, history: true }"
         language="zh"
+        :style="{ height }"
       />
     </el-dialog>
   </template>
@@ -22,6 +24,7 @@
       :modeList="['text', 'view', 'tree', 'code', 'form']"
       :options="{ search: true, history: true }"
       language="zh"
+      :style="{ height }"
     />
   </template>
 </template>
@@ -41,7 +44,9 @@ const props = defineProps({
   mode: {
     type: String,
     default: 'dialog'
-  }
+  },
+  height: null,
+  description: String
 })
 watchEffect(() => {
   console.log(props)
@@ -80,7 +85,6 @@ const handlePreviewExec = () => {
 }
 
 .editor-direct {
-  max-height: 350px;
   width: 100%;
 }
 
