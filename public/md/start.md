@@ -3,9 +3,13 @@
 ### 安装
 
 ```js
+npm i vue-form-craft
+//或
+yarn add vue-form-craft
+//或
 pnpm i vue-form-craft
-
 ```
+
 ### 全局注册
 
 ```js
@@ -38,7 +42,6 @@ const schema = {
       props: {
         placeholder: '请输入用户名'
       },
-      onlyId: 'form-eNR0',
       name: 'username'
     },
     {
@@ -47,7 +50,6 @@ const schema = {
       props: {
         placeholder: '请输入密码'
       },
-      onlyId: 'form-D1x7',
       name: 'password'
     },
     {
@@ -56,8 +58,6 @@ const schema = {
         name: '提交',
         clickEvent: 'submitForm'
       },
-      onlyId: 'form-aBMY',
-      name: 'submit'
     }
   ]
 }

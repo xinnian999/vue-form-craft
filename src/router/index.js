@@ -13,11 +13,27 @@ export const routes = [
     redirect: '/document/start',
     children: [
       {
+        path: '/document/introduce',
+        name: '简介',
+        component: () => import('@/views/Document/Start.vue'),
+        meta: {
+          md: 'introduce.md'
+        }
+      },
+      {
         path: '/document/start',
         name: '快速开始',
         component: () => import('@/views/Document/Start.vue'),
         meta: {
           md: 'start.md'
+        }
+      },
+      {
+        path: '/document/schema',
+        name: 'Schema详解',
+        component: () => import('@/views/Document/Start.vue'),
+        meta: {
+          md: 'schema.md'
         }
       },
       {
