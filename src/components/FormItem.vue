@@ -9,7 +9,7 @@
   >
     <template #label v-if="!hideLabel">
       <div class="form-item-label">
-        <div>{{ label }}</div>
+        <div :style="schema.labelBold && 'font-weight: bold'">{{ label }}</div>
         <div class="ico" v-if="help">
           <el-tooltip class="box-item" effect="dark" :content="help">
             <icon-render name="help" />
@@ -182,7 +182,6 @@ onBeforeMount(() => {
 <style lang="less">
 #form-item {
   .el-form-item__label {
-    font-weight: bold;
   }
 
   .form-item-input {

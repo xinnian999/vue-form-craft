@@ -13,11 +13,15 @@
 import { watchEffect, ref } from 'vue'
 import axios from 'axios'
 import { useRoute } from 'vue-router'
+import linkage1Schema from './case/linkage1'
+import render from '@/render'
 
 const route = useRoute()
 
 const text = ref('Hello Editor!')
 const scrollElement = ref(null)
+
+const com = <schema-form schema={linkage1Schema} />
 
 watchEffect(async () => {
   const { md } = route.meta
@@ -26,6 +30,10 @@ watchEffect(async () => {
   text.value = data
   scrollElement.value = document.querySelector('.md-container')
   scrollElement.value.scrollTop = 0
+
+  setTimeout(() => {
+    render(com, '.test')
+  }, 500)
 })
 </script>
 

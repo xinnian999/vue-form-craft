@@ -13,6 +13,8 @@
 import { watchEffect, ref } from 'vue'
 import axios from 'axios'
 import { useRoute } from 'vue-router'
+import Test from '../Test.vue'
+import render from '@/render'
 
 const route = useRoute()
 
@@ -26,6 +28,10 @@ watchEffect(async () => {
   text.value = data
   scrollElement.value = document.querySelector('.md-container')
   scrollElement.value.scrollTop = 0
+
+  setTimeout(() => {
+    render(Test, '.test')
+  }, 500)
 })
 </script>
 

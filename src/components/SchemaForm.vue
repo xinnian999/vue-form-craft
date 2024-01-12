@@ -3,6 +3,8 @@
     :model="form"
     :label-position="currentSchema.labelAlign"
     :size="currentSchema.size"
+    :disabled="disabled"
+    :hide-required-asterisk="currentSchema.hideRequiredAsterisk"
     ref="formRef"
   >
     <FormRender v-model="form" :formItems="formItems" />
@@ -43,10 +45,14 @@ const props = defineProps({
   schemaContext: {
     type: Object,
     default: () => ({})
+  },
+  disabled: {
+    type: Boolean,
+    default: false
   }
 })
 
-const emit = defineEmits(['update:modelValue', 'onSubmit'])
+const emit = defineEmits(['update:modelValue', 'onSubmit', 'onChange'])
 
 const currentSchema = ref({})
 
@@ -82,6 +88,7 @@ const formItems = computed(() => {
 watch(
   form,
   (newVal, oldVal) => {
+    emit('onChange', newVal)
     handleLinkages({ newVal, oldVal, form, formItems: formItems.value })
   },
   { deep: true }

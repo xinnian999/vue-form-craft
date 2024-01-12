@@ -1,71 +1,54 @@
 <template>
-  <schema-form
-    :schema="schema"
-    :schemaContext="{ onTest: () => console.log(666) }"
-    @onSubmit="onSubmit"
-  />
+  <schema-form :schema="schema" ref="formRef" />
+  <button @click="handleSubmit">提交</button>
 </template>
 
 <script setup>
+import { onMounted, ref } from 'vue'
+
+const formRef = ref()
+
 const schema = {
   labelWidth: 150,
   labelAlign: 'right',
   size: 'default',
   items: [
     {
-      label: '用户名',
+      label: '标题',
       component: 'input',
       props: {
-        placeholder: '请输入用户名'
+        placeholder: '请输入标题'
       },
       onlyId: 'form-eNR0',
-      name: 'username',
+      name: 'title',
       initialValue: 10
     },
     {
-      label: '密码',
-      component: 'password',
+      label: '描述',
+      component: 'textarea',
       props: {
-        placeholder: '请输入密码'
+        placeholder: '请输入描述'
       },
       onlyId: 'form-D1x7',
-      name: 'password'
-    },
-    {
-      label: '',
-      component: 'inline',
-      children: [
-        {
-          component: 'button',
-          props: {
-            name: '提交',
-            clickEvent: 'submitForm'
-          },
-          onlyId: 'form-aBMY',
-          name: 'submit',
-          hideLabel: true
-        },
-        {
-          component: 'button',
-          props: {
-            name: '重置',
-            clickEvent: 'resetForm',
-            style: {
-              marginLeft: '30px'
-            }
-          },
-          onlyId: 'form-mtnY',
-          name: 'IxjeOB',
-          hideLabel: true
-        }
-      ],
-      onlyId: 'form-0dVt',
-      name: 'j0rCIj'
+      name: 'desc',
+      required: true
     }
   ]
 }
 
-const onSubmit = (values) => {
-  alert(JSON.stringify(values))
+onMounted(() => {
+  //模拟表单值回显
+  setTimeout(() => {
+    formRef.value.setFormValues({ title: '测试标题', desc: '这是一个描述' })
+  }, 1000)
+})
+
+const handleSubmit = () => {
+  formRef.value
+    .submit()
+    .then((values) => {
+      alert(JSON.stringify(values))
+    })
+    .catch((e) => console.log(e))
 }
 </script>

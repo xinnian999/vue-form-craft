@@ -4,6 +4,7 @@
     :style="`max-width: ${schema.formWidth}`"
     :label-position="schema.labelAlign"
     :size="schema.size"
+    :hide-required-asterisk="schema.hideRequiredAsterisk"
   >
     <div class="tip" v-if="!list.length">
       <div class="ico">

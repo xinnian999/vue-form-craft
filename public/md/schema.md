@@ -47,11 +47,13 @@
 
 #### 表单整体配置
 
-| 参数名     | 类型                            | 默认值  | 是否必传 | 描述              |
-| ---------- | ------------------------------- | ------- | -------- | ----------------- |
-| labelWidth | Number                          | 150     | No       | 表单label宽度     |
-| labelAlign | 'left' \| 'top'   \| 'right'    | right   | No       | 表单label对齐方式 |
-| size       | 'small' \| 'default' \| 'large' | default | No       | 表单字段大小      |
+| 参数名               | 类型                            | 默认值  | 是否必传 | 描述              |
+| -------------------- | ------------------------------- | ------- | -------- | ----------------- |
+| labelWidth           | Number                          | 150     | No       | 表单label宽度     |
+| labelAlign           | 'left' \| 'top'   \| 'right'    | right   | No       | 表单label对齐方式 |
+| size                 | 'small' \| 'default' \| 'large' | default | No       | 表单字段大小      |
+| hideRequiredAsterisk | Boolean                         | false   | No       | 表单隐藏必填星号  |
+| labelBold            | Boolean                         | false   | No       | 表单label加粗     |
 
 #### 表单项配置
 
