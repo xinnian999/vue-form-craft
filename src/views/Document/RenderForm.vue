@@ -1,5 +1,5 @@
 <template>
-  <schema-form :schema="schema" />
+  <schema-form :schema="schema" class="renderForm" />
 </template>
 
 <script setup lang="jsx">
@@ -13,4 +13,10 @@ defineProps({
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+.renderForm {
+  border: 1px solid #eee;
+  margin: 25px 0;
+  padding: 20px;
+}
+</style>

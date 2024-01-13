@@ -13,15 +13,14 @@
 import { watchEffect, ref } from 'vue'
 import axios from 'axios'
 import { useRoute } from 'vue-router'
-import linkage1Schema from './case/linkage1'
+import caseForm from './case'
 import render from '@/render'
+import RenderForm from './RenderForm.vue'
 
 const route = useRoute()
 
 const text = ref('Hello Editor!')
 const scrollElement = ref(null)
-
-const com = <schema-form schema={linkage1Schema} />
 
 watchEffect(async () => {
   const { md } = route.meta
@@ -32,7 +31,9 @@ watchEffect(async () => {
   scrollElement.value.scrollTop = 0
 
   setTimeout(() => {
-    render(com, '.test')
+    Object.keys(caseForm).forEach((key) => {
+      render(<RenderForm schema={caseForm[key]} />, `.${key}`)
+    })
   }, 500)
 })
 </script>

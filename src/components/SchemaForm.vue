@@ -7,6 +7,7 @@
     :hide-required-asterisk="currentSchema.hideRequiredAsterisk"
     ref="formRef"
     :style="style"
+    :class="class"
   >
     <FormRender v-model="form" :formItems="formItems" />
   </el-form>
@@ -52,6 +53,10 @@ const props = defineProps({
     default: false
   },
   style: {
+    type: Object,
+    default: () => ({})
+  },
+  class: {
     type: Object,
     default: () => ({})
   }
