@@ -6,6 +6,7 @@
     :disabled="disabled"
     :hide-required-asterisk="currentSchema.hideRequiredAsterisk"
     ref="formRef"
+    :style="style"
   >
     <FormRender v-model="form" :formItems="formItems" />
   </el-form>
@@ -49,6 +50,10 @@ const props = defineProps({
   disabled: {
     type: Boolean,
     default: false
+  },
+  style: {
+    type: Object,
+    default: () => ({})
   }
 })
 
