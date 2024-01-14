@@ -15,7 +15,7 @@ export const routes = [
       {
         path: '/document/introduce',
         name: '简介',
-        component: () => import('@/views/Document/Start.vue'),
+        component: () => import('@/views/Document/RenderMd.vue'),
         meta: {
           md: 'introduce.md'
         }
@@ -23,7 +23,7 @@ export const routes = [
       {
         path: '/document/start',
         name: '快速开始',
-        component: () => import('@/views/Document/Start.vue'),
+        component: () => import('@/views/Document/RenderMd.vue'),
         meta: {
           md: 'start.md'
         }
@@ -31,7 +31,7 @@ export const routes = [
       {
         path: '/document/schema',
         name: 'Schema详解',
-        component: () => import('@/views/Document/Schema.vue'),
+        component: () => import('@/views/Document/RenderMd.vue'),
         meta: {
           md: 'schema.md'
         }
@@ -39,7 +39,7 @@ export const routes = [
       {
         path: '/document/schemaFormDoc',
         name: 'SchemaForm（表单渲染器）',
-        component: () => import('@/views/Document/Start.vue'),
+        component: () => import('@/views/Document/RenderMd.vue'),
         meta: {
           md: 'schemaFormDoc.md'
         }
@@ -47,7 +47,7 @@ export const routes = [
       {
         path: '/document/linkage',
         name: '表单联动',
-        component: () => import('@/views/Document/Linkage.vue'),
+        component: () => import('@/views/Document/RenderMd.vue'),
         meta: {
           md: 'linkage.md'
         }

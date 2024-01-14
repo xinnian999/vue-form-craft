@@ -32,9 +32,10 @@ watchEffect(async () => {
 
   setTimeout(() => {
     Object.keys(caseForm).forEach((key) => {
-      render(<RenderForm schema={caseForm[key]} />, `.${key}`)
+      const component = <RenderForm schema={caseForm[key]} />
+      render(component, `.${key}`)
     })
-  }, 500)
+  }, 100)
 })
 </script>
 
