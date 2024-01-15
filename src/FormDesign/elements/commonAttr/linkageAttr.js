@@ -1,7 +1,7 @@
 export default [
   {
     label: '联动值',
-    name: 'linkage',
+    name: 'change',
     component: 'formList',
     children: [
       {

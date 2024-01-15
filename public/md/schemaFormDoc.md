@@ -1,6 +1,6 @@
 ## 简介
 
-SchemaForm是vue-form-craft的表单JSON渲染组件。
+SchemaForm 是 vue-form-craft 的渲染组件。
 
 ## Props
 

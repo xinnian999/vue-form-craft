@@ -16,7 +16,7 @@ defineProps({
 <style scoped>
 .renderForm {
   border: 1px solid #eee;
-  margin: 25px 0;
+  margin: 15px 0;
   padding: 20px;
 }
 </style>

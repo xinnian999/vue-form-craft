@@ -4,7 +4,7 @@
       <MdPreview v-model="text" editorId="start" />
     </div>
     <div class="catalog" v-if="scrollElement">
-      <MdCatalog editorId="start" :scrollElement="scrollElement" />
+      <MdCatalog editorId="start" :scrollElement="scrollElement" :scrollElementOffsetTop="80" />
     </div>
   </div>
 </template>
