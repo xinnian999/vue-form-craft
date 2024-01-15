@@ -43,5 +43,11 @@
     "dist"
   ],
   "main": "./dist/vue-form-craft.mjs",
-  "module": "./dist/vue-form-craft.mjs"
+  "module": "./dist/vue-form-craft.mjs",
+  "keywords": [
+    "component",
+    "vue",
+    "form",
+    "element-ui"
+  ]
 }

@@ -1,35 +1,18 @@
 # vue-form-craft
 
-This template should help get you started developing with Vue 3 in Vite.
+基于 [vue](https://github.com/vuejs/vue) 和 [element-ui](https://github.com/ElemeFE/element) 实现的可视化表单设计器，使用了最新的前端技术栈，可以让表单开发简单而高效。
 
-## Recommended IDE Setup
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+* [在线预览](https://hyl999.co:86/formDesign)
+* [官网](https://hyl999.co:86/)
 
-## Customize configuration
+## 特性
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+* 可视化配置页面
+* 简单高效的联动系统
+* 一键预览配置的效果
+* 一键生成配置json数据
+* 提供自定义组件满足用户自定义需求
+* 提供功能强大的高级组件
+* 支持表单验证
+* 快速获取表单数据
