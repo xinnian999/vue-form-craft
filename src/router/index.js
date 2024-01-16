@@ -29,11 +29,11 @@ export const routes = [
         }
       },
       {
-        path: '/document/schema',
-        name: 'Schema详解',
+        path: '/document/FormDesignDoc',
+        name: 'FormDesign（表单设计器）',
         component: () => import('@/views/Document/RenderMd.vue'),
         meta: {
-          md: 'schema.md'
+          md: 'FormDesignDoc.md'
         }
       },
       {
@@ -42,6 +42,14 @@ export const routes = [
         component: () => import('@/views/Document/RenderMd.vue'),
         meta: {
           md: 'schemaFormDoc.md'
+        }
+      },
+      {
+        path: '/document/schema',
+        name: 'Schema详解',
+        component: () => import('@/views/Document/RenderMd.vue'),
+        meta: {
+          md: 'schema.md'
         }
       },
       {
@@ -58,12 +66,12 @@ export const routes = [
     path: '/formDesign',
     name: '表单设计',
     component: () => import('@/views/FormDesign.vue')
+  },
+  {
+    path: '/test',
+    name: '测试',
+    component: () => import('@/views/Test.vue')
   }
-  // {
-  //   path: '/test',
-  //   name: '测试',
-  //   component: () => import('@/views/Test.vue')
-  // }
 ]
 
 const router = createRouter({

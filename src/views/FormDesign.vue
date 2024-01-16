@@ -1,9 +1,5 @@
 <template>
-  <form-design
-    v-model="schema"
-    :previewSchemaContext="{ onTest: () => console.log(666) }"
-    @onSave="onSave"
-  />
+  <form-design v-model="schema" @onSave="onSave" />
 </template>
 
 <script setup>
@@ -16,7 +12,7 @@ const schema = ref({
   items: []
 })
 
-const onSave = (schema) => {
-  console.log(schema)
+const onSave = () => {
+  console.log(schema.value)
 }
 </script>

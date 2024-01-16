@@ -7,7 +7,7 @@
     :hide-required-asterisk="currentSchema.hideRequiredAsterisk"
     ref="formRef"
     :style="style"
-    :class="class"
+    :class="props.class"
   >
     <FormRender v-model="form" :formItems="formItems" />
   </el-form>
@@ -56,10 +56,7 @@ const props = defineProps({
     type: Object,
     default: () => ({})
   },
-  class: {
-    type: Object,
-    default: () => ({})
-  }
+  class: null
 })
 
 const emit = defineEmits(['update:modelValue', 'onSubmit', 'onChange'])
@@ -104,6 +101,16 @@ watch(
   { deep: true }
 )
 
+watchEffect(() => {
+  currentSchema.value = props.schema
+})
+
+onMounted(async () => {
+  if (props.schemaId) {
+    currentSchema.value = await getSchema(props.schemaId)
+  }
+})
+
 const validate = () => formRef.value.validate()
 
 const submit = async () => {
@@ -123,16 +130,6 @@ const setFormValues = (values) => {
 }
 
 const reset = () => formRef.value.resetFields()
-
-watchEffect(() => {
-  currentSchema.value = props.schema
-})
-
-onMounted(async () => {
-  if (props.schemaId) {
-    currentSchema.value = await getSchema(props.schemaId)
-  }
-})
 
 provide('$schema', currentSchema)
 provide('$selectData', selectData)
