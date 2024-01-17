@@ -1,18 +1,9 @@
 <template>
-  <form-design v-model="schema" @onSave="onSave" />
+  <form-design schemaId="6" @onSave="onSave" />
 </template>
 
 <script setup>
 import { ref } from 'vue'
 
-const schema = ref({
-  labelWidth: 150,
-  labelAlign: 'right',
-  size: 'default',
-  items: []
-})
-
-const onSave = () => {
-  console.log(schema.value)
-}
+const onSave = () => {}
 </script>

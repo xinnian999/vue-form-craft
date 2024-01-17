@@ -95,8 +95,9 @@ const current = computed({
 })
 
 onMounted(async () => {
-  if (props.schemaId) {
-    currentSchema.value = await getSchema(props.schemaId)
+  if (props.schemaId && getSchema) {
+    const remoteSchema = await getSchema(props.schemaId)
+    remoteSchema && (currentSchema.value = remoteSchema)
   }
 })
 
