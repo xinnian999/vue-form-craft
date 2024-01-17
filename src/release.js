@@ -12,9 +12,8 @@ FormDesign.__name = 'FormDesign'
 const components = [SchemaForm, FormDesign, IconRender, MdPreview, MdCatalog, MdEditor] // 全局组件列表
 
 const install = function (app, options = {}) {
-  const { request = axios, getSchema, FormManagementMode } = options
+  const { request = axios, getSchema } = options
   app.provide('$request', request)
-  app.provide('$FormManagementMode', FormManagementMode)
   app.provide('$getSchema', getSchema)
 
   // 注册组件

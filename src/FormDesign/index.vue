@@ -1,5 +1,5 @@
 <template>
-  <div id="formDesign">
+  <div id="formDesign" :class="props.class" :style="style">
     <div class="formItemList">
       <Menus />
     </div>
@@ -28,7 +28,9 @@ const props = defineProps({
   previewSchemaContext: {
     type: Object,
     default: () => ({})
-  }
+  },
+  class: null,
+  style: null
 })
 
 const emit = defineEmits(['update:modelValue', 'onSave'])

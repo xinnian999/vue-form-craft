@@ -58,15 +58,15 @@ const handleSubmit = () => {
 
 ## Props
 
-| 参数名        | 类型       | 默认值  | 是否必传 | 描述                                                   |
-| ------------- | ---------- | ------- | -------- | ------------------------------------------------------ |
-| schema        | object     | --      | Yes      | 表单JSON配置，用于描述表单结构                         |
-| v-model       | object ref | ref({}) | No       | 表单数据对象，用于控制表单值，双向绑定                 |
-| schemaContext | object     | {}      | No       | 自定义的上下文对象，用于表单联动                       |
-| disabled      | Boolean    | false   | No       | 禁用所有表单项                                         |
-| style         | Object     | ———     | No       | 渲染器的style                                          |
-| class         | any        | ———     | No       | 渲染器的class                                          |
-| schemaId      | String     | ———     | No       | `表单管理模式专用`渲染器会根据这个id，远程获取schema。 |
+| 参数名        | 类型       | 默认值  | 是否必传 | 描述                                                        |
+| ------------- | ---------- | ------- | -------- | ----------------------------------------------------------- |
+| schema        | object     | --      | No       | 表单Schema配置，纯JSON，用于描述表单结构                    |
+| v-model       | object ref | ref({}) | No       | 表单数据对象，用于控制表单值，双向绑定                      |
+| schemaContext | object     | {}      | No       | 自定义的上下文对象，用于表单联动                            |
+| disabled      | Boolean    | false   | No       | 禁用所有表单项                                              |
+| style         | any        | ———     | No       | 渲染器的style                                               |
+| class         | any        | ———     | No       | 渲染器的class                                               |
+| schemaId      | String     | ———     | No       | 渲染器会根据这个id，远程获取schema。需提前配置getSchema方法 |
 
 
 ## Events

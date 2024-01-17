@@ -52,10 +52,7 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
-  style: {
-    type: Object,
-    default: () => ({})
-  },
+  style: null,
   class: null
 })
 
