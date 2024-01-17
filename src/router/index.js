@@ -45,6 +45,14 @@ export const routes = [
         }
       },
       {
+        path: '/document/globalConfig',
+        name: '全局配置',
+        component: () => import('@/views/Document/RenderMd.vue'),
+        meta: {
+          md: 'globalConfig.md'
+        }
+      },
+      {
         path: '/document/schema',
         name: 'Schema详解',
         component: () => import('@/views/Document/RenderMd.vue'),
