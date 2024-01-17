@@ -46,8 +46,8 @@
         <JsonEdit
           v-model="formContext"
           height="400px"
-          title="上下文"
-          description="实时预览表单上下文，调试联动"
+          title="联动变量"
+          description="实时预览表单的联动变量，调试联动"
         />
       </template>
     </el-dialog>

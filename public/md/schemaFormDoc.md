@@ -62,7 +62,7 @@ const handleSubmit = () => {
 | ------------- | ---------- | ------- | -------- | ----------------------------------------------------------- |
 | schema        | object     | --      | No       | 表单Schema配置，纯JSON，用于描述表单结构                    |
 | v-model       | object ref | ref({}) | No       | 表单数据对象，用于控制表单值，双向绑定                      |
-| schemaContext | object     | {}      | No       | 自定义的上下文对象，用于表单联动                            |
+| schemaContext | object     | {}      | No       | 自定义的联动变量                                            |
 | disabled      | Boolean    | false   | No       | 禁用所有表单项                                              |
 | style         | any        | ———     | No       | 渲染器的style                                               |
 | class         | any        | ———     | No       | 渲染器的class                                               |
@@ -88,7 +88,7 @@ const handleSubmit = () => {
 | getFormValues | ()=>void              | 获取表单值                             |
 | setFormValues | (values)=>void        | 修改表单值，常用于表单回显             |
 | selectData    | Array                 | 选择类型的组件，已选项对应的数据源集合 |
-| context       | {}                    | 表单上下文集合                         |
+| context       | {}                    | 表单的联动变量                         |
 
 
 

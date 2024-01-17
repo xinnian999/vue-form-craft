@@ -30,7 +30,7 @@ const onSave = () => {
 | 参数名               | 类型       | 默认值  | 是否必传 | 描述                                                        |
 | -------------------- | ---------- | ------- | -------- | ----------------------------------------------------------- |
 | v-model              | object ref | ref({}) | No       | 设计器的Schema，双向绑定                                    |
-| previewSchemaContext | object     | {}      | No       | **表单预览** 的自定义上下文对象，用于表单联动               |
+| previewSchemaContext | object     | {}      | No       | **表单预览** 的自定义联动变量                               |
 | style                | any        | ———     | No       | 设计器的style                                               |
 | class                | any        | ———     | No       | 设计器的class                                               |
 | schemaId             | String     | ———     | No       | 设计器会根据这个id，远程获取schema。需提前配置getSchema方法 |
