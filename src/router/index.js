@@ -67,6 +67,14 @@ export const routes = [
         meta: {
           md: 'linkage.md'
         }
+      },
+      {
+        path: '/document/lowCode',
+        name: '低代码开发方案',
+        component: () => import('@/views/Document/RenderMd.vue'),
+        meta: {
+          md: 'lowCode.md'
+        }
       }
     ]
   },
