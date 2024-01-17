@@ -1,6 +1,8 @@
 <template>
-  <schema-form v-model="formValues" :schema="schema" ref="formRef" />
-  <button @click="handleSubmit">提交</button>
+  <div class="renderForm">
+    <schema-form v-model="formValues" schemaId="3" ref="formRef" />
+    <button @click="handleSubmit">提交</button>
+  </div>
 </template>
 
 <script setup>
@@ -49,3 +51,11 @@ const handleSubmit = () => {
     .catch((e) => console.log(e))
 }
 </script>
+
+<style lang="less" scoped>
+.renderForm {
+  border: 1px solid #eee;
+  margin: 15px 0;
+  padding: 20px;
+}
+</style>

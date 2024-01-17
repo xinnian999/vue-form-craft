@@ -115,6 +115,7 @@ const useSelect = (props, emits) => {
         currentOptions.value = props.options
       }
       if (newVal === 'remote') {
+        currentOptions.value = []
         fetchData()
       }
     }

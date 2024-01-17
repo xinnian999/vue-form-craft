@@ -1,9 +1,5 @@
 <template>
-  <form-design schemaId="6" @onSave="onSave" />
+  <form-design schemaId="4" />
 </template>
 
-<script setup>
-import { ref } from 'vue'
-
-const onSave = () => {}
-</script>
+<script setup></script>

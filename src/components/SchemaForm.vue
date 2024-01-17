@@ -8,6 +8,7 @@
     ref="formRef"
     :style="style"
     :class="props.class"
+    v-loading="!currentSchema.items.length"
   >
     <FormRender v-model="form" :formItems="formItems" />
   </el-form>
