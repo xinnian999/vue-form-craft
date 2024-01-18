@@ -190,7 +190,7 @@ onBeforeMount(() => {
   }
 
   .form-item-input {
-    max-width: 400px;
+    // max-width: 400px;
   }
   .form-item-label {
     display: flex;

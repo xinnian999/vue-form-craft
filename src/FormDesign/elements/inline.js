@@ -7,5 +7,28 @@ export default {
     component: 'inline',
     children: []
   },
-  attr: [...basic]
+  attr: [
+    ...basic,
+    {
+      label: 'props',
+      component: 'itemGroup',
+      name: 'props',
+      children: [
+        {
+          label: '对齐方式',
+          component: 'radio',
+          name: 'align',
+          props: {
+            mode: 'static',
+            options: [
+              { label: '左对齐', value: 'left' },
+              { label: '居中', value: 'center' },
+              { label: '右对齐', value: 'right' }
+            ]
+          },
+          initialValue: 'left'
+        }
+      ]
+    }
+  ]
 }

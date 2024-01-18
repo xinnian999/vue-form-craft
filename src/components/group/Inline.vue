@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import { defineProps, inject } from 'vue'
+import { computed, defineProps, inject } from 'vue'
 import FormRender from '../FormRender.vue'
 import FormItem from '../FormItem.vue'
 
@@ -22,12 +22,14 @@ const thisProps = defineProps({
 })
 
 const formValues = inject('$formValues')
+
+const align = computed(() => thisProps.props.align)
 </script>
 
 <style lang="less">
 .inline-container {
   .el-form-item__content {
-    // justify-content: center;
+    justify-content: v-bind(align);
   }
 }
 </style>

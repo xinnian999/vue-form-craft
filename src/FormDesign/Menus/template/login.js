@@ -24,7 +24,6 @@ export default {
       required: true
     },
     {
-      label: '',
       component: 'inline',
       children: [
         {
@@ -52,7 +51,11 @@ export default {
         }
       ],
       onlyId: 'form-0dVt',
-      name: 'j0rCIj'
+      name: 'j0rCIj',
+      props: {
+        align: 'center'
+      },
+      hideLabel: true
     }
   ]
 }
