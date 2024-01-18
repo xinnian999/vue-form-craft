@@ -73,6 +73,8 @@
 
     <el-date-picker v-if="currentComponent === 'datePicker'" v-model="value" v-bind="props" />
 
+    <UploadImage v-if="currentComponent === 'uploadImage'" v-model="value" v-bind="props" />
+
     <div v-if="currentComponent === 'text'">
       {{ props.formatter || value }}
     </div>
@@ -102,6 +104,7 @@ import Cascader from './basic/Cascader.vue'
 import JsonEdit from './basic/JsonEdit.vue'
 import Button from './basic/Button.vue'
 import { isRegexString } from '@/utils'
+import UploadImage from './basic/UploadImage.vue'
 
 const thisProps = defineProps({
   label: String,

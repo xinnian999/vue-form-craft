@@ -17,7 +17,8 @@ import {
   inline,
   markdown,
   alert,
-  datePicker
+  datePicker,
+  uploadImage
 } from '../elements'
 
 const menus = [
@@ -49,7 +50,7 @@ const menus = [
   },
   {
     title: '功能字段',
-    children: [button, alert]
+    children: [button, alert, uploadImage]
   }
 ]
 

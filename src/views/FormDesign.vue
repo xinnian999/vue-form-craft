@@ -1,5 +1,5 @@
 <template>
-  <form-design schemaId="4" />
+  <form-design />
 </template>
 
 <script setup></script>
