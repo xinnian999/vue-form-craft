@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import { ref, defineProps, computed } from 'vue'
+import { ref, defineProps, computed, onBeforeMount } from 'vue'
 import { ElMessage, ElUpload } from 'element-plus'
 import { getDataByPath } from '@/utils'
 
@@ -32,6 +32,7 @@ const props = defineProps({
     type: String,
     default: 'image'
   }
+  // echoPath: String
 })
 
 const emits = defineEmits(['update:modelValue'])
@@ -48,6 +49,7 @@ const imageSizeStyle = computed(() => {
 
 const handleAvatarSuccess = (response, uploadFile) => {
   imageUrl.value = URL.createObjectURL(uploadFile.raw)
+  console.log(imageUrl.value)
   emits('update:modelValue', getDataByPath(response, props.dataPath))
 }
 
@@ -66,6 +68,14 @@ const beforeAvatarUpload = (rawFile) => {
 
   return true
 }
+
+onBeforeMount(() => {
+  const { modelValue } = props
+
+  if (modelValue) {
+    imageUrl.value = modelValue
+  }
+})
 </script>
 
 <style scoped>

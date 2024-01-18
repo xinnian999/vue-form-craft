@@ -6,6 +6,7 @@ export default {
     props: {
       width: 150,
       height: 150,
+      uploadKey: 'image',
       action: 'https://hyl999.co/api/upload/image',
       fileTypes: ['jpeg', 'png'],
       size: 5
@@ -20,6 +21,7 @@ export default {
       component: 'itemGroup',
       name: 'props',
       children: [
+        { label: '上传Key', component: 'input', name: 'uploadKey' },
         { label: '上传地址', component: 'input', name: 'action' },
         { label: '图片宽度', component: 'inputNumber', name: 'width', props: { unit: 'px' } },
         { label: '图片高度', component: 'inputNumber', name: 'height', props: { unit: 'px' } },
@@ -42,8 +44,14 @@ export default {
           label: '数据路径',
           component: 'input',
           name: 'dataPath',
-          help: '用于上传成功后，可以在回参里取一个值保存到表。(比如上传完图片，保存图片存储在服务器的地址)'
+          help: '用于上传成功后，可以在回参里取一个值保存到字段值。(比如图片存储在服务器的地址)'
         }
+        // {
+        //   label: '回显路径',
+        //   component: 'input',
+        //   name: 'dataPath',
+        //   help: '用于表单回显时，此路径 + 图片名称（此字段的值）组成回显图片路径'
+        // }
       ]
     }
   ]

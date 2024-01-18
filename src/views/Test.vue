@@ -1,6 +1,6 @@
 <template>
   <div class="renderForm">
-    <schema-form v-model="formValues" schemaId="8" :schema="schema" ref="formRef" />
+    <schema-form v-model="formValues" :schema="schema" ref="formRef" />
     <button @click="handleSubmit">提交</button>
   </div>
 </template>
@@ -12,7 +12,8 @@ const formRef = ref()
 
 const formValues = ref({
   title: 'test',
-  desc: '这是一个简单基本的描述'
+  desc: '这是一个简单基本的描述',
+  picture: 'https://cdn.hyl999.co/public/image/1677815398283.png'
 })
 
 const schema = {
@@ -38,6 +39,21 @@ const schema = {
       },
       onlyId: 'form-D1x7',
       name: 'desc'
+    },
+    {
+      label: '文章海报',
+      component: 'uploadImage',
+      props: {
+        width: 250,
+        height: 150,
+        action: '/api/upload/image',
+        fileTypes: ['jpeg', 'png'],
+        size: 5,
+        uploadKey: 'image',
+        dataPath: 'filename'
+      },
+      onlyId: 'form-YM6S',
+      name: 'picture'
     }
   ]
 }
