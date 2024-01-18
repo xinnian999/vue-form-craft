@@ -1,6 +1,6 @@
 <template>
   <div class="renderForm">
-    <schema-form v-model="formValues" schemaId="3" ref="formRef" />
+    <schema-form v-model="formValues" schemaId="8" :schema="schema" ref="formRef" />
     <button @click="handleSubmit">提交</button>
   </div>
 </template>

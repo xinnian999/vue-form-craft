@@ -8,7 +8,7 @@
     ref="formRef"
     :style="style"
     :class="props.class"
-    v-loading="!currentSchema.items.length"
+    v-loading="loading"
   >
     <FormRender v-model="form" :formItems="formItems" />
   </el-form>
@@ -26,7 +26,7 @@ import {
   watch,
   watchEffect,
   inject,
-  onMounted
+  onBeforeMount
 } from 'vue'
 import { ElForm, ElMessage } from 'element-plus'
 import { handleLinkages, deepParse } from '@/utils'
@@ -62,6 +62,8 @@ const emit = defineEmits(['update:modelValue', 'onSubmit', 'onChange'])
 const currentSchema = ref({})
 
 const stateForm = ref({})
+
+const loading = ref(false)
 
 const selectData = reactive({})
 
@@ -103,9 +105,12 @@ watchEffect(() => {
   currentSchema.value = props.schema
 })
 
-onMounted(async () => {
+onBeforeMount(async () => {
   if (props.schemaId) {
+    loading.value = true
     currentSchema.value = await getSchema(props.schemaId)
+
+    loading.value = false
   }
 })
 
