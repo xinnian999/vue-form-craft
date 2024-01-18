@@ -5,6 +5,7 @@
     :show-file-list="false"
     :on-success="handleAvatarSuccess"
     :before-upload="beforeAvatarUpload"
+    :name="uploadKey"
   >
     <img v-if="imageUrl" :src="imageUrl" class="image" :style="imageSizeStyle" />
     <div class="container" :style="imageSizeStyle" v-else><icon-render name="add" /></div>
@@ -26,7 +27,11 @@ const props = defineProps({
     type: String,
     default: 'data'
   },
-  modelValue: String
+  modelValue: String,
+  uploadKey: {
+    type: String,
+    default: 'image'
+  }
 })
 
 const emits = defineEmits(['update:modelValue'])
