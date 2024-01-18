@@ -6,6 +6,7 @@
     :prop="prop || name"
     :label-width="hideLabel ? '0' : schema.labelWidth"
     :rules="computeRules"
+    :class="thisProps.class"
   >
     <template #label v-if="!hideLabel">
       <div class="form-item-label">
@@ -119,7 +120,8 @@ const thisProps = defineProps({
   children: Array,
   hideLabel: Boolean,
   prop: String,
-  rules: Array
+  rules: Array,
+  class: null
 })
 
 const emit = defineEmits(['update:modelValue'])

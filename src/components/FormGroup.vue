@@ -14,9 +14,9 @@
       />
     </form-item>
 
-    <form-item v-if="component === 'inline'" v-bind="thisProps">
+    <!-- <form-item v-if="component === 'inline'" v-bind="thisProps">
       <FormRender v-model="form" :formItems="children" />
-    </form-item>
+    </form-item> -->
 
     <item-group
       v-if="component === 'itemGroup'"
@@ -25,6 +25,9 @@
       :name="name"
     >
     </item-group>
+
+    <Inline v-if="component === 'inline'" :children="children" :name="name" v-bind="thisProps">
+    </Inline>
   </div>
 </template>
 
@@ -34,6 +37,7 @@ import { ElCard } from 'element-plus'
 import { merge } from 'lodash'
 import FormList from './group/FormList.vue'
 import ItemGroup from './group/ItemGroup.vue'
+import Inline from './group/Inline.vue'
 import FormRender from './FormRender.vue'
 import FormItem from './FormItem.vue'
 
