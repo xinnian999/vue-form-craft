@@ -1,50 +1,24 @@
 <template>
   <div class="CanvasGroup">
     <el-card v-if="component === 'card'" :header="label">
-      <draggable
-        :list="children"
-        group="form"
-        itemKey="name"
-        chosenClass="active"
-        ghost-class="ghost"
-        class="childContainer"
-        :animation="300"
-        @add="handleAdd"
-      >
-        <template #item="{ element: child, index }">
-          <CanvasRender :element="child" :index="index" />
-        </template>
-      </draggable>
+      <DraggableBox />
     </el-card>
 
     <div v-if="['formList', 'itemGroup', 'inline'].includes(component)" class="default">
       <div class="title">【{{ elements[component].name }}】 {{ label }} {{ name }}</div>
-      <draggable
-        :list="children"
-        group="form"
-        itemKey="name"
-        chosenClass="active"
-        ghost-class="ghost"
-        class="childContainer"
-        :animation="300"
-        @add="handleAdd"
-      >
-        <template #item="{ element: child, index }">
-          <CanvasRender :element="child" :index="index" />
-        </template>
-      </draggable>
+      <DraggableBox />
     </div>
   </div>
 </template>
 
 <script setup lang="jsx">
-import { defineProps, inject } from 'vue'
-import draggable from 'vuedraggable-es'
+import { computed, defineProps, inject } from 'vue'
+import Draggable from 'vuedraggable-es'
 import { ElCard } from 'element-plus'
 import CanvasRender from './CanvasRender.vue'
 import * as elements from '../elements'
 
-defineProps({
+const props = defineProps({
   label: String,
   name: String,
   component: String,
@@ -56,6 +30,23 @@ defineProps({
 })
 
 const handleAdd = inject('handleAdd')
+
+const DraggableBox = computed(() => (
+  <Draggable
+    list={props.children}
+    group="form"
+    itemKey="name"
+    chosenClass="active"
+    ghost-class="ghost"
+    class="childContainer"
+    animation={300}
+    onAdd={handleAdd}
+  >
+    {{
+      item: ({ element: child, index }) => <CanvasRender element={child} index={index} />
+    }}
+  </Draggable>
+))
 </script>
 
 <style lang="less">
