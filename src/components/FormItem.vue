@@ -76,6 +76,8 @@
 
     <UploadImage v-if="currentComponent === 'uploadImage'" v-model="value" v-bind="props" />
 
+    <ElRate v-if="currentComponent === 'rate'" v-model="value" v-bind="props" />
+
     <div v-if="currentComponent === 'text'">
       {{ props.formatter || value }}
     </div>
@@ -93,7 +95,8 @@ import {
   ElColorPicker,
   ElSwitch,
   ElAlert,
-  ElDatePicker
+  ElDatePicker,
+  ElRate
 } from 'element-plus'
 import { isString } from 'lodash'
 import { MdEditor } from 'md-editor-v3'

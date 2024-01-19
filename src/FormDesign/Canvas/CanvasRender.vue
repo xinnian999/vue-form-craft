@@ -63,7 +63,7 @@ const checkProps = (props) => {
 }
 </script>
 
-<style lang="less">
+<style scoped lang="less">
 .canvas-item {
   border: 2px solid transparent;
   margin-bottom: 5px;

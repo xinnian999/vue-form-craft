@@ -18,7 +18,8 @@ import {
   markdown,
   alert,
   datePicker,
-  uploadImage
+  uploadImage,
+  rate
 } from '../elements'
 
 const menus = [
@@ -37,6 +38,7 @@ const menus = [
       jsonEdit,
       colorPicker,
       datePicker,
+      rate,
       markdown
     ]
   },
