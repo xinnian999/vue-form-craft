@@ -1,14 +1,16 @@
-import basic from './commonAttr/basic'
-import props from './commonAttr/props'
 export default {
   name: '行内布局',
   initialValues: {
-    label: '行内布局',
     component: 'inline',
-    children: []
+    children: [],
+    props: {
+      align: 'left',
+      margin: 20
+    }
   },
   attr: [
-    ...basic,
+    { label: '字段标识', component: 'input', name: 'name' },
+    { label: '隐藏字段', component: 'switch', name: 'hidden' },
     {
       label: 'props',
       component: 'itemGroup',
@@ -27,7 +29,9 @@ export default {
             ]
           },
           initialValue: 'left'
-        }
+        },
+        { label: '间距大小', component: 'inputNumber', name: 'margin', props: { unit: 'px' } },
+        { label: '自动换行', component: 'switch', name: 'autoWrap' }
       ]
     }
   ]

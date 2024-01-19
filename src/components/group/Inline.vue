@@ -1,35 +1,31 @@
 <template>
-  <form-item class="inline-container" v-if="component === 'inline'" v-bind="thisProps">
-    <FormRender v-model="formValues" :formItems="children" />
-  </form-item>
+  <div class="inline-container"><FormRender v-model="formValues" :formItems="children" /></div>
 </template>
 
 <script setup>
 import { computed, defineProps, inject } from 'vue'
 import FormRender from '../FormRender.vue'
-import FormItem from '../FormItem.vue'
 
 const thisProps = defineProps({
-  label: String,
-  name: String,
-  component: String,
-  required: Boolean,
   props: Object,
-  modelValue: null,
-  initialValue: null,
-  children: Array,
-  hideLabel: Boolean
+  children: Array
 })
 
 const formValues = inject('$formValues')
 
 const align = computed(() => thisProps.props.align)
+const margin = computed(() => thisProps.props.margin + 'px')
+const autoWrap = computed(() => (thisProps.props.autoWrap ? 'wrap' : 'nowrap'))
 </script>
 
 <style lang="less">
 .inline-container {
-  .el-form-item__content {
-    justify-content: v-bind(align);
+  width: 100%;
+  display: flex;
+  justify-content: v-bind(align);
+  flex-wrap: v-bind(autoWrap);
+  & > * {
+    margin-right: v-bind(margin);
   }
 }
 </style>

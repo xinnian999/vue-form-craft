@@ -14,10 +14,6 @@
       />
     </form-item>
 
-    <!-- <form-item v-if="component === 'inline'" v-bind="thisProps">
-      <FormRender v-model="form" :formItems="children" />
-    </form-item> -->
-
     <item-group
       v-if="component === 'itemGroup'"
       v-model="formValues[name]"
@@ -26,8 +22,7 @@
     >
     </item-group>
 
-    <Inline v-if="component === 'inline'" :children="children" :name="name" v-bind="thisProps">
-    </Inline>
+    <Inline v-if="component === 'inline'" :children="children" v-bind="thisProps"> </Inline>
   </div>
 </template>
 

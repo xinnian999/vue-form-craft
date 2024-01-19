@@ -8,6 +8,7 @@
         chosenClass="active"
         ghost-class="ghost"
         class="childContainer"
+        :animation="300"
         @add="handleAdd"
       >
         <template #item="{ element: child, index }">
@@ -25,6 +26,7 @@
         chosenClass="active"
         ghost-class="ghost"
         class="childContainer"
+        :animation="300"
         @add="handleAdd"
       >
         <template #item="{ element: child, index }">

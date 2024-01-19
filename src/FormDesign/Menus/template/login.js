@@ -40,10 +40,7 @@ export default {
           component: 'button',
           props: {
             name: '注册',
-            clickEvent: 'resetForm',
-            style: {
-              marginLeft: '20px'
-            }
+            clickEvent: 'resetForm'
           },
           onlyId: 'form-mtnY',
           name: 'IxjeOB',
@@ -53,7 +50,8 @@ export default {
       onlyId: 'form-0dVt',
       name: 'j0rCIj',
       props: {
-        align: 'center'
+        align: 'center',
+        margin: 20
       },
       hideLabel: true
     }
