@@ -4,7 +4,11 @@
       <DraggableBox />
     </el-card>
 
-    <div v-if="['formList', 'itemGroup', 'inline'].includes(component)" class="default">
+    <div
+      v-if="['formList', 'itemGroup', 'inline', 'grid'].includes(component)"
+      class="default"
+      :class="component"
+    >
       <div class="title">【{{ elements[component].name }}】 {{ label }} {{ name }}</div>
       <DraggableBox />
     </div>

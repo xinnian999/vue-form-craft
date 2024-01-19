@@ -19,7 +19,8 @@ import {
   alert,
   datePicker,
   uploadImage,
-  rate
+  rate,
+  grid
 } from '../elements'
 
 const menus = [
@@ -48,7 +49,7 @@ const menus = [
   },
   {
     title: '布局字段',
-    children: [card, inline]
+    children: [card, inline, grid]
   },
   {
     title: '功能字段',

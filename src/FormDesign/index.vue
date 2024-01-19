@@ -119,6 +119,7 @@ provide('$emit', emit)
     padding: 10px;
     background-color: #fff;
     position: relative;
+    overflow: auto;
   }
   .formRender {
     flex: 1;

@@ -22,7 +22,9 @@
     >
     </item-group>
 
-    <Inline v-if="component === 'inline'" :children="children" v-bind="thisProps"> </Inline>
+    <Inline v-if="component === 'inline'" :children="children" v-bind="thisProps" />
+
+    <Grid v-if="component === 'grid'" :children="children" v-bind="thisProps" />
   </div>
 </template>
 
@@ -35,6 +37,7 @@ import ItemGroup from './group/ItemGroup.vue'
 import Inline from './group/Inline.vue'
 import FormRender from './FormRender.vue'
 import FormItem from './FormItem.vue'
+import Grid from './group/Grid.vue'
 
 const thisProps = defineProps({
   label: String,
