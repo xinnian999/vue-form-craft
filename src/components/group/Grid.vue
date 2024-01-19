@@ -16,7 +16,6 @@ const thisProps = defineProps({
 const formValues = inject('$formValues')
 
 const colCount = computed(() => thisProps.props?.colCount)
-const colPercent = computed(() => 100 / thisProps.props?.colCount + '%')
 const colSpace = computed(() => thisProps.props?.space + 'px')
 </script>
 
@@ -24,6 +23,6 @@ const colSpace = computed(() => thisProps.props?.space + 'px')
 .grid {
   display: grid;
   gap: v-bind(colSpace);
-  grid-template-columns: repeat(v-bind(colCount), v-bind(colPercent));
+  grid-template-columns: repeat(v-bind(colCount), 1fr);
 }
 </style>
