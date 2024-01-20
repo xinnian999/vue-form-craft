@@ -37,7 +37,7 @@
 import { computed, provide, inject, ref } from 'vue'
 import draggable from 'vuedraggable-es'
 import { ElForm } from 'element-plus'
-import { changeItems } from '@/utils'
+import { changeItems, copyItems } from '@/utils'
 import CanvasRender from './CanvasRender.vue'
 
 const schema = inject('$schema')
@@ -85,9 +85,14 @@ const handleSelect = (element) => {
   current.value = element
 }
 
+const handleCopy = (element) => {
+  list.value = copyItems(list.value, element.onlyId)
+}
+
 provide('handleAdd', handleAdd)
 provide('handleSelect', handleSelect)
 provide('handleDelete', handleDelete)
+provide('handleCopy', handleCopy)
 </script>
 
 <style lang="less">

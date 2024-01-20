@@ -13,6 +13,9 @@
       </el-button>
     </div>
     <div class="actions-right-bottom" v-if="element.onlyId === current.onlyId">
+      <el-button size="small" type="primary" @click.stop="handleCopy(element)">
+        <template #icon> <icon-render name="copy"></icon-render> </template
+      ></el-button>
       <el-button size="small" type="primary" @click.stop="handleDelete(element)">
         <template #icon> <icon-render name="delete"></icon-render> </template
       ></el-button>
@@ -40,6 +43,8 @@ const current = inject('$current')
 const handleSelect = inject('handleSelect')
 
 const handleDelete = inject('handleDelete')
+
+const handleCopy = inject('handleCopy')
 
 const hoverId = inject('hoverId')
 
