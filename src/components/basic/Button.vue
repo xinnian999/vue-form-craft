@@ -1,5 +1,5 @@
 <template>
-  <el-button v-bind="{ ...$attrs, ...props }" @click="onClick">{{ name }}</el-button>
+  <el-button class="Button" v-bind="{ ...$attrs, ...props }" @click="onClick">{{ name }}</el-button>
 </template>
 
 <script setup>
@@ -16,7 +16,8 @@ const props = defineProps({
     default: 'primary'
   },
   clickEvent: String,
-  customEvent: Function
+  customEvent: Function,
+  color: String
 })
 
 const onClick = () => {
@@ -31,3 +32,9 @@ const onClick = () => {
   }
 }
 </script>
+
+<style scoped>
+.Button {
+  /* background-color: v-bind(color); */
+}
+</style>

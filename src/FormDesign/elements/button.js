@@ -5,7 +5,8 @@ export default {
     component: 'button',
     props: {
       name: '提交'
-    }
+    },
+    hideLabel: true
   },
   attr: [
     { label: '字段label', component: 'input', name: 'label' },
@@ -39,6 +40,11 @@ export default {
           hidden: '{{$form.props.clickEvent!=="custom"}}',
           help: '可以通过schemaContext注入自定义事件，然后通过插值获取。 例：{{ onTest }}'
         },
+        // {
+        //   label: '按钮颜色',
+        //   component: 'colorPicker',
+        //   name: 'color'
+        // },
         {
           label: '样式',
           component: 'jsonEdit',
