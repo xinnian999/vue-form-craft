@@ -2,11 +2,13 @@ import getRandomId from './getRandomId'
 
 const copyChildren = (children) => {
   return children.map((child) => {
+    const data = { ...child, onlyId: `form-${getRandomId(4)}`, name: getRandomId(8) }
+
     if (child.children) {
-      return { ...child, onlyId: getRandomId(8), children: copyChildren(child.children) }
+      data.children = copyChildren(child.children)
     }
 
-    return { ...child, onlyId: getRandomId(8) }
+    return data
   })
 }
 
@@ -19,16 +21,13 @@ const copyItems = (list, id) => {
     }
 
     if (current.onlyId === id) {
+      const newItem = { ...current, onlyId: `form-${getRandomId(4)}`, name: getRandomId(8) }
       if (current.children) {
-        all.push({
-          ...current,
-          children: copyChildren(current.children),
-          onlyId: getRandomId(8)
-        })
-      } else {
-        all.push({ ...current, onlyId: getRandomId(8) })
+        newItem.children = copyChildren(current.children)
       }
+      all.push(newItem)
     }
+
     return all
   }, [])
 }
