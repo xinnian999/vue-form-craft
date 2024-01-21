@@ -123,10 +123,10 @@ provide('$emit', emit)
   }
   .formRender {
     flex: 1;
+    overflow: hidden;
     border-left: 1px solid #eee;
     border-right: 1px solid #eee;
     background-color: #fff;
-    overflow: auto;
     padding: 0 15px;
     display: flex;
     flex-direction: column;

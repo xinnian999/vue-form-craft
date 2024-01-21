@@ -1,8 +1,9 @@
 import getRandomId from './getRandomId'
+import { cloneDeep } from 'lodash'
 
 const copyChildren = (children) => {
   return children.map((child) => {
-    const data = { ...child, onlyId: `form-${getRandomId(4)}`, name: getRandomId(8) }
+    const data = { ...cloneDeep(child), onlyId: `form-${getRandomId(4)}`, name: getRandomId(8) }
 
     if (child.children) {
       data.children = copyChildren(child.children)
@@ -15,13 +16,17 @@ const copyChildren = (children) => {
 const copyItems = (list, id) => {
   return list.reduce((all, current) => {
     if (current.children) {
-      all.push({ ...current, children: copyItems(current.children, id) })
+      all.push({ ...cloneDeep(current), children: copyItems(current.children, id) })
     } else {
       all.push(current)
     }
 
     if (current.onlyId === id) {
-      const newItem = { ...current, onlyId: `form-${getRandomId(4)}`, name: getRandomId(8) }
+      const newItem = {
+        ...cloneDeep(current),
+        onlyId: `form-${getRandomId(4)}`,
+        name: getRandomId(8)
+      }
       if (current.children) {
         newItem.children = copyChildren(current.children)
       }

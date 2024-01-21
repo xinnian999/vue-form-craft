@@ -101,6 +101,7 @@ provide('handleCopy', handleCopy)
   padding: 20px;
   border: 1px dashed #999;
   position: relative;
+  overflow-y: auto;
   .tip {
     color: #999;
     font-size: 18px;

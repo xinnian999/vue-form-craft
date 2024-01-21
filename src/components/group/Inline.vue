@@ -18,7 +18,7 @@ const margin = computed(() => thisProps.props.margin + 'px')
 const autoWrap = computed(() => (thisProps.props.autoWrap ? 'wrap' : 'nowrap'))
 </script>
 
-<style lang="less">
+<style scoped lang="less">
 .inline-container {
   width: 100%;
   display: flex;
