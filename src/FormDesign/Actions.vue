@@ -1,6 +1,7 @@
 <template>
   <div class="formDesign-actions">
     <el-button @click="handlePreviewExec">预览脚本</el-button>
+    <el-button @click="handlePreviewVue">生成VUE组件</el-button>
     <el-button @click="handlePreviewForm">预览表单</el-button>
     <el-button @click="handleSave" type="primary">保存</el-button>
 
@@ -8,7 +9,6 @@
       v-model="execVisible"
       title="预览脚本"
       width="70%"
-      class="dialog"
       center
       destroy-on-close
       top="10vh"
@@ -22,6 +22,18 @@
         language="zh"
         @blur="onBlur"
       />
+    </el-dialog>
+
+    <el-dialog
+      v-model="vueVisible"
+      title="生成VUE组件"
+      width="70%"
+      class="dialog"
+      center
+      destroy-on-close
+      top="10vh"
+    >
+      <VueEdit />
     </el-dialog>
 
     <el-dialog
@@ -60,6 +72,7 @@ import JsonEditorVue from 'json-editor-vue3'
 import { ElMessageBox, ElButton, ElDialog } from 'element-plus'
 import { SchemaForm, JsonEdit } from '@/components'
 import { changeItems } from '@/utils'
+import VueEdit from './VueEdit.vue'
 
 defineProps({
   previewSchemaContext: {
@@ -84,14 +97,22 @@ const formRef = ref(null)
 
 const form = ref({})
 
+const formVue = ref(``)
+
 const formContext = computed(() => formRef.value?.context)
 
 const execVisible = ref(false)
 
 const formVisible = ref(false)
 
+const vueVisible = ref(false)
+
 const handlePreviewExec = () => {
   execVisible.value = true
+}
+
+const handlePreviewVue = () => {
+  vueVisible.value = true
 }
 
 const handlePreviewForm = () => {
