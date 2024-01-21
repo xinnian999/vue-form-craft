@@ -8,6 +8,7 @@
     ref="formRef"
     :style="style"
     :class="props.class"
+    id="SchemaForm"
     v-loading="loading"
   >
     <FormRender v-model="form" :formItems="formItems" />
@@ -141,3 +142,9 @@ provide('$formEvents', { submit, validate, getFormValues, setFormValues, reset }
 
 defineExpose({ submit, validate, selectData, getFormValues, setFormValues, reset, context })
 </script>
+
+<style scoped>
+#SchemaForm {
+  /* overflow: auto; */
+}
+</style>

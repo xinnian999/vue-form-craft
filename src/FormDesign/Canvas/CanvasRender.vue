@@ -12,14 +12,17 @@
         </template>
       </el-button>
     </div>
-    <div class="actions-right-bottom" v-if="element.onlyId === current.onlyId">
-      <el-button size="small" type="primary" @click.stop="handleCopy(element)">
+    <ul class="actions-right-bottom" v-if="element.onlyId === current.onlyId">
+      <!-- <el-button size="small" type="primary" @click.stop="handleCopy(element)">
         <template #icon> <icon-render name="copy"></icon-render> </template
       ></el-button>
       <el-button size="small" type="primary" @click.stop="handleDelete(element)">
         <template #icon> <icon-render name="delete"></icon-render> </template
-      ></el-button>
-    </div>
+      ></el-button> -->
+      <li v-for="{ icon, click } in rightBottomActions" @click.stop="click(element)">
+        <icon-render :name="icon" />
+      </li>
+    </ul>
 
     <canvas-group v-if="element.children" v-bind="element" :hidden="false" />
 
@@ -66,6 +69,17 @@ const handleHoverLeave = () => {
 const checkProps = (props) => {
   return omit(props, ['multiple', 'autoSelectedFirst', 'api'])
 }
+
+const rightBottomActions = [
+  {
+    icon: 'copy',
+    click: handleCopy
+  },
+  {
+    icon: 'delete',
+    click: handleDelete
+  }
+]
 </script>
 
 <style scoped lang="less">
@@ -94,7 +108,22 @@ const checkProps = (props) => {
     right: 0;
     bottom: 0;
     z-index: 20;
-    background-color: var(--el-color-primary);
+    color: #fff;
+    list-style: none;
+    padding: 1px;
+    display: flex;
+
+    li {
+      padding: 2px 3px;
+      background-color: var(--el-color-primary);
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 12px;
+      margin-left: 3px;
+      &:hover {
+        opacity: 0.7;
+      }
+    }
   }
 }
 

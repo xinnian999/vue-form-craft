@@ -24,6 +24,8 @@ const autoWrap = computed(() => (thisProps.props.autoWrap ? 'wrap' : 'nowrap'))
   display: flex;
   justify-content: v-bind(align);
   flex-wrap: v-bind(autoWrap);
+  overflow-x: auto;
+
   & > * {
     margin-right: v-bind(margin);
   }

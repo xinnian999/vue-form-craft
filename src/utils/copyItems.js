@@ -25,6 +25,9 @@ const copyItems = (list, id) => {
       if (current.children) {
         newItem.children = copyChildren(current.children)
       }
+      if (current.label) {
+        newItem.label = newItem.label + ' copy'
+      }
       all.push(newItem)
     }
 

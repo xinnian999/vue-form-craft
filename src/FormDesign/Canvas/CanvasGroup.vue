@@ -1,12 +1,38 @@
 <template>
   <div class="CanvasGroup">
     <el-card v-if="component === 'card'" :header="label">
-      <DraggableBox />
+      <draggable
+        :list="children"
+        group="form"
+        itemKey="name"
+        chosenClass="active"
+        ghost-class="ghost"
+        :class="`childContainer ${component}`"
+        @add="handleAdd"
+        :animation="300"
+      >
+        <template #item="{ element: child, index }">
+          <CanvasRender :element="child" :index="index" />
+        </template>
+      </draggable>
     </el-card>
 
     <div v-if="['formList', 'itemGroup', 'inline', 'grid'].includes(component)" class="default">
       <div class="title">【{{ elements[component].name }}】 {{ label }} {{ name }}</div>
-      <DraggableBox />
+      <draggable
+        :list="children"
+        group="form"
+        itemKey="name"
+        chosenClass="active"
+        ghost-class="ghost"
+        :class="`childContainer ${component}`"
+        :animation="300"
+        @add="handleAdd"
+      >
+        <template #item="{ element: child, index }">
+          <CanvasRender :element="child" :index="index" />
+        </template>
+      </draggable>
     </div>
   </div>
 </template>
@@ -80,6 +106,7 @@ const inlineAutoWrap = computed(() => (thisProps.props?.autoWrap ? 'wrap' : 'now
   display: grid;
   width: 100%;
   gap: v-bind(gridColSpace);
+  overflow: auto;
   grid-template-columns: repeat(v-bind(gridColCount), 1fr);
 }
 

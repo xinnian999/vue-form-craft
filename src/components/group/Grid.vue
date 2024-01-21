@@ -24,5 +24,6 @@ const colSpace = computed(() => thisProps.props?.space + 'px')
   display: grid;
   gap: v-bind(colSpace);
   grid-template-columns: repeat(v-bind(colCount), 1fr);
+  overflow-x: auto;
 }
 </style>
