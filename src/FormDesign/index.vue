@@ -16,11 +16,25 @@
 </template>
 
 <script setup lang="jsx">
-import { ref, provide, reactive, onMounted, inject, computed, defineProps, defineEmits } from 'vue'
+import {
+  ref,
+  provide,
+  reactive,
+  onMounted,
+  inject,
+  computed,
+  defineProps,
+  defineEmits,
+  defineOptions
+} from 'vue'
 import Menus from './Menus/index.vue'
 import Canvas from './Canvas/index.vue'
 import Current from './Current/index.vue'
 import Actions from './Actions.vue'
+
+defineOptions({
+  name: 'FormDesign'
+})
 
 const props = defineProps({
   modelValue: Object,

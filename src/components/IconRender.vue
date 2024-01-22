@@ -3,7 +3,11 @@
 </template>
 
 <script setup lang="jsx">
-import { defineProps, shallowRef } from 'vue'
+import { defineProps, shallowRef, defineOptions } from 'vue'
+
+defineOptions({
+  name: 'IconRender'
+})
 
 const props = defineProps({
   name: String,

@@ -199,12 +199,6 @@ onBeforeMount(() => {
 
 <style lang="less">
 #form-item {
-  .el-form-item__label {
-  }
-
-  .form-item-input {
-    // max-width: 400px;
-  }
   .form-item-label {
     display: flex;
     position: relative;

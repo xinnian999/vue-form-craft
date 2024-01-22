@@ -27,11 +27,16 @@ import {
   watch,
   watchEffect,
   inject,
-  onBeforeMount
+  onBeforeMount,
+  defineOptions
 } from 'vue'
 import { ElForm, ElMessage } from 'element-plus'
 import { handleLinkages, deepParse } from '@/utils'
 import FormRender from './FormRender.vue'
+
+defineOptions({
+  name: 'SchemaForm'
+})
 
 const formRef = ref(null)
 
