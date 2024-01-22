@@ -31,7 +31,7 @@
 <script setup lang="jsx">
 import { defineProps, computed, defineEmits } from 'vue'
 import { ElCard } from 'element-plus'
-import { merge } from 'lodash'
+import { mergeWith } from 'lodash'
 import FormList from './group/FormList.vue'
 import ItemGroup from './group/ItemGroup.vue'
 import Inline from './group/Inline.vue'
@@ -62,11 +62,17 @@ const form = computed({
   }
 })
 
-// 通过Proxy接管的数据源，某项属性被修改会立刻通知父组件，遵守单项数据流原则
 const formValues = computed(() => {
   return new Proxy(thisProps.modelValue, {
     set(target, key, value) {
-      emit('update:modelValue', merge(target, { [key]: value }))
+      emit(
+        'update:modelValue',
+        mergeWith(target, { [key]: value }, (objValue, srcValue) => {
+          if (Array.isArray(srcValue)) {
+            return srcValue
+          }
+        })
+      )
       return true
     }
   })
