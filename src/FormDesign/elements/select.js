@@ -14,10 +14,6 @@ export default {
         { label: '选项1', value: 'value1' },
         { label: '选项2', value: 'value2' },
         { label: '选项3', value: 'value3' }
-      ],
-      columns: [
-        { title: 'label', dataIndex: 'label' },
-        { title: 'value', dataIndex: 'value' }
       ]
     }
   },
@@ -68,7 +64,11 @@ export default {
           name: 'columns',
           component: 'jsonEdit',
           hidden: '{{!$form.props.tableDrop}}',
-          onlyId: 'form-Iwpd'
+          onlyId: 'form-Iwpd',
+          initialValue: [
+            { title: 'label', dataIndex: 'label' },
+            { title: 'value', dataIndex: 'value' }
+          ]
         },
 
         ...optionAttr

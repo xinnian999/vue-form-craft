@@ -43,7 +43,7 @@ export default [
     children: [
       {
         label: '选项名',
-        name: 'label',
+        name: '{{$values.props.labelKey}}',
         component: 'input',
         props: {
           placeholder: '请输入...'
@@ -52,7 +52,7 @@ export default [
       },
       {
         label: '选项值',
-        name: 'value',
+        name: '{{$values.props.valueKey}}',
         component: 'input',
         props: {},
         onlyId: 'form-HYtW'

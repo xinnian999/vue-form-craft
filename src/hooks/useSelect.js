@@ -29,7 +29,7 @@ const useSelect = (props, emits) => {
   })
 
   const fetchData = debounce(async () => {
-    if (isMax.value) return
+    if (isMax.value || !props.api) return
 
     const { baseURL, url, method, params, data, dataPath } = props.api
 
