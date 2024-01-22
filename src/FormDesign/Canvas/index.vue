@@ -22,9 +22,10 @@
       ghost-class="ghost"
       @add="handleAdd"
       drag-class="drag"
-      fallback-class="fallback"
       handle=".canvas-move"
       :animation="300"
+      force-fallback
+      :scroll-fensitivity="1"
     >
       <template #item="{ element }">
         <CanvasRender :element="element" />

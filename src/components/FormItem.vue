@@ -78,6 +78,15 @@
 
     <ElRate v-if="currentComponent === 'rate'" v-model="value" v-bind="props" />
 
+    <Title v-if="currentComponent === 'title'" v-bind="props" />
+
+    <component
+      v-if="currentComponent === 'custom'"
+      :is="props.componentName"
+      v-model="value"
+      v-bind="props"
+    ></component>
+
     <div v-if="currentComponent === 'text'">
       {{ props.formatter || value }}
     </div>
@@ -109,6 +118,7 @@ import JsonEdit from './basic/JsonEdit.vue'
 import Button from './basic/Button.vue'
 import { isRegexString } from '@/utils'
 import UploadImage from './basic/UploadImage.vue'
+import Title from './basic/Title.vue'
 
 const thisProps = defineProps({
   label: String,

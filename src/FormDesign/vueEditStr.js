@@ -1,5 +1,4 @@
-export default (schema) => `
-<template>
+export default (schema) => `<template>
     <schema-form v-model="formValues" :schema="schema" ref="formRef" />
     <button @click="handleSubmit">提交</button>
 </template>
@@ -11,8 +10,6 @@ const formRef = ref()
 
 const formValues = ref({})
 
-const schema = ${schema}
-
 const handleSubmit = () => {
   formRef.value
     .submit()
@@ -21,6 +18,9 @@ const handleSubmit = () => {
     })
     .catch((e) => console.log(e))
 }
+
+const schema = ${schema}
+
 </script>
 
 `

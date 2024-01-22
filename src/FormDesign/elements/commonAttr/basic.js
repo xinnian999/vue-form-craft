@@ -1,4 +1,12 @@
 export default [
+  {
+    component: 'title',
+    name: 'basic',
+    hideLabel: true,
+    props: {
+      title: '通用属性'
+    }
+  },
   { label: '字段label', component: 'input', name: 'label' },
   { label: '字段标识', component: 'input', name: 'name' },
   { label: '字段说明', component: 'textarea', name: 'help' },

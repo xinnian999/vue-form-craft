@@ -15,7 +15,6 @@ const install = function (app, options = {}) {
   const { request = axios, getSchema } = options
   app.provide('$request', request)
   app.provide('$getSchema', getSchema)
-
   // 注册组件
   components.forEach((component) => {
     app.component(component.__name || component.name, component)

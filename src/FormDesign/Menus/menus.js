@@ -20,7 +20,9 @@ import {
   datePicker,
   uploadImage,
   rate,
-  grid
+  grid,
+  custom,
+  title
 } from '../elements'
 
 const menus = [
@@ -45,11 +47,11 @@ const menus = [
   },
   {
     title: '高级字段',
-    children: [formList, itemGroup]
+    children: [formList, itemGroup, custom]
   },
   {
     title: '布局字段',
-    children: [card, inline, grid]
+    children: [card, inline, grid, title]
   },
   {
     title: '功能字段',

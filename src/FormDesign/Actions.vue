@@ -3,7 +3,7 @@
     <div>
       <el-button size="small" @click="handlePreviewExec">预览JSON脚本</el-button>
       <el-button size="small" @click="handlePreviewVue">生成VUE代码</el-button>
-      <el-button size="small" @click="handlePreviewForm">预览表单</el-button>
+      <el-button size="small" type="primary" @click="handlePreviewForm">预览表单</el-button>
     </div>
     <div>
       <el-button size="small" type="danger" @click="handleClear">清空</el-button>
