@@ -1,5 +1,5 @@
 export default {
-  name: '字段组',
+  name: '字段组合',
   initialValues: {
     component: 'itemGroup',
     children: []

@@ -129,6 +129,7 @@ const rightBottomActions = [
 
 .hover {
   border: 2px solid var(--el-color-primary-light-5);
+  background-color: var(--el-color-primary-light-9);
 }
 
 .mask {

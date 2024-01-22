@@ -1,9 +1,14 @@
 <template>
   <div class="formDesign-actions">
-    <el-button @click="handlePreviewExec">预览脚本</el-button>
-    <el-button @click="handlePreviewVue">生成VUE组件</el-button>
-    <el-button @click="handlePreviewForm">预览表单</el-button>
-    <el-button @click="handleSave" type="primary">保存</el-button>
+    <div>
+      <el-button size="small" @click="handlePreviewExec">预览JSON脚本</el-button>
+      <el-button size="small" @click="handlePreviewVue">生成VUE代码</el-button>
+      <el-button size="small" @click="handlePreviewForm">预览表单</el-button>
+    </div>
+    <div>
+      <el-button size="small" type="danger" @click="handleClear">清空</el-button>
+      <el-button size="small" @click="handleSave" type="primary">保存</el-button>
+    </div>
 
     <el-dialog
       v-model="execVisible"
@@ -26,7 +31,7 @@
 
     <el-dialog
       v-model="vueVisible"
-      title="生成VUE组件"
+      title="VUE代码"
       width="70%"
       class="dialog"
       center
@@ -139,11 +144,17 @@ const handleSubmit = () => {
     })
     .catch((e) => console.log(e))
 }
+
+const handleClear = () => {
+  schema.value = { ...schema.value, items: [] }
+}
 </script>
 
 <style>
 .formDesign-actions {
   padding: 10px;
   text-align: right;
+  display: flex;
+  justify-content: space-between;
 }
 </style>
