@@ -58,23 +58,6 @@ const thisProps = defineProps({
 
 const handleAdd = inject('handleAdd')
 
-const DraggableBox = computed(() => (
-  <Draggable
-    list={thisProps.children}
-    group="form"
-    itemKey="name"
-    chosenClass="active"
-    ghost-class="ghost"
-    class={`childContainer ${thisProps.component}`}
-    animation={300}
-    onAdd={handleAdd}
-  >
-    {{
-      item: ({ element: child, index }) => <CanvasRender element={child} index={index} />
-    }}
-  </Draggable>
-))
-
 const gridColCount = computed(() => thisProps.props?.colCount)
 const gridColSpace = computed(() => thisProps.props?.space + 'px')
 const inlineAutoWrap = computed(() => (thisProps.props?.autoWrap ? 'wrap' : 'nowrap'))

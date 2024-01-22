@@ -50,10 +50,9 @@
         :schema="schema"
         ref="formRef"
         :schemaContext="previewSchemaContext"
-        @onSubmit="ElMessageBox.alert(JSON.stringify(form), '模拟提交')"
       />
       <template #footer>
-        <el-button @click="formRef.submit()" type="primary">模拟提交</el-button>
+        <el-button @click="handleSubmit" type="primary">模拟提交</el-button>
         <el-button @click="formRef.reset()" type="primary">重置</el-button>
         <JsonEdit
           v-model="formContext"
@@ -69,7 +68,7 @@
 <script setup lang="jsx">
 import { ref, computed, inject, defineProps } from 'vue'
 import JsonEditorVue from 'json-editor-vue3'
-import { ElMessageBox, ElButton, ElDialog } from 'element-plus'
+import { ElButton, ElDialog } from 'element-plus'
 import { SchemaForm, JsonEdit } from '@/components'
 import { changeItems } from '@/utils'
 import VueEdit from './VueEdit.vue'
@@ -96,8 +95,6 @@ const json = computed({
 const formRef = ref(null)
 
 const form = ref({})
-
-const formVue = ref(``)
 
 const formContext = computed(() => formRef.value?.context)
 
@@ -132,6 +129,15 @@ const onBlur = async (editor) => {
 
 const handleSave = () => {
   emit('onSave', schema.value)
+}
+
+const handleSubmit = () => {
+  formRef.value
+    .submit()
+    .then((values) => {
+      alert(JSON.stringify(values, null, 2), '模拟提交')
+    })
+    .catch((e) => console.log(e))
 }
 </script>
 
