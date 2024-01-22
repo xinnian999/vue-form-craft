@@ -71,7 +71,7 @@ export default {
           component: 'switch',
           name: 'takeLastLevel',
           onlyId: 'form-kJ7K222',
-          hidden: '{{$form.props.multiple}}'
+          hidden: '{{$values.props.multiple}}'
         },
         {
           label: '标签key',
@@ -111,7 +111,7 @@ export default {
           label: '静态选项',
           name: 'options',
           component: 'jsonEdit',
-          hidden: '{{$form.props.mode!=="static"}}',
+          hidden: '{{$values.props.mode!=="static"}}',
           onlyId: 'form-Iwpd'
         },
         apiAttr

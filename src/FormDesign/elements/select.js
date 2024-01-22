@@ -63,7 +63,7 @@ export default {
           label: '表格列配置',
           name: 'columns',
           component: 'jsonEdit',
-          hidden: '{{!$form.props.tableDrop}}',
+          hidden: '{{!$values.props.tableDrop}}',
           onlyId: 'form-Iwpd',
           initialValue: [
             { title: 'label', dataIndex: 'label' },

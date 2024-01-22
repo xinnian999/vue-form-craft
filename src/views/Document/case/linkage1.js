@@ -47,7 +47,7 @@ export default {
       },
       onlyId: 'form-2ZCi',
       name: 'type',
-      hidden: '{{!$form.title}}'
+      hidden: '{{!$values.title}}'
     },
     {
       label: '数量',
@@ -58,7 +58,7 @@ export default {
         min: 1,
         max: 9999,
         step: 1,
-        disabled: "{{$form.type!=='3'}}"
+        disabled: "{{$values.type!=='3'}}"
       },
       initialValue: 1
     }

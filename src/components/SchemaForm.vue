@@ -1,6 +1,6 @@
 <template>
   <el-form
-    :model="form"
+    :model="formValues"
     :label-position="currentSchema.labelAlign"
     :size="currentSchema.size"
     :disabled="disabled"
@@ -11,7 +11,7 @@
     id="SchemaForm"
     v-loading="loading"
   >
-    <FormRender v-model="form" :formItems="formItems" />
+    <FormRender v-model="formValues" :formItems="formItems" />
   </el-form>
 </template>
 
@@ -70,7 +70,7 @@ const selectData = reactive({})
 
 const getSchema = inject('$getSchema')
 
-const form = computed({
+const formValues = computed({
   get() {
     return props.modelValue || stateForm.value
   },
@@ -81,8 +81,8 @@ const form = computed({
 })
 
 const context = computed(() => ({
-  $values: form.value,
-  $form: form.value,
+  $values: formValues.value,
+  $form: formValues.value,
   $selectData: selectData,
   $utils: {},
   ...props.schemaContext
@@ -94,10 +94,10 @@ const formItems = computed(() => {
 })
 
 watch(
-  form,
+  formValues,
   (newVal, oldVal) => {
     emit('onChange', newVal)
-    handleLinkages({ newVal, oldVal, form, formItems: formItems.value })
+    handleLinkages({ newVal, oldVal, form: formValues, formItems: formItems.value })
   },
   { deep: true }
 )
@@ -120,23 +120,23 @@ const validate = () => formRef.value.validate()
 const submit = async () => {
   try {
     await validate()
-    emit('onSubmit', form.value)
-    return form.value
+    emit('onSubmit', formValues.value)
+    return formValues.value
   } catch (e) {
     ElMessage.error('表单填写校验不通过！')
     return Promise.reject(e)
   }
 }
 
-const getFormValues = () => ({ ...form.value })
+const getFormValues = () => ({ ...formValues.value })
 const setFormValues = (values) => {
-  form.value = { ...form.value, ...values }
+  formValues.value = { ...formValues.value, ...values }
 }
 
 const reset = () => formRef.value.resetFields()
 
 provide('$schema', currentSchema)
-provide('$formValues', form)
+provide('$formValues', formValues.value)
 provide('$selectData', selectData)
 provide('$formEvents', { submit, validate, getFormValues, setFormValues, reset })
 

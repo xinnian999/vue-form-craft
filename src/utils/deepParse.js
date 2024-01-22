@@ -31,7 +31,7 @@ const deepParse = (prop, context) => {
           ...all,
           [key]: deepParse(prop[key], {
             ...context,
-            $val: context.$form[prop.name]
+            $val: context.$values[prop.name]
           })
         }
       }

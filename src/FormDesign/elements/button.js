@@ -37,7 +37,7 @@ export default {
           label: '自定义事件',
           component: 'input',
           name: 'customEvent',
-          hidden: '{{$form.props.clickEvent!=="custom"}}',
+          hidden: '{{$values.props.clickEvent!=="custom"}}',
           help: '可以通过schemaContext注入自定义事件，然后通过插值获取。 例：{{ onTest }}'
         },
         // {

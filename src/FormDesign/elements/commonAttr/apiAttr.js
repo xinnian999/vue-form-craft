@@ -1,7 +1,7 @@
 export default {
   component: 'itemGroup',
   name: 'api',
-  hidden: '{{$form.props.mode==="static"}}',
+  hidden: '{{$values.props.mode==="static"}}',
   children: [
     {
       label: 'url',
@@ -42,14 +42,14 @@ export default {
       label: '请求参数',
       component: 'jsonEdit',
       name: 'params',
-      hidden: '{{$form.props.api.method==="POST"||$form.props.api.method==="PUT"}}',
+      hidden: '{{$values.props.api.method==="POST"||$values.props.api.method==="PUT"}}',
       initialValue: {}
     },
     {
       label: '请求参数',
       component: 'jsonEdit',
       name: 'data',
-      hidden: '{{$form.props.api.method==="GET"||$form.props.api.method==="DELETE"}}',
+      hidden: '{{$values.props.api.method==="GET"||$values.props.api.method==="DELETE"}}',
       initialValue: {}
     },
     {
