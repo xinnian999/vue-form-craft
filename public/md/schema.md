@@ -4,7 +4,11 @@
 
 ### 结构
 
-首先，我们要理解，JSON Schema用于描述表单结构，并且 vue-form-craft 对其做了扩展，可以支持描述 UI：
+首先，我们要理解，JSON Schema就是 **表单的抽象** 。
+
+JSON的最外层是表单整体的配置，items里面是表单项的配置。
+
+items里是每个字段的抽象，label、name、component等是每个字段的通用配置。`props就是传给该组件的props，每种组件的props都不一样，可以用于定制组件的行为和样式。参考element-plus的文档`
 
 ```json
 {
@@ -39,7 +43,6 @@
 }
 ```
 
-这是个简单的登陆表单Schema，基本概念就是json的最外层是表单整体的配置，items里面是表单项的配置。
 
 ### 配置
 
