@@ -1,8 +1,6 @@
 <template>
-  <div class="renderForm">
-    <schema-form v-model="formValues" :schema="schema" ref="formRef" />
-    <button @click="handleSubmit">提交</button>
-  </div>
+  <schema-form v-model="formValues" :schema="schema" ref="formRef" />
+  <button @click="handleSubmit">提交</button>
 </template>
 
 <script setup>
@@ -10,53 +8,7 @@ import { ref } from 'vue'
 
 const formRef = ref()
 
-const formValues = ref({
-  title: 'test',
-  desc: '这是一个简单基本的描述',
-  picture: 'https://cdn.hyl999.co/public/image/1677815398283.png'
-})
-
-const schema = {
-  labelWidth: 150,
-  labelAlign: 'right',
-  size: 'default',
-  items: [
-    {
-      label: '标题',
-      component: 'input',
-      props: {
-        placeholder: '请输入标题'
-      },
-      onlyId: 'form-eNR0',
-      name: 'title',
-      required: true
-    },
-    {
-      label: '描述',
-      component: 'textarea',
-      props: {
-        placeholder: '请输入描述'
-      },
-      onlyId: 'form-D1x7',
-      name: 'desc'
-    },
-    {
-      label: '文章海报',
-      component: 'uploadImage',
-      props: {
-        width: 250,
-        height: 150,
-        action: '/api/upload/image',
-        fileTypes: ['jpeg', 'png'],
-        size: 5,
-        uploadKey: 'image',
-        dataPath: 'filename'
-      },
-      onlyId: 'form-YM6S',
-      name: 'picture'
-    }
-  ]
-}
+const formValues = ref({})
 
 const handleSubmit = () => {
   formRef.value
@@ -66,12 +18,100 @@ const handleSubmit = () => {
     })
     .catch((e) => console.log(e))
 }
-</script>
 
-<style lang="less" scoped>
-.renderForm {
-  border: 1px solid #eee;
-  margin: 15px 0;
-  padding: 20px;
+const schema = {
+  labelWidth: 150,
+  labelAlign: 'right',
+  size: 'default',
+  items: [
+    {
+      label: '单行文本',
+      component: 'input',
+      props: {},
+      onlyId: 'form-CcbS',
+      name: 'GPbY7B'
+    },
+    {
+      label: '单选框组',
+      component: 'radio',
+      props: {
+        mode: 'static',
+        options: [
+          {
+            label: '选项1',
+            value: 'value1'
+          },
+          {
+            label: '选项2',
+            value: 'value2'
+          },
+          {
+            label: '选项3',
+            value: 'value3'
+          }
+        ]
+      },
+      onlyId: 'form-JbJr',
+      name: 'gAeCer'
+    },
+    {
+      label: '多选框组',
+      component: 'checkbox',
+      props: {
+        mode: 'static',
+        options: [
+          {
+            label: '选项1',
+            value: 'value1'
+          },
+          {
+            label: '选项2',
+            value: 'value2'
+          },
+          {
+            label: '选项3',
+            value: 'value3'
+          }
+        ]
+      },
+      onlyId: 'form-qaIU',
+      name: '4Kpplx'
+    },
+    {
+      label: '多行文本',
+      component: 'textarea',
+      props: {
+        autosize: {
+          minRows: 4,
+          maxRows: 999
+        }
+      },
+      onlyId: 'form-LmKV',
+      name: 'P5WBvj'
+    },
+    {
+      label: '下拉选择框',
+      component: 'select',
+      props: {
+        mode: 'static',
+        options: [
+          {
+            label: '选项1',
+            value: 'value1'
+          },
+          {
+            label: '选项2',
+            value: 'value2'
+          },
+          {
+            label: '选项3',
+            value: 'value3'
+          }
+        ]
+      },
+      onlyId: 'form-bsxr',
+      name: 'MpU6Sf'
+    }
+  ]
 }
-</style>
+</script>

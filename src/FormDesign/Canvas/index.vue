@@ -16,11 +16,11 @@
     <draggable
       style="height: 100%"
       :list="list"
-      :group="{ name: 'form', pull: true, put: true }"
+      :group="{ name: 'formDesign', pull: true, put: true }"
       itemKey="name"
       chooseClass="choose"
       ghost-class="ghost"
-      @add="handleAdd"
+      @add="onAdd"
       drag-class="drag"
       handle=".canvas-move"
       :animation="300"
@@ -28,7 +28,7 @@
       :scroll-fensitivity="1"
     >
       <template #item="{ element }">
-        <CanvasRender :element="element" />
+        <CanvasRender v-bind="element" :hidden="false" />
       </template>
     </draggable>
   </el-form>
@@ -38,16 +38,12 @@
 import { computed, provide, inject, ref } from 'vue'
 import draggable from 'vuedraggable-es'
 import { ElForm } from 'element-plus'
-import { changeItems, copyItems } from '@/utils'
+import { changeItems } from '@/utils'
 import CanvasRender from './CanvasRender.vue'
 
 const schema = inject('$schema')
 
-const current = inject('$current')
-
 const hoverId = ref('')
-
-provide('hoverId', hoverId)
 
 const list = computed({
   get() {
@@ -58,42 +54,13 @@ const list = computed({
   }
 })
 
-const handleAdd = () => {
+const onAdd = () => {
   list.value = changeItems(list.value)
 }
 
-const filterId = (items, elementId) => {
-  const data = items.filter((item) => {
-    return item.onlyId !== elementId
-  })
-
-  return data.map((item) => {
-    if (item.children) {
-      return {
-        ...item,
-        children: filterId(item.children, elementId)
-      }
-    }
-    return item
-  })
-}
-
-const handleDelete = (element) => {
-  list.value = filterId(list.value, element.onlyId)
-}
-
-const handleSelect = (element) => {
-  current.value = element
-}
-
-const handleCopy = (element) => {
-  list.value = copyItems(list.value, element.onlyId)
-}
-
-provide('handleAdd', handleAdd)
-provide('handleSelect', handleSelect)
-provide('handleDelete', handleDelete)
-provide('handleCopy', handleCopy)
+provide('$onAdd', onAdd)
+provide('hoverId', hoverId)
+provide('$list', list)
 </script>
 
 <style lang="less">

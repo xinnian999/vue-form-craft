@@ -16,7 +16,7 @@ const copyChildren = (children) => {
 const copyItems = (list, id) => {
   return list.reduce((all, current) => {
     if (current.children) {
-      all.push({ ...cloneDeep(current), children: copyItems(current.children, id) })
+      all.push({ ...current, children: copyItems(current.children, id) })
     } else {
       all.push(current)
     }

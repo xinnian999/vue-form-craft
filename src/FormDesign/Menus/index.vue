@@ -20,7 +20,7 @@
       <draggable
         class="list"
         :list="children"
-        :group="{ name: 'form', pull: 'clone', put: false }"
+        :group="{ name: 'formDesign', pull: 'clone', put: false }"
         :sort="false"
         ghost-class="ghost"
         drag-class="drag"

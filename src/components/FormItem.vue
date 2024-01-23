@@ -1,16 +1,15 @@
 <template>
-  <el-card
-    v-if="currentComponent === 'card'"
-    v-bind="props"
-    :header="label"
-    class="form-item-group"
-  >
+  <el-card v-if="currentComponent === 'card'" v-bind="props" class="form-item-group">
     <form-render v-model="formValues" :formItems="children" />
   </el-card>
 
-  <Inline v-else-if="currentComponent === 'inline'" class="form-item-group" v-bind="thisProps" />
-
-  <Grid v-else-if="currentComponent === 'grid'" class="form-item-group" v-bind="thisProps" />
+  <div
+    v-else-if="['grid', 'inline'].includes(currentComponent)"
+    class="form-item-group"
+    :style="layoutBoxStyle"
+  >
+    <form-render v-model="formValues" :formItems="children" />
+  </div>
 
   <item-group
     v-else-if="currentComponent === 'itemGroup'"
@@ -171,10 +170,9 @@ import {
   UploadImage,
   Title,
   FormList,
-  Inline,
-  Grid,
   ItemGroup
 } from '@/components'
+import useStyle from '@/hooks/useStyle'
 import FormRender from './FormRender.vue'
 
 const thisProps = defineProps({
@@ -199,6 +197,8 @@ const emit = defineEmits(['update:modelValue'])
 const schema = inject('$schema')
 
 const formValues = inject('$formValues')
+
+const layoutBoxStyle = useStyle(thisProps.component, thisProps.props)
 
 const value = computed({
   get() {

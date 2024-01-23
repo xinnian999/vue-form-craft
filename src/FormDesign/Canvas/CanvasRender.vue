@@ -1,85 +1,106 @@
 <template>
   <div
     :class="canvasItemClass"
-    @click.stop="handleSelect(element)"
+    @click.stop="handleSelect({ ...thisProps })"
     @mousemove.stop="handleHoverEnter"
     @mouseleave.stop="handleHoverLeave"
   >
-    <div class="actions-left-top" v-if="element.onlyId === current.onlyId">
+    <div class="actions-left-top" v-if="onlyId === current.onlyId">
       <el-button class="canvas-move" size="small" type="primary">
         <template #icon>
-          <icon-render name="move"></icon-render>
+          <icon-render name="move" />
         </template>
       </el-button>
     </div>
-    <ul class="actions-right-bottom" v-if="element.onlyId === current.onlyId">
-      <!-- <el-button size="small" type="primary" @click.stop="handleCopy(element)">
-        <template #icon> <icon-render name="copy"></icon-render> </template
-      ></el-button>
-      <el-button size="small" type="primary" @click.stop="handleDelete(element)">
-        <template #icon> <icon-render name="delete"></icon-render> </template
-      ></el-button> -->
-      <li v-for="{ icon, click } in rightBottomActions" @click.stop="click(element)">
+    <ul class="actions-right-bottom" v-if="onlyId === current.onlyId">
+      <li
+        v-for="{ icon, handle } in rightBottomActions"
+        @click.stop="handle(thisProps)"
+        :key="icon"
+      >
         <icon-render :name="icon" />
       </li>
     </ul>
 
-    <canvas-group v-if="element.children" v-bind="element" :hidden="false" />
+    <div v-if="['formList', 'itemGroup', 'inline', 'grid'].includes(component)" class="default">
+      <div class="title">【{{ elements[component].name }}】 {{ label }} {{ name }}</div>
+      <ChildrenContainer v-bind="thisProps" />
+    </div>
 
-    <form-item v-else v-bind="element" :props="checkProps(element.props)" class="form-item-btn" />
+    <el-card v-else-if="component === 'card'" v-bind="props">
+      <ChildrenContainer v-bind="thisProps" />
+    </el-card>
+
+    <form-item v-else v-bind="thisProps" :props="checkProps(props)" />
   </div>
 </template>
 
 <script setup lang="jsx">
 import { defineProps, inject, computed } from 'vue'
 import { omit } from 'lodash'
-import { ElButton } from 'element-plus'
-import CanvasGroup from './CanvasGroup.vue'
+import { ElButton, ElCard } from 'element-plus'
+import { copyItems, deleteItem } from '@/utils'
+import * as elements from '../elements'
 import { FormItem } from '@/components'
+import ChildrenContainer from './ChildrenContainer.vue'
 
-const props = defineProps({
-  element: Object
+const thisProps = defineProps({
+  label: String,
+  name: String,
+  component: String,
+  props: Object,
+  children: Array,
+  onlyId: String,
+  hideLabel: Boolean,
+  required: Boolean,
+  style: Object,
+  help: String,
+  class: null
 })
 
 const current = inject('$current')
 
-const handleSelect = inject('handleSelect')
-
-const handleDelete = inject('handleDelete')
-
-const handleCopy = inject('handleCopy')
-
 const hoverId = inject('hoverId')
+
+const list = inject('$list')
 
 const canvasItemClass = computed(() => ({
   'canvas-item': true,
-  active: props.element.onlyId === current.value.onlyId,
-  hover: props.element.onlyId === hoverId.value,
-  mask: props.element.onlyId === hoverId.value && !props.element.children
+  active: thisProps.onlyId === current.value.onlyId,
+  hover: thisProps.onlyId === hoverId.value,
+  mask: thisProps.onlyId === hoverId.value && !thisProps.children
 }))
 
 const handleHoverEnter = () => {
-  hoverId.value = props.element.onlyId
+  hoverId.value = thisProps.onlyId
 }
 
 const handleHoverLeave = () => {
   hoverId.value = ''
 }
 
-const checkProps = (props) => {
-  return omit(props, ['multiple', 'autoSelectedFirst', 'api'])
+const handleSelect = (element) => {
+  current.value = element
 }
 
 const rightBottomActions = [
   {
     icon: 'copy',
-    click: handleCopy
+    handle: (element) => {
+      list.value = copyItems(list.value, element.onlyId)
+    }
   },
   {
     icon: 'delete',
-    click: handleDelete
+    handle: (element) => {
+      list.value = deleteItem(list.value, element.onlyId)
+    }
   }
 ]
+
+const checkProps = (props) => {
+  return omit(props, ['multiple', 'autoSelectedFirst', 'api'])
+}
 </script>
 
 <style scoped lang="less">
@@ -101,6 +122,7 @@ const rightBottomActions = [
     background-color: var(--el-color-primary);
     .canvas-move {
       font-size: 16px;
+      box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
     }
   }
   .actions-right-bottom {
@@ -114,16 +136,36 @@ const rightBottomActions = [
     display: flex;
 
     li {
-      padding: 2px 3px;
+      padding: 2px 4px;
       background-color: var(--el-color-primary);
       border-radius: 3px;
       cursor: pointer;
       font-size: 12px;
       margin-left: 3px;
+      box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
       &:hover {
         opacity: 0.7;
       }
     }
+  }
+
+  .default {
+    border: 2px dashed var(--el-color-primary);
+    margin: 10px;
+    position: relative;
+    .title {
+      position: absolute;
+      left: 0;
+      top: -20px;
+      padding: 1px 5px;
+      background-color: var(--el-color-primary);
+      font-size: 12px;
+      color: #fff;
+    }
+  }
+
+  .childContainer {
+    min-height: 150px;
   }
 }
 
