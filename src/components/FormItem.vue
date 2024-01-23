@@ -1,5 +1,36 @@
 <template>
+  <el-card
+    v-if="currentComponent === 'card'"
+    v-bind="props"
+    :header="label"
+    class="form-item-group"
+  >
+    <form-render v-model="formValues" :formItems="children" />
+  </el-card>
+
+  <Inline
+    class="form-item-group"
+    v-else-if="currentComponent === 'inline'"
+    :children="children"
+    :props="props"
+  />
+
+  <Grid
+    class="form-item-group"
+    v-else-if="currentComponent === 'grid'"
+    :children="children"
+    :props="props"
+  />
+
+  <item-group
+    v-else-if="currentComponent === 'itemGroup'"
+    v-model="value"
+    :children="children"
+    :name="name"
+  />
+
   <el-form-item
+    v-else
     id="form-item"
     :style="style"
     :key="name"
@@ -30,7 +61,7 @@
     />
 
     <el-input
-      v-if="currentComponent === 'password'"
+      v-else-if="currentComponent === 'password'"
       v-model="value"
       autocomplete="off"
       show-password
@@ -41,7 +72,7 @@
     />
 
     <el-input
-      v-if="currentComponent === 'textarea'"
+      v-else-if="currentComponent === 'textarea'"
       v-model="value"
       autocomplete="off"
       v-bind="props"
@@ -50,48 +81,76 @@
       class="form-item-input"
     />
 
-    <InputNumber v-model="value" v-bind="props" v-if="currentComponent === 'inputNumber'" />
+    <InputNumber v-else-if="currentComponent === 'inputNumber'" v-model="value" v-bind="props" />
 
-    <Select v-if="currentComponent === 'select'" v-model="value" v-bind="props" :name="name" />
+    <Select v-else-if="currentComponent === 'select'" v-model="value" v-bind="props" :name="name" />
 
-    <Radio v-model="value" v-bind="props" v-if="currentComponent === 'radio'" :name="name" />
+    <Radio v-else-if="currentComponent === 'radio'" v-model="value" v-bind="props" :name="name" />
 
-    <Checkbox v-if="currentComponent === 'checkbox'" v-model="value" v-bind="props" :name="name" />
+    <Checkbox
+      v-else-if="currentComponent === 'checkbox'"
+      v-model="value"
+      v-bind="props"
+      :name="name"
+    />
 
-    <Cascader v-if="currentComponent === 'cascader'" v-model="value" v-bind="props" :name="name" />
+    <Cascader
+      v-else-if="currentComponent === 'cascader'"
+      v-model="value"
+      v-bind="props"
+      :name="name"
+    />
 
-    <JsonEdit v-if="currentComponent === 'jsonEdit'" v-model="value" v-bind="props" :name="name" />
+    <JsonEdit
+      v-else-if="currentComponent === 'jsonEdit'"
+      v-model="value"
+      v-bind="props"
+      :name="name"
+    />
 
-    <el-color-picker v-if="currentComponent === 'colorPicker'" v-model="value" v-bind="props" />
+    <el-color-picker
+      v-else-if="currentComponent === 'colorPicker'"
+      v-model="value"
+      v-bind="props"
+    />
 
-    <el-switch v-if="currentComponent === 'switch'" v-model="value" v-bind="props" />
+    <el-switch v-else-if="currentComponent === 'switch'" v-model="value" v-bind="props" />
 
-    <Button v-if="currentComponent === 'button'" type="primary" v-bind="props">{{ label }}</Button>
+    <Button v-else-if="currentComponent === 'button'" type="primary" v-bind="props">{{
+      label
+    }}</Button>
 
-    <MdEditor v-if="currentComponent === 'markdown'" v-model="value" v-bind="props" />
+    <MdEditor v-else-if="currentComponent === 'markdown'" v-model="value" v-bind="props" />
 
-    <el-alert v-if="currentComponent === 'alert'" v-bind="props" />
+    <el-alert v-else-if="currentComponent === 'alert'" v-bind="props" />
 
-    <el-date-picker v-if="currentComponent === 'datePicker'" v-model="value" v-bind="props" />
+    <el-date-picker v-else-if="currentComponent === 'datePicker'" v-model="value" v-bind="props" />
 
-    <UploadImage v-if="currentComponent === 'uploadImage'" v-model="value" v-bind="props" />
+    <UploadImage v-else-if="currentComponent === 'uploadImage'" v-model="value" v-bind="props" />
 
-    <ElRate v-if="currentComponent === 'rate'" v-model="value" v-bind="props" />
+    <ElRate v-else-if="currentComponent === 'rate'" v-model="value" v-bind="props" />
 
-    <Title v-if="currentComponent === 'title'" v-bind="props" />
+    <Title v-else-if="currentComponent === 'title'" v-bind="props" />
+
+    <form-list
+      v-else-if="currentComponent === 'formList'"
+      v-model="value"
+      v-bind="props"
+      :children="children"
+      :title="label"
+      :name="name"
+    />
+
+    <div v-else-if="currentComponent === 'text'">
+      {{ props.formatter || value }}
+    </div>
 
     <component
-      v-if="currentComponent === 'custom'"
+      v-else-if="currentComponent === 'custom'"
       :is="props.componentName"
       v-model="value"
       v-bind="props"
     ></component>
-
-    <div v-if="currentComponent === 'text'">
-      {{ props.formatter || value }}
-    </div>
-
-    <slot />
   </el-form-item>
 </template>
 
@@ -105,7 +164,8 @@ import {
   ElSwitch,
   ElAlert,
   ElDatePicker,
-  ElRate
+  ElRate,
+  ElCard
 } from 'element-plus'
 import { isString } from 'lodash'
 import { MdEditor } from 'md-editor-v3'
@@ -119,6 +179,11 @@ import Button from './basic/Button.vue'
 import { isRegexString } from '@/utils'
 import UploadImage from './basic/UploadImage.vue'
 import Title from './basic/Title.vue'
+import FormList from './group/FormList.vue'
+import Inline from './group/Inline.vue'
+import Grid from './group/Grid.vue'
+import ItemGroup from './group/ItemGroup.vue'
+import FormRender from './FormRender.vue'
 
 const thisProps = defineProps({
   label: String,
@@ -140,6 +205,8 @@ const thisProps = defineProps({
 const emit = defineEmits(['update:modelValue'])
 
 const schema = inject('$schema')
+
+const formValues = inject('$formValues')
 
 const value = computed({
   get() {
@@ -208,5 +275,9 @@ onBeforeMount(() => {
       position: relative;
     }
   }
+}
+
+.form-item-group {
+  margin-bottom: 20px;
 }
 </style>

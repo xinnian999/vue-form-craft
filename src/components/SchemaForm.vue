@@ -141,7 +141,7 @@ const setFormValues = (values) => {
 const reset = () => formRef.value.resetFields()
 
 provide('$schema', currentSchema)
-provide('$formValues', formValues.value)
+provide('$formValues', formValues)
 provide('$selectData', selectData)
 provide('$formEvents', { submit, validate, getFormValues, setFormValues, reset })
 

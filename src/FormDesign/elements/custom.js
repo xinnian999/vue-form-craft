@@ -31,6 +31,13 @@ export default {
       ]
     },
 
+    {
+      label: 'props',
+      component: 'jsonEdit',
+      name: 'props',
+      initialValue: {}
+    },
+
     ...linkageAttr
   ]
 }

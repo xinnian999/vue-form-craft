@@ -24,13 +24,16 @@ export default {
       required: true
     },
     {
-      component: 'inline',
+      component: 'grid',
       children: [
         {
           component: 'button',
           props: {
             name: '登陆',
-            clickEvent: 'submitForm'
+            clickEvent: 'submitForm',
+            style: {
+              'margin-left': 'auto'
+            }
           },
           onlyId: 'form-aBMY',
           name: 'submit',
@@ -40,20 +43,20 @@ export default {
           component: 'button',
           props: {
             name: '注册',
-            clickEvent: 'resetForm'
+            clickEvent: 'resetForm',
+            style: {}
           },
           onlyId: 'form-mtnY',
           name: 'IxjeOB',
           hideLabel: true
         }
       ],
-      onlyId: 'form-0dVt',
-      name: 'j0rCIj',
       props: {
-        align: 'center',
-        margin: 20
+        colCount: 2,
+        space: 20
       },
-      hideLabel: true
+      onlyId: 'form-WNcq',
+      name: 'HeDkKP'
     }
   ]
 }
