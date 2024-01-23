@@ -1,6 +1,9 @@
 import props from './commonAttr/props'
+import { Button } from '@/components'
+
 export default {
   name: '按钮',
+  component: Button,
   initialValues: {
     component: 'button',
     props: {

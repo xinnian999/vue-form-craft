@@ -1,5 +1,8 @@
+import { ElCard } from 'element-plus'
+
 export default {
   name: '卡片',
+  component: ElCard,
   initialValues: {
     component: 'card',
     children: [],

@@ -1,9 +1,11 @@
 import basic from './commonAttr/basic'
 import props from './commonAttr/props'
 import linkageAttr from './commonAttr/linkageAttr'
+import { ElDatePicker } from 'element-plus'
 
 export default {
   name: '日期选择器',
+  component: ElDatePicker,
   initialValues: {
     label: '日期选择器',
     component: 'datePicker',

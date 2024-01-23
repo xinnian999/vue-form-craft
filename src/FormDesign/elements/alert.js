@@ -1,5 +1,8 @@
+import { ElAlert } from 'element-plus'
+
 export default {
   name: '提示框',
+  component: ElAlert,
   initialValues: {
     component: 'alert',
     hideLabel: true,

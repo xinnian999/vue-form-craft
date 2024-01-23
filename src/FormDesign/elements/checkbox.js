@@ -1,9 +1,11 @@
 import optionAttr from './commonAttr/optionAttr'
 import basic from './commonAttr/basic'
 import props from './commonAttr/props'
+import { Checkbox } from '@/components'
 
 export default {
   name: '多选框组',
+  component: Checkbox,
   initialValues: {
     label: '多选框组',
     component: 'checkbox',

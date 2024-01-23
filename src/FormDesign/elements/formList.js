@@ -1,7 +1,10 @@
 import basic from './commonAttr/basic'
 import props from './commonAttr/props'
+import { FormList } from '@/components'
+
 export default {
   name: '自增容器',
+  component: FormList,
   initialValues: {
     label: '自增容器',
     component: 'formList',

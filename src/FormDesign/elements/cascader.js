@@ -2,9 +2,11 @@ import linkageAttr from './commonAttr/linkageAttr'
 import apiAttr from './commonAttr/apiAttr'
 import basic from './commonAttr/basic'
 import props from './commonAttr/props'
+import { Cascader } from '@/components'
 
 export default {
   name: '级联选择器',
+  component: Cascader,
   initialValues: {
     label: '级联选择器',
     component: 'cascader',
