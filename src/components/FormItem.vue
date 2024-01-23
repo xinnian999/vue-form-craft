@@ -8,19 +8,9 @@
     <form-render v-model="formValues" :formItems="children" />
   </el-card>
 
-  <Inline
-    class="form-item-group"
-    v-else-if="currentComponent === 'inline'"
-    :children="children"
-    :props="props"
-  />
+  <Inline v-else-if="currentComponent === 'inline'" class="form-item-group" v-bind="thisProps" />
 
-  <Grid
-    class="form-item-group"
-    v-else-if="currentComponent === 'grid'"
-    :children="children"
-    :props="props"
-  />
+  <Grid v-else-if="currentComponent === 'grid'" class="form-item-group" v-bind="thisProps" />
 
   <item-group
     v-else-if="currentComponent === 'itemGroup'"
@@ -169,20 +159,22 @@ import {
 } from 'element-plus'
 import { isString } from 'lodash'
 import { MdEditor } from 'md-editor-v3'
-import Select from './basic/Select.vue'
-import Radio from './basic/Radio.vue'
-import InputNumber from './basic/InputNumber.vue'
-import Checkbox from './basic/Checkbox.vue'
-import Cascader from './basic/Cascader.vue'
-import JsonEdit from './basic/JsonEdit.vue'
-import Button from './basic/Button.vue'
 import { isRegexString } from '@/utils'
-import UploadImage from './basic/UploadImage.vue'
-import Title from './basic/Title.vue'
-import FormList from './group/FormList.vue'
-import Inline from './group/Inline.vue'
-import Grid from './group/Grid.vue'
-import ItemGroup from './group/ItemGroup.vue'
+import {
+  Select,
+  Radio,
+  InputNumber,
+  Checkbox,
+  Cascader,
+  JsonEdit,
+  Button,
+  UploadImage,
+  Title,
+  FormList,
+  Inline,
+  Grid,
+  ItemGroup
+} from '@/components'
 import FormRender from './FormRender.vue'
 
 const thisProps = defineProps({
