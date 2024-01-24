@@ -5,7 +5,7 @@ export default {
   items: [
     {
       label: '文章标题',
-      component: 'input',
+      component: 'Input',
       props: {
         placeholder: '请输入...'
       },
@@ -15,7 +15,7 @@ export default {
     },
     {
       label: '文章简介',
-      component: 'textarea',
+      component: 'Textarea',
       props: {
         autosize: {
           minRows: 4,
@@ -63,7 +63,7 @@ export default {
     },
     {
       label: '文章类型',
-      component: 'radio',
+      component: 'Radio',
       props: {
         mode: 'static',
         options: [

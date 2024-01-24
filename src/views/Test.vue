@@ -26,14 +26,14 @@ const schema = {
   items: [
     {
       label: '单行文本',
-      component: 'input',
+      component: 'Input',
       props: {},
       onlyId: 'form-CcbS',
       name: 'GPbY7B'
     },
     {
       label: '单选框组',
-      component: 'radio',
+      component: 'Radio',
       props: {
         mode: 'static',
         options: [
@@ -79,7 +79,7 @@ const schema = {
     },
     {
       label: '多行文本',
-      component: 'textarea',
+      component: 'Textarea',
       props: {
         autosize: {
           minRows: 4,

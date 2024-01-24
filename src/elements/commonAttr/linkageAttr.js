@@ -7,13 +7,13 @@ export default [
       {
         label: '联动字段',
         name: 'target',
-        component: 'input',
+        component: 'Input',
         props: {}
       },
       {
         label: '值',
         name: 'value',
-        component: 'input',
+        component: 'Input',
         props: {}
       }
     ],

@@ -9,15 +9,15 @@ export default {
     }
   },
   attr: [
-    { label: '字段标识', component: 'input', name: 'name' },
-    { label: '隐藏字段', component: 'switch', name: 'hidden' },
+    { label: '字段标识', component: 'Input', name: 'name' },
+    { label: '隐藏字段', component: 'Switch', name: 'hidden' },
     {
       label: 'props',
       component: 'itemGroup',
       name: 'props',
       children: [
-        { label: '列数', component: 'inputNumber', name: 'colCount', initialValue: 2 },
-        { label: '间距', component: 'inputNumber', name: 'space', props: { unit: 'px' } }
+        { label: '列数', component: 'InputNumber', name: 'colCount', initialValue: 2 },
+        { label: '间距', component: 'InputNumber', name: 'space', props: { unit: 'px' } }
       ]
     }
   ]

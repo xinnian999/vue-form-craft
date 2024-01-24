@@ -3,7 +3,7 @@ export default {
   items: [
     {
       label: 'label宽度',
-      component: 'inputNumber',
+      component: 'InputNumber',
       name: 'labelWidth',
       props: {
         min: 60,
@@ -14,7 +14,7 @@ export default {
     },
     {
       label: 'label对齐方式',
-      component: 'radio',
+      component: 'Radio',
       name: 'labelAlign',
       props: {
         mode: 'static',
@@ -28,7 +28,7 @@ export default {
     },
     {
       label: '表单组件尺寸',
-      component: 'radio',
+      component: 'Radio',
       name: 'size',
       props: {
         mode: 'static',
@@ -40,7 +40,7 @@ export default {
       },
       initialValue: 'default'
     },
-    { label: '隐藏必填星号', component: 'switch', name: 'hideRequiredAsterisk' },
-    { label: 'label加粗', component: 'switch', name: 'labelBold' }
+    { label: '隐藏必填星号', component: 'Switch', name: 'hideRequiredAsterisk' },
+    { label: 'label加粗', component: 'Switch', name: 'labelBold' }
   ]
 }

@@ -40,7 +40,7 @@ export default {
     },
     {
       label: '价格',
-      component: 'inputNumber',
+      component: 'InputNumber',
       onlyId: 'form-rS3W',
       name: 'price',
       props: {

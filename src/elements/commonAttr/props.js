@@ -7,5 +7,5 @@ export default [
       title: 'Props'
     }
   },
-  { label: '自定义class', component: 'input', name: 'class' }
+  { label: '自定义class', component: 'Input', name: 'class' }
 ]

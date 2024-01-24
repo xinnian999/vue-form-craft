@@ -3,21 +3,21 @@ import apiAttr from './apiAttr'
 export default [
   {
     label: '标签key',
-    component: 'input',
+    component: 'Input',
     name: 'labelKey',
     initialValue: 'label',
     onlyId: 'form-X6hs'
   },
   {
     label: '值Key',
-    component: 'input',
+    component: 'Input',
     name: 'valueKey',
     initialValue: 'value',
     onlyId: 'form-STkl'
   },
   {
     label: '数据模式',
-    component: 'radio',
+    component: 'Radio',
     name: 'mode',
     props: {
       mode: 'static',
@@ -44,7 +44,7 @@ export default [
       {
         label: '选项名',
         name: '{{$values.props.labelKey}}',
-        component: 'input',
+        component: 'Input',
         props: {
           placeholder: '请输入...'
         },
@@ -53,7 +53,7 @@ export default [
       {
         label: '选项值',
         name: '{{$values.props.valueKey}}',
-        component: 'input',
+        component: 'Input',
         props: {},
         onlyId: 'form-HYtW'
       }

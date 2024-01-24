@@ -28,7 +28,7 @@
       :scroll-fensitivity="1"
     >
       <template #item="{ element }">
-        <CanvasRender v-bind="element" :hidden="false" />
+        <CanvasRender v-if="element.onlyId" v-bind="element" :hidden="false" />
       </template>
     </draggable>
   </el-form>

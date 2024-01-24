@@ -5,14 +5,14 @@ export default {
   children: [
     {
       label: 'url',
-      component: 'input',
+      component: 'Input',
       name: 'url',
       initialValue: '/current/query/article',
       onlyId: 'form-UrE8'
     },
     {
       label: '请求方式',
-      component: 'radio',
+      component: 'Radio',
       name: 'method',
       props: {
         mode: 'static',
@@ -54,7 +54,7 @@ export default {
     },
     {
       label: '数据路径',
-      component: 'input',
+      component: 'Input',
       name: 'dataPath',
       initialValue: 'data',
       onlyId: 'form-UrE8'

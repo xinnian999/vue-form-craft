@@ -6,6 +6,17 @@ import * as Directives from '@/directive'
 import { MdPreview, MdCatalog, MdEditor } from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
 import 'element-plus/dist/index.css'
+// import * as elements from '@/elements'
+
+const modules = import.meta.glob('@/elements/*/index.js', { eager: true })
+const elements = {}
+for (const path in modules) {
+  const data = modules[path].default
+
+  if (data) {
+    elements[data.initialValues.component] = data
+  }
+}
 
 const components = [SchemaForm, FormDesign, IconRender, MdPreview, MdCatalog, MdEditor] // 全局组件列表
 
@@ -13,6 +24,7 @@ const install = function (app, options = {}) {
   const { request = axios, getSchema } = options
   app.provide('$request', request)
   app.provide('$getSchema', getSchema)
+  app.provide('$elements', elements)
   // 注册组件
   components.forEach((component) => {
     app.component(component.name, component)

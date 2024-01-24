@@ -4,5 +4,5 @@ export default {
     component: 'itemGroup',
     children: []
   },
-  attr: [{ label: '字段标识', component: 'input', name: 'name' }]
+  attr: [{ label: '字段标识', component: 'Input', name: 'name' }]
 }

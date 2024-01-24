@@ -4,7 +4,7 @@ import { FormList } from '@/components'
 
 export default {
   name: '自增容器',
-  component: FormList,
+  // component: FormList,
   initialValues: {
     label: '自增容器',
     component: 'formList',
@@ -25,7 +25,7 @@ export default {
         ...props,
         {
           label: '显示模式',
-          component: 'radio',
+          component: 'Radio',
           name: 'mode',
           props: {
             mode: 'static',

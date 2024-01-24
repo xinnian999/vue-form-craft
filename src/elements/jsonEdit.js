@@ -1,8 +1,11 @@
 import linkageAttr from './commonAttr/linkageAttr'
 import basic from './commonAttr/basic'
 import props from './commonAttr/props'
+import { JsonEdit } from '@/components'
+
 export default {
   name: 'JSON编辑器',
+  // component: JsonEdit,
   initialValues: { label: 'JSON编辑器', component: 'jsonEdit' },
   attr: [
     ...basic,
@@ -15,7 +18,7 @@ export default {
         ...props,
         {
           label: '显示模式',
-          component: 'radio',
+          component: 'Radio',
           name: 'mode',
           props: {
             mode: 'static',

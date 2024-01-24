@@ -1,5 +1,8 @@
+import { Title } from '@/components'
+
 export default {
   name: '标题',
+  // component: Title,
   initialValues: {
     component: 'title',
     hideLabel: true,
@@ -9,17 +12,17 @@ export default {
     }
   },
   attr: [
-    { label: '字段标识', component: 'input', name: 'name' },
-    { label: '隐藏字段', component: 'switch', name: 'hidden' },
+    { label: '字段标识', component: 'Input', name: 'name' },
+    { label: '隐藏字段', component: 'Switch', name: 'hidden' },
     {
       label: 'props',
       component: 'itemGroup',
       name: 'props',
       children: [
-        { label: '标题内容', component: 'input', name: 'title' },
+        { label: '标题内容', component: 'Input', name: 'title' },
         {
           label: '类型',
-          component: 'radio',
+          component: 'Radio',
           name: 'type',
           props: {
             mode: 'static',

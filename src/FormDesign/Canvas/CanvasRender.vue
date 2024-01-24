@@ -27,7 +27,7 @@
       <ChildrenContainer v-bind="thisProps" />
     </div>
 
-    <el-card v-else-if="component === 'card'" v-bind="props">
+    <el-card v-else-if="component === 'Card'" v-bind="props">
       <ChildrenContainer v-bind="thisProps" />
     </el-card>
 
@@ -36,11 +36,10 @@
 </template>
 
 <script setup lang="jsx">
-import { defineProps, inject, computed, watchEffect } from 'vue'
+import { defineProps, inject, computed } from 'vue'
 import { omit } from 'lodash'
 import { ElButton, ElCard } from 'element-plus'
 import { copyItems, deleteItem } from '@/utils'
-import * as elements from '@/elements'
 import { FormItem } from '@/components'
 import ChildrenContainer from './ChildrenContainer.vue'
 
@@ -57,6 +56,8 @@ const thisProps = defineProps({
   help: String,
   class: null
 })
+
+const elements = inject('$elements')
 
 const current = inject('$current')
 
@@ -78,9 +79,7 @@ const handleHoverEnter = () => {
 const handleHoverLeave = () => {
   hoverId.value = ''
 }
-watchEffect(() => {
-  console.log(thisProps)
-})
+
 const handleSelect = (element) => {
   current.value = element
 }

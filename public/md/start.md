@@ -38,7 +38,7 @@ const schema = {
   items: [
     {
       label: '用户名',
-      component: 'input',
+      component: 'Input',
       props: {
         placeholder: '请输入用户名'
       },
@@ -46,7 +46,7 @@ const schema = {
     },
     {
       label: '密码',
-      component: 'password',
+      component: 'Password',
       props: {
         placeholder: '请输入密码'
       },

@@ -5,7 +5,7 @@ export default {
   items: [
     {
       label: '标题',
-      component: 'input',
+      component: 'Input',
       props: {
         placeholder: '请输入...'
       },
@@ -51,7 +51,7 @@ export default {
     },
     {
       label: '数量',
-      component: 'inputNumber',
+      component: 'InputNumber',
       onlyId: 'form-9R9B',
       name: 'count',
       props: {

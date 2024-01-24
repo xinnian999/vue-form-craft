@@ -13,7 +13,7 @@ export default {
 
     {
       label: '初始值',
-      component: 'input',
+      component: 'Input',
       name: 'initialValue'
     },
 
@@ -24,7 +24,7 @@ export default {
       children: [
         {
           label: '自定义组件名称',
-          component: 'input',
+          component: 'Input',
           name: 'componentName',
           props: { placeholder: '全局组件名称' }
         }

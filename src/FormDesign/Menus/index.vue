@@ -29,7 +29,7 @@
       >
         <template #item="{ element }">
           <li class="form-item-btn">
-            <div class="ico"><IconRender :name="element.initialValues.component" /></div>
+            <div class="ico"><IconRender :name="element.icon" /></div>
             <div class="name">{{ element.name }}</div>
           </li>
         </template>

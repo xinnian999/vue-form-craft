@@ -9,8 +9,8 @@ export default {
     }
   },
   attr: [
-    { label: '字段标识', component: 'input', name: 'name' },
-    { label: '隐藏字段', component: 'switch', name: 'hidden' },
+    { label: '字段标识', component: 'Input', name: 'name' },
+    { label: '隐藏字段', component: 'Switch', name: 'hidden' },
     {
       label: 'props',
       component: 'itemGroup',
@@ -18,7 +18,7 @@ export default {
       children: [
         {
           label: '对齐方式',
-          component: 'radio',
+          component: 'Radio',
           name: 'align',
           props: {
             mode: 'static',
@@ -30,8 +30,8 @@ export default {
           },
           initialValue: 'left'
         },
-        { label: '间距大小', component: 'inputNumber', name: 'margin', props: { unit: 'px' } },
-        { label: '自动换行', component: 'switch', name: 'autoWrap' }
+        { label: '间距大小', component: 'InputNumber', name: 'margin', props: { unit: 'px' } },
+        { label: '自动换行', component: 'Switch', name: 'autoWrap' }
       ]
     }
   ]

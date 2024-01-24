@@ -1,5 +1,5 @@
 <template>
-  <el-card v-if="currentComponent === 'card'" v-bind="props" class="form-item-group">
+  <el-card v-if="currentComponent === 'Card'" v-bind="props" class="form-item-group">
     <form-render v-model="formValues" :formItems="children" />
   </el-card>
 
@@ -38,9 +38,9 @@
         </div>
       </div>
     </template>
-
+    <!-- 
     <el-input
-      v-if="currentComponent === 'input'"
+      v-if="currentComponent === 'Input'"
       v-model="value"
       autocomplete="off"
       v-bind="props"
@@ -103,7 +103,7 @@
       v-bind="props"
     />
 
-    <el-switch v-else-if="currentComponent === 'switch'" v-model="value" v-bind="props" />
+    <el-switch v-else-if="currentComponent === 'Switch'" v-model="value" v-bind="props" />
 
     <Button v-else-if="currentComponent === 'button'" type="primary" v-bind="props">{{
       label
@@ -132,14 +132,16 @@
 
     <div v-else-if="currentComponent === 'text'">
       {{ props.formatter || value }}
-    </div>
+    </div> -->
 
     <component
-      v-else-if="currentComponent === 'custom'"
+      v-if="currentComponent === 'custom'"
       :is="props.componentName"
       v-model="value"
       v-bind="props"
-    ></component>
+    />
+
+    <component v-else :is="elements[currentComponent]?.component" v-model="value" v-bind="props" />
   </el-form-item>
 </template>
 
@@ -194,6 +196,8 @@ const thisProps = defineProps({
 
 const emit = defineEmits(['update:modelValue'])
 
+const elements = inject('$elements')
+
 const schema = inject('$schema')
 
 const formValues = inject('$formValues')
@@ -243,7 +247,7 @@ const computeRules = computed(() => {
 
 const currentComponent = computed(() => {
   if (isString(value.value) && /^{{\s*(.*?)\s*}}$/.test(value.value)) {
-    return 'input'
+    return 'Input'
   }
 
   return thisProps.component

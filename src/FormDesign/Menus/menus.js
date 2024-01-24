@@ -1,61 +1,30 @@
-import {
-  input,
-  textarea,
-  select,
-  radio,
-  checkbox,
-  cascader,
-  inputNumber,
-  switch as switchConfig,
-  jsonEdit,
-  colorPicker,
-  formList,
-  itemGroup,
-  button,
-  card,
-  password,
-  inline,
-  markdown,
-  alert,
-  datePicker,
-  uploadImage,
-  rate,
-  grid,
-  custom,
-  title
-} from '@/elements'
+const modules = import.meta.glob('@/elements/*/index.js', { eager: true })
+
+const getChildren = (type) => {
+  return Object.values(modules)
+    .map((item) => item.default)
+    .filter((item) => item?.type === type)
+    .sort((a, b) => {
+      return a.order - b.order
+    })
+}
 
 const menus = [
   {
     title: '基础字段',
-    children: [
-      input,
-      textarea,
-      password,
-      select,
-      radio,
-      checkbox,
-      cascader,
-      inputNumber,
-      switchConfig,
-      jsonEdit,
-      colorPicker,
-      datePicker,
-      rate,
-      markdown
-    ]
+    children: getChildren('basic')
   },
   {
     title: '高级字段',
-    children: [formList, itemGroup, custom]
+    children: getChildren('high')
   },
   {
     title: '布局字段',
-    children: [card, inline, grid, title]
+    children: getChildren('layout')
   },
   {
     title: '功能字段',
-    children: [button, alert, uploadImage]
+    children: getChildren('assist')
   }
 ]
 
