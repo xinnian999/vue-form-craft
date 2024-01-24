@@ -36,11 +36,11 @@
 </template>
 
 <script setup lang="jsx">
-import { defineProps, inject, computed } from 'vue'
+import { defineProps, inject, computed, watchEffect } from 'vue'
 import { omit } from 'lodash'
 import { ElButton, ElCard } from 'element-plus'
 import { copyItems, deleteItem } from '@/utils'
-import * as elements from '../elements'
+import * as elements from '@/elements'
 import { FormItem } from '@/components'
 import ChildrenContainer from './ChildrenContainer.vue'
 
@@ -51,8 +51,8 @@ const thisProps = defineProps({
   props: Object,
   children: Array,
   onlyId: String,
-  hideLabel: Boolean,
-  required: Boolean,
+  hideLabel: { type: Boolean, default: undefined },
+  required: { type: Boolean, default: undefined },
   style: Object,
   help: String,
   class: null
@@ -78,7 +78,9 @@ const handleHoverEnter = () => {
 const handleHoverLeave = () => {
   hoverId.value = ''
 }
-
+watchEffect(() => {
+  console.log(thisProps)
+})
 const handleSelect = (element) => {
   current.value = element
 }

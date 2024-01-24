@@ -12,6 +12,7 @@ const changeItems = (items) => {
     if (config.children) {
       data.children = changeItems(config.children)
     }
+
     return data
   })
 }

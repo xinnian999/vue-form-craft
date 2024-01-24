@@ -23,7 +23,7 @@ import {
   grid,
   custom,
   title
-} from '../elements'
+} from '@/elements'
 
 const menus = [
   {
