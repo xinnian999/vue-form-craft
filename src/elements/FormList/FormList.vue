@@ -94,7 +94,7 @@
 <script setup lang="jsx">
 import { computed, defineProps, defineEmits } from 'vue'
 import { ElFormItem, ElSpace, ElButton, ElCard, ElTableColumn, ElTable } from 'element-plus'
-import FormItem from '../FormItem.vue'
+import { FormItem } from '@/components'
 
 const props = defineProps({
   modelValue: Array,
@@ -140,6 +140,8 @@ const list = computed(() => {
     }
   })
 })
+
+console.log(props)
 
 const isMax = computed(() => {
   return list.value.length >= props.maxLines

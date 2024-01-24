@@ -1,12 +1,8 @@
-import { basic, props } from '../commonAttr'
+import { linkageAttr, basic, props } from '../commonAttr'
 
 export default [
   ...basic,
-  {
-    label: '初始值',
-    component: 'JsonEdit',
-    name: 'initialValue'
-  },
+  { label: '初始值', component: 'JsonEdit', name: 'initialValue' },
   {
     label: 'props',
     component: 'itemGroup',
@@ -20,13 +16,13 @@ export default [
         props: {
           mode: 'static',
           options: [
-            { label: '表格', value: 'table' },
-            { label: '卡片', value: 'card' },
-            { label: '行内', value: 'inline' }
+            { label: '弹窗', value: 'dialog' },
+            { label: '直接显示', value: 'direct' }
           ]
         },
-        initialValue: 'table'
+        initialValue: 'dialog'
       }
     ]
-  }
+  },
+  ...linkageAttr
 ]

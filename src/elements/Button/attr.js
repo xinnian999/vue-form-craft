@@ -39,7 +39,7 @@ export default [
       // },
       {
         label: '样式',
-        component: 'jsonEdit',
+        component: 'JsonEdit',
         name: 'style',
         initialValue: {},
         props: {

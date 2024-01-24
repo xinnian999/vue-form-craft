@@ -33,7 +33,7 @@ export default {
 
     {
       label: 'props',
-      component: 'jsonEdit',
+      component: 'JsonEdit',
       name: 'props',
       initialValue: {}
     },

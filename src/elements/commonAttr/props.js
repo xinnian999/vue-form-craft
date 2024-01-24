@@ -1,6 +1,6 @@
 export default [
   {
-    component: 'title',
+    component: 'Title',
     name: 'Props',
     hideLabel: true,
     props: {

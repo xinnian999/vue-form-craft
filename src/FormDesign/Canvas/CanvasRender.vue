@@ -22,7 +22,7 @@
       </li>
     </ul>
 
-    <div v-if="['formList', 'itemGroup', 'inline', 'grid'].includes(component)" class="default">
+    <div v-if="['FormList', 'itemGroup', 'inline', 'grid'].includes(component)" class="default">
       <div class="title">【{{ elements[component].name }}】 {{ label }} {{ name }}</div>
       <ChildrenContainer v-bind="thisProps" />
     </div>

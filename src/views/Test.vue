@@ -56,7 +56,7 @@ const schema = {
     },
     {
       label: '多选框组',
-      component: 'checkbox',
+      component: 'Checkbox',
       props: {
         mode: 'static',
         options: [

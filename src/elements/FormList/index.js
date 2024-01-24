@@ -1,21 +1,16 @@
-import { ElInput } from 'element-plus'
 import attr from './attr'
+import FormList from './FormList.vue'
 
 export default {
-  name: '多行文本',
-  component: ElInput,
-  icon: 'textarea',
-  type: 'basic',
-  order: 2,
+  name: '自增容器',
+  component: FormList,
+  icon: 'formList',
+  type: 'high',
+  order: 1,
   initialValues: {
-    label: '多行文本',
-    component: 'Textarea',
-    props: {
-      autocomplete: 'off',
-      showWordLimit: true,
-      type: 'textarea',
-      autosize: { minRows: 4, maxRows: 999 }
-    }
+    label: '自增容器',
+    component: 'FormList',
+    children: []
   },
   attr
 }

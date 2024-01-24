@@ -141,7 +141,13 @@
       v-bind="props"
     />
 
-    <component v-else :is="elements[currentComponent]?.component" v-model="value" v-bind="props" />
+    <component
+      v-else
+      :is="elements[currentComponent]?.component"
+      v-model="value"
+      v-bind="props"
+      :children="children"
+    />
   </el-form-item>
 </template>
 

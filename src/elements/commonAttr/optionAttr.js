@@ -38,7 +38,7 @@ export default [
   {
     label: '静态选项',
     name: 'options',
-    component: 'formList',
+    component: 'FormList',
     hidden: '{{$values.props.mode!=="static"}}',
     children: [
       {

@@ -82,7 +82,7 @@ export default [
       {
         label: '静态选项',
         name: 'options',
-        component: 'jsonEdit',
+        component: 'JsonEdit',
         hidden: '{{$values.props.mode!=="static"}}',
         onlyId: 'form-Iwpd'
       },

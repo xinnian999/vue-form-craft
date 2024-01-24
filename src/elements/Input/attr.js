@@ -27,7 +27,7 @@ export default [
   ...linkageAttr,
   {
     label: '校验规则',
-    component: 'formList',
+    component: 'FormList',
     children: [
       {
         label: '类型',
@@ -76,7 +76,7 @@ export default [
       },
       {
         label: '校验时机',
-        component: 'checkbox',
+        component: 'Checkbox',
         props: {
           mode: 'static',
           options: [

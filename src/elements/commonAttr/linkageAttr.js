@@ -2,7 +2,7 @@ export default [
   {
     label: '联动值',
     name: 'change',
-    component: 'formList',
+    component: 'FormList',
     children: [
       {
         label: '联动字段',

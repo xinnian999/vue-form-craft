@@ -28,7 +28,7 @@ export default {
     },
     {
       label: '标签',
-      component: 'checkbox',
+      component: 'Checkbox',
       props: {
         mode: 'remote',
         options: [
@@ -87,7 +87,7 @@ export default {
     },
     {
       label: '文章海报',
-      component: 'uploadImage',
+      component: 'UploadImage',
       props: {
         width: 250,
         height: 150,
@@ -102,7 +102,7 @@ export default {
     },
     {
       label: '文章内容',
-      component: 'markdown',
+      component: 'Markdown',
       onlyId: 'form-fSYT',
       name: 'content',
       required: true
