@@ -181,7 +181,7 @@ const schema = {
       name: 'password'
     },
     {
-      component: 'button',
+      component: 'Button',
       props: {
         name: '提交',
         clickEvent: 'submitForm'

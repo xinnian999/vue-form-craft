@@ -8,7 +8,6 @@ export default {
   component: Grid,
   order: 3,
   isNotFormItem: true,
-  isWrapper: true,
   isDefaultWrapper: true,
   initialValues: {
     component: 'Grid',

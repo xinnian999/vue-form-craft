@@ -22,16 +22,13 @@
       </li>
     </ul>
 
-    <div
-      v-if="currentComponentConfig.isWrapper && currentComponentConfig.isDefaultWrapper"
-      class="default"
-    >
+    <div v-if="currentComponentConfig.isDefaultWrapper" class="default">
       <div class="title">【{{ currentComponentConfig.name }}】 {{ label }} {{ name }}</div>
       <ChildrenContainer v-bind="thisProps" />
     </div>
 
     <component
-      v-else-if="currentComponentConfig.isWrapper && !currentComponentConfig.isDefaultWrapper"
+      v-else-if="currentComponentConfig.isWrapper"
       :is="currentComponentConfig.component"
       v-bind="props"
     >

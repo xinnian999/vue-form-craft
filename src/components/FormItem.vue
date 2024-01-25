@@ -152,8 +152,4 @@ onBeforeMount(() => {
     }
   }
 }
-
-.isNotFormItem {
-  margin-bottom: 18px;
-}
 </style>

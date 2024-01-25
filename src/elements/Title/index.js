@@ -6,6 +6,7 @@ export default {
   icon: 'title',
   type: 'assist',
   order: 3,
+  isNotFormItem: true,
   attr,
   initialValues: {
     component: 'Title',

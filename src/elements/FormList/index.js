@@ -7,7 +7,6 @@ export default {
   icon: 'formList',
   type: 'high',
   order: 1,
-  isWrapper: true,
   isDefaultWrapper: true,
   initialValues: {
     label: '自增容器',

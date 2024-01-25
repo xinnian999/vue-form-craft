@@ -6,7 +6,6 @@ import * as Directives from '@/directive'
 import { MdPreview, MdCatalog, MdEditor } from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
 import 'element-plus/dist/index.css'
-// import * as elements from '@/elements'
 
 const modules = import.meta.glob('@/elements/*/index.js', { eager: true })
 const elements = {}

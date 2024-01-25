@@ -27,7 +27,7 @@ export default {
       component: 'grid',
       children: [
         {
-          component: 'button',
+          component: 'Button',
           props: {
             name: '登陆',
             clickEvent: 'submitForm',
@@ -40,7 +40,7 @@ export default {
           hideLabel: true
         },
         {
-          component: 'button',
+          component: 'Button',
           props: {
             name: '注册',
             clickEvent: 'resetForm',

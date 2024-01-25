@@ -7,7 +7,6 @@ export default {
   component: ItemGroup,
   order: 2,
   isNotFormItem: true,
-  isWrapper: true,
   isDefaultWrapper: true,
   initialValues: {
     component: 'ItemGroup',

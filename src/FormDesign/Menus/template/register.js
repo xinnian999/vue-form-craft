@@ -43,7 +43,7 @@ export default {
       name: 'code'
     },
     {
-      component: 'button',
+      component: 'Button',
       props: {
         name: '立即注册',
         clickEvent: 'custom',

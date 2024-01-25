@@ -8,7 +8,6 @@ export default {
   component: Inline,
   order: 2,
   isNotFormItem: true,
-  isWrapper: true,
   isDefaultWrapper: true,
   initialValues: {
     component: 'Inline',
