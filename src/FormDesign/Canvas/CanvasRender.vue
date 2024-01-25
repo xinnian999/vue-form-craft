@@ -12,6 +12,9 @@
         </template>
       </el-button>
     </div>
+
+    <div class="hidden-ico" v-if="hidden"><icon-render name="hidden" /></div>
+
     <ul class="actions-right-bottom" v-if="onlyId === current.onlyId">
       <li
         v-for="{ icon, handle } in rightBottomActions"
@@ -58,7 +61,8 @@ const thisProps = defineProps({
   required: { type: Boolean, default: undefined },
   style: Object,
   help: String,
-  class: null
+  class: null,
+  hidden: Boolean
 })
 
 const elements = inject('$elements')
@@ -133,6 +137,17 @@ const checkProps = (props) => {
       font-size: 16px;
       box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
     }
+  }
+
+  .hidden-ico {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 10;
+    padding: 0px 5px;
+    font-size: 13px;
+    background-color: var(--el-color-primary);
+    color: #fff;
   }
   .actions-right-bottom {
     position: absolute;
