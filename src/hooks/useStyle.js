@@ -10,7 +10,7 @@ const useStyle = (component, props) => {
     }))
   }
 
-  if (component === 'inline') {
+  if (component === 'Inline') {
     return computed(() => ({
       width: '100%',
       display: 'flex',

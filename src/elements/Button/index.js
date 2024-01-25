@@ -1,5 +1,5 @@
 import attr from './attr'
-import { Button } from '@/components'
+import Button from './Button.vue'
 
 export default {
   name: '按钮',
@@ -13,8 +13,7 @@ export default {
     props: {
       name: '提交',
       type: 'primary'
-    },
-    hideLabel: true
+    }
   },
   attr
 }
