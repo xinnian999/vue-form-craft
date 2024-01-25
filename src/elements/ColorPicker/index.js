@@ -13,7 +13,7 @@ export default {
     { label: '初始值', component: 'ColorPicker', name: 'initialValue' },
     {
       label: 'props',
-      component: 'itemGroup',
+      component: 'ItemGroup',
       name: 'props',
       children: [...props, { label: '是否禁用', component: 'Switch', name: 'disabled' }]
     },

@@ -3,7 +3,7 @@ import { optionAttr, linkageAttr, basic, props } from '../commonAttr'
 export default [
   ...basic,
   {
-    component: 'itemGroup',
+    component: 'ItemGroup',
     name: 'props',
     children: [
       ...props,

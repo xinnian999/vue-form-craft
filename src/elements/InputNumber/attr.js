@@ -9,7 +9,7 @@ export default [
   },
   {
     label: 'props',
-    component: 'itemGroup',
+    component: 'ItemGroup',
     name: 'props',
     children: [
       ...props,

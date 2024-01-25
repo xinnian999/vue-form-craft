@@ -4,7 +4,7 @@ export default [
   ...basic,
   {
     label: 'props',
-    component: 'itemGroup',
+    component: 'ItemGroup',
     name: 'props',
     children: [
       ...props,

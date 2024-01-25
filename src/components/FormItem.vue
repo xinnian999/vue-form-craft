@@ -1,31 +1,22 @@
 <template>
-  <!-- <component
-    v-if="currentComponentConfig.type === 'layout'"
-    :is="currentComponentConfig.component"
-    v-bind="props"
-    class="form-item-group"
-  >
-    <form-render v-model="formValues" :formItems="children" />
-  </component> -->
-
-  <el-card v-if="currentComponent === 'Card'" v-bind="props" class="form-item-group">
-    <form-render v-model="formValues" :formItems="children" />
-  </el-card>
-
   <div
-    v-else-if="['grid', 'inline'].includes(currentComponent)"
-    class="form-item-group"
-    :style="layoutBoxStyle"
+    v-if="currentComponentConfig.isNotFormItem"
+    :style="{
+      marginBottom: design ? 0 : '18px'
+    }"
   >
-    <form-render v-model="formValues" :formItems="children" />
+    <component :is="currentComponentConfig.component" v-bind="props">
+      <template v-if="currentComponentConfig.isWrapper">
+        <form-render
+          v-if="currentComponent === 'ItemGroup'"
+          v-model="value"
+          :formItems="children"
+          :name="name"
+        />
+        <form-render v-else v-model="formValues" :formItems="children" />
+      </template>
+    </component>
   </div>
-
-  <item-group
-    v-else-if="currentComponent === 'itemGroup'"
-    v-model="value"
-    :children="children"
-    :name="name"
-  />
 
   <el-form-item
     v-else
@@ -56,24 +47,19 @@
     />
 
     <component
-      v-else-if="children"
-      :is="currentComponentConfig?.component"
+      v-else
+      :is="currentComponentConfig.component"
       v-model="value"
-      v-bind="props"
-      :children="children"
+      v-bind="pickBy({ ...props, name, children }, Boolean)"
     />
-
-    <component v-else :is="currentComponentConfig?.component" v-model="value" v-bind="props" />
   </el-form-item>
 </template>
 
 <script setup lang="jsx">
 import { computed, defineProps, defineEmits, onBeforeMount, inject } from 'vue'
-import { ElFormItem, ElTooltip, ElCard } from 'element-plus'
-import { isString } from 'lodash'
+import { ElFormItem, ElTooltip } from 'element-plus'
+import { isString, pickBy } from 'lodash'
 import { isRegexString } from '@/utils'
-import { ItemGroup } from '@/components'
-import useStyle from '@/hooks/useStyle'
 import FormRender from './FormRender.vue'
 
 const thisProps = defineProps({
@@ -90,7 +76,8 @@ const thisProps = defineProps({
   hideLabel: Boolean,
   prop: String,
   rules: Array,
-  class: null
+  class: null,
+  design: Boolean
 })
 
 const emit = defineEmits(['update:modelValue'])
@@ -100,8 +87,6 @@ const elements = inject('$elements')
 const schema = inject('$schema')
 
 const formValues = inject('$formValues')
-
-const layoutBoxStyle = useStyle(thisProps.component, thisProps.props)
 
 const value = computed({
   get() {
@@ -153,7 +138,7 @@ const currentComponent = computed(() => {
 })
 
 const currentComponentConfig = computed(() => {
-  return elements[currentComponent.value]
+  return elements[currentComponent.value] || {}
 })
 
 onBeforeMount(() => {
@@ -176,7 +161,7 @@ onBeforeMount(() => {
   }
 }
 
-.form-item-group {
-  margin-bottom: 20px;
+.isNotFormItem {
+  margin-bottom: 18px;
 }
 </style>

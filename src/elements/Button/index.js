@@ -7,6 +7,7 @@ export default {
   icon: 'button',
   type: 'assist',
   order: 1,
+  isNotFormItem: true,
   initialValues: {
     component: 'Button',
     props: {

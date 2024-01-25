@@ -8,7 +8,7 @@
   />
 </template>
 
-<script setup lang="jsx">
+<script setup>
 import { defineProps, defineEmits, computed } from 'vue'
 import FormItem from './FormItem.vue'
 import { mergeWith } from 'lodash'
@@ -23,7 +23,7 @@ const emit = defineEmits(['update:modelValue'])
 
 // 通过Proxy接管的数据源，某项属性被修改会立刻通知父组件，遵守单项数据流原则
 const formValues = computed(() => {
-  return new Proxy(props.modelValue, {
+  return new Proxy(props.modelValue || {}, {
     set(target, key, value) {
       //字段值为对象时，需要与上一次值深度合并（itemGroup）
       emit(

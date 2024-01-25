@@ -1,12 +1,12 @@
 import { computed } from 'vue'
 
 const useStyle = (component, props) => {
-  if (component === 'grid') {
+  if (component === 'Grid') {
     return computed(() => ({
       display: 'grid',
       gap: props?.space + 'px',
-      'grid-template-columns': `repeat(${props?.colCount}, 1fr)`,
-      'overflow-x': 'auto'
+      'grid-template-columns': `repeat(${props?.colCount}, 1fr)`
+      // 'overflow-x': 'auto'
     }))
   }
 

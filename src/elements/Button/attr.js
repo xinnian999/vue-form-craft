@@ -6,7 +6,7 @@ export default [
   { label: '隐藏label', component: 'Switch', name: 'hideLabel' },
   {
     label: 'props',
-    component: 'itemGroup',
+    component: 'ItemGroup',
     name: 'props',
     children: [
       ...props,

@@ -9,7 +9,7 @@ export default [
     onlyId: 'form-4MUd'
   },
   {
-    component: 'itemGroup',
+    component: 'ItemGroup',
     name: 'props',
     children: [
       ...props,

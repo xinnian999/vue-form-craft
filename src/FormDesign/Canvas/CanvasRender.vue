@@ -22,23 +22,30 @@
       </li>
     </ul>
 
-    <div v-if="['FormList', 'itemGroup', 'inline', 'grid'].includes(component)" class="default">
-      <div class="title">【{{ elements[component].name }}】 {{ label }} {{ name }}</div>
+    <div
+      v-if="currentComponentConfig.isWrapper && currentComponentConfig.isDefaultWrapper"
+      class="default"
+    >
+      <div class="title">【{{ currentComponentConfig.name }}】 {{ label }} {{ name }}</div>
       <ChildrenContainer v-bind="thisProps" />
     </div>
 
-    <el-card v-else-if="component === 'Card'" v-bind="props">
+    <component
+      v-else-if="currentComponentConfig.isWrapper && !currentComponentConfig.isDefaultWrapper"
+      :is="currentComponentConfig.component"
+      v-bind="props"
+    >
       <ChildrenContainer v-bind="thisProps" />
-    </el-card>
+    </component>
 
-    <form-item v-else v-bind="thisProps" :props="checkProps(props)" />
+    <form-item v-else v-bind="thisProps" :props="checkProps(props)" design />
   </div>
 </template>
 
-<script setup lang="jsx">
+<script setup>
 import { defineProps, inject, computed } from 'vue'
 import { omit } from 'lodash'
-import { ElButton, ElCard } from 'element-plus'
+import { ElButton } from 'element-plus'
 import { copyItems, deleteItem } from '@/utils'
 import { FormItem } from '@/components'
 import ChildrenContainer from './ChildrenContainer.vue'
@@ -64,6 +71,10 @@ const current = inject('$current')
 const hoverId = inject('hoverId')
 
 const list = inject('$list')
+
+const currentComponentConfig = computed(() => {
+  return elements[thisProps.component] || {}
+})
 
 const canvasItemClass = computed(() => ({
   'canvas-item': true,
@@ -162,6 +173,7 @@ const checkProps = (props) => {
       background-color: var(--el-color-primary);
       font-size: 12px;
       color: #fff;
+      z-index: 10;
     }
   }
 

@@ -1,5 +1,5 @@
 export default {
-  component: 'itemGroup',
+  component: 'ItemGroup',
   name: 'api',
   hidden: '{{$values.props.mode==="static"}}',
   children: [

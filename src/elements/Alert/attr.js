@@ -3,7 +3,7 @@ export default [
   { label: '隐藏字段', component: 'Switch', name: 'hidden' },
   {
     label: 'props',
-    component: 'itemGroup',
+    component: 'ItemGroup',
     name: 'props',
     children: [
       { label: '标题', component: 'Input', name: 'title' },

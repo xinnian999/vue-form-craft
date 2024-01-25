@@ -5,7 +5,7 @@ export default [
   { label: '初始值', component: 'Textarea', name: 'initialValue' },
   {
     label: 'props',
-    component: 'itemGroup',
+    component: 'ItemGroup',
     name: 'props',
     children: [...props]
   },

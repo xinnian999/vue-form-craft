@@ -5,7 +5,7 @@ export default [
   { label: '初始值', component: 'Input', name: 'initialValue' },
   {
     label: 'props',
-    component: 'itemGroup',
+    component: 'ItemGroup',
     name: 'props',
     children: [
       ...props,
@@ -22,7 +22,7 @@ export default [
         name: 'maxlength'
       },
       {
-        component: 'itemGroup',
+        component: 'ItemGroup',
         name: 'autosize',
         children: [
           {

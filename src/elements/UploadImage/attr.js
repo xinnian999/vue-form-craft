@@ -4,7 +4,7 @@ export default [
   { label: '隐藏字段', component: 'Switch', name: 'hidden' },
   {
     label: 'props',
-    component: 'itemGroup',
+    component: 'ItemGroup',
     name: 'props',
     children: [
       { label: '上传Key', component: 'Input', name: 'uploadKey' },
