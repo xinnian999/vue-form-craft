@@ -91,11 +91,10 @@ const current = computed({
   },
   set(element) {
     currentId.value = element.onlyId
-
     const set = (items) => {
       return items.map((item) => {
         if (item.onlyId === element.onlyId) {
-          return element
+          return item
         }
         if (item.children) {
           return { ...item, children: set(item.children) }

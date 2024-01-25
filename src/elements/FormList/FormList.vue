@@ -141,8 +141,6 @@ const list = computed(() => {
   })
 })
 
-console.log(props)
-
 const isMax = computed(() => {
   return list.value.length >= props.maxLines
 })

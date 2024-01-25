@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="jsx">
-import { ref, computed, watchEffect } from 'vue'
+import { ref, computed } from 'vue'
 import JsonEditorVue from 'json-editor-vue3'
 import { ElButton, ElDialog } from 'element-plus'
 
@@ -48,9 +48,7 @@ const props = defineProps({
   height: null,
   description: String
 })
-watchEffect(() => {
-  console.log(props)
-})
+
 const emits = defineEmits(['update:modelValue'])
 
 const json = computed({
