@@ -64,6 +64,8 @@ const thisProps = defineProps({
   class: null
 })
 
+console.log(thisProps)
+
 const elements = inject('$elements')
 
 const current = inject('$current')

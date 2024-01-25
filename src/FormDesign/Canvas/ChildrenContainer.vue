@@ -27,7 +27,6 @@ const thisProps = defineProps({
   children: Array,
   props: Object
 })
-
 const layoutBoxStyle = useStyle(thisProps.component, thisProps.props)
 
 const onAdd = inject('$onAdd')

@@ -86,7 +86,7 @@ const elements = inject('$elements')
 
 const schema = inject('$schema')
 
-const formValues = inject('$formValues')
+const formValues = thisProps.design ? {} : inject('$formValues')
 
 const value = computed({
   get() {
