@@ -24,7 +24,7 @@
 
     <div v-if="currentComponentConfig.isDefaultWrapper" class="default">
       <div class="title">【{{ currentComponentConfig.name }}】 {{ label }} {{ name }}</div>
-      <ChildrenContainer v-bind="thisProps" />
+      <CanvasWrapper v-bind="thisProps" />
     </div>
 
     <component
@@ -32,7 +32,7 @@
       :is="currentComponentConfig.component"
       v-bind="props"
     >
-      <ChildrenContainer v-bind="thisProps" />
+      <CanvasWrapper v-bind="thisProps" />
     </component>
 
     <form-item v-else v-bind="thisProps" :props="checkProps(props)" design />
@@ -45,7 +45,7 @@ import { omit } from 'lodash'
 import { ElButton } from 'element-plus'
 import { copyItems, deleteItem } from '@/utils'
 import { FormItem } from '@/components'
-import ChildrenContainer from './ChildrenContainer.vue'
+import CanvasWrapper from './CanvasWrapper.vue'
 
 const thisProps = defineProps({
   label: String,

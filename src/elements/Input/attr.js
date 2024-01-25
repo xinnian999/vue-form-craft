@@ -31,7 +31,7 @@ export default [
     children: [
       {
         label: '类型',
-        component: 'select',
+        component: 'Select',
         props: {
           mode: 'static',
           options: [

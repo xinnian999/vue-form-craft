@@ -91,7 +91,7 @@ const schema = {
     },
     {
       label: '下拉选择框',
-      component: 'select',
+      component: 'Select',
       props: {
         mode: 'static',
         options: [

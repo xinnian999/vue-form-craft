@@ -2,7 +2,8 @@
   <div
     v-if="currentComponentConfig.isNotFormItem"
     :style="{
-      marginBottom: design ? 0 : '18px'
+      marginBottom: design ? 0 : '18px',
+      display: 'flex'
     }"
   >
     <component :is="currentComponentConfig.component" v-bind="props">

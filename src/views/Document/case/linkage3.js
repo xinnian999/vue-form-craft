@@ -5,7 +5,7 @@ export default {
   items: [
     {
       label: '选择商品',
-      component: 'select',
+      component: 'Select',
       props: {
         mode: 'static',
         options: [

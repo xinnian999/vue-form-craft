@@ -13,7 +13,7 @@ export default [
       { label: '按钮名称', component: 'Input', name: 'name' },
       {
         label: '点击事件',
-        component: 'select',
+        component: 'Select',
         name: 'clickEvent',
         props: {
           mode: 'static',

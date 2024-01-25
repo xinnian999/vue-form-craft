@@ -24,7 +24,7 @@ export default {
       required: true
     },
     {
-      component: 'grid',
+      component: 'Grid',
       children: [
         {
           component: 'Button',

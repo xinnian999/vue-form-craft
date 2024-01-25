@@ -4,7 +4,8 @@ export default [
     name: 'basic',
     hideLabel: true,
     props: {
-      title: '通用属性'
+      title: '通用属性',
+      type: 'h4'
     }
   },
   { label: '字段label', component: 'Input', name: 'label' },
