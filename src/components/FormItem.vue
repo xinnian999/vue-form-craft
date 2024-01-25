@@ -6,7 +6,7 @@
     }"
   >
     <component :is="currentComponentConfig.component" v-bind="props">
-      <template v-if="currentComponentConfig.isWrapper">
+      <template v-if="currentComponentConfig.isWrapper || currentComponentConfig.isDefaultWrapper">
         <form-render
           v-if="currentComponent === 'ItemGroup'"
           v-model="value"
@@ -40,14 +40,6 @@
     </template>
 
     <component
-      v-if="currentComponent === 'custom'"
-      :is="props.componentName"
-      v-model="value"
-      v-bind="props"
-    />
-
-    <component
-      v-else
       :is="currentComponentConfig.component"
       v-model="value"
       v-bind="pickBy({ ...props, name, children }, Boolean)"
