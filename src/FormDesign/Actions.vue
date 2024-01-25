@@ -72,9 +72,9 @@
 
 <script setup lang="jsx">
 import { ref, computed, inject, defineProps } from 'vue'
-import JsonEditorVue from 'json-editor-vue3'
 import { ElButton, ElDialog } from 'element-plus'
-import { SchemaForm, JsonEdit } from '@/components'
+import JsonEditorVue from 'json-editor-vue3'
+import { SchemaForm } from '@/components'
 import { changeItems } from '@/utils'
 import VueEdit from './VueEdit.vue'
 
@@ -87,6 +87,8 @@ defineProps({
 
 const schema = inject('$schema')
 const emit = inject('$emit')
+const elements = inject('$elements')
+const JsonEdit = elements.JsonEdit.component
 
 const json = computed({
   get() {
