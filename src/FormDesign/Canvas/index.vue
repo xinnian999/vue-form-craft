@@ -67,7 +67,7 @@ provide('$list', list)
 .canvas {
   flex: 1;
   padding: 20px;
-  border: 1px dashed #999;
+  border: 1px solid #c7c7c7;
   position: relative;
   overflow-y: auto;
   overflow-x: hidden;

@@ -126,7 +126,7 @@ provide('$emit', emit)
   display: flex;
   height: 100%;
   box-sizing: border-box;
-
+  background-color: #eee;
   .formItemList {
     width: 18%;
     padding: 10px;
@@ -136,6 +136,7 @@ provide('$emit', emit)
   }
   .formRender {
     flex: 1;
+    margin: 0 10px;
     overflow: hidden;
     border-left: 1px solid #eee;
     border-right: 1px solid #eee;
