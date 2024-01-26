@@ -83,34 +83,34 @@ const useTemplate = (templateSchema) => {
     margin-top: 10px;
   }
   .list {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
     width: 100%;
-    justify-content: space-between;
     padding-left: 0;
-    flex-wrap: wrap;
     .form-item-btn {
       list-style: none;
       padding: 5px 0px;
-      margin-bottom: 10px;
       cursor: move;
       border: 1px dashed transparent;
+      transition: 0.3s all;
       &:hover {
-        border: 1px dashed var(--el-color-primary);
+        // border: 1px dashed var(--el-color-primary);
+        box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
         color: var(--el-color-primary);
       }
-      background-color: aliceblue;
-      width: 45%;
-      display: flex;
+      background-color: var(--el-color-primary-light-9);
+      // display: flex;
+      text-align: center;
       .ico {
-        width: 40px;
-        height: 20px;
+        height: 40px;
         display: flex;
         align-items: center;
+        font-size: 20px;
         justify-content: center;
       }
       .name {
-        flex: 1;
-        font-size: 14px;
+        font-size: 13px;
       }
     }
   }

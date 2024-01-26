@@ -4,6 +4,7 @@
     :style="{
       marginBottom: design ? 0 : '18px'
     }"
+    class="notFormItem"
   >
     <component :is="currentComponentConfig.component" v-bind="props">
       <template v-if="currentComponentConfig.isWrapper || currentComponentConfig.isDefaultWrapper">
@@ -151,5 +152,11 @@ onBeforeMount(() => {
       position: relative;
     }
   }
+}
+
+.notFormItem {
+  // .el-form-item {
+  //   margin-bottom: 0;
+  // }
 }
 </style>

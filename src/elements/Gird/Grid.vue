@@ -1,5 +1,5 @@
 <template>
-  <div :style="gridStyle">
+  <div :style="gridStyle" class="form-item-grid">
     <slot />
   </div>
 </template>
@@ -15,4 +15,10 @@ const props = defineProps({
 const gridStyle = useStyle('Grid', props)
 </script>
 
-<style></style>
+<style lang="less">
+.form-item-grid {
+  .el-form-item {
+    margin-bottom: 0;
+  }
+}
+</style>

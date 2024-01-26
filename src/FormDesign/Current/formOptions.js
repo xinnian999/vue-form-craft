@@ -1,5 +1,6 @@
 export default {
   size: 'small',
+  labelAlign: 'top',
   items: [
     {
       label: 'label宽度',

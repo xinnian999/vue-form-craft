@@ -128,7 +128,7 @@ provide('$emit', emit)
   box-sizing: border-box;
 
   .formItemList {
-    width: 20%;
+    width: 18%;
     padding: 10px;
     background-color: #fff;
     position: relative;
@@ -146,7 +146,7 @@ provide('$emit', emit)
     padding-bottom: 20px;
   }
   .formItemOptions {
-    width: 25%;
+    width: 20%;
     overflow: auto;
     padding: 20px;
     background-color: #fff;

@@ -163,7 +163,7 @@ const checkProps = (props) => {
   .actions-right-bottom {
     position: absolute;
     right: 0;
-    bottom: 0;
+    bottom: -1px;
     z-index: 20;
     color: #fff;
     list-style: none;

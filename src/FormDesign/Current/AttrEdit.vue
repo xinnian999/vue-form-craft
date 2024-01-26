@@ -40,10 +40,10 @@ const attrSchema = computed(() => {
   const config = elements[current.value.component]
 
   if (config) {
-    return { size: 'small', items: config.attr }
+    return { size: 'small', labelAlign: 'top', items: config.attr }
   }
 
-  return { size: 'small', items: [] }
+  return { size: 'small', labelAlign: 'top', items: [] }
 })
 
 const handleEdit = () => {
