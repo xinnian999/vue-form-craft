@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { SchemaForm } from '@/components'
+import { SchemaForm, RemoteSchemaForm, RemoteFormDesign } from '@/components'
 import FormDesign from './FormDesign/index.vue'
 import IconRender from '@/components/IconRender.vue'
 import * as Directives from '@/directive'
@@ -17,7 +17,16 @@ for (const path in modules) {
   }
 }
 
-const components = [SchemaForm, FormDesign, IconRender, MdPreview, MdCatalog, MdEditor] // 全局组件列表
+const components = [
+  SchemaForm,
+  FormDesign,
+  RemoteSchemaForm,
+  IconRender,
+  MdPreview,
+  MdCatalog,
+  MdEditor,
+  RemoteFormDesign
+] // 全局组件列表
 
 const install = function (app, options = {}) {
   const { request = axios, getSchema } = options

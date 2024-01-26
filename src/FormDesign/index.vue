@@ -20,12 +20,11 @@ import {
   ref,
   provide,
   reactive,
-  onMounted,
-  inject,
   computed,
   defineProps,
   defineEmits,
-  defineOptions
+  defineOptions,
+  watchEffect
 } from 'vue'
 import Menus from './Menus/index.vue'
 import Canvas from './Canvas/index.vue'
@@ -37,8 +36,7 @@ defineOptions({
 })
 
 const props = defineProps({
-  modelValue: Object,
-  schemaId: [String, Number],
+  schema: Object,
   previewSchemaContext: {
     type: Object,
     default: () => ({})
@@ -47,7 +45,7 @@ const props = defineProps({
   style: null
 })
 
-const emit = defineEmits(['update:modelValue', 'onSave'])
+const emit = defineEmits(['onSave'])
 
 const selectData = reactive({})
 
@@ -58,18 +56,6 @@ const currentSchema = ref({
   labelAlign: 'right',
   size: 'default',
   items: []
-})
-
-const getSchema = inject('$getSchema')
-
-const schema = computed({
-  get() {
-    return props.modelValue || currentSchema.value
-  },
-  set(val) {
-    emit('update:modelValue', val)
-    currentSchema.value = val
-  }
 })
 
 const current = computed({
@@ -87,7 +73,7 @@ const current = computed({
         return all
       }, null)
     }
-    return findItem(schema.value.items) || {}
+    return findItem(currentSchema.value.items) || {}
   },
   set(element) {
     currentId.value = element.onlyId
@@ -103,19 +89,18 @@ const current = computed({
       })
     }
 
-    schema.value = { ...schema.value, items: set(schema.value.items) }
+    currentSchema.value = { ...currentSchema.value, items: set(currentSchema.value.items) }
   }
 })
 
-onMounted(async () => {
-  if (props.schemaId && getSchema) {
-    const remoteSchema = await getSchema(props.schemaId)
-    remoteSchema && (currentSchema.value = remoteSchema)
+watchEffect(() => {
+  if (props.schema) {
+    currentSchema.value = props.schema
   }
 })
 
 provide('$current', current)
-provide('$schema', schema)
+provide('$schema', currentSchema)
 provide('$selectData', selectData)
 
 provide('$emit', emit)

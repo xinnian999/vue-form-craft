@@ -1,15 +1,14 @@
 <template>
   <el-form
     :model="formValues"
-    :label-position="currentSchema.labelAlign"
-    :size="currentSchema.size"
+    :label-position="schema.labelAlign"
+    :size="schema.size"
     :disabled="disabled"
-    :hide-required-asterisk="currentSchema.hideRequiredAsterisk"
+    :hide-required-asterisk="schema.hideRequiredAsterisk"
     ref="formRef"
     :style="style"
     :class="props.class"
     id="SchemaForm"
-    v-loading="loading"
   >
     <FormRender v-model="formValues" :formItems="formItems" />
   </el-form>
@@ -25,9 +24,6 @@ import {
   reactive,
   provide,
   watch,
-  watchEffect,
-  inject,
-  onBeforeMount,
   defineOptions
 } from 'vue'
 import { ElForm, ElMessage } from 'element-plus'
@@ -50,7 +46,6 @@ const props = defineProps({
     type: Object,
     default: () => ({ labelWidth: 150, labelAlign: 'right', size: 'default', items: [] })
   },
-  schemaId: [String, Number],
   schemaContext: {
     type: Object,
     default: () => ({})
@@ -65,23 +60,14 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue', 'onSubmit', 'onChange'])
 
-const currentSchema = ref({})
-
-const stateForm = ref({})
-
-const loading = ref(false)
-
 const selectData = reactive({})
-
-const getSchema = inject('$getSchema')
 
 const formValues = computed({
   get() {
-    return props.modelValue || stateForm.value
+    return props.modelValue
   },
   set(val) {
     emit('update:modelValue', val)
-    stateForm.value = val
   }
 })
 
@@ -95,8 +81,11 @@ const context = computed(() => ({
 
 // 转换为动态配置
 const formItems = computed(() => {
-  return deepParse(currentSchema.value.items, context.value)
+  return deepParse(props.schema.items, context.value)
 })
+
+// 保证schema的响应式
+const currentSchema = computed(() => props.schema)
 
 watch(
   formValues,
@@ -106,19 +95,6 @@ watch(
   },
   { deep: true }
 )
-
-watchEffect(() => {
-  currentSchema.value = props.schema
-})
-
-onBeforeMount(async () => {
-  if (props.schemaId) {
-    loading.value = true
-    currentSchema.value = await getSchema(props.schemaId)
-
-    loading.value = false
-  }
-})
 
 const validate = () => formRef.value.validate()
 
@@ -147,9 +123,3 @@ provide('$formEvents', { submit, validate, getFormValues, setFormValues, reset }
 
 defineExpose({ submit, validate, selectData, getFormValues, setFormValues, reset, context })
 </script>
-
-<style scoped>
-#SchemaForm {
-  /* overflow: auto; */
-}
-</style>

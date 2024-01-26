@@ -1,5 +1,7 @@
 <template>
-  <form-design />
+  <RemoteFormDesign schemaId="4" />
 </template>
 
-<script setup></script>
+<script setup>
+import { RemoteFormDesign } from '@/components'
+</script>
