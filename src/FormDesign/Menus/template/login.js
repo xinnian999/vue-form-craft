@@ -32,7 +32,8 @@ export default {
             name: '登陆',
             clickEvent: 'submitForm',
             style: {
-              'margin-left': 'auto'
+              'margin-left': 'auto',
+              display: 'flex'
             }
           },
           onlyId: 'form-aBMY',

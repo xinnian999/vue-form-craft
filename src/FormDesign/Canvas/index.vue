@@ -28,7 +28,7 @@
       :scroll-fensitivity="1"
     >
       <template #item="{ element }">
-        <CanvasRender v-if="element.onlyId" v-bind="element" :hidden="false" />
+        <CanvasRender v-if="element.onlyId" v-bind="element" />
       </template>
     </draggable>
   </el-form>
@@ -70,6 +70,7 @@ provide('$list', list)
   border: 1px dashed #999;
   position: relative;
   overflow-y: auto;
+  overflow-x: hidden;
   .tip {
     color: #999;
     font-size: 18px;
@@ -86,7 +87,7 @@ provide('$list', list)
   }
 
   .ghost {
-    border-top: 2px solid var(--el-color-primary);
+    border-top: 5px solid rgb(248, 47, 47);
     list-style: none;
   }
 }

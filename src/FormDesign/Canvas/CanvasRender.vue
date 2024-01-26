@@ -122,6 +122,17 @@ const checkProps = (props) => {
   margin-bottom: 5px;
   padding: 10px;
   position: relative;
+  z-index: 2;
+  &::before {
+    content: '';
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border: 1px dashed #c0bdbd;
+  }
 
   #form-item {
     margin-bottom: 0;
@@ -177,6 +188,7 @@ const checkProps = (props) => {
     border: 2px dashed var(--el-color-primary);
     margin: 10px;
     position: relative;
+    padding: 5px;
     .title {
       position: absolute;
       left: 0;
