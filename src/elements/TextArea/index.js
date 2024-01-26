@@ -1,9 +1,10 @@
 import { ElInput } from 'element-plus'
+import { h } from 'vue'
 import attr from './attr'
 
 export default {
   name: '多行文本',
-  component: ElInput,
+  component: h(ElInput, { type: 'textarea', showWordLimit: true, autocomplete: 'off' }),
   icon: 'textarea',
   type: 'basic',
   order: 2,
@@ -11,9 +12,6 @@ export default {
     label: '多行文本',
     component: 'Textarea',
     props: {
-      autocomplete: 'off',
-      showWordLimit: true,
-      type: 'textarea',
       autosize: { minRows: 4, maxRows: 999 }
     }
   },

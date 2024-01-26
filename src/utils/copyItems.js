@@ -30,7 +30,7 @@ const copyItems = (list, id) => {
       if (current.children) {
         newItem.children = copyChildren(current.children)
       }
-      if (current.label) {
+      if (current.label && !newItem.label.includes('copy')) {
         newItem.label = newItem.label + ' copy'
       }
       all.push(newItem)
