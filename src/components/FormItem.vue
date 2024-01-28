@@ -25,7 +25,7 @@
     <el-form-item
       v-else
       id="form-item"
-      :style="{ ...style }"
+      :style="{ ...style, marginBottom: design ? 0 : '18px' }"
       :key="name"
       :prop="prop || name"
       :label-width="hideLabel ? '0' : schema.labelWidth"
@@ -161,8 +161,5 @@ onBeforeMount(() => {
 }
 
 .notFormItem {
-  // .el-form-item {
-  //   margin-bottom: 0;
-  // }
 }
 </style>
