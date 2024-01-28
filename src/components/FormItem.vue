@@ -25,7 +25,7 @@
     <el-form-item
       v-else
       id="form-item"
-      :style="style"
+      :style="{ ...style }"
       :key="name"
       :prop="prop || name"
       :label-width="hideLabel ? '0' : schema.labelWidth"

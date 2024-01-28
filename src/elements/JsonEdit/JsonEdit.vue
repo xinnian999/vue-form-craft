@@ -77,10 +77,10 @@ const handlePreviewExec = () => {
 </script>
 
 <style>
-.formDesign-actions {
+/* .formDesign-actions {
   padding: 10px;
   text-align: right;
-}
+} */
 
 .editor-direct {
   width: 100%;

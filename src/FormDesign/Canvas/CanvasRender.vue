@@ -134,10 +134,6 @@ const checkProps = (props) => {
     border: 1px dashed #c0bdbd;
   }
 
-  #form-item {
-    margin-bottom: 0;
-  }
-
   .actions-left-top {
     position: absolute;
     left: -1px;
