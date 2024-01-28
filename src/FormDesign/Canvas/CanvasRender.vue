@@ -38,7 +38,7 @@
       <CanvasWrapper v-bind="thisProps" />
     </component>
 
-    <form-item v-else v-bind="thisProps" :props="checkProps(props)" design />
+    <form-item v-else v-bind="thisProps" :props="checkProps(props)" :hidden="false" design />
   </div>
 </template>
 

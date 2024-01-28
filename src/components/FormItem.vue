@@ -1,51 +1,55 @@
 <template>
-  <div
-    v-if="currentComponentConfig.isNotFormItem"
-    :style="{
-      marginBottom: design ? 0 : '18px'
-    }"
-    class="notFormItem"
-  >
-    <component :is="currentComponentConfig.component" v-bind="props">
-      <template v-if="currentComponentConfig.isWrapper || currentComponentConfig.isDefaultWrapper">
-        <form-render
-          v-if="currentComponent === 'ItemGroup'"
-          v-model="value"
-          :formItems="children"
-          :name="name"
-        />
-        <form-render v-else v-model="formValues" :formItems="children" />
-      </template>
-    </component>
-  </div>
+  <template v-if="!hidden">
+    <div
+      v-if="currentComponentConfig.isNotFormItem"
+      :style="{
+        marginBottom: design ? 0 : '18px'
+      }"
+      class="notFormItem"
+    >
+      <component :is="currentComponentConfig.component" v-bind="props">
+        <template
+          v-if="currentComponentConfig.isWrapper || currentComponentConfig.isDefaultWrapper"
+        >
+          <form-render
+            v-if="currentComponent === 'ItemGroup'"
+            v-model="value"
+            :formItems="children"
+            :name="name"
+          />
+          <form-render v-else v-model="formValues" :formItems="children" />
+        </template>
+      </component>
+    </div>
 
-  <el-form-item
-    v-else
-    id="form-item"
-    :style="style"
-    :key="name"
-    :prop="prop || name"
-    :label-width="hideLabel ? '0' : schema.labelWidth"
-    :rules="computeRules"
-    :class="thisProps.class"
-  >
-    <template #label v-if="!hideLabel">
-      <div class="form-item-label">
-        <div :style="schema.labelBold && 'font-weight: bold'">{{ label }}</div>
-        <div class="ico" v-if="help">
-          <el-tooltip class="box-item" effect="dark" :content="help">
-            <icon-render name="help" />
-          </el-tooltip>
+    <el-form-item
+      v-else
+      id="form-item"
+      :style="style"
+      :key="name"
+      :prop="prop || name"
+      :label-width="hideLabel ? '0' : schema.labelWidth"
+      :rules="computeRules"
+      :class="thisProps.class"
+    >
+      <template #label v-if="!hideLabel">
+        <div class="form-item-label">
+          <div :style="schema.labelBold && 'font-weight: bold'">{{ label }}</div>
+          <div class="ico" v-if="help">
+            <el-tooltip class="box-item" effect="dark" :content="help">
+              <icon-render name="help" />
+            </el-tooltip>
+          </div>
         </div>
-      </div>
-    </template>
+      </template>
 
-    <component
-      :is="currentComponentConfig.component"
-      v-model="value"
-      v-bind="pickBy({ ...props, name, children }, Boolean)"
-    />
-  </el-form-item>
+      <component
+        :is="currentComponentConfig.component"
+        v-model="value"
+        v-bind="pickBy({ ...props, name, children }, Boolean)"
+      />
+    </el-form-item>
+  </template>
 </template>
 
 <script setup lang="jsx">
@@ -66,8 +70,10 @@ const thisProps = defineProps({
   style: Object,
   help: String,
   children: Array,
+  hidden: Boolean,
   hideLabel: Boolean,
   prop: String,
+  onlyId: String,
   rules: Array,
   class: null,
   design: Boolean

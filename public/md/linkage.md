@@ -6,12 +6,11 @@
 
 插值表达式为字符串格式，以双花括号 {{ ... }}为语法特征，对于简单的联动提供一种简洁的配置方式。
 
-被双花括号包裹的字符串一律会被解析为 **js表达式并返回结果**，且只能使用联动变量。这种联动方式基本能应对百分之80以上的联动场景😎 
+被双花括号包裹的字符串一律会被解析为 **js表达式并返回结果**，且只能使用联动变量。这种联动方式基本能应对百分之80以上的联动场景😎
 
 例如：控制字段禁用、隐藏、文案提示等交互。
 
 **Schema 所有协议字段都支持插值表达式。**
-
 
 > Schema插值表达式 可以使用的联动变量：
 
@@ -23,12 +22,11 @@
 | $utils      | Object | 一些工具函数                    |
 | ...         | any    | 由schemaContext传入的自定义变量 |
 
-
 <br/>
 
 #### 举个栗子
 
-必须标题输入了值，类型才会出现。类型如果选了【发布多条】，数量会解除禁用
+评分低于3星可以输入差评原因
 
 <div class="linkage1"></div>
 
@@ -39,60 +37,40 @@
   "size": "default",
   "items": [
     {
-      "label": "标题",
-      "component": "input",
+      "label": "评分",
+      "component": "Rate",
       "props": {
+        "max": 5,
+        "allow-half": true
+      },
+      "onlyId": "form-Lx4g",
+      "name": "rate",
+      "style": {},
+      "required": true
+    },
+    {
+      "label": "差评原因",
+      "component": "Textarea",
+      "props": {
+        "autocomplete": "off",
+        "showWordLimit": true,
+        "type": "textarea",
+        "autosize": {
+          "minRows": 4,
+          "maxRows": 999
+        },
         "placeholder": "请输入..."
       },
-      "onlyId": "form-JPzT",
-      "name": "title"
-    },
-    {
-      "label": "类型",
-      "component": "select",
-      "props": {
-        "mode": "static",
-        "options": [
-          {
-            "label": "存草稿",
-            "value": "1"
-          },
-          {
-            "label": "发布一条",
-            "value": "2"
-          },
-          {
-            "label": "发布多条",
-            "value": "3"
-          }
-        ],
-        "placeholder": "请选择...",
-        "labelKey": "label",
-        "valueKey": "value"
-      },
-      "onlyId": "form-2ZCi",
-      "name": "type",
-      "hidden": "{{!$values.title}}"
-    },
-    {
-      "label": "数量",
-      "component": "inputNumber",
-      "onlyId": "form-9R9B",
-      "name": "count",
-      "props": {
-        "min": 1,
-        "max": 9999,
-        "step": 1,
-        "disabled": "{{$values.type!=='3'}}"
-      },
-      "initialValue": 1
+      "onlyId": "form-XyJs",
+      "name": "reason",
+      "style": {},
+      "hidden": "{{$values.rate>=3 || !$values.rate}}" //大于等于3分时隐藏，未评分时也要隐藏
     }
   ]
 }
 ```
 
 hidden、disabled本应该是静态的布尔值。这里我们通过插值表达式，就能根据其他字段的值动态改变。
-
 
 ### change配置
 
@@ -102,8 +80,6 @@ change是一个数组，数组每一项是要联动改变的字段值。target�
 
 配置了change，就会在这个字段的值改变时，才会触发change联动
 
-
-
 <br/>
 
 #### 举个栗子1
@@ -111,7 +87,7 @@ change是一个数组，数组每一项是要联动改变的字段值。target�
 <div class="linkage2"></div>
 
 ```json
- {
+{
   "labelWidth": 150,
   "labelAlign": "right",
   "size": "default",
@@ -155,7 +131,6 @@ change是一个数组，数组每一项是要联动改变的字段值。target�
     }
   ]
 }
-
 ```
 
 <br/>
@@ -164,11 +139,10 @@ change是一个数组，数组每一项是要联动改变的字段值。target�
 
 一些场景需要根据已选值的数据源中取某个字段，再给其他字段作为值，这就可以用上 **$selectData** 了
 
-
 <div class="linkage3"></div>
 
 ```json
- {
+{
   "labelWidth": 150,
   "labelAlign": "right",
   "size": "default",
@@ -224,6 +198,4 @@ change是一个数组，数组每一项是要联动改变的字段值。target�
     }
   ]
 }
-
-
 ```
