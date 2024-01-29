@@ -39,9 +39,7 @@ const deepParse = (prop, context) => {
     }, {})
   }
   if (isArray(prop)) {
-    return prop
-      .filter((item) => !templateParse(item.hidden, context))
-      .map((item) => deepParse(item, context))
+    return prop.map((item) => deepParse(item, context))
   }
 
   return prop

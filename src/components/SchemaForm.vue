@@ -29,6 +29,7 @@ import {
 import { ElForm, ElMessage } from 'element-plus'
 import { handleLinkages, deepParse } from '@/utils'
 import FormRender from './FormRender.vue'
+import { cloneDeep } from 'lodash'
 
 defineOptions({
   name: 'SchemaForm'
@@ -62,12 +63,15 @@ const emit = defineEmits(['update:modelValue', 'onSubmit', 'onChange'])
 
 const selectData = reactive({})
 
+const stateFormValues = ref({})
+
 const formValues = computed({
   get() {
-    return props.modelValue
+    return props.modelValue || stateFormValues.value
   },
-  set(val) {
-    emit('update:modelValue', val)
+  set(values) {
+    emit('update:modelValue', values)
+    stateFormValues.value = values
   }
 })
 
@@ -88,7 +92,7 @@ const formItems = computed(() => {
 const currentSchema = computed(() => props.schema)
 
 watch(
-  formValues,
+  () => cloneDeep(formValues.value),
   (newVal, oldVal) => {
     emit('onChange', newVal)
     handleLinkages({ newVal, oldVal, form: formValues, formItems: formItems.value })

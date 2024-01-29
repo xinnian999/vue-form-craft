@@ -19,8 +19,7 @@ defineOptions({
 })
 
 const props = defineProps({
-  schemaId: [String, Number],
-  schema: null
+  schemaId: [String, Number]
 })
 
 const formRef = ref(null)

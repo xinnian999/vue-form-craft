@@ -38,7 +38,7 @@
       <CanvasWrapper v-bind="thisProps" />
     </component>
 
-    <form-item v-else v-bind="thisProps" :props="checkProps(props)" design />
+    <form-item v-else v-bind="thisProps" :props="checkProps(props)" :hidden="false" design />
   </div>
 </template>
 
@@ -132,10 +132,6 @@ const checkProps = (props) => {
     left: 0;
     top: 0;
     border: 1px dashed #c0bdbd;
-  }
-
-  #form-item {
-    margin-bottom: 0;
   }
 
   .actions-left-top {

@@ -85,6 +85,13 @@ const useTemplate = (templateSchema) => {
   .list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    @media screen and (max-width: 1300px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media screen and (max-width: 800px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
     gap: 10px;
     width: 100%;
     padding-left: 0;

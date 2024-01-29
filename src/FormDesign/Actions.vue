@@ -152,11 +152,15 @@ const handleClear = () => {
 }
 </script>
 
-<style>
+<style scoped lang="less">
 .formDesign-actions {
-  padding: 10px;
-  text-align: right;
+  /* padding: 10px; */
+  margin-top: 10px;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  button {
+    margin-bottom: 10px;
+  }
 }
 </style>
