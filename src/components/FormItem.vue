@@ -47,7 +47,7 @@
 </template>
 
 <script setup lang="jsx">
-import { computed, defineProps, defineEmits, onBeforeMount, inject, watchEffect } from 'vue'
+import { computed, defineProps, defineEmits, onBeforeMount, inject, onMounted, nextTick } from 'vue'
 import { ElFormItem, ElTooltip } from 'element-plus'
 import { isString, pickBy } from 'lodash'
 import { isRegexString } from '@/utils'
@@ -134,15 +134,15 @@ const currentComponentConfig = computed(() => {
   return elements[currentComponent.value] || {}
 })
 
-// const notFormItemMarginBottom = computed(() => {
-//   if (thisProps.design || currentComponent.value === 'Title') {
-//     return '5px'
-//   }
-//   return '18px'
-// })
-
 onBeforeMount(() => {
-  if (!value.value && (thisProps.initialValue || thisProps.initialValue === 0)) {
+  // TODO:el-switch的modelValue提前赋值会引发未知BUG,暂时推到dom挂载后再赋值（但是表单重置会失效）
+  if (currentComponent.value === 'Switch') {
+    return nextTick(() => {
+      emit('update:modelValue', thisProps.initialValue)
+    })
+  }
+
+  if (thisProps.initialValue || thisProps.initialValue === 0) {
     emit('update:modelValue', thisProps.initialValue)
   }
 })

@@ -1,9 +1,9 @@
-import { ElSwitch } from 'element-plus'
+import Switch from './Switch.vue'
 import attr from './attr'
 
 export default {
   name: '开关',
-  component: ElSwitch,
+  component: Switch,
   icon: 'switch',
   type: 'basic',
   order: 8,

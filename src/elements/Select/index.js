@@ -1,11 +1,11 @@
-import Select from './Select.vue'
+import {ElSwitch} from 'element-plus'
 import attr from './attr'
 
 export default {
   name: '下拉选择框',
   icon: 'select',
   type: 'basic',
-  component: Select,
+  component: ElSwitch,
   order: 3,
   initialValues: {
     label: '下拉选择框',

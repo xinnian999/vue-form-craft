@@ -41,7 +41,11 @@ export default {
       },
       initialValue: 'default'
     },
-    { label: '隐藏必填星号', component: 'Switch', name: 'hideRequiredAsterisk' },
+    {
+      label: '隐藏必填星号',
+      component: 'Switch',
+      name: 'hideRequiredAsterisk'
+    },
     { label: 'label加粗', component: 'Switch', name: 'labelBold' }
   ]
 }
