@@ -100,13 +100,19 @@ const computeRules = computed(() => {
   }
 
   if (rules) {
-    const ruleParse = rules.map(({ type, message, trigger }) => {
+    const ruleParse = rules.map(({ type, message, trigger, customReg }) => {
       const ruleDef = {
         message,
         trigger
       }
       if (['email', 'url'].includes(type)) {
         return { ...ruleDef, type }
+      }
+      if (type === 'custom') {
+        return {
+          ...ruleDef,
+          pattern: customReg
+        }
       }
       if (isRegexString(type)) {
         return {
