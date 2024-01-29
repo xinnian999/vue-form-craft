@@ -1,11 +1,11 @@
 <template>
   <div class="formDesign-actions">
-    <div>
+    <div class="formDesign-actions-left">
       <el-button size="small" @click="handlePreviewExec">预览JSON脚本</el-button>
       <el-button size="small" @click="handlePreviewVue">生成VUE代码</el-button>
       <el-button size="small" type="primary" @click="handlePreviewForm">预览表单</el-button>
     </div>
-    <div>
+    <div class="formDesign-actions-right">
       <el-button size="small" type="danger" @click="handleClear">清空</el-button>
       <el-button size="small" @click="handleSave" type="primary">保存</el-button>
     </div>
@@ -64,6 +64,7 @@
           height="400px"
           title="联动变量"
           description="实时预览表单的联动变量，调试联动"
+          mode="dialog"
         />
       </template>
     </el-dialog>
@@ -72,7 +73,7 @@
 
 <script setup lang="jsx">
 import { ref, computed, inject, defineProps } from 'vue'
-import { ElButton, ElDialog } from 'element-plus'
+import { ElButton, ElDialog, ElSwitch } from 'element-plus'
 import JsonEditorVue from 'json-editor-vue3'
 import { SchemaForm } from '@/components'
 import { changeItems } from '@/utils'
@@ -159,8 +160,11 @@ const handleClear = () => {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  button {
-    margin-bottom: 10px;
+  .formDesign-actions-left,
+  .formDesign-actions-right {
+    button {
+      margin-bottom: 10px;
+    }
   }
 }
 </style>

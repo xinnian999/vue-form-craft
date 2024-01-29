@@ -16,11 +16,10 @@ export default [
         props: {
           mode: 'static',
           options: [
-            { label: '弹窗', value: 'dialog' },
-            { label: '直接显示', value: 'direct' }
+            { label: '直接显示', value: 'direct' },
+            { label: '弹窗', value: 'dialog' }
           ]
-        },
-        initialValue: 'dialog'
+        }
       }
     ]
   },

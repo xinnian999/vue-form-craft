@@ -77,16 +77,13 @@ const formValues = computed({
 
 const context = computed(() => ({
   $values: formValues.value,
-  $form: formValues.value,
   $selectData: selectData,
   $utils: {},
   ...props.schemaContext
 }))
 
 // 转换为动态配置
-const formItems = computed(() => {
-  return deepParse(props.schema.items, context.value)
-})
+const formItems = computed(() => deepParse(props.schema.items, context.value))
 
 // 保证schema的响应式
 const currentSchema = computed(() => props.schema)

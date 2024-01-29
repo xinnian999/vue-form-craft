@@ -9,9 +9,9 @@
         v-model="json"
         currentMode="code"
         :modeList="['text', 'view', 'tree', 'code', 'form']"
-        :options="{ search: true, history: true }"
+        :options="{ search: false, history: false }"
         language="zh"
-        :style="{ height }"
+        :style="{ height: '60vh' }"
       />
     </el-dialog>
   </template>
@@ -20,9 +20,10 @@
     <json-editor-vue
       class="editor-direct"
       v-model="json"
+      :key="key"
       currentMode="code"
       :modeList="['text', 'view', 'tree', 'code', 'form']"
-      :options="{ search: true, history: true }"
+      :options="{ search: false, history: false }"
       language="zh"
       :style="{ height }"
     />
@@ -30,7 +31,7 @@
 </template>
 
 <script setup lang="jsx">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import JsonEditorVue from 'json-editor-vue3'
 import { ElButton, ElDialog } from 'element-plus'
 
@@ -43,7 +44,7 @@ const props = defineProps({
   },
   mode: {
     type: String,
-    default: 'dialog'
+    default: 'direct'
   },
   height: null,
   description: String
@@ -53,27 +54,24 @@ const emits = defineEmits(['update:modelValue'])
 
 const json = computed({
   get() {
-    const { name, modelValue } = props
-    if (name) {
-      return modelValue ? { [name]: modelValue } : { [name]: [] }
-    }
     return props.modelValue
   },
   set(val) {
-    const { name } = props
-    if (name) {
-      emits('update:modelValue', val[props.name])
-    } else {
-      emits('update:modelValue', val)
-    }
+    emits('update:modelValue', val)
   }
 })
 
 const execVisible = ref(false)
 
+const key = ref(null)
+
 const handlePreviewExec = () => {
   execVisible.value = true
 }
+
+onMounted(() => {
+  key.value = 'initialValue'
+})
 </script>
 
 <style>
@@ -88,5 +86,15 @@ const handlePreviewExec = () => {
 
 .editor-dialog {
   width: 100%;
+}
+
+.jsoneditor-undo,
+.jsoneditor-redo,
+.jsoneditor-poweredBy,
+.jsoneditor-sort {
+  display: none;
+}
+.full-screen {
+  right: 10px !important;
 }
 </style>

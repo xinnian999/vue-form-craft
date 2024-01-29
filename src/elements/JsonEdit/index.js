@@ -8,5 +8,5 @@ export default {
   type: 'basic',
   order: 14,
   attr,
-  initialValues: { label: 'JSON编辑器', component: 'JsonEdit' }
+  initialValues: { label: 'JSON编辑器', component: 'JsonEdit', props: { mode: 'direct' } }
 }

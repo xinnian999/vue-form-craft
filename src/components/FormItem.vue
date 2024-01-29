@@ -1,12 +1,6 @@
 <template>
   <template v-if="!hidden">
-    <div
-      v-if="currentComponentConfig.isNotFormItem"
-      :style="{
-        marginBottom: design ? 0 : '18px'
-      }"
-      class="notFormItem"
-    >
+    <div v-if="currentComponentConfig.isNotFormItem" class="notFormItem">
       <component :is="currentComponentConfig.component" v-bind="props">
         <template
           v-if="currentComponentConfig.isWrapper || currentComponentConfig.isDefaultWrapper"
@@ -25,7 +19,7 @@
     <el-form-item
       v-else
       id="form-item"
-      :style="{ ...style, marginBottom: design ? 0 : '18px' }"
+      :style="{ marginBottom: design ? 0 : '18px', ...style }"
       :key="name"
       :prop="prop || name"
       :label-width="hideLabel ? '0' : schema.labelWidth"
@@ -45,15 +39,15 @@
 
       <component
         :is="currentComponentConfig.component"
-        v-model="value"
         v-bind="pickBy({ ...props, name, children }, Boolean)"
+        v-model="value"
       />
     </el-form-item>
   </template>
 </template>
 
 <script setup lang="jsx">
-import { computed, defineProps, defineEmits, onBeforeMount, inject } from 'vue'
+import { computed, defineProps, defineEmits, onBeforeMount, inject, watchEffect } from 'vue'
 import { ElFormItem, ElTooltip } from 'element-plus'
 import { isString, pickBy } from 'lodash'
 import { isRegexString } from '@/utils'
@@ -140,6 +134,13 @@ const currentComponentConfig = computed(() => {
   return elements[currentComponent.value] || {}
 })
 
+// const notFormItemMarginBottom = computed(() => {
+//   if (thisProps.design || currentComponent.value === 'Title') {
+//     return '5px'
+//   }
+//   return '18px'
+// })
+
 onBeforeMount(() => {
   if (!value.value && (thisProps.initialValue || thisProps.initialValue === 0)) {
     emit('update:modelValue', thisProps.initialValue)
@@ -161,5 +162,6 @@ onBeforeMount(() => {
 }
 
 .notFormItem {
+  margin-bottom: 18px;
 }
 </style>
