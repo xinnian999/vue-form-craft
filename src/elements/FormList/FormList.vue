@@ -5,7 +5,7 @@
         <div class="list-item-content">
           <el-space>
             <form-item
-              v-for="field in children"
+              v-for="field in fields(index)"
               v-model="item[field.name]"
               v-bind="field"
               :key="field.label"
@@ -44,7 +44,7 @@
           </div>
         </template>
         <form-item
-          v-for="field in children"
+          v-for="field in fields(index)"
           v-model="item[field.name]"
           v-bind="field"
           :key="field.label"
@@ -95,6 +95,7 @@
 import { computed, defineProps, defineEmits, watch } from 'vue'
 import { ElFormItem, ElSpace, ElButton, ElCard, ElTableColumn, ElTable } from 'element-plus'
 import { FormItem } from '@/components'
+import { deepParse } from '@/utils'
 
 const props = defineProps({
   modelValue: Array,
@@ -135,6 +136,8 @@ const list = computed(() => {
   return props.modelValue || []
 })
 
+const fields = computed(() => (index) => deepParse(props.children, { $item: list.value[index] }))
+
 const isMax = computed(() => {
   return list.value.length >= props.maxLines
 })
@@ -154,7 +157,7 @@ const handleReduceItem = (index) => {
 const formatter = (item, data, index) => {
   return (
     <FormItem
-      {...item}
+      {...deepParse(item, { $item: list.value[index] })}
       hideLabel
       modelValue={data[item.name]}
       onUpdate:modelValue={(newValue) => (data[item.name] = newValue)}

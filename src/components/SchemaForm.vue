@@ -91,7 +91,7 @@ watch(
   context,
   (newVal) => {
     formItems.value = deepParse(props.schema.items, newVal)
-    console.log(newVal)
+    // console.log(newVal)
   },
   { deep: true, immediate: true }
 )
