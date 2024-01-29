@@ -92,7 +92,7 @@
 </template>
 
 <script setup lang="jsx">
-import { computed, defineProps, defineEmits } from 'vue'
+import { computed, defineProps, defineEmits, watch } from 'vue'
 import { ElFormItem, ElSpace, ElButton, ElCard, ElTableColumn, ElTable } from 'element-plus'
 import { FormItem } from '@/components'
 
@@ -163,6 +163,16 @@ const formatter = (item, data, index) => {
     />
   )
 }
+
+//为了触发数组深度监听
+// watch(
+//   list,
+//   (newVal) => {
+//     // console.log(newVal)
+//     emit('update:modelValue', newVal)
+//   },
+//   { deep: true }
+// )
 </script>
 
 <style lang="less">

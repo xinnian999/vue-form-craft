@@ -42,16 +42,15 @@ export default [
         onlyId: 'form-3L0P',
         name: 'type'
       },
-      {
-        label: '自定义正则',
-        component: 'Input',
-        props: {
-          placeholder: '请输入正则表达式'
-        },
-        onlyId: 'form-Wdb2Reg',
-        name: 'customReg',
-        hidden: '{{console.log($index) }}'
-      },
+      // {
+      //   label: '自定义正则',
+      //   component: 'Input',
+      //   props: {
+      //     placeholder: '请输入正则表达式'
+      //   },
+      //   onlyId: 'form-Wdb2Reg',
+      //   name: 'customReg'
+      // },
       {
         label: '提示语',
         component: 'Input',

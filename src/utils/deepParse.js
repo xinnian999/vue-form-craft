@@ -12,7 +12,7 @@ const templateParse = (str, context) => {
 
       return parse(...Object.values(context))
     } catch (e) {
-      console.log(str, '模板转换错误：', e)
+      // console.log(str, '模板转换错误：', e)
       return str
     }
   } else {
@@ -27,12 +27,8 @@ const deepParse = (prop, context) => {
   if (isPlainObject(prop)) {
     return Object.keys(prop).reduce((all, key) => {
       const extendContext = context
-      if (prop.name) {
+      if (prop.name && context.$values) {
         extendContext.$val = context.$values[prop.name]
-        if (prop.component === 'FormList') {
-          // extendContext.$item=context.$values[prop.name]
-          // console.log(context.$values[prop.name])
-        }
       }
 
       return { ...all, [key]: deepParse(prop[key], context) }

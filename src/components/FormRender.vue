@@ -25,15 +25,15 @@ const emit = defineEmits(['update:modelValue'])
 const formValues = computed(() => {
   return new Proxy(props.modelValue || {}, {
     set(target, key, value) {
-      //字段值为对象时，需要与上一次值深度合并（itemGroup）
-      emit(
-        'update:modelValue',
-        mergeWith(target, { [key]: value }, (objValue, srcValue) => {
-          if (Array.isArray(srcValue)) {
-            return srcValue
-          }
-        })
-      )
+      //字段值为对象时，需要与上一次值深度合并（itemGroup）,数组不合并
+      const mergeValue = mergeWith(target, { [key]: value }, (objValue, srcValue) => {
+        if (Array.isArray(srcValue)) {
+          return srcValue
+        }
+      })
+
+      // console.log(mergeValue)
+      emit('update:modelValue', mergeValue)
       return true
     }
   })

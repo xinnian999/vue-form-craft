@@ -82,14 +82,19 @@ const context = computed(() => ({
   ...props.schemaContext
 }))
 
-// 转换为动态配置
-const formItems = computed(() => {
-  // console.log(context.value)
-  return deepParse(props.schema.items, context.value)
-})
-
 // 保证schema的响应式
 const currentSchema = computed(() => props.schema)
+
+const formItems = ref([])
+
+watch(
+  context,
+  (newVal) => {
+    formItems.value = deepParse(props.schema.items, newVal)
+    console.log(newVal)
+  },
+  { deep: true, immediate: true }
+)
 
 watch(
   () => cloneDeep(formValues.value),
