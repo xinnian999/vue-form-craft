@@ -26,20 +26,22 @@ const deepParse = (prop, context) => {
   }
   if (isPlainObject(prop)) {
     return Object.keys(prop).reduce((all, key) => {
+      const extendContext = context
       if (prop.name) {
-        return {
-          ...all,
-          [key]: deepParse(prop[key], {
-            ...context,
-            $val: context.$values[prop.name]
-          })
+        extendContext.$val = context.$values[prop.name]
+        if (prop.component === 'FormList') {
+          // extendContext.$item=context.$values[prop.name]
+          // console.log(context.$values[prop.name])
         }
       }
+
       return { ...all, [key]: deepParse(prop[key], context) }
     }, {})
   }
   if (isArray(prop)) {
-    return prop.map((item) => deepParse(item, context))
+    return prop.map((item) => {
+      return deepParse(item, context)
+    })
   }
 
   return prop

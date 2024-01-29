@@ -6,6 +6,7 @@ export default [
   {
     label: '校验规则',
     component: 'FormList',
+    name: 'rules',
     children: [
       {
         label: '类型',
@@ -24,16 +25,14 @@ export default [
             {
               label: '手机号码',
               value: '^1[3456789]\\d{9}$'
-            }
-          ],
-          columns: [
-            {
-              title: 'label',
-              dataIndex: 'label'
             },
             {
-              title: 'value',
-              dataIndex: 'value'
+              label: '网址',
+              value: 'url'
+            },
+            {
+              label: '自定义正则',
+              value: 'custom'
             }
           ],
           placeholder: '请选择...',
@@ -42,6 +41,16 @@ export default [
         },
         onlyId: 'form-3L0P',
         name: 'type'
+      },
+      {
+        label: '自定义正则',
+        component: 'Input',
+        props: {
+          placeholder: '请输入正则表达式'
+        },
+        onlyId: 'form-Wdb2Reg',
+        name: 'customReg',
+        hidden: '{{console.log($index) }}'
       },
       {
         label: '提示语',
@@ -76,7 +85,6 @@ export default [
       }
     ],
     onlyId: 'form-89tI',
-    name: 'rules',
     props: {
       mode: 'card'
     }

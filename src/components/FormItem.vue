@@ -105,7 +105,7 @@ const computeRules = computed(() => {
         message,
         trigger
       }
-      if (['email'].includes(type)) {
+      if (['email', 'url'].includes(type)) {
         return { ...ruleDef, type }
       }
       if (isRegexString(type)) {

@@ -83,7 +83,10 @@ const context = computed(() => ({
 }))
 
 // 转换为动态配置
-const formItems = computed(() => deepParse(props.schema.items, context.value))
+const formItems = computed(() => {
+  // console.log(context.value)
+  return deepParse(props.schema.items, context.value)
+})
 
 // 保证schema的响应式
 const currentSchema = computed(() => props.schema)

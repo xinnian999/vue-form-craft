@@ -1,18 +1,14 @@
 <template>
   <el-select
     v-model="selectVal"
-    :placeholder="placeholder"
+    v-bind="$attrs"
     @change="selectChange"
-    :disabled="disabled"
     :multiple="multiple"
-    :size="size"
-    :style="style"
     clearable
     filterable
     ref="selectRef"
     v-selectLoadMore:[popperClass]="fetchData"
     :popper-class="popperClass"
-    :class="props.class"
   >
     <template #empty v-if="tableDrop">
       <el-table
@@ -68,14 +64,6 @@ const props = defineProps({
     type: Array,
     default: () => []
   },
-  placeholder: {
-    type: String,
-    default: '请选择'
-  },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
   multiple: {
     type: Boolean,
     default: false
@@ -98,17 +86,11 @@ const props = defineProps({
   },
   api: Object,
   name: String,
-  size: {
-    type: String,
-    default: 'default'
-  },
-  style: null,
   filterKey: { default: 'filter', type: String },
   formatter: Function,
   sort: Boolean,
   tableDrop: Boolean,
-  columns: { default: () => [], type: Array },
-  class: String
+  columns: { default: () => [], type: Array }
 })
 
 const emits = defineEmits(['update:modelValue', 'onChangeSelect'])

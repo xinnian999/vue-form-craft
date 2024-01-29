@@ -132,13 +132,7 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue'])
 
 const list = computed(() => {
-  return new Proxy(props.modelValue || [], {
-    set(target, key, value) {
-      target[key] = value
-      emit('update:modelValue', target)
-      return true
-    }
-  })
+  return props.modelValue || []
 })
 
 const isMax = computed(() => {
