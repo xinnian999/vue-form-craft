@@ -6,7 +6,7 @@ import * as Directives from '@/directive'
 import { MdPreview, MdCatalog, MdEditor } from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
 import 'element-plus/dist/index.css'
-import '@arco-design/web-vue/dist/arco.css'
+import { ElForm } from 'element-plus'
 
 const modules = import.meta.glob('@/elements/*/index.js', { eager: true })
 const elements = {}
@@ -30,10 +30,17 @@ const components = [
 ] // 全局组件列表
 
 const install = function (app, options = {}) {
-  const { request = axios, getSchema } = options
+  const { request = axios, getSchema, customElements = {} } = options
+  const mergeElements = {}
+  Object.entries(elements).forEach(([key, value]) => {
+    mergeElements[key] = { ...value, ...customElements[key] }
+  })
+
   app.provide('$request', request)
   app.provide('$getSchema', getSchema)
-  app.provide('$elements', elements)
+  app.provide('$elements', mergeElements)
+  app.provide('$customForm', { component: ElForm })
+
   // 注册组件
   components.forEach((component) => {
     app.component(component.name, component)

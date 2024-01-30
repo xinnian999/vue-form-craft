@@ -1,5 +1,5 @@
 <template>
-  <el-form
+  <!-- <el-form
     :model="formValues"
     :label-position="schema.labelAlign"
     :size="schema.size"
@@ -11,7 +11,22 @@
     id="SchemaForm"
   >
     <FormRender v-model="formValues" :formItems="formItems" />
-  </el-form>
+  </el-form> -->
+
+  <component
+    :is="customForm.component"
+    :model="formValues"
+    :label-position="schema.labelAlign"
+    :size="schema.size"
+    :disabled="disabled"
+    :hide-required-asterisk="schema.hideRequiredAsterisk"
+    ref="formRef"
+    :style="style"
+    :class="props.class"
+    id="SchemaForm"
+  >
+    <FormRender v-model="formValues" :formItems="formItems" />
+  </component>
 </template>
 
 <script setup lang="jsx">
@@ -24,7 +39,8 @@ import {
   reactive,
   provide,
   watch,
-  defineOptions
+  defineOptions,
+  inject
 } from 'vue'
 import { ElForm, ElMessage } from 'element-plus'
 import { handleLinkages, deepParse } from '@/utils'
@@ -60,6 +76,8 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['update:modelValue', 'onSubmit', 'onChange'])
+
+const customForm = inject('$customForm')
 
 const selectData = reactive({})
 

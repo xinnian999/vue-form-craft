@@ -1,10 +1,9 @@
-// import { ElInput } from 'element-plus'
-import { Input } from '@arco-design/web-vue'
+import { ElInput } from 'element-plus'
 import attr from './attr'
 
 export default {
   name: '单行文本',
-  component: Input,
+  component: ElInput,
   icon: 'input',
   type: 'basic',
   order: 1,
