@@ -13,7 +13,8 @@ export default {
     props: {
       autocomplete: 'off',
       showWordLimit: true,
-      type: 'text'
+      type: 'text',
+      placeholder: '请输入...'
     }
   },
   attr

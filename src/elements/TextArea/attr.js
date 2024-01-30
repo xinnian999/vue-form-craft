@@ -9,7 +9,6 @@ export default [
     name: 'props',
     children: [
       ...props,
-      { label: '是否禁用', component: 'Switch', name: 'disabled' },
       {
         label: '占位提示',
         component: 'Input',

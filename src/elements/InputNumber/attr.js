@@ -13,7 +13,6 @@ export default [
     name: 'props',
     children: [
       ...props,
-      { label: '是否禁用', component: 'Switch', name: 'disabled' },
       {
         label: '按钮位置',
         component: 'Radio',

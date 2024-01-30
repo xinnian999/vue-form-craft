@@ -9,7 +9,6 @@ export default [
     name: 'props',
     children: [
       ...props,
-      { label: '是否禁用', component: 'Switch', name: 'disabled' },
       {
         label: '自动选中第一项',
         component: 'Switch',

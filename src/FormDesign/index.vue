@@ -80,7 +80,7 @@ const current = computed({
     const set = (items) => {
       return items.map((item) => {
         if (item.onlyId === element.onlyId) {
-          return item
+          return element
         }
         if (item.children) {
           return { ...item, children: set(item.children) }
@@ -88,7 +88,6 @@ const current = computed({
         return item
       })
     }
-
     currentSchema.value = { ...currentSchema.value, items: set(currentSchema.value.items) }
   }
 })

@@ -15,7 +15,7 @@ export default {
       label: 'props',
       component: 'ItemGroup',
       name: 'props',
-      children: [...props, { label: '是否禁用', component: 'Switch', name: 'disabled' }]
+      children: [...props]
     },
     ...linkageAttr
   ]

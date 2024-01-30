@@ -6,7 +6,7 @@ import * as Directives from '@/directive'
 import { MdPreview, MdCatalog, MdEditor } from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
 import 'element-plus/dist/index.css'
-import { ElForm } from 'element-plus'
+import { props } from '@/elements/commonAttr'
 
 const modules = import.meta.glob('@/elements/*/index.js', { eager: true })
 const elements = {}
@@ -33,13 +33,27 @@ const install = function (app, options = {}) {
   const { request = axios, getSchema, customElements = {} } = options
   const mergeElements = {}
   Object.entries(elements).forEach(([key, value]) => {
-    mergeElements[key] = { ...value, ...customElements[key] }
+    const customData = customElements[key]
+    if (customData) {
+      return (mergeElements[key] = {
+        ...value,
+        component: customData.component,
+        attr: customData.propAttrs
+          ? value.attr.map((item) =>
+              item.name === 'props'
+                ? { ...item, children: [...props, ...customData.propAttrs] }
+                : item
+            )
+          : value.attr
+      })
+    }
+
+    return (mergeElements[key] = value)
   })
 
   app.provide('$request', request)
   app.provide('$getSchema', getSchema)
   app.provide('$elements', mergeElements)
-  app.provide('$customForm', { component: ElForm })
 
   // 注册组件
   components.forEach((component) => {

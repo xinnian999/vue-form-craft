@@ -41,6 +41,7 @@
         :is="currentComponentConfig.component"
         v-bind="pickBy({ ...props, name, children }, Boolean)"
         v-model="value"
+        :size="schema.size"
       />
     </el-form-item>
   </template>

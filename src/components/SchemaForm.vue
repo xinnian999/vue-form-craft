@@ -1,5 +1,5 @@
 <template>
-  <!-- <el-form
+  <el-form
     :model="formValues"
     :label-position="schema.labelAlign"
     :size="schema.size"
@@ -11,22 +11,7 @@
     id="SchemaForm"
   >
     <FormRender v-model="formValues" :formItems="formItems" />
-  </el-form> -->
-
-  <component
-    :is="customForm.component"
-    :model="formValues"
-    :label-position="schema.labelAlign"
-    :size="schema.size"
-    :disabled="disabled"
-    :hide-required-asterisk="schema.hideRequiredAsterisk"
-    ref="formRef"
-    :style="style"
-    :class="props.class"
-    id="SchemaForm"
-  >
-    <FormRender v-model="formValues" :formItems="formItems" />
-  </component>
+  </el-form>
 </template>
 
 <script setup lang="jsx">
@@ -77,8 +62,6 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue', 'onSubmit', 'onChange'])
 
-const customForm = inject('$customForm')
-
 const selectData = reactive({})
 
 const stateFormValues = ref({})
@@ -109,7 +92,6 @@ watch(
   context,
   (newVal) => {
     formItems.value = deepParse(props.schema.items, newVal)
-    // console.log(newVal)
   },
   { deep: true, immediate: true }
 )

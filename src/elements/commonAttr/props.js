@@ -8,5 +8,6 @@ export default [
       type: 'h4'
     }
   },
-  { label: '自定义class', component: 'Input', name: 'class' }
+  { label: '自定义class', component: 'Input', name: 'class' },
+  { label: '是否禁用', component: 'Switch', name: 'disabled' }
 ]

@@ -13,7 +13,6 @@ export default [
     name: 'props',
     children: [
       ...props,
-      { label: '是否禁用', component: 'Switch', name: 'disabled' },
       { label: '打开时描述', component: 'Input', name: 'active-text' },
       { label: '关闭时描述', component: 'Input', name: 'inactive-text' },
       {
