@@ -7,16 +7,17 @@ import { MdPreview, MdCatalog, MdEditor } from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
 import 'element-plus/dist/index.css'
 import { props } from '@/elements/commonAttr'
+import * as elements from '@/elements'
 
-const modules = import.meta.glob('@/elements/*/index.js', { eager: true })
-const elements = {}
-for (const path in modules) {
-  const data = modules[path].default
+// const modules = import.meta.glob('@/elements/*/index.js', { eager: true })
+// const elements = {}
+// for (const path in modules) {
+//   const data = modules[path].default
 
-  if (data) {
-    elements[data.initialValues.component] = data
-  }
-}
+//   if (data) {
+//     elements[data.initialValues.component] = data
+//   }
+// }
 
 const components = [
   SchemaForm,

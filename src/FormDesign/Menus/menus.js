@@ -1,8 +1,7 @@
-const modules = import.meta.glob('@/elements/*/index.js', { eager: true })
+import * as elements from '@/elements'
 
 const getChildren = (type) => {
-  return Object.values(modules)
-    .map((item) => item.default)
+  return Object.values(elements)
     .filter((item) => item?.type === type)
     .sort((a, b) => {
       return a.order - b.order
