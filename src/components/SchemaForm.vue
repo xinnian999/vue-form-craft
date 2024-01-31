@@ -24,8 +24,7 @@ import {
   reactive,
   provide,
   watch,
-  defineOptions,
-  inject
+  defineOptions
 } from 'vue'
 import { ElForm, ElMessage } from 'element-plus'
 import { handleLinkages, deepParse } from '@/utils'
@@ -86,15 +85,7 @@ const context = computed(() => ({
 // 保证schema的响应式
 const currentSchema = computed(() => props.schema)
 
-const formItems = ref([])
-
-watch(
-  context,
-  (newVal) => {
-    formItems.value = deepParse(props.schema.items, newVal)
-  },
-  { deep: true, immediate: true }
-)
+const formItems = computed(() => deepParse(currentSchema.value.items, context.value))
 
 watch(
   () => cloneDeep(formValues.value),

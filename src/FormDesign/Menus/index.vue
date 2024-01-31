@@ -61,7 +61,7 @@ const useTemplate = (templateSchema) => {
   .template-btn {
     position: absolute;
     right: 10px;
-    top: 20px;
+    top: 15px;
   }
 
   .template-drawer {
