@@ -9,6 +9,7 @@ export default [
       { label: '标题', component: 'Input', name: 'title' },
       { label: '描述', component: 'Textarea', name: 'description' },
       { label: '是否可关闭', component: 'Switch', name: 'closable' },
+      { label: '显示图标', component: 'Switch', name: 'show-icon' },
       {
         label: '类型',
         component: 'Radio',

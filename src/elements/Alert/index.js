@@ -16,7 +16,8 @@ export default {
       type: 'info',
       effect: 'light',
       description: '这是一个描述',
-      closable: true
+      closable: true,
+      'show-icon': true
     }
   }
 }
