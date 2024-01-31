@@ -58,15 +58,14 @@ const handleSubmit = () => {
 
 ## Props
 
-| 参数名        | 类型       | 默认值  | 是否必传 | 描述                                                        |
-| ------------- | ---------- | ------- | -------- | ----------------------------------------------------------- |
-| schema        | object     | --      | No       | 表单Schema配置，纯JSON，用于描述表单结构                    |
-| v-model       | object ref | ref({}) | No       | 表单数据对象，用于控制表单值，双向绑定                      |
-| schemaContext | object     | {}      | No       | 自定义的联动变量                                            |
-| disabled      | Boolean    | false   | No       | 禁用所有表单项                                              |
-| style         | any        | ———     | No       | 渲染器的style                                               |
-| class         | any        | ———     | No       | 渲染器的class                                               |
-| schemaId      | String     | ———     | No       | 渲染器会根据这个id，远程获取schema。需提前配置getSchema方法 |
+| 参数名        | 类型       | 默认值  | 是否必传 | 描述                                     |
+| ------------- | ---------- | ------- | -------- | ---------------------------------------- |
+| v-model       | object ref | ref({}) | No       | 表单数据对象，用于控制表单值，双向绑定   |
+| schema        | object     | --      | No       | 表单Schema配置，纯JSON，用于描述表单结构 |
+| schemaContext | object     | {}      | No       | 自定义的联动变量                         |
+| disabled      | Boolean    | false   | No       | 禁用所有表单项                           |
+| style         | any        | ———     | No       | 渲染器的style                            |
+| class         | any        | ———     | No       | 渲染器的class                            |
 
 
 ## Events
@@ -97,7 +96,7 @@ const handleSubmit = () => {
 
 提交表单，会先触发表单的校验，校验通过才会执行onSubmit回调。下面是两个示例：
 
->示例一：通过ref去调用组件暴露的submit方法，好处是可以让你指定任何元素去触发表单提交
+>示例一：通过ref去调用组件暴露的submit方法
 ```vue
 <template>
   <schema-form :schema="schema" ref="formRef" />
@@ -143,13 +142,13 @@ const handleSubmit = () => {
     .then((values) => {
       alert(JSON.stringify(values))
     })
-    .catch((e) => console.log(e))
+    .catch((e) => console.log('表单校验不通过！',e))
 }
 </script>
 ```
 
 
->示例二：在schema配置一个按钮组件，它内置了触发表单提交功能，然后给表单传递onSubmit去处理提交逻辑就可以了，省去多写一个提交按钮的功夫
+>示例二：使用低代码按钮组件提交，通过onSubmit去处理提交逻辑
 ```vue
 <template>
   <schema-form :schema="schema" @onSubmit="onSubmit" />
