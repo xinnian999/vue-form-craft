@@ -3,7 +3,7 @@ import router from './router'
 // import VueFormCraft from '../dist/vue-form-craft.mjs'
 import VueFormCraft from './release'
 import { request } from '@/utils'
-import '@arco-design/web-vue/dist/arco.css'
+// import '@arco-design/web-vue/dist/arco.css'
 // import { Switch, Input, Textarea, InputNumber } from '@arco-design/web-vue'
 
 const render = (component, dom) => {
