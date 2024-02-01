@@ -149,7 +149,7 @@ onBeforeMount(() => {
     })
   }
 
-  if (thisProps.initialValue || thisProps.initialValue === 0) {
+  if ((!value.value && thisProps.initialValue) || thisProps.initialValue === 0) {
     emit('update:modelValue', thisProps.initialValue)
   }
 })
