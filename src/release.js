@@ -18,6 +18,12 @@ for (const path in modules) {
   }
 }
 
+const icons = import.meta.glob('@/icons/*.vue', { eager: true })
+
+const iconList = Object.entries(icons).map(([key, value]) => {
+  return key.match(/\/([^\/]+)\.vue$/)[1]
+})
+
 const components = [
   SchemaForm,
   FormDesign,
@@ -30,8 +36,15 @@ const components = [
 ] // 全局组件列表
 
 const install = function (app, options = {}) {
-  const { request = axios, getSchema, customElements = {} } = options
+  const {
+    request = axios,
+    getSchema,
+    customElements = {},
+    icon = { component: IconRender, propKey: 'name', iconList }
+  } = options
+
   const mergeElements = {}
+
   Object.entries(elements).forEach(([key, value]) => {
     const customData = customElements[key]
     if (customData) {
@@ -54,6 +67,7 @@ const install = function (app, options = {}) {
   app.provide('$request', request)
   app.provide('$getSchema', getSchema)
   app.provide('$elements', mergeElements)
+  app.provide('$icon', icon)
 
   // 注册组件
   components.forEach((component) => {

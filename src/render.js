@@ -23,6 +23,7 @@ const render = (component, dom) => {
       })
       return JSON.parse(data[0].formSchema)
     }
+    // icon: { component: IconRender, propKey: 'name' }
     // customElements: {
     //   Switch: {
     //     component: Switch,

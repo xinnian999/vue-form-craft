@@ -12,15 +12,9 @@
       </el-input>
     </div>
     <ul class="icon-list">
-      <el-tooltip
-        effect="dark"
-        :content="name"
-        placement="top"
-        v-for="{ name, icon } in data"
-        :key="name"
-      >
-        <li @click="handleSelect(name)">
-          <component class="icon" :is="icon"></component>
+      <el-tooltip effect="dark" :content="item" placement="top" v-for="item in data" :key="item">
+        <li @click="handleSelect(item)">
+          <component :is="component" :[propKey]="item"></component>
         </li>
       </el-tooltip>
     </ul>
@@ -29,24 +23,16 @@
 
 <script setup>
 import { ElDialog, ElTooltip, ElInput } from 'element-plus'
-import { ref, shallowRef, onBeforeMount, defineEmits, defineProps } from 'vue'
+import { ref, shallowRef, onBeforeMount, defineEmits, defineProps, inject } from 'vue'
 import { debounce } from 'lodash'
-
-const modules = import.meta.glob('@/icons/*.vue', { eager: true })
-
-const iconData = Object.entries(modules).map(([key, value]) => {
-  const name = key.match(/\/([^\/]+)\.vue$/)[1]
-  return {
-    name,
-    icon: value.default
-  }
-})
 
 defineProps({
   modelValue: String
 })
 
 const emits = defineEmits(['update:modelValue'])
+
+const { component, propKey, iconData } = inject('$icon')
 
 const visible = ref(false)
 
@@ -62,7 +48,8 @@ const handleSearch = debounce(() => {
   if (!q.value) {
     data.value = iconData
   }
-  data.value = iconData.filter((item) => item.name.includes(q.value))
+
+  data.value = iconData.filter((item) => item.includes(q.value))
 }, 700)
 
 const handleSelect = (name) => {
@@ -130,11 +117,6 @@ onBeforeMount(() => {
     text-align: center;
     line-height: 50px;
     font-size: 25px;
-  }
-  .icon {
-    width: 1em;
-    height: 1em;
-    fill: currentColor;
   }
 }
 
