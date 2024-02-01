@@ -1,6 +1,6 @@
 <template>
   <div class="container" @click="open">
-    <icon-render class="selected" v-if="modelValue" :name="modelValue" />
+    <component v-if="modelValue" class="selected" :is="component" :[propKey]="modelValue" />
     <icon-render class="un-selected" v-else name="add" />
   </div>
   <ElDialog v-model="visible" title="图标选择">
@@ -14,7 +14,7 @@
     <ul class="icon-list">
       <el-tooltip effect="dark" :content="item" placement="top" v-for="item in data" :key="item">
         <li @click="handleSelect(item)">
-          <component :is="component" :[propKey]="item"></component>
+          <component :is="component" :[propKey]="item" />
         </li>
       </el-tooltip>
     </ul>
@@ -32,7 +32,7 @@ defineProps({
 
 const emits = defineEmits(['update:modelValue'])
 
-const { component, propKey, iconData } = inject('$icon')
+const { component, propKey, iconList } = inject('$icon')
 
 const visible = ref(false)
 
@@ -46,10 +46,10 @@ const open = () => {
 
 const handleSearch = debounce(() => {
   if (!q.value) {
-    data.value = iconData
+    data.value = iconList
   }
 
-  data.value = iconData.filter((item) => item.includes(q.value))
+  data.value = iconList.filter((item) => item.includes(q.value))
 }, 700)
 
 const handleSelect = (name) => {
@@ -58,7 +58,7 @@ const handleSelect = (name) => {
 }
 
 onBeforeMount(() => {
-  data.value = iconData
+  data.value = iconList
 })
 </script>
 
