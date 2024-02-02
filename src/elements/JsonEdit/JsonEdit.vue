@@ -1,6 +1,6 @@
 <template>
   <template v-if="mode === 'dialog'">
-    <el-button @click="handlePreviewExec">{{ title }}</el-button>
+    <el-button @click="handlePreviewExec" :disabled="disabled">{{ title }}</el-button>
 
     <el-dialog v-model="execVisible" :title="title" width="70%" center destroy-on-close>
       <div>{{ description }}</div>
@@ -17,16 +17,18 @@
   </template>
 
   <template v-if="mode === 'direct'">
-    <json-editor-vue
-      class="editor-direct"
-      v-model="json"
-      :key="key"
-      currentMode="code"
-      :modeList="['text', 'view', 'tree', 'code', 'form']"
-      :options="{ search: false, history: false }"
-      language="zh"
-      :style="{ height }"
-    />
+    <Disabled :disabled="disabled" class="jsonEdit-disabled">
+      <json-editor-vue
+        class="editor-direct"
+        v-model="json"
+        :key="key"
+        currentMode="code"
+        :modeList="['text', 'view', 'tree', 'code', 'form']"
+        :options="{ search: false, history: false }"
+        language="zh"
+        :style="{ height }"
+      />
+    </Disabled>
   </template>
 </template>
 
@@ -34,6 +36,7 @@
 import { ref, computed, onMounted } from 'vue'
 import JsonEditorVue from 'json-editor-vue3'
 import { ElButton, ElDialog } from 'element-plus'
+import { Disabled } from '@/components'
 
 const props = defineProps({
   modelValue: {},
@@ -47,7 +50,8 @@ const props = defineProps({
     default: 'direct'
   },
   height: null,
-  description: String
+  description: String,
+  disabled: Boolean
 })
 
 const emits = defineEmits(['update:modelValue'])
@@ -75,11 +79,6 @@ onMounted(() => {
 </script>
 
 <style>
-/* .formDesign-actions {
-  padding: 10px;
-  text-align: right;
-} */
-
 .editor-direct {
   width: 100%;
 }
@@ -96,5 +95,9 @@ onMounted(() => {
 }
 .full-screen {
   right: 10px !important;
+}
+.jsonEdit-disabled {
+  width: 100%;
+  opacity: 0.7;
 }
 </style>

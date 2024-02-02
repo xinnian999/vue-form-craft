@@ -1,8 +1,11 @@
 <template>
-  <div class="container" @click="open" :class="{ disabled }">
-    <component v-if="modelValue" class="selected" :is="component" :[propKey]="modelValue" />
-    <icon-render class="un-selected" v-else name="add" />
-  </div>
+  <Disabled :disabled="disabled">
+    <div class="container" @click="open">
+      <component v-if="modelValue" class="selected" :is="component" :[propKey]="modelValue" />
+      <icon-render class="un-selected" v-else name="add" />
+    </div>
+  </Disabled>
+
   <ElDialog v-model="visible" title="图标选择">
     <div class="searchBar" @click="handleSearch">
       <el-input v-model="q" placeholder="输入关键词搜索" @input="handleSearch">
@@ -25,6 +28,7 @@
 import { ElDialog, ElTooltip, ElInput } from 'element-plus'
 import { ref, shallowRef, onBeforeMount, defineEmits, defineProps, inject } from 'vue'
 import { debounce } from 'lodash'
+import { Disabled } from '@/components'
 
 const props = defineProps({
   modelValue: String,
@@ -42,9 +46,6 @@ const q = ref('')
 const data = shallowRef([])
 
 const open = () => {
-  if (props.disabled) {
-    return
-  }
   visible.value = true
   q.value = ''
   data.value = iconList
@@ -91,13 +92,6 @@ onBeforeMount(() => {
   display: flex;
   &:hover {
     border-color: var(--el-color-primary);
-  }
-}
-.disabled {
-  cursor: not-allowed;
-  background-color: var(--el-disabled-bg-color);
-  &:hover {
-    border-color: var(--el-border-color);
   }
 }
 
