@@ -1,5 +1,5 @@
 <template>
-  <schema-form v-model="formValues" :schema="schema" ref="formRef" />
+  <schema-form v-model="formValues" :schema="schema" ref="formRef" disabled />
   <button @click="handleSubmit">提交</button>
 </template>
 
@@ -36,6 +36,13 @@ const schema = {
       },
       onlyId: 'form-D1x7',
       name: 'desc'
+    },
+    {
+      label: '图标选择器',
+      component: 'IconSelect',
+      props: {},
+      onlyId: 'form-MrlL',
+      name: 'p0rWAP'
     }
   ]
 }

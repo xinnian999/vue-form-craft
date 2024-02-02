@@ -42,6 +42,11 @@ export default {
       initialValue: 'default'
     },
     {
+      label: '禁用整个表单',
+      component: 'Switch',
+      name: 'disabled'
+    },
+    {
       label: '隐藏必填星号',
       component: 'Switch',
       name: 'hideRequiredAsterisk'

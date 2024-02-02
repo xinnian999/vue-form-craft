@@ -3,7 +3,7 @@
     :model="formValues"
     :label-position="schema.labelAlign"
     :size="schema.size"
-    :disabled="disabled"
+    :disabled="disabled || schema.disabled"
     :hide-required-asterisk="schema.hideRequiredAsterisk"
     ref="formRef"
     :style="style"
@@ -83,7 +83,7 @@ const context = computed(() => ({
 }))
 
 // 保证schema的响应式
-const currentSchema = computed(() => props.schema)
+const currentSchema = computed(() => ({ disabled: props.disabled, ...props.schema }))
 
 const formItems = computed(() => deepParse(currentSchema.value.items, context.value))
 

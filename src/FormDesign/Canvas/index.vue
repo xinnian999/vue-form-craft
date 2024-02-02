@@ -5,6 +5,7 @@
     :label-position="schema.labelAlign"
     :size="schema.size"
     :hide-required-asterisk="schema.hideRequiredAsterisk"
+    :disabled="schema.disabled"
   >
     <div class="tip" v-if="!list.length">
       <div class="ico">

@@ -12,7 +12,7 @@ export default {
   initialValues: {
     component: 'Divider',
     props: {
-      title: '提示信息'
+      title: '分割线'
     }
   }
 }

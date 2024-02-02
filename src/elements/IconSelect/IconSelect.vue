@@ -1,5 +1,5 @@
 <template>
-  <div class="container" @click="open">
+  <div class="container" @click="open" :class="{ disabled }">
     <component v-if="modelValue" class="selected" :is="component" :[propKey]="modelValue" />
     <icon-render class="un-selected" v-else name="add" />
   </div>
@@ -13,7 +13,7 @@
     </div>
     <ul class="icon-list">
       <el-tooltip effect="dark" :content="item" placement="top" v-for="item in data" :key="item">
-        <li @click="handleSelect(item)">
+        <li @click="handleSelect(item)" :class="{ active: modelValue === item }">
           <component :is="component" :[propKey]="item" />
         </li>
       </el-tooltip>
@@ -26,8 +26,9 @@ import { ElDialog, ElTooltip, ElInput } from 'element-plus'
 import { ref, shallowRef, onBeforeMount, defineEmits, defineProps, inject } from 'vue'
 import { debounce } from 'lodash'
 
-defineProps({
-  modelValue: String
+const props = defineProps({
+  modelValue: String,
+  disabled: Boolean
 })
 
 const emits = defineEmits(['update:modelValue'])
@@ -41,7 +42,12 @@ const q = ref('')
 const data = shallowRef([])
 
 const open = () => {
+  if (props.disabled) {
+    return
+  }
   visible.value = true
+  q.value = ''
+  data.value = iconList
 }
 
 const handleSearch = debounce(() => {
@@ -83,10 +89,16 @@ onBeforeMount(() => {
   color: #8c939d;
   //   line-height: 50px;
   display: flex;
+  &:hover {
+    border-color: var(--el-color-primary);
+  }
 }
-
-.container:hover {
-  border-color: var(--el-color-primary);
+.disabled {
+  cursor: not-allowed;
+  background-color: var(--el-disabled-bg-color);
+  &:hover {
+    border-color: var(--el-border-color);
+  }
 }
 
 .searchBar {
@@ -106,8 +118,8 @@ onBeforeMount(() => {
 
   li {
     &:hover {
-      border: 1px solid var(--el-color-primary);
-      color: var(--el-color-primary);
+      border: 1px solid var(--el-color-primary-light-3);
+      color: var(--el-color-primary-light-3);
       cursor: pointer;
     }
     border: 1px solid #eee;
@@ -117,6 +129,12 @@ onBeforeMount(() => {
     text-align: center;
     line-height: 50px;
     font-size: 25px;
+  }
+
+  .active {
+    border: 1px solid var(--el-color-primary);
+    color: var(--el-color-primary);
+    cursor: pointer;
   }
 }
 
