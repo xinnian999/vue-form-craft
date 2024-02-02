@@ -12,7 +12,6 @@ export default [
     component: 'ItemGroup',
     name: 'props',
     children: [
-      ...props,
       {
         label: '显示模式',
         component: 'Radio',

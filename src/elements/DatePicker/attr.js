@@ -11,12 +11,6 @@ export default [
       ...props,
       { label: '显示清除按钮', component: 'Switch', name: 'clearable' },
       {
-        label: '占位提示',
-        component: 'Input',
-        name: 'placeholder',
-        initialValue: '请输入...'
-      },
-      {
         label: '类型',
         component: 'Radio',
         name: 'type',

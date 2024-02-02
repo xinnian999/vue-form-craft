@@ -10,12 +10,6 @@ export default [
     children: [
       ...props,
       {
-        label: '占位提示',
-        component: 'Input',
-        name: 'placeholder',
-        initialValue: '请输入...'
-      },
-      {
         label: '最长字数',
         component: 'InputNumber',
         name: 'maxlength'

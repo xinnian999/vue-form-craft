@@ -12,7 +12,8 @@ export default {
     label: '多行文本',
     component: 'Textarea',
     props: {
-      autosize: { minRows: 4, maxRows: 999 }
+      autosize: { minRows: 4, maxRows: 999 },
+      placeholder: '请输入...'
     }
   },
   attr

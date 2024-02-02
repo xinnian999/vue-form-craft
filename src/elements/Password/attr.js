@@ -7,16 +7,7 @@ export default [
     label: 'props',
     component: 'ItemGroup',
     name: 'props',
-    children: [
-      ...props,
-      { label: '显示清除按钮', component: 'Switch', name: 'clearable' },
-      {
-        label: '占位提示',
-        component: 'Input',
-        name: 'placeholder',
-        initialValue: '请输入...'
-      }
-    ]
+    children: [...props, { label: '显示清除按钮', component: 'Switch', name: 'clearable' }]
   },
 
   ...linkageAttr

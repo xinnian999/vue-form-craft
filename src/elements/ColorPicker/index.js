@@ -7,7 +7,10 @@ export default {
   icon: 'colorPicker',
   type: 'basic',
   order: 9,
-  initialValues: { label: '颜色选择器', component: 'ColorPicker' },
+  initialValues: {
+    label: '颜色选择器',
+    component: 'ColorPicker'
+  },
   attr: [
     ...basic,
     { label: '初始值', component: 'ColorPicker', name: 'initialValue' },

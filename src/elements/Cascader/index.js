@@ -12,6 +12,7 @@ export default {
     label: '级联选择器',
     component: 'cascader',
     props: {
+      placeholder: '请选择...',
       mode: 'static',
       options: [
         {

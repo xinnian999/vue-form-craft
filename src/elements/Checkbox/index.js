@@ -11,6 +11,7 @@ export default {
     label: '多选框组',
     component: 'Checkbox',
     props: {
+      placeholder: '请选择...',
       mode: 'static',
       options: [
         { label: '选项1', value: 'value1' },

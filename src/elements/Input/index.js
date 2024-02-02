@@ -14,7 +14,7 @@ export default {
       autocomplete: 'off',
       showWordLimit: true,
       type: 'text',
-      placeholder: '请输入...'
+      placeholder: '请输入文本'
     }
   },
   attr

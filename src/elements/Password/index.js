@@ -10,7 +10,10 @@ export default {
   order: 3,
   initialValues: {
     label: '密码输入框',
-    component: 'Password'
+    component: 'Password',
+    props: {
+      placeholder: '请输入密码'
+    }
   },
   attr
 }

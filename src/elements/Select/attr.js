@@ -8,19 +8,6 @@ export default [
     children: [
       ...props,
       {
-        label: '是否禁用',
-        component: 'Switch',
-        name: 'disabled',
-        onlyId: 'form-kJ7K'
-      },
-      {
-        label: '占位提示',
-        component: 'Input',
-        name: 'placeholder',
-        initialValue: '请选择...',
-        onlyId: 'form-ekRL'
-      },
-      {
         label: '选择模式',
         component: 'Switch',
         name: 'multiple',

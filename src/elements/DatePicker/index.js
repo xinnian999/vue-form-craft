@@ -11,7 +11,8 @@ export default {
     label: '日期选择器',
     component: 'DatePicker',
     props: {
-      type: 'datetime'
+      type: 'datetime',
+      placeholder: '请选择日期'
     }
   },
   attr
