@@ -6,11 +6,9 @@
     @mouseleave.stop="handleHoverLeave"
   >
     <div class="actions-left-top" v-if="onlyId === current.onlyId">
-      <el-button class="canvas-move" size="small" type="primary">
-        <template #icon>
-          <icon-render name="move" />
-        </template>
-      </el-button>
+      <div class="canvas-move" size="small" type="primary">
+        <icon-render name="move" />
+      </div>
     </div>
 
     <div class="hidden-ico" v-if="hidden"><icon-render name="hidden" /></div>
@@ -143,6 +141,13 @@ const checkProps = (props) => {
     .canvas-move {
       font-size: 16px;
       box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+      color: #fff;
+      padding: 0 11px;
+      line-height: 24px;
+      cursor: pointer;
+      &:hover {
+        opacity: 0.7;
+      }
     }
   }
 
