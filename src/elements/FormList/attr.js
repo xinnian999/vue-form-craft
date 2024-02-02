@@ -1,6 +1,21 @@
 import { basic, props } from '../commonAttr'
 
 export default [
+  {
+    component: 'Alert',
+    props: {
+      title: '说明',
+      type: 'info',
+      effect: 'light',
+      description: '值是一个【包含多个对象的数组】，适用于收集多组数据',
+      closable: true,
+      'show-icon': true
+    },
+    onlyId: 'form-fVKS',
+    name: 'sv1sIQ',
+    hideLabel: true,
+    hidden: false
+  },
   ...basic,
   {
     label: '初始值',

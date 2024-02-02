@@ -31,21 +31,12 @@ export default [
         name: 'customEvent',
         hidden: '{{$values.props.clickEvent!=="custom"}}',
         help: '可以通过schemaContext注入自定义事件，然后通过插值获取。 例：{{ onTest }}'
-      },
+      }
       // {
       //   label: '按钮颜色',
       //   component: 'ColorPicker',
       //   name: 'color'
       // },
-      {
-        label: '样式',
-        component: 'JsonEdit',
-        name: 'style',
-        initialValue: {},
-        props: {
-          mode: 'direct'
-        }
-      }
     ]
   }
 ]
