@@ -1,19 +1,22 @@
 <template>
   <div :style="InlineStyle">
-    <slot />
+    <FormRender v-model="formValues" :formItems="children" />
   </div>
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
+import { defineProps, inject } from 'vue'
 import useStyle from '@/hooks/useStyle'
+import { FormRender } from '@/components'
 
-const props = defineProps({
-  align: String,
-  margin: Number,
-  autoWrap: Boolean
+const formValues = inject('$formValues') || {}
+
+const thisProps = defineProps({
+  props: Object,
+  children: Array
 })
-const InlineStyle = useStyle('Inline', props)
+
+const InlineStyle = useStyle('Inline', thisProps.props)
 </script>
 
 <style></style>

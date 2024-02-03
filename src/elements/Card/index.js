@@ -1,8 +1,8 @@
-import { ElCard } from 'element-plus'
+import Card from './Card.vue'
 
 export default {
   name: '卡片',
-  component: ElCard,
+  component: Card,
   icon: 'card',
   type: 'layout',
   order: 1,

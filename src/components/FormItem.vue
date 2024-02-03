@@ -1,18 +1,15 @@
 <template>
   <template v-if="!hidden">
-    <div v-if="config.isNotFormItem" class="notFormItem">
-      <component :is="config.component" v-bind="props">
-        <template v-if="config.isWrapper || config.isDefaultWrapper">
-          <form-render
-            v-if="currentComponent === 'ItemGroup'"
-            v-model="value"
-            :formItems="children"
-            :name="name"
-            :prop="prop"
-          />
-          <form-render v-else v-model="formValues" :formItems="children" />
-        </template>
-      </component>
+    <div v-if="config.type === 'layout'" class="notFormItem">
+      <component :is="config.component" v-bind="thisProps" />
+    </div>
+
+    <div v-else-if="config.type === 'assist'" class="notFormItem">
+      <component :is="config.component" v-bind="props" />
+    </div>
+
+    <div v-else-if="component === 'ItemGroup'" class="notFormItem">
+      <component :is="config.component" v-bind="thisProps" v-model="value" />
     </div>
 
     <el-form-item
@@ -79,8 +76,6 @@ const emit = defineEmits(['update:modelValue'])
 const elements = inject('$elements')
 
 const schema = inject('$schema')
-
-const formValues = thisProps.design ? {} : inject('$formValues')
 
 const value = computed({
   get() {

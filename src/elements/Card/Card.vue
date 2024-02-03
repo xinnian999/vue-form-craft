@@ -1,21 +1,22 @@
 <template>
-  <div :style="gridStyle" class="form-item-grid">
+  <ElCard v-bind="{ ...props, ...$attrs }">
     <FormRender v-model="formValues" :formItems="children" />
-  </div>
+    <slot />
+  </ElCard>
 </template>
 
 <script setup>
 import { defineProps, inject } from 'vue'
-import useStyle from '@/hooks/useStyle'
+import { ElCard } from 'element-plus'
 import { FormRender } from '@/components'
-
-const formValues = inject('$formValues')
 
 const thisProps = defineProps({
   props: Object,
-  children: Array
+  children: Array,
+  design: Boolean
 })
-const gridStyle = useStyle('Grid', thisProps.props)
+
+const formValues = thisProps.design ? {} : inject('$formValues')
 </script>
 
 <style lang="less">

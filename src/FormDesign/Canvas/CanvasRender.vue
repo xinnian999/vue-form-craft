@@ -32,6 +32,7 @@
       v-else-if="currentComponentConfig.isWrapper"
       :is="currentComponentConfig.component"
       v-bind="props"
+      design
     >
       <CanvasWrapper v-bind="thisProps" />
     </component>

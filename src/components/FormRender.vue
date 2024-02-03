@@ -2,14 +2,14 @@
   <form-item
     v-for="item in formItems"
     :key="item.name"
-    v-model="formValues[item.name]"
+    v-model="values[item.name]"
     v-bind="item"
     :prop="name && `${prop || name}.${item.name}`"
   />
 </template>
 
 <script setup>
-import { defineProps, defineEmits, computed } from 'vue'
+import { defineProps, defineEmits, computed, provide } from 'vue'
 import FormItem from './FormItem.vue'
 import { mergeWith } from 'lodash'
 
@@ -22,8 +22,20 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue'])
 
-// 通过Proxy接管的数据源，某项属性被修改会立刻通知父组件，遵守单项数据流原则
-const formValues = computed(() => {
+//上一级的value
+// const beforeValue = computed({
+//   get() {
+//     return props.modelValue
+//   },
+//   set(val) {
+//     emit('update:modelValue', val)
+//   }
+// })
+
+// provide('$beforeValue', beforeValue)
+
+// 将子字段合成一个字段
+const values = computed(() => {
   return new Proxy(props.modelValue || {}, {
     set(target, key, value) {
       //字段值为对象时，需要与上一次值深度合并（itemGroup）,数组不合并
