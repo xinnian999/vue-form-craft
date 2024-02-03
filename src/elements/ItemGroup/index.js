@@ -19,7 +19,7 @@ export default {
         title: '说明',
         type: 'info',
         effect: 'light',
-        description: '值是一个对象，此组件包裹的子字段都会引用这个对象的键值',
+        description: '此组件包裹的子字段会组成一个对象',
         closable: true,
         'show-icon': true
       },
