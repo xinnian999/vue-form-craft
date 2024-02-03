@@ -1,5 +1,5 @@
 <template>
-  <FormRender v-if="props.type === 'object'" v-model="value" :formItems="children" />
+  <FormRender v-if="props.type === 'object'" v-model="objectValue" :formItems="children" />
 
   <template v-else>
     <form-item
@@ -27,7 +27,7 @@ const thisProps = defineProps({
 
 const emit = defineEmits(['update:modelValue'])
 
-const value = computed({
+const objectValue = computed({
   get() {
     return thisProps.modelValue
   },

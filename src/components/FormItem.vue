@@ -49,7 +49,6 @@ import { computed, defineProps, defineEmits, onBeforeMount, inject, onMounted, n
 import { ElFormItem, ElTooltip } from 'element-plus'
 import { isString, pickBy } from 'lodash'
 import { isRegexString } from '@/utils'
-import FormRender from './FormRender.vue'
 
 const thisProps = defineProps({
   label: String,

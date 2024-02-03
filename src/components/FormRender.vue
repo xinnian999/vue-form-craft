@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits, computed, provide } from 'vue'
+import { defineProps, defineEmits, computed } from 'vue'
 import FormItem from './FormItem.vue'
 import { mergeWith } from 'lodash'
 
@@ -22,18 +22,6 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue'])
 
-//上一级的value
-// const beforeValue = computed({
-//   get() {
-//     return props.modelValue
-//   },
-//   set(val) {
-//     emit('update:modelValue', val)
-//   }
-// })
-
-// provide('$beforeValue', beforeValue)
-
 // 将子字段合成一个字段
 const values = computed(() => {
   return new Proxy(props.modelValue || {}, {
@@ -45,7 +33,6 @@ const values = computed(() => {
         }
       })
 
-      // console.log(mergeValue)
       emit('update:modelValue', mergeValue)
       return true
     }
