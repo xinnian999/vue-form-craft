@@ -7,7 +7,7 @@ export default {
   type: 'layout',
   order: 1,
   isWrapper: true,
-  isNotFormItem: true,
+
   initialValues: {
     component: 'Card',
     children: [],

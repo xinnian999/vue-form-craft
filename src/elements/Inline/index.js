@@ -7,7 +7,7 @@ export default {
   type: 'layout',
   component: Inline,
   order: 2,
-  isNotFormItem: true,
+
   isDefaultWrapper: true,
   initialValues: {
     component: 'Inline',

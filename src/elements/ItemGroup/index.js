@@ -6,7 +6,7 @@ export default {
   type: 'high',
   component: ItemGroup,
   order: 2,
-  isNotFormItem: true,
+
   isDefaultWrapper: true,
   initialValues: {
     component: 'ItemGroup',
