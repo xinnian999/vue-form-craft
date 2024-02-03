@@ -29,7 +29,7 @@ const useSelect = (props, emits) => {
   })
 
   const fetchData = debounce(async () => {
-    if (isMax.value) return
+    if (isMax.value || !props.api) return
 
     const { baseURL, url, method, params, data, dataPath } = props.api
 
@@ -64,6 +64,7 @@ const useSelect = (props, emits) => {
   }, 300)
 
   onMounted(() => {
+    console.log(props)
     const { mode, options } = props
     if (mode === 'static') {
       currentOptions.value = options
@@ -115,6 +116,7 @@ const useSelect = (props, emits) => {
         currentOptions.value = props.options
       }
       if (newVal === 'remote') {
+        currentOptions.value = []
         fetchData()
       }
     }

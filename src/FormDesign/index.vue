@@ -1,5 +1,5 @@
 <template>
-  <div id="formDesign">
+  <div id="formDesign" :class="props.class" :style="style">
     <div class="formItemList">
       <Menus />
     </div>
@@ -16,22 +16,36 @@
 </template>
 
 <script setup lang="jsx">
-import { ref, provide, reactive, onMounted, inject, computed, defineProps, defineEmits } from 'vue'
+import {
+  ref,
+  provide,
+  reactive,
+  computed,
+  defineProps,
+  defineEmits,
+  defineOptions,
+  watchEffect
+} from 'vue'
 import Menus from './Menus/index.vue'
 import Canvas from './Canvas/index.vue'
 import Current from './Current/index.vue'
 import Actions from './Actions.vue'
 
+defineOptions({
+  name: 'FormDesign'
+})
+
 const props = defineProps({
-  modelValue: Object,
-  schemaId: [String, Number],
+  schema: Object,
   previewSchemaContext: {
     type: Object,
     default: () => ({})
-  }
+  },
+  class: null,
+  style: null
 })
 
-const emit = defineEmits(['update:modelValue', 'onSave'])
+const emit = defineEmits(['onSave'])
 
 const selectData = reactive({})
 
@@ -42,18 +56,6 @@ const currentSchema = ref({
   labelAlign: 'right',
   size: 'default',
   items: []
-})
-
-const getSchema = inject('$getSchema')
-
-const schema = computed({
-  get() {
-    return props.modelValue || currentSchema.value
-  },
-  set(val) {
-    emit('update:modelValue', val)
-    currentSchema.value = val
-  }
 })
 
 const current = computed({
@@ -71,11 +73,10 @@ const current = computed({
         return all
       }, null)
     }
-    return findItem(schema.value.items) || {}
+    return findItem(currentSchema.value.items) || {}
   },
   set(element) {
     currentId.value = element.onlyId
-
     const set = (items) => {
       return items.map((item) => {
         if (item.onlyId === element.onlyId) {
@@ -87,19 +88,18 @@ const current = computed({
         return item
       })
     }
-
-    schema.value = { ...schema.value, items: set(schema.value.items) }
+    currentSchema.value = { ...currentSchema.value, items: set(currentSchema.value.items) }
   }
 })
 
-onMounted(async () => {
-  if (props.schemaId) {
-    currentSchema.value = await getSchema(props.schemaId)
+watchEffect(() => {
+  if (props.schema) {
+    currentSchema.value = props.schema
   }
 })
 
 provide('$current', current)
-provide('$schema', schema)
+provide('$schema', currentSchema)
 provide('$selectData', selectData)
 
 provide('$emit', emit)
@@ -110,26 +110,28 @@ provide('$emit', emit)
   display: flex;
   height: 100%;
   box-sizing: border-box;
-
+  background-color: #eee;
   .formItemList {
-    width: 20%;
+    width: 18%;
     padding: 10px;
     background-color: #fff;
     position: relative;
+    overflow: auto;
   }
   .formRender {
     flex: 1;
+    margin: 0 10px;
+    overflow: hidden;
     border-left: 1px solid #eee;
     border-right: 1px solid #eee;
     background-color: #fff;
-    overflow: auto;
     padding: 0 15px;
     display: flex;
     flex-direction: column;
     padding-bottom: 20px;
   }
   .formItemOptions {
-    width: 25%;
+    width: 20%;
     overflow: auto;
     padding: 20px;
     background-color: #fff;

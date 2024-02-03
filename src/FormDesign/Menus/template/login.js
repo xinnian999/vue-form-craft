@@ -5,7 +5,7 @@ export default {
   items: [
     {
       label: '用户名',
-      component: 'input',
+      component: 'Input',
       props: {
         placeholder: '请输入用户名'
       },
@@ -15,7 +15,7 @@ export default {
     },
     {
       label: '密码',
-      component: 'password',
+      component: 'Password',
       props: {
         placeholder: '请输入密码'
       },
@@ -24,35 +24,40 @@ export default {
       required: true
     },
     {
-      label: '',
-      component: 'inline',
+      component: 'Grid',
       children: [
         {
-          component: 'button',
+          component: 'Button',
           props: {
             name: '登陆',
-            clickEvent: 'submitForm'
+            clickEvent: 'submitForm',
+            style: {
+              'margin-left': 'auto',
+              display: 'flex'
+            }
           },
           onlyId: 'form-aBMY',
           name: 'submit',
           hideLabel: true
         },
         {
-          component: 'button',
+          component: 'Button',
           props: {
             name: '注册',
             clickEvent: 'resetForm',
-            style: {
-              marginLeft: '20px'
-            }
+            style: {}
           },
           onlyId: 'form-mtnY',
           name: 'IxjeOB',
           hideLabel: true
         }
       ],
-      onlyId: 'form-0dVt',
-      name: 'j0rCIj'
+      props: {
+        colCount: 2,
+        space: 20
+      },
+      onlyId: 'form-WNcq',
+      name: 'HeDkKP'
     }
   ]
 }

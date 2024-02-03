@@ -1,12 +1,17 @@
 <template>
-  <component class="svg-icon" :is="icon" :style="{ color }" />
+  <component id="icon-render" :class="class" :is="icon" :style="{ color }" />
 </template>
 
 <script setup lang="jsx">
-import { defineProps, shallowRef } from 'vue'
+import { defineProps, shallowRef, defineOptions, watchEffect } from 'vue'
+
+defineOptions({
+  name: 'IconRender'
+})
 
 const props = defineProps({
   name: String,
+  class: null,
   color: {
     type: String,
     default: ''
@@ -15,18 +20,20 @@ const props = defineProps({
 
 const icon = shallowRef(null)
 
-import(`../icons/${props.name}.vue`).then((module) => {
-  icon.value = module.default
+watchEffect(() => {
+  import(`../icons/${props.name}.vue`).then((module) => {
+    icon.value = module.default
+  })
 })
 </script>
 
 <style>
-.svg-icon {
+#icon-render {
   display: inline-block;
   width: 1em;
   height: 1em;
   overflow: hidden;
-  vertical-align: -0.15em;
+  /* vertical-align: -0.15em; */
   fill: currentColor;
 }
 </style>

@@ -5,7 +5,7 @@ export default {
   items: [
     {
       label: '选择商品',
-      component: 'select',
+      component: 'Select',
       props: {
         mode: 'static',
         options: [
@@ -40,7 +40,7 @@ export default {
     },
     {
       label: '价格',
-      component: 'inputNumber',
+      component: 'InputNumber',
       onlyId: 'form-rS3W',
       name: 'price',
       props: {

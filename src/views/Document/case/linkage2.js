@@ -5,7 +5,7 @@ export default {
   items: [
     {
       label: '字段1',
-      component: 'input',
+      component: 'Input',
       props: {
         placeholder: '请输入...'
       },
@@ -24,7 +24,7 @@ export default {
     },
     {
       label: '字段2',
-      component: 'input',
+      component: 'Input',
       props: {
         placeholder: '请输入...'
       },
@@ -33,7 +33,7 @@ export default {
     },
     {
       label: '字段3',
-      component: 'input',
+      component: 'Input',
       props: {
         placeholder: '请输入...'
       },

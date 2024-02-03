@@ -1,15 +1,16 @@
 <template>
   <el-form
-    :model="form"
-    :label-position="currentSchema.labelAlign"
-    :size="currentSchema.size"
-    :disabled="disabled"
-    :hide-required-asterisk="currentSchema.hideRequiredAsterisk"
+    :model="formValues"
+    :label-position="schema.labelAlign"
+    :size="schema.size"
+    :disabled="disabled || schema.disabled"
+    :hide-required-asterisk="schema.hideRequiredAsterisk"
     ref="formRef"
     :style="style"
-    :class="class"
+    :class="props.class"
+    id="SchemaForm"
   >
-    <FormRender v-model="form" :formItems="formItems" />
+    <FormRender v-model="formValues" :formItems="formItems" />
   </el-form>
 </template>
 
@@ -23,13 +24,16 @@ import {
   reactive,
   provide,
   watch,
-  watchEffect,
-  inject,
-  onMounted
+  defineOptions
 } from 'vue'
 import { ElForm, ElMessage } from 'element-plus'
 import { handleLinkages, deepParse } from '@/utils'
 import FormRender from './FormRender.vue'
+import { cloneDeep } from 'lodash'
+
+defineOptions({
+  name: 'SchemaForm'
+})
 
 const formRef = ref(null)
 
@@ -43,7 +47,6 @@ const props = defineProps({
     type: Object,
     default: () => ({ labelWidth: 150, labelAlign: 'right', size: 'default', items: [] })
   },
-  schemaId: [String, Number],
   schemaContext: {
     type: Object,
     default: () => ({})
@@ -52,54 +55,43 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
-  style: {
-    type: Object,
-    default: () => ({})
-  },
-  class: {
-    type: Object,
-    default: () => ({})
-  }
+  style: null,
+  class: null
 })
 
 const emit = defineEmits(['update:modelValue', 'onSubmit', 'onChange'])
 
-const currentSchema = ref({})
-
-const stateForm = ref({})
-
 const selectData = reactive({})
 
-const getSchema = inject('$getSchema')
+const stateFormValues = ref({})
 
-const form = computed({
+const formValues = computed({
   get() {
-    return props.modelValue || stateForm.value
+    return props.modelValue || stateFormValues.value
   },
-  set(val) {
-    emit('update:modelValue', val)
-    stateForm.value = val
+  set(values) {
+    emit('update:modelValue', values)
+    stateFormValues.value = values
   }
 })
 
 const context = computed(() => ({
-  $values: form.value,
-  $form: form.value,
+  $values: formValues.value,
   $selectData: selectData,
   $utils: {},
   ...props.schemaContext
 }))
 
-// 转换为动态配置
-const formItems = computed(() => {
-  return deepParse(currentSchema.value.items, context.value)
-})
+// 保证schema的响应式
+const currentSchema = computed(() => ({ disabled: props.disabled, ...props.schema }))
+
+const formItems = computed(() => deepParse(currentSchema.value.items, context.value))
 
 watch(
-  form,
+  () => cloneDeep(formValues.value),
   (newVal, oldVal) => {
     emit('onChange', newVal)
-    handleLinkages({ newVal, oldVal, form, formItems: formItems.value })
+    handleLinkages({ newVal, oldVal, form: formValues, formItems: formItems.value })
   },
   { deep: true }
 )
@@ -109,32 +101,23 @@ const validate = () => formRef.value.validate()
 const submit = async () => {
   try {
     await validate()
-    emit('onSubmit', form.value)
-    return form.value
+    emit('onSubmit', formValues.value)
+    return formValues.value
   } catch (e) {
     ElMessage.error('表单填写校验不通过！')
     return Promise.reject(e)
   }
 }
 
-const getFormValues = () => ({ ...form.value })
+const getFormValues = () => ({ ...formValues.value })
 const setFormValues = (values) => {
-  form.value = { ...form.value, ...values }
+  formValues.value = { ...formValues.value, ...values }
 }
 
 const reset = () => formRef.value.resetFields()
 
-watchEffect(() => {
-  currentSchema.value = props.schema
-})
-
-onMounted(async () => {
-  if (props.schemaId) {
-    currentSchema.value = await getSchema(props.schemaId)
-  }
-})
-
 provide('$schema', currentSchema)
+provide('$formValues', formValues)
 provide('$selectData', selectData)
 provide('$formEvents', { submit, validate, getFormValues, setFormValues, reset })
 

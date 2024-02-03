@@ -1,10 +1,7 @@
-import ItemGroup from './group/ItemGroup.vue'
-import InputNumber from './basic/InputNumber.vue'
-import Select from './basic/Select.vue'
-import Radio from './basic/Radio.vue'
-import FormList from './group/FormList.vue'
-import FormItem from './FormItem.vue'
-import SchemaForm from './SchemaForm.vue'
-import JsonEdit from './basic/JsonEdit.vue'
-
-export { ItemGroup, JsonEdit, InputNumber, Select, Radio, FormItem, FormList, SchemaForm }
+export { default as SchemaForm } from './SchemaForm.vue'
+export { default as FormItem } from './FormItem.vue'
+export { default as FormRender } from './FormRender.vue'
+export { default as IconRender } from './IconRender.vue'
+export { default as RemoteSchemaForm } from './RemoteSchemaForm.vue'
+export { default as RemoteFormDesign } from './RemoteFormDesign.vue'
+export { default as Disabled } from './Disabled.vue'

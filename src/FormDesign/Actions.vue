@@ -1,14 +1,19 @@
 <template>
   <div class="formDesign-actions">
-    <el-button @click="handlePreviewExec">预览脚本</el-button>
-    <el-button @click="handlePreviewForm">预览表单</el-button>
-    <el-button @click="handleSave" type="primary">保存</el-button>
+    <div class="formDesign-actions-left">
+      <el-button size="small" @click="handlePreviewExec">预览JSON脚本</el-button>
+      <el-button size="small" @click="handlePreviewVue">生成VUE代码</el-button>
+      <el-button size="small" type="primary" @click="handlePreviewForm">预览表单</el-button>
+    </div>
+    <div class="formDesign-actions-right">
+      <el-button size="small" type="danger" @click="handleClear">清空</el-button>
+      <el-button size="small" @click="handleSave" type="primary">保存</el-button>
+    </div>
 
     <el-dialog
       v-model="execVisible"
       title="预览脚本"
       width="70%"
-      class="dialog"
       center
       destroy-on-close
       top="10vh"
@@ -25,6 +30,18 @@
     </el-dialog>
 
     <el-dialog
+      v-model="vueVisible"
+      title="VUE代码"
+      width="70%"
+      class="dialog"
+      center
+      destroy-on-close
+      top="10vh"
+    >
+      <VueEdit />
+    </el-dialog>
+
+    <el-dialog
       v-model="formVisible"
       title="预览表单"
       width="70%"
@@ -38,16 +55,16 @@
         :schema="schema"
         ref="formRef"
         :schemaContext="previewSchemaContext"
-        @onSubmit="ElMessageBox.alert(JSON.stringify(form), '模拟提交')"
       />
       <template #footer>
-        <el-button @click="formRef.submit()" type="primary">模拟提交</el-button>
+        <el-button @click="handleSubmit" type="primary">模拟提交</el-button>
         <el-button @click="formRef.reset()" type="primary">重置</el-button>
         <JsonEdit
           v-model="formContext"
           height="400px"
-          title="上下文"
-          description="实时预览表单上下文，调试联动"
+          title="联动变量"
+          description="实时预览表单的联动变量，调试联动"
+          mode="dialog"
         />
       </template>
     </el-dialog>
@@ -56,10 +73,11 @@
 
 <script setup lang="jsx">
 import { ref, computed, inject, defineProps } from 'vue'
+import { ElButton, ElDialog, ElSwitch } from 'element-plus'
 import JsonEditorVue from 'json-editor-vue3'
-import { ElMessageBox, ElButton, ElDialog } from 'element-plus'
-import { SchemaForm, JsonEdit } from '@/components'
+import { SchemaForm } from '@/components'
 import { changeItems } from '@/utils'
+import VueEdit from './VueEdit.vue'
 
 defineProps({
   previewSchemaContext: {
@@ -70,6 +88,8 @@ defineProps({
 
 const schema = inject('$schema')
 const emit = inject('$emit')
+const elements = inject('$elements')
+const JsonEdit = elements.JsonEdit.component
 
 const json = computed({
   get() {
@@ -90,8 +110,14 @@ const execVisible = ref(false)
 
 const formVisible = ref(false)
 
+const vueVisible = ref(false)
+
 const handlePreviewExec = () => {
   execVisible.value = true
+}
+
+const handlePreviewVue = () => {
+  vueVisible.value = true
 }
 
 const handlePreviewForm = () => {
@@ -112,11 +138,33 @@ const onBlur = async (editor) => {
 const handleSave = () => {
   emit('onSave', schema.value)
 }
+
+const handleSubmit = () => {
+  formRef.value
+    .submit()
+    .then((values) => {
+      alert(JSON.stringify(values, null, 2), '模拟提交')
+    })
+    .catch((e) => console.log(e))
+}
+
+const handleClear = () => {
+  schema.value = { ...schema.value, items: [] }
+}
 </script>
 
-<style>
+<style scoped lang="less">
 .formDesign-actions {
-  padding: 10px;
-  text-align: right;
+  /* padding: 10px; */
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  .formDesign-actions-left,
+  .formDesign-actions-right {
+    button {
+      margin-bottom: 10px;
+    }
+  }
 }
 </style>

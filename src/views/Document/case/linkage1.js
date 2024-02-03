@@ -4,63 +4,34 @@ export default {
   size: 'default',
   items: [
     {
-      label: '标题',
-      component: 'input',
+      label: '评分',
+      component: 'Rate',
       props: {
+        max: 5,
+        'allow-half': true
+      },
+      onlyId: 'form-Lx4g',
+      name: 'rate',
+      style: {},
+      required: true
+    },
+    {
+      label: '差评原因',
+      component: 'Textarea',
+      props: {
+        autocomplete: 'off',
+        showWordLimit: true,
+        type: 'textarea',
+        autosize: {
+          minRows: 4,
+          maxRows: 999
+        },
         placeholder: '请输入...'
       },
-      onlyId: 'form-JPzT',
-      name: 'title'
-    },
-    {
-      label: '类型',
-      component: 'select',
-      props: {
-        mode: 'static',
-        options: [
-          {
-            label: '存草稿',
-            value: '1'
-          },
-          {
-            label: '发布一条',
-            value: '2'
-          },
-          {
-            label: '发布多条',
-            value: '3'
-          }
-        ],
-        columns: [
-          {
-            title: 'label',
-            dataIndex: 'label'
-          },
-          {
-            title: 'value',
-            dataIndex: 'value'
-          }
-        ],
-        placeholder: '请选择...',
-        labelKey: 'label',
-        valueKey: 'value'
-      },
-      onlyId: 'form-2ZCi',
-      name: 'type',
-      hidden: '{{!$form.title}}'
-    },
-    {
-      label: '数量',
-      component: 'inputNumber',
-      onlyId: 'form-9R9B',
-      name: 'count',
-      props: {
-        min: 1,
-        max: 9999,
-        step: 1,
-        disabled: "{{$form.type!=='3'}}"
-      },
-      initialValue: 1
+      onlyId: 'form-XyJs',
+      name: 'reason',
+      style: {},
+      hidden: '{{$values.rate>=3 || !$values.rate}}'
     }
   ]
 }

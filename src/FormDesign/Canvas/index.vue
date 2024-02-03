@@ -5,6 +5,7 @@
     :label-position="schema.labelAlign"
     :size="schema.size"
     :hide-required-asterisk="schema.hideRequiredAsterisk"
+    :disabled="schema.disabled"
   >
     <div class="tip" v-if="!list.length">
       <div class="ico">
@@ -16,18 +17,19 @@
     <draggable
       style="height: 100%"
       :list="list"
-      :group="{ name: 'form', pull: true, put: true }"
+      :group="{ name: 'formDesign', pull: true, put: true }"
       itemKey="name"
       chooseClass="choose"
       ghost-class="ghost"
-      @add="handleAdd"
+      @add="onAdd"
       drag-class="drag"
-      fallback-class="fallback"
       handle=".canvas-move"
       :animation="300"
+      force-fallback
+      :scroll-fensitivity="1"
     >
       <template #item="{ element }">
-        <CanvasRender :element="element" />
+        <CanvasRender v-if="element.onlyId" v-bind="element" />
       </template>
     </draggable>
   </el-form>
@@ -42,11 +44,7 @@ import CanvasRender from './CanvasRender.vue'
 
 const schema = inject('$schema')
 
-const current = inject('$current')
-
 const hoverId = ref('')
-
-provide('hoverId', hoverId)
 
 const list = computed({
   get() {
@@ -57,45 +55,23 @@ const list = computed({
   }
 })
 
-const handleAdd = () => {
+const onAdd = () => {
   list.value = changeItems(list.value)
 }
 
-const filterId = (items, elementId) => {
-  const data = items.filter((item) => {
-    return item.onlyId !== elementId
-  })
-
-  return data.map((item) => {
-    if (item.children) {
-      return {
-        ...item,
-        children: filterId(item.children, elementId)
-      }
-    }
-    return item
-  })
-}
-
-const handleDelete = (element) => {
-  list.value = filterId(list.value, element.onlyId)
-}
-
-const handleSelect = (element) => {
-  current.value = element
-}
-
-provide('handleAdd', handleAdd)
-provide('handleSelect', handleSelect)
-provide('handleDelete', handleDelete)
+provide('$onAdd', onAdd)
+provide('hoverId', hoverId)
+provide('$list', list)
 </script>
 
 <style lang="less">
 .canvas {
   flex: 1;
   padding: 20px;
-  border: 1px dashed #999;
+  border: 1px solid #c7c7c7;
   position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
   .tip {
     color: #999;
     font-size: 18px;
@@ -112,7 +88,7 @@ provide('handleDelete', handleDelete)
   }
 
   .ghost {
-    border-top: 2px solid var(--el-color-primary);
+    border-top: 5px solid rgb(248, 47, 47);
     list-style: none;
   }
 }

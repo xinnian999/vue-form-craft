@@ -1,12 +1,17 @@
 <template>
-  <schema-form :schema="schema" ref="formRef" />
+  <schema-form v-model="formValues" :schema="schema" ref="formRef" disabled />
   <button @click="handleSubmit">提交</button>
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 
 const formRef = ref()
+
+const formValues = ref({
+  title: 'test',
+  desc: '这是一个简单基本的描述'
+})
 
 const schema = {
   labelWidth: 150,
@@ -15,33 +20,32 @@ const schema = {
   items: [
     {
       label: '标题',
-      component: 'input',
+      component: 'Input',
       props: {
         placeholder: '请输入标题'
       },
       onlyId: 'form-eNR0',
       name: 'title',
-      initialValue: 10
+      required: true
     },
     {
       label: '描述',
-      component: 'textarea',
+      component: 'Textarea',
       props: {
         placeholder: '请输入描述'
       },
       onlyId: 'form-D1x7',
-      name: 'desc',
-      required: true
+      name: 'desc'
+    },
+    {
+      label: '图标选择器',
+      component: 'IconSelect',
+      props: {},
+      onlyId: 'form-MrlL',
+      name: 'p0rWAP'
     }
   ]
 }
-
-onMounted(() => {
-  //模拟表单值回显
-  setTimeout(() => {
-    formRef.value.setFormValues({ title: '测试标题', desc: '这是一个描述' })
-  }, 1000)
-})
 
 const handleSubmit = () => {
   formRef.value

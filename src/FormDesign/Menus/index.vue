@@ -20,7 +20,7 @@
       <draggable
         class="list"
         :list="children"
-        :group="{ name: 'form', pull: 'clone', put: false }"
+        :group="{ name: 'formDesign', pull: 'clone', put: false }"
         :sort="false"
         ghost-class="ghost"
         drag-class="drag"
@@ -29,7 +29,7 @@
       >
         <template #item="{ element }">
           <li class="form-item-btn">
-            <div class="ico"><IconRender :name="element.initialValues.component" /></div>
+            <div class="ico"><IconRender :name="element.icon" /></div>
             <div class="name">{{ element.name }}</div>
           </li>
         </template>
@@ -61,7 +61,7 @@ const useTemplate = (templateSchema) => {
   .template-btn {
     position: absolute;
     right: 10px;
-    top: 20px;
+    top: 15px;
   }
 
   .template-drawer {
@@ -83,34 +83,41 @@ const useTemplate = (templateSchema) => {
     margin-top: 10px;
   }
   .list {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    @media screen and (max-width: 1300px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media screen and (max-width: 800px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+    gap: 10px;
     width: 100%;
-    justify-content: space-between;
     padding-left: 0;
-    flex-wrap: wrap;
     .form-item-btn {
       list-style: none;
       padding: 5px 0px;
-      margin-bottom: 10px;
       cursor: move;
       border: 1px dashed transparent;
+      transition: 0.3s all;
       &:hover {
-        border: 1px dashed var(--el-color-primary);
+        // border: 1px dashed var(--el-color-primary);
+        box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
         color: var(--el-color-primary);
       }
-      background-color: aliceblue;
-      width: 45%;
-      display: flex;
+      background-color: var(--el-color-primary-light-9);
+      // display: flex;
+      text-align: center;
       .ico {
-        width: 40px;
-        height: 20px;
+        height: 40px;
         display: flex;
         align-items: center;
+        font-size: 20px;
         justify-content: center;
       }
       .name {
-        flex: 1;
-        font-size: 14px;
+        font-size: 13px;
       }
     }
   }

@@ -1,107 +1,59 @@
 <template>
-  <el-form-item
-    id="form-item"
-    :style="style"
-    :key="name"
-    :prop="prop || name"
-    :label-width="hideLabel ? '0' : schema.labelWidth"
-    :rules="computeRules"
-  >
-    <template #label v-if="!hideLabel">
-      <div class="form-item-label">
-        <div :style="schema.labelBold && 'font-weight: bold'">{{ label }}</div>
-        <div class="ico" v-if="help">
-          <el-tooltip class="box-item" effect="dark" :content="help">
-            <icon-render name="help" />
-          </el-tooltip>
-        </div>
-      </div>
-    </template>
-
-    <el-input
-      v-if="currentComponent === 'input'"
-      v-model="value"
-      autocomplete="off"
-      v-bind="props"
-      class="form-item-input"
-      showWordLimit
-      type="text"
-    />
-
-    <el-input
-      v-if="currentComponent === 'password'"
-      v-model="value"
-      autocomplete="off"
-      show-password
-      v-bind="props"
-      type="password"
-      showWordLimit
-      class="form-item-input"
-    />
-
-    <el-input
-      v-if="currentComponent === 'textarea'"
-      v-model="value"
-      autocomplete="off"
-      v-bind="props"
-      type="textarea"
-      showWordLimit
-      class="form-item-input"
-    />
-
-    <InputNumber v-model="value" v-bind="props" v-if="currentComponent === 'inputNumber'" />
-
-    <Select v-if="currentComponent === 'select'" v-model="value" v-bind="props" :name="name" />
-
-    <Radio v-model="value" v-bind="props" v-if="currentComponent === 'radio'" :name="name" />
-
-    <Checkbox v-if="currentComponent === 'checkbox'" v-model="value" v-bind="props" :name="name" />
-
-    <Cascader v-if="currentComponent === 'cascader'" v-model="value" v-bind="props" :name="name" />
-
-    <JsonEdit v-if="currentComponent === 'jsonEdit'" v-model="value" v-bind="props" :name="name" />
-
-    <el-color-picker v-if="currentComponent === 'colorPicker'" v-model="value" v-bind="props" />
-
-    <el-switch v-if="currentComponent === 'switch'" v-model="value" v-bind="props" />
-
-    <Button v-if="currentComponent === 'button'" type="primary" v-bind="props">{{ label }}</Button>
-
-    <MdEditor v-if="currentComponent === 'markdown'" v-model="value" v-bind="props" />
-
-    <el-alert v-if="currentComponent === 'alert'" v-bind="props" />
-
-    <el-date-picker v-if="currentComponent === 'datePicker'" v-model="value" v-bind="props" />
-
-    <div v-if="currentComponent === 'text'">
-      {{ props.formatter || value }}
+  <template v-if="!hidden">
+    <div v-if="currentComponentConfig.isNotFormItem" class="notFormItem">
+      <component :is="currentComponentConfig.component" v-bind="props">
+        <template
+          v-if="currentComponentConfig.isWrapper || currentComponentConfig.isDefaultWrapper"
+        >
+          <form-render
+            v-if="currentComponent === 'ItemGroup'"
+            v-model="value"
+            :formItems="children"
+            :name="name"
+          />
+          <form-render v-else v-model="formValues" :formItems="children" />
+        </template>
+      </component>
     </div>
 
-    <slot />
-  </el-form-item>
+    <el-form-item
+      v-else
+      id="form-item"
+      :style="{ marginBottom: design ? 0 : '18px', ...style }"
+      :key="name"
+      :prop="prop || name"
+      :label-width="hideLabel ? '0' : schema.labelWidth"
+      :rules="computeRules"
+      :class="thisProps.class"
+    >
+      <template #label v-if="!hideLabel">
+        <div class="form-item-label">
+          <div :style="schema.labelBold && 'font-weight: bold'">{{ label }}</div>
+          <div class="ico" v-if="help">
+            <el-tooltip class="box-item" effect="dark" :content="help">
+              <icon-render name="help" />
+            </el-tooltip>
+          </div>
+        </div>
+      </template>
+
+      <component
+        :is="currentComponentConfig.component"
+        :disabled="schema.disabled"
+        :size="schema.size"
+        v-bind="pickBy({ ...props, name, children }, Boolean)"
+        v-model="value"
+      />
+    </el-form-item>
+  </template>
 </template>
 
 <script setup lang="jsx">
-import { computed, defineProps, defineEmits, onBeforeMount, inject } from 'vue'
-import {
-  ElFormItem,
-  ElInput,
-  ElTooltip,
-  ElColorPicker,
-  ElSwitch,
-  ElAlert,
-  ElDatePicker
-} from 'element-plus'
-import { isString } from 'lodash'
-import { MdEditor } from 'md-editor-v3'
-import Select from './basic/Select.vue'
-import Radio from './basic/Radio.vue'
-import InputNumber from './basic/InputNumber.vue'
-import Checkbox from './basic/Checkbox.vue'
-import Cascader from './basic/Cascader.vue'
-import JsonEdit from './basic/JsonEdit.vue'
-import Button from './basic/Button.vue'
+import { computed, defineProps, defineEmits, onBeforeMount, inject, onMounted, nextTick } from 'vue'
+import { ElFormItem, ElTooltip } from 'element-plus'
+import { isString, pickBy } from 'lodash'
 import { isRegexString } from '@/utils'
+import FormRender from './FormRender.vue'
 
 const thisProps = defineProps({
   label: String,
@@ -114,14 +66,22 @@ const thisProps = defineProps({
   style: Object,
   help: String,
   children: Array,
+  hidden: Boolean,
   hideLabel: Boolean,
   prop: String,
-  rules: Array
+  onlyId: String,
+  rules: Array,
+  class: null,
+  design: Boolean
 })
 
 const emit = defineEmits(['update:modelValue'])
 
+const elements = inject('$elements')
+
 const schema = inject('$schema')
+
+const formValues = thisProps.design ? {} : inject('$formValues')
 
 const value = computed({
   get() {
@@ -142,13 +102,19 @@ const computeRules = computed(() => {
   }
 
   if (rules) {
-    const ruleParse = rules.map(({ type, message, trigger }) => {
+    const ruleParse = rules.map(({ type, message, trigger, customReg }) => {
       const ruleDef = {
         message,
         trigger
       }
-      if (['email'].includes(type)) {
+      if (['email', 'url'].includes(type)) {
         return { ...ruleDef, type }
+      }
+      if (type === 'custom') {
+        return {
+          ...ruleDef,
+          pattern: customReg
+        }
       }
       if (isRegexString(type)) {
         return {
@@ -166,14 +132,25 @@ const computeRules = computed(() => {
 
 const currentComponent = computed(() => {
   if (isString(value.value) && /^{{\s*(.*?)\s*}}$/.test(value.value)) {
-    return 'input'
+    return 'Input'
   }
 
   return thisProps.component
 })
 
+const currentComponentConfig = computed(() => {
+  return elements[currentComponent.value] || {}
+})
+
 onBeforeMount(() => {
-  if (!value.value && (thisProps.initialValue || thisProps.initialValue === 0)) {
+  // TODO:el-switch的modelValue提前赋值会引发未知BUG,暂时推到dom挂载后再赋值（但是表单重置会失效）
+  if (currentComponent.value === 'Switch') {
+    return nextTick(() => {
+      emit('update:modelValue', thisProps.initialValue)
+    })
+  }
+
+  if ((!value.value && thisProps.initialValue) || thisProps.initialValue === 0) {
     emit('update:modelValue', thisProps.initialValue)
   }
 })
@@ -181,12 +158,6 @@ onBeforeMount(() => {
 
 <style lang="less">
 #form-item {
-  .el-form-item__label {
-  }
-
-  .form-item-input {
-    max-width: 400px;
-  }
   .form-item-label {
     display: flex;
     position: relative;
@@ -196,5 +167,9 @@ onBeforeMount(() => {
       position: relative;
     }
   }
+}
+
+.notFormItem {
+  margin-bottom: 18px;
 }
 </style>

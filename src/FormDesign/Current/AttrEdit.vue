@@ -1,21 +1,25 @@
 <template>
   <div class="attrForm">
-    <schema-form :key="current.onlyId" v-model="current" :schema="attrSchema"></schema-form>
+    <h4 v-if="!Object.keys(current).length">未选中字段</h4>
 
-    <div>
-      <el-button @click="handleEdit">编辑配置文本</el-button>
-    </div>
+    <template v-else>
+      <schema-form :key="current.onlyId" v-model="current" :schema="attrSchema"></schema-form>
 
-    <el-drawer destroy-on-close v-model="editVisible">
-      <json-editor-vue
-        class="editor"
-        v-model="current"
-        currentMode="code"
-        :modeList="['text', 'view', 'tree', 'code', 'form']"
-        :options="{ search: true, history: true }"
-        language="zh"
-      />
-    </el-drawer>
+      <div>
+        <el-button @click="handleEdit">编辑配置文本</el-button>
+      </div>
+
+      <el-drawer destroy-on-close v-model="editVisible">
+        <json-editor-vue
+          class="editor"
+          v-model="current"
+          currentMode="code"
+          :modeList="['text', 'view', 'tree', 'code', 'form']"
+          :options="{ search: true, history: true }"
+          language="zh"
+        />
+      </el-drawer>
+    </template>
   </div>
 </template>
 
@@ -23,8 +27,10 @@
 import { computed, inject, ref } from 'vue'
 import JsonEditorVue from 'json-editor-vue3'
 import { ElButton, ElDrawer } from 'element-plus'
-import * as elements from '../elements'
+
 import { SchemaForm } from '@/components'
+
+const elements = inject('$elements')
 
 const current = inject('$current')
 
@@ -34,10 +40,10 @@ const attrSchema = computed(() => {
   const config = elements[current.value.component]
 
   if (config) {
-    return { size: 'small', items: config.attr }
+    return { size: 'small', labelAlign: 'top', items: config.attr }
   }
 
-  return { size: 'small', items: [] }
+  return { size: 'small', labelAlign: 'top', items: [] }
 })
 
 const handleEdit = () => {
