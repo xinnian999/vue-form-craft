@@ -1,7 +1,7 @@
 <template>
   <template v-if="!hidden">
     <div v-if="config.type === 'layout'" class="notFormItem">
-      <component :is="config.component" v-bind="thisProps" />
+      <component :is="config.component" v-bind="thisProps" v-model="parentValue" />
     </div>
 
     <div v-else-if="config.type === 'assist'" class="notFormItem">
@@ -67,10 +67,11 @@ const thisProps = defineProps({
   onlyId: String,
   rules: Array,
   class: null,
-  design: Boolean
+  design: Boolean,
+  parentValue: Object
 })
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'update:parentValue'])
 
 const elements = inject('$elements')
 
@@ -82,6 +83,15 @@ const value = computed({
   },
   set(val) {
     emit('update:modelValue', val)
+  }
+})
+
+const parentValue = computed({
+  get() {
+    return thisProps.parentValue
+  },
+  set(val) {
+    emit('update:parentValue', val)
   }
 })
 
