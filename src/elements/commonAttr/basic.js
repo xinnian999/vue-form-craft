@@ -1,12 +1,22 @@
 export default [
+  // {
+  //   component: 'Title',
+  //   name: 'basic',
+  //   hideLabel: true,
+  //   props: {
+  //     title: '通用属性',
+  //     type: 'h4'
+  //   }
+  // },
   {
-    component: 'Title',
-    name: 'basic',
-    hideLabel: true,
+    component: 'Divider',
     props: {
       title: '通用属性',
-      type: 'h4'
-    }
+      contentPosition: 'center'
+    },
+    onlyId: 'form-Z2QZ',
+    name: 'VekeRi',
+    hidden: false
   },
   { label: '字段label', component: 'Input', name: 'label' },
   { label: '字段标识', component: 'Input', name: 'name' },

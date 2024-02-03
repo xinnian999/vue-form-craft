@@ -1,12 +1,22 @@
 export default [
+  // {
+  //   component: 'Title',
+  //   name: 'basic',
+  //   hideLabel: true,
+  //   props: {
+  //     title: '联动',
+  //     type: 'h4'
+  //   }
+  // },
   {
-    component: 'Title',
-    name: 'basic',
-    hideLabel: true,
+    component: 'Divider',
     props: {
       title: '联动',
-      type: 'h4'
-    }
+      contentPosition: 'center'
+    },
+    onlyId: 'form-Z2QZ222',
+    name: 'VekeRi',
+    hidden: false
   },
   {
     label: '联动表单值',

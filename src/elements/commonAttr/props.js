@@ -1,12 +1,22 @@
 export default [
+  // {
+  //   component: 'Title',
+  //   name: 'Props',
+  //   hideLabel: true,
+  //   props: {
+  //     title: 'props',
+  //     type: 'h4'
+  //   }
+  // },
   {
-    component: 'Title',
-    name: 'Props',
-    hideLabel: true,
+    component: 'Divider',
     props: {
-      title: 'props',
-      type: 'h4'
-    }
+      title: 'Props',
+      contentPosition: 'center'
+    },
+    onlyId: 'form-Props',
+    name: 'VekeRi',
+    hidden: false
   },
   { label: '自定义class', component: 'Input', name: 'class' },
   {

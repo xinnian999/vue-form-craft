@@ -64,6 +64,7 @@ const useSelect = (props, emits) => {
   }, 300)
 
   onMounted(() => {
+    console.log(props)
     const { mode, options } = props
     if (mode === 'static') {
       currentOptions.value = options

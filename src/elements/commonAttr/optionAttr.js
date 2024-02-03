@@ -61,7 +61,7 @@ export default [
     onlyId: 'form-Iwpd',
     props: {
       mode: 'table',
-      newItemDefaults: (index) => ({ label: `选项${index + 1}`, value: `value${index + 1}` })
+      newItemDefaults: (index) => ({ label: `选项${index + 1}`, key: `value${index + 1}` })
     }
   },
   apiAttr
