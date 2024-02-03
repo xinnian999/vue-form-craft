@@ -4,7 +4,7 @@
     :key="item.name"
     v-model="formValues[item.name]"
     v-bind="item"
-    :prop="name && `${name}.${item.name}`"
+    :prop="name && `${prop || name}.${item.name}`"
   />
 </template>
 
@@ -16,7 +16,8 @@ import { mergeWith } from 'lodash'
 const props = defineProps({
   modelValue: Object,
   formItems: Array,
-  name: String
+  name: String,
+  prop: String
 })
 
 const emit = defineEmits(['update:modelValue'])

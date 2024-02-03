@@ -1,15 +1,14 @@
 <template>
   <template v-if="!hidden">
-    <div v-if="currentComponentConfig.isNotFormItem" class="notFormItem">
-      <component :is="currentComponentConfig.component" v-bind="props">
-        <template
-          v-if="currentComponentConfig.isWrapper || currentComponentConfig.isDefaultWrapper"
-        >
+    <div v-if="config.isNotFormItem" class="notFormItem">
+      <component :is="config.component" v-bind="props">
+        <template v-if="config.isWrapper || config.isDefaultWrapper">
           <form-render
             v-if="currentComponent === 'ItemGroup'"
             v-model="value"
             :formItems="children"
             :name="name"
+            :prop="prop"
           />
           <form-render v-else v-model="formValues" :formItems="children" />
         </template>
@@ -38,7 +37,7 @@
       </template>
 
       <component
-        :is="currentComponentConfig.component"
+        :is="config.component"
         :disabled="schema.disabled"
         :size="schema.size"
         v-bind="pickBy({ ...props, name, children }, Boolean)"
@@ -138,7 +137,7 @@ const currentComponent = computed(() => {
   return thisProps.component
 })
 
-const currentComponentConfig = computed(() => {
+const config = computed(() => {
   return elements[currentComponent.value] || {}
 })
 
