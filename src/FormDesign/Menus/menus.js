@@ -23,7 +23,7 @@ const menus = [
     children: getChildren('layout')
   },
   {
-    title: '功能字段',
+    title: '辅助字段',
     children: getChildren('assist')
   }
 ]
