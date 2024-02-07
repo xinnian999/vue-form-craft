@@ -4,7 +4,7 @@
       <component :is="config.component" v-bind="thisProps" v-model="parentValue" />
     </div>
 
-    <div v-else-if="config.type === 'assist'" class="notFormItem">
+    <div v-else-if="config.type === 'assist'" :style="{ marginBottom: design ? 0 : '18px' }">
       <component :is="config.component" v-bind="props" />
     </div>
 
