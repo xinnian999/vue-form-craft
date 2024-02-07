@@ -1,58 +1,40 @@
 <template>
-  <schema-form v-model="formValues" :schema="schema" ref="formRef" disabled />
-  <button @click="handleSubmit">提交</button>
+  <schema-form :schema="schema" @onSubmit="onSubmit" />
 </template>
 
 <script setup>
-import { ref } from 'vue'
-
-const formRef = ref()
-
-const formValues = ref({
-  title: 'test',
-  desc: '这是一个简单基本的描述'
-})
-
 const schema = {
   labelWidth: 150,
   labelAlign: 'right',
   size: 'default',
   items: [
     {
-      label: '标题',
+      label: '用户名',
       component: 'Input',
       props: {
-        placeholder: '请输入标题'
+        placeholder: '请输入用户名'
       },
-      onlyId: 'form-eNR0',
-      name: 'title',
-      required: true
+      name: 'username'
     },
     {
-      label: '描述',
-      component: 'Textarea',
+      label: '密码',
+      component: 'Password',
       props: {
-        placeholder: '请输入描述'
+        placeholder: '请输入密码'
       },
-      onlyId: 'form-D1x7',
-      name: 'desc'
+      name: 'password'
     },
     {
-      label: '图标选择器',
-      component: 'IconSelect',
-      props: {},
-      onlyId: 'form-MrlL',
-      name: 'p0rWAP'
+      component: 'Button',
+      props: {
+        name: '提交',
+        clickEvent: 'submitForm'
+      }
     }
   ]
 }
 
-const handleSubmit = () => {
-  formRef.value
-    .submit()
-    .then((values) => {
-      alert(JSON.stringify(values))
-    })
-    .catch((e) => console.log(e))
+const onSubmit = (values) => {
+  alert(JSON.stringify(values))
 }
 </script>
