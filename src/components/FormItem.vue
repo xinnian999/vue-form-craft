@@ -1,5 +1,5 @@
 <template>
-  <template v-if="!hidden">
+  <template v-if="design || !hidden">
     <div v-if="config.type === 'layout'" class="notFormItem">
       <component :is="config.component" v-bind="thisProps" v-model="parentValue" />
     </div>

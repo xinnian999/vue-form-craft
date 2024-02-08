@@ -37,14 +37,13 @@
       <CanvasWrapper v-bind="thisProps" />
     </component>
 
-    <form-item v-else v-bind="thisProps" :props="checkProps(props)" :hidden="false" design />
+    <form-item v-else v-bind="thisProps" :props="checkProps(props)" design />
   </div>
 </template>
 
 <script setup>
 import { defineProps, inject, computed } from 'vue'
 import { omit } from 'lodash'
-import { ElButton } from 'element-plus'
 import { copyItems, deleteItem } from '@/utils'
 import { FormItem } from '@/components'
 import CanvasWrapper from './CanvasWrapper.vue'
