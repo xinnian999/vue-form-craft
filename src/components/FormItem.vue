@@ -38,7 +38,7 @@
         :disabled="schema.disabled"
         :size="schema.size"
         v-bind="pickBy({ ...props, name, children }, Boolean)"
-        v-model="value"
+        v-model:[config.modelName]="value"
       />
     </el-form-item>
   </template>

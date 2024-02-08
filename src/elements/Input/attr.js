@@ -97,11 +97,6 @@ export default [
       ...props,
       { label: '显示清除按钮', component: 'Switch', name: 'clearable' },
       {
-        label: '占位提示',
-        component: 'Input',
-        name: 'placeholder'
-      },
-      {
         label: '最长字数',
         component: 'InputNumber',
         name: 'maxlength'

@@ -6,7 +6,6 @@ import * as Directives from '@/directive'
 import { MdPreview, MdCatalog, MdEditor } from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
 import 'element-plus/dist/index.css'
-import { props } from '@/elements/commonAttr'
 
 const modules = import.meta.glob('@/elements/*/index.js', { eager: true })
 const elements = {}
@@ -51,17 +50,31 @@ const install = function (app, options = {}) {
       return (mergeElements[key] = {
         ...value,
         component: customData.component,
+        modelName: customData.modelName || 'modelValue',
         attr: customData.propAttrs
           ? value.attr.map((item) =>
               item.name === 'props'
-                ? { ...item, children: [...props, ...customData.propAttrs] }
+                ? {
+                    ...item,
+                    children: [
+                      {
+                        component: 'Divider',
+                        props: {
+                          title: 'Props',
+                          contentPosition: 'center'
+                        },
+                        name: 'VekeRi'
+                      },
+                      ...customData.propAttrs
+                    ]
+                  }
                 : item
             )
           : value.attr
       })
     }
 
-    return (mergeElements[key] = value)
+    return (mergeElements[key] = { ...value, modelName: 'modelValue' })
   })
 
   app.provide('$request', request)
