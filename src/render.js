@@ -50,12 +50,6 @@ const render = (component, dom) => {
     //   }
   })
 
-  // app.config.warnHandler = (msg, instance, trace) => {
-  //   if (msg.includes('non-props')) {
-  //     return null
-  //   }
-  //   console.warn(msg, instance, trace)
-  // }
   app.mount(dom)
 }
 

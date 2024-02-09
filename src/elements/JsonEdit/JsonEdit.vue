@@ -10,8 +10,7 @@
         currentMode="code"
         :modeList="['text', 'view', 'tree', 'code', 'form']"
         :options="{ search: false, history: false }"
-        language="zh"
-        :style="{ height: '60vh' }"
+        v-bind="$attrs"
       />
     </el-dialog>
   </template>
@@ -25,18 +24,22 @@
         currentMode="code"
         :modeList="['text', 'view', 'tree', 'code', 'form']"
         :options="{ search: false, history: false }"
-        language="zh"
         :style="{ height }"
+        v-bind="$attrs"
       />
     </Disabled>
   </template>
 </template>
 
 <script setup lang="jsx">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, defineOptions } from 'vue'
 import JsonEditorVue from 'json-editor-vue3'
 import { ElButton, ElDialog } from 'element-plus'
 import { Disabled } from '@/components'
+
+defineOptions({
+  inheritAttrs: false
+})
 
 const props = defineProps({
   modelValue: {},
@@ -86,6 +89,7 @@ onMounted(() => {
 
 .editor-dialog {
   width: 100%;
+  height: 60vh;
 }
 
 .jsoneditor-undo,
