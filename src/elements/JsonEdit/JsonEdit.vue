@@ -51,7 +51,8 @@ const props = defineProps({
   },
   height: null,
   description: String,
-  disabled: Boolean
+  disabled: Boolean,
+  size: String
 })
 
 const emits = defineEmits(['update:modelValue'])

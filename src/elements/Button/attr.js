@@ -1,7 +1,7 @@
 import { props } from '../commonAttr'
 
 export default [
-  { label: '字段label', component: 'Input', name: 'label' },
+  { label: '字段标签', component: 'Input', name: 'label' },
   { label: '字段标识', component: 'Input', name: 'name' },
   { label: '隐藏label', component: 'Switch', name: 'hideLabel' },
   {

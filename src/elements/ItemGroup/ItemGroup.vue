@@ -1,15 +1,17 @@
 <template>
-  <FormRender v-if="props.type === 'object'" v-model="objectValue" :formItems="children" />
+  <div v-bind="$attrs">
+    <FormRender v-if="props.type === 'object'" v-model="objectValue" :formItems="children" />
 
-  <template v-else>
-    <form-item
-      v-for="(item, index) in children"
-      :key="item.name"
-      v-model="arrayValue[index]"
-      v-bind="item"
-      :prop="`${prop || name}[${index}]`"
-    />
-  </template>
+    <template v-else>
+      <form-item
+        v-for="(item, index) in children"
+        :key="item.name"
+        v-model="arrayValue[index]"
+        v-bind="item"
+        :prop="`${prop || name}[${index}]`"
+      />
+    </template>
+  </div>
 </template>
 
 <script setup>

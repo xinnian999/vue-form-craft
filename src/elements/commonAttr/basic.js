@@ -18,7 +18,7 @@ export default [
     name: 'VekeRi',
     hidden: false
   },
-  { label: '字段label', component: 'Input', name: 'label' },
+  { label: '字段标签', component: 'Input', name: 'label' },
   { label: '字段标识', component: 'Input', name: 'name' },
   { label: '字段说明', component: 'Textarea', name: 'help' },
   {
