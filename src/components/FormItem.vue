@@ -37,7 +37,7 @@
         :is="config.component"
         :disabled="schema.disabled"
         :size="schema.size"
-        v-bind="pickBy({ ...props, name, children }, Boolean)"
+        v-bind="formItemProps"
         v-model:[config.modelName]="value"
       />
     </el-form-item>
@@ -143,6 +143,17 @@ const currentComponent = computed(() => {
 
 const config = computed(() => {
   return elements[currentComponent.value] || {}
+})
+
+const formItemProps = computed(() => {
+  const initProps = {
+    ...thisProps.props,
+    name: thisProps.name
+  }
+  if (thisProps.children) {
+    initProps.children = thisProps.children
+  }
+  return initProps
 })
 
 onBeforeMount(() => {
