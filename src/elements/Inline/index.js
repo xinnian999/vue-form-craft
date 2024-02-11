@@ -14,7 +14,7 @@ export default {
     children: [],
     props: {
       align: 'left',
-      margin: 20
+      gap: 20
     }
   },
   attr

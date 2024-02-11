@@ -13,7 +13,8 @@ const thisProps = defineProps({
   modelValue: Object,
   props: Object,
   children: Array,
-  design: Boolean
+  design: Boolean,
+  gap: Number
 })
 
 const InlineStyle = useStyle('Inline', thisProps.props)

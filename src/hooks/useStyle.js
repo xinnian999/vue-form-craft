@@ -16,7 +16,8 @@ const useStyle = (component, props) => {
       display: 'flex',
       'justify-content': props.align,
       'flex-wrap': props.autoWrap ? 'wrap' : 'nowrap',
-      'overflow-x': 'auto'
+      'overflow-x': 'auto',
+      gap: `${props.gap}px`
     }))
   }
 
