@@ -10,12 +10,14 @@ import customIconSelect from './customIconSelect'
 const components = [SchemaForm, FormDesign, RemoteSchemaForm, RemoteFormDesign, IconRender] // 全局组件列表
 
 const install = function (app, options = {}) {
-  const { request = axios, getSchema, customElements = {}, icon = {} } = options
+  const { request = axios, getSchema, customElements = {}, iconSelectConfig = {} } = options
 
-  app.provide('$request', request)
-  app.provide('$getSchema', getSchema)
-  app.provide('$elements', mergeElements(customElements))
-  app.provide('$icon', customIconSelect(icon))
+  app.provide('$options', {
+    request,
+    getSchema,
+    elements: mergeElements(customElements),
+    iconSelectConfig: customIconSelect(iconSelectConfig)
+  })
 
   // 注册组件
   components.forEach((component) => {

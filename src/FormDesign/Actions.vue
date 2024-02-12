@@ -88,7 +88,7 @@ defineProps({
 
 const schema = inject('$schema')
 const emit = inject('$emit')
-const elements = inject('$elements')
+const { elements } = inject('$options')
 const JsonEdit = elements.JsonEdit.component
 
 const json = computed({

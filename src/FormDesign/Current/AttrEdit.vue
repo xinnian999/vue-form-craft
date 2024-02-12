@@ -30,7 +30,7 @@ import { ElButton, ElDrawer } from 'element-plus'
 
 import { SchemaForm } from '@/components'
 
-const elements = inject('$elements')
+const { elements } = inject('$options')
 
 const current = inject('$current')
 

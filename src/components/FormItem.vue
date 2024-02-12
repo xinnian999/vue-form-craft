@@ -73,7 +73,7 @@ const thisProps = defineProps({
 
 const emit = defineEmits(['update:modelValue', 'update:parentValue'])
 
-const elements = inject('$elements')
+const { elements } = inject('$options')
 
 const schema = inject('$schema')
 

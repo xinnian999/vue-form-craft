@@ -29,7 +29,7 @@ const render = (component, dom) => {
       })
       return JSON.parse(data[0].formSchema)
     }
-    // icon: { component: IconRender, propKey: 'name' }
+    // iconSelectConfig: { component: IconRender, propKey: 'name' }
     // customElements: {
     //   Input: {
     //     component: Input,

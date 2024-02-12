@@ -63,7 +63,7 @@ const thisProps = defineProps({
   hidden: Boolean
 })
 
-const elements = inject('$elements')
+const { elements } = inject('$options')
 
 const current = inject('$current')
 

@@ -5,7 +5,7 @@ import { getDataByPath } from '@/utils'
 const useSelect = (props, emits) => {
   const $selectData = inject('$selectData')
 
-  const $request = inject('$request')
+  const { request } = inject('$options')
 
   const selectVal = computed({
     get() {
@@ -35,7 +35,7 @@ const useSelect = (props, emits) => {
 
     loading.value = true
 
-    const res = await $request({
+    const res = await request({
       baseURL,
       url,
       method,
