@@ -91,7 +91,7 @@ watch(
   () => cloneDeep(formValues.value),
   (newVal, oldVal) => {
     emit('onChange', newVal)
-    handleLinkages({ newVal, oldVal, form: formValues, formItems: formItems.value })
+    handleLinkages({ newVal, oldVal, formValues, formItems: formItems.value })
   },
   { deep: true }
 )

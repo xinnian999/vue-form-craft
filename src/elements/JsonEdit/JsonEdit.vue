@@ -1,6 +1,8 @@
 <template>
   <template v-if="mode === 'dialog'">
-    <el-button @click="handlePreviewExec" :disabled="disabled">{{ title }}</el-button>
+    <el-button @click="handlePreviewExec" :disabled="disabled" type="primary">{{
+      title
+    }}</el-button>
 
     <el-dialog v-model="execVisible" :title="title" width="70%" center destroy-on-close>
       <div>{{ description }}</div>

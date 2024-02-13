@@ -68,7 +68,8 @@ const thisProps = defineProps({
   rules: Array,
   class: null,
   design: Boolean,
-  parentValue: Object
+  parentValue: Object,
+  change: Array
 })
 
 const emit = defineEmits(['update:modelValue', 'update:parentValue'])
@@ -153,19 +154,20 @@ const formItemProps = computed(() => {
   if (thisProps.children) {
     initProps.children = thisProps.children
   }
+
   return initProps
 })
 
 onBeforeMount(() => {
-  // TODO:el-switch的modelValue提前赋值会引发未知BUG,暂时推到dom挂载后再赋值（但是表单重置会失效）
-  if (currentComponent.value === 'Switch') {
-    return nextTick(() => {
+  if (!value.value && thisProps.initialValue !== undefined) {
+    // TODO:el部分组件提前赋值会引发BUG,暂时推到dom挂载后再赋值（但是表单重置会失效）
+    if (['Switch', 'Select'].includes(currentComponent.value)) {
+      nextTick(() => {
+        emit('update:modelValue', thisProps.initialValue)
+      })
+    } else {
       emit('update:modelValue', thisProps.initialValue)
-    })
-  }
-
-  if ((!value.value && thisProps.initialValue) || thisProps.initialValue === 0) {
-    emit('update:modelValue', thisProps.initialValue)
+    }
   }
 })
 </script>

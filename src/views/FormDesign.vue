@@ -1,5 +1,5 @@
 <template>
-  <RemoteFormDesign schema-id="4" />
+  <RemoteFormDesign />
 </template>
 
 <script setup>
