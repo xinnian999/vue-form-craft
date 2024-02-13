@@ -5,7 +5,6 @@
     v-model="valueProxy[item.name]"
     v-model:parentValue="value"
     v-bind="item"
-    :prop="name && `${prop || name}.${item.name}`"
   />
 </template>
 

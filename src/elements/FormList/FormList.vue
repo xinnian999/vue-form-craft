@@ -9,7 +9,7 @@
               v-model="item[field.name]"
               v-bind="field"
               :key="field.label"
-              :prop="`${name}.${index}.${field.name}`"
+              :prop="getPath(index, field.dataPath)"
               hideLabel
             />
           </el-space>
@@ -49,7 +49,7 @@
           v-bind="field"
           :key="field.label"
           class="list-card-item"
-          :prop="`${name}.${index}.${field.name}`"
+          :prop="getPath(index, field.dataPath)"
         />
       </el-card>
     </template>
@@ -143,6 +143,10 @@ const isMax = computed(() => {
   return list.value.length >= props.maxLines
 })
 
+const getPath = (index, dataPath) => {
+  return dataPath.replace('[]', index)
+}
+
 const handleAddItem = () => {
   if (isMax.value) {
     return
@@ -163,7 +167,7 @@ const formatter = (item, data, index) => {
       modelValue={data[item.name]}
       onUpdate:modelValue={(newValue) => (data[item.name] = newValue)}
       style={{ marginBottom: 0 }}
-      prop={`${props.name}.${index}.${item.name}`}
+      prop={getPath(index, item.dataPath)}
     />
   )
 }

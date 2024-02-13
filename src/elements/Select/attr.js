@@ -24,7 +24,7 @@ export default [
           'inactive-text': '单选'
         },
         onlyId: 'form-eTxc',
-        change: [{ target: 'initialValue', value: "{{ $values.props.multiple?[]:'' }}" }]
+        change: [{ target: 'initialValue', value: "{{ $val?[]:'' }}" }]
       },
       {
         label: '自动选中第一项',

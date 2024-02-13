@@ -17,7 +17,7 @@
       id="form-item"
       :style="{ marginBottom: design ? 0 : '18px', ...style }"
       :key="name"
-      :prop="prop || name"
+      :prop="prop || dataPath"
       :label-width="hideLabel ? '0' : schema.labelWidth"
       :rules="computeRules"
       :class="thisProps.class"
@@ -69,7 +69,8 @@ const thisProps = defineProps({
   class: null,
   design: Boolean,
   parentValue: Object,
-  change: Array
+  change: Array,
+  dataPath: String
 })
 
 const emit = defineEmits(['update:modelValue', 'update:parentValue'])

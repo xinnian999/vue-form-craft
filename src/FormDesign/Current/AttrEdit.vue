@@ -27,6 +27,7 @@
 import { computed, inject, ref } from 'vue'
 import JsonEditorVue from 'json-editor-vue3'
 import { ElButton, ElDrawer } from 'element-plus'
+import { changeItems } from '@/utils'
 
 import { SchemaForm } from '@/components'
 
@@ -40,7 +41,7 @@ const attrSchema = computed(() => {
   const config = elements[current.value.component]
 
   if (config) {
-    return { size: 'small', labelAlign: 'top', items: config.attr }
+    return { size: 'small', labelAlign: 'top', items: changeItems(config.attr) }
   }
 
   return { size: 'small', labelAlign: 'top', items: [] }
