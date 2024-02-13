@@ -27,7 +27,7 @@ import {
   defineOptions
 } from 'vue'
 import { ElForm, ElMessage } from 'element-plus'
-import { handleLinkages, deepParse } from '@/utils'
+import { handleLinkages, deepParse, changeItems } from '@/utils'
 import FormRender from './FormRender.vue'
 import { cloneDeep } from 'lodash'
 
@@ -85,7 +85,7 @@ const context = computed(() => ({
 // 保证schema的响应式
 const currentSchema = computed(() => ({ disabled: props.disabled, ...props.schema }))
 
-const formItems = computed(() => deepParse(currentSchema.value.items, context.value))
+const formItems = computed(() => deepParse(changeItems(currentSchema.value.items), context.value))
 
 watch(
   () => cloneDeep(formValues.value),

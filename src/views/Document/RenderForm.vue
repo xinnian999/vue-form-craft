@@ -1,21 +1,16 @@
 <template>
-  <schema-form :schema="currentSchema" class="renderForm" />
+  <schema-form :schema="schema" class="renderForm" />
 </template>
 
 <script setup lang="jsx">
-import { defineProps, computed } from 'vue'
-import { changeItems } from '@/utils'
+import { defineProps } from 'vue'
 
-const props = defineProps({
+defineProps({
   // 表单JSON配置
   schema: {
     type: Object,
     default: () => ({ labelWidth: 150, labelAlign: 'right', size: 'default', items: [] })
   }
-})
-
-const currentSchema = computed(() => {
-  return { ...props.schema, items: changeItems(props.schema.items) }
 })
 </script>
 

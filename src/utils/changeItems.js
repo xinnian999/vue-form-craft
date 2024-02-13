@@ -11,6 +11,9 @@ const changeItems = (items, path) => {
     }
 
     data.dataPath = path ? `${path}.${data.name}` : data.name
+    if (!data.hidden) {
+      delete data.hidden
+    }
 
     if (config.children) {
       if (item.component === 'ItemGroup') {

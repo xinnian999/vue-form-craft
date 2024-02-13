@@ -137,7 +137,9 @@ const list = computed(() => {
   return props.modelValue || []
 })
 
-const fields = computed(() => (index) => deepParse(props.children, { $item: list.value[index] }))
+const fields = computed(
+  () => (index) => deepParse(props.children, { $item: list.value[index], $index: index })
+)
 
 const isMax = computed(() => {
   return list.value.length >= props.maxLines
@@ -162,7 +164,7 @@ const handleReduceItem = (index) => {
 const formatter = (item, data, index) => {
   return (
     <FormItem
-      {...deepParse(item, { $item: list.value[index] })}
+      {...deepParse(item, { $item: list.value[index], $index: index })}
       hideLabel
       modelValue={data[item.name]}
       onUpdate:modelValue={(newValue) => (data[item.name] = newValue)}

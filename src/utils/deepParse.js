@@ -30,7 +30,11 @@ const deepParse = (prop, context) => {
   if (isPlainObject(prop)) {
     return Object.keys(prop).reduce((all, key) => {
       if (prop.name && prop.dataPath && $values) {
+        const parentDataPathArr = prop.dataPath.split('.')
+        const parentDataPath = parentDataPathArr.slice(0, parentDataPathArr.length - 1).join('.')
+
         context.$val = getDataByPath($values, prop.dataPath)
+        context.$parentVal = getDataByPath($values, parentDataPath)
       }
       return { ...all, [key]: deepParse(prop[key], context) }
     }, {})
