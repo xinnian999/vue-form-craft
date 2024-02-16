@@ -7,12 +7,12 @@
     clearable
     filterable
     ref="selectRef"
-    v-selectLoadMore:[popperClass]="fetchData"
+    v-selectLoadMore:[popperClass]="scrollFetchData"
     :popper-class="popperClass"
   >
     <template #empty v-if="tableDrop">
       <el-table
-        v-tableLoadMore="fetchData"
+        v-tableLoadMore="scrollFetchData"
         :data="currentOptions"
         max-height="250"
         @current-change="handleCurrentChange"
@@ -44,7 +44,7 @@
       </el-option>
     </template>
 
-    <template #footer>
+    <template #footer v-if="scrollLoad">
       <div class="footer" v-loading="loading">
         {{ isMax ? '没有更多选项了' : loading ? '加载中' : '滚动到底加载更多选项' }}
       </div>
@@ -90,7 +90,8 @@ const props = defineProps({
   formatter: Function,
   sort: Boolean,
   tableDrop: Boolean,
-  columns: { default: () => [], type: Array }
+  columns: { default: () => [], type: Array },
+  scrollLoad: Boolean
 })
 
 const emits = defineEmits(['update:modelValue', 'onChangeSelect'])
@@ -103,6 +104,12 @@ const { selectVal, currentOptions, selectChange, loading, fetchData, isMax } = u
   props,
   emits
 )
+
+const scrollFetchData = () => {
+  if (props.scrollLoad) {
+    fetchData()
+  }
+}
 
 //table单选回调
 const handleCurrentChange = (row) => {

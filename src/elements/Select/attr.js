@@ -33,6 +33,12 @@ export default [
         onlyId: 'form-LPpx'
       },
       {
+        label: '滚动加载下一页',
+        component: 'Switch',
+        name: 'scrollLoad',
+        onlyId: 'form-LPpxscrollLoad'
+      },
+      {
         label: '表格模式',
         component: 'Switch',
         name: 'tableDrop',
