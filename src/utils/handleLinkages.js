@@ -1,4 +1,4 @@
-import { isArray, cloneDeep, isEqual } from 'lodash'
+import { isPlainObject, cloneDeep, isEqual } from 'lodash'
 
 const updateObjectAtPath = (obj, path, value) => {
   // 将路径字符串分割成路径数组
@@ -43,8 +43,8 @@ const handleLinkages = ({ newVal, oldVal, formValues, formItems }) => {
 
     if (item.children) {
       handleLinkages({
-        newVal: newVal[item.name],
-        oldVal: oldVal[item.name],
+        newVal: isPlainObject(newVal) ? newVal[item.name] : newVal,
+        oldVal: isPlainObject(oldVal) ? oldVal[item.name] : oldVal,
         formValues,
         formItems: item.children
       })
