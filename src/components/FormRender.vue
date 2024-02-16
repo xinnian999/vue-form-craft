@@ -2,9 +2,9 @@
   <form-item
     v-for="item in formItems"
     :key="item.name"
-    v-model="formValues[item.name]"
+    v-model="valueProxy[item.name]"
+    v-model:parentValue="value"
     v-bind="item"
-    :prop="name && `${name}.${item.name}`"
   />
 </template>
 
@@ -16,13 +16,23 @@ import { mergeWith } from 'lodash'
 const props = defineProps({
   modelValue: Object,
   formItems: Array,
-  name: String
+  name: String,
+  prop: String
 })
 
 const emit = defineEmits(['update:modelValue'])
 
-// 通过Proxy接管的数据源，某项属性被修改会立刻通知父组件，遵守单项数据流原则
-const formValues = computed(() => {
+const value = computed({
+  get() {
+    return props.modelValue
+  },
+  set(val) {
+    emit('update:modelValue', val)
+  }
+})
+
+// 将子字段合成一个字段
+const valueProxy = computed(() => {
   return new Proxy(props.modelValue || {}, {
     set(target, key, value) {
       //字段值为对象时，需要与上一次值深度合并（itemGroup）,数组不合并
@@ -32,7 +42,6 @@ const formValues = computed(() => {
         }
       })
 
-      // console.log(mergeValue)
       emit('update:modelValue', mergeValue)
       return true
     }

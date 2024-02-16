@@ -5,14 +5,12 @@ export default [
     label: '标签key',
     component: 'Input',
     name: 'labelKey',
-    initialValue: 'label',
     onlyId: 'form-X6hs'
   },
   {
     label: '值Key',
     component: 'Input',
     name: 'valueKey',
-    initialValue: 'value',
     onlyId: 'form-STkl'
   },
   {
@@ -30,9 +28,9 @@ export default [
           label: '远程',
           value: 'remote'
         }
-      ]
+      ],
+      optionType: 'button'
     },
-    initialValue: 'static',
     onlyId: 'form-PLpj'
   },
   {
@@ -49,6 +47,7 @@ export default [
           placeholder: '请输入...'
         },
         onlyId: 'form-LnGh'
+        // initialValue: "{{ '选项' + ($index+1) }}"
       },
       {
         label: '选项值',
@@ -56,12 +55,14 @@ export default [
         component: 'Input',
         props: {},
         onlyId: 'form-HYtW'
+        // initialValue: "{{ 'value' + ($index+1) }}"
       }
     ],
     onlyId: 'form-Iwpd',
     props: {
       mode: 'table',
-      newItemDefaults: (index) => ({ label: `选项${index + 1}`, key: `value${index + 1}` })
+      newItemDefaults:
+        '{{ (index) => ({ [$values.props.labelKey]: `选项${index + 1}`, [$values.props.valueKey]: `value${index + 1}` }) }}'
     }
   },
   apiAttr

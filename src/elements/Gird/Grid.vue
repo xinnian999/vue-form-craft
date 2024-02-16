@@ -1,18 +1,32 @@
 <template>
   <div :style="gridStyle" class="form-item-grid">
-    <slot />
+    <FormRender v-model="value" :formItems="children" />
   </div>
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
+import { defineProps, computed, defineEmits } from 'vue'
 import useStyle from '@/hooks/useStyle'
+import { FormRender } from '@/components'
 
-const props = defineProps({
-  space: Number,
-  colCount: Number
+const thisProps = defineProps({
+  modelValue: Object,
+  props: Object,
+  children: Array,
+  design: Boolean
 })
-const gridStyle = useStyle('Grid', props)
+const gridStyle = useStyle('Grid', thisProps.props)
+
+const emit = defineEmits(['update:modelValue'])
+
+const value = computed({
+  get() {
+    return thisProps.modelValue
+  },
+  set(val) {
+    emit('update:modelValue', val)
+  }
+})
 </script>
 
 <style lang="less">

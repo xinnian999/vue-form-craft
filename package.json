@@ -15,6 +15,9 @@
   },
   "dependencies": {
     "@originjs/vite-plugin-commonjs": "^1.0.3",
+    "@wangeditor/editor": "^5.1.23",
+    "@wangeditor/editor-for-vue": "^5.1.12",
+    "ant-design-vue": "^4.1.2",
     "axios": "^1.6.2",
     "codemirror": "^5.65.16",
     "codemirror-editor-vue3": "^2.4.1",

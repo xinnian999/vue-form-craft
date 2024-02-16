@@ -30,14 +30,16 @@ import { ref, shallowRef, onBeforeMount, defineEmits, defineProps, inject } from
 import { debounce } from 'lodash'
 import { Disabled } from '@/components'
 
-const props = defineProps({
+defineProps({
   modelValue: String,
   disabled: Boolean
 })
 
 const emits = defineEmits(['update:modelValue'])
 
-const { component, propKey, iconList } = inject('$icon')
+const {
+  iconSelectConfig: { component, propKey, iconList }
+} = inject('$options')
 
 const visible = ref(false)
 

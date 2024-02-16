@@ -3,6 +3,14 @@ import { optionAttr, linkageAttr, basic, props } from '../commonAttr'
 export default [
   ...basic,
   {
+    label: '初始值',
+    component: 'JsonEdit',
+    name: 'initialValue',
+    props: {
+      mode: 'dialog'
+    }
+  },
+  {
     component: 'ItemGroup',
     name: 'props',
     children: [
@@ -15,7 +23,8 @@ export default [
           'active-text': '多选',
           'inactive-text': '单选'
         },
-        onlyId: 'form-eTxc'
+        onlyId: 'form-eTxc',
+        change: [{ target: 'initialValue', value: "{{ $val?[]:'' }}" }]
       },
       {
         label: '自动选中第一项',
@@ -24,10 +33,25 @@ export default [
         onlyId: 'form-LPpx'
       },
       {
+        label: '滚动加载下一页',
+        component: 'Switch',
+        name: 'scrollLoad',
+        onlyId: 'form-LPpxscrollLoad'
+      },
+      {
         label: '表格模式',
         component: 'Switch',
         name: 'tableDrop',
-        onlyId: 'form-LPpx'
+        onlyId: 'form-LPpx',
+        change: [
+          {
+            target: 'props.columns',
+            value: [
+              { title: 'label', dataIndex: 'label' },
+              { title: 'value', dataIndex: 'value' }
+            ]
+          }
+        ]
       },
       {
         label: '表格列配置',
@@ -35,10 +59,9 @@ export default [
         component: 'JsonEdit',
         hidden: '{{!$values.props.tableDrop}}',
         onlyId: 'form-Iwpd',
-        initialValue: [
-          { title: 'label', dataIndex: 'label' },
-          { title: 'value', dataIndex: 'value' }
-        ]
+        props: {
+          mode: 'dialog'
+        }
       },
 
       ...optionAttr

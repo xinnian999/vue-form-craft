@@ -6,7 +6,7 @@ export default {
   component: ElSlider,
   icon: 'slider',
   type: 'basic',
-  order: 16,
+  order: 12,
   initialValues: { label: '滑块', component: 'Slider' },
   attr: [
     ...basic,

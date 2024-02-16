@@ -1,19 +1,15 @@
 <template>
-  <template v-if="!hidden">
-    <div v-if="currentComponentConfig.isNotFormItem" class="notFormItem">
-      <component :is="currentComponentConfig.component" v-bind="props">
-        <template
-          v-if="currentComponentConfig.isWrapper || currentComponentConfig.isDefaultWrapper"
-        >
-          <form-render
-            v-if="currentComponent === 'ItemGroup'"
-            v-model="value"
-            :formItems="children"
-            :name="name"
-          />
-          <form-render v-else v-model="formValues" :formItems="children" />
-        </template>
-      </component>
+  <template v-if="design || !hidden">
+    <div v-if="config.type === 'layout'" class="notFormItem">
+      <component :is="config.component" v-bind="thisProps" v-model="parentValue" />
+    </div>
+
+    <div v-else-if="config.type === 'assist'" :style="{ marginBottom: design ? 0 : '18px' }">
+      <component :is="config.component" v-bind="props" />
+    </div>
+
+    <div v-else-if="component === 'ItemGroup'" class="notFormItem">
+      <component :is="config.component" v-bind="thisProps" v-model="value" />
     </div>
 
     <el-form-item
@@ -21,7 +17,7 @@
       id="form-item"
       :style="{ marginBottom: design ? 0 : '18px', ...style }"
       :key="name"
-      :prop="prop || name"
+      :prop="prop || dataPath"
       :label-width="hideLabel ? '0' : schema.labelWidth"
       :rules="computeRules"
       :class="thisProps.class"
@@ -38,11 +34,11 @@
       </template>
 
       <component
-        :is="currentComponentConfig.component"
+        :is="config.component"
         :disabled="schema.disabled"
         :size="schema.size"
-        v-bind="pickBy({ ...props, name, children }, Boolean)"
-        v-model="value"
+        v-bind="formItemProps"
+        v-model:[config.modelName]="value"
       />
     </el-form-item>
   </template>
@@ -53,7 +49,6 @@ import { computed, defineProps, defineEmits, onBeforeMount, inject, onMounted, n
 import { ElFormItem, ElTooltip } from 'element-plus'
 import { isString, pickBy } from 'lodash'
 import { isRegexString } from '@/utils'
-import FormRender from './FormRender.vue'
 
 const thisProps = defineProps({
   label: String,
@@ -72,16 +67,17 @@ const thisProps = defineProps({
   onlyId: String,
   rules: Array,
   class: null,
-  design: Boolean
+  design: Boolean,
+  parentValue: Object,
+  change: Array,
+  dataPath: String
 })
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'update:parentValue'])
 
-const elements = inject('$elements')
+const { elements } = inject('$options')
 
 const schema = inject('$schema')
-
-const formValues = thisProps.design ? {} : inject('$formValues')
 
 const value = computed({
   get() {
@@ -89,6 +85,15 @@ const value = computed({
   },
   set(val) {
     emit('update:modelValue', val)
+  }
+})
+
+const parentValue = computed({
+  get() {
+    return thisProps.parentValue
+  },
+  set(val) {
+    emit('update:parentValue', val)
   }
 })
 
@@ -138,20 +143,32 @@ const currentComponent = computed(() => {
   return thisProps.component
 })
 
-const currentComponentConfig = computed(() => {
+const config = computed(() => {
   return elements[currentComponent.value] || {}
 })
 
-onBeforeMount(() => {
-  // TODO:el-switch的modelValue提前赋值会引发未知BUG,暂时推到dom挂载后再赋值（但是表单重置会失效）
-  if (currentComponent.value === 'Switch') {
-    return nextTick(() => {
-      emit('update:modelValue', thisProps.initialValue)
-    })
+const formItemProps = computed(() => {
+  const initProps = {
+    ...thisProps.props,
+    name: thisProps.name
+  }
+  if (thisProps.children) {
+    initProps.children = thisProps.children
   }
 
-  if ((!value.value && thisProps.initialValue) || thisProps.initialValue === 0) {
-    emit('update:modelValue', thisProps.initialValue)
+  return initProps
+})
+
+onBeforeMount(() => {
+  if (!value.value && thisProps.initialValue !== undefined) {
+    // TODO:el部分组件提前赋值会引发BUG,暂时推到dom挂载后再赋值（但是表单重置会失效）
+    if (['Switch', 'Select'].includes(currentComponent.value)) {
+      nextTick(() => {
+        emit('update:modelValue', thisProps.initialValue)
+      })
+    } else {
+      emit('update:modelValue', thisProps.initialValue)
+    }
   }
 })
 </script>

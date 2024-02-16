@@ -7,14 +7,14 @@ export default {
   type: 'layout',
   component: Inline,
   order: 2,
-  isNotFormItem: true,
+
   isDefaultWrapper: true,
   initialValues: {
     component: 'Inline',
     children: [],
     props: {
       align: 'left',
-      margin: 20
+      gap: 20
     }
   },
   attr

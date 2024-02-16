@@ -43,6 +43,47 @@ export default [
         hidden: '{{!$values.props.filterable}}'
       },
       {
+        component: 'ItemGroup',
+        children: [
+          {
+            label: '左列表标题',
+            component: 'Input',
+            props: {
+              autocomplete: 'off',
+              showWordLimit: true,
+              type: 'text',
+              placeholder: '请输入文本',
+              style: {}
+            },
+            onlyId: 'form-7KcJ',
+            name: '1',
+            style: {},
+            hidden: false
+          },
+          {
+            label: '右列表标题',
+            component: 'Input',
+            props: {
+              autocomplete: 'off',
+              showWordLimit: true,
+              type: 'text',
+              placeholder: '请输入文本',
+              style: {}
+            },
+            onlyId: 'form-Cp1y',
+            name: '5F5Kq2',
+            hidden: false,
+            style: {}
+          }
+        ],
+        props: {
+          type: 'array'
+        },
+        onlyId: 'form-gdHm',
+        name: 'titles',
+        hidden: false
+      },
+      {
         label: '标签key',
         component: 'Input',
         name: 'labelKey',

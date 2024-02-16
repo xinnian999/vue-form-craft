@@ -30,7 +30,7 @@ const remoteSchema = ref(null)
 
 const loading = ref(false)
 
-const getSchema = inject('$getSchema')
+const { getSchema } = inject('$options')
 
 onBeforeMount(async () => {
   if (props.schemaId) {

@@ -9,7 +9,7 @@
               v-model="item[field.name]"
               v-bind="field"
               :key="field.label"
-              :prop="`${name}.${index}.${field.name}`"
+              :prop="getPath(index, field.dataPath)"
               hideLabel
             />
           </el-space>
@@ -49,7 +49,7 @@
           v-bind="field"
           :key="field.label"
           class="list-card-item"
-          :prop="`${name}.${index}.${field.name}`"
+          :prop="getPath(index, field.dataPath)"
         />
       </el-card>
     </template>
@@ -60,6 +60,7 @@
         :label="item.label"
         :key="item.name"
         v-for="item in children"
+        :width="item.width"
         :formatter="(row, _, __, index) => formatter(item, row, index)"
       />
       <el-table-column fixed="right" min-width="60">
@@ -136,11 +137,17 @@ const list = computed(() => {
   return props.modelValue || []
 })
 
-const fields = computed(() => (index) => deepParse(props.children, { $item: list.value[index] }))
+const fields = computed(
+  () => (index) => deepParse(props.children, { $item: list.value[index], $index: index })
+)
 
 const isMax = computed(() => {
   return list.value.length >= props.maxLines
 })
+
+const getPath = (index, dataPath) => {
+  return dataPath.replace('[]', index)
+}
 
 const handleAddItem = () => {
   if (isMax.value) {
@@ -157,12 +164,12 @@ const handleReduceItem = (index) => {
 const formatter = (item, data, index) => {
   return (
     <FormItem
-      {...deepParse(item, { $item: list.value[index] })}
+      {...deepParse(item, { $item: list.value[index], $index: index })}
       hideLabel
       modelValue={data[item.name]}
       onUpdate:modelValue={(newValue) => (data[item.name] = newValue)}
       style={{ marginBottom: 0 }}
-      prop={`${props.name}.${index}.${item.name}`}
+      prop={getPath(index, item.dataPath)}
     />
   )
 }

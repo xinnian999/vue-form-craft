@@ -7,7 +7,7 @@ export default {
   icon: 'divider',
   type: 'assist',
   order: 6,
-  isNotFormItem: true,
+
   attr,
   initialValues: {
     component: 'Divider',

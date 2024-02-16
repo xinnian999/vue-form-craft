@@ -1,23 +1,21 @@
 <template>
-  <div :style="InlineStyle">
+  <ElCard v-bind="{ ...props, ...$attrs }">
     <FormRender v-model="value" :formItems="children" />
-  </div>
+    <slot />
+  </ElCard>
 </template>
 
 <script setup>
 import { defineProps, defineEmits, computed } from 'vue'
-import useStyle from '@/hooks/useStyle'
+import { ElCard } from 'element-plus'
 import { FormRender } from '@/components'
 
 const thisProps = defineProps({
   modelValue: Object,
   props: Object,
   children: Array,
-  design: Boolean,
-  gap: Number
+  design: Boolean
 })
-
-const InlineStyle = useStyle('Inline', thisProps.props)
 
 const emit = defineEmits(['update:modelValue'])
 
@@ -31,4 +29,10 @@ const value = computed({
 })
 </script>
 
-<style></style>
+<style lang="less">
+.form-item-grid {
+  .el-form-item {
+    margin-bottom: 0;
+  }
+}
+</style>

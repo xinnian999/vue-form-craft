@@ -14,7 +14,7 @@ export default {
       change: [
         {
           target: 'item2',
-          value: '{{$val}}'
+          value: '{{$val * 2}}'
         },
         {
           target: 'item3',

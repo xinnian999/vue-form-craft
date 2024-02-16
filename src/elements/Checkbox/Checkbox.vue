@@ -1,13 +1,7 @@
 <template>
   <div v-if="!currentOptions.length && !loading" style="font-size: 12px">暂无选项</div>
 
-  <el-checkbox-group
-    v-model="selectVal"
-    :placeholder="placeholder"
-    :disabled="disabled"
-    @change="selectChange"
-    v-loading="loading"
-  >
+  <el-checkbox-group v-bind="$attrs" v-model="selectVal" @change="selectChange" v-loading="loading">
     <template v-if="optionType === 'circle' || optionType === 'border'">
       <el-checkbox
         v-for="item in currentOptions"
@@ -40,14 +34,6 @@ const props = defineProps({
   options: {
     type: Array,
     default: () => []
-  },
-  placeholder: {
-    type: String,
-    default: '请选择'
-  },
-  disabled: {
-    type: Boolean,
-    default: false
   },
   mode: {
     type: String,

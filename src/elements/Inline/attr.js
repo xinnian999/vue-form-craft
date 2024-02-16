@@ -20,7 +20,7 @@ export default [
         },
         initialValue: 'left'
       },
-      { label: '间距大小', component: 'InputNumber', name: 'margin', props: { unit: 'px' } },
+      { label: '间距大小', component: 'InputNumber', name: 'gap', props: { unit: 'px' } },
       { label: '自动换行', component: 'Switch', name: 'autoWrap' }
     ]
   }

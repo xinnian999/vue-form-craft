@@ -7,6 +7,7 @@
     :props="{
       multiple
     }"
+    v-bind="$attrs"
   />
 </template>
 
@@ -20,14 +21,6 @@ const props = defineProps({
   options: {
     type: Array,
     default: () => []
-  },
-  placeholder: {
-    type: String,
-    default: '请选择'
-  },
-  disabled: {
-    type: Boolean,
-    default: false
   },
   multiple: {
     type: Boolean,
@@ -47,11 +40,6 @@ const props = defineProps({
   },
   api: Object,
   name: String,
-  size: {
-    type: String,
-    default: 'default'
-  },
-  style: null,
   takeLastLevel: {
     type: Boolean,
     default: false
@@ -75,5 +63,3 @@ const value = computed({
 
 const { currentOptions, selectChange, loading } = useSelect(props, emits)
 </script>
-
-<style></style>

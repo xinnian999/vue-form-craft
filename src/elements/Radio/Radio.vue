@@ -1,12 +1,6 @@
 <template>
   <div v-if="!currentOptions.length && !loading" style="font-size: 12px">暂无选项</div>
-  <el-radio-group
-    v-model="selectVal"
-    :placeholder="placeholder"
-    :disabled="disabled"
-    @change="selectChange"
-    v-loading="loading"
-  >
+  <el-radio-group v-model="selectVal" @change="selectChange" v-loading="loading" v-bind="$attrs">
     <template v-if="optionType === 'circle' || optionType === 'border'">
       <el-radio
         v-for="item in currentOptions"
@@ -22,7 +16,7 @@
         v-for="item in currentOptions"
         :key="item[valueKey]"
         :label="item[valueKey]"
-        size="large"
+        :size="$attrs.size"
         >{{ item[labelKey] }}</el-radio-button
       >
     </el-space>
@@ -39,14 +33,6 @@ const props = defineProps({
   options: {
     type: Array,
     default: () => []
-  },
-  placeholder: {
-    type: String,
-    default: '请选择'
-  },
-  disabled: {
-    type: Boolean,
-    default: false
   },
   mode: {
     type: String,

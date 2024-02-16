@@ -1,6 +1,8 @@
 <template>
   <template v-if="mode === 'dialog'">
-    <el-button @click="handlePreviewExec" :disabled="disabled">{{ title }}</el-button>
+    <el-button @click="handlePreviewExec" :disabled="disabled" type="primary">{{
+      title
+    }}</el-button>
 
     <el-dialog v-model="execVisible" :title="title" width="70%" center destroy-on-close>
       <div>{{ description }}</div>
@@ -10,8 +12,7 @@
         currentMode="code"
         :modeList="['text', 'view', 'tree', 'code', 'form']"
         :options="{ search: false, history: false }"
-        language="zh"
-        :style="{ height: '60vh' }"
+        v-bind="$attrs"
       />
     </el-dialog>
   </template>
@@ -25,18 +26,22 @@
         currentMode="code"
         :modeList="['text', 'view', 'tree', 'code', 'form']"
         :options="{ search: false, history: false }"
-        language="zh"
         :style="{ height }"
+        v-bind="$attrs"
       />
     </Disabled>
   </template>
 </template>
 
 <script setup lang="jsx">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, defineOptions } from 'vue'
 import JsonEditorVue from 'json-editor-vue3'
 import { ElButton, ElDialog } from 'element-plus'
 import { Disabled } from '@/components'
+
+defineOptions({
+  inheritAttrs: false
+})
 
 const props = defineProps({
   modelValue: {},
@@ -51,7 +56,8 @@ const props = defineProps({
   },
   height: null,
   description: String,
-  disabled: Boolean
+  disabled: Boolean,
+  size: String
 })
 
 const emits = defineEmits(['update:modelValue'])
@@ -85,6 +91,7 @@ onMounted(() => {
 
 .editor-dialog {
   width: 100%;
+  height: 60vh;
 }
 
 .jsoneditor-undo,

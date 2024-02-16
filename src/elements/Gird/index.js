@@ -7,7 +7,7 @@ export default {
   type: 'layout',
   component: Grid,
   order: 3,
-  isNotFormItem: true,
+
   isDefaultWrapper: true,
   initialValues: {
     component: 'Grid',

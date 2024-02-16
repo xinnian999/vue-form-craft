@@ -6,7 +6,7 @@ export default {
   icon: 'alert',
   type: 'assist',
   order: 2,
-  isNotFormItem: true,
+
   attr,
   initialValues: {
     component: 'Alert',

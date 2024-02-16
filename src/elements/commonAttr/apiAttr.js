@@ -42,15 +42,21 @@ export default {
       label: '请求参数',
       component: 'JsonEdit',
       name: 'params',
-      hidden: '{{$values.props.api.method==="POST"||$values.props.api.method==="PUT"}}',
-      initialValue: {}
+      hidden: '{{ ["POST","PUT"].includes($parentVal.method) }}',
+      initialValue: {},
+      props: {
+        mode: 'dialog'
+      }
     },
     {
       label: '请求参数',
       component: 'JsonEdit',
       name: 'data',
-      hidden: '{{$values.props.api.method==="GET"||$values.props.api.method==="DELETE"}}',
-      initialValue: {}
+      hidden: '{{ ["GET","DELETE"].includes($parentVal.method) }}',
+      initialValue: {},
+      props: {
+        mode: 'dialog'
+      }
     },
     {
       label: '数据路径',

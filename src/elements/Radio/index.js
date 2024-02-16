@@ -17,7 +17,8 @@ export default {
         { label: '选项2', value: 'value2' },
         { label: '选项3', value: 'value3' }
       ],
-      placeholder: '请选择...'
+      labelKey: 'label',
+      valueKey: 'value'
     }
   },
   attr

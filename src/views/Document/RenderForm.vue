@@ -4,6 +4,7 @@
 
 <script setup lang="jsx">
 import { defineProps } from 'vue'
+
 defineProps({
   // 表单JSON配置
   schema: {
