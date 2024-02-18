@@ -57,6 +57,7 @@ items里是每个字段的抽象，label、name、component等是每个字段的
 | size                 | 'small' \| 'default' \| 'large' | default | No       | 表单字段大小      |
 | hideRequiredAsterisk | Boolean                         | false   | No       | 表单隐藏必填星号  |
 | labelBold            | Boolean                         | false   | No       | 表单label加粗     |
+| disabled             | Boolean                         | false   | No       | 禁用所有表单项    |
 
 #### 表单项配置
 

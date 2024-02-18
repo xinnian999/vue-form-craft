@@ -63,9 +63,8 @@ const handleSubmit = () => {
 | v-model       | object ref | ref({}) | No       | 表单数据对象，用于控制表单值，双向绑定   |
 | schema        | object     | --      | No       | 表单Schema配置，纯JSON，用于描述表单结构 |
 | schemaContext | object     | {}      | No       | 自定义的联动变量                         |
-| disabled      | Boolean    | false   | No       | 禁用所有表单项                           |
-| style         | any        | ———     | No       | 渲染器的style                            |
-| class         | any        | ———     | No       | 渲染器的class                            |
+| style         | any        | ———     | No       | 表单的style                              |
+| class         | any        | ———     | No       | 表单的class                              |
 
 
 ## Events

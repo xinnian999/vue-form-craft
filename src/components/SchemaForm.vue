@@ -3,11 +3,10 @@
     :model="formValues"
     :label-position="schema.labelAlign"
     :size="schema.size"
-    :disabled="disabled || schema.disabled"
+    :disabled="schema.disabled"
     :hide-required-asterisk="schema.hideRequiredAsterisk"
     ref="formRef"
-    :style="style"
-    :class="props.class"
+    v-bind="$attrs"
     id="SchemaForm"
   >
     <FormRender v-model="formValues" :formItems="formItems" />
@@ -50,13 +49,7 @@ const props = defineProps({
   schemaContext: {
     type: Object,
     default: () => ({})
-  },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
-  style: null,
-  class: null
+  }
 })
 
 const emit = defineEmits(['update:modelValue', 'onSubmit', 'onChange'])
@@ -82,10 +75,7 @@ const context = computed(() => ({
   ...props.schemaContext
 }))
 
-// 保证schema的响应式
-const currentSchema = computed(() => ({ disabled: props.disabled, ...props.schema }))
-
-const formItems = computed(() => deepParse(changeItems(currentSchema.value.items), context.value))
+const formItems = computed(() => deepParse(changeItems(props.schema.items || []), context.value))
 
 watch(
   () => cloneDeep(formValues.value),
@@ -115,6 +105,9 @@ const setFormValues = (values) => {
 }
 
 const reset = () => formRef.value.resetFields()
+
+// 保持schema的响应 传递给后代使用
+const currentSchema = computed(() => props.schema)
 
 provide('$schema', currentSchema)
 provide('$formValues', formValues)

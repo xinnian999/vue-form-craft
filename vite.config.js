@@ -41,7 +41,8 @@ export default defineConfig(({ mode }) => {
               vue: 'Vue'
             }
           }
-        }
+        },
+        sourcemap: true
       }
     }
   }
