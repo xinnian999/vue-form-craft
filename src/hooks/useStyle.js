@@ -1,11 +1,14 @@
-import { computed } from 'vue'
+import { computed, watchEffect } from 'vue'
 
-const useStyle = (component, props) => {
+const useStyle = (component, thisProps) => {
+  const style = computed(() => thisProps.props || {})
+
   if (component === 'Grid') {
     return computed(() => ({
       display: 'grid',
-      gap: props?.space + 'px',
-      'grid-template-columns': `repeat(${props?.colCount}, 1fr)`
+      'grid-template-columns': `repeat(${style.value.columns}, 1fr)`,
+      'row-gap': style.value['row-gap'] + 'px',
+      'column-gap': style.value['column-gap'] + 'px'
       // 'overflow-x': 'auto'
     }))
   }
@@ -14,10 +17,10 @@ const useStyle = (component, props) => {
     return computed(() => ({
       width: '100%',
       display: 'flex',
-      'justify-content': props.align,
-      'flex-wrap': props.autoWrap ? 'wrap' : 'nowrap',
+      'justify-content': style.value.align,
+      'flex-wrap': style.value.autoWrap ? 'wrap' : 'nowrap',
       'overflow-x': 'auto',
-      gap: `${props.gap}px`
+      gap: `${style.value.gap}px`
     }))
   }
 

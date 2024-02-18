@@ -122,7 +122,7 @@ const useSelect = (props, emits) => {
   )
 
   const selectChange = (val) => {
-    const { valueKey, multiple, dataPath } = props
+    const { valueKey, multiple, name } = props
 
     let selectData = {}
 
@@ -138,7 +138,7 @@ const useSelect = (props, emits) => {
 
     //如果接到了$selectData，给顶级组件保存当前值对应得数据源
     if ($selectData) {
-      $selectData[dataPath] = selectData
+      $selectData[name] = selectData
     }
     emits('onChangeSelect', selectData)
   }

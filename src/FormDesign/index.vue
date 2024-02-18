@@ -30,7 +30,6 @@ import Menus from './Menus/index.vue'
 import Canvas from './Canvas/index.vue'
 import Current from './Current/index.vue'
 import Actions from './Actions.vue'
-import { changeItems } from '@/utils'
 
 defineOptions({
   name: 'FormDesign'
@@ -91,7 +90,7 @@ const current = computed({
     }
     currentSchema.value = {
       ...currentSchema.value,
-      items: changeItems(set(currentSchema.value.items))
+      items: set(currentSchema.value.items)
     }
   }
 })

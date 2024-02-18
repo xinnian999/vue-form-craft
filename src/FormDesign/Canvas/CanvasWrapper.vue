@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="jsx">
-import { defineProps, inject } from 'vue'
+import { defineProps, inject, watchEffect } from 'vue'
 import Draggable from 'vuedraggable-es'
 import useStyle from '@/hooks/useStyle'
 import CanvasRender from './CanvasRender.vue'
@@ -27,7 +27,11 @@ const thisProps = defineProps({
   children: Array,
   props: Object
 })
-const layoutBoxStyle = useStyle(thisProps.component, thisProps.props)
+
+watchEffect(() => {
+  console.log(thisProps.props)
+})
+const layoutBoxStyle = useStyle(thisProps.component, thisProps)
 
 const onAdd = inject('$onAdd')
 </script>

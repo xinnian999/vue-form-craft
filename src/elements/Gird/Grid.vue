@@ -1,32 +1,19 @@
 <template>
   <div :style="gridStyle" class="form-item-grid">
-    <FormRender v-model="value" :formItems="children" />
+    <FormRender :formItems="children" />
   </div>
 </template>
 
 <script setup>
-import { defineProps, computed, defineEmits } from 'vue'
+import { defineProps } from 'vue'
 import useStyle from '@/hooks/useStyle'
 import { FormRender } from '@/components'
 
 const thisProps = defineProps({
-  modelValue: Object,
   props: Object,
-  children: Array,
-  design: Boolean
+  children: Array
 })
-const gridStyle = useStyle('Grid', thisProps.props)
-
-const emit = defineEmits(['update:modelValue'])
-
-const value = computed({
-  get() {
-    return thisProps.modelValue
-  },
-  set(val) {
-    emit('update:modelValue', val)
-  }
-})
+const gridStyle = useStyle('Grid', thisProps)
 </script>
 
 <style lang="less">

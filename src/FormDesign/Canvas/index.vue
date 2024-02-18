@@ -44,6 +44,8 @@ import CanvasRender from './CanvasRender.vue'
 
 const schema = inject('$schema')
 
+const formValues = ref({})
+
 const hoverId = ref('')
 
 const list = computed({
@@ -62,6 +64,7 @@ const onAdd = () => {
 provide('$onAdd', onAdd)
 provide('hoverId', hoverId)
 provide('$list', list)
+provide('$formValues', formValues)
 </script>
 
 <style lang="less">

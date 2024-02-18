@@ -43,8 +43,7 @@ const props = defineProps({
   takeLastLevel: {
     type: Boolean,
     default: false
-  },
-  dataPath: String
+  }
 })
 
 const emits = defineEmits(['update:modelValue', 'onChangeSelect'])

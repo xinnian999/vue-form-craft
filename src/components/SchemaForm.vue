@@ -9,7 +9,7 @@
     v-bind="$attrs"
     id="SchemaForm"
   >
-    <FormRender v-model="formValues" :formItems="formItems" />
+    <FormRender :formItems="formItems" />
   </el-form>
 </template>
 
@@ -26,7 +26,7 @@ import {
   defineOptions
 } from 'vue'
 import { ElForm, ElMessage } from 'element-plus'
-import { handleLinkages, deepParse, changeItems } from '@/utils'
+import { handleLinkages, deepParse } from '@/utils'
 import FormRender from './FormRender.vue'
 import { cloneDeep } from 'lodash'
 
@@ -74,7 +74,7 @@ const context = computed(() => ({
   ...props.schemaContext
 }))
 
-const formItems = computed(() => deepParse(changeItems(props.schema.items || []), context.value))
+const formItems = computed(() => deepParse(props.schema.items || [], context.value))
 
 watch(
   () => cloneDeep(formValues.value),

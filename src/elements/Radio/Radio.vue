@@ -59,8 +59,7 @@ const props = defineProps({
   space: {
     type: Number,
     default: 0
-  },
-  dataPath: String
+  }
 })
 
 const emits = defineEmits(['update:modelValue', 'onChangeSelect'])

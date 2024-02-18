@@ -1,4 +1,4 @@
-import { linkageAttr, basic, props } from '../commonAttr'
+import { linkageAttr, basic } from '../commonAttr'
 
 export default [
   ...basic,
@@ -89,19 +89,12 @@ export default [
       mode: 'card'
     }
   },
+
+  { label: '显示清除按钮', component: 'Switch', name: 'props.clearable' },
   {
-    label: 'props',
-    component: 'ItemGroup',
-    name: 'props',
-    children: [
-      ...props,
-      { label: '显示清除按钮', component: 'Switch', name: 'clearable' },
-      {
-        label: '最长字数',
-        component: 'InputNumber',
-        name: 'maxlength'
-      }
-    ]
+    label: '最长字数',
+    component: 'InputNumber',
+    name: 'props.maxlength'
   },
   ...linkageAttr
 ]

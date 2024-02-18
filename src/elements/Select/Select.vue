@@ -91,8 +91,7 @@ const props = defineProps({
   sort: Boolean,
   tableDrop: Boolean,
   columns: { default: () => [], type: Array },
-  scrollLoad: Boolean,
-  dataPath: String
+  scrollLoad: Boolean
 })
 
 const emits = defineEmits(['update:modelValue', 'onChangeSelect'])

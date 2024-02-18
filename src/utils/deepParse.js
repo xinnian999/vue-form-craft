@@ -31,13 +31,13 @@ const deepParse = (prop, context) => {
     return Object.keys(prop).reduce((all, key) => {
       const itemContext = { ...context }
 
-      if (prop.name && prop.dataPath && $values) {
-        const parentDataPathArr = prop.dataPath.split('.')
+      if (prop.name && $values) {
+        const parentDataPathArr = prop.name.split('.')
         const parentDataPath = parentDataPathArr.slice(0, parentDataPathArr.length - 1).join('.')
 
-        itemContext.$val = getDataByPath($values, prop.dataPath)
+        itemContext.$val = getDataByPath($values, prop.name)
         itemContext.$parentVal = getDataByPath($values, parentDataPath)
-        itemContext.$opt = context.$selectData[prop.dataPath]
+        itemContext.$opt = context.$selectData[prop.name]
       }
 
       return { ...all, [key]: deepParse(prop[key], itemContext) }

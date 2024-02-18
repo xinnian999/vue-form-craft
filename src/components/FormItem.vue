@@ -1,15 +1,11 @@
 <template>
   <template v-if="design || !hidden">
     <div v-if="config.type === 'layout'" class="notFormItem">
-      <component :is="config.component" v-bind="thisProps" v-model="parentValue" />
+      <component :is="config.component" v-bind="thisProps" />
     </div>
 
     <div v-else-if="config.type === 'assist'" :style="{ marginBottom: design ? 0 : '18px' }">
       <component :is="config.component" v-bind="props" />
-    </div>
-
-    <div v-else-if="component === 'ItemGroup'" class="notFormItem">
-      <component :is="config.component" v-bind="thisProps" v-model="value" />
     </div>
 
     <el-form-item
@@ -17,7 +13,7 @@
       id="form-item"
       :style="{ marginBottom: design ? 0 : '18px', ...style }"
       :key="name"
-      :prop="prop || dataPath"
+      :prop="name"
       :label-width="hideLabel ? '0' : schema.labelWidth"
       :rules="computeRules"
       :class="thisProps.class"
@@ -37,7 +33,8 @@
         :is="config.component"
         :disabled="schema.disabled"
         :size="schema.size"
-        v-bind="formItemProps"
+        v-bind="thisProps.props"
+        :name="thisProps.name"
         v-model:[config.modelName]="value"
       />
     </el-form-item>
@@ -47,8 +44,8 @@
 <script setup lang="jsx">
 import { computed, defineProps, defineEmits, onBeforeMount, inject, onMounted, nextTick } from 'vue'
 import { ElFormItem, ElTooltip } from 'element-plus'
-import { isString, pickBy } from 'lodash'
-import { isRegexString } from '@/utils'
+import { isString, cloneDeep } from 'lodash'
+import { isRegexString, getDataByPath, setDataByPath } from '@/utils'
 
 const thisProps = defineProps({
   label: String,
@@ -69,8 +66,7 @@ const thisProps = defineProps({
   class: null,
   design: Boolean,
   parentValue: Object,
-  change: Array,
-  dataPath: String
+  change: Array
 })
 
 const emit = defineEmits(['update:modelValue', 'update:parentValue'])
@@ -79,21 +75,19 @@ const { elements } = inject('$options')
 
 const schema = inject('$schema')
 
+const formValues = inject('$formValues')
+
 const value = computed({
   get() {
-    return thisProps.modelValue
+    if (formValues) {
+      return getDataByPath(formValues.value, thisProps.name)
+    }
+    return undefined
   },
   set(val) {
-    emit('update:modelValue', val)
-  }
-})
-
-const parentValue = computed({
-  get() {
-    return thisProps.parentValue
-  },
-  set(val) {
-    emit('update:parentValue', val)
+    const tempValues = cloneDeep(formValues.value)
+    setDataByPath(tempValues, thisProps.name, val)
+    formValues.value = tempValues
   }
 })
 
@@ -150,8 +144,7 @@ const config = computed(() => {
 const formItemProps = computed(() => {
   const initProps = {
     ...thisProps.props,
-    name: thisProps.name,
-    dataPath: thisProps.dataPath
+    name: thisProps.name
   }
   if (thisProps.children) {
     initProps.children = thisProps.children
