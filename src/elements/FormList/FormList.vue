@@ -49,7 +49,7 @@
           v-bind="field"
           :key="field.label"
           class="list-card-item"
-          :prop="getPath(index, field.dataPath)"
+          :prop="getPath(index, field.name)"
         />
       </el-card>
     </template>

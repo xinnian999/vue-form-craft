@@ -33,8 +33,7 @@
         :is="config.component"
         :disabled="schema.disabled"
         :size="schema.size"
-        v-bind="thisProps.props"
-        :name="thisProps.name"
+        v-bind="formItemProps"
         v-model:[config.modelName]="value"
       />
     </el-form-item>
@@ -79,12 +78,15 @@ const formValues = inject('$formValues')
 
 const value = computed({
   get() {
-    if (formValues) {
-      return getDataByPath(formValues.value, thisProps.name)
-    }
-    return undefined
+    // if (thisProps.modelValue) {
+    //   return thisProps.modelValue
+    // }
+    return getDataByPath(formValues.value, thisProps.name)
   },
   set(val) {
+    // if (thisProps.modelValue) {
+    //   return emit('update:modelValue', val)
+    // }
     const tempValues = cloneDeep(formValues.value)
     setDataByPath(tempValues, thisProps.name, val)
     formValues.value = tempValues

@@ -23,24 +23,17 @@ export default [
     name: 'initialValue'
   },
   {
-    label: 'props',
-    component: 'ItemGroup',
-    name: 'props',
-    children: [
-      {
-        label: '显示模式',
-        component: 'Radio',
-        name: 'mode',
-        props: {
-          mode: 'static',
-          options: [
-            { label: '表格', value: 'table' },
-            { label: '卡片', value: 'card' },
-            { label: '行内', value: 'inline' }
-          ]
-        },
-        initialValue: 'table'
-      }
-    ]
+    label: '显示模式',
+    component: 'Radio',
+    name: 'props.mode',
+    props: {
+      mode: 'static',
+      options: [
+        { label: '表格', value: 'table' },
+        { label: '卡片', value: 'card' },
+        { label: '行内', value: 'inline' }
+      ]
+    },
+    initialValue: 'table'
   }
 ]
