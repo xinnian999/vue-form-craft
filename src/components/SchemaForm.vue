@@ -71,7 +71,6 @@ const formValues = computed({
 const context = computed(() => ({
   $values: formValues.value,
   $selectData: selectData,
-  $utils: {},
   ...props.schemaContext
 }))
 

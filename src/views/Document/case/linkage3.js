@@ -22,7 +22,7 @@ export default {
           {
             name: '商品3',
             id: '3',
-            price: 66
+            price: 100
           }
         ],
         placeholder: '请选择...',
@@ -34,7 +34,7 @@ export default {
       change: [
         {
           target: 'price',
-          value: '{{$selectData.commodity?.price}}'
+          value: '{{$opt.price}}'
         }
       ]
     },

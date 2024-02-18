@@ -29,14 +29,18 @@ const deepParse = (prop, context) => {
   }
   if (isPlainObject(prop)) {
     return Object.keys(prop).reduce((all, key) => {
+      const itemContext = { ...context }
+
       if (prop.name && prop.dataPath && $values) {
         const parentDataPathArr = prop.dataPath.split('.')
         const parentDataPath = parentDataPathArr.slice(0, parentDataPathArr.length - 1).join('.')
 
-        context.$val = getDataByPath($values, prop.dataPath)
-        context.$parentVal = getDataByPath($values, parentDataPath)
+        itemContext.$val = getDataByPath($values, prop.dataPath)
+        itemContext.$parentVal = getDataByPath($values, parentDataPath)
+        itemContext.$opt = context.$selectData[prop.dataPath]
       }
-      return { ...all, [key]: deepParse(prop[key], context) }
+
+      return { ...all, [key]: deepParse(prop[key], itemContext) }
     }, {})
   }
   if (isArray(prop)) {

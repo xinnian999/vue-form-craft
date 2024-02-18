@@ -150,7 +150,8 @@ const config = computed(() => {
 const formItemProps = computed(() => {
   const initProps = {
     ...thisProps.props,
-    name: thisProps.name
+    name: thisProps.name,
+    dataPath: thisProps.dataPath
   }
   if (thisProps.children) {
     initProps.children = thisProps.children

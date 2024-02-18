@@ -64,7 +64,8 @@ const props = defineProps({
   multiple: {
     type: Boolean,
     default: true //不可更改
-  }
+  },
+  dataPath: String
 })
 
 const emits = defineEmits(['update:modelValue', 'onChangeSelect'])
