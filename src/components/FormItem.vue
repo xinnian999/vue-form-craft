@@ -13,7 +13,7 @@
       id="form-item"
       :style="{ marginBottom: design ? 0 : '18px', ...style }"
       :key="name"
-      :prop="name"
+      :prop="prop || name"
       :label-width="hideLabel ? '0' : schema.labelWidth"
       :rules="computeRules"
       :class="thisProps.class"
@@ -78,15 +78,9 @@ const formValues = inject('$formValues')
 
 const value = computed({
   get() {
-    // if (thisProps.modelValue) {
-    //   return thisProps.modelValue
-    // }
     return getDataByPath(formValues.value, thisProps.name)
   },
   set(val) {
-    // if (thisProps.modelValue) {
-    //   return emit('update:modelValue', val)
-    // }
     const tempValues = cloneDeep(formValues.value)
     setDataByPath(tempValues, thisProps.name, val)
     formValues.value = tempValues

@@ -9,7 +9,8 @@
               v-model="item[field.name]"
               v-bind="field"
               :key="field.label"
-              :prop="getPath(index, field.dataPath)"
+              :prop="getPath(index, `${name}.[].${field.name}`)"
+              :name="getPath(index, `${name}.[].${field.name}`)"
               hideLabel
             />
           </el-space>
@@ -49,7 +50,8 @@
           v-bind="field"
           :key="field.label"
           class="list-card-item"
-          :prop="getPath(index, field.name)"
+          :prop="getPath(index, `${name}.[].${field.name}`)"
+          :name="getPath(index, `${name}.[].${field.name}`)"
         />
       </el-card>
     </template>
@@ -169,7 +171,8 @@ const formatter = (item, data, index) => {
       modelValue={data[item.name]}
       onUpdate:modelValue={(newValue) => (data[item.name] = newValue)}
       style={{ marginBottom: 0 }}
-      prop={getPath(index, item.dataPath)}
+      prop={getPath(index, `${props.name}.[].${item.name}`)}
+      name={getPath(index, `${props.name}.[].${item.name}`)}
     />
   )
 }
