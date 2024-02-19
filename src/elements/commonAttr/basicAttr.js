@@ -34,7 +34,10 @@ const basicAttr = (omit = []) => {
         'column-gap': 20
       },
       onlyId: 'form-R003',
-      name: 'cNmCuu'
+      name: 'cNmCuu',
+      style: {
+        marginBottom: 0
+      }
     }
   ]
 

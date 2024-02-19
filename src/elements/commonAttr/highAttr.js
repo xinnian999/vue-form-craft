@@ -15,7 +15,7 @@ const basicAttr = (omit = []) => {
       label: '自定义style',
       component: 'JsonEdit',
       name: 'props.style',
-      initialValue: {},
+      // initialValue: {},
       help: '与vue的style对象格式一样',
       props: {
         mode: 'dialog'

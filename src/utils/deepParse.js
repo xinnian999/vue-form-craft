@@ -37,7 +37,7 @@ const deepParse = (prop, context) => {
 
         itemContext.$val = getDataByPath($values, prop.name)
         itemContext.$parentVal = getDataByPath($values, parentDataPath)
-        itemContext.$opt = context.$selectData[prop.name]
+        itemContext.$select = context.$selectData[prop.name]
       }
 
       return { ...all, [key]: deepParse(prop[key], itemContext) }

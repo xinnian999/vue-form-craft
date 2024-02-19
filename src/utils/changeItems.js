@@ -10,10 +10,6 @@ const changeItems = (items) => {
       name: config.name || `form-${getRandomId(4)}`
     }
 
-    if (!data.hidden) {
-      delete data.hidden
-    }
-
     if (config.children) {
       data.children = changeItems(config.children)
 

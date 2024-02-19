@@ -1,20 +1,22 @@
-import { isPlainObject, cloneDeep, isEqual } from 'lodash'
+import { isEqual } from 'lodash'
 import setDataByPath from './setDataByPath'
+import getDataByPath from './getDataByPath'
 
 const handleLinkages = ({ newVal, oldVal, formValues, formItems }) => {
-  const tempFormValues = cloneDeep(formValues.value)
   for (const item of formItems) {
-    if (item.change && !isEqual(newVal[item.name], oldVal[item.name])) {
+    const newValue = getDataByPath(newVal, item.name)
+    const oldValue = getDataByPath(oldVal, item.name)
+
+    if (item.change && !isEqual(newValue, oldValue)) {
       item.change.forEach(({ target, value }) => {
-        setDataByPath(tempFormValues, target, value)
+        formValues.value = setDataByPath(formValues.value, target, value)
       })
-      formValues.value = tempFormValues
     }
 
-    if (item.children) {
+    if (item.children && item.component !== 'FormList') {
       handleLinkages({
-        newVal: isPlainObject(newVal) ? newVal[item.name] : newVal,
-        oldVal: isPlainObject(oldVal) ? oldVal[item.name] : oldVal,
+        newVal,
+        oldVal,
         formValues,
         formItems: item.children
       })

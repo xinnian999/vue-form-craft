@@ -11,7 +11,10 @@ export default {
   initialValues: {
     label: '自增容器',
     component: 'FormList',
-    children: []
+    children: [],
+    props: {
+      // mode: 'table'
+    }
   },
   attr
 }

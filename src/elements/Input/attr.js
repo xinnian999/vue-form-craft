@@ -2,17 +2,9 @@ import { linkageAttr, basicAttr, highAttr } from '../commonAttr'
 
 export default [
   ...basicAttr(),
-  ...highAttr(),
-
-  { label: '显示清除按钮', component: 'Switch', name: 'props.clearable' },
-  {
-    label: '最长字数',
-    component: 'InputNumber',
-    name: 'props.maxlength'
-  },
 
   {
-    label: '高级输入校验',
+    label: '校验规则',
     component: 'FormList',
     name: 'rules',
     children: [
@@ -102,5 +94,15 @@ export default [
       mode: 'card'
     }
   },
+
+  ...highAttr(),
+
+  { label: '显示清除按钮', component: 'Switch', name: 'props.clearable' },
+  {
+    label: '最长字数',
+    component: 'InputNumber',
+    name: 'props.maxlength'
+  },
+
   ...linkageAttr
 ]

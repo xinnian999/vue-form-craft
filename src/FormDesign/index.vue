@@ -73,6 +73,7 @@ const current = computed({
         return all
       }, null)
     }
+    // console.log(currentSchema.value.items)
     return findItem(currentSchema.value.items) || {}
   },
   set(element) {

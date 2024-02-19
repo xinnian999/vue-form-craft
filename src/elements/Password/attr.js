@@ -1,10 +1,9 @@
-import { linkageAttr, basic, props } from '../commonAttr'
+import { linkageAttr, basicAttr, highAttr } from '../commonAttr'
 
 export default [
-  ...basic,
-  { label: '初始值', component: 'Input', name: 'initialValue' },
+  ...basicAttr(),
   {
-    label: '校验规则',
+    label: '密码校验规则',
     component: 'FormList',
     name: 'rules',
     children: [
@@ -86,12 +85,7 @@ export default [
     }
   },
 
-  {
-    label: 'props',
-    component: 'ItemGroup',
-    name: 'props',
-    children: [...props, { label: '显示清除按钮', component: 'Switch', name: 'clearable' }]
-  },
-
+  ...highAttr(),
+  { label: '显示清除按钮', component: 'Switch', name: 'props.clearable' },
   ...linkageAttr
 ]

@@ -1,7 +1,7 @@
 <template>
   <div
     :class="canvasItemClass"
-    @click.stop="handleSelect({ ...thisProps })"
+    @click.stop="handleSelect({ ...thisProps, ...$attrs })"
     @mousemove.stop="handleHoverEnter"
     @mouseleave.stop="handleHoverLeave"
   >
@@ -60,7 +60,7 @@ const thisProps = defineProps({
   style: Object,
   help: String,
   class: null,
-  hidden: Boolean
+  hidden: { type: Boolean, default: undefined }
 })
 
 const { elements } = inject('$options')
@@ -91,7 +91,9 @@ const handleHoverLeave = () => {
 }
 
 const handleSelect = (element) => {
-  current.value = element
+  const omitKeys = ['data-draggable']
+
+  current.value = omit(element, omitKeys)
 }
 
 const rightBottomActions = [

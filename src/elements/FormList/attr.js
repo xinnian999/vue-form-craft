@@ -1,4 +1,4 @@
-import { basic, props } from '../commonAttr'
+import { basicAttr, highAttr } from '../commonAttr'
 
 export default [
   {
@@ -7,7 +7,7 @@ export default [
       title: '说明',
       type: 'info',
       effect: 'light',
-      description: '值是一个【包含多个对象的数组】，适用于收集多组数据',
+      description: '值是由【多个相同格式的对象】组成的数组，适用于收集多组数据',
       closable: true,
       'show-icon': true
     },
@@ -16,12 +16,8 @@ export default [
     hideLabel: true,
     hidden: false
   },
-  ...basic,
-  {
-    label: '初始值',
-    component: 'JsonEdit',
-    name: 'initialValue'
-  },
+  ...basicAttr(['initialValue', 'props.placeholder']),
+
   {
     label: '显示模式',
     component: 'Radio',
@@ -35,5 +31,16 @@ export default [
       ]
     },
     initialValue: 'table'
-  }
+  },
+  {
+    label: '初始值',
+    component: 'JsonEdit',
+    name: 'initialValue',
+    props: {
+      mode: 'dialog'
+    },
+    initialValue: [{}]
+  },
+
+  ...highAttr()
 ]

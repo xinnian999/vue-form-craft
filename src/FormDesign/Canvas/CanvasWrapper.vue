@@ -10,14 +10,14 @@
     :style="layoutBoxStyle"
     @add="onAdd"
   >
-    <template #item="{ element: child, index }">
-      <CanvasRender v-if="child.onlyId" v-bind="child" :index="index" />
+    <template #item="{ element: child }">
+      <CanvasRender v-if="child.onlyId" v-bind="child" />
     </template>
   </draggable>
 </template>
 
 <script setup lang="jsx">
-import { defineProps, inject, watchEffect } from 'vue'
+import { defineProps, inject } from 'vue'
 import Draggable from 'vuedraggable-es'
 import useStyle from '@/hooks/useStyle'
 import CanvasRender from './CanvasRender.vue'
@@ -28,9 +28,6 @@ const thisProps = defineProps({
   props: Object
 })
 
-watchEffect(() => {
-  console.log(thisProps.props)
-})
 const layoutBoxStyle = useStyle(thisProps.component, thisProps)
 
 const onAdd = inject('$onAdd')

@@ -1,4 +1,7 @@
-const setDataByPath = (obj, path, value) => {
+import { cloneDeep } from 'lodash'
+
+const setDataByPath = (object, path, value) => {
+  const cloneObj = cloneDeep(object)
   // 将路径字符串分割成路径数组
   const pathArray = path.split('.')
 
@@ -23,10 +26,10 @@ const setDataByPath = (obj, path, value) => {
   }
 
   // 调用递归函数
-  update(obj, pathArray, value)
+  update(cloneObj, pathArray, value)
 
   // 返回更新后的对象
-  return obj
+  return cloneObj
 }
 
 export default setDataByPath

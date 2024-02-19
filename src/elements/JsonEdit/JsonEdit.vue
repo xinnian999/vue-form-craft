@@ -80,6 +80,7 @@ const handlePreviewExec = () => {
 }
 
 onMounted(() => {
+  // console.log(props.modelValue)
   key.value = 'initialValue'
 })
 </script>

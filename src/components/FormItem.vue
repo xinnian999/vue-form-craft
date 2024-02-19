@@ -1,10 +1,13 @@
 <template>
   <template v-if="design || !hidden">
-    <div v-if="config.type === 'layout'" class="notFormItem">
+    <div v-if="config.type === 'layout'" class="notFormItem" :style="style">
       <component :is="config.component" v-bind="thisProps" />
     </div>
 
-    <div v-else-if="config.type === 'assist'" :style="{ marginBottom: design ? 0 : '18px' }">
+    <div
+      v-else-if="config.type === 'assist'"
+      :style="{ marginBottom: design ? 0 : '18px', ...style }"
+    >
       <component :is="config.component" v-bind="props" />
     </div>
 
@@ -41,9 +44,9 @@
 </template>
 
 <script setup lang="jsx">
-import { computed, defineProps, onBeforeMount, inject, nextTick } from 'vue'
+import { computed, defineProps, onBeforeMount, inject, nextTick, onMounted } from 'vue'
 import { ElFormItem, ElTooltip } from 'element-plus'
-import { isString, cloneDeep } from 'lodash'
+import { isString } from 'lodash'
 import { isRegexString, getDataByPath, setDataByPath } from '@/utils'
 
 const thisProps = defineProps({
@@ -73,9 +76,9 @@ const schema = inject('$schema')
 const formValues = inject('$formValues')
 
 const setValue = (newVal) => {
-  const tempValues = cloneDeep(formValues.value)
-  setDataByPath(tempValues, thisProps.name, newVal)
-  formValues.value = tempValues
+  // console.log(newVal)
+  // console.log(setDataByPath(formValues.value, thisProps.name, newVal))
+  formValues.value = setDataByPath(formValues.value, thisProps.name, newVal)
 }
 
 const value = computed({
@@ -149,16 +152,24 @@ const formItemProps = computed(() => {
   return initProps
 })
 
-onBeforeMount(() => {
+// onBeforeMount(() => {
+//   if (!value.value && thisProps.initialValue !== undefined) {
+//     // console.log(thisProps.name, thisProps.initialValue)
+
+//     // TODO:el部分组件提前赋值会引发BUG,暂时推到dom挂载后再赋值（但是表单重置会失效）
+//     if (['Switch', 'Select'].includes(currentComponent.value)) {
+//       nextTick(() => {
+//         setValue(thisProps.initialValue)
+//       })
+//     } else {
+//       setValue(thisProps.initialValue)
+//     }
+//   }
+// })
+
+onMounted(() => {
   if (!value.value && thisProps.initialValue !== undefined) {
-    // TODO:el部分组件提前赋值会引发BUG,暂时推到dom挂载后再赋值（但是表单重置会失效）
-    if (['Switch', 'Select'].includes(currentComponent.value)) {
-      nextTick(() => {
-        setValue(thisProps.initialValue)
-      })
-    } else {
-      setValue(thisProps.initialValue)
-    }
+    setValue(thisProps.initialValue)
   }
 })
 </script>
