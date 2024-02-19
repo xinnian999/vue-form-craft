@@ -8,7 +8,10 @@ const basicAttr = (omit = []) => {
         italic: true
       },
       onlyId: 'id-high-title',
-      name: 'form-high-title'
+      name: 'form-high-title',
+      style: {
+        marginTop: '40px'
+      }
     },
     { label: '自定义class', component: 'Input', name: 'props.class' },
     {

@@ -19,8 +19,7 @@ export default {
       ],
       placeholder: '请选择...',
       labelKey: 'label',
-      valueKey: 'value',
-      api: {}
+      valueKey: 'value'
     }
   },
   attr

@@ -23,8 +23,7 @@ import {
   reactive,
   provide,
   watch,
-  defineOptions,
-  onMounted
+  defineOptions
 } from 'vue'
 import { ElForm, ElMessage } from 'element-plus'
 import { handleLinkages, deepParse } from '@/utils'
@@ -118,8 +117,8 @@ provide('$selectData', selectData)
 provide('$formEvents', { submit, validate, getFormValues, setFormValues, reset })
 provide('$initialValues', initialValues)
 
-onMounted(() => {
-  formValues.value = merge(formValues.value, initialValues)
+watch(initialValues, (newVal) => {
+  formValues.value = merge(formValues.value, newVal)
 })
 
 defineExpose({ submit, validate, selectData, getFormValues, setFormValues, reset, context })

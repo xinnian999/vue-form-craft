@@ -7,7 +7,10 @@ export default [
       italic: true
     },
     onlyId: 'id-high-linkage',
-    name: 'form-high-linkage'
+    name: 'form-high-linkage',
+    style: {
+      marginTop: '40px'
+    }
   },
   {
     label: '本字段值改变时，修改其他字段的值',

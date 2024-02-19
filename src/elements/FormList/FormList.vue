@@ -172,16 +172,6 @@ const formatter = (item, data, index) => {
     />
   )
 }
-
-//为了触发数组深度监听
-// watch(
-//   list,
-//   (newVal) => {
-//     // console.log(newVal)
-//     emit('update:modelValue', newVal)
-//   },
-//   { deep: true }
-// )
 </script>
 
 <style lang="less">
