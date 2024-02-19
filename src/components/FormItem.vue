@@ -23,7 +23,7 @@
           <div :style="schema.labelBold && 'font-weight: bold'">{{ label }}</div>
           <div class="ico" v-if="help">
             <el-tooltip class="box-item" effect="dark" :content="help">
-              <icon-render name="help" />
+              <div><icon-render name="help" /></div>
             </el-tooltip>
           </div>
         </div>
@@ -41,7 +41,7 @@
 </template>
 
 <script setup lang="jsx">
-import { computed, defineProps, defineEmits, onBeforeMount, inject, onMounted, nextTick } from 'vue'
+import { computed, defineProps, onBeforeMount, inject, nextTick } from 'vue'
 import { ElFormItem, ElTooltip } from 'element-plus'
 import { isString, cloneDeep } from 'lodash'
 import { isRegexString, getDataByPath, setDataByPath } from '@/utils'
@@ -52,7 +52,6 @@ const thisProps = defineProps({
   component: String,
   required: Boolean,
   props: Object,
-  modelValue: null,
   initialValue: null,
   style: Object,
   help: String,
@@ -64,11 +63,8 @@ const thisProps = defineProps({
   rules: Array,
   class: null,
   design: Boolean,
-  parentValue: Object,
   change: Array
 })
-
-const emit = defineEmits(['update:modelValue', 'update:parentValue'])
 
 const { elements } = inject('$options')
 
@@ -76,14 +72,18 @@ const schema = inject('$schema')
 
 const formValues = inject('$formValues')
 
+const setValue = (newVal) => {
+  const tempValues = cloneDeep(formValues.value)
+  setDataByPath(tempValues, thisProps.name, newVal)
+  formValues.value = tempValues
+}
+
 const value = computed({
   get() {
     return getDataByPath(formValues.value, thisProps.name)
   },
   set(val) {
-    const tempValues = cloneDeep(formValues.value)
-    setDataByPath(tempValues, thisProps.name, val)
-    formValues.value = tempValues
+    setValue(val)
   }
 })
 
@@ -154,10 +154,10 @@ onBeforeMount(() => {
     // TODO:el部分组件提前赋值会引发BUG,暂时推到dom挂载后再赋值（但是表单重置会失效）
     if (['Switch', 'Select'].includes(currentComponent.value)) {
       nextTick(() => {
-        emit('update:modelValue', thisProps.initialValue)
+        setValue(thisProps.initialValue)
       })
     } else {
-      emit('update:modelValue', thisProps.initialValue)
+      setValue(thisProps.initialValue)
     }
   }
 })
@@ -172,6 +172,12 @@ onBeforeMount(() => {
       margin-left: 3px;
       font-size: 15px;
       position: relative;
+      .el-tooltip__trigger {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
     }
   }
 }

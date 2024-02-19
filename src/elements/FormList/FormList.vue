@@ -6,11 +6,10 @@
           <el-space>
             <form-item
               v-for="field in fields(index)"
-              v-model="item[field.name]"
               v-bind="field"
               :key="field.label"
-              :prop="getPath(index, `${name}.[].${field.name}`)"
-              :name="getPath(index, `${name}.[].${field.name}`)"
+              :prop="`${name}.${index}.${field.name}`"
+              :name="`${name}.${index}.${field.name}`"
               hideLabel
             />
           </el-space>
@@ -46,12 +45,11 @@
         </template>
         <form-item
           v-for="field in fields(index)"
-          v-model="item[field.name]"
           v-bind="field"
           :key="field.label"
           class="list-card-item"
-          :prop="getPath(index, `${name}.[].${field.name}`)"
-          :name="getPath(index, `${name}.[].${field.name}`)"
+          :prop="`${name}.${index}.${field.name}`"
+          :name="`${name}.${index}.${field.name}`"
         />
       </el-card>
     </template>
@@ -168,11 +166,9 @@ const formatter = (item, data, index) => {
     <FormItem
       {...deepParse(item, { $item: list.value[index], $index: index })}
       hideLabel
-      modelValue={data[item.name]}
-      onUpdate:modelValue={(newValue) => (data[item.name] = newValue)}
       style={{ marginBottom: 0 }}
-      prop={getPath(index, `${props.name}.[].${item.name}`)}
-      name={getPath(index, `${props.name}.[].${item.name}`)}
+      prop={`${props.name}.${index}.${item.name}`}
+      name={`${props.name}.${index}.${item.name}`}
     />
   )
 }

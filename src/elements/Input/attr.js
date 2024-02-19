@@ -1,10 +1,18 @@
-import { linkageAttr, basic } from '../commonAttr'
+import { linkageAttr, basicAttr, highAttr } from '../commonAttr'
 
 export default [
-  ...basic,
-  { label: '初始值', component: 'Input', name: 'initialValue' },
+  ...basicAttr(),
+  ...highAttr(),
+
+  { label: '显示清除按钮', component: 'Switch', name: 'props.clearable' },
   {
-    label: '校验规则',
+    label: '最长字数',
+    component: 'InputNumber',
+    name: 'props.maxlength'
+  },
+
+  {
+    label: '高级输入校验',
     component: 'FormList',
     name: 'rules',
     children: [
@@ -51,6 +59,11 @@ export default [
         onlyId: 'form-Wdb2Reg',
         name: 'customReg',
         hidden: '{{$item.type!=="custom"}}'
+        // change:[
+        //   {
+        //     target:'$item.'
+        //   }
+        // ]
       },
       {
         label: '提示语',
@@ -88,13 +101,6 @@ export default [
     props: {
       mode: 'card'
     }
-  },
-
-  { label: '显示清除按钮', component: 'Switch', name: 'props.clearable' },
-  {
-    label: '最长字数',
-    component: 'InputNumber',
-    name: 'props.maxlength'
   },
   ...linkageAttr
 ]

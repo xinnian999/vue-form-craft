@@ -1,28 +1,18 @@
 export default [
-  // {
-  //   component: 'Title',
-  //   name: 'basic',
-  //   hideLabel: true,
-  //   props: {
-  //     title: '联动',
-  //     type: 'h4'
-  //   }
-  // },
   {
-    component: 'Divider',
+    component: 'Title',
     props: {
       title: '联动',
-      contentPosition: 'center'
+      type: 'h4',
+      italic: true
     },
-    onlyId: 'form-Z2QZ222',
-    name: 'VekeRi',
-    hidden: false
+    onlyId: 'id-high-linkage',
+    name: 'form-high-linkage'
   },
   {
-    label: '联动表单值',
+    label: '本字段值改变时，修改其他字段的值',
     name: 'change',
     component: 'FormList',
-    help: '本字段值改变时，修改其他字段的值',
     children: [
       {
         label: '目标字段',

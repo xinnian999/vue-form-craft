@@ -1,5 +1,7 @@
 <template>
-  <component :is="type">{{ title }}</component>
+  <component :is="type" class="Title" :style="{ fontStyle: italic ? 'italic' : 'normal' }">{{
+    title
+  }}</component>
 </template>
 
 <script setup>
@@ -13,6 +15,7 @@ defineProps({
   type: {
     type: String,
     default: 'h3'
-  }
+  },
+  italic: Boolean
 })
 </script>
