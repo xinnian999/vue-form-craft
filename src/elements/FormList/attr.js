@@ -29,17 +29,16 @@ export default [
         { label: '卡片', value: 'card' },
         { label: '行内', value: 'inline' }
       ]
-    },
-    initialValue: 'table'
+    }
   },
   {
     label: '初始值',
     component: 'JsonEdit',
     name: 'initialValue',
     props: {
-      mode: 'dialog'
-    },
-    initialValue: [{}]
+      mode: 'dialog',
+      initVal: []
+    }
   },
 
   ...highAttr()

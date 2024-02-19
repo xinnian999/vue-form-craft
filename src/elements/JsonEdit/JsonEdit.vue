@@ -57,14 +57,15 @@ const props = defineProps({
   height: null,
   description: String,
   disabled: Boolean,
-  size: String
+  size: String,
+  initVal: null
 })
 
 const emits = defineEmits(['update:modelValue'])
 
 const json = computed({
   get() {
-    return props.modelValue
+    return props.modelValue || props.initVal
   },
   set(val) {
     emits('update:modelValue', val)
@@ -80,7 +81,6 @@ const handlePreviewExec = () => {
 }
 
 onMounted(() => {
-  // console.log(props.modelValue)
   key.value = 'initialValue'
 })
 </script>

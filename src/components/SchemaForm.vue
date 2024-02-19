@@ -23,12 +23,13 @@ import {
   reactive,
   provide,
   watch,
-  defineOptions
+  defineOptions,
+  onMounted
 } from 'vue'
 import { ElForm, ElMessage } from 'element-plus'
 import { handleLinkages, deepParse } from '@/utils'
 import FormRender from './FormRender.vue'
-import { cloneDeep } from 'lodash'
+import { cloneDeep, merge } from 'lodash'
 
 defineOptions({
   name: 'SchemaForm'
@@ -56,6 +57,8 @@ const emit = defineEmits(['update:modelValue', 'onSubmit', 'onChange'])
 
 const selectData = reactive({})
 
+const initialValues = reactive({})
+
 const stateFormValues = ref({})
 
 const formValues = computed({
@@ -71,6 +74,7 @@ const formValues = computed({
 const context = computed(() => ({
   $values: formValues.value,
   $selectData: selectData,
+  $initialValues: initialValues,
   ...props.schemaContext
 }))
 
@@ -103,7 +107,7 @@ const setFormValues = (values) => {
   formValues.value = { ...formValues.value, ...values }
 }
 
-const reset = () => formRef.value.resetFields()
+const reset = () => (formValues.value = initialValues)
 
 // 保持schema的响应 传递给后代使用
 const currentSchema = computed(() => props.schema)
@@ -112,6 +116,11 @@ provide('$schema', currentSchema)
 provide('$formValues', formValues)
 provide('$selectData', selectData)
 provide('$formEvents', { submit, validate, getFormValues, setFormValues, reset })
+provide('$initialValues', initialValues)
+
+onMounted(() => {
+  formValues.value = merge(formValues.value, initialValues)
+})
 
 defineExpose({ submit, validate, selectData, getFormValues, setFormValues, reset, context })
 </script>

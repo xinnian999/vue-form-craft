@@ -2,21 +2,31 @@ import apiAttr from './apiAttr'
 
 export default [
   {
+    component: 'Title',
+    props: {
+      title: '选项设置',
+      type: 'h4',
+      italic: true
+    },
+    onlyId: 'id-options',
+    name: 'form-options'
+  },
+  {
     label: '标签key',
     component: 'Input',
-    name: 'labelKey',
+    name: 'props.labelKey',
     onlyId: 'form-X6hs'
   },
   {
     label: '值Key',
     component: 'Input',
-    name: 'valueKey',
+    name: 'props.valueKey',
     onlyId: 'form-STkl'
   },
   {
     label: '数据模式',
     component: 'Radio',
-    name: 'mode',
+    name: 'props.mode',
     props: {
       mode: 'static',
       options: [
@@ -35,7 +45,7 @@ export default [
   },
   {
     label: '静态选项',
-    name: 'options',
+    name: 'props.options',
     component: 'FormList',
     hidden: '{{$values.props.mode!=="static"}}',
     children: [
@@ -65,5 +75,14 @@ export default [
         '{{ (index) => ({ [$values.props.labelKey]: `选项${index + 1}`, [$values.props.valueKey]: `value${index + 1}` }) }}'
     }
   },
-  apiAttr
+  {
+    component: 'Card',
+    props: {
+      header: '远程数据'
+    },
+    onlyId: 'id-pGeN',
+    name: 'form-6vzT',
+    hidden: '{{$values.props.mode==="static"}}',
+    children: apiAttr
+  }
 ]

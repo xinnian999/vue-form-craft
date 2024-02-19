@@ -75,18 +75,14 @@ const schema = inject('$schema')
 
 const formValues = inject('$formValues')
 
-const setValue = (newVal) => {
-  // console.log(newVal)
-  // console.log(setDataByPath(formValues.value, thisProps.name, newVal))
-  formValues.value = setDataByPath(formValues.value, thisProps.name, newVal)
-}
+const initialValues = inject('$initialValues')
 
 const value = computed({
   get() {
     return getDataByPath(formValues.value, thisProps.name)
   },
   set(val) {
-    setValue(val)
+    formValues.value = setDataByPath(formValues.value, thisProps.name, val)
   }
 })
 
@@ -152,24 +148,12 @@ const formItemProps = computed(() => {
   return initProps
 })
 
-// onBeforeMount(() => {
-//   if (!value.value && thisProps.initialValue !== undefined) {
-//     // console.log(thisProps.name, thisProps.initialValue)
-
-//     // TODO:el部分组件提前赋值会引发BUG,暂时推到dom挂载后再赋值（但是表单重置会失效）
-//     if (['Switch', 'Select'].includes(currentComponent.value)) {
-//       nextTick(() => {
-//         setValue(thisProps.initialValue)
-//       })
-//     } else {
-//       setValue(thisProps.initialValue)
-//     }
-//   }
-// })
-
-onMounted(() => {
+onBeforeMount(() => {
   if (!value.value && thisProps.initialValue !== undefined) {
-    setValue(thisProps.initialValue)
+    Object.assign(
+      initialValues,
+      setDataByPath(initialValues, thisProps.name, thisProps.initialValue)
+    )
   }
 })
 </script>

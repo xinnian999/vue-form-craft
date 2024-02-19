@@ -13,8 +13,9 @@ export default {
     component: 'FormList',
     children: [],
     props: {
-      // mode: 'table'
+      mode: 'table'
     }
+    // initialValue: []
   },
   attr
 }
