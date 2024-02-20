@@ -1,18 +1,18 @@
 const basicAttr = (omit = []) => {
   const attr = [
-    {
-      component: 'Title',
-      props: {
-        title: '高级属性',
-        type: 'h4',
-        italic: true
-      },
-      onlyId: 'id-high-title',
-      name: 'form-high-title',
-      style: {
-        marginTop: '40px'
-      }
-    },
+    // {
+    //   component: 'Title',
+    //   props: {
+    //     title: '高级属性',
+    //     type: 'h4',
+    //     italic: true
+    //   },
+    //   onlyId: 'id-high-title',
+    //   name: 'form-high-title',
+    //   style: {
+    //     marginTop: '40px'
+    //   }
+    // },
     { label: '自定义class', component: 'Input', name: 'props.class' },
     {
       label: '自定义style',

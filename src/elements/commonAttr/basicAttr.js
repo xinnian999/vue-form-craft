@@ -2,18 +2,18 @@ import { recursionDelete } from '@/utils'
 
 const basicAttr = (omit = [], moreAttrs = []) => {
   const attr = [
-    {
-      component: 'Title',
-      props: {
-        title: '常见属性',
-        type: 'h4',
-        italic: true
-      },
-      onlyId: 'id-RjVN',
-      name: 'form-Kanq'
-    },
-    { label: '字段标签', component: 'Input', name: 'label' },
-    { label: '字段标识', component: 'Input', name: 'name' },
+    // {
+    //   component: 'Title',
+    //   props: {
+    //     title: '常见属性',
+    //     type: 'h4',
+    //     italic: true
+    //   },
+    //   onlyId: 'id-RjVN',
+    //   name: 'form-Kanq'
+    // },
+    { label: '标签', component: 'Input', name: 'label' },
+    { label: '唯一标识', component: 'Input', name: 'name' },
     { label: '字段说明', component: 'Textarea', name: 'help' },
     {
       label: '占位提示',
@@ -29,7 +29,7 @@ const basicAttr = (omit = [], moreAttrs = []) => {
         { label: '是否只读', component: 'Switch', name: 'props.readonly' },
         { label: '是否禁用', component: 'Switch', name: 'props.disabled' },
         { label: '隐藏字段', component: 'Switch', name: 'hidden' },
-        { label: '隐藏label', component: 'Switch', name: 'hideLabel' }
+        { label: '隐藏标签', component: 'Switch', name: 'hideLabel' }
       ],
       props: {
         columns: 3,

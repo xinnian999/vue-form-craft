@@ -22,7 +22,7 @@ items里是每个字段的抽象，label、name、component等是每个字段的
       "props": {    //传给该组件的props，支持该组件在element plus的所有props
         "placeholder": "请输入用户名"
       },
-      "name": "username" //字段标识，也就是值key
+      "name": "username" //唯一标识，也就是值key
     },
     {
       "label": "密码",

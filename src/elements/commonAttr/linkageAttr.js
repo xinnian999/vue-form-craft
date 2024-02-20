@@ -1,17 +1,17 @@
 export default [
-  {
-    component: 'Title',
-    props: {
-      title: '联动',
-      type: 'h4',
-      italic: true
-    },
-    onlyId: 'id-high-linkage',
-    name: 'form-high-linkage',
-    style: {
-      marginTop: '40px'
-    }
-  },
+  // {
+  //   component: 'Title',
+  //   props: {
+  //     title: '联动',
+  //     type: 'h4',
+  //     italic: true
+  //   },
+  //   onlyId: 'id-high-linkage',
+  //   name: 'form-high-linkage',
+  //   style: {
+  //     marginTop: '40px'
+  //   }
+  // },
   {
     label: '本字段值改变时，修改其他字段的值',
     name: 'change',

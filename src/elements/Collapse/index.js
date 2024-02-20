@@ -9,10 +9,10 @@ export default {
   isWrapper: true,
   initialValues: {
     component: 'Collapse',
-    children: [{ title: '折叠面板1', key: 'key1', children: [] }]
+    children: [{ title: '折叠面板1', name: 'name1', children: [] }]
   },
   attr: [
-    { label: '字段标识', component: 'Input', name: 'name' },
+    { label: '唯一标识', component: 'Input', name: 'name' },
     {
       label: '子面板设置',
       component: 'FormList',
@@ -27,13 +27,13 @@ export default {
           name: 'title'
         },
         {
-          label: 'key',
+          label: '唯一标识',
           component: 'Input',
           props: {
-            placeholder: '请输入key'
+            placeholder: '请输入唯一标识'
           },
           onlyId: 'form-YE6U',
-          name: 'key'
+          name: 'name'
         },
         {
           label: '默认展开',
@@ -46,7 +46,7 @@ export default {
         mode: 'card',
         title: '子面板',
         newItemDefaults:
-          '{{ (index) => ({ title: `折叠面板${index + 1}`, key: `key${index + 1}`,children: [] }) }}'
+          '{{ (index) => ({ title: `折叠面板${index + 1}`, name: `name${index + 1}`,children: [] }) }}'
       },
       onlyId: 'id-RQ1a',
       name: 'children'

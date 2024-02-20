@@ -1,6 +1,9 @@
 <template>
   <ElCollapse v-bind="{ ...props, ...$attrs }" v-model="activeKey">
-    <ElCollapseItem v-for="item in children" :key="item.key" :title="item.title" :name="item.key">
+    <ElCollapseItem v-for="item in children" :key="item.name" :name="item.name">
+      <template #title>
+        <Title :title="item.title" italic type="h4" />
+      </template>
       <CanvasWrapper :children="item.children" v-if="design" />
       <FormRender :formItems="item.children" v-else />
     </ElCollapseItem>
@@ -12,7 +15,7 @@ import { defineProps, onMounted, ref } from 'vue'
 import { ElCollapse, ElCollapseItem } from 'element-plus'
 import { FormRender } from '@/components'
 import CanvasWrapper from '@/FormDesign/Canvas/CanvasWrapper.vue'
-
+import Title from '../Title/Title.vue'
 const thisProps = defineProps({
   props: Object,
   children: Array,
@@ -22,7 +25,7 @@ const thisProps = defineProps({
 const activeKey = ref([])
 
 onMounted(() => {
-  activeKey.value = thisProps.children.filter((item) => item.checked).map((item) => item.key)
+  activeKey.value = thisProps.children.filter((item) => item.checked).map((item) => item.name)
 })
 </script>
 
