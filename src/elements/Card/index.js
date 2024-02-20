@@ -17,11 +17,6 @@ export default {
   },
   attr: [
     { label: '字段标识', component: 'Input', name: 'name' },
-    {
-      label: 'props',
-      component: 'ItemGroup',
-      name: 'props',
-      children: [{ label: '卡片标题', component: 'Input', name: 'header' }]
-    }
+    { label: '卡片标题', component: 'Input', name: 'props.header' }
   ]
 }

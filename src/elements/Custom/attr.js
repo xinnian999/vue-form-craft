@@ -1,7 +1,7 @@
-import { linkageAttr, basic } from '../commonAttr'
+import { basicAttr } from '../commonAttr'
 
 export default [
-  ...basic,
+  ...basicAttr(['initialValue', 'props.readonly', 'props.placeholder', 'props.disabled']),
 
   {
     label: '初始值',
@@ -10,17 +10,10 @@ export default [
   },
 
   {
-    label: 'props',
-    component: 'ItemGroup',
-    name: 'props',
-    children: [
-      {
-        label: '自定义组件名称',
-        component: 'Input',
-        name: 'componentName',
-        props: { placeholder: '全局组件名称' }
-      }
-    ]
+    label: '自定义组件名称',
+    component: 'Input',
+    name: 'props.componentName',
+    props: { placeholder: '全局组件名称' }
   },
 
   {
@@ -28,7 +21,5 @@ export default [
     component: 'JsonEdit',
     name: 'props',
     initialValue: {}
-  },
-
-  ...linkageAttr
+  }
 ]

@@ -1,10 +1,2 @@
-import { linkageAttr, basic, props } from '../commonAttr'
-export default [
-  ...basic,
-  {
-    label: 'props',
-    component: 'ItemGroup',
-    name: 'props',
-    children: [...props]
-  }
-]
+import { basicAttr, highAttr } from '../commonAttr'
+export default [...basicAttr(['props.readonly', 'props.placeholder']), ...highAttr()]
