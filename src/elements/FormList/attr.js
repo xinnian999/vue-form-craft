@@ -32,6 +32,12 @@ export default [
     }
   },
   {
+    label: '卡片标题',
+    component: 'Input',
+    name: 'props.title',
+    hidden: "{{$values.props.mode!=='card'}}"
+  },
+  {
     label: '初始值',
     component: 'JsonEdit',
     name: 'initialValue',

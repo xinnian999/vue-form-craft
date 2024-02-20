@@ -1,20 +1,28 @@
 <template>
-  <ElCollapse v-bind="{ ...props, ...$attrs }">
-    <ElCollapseItem v-for="item in children" :key="item.title" :title="item.title">
-      <FormRender :formItems="item.children" />
-      <slot />
+  <ElCollapse v-bind="{ ...props, ...$attrs }" v-model="activeKey">
+    <ElCollapseItem v-for="item in children" :key="item.key" :title="item.title" :name="item.key">
+      <CanvasWrapper :children="item.children" v-if="design" />
+      <FormRender :formItems="item.children" v-else />
     </ElCollapseItem>
   </ElCollapse>
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
+import { defineProps, onMounted, ref } from 'vue'
 import { ElCollapse, ElCollapseItem } from 'element-plus'
 import { FormRender } from '@/components'
+import CanvasWrapper from '@/FormDesign/Canvas/CanvasWrapper.vue'
 
-defineProps({
+const thisProps = defineProps({
   props: Object,
-  children: Array
+  children: Array,
+  design: Boolean
+})
+
+const activeKey = ref([])
+
+onMounted(() => {
+  activeKey.value = thisProps.children.filter((item) => item.checked).map((item) => item.key)
 })
 </script>
 

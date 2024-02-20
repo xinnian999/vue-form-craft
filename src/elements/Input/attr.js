@@ -91,7 +91,8 @@ export default [
     ],
     onlyId: 'form-89tI',
     props: {
-      mode: 'card'
+      mode: 'card',
+      title: '校验规则'
     }
   },
 

@@ -31,7 +31,7 @@
       <el-card v-for="(item, index) in list" :key="item.key" class="list-card">
         <template #header>
           <div class="card-header">
-            <span>{{ title + index }}</span>
+            <span>{{ title + (index + 1) }}</span>
             <el-button
               v-if="allowReduce"
               @click="handleReduceItem(index)"
@@ -144,10 +144,6 @@ const fields = computed(
 const isMax = computed(() => {
   return list.value.length >= props.maxLines
 })
-
-const getPath = (index, dataPath) => {
-  return dataPath.replace('[]', index)
-}
 
 const handleAddItem = () => {
   if (isMax.value) {
