@@ -1,13 +1,9 @@
-import { linkageAttr, basic, props } from '../commonAttr'
+import { linkageAttr, basicAttr, highAttr } from '../commonAttr'
 
 export default [
-  ...basic,
+  ...basicAttr(['props.readonly', 'props.placeholder', 'initialValue']),
   { label: '初始值', component: 'Textarea', name: 'initialValue' },
-  {
-    label: 'props',
-    component: 'ItemGroup',
-    name: 'props',
-    children: [...props]
-  },
+
+  ...highAttr(),
   ...linkageAttr
 ]

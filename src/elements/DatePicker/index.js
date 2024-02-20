@@ -12,7 +12,8 @@ export default {
     component: 'DatePicker',
     props: {
       type: 'datetime',
-      placeholder: '请选择日期'
+      placeholder: '请选择日期',
+      clearable: false
     }
   },
   attr

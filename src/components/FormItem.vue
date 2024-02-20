@@ -44,7 +44,7 @@
 </template>
 
 <script setup lang="jsx">
-import { computed, defineProps, onBeforeMount, inject, nextTick, onMounted } from 'vue'
+import { computed, defineProps, onBeforeMount, inject, nextTick, onMounted, ref } from 'vue'
 import { ElFormItem, ElTooltip } from 'element-plus'
 import { isString } from 'lodash'
 import { isRegexString, getDataByPath, setDataByPath } from '@/utils'
@@ -73,7 +73,7 @@ const { elements } = inject('$options')
 
 const schema = inject('$schema')
 
-const formValues = thisProps.design ? {} : inject('$formValues')
+const formValues = thisProps.design ? ref({}) : inject('$formValues')
 
 const initialValues = thisProps.design ? {} : inject('$initialValues')
 

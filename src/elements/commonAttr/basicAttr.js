@@ -1,6 +1,6 @@
 import { recursionDelete } from '@/utils'
 
-const basicAttr = (omit = []) => {
+const basicAttr = (omit = [], moreAttrs = []) => {
   const attr = [
     {
       component: 'Title',
@@ -44,7 +44,9 @@ const basicAttr = (omit = []) => {
     }
   ]
 
-  return recursionDelete(attr, (item) => !omit.includes(item.name))
+  const omitAttrs = recursionDelete(attr, (item) => !omit.includes(item.name))
+
+  return [...omitAttrs, ...moreAttrs]
 }
 
 export default basicAttr

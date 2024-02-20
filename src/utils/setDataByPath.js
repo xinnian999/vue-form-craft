@@ -4,7 +4,6 @@ const setDataByPath = (object, path, value) => {
   const cloneObj = cloneDeep(object)
   // 将路径字符串分割成路径数组
   const pathArray = path.split('.')
-
   // 递归函数，用于在对象的深层级找到要修改的位置并更新其值
   function update(obj, pathArray, value) {
     // 如果路径数组为空，表示已经到达了最后一级，更新值并返回
