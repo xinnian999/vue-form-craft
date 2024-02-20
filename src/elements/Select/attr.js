@@ -1,7 +1,7 @@
 import { optionAttr, linkageAttr, basicAttr, highAttr } from '../commonAttr'
 
 export default [
-  ...basicAttr(['initialValue']),
+  ...basicAttr(['initialValue', 'props.readonly']),
   {
     label: '初始值',
     component: 'JsonEdit',
@@ -21,7 +21,6 @@ export default [
       'inactive-text': '单选'
     },
     onlyId: 'form-eTxc'
-    // change: [{ target: 'initialValue', value: "{{ $val?[]:'' }}" }]
   },
 
   ...optionAttr,

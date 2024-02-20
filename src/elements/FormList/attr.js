@@ -16,7 +16,7 @@ export default [
     hideLabel: true,
     hidden: false
   },
-  ...basicAttr(['initialValue', 'props.placeholder']),
+  ...basicAttr(['initialValue', 'props.placeholder', 'props.readonly']),
 
   {
     label: '显示模式',

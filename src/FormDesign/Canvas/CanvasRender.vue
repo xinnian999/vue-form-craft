@@ -44,7 +44,7 @@
 <script setup>
 import { defineProps, inject, computed } from 'vue'
 import { omit } from 'lodash'
-import { copyItems, deleteItem } from '@/utils'
+import { copyItems, recursionDelete } from '@/utils'
 import { FormItem } from '@/components'
 import CanvasWrapper from './CanvasWrapper.vue'
 
@@ -106,7 +106,7 @@ const rightBottomActions = [
   {
     icon: 'delete',
     handle: (element) => {
-      list.value = deleteItem(list.value, element.onlyId)
+      list.value = recursionDelete(list.value, (item) => item.onlyId !== element.onlyId)
     }
   }
 ]

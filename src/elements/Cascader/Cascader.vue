@@ -61,5 +61,5 @@ const value = computed({
   }
 })
 
-const { currentOptions, selectChange, loading } = useSelect(props, emits)
+const { currentOptions, loading } = useSelect(props, emits)
 </script>

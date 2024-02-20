@@ -1,9 +1,11 @@
+import { recursionDelete } from '@/utils'
+
 const basicAttr = (omit = []) => {
   const attr = [
     {
       component: 'Title',
       props: {
-        title: '常用属性',
+        title: '常见属性',
         type: 'h4',
         italic: true
       },
@@ -24,6 +26,7 @@ const basicAttr = (omit = []) => {
       component: 'Grid',
       children: [
         { label: '是否必填', component: 'Switch', name: 'required' },
+        { label: '是否只读', component: 'Switch', name: 'props.readonly' },
         { label: '是否禁用', component: 'Switch', name: 'props.disabled' },
         { label: '隐藏字段', component: 'Switch', name: 'hidden' },
         { label: '隐藏label', component: 'Switch', name: 'hideLabel' }
@@ -41,7 +44,7 @@ const basicAttr = (omit = []) => {
     }
   ]
 
-  return attr.filter((item) => !omit.includes(item.name))
+  return recursionDelete(attr, (item) => !omit.includes(item.name))
 }
 
 export default basicAttr
