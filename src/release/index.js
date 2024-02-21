@@ -1,6 +1,5 @@
 import axios from 'axios'
-import { SchemaForm, RemoteSchemaForm, RemoteFormDesign } from '@/components'
-import FormDesign from '@/FormDesign/index.vue'
+import { SchemaForm, RemoteSchemaForm, RemoteFormDesign, FormDesign } from '@/components'
 import IconRender from '@/components/IconRender.vue'
 import * as Directives from '@/directive'
 import 'element-plus/dist/index.css'

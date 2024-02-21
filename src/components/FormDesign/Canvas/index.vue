@@ -40,7 +40,7 @@ import { computed, provide, inject, ref } from 'vue'
 import draggable from 'vuedraggable-es'
 import { ElForm } from 'element-plus'
 import { changeItems } from '@/utils'
-import { CanvasRender } from '@/components'
+import CanvasRender from './CanvasRender.vue'
 
 const schema = inject('$schema')
 
