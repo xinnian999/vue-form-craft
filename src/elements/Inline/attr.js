@@ -1,6 +1,5 @@
 export default [
   { label: '唯一标识', component: 'Input', name: 'name' },
-  { label: '隐藏字段', component: 'Switch', name: 'hidden' },
   {
     label: '对齐方式',
     component: 'Radio',
