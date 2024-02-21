@@ -8,8 +8,7 @@
 <script setup>
 import { defineProps } from 'vue'
 import { ElCard } from 'element-plus'
-import { FormRender } from '@/components'
-import CanvasWrapper from '@/FormDesign/Canvas/CanvasWrapper.vue'
+import { FormRender, CanvasWrapper } from '@/components'
 
 defineProps({
   props: Object,

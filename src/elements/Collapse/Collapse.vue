@@ -13,8 +13,7 @@
 <script setup>
 import { defineProps, onMounted, ref } from 'vue'
 import { ElCollapse, ElCollapseItem } from 'element-plus'
-import { FormRender } from '@/components'
-import CanvasWrapper from '@/FormDesign/Canvas/CanvasWrapper.vue'
+import { FormRender, CanvasWrapper } from '@/components'
 import Title from '../Title/Title.vue'
 const thisProps = defineProps({
   props: Object,

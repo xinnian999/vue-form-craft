@@ -13,8 +13,7 @@
 
 <script setup>
 import { defineProps, computed } from 'vue'
-import { FormRender } from '@/components'
-import CanvasWrapper from '@/FormDesign/Canvas/CanvasWrapper.vue'
+import { FormRender, CanvasWrapper } from '@/components'
 
 const thisProps = defineProps({
   name: String,

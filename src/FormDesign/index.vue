@@ -27,7 +27,7 @@ import {
   watchEffect
 } from 'vue'
 import Menus from './Menus/index.vue'
-import Canvas from './Canvas/index.vue'
+import Canvas from './Canvas.vue'
 import Current from './Current/index.vue'
 import Actions from './Actions.vue'
 
