@@ -29,7 +29,7 @@ export default {
         labelKey: 'name',
         valueKey: 'id'
       },
-      onlyId: 'form-2Rtu',
+      designKey: 'form-2Rtu',
       name: 'commodity',
       change: [
         {
@@ -41,7 +41,7 @@ export default {
     {
       label: '价格',
       component: 'InputNumber',
-      onlyId: 'form-rS3W',
+      designKey: 'form-rS3W',
       name: 'price',
       props: {
         min: 1,

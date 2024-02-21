@@ -5,13 +5,13 @@ export default [
     label: '标签key',
     component: 'Input',
     name: 'props.labelKey',
-    onlyId: 'form-X6hs'
+    designKey: 'form-X6hs'
   },
   {
     label: '值Key',
     component: 'Input',
     name: 'props.valueKey',
-    onlyId: 'form-STkl'
+    designKey: 'form-STkl'
   },
   {
     label: '数据模式',
@@ -31,7 +31,7 @@ export default [
       ],
       optionType: 'button'
     },
-    onlyId: 'form-PLpj'
+    designKey: 'form-PLpj'
   },
   {
     label: '静态选项',
@@ -46,7 +46,7 @@ export default [
         props: {
           placeholder: '请输入...'
         },
-        onlyId: 'form-LnGh'
+        designKey: 'form-LnGh'
         // initialValue: "{{ '选项' + ($index+1) }}"
       },
       {
@@ -54,11 +54,11 @@ export default [
         name: '{{$values.props.valueKey}}',
         component: 'Input',
         props: {},
-        onlyId: 'form-HYtW'
+        designKey: 'form-HYtW'
         // initialValue: "{{ 'value' + ($index+1) }}"
       }
     ],
-    onlyId: 'form-Iwpd',
+    designKey: 'form-Iwpd',
     props: {
       mode: 'table',
       newItemDefaults:
@@ -70,7 +70,7 @@ export default [
     props: {
       // header: '远程数据'
     },
-    onlyId: 'id-pGeN',
+    designKey: 'id-pGeN',
     name: 'form-6vzT',
     hidden: '{{$values.props.mode==="static"}}',
     children: apiAttr

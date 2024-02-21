@@ -9,7 +9,7 @@ export default {
       props: {
         placeholder: '请输入...'
       },
-      onlyId: 'form-NASi',
+      designKey: 'form-NASi',
       name: 'item1',
       change: [
         {
@@ -28,7 +28,7 @@ export default {
       props: {
         placeholder: '请输入...'
       },
-      onlyId: 'form-Nasd',
+      designKey: 'form-Nasd',
       name: 'item2'
     },
     {
@@ -37,7 +37,7 @@ export default {
       props: {
         placeholder: '请输入...'
       },
-      onlyId: 'form-KI1N',
+      designKey: 'form-KI1N',
       name: 'item3'
     }
   ]

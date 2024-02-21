@@ -11,7 +11,7 @@
     @add="onAdd"
   >
     <template #item="{ element: child }">
-      <CanvasRender v-if="child.onlyId" v-bind="child" />
+      <CanvasRender v-if="child.designKey" v-bind="child" />
     </template>
   </draggable>
 </template>

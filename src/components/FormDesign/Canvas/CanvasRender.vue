@@ -5,7 +5,7 @@
     @mousemove.stop="handleHoverEnter"
     @mouseleave.stop="handleHoverLeave"
   >
-    <div class="actions-left-top" v-if="onlyId === current.onlyId">
+    <div class="actions-left-top" v-if="designKey === current.designKey">
       <div class="canvas-move" size="small" type="primary">
         <icon-render name="move" />
       </div>
@@ -13,7 +13,7 @@
 
     <div class="hidden-ico" v-if="hidden"><icon-render name="hidden" /></div>
 
-    <ul class="actions-right-bottom" v-if="onlyId === current.onlyId">
+    <ul class="actions-right-bottom" v-if="designKey === current.designKey">
       <li
         v-for="{ icon, handle } in rightBottomActions"
         @click.stop="handle(thisProps)"
@@ -39,7 +39,7 @@ const thisProps = defineProps({
   component: String,
   props: Object,
   children: Array,
-  onlyId: String,
+  designKey: String,
   hideLabel: { type: Boolean, default: undefined },
   required: { type: Boolean, default: undefined },
   style: Object,
@@ -56,13 +56,13 @@ const list = inject('$list')
 
 const canvasItemClass = computed(() => ({
   'canvas-item': true,
-  active: thisProps.onlyId === current.value.onlyId,
-  hover: thisProps.onlyId === hoverId.value,
-  mask: thisProps.onlyId === hoverId.value && !thisProps.children
+  active: thisProps.designKey === current.value.designKey,
+  hover: thisProps.designKey === hoverId.value,
+  mask: thisProps.designKey === hoverId.value && !thisProps.children
 }))
 
 const handleHoverEnter = () => {
-  hoverId.value = thisProps.onlyId
+  hoverId.value = thisProps.designKey
 }
 
 const handleHoverLeave = () => {
@@ -79,13 +79,13 @@ const rightBottomActions = [
   {
     icon: 'copy',
     handle: (element) => {
-      list.value = copyItems(list.value, element.onlyId)
+      list.value = copyItems(list.value, element.designKey)
     }
   },
   {
     icon: 'delete',
     handle: (element) => {
-      list.value = recursionDelete(list.value, (item) => item.onlyId !== element.onlyId)
+      list.value = recursionDelete(list.value, (item) => item.designKey !== element.designKey)
     }
   }
 ]

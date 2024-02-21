@@ -7,7 +7,7 @@ const basicAttr = (omit = []) => {
     //     type: 'h4',
     //     italic: true
     //   },
-    //   onlyId: 'id-high-title',
+    //   designKey: 'id-high-title',
     //   name: 'form-high-title',
     //   style: {
     //     marginTop: '40px'

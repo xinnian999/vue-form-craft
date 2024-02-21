@@ -11,7 +11,7 @@ export default mergeAttr({
         'active-text': '多选',
         'inactive-text': '单选'
       },
-      onlyId: 'form-eTxc'
+      designKey: 'form-eTxc'
     }
   ],
 
@@ -20,13 +20,13 @@ export default mergeAttr({
       label: '标签key',
       component: 'Input',
       name: 'props.labelKey',
-      onlyId: 'form-X6hs'
+      designKey: 'form-X6hs'
     },
     {
       label: '值Key',
       component: 'Input',
       name: 'props.valueKey',
-      onlyId: 'form-STkl'
+      designKey: 'form-STkl'
     },
     {
       label: '数据模式',
@@ -46,21 +46,21 @@ export default mergeAttr({
         ],
         optionType: 'button'
       },
-      onlyId: 'form-PLpj'
+      designKey: 'form-PLpj'
     },
     {
       label: '静态选项',
       name: 'props.options',
       component: 'JsonEdit',
       hidden: '{{$values.props.mode!=="static"}}',
-      onlyId: 'form-Iwpd',
+      designKey: 'form-Iwpd',
       props: {
         mode: 'dialog'
       }
     },
     {
       component: 'Card',
-      onlyId: 'id-pGeN',
+      designKey: 'id-pGeN',
       name: 'form-6vzT',
       hidden: '{{$values.props.mode==="static"}}',
       children: apiAttr
@@ -73,7 +73,7 @@ export default mergeAttr({
       label: '只取最后一级',
       component: 'Switch',
       name: 'props.takeLastLevel',
-      onlyId: 'form-kJ7K222',
+      designKey: 'form-kJ7K222',
       hidden: '{{$values.props.multiple}}'
     }
   ],

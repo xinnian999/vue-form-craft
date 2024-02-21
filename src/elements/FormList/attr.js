@@ -12,7 +12,7 @@ export default mergeAttr({
         closable: true,
         'show-icon': true
       },
-      onlyId: 'form-fVKS',
+      designKey: 'form-fVKS',
       name: 'sv1sIQ',
       hideLabel: true,
       hidden: false

@@ -9,7 +9,7 @@ export default {
       props: {
         placeholder: '请输入用户名'
       },
-      onlyId: 'form-eNR0',
+      designKey: 'form-eNR0',
       name: 'username',
       required: true
     },
@@ -19,7 +19,7 @@ export default {
       props: {
         placeholder: '请输入密码'
       },
-      onlyId: 'form-D1x7',
+      designKey: 'form-D1x7',
       name: 'password',
       required: true
     },
@@ -36,7 +36,7 @@ export default {
               display: 'flex'
             }
           },
-          onlyId: 'form-aBMY',
+          designKey: 'form-aBMY',
           name: 'submit',
           hideLabel: true
         },
@@ -47,7 +47,7 @@ export default {
             clickEvent: 'resetForm',
             style: {}
           },
-          onlyId: 'form-mtnY',
+          designKey: 'form-mtnY',
           name: 'IxjeOB',
           hideLabel: true
         }
@@ -56,7 +56,7 @@ export default {
         colCount: 2,
         space: 20
       },
-      onlyId: 'form-WNcq',
+      designKey: 'form-WNcq',
       name: 'HeDkKP'
     }
   ]

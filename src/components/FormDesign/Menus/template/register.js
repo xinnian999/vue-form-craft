@@ -9,7 +9,7 @@ export default {
       props: {
         placeholder: '请输入用户名'
       },
-      onlyId: 'form-eNR0',
+      designKey: 'form-eNR0',
       name: 'username',
       required: true
     },
@@ -19,7 +19,7 @@ export default {
       props: {
         placeholder: '请输入密码'
       },
-      onlyId: 'form-D1x7',
+      designKey: 'form-D1x7',
       name: 'password',
       required: true
     },
@@ -29,7 +29,7 @@ export default {
       props: {
         placeholder: '请输入...'
       },
-      onlyId: 'form-qx0M',
+      designKey: 'form-qx0M',
       name: 'phoneNumber',
       required: true
     },
@@ -39,7 +39,7 @@ export default {
       props: {
         placeholder: '请输入...'
       },
-      onlyId: 'form-M7xE',
+      designKey: 'form-M7xE',
       name: 'code'
     },
     {
@@ -50,7 +50,7 @@ export default {
         style: {},
         customEvent: '{{}}'
       },
-      onlyId: 'form-gW1S',
+      designKey: 'form-gW1S',
       name: '1fx9H8'
     }
   ]

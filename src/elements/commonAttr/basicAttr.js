@@ -9,7 +9,7 @@ const basicAttr = (omit = [], moreAttrs = []) => {
     //     type: 'h4',
     //     italic: true
     //   },
-    //   onlyId: 'id-RjVN',
+    //   designKey: 'id-RjVN',
     //   name: 'form-Kanq'
     // },
     { label: '标签', component: 'Input', name: 'label' },
@@ -19,7 +19,7 @@ const basicAttr = (omit = [], moreAttrs = []) => {
       label: '占位提示',
       component: 'Input',
       name: 'props.placeholder',
-      onlyId: 'form-ekRL'
+      designKey: 'form-ekRL'
     },
     { label: '初始值', component: 'Input', name: 'initialValue' },
     {
@@ -36,7 +36,7 @@ const basicAttr = (omit = [], moreAttrs = []) => {
         'row-gap': 0,
         'column-gap': 20
       },
-      onlyId: 'form-R003',
+      designKey: 'form-R003',
       name: 'cNmCuu',
       style: {
         marginBottom: 0

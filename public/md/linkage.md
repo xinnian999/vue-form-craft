@@ -45,7 +45,7 @@
         "max": 5,
         "allow-half": true
       },
-      "onlyId": "form-Lx4g",
+      "designKey": "form-Lx4g",
       "name": "rate",
       "style": {},
       "required": true
@@ -63,7 +63,7 @@
         },
         "placeholder": "请输入..."
       },
-      "onlyId": "form-XyJs",
+      "designKey": "form-XyJs",
       "name": "reason",
       "style": {},
       "hidden": "{{$values.rate>=3 || !$values.rate}}" //大于等于3分时隐藏，未评分时也要隐藏
@@ -100,7 +100,7 @@ change是一个数组，可以同时联动多个字段。target为目标字段�
       "props": {
         "placeholder": "请输入..."
       },
-      "onlyId": "form-NASi",
+      "designKey": "form-NASi",
       "name": "item1",
       "change": [
         {
@@ -119,7 +119,7 @@ change是一个数组，可以同时联动多个字段。target为目标字段�
       "props": {
         "placeholder": "请输入..."
       },
-      "onlyId": "form-Nasd",
+      "designKey": "form-Nasd",
       "name": "item2"
     },
     {
@@ -128,7 +128,7 @@ change是一个数组，可以同时联动多个字段。target为目标字段�
       "props": {
         "placeholder": "请输入..."
       },
-      "onlyId": "form-KI1N",
+      "designKey": "form-KI1N",
       "name": "item3"
     }
   ]
@@ -175,7 +175,7 @@ change是一个数组，可以同时联动多个字段。target为目标字段�
         "labelKey": "name",
         "valueKey": "id"
       },
-      "onlyId": "form-2Rtu",
+      "designKey": "form-2Rtu",
       "name": "commodity",
       "change": [
         {
@@ -187,7 +187,7 @@ change是一个数组，可以同时联动多个字段。target为目标字段�
     {
       "label": "价格",
       "component": "inputNumber",
-      "onlyId": "form-rS3W",
+      "designKey": "form-rS3W",
       "name": "price",
       "props": {
         "min": 1,

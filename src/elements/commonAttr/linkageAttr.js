@@ -6,7 +6,7 @@ export default [
   //     type: 'h4',
   //     italic: true
   //   },
-  //   onlyId: 'id-high-linkage',
+  //   designKey: 'id-high-linkage',
   //   name: 'form-high-linkage',
   //   style: {
   //     marginTop: '40px'

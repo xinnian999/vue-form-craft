@@ -62,7 +62,7 @@ const current = computed({
   get() {
     const findItem = (items) => {
       return items.reduce((all, item) => {
-        if (item.onlyId === currentId.value) {
+        if (item.designKey === currentId.value) {
           return item
         }
         if (item.children) {
@@ -77,10 +77,10 @@ const current = computed({
     return findItem(currentSchema.value.items) || {}
   },
   set(element) {
-    currentId.value = element.onlyId
+    currentId.value = element.designKey
     const set = (items) => {
       return items.map((item) => {
-        if (item.onlyId === element.onlyId) {
+        if (item.designKey === element.designKey) {
           return element
         }
         if (item.children) {

@@ -37,7 +37,7 @@ export default mergeAttr({
       label: '自动选中第一项',
       component: 'Switch',
       name: 'props.autoSelectedFirst',
-      onlyId: 'form-LPpx'
+      designKey: 'form-LPpx'
     }
   ],
 

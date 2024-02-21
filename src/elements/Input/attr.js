@@ -39,7 +39,7 @@ export default mergeAttr({
             labelKey: 'label',
             valueKey: 'value'
           },
-          onlyId: 'form-3L0P',
+          designKey: 'form-3L0P',
           name: 'type'
         },
         {
@@ -48,7 +48,7 @@ export default mergeAttr({
           props: {
             placeholder: '请输入正则表达式'
           },
-          onlyId: 'form-Wdb2Reg',
+          designKey: 'form-Wdb2Reg',
           name: 'customReg',
           hidden: '{{$item.type!=="custom"}}'
           // change:[
@@ -63,7 +63,7 @@ export default mergeAttr({
           props: {
             placeholder: '请输入...'
           },
-          onlyId: 'form-Wdb2',
+          designKey: 'form-Wdb2',
           name: 'message'
         },
         {
@@ -85,11 +85,11 @@ export default mergeAttr({
             labelKey: 'label',
             valueKey: 'value'
           },
-          onlyId: 'form-3L0P6666',
+          designKey: 'form-3L0P6666',
           name: 'trigger'
         }
       ],
-      onlyId: 'form-89tI',
+      designKey: 'form-89tI',
       props: {
         mode: 'card',
         title: '校验规则'

@@ -3,7 +3,7 @@
     <h4 v-if="!Object.keys(current).length">未选中字段</h4>
 
     <template v-else>
-      <schema-form :key="current.onlyId" v-model="current" :schema="attrSchema"></schema-form>
+      <schema-form :key="current.designKey" v-model="current" :schema="attrSchema"></schema-form>
 
       <div>
         <el-button @click="handleEdit">编辑配置文本</el-button>

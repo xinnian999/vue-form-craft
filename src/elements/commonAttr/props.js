@@ -14,7 +14,7 @@ export default [
       title: 'Props',
       contentPosition: 'center'
     },
-    onlyId: 'form-Props',
+    designKey: 'form-Props',
     name: 'VekeRi',
     hidden: false
   },
@@ -23,6 +23,6 @@ export default [
     label: '占位提示',
     component: 'Input',
     name: 'placeholder',
-    onlyId: 'form-ekRL'
+    designKey: 'form-ekRL'
   }
 ]

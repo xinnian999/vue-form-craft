@@ -29,7 +29,7 @@
       :scroll-fensitivity="1"
     >
       <template #item="{ element }">
-        <CanvasRender v-if="element.onlyId" v-bind="element" />
+        <CanvasRender v-if="element.designKey" v-bind="element" />
       </template>
     </draggable>
   </el-form>

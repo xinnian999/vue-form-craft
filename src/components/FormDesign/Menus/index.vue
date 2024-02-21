@@ -25,7 +25,7 @@
         ghost-class="ghost"
         drag-class="drag"
         fallback-class="fallback"
-        item-key="onlyId"
+        item-key="designKey"
       >
         <template #item="{ element }">
           <li class="form-item-btn">

@@ -3,7 +3,7 @@ import { cloneDeep } from 'lodash'
 
 const copyChildren = (children) => {
   return children.map((child) => {
-    const data = { ...cloneDeep(child), onlyId: `form-${getRandomId(4)}`, name: getRandomId(8) }
+    const data = { ...cloneDeep(child), designKey: `form-${getRandomId(4)}`, name: getRandomId(8) }
 
     if (child.children) {
       data.children = copyChildren(child.children)
@@ -21,10 +21,10 @@ const copyItems = (list, id) => {
       all.push(current)
     }
 
-    if (current.onlyId === id) {
+    if (current.designKey === id) {
       const newItem = {
         ...cloneDeep(current),
-        onlyId: `form-${getRandomId(4)}`,
+        designKey: `form-${getRandomId(4)}`,
         name: getRandomId(8)
       }
       if (current.children) {

@@ -5,7 +5,7 @@ export default [
       title: '通用属性',
       contentPosition: 'center'
     },
-    onlyId: 'form-Z2QZ',
+    designKey: 'form-Z2QZ',
     name: 'VekeRi',
     hidden: false
   },
@@ -25,7 +25,7 @@ export default [
       'row-gap': 0,
       'column-gap': 20
     },
-    onlyId: 'form-R003',
+    designKey: 'form-R003',
     name: 'cNmCuu'
   },
   { label: '自定义class', component: 'Input', name: 'props.class' },

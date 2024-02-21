@@ -4,7 +4,7 @@ export default [
     component: 'Input',
     name: 'props.api.url',
     initialValue: '/current/query/article',
-    onlyId: 'form-UrE8'
+    designKey: 'form-UrE8'
   },
   {
     label: '请求方式',
@@ -32,7 +32,7 @@ export default [
         }
       ]
     },
-    onlyId: 'form-nOpD'
+    designKey: 'form-nOpD'
   },
   {
     label: '请求参数',
@@ -59,6 +59,6 @@ export default [
     component: 'Input',
     name: 'props.api.dataPath',
     initialValue: 'data',
-    onlyId: 'form-UrE8'
+    designKey: 'form-UrE8'
   }
 ]

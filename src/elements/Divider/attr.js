@@ -24,6 +24,6 @@ export default [
       ]
     },
     initialValue: 'center',
-    onlyId: 'form-PLpj'
+    designKey: 'form-PLpj'
   }
 ]

@@ -15,7 +15,7 @@ export default {
             showWordLimit: true,
             type: 'text'
           },
-          onlyId: 'form-JuGq',
+          designKey: 'form-JuGq',
           name: 'name'
         },
         {
@@ -26,12 +26,12 @@ export default {
             showWordLimit: true,
             type: 'text'
           },
-          onlyId: 'form-JuGq',
+          designKey: 'form-JuGq',
           name: 'desc',
           hidden: '{{$item.name==="aaa"}}'
         }
       ],
-      onlyId: 'form-wC99',
+      designKey: 'form-wC99',
       name: '7aJJ2x',
       props: {
         mode: 'card'

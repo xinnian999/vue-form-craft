@@ -9,7 +9,7 @@ export default {
       props: {
         placeholder: '请输入...'
       },
-      onlyId: 'form-MPd5',
+      designKey: 'form-MPd5',
       name: 'title',
       required: true
     },
@@ -23,7 +23,7 @@ export default {
         },
         placeholder: '请输入...'
       },
-      onlyId: 'form-ojdx',
+      designKey: 'form-ojdx',
       name: 'introduce'
     },
     {
@@ -57,7 +57,7 @@ export default {
           data: {}
         }
       },
-      onlyId: 'form-ri81',
+      designKey: 'form-ri81',
       name: 'tag',
       required: true
     },
@@ -81,7 +81,7 @@ export default {
         labelKey: 'name',
         valueKey: 'value'
       },
-      onlyId: 'form-emNb',
+      designKey: 'form-emNb',
       name: 'type',
       required: true
     },
@@ -97,13 +97,13 @@ export default {
         uploadKey: 'image',
         dataPath: 'fileUrl'
       },
-      onlyId: 'form-YM6S',
+      designKey: 'form-YM6S',
       name: 'picture'
     },
     {
       label: '文章内容',
       component: 'Markdown',
-      onlyId: 'form-fSYT',
+      designKey: 'form-fSYT',
       name: 'content',
       required: true
     }

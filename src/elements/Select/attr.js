@@ -21,7 +21,7 @@ export default mergeAttr({
         'active-text': '多选',
         'inactive-text': '单选'
       },
-      onlyId: 'form-eTxc'
+      designKey: 'form-eTxc'
     }
   ],
 
@@ -32,19 +32,19 @@ export default mergeAttr({
       label: '自动选中第一项',
       component: 'Switch',
       name: 'props.autoSelectedFirst',
-      onlyId: 'form-LPpx'
+      designKey: 'form-LPpx'
     },
     {
       label: '滚动加载下一页',
       component: 'Switch',
       name: 'props.scrollLoad',
-      onlyId: 'form-LPpxscrollLoad'
+      designKey: 'form-LPpxscrollLoad'
     },
     {
       label: '表格模式',
       component: 'Switch',
       name: 'props.tableDrop',
-      onlyId: 'form-LPpx',
+      designKey: 'form-LPpx',
       change: [
         {
           target: 'props.columns',
@@ -60,7 +60,7 @@ export default mergeAttr({
       name: 'props.columns',
       component: 'JsonEdit',
       hidden: '{{!$values.props.tableDrop}}',
-      onlyId: 'form-Iwpd',
+      designKey: 'form-Iwpd',
       props: {
         mode: 'dialog'
       }

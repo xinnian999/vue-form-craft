@@ -29,7 +29,7 @@ const schema = {
       props: {
         placeholder: '请输入标题'
       },
-      onlyId: 'form-eNR0',
+      designKey: 'form-eNR0',
       name: 'title',
       required: true
     },
@@ -39,7 +39,7 @@ const schema = {
       props: {
         placeholder: '请输入描述'
       },
-      onlyId: 'form-D1x7',
+      designKey: 'form-D1x7',
       name: 'desc'
     }
   ]
@@ -118,7 +118,7 @@ const schema = {
       props: {
         placeholder: '请输入用户名'
       },
-      onlyId: 'form-eNR0',
+      designKey: 'form-eNR0',
       name: 'username',
       initialValue: 10
     },
@@ -128,7 +128,7 @@ const schema = {
       props: {
         placeholder: '请输入密码'
       },
-      onlyId: 'form-D1x7',
+      designKey: 'form-D1x7',
       name: 'password',
       required: true
     }
@@ -165,7 +165,7 @@ const schema = {
       props: {
         placeholder: '请输入用户名'
       },
-      onlyId: 'form-eNR0',
+      designKey: 'form-eNR0',
       name: 'username',
       initialValue: 10
     },
@@ -175,7 +175,7 @@ const schema = {
       props: {
         placeholder: '请输入密码'
       },
-      onlyId: 'form-D1x7',
+      designKey: 'form-D1x7',
       name: 'password'
     },
     {
@@ -184,7 +184,7 @@ const schema = {
         name: '提交',
         clickEvent: 'submitForm'
       },
-      onlyId: 'form-aBMY',
+      designKey: 'form-aBMY',
       name: 'submit',
     }
   ]
