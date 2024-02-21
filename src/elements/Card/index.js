@@ -6,8 +6,6 @@ export default {
   icon: 'card',
   type: 'layout',
   order: 1,
-  isWrapper: true,
-
   initialValues: {
     component: 'Card',
     children: [],

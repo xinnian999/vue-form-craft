@@ -1,7 +1,7 @@
 <template>
   <template v-if="design || !hidden">
-    <div v-if="config.type === 'layout'" class="notFormItem" :style="style">
-      <component :is="config.component" v-bind="thisProps" />
+    <div v-if="config.type === 'layout'" :style="{ marginBottom: design ? 0 : '18px', ...style }">
+      <component :is="config.component" v-bind="thisProps" :design="design" />
     </div>
 
     <div

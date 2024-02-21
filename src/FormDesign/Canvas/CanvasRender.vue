@@ -28,13 +28,6 @@
       <CanvasWrapper v-bind="thisProps" />
     </div>
 
-    <component
-      v-else-if="currentComponentConfig.isWrapper"
-      :is="currentComponentConfig.component"
-      v-bind="thisProps"
-      design
-    />
-
     <form-item v-else v-bind="thisProps" :props="checkProps(props)" design />
   </div>
 </template>

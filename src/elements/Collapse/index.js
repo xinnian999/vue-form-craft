@@ -6,7 +6,6 @@ export default {
   icon: 'card',
   type: 'layout',
   order: 4,
-  isWrapper: true,
   initialValues: {
     component: 'Collapse',
     children: [{ title: '折叠面板1', name: 'name1', children: [] }]
