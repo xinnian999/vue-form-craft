@@ -11,7 +11,6 @@
                 v-for="field in fields(index)"
                 v-bind="field"
                 :key="field.label"
-                :prop="`${name}.${index}.${field.name}`"
                 :name="`${name}.${index}.${field.name}`"
                 hideLabel
               />
@@ -51,7 +50,6 @@
             v-bind="field"
             :key="field.label"
             class="list-card-item"
-            :prop="`${name}.${index}.${field.name}`"
             :name="`${name}.${index}.${field.name}`"
           />
         </el-card>
@@ -168,7 +166,6 @@ const formatter = (item, data, index) => {
       {...deepParse(item, { $item: list.value[index], $index: index })}
       hideLabel
       style={{ marginBottom: 0 }}
-      prop={`${props.name}.${index}.${item.name}`}
       name={`${props.name}.${index}.${item.name}`}
     />
   )

@@ -13,7 +13,7 @@
       id="form-item"
       :style="itemStyle"
       :key="name"
-      :prop="prop || name"
+      :prop="name"
       :label-width="hideLabel ? '0' : schema.labelWidth"
       :rules="computeRules"
       :class="thisProps.class"
@@ -59,7 +59,6 @@ const thisProps = defineProps({
   children: Array,
   hidden: Boolean,
   hideLabel: Boolean,
-  prop: String,
   onlyId: String,
   rules: Array,
   class: null,
