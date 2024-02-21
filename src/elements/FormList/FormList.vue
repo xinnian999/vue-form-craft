@@ -22,6 +22,7 @@
               circle
               type="primary"
               class="list-btn"
+              :disabled="disabled"
             >
               <template #icon> <icon-render name="reduce" color="#fff" /> </template
             ></el-button>
@@ -40,6 +41,7 @@
                 circle
                 type="primary"
                 class="list-btn"
+                :disabled="disabled"
               >
                 <template #icon> <icon-render name="reduce" color="#fff" /> </template>
               </el-button>
@@ -72,6 +74,7 @@
               circle
               type="primary"
               class="list-btn"
+              :disabled="disabled"
             >
               <template #icon> <icon-render name="reduce" color="#fff" /> </template
             ></el-button>
@@ -86,6 +89,7 @@
           circle
           type="primary"
           class="list-btn addBtn"
+          :disabled="disabled"
         >
           <template #icon> <icon-render name="add" color="#fff" /></template>
         </el-button>
@@ -132,7 +136,8 @@ const props = defineProps({
     default: () => ({})
   },
   name: String,
-  design: Boolean
+  design: Boolean,
+  disabled: Boolean
 })
 const emit = defineEmits(['update:modelValue'])
 

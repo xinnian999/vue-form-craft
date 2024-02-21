@@ -3,7 +3,7 @@ import Collapse from './Collapse.vue'
 export default {
   name: '折叠面板',
   component: Collapse,
-  icon: 'card',
+  icon: 'collapse',
   type: 'layout',
   order: 4,
   initialValues: {

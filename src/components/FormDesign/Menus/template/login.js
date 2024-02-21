@@ -24,7 +24,7 @@ export default {
       required: true
     },
     {
-      component: 'Grid',
+      component: 'Inline',
       children: [
         {
           component: 'Button',
@@ -53,11 +53,11 @@ export default {
         }
       ],
       props: {
-        colCount: 2,
-        space: 20
+        align: 'center',
+        gap: 20
       },
-      designKey: 'form-WNcq',
-      name: 'HeDkKP'
+      designKey: 'design-2NnI',
+      name: 'form-dxYP'
     }
   ]
 }
