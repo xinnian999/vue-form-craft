@@ -1,37 +1,22 @@
 <template>
   <div id="formList">
-    <template v-if="mode === 'inline'">
-      <el-form-item v-for="(item, index) in list" :key="item.key" class="list-item">
-        <div class="list-item-content">
-          <el-space>
-            <form-item
-              v-for="field in fields(index)"
-              v-bind="field"
-              :key="field.label"
-              :prop="`${name}.${index}.${field.name}`"
-              :name="`${name}.${index}.${field.name}`"
-              hideLabel
-            />
-          </el-space>
+    <DefaultCanvasWrapper v-if="design" :children="children" title="自增容器" :name="name" />
 
-          <el-button
-            v-if="allowReduce"
-            @click="handleReduceItem(index)"
-            circle
-            type="primary"
-            class="list-btn"
-          >
-            <template #icon> <icon-render name="reduce" color="#fff" /> </template
-          ></el-button>
-        </div>
-      </el-form-item>
-    </template>
+    <div v-else>
+      <template v-if="mode === 'inline'">
+        <el-form-item v-for="(item, index) in list" :key="item.key" class="list-item">
+          <div class="list-item-content">
+            <el-space>
+              <form-item
+                v-for="field in fields(index)"
+                v-bind="field"
+                :key="field.label"
+                :prop="`${name}.${index}.${field.name}`"
+                :name="`${name}.${index}.${field.name}`"
+                hideLabel
+              />
+            </el-space>
 
-    <template v-if="mode === 'card'">
-      <el-card v-for="(item, index) in list" :key="item.key" class="list-card">
-        <template #header>
-          <div class="card-header">
-            <span>{{ title + (index + 1) }}</span>
             <el-button
               v-if="allowReduce"
               @click="handleReduceItem(index)"
@@ -39,55 +24,74 @@
               type="primary"
               class="list-btn"
             >
-              <template #icon> <icon-render name="reduce" color="#fff" /> </template>
-            </el-button>
+              <template #icon> <icon-render name="reduce" color="#fff" /> </template
+            ></el-button>
           </div>
-        </template>
-        <form-item
-          v-for="field in fields(index)"
-          v-bind="field"
-          :key="field.label"
-          class="list-card-item"
-          :prop="`${name}.${index}.${field.name}`"
-          :name="`${name}.${index}.${field.name}`"
+        </el-form-item>
+      </template>
+
+      <template v-if="mode === 'card'">
+        <el-card v-for="(item, index) in list" :key="item.key" class="list-card">
+          <template #header>
+            <div class="card-header">
+              <span>{{ title + (index + 1) }}</span>
+              <el-button
+                v-if="allowReduce"
+                @click="handleReduceItem(index)"
+                circle
+                type="primary"
+                class="list-btn"
+              >
+                <template #icon> <icon-render name="reduce" color="#fff" /> </template>
+              </el-button>
+            </div>
+          </template>
+          <form-item
+            v-for="field in fields(index)"
+            v-bind="field"
+            :key="field.label"
+            class="list-card-item"
+            :prop="`${name}.${index}.${field.name}`"
+            :name="`${name}.${index}.${field.name}`"
+          />
+        </el-card>
+      </template>
+
+      <el-table v-if="mode === 'table' && list.length" :data="list" style="width: 100%">
+        <el-table-column
+          :prop="item.name"
+          :label="item.label"
+          :key="item.name"
+          v-for="item in children"
+          :width="item.width"
+          :formatter="(row, _, __, index) => formatter(item, row, index)"
         />
-      </el-card>
-    </template>
+        <el-table-column fixed="right" min-width="60">
+          <template #default="record">
+            <el-button
+              v-if="allowReduce"
+              @click="handleReduceItem(record.$index)"
+              circle
+              type="primary"
+              class="list-btn"
+            >
+              <template #icon> <icon-render name="reduce" color="#fff" /> </template
+            ></el-button>
+          </template>
+        </el-table-column>
+      </el-table>
 
-    <el-table :data="list" style="width: 100%" v-if="mode === 'table' && list.length">
-      <el-table-column
-        :prop="item.name"
-        :label="item.label"
-        :key="item.name"
-        v-for="item in children"
-        :width="item.width"
-        :formatter="(row, _, __, index) => formatter(item, row, index)"
-      />
-      <el-table-column fixed="right" min-width="60">
-        <template #default="record">
-          <el-button
-            v-if="allowReduce"
-            @click="handleReduceItem(record.$index)"
-            circle
-            type="primary"
-            class="list-btn"
-          >
-            <template #icon> <icon-render name="reduce" color="#fff" /> </template
-          ></el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-
-    <div>
-      <el-button
-        v-if="allowAdd && !isMax"
-        @click="handleAddItem"
-        circle
-        type="primary"
-        class="list-btn addBtn"
-      >
-        <template #icon> <icon-render name="add" color="#fff" /></template>
-      </el-button>
+      <div>
+        <el-button
+          v-if="allowAdd && !isMax"
+          @click="handleAddItem"
+          circle
+          type="primary"
+          class="list-btn addBtn"
+        >
+          <template #icon> <icon-render name="add" color="#fff" /></template>
+        </el-button>
+      </div>
     </div>
   </div>
 </template>
@@ -95,7 +99,7 @@
 <script setup lang="jsx">
 import { computed, defineProps, defineEmits } from 'vue'
 import { ElFormItem, ElSpace, ElButton, ElCard, ElTableColumn, ElTable } from 'element-plus'
-import { FormItem } from '@/components'
+import { FormItem, DefaultCanvasWrapper } from '@/components'
 import { deepParse } from '@/utils'
 
 const props = defineProps({
@@ -129,7 +133,8 @@ const props = defineProps({
     type: Function,
     default: () => ({})
   },
-  name: String
+  name: String,
+  design: Boolean
 })
 const emit = defineEmits(['update:modelValue'])
 

@@ -1,9 +1,12 @@
 <template>
   <div class="form-item-grid">
-    <div v-if="design" class="default">
-      <div class="title">【{{ config.name }}】 {{ name }}</div>
-      <CanvasWrapper :children="children" :style="gridStyle" />
-    </div>
+    <DefaultCanvasWrapper
+      v-if="design"
+      :children="children"
+      :style="gridStyle"
+      title="栅格布局"
+      :name="name"
+    />
 
     <div v-else :style="gridStyle">
       <FormRender :formItems="children" />
@@ -13,14 +16,13 @@
 
 <script setup>
 import { defineProps, computed } from 'vue'
-import { FormRender, CanvasWrapper } from '@/components'
+import { FormRender, DefaultCanvasWrapper } from '@/components'
 
 const thisProps = defineProps({
   name: String,
   props: Object,
   children: Array,
-  design: Boolean,
-  config: Object
+  design: Boolean
 })
 
 const gridStyle = computed(() => ({
@@ -28,7 +30,6 @@ const gridStyle = computed(() => ({
   'grid-template-columns': `repeat(${thisProps.props.columns}, 1fr)`,
   'row-gap': thisProps.props['row-gap'] + 'px',
   'column-gap': thisProps.props['column-gap'] + 'px'
-  // 'overflow-x': 'auto'
 }))
 </script>
 
@@ -39,23 +40,6 @@ const gridStyle = computed(() => ({
   }
   .el-form-item__content {
     align-items: start;
-  }
-}
-
-.default {
-  border: 2px dashed var(--el-color-primary);
-  margin: 10px;
-  position: relative;
-  padding: 5px;
-  .title {
-    position: absolute;
-    left: 0;
-    top: -20px;
-    padding: 1px 5px;
-    background-color: var(--el-color-primary);
-    font-size: 12px;
-    color: #fff;
-    z-index: 10;
   }
 }
 </style>

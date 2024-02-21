@@ -1,9 +1,12 @@
 <template>
   <div class="form-item-inline">
-    <div v-if="design" class="default">
-      <div class="title">【{{ config.name }}】 {{ name }}</div>
-      <CanvasWrapper :children="children" :style="InlineStyle" />
-    </div>
+    <DefaultCanvasWrapper
+      v-if="design"
+      :children="children"
+      :style="InlineStyle"
+      title="行内布局"
+      :name="name"
+    />
 
     <div v-else :style="InlineStyle">
       <FormRender :formItems="children" />
@@ -13,7 +16,7 @@
 
 <script setup>
 import { defineProps, computed } from 'vue'
-import { FormRender, CanvasWrapper } from '@/components'
+import { FormRender, DefaultCanvasWrapper } from '@/components'
 
 const thisProps = defineProps({
   name: String,
@@ -40,23 +43,6 @@ const InlineStyle = computed(() => ({
   }
   .el-form-item__content {
     align-items: start;
-  }
-}
-
-.default {
-  border: 2px dashed var(--el-color-primary);
-  margin: 10px;
-  position: relative;
-  padding: 5px;
-  .title {
-    position: absolute;
-    left: 0;
-    top: -20px;
-    padding: 1px 5px;
-    background-color: var(--el-color-primary);
-    font-size: 12px;
-    color: #fff;
-    z-index: 10;
   }
 }
 </style>
