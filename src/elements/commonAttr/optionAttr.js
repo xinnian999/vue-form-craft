@@ -2,16 +2,6 @@ import apiAttr from './apiAttr'
 
 export default [
   {
-    component: 'Title',
-    props: {
-      title: '选项设置',
-      type: 'h4',
-      italic: true
-    },
-    onlyId: 'id-options',
-    name: 'form-options'
-  },
-  {
     label: '标签key',
     component: 'Input',
     name: 'props.labelKey',
@@ -78,7 +68,7 @@ export default [
   {
     component: 'Card',
     props: {
-      header: '远程数据'
+      // header: '远程数据'
     },
     onlyId: 'id-pGeN',
     name: 'form-6vzT',

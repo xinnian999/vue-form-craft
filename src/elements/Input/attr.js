@@ -107,18 +107,3 @@ export default mergeAttr({
   ],
   linkage: linkageAttr
 })
-
-// export default [
-//   ...basicAttr(),
-
-//   ...highAttr(),
-
-//   { label: '显示清除按钮', component: 'Switch', name: 'props.clearable' },
-//   {
-//     label: '最长字数',
-//     component: 'InputNumber',
-//     name: 'props.maxlength'
-//   },
-
-//   ...linkageAttr
-// ]

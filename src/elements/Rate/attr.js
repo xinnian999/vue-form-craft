@@ -1,12 +1,14 @@
-import { linkageAttr, basicAttr, highAttr } from '../commonAttr'
+import { linkageAttr, basicAttr, highAttr, mergeAttr } from '../commonAttr'
 
-export default [
-  ...basicAttr(['props.readonly', 'props.placeholder', 'initialValue']),
-  { label: '初始值', component: 'InputNumber', name: 'initialValue' },
+export default mergeAttr({
+  basic: [
+    ...basicAttr(['props.readonly', 'props.placeholder', 'initialValue']),
+    { label: '初始值', component: 'InputNumber', name: 'initialValue' },
 
-  { label: '最大分值', component: 'InputNumber', name: 'props.max', initialValue: 5 },
-  { label: '是否允许半选', component: 'Switch', name: 'props.allow-half' },
+    { label: '最大分值', component: 'InputNumber', name: 'props.max', initialValue: 5 },
+    { label: '是否允许半选', component: 'Switch', name: 'props.allow-half' }
+  ],
+  high: highAttr(),
 
-  ...highAttr(),
-  ...linkageAttr
-]
+  linkage: linkageAttr
+})

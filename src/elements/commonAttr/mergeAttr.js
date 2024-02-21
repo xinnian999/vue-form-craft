@@ -1,6 +1,7 @@
-const mergeAttr = (attrs) => {
-  const { basic = [], high = [], linkage = [] } = attrs
-  return [
+const mergeAttr = (attrConfig) => {
+  const { basic = [], high = [], linkage = [], option } = attrConfig
+
+  const attrs = [
     {
       component: 'Collapse',
       name: 'mergeAttr',
@@ -24,6 +25,17 @@ const mergeAttr = (attrs) => {
       ]
     }
   ]
+
+  if (option) {
+    attrs[0].children.splice(1, 0, {
+      title: '选项设置',
+      name: 'option',
+      checked: true,
+      children: option
+    })
+  }
+
+  return attrs
 }
 
 export default mergeAttr
