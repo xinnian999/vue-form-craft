@@ -1,20 +1,17 @@
 <template>
   <template v-if="design || !hidden">
-    <div v-if="config.type === 'layout'" :style="{ marginBottom: design ? 0 : '18px', ...style }">
-      <component :is="config.component" v-bind="thisProps" :design="design" />
+    <div v-if="config.type === 'layout'" :style="itemStyle">
+      <component :is="config.component" v-bind="thisProps" :config="config" :design="design" />
     </div>
 
-    <div
-      v-else-if="config.type === 'assist'"
-      :style="{ marginBottom: design ? 0 : '18px', ...style }"
-    >
+    <div v-else-if="config.type === 'assist'" :style="itemStyle">
       <component :is="config.component" v-bind="props" />
     </div>
 
     <el-form-item
       v-else
       id="form-item"
-      :style="{ marginBottom: design ? 0 : '18px', ...style }"
+      :style="itemStyle"
       :key="name"
       :prop="prop || name"
       :label-width="hideLabel ? '0' : schema.labelWidth"
@@ -38,13 +35,14 @@
         :size="schema.size"
         v-bind="formItemProps"
         v-model:[config.modelName]="value"
+        :design="design"
       />
     </el-form-item>
   </template>
 </template>
 
 <script setup lang="jsx">
-import { computed, defineProps, onBeforeMount, inject, nextTick, onMounted, ref } from 'vue'
+import { computed, defineProps, onBeforeMount, inject, ref } from 'vue'
 import { ElFormItem, ElTooltip } from 'element-plus'
 import { isString } from 'lodash'
 import { isRegexString, getDataByPath, setDataByPath } from '@/utils'
@@ -85,6 +83,11 @@ const value = computed({
     formValues.value = setDataByPath(formValues.value, thisProps.name, val)
   }
 })
+
+const itemStyle = computed(() => ({
+  marginBottom: thisProps.design ? 0 : '18px',
+  ...thisProps.style
+}))
 
 const computeRules = computed(() => {
   const { rules, required } = thisProps
@@ -175,9 +178,5 @@ onBeforeMount(() => {
       }
     }
   }
-}
-
-.notFormItem {
-  margin-bottom: 18px;
 }
 </style>

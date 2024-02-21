@@ -7,7 +7,7 @@
     ghost-class="ghost"
     class="childrenContainer"
     :animation="300"
-    :style="layoutBoxStyle"
+    :style="style"
     @add="onAdd"
   >
     <template #item="{ element: child }">
@@ -19,16 +19,12 @@
 <script setup lang="jsx">
 import { defineProps, inject } from 'vue'
 import Draggable from 'vuedraggable-es'
-import useStyle from '@/hooks/useStyle'
 import CanvasRender from './CanvasRender.vue'
 
-const thisProps = defineProps({
-  component: String,
+defineProps({
   children: Array,
-  props: Object
+  style: null
 })
-
-const layoutBoxStyle = useStyle(thisProps.component, thisProps)
 
 const onAdd = inject('$onAdd')
 </script>

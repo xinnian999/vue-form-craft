@@ -6,7 +6,6 @@ export default {
   icon: 'alert',
   type: 'assist',
   order: 2,
-
   attr,
   initialValues: {
     component: 'Alert',

@@ -23,12 +23,7 @@
       </li>
     </ul>
 
-    <div v-if="currentComponentConfig.isDefaultWrapper" class="default">
-      <div class="title">【{{ currentComponentConfig.name }}】 {{ label }} {{ name }}</div>
-      <CanvasWrapper v-bind="thisProps" />
-    </div>
-
-    <form-item v-else v-bind="thisProps" :props="checkProps(props)" design />
+    <form-item v-bind="thisProps" :props="checkProps(props)" design />
   </div>
 </template>
 
@@ -37,7 +32,6 @@ import { defineProps, inject, computed } from 'vue'
 import { omit } from 'lodash'
 import { copyItems, recursionDelete } from '@/utils'
 import { FormItem } from '@/components'
-import CanvasWrapper from './CanvasWrapper.vue'
 
 const thisProps = defineProps({
   label: String,
@@ -54,17 +48,11 @@ const thisProps = defineProps({
   hidden: { type: Boolean, default: undefined }
 })
 
-const { elements } = inject('$options')
-
 const current = inject('$current')
 
 const hoverId = inject('hoverId')
 
 const list = inject('$list')
-
-const currentComponentConfig = computed(() => {
-  return elements[thisProps.component] || {}
-})
 
 const canvasItemClass = computed(() => ({
   'canvas-item': true,

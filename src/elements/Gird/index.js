@@ -8,7 +8,6 @@ export default {
   component: Grid,
   order: 3,
 
-  isDefaultWrapper: true,
   initialValues: {
     component: 'Grid',
     children: [],
