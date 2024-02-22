@@ -2,6 +2,18 @@ import apiAttr from './apiAttr'
 
 export default [
   {
+    component: 'Divider',
+    props: {
+      title: '选项设置',
+      contentPosition: 'center'
+    },
+    designKey: 'design-gSnX',
+    name: 'form-xDEe',
+    style: {
+      marginTop: '40px'
+    }
+  },
+  {
     label: '标签key',
     component: 'Input',
     name: 'props.labelKey',

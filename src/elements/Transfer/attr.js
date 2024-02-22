@@ -1,8 +1,7 @@
 import { linkageAttr, basicAttr, highAttr, mergeAttr, optionAttr } from '../commonAttr'
 
 export default mergeAttr({
-  basic: [...basicAttr(['props.readonly', 'props.placeholder'])],
-  option: optionAttr,
+  basic: [...basicAttr(['props.readonly', 'props.placeholder']), ...optionAttr],
   high: [
     ...highAttr(),
     {

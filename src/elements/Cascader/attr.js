@@ -3,6 +3,7 @@ import { linkageAttr, basicAttr, highAttr, mergeAttr, apiAttr } from '../commonA
 export default mergeAttr({
   basic: [
     ...basicAttr(['initialValue', 'props.readonly']),
+
     {
       label: '选择模式',
       component: 'Switch',
@@ -12,10 +13,19 @@ export default mergeAttr({
         'inactive-text': '单选'
       },
       designKey: 'form-eTxc'
-    }
-  ],
-
-  option: [
+    },
+    {
+      component: 'Divider',
+      props: {
+        title: '选项设置',
+        contentPosition: 'center'
+      },
+      designKey: 'design-gSnX',
+      name: 'form-xDEe',
+      style: {
+        marginTop: '40px'
+      }
+    },
     {
       label: '标签key',
       component: 'Input',

@@ -22,10 +22,11 @@ export default mergeAttr({
         'inactive-text': '单选'
       },
       designKey: 'form-eTxc'
-    }
+    },
+
+    ...optionAttr
   ],
 
-  option: optionAttr,
   high: [
     ...highAttr(),
     {
@@ -39,31 +40,6 @@ export default mergeAttr({
       component: 'Switch',
       name: 'props.scrollLoad',
       designKey: 'form-LPpxscrollLoad'
-    },
-    {
-      label: '表格模式',
-      component: 'Switch',
-      name: 'props.tableDrop',
-      designKey: 'form-LPpx',
-      change: [
-        {
-          target: 'props.columns',
-          value: [
-            { title: 'label', dataIndex: 'label' },
-            { title: 'value', dataIndex: 'value' }
-          ]
-        }
-      ]
-    },
-    {
-      label: '表格列配置',
-      name: 'props.columns',
-      component: 'JsonEdit',
-      hidden: '{{!$values.props.tableDrop}}',
-      designKey: 'form-Iwpd',
-      props: {
-        mode: 'dialog'
-      }
     }
   ],
 

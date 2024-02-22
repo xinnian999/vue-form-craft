@@ -26,10 +26,10 @@ export default mergeAttr({
         ]
       },
       initialValue: 'circle'
-    }
-  ],
+    },
 
-  option: optionAttr,
+    ...optionAttr
+  ],
 
   high: [
     ...highAttr(),
