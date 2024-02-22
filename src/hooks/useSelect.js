@@ -79,7 +79,8 @@ const useSelect = (props, emits) => {
     (newVal, oldVal) => {
       //bug：这里发生只api内存地址变化，实际api无变化也会触发监听。暂时使用深层对比解决
       if (!isEqual(newVal, oldVal)) {
-        // console.log(newVal, oldVal);
+        currentOptions.value = []
+        isMax.value = false
         stateParams.pageNum = 1
         fetchData()
       }

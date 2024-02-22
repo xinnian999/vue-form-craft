@@ -9,6 +9,7 @@
     ref="selectRef"
     v-selectLoadMore:[popperClass]="scrollFetchData"
     :popper-class="popperClass"
+    :loading="loading"
   >
     <template #empty v-if="tableDrop">
       <el-table
