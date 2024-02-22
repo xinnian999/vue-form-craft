@@ -1,5 +1,5 @@
 <template>
-  <RemoteFormDesign />
+  <RemoteFormDesign @onSave="(schema) => console.log(schema)" />
 </template>
 
 <script setup>

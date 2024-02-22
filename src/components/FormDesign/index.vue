@@ -83,6 +83,9 @@ provide('$methods', {
   },
   handleCopyItem: (element) => {
     list.value = copyItems(list.value, element.designKey)
+  },
+  handleSave: () => {
+    emit('onSave', currentSchema.value)
   }
 })
 

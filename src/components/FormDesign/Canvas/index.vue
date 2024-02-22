@@ -36,9 +36,9 @@ import CanvasRender from './CanvasRender.vue'
 const schema = inject('$schema')
 const { onAdd } = inject('$methods')
 
-const hoverId = ref('')
+const hoverKey = ref(null)
 
-provide('hoverId', hoverId)
+provide('hoverKey', hoverKey)
 </script>
 
 <style lang="less">

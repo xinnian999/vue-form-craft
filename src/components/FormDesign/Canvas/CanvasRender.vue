@@ -49,23 +49,23 @@ const thisProps = defineProps({
 
 const current = inject('$current')
 
-const hoverId = inject('hoverId')
+const hoverKey = inject('hoverKey')
 
 const { handleDeleteItem, handleCopyItem } = inject('$methods')
 
 const canvasItemClass = computed(() => ({
   'canvas-item': true,
   active: thisProps.designKey === current.value.designKey,
-  hover: thisProps.designKey === hoverId.value,
-  mask: thisProps.designKey === hoverId.value && !thisProps.children
+  hover: thisProps.designKey === hoverKey.value,
+  mask: thisProps.designKey === hoverKey.value && !thisProps.children
 }))
 
 const handleHoverEnter = () => {
-  hoverId.value = thisProps.designKey
+  hoverKey.value = thisProps.designKey
 }
 
 const handleHoverLeave = () => {
-  hoverId.value = ''
+  hoverKey.value = ''
 }
 
 const handleSelect = (element) => {

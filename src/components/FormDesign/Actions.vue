@@ -52,7 +52,7 @@
   </div>
 </template>
 
-<script setup lang="jsx">
+<script setup>
 import { ref, computed, inject, defineProps } from 'vue'
 import { ElButton, ElDialog } from 'element-plus'
 import JsonEditorVue from 'json-editor-vue3'
@@ -67,8 +67,11 @@ defineProps({
 })
 
 const schema = inject('$schema')
-const emit = inject('$emit')
+
+const { handleSave } = inject('$methods')
+
 const { elements } = inject('$options')
+
 const JsonEdit = elements.JsonEdit.component
 
 const json = computed({
@@ -108,10 +111,6 @@ const handlePreviewForm = () => {
 
 const onBlur = (editor) => {
   editor.repair()
-}
-
-const handleSave = () => {
-  emit('onSave', schema.value)
 }
 
 const handleSubmit = () => {
