@@ -1,5 +1,5 @@
 <template>
-  <div id="formDesign" :class="props.class" :style="style">
+  <div id="formDesign" v-bind="$attrs">
     <div class="formItemList">
       <Menus />
     </div>
@@ -40,9 +40,7 @@ const props = defineProps({
   previewSchemaContext: {
     type: Object,
     default: () => ({})
-  },
-  class: null,
-  style: null
+  }
 })
 
 const emit = defineEmits(['onSave'])
@@ -73,7 +71,6 @@ const current = computed({
         return all
       }, null)
     }
-    // console.log(currentSchema.value.items)
     return findItem(currentSchema.value.items) || {}
   },
   set(element) {
