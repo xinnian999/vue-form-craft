@@ -11,7 +11,7 @@
     </div>
 
     <el-dialog
-      v-model="execVisible"
+      v-model="dialogVisible"
       title="预览脚本"
       width="70%"
       center
@@ -19,6 +19,7 @@
       top="10vh"
     >
       <json-editor-vue
+        v-if="dialogType === 'exec'"
         class="editor"
         v-model="json"
         currentMode="code"
@@ -27,36 +28,16 @@
         language="zh"
         @blur="onBlur"
       />
-    </el-dialog>
+      <VueEdit v-if="dialogType === 'vue'" />
 
-    <el-dialog
-      v-model="vueVisible"
-      title="VUE代码"
-      width="70%"
-      class="dialog"
-      center
-      destroy-on-close
-      top="10vh"
-    >
-      <VueEdit />
-    </el-dialog>
-
-    <el-dialog
-      v-model="formVisible"
-      title="预览表单"
-      width="70%"
-      class="dialog"
-      destroy-on-close
-      center
-      top="10vh"
-    >
       <schema-form
+        v-if="dialogType === 'form'"
         v-model="form"
         :schema="schema"
         ref="formRef"
         :schemaContext="previewSchemaContext"
       />
-      <template #footer>
+      <template #footer v-if="dialogType === 'form'">
         <el-button @click="handleSubmit" type="primary">模拟提交</el-button>
         <el-button @click="formRef.reset()" type="primary">重置</el-button>
         <JsonEdit
@@ -76,7 +57,6 @@ import { ref, computed, inject, defineProps } from 'vue'
 import { ElButton, ElDialog } from 'element-plus'
 import JsonEditorVue from 'json-editor-vue3'
 import { SchemaForm } from '@/components'
-// import { changeItems } from '@/utils'
 import VueEdit from './VueEdit.vue'
 
 defineProps({
@@ -106,26 +86,27 @@ const form = ref({})
 
 const formContext = computed(() => formRef.value?.context)
 
-const execVisible = ref(false)
+const dialogVisible = ref(false)
 
-const formVisible = ref(false)
-
-const vueVisible = ref(false)
+const dialogType = ref('')
 
 const handlePreviewExec = () => {
-  execVisible.value = true
+  dialogVisible.value = true
+  dialogType.value = 'exec'
 }
 
 const handlePreviewVue = () => {
-  vueVisible.value = true
+  dialogVisible.value = true
+  dialogType.value = 'vue'
 }
 
 const handlePreviewForm = () => {
   form.value = {}
-  formVisible.value = true
+  dialogVisible.value = true
+  dialogType.value = 'form'
 }
 
-const onBlur = async (editor) => {
+const onBlur = (editor) => {
   editor.repair()
 }
 
