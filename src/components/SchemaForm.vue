@@ -9,7 +9,8 @@
     v-bind="$attrs"
     id="SchemaForm"
   >
-    <FormRender :formItems="formItems" />
+    <FormRender v-if="!design" :formItems="formItems" />
+    <slot />
   </el-form>
 </template>
 
@@ -49,7 +50,8 @@ const props = defineProps({
   schemaContext: {
     type: Object,
     default: () => ({})
-  }
+  },
+  design: Boolean
 })
 
 const emit = defineEmits(['update:modelValue', 'onSubmit', 'onChange'])

@@ -1,12 +1,5 @@
 <template>
-  <el-form
-    class="canvas"
-    :style="`max-width: ${schema.formWidth}`"
-    :label-position="schema.labelAlign"
-    :size="schema.size"
-    :hide-required-asterisk="schema.hideRequiredAsterisk"
-    :disabled="schema.disabled"
-  >
+  <SchemaForm design class="canvas" :schema="schema">
     <div class="tip" v-if="!list.length">
       <div class="ico">
         <icon-render name="add" />
@@ -32,14 +25,14 @@
         <CanvasRender v-if="element.designKey" v-bind="element" />
       </template>
     </draggable>
-  </el-form>
+  </SchemaForm>
 </template>
 
 <script setup lang="jsx">
 import { computed, provide, inject, ref } from 'vue'
 import draggable from 'vuedraggable-es'
-import { ElForm } from 'element-plus'
 import { changeItems } from '@/utils'
+import { SchemaForm } from '@/components'
 import CanvasRender from './CanvasRender.vue'
 
 const schema = inject('$schema')
