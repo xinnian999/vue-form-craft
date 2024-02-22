@@ -1,19 +1,18 @@
 export default [
-  // {
-  //   component: 'Title',
-  //   props: {
-  //     title: '联动',
-  //     type: 'h4',
-  //     italic: true
-  //   },
-  //   designKey: 'id-high-linkage',
-  //   name: 'form-high-linkage',
-  //   style: {
-  //     marginTop: '40px'
-  //   }
-  // },
   {
-    label: '本字段值改变时，修改其他字段的值',
+    component: 'Alert',
+    props: {
+      type: 'success',
+      description: '对于配置级的联动，请直接点击下方按钮【编辑配置文本】，通过插值表达式实现',
+      closable: true,
+      'show-icon': true
+    },
+    designKey: 'design-MQPU',
+    name: 'form-Oqi5'
+  },
+  {
+    label: '值联动',
+    help: '本字段值改变时，修改其他字段的值',
     name: 'change',
     component: 'FormList',
     children: [
