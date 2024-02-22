@@ -76,7 +76,7 @@ import { ref, computed, inject, defineProps } from 'vue'
 import { ElButton, ElDialog } from 'element-plus'
 import JsonEditorVue from 'json-editor-vue3'
 import { SchemaForm } from '@/components'
-import { changeItems } from '@/utils'
+// import { changeItems } from '@/utils'
 import VueEdit from './VueEdit.vue'
 
 defineProps({
@@ -126,13 +126,7 @@ const handlePreviewForm = () => {
 }
 
 const onBlur = async (editor) => {
-  const res = await editor.validate()
-  if (res.length) {
-    let parse = editor.getText()
-    parse = new Function('return ' + parse)()
-    parse.items = changeItems(parse.items)
-    json.value = parse
-  }
+  editor.repair()
 }
 
 const handleSave = () => {

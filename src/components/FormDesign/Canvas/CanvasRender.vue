@@ -30,7 +30,6 @@
 <script setup>
 import { defineProps, inject, computed } from 'vue'
 import { omit } from 'lodash'
-import { copyItems, recursionDelete } from '@/utils'
 import { FormItem } from '@/components'
 
 const thisProps = defineProps({
@@ -52,7 +51,7 @@ const current = inject('$current')
 
 const hoverId = inject('hoverId')
 
-const list = inject('$list')
+const { handleDeleteItem, handleCopyItem } = inject('$methods')
 
 const canvasItemClass = computed(() => ({
   'canvas-item': true,
@@ -78,15 +77,11 @@ const handleSelect = (element) => {
 const rightBottomActions = [
   {
     icon: 'copy',
-    handle: (element) => {
-      list.value = copyItems(list.value, element.designKey)
-    }
+    handle: handleCopyItem
   },
   {
     icon: 'delete',
-    handle: (element) => {
-      list.value = recursionDelete(list.value, (item) => item.designKey !== element.designKey)
-    }
+    handle: handleDeleteItem
   }
 ]
 

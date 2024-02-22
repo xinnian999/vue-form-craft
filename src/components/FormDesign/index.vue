@@ -17,10 +17,12 @@
 
 <script setup lang="jsx">
 import { ref, provide, computed, defineProps, defineEmits, defineOptions, watchEffect } from 'vue'
+import { recursionDelete } from '@/utils'
 import Menus from './Menus/index.vue'
 import Canvas from './Canvas/index.vue'
 import Current from './Current/index.vue'
 import Actions from './Actions.vue'
+import { getCurrentByKey, setCurrentByKey, changeItems, copyItems } from './utils'
 
 defineOptions({
   name: 'FormDesign'
@@ -36,7 +38,7 @@ const props = defineProps({
 
 const emit = defineEmits(['onSave'])
 
-const currentId = ref('')
+const currentKey = ref('')
 
 const currentSchema = ref({
   labelWidth: 150,
@@ -45,40 +47,22 @@ const currentSchema = ref({
   items: []
 })
 
+const list = computed({
+  get() {
+    return currentSchema.value.items
+  },
+  set(value) {
+    currentSchema.value = { ...currentSchema.value, items: value }
+  }
+})
+
 const current = computed({
   get() {
-    const findItem = (items) => {
-      return items.reduce((all, item) => {
-        if (item.designKey === currentId.value) {
-          return item
-        }
-        if (item.children) {
-          const res = findItem(item.children)
-          if (res) return res
-        }
-
-        return all
-      }, null)
-    }
-    return findItem(currentSchema.value.items) || {}
+    return getCurrentByKey(list.value, currentKey.value) || {}
   },
   set(element) {
-    currentId.value = element.designKey
-    const set = (items) => {
-      return items.map((item) => {
-        if (item.designKey === element.designKey) {
-          return element
-        }
-        if (item.children) {
-          return { ...item, children: set(item.children) }
-        }
-        return item
-      })
-    }
-    currentSchema.value = {
-      ...currentSchema.value,
-      items: set(currentSchema.value.items)
-    }
+    currentKey.value = element.designKey
+    list.value = setCurrentByKey(currentSchema.value.items, element)
   }
 })
 
@@ -88,8 +72,20 @@ watchEffect(() => {
   }
 })
 
-provide('$current', current)
 provide('$schema', currentSchema)
+provide('$current', current)
+provide('$methods', {
+  onAdd: () => {
+    list.value = changeItems(list.value)
+  },
+  handleDeleteItem: (element) => {
+    list.value = recursionDelete(list.value, (item) => item.designKey !== element.designKey)
+  },
+  handleCopyItem: (element) => {
+    list.value = copyItems(list.value, element.designKey)
+  }
+})
+
 provide('$emit', emit)
 </script>
 

@@ -34,7 +34,7 @@ defineProps({
   style: null
 })
 
-const onAdd = inject('$onAdd')
+const { onAdd } = inject('$methods')
 </script>
 
 <style scoped lang="less">

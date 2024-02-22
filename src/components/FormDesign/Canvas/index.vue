@@ -1,6 +1,6 @@
 <template>
   <SchemaForm design class="canvas" :schema="schema">
-    <div class="tip" v-if="!list.length">
+    <div class="tip" v-if="!schema.items.length">
       <div class="ico">
         <icon-render name="add" />
       </div>
@@ -9,7 +9,7 @@
 
     <draggable
       style="height: 100%"
-      :list="list"
+      :list="schema.items"
       :group="{ name: 'formDesign', pull: true, put: true }"
       itemKey="name"
       chooseClass="choose"
@@ -19,7 +19,6 @@
       handle=".canvas-move"
       :animation="300"
       force-fallback
-      :scroll-fensitivity="1"
     >
       <template #item="{ element }">
         <CanvasRender v-if="element.designKey" v-bind="element" />
@@ -29,32 +28,17 @@
 </template>
 
 <script setup lang="jsx">
-import { computed, provide, inject, ref } from 'vue'
+import { provide, inject, ref } from 'vue'
 import draggable from 'vuedraggable-es'
-import { changeItems } from '@/utils'
 import { SchemaForm } from '@/components'
 import CanvasRender from './CanvasRender.vue'
 
 const schema = inject('$schema')
+const { onAdd } = inject('$methods')
 
 const hoverId = ref('')
 
-const list = computed({
-  get() {
-    return schema.value.items
-  },
-  set(value) {
-    schema.value = { ...schema.value, items: value }
-  }
-})
-
-const onAdd = () => {
-  list.value = changeItems(list.value)
-}
-
-provide('$onAdd', onAdd)
 provide('hoverId', hoverId)
-provide('$list', list)
 </script>
 
 <style lang="less">
