@@ -1,7 +1,7 @@
 <template>
   <template v-if="design || !hidden">
     <div v-if="config.type === 'layout'" :style="itemStyle">
-      <component :is="config.component" v-bind="thisProps" :config="config" :design="design" />
+      <component :is="config.component" v-bind="thisProps" :design="design" />
     </div>
 
     <div v-else-if="config.type === 'assist'" :style="itemStyle">
@@ -70,9 +70,9 @@ const { elements } = inject('$options')
 
 const schema = inject('$schema')
 
-const formValues = thisProps.design ? ref({}) : inject('$formValues')
+const formValues = inject('$formValues')
 
-const initialValues = thisProps.design ? {} : inject('$initialValues')
+const initialValues = inject('$initialValues')
 
 const value = computed({
   get() {

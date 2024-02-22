@@ -16,16 +16,7 @@
 </template>
 
 <script setup lang="jsx">
-import {
-  ref,
-  provide,
-  reactive,
-  computed,
-  defineProps,
-  defineEmits,
-  defineOptions,
-  watchEffect
-} from 'vue'
+import { ref, provide, computed, defineProps, defineEmits, defineOptions, watchEffect } from 'vue'
 import Menus from './Menus/index.vue'
 import Canvas from './Canvas/index.vue'
 import Current from './Current/index.vue'
@@ -44,8 +35,6 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['onSave'])
-
-const selectData = reactive({})
 
 const currentId = ref('')
 
@@ -101,8 +90,6 @@ watchEffect(() => {
 
 provide('$current', current)
 provide('$schema', currentSchema)
-provide('$selectData', selectData)
-
 provide('$emit', emit)
 </script>
 

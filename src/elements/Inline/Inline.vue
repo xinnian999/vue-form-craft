@@ -22,8 +22,7 @@ const thisProps = defineProps({
   name: String,
   props: Object,
   children: Array,
-  design: Boolean,
-  config: Object
+  design: Boolean
 })
 
 const InlineStyle = computed(() => ({

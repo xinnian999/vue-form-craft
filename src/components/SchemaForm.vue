@@ -7,7 +7,6 @@
     :hide-required-asterisk="schema.hideRequiredAsterisk"
     ref="formRef"
     v-bind="$attrs"
-    id="SchemaForm"
   >
     <FormRender v-if="!design" :formItems="formItems" />
     <slot />
