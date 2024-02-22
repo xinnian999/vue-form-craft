@@ -32,7 +32,9 @@ export default {
           dataPath: 'data',
           method: 'GET'
         },
-        autoSelectedFirst: true
+        autoSelectedFirst: true,
+        direction: 'horizontal',
+        space: 0
       },
       designKey: 'design-oGXW',
       name: 'category',
@@ -59,7 +61,9 @@ export default {
           method: 'GET'
         },
         optionType: 'circle',
-        autoSelectedFirst: true
+        autoSelectedFirst: true,
+        direction: 'vertical',
+        space: 0
       },
       designKey: 'design-ojMx',
       name: 'article',

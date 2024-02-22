@@ -14,8 +14,24 @@ export default mergeAttr({
           { label: '边框', value: 'border' },
           { label: '按钮', value: 'button' }
         ]
-      },
-      initialValue: 'circle'
+      }
+    },
+    {
+      label: '选项排列方向',
+      component: 'Radio',
+      name: 'props.direction',
+      props: {
+        mode: 'static',
+        options: [
+          { label: '水平排列', value: 'horizontal' },
+          { label: '垂直排列', value: 'vertical' }
+        ]
+      }
+    },
+    {
+      label: '选项间距',
+      component: 'InputNumber',
+      name: 'props.space'
     },
     ...optionAttr
   ],
