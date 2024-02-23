@@ -19,7 +19,8 @@ export default defineConfig(({ mode }) => {
     },
     server: {
       open: true
-    }
+    },
+    assetsInclude: ['**/*.md']
   }
 
   //发布到npm的打包配置
