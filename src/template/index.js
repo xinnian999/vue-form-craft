@@ -15,5 +15,5 @@ export default [
   { name: '联动案例1', schema: linkage1, id: 'linkage1' },
   { name: '联动案例2', schema: linkage2, id: 'linkage2' },
   { name: '联动案例3', schema: linkage3, id: 'linkage3' },
-  { name: '联动案例4', schema: linkage2, id: 'linkage4' }
+  { name: '联动案例4', schema: linkage4, id: 'linkage4' }
 ]
