@@ -21,7 +21,7 @@ const props = defineProps({
 const icon = shallowRef(null)
 
 watchEffect(() => {
-  import(`../icons/${props.name}.vue`).then((module) => {
+  import(`@/assets/icons/${props.name}.vue`).then((module) => {
     icon.value = module.default
   })
 })
