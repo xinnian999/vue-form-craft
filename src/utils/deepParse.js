@@ -32,11 +32,7 @@ const deepParse = (prop, context) => {
       const itemContext = { ...context }
 
       if (prop.name && $values) {
-        const parentDataPathArr = prop.name.split('.')
-        const parentDataPath = parentDataPathArr.slice(0, parentDataPathArr.length - 1).join('.')
-
         itemContext.$val = getDataByPath($values, prop.name)
-        itemContext.$parentVal = getDataByPath($values, parentDataPath)
         itemContext.$select = context.$selectData[prop.name]
       }
 

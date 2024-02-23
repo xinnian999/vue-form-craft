@@ -38,7 +38,7 @@ export default [
     label: '请求参数',
     component: 'JsonEdit',
     name: 'props.api.params',
-    hidden: '{{ ["POST","PUT"].includes($parentVal.method) }}',
+    hidden: '{{ ["POST","PUT"].includes($values.props.api.method) }}',
     initialValue: {},
     props: {
       mode: 'dialog'
@@ -48,7 +48,7 @@ export default [
     label: '请求参数',
     component: 'JsonEdit',
     name: 'props.api.data',
-    hidden: '{{ ["GET","DELETE"].includes($parentVal.method) }}',
+    hidden: '{{ ["GET","DELETE"].includes($values.props.api.method) }}',
     initialValue: {},
     props: {
       mode: 'dialog'

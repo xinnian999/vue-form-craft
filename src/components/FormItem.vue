@@ -57,7 +57,7 @@ const thisProps = defineProps({
   style: Object,
   help: String,
   children: Array,
-  hidden: Boolean,
+  hidden: [Boolean, String],
   hideLabel: Boolean,
   designKey: String,
   rules: Array,
