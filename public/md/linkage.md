@@ -80,7 +80,7 @@ hidden、disabled本应该是静态的布尔值。这里我们通过插值表达
 
 【分类】改变时，动态改变传给【文章】的接口参数
 
-<div class="linkage4"></div>
+<div class="linkage2"></div>
 
 ```json
 {
@@ -167,7 +167,7 @@ change是一个数组，可以同时联动多个字段。target为目标字段�
 
 #### 举个栗子1
 
-<div class="linkage2"></div>
+<!-- <div class="linkage3"></div> -->
 
 ```json
 {
@@ -222,7 +222,7 @@ change是一个数组，可以同时联动多个字段。target为目标字段�
 
 一些场景需要根据已选值的数据源中取某个字段，再给其他字段使用，这就可以用上 **$select** 了
 
-<div class="linkage3"></div>
+<!-- <div class="linkage4"></div> -->
 
 ```json
 {

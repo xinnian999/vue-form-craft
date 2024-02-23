@@ -45,7 +45,7 @@ import { ElButton, ElDrawer, ElSpace } from 'element-plus'
 import IconRender from '@/components/IconRender.vue'
 import { ref } from 'vue'
 import menus from './menus'
-import template from './template'
+import template from '@/template'
 
 const drawerVisible = ref(false)
 

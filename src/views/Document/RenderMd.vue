@@ -1,6 +1,6 @@
 <template>
   <div class="md-container">
-    <div class="md">
+    <div class="md" :key="text">
       <MdPreview v-model="text" editorId="start" @onHtmlChanged="onHtmlChanged" />
     </div>
     <div class="catalog" v-if="scrollElement">
@@ -13,11 +13,9 @@
 import { watchEffect, ref } from 'vue'
 import axios from 'axios'
 import { useRoute } from 'vue-router'
-import caseForm from './case'
 import render from '@/render'
 import RenderForm from './RenderForm.vue'
-// import md from './linkage.md'
-// console.log(md)
+import template from '@/template'
 
 const route = useRoute()
 
@@ -25,11 +23,12 @@ const text = ref('Hello Editor!')
 const scrollElement = ref(null)
 
 const onHtmlChanged = () => {
-  Object.keys(caseForm).forEach((key) => {
-    const component = <RenderForm schema={caseForm[key]} />
-    const el = document.querySelector(`.${key}`)
+  // console.log(9999)
+  template.forEach(({ schema, id }) => {
+    const component = <RenderForm schema={schema} />
+    const el = document.querySelector(`.${id}`)
     if (el) {
-      render(component, `.${key}`)
+      render(component, el)
     }
   })
 }

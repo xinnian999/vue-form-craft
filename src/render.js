@@ -58,6 +58,7 @@ const render = (component, dom) => {
   components.forEach((component) => {
     app.component(component.name, component)
   })
+
   app.mount(dom)
 }
 
