@@ -1,7 +1,7 @@
 <template>
   <div class="md-container">
-    <div class="md" :key="text">
-      <MdPreview v-model="text" editorId="start" @onHtmlChanged="onHtmlChanged" />
+    <div class="md">
+      <MdPreview v-model="text" editorId="start" />
     </div>
     <div class="catalog" v-if="scrollElement">
       <MdCatalog editorId="start" :scrollElement="scrollElement" :scrollElementOffsetTop="80" />
@@ -22,17 +22,6 @@ const route = useRoute()
 const text = ref('Hello Editor!')
 const scrollElement = ref(null)
 
-const onHtmlChanged = () => {
-  // console.log(9999)
-  template.forEach(({ schema, id }) => {
-    const component = <RenderForm schema={schema} />
-    const el = document.querySelector(`.${id}`)
-    if (el) {
-      render(component, el)
-    }
-  })
-}
-
 watchEffect(async () => {
   const { md } = route.meta
 
@@ -40,6 +29,16 @@ watchEffect(async () => {
   text.value = data
   scrollElement.value = document.querySelector('.md-container')
   scrollElement.value.scrollTop = 0
+
+  setTimeout(() => {
+    template.forEach(({ schema, id }) => {
+      const component = <RenderForm schema={schema} />
+      const el = document.querySelector(`.${id}`)
+      if (el) {
+        render(component, el)
+      }
+    })
+  }, 100)
 })
 </script>
 

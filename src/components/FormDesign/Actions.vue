@@ -28,7 +28,7 @@
         language="zh"
         @blur="onBlur"
       />
-      <VueEdit v-if="dialogType === 'vue'" />
+      <CodeMirror v-if="dialogType === 'vue'" :schema="schema" readOnly />
 
       <schema-form
         v-if="dialogType === 'form'"
@@ -56,8 +56,7 @@
 import { ref, computed, inject, defineProps } from 'vue'
 import { ElButton, ElDialog } from 'element-plus'
 import JsonEditorVue from 'json-editor-vue3'
-import { SchemaForm } from '@/components'
-import VueEdit from './VueEdit.vue'
+import { SchemaForm, CodeMirror } from '@/components'
 
 defineProps({
   previewSchemaContext: {

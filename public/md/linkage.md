@@ -33,127 +33,17 @@
 
 <div class="linkage1"></div>
 
-```json
-{
-  "labelWidth": 150,
-  "labelAlign": "right",
-  "size": "default",
-  "items": [
-    {
-      "label": "评分",
-      "component": "Rate",
-      "props": {
-        "max": 5,
-        "allow-half": true
-      },
-      "designKey": "form-Lx4g",
-      "name": "rate",
-      "style": {},
-      "required": true
-    },
-    {
-      "label": "差评原因",
-      "component": "Textarea",
-      "props": {
-        "autocomplete": "off",
-        "showWordLimit": true,
-        "type": "textarea",
-        "autosize": {
-          "minRows": 4,
-          "maxRows": 999
-        },
-        "placeholder": "请输入..."
-      },
-      "designKey": "form-XyJs",
-      "name": "reason",
-      "style": {},
-      "hidden": "{{$values.rate>=3 || !$values.rate}}" //大于等于3分时隐藏，未评分时也要隐藏
-    }
-  ]
-}
-```
-
-hidden、disabled本应该是静态的布尔值。这里我们通过插值表达式，就能根据其他字段的值动态改变。
+<br/>
+<br/>
 
 #### 举个栗子2
+
 【文章】需要依赖【分类】去查询，所以【分类】没选时，需要隐藏【文章】。
 
 【分类】改变时，动态改变传给【文章】的接口参数
 
 <div class="linkage2"></div>
 
-```json
-{
-  "labelWidth": 150,
-  "labelAlign": "right",
-  "size": "default",
-  "items": [
-    {
-      "label": "分类",
-      "component": "Radio",
-      "props": {
-        "mode": "remote",
-        "options": [
-          {
-            "label": "选项1",
-            "value": "value1"
-          },
-          {
-            "label": "选项2",
-            "value": "value2"
-          },
-          {
-            "label": "选项3",
-            "value": "value3"
-          }
-        ],
-        "labelKey": "name",
-        "valueKey": "name",
-        "optionType": "button",
-        "api": {
-          "url": "/current/query/category",
-          "params": {},
-          "data": {},
-          "dataPath": "data",
-          "method": "GET"
-        },
-        "autoSelectedFirst": true
-      },
-      "designKey": "design-oGXW",
-      "name": "category",
-      "required": true
-    },
-    {
-      "label": "文章",
-      "component": "Radio",
-      "props": {
-        "mode": "remote",
-        "options": [],
-        "placeholder": "请选择文章",
-        "labelKey": "title",
-        "valueKey": "id",
-        "api": {
-          "url": "/current/query/article",
-          "params": {
-            "filters": {
-              "category": "{{$values.category}}"
-            }
-          },
-          "data": {},
-          "dataPath": "data",
-          "method": "GET"
-        },
-        "optionType": "circle",
-        "autoSelectedFirst": true
-      },
-      "designKey": "design-ojMx",
-      "name": "article",
-      "required": true,
-      "hidden": "{{!$values.category}}"
-    }
-  ]
-}
-```
 
 ### change配置
 
@@ -165,120 +55,16 @@ change是一个数组，可以同时联动多个字段。target为目标字段�
 
 <br/>
 
-#### 举个栗子1
+#### 举个栗子3
 
 <div class="linkage3"></div>
 
-```json
-{
-  "labelWidth": 150,
-  "labelAlign": "right",
-  "size": "default",
-  "items": [
-    {
-      "label": "字段1",
-      "component": "input",
-      "props": {
-        "placeholder": "请输入..."
-      },
-      "designKey": "form-NASi",
-      "name": "item1",
-      "change": [
-        {
-          "target": "item2",
-          "value": "{{$val * 2}}"
-        },
-        {
-          "target": "item3",
-          "value": "{{$val + '元'}}"
-        }
-      ]
-    },
-    {
-      "label": "字段2",
-      "component": "input",
-      "props": {
-        "placeholder": "请输入..."
-      },
-      "designKey": "form-Nasd",
-      "name": "item2"
-    },
-    {
-      "label": "字段3",
-      "component": "input",
-      "props": {
-        "placeholder": "请输入..."
-      },
-      "designKey": "form-KI1N",
-      "name": "item3"
-    }
-  ]
-}
-```
 
 <br/>
 
-#### 举个栗子2
+#### 举个栗子4
 
 一些场景需要根据已选值的数据源中取某个字段，再给其他字段使用，这就可以用上 **$select** 了
 
 <div class="linkage4"></div>
 
-```json
-{
-  "labelWidth": 150,
-  "labelAlign": "right",
-  "size": "default",
-  "items": [
-    {
-      "label": "选择商品",
-      "component": "select",
-      "props": {
-        "mode": "static",
-        "options": [
-          {
-            "name": "商品1",
-            "id": "1",
-            "price": 25
-          },
-          {
-            "name": "商品2",
-            "id": "2",
-            "price": 65
-          },
-          {
-            "name": "商品3",
-            "id": "3",
-            "price": 66
-          }
-        ],
-        "placeholder": "请选择...",
-        "labelKey": "name",
-        "valueKey": "id"
-      },
-      "designKey": "form-2Rtu",
-      "name": "commodity",
-      "change": [
-        {
-          "target": "price",
-          "value": "{{$select.price}}"
-        }
-      ]
-    },
-    {
-      "label": "价格",
-      "component": "inputNumber",
-      "designKey": "form-rS3W",
-      "name": "price",
-      "props": {
-        "min": 1,
-        "max": 9999,
-        "step": 1,
-        "unit": "元",
-        "disabled": true,
-        "controlsPosition": "right"
-      }
-    }
-  ]
-}
-```

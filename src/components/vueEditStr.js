@@ -1,14 +1,13 @@
 export default (schema) => `<template>
-    <schema-form v-model="formValues" :schema="schema" ref="formRef" />
-    <button @click="handleSubmit">提交</button>
+    <schema-form :schema="schema" ref="formRef" />
+    <ElButton @click="handleSubmit" type="primary" style="margin-left: 150px">提交</ElButton>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import { ElButton } from 'element-plus'
 
 const formRef = ref()
-
-const formValues = ref({})
 
 const handleSubmit = () => {
   formRef.value
@@ -16,7 +15,7 @@ const handleSubmit = () => {
     .then((values) => {
       alert(JSON.stringify(values))
     })
-    .catch((e) => console.log(e))
+    .catch(() => console.log('表单校验不通过'))
 }
 
 const schema = ${schema}

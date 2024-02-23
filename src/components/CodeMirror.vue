@@ -2,16 +2,19 @@
   <Codemirror v-model:value="code" :options="cmOptions" border ref="cmRef"> </Codemirror>
 </template>
 <script setup>
-import { ref, reactive, onMounted, onUnmounted, inject } from 'vue'
+import { ref, reactive, onMounted, onUnmounted, defineProps } from 'vue'
 import 'codemirror/mode/javascript/javascript.js'
 import Codemirror from 'codemirror-editor-vue3'
-import 'codemirror/theme/ayu-mirage.css'
-import 'codemirror/theme/neo.css'
 import vueEditStr from './vueEditStr'
+
+const props = defineProps({
+  schema: Object,
+  readOnly: Boolean
+})
 
 const code = ref('')
 
-const schema = inject('$schema')
+// const schema = inject('$schema')
 
 const cmRef = ref()
 const cmOptions = reactive({
@@ -23,13 +26,12 @@ const cmOptions = reactive({
   matchBrackets: true,
   autoCloseBrackets: true,
   styleActiveLine: true, // Display the style of the selected row
-  readOnly: false
-  // theme:'ayu-mirage',
-  // theme:'neo',
+  readOnly: props.readOnly
+  // theme: 'neo'
 })
 
 onMounted(() => {
-  code.value = vueEditStr(JSON.stringify(schema.value, null, 2))
+  code.value = vueEditStr(JSON.stringify(props.schema, null, 2))
   cmRef.value.refresh()
 })
 

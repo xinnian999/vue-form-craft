@@ -1,14 +1,13 @@
 <template>
-  <schema-form v-model="formValues" :schema="schema" ref="formRef" />
-  <button @click="handleSubmit">提交</button>
+  <schema-form :schema="schema" ref="formRef" />
+  <ElButton @click="handleSubmit" type="primary" style="margin-left: 150px">提交</ElButton>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import { ElButton } from 'element-plus'
 
 const formRef = ref()
-
-const formValues = ref({})
 
 const handleSubmit = () => {
   formRef.value
@@ -16,7 +15,7 @@ const handleSubmit = () => {
     .then((values) => {
       alert(JSON.stringify(values))
     })
-    .catch((e) => console.log(e))
+    .catch(() => console.log('表单校验不通过'))
 }
 
 const schema = {
@@ -25,41 +24,34 @@ const schema = {
   size: 'default',
   items: [
     {
-      label: '字段1',
-      component: 'Input',
+      label: '评分',
+      component: 'Rate',
       props: {
-        placeholder: '请输入...'
+        max: 5,
+        'allow-half': true
       },
-      designKey: 'form-NASi',
-      name: 'item1',
-      change: [
-        {
-          target: 'item2',
-          value: '{{$val * 2}}'
+      designKey: 'form-Lx4g',
+      name: 'rate',
+      style: {},
+      required: true
+    },
+    {
+      label: '差评原因',
+      component: 'Textarea',
+      props: {
+        autocomplete: 'off',
+        showWordLimit: true,
+        type: 'textarea',
+        autosize: {
+          minRows: 4,
+          maxRows: 999
         },
-        {
-          target: 'item3',
-          value: "{{$val + '元'}}"
-        }
-      ]
-    },
-    {
-      label: '字段2',
-      component: 'Input',
-      props: {
         placeholder: '请输入...'
       },
-      designKey: 'form-Nasd',
-      name: 'item2'
-    },
-    {
-      label: '字段3',
-      component: 'Input',
-      props: {
-        placeholder: '请输入...'
-      },
-      designKey: 'form-KI1N',
-      name: 'item3'
+      designKey: 'form-XyJs',
+      name: 'reason',
+      style: {},
+      hidden: '{{!$values.rate||$values.rate>3}}'
     }
   ]
 }
