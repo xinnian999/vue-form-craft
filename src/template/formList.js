@@ -4,38 +4,44 @@ export default {
   size: 'default',
   items: [
     {
-      label: '自增容器',
+      label: '增添用户',
       component: 'FormList',
       children: [
         {
-          label: '单行文本',
+          label: '用户名',
           component: 'Input',
           props: {
-            autocomplete: 'off',
-            showWordLimit: true,
-            type: 'text'
+            placeholder: '请输入文本'
           },
-          designKey: 'form-JuGq',
-          name: 'name'
+          designKey: 'design-M91n',
+          name: 'username',
+          style: {}
         },
         {
-          label: '单行文本',
-          component: 'Input',
+          label: '密码',
+          component: 'Password',
           props: {
-            autocomplete: 'off',
-            showWordLimit: true,
-            type: 'text'
+            placeholder: '请输入密码'
           },
-          designKey: 'form-JuGq',
-          name: 'desc',
-          hidden: '{{$item.name==="aaa"}}'
+          designKey: 'design-kVO2',
+          name: 'password'
+        },
+        {
+          label: '设为管理员',
+          component: 'Switch',
+          designKey: 'design-jC1O',
+          name: 'vip',
+          props: {
+            'inline-prompt': 0
+          }
         }
       ],
-      designKey: 'form-wC99',
-      name: '7aJJ2x',
       props: {
-        mode: 'card'
-      }
+        mode: 'table'
+      },
+      designKey: 'design-pMUa',
+      name: 'form-kWJU',
+      style: {}
     }
   ]
 }

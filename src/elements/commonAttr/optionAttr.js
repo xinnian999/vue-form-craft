@@ -41,7 +41,8 @@ export default [
           value: 'remote'
         }
       ],
-      optionType: 'button'
+      optionType: 'button',
+      space: 0
     },
     designKey: 'form-PLpj'
   },
