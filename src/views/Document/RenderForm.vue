@@ -1,8 +1,7 @@
 <template>
   <div class="renderVue">
     <div class="renderForm">
-      <schema-form :schema="schema" ref="formRef" />
-      <ElButton @click="handleSubmit" type="primary" style="margin-left: 150px">提交</ElButton>
+      <schema-form :schema="schema" footer @onFinish="onFinish" />
     </div>
 
     <ElCollapse v-model="activeNames">
@@ -15,7 +14,7 @@
 
 <script setup lang="jsx">
 import { defineProps, ref } from 'vue'
-import { ElCollapse, ElCollapseItem, ElButton } from 'element-plus'
+import { ElCollapse, ElCollapseItem } from 'element-plus'
 import { CodeMirror } from '@/components'
 
 defineProps({
@@ -28,15 +27,8 @@ defineProps({
 
 const activeNames = ref([])
 
-const formRef = ref()
-
-const handleSubmit = () => {
-  formRef.value
-    .submit()
-    .then((values) => {
-      alert(JSON.stringify(values))
-    })
-    .catch(() => console.log('表单校验不通过'))
+const onFinish = (values) => {
+  alert(JSON.stringify(values))
 }
 </script>
 

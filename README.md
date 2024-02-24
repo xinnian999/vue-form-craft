@@ -78,7 +78,7 @@ const onSave = (schema) => {
 
 ```vue
 <template>
-  <schema-form :schema="schema" @onSubmit="onSubmit" />
+  <schema-form :schema="schema" @onFinish="onFinish" />
 </template>
 
 <script setup>
@@ -113,7 +113,7 @@ const schema = {
   ]
 }
 
-const onSubmit = (values) => {
+const onFinish = (values) => {
   alert(JSON.stringify(values))
 }
 </script>

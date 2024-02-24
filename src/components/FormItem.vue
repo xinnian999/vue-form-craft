@@ -1,7 +1,13 @@
 <template>
   <template v-if="design || !hidden">
     <div v-if="config.type === 'layout'" :style="itemStyle">
-      <component :is="config.component" v-bind="thisProps" :design="design" />
+      <component
+        :is="config.component"
+        :design="design"
+        :name="name"
+        :props="props"
+        :children="children"
+      />
     </div>
 
     <div v-else-if="config.type === 'assist'" :style="itemStyle">

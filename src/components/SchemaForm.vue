@@ -9,6 +9,11 @@
     v-bind="$attrs"
   >
     <FormRender v-if="!design" :formItems="formItems" />
+    <FormItem
+      v-if="footer && !design"
+      v-bind="footerSchema"
+      :style="{ paddingLeft: schema.labelWidth + 'px' }"
+    />
     <slot />
   </el-form>
 </template>
@@ -28,7 +33,9 @@ import {
 import { ElForm, ElMessage } from 'element-plus'
 import { handleLinkages, deepParse } from '@/utils'
 import FormRender from './FormRender.vue'
+import FormItem from './FormItem.vue'
 import { cloneDeep, merge } from 'lodash'
+import footerSchema from './footerSchema'
 
 defineOptions({
   name: 'SchemaForm'
@@ -50,10 +57,11 @@ const props = defineProps({
     type: Object,
     default: () => ({})
   },
-  design: Boolean
+  design: Boolean,
+  footer: Boolean
 })
 
-const emit = defineEmits(['update:modelValue', 'onSubmit', 'onChange'])
+const emit = defineEmits(['update:modelValue', 'onFinish', 'onChange'])
 
 const selectData = reactive({})
 
@@ -94,7 +102,7 @@ const validate = () => formRef.value.validate()
 const submit = async () => {
   try {
     await validate()
-    emit('onSubmit', formValues.value)
+    emit('onFinish', formValues.value)
     return formValues.value
   } catch (e) {
     ElMessage.error('表单填写校验不通过！')
@@ -124,3 +132,4 @@ watch(initialValues, (newVal) => {
 
 defineExpose({ submit, validate, selectData, getFormValues, setFormValues, reset, context })
 </script>
+./footerShema
