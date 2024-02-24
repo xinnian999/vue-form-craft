@@ -7,36 +7,30 @@ export default {
       label: '分类',
       component: 'Radio',
       props: {
-        mode: 'remote',
+        mode: 'static',
         options: [
           {
-            label: '选项1',
-            value: 'value1'
+            name: '前端',
+            id: 1
           },
           {
-            label: '选项2',
-            value: 'value2'
+            name: '后端',
+            id: 2
           },
           {
-            label: '选项3',
-            value: 'value3'
+            name: '运维',
+            id: 3
+          },
+          {
+            name: '其他',
+            id: 4
           }
         ],
         labelKey: 'name',
         valueKey: 'name',
         optionType: 'button',
-        api: {
-          url: '/current/query/category',
-          params: {},
-          data: {},
-          dataPath: 'data',
-          method: 'GET'
-        },
-        autoSelectedFirst: true,
-        direction: 'horizontal',
         space: 0
       },
-      designKey: 'design-oGXW',
       name: 'category',
       required: true
     },
@@ -45,27 +39,24 @@ export default {
       component: 'Radio',
       props: {
         mode: 'remote',
-        options: [],
         placeholder: '请选择文章',
         labelKey: 'title',
         valueKey: 'id',
         api: {
           url: '/current/query/article',
+          method: 'GET',
           params: {
             filters: {
               category: '{{$values.category}}'
             }
           },
-          data: {},
-          dataPath: 'data',
-          method: 'GET'
+          dataPath: 'data'
         },
         optionType: 'circle',
         autoSelectedFirst: true,
         direction: 'vertical',
         space: 0
       },
-      designKey: 'design-ojMx',
       name: 'article',
       required: true,
       hidden: '{{!$values.category}}'

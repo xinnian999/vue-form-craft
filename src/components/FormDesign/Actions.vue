@@ -36,6 +36,7 @@
         :schema="schema"
         ref="formRef"
         :schemaContext="previewSchemaContext"
+        :style="{ minHeight: '200px' }"
       />
       <template #footer v-if="dialogType === 'form'">
         <el-button @click="handleSubmit" type="primary">模拟提交</el-button>
@@ -57,6 +58,7 @@ import { ref, computed, inject, defineProps } from 'vue'
 import { ElButton, ElDialog } from 'element-plus'
 import JsonEditorVue from 'json-editor-vue3'
 import { SchemaForm, CodeMirror } from '@/components'
+import { changeItems } from './utils'
 
 defineProps({
   previewSchemaContext: {
@@ -109,6 +111,7 @@ const handlePreviewForm = () => {
 }
 
 const onBlur = (editor) => {
+  schema.value = { ...schema.value, items: changeItems(schema.value.items) }
   editor.repair()
 }
 
