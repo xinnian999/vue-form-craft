@@ -1,6 +1,6 @@
 {
   "name": "vue-form-craft",
-  "version": "2.3",
+  "version": "2.3.1",
   "private": false,
   "type": "commonjs",
   "scripts": {
