@@ -22,42 +22,6 @@ export default {
       designKey: 'form-D1x7',
       name: 'password',
       required: true
-    },
-    {
-      component: 'Inline',
-      children: [
-        {
-          component: 'Button',
-          props: {
-            name: '登陆',
-            clickEvent: 'submitForm',
-            style: {
-              'margin-left': 'auto',
-              display: 'flex'
-            }
-          },
-          designKey: 'form-aBMY',
-          name: 'submit',
-          hideLabel: true
-        },
-        {
-          component: 'Button',
-          props: {
-            name: '注册',
-            clickEvent: 'resetForm',
-            style: {}
-          },
-          designKey: 'form-mtnY',
-          name: 'IxjeOB',
-          hideLabel: true
-        }
-      ],
-      props: {
-        align: 'center',
-        gap: 20
-      },
-      designKey: 'design-2NnI',
-      name: 'form-dxYP'
     }
   ]
 }

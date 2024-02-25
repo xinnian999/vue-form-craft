@@ -32,7 +32,8 @@ export default {
         space: 0
       },
       name: 'category',
-      required: true
+      required: true,
+      designKey: 'design-9djJ'
     },
     {
       label: '文章',
@@ -59,7 +60,8 @@ export default {
       },
       name: 'article',
       required: true,
-      hidden: '{{!$values.category}}'
+      hidden: '{{!$values.category}}',
+      designKey: 'design-gr3L'
     }
   ]
 }

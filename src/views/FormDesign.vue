@@ -1,7 +1,3 @@
 <template>
-  <RemoteFormDesign @onSave="(schema) => console.log(schema)" />
+  <form-design @onSave="(schema) => console.log(schema)" />
 </template>
-
-<script setup>
-import { RemoteFormDesign } from '@/components'
-</script>

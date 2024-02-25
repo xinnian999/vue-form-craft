@@ -1,7 +1,7 @@
 <template>
   <div class="renderVue">
     <div class="renderForm">
-      <schema-form :schema="schema" footer @onFinish="onFinish" />
+      <schema-form :schema="schema" footer @onFinish="onFinish" style="max-width: 600px" />
     </div>
 
     <ElCollapse v-model="activeNames">
