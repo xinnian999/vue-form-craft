@@ -29,7 +29,7 @@ import { ElDialog, ElTooltip, ElInput } from 'element-plus'
 import { ref, shallowRef, onBeforeMount, defineEmits, defineProps, inject } from 'vue'
 import { debounce } from 'lodash'
 import { Disabled } from '@/components'
-import { $global } from '@/components/symbol'
+import { $global } from '@/config/symbol'
 
 defineProps({
   modelValue: String,

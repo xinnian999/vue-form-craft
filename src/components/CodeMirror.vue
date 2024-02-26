@@ -5,7 +5,7 @@
 import { ref, reactive, onMounted, onUnmounted, defineProps } from 'vue'
 import 'codemirror/mode/javascript/javascript.js'
 import Codemirror from 'codemirror-editor-vue3'
-import vueEditStr from './vueEditStr'
+import vueEditStr from '@/config/vueEditStr'
 
 const props = defineProps({
   schema: Object,

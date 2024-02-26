@@ -28,7 +28,7 @@
 import { defineProps, inject } from 'vue'
 import Draggable from 'vuedraggable-es'
 import CanvasRender from './CanvasRender.vue'
-import { $methods } from '@/components/symbol'
+import { $methods } from '@/config/symbol'
 
 defineProps({
   children: Array,

@@ -7,7 +7,7 @@
 <script setup>
 import { computed, inject } from 'vue'
 import { SchemaForm } from '@/components'
-import { $schema } from '@/components/symbol'
+import { $schema } from '@/config/symbol'
 import formOptions from './formOptions'
 
 const { schema, updateSchema } = inject($schema)

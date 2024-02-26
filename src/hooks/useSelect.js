@@ -1,7 +1,7 @@
 import { ref, reactive, computed, watch, onMounted, inject } from 'vue'
 import { isEqual, isPlainObject, debounce } from 'lodash'
 import { getDataByPath } from '@/utils'
-import { $selectData, $global } from '@/components/symbol'
+import { $selectData, $global } from '@/config/symbol'
 
 const useSelect = (props, emits) => {
   const selectData = inject($selectData)

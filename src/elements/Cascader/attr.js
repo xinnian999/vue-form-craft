@@ -1,4 +1,4 @@
-import { linkageAttr, basicAttr, highAttr, mergeAttr, apiAttr } from '../commonAttr'
+import { linkageAttr, basicAttr, highAttr, mergeAttr, apiAttr } from '@/config/commonAttr'
 
 export default mergeAttr({
   basic: [

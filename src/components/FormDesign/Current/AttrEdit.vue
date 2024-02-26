@@ -27,7 +27,7 @@
 import { computed, inject, ref } from 'vue'
 import JsonEditorVue from 'json-editor-vue3'
 import { ElButton, ElDrawer } from 'element-plus'
-import { $current, $global } from '@/components/symbol'
+import { $current, $global } from '@/config/symbol'
 import { SchemaForm } from '@/components'
 
 const { elements } = inject($global)

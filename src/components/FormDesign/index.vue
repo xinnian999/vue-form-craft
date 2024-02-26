@@ -23,7 +23,7 @@ import Canvas from './Canvas/index.vue'
 import Current from './Current/index.vue'
 import Actions from './Actions.vue'
 import { getCurrentByKey, setCurrentByKey, changeItems, copyItems } from './utils'
-import { $schema, $current, $methods, $hoverKey } from '@/components/symbol'
+import { $schema, $current, $methods, $hoverKey } from '@/config/symbol'
 
 defineOptions({
   name: 'FormDesign'

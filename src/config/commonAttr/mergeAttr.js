@@ -1,5 +1,5 @@
 const mergeAttr = (attrConfig) => {
-  const { basic = [], high = [], linkage = [], option } = attrConfig
+  const { basic = [], high = [], linkage = [] } = attrConfig
 
   const attrs = [
     {
@@ -25,15 +25,6 @@ const mergeAttr = (attrConfig) => {
       ]
     }
   ]
-
-  if (option) {
-    attrs[0].children.splice(1, 0, {
-      title: '选项设置',
-      name: 'option',
-      checked: true,
-      children: option
-    })
-  }
 
   return attrs
 }

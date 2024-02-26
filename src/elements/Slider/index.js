@@ -1,5 +1,5 @@
 import { ElSlider } from 'element-plus'
-import { linkageAttr, basicAttr, highAttr, mergeAttr } from '../commonAttr'
+import { linkageAttr, basicAttr, highAttr, mergeAttr } from '@/config/commonAttr'
 
 export default {
   name: '滑块',

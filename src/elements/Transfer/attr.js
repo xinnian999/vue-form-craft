@@ -1,4 +1,4 @@
-import { linkageAttr, basicAttr, highAttr, mergeAttr, optionAttr } from '../commonAttr'
+import { linkageAttr, basicAttr, highAttr, mergeAttr, optionAttr } from '@/config/commonAttr'
 
 export default mergeAttr({
   basic: [...basicAttr(['props.readonly', 'props.placeholder']), ...optionAttr],

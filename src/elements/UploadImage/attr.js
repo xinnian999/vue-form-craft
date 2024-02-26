@@ -1,4 +1,4 @@
-import { basicAttr, highAttr, mergeAttr } from '../commonAttr'
+import { basicAttr, highAttr, mergeAttr } from '@/config/commonAttr'
 
 export default mergeAttr({
   basic: [

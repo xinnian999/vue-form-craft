@@ -58,7 +58,7 @@ import { ref, computed, inject, defineProps } from 'vue'
 import { ElButton, ElDialog } from 'element-plus'
 import JsonEditorVue from 'json-editor-vue3'
 import { SchemaForm, CodeMirror } from '@/components'
-import { $schema, $methods, $global } from '@/components/symbol'
+import { $schema, $methods, $global } from '@/config/symbol'
 import { changeItems } from './utils'
 
 defineProps({

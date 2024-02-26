@@ -14,7 +14,7 @@ import {
   getCurrentInstance
 } from 'vue'
 import SchemaForm from './SchemaForm.vue'
-import { $global } from './symbol'
+import { $global } from '@/config/symbol'
 
 defineOptions({
   name: 'RemoteSchemaForm'

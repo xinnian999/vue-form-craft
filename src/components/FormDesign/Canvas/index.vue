@@ -31,7 +31,7 @@
 import { inject } from 'vue'
 import draggable from 'vuedraggable-es'
 import { SchemaForm } from '@/components'
-import { $schema, $methods } from '@/components/symbol'
+import { $schema, $methods } from '@/config/symbol'
 import CanvasRender from './CanvasRender.vue'
 
 const { schema } = inject($schema)

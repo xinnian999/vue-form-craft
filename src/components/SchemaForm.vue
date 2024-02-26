@@ -35,8 +35,8 @@ import { handleLinkages, deepParse, setDataByPath, getDataByPath } from '@/utils
 import FormRender from './FormRender.vue'
 import FormItem from './FormItem.vue'
 import { cloneDeep, merge } from 'lodash'
-import footerSchema from './footerSchema'
-import { $schema, $formValues, $selectData, $formEvents, $initialValues } from '@/components/symbol'
+import footerSchema from '@/config/footerSchema'
+import { $schema, $formValues, $selectData, $formEvents, $initialValues } from '@/config/symbol'
 
 defineOptions({
   name: 'SchemaForm'
