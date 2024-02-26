@@ -43,16 +43,17 @@ import draggable from 'vuedraggable-es'
 import { inject } from 'vue'
 import { ElButton, ElDrawer, ElSpace } from 'element-plus'
 import IconRender from '@/components/IconRender.vue'
+import { $schema } from '@/components/symbol'
 import { ref } from 'vue'
 import menus from './menus'
 import template from '@/template'
 
 const drawerVisible = ref(false)
 
-const schema = inject('$schema')
+const { updateSchema } = inject($schema)
 
 const useTemplate = (templateSchema) => {
-  schema.value = templateSchema
+  updateSchema(templateSchema)
 }
 </script>
 

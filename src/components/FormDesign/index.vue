@@ -23,6 +23,7 @@ import Canvas from './Canvas/index.vue'
 import Current from './Current/index.vue'
 import Actions from './Actions.vue'
 import { getCurrentByKey, setCurrentByKey, changeItems, copyItems } from './utils'
+import { $schema, $current, $methods, $hoverKey } from '@/components/symbol'
 
 defineOptions({
   name: 'FormDesign'
@@ -39,6 +40,8 @@ const props = defineProps({
 const emit = defineEmits(['onSave'])
 
 const currentKey = ref('')
+
+const hoverKey = ref(null)
 
 const currentSchema = ref({
   labelWidth: 150,
@@ -72,9 +75,10 @@ watchEffect(() => {
   }
 })
 
-provide('$schema', currentSchema)
-provide('$current', current)
-provide('$methods', {
+provide($schema, { schema: currentSchema, updateSchema: (json) => (currentSchema.value = json) })
+provide($current, { current, updateCurrent: (data) => (current.value = data) })
+provide($hoverKey, { hoverKey, updateHoverKey: (key) => (hoverKey.value = key) })
+provide($methods, {
   onAdd: () => {
     list.value = changeItems(list.value)
   },
@@ -88,8 +92,6 @@ provide('$methods', {
     emit('onSave', currentSchema.value)
   }
 })
-
-provide('$emit', emit)
 </script>
 
 <style lang="less">

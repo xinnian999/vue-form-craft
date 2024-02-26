@@ -28,18 +28,15 @@
 </template>
 
 <script setup lang="jsx">
-import { provide, inject, ref } from 'vue'
+import { inject } from 'vue'
 import draggable from 'vuedraggable-es'
 import { SchemaForm } from '@/components'
+import { $schema, $methods } from '@/components/symbol'
 import CanvasRender from './CanvasRender.vue'
 
-const schema = inject('$schema')
+const { schema } = inject($schema)
 
-const { onAdd } = inject('$methods')
-
-const hoverKey = ref(null)
-
-provide('hoverKey', hoverKey)
+const { onAdd } = inject($methods)
 </script>
 
 <style lang="less">

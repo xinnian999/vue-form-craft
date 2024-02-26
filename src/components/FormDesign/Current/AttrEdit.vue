@@ -27,12 +27,12 @@
 import { computed, inject, ref } from 'vue'
 import JsonEditorVue from 'json-editor-vue3'
 import { ElButton, ElDrawer } from 'element-plus'
-
+import { $current, $options } from '@/components/symbol'
 import { SchemaForm } from '@/components'
 
-const { elements } = inject('$options')
+const { elements } = inject($options)
 
-const current = inject('$current')
+const { current } = inject($current)
 
 const editVisible = ref(false)
 

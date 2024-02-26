@@ -28,13 +28,14 @@
 import { defineProps, inject } from 'vue'
 import Draggable from 'vuedraggable-es'
 import CanvasRender from './CanvasRender.vue'
+import { $methods } from '@/components/symbol'
 
 defineProps({
   children: Array,
   style: null
 })
 
-const { onAdd } = inject('$methods')
+const { onAdd } = inject($methods)
 </script>
 
 <style scoped lang="less">

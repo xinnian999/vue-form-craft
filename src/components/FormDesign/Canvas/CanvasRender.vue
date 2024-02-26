@@ -27,16 +27,17 @@
 import { defineProps, inject, computed } from 'vue'
 import { omit } from 'lodash'
 import { FormItem } from '@/components'
+import { $current, $methods, $hoverKey } from '@/components/symbol'
 
 const props = defineProps({
   data: Object
 })
 
-const current = inject('$current')
+const { current, updateCurrent } = inject($current)
 
-const hoverKey = inject('hoverKey')
+const { hoverKey, updateHoverKey } = inject($hoverKey)
 
-const { handleDeleteItem, handleCopyItem } = inject('$methods')
+const { handleDeleteItem, handleCopyItem } = inject($methods)
 
 const canvasItemClass = computed(() => ({
   'canvas-item': true,
@@ -46,17 +47,15 @@ const canvasItemClass = computed(() => ({
 }))
 
 const handleHoverEnter = () => {
-  hoverKey.value = props.data.designKey
+  updateHoverKey(props.data.designKey)
 }
 
 const handleHoverLeave = () => {
-  hoverKey.value = ''
+  updateHoverKey(null)
 }
 
 const handleSelect = (element) => {
-  const omitKeys = ['data-draggable']
-
-  current.value = omit(element, omitKeys)
+  updateCurrent(element)
 }
 
 const rightBottomActions = [

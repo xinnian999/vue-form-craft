@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { SchemaForm, RemoteSchemaForm, RemoteFormDesign, FormDesign } from '@/components'
 import IconRender from '@/components/IconRender.vue'
+import { $options } from '@/components/symbol'
 import * as Directives from '@/directive'
 import 'element-plus/dist/index.css'
 import mergeElements from './mergeElements'
@@ -11,7 +12,7 @@ const components = [SchemaForm, FormDesign, RemoteSchemaForm, RemoteFormDesign, 
 const install = function (app, options = {}) {
   const { request = axios, getSchema, customElements = {}, iconSelectConfig = {} } = options
 
-  app.provide('$options', {
+  app.provide($options, {
     request,
     getSchema,
     elements: mergeElements(customElements),

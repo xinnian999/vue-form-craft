@@ -52,6 +52,7 @@ import { computed, defineProps, inject, onMounted } from 'vue'
 import { ElFormItem, ElTooltip } from 'element-plus'
 import { isString } from 'lodash'
 import { isRegexString, getDataByPath, setDataByPath } from '@/utils'
+import { $options, $schema, $formValues, $initialValues } from '@/components/symbol'
 
 const thisProps = defineProps({
   label: String,
@@ -72,20 +73,21 @@ const thisProps = defineProps({
   change: Array
 })
 
-const { elements } = inject('$options')
+const { elements } = inject($options)
 
-const schema = inject('$schema')
+const schema = inject($schema)
 
-const formValues = inject('$formValues')
+const { formValues, updateFormValues } = inject($formValues)
 
-const initialValues = inject('$initialValues')
+const { initialValues, updateInitialValues } = inject($initialValues)
 
 const value = computed({
   get() {
     return getDataByPath(formValues.value, thisProps.name)
   },
   set(val) {
-    formValues.value = setDataByPath(formValues.value, thisProps.name, val)
+    const newValues = setDataByPath(formValues.value, thisProps.name, val)
+    updateFormValues(newValues)
   }
 })
 
@@ -158,10 +160,8 @@ const formItemProps = computed(() => {
 
 onMounted(() => {
   if (!value.value && thisProps.initialValue !== undefined) {
-    Object.assign(
-      initialValues,
-      setDataByPath(initialValues, thisProps.name, thisProps.initialValue)
-    )
+    const newInitialValues = setDataByPath(initialValues, thisProps.name, thisProps.initialValue)
+    updateInitialValues(newInitialValues)
   }
 })
 </script>

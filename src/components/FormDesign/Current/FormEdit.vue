@@ -7,9 +7,10 @@
 <script setup lang="jsx">
 import { computed, inject } from 'vue'
 import { SchemaForm } from '@/components'
+import { $schema } from '@/components/symbol'
 import formOptions from './formOptions'
 
-const schema = inject('$schema')
+const { schema, updateSchema } = inject($schema)
 
 //修改schema除了items的其他属性
 const form = computed({
@@ -17,7 +18,7 @@ const form = computed({
     return schema.value
   },
   set(value) {
-    schema.value = value
+    updateSchema(value)
   }
 })
 </script>

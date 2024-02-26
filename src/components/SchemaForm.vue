@@ -36,6 +36,7 @@ import FormRender from './FormRender.vue'
 import FormItem from './FormItem.vue'
 import { cloneDeep, merge } from 'lodash'
 import footerSchema from './footerSchema'
+import { $schema, $formValues, $selectData, $formEvents, $initialValues } from '@/components/symbol'
 
 defineOptions({
   name: 'SchemaForm'
@@ -130,11 +131,14 @@ const resetFields = (names) => {
 // 保持schema的响应 传递给后代使用
 const currentSchema = computed(() => props.schema)
 
-provide('$schema', currentSchema)
-provide('$formValues', formValues)
-provide('$selectData', selectData)
-provide('$formEvents', { submit, validate, getFormValues, setFormValues, resetFields })
-provide('$initialValues', initialValues)
+provide($schema, currentSchema)
+provide($formValues, { formValues, updateFormValues: (values) => (formValues.value = values) })
+provide($selectData, selectData)
+provide($formEvents, { submit, validate, getFormValues, setFormValues, resetFields })
+provide($initialValues, {
+  initialValues,
+  updateInitialValues: (values) => Object.assign(initialValues, values)
+})
 
 watch(initialValues, (newVal) => {
   formValues.value = merge(formValues.value, newVal)

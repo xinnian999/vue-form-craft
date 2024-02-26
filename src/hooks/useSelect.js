@@ -1,11 +1,12 @@
 import { ref, reactive, computed, watch, onMounted, inject } from 'vue'
 import { isEqual, isPlainObject, debounce } from 'lodash'
 import { getDataByPath } from '@/utils'
+import { $selectData, $options } from '@/components/symbol'
 
 const useSelect = (props, emits) => {
-  const $selectData = inject('$selectData')
+  const selectData = inject($selectData)
 
-  const { request } = inject('$options')
+  const { request } = inject($options)
 
   const selectVal = computed({
     get() {
@@ -126,21 +127,21 @@ const useSelect = (props, emits) => {
   const selectChange = (val) => {
     const { valueKey, multiple, name } = props
 
-    let selectData = {}
+    let valueData = {}
 
     if (multiple) {
       //多选就过滤出vals对应的源数据
-      selectData = currentOptions.value.filter((item) => {
+      valueData = currentOptions.value.filter((item) => {
         return val.includes(item[valueKey])
       })
     } else {
       //单选找到单项对应的源数据
-      selectData = currentOptions.value.find((item) => item[valueKey] === val)
+      valueData = currentOptions.value.find((item) => item[valueKey] === val)
     }
 
-    //如果接到了$selectData，给顶级组件保存当前值对应得数据源
-    if ($selectData) {
-      $selectData[name] = selectData
+    //如果接到了selectData，给顶级组件保存当前值对应得数据源
+    if (selectData) {
+      selectData[name] = valueData
     }
     emits('onChangeSelect', selectData)
   }
