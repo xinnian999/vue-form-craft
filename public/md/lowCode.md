@@ -27,7 +27,7 @@
   <remote-form-design :schemaId="route.query.formId" @onSave="onSave" />
 </template>
 
-<script setup lang="jsx">
+<script setup>
 import { useRoute } from "vue-router";
 import { request } from "@/utils";
 import { ElMessage } from "element-plus";

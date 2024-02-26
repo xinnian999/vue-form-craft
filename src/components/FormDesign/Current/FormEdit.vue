@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script setup lang="jsx">
+<script setup>
 import { computed, inject } from 'vue'
 import { SchemaForm } from '@/components'
 import { $schema } from '@/components/symbol'

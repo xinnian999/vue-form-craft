@@ -12,7 +12,7 @@
   </div>
 </template>
 
-<script setup lang="jsx">
+<script setup>
 import { defineProps, ref } from 'vue'
 import { ElCollapse, ElCollapseItem } from 'element-plus'
 import { CodeMirror } from '@/components'

@@ -38,7 +38,7 @@
   </div>
 </template>
 
-<script setup lang="jsx">
+<script setup>
 import draggable from 'vuedraggable-es'
 import { inject } from 'vue'
 import { ElButton, ElDrawer, ElSpace } from 'element-plus'

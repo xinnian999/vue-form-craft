@@ -51,11 +51,6 @@ export default mergeAttr({
           designKey: 'form-Wdb2Reg',
           name: 'customReg',
           hidden: '{{$item.type!=="custom"}}'
-          // change:[
-          //   {
-          //     target:'$item.'
-          //   }
-          // ]
         },
         {
           label: '提示语',

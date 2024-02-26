@@ -47,7 +47,7 @@
   </template>
 </template>
 
-<script setup lang="jsx">
+<script setup>
 import { computed, defineProps, inject, onMounted } from 'vue'
 import { ElFormItem, ElTooltip } from 'element-plus'
 import { isString } from 'lodash'

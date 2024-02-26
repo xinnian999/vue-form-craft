@@ -27,7 +27,7 @@
   </SchemaForm>
 </template>
 
-<script setup lang="jsx">
+<script setup>
 import { inject } from 'vue'
 import draggable from 'vuedraggable-es'
 import { SchemaForm } from '@/components'

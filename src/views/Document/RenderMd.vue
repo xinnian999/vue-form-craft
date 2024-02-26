@@ -9,8 +9,8 @@
   </div>
 </template>
 
-<script setup lang="jsx">
-import { watchEffect, ref } from 'vue'
+<script setup>
+import { watchEffect, ref, h } from 'vue'
 import axios from 'axios'
 import { useRoute } from 'vue-router'
 import render from '@/render'
@@ -32,7 +32,7 @@ watchEffect(async () => {
 
   setTimeout(() => {
     template.forEach(({ schema, id }) => {
-      const component = <RenderForm schema={schema} />
+      const component = h(RenderForm, { schema })
       const el = document.querySelector(`.${id}`)
       if (el) {
         render(component, el)

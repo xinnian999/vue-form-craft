@@ -29,7 +29,7 @@
   </div>
 </template>
 
-<script setup lang="jsx">
+<script setup>
 import { useRouter } from 'vue-router'
 import { ElButton, ElRow, ElCol } from 'element-plus'
 

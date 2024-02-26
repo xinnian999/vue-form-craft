@@ -2,7 +2,7 @@
   <FormDesign v-bind="$attrs" :schema="remoteSchema" ref="formRef" />
 </template>
 
-<script setup lang="jsx">
+<script setup>
 import {
   ref,
   defineProps,

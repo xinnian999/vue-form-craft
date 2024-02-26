@@ -18,7 +18,7 @@
   </el-form>
 </template>
 
-<script setup lang="jsx">
+<script setup>
 import {
   ref,
   defineProps,
@@ -89,14 +89,8 @@ const context = computed(() => ({
 
 const formItems = computed(() => deepParse(props.schema.items || [], context.value))
 
-watch(
-  () => cloneDeep(formValues.value),
-  (newVal, oldVal) => {
-    emit('onChange', newVal)
-    handleLinkages({ newVal, oldVal, formValues, formItems: formItems.value })
-  },
-  { deep: true }
-)
+// 保持schema的响应 传递给后代使用
+const currentSchema = computed(() => props.schema)
 
 const validate = () => formRef.value.validate()
 
@@ -128,8 +122,18 @@ const resetFields = (names) => {
   }
 }
 
-// 保持schema的响应 传递给后代使用
-const currentSchema = computed(() => props.schema)
+watch(
+  formValues,
+  (newVal, oldVal) => {
+    emit('onChange', newVal)
+    handleLinkages({ newVal, oldVal, formValues, formItems: formItems.value })
+  },
+  { deep: true }
+)
+
+watch(initialValues, (newVal) => {
+  formValues.value = merge(formValues.value, newVal)
+})
 
 provide($schema, currentSchema)
 provide($formValues, { formValues, updateFormValues: (values) => (formValues.value = values) })
@@ -138,10 +142,6 @@ provide($formEvents, { submit, validate, getFormValues, setFormValues, resetFiel
 provide($initialValues, {
   initialValues,
   updateInitialValues: (values) => Object.assign(initialValues, values)
-})
-
-watch(initialValues, (newVal) => {
-  formValues.value = merge(formValues.value, newVal)
 })
 
 defineExpose({ submit, validate, getFormValues, setFormValues, resetFields, context })

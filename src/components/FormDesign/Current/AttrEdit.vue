@@ -23,7 +23,7 @@
   </div>
 </template>
 
-<script setup lang="jsx">
+<script setup>
 import { computed, inject, ref } from 'vue'
 import JsonEditorVue from 'json-editor-vue3'
 import { ElButton, ElDrawer } from 'element-plus'

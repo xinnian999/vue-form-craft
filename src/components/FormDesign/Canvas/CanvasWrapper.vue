@@ -24,7 +24,7 @@
   </div>
 </template>
 
-<script setup lang="jsx">
+<script setup>
 import { defineProps, inject } from 'vue'
 import Draggable from 'vuedraggable-es'
 import CanvasRender from './CanvasRender.vue'

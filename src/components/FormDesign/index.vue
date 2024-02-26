@@ -15,7 +15,7 @@
   </div>
 </template>
 
-<script setup lang="jsx">
+<script setup>
 import { ref, provide, computed, defineProps, defineEmits, defineOptions, watchEffect } from 'vue'
 import { recursionDelete } from '@/utils'
 import Menus from './Menus/index.vue'

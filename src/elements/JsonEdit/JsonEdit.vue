@@ -33,7 +33,7 @@
   </template>
 </template>
 
-<script setup lang="jsx">
+<script setup>
 import { ref, computed, onMounted, defineOptions } from 'vue'
 import JsonEditorVue from 'json-editor-vue3'
 import { ElButton, ElDialog } from 'element-plus'

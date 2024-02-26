@@ -98,8 +98,8 @@
   </div>
 </template>
 
-<script setup lang="jsx">
-import { computed, defineProps, defineEmits } from 'vue'
+<script setup>
+import { computed, defineProps, defineEmits, h } from 'vue'
 import { ElFormItem, ElSpace, ElButton, ElCard, ElTableColumn, ElTable } from 'element-plus'
 import { FormItem, DefaultCanvasWrapper } from '@/components'
 import { deepParse } from '@/utils'
@@ -166,14 +166,20 @@ const handleReduceItem = (index) => {
 }
 
 const formatter = (item, data, index) => {
-  return (
-    <FormItem
-      {...deepParse(item, { $item: list.value[index], $index: index })}
-      hideLabel
-      style={{ marginBottom: 0 }}
-      name={`${props.name}.${index}.${item.name}`}
-    />
-  )
+  return h(FormItem, {
+    ...deepParse(item, { $item: list.value[index], $index: index }),
+    hideLabel: true,
+    style: { marginBottom: 0 },
+    name: `${props.name}.${index}.${item.name}`
+  })
+  // return (
+  //   <FormItem
+  //     {...deepParse(item, { $item: list.value[index], $index: index })}
+  //     hideLabel
+  //     style={{ marginBottom: 0 }}
+  //     name={`${props.name}.${index}.${item.name}`}
+  //   />
+  // )
 }
 </script>
 

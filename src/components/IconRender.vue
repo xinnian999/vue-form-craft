@@ -1,8 +1,8 @@
 <template>
-  <component id="icon-render" :class="class" :is="icon" :style="{ color }" />
+  <component id="icon-render" :is="icon" v-bind="$attrs" />
 </template>
 
-<script setup lang="jsx">
+<script setup>
 import { defineProps, shallowRef, defineOptions, watchEffect } from 'vue'
 
 defineOptions({
@@ -10,12 +10,7 @@ defineOptions({
 })
 
 const props = defineProps({
-  name: String,
-  class: null,
-  color: {
-    type: String,
-    default: ''
-  }
+  name: String
 })
 
 const icon = shallowRef(null)
@@ -27,7 +22,7 @@ watchEffect(() => {
 })
 </script>
 
-<style>
+<style scoped>
 #icon-render {
   display: inline-block;
   width: 1em;
