@@ -18,7 +18,7 @@ export default {
       component: 'Button',
       props: {
         name: '重置',
-        clickEvent: 'resetFieldsForm',
+        clickEvent: 'resetForm',
         type: 'default'
       },
       designKey: 'form-mtnY',

@@ -141,9 +141,6 @@ const checkProps = (props) => {
       margin-left: 3px;
       box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
       line-height: 16px;
-      &:hover {
-        opacity: 0.7;
-      }
     }
   }
 

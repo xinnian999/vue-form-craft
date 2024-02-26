@@ -14,8 +14,6 @@ const props = defineProps({
 
 const code = ref('')
 
-// const schema = inject('$schema')
-
 const cmRef = ref()
 const cmOptions = reactive({
   mode: 'text/javascript',
