@@ -48,7 +48,7 @@
 </template>
 
 <script setup lang="jsx">
-import { computed, defineProps, onBeforeMount, inject, ref } from 'vue'
+import { computed, defineProps, inject, onMounted } from 'vue'
 import { ElFormItem, ElTooltip } from 'element-plus'
 import { isString } from 'lodash'
 import { isRegexString, getDataByPath, setDataByPath } from '@/utils'
@@ -156,7 +156,7 @@ const formItemProps = computed(() => {
   return initProps
 })
 
-onBeforeMount(() => {
+onMounted(() => {
   if (!value.value && thisProps.initialValue !== undefined) {
     Object.assign(
       initialValues,

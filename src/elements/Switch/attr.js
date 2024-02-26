@@ -21,11 +21,10 @@ export default mergeAttr({
       props: {
         mode: 'static',
         options: [
-          { label: '外部', value: 0 },
-          { label: '内部', value: 1 }
+          { label: '外部', value: false },
+          { label: '内部', value: true }
         ]
-      },
-      initialValue: 0
+      }
     }
   ],
 

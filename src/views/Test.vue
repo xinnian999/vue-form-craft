@@ -1,21 +1,14 @@
 <template>
-  <schema-form :schema="schema" ref="formRef" />
-  <ElButton @click="handleSubmit" type="primary" style="margin-left: 150px">提交</ElButton>
+  <schema-form :schema="schema" footer @onFinish="onFinish" @onFinishFailed="onFinishFailed" />
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { ElButton } from 'element-plus'
+const onFinish = (values) => {
+  alert(JSON.stringify(values))
+}
 
-const formRef = ref()
-
-const handleSubmit = () => {
-  formRef.value
-    .submit()
-    .then((values) => {
-      alert(JSON.stringify(values))
-    })
-    .catch(() => console.log('表单校验不通过'))
+const onFinishFailed = (e) => {
+  console.log(e)
 }
 
 const schema = {
@@ -24,32 +17,14 @@ const schema = {
   size: 'default',
   items: [
     {
-      label: '评分',
-      component: 'Rate',
+      label: '单行文本',
+      component: 'Input',
       props: {
-        max: 5,
-        'allow-half': true
+        placeholder: '请输入文本'
       },
-      designKey: 'form-Lx4g',
-      name: 'rate',
+      designKey: 'design-ViXi',
+      name: 'form-qJMv',
       required: true
-    },
-    {
-      label: '差评原因',
-      component: 'Textarea',
-      props: {
-        autocomplete: 'off',
-        showWordLimit: true,
-        type: 'textarea',
-        autosize: {
-          minRows: 4,
-          maxRows: 999
-        },
-        placeholder: '请输入...'
-      },
-      designKey: 'form-XyJs',
-      name: 'reason',
-      hidden: '{{!$values.rate||$values.rate>3}}'
     }
   ]
 }

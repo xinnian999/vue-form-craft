@@ -30,7 +30,7 @@ import {
   watch,
   defineOptions
 } from 'vue'
-import { ElForm, ElMessage } from 'element-plus'
+import { ElForm } from 'element-plus'
 import { handleLinkages, deepParse } from '@/utils'
 import FormRender from './FormRender.vue'
 import FormItem from './FormItem.vue'
@@ -61,7 +61,7 @@ const props = defineProps({
   footer: Boolean
 })
 
-const emit = defineEmits(['update:modelValue', 'onFinish', 'onChange'])
+const emit = defineEmits(['update:modelValue', 'onFinish', 'onFinishFailed', 'onChange'])
 
 const selectData = reactive({})
 
@@ -105,7 +105,7 @@ const submit = async () => {
     emit('onFinish', formValues.value)
     return formValues.value
   } catch (e) {
-    ElMessage.error('表单填写校验不通过！')
+    emit('onFinishFailed', e)
     return Promise.reject(e)
   }
 }
@@ -132,4 +132,3 @@ watch(initialValues, (newVal) => {
 
 defineExpose({ submit, validate, selectData, getFormValues, setFormValues, reset, context })
 </script>
-./footerShema
