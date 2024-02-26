@@ -12,7 +12,6 @@ export default {
       },
       designKey: 'form-Lx4g',
       name: 'rate',
-      style: {},
       required: true
     },
     {
@@ -30,7 +29,6 @@ export default {
       },
       designKey: 'form-XyJs',
       name: 'reason',
-      style: {},
       hidden: '{{!$values.rate||$values.rate>3}}'
     }
   ]

@@ -1,5 +1,3 @@
-import { props } from '../commonAttr'
-
 export default [
   { label: '唯一标识', component: 'Input', name: 'name' },
   { label: '按钮名称', component: 'Input', name: 'props.name' },

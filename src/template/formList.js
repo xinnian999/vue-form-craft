@@ -14,8 +14,7 @@ export default {
             placeholder: '请输入文本'
           },
           designKey: 'design-M91n',
-          name: 'username',
-          style: {}
+          name: 'username'
         },
         {
           label: '密码',
@@ -40,8 +39,7 @@ export default {
         mode: 'table'
       },
       designKey: 'design-pMUa',
-      name: 'form-kWJU',
-      style: {}
+      name: 'form-kWJU'
     }
   ]
 }

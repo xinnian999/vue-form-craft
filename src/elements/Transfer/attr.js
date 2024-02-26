@@ -25,8 +25,7 @@ export default mergeAttr({
         autocomplete: 'off',
         showWordLimit: true,
         type: 'text',
-        placeholder: '请输入文本',
-        style: {}
+        placeholder: '请输入文本'
       },
       designKey: 'form-7KcJ',
       name: 'props.titles.0'
@@ -38,8 +37,7 @@ export default mergeAttr({
         autocomplete: 'off',
         showWordLimit: true,
         type: 'text',
-        placeholder: '请输入文本',
-        style: {}
+        placeholder: '请输入文本'
       },
       designKey: 'form-Cp1y',
       name: 'props.titles.1'

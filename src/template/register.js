@@ -47,7 +47,6 @@ export default {
       props: {
         name: '立即注册',
         clickEvent: 'custom',
-        style: {},
         customEvent: '{{}}'
       },
       designKey: 'form-gW1S',
