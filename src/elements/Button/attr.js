@@ -9,7 +9,7 @@ export default [
       mode: 'static',
       options: [
         { label: '提交表单', value: 'submitForm' },
-        { label: '重置表单', value: 'resetForm' },
+        { label: '重置表单', value: 'resetFieldsForm' },
         { label: '自定义', value: 'custom' }
       ]
     },

@@ -24,8 +24,8 @@ const onClick = () => {
   if (props.clickEvent === 'submitForm') {
     formEvents.submit()
   }
-  if (props.clickEvent === 'resetForm') {
-    formEvents.reset()
+  if (props.clickEvent === 'resetFieldsForm') {
+    formEvents.resetFields()
   }
   if (props.clickEvent === 'custom') {
     props.customEvent()

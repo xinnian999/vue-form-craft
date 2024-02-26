@@ -31,7 +31,7 @@ import {
   defineOptions
 } from 'vue'
 import { ElForm } from 'element-plus'
-import { handleLinkages, deepParse } from '@/utils'
+import { handleLinkages, deepParse, setDataByPath, getDataByPath } from '@/utils'
 import FormRender from './FormRender.vue'
 import FormItem from './FormItem.vue'
 import { cloneDeep, merge } from 'lodash'
@@ -115,7 +115,17 @@ const setFormValues = (values) => {
   formValues.value = { ...formValues.value, ...values }
 }
 
-const reset = () => (formValues.value = initialValues)
+const resetFields = (names) => {
+  if (names) {
+    let temp = cloneDeep(formValues.value)
+    names.forEach((name) => {
+      temp = setDataByPath(temp, name, getDataByPath(initialValues, name))
+    })
+    formValues.value = temp
+  } else {
+    formValues.value = initialValues
+  }
+}
 
 // 保持schema的响应 传递给后代使用
 const currentSchema = computed(() => props.schema)
@@ -123,12 +133,12 @@ const currentSchema = computed(() => props.schema)
 provide('$schema', currentSchema)
 provide('$formValues', formValues)
 provide('$selectData', selectData)
-provide('$formEvents', { submit, validate, getFormValues, setFormValues, reset })
+provide('$formEvents', { submit, validate, getFormValues, setFormValues, resetFields })
 provide('$initialValues', initialValues)
 
 watch(initialValues, (newVal) => {
   formValues.value = merge(formValues.value, newVal)
 })
 
-defineExpose({ submit, validate, selectData, getFormValues, setFormValues, reset, context })
+defineExpose({ submit, validate, getFormValues, setFormValues, resetFields, context })
 </script>

@@ -40,7 +40,7 @@
       />
       <template #footer v-if="dialogType === 'form'">
         <el-button @click="handleSubmit" type="primary">模拟提交</el-button>
-        <el-button @click="formRef.reset()" type="primary">重置</el-button>
+        <el-button @click="formRef.resetFields()" type="primary">重置</el-button>
         <JsonEdit
           v-model="formContext"
           height="400px"

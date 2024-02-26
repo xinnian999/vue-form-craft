@@ -7,7 +7,7 @@ import { MdPreview, MdCatalog, MdEditor } from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
 // import '@arco-design/web-vue/dist/arco.css'
 // import { Switch, Input, Textarea, InputNumber } from '@arco-design/web-vue'
-// import 'ant-design-vue/dist/reset.css'
+// import 'ant-design-vue/dist/resetFields.css'
 // import { Switch, Input, Textarea, InputNumber } from 'ant-design-vue'
 
 const components = [MdPreview, MdCatalog, MdEditor] // 全局组件列表
