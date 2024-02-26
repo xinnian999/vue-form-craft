@@ -58,7 +58,7 @@ import { ref, computed, inject, defineProps } from 'vue'
 import { ElButton, ElDialog } from 'element-plus'
 import JsonEditorVue from 'json-editor-vue3'
 import { SchemaForm, CodeMirror } from '@/components'
-import { $schema, $methods, $options } from '@/components/symbol'
+import { $schema, $methods, $global } from '@/components/symbol'
 import { changeItems } from './utils'
 
 defineProps({
@@ -72,7 +72,7 @@ const { schema, updateSchema } = inject($schema)
 
 const { handleSave } = inject($methods)
 
-const { elements } = inject($options)
+const { elements } = inject($global)
 
 const JsonEdit = elements.JsonEdit.component
 

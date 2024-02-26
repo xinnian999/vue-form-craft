@@ -14,7 +14,7 @@ import {
   getCurrentInstance
 } from 'vue'
 import SchemaForm from './SchemaForm.vue'
-import { $options } from './symbol'
+import { $global } from './symbol'
 
 defineOptions({
   name: 'RemoteSchemaForm'
@@ -33,7 +33,7 @@ const remoteSchema = ref({})
 
 const loading = ref(false)
 
-const { getSchema } = inject($options)
+const { getSchema } = inject($global)
 
 onBeforeMount(async () => {
   if (props.schemaId) {

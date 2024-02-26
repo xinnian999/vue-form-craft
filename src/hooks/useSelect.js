@@ -1,12 +1,12 @@
 import { ref, reactive, computed, watch, onMounted, inject } from 'vue'
 import { isEqual, isPlainObject, debounce } from 'lodash'
 import { getDataByPath } from '@/utils'
-import { $selectData, $options } from '@/components/symbol'
+import { $selectData, $global } from '@/components/symbol'
 
 const useSelect = (props, emits) => {
   const selectData = inject($selectData)
 
-  const { request } = inject($options)
+  const { request } = inject($global)
 
   const selectVal = computed({
     get() {

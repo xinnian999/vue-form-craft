@@ -29,7 +29,7 @@ import { ElDialog, ElTooltip, ElInput } from 'element-plus'
 import { ref, shallowRef, onBeforeMount, defineEmits, defineProps, inject } from 'vue'
 import { debounce } from 'lodash'
 import { Disabled } from '@/components'
-import { $options } from '@/components/symbol'
+import { $global } from '@/components/symbol'
 
 defineProps({
   modelValue: String,
@@ -40,7 +40,7 @@ const emits = defineEmits(['update:modelValue'])
 
 const {
   iconSelectConfig: { component, propKey, iconList }
-} = inject($options)
+} = inject($global)
 
 const visible = ref(false)
 

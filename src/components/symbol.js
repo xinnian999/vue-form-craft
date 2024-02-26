@@ -1,4 +1,4 @@
-export const $options = Symbol()
+export const $global = Symbol()
 export const $schema = Symbol()
 export const $formValues = Symbol()
 export const $selectData = Symbol()

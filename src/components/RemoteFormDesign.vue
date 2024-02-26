@@ -13,7 +13,7 @@ import {
   onMounted,
   getCurrentInstance
 } from 'vue'
-import { $options } from './symbol'
+import { $global } from './symbol'
 
 defineOptions({
   name: 'RemoteFormDesign'
@@ -31,7 +31,7 @@ const remoteSchema = ref(null)
 
 const loading = ref(false)
 
-const { getSchema } = inject($options)
+const { getSchema } = inject($global)
 
 onBeforeMount(async () => {
   if (props.schemaId) {

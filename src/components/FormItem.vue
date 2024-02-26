@@ -52,7 +52,7 @@ import { computed, defineProps, inject, onMounted } from 'vue'
 import { ElFormItem, ElTooltip } from 'element-plus'
 import { isString } from 'lodash'
 import { isRegexString, getDataByPath, setDataByPath } from '@/utils'
-import { $options, $schema, $formValues, $initialValues } from '@/components/symbol'
+import { $global, $schema, $formValues, $initialValues } from '@/components/symbol'
 
 const thisProps = defineProps({
   label: String,
@@ -73,7 +73,7 @@ const thisProps = defineProps({
   change: Array
 })
 
-const { elements } = inject($options)
+const { elements } = inject($global)
 
 const schema = inject($schema)
 
