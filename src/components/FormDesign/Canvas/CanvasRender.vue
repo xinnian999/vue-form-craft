@@ -1,29 +1,25 @@
 <template>
   <div
     :class="canvasItemClass"
-    @click.stop="handleSelect({ ...thisProps, ...$attrs })"
+    @click.stop="handleSelect(data)"
     @mousemove.stop="handleHoverEnter"
     @mouseleave.stop="handleHoverLeave"
   >
-    <div class="actions-left-top" v-if="designKey === current.designKey">
+    <div class="actions-left-top" v-if="data.designKey === current.designKey">
       <div class="canvas-move" size="small" type="primary">
         <icon-render name="move" />
       </div>
     </div>
 
-    <div class="hidden-ico" v-if="hidden"><icon-render name="hidden" /></div>
+    <div class="hidden-ico" v-if="data.hidden"><icon-render name="hidden" /></div>
 
-    <ul class="actions-right-bottom" v-if="designKey === current.designKey">
-      <li
-        v-for="{ icon, handle } in rightBottomActions"
-        @click.stop="handle(thisProps)"
-        :key="icon"
-      >
+    <ul class="actions-right-bottom" v-if="data.designKey === current.designKey">
+      <li v-for="{ icon, handle } in rightBottomActions" @click.stop="handle(data)" :key="icon">
         <icon-render :name="icon" />
       </li>
     </ul>
 
-    <form-item v-bind="thisProps" :props="checkProps(props)" design />
+    <form-item v-bind="data" :props="checkProps(data.props)" design />
   </div>
 </template>
 
@@ -32,19 +28,8 @@ import { defineProps, inject, computed } from 'vue'
 import { omit } from 'lodash'
 import { FormItem } from '@/components'
 
-const thisProps = defineProps({
-  label: String,
-  name: String,
-  component: String,
-  props: Object,
-  children: Array,
-  designKey: String,
-  hideLabel: { type: Boolean, default: undefined },
-  required: { type: Boolean, default: undefined },
-  style: Object,
-  help: String,
-  class: null,
-  hidden: { type: Boolean, default: undefined }
+const props = defineProps({
+  data: Object
 })
 
 const current = inject('$current')
@@ -55,13 +40,13 @@ const { handleDeleteItem, handleCopyItem } = inject('$methods')
 
 const canvasItemClass = computed(() => ({
   'canvas-item': true,
-  active: thisProps.designKey === current.value.designKey,
-  hover: thisProps.designKey === hoverKey.value,
-  mask: thisProps.designKey === hoverKey.value && !thisProps.children
+  active: props.data.designKey === current.value.designKey,
+  hover: props.data.designKey === hoverKey.value,
+  mask: props.data.designKey === hoverKey.value && !props.data.children
 }))
 
 const handleHoverEnter = () => {
-  hoverKey.value = thisProps.designKey
+  hoverKey.value = props.data.designKey
 }
 
 const handleHoverLeave = () => {

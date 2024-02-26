@@ -14,7 +14,6 @@ export default mergeAttr({
       },
       designKey: 'form-fVKS',
       name: 'sv1sIQ',
-      hideLabel: true,
       hidden: false
     },
     ...basicAttr(['initialValue', 'props.placeholder', 'props.readonly']),

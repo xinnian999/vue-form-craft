@@ -9,7 +9,6 @@ export default {
   attr,
   initialValues: {
     component: 'Alert',
-    hideLabel: true,
     props: {
       title: '提示信息',
       type: 'info',

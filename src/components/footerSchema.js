@@ -12,8 +12,7 @@ export default {
         }
       },
       designKey: 'form-aBMY',
-      name: 'submit',
-      hideLabel: true
+      name: 'submit'
     },
     {
       component: 'Button',
@@ -23,8 +22,7 @@ export default {
         type: 'default'
       },
       designKey: 'form-mtnY',
-      name: 'IxjeOB',
-      hideLabel: true
+      name: 'IxjeOB'
     }
   ],
   props: {

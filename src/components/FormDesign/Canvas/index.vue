@@ -21,7 +21,7 @@
       force-fallback
     >
       <template #item="{ element }">
-        <CanvasRender v-if="element.designKey" v-bind="element" />
+        <CanvasRender v-if="element.designKey" :data="element" />
       </template>
     </draggable>
   </SchemaForm>
@@ -34,6 +34,7 @@ import { SchemaForm } from '@/components'
 import CanvasRender from './CanvasRender.vue'
 
 const schema = inject('$schema')
+
 const { onAdd } = inject('$methods')
 
 const hoverKey = ref(null)
