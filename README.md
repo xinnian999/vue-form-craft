@@ -1,7 +1,5 @@
 # vue-form-craft
 
-
-
 基于 [vue](https://github.com/vuejs/vue) 和 [element-ui](https://github.com/ElemeFE/element) 实现的表单设计器 + 渲染器
 
 使用了最新的前端技术栈，可以让你免去vue项目中表单的烦恼。
@@ -26,6 +24,17 @@
 * 支持表单填写校验
 * 组件无限深层嵌套，深层校验
 * 支持远程获取表单的schema，后台存储表单，前端在线修改
+
+## 第三方插件
+
+* vuedraggable
+* element-ui
+* json-editor-vue3
+* codemirror
+* codemirror-editor-vue3
+* lodash
+* editor-for-vue
+* md-editor-v3
 
 ## 使用
 
@@ -78,46 +87,43 @@ const onSave = (schema) => {
 
 ```vue
 <template>
-  <schema-form :schema="schema" @onFinish="onFinish" />
+    <schema-form :schema="schema" footer  @onFinish="onFinish" />
 </template>
 
 <script setup>
-const schema = {
-  labelWidth: 150,
-  labelAlign: 'right',
-  size: 'default',
-  items: [
-    {
-      label: '用户名',
-      component: 'Input',
-      props: {
-        placeholder: '请输入用户名'
-      },
-      name: 'username'
-    },
-    {
-      label: '密码',
-      component: 'Password',
-      props: {
-        placeholder: '请输入密码'
-      },
-      name: 'password'
-    },
-    {
-      component: 'Button',
-      props: {
-        name: '提交',
-        clickEvent: 'submitForm'
-      },
-    }
-  ]
-}
 
 const onFinish = (values) => {
   alert(JSON.stringify(values))
 }
-</script>
 
+const schema = {
+  "labelWidth": 150,
+  "labelAlign": "right",
+  "size": "default",
+  "items": [
+    {
+      "label": "用户名",
+      "component": "Input",
+      "props": {
+        "placeholder": "请输入用户名"
+      },
+      "designKey": "form-eNR0",
+      "name": "username",
+      "required": true
+    },
+    {
+      "label": "密码",
+      "component": "Password",
+      "props": {
+        "placeholder": "请输入密码"
+      },
+      "designKey": "form-D1x7",
+      "name": "password",
+      "required": true
+    }
+  ]
+}
+</script>
 ```
 
 

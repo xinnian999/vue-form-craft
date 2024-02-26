@@ -8,7 +8,6 @@
     filterable
     v-selectLoadMore:[popperClass]="scrollFetchData"
     :popper-class="popperClass"
-    :loading="loading"
   >
     <el-option
       v-for="item in currentOptions"
