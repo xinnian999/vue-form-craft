@@ -1,23 +1,25 @@
 <template>
   <template v-if="design || !hidden">
-    <div v-if="config.type === 'layout'" class="notFormItem">
-      <component :is="config.component" v-bind="thisProps" v-model="parentValue" />
+    <div v-if="config.type === 'layout'" :style="itemStyle">
+      <component
+        :is="config.component"
+        :design="design"
+        :name="name"
+        :props="props"
+        :children="children"
+      />
     </div>
 
-    <div v-else-if="config.type === 'assist'" :style="{ marginBottom: design ? 0 : '18px' }">
+    <div v-else-if="config.type === 'assist'" :style="itemStyle">
       <component :is="config.component" v-bind="props" />
-    </div>
-
-    <div v-else-if="component === 'ItemGroup'" class="notFormItem">
-      <component :is="config.component" v-bind="thisProps" v-model="value" />
     </div>
 
     <el-form-item
       v-else
       id="form-item"
-      :style="{ marginBottom: design ? 0 : '18px', ...style }"
+      :style="itemStyle"
       :key="name"
-      :prop="prop || dataPath"
+      :prop="name"
       :label-width="hideLabel ? '0' : schema.labelWidth"
       :rules="computeRules"
       :class="thisProps.class"
@@ -27,7 +29,7 @@
           <div :style="schema.labelBold && 'font-weight: bold'">{{ label }}</div>
           <div class="ico" v-if="help">
             <el-tooltip class="box-item" effect="dark" :content="help">
-              <icon-render name="help" />
+              <div><icon-render name="help" /></div>
             </el-tooltip>
           </div>
         </div>
@@ -39,16 +41,18 @@
         :size="schema.size"
         v-bind="formItemProps"
         v-model:[config.modelName]="value"
+        :design="design"
       />
     </el-form-item>
   </template>
 </template>
 
-<script setup lang="jsx">
-import { computed, defineProps, defineEmits, onBeforeMount, inject, onMounted, nextTick } from 'vue'
+<script setup>
+import { computed, defineProps, inject, onMounted } from 'vue'
 import { ElFormItem, ElTooltip } from 'element-plus'
-import { isString, pickBy } from 'lodash'
-import { isRegexString } from '@/utils'
+import { isString } from 'lodash'
+import { isRegexString, getDataByPath, setDataByPath } from '@/utils'
+import { $global, $schema, $formValues, $initialValues } from '@/config/symbol'
 
 const thisProps = defineProps({
   label: String,
@@ -56,46 +60,41 @@ const thisProps = defineProps({
   component: String,
   required: Boolean,
   props: Object,
-  modelValue: null,
   initialValue: null,
   style: Object,
   help: String,
   children: Array,
-  hidden: Boolean,
+  hidden: [Boolean, String],
   hideLabel: Boolean,
-  prop: String,
-  onlyId: String,
+  designKey: String,
   rules: Array,
   class: null,
   design: Boolean,
-  parentValue: Object,
-  change: Array,
-  dataPath: String
+  change: Array
 })
 
-const emit = defineEmits(['update:modelValue', 'update:parentValue'])
+const { elements } = inject($global)
 
-const { elements } = inject('$options')
+const schema = inject($schema)
 
-const schema = inject('$schema')
+const { formValues, updateFormValues } = inject($formValues)
+
+const { initialValues, updateInitialValues } = inject($initialValues)
 
 const value = computed({
   get() {
-    return thisProps.modelValue
+    return getDataByPath(formValues.value, thisProps.name)
   },
   set(val) {
-    emit('update:modelValue', val)
+    const newValues = setDataByPath(formValues.value, thisProps.name, val)
+    updateFormValues(newValues)
   }
 })
 
-const parentValue = computed({
-  get() {
-    return thisProps.parentValue
-  },
-  set(val) {
-    emit('update:parentValue', val)
-  }
-})
+const itemStyle = computed(() => ({
+  marginBottom: thisProps.design ? 0 : '18px',
+  ...thisProps.style
+}))
 
 const computeRules = computed(() => {
   const { rules, required } = thisProps
@@ -159,16 +158,10 @@ const formItemProps = computed(() => {
   return initProps
 })
 
-onBeforeMount(() => {
+onMounted(() => {
   if (!value.value && thisProps.initialValue !== undefined) {
-    // TODO:el部分组件提前赋值会引发BUG,暂时推到dom挂载后再赋值（但是表单重置会失效）
-    if (['Switch', 'Select'].includes(currentComponent.value)) {
-      nextTick(() => {
-        emit('update:modelValue', thisProps.initialValue)
-      })
-    } else {
-      emit('update:modelValue', thisProps.initialValue)
-    }
+    const newInitialValues = setDataByPath(initialValues, thisProps.name, thisProps.initialValue)
+    updateInitialValues(newInitialValues)
   }
 })
 </script>
@@ -182,11 +175,13 @@ onBeforeMount(() => {
       margin-left: 3px;
       font-size: 15px;
       position: relative;
+      .el-tooltip__trigger {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
     }
   }
-}
-
-.notFormItem {
-  margin-bottom: 18px;
 }
 </style>

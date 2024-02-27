@@ -10,7 +10,6 @@ export default {
   attr,
   initialValues: {
     component: 'Title',
-    hideLabel: true,
     props: {
       title: '标题',
       type: 'h3'

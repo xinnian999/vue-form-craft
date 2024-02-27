@@ -18,7 +18,10 @@ export default {
         { label: '选项3', value: 'value3' }
       ],
       labelKey: 'label',
-      valueKey: 'value'
+      valueKey: 'value',
+      optionType: 'circle',
+      direction: 'horizontal',
+      space: 20
     }
   },
   attr

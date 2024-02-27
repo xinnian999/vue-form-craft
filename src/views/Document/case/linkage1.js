@@ -10,9 +10,8 @@ export default {
         max: 5,
         'allow-half': true
       },
-      onlyId: 'form-Lx4g',
+      designKey: 'form-Lx4g',
       name: 'rate',
-      style: {},
       required: true
     },
     {
@@ -28,9 +27,8 @@ export default {
         },
         placeholder: '请输入...'
       },
-      onlyId: 'form-XyJs',
+      designKey: 'form-XyJs',
       name: 'reason',
-      style: {},
       hidden: '{{$values.rate>=3 || !$values.rate}}'
     }
   ]

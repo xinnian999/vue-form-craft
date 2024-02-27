@@ -1,38 +1,45 @@
 <template>
-  <div :style="gridStyle" class="form-item-grid">
-    <FormRender v-model="value" :formItems="children" />
+  <div class="form-item-grid">
+    <DefaultCanvasWrapper
+      v-if="design"
+      :children="children"
+      :style="gridStyle"
+      title="栅格布局"
+      :name="name"
+    />
+
+    <div v-else :style="gridStyle">
+      <FormRender :formItems="children" />
+    </div>
   </div>
 </template>
 
 <script setup>
-import { defineProps, computed, defineEmits } from 'vue'
-import useStyle from '@/hooks/useStyle'
-import { FormRender } from '@/components'
+import { defineProps, computed } from 'vue'
+import { FormRender, DefaultCanvasWrapper } from '@/components'
 
 const thisProps = defineProps({
-  modelValue: Object,
+  name: String,
   props: Object,
   children: Array,
   design: Boolean
 })
-const gridStyle = useStyle('Grid', thisProps.props)
 
-const emit = defineEmits(['update:modelValue'])
-
-const value = computed({
-  get() {
-    return thisProps.modelValue
-  },
-  set(val) {
-    emit('update:modelValue', val)
-  }
-})
+const gridStyle = computed(() => ({
+  display: 'grid',
+  'grid-template-columns': `repeat(${thisProps.props.columns}, 1fr)`,
+  'row-gap': thisProps.props['row-gap'] + 'px',
+  'column-gap': thisProps.props['column-gap'] + 'px'
+}))
 </script>
 
-<style lang="less">
+<style scoped lang="less">
 .form-item-grid {
   .el-form-item {
     margin-bottom: 0;
+  }
+  .el-form-item__content {
+    align-items: start;
   }
 }
 </style>

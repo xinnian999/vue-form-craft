@@ -1,7 +1,8 @@
 import axios from 'axios'
-import { SchemaForm, RemoteSchemaForm, RemoteFormDesign } from '@/components'
-import FormDesign from '@/FormDesign/index.vue'
+import { SchemaForm, RemoteSchemaForm, RemoteFormDesign, FormDesign } from '@/components'
 import IconRender from '@/components/IconRender.vue'
+import { $global } from '@/config/symbol'
+import { mergeAttr, basicAttr } from '@/config/commonAttr'
 import * as Directives from '@/directive'
 import 'element-plus/dist/index.css'
 import mergeElements from './mergeElements'
@@ -12,7 +13,7 @@ const components = [SchemaForm, FormDesign, RemoteSchemaForm, RemoteFormDesign, 
 const install = function (app, options = {}) {
   const { request = axios, getSchema, customElements = {}, iconSelectConfig = {} } = options
 
-  app.provide('$options', {
+  app.provide($global, {
     request,
     getSchema,
     elements: mergeElements(customElements),
@@ -27,4 +28,6 @@ const install = function (app, options = {}) {
   Object.values(Directives).forEach((fn) => fn(app))
 }
 
-export default { install } //用来给Vue全局挂载
+export default { install }
+
+export { mergeAttr, basicAttr }

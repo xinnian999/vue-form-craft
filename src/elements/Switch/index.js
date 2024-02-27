@@ -7,6 +7,6 @@ export default {
   icon: 'switch',
   type: 'basic',
   order: 8,
-  initialValues: { label: '开关', component: 'Switch' },
+  initialValues: { label: '开关', component: 'Switch', props: { 'inline-prompt': false } },
   attr
 }

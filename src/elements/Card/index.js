@@ -6,8 +6,6 @@ export default {
   icon: 'card',
   type: 'layout',
   order: 1,
-  isWrapper: true,
-
   initialValues: {
     component: 'Card',
     children: [],
@@ -16,12 +14,7 @@ export default {
     }
   },
   attr: [
-    { label: '字段标识', component: 'Input', name: 'name' },
-    {
-      label: 'props',
-      component: 'ItemGroup',
-      name: 'props',
-      children: [{ label: '卡片标题', component: 'Input', name: 'header' }]
-    }
+    { label: '唯一标识', component: 'Input', name: 'name' },
+    { label: '卡片标题', component: 'Input', name: 'props.header' }
   ]
 }

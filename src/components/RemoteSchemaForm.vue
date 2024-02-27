@@ -2,7 +2,7 @@
   <SchemaForm v-loading="loading" v-bind="$attrs" :schema="remoteSchema" ref="formRef" />
 </template>
 
-<script setup lang="jsx">
+<script setup>
 import {
   ref,
   defineProps,
@@ -14,6 +14,7 @@ import {
   getCurrentInstance
 } from 'vue'
 import SchemaForm from './SchemaForm.vue'
+import { $global } from '@/config/symbol'
 
 defineOptions({
   name: 'RemoteSchemaForm'
@@ -32,7 +33,7 @@ const remoteSchema = ref({})
 
 const loading = ref(false)
 
-const { getSchema } = inject('$options')
+const { getSchema } = inject($global)
 
 onBeforeMount(async () => {
   if (props.schemaId) {

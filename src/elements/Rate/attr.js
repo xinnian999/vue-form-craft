@@ -1,16 +1,14 @@
-import { linkageAttr, basic, props } from '../commonAttr'
+import { linkageAttr, basicAttr, highAttr, mergeAttr } from '@/config/commonAttr'
 
-export default [
-  ...basic,
-  {
-    label: 'props',
-    component: 'ItemGroup',
-    name: 'props',
-    children: [
-      ...props,
-      { label: '最大分值', component: 'InputNumber', name: 'max', initialValue: 5 },
-      { label: '是否允许半选', component: 'Switch', name: 'allow-half' }
-    ]
-  },
-  ...linkageAttr
-]
+export default mergeAttr({
+  basic: [
+    ...basicAttr(['props.readonly', 'props.placeholder', 'initialValue']),
+    { label: '初始值', component: 'InputNumber', name: 'initialValue' },
+
+    { label: '最大分值', component: 'InputNumber', name: 'props.max', initialValue: 5 },
+    { label: '是否允许半选', component: 'Switch', name: 'props.allow-half' }
+  ],
+  high: highAttr(),
+
+  linkage: linkageAttr
+})

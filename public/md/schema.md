@@ -22,7 +22,7 @@ items里是每个字段的抽象，label、name、component等是每个字段的
       "props": {    //传给该组件的props，支持该组件在element plus的所有props
         "placeholder": "请输入用户名"
       },
-      "name": "username" //字段标识，也就是值key
+      "name": "username" //唯一标识，也就是值key
     },
     {
       "label": "密码",
@@ -57,6 +57,7 @@ items里是每个字段的抽象，label、name、component等是每个字段的
 | size                 | 'small' \| 'default' \| 'large' | default | No       | 表单字段大小      |
 | hideRequiredAsterisk | Boolean                         | false   | No       | 表单隐藏必填星号  |
 | labelBold            | Boolean                         | false   | No       | 表单label加粗     |
+| disabled             | Boolean                         | false   | No       | 禁用所有表单项    |
 
 #### 表单项配置
 

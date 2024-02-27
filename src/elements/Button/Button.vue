@@ -5,8 +5,9 @@
 <script setup>
 import { defineProps, inject } from 'vue'
 import { ElButton } from 'element-plus'
+import { $formEvents } from '@/config/symbol'
 
-const formEvents = inject('$formEvents')
+const formEvents = inject($formEvents)
 
 const props = defineProps({
   name: String,
@@ -25,7 +26,7 @@ const onClick = () => {
     formEvents.submit()
   }
   if (props.clickEvent === 'resetForm') {
-    formEvents.reset()
+    formEvents.resetFields()
   }
   if (props.clickEvent === 'custom') {
     props.customEvent()

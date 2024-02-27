@@ -1,5 +1,5 @@
 import { ElColorPicker } from 'element-plus'
-import { linkageAttr, basic, props } from '../commonAttr'
+import { linkageAttr, basicAttr, highAttr, mergeAttr } from '@/config/commonAttr'
 
 export default {
   name: '颜色选择器',
@@ -11,15 +11,13 @@ export default {
     label: '颜色选择器',
     component: 'ColorPicker'
   },
-  attr: [
-    ...basic,
-    { label: '初始值', component: 'ColorPicker', name: 'initialValue' },
-    {
-      label: 'props',
-      component: 'ItemGroup',
-      name: 'props',
-      children: [...props]
-    },
-    ...linkageAttr
-  ]
+  attr: mergeAttr({
+    basic: [
+      ...basicAttr(['props.readonly', 'props.placeholder']),
+      { label: '初始值', component: 'ColorPicker', name: 'initialValue' }
+    ],
+    high: highAttr(),
+
+    linkage: linkageAttr
+  })
 }

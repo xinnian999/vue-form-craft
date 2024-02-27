@@ -1,34 +1,47 @@
 <template>
-  <div :style="InlineStyle">
-    <FormRender v-model="value" :formItems="children" />
+  <div class="form-item-inline">
+    <DefaultCanvasWrapper
+      v-if="design"
+      :children="children"
+      :style="InlineStyle"
+      title="行内布局"
+      :name="name"
+    />
+
+    <div v-else :style="InlineStyle">
+      <FormRender :formItems="children" />
+    </div>
   </div>
 </template>
 
 <script setup>
-import { defineProps, defineEmits, computed } from 'vue'
-import useStyle from '@/hooks/useStyle'
-import { FormRender } from '@/components'
+import { defineProps, computed } from 'vue'
+import { FormRender, DefaultCanvasWrapper } from '@/components'
 
 const thisProps = defineProps({
-  modelValue: Object,
+  name: String,
   props: Object,
   children: Array,
-  design: Boolean,
-  gap: Number
+  design: Boolean
 })
 
-const InlineStyle = useStyle('Inline', thisProps.props)
-
-const emit = defineEmits(['update:modelValue'])
-
-const value = computed({
-  get() {
-    return thisProps.modelValue
-  },
-  set(val) {
-    emit('update:modelValue', val)
-  }
-})
+const InlineStyle = computed(() => ({
+  width: '100%',
+  display: 'flex',
+  'justify-content': thisProps.props.align,
+  'flex-wrap': thisProps.props.autoWrap ? 'wrap' : 'nowrap',
+  'overflow-x': 'auto',
+  gap: `${thisProps.props.gap}px`
+}))
 </script>
 
-<style></style>
+<style scoped lang="less">
+.form-item-inline {
+  .el-form-item {
+    margin-bottom: 0;
+  }
+  .el-form-item__content {
+    align-items: start;
+  }
+}
+</style>

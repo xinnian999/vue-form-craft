@@ -1,24 +1,26 @@
 <template>
   <div v-if="!currentOptions.length && !loading" style="font-size: 12px">暂无选项</div>
   <el-radio-group v-model="selectVal" @change="selectChange" v-loading="loading" v-bind="$attrs">
-    <template v-if="optionType === 'circle' || optionType === 'border'">
-      <el-radio
-        v-for="item in currentOptions"
-        :key="item[valueKey]"
-        :label="item[valueKey]"
-        :border="optionType === 'border'"
-        >{{ item[labelKey] }}</el-radio
-      >
-    </template>
+    <el-space wrap :direction="direction" :size="[space, space]" alignment="normal">
+      <template v-if="optionType === 'circle' || optionType === 'border'">
+        <el-radio
+          v-for="item in currentOptions"
+          :key="item[valueKey]"
+          :label="item[valueKey]"
+          :border="optionType === 'border'"
+          >{{ item[labelKey] }}</el-radio
+        >
+      </template>
 
-    <el-space v-if="optionType === 'button'" wrap :size="[space, space]">
-      <el-radio-button
-        v-for="item in currentOptions"
-        :key="item[valueKey]"
-        :label="item[valueKey]"
-        :size="$attrs.size"
-        >{{ item[labelKey] }}</el-radio-button
-      >
+      <template v-else>
+        <el-radio-button
+          v-for="item in currentOptions"
+          :key="item[valueKey]"
+          :label="item[valueKey]"
+          :size="$attrs.size"
+          >{{ item[labelKey] }}
+        </el-radio-button>
+      </template>
     </el-space>
   </el-radio-group>
 </template>
@@ -56,9 +58,14 @@ const props = defineProps({
     type: String,
     default: 'circle'
   },
+
+  direction: {
+    type: String,
+    default: 'horizontal'
+  },
   space: {
     type: Number,
-    default: 0
+    default: 20
   }
 })
 

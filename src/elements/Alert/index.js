@@ -6,11 +6,9 @@ export default {
   icon: 'alert',
   type: 'assist',
   order: 2,
-
   attr,
   initialValues: {
     component: 'Alert',
-    hideLabel: true,
     props: {
       title: '提示信息',
       type: 'info',

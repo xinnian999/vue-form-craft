@@ -33,7 +33,7 @@
   </template>
 </template>
 
-<script setup lang="jsx">
+<script setup>
 import { ref, computed, onMounted, defineOptions } from 'vue'
 import JsonEditorVue from 'json-editor-vue3'
 import { ElButton, ElDialog } from 'element-plus'
@@ -57,14 +57,15 @@ const props = defineProps({
   height: null,
   description: String,
   disabled: Boolean,
-  size: String
+  size: String,
+  initVal: null
 })
 
 const emits = defineEmits(['update:modelValue'])
 
 const json = computed({
   get() {
-    return props.modelValue
+    return props.modelValue || props.initVal
   },
   set(val) {
     emits('update:modelValue', val)

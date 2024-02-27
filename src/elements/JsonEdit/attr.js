@@ -1,27 +1,22 @@
-import { linkageAttr, basic, props } from '../commonAttr'
+import { linkageAttr, basicAttr, highAttr, mergeAttr } from '@/config/commonAttr'
 
-export default [
-  ...basic,
-  { label: '初始值', component: 'JsonEdit', name: 'initialValue' },
-  {
-    label: 'props',
-    component: 'ItemGroup',
-    name: 'props',
-    children: [
-      ...props,
-      {
-        label: '显示模式',
-        component: 'Radio',
-        name: 'mode',
-        props: {
-          mode: 'static',
-          options: [
-            { label: '直接显示', value: 'direct' },
-            { label: '弹窗', value: 'dialog' }
-          ]
-        }
+export default mergeAttr({
+  basic: [
+    ...basicAttr(['initialValue', 'props.readonly', 'props.placeholder']),
+    { label: '初始值', component: 'JsonEdit', name: 'initialValue' },
+    {
+      label: '显示模式',
+      component: 'Radio',
+      name: 'props.mode',
+      props: {
+        mode: 'static',
+        options: [
+          { label: '直接显示', value: 'direct' },
+          { label: '弹窗', value: 'dialog' }
+        ]
       }
-    ]
-  },
-  ...linkageAttr
-]
+    }
+  ],
+  high: highAttr(),
+  linkage: linkageAttr
+})

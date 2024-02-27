@@ -2,7 +2,7 @@
   <FormDesign v-bind="$attrs" :schema="remoteSchema" ref="formRef" />
 </template>
 
-<script setup lang="jsx">
+<script setup>
 import {
   ref,
   defineProps,
@@ -13,6 +13,7 @@ import {
   onMounted,
   getCurrentInstance
 } from 'vue'
+import { $global } from '@/config/symbol'
 
 defineOptions({
   name: 'RemoteFormDesign'
@@ -30,7 +31,7 @@ const remoteSchema = ref(null)
 
 const loading = ref(false)
 
-const { getSchema } = inject('$options')
+const { getSchema } = inject($global)
 
 onBeforeMount(async () => {
   if (props.schemaId) {

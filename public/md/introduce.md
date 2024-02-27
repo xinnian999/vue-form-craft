@@ -9,5 +9,5 @@ vue-form-craft是一款基于Vue 3.+的低代码表单，基于Element Plus UI�
 
 vue-form-craft主要由 **表单设计器FormDesign** 、 **表单渲染器SchemaForm**两部分构成。
 
-FormDesign通过拖拽组件方式生成JSON格式的表单配置，SchemaForm负责将表单JSON渲染为Vue组件。
+FormDesign通过拖拽生成JSON格式的表单配置，SchemaForm负责将表单JSON渲染为Vue组件。
 

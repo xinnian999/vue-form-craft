@@ -7,11 +7,14 @@ export default {
   icon: 'formList',
   type: 'high',
   order: 1,
-  isDefaultWrapper: true,
   initialValues: {
     label: '自增容器',
     component: 'FormList',
-    children: []
+    children: [],
+    props: {
+      mode: 'table'
+    }
+    // initialValue: []
   },
   attr
 }

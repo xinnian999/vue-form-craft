@@ -11,7 +11,7 @@
   />
 </template>
 
-<script setup lang="jsx">
+<script setup>
 import { defineProps, defineEmits, computed } from 'vue'
 import { ElCascader } from 'element-plus'
 import useSelect from '@/hooks/useSelect'
@@ -61,5 +61,5 @@ const value = computed({
   }
 })
 
-const { currentOptions, selectChange, loading } = useSelect(props, emits)
+const { currentOptions, loading } = useSelect(props, emits)
 </script>

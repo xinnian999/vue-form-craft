@@ -1,31 +1,19 @@
 <template>
   <ElCard v-bind="{ ...props, ...$attrs }">
-    <FormRender v-model="value" :formItems="children" />
-    <slot />
+    <CanvasWrapper :children="children" v-if="design" />
+    <FormRender :formItems="children" v-else />
   </ElCard>
 </template>
 
 <script setup>
-import { defineProps, defineEmits, computed } from 'vue'
+import { defineProps } from 'vue'
 import { ElCard } from 'element-plus'
-import { FormRender } from '@/components'
+import { FormRender, CanvasWrapper } from '@/components'
 
-const thisProps = defineProps({
-  modelValue: Object,
+defineProps({
   props: Object,
   children: Array,
   design: Boolean
-})
-
-const emit = defineEmits(['update:modelValue'])
-
-const value = computed({
-  get() {
-    return thisProps.modelValue
-  },
-  set(val) {
-    emit('update:modelValue', val)
-  }
 })
 </script>
 

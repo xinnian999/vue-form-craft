@@ -1,43 +1,45 @@
-import { optionAttr, basic, props } from '../commonAttr'
+import { optionAttr, linkageAttr, basicAttr, highAttr, mergeAttr } from '@/config/commonAttr'
 
-export default [
-  ...basic,
-  // { label: '初始值', component: 'Input', name: 'initialValue' },
-  {
-    label: 'props',
-    component: 'ItemGroup',
-    name: 'props',
-    children: [
-      ...props,
-      {
-        label: '自动选中第一项',
-        component: 'Switch',
-        name: 'autoSelectedFirst'
+export default mergeAttr({
+  basic: [
+    ...basicAttr(['props.readonly', 'props.placeholder', 'initialValue']),
+    {
+      label: '初始值',
+      component: 'JsonEdit',
+      name: 'initialValue',
+      props: {
+        mode: 'dialog',
+        initVal: []
+      }
+    },
+
+    {
+      label: '选项样式类型',
+      component: 'Radio',
+      name: 'props.optionType',
+      props: {
+        mode: 'static',
+        options: [
+          { label: '无边框', value: 'circle' },
+          { label: '边框', value: 'border' },
+          { label: '按钮', value: 'button' }
+        ]
       },
-      {
-        label: '选项样式类型',
-        component: 'Radio',
-        name: 'optionType',
-        props: {
-          mode: 'static',
-          options: [
-            { label: '无边框', value: 'circle' },
-            { label: '边框', value: 'border' },
-            { label: '按钮', value: 'button' }
-          ]
-        },
-        initialValue: 'circle'
-      },
-      {
-        label: '选项间距',
-        component: 'InputNumber',
-        name: 'space',
-        props: {
-          min: 0
-        },
-        initialValue: 0
-      },
-      ...optionAttr
-    ]
-  }
-]
+      initialValue: 'circle'
+    },
+
+    ...optionAttr
+  ],
+
+  high: [
+    ...highAttr(),
+    {
+      label: '自动选中第一项',
+      component: 'Switch',
+      name: 'props.autoSelectedFirst',
+      designKey: 'form-LPpx'
+    }
+  ],
+
+  linkage: linkageAttr
+})

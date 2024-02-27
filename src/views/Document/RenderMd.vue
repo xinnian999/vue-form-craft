@@ -9,13 +9,13 @@
   </div>
 </template>
 
-<script setup lang="jsx">
-import { watchEffect, ref } from 'vue'
+<script setup>
+import { watchEffect, ref, h } from 'vue'
 import axios from 'axios'
 import { useRoute } from 'vue-router'
-import caseForm from './case'
 import render from '@/render'
 import RenderForm from './RenderForm.vue'
+import template from '@/template'
 
 const route = useRoute()
 
@@ -31,9 +31,12 @@ watchEffect(async () => {
   scrollElement.value.scrollTop = 0
 
   setTimeout(() => {
-    Object.keys(caseForm).forEach((key) => {
-      const component = <RenderForm schema={caseForm[key]} />
-      render(component, `.${key}`)
+    template.forEach(({ schema, id }) => {
+      const component = h(RenderForm, { schema })
+      const el = document.querySelector(`.${id}`)
+      if (el) {
+        render(component, el)
+      }
     })
   }, 100)
 })

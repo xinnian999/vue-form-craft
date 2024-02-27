@@ -1,13 +1,11 @@
-import { linkageAttr, basic, props } from '../commonAttr'
+import { linkageAttr, basicAttr, highAttr, mergeAttr } from '@/config/commonAttr'
 
-export default [
-  ...basic,
-  { label: '初始值', component: 'Textarea', name: 'initialValue' },
-  {
-    label: 'props',
-    component: 'ItemGroup',
-    name: 'props',
-    children: [...props]
-  },
-  ...linkageAttr
-]
+export default mergeAttr({
+  basic: [
+    ...basicAttr(['props.readonly', 'props.placeholder', 'initialValue']),
+    { label: '初始值', component: 'Textarea', name: 'initialValue' }
+  ],
+  high: highAttr(),
+
+  linkage: linkageAttr
+})

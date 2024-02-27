@@ -8,13 +8,13 @@ export default {
   component: Grid,
   order: 3,
 
-  isDefaultWrapper: true,
   initialValues: {
     component: 'Grid',
     children: [],
     props: {
-      colCount: 2,
-      space: 20
+      columns: 2,
+      'column-gap': 20,
+      'row-gap': 20
     }
   },
   attr

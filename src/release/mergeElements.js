@@ -19,26 +19,7 @@ const handle = (customElements) => {
         ...value,
         component: customData.component,
         modelName: customData.modelName || 'modelValue',
-        attr: customData.propAttrs
-          ? value.attr.map((item) =>
-              item.name === 'props'
-                ? {
-                    ...item,
-                    children: [
-                      {
-                        component: 'Divider',
-                        props: {
-                          title: 'Props',
-                          contentPosition: 'center'
-                        },
-                        name: 'VekeRi'
-                      },
-                      ...customData.propAttrs
-                    ]
-                  }
-                : item
-            )
-          : value.attr
+        attr: customData.attrs || value.attr
       })
     }
 
