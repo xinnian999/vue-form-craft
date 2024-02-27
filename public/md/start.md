@@ -3,11 +3,9 @@
 ### 安装
 
 ```js
+
 npm i vue-form-craft
-//或
-yarn add vue-form-craft
-//或
-pnpm i vue-form-craft
+
 ```
 
 ### 全局注册
@@ -27,7 +25,7 @@ app.mount('#app')
 
 ```vue
 <template>
-  <schema-form :schema="schema" @onFinish="onFinish" />
+  <schema-form :schema="schema" footer @onFinish="onFinish" />
 </template>
 
 <script setup>
@@ -51,13 +49,6 @@ const schema = {
         placeholder: '请输入密码'
       },
       name: 'password'
-    },
-    {
-      component: 'Button',
-      props: {
-        name: '提交',
-        clickEvent: 'submitForm'
-      },
     }
   ]
 }
@@ -69,3 +60,11 @@ const onFinish = (values) => {
 
 ```
 
+
+### 通过表单设计器拖拖拽拽 快速生成JsonSchema
+
+```vue
+<template>
+  <form-design @onSave="(schema) => console.log(schema)" />
+</template>
+```

@@ -16,7 +16,6 @@
 * 可视化设计表单
 * 支持三十多种的表单组件(el所有表单组件、内置组件)
 * 支持收集Array数据（自增组件）
-* 支持收集Object数据（字段组合）
 * 用法简单，又非常高效的表单联动
 * 可预览生成的json配置
 * 可预览生成的VUE组件
@@ -31,9 +30,7 @@
 * element-ui
 * json-editor-vue3
 * codemirror
-* codemirror-editor-vue3
 * lodash
-* editor-for-vue
 * md-editor-v3
 
 ## 使用

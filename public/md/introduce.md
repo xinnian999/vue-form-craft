@@ -11,3 +11,11 @@ vue-form-craft主要由 **表单设计器FormDesign** 、 **表单渲染器Schem
 
 FormDesign通过拖拽生成JSON格式的表单配置，SchemaForm负责将表单JSON渲染为Vue组件。
 
+
+## 关于
+
++ 作者：Elin
++ 联系方式：17803000829
++ github: [github源码](https://github.com/xinnian999/vue-form-craft) 
+
+
