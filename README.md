@@ -7,9 +7,12 @@
 
 * [在线预览](https://hyl999.co:86/formDesign)
 * [官方文档](https://hyl999.co:86/)
-
+* 作者：Elin
+* 联系方式：17803000829
 
 ![ui](./src/assets/ui.png)
+
+
 
 ## 特性
 
