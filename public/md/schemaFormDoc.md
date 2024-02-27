@@ -8,7 +8,7 @@ SchemaForm 是 vue-form-craft 的渲染组件。
 
 | 参数名        | 类型    | 默认值  | 是否必传 | 描述                                               |
 | ------------- | ------- | ------- | -------- | -------------------------------------------------- |
-| v-model       | object  | ref({}) | No       | 表单数据对象，可用于表单值回显等操作，可不传       |
+| v-model       | object  | ref({}) | No       | 表单数据对象，可用于设置表单值初始值等操作，可不传 |
 | schema        | object  | ——      | No       | 表单Schema配置，纯JSON，用于描述表单结构           |
 | schemaContext | object  | {}      | No       | 表单Schema，自定义的 [联动变量](/document/linkage) |
 | footer        | Boolean | false   | No       | 显示表单底部提交按钮                               |
