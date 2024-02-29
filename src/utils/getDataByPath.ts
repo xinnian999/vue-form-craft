@@ -1,4 +1,4 @@
-const getDataByPath = (obj, path) => {
+const getDataByPath = (obj: formValuesType, path: string) => {
   // 使用正则表达式分割路径字符串
   const keys = path.split('.')
 

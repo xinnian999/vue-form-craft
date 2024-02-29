@@ -14,7 +14,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useRoute } from 'vue-router'
 import { ElMenu, ElMenuItem } from 'element-plus'
 import { routes } from '@/router'

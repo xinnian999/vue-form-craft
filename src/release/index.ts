@@ -7,11 +7,12 @@ import * as Directives from '@/directive'
 import 'element-plus/dist/index.css'
 import mergeElements from './mergeElements'
 import customIconSelect from './customIconSelect'
+import type { App } from 'vue'
 
 const components = [SchemaForm, FormDesign, RemoteSchemaForm, RemoteFormDesign, IconRender] // 全局组件列表
 
-const install = function (app, options = {}) {
-  const { request = axios, getSchema, customElements = {}, iconSelectConfig = {} } = options
+const install = function (app: App<Element>, options: $globalType) {
+  const { request = axios, getSchema, customElements = {}, iconSelectConfig } = options
 
   app.provide($global, {
     request,
@@ -30,4 +31,4 @@ const install = function (app, options = {}) {
 
 export default { install }
 
-export { mergeAttr, basicAttr }
+export { mergeAttr, basicAttr, FormDesign, SchemaForm }

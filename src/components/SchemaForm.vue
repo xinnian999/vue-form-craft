@@ -18,7 +18,7 @@
   </el-form>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {
   ref,
   defineProps,
@@ -31,6 +31,7 @@ import {
   defineOptions
 } from 'vue'
 import { ElForm } from 'element-plus'
+import type { FormInstance } from 'element-plus'
 import { handleLinkages, deepParse, setDataByPath, getDataByPath } from '@/utils'
 import FormRender from './FormRender.vue'
 import FormItem from './FormItem.vue'
@@ -42,7 +43,7 @@ defineOptions({
   name: 'SchemaForm'
 })
 
-const formRef = ref(null)
+const formRef = ref<FormInstance>()
 
 const props = defineProps({
   // 表单数据源，双向绑定
@@ -92,7 +93,7 @@ const formItems = computed(() => deepParse(props.schema.items || [], context.val
 // 保持schema的响应 传递给后代使用
 const currentSchema = computed(() => props.schema)
 
-const validate = () => formRef.value.validate()
+const validate = () => formRef.value?.validate()
 
 const submit = async () => {
   try {
@@ -106,11 +107,11 @@ const submit = async () => {
 }
 
 const getFormValues = () => ({ ...formValues.value })
-const setFormValues = (values) => {
+const setFormValues = (values: anyObject) => {
   formValues.value = { ...formValues.value, ...values }
 }
 
-const resetFields = (names) => {
+const resetFields = (names: string[]) => {
   if (names) {
     let temp = cloneDeep(formValues.value)
     names.forEach((name) => {
@@ -136,12 +137,15 @@ watch(initialValues, (newVal) => {
 })
 
 provide($schema, currentSchema)
-provide($formValues, { formValues, updateFormValues: (values) => (formValues.value = values) })
+provide($formValues, {
+  formValues,
+  updateFormValues: (values: anyObject) => (formValues.value = values)
+})
 provide($selectData, selectData)
 provide($formEvents, { submit, validate, getFormValues, setFormValues, resetFields })
 provide($initialValues, {
   initialValues,
-  updateInitialValues: (values) => Object.assign(initialValues, values)
+  updateInitialValues: (values: anyObject) => Object.assign(initialValues, values)
 })
 
 defineExpose({ submit, validate, getFormValues, setFormValues, resetFields, context })

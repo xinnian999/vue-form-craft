@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import router from './router'
-// import VueFormCraft from '../dist/vue-form-craft.mjs'
-import VueFormCraft, { mergeAttr, basicAttr } from './release/index'
+import VueFormCraft from '../dist/vue-form-craft.mjs'
+// import VueFormCraft, { mergeAttr, basicAttr } from './release/index'
 import { request } from '@/utils'
 import { MdPreview, MdCatalog, MdEditor } from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
@@ -9,10 +9,11 @@ import 'md-editor-v3/lib/style.css'
 // import { Switch, Input, Textarea, InputNumber } from '@arco-design/web-vue'
 // import 'ant-design-vue/dist/resetFields.css'
 import { Switch, Input, Textarea, InputNumber } from 'ant-design-vue'
+import type { Component } from 'vue'
 
 const components = [MdPreview, MdCatalog, MdEditor] // 全局组件列表
 
-const render = (component, dom) => {
+const render = (component: Component, dom: string | Element) => {
   const app = createApp(component)
 
   app.use(router)

@@ -31,4 +31,4 @@ export default {
   },
   designKey: 'design-2NnI',
   name: 'form-dxYP'
-}
+} as formItemType

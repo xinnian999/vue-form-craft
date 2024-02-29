@@ -1,4 +1,7 @@
-const recursionDelete = (items, callback) => {
+const recursionDelete = (
+  items: formItemsType,
+  callback: (item: formItemType) => boolean
+): formItemsType => {
   const data = items.filter(callback)
 
   return data.map((item) => {

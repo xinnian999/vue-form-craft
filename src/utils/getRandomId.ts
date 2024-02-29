@@ -1,5 +1,5 @@
 //可指定长度，生成随机id
-const getRandomId = (length) => {
+const getRandomId = (length: number) => {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
   let randomId = ''
 
