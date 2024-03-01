@@ -1,5 +1,3 @@
-// import { AxiosInstance } from 'axios'
-
 type anyObject = { [key: string]: any }
 
 type formValuesType = anyObject
@@ -61,8 +59,8 @@ type formElement = {
 type iconSelectConfigType = { component?: any; propKey?: string; iconList?: string[] }
 
 type $globalType = {
-  request?: AxiosInstance
-  getSchema?: (schemaId: string) => Promise
+  request?: any
+  getSchema?: (schemaId: string) => Promise<schemaType>
   elements?: { [key: string]: formElement }
   iconSelectConfig?: iconSelectConfigType
   customElements?: { [key: string]: formElement }

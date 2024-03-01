@@ -1,17 +1,24 @@
-import axios from 'axios'
+import axios, { type AxiosInstance } from 'axios'
 import { SchemaForm, RemoteSchemaForm, RemoteFormDesign, FormDesign } from '@/components'
 import IconRender from '@/components/IconRender.vue'
 import { $global } from '@/config/symbol'
-import { mergeAttr, basicAttr } from '@/config/commonAttr'
 import * as Directives from '@/directive'
 import 'element-plus/dist/index.css'
 import mergeElements from './mergeElements'
 import customIconSelect from './customIconSelect'
 import type { App } from 'vue'
 
+type $optionsType = {
+  request?: AxiosInstance
+  getSchema?: (schemaId: string) => Promise<schemaType>
+  elements?: { [key: string]: formElement }
+  iconSelectConfig?: iconSelectConfigType
+  customElements?: { [key: string]: formElement }
+}
+
 const components = [SchemaForm, FormDesign, RemoteSchemaForm, RemoteFormDesign, IconRender] // 全局组件列表
 
-const install = function (app: App<Element>, options: $globalType) {
+const install = function (app: App<Element>, options: $optionsType) {
   const { request = axios, getSchema, customElements = {}, iconSelectConfig } = options
 
   app.provide($global, {
@@ -31,4 +38,4 @@ const install = function (app: App<Element>, options: $globalType) {
 
 export default { install }
 
-export { mergeAttr, basicAttr, FormDesign, SchemaForm }
+export { FormDesign, SchemaForm }
