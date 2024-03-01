@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import router from './router'
 // import VueFormCraft from './dist/vue-form-craft.mjs'
-// import VueFormCraft from '../dist/vue-form-craft.mjs'
+
 import VueFormCraft, { mergeAttr, basicAttr } from './release/index'
 import { request } from '@/utils'
 import { MdPreview, MdCatalog, MdEditor } from 'md-editor-v3'

@@ -9,7 +9,7 @@
   <button @click="resetName">重置姓名</button>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 
 const formRef = ref()

@@ -5,13 +5,20 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
 import libCss from 'vite-plugin-libcss'
+import dts from 'vite-plugin-dts'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd())
 
   const config = {
-    plugins: [vue(), vueJsx(), viteCommonjs(), libCss()],
+    plugins: [
+      vue(),
+      dts({ outDir: './dist/types', rollupTypes: false, include: [] }),
+      vueJsx(),
+      viteCommonjs(),
+      libCss()
+    ],
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url))
