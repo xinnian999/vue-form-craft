@@ -1,20 +1,20 @@
-type anyObject = { [key: string]: any }
+declare type anyObject = { [key: string]: any }
 
-type formValuesType = anyObject
+declare type formValuesType = anyObject
 
-type contextType = {
+declare type contextType = {
   $values: formValuesType
   $selectData: formValuesType
   $initialValues: formValuesType
   [key: string]: any
 }
 
-type changeItemType = {
+declare type changeItemType = {
   target: string
   value: any
 }
 
-interface formItemType {
+declare interface formItemType {
   label: string
   name: string
   component: string

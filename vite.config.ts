@@ -6,7 +6,6 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
 import libCss from 'vite-plugin-libcss'
 import dts from 'vite-plugin-dts'
-import dtsCopy from './vite-plugin-dtsCopy.ts'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -20,7 +19,6 @@ export default defineConfig(({ mode }) => {
         rollupTypes: false
         // include: ['src/release/**/*', 'src/components/**/*']
       }),
-      dtsCopy(),
       vueJsx(),
       viteCommonjs(),
       libCss()

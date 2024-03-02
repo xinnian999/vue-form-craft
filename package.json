@@ -30,6 +30,7 @@
     "lodash": "^4.17.21",
     "md-editor-v3": "^4.10.0",
     "vue": "^3.3.11",
+    "vue-form-craft": "^3.0.1",
     "vue-router": "^4.2.5",
     "vuedraggable-es": "^4.1.1"
   },
@@ -57,7 +58,8 @@
     "vue-tsc": "^1.8.27"
   },
   "files": [
-    "dist"
+    "dist",
+    "global.d.ts"
   ],
   "main": "./dist/vue-form-craft.mjs",
   "module": "./dist/vue-form-craft.mjs",
