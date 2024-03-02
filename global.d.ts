@@ -3,3 +3,5 @@ declare module '@vue/runtime-core' {
     SchemaForm: (typeof import('vue-form-craft'))['SchemaForm']
   }
 }
+
+export {}
