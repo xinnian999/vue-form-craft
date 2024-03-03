@@ -14,11 +14,11 @@ import { ref } from 'vue'
 
 const formRef = ref()
 
-const onFinish = (values) => {
+const onFinish = (values: anyObject) => {
   alert(JSON.stringify(values))
 }
 
-const onFinishFailed = (e) => {
+const onFinishFailed = (e: anyObject) => {
   console.log(e)
 }
 
@@ -26,7 +26,7 @@ const resetName = () => {
   formRef.value.resetFields(['name'])
 }
 
-const schema = {
+const schema: schemaType = {
   labelWidth: 150,
   labelAlign: 'right',
   size: 'default',

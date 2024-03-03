@@ -15,22 +15,22 @@ declare type changeItemType = {
 }
 
 declare interface formItemType {
-  label: string
+  label?: string
   name: string
   component: string
-  required: boolean
-  props: object
-  initialValue: any
-  help: string
-  children: formItemType[]
-  hidden: boolean | string
-  hideLabel: boolean
-  designKey: string
-  rules: any[]
-  class: any
-  style: any
-  design: boolean
-  change: changeItemType[]
+  required?: boolean
+  props?: object
+  initialValue?: any
+  help?: string
+  children?: formItemType[]
+  hidden?: boolean | string
+  hideLabel?: boolean
+  designKey?: string
+  rules?: any[]
+  class?: any
+  style?: any
+  design?: boolean
+  change?: changeItemType[]
 }
 
 type formItemsType = formItemType[]

@@ -28,7 +28,8 @@ import {
   reactive,
   provide,
   watch,
-  defineOptions
+  defineOptions,
+  watchEffect
 } from 'vue'
 import { ElForm } from 'element-plus'
 import type { FormInstance } from 'element-plus'
@@ -43,27 +44,28 @@ defineOptions({
   name: 'SchemaForm'
 })
 
+const props = defineProps<
+  Readonly<{
+    modelValue?: anyObject
+    schema: schemaType
+    schemaContext?: anyObject
+    design?: boolean
+    footer?: boolean
+  }>
+>()
+
+// watchEffect(() => {
+//   console.log(props.footer)
+// })
+
+const emit = defineEmits<{
+  'update:modelValue': [values: anyObject]
+  onChange: [values: anyObject]
+  onFinish: [values: anyObject]
+  onFinishFailed: [e: anyObject]
+}>()
+
 const formRef = ref<FormInstance>()
-
-const props = defineProps({
-  // 表单数据源，双向绑定
-  modelValue: {
-    type: Object
-  },
-  // 表单JSON配置
-  schema: {
-    type: Object,
-    default: () => ({ labelWidth: 150, labelAlign: 'right', size: 'default', items: [] })
-  },
-  schemaContext: {
-    type: Object,
-    default: () => ({})
-  },
-  design: Boolean,
-  footer: Boolean
-})
-
-const emit = defineEmits(['update:modelValue', 'onFinish', 'onFinishFailed', 'onChange'])
 
 const selectData = reactive({})
 
