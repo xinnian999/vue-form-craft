@@ -14,11 +14,11 @@ import { ref } from 'vue'
 
 const formRef = ref()
 
-const onFinish = (values: anyObject) => {
+const onFinish = (values: { [key: string]: any }) => {
   alert(JSON.stringify(values))
 }
 
-const onFinishFailed = (e: anyObject) => {
+const onFinishFailed = (e: { [key: string]: any }) => {
   console.log(e)
 }
 

@@ -15,7 +15,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, provide, computed, defineProps, defineEmits, defineOptions, watchEffect } from 'vue'
 import { recursionDelete } from '@/utils'
 import Menus from './Menus/index.vue'
@@ -29,21 +29,20 @@ defineOptions({
   name: 'FormDesign'
 })
 
-const props = defineProps({
-  schema: Object,
-  previewSchemaContext: {
-    type: Object,
-    default: () => ({})
-  }
-})
+const props = defineProps<{
+  schema: schemaType
+  previewSchemaContext: anyObject
+}>()
 
-const emit = defineEmits(['onSave'])
+const emit = defineEmits<{
+  onSave: [schema: schemaType]
+}>()
 
 const currentKey = ref('')
 
-const hoverKey = ref(null)
+const hoverKey = ref<string>('')
 
-const currentSchema = ref({
+const currentSchema = ref<schemaType>({
   labelWidth: 150,
   labelAlign: 'right',
   size: 'default',
@@ -75,17 +74,20 @@ watchEffect(() => {
   }
 })
 
-provide($schema, { schema: currentSchema, updateSchema: (json) => (currentSchema.value = json) })
-provide($current, { current, updateCurrent: (data) => (current.value = data) })
-provide($hoverKey, { hoverKey, updateHoverKey: (key) => (hoverKey.value = key) })
+provide($schema, {
+  schema: currentSchema,
+  updateSchema: (json: schemaType) => (currentSchema.value = json)
+})
+provide($current, { current, updateCurrent: (data: formItemType) => (current.value = data) })
+provide($hoverKey, { hoverKey, updateHoverKey: (key: string) => (hoverKey.value = key) })
 provide($methods, {
   onAdd: () => {
     list.value = changeItems(list.value)
   },
-  handleDeleteItem: (element) => {
+  handleDeleteItem: (element: formItemType) => {
     list.value = recursionDelete(list.value, (item) => item.designKey !== element.designKey)
   },
-  handleCopyItem: (element) => {
+  handleCopyItem: (element: formItemType) => {
     list.value = copyItems(list.value, element.designKey)
   },
   handleSave: () => {

@@ -28,8 +28,7 @@ import {
   reactive,
   provide,
   watch,
-  defineOptions,
-  watchEffect
+  defineOptions
 } from 'vue'
 import { ElForm } from 'element-plus'
 import type { FormInstance } from 'element-plus'
