@@ -1,6 +1,5 @@
 import { createApp } from 'vue'
 import router from './router'
-// import VueFormCraft from './dist/vue-form-craft.mjs'
 import VueFormCraft from './release/index'
 import { request } from '@/utils'
 import { MdPreview, MdCatalog, MdEditor } from 'md-editor-v3'
@@ -26,32 +25,6 @@ const render = (component: Component, dom: string | Element) => {
       })
       return JSON.parse(data[0].formSchema)
     }
-    // iconSelectConfig: { component: IconRender, propKey: 'name' }
-    // customElements: {
-    //   Input: {
-    //     component: Input,
-    //     modelName: 'value'
-    //   },
-    //   Switch: {
-    //     component: Switch,
-    //     modelName: 'checked',
-    //     attrs: mergeAttr({
-    //       basic: basicAttr(),
-    //       high: [
-    //         { label: '打开时描述', component: 'Input', name: 'checked-text' },
-    //         { label: '关闭时描述', component: 'Input', name: 'unchecked-text' }
-    //       ]
-    //     })
-    //   },
-    //   Textarea: {
-    //     component: Textarea,
-    //     modelName: 'value'
-    //   },
-    //   InputNumber: {
-    //     component: InputNumber,
-    //     modelName: 'value'
-    //   }
-    // }
   })
 
   // 注册组件
