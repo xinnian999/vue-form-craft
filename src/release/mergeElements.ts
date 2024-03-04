@@ -1,3 +1,4 @@
+import type { formElement } from '@/config/commonType'
 import elements from '@/elements'
 
 const handle = (customElements: { [key: string]: formElement }) => {

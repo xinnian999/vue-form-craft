@@ -37,6 +37,7 @@ import FormRender from './FormRender.vue'
 import FormItem from './FormItem.vue'
 import { cloneDeep, merge } from 'lodash'
 import footerSchema from '@/config/footerSchema'
+import type { anyObject, schemaType } from '@/config/commonType'
 import { $schema, $formValues, $selectData, $formEvents, $initialValues } from '@/config/symbol'
 
 defineOptions({
@@ -101,7 +102,7 @@ const submit = async () => {
     await validate()
     emit('onFinish', formValues.value)
     return formValues.value
-  } catch (e) {
+  } catch (e: any) {
     emit('onFinishFailed', e)
     return Promise.reject(e)
   }

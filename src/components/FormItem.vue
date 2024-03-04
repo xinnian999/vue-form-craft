@@ -54,6 +54,13 @@ import { isString } from 'lodash'
 import { isRegexString, getDataByPath, setDataByPath } from '@/utils'
 import { $global, $schema, $formValues, $initialValues } from '@/config/symbol'
 import defaultSchema from '@/config/defaultSchema'
+import type {
+  formItemType,
+  changeItemType,
+  schemaType,
+  anyObject,
+  $globalType
+} from '@/config/commonType'
 import defaultElements from '@/elements'
 
 type FormItemProps = {

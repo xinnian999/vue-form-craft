@@ -1,5 +1,6 @@
 import { isString, isPlainObject, isArray } from 'lodash'
 import getDataByPath from './getDataByPath'
+import type { contextType } from '@/config/commonType'
 
 //模板转换函数，将一个由双大括号包裹的字符串，转化为js表达式并返回结果（context限制变量范围）
 const templateParse = (str: string, context: contextType) => {

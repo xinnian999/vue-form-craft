@@ -1,20 +1,20 @@
-declare type anyObject = { [key: string]: any }
+type anyObject = { [key: string]: any }
 
-declare type formValuesType = anyObject
+type formValuesType = anyObject
 
-declare type contextType = {
+type contextType = {
   $values: formValuesType
   $selectData: formValuesType
   $initialValues: formValuesType
   [key: string]: any
 }
 
-declare type changeItemType = {
+type changeItemType = {
   target: string
   value: any
 }
 
-declare interface formItemType {
+interface formItemType {
   label?: string
   name: string
   component: string
@@ -64,4 +64,17 @@ type $globalType = {
   elements?: { [key: string]: formElement }
   iconSelectConfig?: iconSelectConfigType
   customElements?: { [key: string]: formElement }
+}
+
+export type {
+  anyObject,
+  schemaType,
+  formValuesType,
+  contextType,
+  formItemType,
+  formItemsType,
+  formElement,
+  changeItemType,
+  $globalType,
+  iconSelectConfigType
 }

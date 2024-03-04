@@ -70,7 +70,7 @@ const infos = [
   }
 ]
 
-const goLink = (link) => {
+const goLink = (link: string) => {
   if (link.includes('http')) {
     window.open(link)
   } else {

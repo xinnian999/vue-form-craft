@@ -1,4 +1,6 @@
-const getDataByPath = (obj: formValuesType, path: string) => {
+import type { anyObject } from '@/config/commonType'
+
+const getDataByPath = (obj: anyObject, path: string) => {
   // 使用正则表达式分割路径字符串
   const keys = path.split('.')
 

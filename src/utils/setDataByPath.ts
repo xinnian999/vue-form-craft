@@ -1,4 +1,5 @@
 import { cloneDeep } from 'lodash'
+import type { formValuesType } from '@/config/commonType'
 
 const setDataByPath = (object: formValuesType, path: string, value: any) => {
   const cloneObj = cloneDeep(object)

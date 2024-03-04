@@ -24,14 +24,15 @@ import Current from './Current/index.vue'
 import Actions from './Actions.vue'
 import { getCurrentByKey, setCurrentByKey, changeItems, copyItems } from './utils'
 import { $schema, $current, $methods, $hoverKey } from '@/config/symbol'
+import type { schemaType, anyObject, formItemType } from '@/config/commonType'
 
 defineOptions({
   name: 'FormDesign'
 })
 
 const props = defineProps<{
-  schema: schemaType
-  previewSchemaContext: anyObject
+  schema?: schemaType
+  previewSchemaContext?: anyObject
 }>()
 
 const emit = defineEmits<{

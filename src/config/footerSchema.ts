@@ -1,3 +1,5 @@
+import type { formItemType } from '@/config/commonType'
+
 export default {
   component: 'Inline',
   children: [

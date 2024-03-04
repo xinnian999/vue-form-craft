@@ -10,6 +10,7 @@
 </template>
 
 <script setup lang="ts">
+import type { schemaType } from '@/config/commonType'
 import { ref } from 'vue'
 
 const formRef = ref()

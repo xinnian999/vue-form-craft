@@ -4,6 +4,7 @@
 
 <script setup lang="ts">
 import { defineProps } from 'vue'
+import type { formItemsType } from '@/config/commonType'
 import FormItem from './FormItem.vue'
 
 defineProps<{

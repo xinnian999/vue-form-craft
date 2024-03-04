@@ -1,4 +1,5 @@
 import IconRender from '@/components/IconRender.vue'
+import type { iconSelectConfigType } from '@/config/commonType'
 
 const icons = import.meta.glob('@/icons/*.vue', { eager: true })
 

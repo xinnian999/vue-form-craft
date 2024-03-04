@@ -7,6 +7,7 @@ import 'element-plus/dist/index.css'
 import mergeElements from './mergeElements'
 import customIconSelect from './customIconSelect'
 import type { App } from 'vue'
+import type { formElement, schemaType, iconSelectConfigType } from '@/config/commonType'
 
 type $optionsType = {
   request?: AxiosInstance

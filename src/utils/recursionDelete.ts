@@ -1,3 +1,5 @@
+import type { formItemType, formItemsType } from '@/config/commonType'
+
 const recursionDelete = (
   items: formItemsType,
   callback: (item: formItemType) => boolean

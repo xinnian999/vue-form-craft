@@ -10,7 +10,6 @@
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
-    "build-type": "run-p type-check \"build-only {@}\" --",
     "type-check": "vue-tsc --build --force",
     "release": "pnpm build --mode release",
     "build:release": "npm run release&& npm version patch && npm publish",
