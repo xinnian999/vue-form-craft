@@ -50,7 +50,7 @@ const install = function (app: App<Element>, options: $optionsType = {}) {
 
 export default { install }
 
-export { FormDesign, SchemaForm }
+export { FormDesign, SchemaForm, RemoteSchemaForm, RemoteFormDesign }
 
 export type {
   anyObject,
