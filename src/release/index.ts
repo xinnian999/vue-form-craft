@@ -30,7 +30,7 @@ type $optionsType = {
 
 const components = [SchemaForm, FormDesign, RemoteSchemaForm, RemoteFormDesign, IconRender] // 全局组件列表
 
-const install = function (app: App<Element>, options: $optionsType) {
+const install = function (app: App<Element>, options: $optionsType = {}) {
   const { request = axios, getSchema, customElements = {}, iconSelectConfig } = options
 
   app.provide($global, {
