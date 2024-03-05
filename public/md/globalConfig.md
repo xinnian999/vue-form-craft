@@ -100,7 +100,7 @@ app.mount('#app')
 
 而其他参数不一样的问题，可以选择二次封装将组件的props都封装符合el参数格式的组件，再传给customElements
 
-也可以通过**attrs**来自行配置每个字段的**字段配置**，和JsonSchema的items配置一样，配置成符合对应组件库参数的attr表单
+也可以通过**attr**来自行配置每个字段的**字段配置**，和JsonSchema的items配置一样，配置成符合对应组件库参数的attr表单
 
 ```js
  Switch: {

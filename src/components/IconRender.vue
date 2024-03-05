@@ -2,7 +2,7 @@
   <component id="icon-render" :is="icon" v-bind="$attrs" />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineProps, shallowRef, defineOptions, watchEffect } from 'vue'
 
 defineOptions({

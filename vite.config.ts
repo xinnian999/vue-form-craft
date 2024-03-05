@@ -5,13 +5,24 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
 import libCss from 'vite-plugin-libcss'
+import dts from 'vite-plugin-dts'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd())
 
   const config = {
-    plugins: [vue(), vueJsx(), viteCommonjs(), libCss()],
+    plugins: [
+      vue(),
+      dts({
+        outDir: './dist/types',
+        rollupTypes: false
+        // include: ['src/release/**/*', 'src/components/**/*']
+      }),
+      vueJsx(),
+      viteCommonjs(),
+      libCss()
+    ],
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url))
@@ -29,7 +40,7 @@ export default defineConfig(({ mode }) => {
       ...config,
       build: {
         lib: {
-          entry: fileURLToPath(new URL('./src/release/index.js', import.meta.url)), //指定组件编译入口文件
+          entry: fileURLToPath(new URL('./src/release/index.ts', import.meta.url)), //指定组件编译入口文件
           name: 'vue-form-craft', // 包名
           fileName: 'vue-form-craft' // 打包文件名
         },
@@ -42,8 +53,8 @@ export default defineConfig(({ mode }) => {
               vue: 'Vue'
             }
           }
-        },
-        sourcemap: true
+        }
+        // sourcemap: true
       }
     }
   }

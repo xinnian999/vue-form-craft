@@ -1,4 +1,9 @@
-const recursionDelete = (items, callback) => {
+import type { formItemType, formItemsType } from '@/config/commonType'
+
+const recursionDelete = (
+  items: formItemsType,
+  callback: (item: formItemType) => boolean
+): formItemsType => {
   const data = items.filter(callback)
 
   return data.map((item) => {

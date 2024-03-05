@@ -1,3 +1,5 @@
+import type { formItemType } from '@/config/commonType'
+
 export default {
   component: 'Inline',
   children: [
@@ -31,4 +33,4 @@ export default {
   },
   designKey: 'design-2NnI',
   name: 'form-dxYP'
-}
+} as formItemType

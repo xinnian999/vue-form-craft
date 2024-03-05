@@ -1,16 +1,8 @@
-const modules = import.meta.glob('@/elements/*/index.js', { eager: true })
+import type { formElement } from '@/config/commonType'
+import elements from '@/elements'
 
-const elements = {}
-for (const path in modules) {
-  const data = modules[path].default
-
-  if (data) {
-    elements[data.initialValues.component] = data
-  }
-}
-
-const handle = (customElements) => {
-  const mergeElements = {}
+const handle = (customElements: { [key: string]: formElement }) => {
+  const mergeElements: { [key: string]: formElement } = {}
 
   Object.entries(elements).forEach(([key, value]) => {
     const customData = customElements[key]
@@ -19,7 +11,7 @@ const handle = (customElements) => {
         ...value,
         component: customData.component,
         modelName: customData.modelName || 'modelValue',
-        attr: customData.attrs || value.attr
+        attr: customData.attr || value.attr
       })
     }
 

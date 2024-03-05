@@ -9,16 +9,17 @@
   <button @click="resetName">重置姓名</button>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import type { schemaType } from '@/config/commonType'
 import { ref } from 'vue'
 
 const formRef = ref()
 
-const onFinish = (values) => {
+const onFinish = (values: { [key: string]: any }) => {
   alert(JSON.stringify(values))
 }
 
-const onFinishFailed = (e) => {
+const onFinishFailed = (e: { [key: string]: any }) => {
   console.log(e)
 }
 
@@ -26,7 +27,7 @@ const resetName = () => {
   formRef.value.resetFields(['name'])
 }
 
-const schema = {
+const schema: schemaType = {
   labelWidth: 150,
   labelAlign: 'right',
   size: 'default',

@@ -29,7 +29,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { ElButton, ElRow, ElCol } from 'element-plus'
 
@@ -70,7 +70,7 @@ const infos = [
   }
 ]
 
-const goLink = (link) => {
+const goLink = (link: string) => {
   if (link.includes('http')) {
     window.open(link)
   } else {

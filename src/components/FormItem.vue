@@ -47,39 +47,60 @@
   </template>
 </template>
 
-<script setup>
-import { computed, defineProps, inject, onMounted } from 'vue'
+<script setup lang="ts">
+import { computed, defineProps, inject, onMounted, ref } from 'vue'
 import { ElFormItem, ElTooltip } from 'element-plus'
 import { isString } from 'lodash'
 import { isRegexString, getDataByPath, setDataByPath } from '@/utils'
 import { $global, $schema, $formValues, $initialValues } from '@/config/symbol'
+import defaultSchema from '@/config/defaultSchema'
+import type {
+  formItemType,
+  changeItemType,
+  schemaType,
+  anyObject,
+  $globalType
+} from '@/config/commonType'
+import defaultElements from '@/elements'
 
-const thisProps = defineProps({
-  label: String,
-  name: String,
-  component: String,
-  required: Boolean,
-  props: Object,
-  initialValue: null,
-  style: Object,
-  help: String,
-  children: Array,
-  hidden: [Boolean, String],
-  hideLabel: Boolean,
-  designKey: String,
-  rules: Array,
-  class: null,
-  design: Boolean,
-  change: Array
+type FormItemProps = {
+  label?: string
+  name: string
+  component: string
+  required?: boolean
+  props?: object
+  initialValue?: any
+  help?: string
+  children?: formItemType[]
+  hidden?: boolean | string
+  hideLabel?: boolean
+  designKey?: string
+  rules?: any[]
+  class?: any
+  style?: any
+  design?: boolean
+  change?: changeItemType[]
+}
+
+const thisProps = defineProps<FormItemProps>()
+
+const { elements = {} } = inject<$globalType>($global, { elements: defaultElements })
+
+const schema = inject<schemaType>($schema, defaultSchema)
+
+const { formValues, updateFormValues } = inject($formValues, {
+  formValues: ref({}),
+  updateFormValues: (values: anyObject) => {
+    console.log(values)
+  }
 })
 
-const { elements } = inject($global)
-
-const schema = inject($schema)
-
-const { formValues, updateFormValues } = inject($formValues)
-
-const { initialValues, updateInitialValues } = inject($initialValues)
+const { initialValues, updateInitialValues } = inject($initialValues, {
+  initialValues: {},
+  updateInitialValues: (values: anyObject) => {
+    console.log(values)
+  }
+})
 
 const value = computed({
   get() {
@@ -147,10 +168,11 @@ const config = computed(() => {
 })
 
 const formItemProps = computed(() => {
-  const initProps = {
+  const initProps: anyObject = {
     ...thisProps.props,
     name: thisProps.name
   }
+
   if (thisProps.children) {
     initProps.children = thisProps.children
   }
