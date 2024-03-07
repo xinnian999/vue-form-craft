@@ -9,13 +9,17 @@
       :append-to-body="false"
     >
       <el-space wrap>
-        <el-button :key="name" v-for="{ name, schema } in template" @click="useTemplate(schema)">
+        <el-button
+          :key="name"
+          v-for="{ name, schema } in templates || template"
+          @click="useTemplate(schema)"
+        >
           {{ name }}
         </el-button>
       </el-space>
     </el-drawer>
 
-    <div v-for="{ title, children } in menus" :key="title">
+    <div v-for="{ title, children } in menuList" :key="title">
       <h4 class="type-title">{{ title }}</h4>
       <draggable
         class="list"
@@ -38,21 +42,39 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import draggable from 'vuedraggable-es'
-import { inject } from 'vue'
+import { inject, defineProps, computed } from 'vue'
 import { ElButton, ElDrawer, ElSpace } from 'element-plus'
 import IconRender from '@/components/IconRender.vue'
 import { $schema } from '@/config/symbol'
 import { ref } from 'vue'
 import menus from './menus'
 import template from '@/template'
+import type { schemaType, templateDataType } from '@/config/commonType'
+
+const props = withDefaults(
+  defineProps<{
+    templates?: templateDataType
+    omitMenus?: string[]
+  }>(),
+  { omitMenus: () => [] }
+)
 
 const drawerVisible = ref(false)
 
-const { updateSchema } = inject($schema)
+const { updateSchema } = inject($schema, { updateSchema: (schema) => {} })
 
-const useTemplate = (templateSchema) => {
+const menuList = computed(() => {
+  return menus.map((item) => ({
+    ...item,
+    children: item.children.filter(
+      (item) => !props.omitMenus.includes(item.initialValues.component)
+    )
+  }))
+})
+
+const useTemplate = (templateSchema: schemaType) => {
   updateSchema(templateSchema)
 }
 </script>

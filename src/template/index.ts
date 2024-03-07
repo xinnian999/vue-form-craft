@@ -6,6 +6,7 @@ import linkage2 from './linkage2'
 import linkage3 from './linkage3'
 import linkage4 from './linkage4'
 import formList from './formList'
+import type { templateDataType } from '@/config/commonType'
 
 export default [
   { name: '登陆账号', schema: login, id: 'login' },
@@ -16,4 +17,4 @@ export default [
   { name: '联动案例2', schema: linkage2, id: 'linkage2' },
   { name: '联动案例3', schema: linkage3, id: 'linkage3' },
   { name: '联动案例4', schema: linkage4, id: 'linkage4' }
-]
+] as templateDataType

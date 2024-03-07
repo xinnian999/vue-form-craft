@@ -37,8 +37,8 @@ type formItemsType = formItemType[]
 
 type schemaType = {
   labelWidth: number
-  labelAlign: 'top' | 'left' | 'right'
-  size: 'default' | 'small' | 'large'
+  labelAlign: 'top' | 'left' | 'right' | string
+  size: 'default' | 'small' | 'large' | string
   disabled?: boolean
   hideRequiredAsterisk?: boolean
   labelBold?: boolean
@@ -66,6 +66,8 @@ type $globalType = {
   customElements?: { [key: string]: formElement }
 }
 
+type templateDataType = { name: string; schema: schemaType; id?: string }[]
+
 export type {
   anyObject,
   schemaType,
@@ -76,5 +78,6 @@ export type {
   formElement,
   changeItemType,
   $globalType,
-  iconSelectConfigType
+  iconSelectConfigType,
+  templateDataType
 }
