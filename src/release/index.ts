@@ -17,7 +17,8 @@ import type {
   formElement,
   changeItemType,
   $globalType,
-  iconSelectConfigType
+  iconSelectConfigType,
+  templateDataType
 } from '@/config/commonType'
 
 type $optionsType = {
@@ -62,5 +63,6 @@ export type {
   formElement,
   changeItemType,
   $globalType,
-  iconSelectConfigType
+  iconSelectConfigType,
+  templateDataType
 }

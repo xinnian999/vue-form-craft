@@ -1,7 +1,7 @@
 <template>
   <div id="formDesign" v-bind="$attrs">
     <div class="formItemList">
-      <Menus />
+      <Menus :templates="templates" :omitMenus="omitMenus" />
     </div>
 
     <div class="formRender">
@@ -24,7 +24,7 @@ import Current from './Current/index.vue'
 import Actions from './Actions.vue'
 import { getCurrentByKey, setCurrentByKey, changeItems, copyItems } from './utils'
 import { $schema, $current, $methods, $hoverKey } from '@/config/symbol'
-import type { schemaType, anyObject, formItemType } from '@/config/commonType'
+import type { schemaType, anyObject, formItemType, templateDataType } from '@/config/commonType'
 
 defineOptions({
   name: 'FormDesign'
@@ -33,6 +33,8 @@ defineOptions({
 const props = defineProps<{
   schema?: schemaType
   previewSchemaContext?: anyObject
+  templates?: templateDataType
+  omitMenus?: string[]
 }>()
 
 const emit = defineEmits<{
