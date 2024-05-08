@@ -12,6 +12,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd())
 
   const config = {
+    base: '/vue-form-craft/',
     plugins: [
       vue(),
       dts({

@@ -25,7 +25,7 @@ const scrollElement = ref(null)
 watchEffect(async () => {
   const { md } = route.meta
 
-  const { data } = await axios(`/md/${md}`)
+  const { data } = await axios(`/vue-form-craft/md/${md}`)
   text.value = data
   scrollElement.value = document.querySelector('.md-container')
   scrollElement.value.scrollTop = 0
