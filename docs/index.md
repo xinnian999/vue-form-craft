@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: "vue-form-craft"
+  name: "Vue Form Craft"
   text: "基于vue3的一个开箱即用低代码表单方案"
   tagline: 让你免去vue项目中表单的烦恼
   actions:

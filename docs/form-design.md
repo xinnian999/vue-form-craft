@@ -1,7 +1,19 @@
 ---
 layout: page
-title: 自定义页面示例
+title: 表单设计
 sidebar: false
 ---
 
-<form-design class="vp-raw" style="height:calc(100vh - 65px)" />
+<form-design class="docs-form-design" style="height:calc(100vh - 65px)" />
+
+
+<style>
+.docs-form-design{
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    line-height: auto;
+    font-size: 16px;
+    font-weight: bold;
+}
+}
+</style>
