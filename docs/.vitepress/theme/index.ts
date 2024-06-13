@@ -2,6 +2,7 @@ import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 // @ts-ignore
 import VueFormCraft from '@/release/index'
+import './custom.css'
 
 
 export default {
