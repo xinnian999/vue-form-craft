@@ -1,3 +1,5 @@
+# SchemaForm 表单渲染器
+
 ## 简介
 
 SchemaForm 是 vue-form-craft 的渲染组件。
@@ -6,14 +8,14 @@ SchemaForm 是 vue-form-craft 的渲染组件。
 
 ## Props
 
-| 参数名        | 类型    | 默认值  | 是否必传 | 描述                                               |
-| ------------- | ------- | ------- | -------- | -------------------------------------------------- |
-| v-model       | object  | ref({}) | No       | 表单数据对象，可用于设置表单值初始值等操作，可不传 |
-| schema        | object  | ——      | No       | 表单Schema配置，纯JSON，用于描述表单结构           |
-| schemaContext | object  | {}      | No       | 表单Schema，自定义的 [联动变量](/document/linkage) |
-| footer        | Boolean | false   | No       | 显示表单底部提交按钮                               |
-| style         | any     | ——      | No       | 表单的style                                        |
-| class         | any     | ——      | No       | 表单的class                                        |
+| 参数名        | 类型    | 默认值  | 是否必传 | 描述                                 |
+| ------------- | ------- | ------- | -------- |------------------------------------|
+| v-model       | object  | ref({}) | No       | 表单数据对象，可用于设置表单值初始值等操作，可不传          |
+| schema        | object  | ——      | No       | 表单Schema配置，纯JSON，用于描述表单结构          |
+| schemaContext | object  | {}      | No       | 表单Schema，自定义的 [联动变量](/doc/linkage) |
+| footer        | Boolean | false   | No       | 显示表单底部提交按钮                         |
+| style         | any     | ——      | No       | 表单的style                           |
+| class         | any     | ——      | No       | 表单的class                           |
 
 
 ## Events
@@ -28,14 +30,14 @@ SchemaForm 是 vue-form-craft 的渲染组件。
 
 >组件暴露出的方法，通过ref调用
 
-| 名称          | 类型                    | 描述                                                                              |
-| ------------- | ----------------------- | --------------------------------------------------------------------------------- |
-| submit        | () => Promise\<values\> | 提交并校验表单，与submit按钮效果相同                                              |
-| validate      | () => Promise           | 校验表单                                                                          |
+| 名称          | 类型                    | 描述                                                  |
+| ------------- | ----------------------- |-----------------------------------------------------|
+| submit        | () => Promise\<values\> | 提交并校验表单，与submit按钮效果相同                               |
+| validate      | () => Promise           | 校验表单                                                |
 | resetFields   | name[] => void          | 接收一个name数组，例如`['name','age']` 来重置一组字段为初始值，不传会重置所有字段 |
-| getFormValues | () => void              | 获取表单值                                                                        |
-| setFormValues | values => void          | 修改表单值，可用于表单回显                                                        |
-| context       | {}                      | 表单的[联动变量](/document/linkage)                                               |
+| getFormValues | () => void              | 获取表单值                                               |
+| setFormValues | values => void          | 修改表单值，可用于表单回显                                       |
+| context       | {}                      | 表单的[联动变量](/doc/linkage)                             |
 
 
 

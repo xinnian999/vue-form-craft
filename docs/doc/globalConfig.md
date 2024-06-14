@@ -94,7 +94,6 @@ app.mount('#app')
 
 ```
 
-![customUI](../customUI.png)
 
 可能不同组件库的参数会不一样，比如el都是直接使用`v-model:modelValue`，而ant大部分都是`v-model:value`，所以提供了modelName来指定v-model的名字
 
