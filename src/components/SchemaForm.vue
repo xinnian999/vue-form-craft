@@ -28,7 +28,8 @@ import {
   reactive,
   provide,
   watch,
-  defineOptions
+  defineOptions,
+  nextTick
 } from 'vue'
 import { ElForm } from 'element-plus'
 import type { FormInstance } from 'element-plus'
@@ -129,7 +130,9 @@ watch(
   formValues,
   (newVal, oldVal) => {
     emit('onChange', newVal)
-    handleLinkages({ newVal, oldVal, formValues, formItems: formItems.value })
+    nextTick(() => {
+      handleLinkages({ newVal, oldVal, formValues, formItems: formItems.value })
+    })
   },
   { deep: true }
 )
