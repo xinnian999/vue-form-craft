@@ -2,7 +2,7 @@ name: Deploy VitePress site to Pages
 
 on:
   push:
-    branches: [master]
+    branches: [v3.2]
   workflow_dispatch:
 
 permissions:
@@ -38,13 +38,13 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Build with VitePress
-        run: pnpm build
+        run: pnpm docs:build
       - name: Build with VitePress
         run: cp dist/index.html dist/404.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: ./docs/.vitepress/dist
 
   deploy:
     environment:

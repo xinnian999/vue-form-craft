@@ -4,8 +4,11 @@ title: 表单设计
 sidebar: false
 ---
 
+
+<ClientOnly>
 <form-design class="docs-form-design" style="height:calc(100vh - 65px)" />
 
+</ClientOnly>
 
 <style>
 .docs-form-design{
