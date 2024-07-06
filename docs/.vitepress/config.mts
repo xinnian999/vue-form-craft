@@ -6,6 +6,7 @@ import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
 export default defineConfig({
   title: 'Vue Form Craft',
   description: '基于vue3的一个开箱即用低代码表单方案',
+  base: '/vue-form-craft/',
   vite: {
     resolve: {
       alias: {
