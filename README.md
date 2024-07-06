@@ -1,12 +1,12 @@
 # vue-form-craft
 
-基于 [vue](https://github.com/vuejs/vue) 和 [element-ui](https://github.com/ElemeFE/element) 实现的表单设计器 + 渲染器
+基于 [vue](https://github.com/vuejs/vue) 和 [element-plus](https://github.com/ElemeFE/element) 实现的表单设计器 + 渲染器
 
 使用了最新的前端技术栈，可以让你免去vue项目中表单的烦恼。
 
 
-* [在线预览](https://hyl999.co:86/formDesign)
-* [官方文档](https://hyl999.co:86/)
+* [在线预览](https://xinnian999.github.io/vue-form-craft/formDesign)
+* [官方文档](https://xinnian999.github.io/vue-form-craft/)
 * 作者：Elin
 * 联系方式：17803000829
 
