@@ -39,6 +39,8 @@ jobs:
         run: pnpm install
       - name: Build with VitePress
         run: pnpm build
+      - name: Build with VitePress
+        run: cp dist/index.html dist/404.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
