@@ -2,7 +2,7 @@ name: Deploy VitePress site to Pages
 
 on:
   push:
-    branches: [v3.2]
+    branches: [master]
   workflow_dispatch:
 
 permissions:
@@ -42,7 +42,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./docs/.vitepress/dist
+          path: docs/.vitepress/dist
 
   deploy:
     environment:
