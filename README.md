@@ -5,7 +5,7 @@
 使用了最新的前端技术栈，可以让你免去vue项目中表单的烦恼。
 
 
-* [在线预览](https://xinnian999.github.io/vue-form-craft/formDesign)
+* [在线预览](https://xinnian999.github.io/vue-form-craft/form-design)
 * [官方文档](https://xinnian999.github.io/vue-form-craft/)
 * 作者：Elin
 * 联系方式：17803000829
