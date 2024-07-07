@@ -39,6 +39,8 @@ jobs:
         run: pnpm install
       - name: Build with VitePress
         run: pnpm docs:build
+      - name: Fix 404
+        run: cp docs/.vitepress/dist/index.html docs/.vitepress/dist/404.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
