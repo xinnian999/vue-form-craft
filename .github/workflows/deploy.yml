@@ -2,7 +2,7 @@ name: Deploy VitePress site to Pages
 
 on:
   push:
-    branches: [v3.2]
+    branches: [master]
   workflow_dispatch:
 
 permissions:
