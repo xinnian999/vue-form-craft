@@ -19,37 +19,3 @@
 
 适用于项目规模较大，需要频繁修改表单或希望在不重新发布前端代码的情况下进行表单调整
 
-> `vue-form-craft` 提供了 `RemoteFormDesign` 和 `RemoteSchemaForm` 组件，它俩分别是设计器和渲染器的扩展组件，使用这两个组件，不再支持传入静态schema参数，而是支持schemaId参数，组件内部会自动根据schemaId查询远程表单（需要全局配置getSchema方法）。
-
-
-```vue
-<template>
-  <remote-form-design :schemaId="route.query.formId" @onSave="onSave" />
-</template>
-
-<script setup>
-import { useRoute } from "vue-router";
-import { request } from "@/utils";
-import { ElMessage } from "element-plus";
-
-const route = useRoute();
-
-const onSave = async (schema) => {
-  if (!route.query.formId) {
-    return ElMessage.error(`未指定表单id`);
-  }
-
-  await request({
-    url: "/current/update/form",
-    method: "put",
-    data: {
-      id: route.query.formId,
-      formSchema: JSON.stringify(schema),
-    },
-  });
-
-  ElMessage.success(`保存成功`);
-};
-</script>
-
-```

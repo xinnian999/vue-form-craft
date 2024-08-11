@@ -1,5 +1,5 @@
 import axios, { type AxiosInstance } from 'axios'
-import { SchemaForm, RemoteSchemaForm, RemoteFormDesign, FormDesign } from '@/components'
+import { SchemaForm, FormDesign } from '@/components'
 import IconRender from '@/components/IconRender.vue'
 import { $global } from '@/config/symbol'
 import * as Directives from '@/directive'
@@ -29,7 +29,7 @@ type $optionsType = {
   customElements?: { [key: string]: formElement }
 }
 
-const components = [SchemaForm, FormDesign, RemoteSchemaForm, RemoteFormDesign, IconRender] // 全局组件列表
+const components = [SchemaForm, FormDesign, IconRender] // 全局组件列表
 
 const install = function (app: App<Element>, options: $optionsType = {}) {
   const { request = axios, getSchema, customElements = {}, iconSelectConfig } = options
@@ -51,7 +51,7 @@ const install = function (app: App<Element>, options: $optionsType = {}) {
 
 export default { install }
 
-export { FormDesign, SchemaForm, RemoteSchemaForm, RemoteFormDesign }
+export { FormDesign, SchemaForm }
 
 export type {
   anyObject,
