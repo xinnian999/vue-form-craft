@@ -32,7 +32,6 @@
 * vuedraggable
 * element-ui
 * json-editor-vue3
-* codemirror
 * lodash
 * md-editor-v3
 
