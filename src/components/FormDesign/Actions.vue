@@ -28,7 +28,10 @@
         language="zh"
         @blur="onBlur"
       />
-      <!-- <CodeMirror v-if="dialogType === 'vue'" :schema="schema" readOnly /> -->
+
+      <highlightjs  v-if="dialogType === 'vue'" language="js" :code="vueEditStr(JSON.stringify(schema, null, 2))">        
+      </highlightjs>
+
 
       <schema-form
         v-if="dialogType === 'form'"
@@ -60,6 +63,7 @@ import JsonEditorVue from 'json-editor-vue3'
 import { SchemaForm } from '@/components'
 import { $schema, $methods, $global } from '@/config/symbol'
 import { changeItems } from './utils'
+import vueEditStr from '@/config/vueEditStr'
 
 defineProps({
   previewSchemaContext: {
@@ -75,6 +79,7 @@ const { handleSave } = inject($methods)
 const { elements } = inject($global)
 
 const JsonEdit = elements.JsonEdit.component
+
 
 const json = computed({
   get() {

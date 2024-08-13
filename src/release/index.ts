@@ -20,6 +20,9 @@ import type {
   iconSelectConfigType,
   templateDataType
 } from '@/config/commonType'
+import 'highlight.js/styles/atom-one-dark.css'
+import 'highlight.js/lib/common'
+import hljsVuePlugin from '@highlightjs/vue-plugin'
 
 type $optionsType = {
   request?: AxiosInstance
@@ -33,6 +36,8 @@ const components = [SchemaForm, FormDesign, IconRender] // 全局组件列表
 
 const install = function (app: App<Element>, options: $optionsType = {}) {
   const { request = axios, getSchema, customElements = {}, iconSelectConfig } = options
+
+  app.use(hljsVuePlugin)
 
   app.provide($global, {
     request,

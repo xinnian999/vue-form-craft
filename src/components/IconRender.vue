@@ -10,21 +10,19 @@ const modules = import.meta.glob('@/assets/icons/*.vue', { eager: true })
 const icons = Object.entries(modules).reduce((acc, [key, value]) => {
   const fileName = key.split('/').pop()
 
-  const newKey = fileName?.split('.')[0]
+  const newKey = fileName?.split('.')[0]!
 
-  acc[newKey]=value.default
+  acc[newKey]=(value as Record<string,any>).default
   
   return acc
-}, {})
+}, {} as Record<string,any>)
 
 
 defineOptions({
   name: 'IconRender'
 })
 
-defineProps({
-  name: String
-})
+defineProps<{name:string}>()
 
 
 </script>
