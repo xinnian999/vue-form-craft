@@ -1,25 +1,33 @@
 <template>
   <div class="formDesign-actions">
+
     <div class="formDesign-actions-left">
-      <el-button size="small" @click="handlePreviewExec">预览JSON脚本</el-button>
-      <el-button size="small" @click="handlePreviewVue">生成VUE代码</el-button>
-      <el-button size="small" type="primary" @click="handlePreviewForm">预览表单</el-button>
+      <el-button
+        v-for="{ label, type, btnType } in previewActions"
+        :key="type"
+        :type="btnType"
+        size="small"
+        @click="handlePreview(type, label)"
+        >{{ label }}</el-button
+      >
     </div>
+
     <div class="formDesign-actions-right">
       <el-button size="small" type="danger" @click="handleClear">清空</el-button>
       <el-button size="small" @click="handleSave" type="primary">保存</el-button>
     </div>
 
     <el-dialog
-      v-model="dialogVisible"
-      title="预览脚本"
+      v-model="dialogState.visible"
+      :title="dialogState.title"
       width="70%"
       center
       destroy-on-close
       top="10vh"
+      @close="form = {}"
     >
       <json-editor-vue
-        v-if="dialogType === 'exec'"
+        v-if="dialogState.type === 'exec'"
         class="editor"
         v-model="json"
         currentMode="code"
@@ -29,19 +37,23 @@
         @blur="onBlur"
       />
 
-      <highlightjs  v-if="dialogType === 'vue'" language="js" :code="vueEditStr(JSON.stringify(schema, null, 2))">        
-      </highlightjs>
-
+      <highlightjs
+        v-if="dialogState.type === 'vue'"
+        class="vueCode"
+        language="js"
+        :code="vueEditStr(JSON.stringify(schema, null, 2))"
+      />
 
       <schema-form
-        v-if="dialogType === 'form'"
+        v-if="dialogState.type === 'form'"
         v-model="form"
         :schema="schema"
         ref="formRef"
         :schemaContext="previewSchemaContext"
         :style="{ minHeight: '200px' }"
       />
-      <template #footer v-if="dialogType === 'form'">
+      
+      <template #footer v-if="dialogState.type === 'form'">
         <el-button @click="handleSubmit" type="primary">模拟提交</el-button>
         <el-button @click="formRef.resetFields()" type="primary">重置</el-button>
         <JsonEdit
@@ -57,13 +69,31 @@
 </template>
 
 <script setup>
-import { ref, computed, inject, defineProps } from 'vue'
+import { ref, computed, inject, defineProps, reactive } from 'vue'
 import { ElButton, ElDialog } from 'element-plus'
 import JsonEditorVue from 'json-editor-vue3'
 import { SchemaForm } from '@/components'
 import { $schema, $methods, $global } from '@/config/symbol'
 import { changeItems } from './utils'
 import vueEditStr from '@/config/vueEditStr'
+
+const previewActions = [
+  {
+    label: '预览JSON脚本',
+    btnType: 'primary',
+    type: 'exec'
+  },
+  {
+    label: '生成VUE代码',
+    btnType: 'default',
+    type: 'vue'
+  },
+  {
+    label: '预览表单',
+    btnType: 'default',
+    type: 'form'
+  }
+]
 
 defineProps({
   previewSchemaContext: {
@@ -80,7 +110,6 @@ const { elements } = inject($global)
 
 const JsonEdit = elements.JsonEdit.component
 
-
 const json = computed({
   get() {
     return schema.value
@@ -96,24 +125,16 @@ const form = ref({})
 
 const formContext = computed(() => formRef.value?.context)
 
-const dialogVisible = ref(false)
+const dialogState=reactive({
+  visible:false,
+  type:'',
+  title:''
+})
 
-const dialogType = ref('')
-
-const handlePreviewExec = () => {
-  dialogVisible.value = true
-  dialogType.value = 'exec'
-}
-
-const handlePreviewVue = () => {
-  dialogVisible.value = true
-  dialogType.value = 'vue'
-}
-
-const handlePreviewForm = () => {
-  form.value = {}
-  dialogVisible.value = true
-  dialogType.value = 'form'
+const handlePreview = (type, label) => {
+  dialogState.visible=true
+  dialogState.type=type
+  dialogState.title=label
 }
 
 const onBlur = (editor) => {
@@ -133,6 +154,8 @@ const handleSubmit = () => {
 const handleClear = () => {
   schema.value = { ...schema.value, items: [] }
 }
+
+
 </script>
 
 <style scoped lang="less">
@@ -147,6 +170,11 @@ const handleClear = () => {
     button {
       margin-bottom: 10px;
     }
+  }
+
+  .vueCode{
+    max-height: 60vh;
+    overflow: auto;
   }
 }
 </style>
