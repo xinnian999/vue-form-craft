@@ -38,6 +38,11 @@ const editVisible = ref(false)
 
 const attrSchema = computed(() => {
   const config = elements[current.value.component]
+
+  if (config.attrSchema) {
+    return config.attrSchema
+  }
+
   if (config) {
     return { size: 'small', labelAlign: 'top', items: config.attr }
   }

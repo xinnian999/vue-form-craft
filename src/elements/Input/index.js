@@ -1,6 +1,6 @@
 import { ElInput } from 'element-plus'
 import { h } from 'vue'
-import attr from './attr'
+import attrSchema from './attrSchema'
 
 export default {
   name: '单行文本',
@@ -15,5 +15,5 @@ export default {
       placeholder: '请输入文本'
     }
   },
-  attr
+  attrSchema
 }
