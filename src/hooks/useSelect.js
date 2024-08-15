@@ -1,4 +1,4 @@
-import { ref, reactive, computed, watch, onMounted, inject } from 'vue'
+import { ref, computed, watch, onMounted, inject } from 'vue'
 import { isEqual, isPlainObject, debounce } from 'lodash'
 import { getDataByPath } from '@/utils'
 import { $selectData, $global } from '@/config/symbol'
@@ -21,16 +21,8 @@ const useSelect = (props, emits) => {
 
   const loading = ref(false)
 
-  const isMax = ref(false)
-
-  const stateParams = reactive({
-    pageNum: 1,
-    pageSize: 10
-    // filters: {},
-  })
-
   const fetchData = debounce(async () => {
-    if (isMax.value || !props.api) return
+    if (!props.api) return
 
     const { baseURL, url, method, params, data, dataPath } = props.api
 
@@ -40,15 +32,11 @@ const useSelect = (props, emits) => {
       baseURL,
       url,
       method,
-      params: { ...params, ...stateParams },
-      data: { ...data, ...stateParams }
+      params,
+      data
     })
 
     const resData = getDataByPath(res, dataPath)
-
-    if (resData.length !== stateParams.pageSize) {
-      isMax.value = true
-    }
 
     const resDataParse = resData.map((item) => {
       if (isPlainObject(item)) {
@@ -59,8 +47,6 @@ const useSelect = (props, emits) => {
 
     currentOptions.value = [...currentOptions.value, ...resDataParse]
 
-    stateParams.pageNum++
-
     loading.value = false
   }, 300)
 
@@ -68,7 +54,6 @@ const useSelect = (props, emits) => {
     const { mode, options } = props
     if (mode === 'static') {
       currentOptions.value = options
-      isMax.value = true
     }
     if (mode === 'remote') {
       fetchData()
@@ -81,24 +66,18 @@ const useSelect = (props, emits) => {
       //bug：这里发生只api内存地址变化，实际api无变化也会触发监听。暂时使用深层对比解决
       if (!isEqual(newVal, oldVal)) {
         currentOptions.value = []
-        isMax.value = false
-        stateParams.pageNum = 1
         fetchData()
       }
     }
   )
 
   watch(currentOptions, (newVal) => {
-    const { autoSelectedFirst, modelValue, valueKey, multiple, sort } = props
+    const { autoSelectedFirst, modelValue, valueKey, multiple } = props
     // 自动选中第一项
     if (autoSelectedFirst && newVal.length && !modelValue?.length) {
       const firstValue = multiple ? [newVal[0][valueKey]] : newVal[0][valueKey]
       emits('update:modelValue', firstValue)
       selectChange(firstValue)
-    }
-
-    if (sort) {
-      currentOptions.value = currentOptions.value.sort((a, b) => a.value - b.value)
     }
   })
 
@@ -146,7 +125,7 @@ const useSelect = (props, emits) => {
     emits('onChangeSelect', selectData)
   }
 
-  return { selectVal, selectChange, currentOptions, loading, fetchData, isMax }
+  return { selectVal, selectChange, currentOptions, loading, fetchData }
 }
 
 export default useSelect

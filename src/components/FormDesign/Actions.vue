@@ -45,7 +45,7 @@
 
       <FormRender
         v-if="dialogState.type === 'form'"
-        v-model="form"
+        v-model="formValues"
         :schema="schema"
         ref="formRef"
         :schemaContext="previewSchemaContext"
@@ -120,7 +120,7 @@ const json = computed({
 
 const formRef = ref(null)
 
-const form = ref({})
+const formValues = ref({})
 
 const formContext = computed(() => formRef.value?.context)
 
@@ -141,13 +141,10 @@ const onBlur = (editor) => {
   editor.repair()
 }
 
-const handleSubmit = () => {
-  formRef.value
-    .submit()
-    .then((values) => {
-      alert(JSON.stringify(values, null, 2), '模拟提交')
-    })
-    .catch((e) => console.log(e))
+const handleSubmit = async () => {
+  await formRef.value.validate()
+
+  alert(JSON.stringify(formValues.value, null, 2), '模拟提交')
 }
 
 const handleClear = () => {

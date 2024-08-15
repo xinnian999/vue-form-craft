@@ -28,9 +28,9 @@ import {
 } from 'vue'
 import { ElForm } from 'element-plus'
 import type { FormInstance } from 'element-plus'
-import { handleLinkages, deepParse } from '@/utils'
+import { handleLinkages, deepParse, setDataByPath, getDataByPath } from '@/utils'
 import FormItemRender from './FormItemRender.vue'
-import { merge } from 'lodash'
+import { cloneDeep, merge } from 'lodash'
 import type { schemaType } from '@/config/commonType'
 import { $schema, $formValues, $selectData, $formEvents, $initialValues } from '@/config/symbol'
 
@@ -83,6 +83,18 @@ const currentSchema = computed(() => props.schema)
 
 const validate = () => formRef.value?.validate()
 
+const resetFields = (names: string[]) => {
+  if (names) {
+    let temp = cloneDeep(formValues.value)
+    names.forEach((name) => {
+      temp = setDataByPath(temp, name, getDataByPath(initialValues, name))
+    })
+    formValues.value = temp
+  } else {
+    formValues.value = initialValues
+  }
+}
+
 watch(
   formValues,
   (newVal, oldVal) => {
@@ -103,11 +115,11 @@ provide($formValues, {
   updateFormValues: (values: Record<string, any>) => (formValues.value = values)
 })
 provide($selectData, selectData)
-provide($formEvents, { validate })
+provide($formEvents, { validate, resetFields })
 provide($initialValues, {
   initialValues,
   updateInitialValues: (values: Record<string, any>) => Object.assign(initialValues, values)
 })
 
-defineExpose({ validate, context })
+defineExpose({ validate, context, resetFields })
 </script>

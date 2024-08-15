@@ -6,8 +6,7 @@
     :multiple="multiple"
     clearable
     filterable
-    v-selectLoadMore:[popperClass]="scrollFetchData"
-    :popper-class="popperClass"
+    v-loading="loading"
   >
     <el-option
       v-for="item in currentOptions"
@@ -15,14 +14,8 @@
       :label="item[labelKey]"
       :value="item[valueKey]"
     >
-      {{ formatter ? formatter(item[labelKey]) : item[labelKey] }}
+      {{ item[labelKey] }}
     </el-option>
-
-    <template #footer v-if="scrollLoad">
-      <div class="footer" v-loading="loading">
-        {{ isMax ? '没有更多选项了' : loading ? '加载中' : '滚动到底加载更多选项' }}
-      </div>
-    </template>
   </el-select>
 </template>
 
@@ -30,7 +23,6 @@
 import { defineProps, defineEmits } from 'vue'
 import { ElSelect, ElOption } from 'element-plus'
 import useSelect from '@/hooks/useSelect'
-import { getRandomId } from '@/utils'
 
 const props = defineProps({
   modelValue: {},
@@ -59,33 +51,10 @@ const props = defineProps({
     default: false
   },
   api: Object,
-  name: String,
-  filterKey: { default: 'filter', type: String },
-  formatter: Function,
-  sort: Boolean,
-  tableDrop: Boolean,
-  columns: { default: () => [], type: Array },
-  scrollLoad: Boolean
+  name: String
 })
 
 const emits = defineEmits(['update:modelValue', 'onChangeSelect'])
 
-const popperClass = getRandomId(8) + '-popper'
-
-const { selectVal, currentOptions, selectChange, loading, fetchData, isMax } = useSelect(
-  props,
-  emits
-)
-
-const scrollFetchData = () => {
-  if (props.scrollLoad) {
-    fetchData()
-  }
-}
+const { selectVal, currentOptions, selectChange, loading } = useSelect(props, emits)
 </script>
-
-<style lang="less" scoped>
-.footer {
-  text-align: center;
-}
-</style>
