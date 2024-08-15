@@ -1,5 +1,5 @@
 export default (schema) => `<template>
-    <schema-form :schema="schema" footer  @onFinish="onFinish" />
+    <FormRender :schema="schema" footer  @onFinish="onFinish" />
 </template>
 
 <script setup>

@@ -16,14 +16,13 @@ const app = createApp(App)
 
 app.use(VueFormCraft)
 app.mount('#app')
-
 ```
 
 ## 使用
 
 ```vue
 <template>
-  <schema-form :schema="schema" footer @onFinish="onFinish" />
+  <FormRender :schema="schema" footer @onFinish="onFinish" />
 </template>
 
 <script setup>
@@ -55,9 +54,7 @@ const onFinish = (values) => {
   alert(JSON.stringify(values))
 }
 </script>
-
 ```
-
 
 ### 通过表单设计器拖拖拽拽 快速生成JsonSchema
 

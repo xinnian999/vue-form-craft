@@ -1,5 +1,5 @@
 <template>
-  <SchemaForm design class="canvas" :schema="schema">
+  <FormRender design class="canvas" :schema="schema">
     <div class="tip" v-if="!schema.items.length">
       <div class="ico">
         <icon-render name="add" />
@@ -24,13 +24,13 @@
         <CanvasRender v-if="element.designKey" :data="element" />
       </template>
     </draggable>
-  </SchemaForm>
+  </FormRender>
 </template>
 
 <script setup>
 import { inject } from 'vue'
 import draggable from 'vuedraggable-es'
-import { SchemaForm } from '@/components'
+import { FormRender } from '@/components'
 import { $schema, $methods } from '@/config/symbol'
 import CanvasRender from './CanvasRender.vue'
 

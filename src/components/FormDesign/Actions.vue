@@ -1,6 +1,5 @@
 <template>
   <div class="formDesign-actions">
-
     <div class="formDesign-actions-left">
       <el-button
         v-for="{ label, type, btnType } in previewActions"
@@ -44,7 +43,7 @@
         :code="vueEditStr(JSON.stringify(schema, null, 2))"
       />
 
-      <schema-form
+      <FormRender
         v-if="dialogState.type === 'form'"
         v-model="form"
         :schema="schema"
@@ -52,7 +51,7 @@
         :schemaContext="previewSchemaContext"
         :style="{ minHeight: '200px' }"
       />
-      
+
       <template #footer v-if="dialogState.type === 'form'">
         <el-button @click="handleSubmit" type="primary">模拟提交</el-button>
         <el-button @click="formRef.resetFields()" type="primary">重置</el-button>
@@ -72,7 +71,7 @@
 import { ref, computed, inject, defineProps, reactive } from 'vue'
 import { ElButton, ElDialog } from 'element-plus'
 import JsonEditorVue from 'json-editor-vue3'
-import { SchemaForm } from '@/components'
+import { FormRender } from '@/components'
 import { $schema, $methods, $global } from '@/config/symbol'
 import { changeItems } from './utils'
 import vueEditStr from '@/config/vueEditStr'
@@ -125,16 +124,16 @@ const form = ref({})
 
 const formContext = computed(() => formRef.value?.context)
 
-const dialogState=reactive({
-  visible:false,
-  type:'',
-  title:''
+const dialogState = reactive({
+  visible: false,
+  type: '',
+  title: ''
 })
 
 const handlePreview = (type, label) => {
-  dialogState.visible=true
-  dialogState.type=type
-  dialogState.title=label
+  dialogState.visible = true
+  dialogState.type = type
+  dialogState.title = label
 }
 
 const onBlur = (editor) => {
@@ -154,8 +153,6 @@ const handleSubmit = () => {
 const handleClear = () => {
   schema.value = { ...schema.value, items: [] }
 }
-
-
 </script>
 
 <style scoped lang="less">
@@ -172,7 +169,7 @@ const handleClear = () => {
     }
   }
 
-  .vueCode{
+  .vueCode {
     max-height: 60vh;
     overflow: auto;
   }

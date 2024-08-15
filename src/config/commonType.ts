@@ -37,8 +37,8 @@ type formItemsType = formItemType[]
 
 type schemaType = {
   labelWidth: number
-  labelAlign: 'top' | 'left' | 'right' | string
-  size: 'default' | 'small' | 'large' | string
+  labelAlign: 'top' | 'left' | 'right'
+  size: 'default' | 'small' | 'large'
   disabled?: boolean
   hideRequiredAsterisk?: boolean
   labelBold?: boolean

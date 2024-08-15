@@ -19,9 +19,7 @@ export default defineConfig({
     },
     plugins: [viteCommonjs() as any]
   },
-  head:[
-    ['link', { rel: 'icon', href: '/favicon.svg' }]
-  ],
+  head: [['link', { rel: 'icon', href: '/favicon.svg' }]],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: '/favicon.svg',
@@ -47,11 +45,11 @@ export default defineConfig({
           text: '文档',
           items: [
             { text: 'FormDesign 表单设计器', link: '/doc/form-design-doc' },
-            { text: 'SchemaForm 表单渲染器', link: '/doc/schema-form-doc' },
+            { text: 'FormRender 表单渲染器', link: '/doc/form-render-doc' },
             { text: 'Schema详解', link: '/doc/schema' },
             { text: '表单联动', link: '/doc/linkage' },
             { text: '全局配置', link: '/doc/globalConfig' },
-            { text: '低代码开发方案', link: '/doc/lowCode' },
+            { text: '低代码开发方案', link: '/doc/lowCode' }
           ]
         }
       ]

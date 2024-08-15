@@ -3,7 +3,7 @@
     <h4 v-if="!Object.keys(current).length">未选中字段</h4>
 
     <template v-else>
-      <schema-form :key="current.designKey" v-model="current" :schema="attrSchema"></schema-form>
+      <FormRender :key="current.designKey" v-model="current" :schema="attrSchema"></FormRender>
 
       <div>
         <el-button @click="handleEdit">编辑配置文本</el-button>
@@ -28,7 +28,7 @@ import { computed, inject, ref } from 'vue'
 import JsonEditorVue from 'json-editor-vue3'
 import { ElButton, ElDrawer } from 'element-plus'
 import { $current, $global } from '@/config/symbol'
-import { SchemaForm } from '@/components'
+import { FormRender } from '@/components'
 
 const { elements } = inject($global)
 

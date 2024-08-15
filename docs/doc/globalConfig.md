@@ -19,38 +19,35 @@ app.mount('#app')
 | 参数名           | 类型                  | 默认值 | 是否必传 | 描述                                                                                       |
 | ---------------- | --------------------- | ------ | -------- | ------------------------------------------------------------------------------------------ |
 | request          | Function              | axios  | No       | 所有组件请求接口的api方法，推荐传入二次封装后的axios实例                                   |
-| getSchema        | schemaId => `Promise` | ———    | No       | 异步函数， 当`FormDesign`或`SchemaForm` 传入schemaId时，会调用此方法来尝试获取远程的schema |
+| getSchema        | schemaId => `Promise` | ———    | No       | 异步函数， 当`FormDesign`或`FormRender` 传入schemaId时，会调用此方法来尝试获取远程的schema |
 | iconSelectConfig | Object                | ———    | No       | 用于定制图标选择器                                                                         |
 | customElements   | Object                | ———    | No       | 用于定制所有组件的ui                                                                       |
-
 
 ## 定制图标选择器
 
 ```ts
+import { createApp } from 'vue'
+import App from './App.vue'
+import vueFormCraft from 'vue-form-craft'
+import SvgIcon from '@/components/SvgIcon.vue'
 
-import { createApp } from "vue";
-import App from "./App.vue";
-import vueFormCraft from "vue-form-craft";
-import SvgIcon from "@/components/SvgIcon.vue";
-
-const files = require.context("./assets/icons", true, /\.svg$/);
+const files = require.context('./assets/icons', true, /\.svg$/)
 
 const iconList = files.keys().map((key) => {
-  return key.match(/\/([^\/]+)\.svg$/)[1];
-});
+  return key.match(/\/([^\/]+)\.svg$/)[1]
+})
 
-const vue = createApp(App);
+const vue = createApp(App)
 
 vue.use(vueFormCraft, {
   icon: {
     component: SvgIcon, //传入你项目中的icon组件
-    propKey: "name", //你的icon组件 icon标识参数
+    propKey: 'name', //你的icon组件 icon标识参数
     iconList // 将使用你的icon组件，给图标选择器生成列表。例如['add','form','copy'...]
-    }
-});
+  }
+})
 
-vue.mount("#app");
-
+vue.mount('#app')
 ```
 
 ### 定制使用其他组件库
@@ -68,32 +65,30 @@ import { Switch, Input, Textarea, InputNumber } from 'ant-design-vue'
 
 const app = createApp(App)
 
-app.use(VueFormCraft, { 
+app.use(VueFormCraft, {
   request,
   customElements: {
-      Input: {
-        component: Input,
-        modelName: 'value'
-      },
-      Switch: {
-        component: Switch,
-        modelName: 'checked'
-      },
-      Textarea: {
-        component: Textarea,
-        modelName: 'value'
-      },
-      InputNumber: {
-        component: InputNumber,
-        modelName: 'value'
-      }
+    Input: {
+      component: Input,
+      modelName: 'value'
+    },
+    Switch: {
+      component: Switch,
+      modelName: 'checked'
+    },
+    Textarea: {
+      component: Textarea,
+      modelName: 'value'
+    },
+    InputNumber: {
+      component: InputNumber,
+      modelName: 'value'
     }
+  }
 })
 
 app.mount('#app')
-
 ```
-
 
 可能不同组件库的参数会不一样，比如el都是直接使用`v-model:modelValue`，而ant大部分都是`v-model:value`，所以提供了modelName来指定v-model的名字
 

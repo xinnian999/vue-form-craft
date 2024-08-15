@@ -1,9 +1,9 @@
-import SchemaForm from '@/components/SchemaForm.vue'
+import FormRender from '@/components/FormRender.vue'
 import FormDesign from '@/components/FormDesign/index.vue'
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SchemaForm: typeof SchemaForm
+    FormRender: typeof FormRender
     FormDesign: typeof FormDesign
   }
 }

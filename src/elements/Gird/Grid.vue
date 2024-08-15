@@ -9,14 +9,14 @@
     />
 
     <div v-else :style="gridStyle">
-      <FormRender :formItems="children" />
+      <FormItemRender :formItems="children" />
     </div>
   </div>
 </template>
 
 <script setup>
 import { defineProps, computed } from 'vue'
-import { FormRender, DefaultCanvasWrapper } from '@/components'
+import { FormItemRender, DefaultCanvasWrapper } from '@/components'
 
 const thisProps = defineProps({
   name: String,
