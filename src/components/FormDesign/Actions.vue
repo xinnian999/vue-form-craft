@@ -23,7 +23,7 @@
       center
       destroy-on-close
       top="10vh"
-      @close="form = {}"
+      @close="formValues = {}"
     >
       <json-editor-vue
         v-if="dialogState.type === 'exec'"
