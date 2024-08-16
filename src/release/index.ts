@@ -18,7 +18,7 @@ import type {
   iconSelectConfigType,
   templateDataType
 } from '@/config/commonType'
-import 'highlight.js/styles/atom-one-dark.css'
+import 'highlight.js/styles/panda-syntax-dark.css'
 import 'highlight.js/lib/common'
 import hljsVuePlugin from '@highlightjs/vue-plugin'
 import { ElLoading } from 'element-plus'

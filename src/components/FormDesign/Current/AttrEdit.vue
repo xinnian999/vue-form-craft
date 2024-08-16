@@ -6,10 +6,15 @@
       <FormRender :key="current.designKey" v-model="current" :schema="attrSchema"></FormRender>
 
       <div>
-        <el-button @click="handleEdit">编辑配置文本</el-button>
+        <el-button @click="handleEdit">编辑此字段JSON</el-button>
       </div>
 
-      <el-drawer destroy-on-close v-model="editVisible">
+      <el-dialog destroy-on-close v-model="editVisible" top="3vh">
+        <!-- <el-alert
+          title="tip"
+          type="info"
+          description="如果字段现有的配置项不能满足需求，可以在下方props配置里，手动传递额外的参数，支持对应组件在el文档的所有Props"
+        ></el-alert> -->
         <json-editor-vue
           class="editor"
           v-model="current"
@@ -18,7 +23,7 @@
           :options="{ search: true, history: true }"
           language="zh"
         />
-      </el-drawer>
+      </el-dialog>
     </template>
   </div>
 </template>
@@ -26,7 +31,7 @@
 <script setup>
 import { computed, inject, ref } from 'vue'
 import JsonEditorVue from 'json-editor-vue3'
-import { ElButton, ElDrawer } from 'element-plus'
+import { ElButton, ElDialog, ElAlert } from 'element-plus'
 import { $current, $global } from '@/config/symbol'
 import { FormRender } from '@/components'
 

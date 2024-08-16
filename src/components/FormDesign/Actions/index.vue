@@ -25,22 +25,33 @@
       top="10vh"
       @close="formValues = {}"
     >
-      <json-editor-vue
+      <el-tabs
         v-if="dialogState.type === 'exec'"
-        class="editor"
-        v-model="json"
-        currentMode="code"
-        :modeList="['text', 'view', 'tree', 'code', 'form']"
-        :options="{ search: true, history: true }"
-        language="zh"
-        @blur="onBlur"
-      />
+        model-value="json"
+        class="demo-tabs"
+        @tab-click="handleClick"
+      >
+        <el-tab-pane label="JsonSchema" name="json">
+          <json-editor-vue
+            class="editor"
+            v-model="json"
+            currentMode="code"
+            :modeList="['text', 'view', 'tree', 'code', 'form']"
+            :options="{ search: true, history: true }"
+            language="zh"
+            @blur="onBlur"
+          />
+        </el-tab-pane>
+        <el-tab-pane label="帮助" name="help">
+          <highlightjs class="vueCode" language="json" :code="helpStr" />
+        </el-tab-pane>
+      </el-tabs>
 
       <highlightjs
         v-if="dialogState.type === 'vue'"
         class="vueCode"
         language="js"
-        :code="vueEditStr(JSON.stringify(schema, null, 2))"
+        :code="vueEditStr(schema)"
       />
 
       <FormRender
@@ -69,12 +80,13 @@
 
 <script setup>
 import { ref, computed, inject, defineProps, reactive } from 'vue'
-import { ElButton, ElDialog } from 'element-plus'
+import { ElButton, ElDialog, ElTabs, ElTabPane } from 'element-plus'
 import JsonEditorVue from 'json-editor-vue3'
 import { FormRender } from '@/components'
 import { $schema, $methods, $global } from '@/config/symbol'
-import { changeItems } from './utils'
-import vueEditStr from '@/config/vueEditStr'
+import { changeItems } from '../utils'
+import vueEditStr from './vueEditStr'
+import helpStr from './helpStr'
 
 const previewActions = [
   {
