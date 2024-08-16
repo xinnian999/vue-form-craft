@@ -3,19 +3,23 @@
     <h4 v-if="!Object.keys(current).length">未选中字段</h4>
 
     <template v-else>
-      <FormRender :key="current.designKey" v-model="current" :schema="attrSchema"></FormRender>
+      <FormRender :key="current.designKey" v-model="current" :schema="attrSchema" />
 
-      <div>
-        <el-button @click="handleEdit">编辑此字段JSON</el-button>
+      <el-divider>高级配置</el-divider>
+
+      <div class="current-footer">
+        <el-button @click="handleEditLinkage">联动配置</el-button>
+        <el-button @click="handleEditJSON">编辑JSON</el-button>
       </div>
 
-      <el-dialog destroy-on-close v-model="editVisible" top="3vh">
-        <!-- <el-alert
-          title="tip"
-          type="info"
-          description="如果字段现有的配置项不能满足需求，可以在下方props配置里，手动传递额外的参数，支持对应组件在el文档的所有Props"
-        ></el-alert> -->
+      <el-dialog
+        destroy-on-close
+        v-model="dialogState.visible"
+        top="3vh"
+        :title="dialogState.title"
+      >
         <json-editor-vue
+          v-if="dialogState.type === 'json'"
           class="editor"
           v-model="current"
           currentMode="code"
@@ -23,23 +27,37 @@
           :options="{ search: true, history: true }"
           language="zh"
         />
+
+        <FormRender
+          v-if="dialogState.type === 'linkage'"
+          v-model="current"
+          :schema="linkageSchema(schema, current)"
+        />
       </el-dialog>
     </template>
   </div>
 </template>
 
 <script setup>
-import { computed, inject, ref } from 'vue'
+import { computed, inject, reactive } from 'vue'
 import JsonEditorVue from 'json-editor-vue3'
-import { ElButton, ElDialog, ElAlert } from 'element-plus'
+import { ElButton, ElDialog, ElDivider } from 'element-plus'
 import { $current, $global } from '@/config/symbol'
 import { FormRender } from '@/components'
+import linkageSchema from './linkageSchema'
+import { $schema } from '@/config/symbol'
 
 const { elements } = inject($global)
 
 const { current } = inject($current)
 
-const editVisible = ref(false)
+const { schema } = inject($schema)
+
+const dialogState = reactive({
+  visible: false,
+  type: '',
+  title: ''
+})
 
 const attrSchema = computed(() => {
   const config = elements[current.value.component]
@@ -55,8 +73,16 @@ const attrSchema = computed(() => {
   return { size: 'small', labelAlign: 'top', items: [] }
 })
 
-const handleEdit = () => {
-  editVisible.value = true
+const handleEditLinkage = () => {
+  dialogState.visible = true
+  dialogState.type = 'linkage'
+  dialogState.title = `字段联动配置`
+}
+
+const handleEditJSON = () => {
+  dialogState.visible = true
+  dialogState.type = 'json'
+  dialogState.title = `编辑字段JSON`
 }
 </script>
 
@@ -64,6 +90,9 @@ const handleEdit = () => {
 .attrForm {
   h3 {
     margin-bottom: 10px;
+  }
+  .current-footer {
+    text-align: center;
   }
 }
 </style>

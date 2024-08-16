@@ -8,6 +8,7 @@ import linkage4 from './linkage4'
 import linkage5 from './linkage5'
 import formList from './formList'
 import MostTest from './300Test'
+import nest from './nest'
 import type { templateDataType } from '@/config/commonType'
 
 export default [
@@ -20,5 +21,6 @@ export default [
   { name: '联动案例3', schema: linkage3, id: 'linkage3' },
   { name: '联动案例4', schema: linkage4, id: 'linkage4' },
   { name: '联动案例5', schema: linkage5, id: 'linkage5' },
-  { name: '大量表单项测试', schema: MostTest, id: 'MostTest' }
+  { name: '大量表单项测试', schema: MostTest, id: 'MostTest' },
+  { name: '容器嵌套', schema: nest, id: '容器嵌套' }
 ] as templateDataType

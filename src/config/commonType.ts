@@ -12,6 +12,7 @@ type contextType = {
 type changeItemType = {
   target: string
   value: any
+  condition?: any
 }
 
 interface formItemType {
@@ -36,9 +37,9 @@ interface formItemType {
 type formItemsType = formItemType[]
 
 type schemaType = {
-  labelWidth: number
-  labelAlign: 'top' | 'left' | 'right'
-  size: 'default' | 'small' | 'large'
+  labelWidth?: number
+  labelAlign?: 'top' | 'left' | 'right'
+  size?: 'default' | 'small' | 'large'
   disabled?: boolean
   hideRequiredAsterisk?: boolean
   labelBold?: boolean

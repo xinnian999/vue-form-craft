@@ -17,8 +17,10 @@ const handleLinkages: handleLinkagesType = ({ newVal, oldVal, formValues, formIt
 
     if (item.change && !isEqual(newValue, oldValue)) {
       let temp = cloneDeep(formValues.value)
-      item.change.forEach(({ target, value }) => {
-        temp = setDataByPath(temp, target, value)
+      item.change.forEach(({ target, value, condition }) => {
+        if (condition !== false) {
+          temp = setDataByPath(temp, target, value)
+        }
       })
       formValues.value = temp
     }
