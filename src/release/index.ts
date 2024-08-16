@@ -21,6 +21,7 @@ import type {
 import 'highlight.js/styles/atom-one-dark.css'
 import 'highlight.js/lib/common'
 import hljsVuePlugin from '@highlightjs/vue-plugin'
+import { ElLoading } from 'element-plus'
 
 type $optionsType = {
   request?: AxiosInstance
@@ -46,6 +47,8 @@ const install = function (app: App<Element>, options: $optionsType = {}) {
   components.forEach((component) => {
     app.component(component.name, component)
   })
+
+  app.directive('el-loading', ElLoading.directive)
 }
 
 export default { install }

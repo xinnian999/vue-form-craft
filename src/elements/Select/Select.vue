@@ -6,7 +6,7 @@
     :multiple="multiple"
     clearable
     filterable
-    v-loading="loading"
+    v-el-loading="loading"
   >
     <el-option
       v-for="item in currentOptions"

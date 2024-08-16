@@ -1,7 +1,12 @@
 <template>
   <div v-if="!currentOptions.length && !loading" style="font-size: 12px">暂无选项</div>
 
-  <el-checkbox-group v-bind="$attrs" v-model="selectVal" @change="selectChange" v-loading="loading">
+  <el-checkbox-group
+    v-bind="$attrs"
+    v-model="selectVal"
+    @change="selectChange"
+    v-el-loading="loading"
+  >
     <template v-if="optionType === 'circle' || optionType === 'border'">
       <el-checkbox
         v-for="item in currentOptions"

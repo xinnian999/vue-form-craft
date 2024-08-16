@@ -50,7 +50,6 @@
 <script setup lang="ts">
 import { computed, defineProps, inject, onMounted, ref } from 'vue'
 import { ElFormItem, ElTooltip } from 'element-plus'
-import { isString } from 'lodash'
 import { isRegexString, getDataByPath, setDataByPath } from '@/utils'
 import { $global, $schema, $formValues, $initialValues } from '@/config/symbol'
 import defaultSchema from '@/config/defaultSchema'
@@ -155,16 +154,8 @@ const computeRules = computed(() => {
   return ruleData
 })
 
-const currentComponent = computed(() => {
-  if (isString(value.value) && /^{{\s*(.*?)\s*}}$/.test(value.value)) {
-    return 'Input'
-  }
-
-  return thisProps.component
-})
-
 const config = computed(() => {
-  return elements[currentComponent.value] || {}
+  return elements[thisProps.component] || {}
 })
 
 const formItemProps = computed(() => {
