@@ -35,7 +35,30 @@
         </div>
       </template>
 
+      <!-- 弹窗展示复杂组件 -->
+      <template v-if="dialog">
+        <el-dialog
+          v-model="dialogState.visible"
+          :title="dialogState.title"
+          width="70%"
+          center
+          destroy-on-close
+        >
+          <component
+            :is="config.component"
+            :disabled="schema.disabled"
+            :size="schema.size"
+            v-bind="formItemProps"
+            v-model:[config.modelName]="value"
+            :design="design"
+          />
+        </el-dialog>
+
+        <el-button type="primary" @click="handleDialog">配置</el-button>
+      </template>
+
       <component
+        v-else
         :is="config.component"
         :disabled="schema.disabled"
         :size="schema.size"
@@ -48,8 +71,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps, inject, onMounted, ref } from 'vue'
-import { ElFormItem, ElTooltip } from 'element-plus'
+import { computed, defineProps, inject, onMounted, reactive, ref } from 'vue'
+import { ElFormItem, ElTooltip, ElDialog, ElInput, ElButton } from 'element-plus'
 import { isRegexString, getDataByPath, setDataByPath } from '@/utils'
 import { $global, $schema, $formValues, $initialValues } from '@/config/symbol'
 import defaultSchema from '@/config/defaultSchema'
@@ -79,6 +102,7 @@ type FormItemProps = {
   style?: any
   design?: boolean
   change?: changeItemType[]
+  dialog?: boolean
 }
 
 const thisProps = defineProps<FormItemProps>()
@@ -100,6 +124,16 @@ const { initialValues, updateInitialValues } = inject($initialValues, {
     console.log(values)
   }
 })
+
+const dialogState = reactive({
+  visible: false,
+  title: ''
+})
+
+const handleDialog = () => {
+  dialogState.visible = true
+  dialogState.title = thisProps.label!
+}
 
 const value = computed({
   get() {

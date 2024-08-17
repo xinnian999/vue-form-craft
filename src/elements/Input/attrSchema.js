@@ -38,9 +38,10 @@ export default {
       }
     },
     {
-      label: '校验规则',
+      label: '文本校验规则',
       component: 'FormList',
       name: 'rules',
+      dialog: true,
       children: [
         {
           label: '类型',

@@ -50,10 +50,12 @@
 import { computed, inject, reactive } from 'vue'
 import JsonEditorVue from 'json-editor-vue3'
 import { ElButton, ElDialog, ElDivider } from 'element-plus'
-import { $current, $global } from '@/config/symbol'
+import { $current, $formValues, $global } from '@/config/symbol'
 import { FormRender } from '@/components'
 import linkageSchema from './linkageSchema'
 import { $schema } from '@/config/symbol'
+import { getDataByPath } from '@/utils'
+import { isString } from 'lodash'
 
 const { elements } = inject($global)
 
@@ -71,7 +73,23 @@ const attrSchema = computed(() => {
   const config = elements[current.value.component]
 
   if (config.attrSchema) {
-    return config.attrSchema
+    const buildItems = (nodes) => {
+      return nodes.map((item) => {
+        const value = getDataByPath(current.value, item.name)
+        if (isString(value) && /^{{\s*(.*?)\s*}}$/.test(value)) {
+          return { ...item, component: 'Input', dialog: true }
+        }
+        if (item.children) {
+          item.children = buildItems(item.children)
+        }
+        return item
+      })
+    }
+    return {
+      ...config.attrSchema,
+      // 将联动组件改用弹窗展示
+      items: buildItems(config.attrSchema.items)
+    }
   }
 
   if (config) {
