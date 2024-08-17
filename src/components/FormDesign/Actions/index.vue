@@ -80,7 +80,7 @@
 
 <script setup>
 import { ref, computed, inject, defineProps, reactive } from 'vue'
-import { ElButton, ElDialog, ElTabs, ElTabPane } from 'element-plus'
+import { ElButton, ElDialog, ElTabs, ElTabPane, ElMessageBox } from 'element-plus'
 import JsonEditorVue from 'json-editor-vue3'
 import { FormRender } from '@/components'
 import { $schema, $methods, $global } from '@/config/symbol'
@@ -159,7 +159,8 @@ const handleSubmit = async () => {
   alert(JSON.stringify(formValues.value, null, 2), '模拟提交')
 }
 
-const handleClear = () => {
+const handleClear = async () => {
+  await ElMessageBox.confirm('确认清空当前设计吗？')
   schema.value = { ...schema.value, items: [] }
 }
 </script>

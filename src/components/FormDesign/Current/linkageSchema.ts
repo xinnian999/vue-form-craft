@@ -27,8 +27,9 @@ export default (schema: schemaType, current: formItemType): schemaType => {
     labelAlign: 'top',
     items: [
       {
-        label: '值联动',
-        help: '本字段值改变时触发，修改其他字段的值',
+        // label: '值联动',
+        // help: '本字段值改变时触发，修改其他字段的值',
+        hideLabel: true,
         name: 'change',
         component: 'FormList',
         children: [

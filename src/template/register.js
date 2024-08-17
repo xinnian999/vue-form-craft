@@ -41,16 +41,6 @@ export default {
       },
       designKey: 'form-M7xE',
       name: 'code'
-    },
-    {
-      component: 'Button',
-      props: {
-        name: '立即注册',
-        clickEvent: 'custom',
-        customEvent: '{{}}'
-      },
-      designKey: 'form-gW1S',
-      name: '1fx9H8'
     }
   ]
 }

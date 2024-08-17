@@ -5,11 +5,11 @@
     <template v-else>
       <FormRender :key="current.designKey" v-model="current" :schema="attrSchema" />
 
-      <el-divider>高级配置</el-divider>
+      <el-divider>联动</el-divider>
 
       <div class="current-footer">
-        <el-button @click="handleEditLinkage">联动配置</el-button>
-        <el-button @click="handleEditJSON">编辑JSON</el-button>
+        <el-button @click="handleEditJSON">配置项联动</el-button>
+        <el-button @click="handleEditLinkage">值联动</el-button>
       </div>
 
       <el-dialog
@@ -18,6 +18,14 @@
         top="3vh"
         :title="dialogState.title"
       >
+        <div style="font-weight: bold; margin-bottom: 10px">
+          {{
+            dialogState.type === 'json'
+              ? '直接将需要动态设置的配置项，改为模版表达式即可'
+              : '本字段的值改变时，联动其他字段的值'
+          }}
+        </div>
+
         <json-editor-vue
           v-if="dialogState.type === 'json'"
           class="editor"
@@ -76,13 +84,13 @@ const attrSchema = computed(() => {
 const handleEditLinkage = () => {
   dialogState.visible = true
   dialogState.type = 'linkage'
-  dialogState.title = `字段联动配置`
+  dialogState.title = `值联动`
 }
 
 const handleEditJSON = () => {
   dialogState.visible = true
   dialogState.type = 'json'
-  dialogState.title = `编辑字段JSON`
+  dialogState.title = `配置联动`
 }
 </script>
 
