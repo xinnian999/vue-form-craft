@@ -33,7 +33,9 @@
       >
         <template #item="{ element }">
           <li class="form-item-btn">
-            <div class="ico"><IconRender :name="element.icon" /></div>
+            <div class="ico">
+              <component v-if="isVNode(element.icon)" :is="element.icon" />
+            </div>
             <div class="name">{{ element.name }}</div>
           </li>
         </template>
@@ -44,7 +46,7 @@
 
 <script setup lang="ts">
 import draggable from 'vuedraggable-es'
-import { inject, defineProps, computed } from 'vue'
+import { inject, defineProps, computed, isVNode } from 'vue'
 import { ElButton, ElDrawer, ElSpace } from 'element-plus'
 import IconRender from '@/components/IconRender.vue'
 import { $schema } from '@/config/symbol'

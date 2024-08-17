@@ -1,6 +1,6 @@
 import type { formElement } from '@/config/commonType'
 
-const modules = import.meta.glob('@/elements/*/index.js', { eager: true })
+const modules = import.meta.glob('@/elements/*/index.ts', { eager: true })
 
 const elements: { [component: string]: formElement } = {}
 

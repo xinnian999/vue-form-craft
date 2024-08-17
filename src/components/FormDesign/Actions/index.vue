@@ -119,7 +119,7 @@ const { handleSave } = inject($methods)
 
 const { elements } = inject($global)
 
-const JsonEdit = elements.JsonEdit.component
+const JsonEdit = elements.JsonEdit?.component
 
 const json = computed({
   get() {

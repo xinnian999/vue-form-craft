@@ -1,3 +1,5 @@
+import type { Component, VNode } from 'vue'
+
 type anyObject = { [key: string]: any }
 
 type formValuesType = anyObject
@@ -48,13 +50,14 @@ type schemaType = {
 
 type formElement = {
   name: string
-  component: any
-  icon: string
+  component: VNode
+  icon: string | VNode
   type: 'assist' | 'layout' | 'basic' | 'high'
   order: number
-  attr: formItemsType
+  attr?: formItemsType
   initialValues: formItemType
-  modelName: string
+  modelName?: string
+  attrSchema: schemaType
 }
 
 type iconSelectConfigType = { component?: any; propKey?: string; iconList?: string[] }
