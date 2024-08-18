@@ -72,6 +72,14 @@ type $globalType = {
 
 type templateDataType = { name: string; schema: schemaType; id?: string }[]
 
+type SchemaApi = {
+  url: string
+  method: 'GET' | 'POST'
+  data?: Record<string, any>
+  params?: Record<string, any>
+  dataPath?: string
+}
+
 export type {
   anyObject,
   schemaType,
@@ -83,5 +91,6 @@ export type {
   changeItemType,
   $globalType,
   iconSelectConfigType,
-  templateDataType
+  templateDataType,
+  SchemaApi
 }

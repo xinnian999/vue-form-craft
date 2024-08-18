@@ -1,21 +1,14 @@
-import { ref, computed, watch, onMounted, inject } from 'vue'
+import { ref, watch, onMounted, inject, defineModel } from 'vue'
 import { isEqual, isPlainObject, debounce } from 'lodash'
 import { getDataByPath } from '@/utils'
 import { $selectData, $global } from '@/config/symbol'
 
-const useSelect = (props, emits) => {
+const useSelect = (props) => {
   const selectData = inject($selectData)
 
   const { request } = inject($global)
 
-  const selectVal = computed({
-    get() {
-      return props.modelValue
-    },
-    set(val) {
-      emits('update:modelValue', val)
-    }
-  })
+  const selectVal = defineModel<string>()
 
   const currentOptions = ref([])
 
@@ -122,7 +115,6 @@ const useSelect = (props, emits) => {
     if (selectData) {
       selectData[name] = valueData
     }
-    emits('onChangeSelect', selectData)
   }
 
   return { selectVal, selectChange, currentOptions, loading, fetchData }

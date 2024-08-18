@@ -1,5 +1,5 @@
 import Radio from './Radio.vue'
-import attr from './attr'
+import attrSchema from './attrSchema'
 
 export default {
   name: '单选框组',
@@ -7,6 +7,7 @@ export default {
   type: 'basic',
   component: Radio,
   order: 3.5,
+  attrSchema,
   initialValues: {
     label: '单选框组',
     component: 'Radio',
@@ -23,6 +24,5 @@ export default {
       direction: 'horizontal',
       space: 20
     }
-  },
-  attr
+  }
 }

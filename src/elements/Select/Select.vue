@@ -19,42 +19,33 @@
   </el-select>
 </template>
 
-<script setup>
-import { defineProps, defineEmits } from 'vue'
+<script setup lang="ts">
+import { defineProps } from 'vue'
 import { ElSelect, ElOption } from 'element-plus'
 import useSelect from '@/hooks/useSelect'
+import type { SchemaApi } from '@/config/commonType'
 
-const props = defineProps({
-  modelValue: {},
-  options: {
-    type: Array,
-    default: () => []
-  },
-  multiple: {
-    type: Boolean,
-    default: false
-  },
-  mode: {
-    type: String,
-    default: 'static'
-  },
-  labelKey: {
-    type: String,
-    default: 'label'
-  },
-  valueKey: {
-    type: String,
-    default: 'value'
-  },
-  autoSelectedFirst: {
-    type: Boolean,
-    default: false
-  },
-  api: Object,
-  name: String
-})
+const props = withDefaults(
+  defineProps<{
+    options?: Array<Record<string, any>>
+    multiple?: boolean
+    mode?: string
+    labelKey?: string
+    valueKey?: string
+    autoSelectedFirst?: boolean
+    api?: SchemaApi
+    name?: string
+  }>(),
+  {
+    options: () => [],
+    multiple: false,
+    mode: 'static',
+    labelKey: 'label',
+    valueKey: 'value',
+    autoSelectedFirst: false,
+    name: ''
+  }
+)
 
-const emits = defineEmits(['update:modelValue', 'onChangeSelect'])
-
-const { selectVal, currentOptions, selectChange, loading } = useSelect(props, emits)
+const { selectVal, currentOptions, selectChange, loading } = useSelect(props)
 </script>

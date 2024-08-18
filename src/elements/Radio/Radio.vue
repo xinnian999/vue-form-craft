@@ -25,8 +25,8 @@
   </el-radio-group>
 </template>
 
-<script setup>
-import { defineProps, defineEmits } from 'vue'
+<script setup lang="ts">
+import { defineProps } from 'vue'
 import { ElRadioGroup, ElRadio, ElRadioButton, ElSpace } from 'element-plus'
 import useSelect from '@/hooks/useSelect'
 
@@ -69,9 +69,7 @@ const props = defineProps({
   }
 })
 
-const emits = defineEmits(['update:modelValue', 'onChangeSelect'])
-
-const { selectVal, currentOptions, selectChange, loading } = useSelect(props, emits)
+const { selectVal, currentOptions, selectChange, loading } = useSelect(props)
 </script>
 
 <style lang="scss" scoped></style>
