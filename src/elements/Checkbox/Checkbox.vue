@@ -57,7 +57,7 @@ const props = withDefaults(defineProps<Props>(), {
 const { selectVal, currentOptions, selectChange, loading } = useSelect<SelectValue[]>(props)
 
 const value = computed(() => {
-  return selectVal.value as CheckboxGroupValueType
+  return selectVal?.value as CheckboxGroupValueType
 })
 </script>
 
