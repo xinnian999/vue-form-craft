@@ -65,7 +65,7 @@ export default {
       }
     },
     {
-      label: '选项间距',
+      label: '选项间距（px）',
       component: 'InputNumber',
       name: 'props.space'
     },

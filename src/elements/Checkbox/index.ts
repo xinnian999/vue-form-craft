@@ -5,7 +5,7 @@ import { h } from 'vue'
 
 export default {
   name: '多选框组',
-  icon: h(IconRender, { name: 'radio' }),
+  icon: h(IconRender, { name: 'checkbox' }),
   type: 'basic',
   component: Checkbox,
   order: 4,
