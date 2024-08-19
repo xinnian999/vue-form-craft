@@ -76,12 +76,11 @@ import { ElFormItem, ElTooltip, ElDialog, ElButton } from 'element-plus'
 import { isRegexString, getDataByPath, setDataByPath } from '@/utils'
 import { $global, $schema, $formValues, $initialValues } from '@/config/symbol'
 import defaultSchema from '@/config/defaultSchema'
-import type { FormItemType, FormSchema, $globalType } from '@/config/commonType'
-import defaultElements from '@/elements'
+import type { FormItemType, FormSchema } from '@/config/commonType'
 
 const thisProps = defineProps<FormItemType>()
 
-const { elements = {} } = inject<$globalType>($global, { elements: defaultElements })
+const { elements = {} } = inject($global)!
 
 const schema = inject<FormSchema>($schema, defaultSchema)
 

@@ -23,29 +23,16 @@
 import { defineProps } from 'vue'
 import { ElSelect, ElOption } from 'element-plus'
 import useSelect from '@/hooks/useSelect'
-import type { SchemaApi } from '@/config/commonType'
+import type { SelectProps, SelectValue } from '@/config/commonType'
 
-const props = withDefaults(
-  defineProps<{
-    options?: Array<Record<string, any>>
-    multiple?: boolean
-    mode?: string
-    labelKey?: string
-    valueKey?: string
-    autoSelectedFirst?: boolean
-    api?: SchemaApi
-    name?: string
-  }>(),
-  {
-    options: () => [],
-    multiple: false,
-    mode: 'static',
-    labelKey: 'label',
-    valueKey: 'value',
-    autoSelectedFirst: false,
-    name: ''
-  }
-)
+const props = withDefaults(defineProps<SelectProps>(), {
+  options: () => [],
+  multiple: false,
+  mode: 'static',
+  labelKey: 'label',
+  valueKey: 'value',
+  name: ''
+})
 
-const { selectVal, currentOptions, selectChange, loading } = useSelect<string | string[]>(props)
+const { selectVal, currentOptions, selectChange, loading } = useSelect<SelectValue | SelectValue[]>(props)
 </script>

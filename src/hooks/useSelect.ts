@@ -2,36 +2,48 @@ import { ref, watch, onMounted, inject, defineModel } from 'vue'
 import { isEqual, isPlainObject, debounce } from 'lodash'
 import { getDataByPath } from '@/utils'
 import { $selectData, $global } from '@/config/symbol'
+import type { SchemaApi } from '@/config/commonType'
 
-const useSelect = <V>(props) => {
+type Props = {
+  options?: Array<Record<string, any>>
+  multiple?: boolean
+  mode?: string
+  labelKey?: string
+  valueKey?: string
+  api?: SchemaApi
+  name?: string
+}
+
+type Option = Record<string, any>
+
+const useSelect = <V>(props: Props) => {
   const selectData = inject($selectData)
 
-  const { request } = inject($global)
+  const { request } = inject($global)!
 
   const selectVal = defineModel<V>()
 
-  const currentOptions = ref([])
+  const currentOptions = ref<Option[]>([])
 
   const loading = ref(false)
 
   const fetchData = debounce(async () => {
     if (!props.api) return
 
-    const { baseURL, url, method, params, data, dataPath } = props.api
+    const { url, method, params, data, dataPath } = props.api
 
     loading.value = true
 
     const res = await request({
-      baseURL,
       url,
       method,
       params,
       data
     })
 
-    const resData = getDataByPath(res, dataPath)
+    const resData = getDataByPath(res, dataPath) || []
 
-    const resDataParse = resData.map((item) => {
+    const resDataParse = resData.map((item: any) => {
       if (isPlainObject(item)) {
         return item
       }
@@ -44,7 +56,7 @@ const useSelect = <V>(props) => {
   }, 300)
 
   onMounted(() => {
-    const { mode, options } = props
+    const { mode, options = [] } = props
     if (mode === 'static') {
       currentOptions.value = options
     }
@@ -64,19 +76,9 @@ const useSelect = <V>(props) => {
     }
   )
 
-  watch(currentOptions, (newVal) => {
-    const { autoSelectedFirst, modelValue, valueKey, multiple } = props
-    // 自动选中第一项
-    if (autoSelectedFirst && newVal.length && !modelValue?.length) {
-      const firstValue = multiple ? [newVal[0][valueKey]] : newVal[0][valueKey]
-      emits('update:modelValue', firstValue)
-      selectChange(firstValue)
-    }
-  })
-
   watch(
     () => props.options,
-    (newVal) => {
+    (newVal = []) => {
       if (props.mode === 'static') {
         currentOptions.value = newVal
       }
@@ -87,7 +89,7 @@ const useSelect = <V>(props) => {
     () => props.mode,
     (newVal) => {
       if (newVal === 'static') {
-        currentOptions.value = props.options
+        currentOptions.value = props.options||[]
       }
       if (newVal === 'remote') {
         currentOptions.value = []
@@ -96,23 +98,23 @@ const useSelect = <V>(props) => {
     }
   )
 
-  const selectChange = (val) => {
-    const { valueKey, multiple, name } = props
+  const selectChange = (val: V) => {
+    const { valueKey = 'value', multiple, name } = props
 
     let valueData = {}
 
-    if (multiple) {
+    if (multiple && Array.isArray(val)) {
       //多选就过滤出vals对应的源数据
       valueData = currentOptions.value.filter((item) => {
         return val.includes(item[valueKey])
       })
     } else {
       //单选找到单项对应的源数据
-      valueData = currentOptions.value.find((item) => item[valueKey] === val)
+      valueData = currentOptions.value.find((item) => item[valueKey] === val) || {}
     }
 
     //如果接到了selectData，给顶级组件保存当前值对应得数据源
-    if (selectData) {
+    if (selectData && name) {
       selectData[name] = valueData
     }
   }

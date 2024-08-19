@@ -54,7 +54,6 @@ export default {
           dataPath: 'data'
         },
         optionType: 'circle',
-        autoSelectedFirst: true,
         direction: 'vertical',
         space: 0
       },

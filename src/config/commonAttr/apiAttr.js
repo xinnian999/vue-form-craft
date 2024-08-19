@@ -12,7 +12,6 @@ export default [
     name: 'props.api.method',
     props: {
       mode: 'static',
-      autoSelectedFirst: true,
       options: [
         {
           label: 'GET',

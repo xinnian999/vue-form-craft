@@ -1,12 +1,7 @@
 <template>
   <div v-if="!currentOptions.length && !loading" style="font-size: 12px">暂无选项</div>
 
-  <el-checkbox-group
-    v-bind="$attrs"
-    v-model="selectVal"
-    @change="selectChange"
-    v-el-loading="loading"
-  >
+  <el-checkbox-group v-bind="$attrs" v-model="value" @change="selectChange" v-el-loading="loading">
     <template v-if="optionType === 'circle' || optionType === 'border'">
       <el-checkbox
         v-for="item in currentOptions"
@@ -29,52 +24,41 @@
   </el-checkbox-group>
 </template>
 
-<script setup>
-import { defineProps, defineEmits } from 'vue'
-import { ElCheckboxGroup, ElCheckbox, ElCheckboxButton, ElSpace } from 'element-plus'
+<script setup lang="ts">
+import { computed, defineProps } from 'vue'
+import {
+  ElCheckboxGroup,
+  ElCheckbox,
+  ElCheckboxButton,
+  ElSpace,
+  type CheckboxGroupValueType
+} from 'element-plus'
 import useSelect from '@/hooks/useSelect'
+import type { Direction, OptionType, SelectProps, SelectValue } from '@/config/commonType'
 
-const props = defineProps({
-  modelValue: {},
-  options: {
-    type: Array,
-    default: () => []
-  },
-  mode: {
-    type: String,
-    default: 'static'
-  },
-  labelKey: {
-    type: String,
-    default: 'label'
-  },
-  valueKey: {
-    type: String,
-    default: 'value'
-  },
-  autoSelectedFirst: {
-    type: Boolean,
-    default: false
-  },
-  api: Object,
-  name: String,
-  optionType: {
-    type: String,
-    default: 'circle'
-  },
-  space: {
-    type: Number,
-    default: 0
-  },
-  multiple: {
-    type: Boolean,
-    default: true //不可更改
-  }
+type Props = Omit<SelectProps, 'multiple'> & {
+  optionType?: OptionType
+  direction?: Direction
+  space?: number
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  options: () => [],
+  mode: 'static',
+  labelKey: 'label',
+  valueKey: 'value',
+  name: '',
+  optionType: 'circle',
+  direction: 'horizontal',
+  space: 20,
+  multiple: true
 })
 
-const emits = defineEmits(['update:modelValue', 'onChangeSelect'])
+const { selectVal, currentOptions, selectChange, loading } = useSelect<SelectValue[]>(props)
 
-const { selectVal, currentOptions, selectChange, loading } = useSelect(props, emits)
+const value = computed(() => {
+  return selectVal.value as CheckboxGroupValueType
+})
 </script>
 
 <style lang="scss" scoped></style>

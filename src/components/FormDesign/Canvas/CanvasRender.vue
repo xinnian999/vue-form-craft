@@ -70,7 +70,7 @@ const rightBottomActions = [
 ]
 
 const checkProps = (props) => {
-  return omit(props, ['multiple', 'autoSelectedFirst', 'api'])
+  return omit(props, ['multiple', 'api'])
 }
 </script>
 

@@ -53,10 +53,9 @@ export type FormElement = {
   attrSchema: FormSchema
 }
 
-export type $globalType = {
+export type $Global = {
   request?: any
-  getSchema?: (schemaId: string) => Promise<FormSchema>
-  elements?: { [key: string]: FormElement }
+  elements: { [key: string]: FormElement }
   customElements?: { [key: string]: FormElement }
 }
 
@@ -73,3 +72,15 @@ export type SchemaApi = {
 export type OptionType = 'circle' | 'border' | 'button'
 
 export type Direction = 'horizontal' | 'vertical'
+
+export interface SelectProps {
+  options?: Record<string, any>[]
+  multiple?: boolean
+  mode?: string
+  labelKey?: string
+  valueKey?: string
+  api?: SchemaApi
+  name?: string
+}
+
+export type SelectValue = string | number | boolean
