@@ -29,45 +29,35 @@
 import { defineProps } from 'vue'
 import { ElRadioGroup, ElRadio, ElRadioButton, ElSpace } from 'element-plus'
 import useSelect from '@/hooks/useSelect'
+import type { Direction, OptionType, SchemaApi } from '@/config/commonType'
 
-const props = defineProps({
-  modelValue: {},
-  options: {
-    type: Array,
-    default: () => []
-  },
-  mode: {
-    type: String,
-    default: 'static'
-  },
-  labelKey: {
-    type: String,
-    default: 'label'
-  },
-  valueKey: {
-    type: String,
-    default: 'value'
-  },
-  autoSelectedFirst: {
-    type: Boolean,
-    default: false
-  },
-  api: Object,
-  name: String,
-  optionType: {
-    type: String,
-    default: 'circle'
-  },
-
-  direction: {
-    type: String,
-    default: 'horizontal'
-  },
-  space: {
-    type: Number,
-    default: 20
+const props = withDefaults(
+  defineProps<{
+    options?: Array<Record<string, any>>
+    multiple?: boolean
+    mode?: string
+    labelKey?: string
+    valueKey?: string
+    autoSelectedFirst?: boolean
+    api?: SchemaApi
+    name?: string
+    optionType?: OptionType
+    direction?: Direction
+    space?: number
+  }>(),
+  {
+    options: () => [],
+    multiple: false,
+    mode: 'static',
+    labelKey: 'label',
+    valueKey: 'value',
+    autoSelectedFirst: false,
+    name: '',
+    optionType: 'circle',
+    direction: 'horizontal',
+    space: 20
   }
-})
+)
 
 const { selectVal, currentOptions, selectChange, loading } = useSelect(props)
 </script>

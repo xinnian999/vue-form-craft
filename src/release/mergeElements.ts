@@ -1,8 +1,8 @@
-import type { formElement } from '@/config/commonType'
+import type { FormElement } from '@/config/commonType'
 import elements from '@/elements'
 
-const handle = (customElements: { [key: string]: formElement }) => {
-  const mergeElements: { [key: string]: formElement } = {}
+const handle = (customElements: { [key: string]: FormElement }) => {
+  const mergeElements: { [key: string]: FormElement } = {}
 
   Object.entries(elements).forEach(([key, value]) => {
     const customData = customElements[key]

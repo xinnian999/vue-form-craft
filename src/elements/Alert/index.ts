@@ -2,11 +2,11 @@ import { ElAlert } from 'element-plus'
 import { h } from 'vue'
 import IconRender from '@/components/IconRender.vue'
 import attrSchema from './attrSchema'
-import type { formElement } from '@/config/commonType'
+import type { FormElement } from '@/config/commonType'
 
 export default {
   name: '提示框',
-  component: h(ElAlert),
+  component: ElAlert,
   icon: h(IconRender, { name: 'alert' }),
   type: 'assist',
   order: 2,
@@ -22,4 +22,4 @@ export default {
       'show-icon': true
     }
   }
-} as formElement
+} as FormElement

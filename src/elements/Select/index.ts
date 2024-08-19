@@ -1,4 +1,4 @@
-import type { formElement } from '@/config/commonType'
+import type { FormElement } from '@/config/commonType'
 import Select from './Select.vue'
 import attrSchema from './attrSchema'
 import { h } from 'vue'
@@ -8,7 +8,7 @@ export default {
   name: '下拉选择框',
   type: 'basic',
   icon: h(IconRender, { name: 'select' }),
-  component: h(Select),
+  component: Select,
   order: 3,
   attrSchema,
   initialValues: {
@@ -26,4 +26,4 @@ export default {
       valueKey: 'value'
     }
   }
-} as formElement
+} as FormElement

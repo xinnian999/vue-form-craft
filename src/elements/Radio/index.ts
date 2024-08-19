@@ -1,9 +1,12 @@
+import type { FormElement } from '@/config/commonType'
 import Radio from './Radio.vue'
 import attrSchema from './attrSchema'
+import { h } from 'vue'
+import { IconRender } from '@/components'
 
 export default {
   name: '单选框组',
-  icon: 'radio',
+  icon: h(IconRender, { name: 'radio' }),
   type: 'basic',
   component: Radio,
   order: 3.5,
@@ -25,4 +28,4 @@ export default {
       space: 20
     }
   }
-}
+} as FormElement

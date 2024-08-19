@@ -2,7 +2,7 @@ import { ElInput } from 'element-plus'
 import { h } from 'vue'
 import IconRender from '@/components/IconRender.vue'
 import attrSchema from './attrSchema'
-import type { formElement } from '@/config/commonType'
+import type { FormElement } from '@/config/commonType'
 
 export default {
   name: '单行文本',
@@ -18,4 +18,4 @@ export default {
     }
   },
   attrSchema
-} as formElement
+} as FormElement

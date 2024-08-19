@@ -6,17 +6,13 @@ import 'element-plus/dist/index.css'
 import mergeElements from './mergeElements'
 import type { App } from 'vue'
 import type {
-  anyObject,
-  schemaType,
-  formValuesType,
-  contextType,
-  formItemType,
-  formItemsType,
-  formElement,
-  changeItemType,
+  FormSchema,
+  FormContext,
+  FormItemType,
+  FormElement,
   $globalType,
   iconSelectConfigType,
-  templateDataType
+  TemplateData
 } from '@/config/commonType'
 import 'highlight.js/styles/panda-syntax-dark.css'
 import 'highlight.js/lib/common'
@@ -25,9 +21,9 @@ import { ElLoading } from 'element-plus'
 
 type $optionsType = {
   request?: AxiosInstance
-  getSchema?: (schemaId: string) => Promise<schemaType>
-  elements?: { [key: string]: formElement }
-  customElements?: { [key: string]: formElement }
+  getSchema?: (schemaId: string) => Promise<FormSchema>
+  elements?: { [key: string]: FormElement }
+  customElements?: { [key: string]: FormElement }
 }
 
 const components = [FormRender, FormDesign, IconRender] // 全局组件列表
@@ -56,15 +52,11 @@ export default { install }
 export { FormDesign, FormRender }
 
 export type {
-  anyObject,
-  schemaType,
-  formValuesType,
-  contextType,
-  formItemType,
-  formItemsType,
-  formElement,
-  changeItemType,
+  FormSchema,
+  FormContext,
+  FormItemType,
+  FormElement,
   $globalType,
   iconSelectConfigType,
-  templateDataType
+  TemplateData
 }

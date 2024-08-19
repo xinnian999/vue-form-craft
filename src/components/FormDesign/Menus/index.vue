@@ -53,11 +53,11 @@ import { $schema } from '@/config/symbol'
 import { ref } from 'vue'
 import menus from './menus'
 import template from '@/template'
-import type { schemaType, templateDataType } from '@/config/commonType'
+import type { FormSchema, TemplateData } from '@/config/commonType'
 
 const props = withDefaults(
   defineProps<{
-    templates?: templateDataType
+    templates?: TemplateData
     omitMenus?: string[]
   }>(),
   { omitMenus: () => [] }
@@ -76,7 +76,7 @@ const menuList = computed(() => {
   }))
 })
 
-const useTemplate = (templateSchema: schemaType) => {
+const useTemplate = (templateSchema: FormSchema) => {
   updateSchema(templateSchema)
 }
 </script>

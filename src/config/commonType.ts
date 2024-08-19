@@ -1,23 +1,6 @@
 import type { Component, VNode } from 'vue'
 
-type anyObject = { [key: string]: any }
-
-type formValuesType = anyObject
-
-type contextType = {
-  $values: formValuesType
-  $selectData: formValuesType
-  $initialValues: formValuesType
-  [key: string]: any
-}
-
-type changeItemType = {
-  target: string
-  value: any
-  condition?: any
-}
-
-interface formItemType {
+export interface FormItemType {
   label?: string
   name: string
   component: string
@@ -25,7 +8,7 @@ interface formItemType {
   props?: object
   initialValue?: any
   help?: string
-  children?: formItemType[]
+  children?: FormItemType[]
   hidden?: boolean | string
   hideLabel?: boolean
   designKey?: string
@@ -33,46 +16,53 @@ interface formItemType {
   class?: any
   style?: any
   design?: boolean
-  change?: changeItemType[]
+  change?: {
+    target: string
+    value: any
+    condition?: any
+  }[]
+  dialog?: boolean
 }
 
-type formItemsType = formItemType[]
-
-type schemaType = {
+export type FormSchema = {
   labelWidth?: number
   labelAlign?: 'top' | 'left' | 'right'
   size?: 'default' | 'small' | 'large'
   disabled?: boolean
   hideRequiredAsterisk?: boolean
   labelBold?: boolean
-  items: formItemsType
+  items: FormItemType[]
 }
 
-type formElement = {
+export type FormContext = {
+  $values: Record<string, any>
+  $selectData: Record<string, any>
+  $initialValues: Record<string, any>
+  [key: string]: any
+}
+
+export type FormElement = {
   name: string
-  component: VNode
-  icon: string | VNode
+  component: VNode | Component
+  icon: string | VNode | Component
   type: 'assist' | 'layout' | 'basic' | 'high'
   order: number
-  attr?: formItemsType
-  initialValues: formItemType
+  attr?: FormItemType[]
+  initialValues: Omit<FormItemType, 'name'>
   modelName?: string
-  attrSchema: schemaType
+  attrSchema: FormSchema
 }
 
-type iconSelectConfigType = { component?: any; propKey?: string; iconList?: string[] }
-
-type $globalType = {
+export type $globalType = {
   request?: any
-  getSchema?: (schemaId: string) => Promise<schemaType>
-  elements?: { [key: string]: formElement }
-  iconSelectConfig?: iconSelectConfigType
-  customElements?: { [key: string]: formElement }
+  getSchema?: (schemaId: string) => Promise<FormSchema>
+  elements?: { [key: string]: FormElement }
+  customElements?: { [key: string]: FormElement }
 }
 
-type templateDataType = { name: string; schema: schemaType; id?: string }[]
+export type TemplateData = { name: string; schema: FormSchema; id?: string }[]
 
-type SchemaApi = {
+export type SchemaApi = {
   url: string
   method: 'GET' | 'POST'
   data?: Record<string, any>
@@ -80,17 +70,6 @@ type SchemaApi = {
   dataPath?: string
 }
 
-export type {
-  anyObject,
-  schemaType,
-  formValuesType,
-  contextType,
-  formItemType,
-  formItemsType,
-  formElement,
-  changeItemType,
-  $globalType,
-  iconSelectConfigType,
-  templateDataType,
-  SchemaApi
-}
+export type OptionType = 'circle' | 'border' | 'button'
+
+export type Direction = 'horizontal' | 'vertical'

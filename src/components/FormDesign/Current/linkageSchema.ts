@@ -1,4 +1,4 @@
-import type { formItemType, schemaType } from '@/release'
+import type { FormSchema, FormItemType } from '@/release'
 import elements from '@/elements'
 
 type option = {
@@ -7,7 +7,7 @@ type option = {
 }
 
 // 将表单树 递归转换为下拉选项 ，并且只取基础字段
-const build = (nodes: formItemType[]) =>
+const build = (nodes: FormItemType[]) =>
   nodes.reduce<option[]>((acc, cur) => {
     if (elements[cur.component].type === 'basic') {
       acc = [...acc, { label: `${cur.label} (${cur.name})`, value: cur.name }]
@@ -19,7 +19,7 @@ const build = (nodes: formItemType[]) =>
     return acc
   }, [])
 
-export default (schema: schemaType, current: formItemType): schemaType => {
+export default (schema: FormSchema, current: FormItemType): FormSchema => {
   const targetOptions = build(schema.items).filter((item) => item.value !== current.name)
 
   return {

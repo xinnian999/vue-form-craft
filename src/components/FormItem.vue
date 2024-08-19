@@ -49,7 +49,7 @@
             :disabled="schema.disabled"
             :size="schema.size"
             v-bind="formItemProps"
-            v-model:[config.modelName]="value"
+            v-model:[config.modelName!]="value"
             :design="design"
           />
         </el-dialog>
@@ -63,7 +63,7 @@
         :disabled="schema.disabled"
         :size="schema.size"
         v-bind="formItemProps"
-        v-model:[config.modelName]="value"
+        v-model:[config.modelName!]="value"
         :design="design"
       />
     </el-form-item>
@@ -72,55 +72,29 @@
 
 <script setup lang="ts">
 import { computed, defineProps, inject, onMounted, reactive, ref } from 'vue'
-import { ElFormItem, ElTooltip, ElDialog, ElInput, ElButton } from 'element-plus'
+import { ElFormItem, ElTooltip, ElDialog, ElButton } from 'element-plus'
 import { isRegexString, getDataByPath, setDataByPath } from '@/utils'
 import { $global, $schema, $formValues, $initialValues } from '@/config/symbol'
 import defaultSchema from '@/config/defaultSchema'
-import type {
-  formItemType,
-  changeItemType,
-  schemaType,
-  anyObject,
-  $globalType
-} from '@/config/commonType'
+import type { FormItemType, FormSchema, $globalType } from '@/config/commonType'
 import defaultElements from '@/elements'
 
-type FormItemProps = {
-  label?: string
-  name: string
-  component: string
-  required?: boolean
-  props?: object
-  initialValue?: any
-  help?: string
-  children?: formItemType[]
-  hidden?: boolean | string
-  hideLabel?: boolean
-  designKey?: string
-  rules?: any[]
-  class?: any
-  style?: any
-  design?: boolean
-  change?: changeItemType[]
-  dialog?: boolean
-}
-
-const thisProps = defineProps<FormItemProps>()
+const thisProps = defineProps<FormItemType>()
 
 const { elements = {} } = inject<$globalType>($global, { elements: defaultElements })
 
-const schema = inject<schemaType>($schema, defaultSchema)
+const schema = inject<FormSchema>($schema, defaultSchema)
 
 const { formValues, updateFormValues } = inject($formValues, {
   formValues: ref({}),
-  updateFormValues: (values: anyObject) => {
+  updateFormValues: (values: Record<string, any>) => {
     console.log(values)
   }
 })
 
 const { initialValues, updateInitialValues } = inject($initialValues, {
   initialValues: {},
-  updateInitialValues: (values: anyObject) => {
+  updateInitialValues: (values: Record<string, any>) => {
     console.log(values)
   }
 })
@@ -193,7 +167,7 @@ const config = computed(() => {
 })
 
 const formItemProps = computed(() => {
-  const initProps: anyObject = {
+  const initProps: Record<string, any> = {
     ...thisProps.props,
     name: thisProps.name
   }

@@ -31,7 +31,7 @@ import type { FormInstance } from 'element-plus'
 import { handleLinkages, deepParse, setDataByPath, getDataByPath } from '@/utils'
 import FormItemRender from './FormItemRender.vue'
 import { cloneDeep, merge } from 'lodash'
-import type { schemaType } from '@/config/commonType'
+import type { FormSchema } from '@/config/commonType'
 import { $schema, $formValues, $selectData, $formEvents, $initialValues } from '@/config/symbol'
 
 defineOptions({
@@ -41,7 +41,7 @@ defineOptions({
 const props = defineProps<
   Readonly<{
     modelValue?: Record<string, any>
-    schema: schemaType
+    schema: FormSchema
     schemaContext?: Record<string, any>
     design?: boolean
   }>

@@ -1,13 +1,13 @@
 import { isEqual, cloneDeep } from 'lodash'
-import type { anyObject, formItemsType } from '@/config/commonType'
+import type { FormItemType } from '@/config/commonType'
 import setDataByPath from './setDataByPath'
 import getDataByPath from './getDataByPath'
 
 type handleLinkagesType = (obj: {
   newVal: Object
   oldVal: Object
-  formValues: anyObject
-  formItems: formItemsType
+  formValues: Record<string, any>
+  formItems: FormItemType[]
 }) => void
 
 const handleLinkages: handleLinkagesType = ({ newVal, oldVal, formValues, formItems }) => {

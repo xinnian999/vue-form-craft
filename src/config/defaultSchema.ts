@@ -1,6 +1,6 @@
-import type { schemaType } from '@/config/commonType'
+import type { FormSchema } from '@/config/commonType'
 
-const defaultSchema: schemaType = {
+const defaultSchema: FormSchema = {
   labelWidth: 150,
   labelAlign: 'right',
   size: 'default',

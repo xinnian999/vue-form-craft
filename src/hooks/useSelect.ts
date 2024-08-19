@@ -3,12 +3,12 @@ import { isEqual, isPlainObject, debounce } from 'lodash'
 import { getDataByPath } from '@/utils'
 import { $selectData, $global } from '@/config/symbol'
 
-const useSelect = (props) => {
+const useSelect = <V>(props) => {
   const selectData = inject($selectData)
 
   const { request } = inject($global)
 
-  const selectVal = defineModel<string>()
+  const selectVal = defineModel<V>()
 
   const currentOptions = ref([])
 

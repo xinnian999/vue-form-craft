@@ -1,6 +1,6 @@
-import type { schemaType } from '@/release'
+import type { FormSchema } from '@/release'
 
-export default (schema: schemaType) => {
+export default (schema: FormSchema) => {
   const str = JSON.stringify(schema, null, 2)
 
   return `<template>

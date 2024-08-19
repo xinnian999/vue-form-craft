@@ -47,5 +47,5 @@ const props = withDefaults(
   }
 )
 
-const { selectVal, currentOptions, selectChange, loading } = useSelect(props)
+const { selectVal, currentOptions, selectChange, loading } = useSelect<string | string[]>(props)
 </script>
