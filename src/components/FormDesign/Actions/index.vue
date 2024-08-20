@@ -66,13 +66,13 @@
       <template #footer v-if="dialogState.type === 'form'">
         <el-button @click="handleSubmit" type="primary">模拟提交</el-button>
         <el-button @click="formRef.resetFields()" type="primary">重置</el-button>
-        <JsonEdit
+        <!-- <JsonEdit
           v-model="formContext"
           height="400px"
           title="联动变量"
           description="实时预览表单的联动变量，调试联动"
           mode="dialog"
-        />
+        /> -->
       </template>
     </el-dialog>
   </div>
