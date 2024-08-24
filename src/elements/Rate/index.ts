@@ -1,16 +1,17 @@
 import { ElRate } from 'element-plus'
-import attr from './attr'
+import attrSchema from './attrSchema'
+import { IconRender } from '@/components'
+import { h } from 'vue'
 
 export default {
   name: '评分',
   component: ElRate,
-  icon: 'rate',
+  icon: h(IconRender, { name: 'rate' }),
   type: 'basic',
   order: 12,
-  attr,
+  attrSchema,
   initialValues: {
     label: '评分',
     component: 'Rate',
-    props: {}
   }
 }

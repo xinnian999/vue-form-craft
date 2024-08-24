@@ -1,11 +1,12 @@
 import { ElInput } from 'element-plus'
+import attrSchema from './attrSchema'
+import { IconRender } from '@/components'
 import { h } from 'vue'
-import attr from './attr'
 
 export default {
   name: '密码输入框',
   component: h(ElInput, { type: 'password', showWordLimit: true, autocomplete: 'off' }),
-  icon: 'password',
+  icon: h(IconRender, { name: 'password' }),
   type: 'basic',
   order: 3,
   initialValues: {
@@ -15,5 +16,5 @@ export default {
       placeholder: '请输入密码'
     }
   },
-  attr
+  attrSchema
 }

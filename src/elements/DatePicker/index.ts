@@ -7,7 +7,7 @@ import { h } from 'vue'
 export default {
   name: '日期选择器',
   component: ElDatePicker,
-  icon: h(IconRender, { name: 'colorPicker' }),
+  icon: h(IconRender, { name: 'datePicker' }),
   type: 'basic',
   order: 9,
   initialValues: {

@@ -10,12 +10,8 @@ export default {
       help: "既是唯一标识，也是数据路径。比如输入【props.name】，数据就会保存为 { props: { name:'xxx' } }"
     },
     { label: '字段说明', component: 'Textarea', name: 'help' },
-    {
-      label: '占位提示',
-      component: 'Input',
-      name: 'props.placeholder',
-      designKey: 'form-ekRL'
-    },
+    { label: '初始值', component: 'InputNumber', name: 'initialValue' },
+
     {
       component: 'Grid',
       children: [
@@ -35,21 +31,9 @@ export default {
         marginBottom: 0
       }
     },
-    {
-      label: '类型',
-      component: 'Radio',
-      name: 'props.type',
-      props: {
-        mode: 'static',
-        options: [
-          { label: '日期时间', value: 'datetime' },
-          { label: '日期', value: 'date' },
-          { label: '年月', value: 'month' },
-          { label: '日期范围', value: 'daterange' },
-          { label: '日期时间范围', value: 'datetimerange' }
-        ]
-      }
-    },
+
+    { label: '最大分值', component: 'InputNumber', name: 'props.max', initialValue: 5 },
+    { label: '是否允许半选', component: 'Switch', name: 'props.allow-half' },
     { label: '自定义class', component: 'Input', name: 'props.class' },
     {
       label: '自定义style',

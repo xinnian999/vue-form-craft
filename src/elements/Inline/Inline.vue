@@ -14,16 +14,17 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineProps, computed } from 'vue'
 import { FormItemRender, DefaultCanvasWrapper } from '@/components'
+import type { FormItemType } from '@/release';
 
-const thisProps = defineProps({
-  name: String,
-  props: Object,
-  children: Array,
-  design: Boolean
-})
+const thisProps = defineProps<{
+  name:string,
+  props:Record<string,any>,
+  children:FormItemType[],
+  design: boolean
+}>()
 
 const InlineStyle = computed(() => ({
   width: '100%',

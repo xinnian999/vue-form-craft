@@ -6,9 +6,7 @@ const basicAttr = (omit = []) => {
       component: 'JsonEdit',
       name: 'props.style',
       help: '与vue的style对象格式一样',
-      props: {
-        mode: 'dialog'
-      }
+      dialog: true
     }
   ]
 
