@@ -6,7 +6,6 @@ import mergeElements from './mergeElements'
 import type { App } from 'vue'
 import type {
   FormSchema,
-  FormContext,
   FormItemType,
   FormElement,
   $Global,
@@ -36,4 +35,4 @@ const install = function (app: App<Element>, options?: $Global) {
 
 export default { install }
 
-export type { FormSchema, FormContext, FormItemType, FormElement, $Global, TemplateData }
+export type { FormSchema,  FormItemType, FormElement, $Global, TemplateData }

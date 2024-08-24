@@ -1,65 +1,33 @@
 <template>
   <el-cascader
-    v-model="value"
+    v-model="selectVal"
     :options="currentOptions"
     :loading="loading"
-    :show-all-levels="!takeLastLevel"
     :props="{
       multiple
     }"
     v-bind="$attrs"
+    @change="selectChange"
   />
 </template>
 
-<script setup>
-import { defineProps, defineEmits, computed } from 'vue'
-import { ElCascader } from 'element-plus'
+<script setup  lang="ts">
+import { defineProps } from 'vue'
+import { ElCascader, type CascaderValue } from 'element-plus'
 import useSelect from '@/hooks/useSelect'
+import type { SelectProps } from '@/config/commonType';
 
-const props = defineProps({
-  modelValue: {},
-  options: {
-    type: Array,
-    default: () => []
-  },
-  multiple: {
-    type: Boolean,
-    default: false
-  },
-  mode: {
-    type: String,
-    default: 'static'
-  },
-  labelKey: {
-    type: String,
-    default: 'label'
-  },
-  valueKey: {
-    type: String,
-    default: 'value'
-  },
-  api: Object,
-  name: String,
-  takeLastLevel: {
-    type: Boolean,
-    default: false
-  }
+const props = withDefaults(defineProps<SelectProps>(), {
+  options: () => [],
+  multiple: false,
+  mode: 'static',
+  labelKey: 'label',
+  valueKey: 'value',
+  name: ''
 })
 
-const emits = defineEmits(['update:modelValue', 'onChangeSelect'])
 
-const value = computed({
-  get() {
-    return props.modelValue
-  },
-  set(val) {
-    if (props.takeLastLevel) {
-      emits('update:modelValue', val[val.length - 1])
-    } else {
-      emits('update:modelValue', val)
-    }
-  }
-})
 
-const { currentOptions, loading } = useSelect(props, emits)
+
+const { selectVal, currentOptions, selectChange, loading } = useSelect<CascaderValue>(props)
 </script>

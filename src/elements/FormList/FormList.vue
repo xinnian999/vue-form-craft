@@ -98,55 +98,50 @@
   </div>
 </template>
 
-<script setup>
-import { computed, defineProps, defineEmits, h } from 'vue'
+<script setup lang="ts">
+import { computed, defineProps, defineModel, h, watchEffect, ref } from 'vue'
 import { ElFormItem, ElSpace, ElButton, ElCard, ElTableColumn, ElTable } from 'element-plus'
-import { FormItem, DefaultCanvasWrapper } from '@/components'
+import { FormItem, DefaultCanvasWrapper ,IconRender} from '@/components'
 import { deepParse } from '@/utils'
+import type { FormItemType } from '@/release'
 
-const props = defineProps({
-  modelValue: Array,
-  children: Array,
-  allowAdd: {
-    default: true,
-    type: Boolean
-  },
-  allowReduce: {
-    default: true,
-    type: Boolean
-  },
-  defaultLineCount: {
-    default: 0,
-    type: Number
-  },
-  maxLines: {
-    default: 999,
-    type: Number
-  },
-  mode: {
-    default: 'table',
-    type: String
-  },
-  title: {
-    default: '卡片',
-    type: String
-  },
-  newItemDefaults: {
-    type: Function,
-    default: () => ({})
-  },
-  name: String,
-  design: Boolean,
-  disabled: Boolean
+interface Props {
+  children: FormItemType[]
+  allowAdd?: boolean
+  allowReduce?: boolean
+  defaultLineCount?: number
+  maxLines?: number
+  mode?: 'table' | 'card' | 'inline'
+  title?: string
+  newItemDefaults?: (index: number) => Record<string, any>
+  name?: string
+  design?: boolean
+  disabled?: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  children: () => [],
+  allowAdd: true,
+  allowReduce: true,
+  defaultLineCount: 0,
+  maxLines: 999,
+  mode: 'table',
+  title: '卡片',
+  newItemDefaults: () => ({}),
+  name: ''
 })
-const emit = defineEmits(['update:modelValue'])
 
-const list = computed(() => {
-  return props.modelValue || []
+// const emit = defineEmits(['update:modelValue'])
+
+const list = defineModel<Record<string, any>[]>({ default: [] })
+
+watchEffect(()=>{
+  console.log('list==>',list);
+  
 })
 
 const fields = computed(
-  () => (index) => deepParse(props.children, { $item: list.value[index], $index: index })
+  () => (index: number) => deepParse(props.children, { $item: list.value[index], $index: index })
 )
 
 const isMax = computed(() => {
@@ -157,29 +152,23 @@ const handleAddItem = () => {
   if (isMax.value) {
     return
   }
-  emit('update:modelValue', [...list.value, props.newItemDefaults(list.value.length)])
+  // emit('update:modelValue', [...list.value, props.newItemDefaults(list.value.length)])
+  list.value = [...list.value, props.newItemDefaults(list.value.length)]
 }
 
-const handleReduceItem = (index) => {
+const handleReduceItem = (index: number) => {
   const newData = list.value.filter((v, i) => i !== index)
-  emit('update:modelValue', newData)
+  // emit('update:modelValue', newData)
+  list.value = newData
 }
 
-const formatter = (item, data, index) => {
+const formatter = (item: FormItemType, data: Record<string, any>, index: number) => {
   return h(FormItem, {
     ...deepParse(item, { $item: list.value[index], $index: index }),
     hideLabel: true,
     style: { marginBottom: 0 },
     name: `${props.name}.${index}.${item.name}`
   })
-  // return (
-  //   <FormItem
-  //     {...deepParse(item, { $item: list.value[index], $index: index })}
-  //     hideLabel
-  //     style={{ marginBottom: 0 }}
-  //     name={`${props.name}.${index}.${item.name}`}
-  //   />
-  // )
 }
 </script>
 

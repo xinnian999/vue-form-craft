@@ -1,7 +1,7 @@
 <template>
   <div v-if="!currentOptions.length && !loading" style="font-size: 12px">暂无选项</div>
 
-  <el-checkbox-group v-bind="$attrs" v-model="value" @change="selectChange" v-el-loading="loading">
+  <el-checkbox-group v-bind="$attrs" v-model="selectVal" @change="selectChange" v-el-loading="loading">
     <template v-if="optionType === 'circle' || optionType === 'border'">
       <el-checkbox
         v-for="item in currentOptions"
@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps } from 'vue'
+import {  defineProps } from 'vue'
 import {
   ElCheckboxGroup,
   ElCheckbox,
@@ -34,7 +34,7 @@ import {
   type CheckboxGroupValueType
 } from 'element-plus'
 import useSelect from '@/hooks/useSelect'
-import type { Direction, OptionType, SelectProps, SelectValue } from '@/config/commonType'
+import type { Direction, OptionType, SelectProps } from '@/config/commonType'
 
 type Props = Omit<SelectProps, 'multiple'> & {
   optionType?: OptionType
@@ -54,11 +54,9 @@ const props = withDefaults(defineProps<Props>(), {
   multiple: true
 })
 
-const { selectVal, currentOptions, selectChange, loading } = useSelect<SelectValue[]>(props)
+const { selectVal, currentOptions, selectChange, loading } = useSelect<CheckboxGroupValueType>(props)
 
-const value = computed(() => {
-  return selectVal?.value as CheckboxGroupValueType
-})
+
 </script>
 
 <style lang="scss" scoped></style>

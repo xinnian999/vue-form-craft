@@ -5,7 +5,7 @@ import { IconRender } from '@/components'
 import { h } from 'vue'
 
 export default {
-  name: 'JSON编辑器',
+  name: 'JSON编辑',
   component: JsonEdit,
   icon: h(IconRender, { name: 'jsonEdit' }),
   type: 'basic',

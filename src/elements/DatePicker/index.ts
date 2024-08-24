@@ -1,10 +1,13 @@
 import { ElDatePicker } from 'element-plus'
-import attr from './attr'
+import attrSchema from './attrSchema'
+import type { FormElement } from '@/release'
+import IconRender from '@/components/IconRender.vue'
+import { h } from 'vue'
 
 export default {
   name: '日期选择器',
   component: ElDatePicker,
-  icon: 'datePicker',
+  icon: h(IconRender, { name: 'colorPicker' }),
   type: 'basic',
   order: 9,
   initialValues: {
@@ -16,5 +19,5 @@ export default {
       clearable: false
     }
   },
-  attr
-}
+  attrSchema
+} as FormElement

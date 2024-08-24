@@ -1,16 +1,18 @@
+import { h } from 'vue'
+import IconRender from '@/components/IconRender.vue'
 import Cascader from './Cascader.vue'
-import attr from './attr'
+import attrSchema from './attrSchema'
 
 export default {
   name: '级联选择器',
-  icon: 'cascader',
+  icon: h(IconRender, { name: 'cascader' }),
   type: 'basic',
   component: Cascader,
-  attr,
+  attrSchema,
   order: 7,
   initialValues: {
     label: '级联选择器',
-    component: 'cascader',
+    component: 'Cascader',
     props: {
       placeholder: '请选择...',
       mode: 'static',

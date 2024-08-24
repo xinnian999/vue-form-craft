@@ -18,7 +18,7 @@
     "highlight.js": "^11.10.0",
     "json-editor-vue3": "^1.0.9",
     "lodash": "^4.17.21",
-    "vue": "^3.3.11",
+    "vue": "^3.4.38",
     "vuedraggable-es": "^4.1.1"
   },
   "devDependencies": {

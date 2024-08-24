@@ -30,7 +30,7 @@
 <script setup>
 import { inject } from 'vue'
 import draggable from 'vuedraggable-es'
-import { FormRender } from '@/components'
+import { FormRender,IconRender } from '@/components'
 import { $schema, $methods } from '@/config/symbol'
 import CanvasRender from './CanvasRender.vue'
 

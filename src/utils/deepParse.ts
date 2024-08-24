@@ -1,9 +1,8 @@
 import { isString, isPlainObject, isArray } from 'lodash'
 import getDataByPath from './getDataByPath'
-import type { FormContext } from '@/config/commonType'
 
 //模板转换函数，将一个由双大括号包裹的字符串，转化为js表达式并返回结果（context限制变量范围）
-const templateParse = (str: string, context: FormContext) => {
+const templateParse = (str: string, context: Record<string,any>) => {
   if (!str) return str
   if (typeof str !== 'string') return str
 
@@ -22,7 +21,7 @@ const templateParse = (str: string, context: FormContext) => {
   }
 }
 
-const deepParse = (prop: any, context: FormContext): any => {
+const deepParse = (prop: any, context: Record<string,any>): any => {
   const $values = context.$values
 
   if (isString(prop)) {

@@ -26,7 +26,7 @@
 <script setup>
 import { defineProps, inject, computed } from 'vue'
 import { omit } from 'lodash'
-import { FormItem } from '@/components'
+import { FormItem ,IconRender} from '@/components'
 import { $current, $methods, $hoverKey } from '@/config/symbol'
 
 const props = defineProps({

@@ -77,6 +77,7 @@ import { isRegexString, getDataByPath, setDataByPath } from '@/utils'
 import { $global, $schema, $formValues, $initialValues } from '@/config/symbol'
 import defaultSchema from '@/config/defaultSchema'
 import type { FormItemType, FormSchema } from '@/config/commonType'
+import { IconRender } from '@/components'
 
 const thisProps = defineProps<FormItemType>()
 

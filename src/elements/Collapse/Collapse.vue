@@ -1,27 +1,36 @@
 <template>
-  <ElCollapse v-bind="{ ...props, ...$attrs }" v-model="activeKey">
+  <ElCollapse v-bind="props" v-model="activeKey">
     <ElCollapseItem v-for="item in children" :key="item.name" :name="item.name">
       <template #title>
         <Title :title="item.title" italic type="h4" />
       </template>
       <CanvasWrapper :children="item.children" v-if="design" />
-      <FormItemRender :formItems="item.children" v-else />
+      <FormItemRender :formItems="item.children!" v-else />
     </ElCollapseItem>
   </ElCollapse>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineProps, onMounted, ref } from 'vue'
 import { ElCollapse, ElCollapseItem } from 'element-plus'
 import { FormItemRender, CanvasWrapper } from '@/components'
 import Title from '../Title/Title.vue'
-const thisProps = defineProps({
-  props: Object,
-  children: Array,
-  design: Boolean
-})
+import type { FormItemType } from '@/config/commonType';
 
-const activeKey = ref([])
+type CollapseItem={
+  title: string
+  name:string
+  checked?: boolean
+  children: FormItemType[]
+}
+
+const thisProps = defineProps<{
+  props:Record<string,any>
+  children:CollapseItem[]
+  design: boolean
+}>()
+
+const activeKey = ref<string[]>([])
 
 onMounted(() => {
   activeKey.value = thisProps.children.filter((item) => item.checked).map((item) => item.name)

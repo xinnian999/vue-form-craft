@@ -2,13 +2,10 @@
   <ElDivider v-bind="$attrs">{{ title }}</ElDivider>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ElDivider } from 'element-plus'
 import { defineProps } from 'vue'
 
-defineProps({
-  title: String
-})
+defineProps<{title:string}>()
 </script>
 
-<style></style>

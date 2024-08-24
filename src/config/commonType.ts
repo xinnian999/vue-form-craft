@@ -34,13 +34,6 @@ export type FormSchema = {
   items: FormItemType[]
 }
 
-export type FormContext = {
-  $values: Record<string, any>
-  $selectData: Record<string, any>
-  $initialValues: Record<string, any>
-  [key: string]: any
-}
-
 export type FormElement = {
   name: string
   component: VNode | Component

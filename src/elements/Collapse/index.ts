@@ -1,16 +1,22 @@
+import type { FormElement } from '@/release'
 import Collapse from './Collapse.vue'
+import { h } from 'vue'
+import IconRender from '@/components/IconRender.vue'
 
 export default {
   name: '折叠面板',
   component: Collapse,
-  icon: 'collapse',
+  icon: h(IconRender, { name: 'collapse' }),
   type: 'layout',
   order: 4,
   initialValues: {
     component: 'Collapse',
     children: [{ title: '折叠面板1', name: 'name1', children: [] }]
   },
-  attr: [
+  attrSchema:{
+    size: 'small',
+    labelAlign: 'top',
+    items:  [
     { label: '唯一标识', component: 'Input', name: 'name' },
     {
       label: '子面板设置',
@@ -50,5 +56,5 @@ export default {
       designKey: 'id-RQ1a',
       name: 'children'
     }
-  ]
-}
+  ]}
+} as FormElement
