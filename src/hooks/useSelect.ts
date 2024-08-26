@@ -1,4 +1,4 @@
-import { ref, watch, onMounted, inject, defineModel } from 'vue'
+import { ref, watch, onMounted, inject } from 'vue'
 import { isEqual, isPlainObject, debounce } from 'lodash'
 import { getDataByPath } from '@/utils'
 import { $selectData, $global } from '@/config/symbol'
@@ -16,12 +16,11 @@ type Props = {
 
 type Option = Record<string, any>
 
-const useSelect = <V>(props: Props) => {
+const useSelect = (props: Props) => {
   const selectData = inject($selectData)
 
   const { request } = inject($global)!
 
-  const selectVal = defineModel<V>()
 
   const currentOptions = ref<Option[]>([])
 
@@ -98,7 +97,7 @@ const useSelect = <V>(props: Props) => {
     }
   )
 
-  const selectChange = (val: V) => {
+  const selectChange = (val:any) => {
     const { valueKey = 'value', multiple, name } = props
 
     let valueData = {}
@@ -119,7 +118,7 @@ const useSelect = <V>(props: Props) => {
     }
   }
 
-  return { selectVal, selectChange, currentOptions, loading, fetchData }
+  return { selectChange, currentOptions, loading, fetchData }
 }
 
 export default useSelect

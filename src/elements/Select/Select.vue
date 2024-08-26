@@ -1,10 +1,10 @@
 <template>
   <el-select
-    v-model="selectVal"
+    v-model="value"
     v-bind="$attrs"
     @change="selectChange"
     :multiple="multiple"
-    clearable
+    clearable                                             
     filterable
     v-el-loading="loading"
   >
@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue'
+import { defineProps,defineModel  } from 'vue'
 import { ElSelect, ElOption } from 'element-plus'
 import useSelect from '@/hooks/useSelect'
 import type { SelectProps, SelectValue } from '@/config/commonType'
@@ -34,5 +34,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   name: ''
 })
 
-const { selectVal, currentOptions, selectChange, loading } = useSelect<SelectValue | SelectValue[]>(props)
+const value = defineModel<SelectValue | SelectValue[]>({ default: [] })
+
+const { currentOptions, selectChange, loading } = useSelect(props)
 </script>

@@ -19,6 +19,11 @@ export default defineConfig({
     },
     plugins: [viteCommonjs() as any]
   },
+  vue:{
+    script:{
+      defineModel: true
+    }
+  },
   head: [['link', { rel: 'icon', href: '/favicon.svg' }]],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
