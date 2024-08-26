@@ -14,11 +14,18 @@ export default {
             placeholder: '请输入文本'
           },
           designKey: 'design-M91n',
-          name: 'username'
+          name: 'username',
+          change:[
+            {
+              target:'users.[].vip',
+              condition:'{{ $item.username.includes("admin") }}',
+              value:1
+            }
+          ]
         },
         {
           label: '密码',
-          component: 'Password',
+          component: 'Input',
           props: {
             placeholder: '请输入密码'
           },
@@ -31,7 +38,9 @@ export default {
           designKey: 'design-jC1O',
           name: 'vip',
           props: {
-            'inline-prompt': 0
+            'inline-prompt': false,
+            "active-value":1,
+            "inactive-value":0,
           }
         }
       ],
@@ -39,7 +48,7 @@ export default {
         mode: 'table'
       },
       designKey: 'design-pMUa',
-      name: 'form-kWJU'
+      name: 'users'
     }
   ]
 }

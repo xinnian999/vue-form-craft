@@ -99,11 +99,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps, defineModel, h, watchEffect, ref } from 'vue'
+import { computed, defineProps, defineModel, h, watchEffect, watch } from 'vue'
 import { ElFormItem, ElSpace, ElButton, ElCard, ElTableColumn, ElTable } from 'element-plus'
-import { FormItem, DefaultCanvasWrapper ,IconRender} from '@/components'
+import { FormItem, DefaultCanvasWrapper, IconRender } from '@/components'
 import { deepParse } from '@/utils'
 import type { FormItemType } from '@/release'
+import { isEqual, isString } from 'lodash'
 
 interface Props {
   children: FormItemType[]
@@ -135,11 +136,6 @@ const props = withDefaults(defineProps<Props>(), {
 
 const list = defineModel<Record<string, any>[]>({ default: [] })
 
-watchEffect(()=>{
-  console.log('list==>',list);
-  
-})
-
 const fields = computed(
   () => (index: number) => deepParse(props.children, { $item: list.value[index], $index: index })
 )
@@ -170,6 +166,36 @@ const formatter = (item: FormItemType, data: Record<string, any>, index: number)
     name: `${props.name}.${index}.${item.name}`
   })
 }
+
+// formList 值联动
+watch(list, (newVal, oldVal) => {
+  // console.log(newVal);
+
+  const changeIndex = newVal.reduce((acc, cur, index) => {
+    if (!isEqual(cur, oldVal[index])) {
+      acc = index
+    }
+
+    return acc
+  }, 0)
+
+  const fields = deepParse(props.children, { $item: newVal[changeIndex], $index: changeIndex })
+
+  fields.forEach((item: FormItemType) => {
+    if (item.change) {
+      item.change.forEach((v) => {
+        if (v.condition !== false) {
+          if (isString(v.condition) && /^{{\s*(.*?)\s*}}$/.test(v.condition)) {
+            return
+          }
+
+          const name = v.target.split('.').pop()!
+          list.value[changeIndex][name] = v.value
+        }
+      })
+    }
+  })
+})
 </script>
 
 <style lang="less">
