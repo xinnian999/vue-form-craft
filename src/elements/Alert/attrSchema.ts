@@ -4,6 +4,7 @@ export default {
   items: [
     { label: '唯一标识', component: 'Input', name: 'name' },
     { label: '隐藏字段', component: 'Switch', name: 'hidden' },
+    { label: '隐藏标签', component: 'Switch', name: 'hideLabel' },
     { label: '标题', component: 'Input', name: 'props.title' },
     { label: '描述', component: 'Textarea', name: 'props.description' },
     { label: '是否可关闭', component: 'Switch', name: 'props.closable' },

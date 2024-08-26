@@ -50,7 +50,7 @@
 import { computed, inject, reactive } from 'vue'
 import JsonEditorVue from 'json-editor-vue3'
 import { ElButton, ElDialog, ElDivider } from 'element-plus'
-import { $current, $formValues, $global } from '@/config/symbol'
+import { $current, $global } from '@/config/symbol'
 import { FormRender } from '@/components'
 import linkageSchema from './linkageSchema'
 import { $schema } from '@/config/symbol'
@@ -85,15 +85,23 @@ const attrSchema = computed(() => {
         return item
       })
     }
+
+    const items = buildItems(config.attrSchema.items)
+
     return {
       ...config.attrSchema,
       // 将联动组件改用弹窗展示
-      items: buildItems(config.attrSchema.items)
+      items: [
+        {
+          label: '组件类型',
+          component: 'Tag',
+          props: {
+            text: config.name
+          }
+        },
+        ...items
+      ]
     }
-  }
-
-  if (config) {
-    return { size: 'small', labelAlign: 'top', items: config.attr }
   }
 
   return { size: 'small', labelAlign: 'top', items: [] }

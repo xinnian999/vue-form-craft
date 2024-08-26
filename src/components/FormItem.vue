@@ -10,9 +10,9 @@
       />
     </div>
 
-    <div v-else-if="config.type === 'assist'" :style="itemStyle">
+    <!-- <div v-else-if="config.type === 'assist'" :style="itemStyle">
       <component :is="config.component" v-bind="props" />
-    </div>
+    </div> -->
 
     <el-form-item
       v-else
@@ -24,8 +24,8 @@
       :rules="computeRules"
       :class="thisProps.class"
     >
-      <template #label v-if="!hideLabel">
-        <div class="form-item-label">
+      <template #label >
+        <div v-if="!hideLabel" class="form-item-label">
           <div :style="schema.labelBold && 'font-weight: bold'">{{ label }}</div>
           <div class="ico" v-if="help">
             <el-tooltip class="box-item" effect="dark" :content="help">
