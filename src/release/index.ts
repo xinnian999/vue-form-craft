@@ -1,20 +1,20 @@
-import axios from 'axios'
-import { ElLoading } from 'element-plus'
-import { FormRender, FormDesign } from '@/components'
-import { $global } from '@/config/symbol'
-import mergeElements from './mergeElements'
-import type { App } from 'vue'
+import { FormDesign, FormRender } from '@/components'
 import type {
-  FormSchema,
-  FormItemType,
-  FormElement,
   $Global,
+  FormElement,
+  FormItemType,
+  FormSchema,
   TemplateData
 } from '@/config/commonType'
+import { $global } from '@/config/symbol'
 import hljsVuePlugin from '@highlightjs/vue-plugin'
-import 'highlight.js/styles/panda-syntax-dark.css'
-import 'highlight.js/lib/common'
+import axios from 'axios'
+import { ElLoading } from 'element-plus'
 import 'element-plus/dist/index.css'
+import 'highlight.js/lib/common'
+import 'highlight.js/styles/panda-syntax-dark.css'
+import type { App } from 'vue'
+import mergeElements from './mergeElements'
 
 const install = function (app: App<Element>, options?: $Global) {
   if (options) {
@@ -35,4 +35,7 @@ const install = function (app: App<Element>, options?: $Global) {
 
 export default { install }
 
-export type { FormSchema, FormItemType, FormElement, $Global, TemplateData }
+export { FormDesign, FormRender }
+
+export type { $Global, FormElement, FormItemType, FormSchema, TemplateData }
+

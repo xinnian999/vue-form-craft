@@ -40,7 +40,6 @@ export type FormElement = {
   icon: string | VNode | Component
   type: 'assist' | 'layout' | 'basic' | 'high'
   order: number
-  attr?: FormItemType[]
   initialValues: Omit<FormItemType, 'name'>
   modelName?: string
   attrSchema: FormSchema

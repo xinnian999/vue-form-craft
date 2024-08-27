@@ -1,8 +1,9 @@
+import type {  FormItemType } from '@/release'
 import { getRandomId } from '@/utils'
 import { cloneDeep } from 'lodash'
 
-export const getCurrentByKey = (items, key) => {
-  return items.reduce((all, item) => {
+export const getCurrentByKey = (items: FormItemType[], key: string): FormItemType | null => {
+  return items.reduce<FormItemType | null>((all, item) => {
     if (item.designKey === key) {
       return item
     }
@@ -15,7 +16,7 @@ export const getCurrentByKey = (items, key) => {
   }, null)
 }
 
-export const setCurrentByKey = (items, element) => {
+export const setCurrentByKey = (items: FormItemType[], element: FormItemType): FormItemType[] => {
   return items.map((item) => {
     if (item.designKey === element.designKey) {
       return element
@@ -27,7 +28,7 @@ export const setCurrentByKey = (items, element) => {
   })
 }
 
-const copyChildren = (children) => {
+const copyChildren = (children: FormItemType[]) => {
   return children.map((child) => {
     const data = { ...cloneDeep(child), designKey: `form-${getRandomId(4)}`, name: getRandomId(8) }
 
@@ -39,8 +40,8 @@ const copyChildren = (children) => {
   })
 }
 
-export const copyItems = (list, id) => {
-  return list.reduce((all, current) => {
+export const copyItems = (list:FormItemType[], id:string):FormItemType[] => {
+  return list.reduce<FormItemType[]>((all, current) => {
     if (current.children) {
       all.push({ ...current, children: copyItems(current.children, id) })
     } else {
@@ -56,7 +57,7 @@ export const copyItems = (list, id) => {
       if (current.children) {
         newItem.children = copyChildren(current.children)
       }
-      if (current.label && !newItem.label.includes('copy')) {
+      if (current.label && !newItem.label?.includes('copy')) {
         newItem.label = newItem.label + ' copy'
       }
       all.push(newItem)
@@ -66,9 +67,11 @@ export const copyItems = (list, id) => {
   }, [])
 }
 
-export const changeItems = (items) => {
-  return items.map((item) => {
-    const config = item.initialValues || item
+
+export const changeItems = (items: FormItemType[]) => {
+  return items.map((item:any) => {
+
+    const config = item.initialValues|| item
 
     const data = {
       ...config,

@@ -26,10 +26,10 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps,defineModel } from 'vue'
-import { ElRadioGroup, ElRadio, ElRadioButton, ElSpace } from 'element-plus'
-import useSelect from '@/hooks/useSelect'
-import type { Direction, OptionType, SelectProps, SelectValue } from '@/config/commonType'
+import type { Direction, OptionType, SelectProps, SelectValue } from '@/config/commonType';
+import useSelect from '@/hooks/useSelect';
+import { ElRadio, ElRadioButton, ElRadioGroup, ElSpace } from 'element-plus';
+import { defineModel, defineProps } from 'vue';
 
 type Props = Omit<SelectProps, 'multiple'> & {
   optionType?: OptionType

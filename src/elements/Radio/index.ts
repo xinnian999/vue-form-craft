@@ -1,8 +1,8 @@
+import { IconRender } from '@/components'
 import type { FormElement } from '@/config/commonType'
+import { h } from 'vue'
 import Radio from './Radio.vue'
 import attrSchema from './attrSchema'
-import { h } from 'vue'
-import { IconRender } from '@/components'
 
 export default {
   name: '单选框组',

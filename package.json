@@ -1,9 +1,9 @@
 {
-  "name": "vue-form-craft",
+  "name": "vue-form-craft-4",
   "version": "4.0.0",
   "private": false,
   "type": "commonjs",
-  "types": "./dist/types/src/release/index.d.ts",
+  "types": "dist/index.d.ts",
   "scripts": {
     "dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
