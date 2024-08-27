@@ -1,4 +1,4 @@
-import { isEqual, cloneDeep } from 'lodash'
+import { isEqual, cloneDeep, isArray } from 'lodash'
 import type { FormItemType } from '@/config/commonType'
 import setDataByPath from './setDataByPath'
 import getDataByPath from './getDataByPath'
@@ -19,7 +19,27 @@ const handleLinkages: handleLinkagesType = ({ newVal, oldVal, formValues, formIt
       let temp = cloneDeep(formValues.value)
       item.change.forEach(({ target, value, condition }) => {
         if (condition !== false) {
-          temp = setDataByPath(temp, target, value)
+          if (target.includes('.*.')) {
+            //自增组件特殊处理
+            const targetArr = target.split('.*.')
+            const listTarget = targetArr.pop()!
+            const targetParse = targetArr.join('.')
+            const list = getDataByPath(newVal, targetParse)
+            if (isArray(list)) {
+              temp = setDataByPath(
+                temp,
+                targetParse,
+                list.map((item) => {
+                  return {
+                    ...item,
+                    [listTarget]: value
+                  }
+                })
+              )
+            }
+          } else {
+            temp = setDataByPath(temp, target, value)
+          }
         }
       })
       formValues.value = temp

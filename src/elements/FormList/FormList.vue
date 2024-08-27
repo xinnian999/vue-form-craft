@@ -99,7 +99,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps, defineModel, h, watchEffect, watch } from 'vue'
+import { computed, defineProps, defineModel, h, watch } from 'vue'
 import { ElFormItem, ElSpace, ElButton, ElCard, ElTableColumn, ElTable } from 'element-plus'
 import { FormItem, DefaultCanvasWrapper, IconRender } from '@/components'
 import { deepParse } from '@/utils'
@@ -132,7 +132,6 @@ const props = withDefaults(defineProps<Props>(), {
   name: ''
 })
 
-// const emit = defineEmits(['update:modelValue'])
 
 const list = defineModel<Record<string, any>[]>({ default: [] })
 
@@ -148,13 +147,11 @@ const handleAddItem = () => {
   if (isMax.value) {
     return
   }
-  // emit('update:modelValue', [...list.value, props.newItemDefaults(list.value.length)])
   list.value = [...list.value, props.newItemDefaults(list.value.length)]
 }
 
 const handleReduceItem = (index: number) => {
   const newData = list.value.filter((v, i) => i !== index)
-  // emit('update:modelValue', newData)
   list.value = newData
 }
 
@@ -169,7 +166,7 @@ const formatter = (item: FormItemType, data: Record<string, any>, index: number)
 
 // formList 值联动
 watch(list, (newVal, oldVal) => {
-  // console.log(newVal);
+  if (!props.children.some((item) => item.change)) return
 
   const changeIndex = newVal.reduce((acc, cur, index) => {
     if (!isEqual(cur, oldVal[index])) {
@@ -185,9 +182,7 @@ watch(list, (newVal, oldVal) => {
     if (item.change) {
       item.change.forEach((v) => {
         if (v.condition !== false) {
-          if (isString(v.condition) && /^{{\s*(.*?)\s*}}$/.test(v.condition)) {
-            return
-          }
+          if (isString(v.condition) && /^{{\s*(.*?)\s*}}$/.test(v.condition)) return
 
           const name = v.target.split('.').pop()!
           list.value[changeIndex][name] = v.value

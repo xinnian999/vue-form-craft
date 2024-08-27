@@ -4,6 +4,16 @@ export default {
   size: 'default',
   items: [
     {
+      label: '增添管理员',
+      name: 'vip',
+      component: 'Switch',
+      props: { 'inline-prompt': false },
+      designKey: 'design-kVO2111',
+      change: [
+        { target: 'users.*.vip', condition: '{{ $values.vip }}', value: 1 }
+      ]
+    },
+    {
       label: '增添用户',
       component: 'FormList',
       children: [
@@ -15,11 +25,11 @@ export default {
           },
           designKey: 'design-M91n',
           name: 'username',
-          change:[
+          change: [
             {
-              target:'users.[].vip',
-              condition:'{{ $item.username.includes("admin") }}',
-              value:1
+              target: 'users.[].vip',
+              condition: '{{ $item.username.includes("admin") }}',
+              value: 1
             }
           ]
         },
@@ -39,8 +49,8 @@ export default {
           name: 'vip',
           props: {
             'inline-prompt': false,
-            "active-value":1,
-            "inactive-value":0,
+            'active-value': 1,
+            'inactive-value': 0
           }
         }
       ],
