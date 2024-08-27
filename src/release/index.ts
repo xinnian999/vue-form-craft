@@ -8,22 +8,31 @@ import type {
 } from '@/config/commonType'
 import { $global } from '@/config/symbol'
 import hljsVuePlugin from '@highlightjs/vue-plugin'
-import axios from 'axios'
+import axios, { type AxiosInstance, type AxiosStatic } from 'axios'
 import { ElLoading } from 'element-plus'
 import 'element-plus/dist/index.css'
 import 'highlight.js/lib/common'
 import 'highlight.js/styles/panda-syntax-dark.css'
 import type { App } from 'vue'
-import mergeElements from './mergeElements'
+import elements from '@/elements'
 
-const install = function (app: App<Element>, options?: $Global) {
-  if (options) {
-    const { request = axios, customElements = {} } = options
-    app.provide($global, {
-      request,
-      elements: mergeElements(customElements)
-    })
+type Options = {
+  request?: AxiosStatic | AxiosInstance
+  extendElements?: Record<string, FormElement>
+}
+
+const install = function (app: App<Element>, options?: Options) {
+  const globalConfig = {
+    request: axios,
+    elements
   }
+
+  if (options) {
+    Object.assign(globalConfig, options)
+    Object.assign(globalConfig.elements, options.extendElements)
+  }
+
+  app.provide($global, globalConfig)
 
   app.use(hljsVuePlugin)
 
@@ -38,4 +47,3 @@ export default { install }
 export { FormDesign, FormRender }
 
 export type { $Global, FormElement, FormItemType, FormSchema, TemplateData }
-

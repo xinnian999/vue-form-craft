@@ -24,7 +24,7 @@
       :rules="computeRules"
       :class="thisProps.class"
     >
-      <template #label >
+      <template #label>
         <div v-if="!hideLabel" class="form-item-label">
           <div :style="schema.labelBold && 'font-weight: bold'">{{ label }}</div>
           <div class="ico" v-if="help">
@@ -49,7 +49,7 @@
             :disabled="schema.disabled"
             :size="schema.size"
             v-bind="formItemProps"
-            v-model:[config.modelName!]="value"
+            v-model:[config.modelName]="value"
             :design="design"
           />
         </el-dialog>
@@ -63,7 +63,7 @@
         :disabled="schema.disabled"
         :size="schema.size"
         v-bind="formItemProps"
-        v-model:[config.modelName!]="value"
+        v-model:[config.modelName]="value"
         :design="design"
       />
     </el-form-item>
@@ -163,7 +163,12 @@ const computeRules = computed(() => {
 })
 
 const config = computed(() => {
-  return elements[thisProps.component] || {}
+  const data = elements[thisProps.component] || {}
+  if (!data.modelName) {
+    data.modelName = 'modelValue'
+  }
+  
+  return data
 })
 
 const formItemProps = computed(() => {

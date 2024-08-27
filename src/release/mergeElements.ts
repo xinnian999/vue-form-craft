@@ -11,7 +11,6 @@ const handle = (customElements: { [key: string]: FormElement }) => {
         ...value,
         component: customData.component,
         modelName: customData.modelName || 'modelValue',
-        attr: customData.attr || value.attr
       })
     }
 

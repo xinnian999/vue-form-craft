@@ -48,10 +48,9 @@
 import draggable from 'vuedraggable-es'
 import { inject, defineProps, computed, isVNode } from 'vue'
 import { ElButton, ElDrawer, ElSpace } from 'element-plus'
-import IconRender from '@/components/IconRender.vue'
-import { $schema } from '@/config/symbol'
+import { $global, $schema } from '@/config/symbol'
 import { ref } from 'vue'
-import menus from './menus'
+import parseMenus from './menus'
 import template from '@/template'
 import type { FormSchema, TemplateData } from '@/config/commonType'
 
@@ -66,6 +65,10 @@ const props = withDefaults(
 const drawerVisible = ref(false)
 
 const { updateSchema } = inject($schema, { updateSchema: (schema) => {} })
+
+const { elements } = inject($global)!
+
+const menus = parseMenus(elements)
 
 const menuList = computed(() => {
   return menus.map((item) => ({
