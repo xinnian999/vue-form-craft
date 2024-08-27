@@ -14,7 +14,8 @@ export default {
     props: {
       title: '标题',
       type: 'h3'
-    }
+    },
+    hideLabel:true
   },
   attrSchema:{
     size: 'small',

@@ -20,6 +20,7 @@ export default {
       description: '这是一个描述',
       closable: true,
       'show-icon': true
-    }
+    },
+    hideLabel:true
   }
 } as FormElement

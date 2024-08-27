@@ -17,7 +17,8 @@ export default {
       type: 'datetime',
       placeholder: '请选择日期',
       clearable: false
-    }
+    },
+    hideLabel:true
   },
   attrSchema
 } as FormElement

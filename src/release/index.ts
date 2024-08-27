@@ -35,4 +35,4 @@ const install = function (app: App<Element>, options?: $Global) {
 
 export default { install }
 
-export type { FormSchema,  FormItemType, FormElement, $Global, TemplateData }
+export type { FormSchema, FormItemType, FormElement, $Global, TemplateData }

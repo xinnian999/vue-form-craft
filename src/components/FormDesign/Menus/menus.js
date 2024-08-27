@@ -14,10 +14,6 @@ const menus = [
     children: getChildren('basic')
   },
   {
-    title: '高级字段',
-    children: getChildren('high')
-  },
-  {
     title: '布局字段',
     children: getChildren('layout')
   },
