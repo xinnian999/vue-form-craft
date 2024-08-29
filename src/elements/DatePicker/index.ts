@@ -21,4 +21,4 @@ export default {
     hideLabel:true
   },
   attrSchema
-} as FormElement
+} satisfies FormElement

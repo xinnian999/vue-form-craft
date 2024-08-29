@@ -28,4 +28,4 @@ export default {
       space: 20
     }
   }
-} as FormElement
+} satisfies FormElement

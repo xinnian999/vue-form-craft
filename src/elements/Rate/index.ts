@@ -15,4 +15,4 @@ export default {
     label: '评分',
     component: 'Rate'
   }
-} as FormElement
+} satisfies FormElement

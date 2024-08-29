@@ -17,7 +17,7 @@ import type { App } from 'vue'
 import elements from '@/elements'
 
 type Options = {
-  request?: AxiosStatic | AxiosInstance
+  request?: AxiosStatic | AxiosInstance | Function
   extendElements?: Record<string, FormElement>
 }
 

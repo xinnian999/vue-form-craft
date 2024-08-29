@@ -21,4 +21,4 @@ export default {
       controlsPosition:''
     },
   }
-} as FormElement
+} satisfies FormElement

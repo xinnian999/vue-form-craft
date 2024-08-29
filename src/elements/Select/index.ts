@@ -26,4 +26,4 @@ export default {
       valueKey: 'value'
     }
   }
-} as FormElement
+} satisfies FormElement

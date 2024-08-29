@@ -1,3 +1,5 @@
+import type { FormSchema } from "@/config/commonType";
+
 export default {
   size: 'small',
   labelAlign: 'top',
@@ -63,4 +65,4 @@ export default {
       dialog: true
     }
   ]
-}
+} satisfies FormSchema

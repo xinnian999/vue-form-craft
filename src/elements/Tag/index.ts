@@ -41,4 +41,4 @@ export default {
         }
       },
     ]}
-} as FormElement
+} satisfies FormElement

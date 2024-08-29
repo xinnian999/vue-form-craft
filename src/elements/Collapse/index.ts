@@ -57,4 +57,4 @@ export default {
       name: 'children'
     }
   ]}
-} as FormElement
+} satisfies FormElement

@@ -15,4 +15,4 @@ export default {
     component: 'ColorPicker'
   },
   attrSchema
-} as FormElement
+} satisfies FormElement

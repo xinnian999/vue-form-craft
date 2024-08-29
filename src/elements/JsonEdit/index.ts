@@ -12,4 +12,4 @@ export default {
   order: 14,
   attrSchema,
   initialValues: { label: 'JSON编辑器', component: 'JsonEdit', props: {} }
-} as FormElement
+} satisfies FormElement

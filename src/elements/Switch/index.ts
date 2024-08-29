@@ -12,4 +12,4 @@ export default {
   order: 8,
   attrSchema,
   initialValues: { label: '开关', component: 'Switch', props: { 'inline-prompt': false } },
-} as FormElement
+} satisfies FormElement

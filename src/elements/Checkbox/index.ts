@@ -2,6 +2,7 @@ import { IconRender } from '@/components'
 import attrSchema from './attrSchema'
 import Checkbox from './Checkbox.vue'
 import { h } from 'vue'
+import type { FormElement } from '@/release'
 
 export default {
   name: '多选框组',
@@ -27,4 +28,4 @@ export default {
       space: 20
     }
   },
-}
+} satisfies FormElement

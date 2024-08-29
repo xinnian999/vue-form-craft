@@ -1,3 +1,5 @@
+import type { FormSchema } from "@/release";
+
 export default {
   size: 'small',
   labelAlign: 'top',
@@ -7,7 +9,7 @@ export default {
       label: '唯一标识',
       component: 'Input',
       name: 'name',
-      help: "既是唯一标识，也是数据路径。比如输入【props.name】，数据就会保存为 { props: { name:'xxx' } }"
+      help: "既是唯一标识，也是数据路径。比如输入【props.name】，数据就会保存为 { props: { name:'xxx' } }",
     },
     { label: '字段说明', component: 'Textarea', name: 'help' },
     {
@@ -196,4 +198,4 @@ export default {
       ]
     }
   ]
-}
+} as FormSchema

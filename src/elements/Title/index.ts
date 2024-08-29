@@ -42,4 +42,4 @@ export default {
       },
       { label: '字体倾斜', component: 'Switch', name: 'props.italic' }
     ]}
-} as FormElement
+} satisfies FormElement

@@ -4,7 +4,7 @@ layout: home
 
 hero:
   name: "Vue Form Craft"
-  text: "一个VUE的表单快速生成工具"
+  text: "VUE表单快速生成工具"
   tagline: 让你免去vue项目中表单的烦恼
   image:
     src: /favicon.svg

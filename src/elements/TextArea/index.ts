@@ -19,4 +19,4 @@ export default {
       placeholder: '请输入...'
     }
   }
-} as FormElement
+} satisfies FormElement

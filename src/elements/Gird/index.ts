@@ -28,4 +28,4 @@ export default {
         { label: '行间距', component: 'InputNumber', name: 'props.row-gap', props: { unit: 'px' } }
       ]
   }
-} as FormElement
+} satisfies FormElement

@@ -1,6 +1,6 @@
 import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
-import { request } from '@/utils'
+import request from './request'
 import './custom.css'
 
 export default {
@@ -8,7 +8,6 @@ export default {
   async enhanceApp({ app }) {
     if (!import.meta.env.SSR) {
       const { default: VueFormCraft } = await import('@/release/index')
-      // @ts-ignore
       app.use(VueFormCraft, { request })
     }
   }

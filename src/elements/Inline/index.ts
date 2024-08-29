@@ -1,5 +1,6 @@
 import Inline from './Inline.vue'
 import { IconRender } from '@/components'
+import type { FormElement } from '@/release'
 import { h } from 'vue'
 
 export default {
@@ -39,4 +40,4 @@ export default {
       { label: '自动换行', component: 'Switch', name: 'props.autoWrap' }
     ]
   }
-}
+}  satisfies FormElement

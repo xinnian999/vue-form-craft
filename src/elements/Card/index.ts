@@ -24,4 +24,4 @@ export default {
       { label: '卡片标题', component: 'Input', name: 'props.header' }
     ]
   }
-} as FormElement
+} satisfies FormElement

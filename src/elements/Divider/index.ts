@@ -17,4 +17,4 @@ export default {
       title: '分割线'
     }
   }
-} as FormElement
+} satisfies FormElement

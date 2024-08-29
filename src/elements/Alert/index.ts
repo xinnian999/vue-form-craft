@@ -22,5 +22,6 @@ export default {
       'show-icon': true
     },
     hideLabel:true
-  }
-} as FormElement
+  },
+  
+} satisfies FormElement

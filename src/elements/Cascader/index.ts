@@ -2,6 +2,7 @@ import { h } from 'vue'
 import IconRender from '@/components/IconRender.vue'
 import Cascader from './Cascader.vue'
 import attrSchema from './attrSchema'
+import type { FormElement } from '@/release'
 
 export default {
   name: '级联选择器',
@@ -62,4 +63,5 @@ export default {
       ]
     }
   }
-}
+} satisfies FormElement
+ 

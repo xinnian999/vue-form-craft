@@ -19,4 +19,4 @@ export default {
     }
   },
   attrSchema
-} as FormElement
+} satisfies FormElement
