@@ -1,5 +1,5 @@
 <template>
-  <div id="formDesign" v-bind="$attrs">
+  <div id="FormDesign" v-bind="$attrs">
     <div class="formItemList">
       <Menus :templates="templates" :omitMenus="omitMenus" />
     </div>
@@ -16,7 +16,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref, provide, computed, defineProps, defineEmits, defineOptions, watchEffect } from 'vue'
+import {
+  ref,
+  provide,
+  computed,
+  defineProps,
+  defineEmits,
+  defineOptions,
+  watchEffect,
+  defineModel
+} from 'vue'
 import { recursionDelete } from '@/utils'
 import Menus from './Menus/index.vue'
 import Canvas from './Canvas/index.vue'
@@ -45,11 +54,13 @@ const currentKey = ref('')
 
 const hoverKey = ref<string>('')
 
-const currentSchema = ref<FormSchema>({
-  labelWidth: 150,
-  labelAlign: 'right',
-  size: 'default',
-  items: []
+const currentSchema = defineModel<FormSchema>({
+  default: {
+    labelWidth: 150,
+    labelAlign: 'right',
+    size: 'default',
+    items: []
+  }
 })
 
 const list = computed({
@@ -91,7 +102,7 @@ provide($methods, {
     list.value = recursionDelete(list.value, (item) => item.designKey !== element.designKey)
   },
   handleCopyItem: (element: FormItemType) => {
-    list.value = copyItems(list.value, element.designKey)
+    list.value = copyItems(list.value, element.designKey!)
   },
   handleSave: () => {
     emit('onSave', currentSchema.value)
@@ -100,7 +111,7 @@ provide($methods, {
 </script>
 
 <style lang="less">
-#formDesign {
+#FormDesign {
   display: flex;
   height: 100%;
   box-sizing: border-box;

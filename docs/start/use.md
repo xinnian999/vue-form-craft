@@ -21,6 +21,20 @@ app.use(VueFormCraft)
 app.mount('#app')
 ```
 
+## 全局组件类型提示
+
+如下配置，即可开启全局组件的类型提示
+
+```json
+// tsconfig.json
+{
+  "compilerOptions": {
+    // ...
+    "types": ["vue-form-craft/global"]
+  }
+}
+```
+
 ## 使用表单设计器
 
 通过表单设计器拖拖拽拽，快速生成JsonSchema！
@@ -90,16 +104,3 @@ const handleSubmit = async () => {
 </script>
 ```
 
-## 全局组件类型提示
-
-如下配置，即可开启全局组件的类型提示
-
-```json
-// tsconfig.json
-{
-  "compilerOptions": {
-    // ...
-    "types": ["vue-form-craft/global"]
-  }
-}
-```
