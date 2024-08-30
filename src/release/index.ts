@@ -4,7 +4,8 @@ import type {
   FormElement,
   FormItemType,
   FormSchema,
-  TemplateData
+  TemplateData,
+  FormRenderInstance
 } from '@/config/commonType'
 import { $global } from '@/config/symbol'
 import hljsVuePlugin from '@highlightjs/vue-plugin'
@@ -46,4 +47,4 @@ export default { install }
 
 export { FormDesign, FormRender }
 
-export type { $Global, FormElement, FormItemType, FormSchema, TemplateData }
+export type { $Global, FormElement, FormItemType, FormSchema, TemplateData, FormRenderInstance }

@@ -1,3 +1,4 @@
+import type FormRender from '@/components/FormRender.vue'
 import type { Component, VNode } from 'vue'
 
 export interface FormItemType {
@@ -76,3 +77,5 @@ export interface SelectProps {
 }
 
 export type SelectValue = string | number | boolean
+
+export type FormRenderInstance=InstanceType<typeof FormRender>
