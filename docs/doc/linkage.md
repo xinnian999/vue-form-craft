@@ -7,14 +7,16 @@ import Linkage4 from './linkageDemo/linkage4.vue'
 
 # 表单联动
 
-要评价一个表单工具能力强不强，表单联动能力至关重要。 **vue-form-craft** 通过 **模板引擎** 动态生成JsonSchema，让表单联动变得非常容易。
+要评价一个表单工具能力强不强，表单联动能力至关重要。 
+
+`vue-form-craft` 提供了一种**极其简单且灵活**的表单联动实现方式！
 
 ## 模板表达式
 
 ::: v-pre
-模板表达式为字符串格式，以双花括号 {{ ... }}为语法特征，对于简单的联动提供一种简洁的配置方式。
+模板表达式为字符串格式，以双花括号 {{ ... }} 为语法特征，对于字段间联动提供一种简洁的配置方式。
 
-在JsonSchema中，被双花括号包裹的字符串一律会被解析为 **js表达式并返回结果**，且只能使用联动变量。这种联动方式能应对大部分联动场景😎
+在JsonSchema中，被双花括号包裹的字符串一律会被解析为 **js表达式并返回结果**，且可以使用一些联动变量。这种联动方式能应对大部分联动场景😎
 
 例如：控制字段禁用、隐藏、文案提示等交互。
 ::: 
@@ -36,11 +38,11 @@ import Linkage4 from './linkageDemo/linkage4.vue'
       }
     },
     {
-      "label": "自我介绍",
+      "label": "简介",
       "component": "TextArea",
       "name": "desc",
       "props": {
-        "placeholder": "{{ $values.name + '的自我介绍' }}",
+        "placeholder": "{{ $values.name + '的简介' }}",
         "disabled":"{{ !$values.name }}"
       }
     }

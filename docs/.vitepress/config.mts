@@ -10,8 +10,8 @@ export default defineConfig({
   vite: {
     resolve: {
       alias: {
-        '@': fileURLToPath(new URL('../../src/', import.meta.url))
-        // 'vue-form-craft': fileURLToPath(new URL('../../src/release', import.meta.url))
+        '@': fileURLToPath(new URL('../../src/', import.meta.url)),
+        'vue-form-craft': fileURLToPath(new URL('../../src/release', import.meta.url))
       }
     },
     server: {
@@ -19,8 +19,8 @@ export default defineConfig({
     },
     plugins: [viteCommonjs() as any]
   },
-  vue:{
-    script:{
+  vue: {
+    script: {
       defineModel: true
     }
   },
@@ -30,31 +30,32 @@ export default defineConfig({
     logo: '/favicon.svg',
     nav: [
       { text: '首页', link: '/' },
-      { text: '指南', link: '/start/introduce' },
-      { text: '文档', link: '/doc/form-design-doc' },
-      { text: '表单设计', link: '/form-design' }
+      { text: '文档', link: '/doc/introduce' },
+      { text: '表单设计', link: '/demo/form-design' }
     ],
 
     sidebar: {
-      '/start/': [
-        {
-          text: '快速开始',
-          items: [
-            { text: '简介', link: '/start/introduce' },
-            { text: '快速上手', link: '/start/use' }
-          ]
-        }
-      ],
       '/doc/': [
         {
-          text: '文档',
+          text: '基础',
+          items: [
+            { text: '简介', link: '/doc/introduce' },
+            { text: '快速开始', link: '/doc/use' }
+          ]
+        },
+        {
+          text: '进阶',
+          items: [
+            { text: 'JsonSchema详解', link: '/doc/schema' },
+            { text: '表单联动', link: '/doc/linkage' },
+            { text: '深层数据绑定', link: '/doc/deepName' }
+          ]
+        },
+        {
+          text: '组件',
           items: [
             { text: 'FormDesign 表单设计器', link: '/doc/form-design-doc' },
-            { text: 'FormRender 表单渲染器', link: '/doc/form-render-doc' },
-            { text: 'Schema详解', link: '/doc/schema' },
-            { text: '表单联动', link: '/doc/linkage' },
-            { text: '全局配置', link: '/doc/globalConfig' },
-            { text: '低代码开发方案', link: '/doc/lowCode' }
+            { text: 'FormRender 表单渲染器', link: '/doc/form-render-doc' }
           ]
         }
       ]

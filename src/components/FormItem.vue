@@ -49,7 +49,7 @@
             :disabled="schema.disabled"
             :size="schema.size"
             v-bind="formItemProps"
-            v-model:[config.modelName]="value"
+            v-model:[config.modelName!]="value"
             :design="design"
           />
         </el-dialog>
@@ -63,7 +63,7 @@
         :disabled="schema.disabled"
         :size="schema.size"
         v-bind="formItemProps"
-        v-model:[config.modelName]="value"
+        v-model:[config.modelName!]="value"
         :design="design"
       />
     </el-form-item>

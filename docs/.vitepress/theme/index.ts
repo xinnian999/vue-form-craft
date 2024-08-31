@@ -7,7 +7,7 @@ export default {
   extends: DefaultTheme,
   async enhanceApp({ app }) {
     if (!import.meta.env.SSR) {
-      const { default: VueFormCraft } = await import('@/release/index')
+      const { default: VueFormCraft } = await import('vue-form-craft')
       app.use(VueFormCraft, { request })
     }
   }

@@ -1,22 +1,22 @@
-# 快速上手
+# 快速开始
 
 ## 安装
 
-```xml
-npm i vue-form-craft
+```sh
+$ npm i vue-form-craft
 ```
 
 ## 全局注册
+
+将会在你的vue项目中，全局注册 **表单设计器** 、**表单渲染器**
+
 ```ts
 import { createApp } from 'vue'
 import App from './App.vue'
-import ElementPlus from 'element-plus'
-import 'element-plus/dist/index.css'
 import VueFormCraft from 'vue-form-craft'
 
 const app = createApp(App)
 
-app.use(ElementPlus)
 app.use(VueFormCraft)
 app.mount('#app')
 ```
@@ -43,21 +43,19 @@ app.mount('#app')
 
 ```vue
 <template>
-  <form-design @onSave="onSave" />
+  <div style="width:100vw;height:100vh">
+    <FormDesign />
+  </div>
 </template>
-
-<script setup>
-const onSave = (newSchema) => {
-  console.log(newSchema)
-}
-</script>
 ```
 
 ## 使用表单渲染器
 
 将设计器生成的JsonSchema传递给渲染器，即可轻松构建出一个表单！
 
-```vue
+::: code-group
+
+```vue [TypeScript]
 <template>
   <FormRender v-model="formValues" :schema="schema" ref="formRef" />
   <el-button @click="handleSubmit">提交</el-button>
@@ -104,3 +102,50 @@ const handleSubmit = async () => {
 </script>
 ```
 
+```vue [JavaScript]
+<template>
+  <FormRender v-model="formValues" :schema="schema" ref="formRef" />
+  <el-button @click="handleSubmit">提交</el-button>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+
+const formRef = ref()
+
+const formValues = ref({})
+
+const schema = {
+  labelWidth: 150,
+  labelAlign: 'right',
+  size: 'default',
+  items: [
+    {
+      label: '用户名',
+      component: 'Input',
+      name: 'username',
+      required: true,
+      props: {
+        placeholder: '请输入用户名'
+      }
+    },
+    {
+      label: '密码',
+      component: 'Password',
+      name: 'password',
+      required: true,
+      props: {
+        placeholder: '请输入密码'
+      }
+    }
+  ]
+}
+
+const handleSubmit = async () => {
+  await formRef.value?.validate()
+  alert(JSON.stringify(formValues.value))
+}
+</script>
+```
+
+:::

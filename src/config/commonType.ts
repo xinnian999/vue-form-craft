@@ -1,6 +1,19 @@
 import type FormRender from '@/components/FormRender.vue'
 import type { Component, VNode } from 'vue'
 
+export type FormRule = {
+  type: 'email' | 'url' | 'custom' | string
+  customReg?: string
+  message?: string
+  trigger: 'blur' | 'change'
+}
+
+export type FormChange = {
+  target: string
+  value: any
+  condition?: any
+}
+
 export interface FormItemType {
   label?: string
   name: string
@@ -13,15 +26,11 @@ export interface FormItemType {
   hidden?: boolean | string
   hideLabel?: boolean
   designKey?: string
-  rules?: any[]
+  rules?: FormRule[]
   class?: any
   style?: any
   design?: boolean
-  change?: {
-    target: string
-    value: any
-    condition?: any
-  }[]
+  change?: FormChange[]
   dialog?: boolean
 }
 
@@ -78,4 +87,4 @@ export interface SelectProps {
 
 export type SelectValue = string | number | boolean
 
-export type FormRenderInstance=InstanceType<typeof FormRender>
+export type FormRenderInstance = InstanceType<typeof FormRender>

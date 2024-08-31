@@ -23,7 +23,6 @@ import {
   defineProps,
   defineEmits,
   defineOptions,
-  watchEffect,
   defineModel
 } from 'vue'
 import { recursionDelete } from '@/utils'
@@ -39,8 +38,7 @@ defineOptions({
   name: 'FormDesign'
 })
 
-const props = defineProps<{
-  schema?: FormSchema
+defineProps<{
   previewSchemaContext?: Record<string, any>
   templates?: TemplateData
   omitMenus?: string[]
@@ -79,12 +77,6 @@ const current = computed({
   set(element) {
     currentKey.value = element.designKey
     list.value = setCurrentByKey(currentSchema.value.items, element)
-  }
-})
-
-watchEffect(() => {
-  if (props.schema) {
-    currentSchema.value = props.schema
   }
 })
 
