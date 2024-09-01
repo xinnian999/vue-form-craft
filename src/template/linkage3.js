@@ -14,11 +14,11 @@ export default {
       change: [
         {
           target: 'item2',
-          value: '{{$val * 2}}'
+          value: '{{$values.item1 * 2}}'
         },
         {
           target: 'item3',
-          value: "{{$val + '元'}}"
+          value: "{{$values.item1 + '元'}}"
         }
       ]
     },

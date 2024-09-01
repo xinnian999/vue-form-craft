@@ -22,23 +22,18 @@ const templateParse = (str: string, context: Record<string,any>) => {
 }
 
 const deepParse = (prop: any, context: Record<string,any>): any => {
-  const $values = context.$values
 
   if (isString(prop)) {
     return templateParse(prop, context)
   }
+
   if (isPlainObject(prop)) {
     return Object.keys(prop).reduce((all, key) => {
-      const itemContext = { ...context }
 
-      if (prop.name && $values) {
-        itemContext.$val = getDataByPath($values, prop.name)
-        itemContext.$select = context.$selectData[prop.name]
-      }
-
-      return { ...all, [key]: deepParse(prop[key], itemContext) }
+      return { ...all, [key]: deepParse(prop[key], context) }
     }, {})
   }
+
   if (isArray(prop)) {
     return prop.map((item) => {
       return deepParse(item, context)

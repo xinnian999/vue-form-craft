@@ -1,5 +1,5 @@
 <template>
-  <FormRender :schema="schema" footer @onFinish="onFinish" style="max-width: 600px" />
+  <FormRender :schema="schema"  />
 </template>
 
 <script setup lang="ts">

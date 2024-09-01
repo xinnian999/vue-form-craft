@@ -1,6 +1,6 @@
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue",  "src/**/*.d.ts","src/**/**/*","docs/.vitepress/**/*","docs/demo/*.vue" ],
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue",  "src/**/*.d.ts","src/**/**/*","docs/.vitepress/**/*","docs/**/*.vue" ],
   "exclude": [],
   "compilerOptions": {
     "types": ["vite/client","./global.d.ts"],

@@ -36,7 +36,7 @@ export default {
       change: [
         {
           target: 'A002',
-          value: '{{ $select.vv }}'
+          value: '{{ $selectData.A001.vv }}'
         }
       ]
     },

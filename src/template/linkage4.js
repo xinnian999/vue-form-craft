@@ -34,7 +34,7 @@ export default {
       change: [
         {
           target: 'price',
-          value: '{{$select.price}}'
+          value: '{{$selectData.commodity.price}}'
         }
       ]
     },

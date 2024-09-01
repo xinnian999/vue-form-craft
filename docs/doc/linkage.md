@@ -1,4 +1,5 @@
 <script setup>
+import Linkage from './linkageDemo/linkage.vue'
 import Linkage1 from './linkageDemo/linkage1.vue'
 import Linkage2 from './linkageDemo/linkage2.vue'
 import Linkage3 from './linkageDemo/linkage3.vue'
@@ -7,21 +8,35 @@ import Linkage4 from './linkageDemo/linkage4.vue'
 
 # 表单联动
 
-要评价一个表单工具能力强不强，表单联动能力至关重要。 
+要评价一个表单工具能力强不强，表单联动能力至关重要。
 
-`vue-form-craft` 提供了一种**极其简单且灵活**的表单联动实现方式！
+`vue-form-craft` 提供了一套【**极其简单且灵活**】的表单联动实现方式！
 
-## 模板表达式
+分为【配置级联动】和【值联动】两种实现方式
+
+## 模板表达式（配置级联动）
 
 ::: v-pre
 模板表达式为字符串格式，以双花括号 {{ ... }} 为语法特征，对于字段间联动提供一种简洁的配置方式。
 
-在JsonSchema中，被双花括号包裹的字符串一律会被解析为 **js表达式并返回结果**，且可以使用一些联动变量。这种联动方式能应对大部分联动场景😎
+在JsonSchema中，被双花括号包裹的字符串一律会被解析为 **js表达式并返回结果**，且可以使用一些联动变量。
 
-例如：控制字段禁用、隐藏、文案提示等交互。
-::: 
+> Schema插值表达式 可以使用的联动变量：
+
+| 变量名      | 类型   | 描述                            |
+| ----------- | ------ | ------------------------------- |
+| $values     | Object | 整个表单的值                    |
+| $selectData | Object | 【选择类字段】选中项数据源合集  |
+| $item       | Object | 【自增组件】专用，单行的数据值  |
+| $index      | Object | 【自增组件】专用，单行的下标    |
+| ...         | any    | 由schemaContext传入的自定义变量 |
+
+这种联动方式能应对大部分联动场景，例如：控制字段禁用、隐藏、文案提示等交互。
+:::
 
 **JsonSchema 所有协议字段都支持模板表达式。**
+
+<Linkage/>
 
 ```json
 {
@@ -39,38 +54,87 @@ import Linkage4 from './linkageDemo/linkage4.vue'
     },
     {
       "label": "简介",
-      "component": "TextArea",
+      "component": "Textarea",
       "name": "desc",
       "props": {
-        "placeholder": "{{ $values.name + '的简介' }}",
-        "disabled":"{{ !$values.name }}"
+        "placeholder": "{{ $values.name + '的简介' }}", // 联动实现
+        "disabled": "{{ !$values.name }}" // 联动实现
       }
     }
   ]
 }
 ```
 
-**Schema 所有协议字段都支持插值表达式。**
 
-> Schema插值表达式 可以使用的联动变量：
-
-| 变量名      | 类型   | 描述                                                     |
-| ----------- | ------ | -------------------------------------------------------- |
-| $val        | any    | 当前字段值                                               |
-| $select     | Object | 当前字段如果是【选择类字段】，这个就是选中项对应的数据源 |
-| $values     | Object | 整个表单的值                                             |
-| $selectData | Object | 【选择类字段】选中项数据源合集                           |
-| $item       | Object | 【自增组件】专用，单行的数据值                           |
-| ...         | any    | 由schemaContext传入的自定义变量                          |
 
 <br/>
 
-### 举个栗子1
+## change配置（值联动）
 
-评分低于3星可以输入差评原因
+上面的模版表达式只可以实现配置间的联动，不能实现 **修改表单值** 类的联动，所以给每个字段提供了一个change配置。
+
+配置了change，就会在这个字段的值改变时，才会触发change联动
+
+change是一个数组，可以同时联动多个字段。target为目标字段，value是修改的值，也支持模版表达式。
+
+
+<Linkage3/>
+
+```json
+{
+  "labelWidth": 150,
+  "labelAlign": "right",
+  "size": "default",
+  "items": [
+    {
+      "label": "字段1",
+      "component": "Input",
+      "props": {
+        "placeholder": "请输入..."
+      },
+      "designKey": "form-NASi",
+      "name": "item1",
+      "change": [
+        {
+          "target": "item2",
+          "value": "{{$values.item1 * 2}}" // 联动
+        },
+        {
+          "target": "item3",
+          "value": "{{$values.item1 + '元'}}" //联动
+        }
+      ]
+    },
+    {
+      "label": "字段2",
+      "component": "Input",
+      "props": {
+        "placeholder": "请输入..."
+      },
+      "designKey": "form-Nasd",
+      "name": "item2"
+    },
+    {
+      "label": "字段3",
+      "component": "Input",
+      "props": {
+        "placeholder": "请输入..."
+      },
+      "designKey": "form-KI1N",
+      "name": "item3"
+    }
+  ]
+}
+```
+
+
+## 在线示例
+
+### 评分低于3星可以输入差评原因
+
+<br/>
 
 <Linkage1/>
-
 
 ::: details 查看代码
 
@@ -78,53 +142,17 @@ import Linkage4 from './linkageDemo/linkage4.vue'
 
 :::
 
-### 举个栗子2
-
-【文章】需要依赖【分类】去查询，所以【分类】没选时，需要隐藏【文章】。
-
-【分类】改变时，动态改变传给【文章】的接口参数
-
-<Linkage2/>
-
-
-::: details 查看代码
-
-<<< ./linkageDemo/linkage2.vue
-
-:::
-
-
-## change配置
-
-上面的插值表达式只能做配置级的联动，不能做 **修改表单值** 类的联动，所以给每个字段提供了一个change配置。
-
-change是一个数组，可以同时联动多个字段。target为目标字段，value是修改的值，也支持插值表达式。
-
-配置了change，就会在这个字段的值改变时，才会触发change联动
 
 <br/>
 
-### 举个栗子3
+### 选完商品，显示价格
 
-<Linkage3/>
-
-
-::: details 查看代码
-
-<<< ./linkageDemo/linkage3.vue
-
-:::
-
-### 举个栗子4
-
-一些场景需要根据已选值的数据源中取某个字段，再给其他字段使用，这就可以用上 **$select** 了
+<br/>
 
 <Linkage4/>
-
 
 ::: details 查看代码
 
 <<< ./linkageDemo/linkage4.vue
 
 :::
-
