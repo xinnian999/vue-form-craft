@@ -34,7 +34,7 @@ const schema = {
       },
       designKey: 'form-XyJs',
       name: 'reason',
-      hidden: '{{$values.rate>=3 || !$values.rate}}'
+      hidden: '{{ $values.rate>=3 || !$values.rate }}' // 评分未选中 或 评分<3时隐藏差评原因
     }
   ]
 }

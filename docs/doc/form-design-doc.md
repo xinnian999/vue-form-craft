@@ -18,24 +18,15 @@ const onSave = (newSchema) => {
 
 ## Props
 
-| 参数名               | 类型           | 默认值 | 是否必传 | 描述                          |
-| -------------------- | -------------- | ------ | -------- | ----------------------------- |
-| schema               | object         | {}     | No       | 设计器的初始Schema            |
-| omitMenus            | string[]       | {}     | No       | 隐藏左侧组件key数组           |
-| templates            | templateType[] | {}     | No       | 定制左侧可用模板              |
-| previewSchemaContext | object         | {}     | No       | **表单预览** 的自定义联动变量 |
-| style                | any            | ———    | No       | 设计器的style                 |
-| class                | any            | ———    | No       | 设计器的class                 |
-
-**templateType**
-
-| 参数名 | 类型   | 描述         |
-| ------ | ------ | ------------ |
-| name   | string | 模板名称     |
-| schema | object | 模板的Schema |
+| 参数名        | 类型           | 默认值 | 描述                                          |
+| ------------- | -------------- | ------ | --------------------------------------------- |
+| v-model       | `FormSchema`   | -      | 设计器的Schema                            |
+| schemaContext | `object`       | -      | Schema自定义的 [联动变量](/doc/linkage) |
+| omitMenus     | `string[]`     | []     | 隐藏左侧组件key数组                           |
+| templates     | `TemplateData` | -      | 定制左侧可用模板                              |
 
 ## Events
 
-| 事件名 | 类型         | 描述               |
-| ------ | ------------ | ------------------ |
-| onSave | schema=>void | 点击保存按钮时触发 |
+| 事件名 | 类型       | 描述               |
+| ------ | ---------- | ------------------ |
+| onSave | `()=>void` | 点击保存按钮时触发 |

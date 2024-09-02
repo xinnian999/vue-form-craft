@@ -1,39 +1,127 @@
+<script setup>
+import FormRender from '../demo/FormRender.vue'
+
+</script>
+
 # FormRender 表单渲染器
 
 ## 简介
 
 FormRender 是 vue-form-craft 的渲染组件。
 
-<div class='login'></div>
+<FormRender/>
+
+::: code-group
+
+```vue [TypeScript]
+<template>
+  <FormRender v-model="formValues" :schema="schema" ref="formRef" />
+  <el-button @click="handleSubmit">提交</el-button>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import type { FormSchema, FormRenderInstance } from 'vue-form-craft'
+
+const formRef = ref<FormRenderInstance>()
+
+const formValues = ref({})
+
+const schema: FormSchema = {
+  labelWidth: 150,
+  labelAlign: 'right',
+  size: 'default',
+  items: [
+    {
+      label: '用户名',
+      component: 'Input',
+      name: 'username',
+      required: true,
+      props: {
+        placeholder: '请输入用户名'
+      }
+    },
+    {
+      label: '密码',
+      component: 'Password',
+      name: 'password',
+      required: true,
+      props: {
+        placeholder: '请输入密码'
+      }
+    }
+  ]
+}
+
+const handleSubmit = async () => {
+  await formRef.value?.validate()
+  alert(JSON.stringify(formValues.value))
+}
+</script>
+```
+
+```vue [JavaScript]
+<template>
+  <FormRender v-model="formValues" :schema="schema" ref="formRef" />
+  <el-button @click="handleSubmit">提交</el-button>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+
+const formRef = ref()
+
+const formValues = ref({})
+
+const schema = {
+  labelWidth: 150,
+  labelAlign: 'right',
+  size: 'default',
+  items: [
+    {
+      label: '用户名',
+      component: 'Input',
+      name: 'username',
+      required: true,
+      props: {
+        placeholder: '请输入用户名'
+      }
+    },
+    {
+      label: '密码',
+      component: 'Password',
+      name: 'password',
+      required: true,
+      props: {
+        placeholder: '请输入密码'
+      }
+    }
+  ]
+}
+
+const handleSubmit = async () => {
+  await formRef.value?.validate()
+  alert(JSON.stringify(formValues.value))
+}
+</script>
+```
+
+:::
 
 ## Props
 
-| 参数名        | 类型    | 默认值  | 是否必传 | 描述                                               |
-| ------------- | ------- | ------- | -------- | -------------------------------------------------- |
-| v-model       | object  | ref({}) | No       | 表单数据对象，可用于设置表单值初始值等操作，可不传 |
-| schema        | object  | ——      | No       | 表单Schema配置，纯JSON，用于描述表单结构           |
-| schemaContext | object  | {}      | No       | 表单Schema，自定义的 [联动变量](/doc/linkage)      |
-| footer        | Boolean | false   | No       | 显示表单底部提交按钮                               |
-| style         | any     | ——      | No       | 表单的style                                        |
-| class         | any     | ——      | No       | 表单的class                                        |
-
-## Events
-
-| 事件名         | 类型              | 描述                         |
-| -------------- | ----------------- | ---------------------------- |
-| onFinish       | values=>void      | 提交表单且表单校验成功后触发 |
-| onFinishFailed | errorFields=>void | 提交表单且表单校验失败后触发 |
-| onChange       | values=>void      | 表单值改变时触发             |
+| 参数名        | 类型     | 默认值 | 描述                                     |
+| ------------- | -------- | ------ | ---------------------------------------- |
+| v-model       | `object` | {}     | 表单值                                   |
+| schema        | `object` | ——     | 表单Schema配置，纯JSON，用于描述表单结构 |
+| schemaContext | `object` | {}     | Schema自定义的 [联动变量](/doc/linkage)  |
 
 ## Exposes
 
 > 组件暴露出的方法，通过ref调用
 
-| 名称          | 类型                    | 描述                                                                              |
-| ------------- | ----------------------- | --------------------------------------------------------------------------------- |
-| submit        | () => Promise\<values\> | 提交并校验表单，与submit按钮效果相同                                              |
-| validate      | () => Promise           | 校验表单                                                                          |
-| resetFields   | name[] => void          | 接收一个name数组，例如`['name','age']` 来重置一组字段为初始值，不传会重置所有字段 |
-| getFormValues | () => void              | 获取表单值                                                                        |
-| setFormValues | values => void          | 修改表单值，可用于表单回显                                                        |
-| context       | {}                      | 表单的[联动变量](/doc/linkage)                                                    |
+| 名称        | 类型             | 描述                                                                              |
+| ----------- | ---------------- | --------------------------------------------------------------------------------- |
+| validate    | `() => Promise`  | 校验表单                                                                          |
+| resetFields | `name[] => void` | 接收一个name数组，例如`['name','age']` 来重置一组字段为初始值，不传会重置所有字段 |
+| context     | `object`         | 表单的[联动变量](/doc/linkage)                                                    |

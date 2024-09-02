@@ -39,7 +39,7 @@ const schema = {
       change: [
         {
           target: 'price',
-          value: '{{$selectData.commodity.price}}'
+          value: '{{ $selectData.commodity.price }}'
         }
       ]
     },

@@ -97,11 +97,11 @@ change是一个数组，可以同时联动多个字段。target为目标字段�
       "change": [
         {
           "target": "item2",
-          "value": "{{$values.item1 * 2}}" // 联动
+          "value": "{{ $values.item1 * 2 }}" // 联动
         },
         {
           "target": "item3",
-          "value": "{{$values.item1 + '元'}}" //联动
+          "value": "{{ $values.item1 + '元' }}" //联动
         }
       ]
     },

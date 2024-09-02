@@ -5,7 +5,7 @@
     </div>
 
     <div class="formRender">
-      <Actions :previewSchemaContext="previewSchemaContext" />
+      <Actions :schemaContext="schemaContext" />
       <Canvas />
     </div>
 
@@ -39,13 +39,13 @@ defineOptions({
 })
 
 defineProps<{
-  previewSchemaContext?: Record<string, any>
+  schemaContext?: Record<string, any>
   templates?: TemplateData
   omitMenus?: string[]
 }>()
 
 const emit = defineEmits<{
-  onSave: [schema: FormSchema]
+  onSave: []
 }>()
 
 const currentKey = ref('')
@@ -97,7 +97,7 @@ provide($methods, {
     list.value = copyItems(list.value, element.designKey!)
   },
   handleSave: () => {
-    emit('onSave', currentSchema.value)
+    emit('onSave')
   }
 })
 </script>

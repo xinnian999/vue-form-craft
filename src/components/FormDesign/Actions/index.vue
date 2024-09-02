@@ -59,7 +59,7 @@
         v-model="formValues"
         :schema="schema"
         ref="formRef"
-        :schemaContext="previewSchemaContext"
+        :schemaContext="schemaContext"
         :style="{ minHeight: '200px' }"
       />
 
@@ -107,7 +107,7 @@ const previewActions = [
 ]
 
 defineProps({
-  previewSchemaContext: {
+  schemaContext: {
     type: Object,
     default: () => ({})
   }
