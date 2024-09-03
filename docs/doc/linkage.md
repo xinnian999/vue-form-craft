@@ -36,7 +36,9 @@ import Linkage4 from './linkageDemo/linkage4.vue'
 
 **JsonSchema 所有协议字段都支持模板表达式。**
 
-<Linkage/>
+<ClientOnly>
+  <Linkage/>
+</ClientOnly>
 
 ```json
 {
@@ -77,8 +79,9 @@ import Linkage4 from './linkageDemo/linkage4.vue'
 
 change是一个数组，可以同时联动多个字段。target为目标字段，value是修改的值，也支持模版表达式。
 
-
+<ClientOnly>
 <Linkage3/>
+</ClientOnly>
 
 ```json
 {
@@ -134,7 +137,9 @@ change是一个数组，可以同时联动多个字段。target为目标字段�
 
 <br/>
 
+<ClientOnly>
 <Linkage1/>
+</ClientOnly>
 
 ::: details 查看代码
 
@@ -149,7 +154,9 @@ change是一个数组，可以同时联动多个字段。target为目标字段�
 
 <br/>
 
+<ClientOnly>
 <Linkage4/>
+</ClientOnly>
 
 ::: details 查看代码
 

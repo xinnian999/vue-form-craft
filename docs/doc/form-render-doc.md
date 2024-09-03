@@ -9,7 +9,9 @@ import FormRender from '../demo/FormRender.vue'
 
 FormRender 是 vue-form-craft 的渲染组件。
 
+<ClientOnly>
 <FormRender/>
+</ClientOnly>
 
 ::: code-group
 
