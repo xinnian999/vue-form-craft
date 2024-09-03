@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress'
 import { fileURLToPath, URL } from 'node:url'
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
+import mdDemo from './mdDemo'  
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -62,5 +63,10 @@ export default defineConfig({
     },
 
     socialLinks: [{ icon: 'github', link: 'https://github.com/vuejs/vitepress' }]
+  },
+  markdown: {
+    config: (md) => {
+      md.use(mdDemo)
+    }
   }
 })

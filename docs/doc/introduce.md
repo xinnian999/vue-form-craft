@@ -17,3 +17,9 @@ vue-form-craft主要由 **表单设计器FormDesign** 、 **表单渲染器FormR
 - 作者：Elin
 - 联系方式：17803000829
 - github: [github源码](https://github.com/xinnian999/vue-form-craft)
+
+::: demo
+
+doc/linkageDemo/linkage1.vue
+
+:::
