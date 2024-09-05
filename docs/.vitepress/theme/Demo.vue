@@ -1,5 +1,6 @@
 <template>
   <div id="vp-demo">
+    <slot name="source" />
     <pre>{{ decodeURIComponent(code) }}</pre>
   </div>
 </template>

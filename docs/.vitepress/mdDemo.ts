@@ -13,7 +13,7 @@ export default (md: any) => {
         const sourcePath = path.resolve('docs', filePath)
         const source = fs.readFileSync(sourcePath, 'utf-8')
 
-        return `<Demo code="${encodeURIComponent(source)}">` // 开始标签
+        return `<Demo code="${encodeURIComponent(source)}"><template #source><${filePath.split('.')[0].replaceAll('/', '-')}/></template>` // 开始标签
       } else {
         // 处理结束标签
         return '</Demo>\n' // 结束标签

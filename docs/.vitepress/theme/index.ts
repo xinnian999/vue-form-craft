@@ -1,5 +1,6 @@
 import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
+import FormRender from '../../demo/FormRender.vue'
 import './custom.css'
 
 export default {
@@ -15,6 +16,7 @@ export default {
       app.use(VueFormCraft, { request })
 
       app.component('Demo', Demo)
+      app.component('demo-FormRender', FormRender)
     }
   }
 } satisfies Theme
