@@ -20,6 +20,6 @@ vue-form-craft主要由 **表单设计器FormDesign** 、 **表单渲染器FormR
 
 ::: demo
 
-demo/FormRender.vue
+demo/test/FormRender.vue
 
 :::
