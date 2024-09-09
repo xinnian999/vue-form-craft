@@ -1,20 +1,11 @@
 import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import './custom.css'
+import { mdVueDemo } from 'vitepress-vue-demo'
+import 'vitepress-vue-demo/dist/style.css'
+import type { Component } from 'vue'
 
-const modules = import.meta.glob('../../demo/**/*', { eager: true })
-
-const components = Object.entries(modules).map(([path, module]) => {
-  const componentName = path
-    .replaceAll('../', '')
-    .replaceAll('./', '')
-    .replaceAll('/', '-')
-    .replace(/\.\w+$/, '')
-  return {
-    name: componentName,
-    component: (module as any).default
-  }
-})
+const modules = import.meta.glob<Component>('../../demo/**/*', { eager: true, import: 'default' })
 
 export default {
   extends: DefaultTheme,
@@ -23,16 +14,12 @@ export default {
       const { default: VueFormCraft } = await import('vue-form-craft')
       const { default: ElementPlus } = await import('element-plus')
       const { default: request } = await import('./request')
-      const { default: DemoContainer } = await import('./DemoContainer/index.vue')
+      // const { default: DemoContainer } = await import('./DemoContainer/index.vue')
 
       app.use(ElementPlus)
       app.use(VueFormCraft, { request })
 
-      app.component('DemoContainer', DemoContainer)
-
-      components.forEach(({ name, component }) => {
-        app.component(name, component)
-      })
+      app.use(mdVueDemo, { modules })
     }
   }
 } satisfies Theme
