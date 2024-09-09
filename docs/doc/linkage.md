@@ -36,40 +36,14 @@ import Linkage4 from './linkageDemo/linkage4.vue'
 
 **JsonSchema 所有协议字段都支持模板表达式。**
 
-<ClientOnly>
-  <Linkage/>
-</ClientOnly>
+::: demo expand
 
-```json
-{
-  "labelWidth": 150,
-  "labelAlign": "right",
-  "size": "default",
-  "items": [
-    {
-      "label": "姓名",
-      "component": "Input",
-      "name": "name",
-      "props": {
-        "placeholder": "请输入姓名"
-      }
-    },
-    {
-      "label": "简介",
-      "component": "Textarea",
-      "name": "desc",
-      "props": {
-        "placeholder": "{{ $values.name + '的简介' }}", // 联动实现
-        "disabled": "{{ !$values.name }}" // 联动实现
-      }
-    }
-  ]
-}
-```
+demo/linkageDemo/linkage.vue
+
+:::
 
 
 
-<br/>
 
 ## change配置（值联动）
 
@@ -79,87 +53,30 @@ import Linkage4 from './linkageDemo/linkage4.vue'
 
 change是一个数组，可以同时联动多个字段。target为目标字段，value是修改的值，也支持模版表达式。
 
-<ClientOnly>
-<Linkage3/>
-</ClientOnly>
+::: demo expand
 
-```json
-{
-  "labelWidth": 150,
-  "labelAlign": "right",
-  "size": "default",
-  "items": [
-    {
-      "label": "字段1",
-      "component": "Input",
-      "props": {
-        "placeholder": "请输入..."
-      },
-      "designKey": "form-NASi",
-      "name": "item1",
-      "change": [
-        {
-          "target": "item2",
-          "value": "{{ $values.item1 * 2 }}" // 联动
-        },
-        {
-          "target": "item3",
-          "value": "{{ $values.item1 + '元' }}" //联动
-        }
-      ]
-    },
-    {
-      "label": "字段2",
-      "component": "Input",
-      "props": {
-        "placeholder": "请输入..."
-      },
-      "designKey": "form-Nasd",
-      "name": "item2"
-    },
-    {
-      "label": "字段3",
-      "component": "Input",
-      "props": {
-        "placeholder": "请输入..."
-      },
-      "designKey": "form-KI1N",
-      "name": "item3"
-    }
-  ]
-}
-```
-
-
-## 在线示例
-
-### 评分低于3星可以输入差评原因
-
-<br/>
-
-<ClientOnly>
-<Linkage1/>
-</ClientOnly>
-
-::: details 查看代码
-
-<<< ./linkageDemo/linkage1.vue
+demo/linkageDemo/linkage3.vue
 
 :::
 
 
-<br/>
 
-### 选完商品，显示价格
+## 更多示例
 
-<br/>
+#### 评分低于3星可以输入差评原因
 
-<ClientOnly>
-<Linkage4/>
-</ClientOnly>
+::: demo 
 
-::: details 查看代码
+demo/linkageDemo/linkage1.vue
 
-<<< ./linkageDemo/linkage4.vue
+:::
+
+
+
+#### 选完商品，显示价格
+
+::: demo 
+
+demo/linkageDemo/linkage4.vue
 
 :::
