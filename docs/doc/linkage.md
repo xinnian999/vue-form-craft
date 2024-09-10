@@ -63,7 +63,7 @@ demo/linkageDemo/linkage3.vue
 
 ## 更多示例
 
-#### 评分低于3星可以输入差评原因
+1、评分低于3星可以输入差评原因
 
 ::: demo 
 
@@ -71,9 +71,9 @@ demo/linkageDemo/linkage1.vue
 
 :::
 
+<br/>
 
-
-#### 选完商品，显示价格
+2、选完商品，显示价格
 
 ::: demo 
 

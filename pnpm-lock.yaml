@@ -26,12 +26,6 @@ importers:
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
-      markdown-it:
-        specifier: ^14.1.0
-        version: 14.1.0
-      markdown-it-container:
-        specifier: ^4.0.0
-        version: 4.0.0
       vue:
         specifier: ^3.4.38
         version: 3.5.3(typescript@5.3.3)
@@ -103,8 +97,8 @@ importers:
         specifier: ^1.2.3
         version: 1.3.4(@algolia/client-search@4.24.0)(@types/node@20.16.5)(async-validator@4.2.5)(axios@1.7.7)(less@4.2.0)(postcss@8.4.45)(search-insights@2.17.1)(sortablejs@1.14.0)(typescript@5.3.3)
       vitepress-vue-demo:
-        specifier: ^1.0.6
-        version: 1.0.6(typescript@5.3.3)
+        specifier: ^1.0.7
+        version: 1.0.7(typescript@5.3.3)
       vue-tsc:
         specifier: ^1.8.27
         version: 1.8.27(typescript@5.3.3)
@@ -2142,8 +2136,8 @@ packages:
       terser:
         optional: true
 
-  vitepress-vue-demo@1.0.6:
-    resolution: {integrity: sha512-WsJ2iNauRK0yvkm7z/hmEyGXNOkhyhlM7RujPpAtUuQfntfb5Xygm9YamD4brMp8HCnDXgv04Ndcf8MKnbYpNA==}
+  vitepress-vue-demo@1.0.7:
+    resolution: {integrity: sha512-ysEG3UNPc2kixpJpcaQRxZ2TMmQerP2MUb+8JCJeJT25e8T8NcvHnJZc/f1WczKz8fD9tDXxroB2wSADANQUxg==}
 
   vitepress@1.3.4:
     resolution: {integrity: sha512-I1/F6OW1xl3kW4PaIMC6snxjWgf3qfziq2aqsDoFc/Gt41WbcRv++z8zjw8qGRIJ+I4bUW7ZcKFDHHN/jkH9DQ==}
@@ -4278,7 +4272,7 @@ snapshots:
       fsevents: 2.3.3
       less: 4.2.0
 
-  vitepress-vue-demo@1.0.6(typescript@5.3.3):
+  vitepress-vue-demo@1.0.7(typescript@5.3.3):
     dependencies:
       element-plus: 2.8.2(vue@3.5.3(typescript@5.3.3))
       markdown-it: 14.1.0
