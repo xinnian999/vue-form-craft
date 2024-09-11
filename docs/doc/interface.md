@@ -84,3 +84,11 @@ type FormElement = {
   attrSchema: FormSchema    // 组件的配置表单，schema
 }
 ```
+
+## TemplateData
+
+设计器的左侧模版数据
+
+```ts
+type TemplateData = { name: string; schema: FormSchema; id?: string }[]
+```
