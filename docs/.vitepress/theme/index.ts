@@ -14,7 +14,6 @@ export default {
       const { default: VueFormCraft } = await import('vue-form-craft')
       const { default: ElementPlus } = await import('element-plus')
       const { default: request } = await import('./request')
-      // const { default: DemoContainer } = await import('./DemoContainer/index.vue')
 
       app.use(ElementPlus)
       app.use(VueFormCraft, { request })

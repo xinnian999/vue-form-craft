@@ -64,6 +64,7 @@ export default defineConfig({
           text: '扩展',
           items: [
             { text: '扩展表单设计器', link: '/doc/extend' },
+            { text: '扩展一个markdown输入框', link: '/doc/extendMd' },
           ]
         },
         {
