@@ -59,6 +59,18 @@ export default defineConfig({
             { text: 'FormDesign 表单设计器', link: '/doc/form-design-doc' },
             { text: 'FormRender 表单渲染器', link: '/doc/form-render-doc' }
           ]
+        },
+        {
+          text: '扩展',
+          items: [
+            { text: '扩展表单设计器', link: '/doc/extend' },
+          ]
+        },
+        {
+          text: '更多',
+          items: [
+            { text: '类型声明', link: '/doc/interface' },
+          ]
         }
       ]
     },
