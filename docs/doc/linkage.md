@@ -34,7 +34,7 @@ import Linkage4 from './linkageDemo/linkage4.vue'
 这种联动方式能应对大部分联动场景，例如：控制字段禁用、隐藏、文案提示等交互。
 :::
 
-**JsonSchema 所有协议字段都支持模板表达式。**
+**JsonSchema 所有协议字段都支持模板表达式。** 这意味着你可以动态的控制表单的任何细粒度的配置，实现各种复杂的联动效果！
 
 ::: demo expand
 
