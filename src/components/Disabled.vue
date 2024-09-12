@@ -7,12 +7,12 @@
   <template v-else> <slot /> </template>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineProps } from 'vue'
 
-defineProps({
-  disabled: Boolean
-})
+defineProps<{
+  disabled: boolean
+}>()
 </script>
 
 <style scoped lang="less">

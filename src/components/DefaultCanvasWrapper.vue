@@ -5,16 +5,16 @@
   </div>
 </template>
 
-<script setup>
-import { defineProps } from 'vue'
+<script setup lang="ts">
 import { CanvasWrapper } from '@/components'
+import type { FormItemType } from '@/release';
 
-defineProps({
-  name: String,
-  style: Object,
-  children: Array,
-  title: String
-})
+defineProps<{
+  name: string,
+  style: any,
+  children: FormItemType[],
+  title: string
+}>()
 </script>
 
 <style scoped lang="less">

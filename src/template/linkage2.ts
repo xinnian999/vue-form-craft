@@ -1,3 +1,4 @@
+import type { FormSchema } from "@/release";
 export default {
   labelWidth: 150,
   labelAlign: 'right',
@@ -63,4 +64,4 @@ export default {
       designKey: 'design-gr3L'
     }
   ]
-}
+} satisfies FormSchema

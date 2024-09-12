@@ -1,3 +1,5 @@
+import type { FormSchema } from "@/release";
+
 export default {
   size: 'small',
   labelAlign: 'top',
@@ -53,4 +55,4 @@ export default {
     },
     { label: 'label加粗', component: 'Switch', name: 'labelBold' }
   ]
-}
+} satisfies FormSchema

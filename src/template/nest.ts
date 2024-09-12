@@ -1,3 +1,5 @@
+import type { FormSchema } from "@/release";
+
 export default {
   labelWidth: 150,
   labelAlign: 'right',
@@ -11,7 +13,6 @@ export default {
       },
       designKey: 'design-NUCU',
       name: 'form-4K4K',
-      change: [{}]
     },
     {
       label: '开关',
@@ -33,7 +34,6 @@ export default {
           },
           designKey: 'design-xqQ2',
           name: 'form-0NH3',
-          change: [{}]
         },
         {
           label: '单选框组',
@@ -71,4 +71,4 @@ export default {
       name: 'form-gi3U'
     }
   ]
-}
+} satisfies FormSchema

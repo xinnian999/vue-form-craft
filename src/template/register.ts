@@ -1,3 +1,5 @@
+import type { FormSchema } from "@/release";
+
 export default {
   labelWidth: 150,
   labelAlign: 'right',
@@ -22,6 +24,25 @@ export default {
       designKey: 'form-D1x7',
       name: 'password',
       required: true
+    },
+    {
+      label: '手机号',
+      component: 'Input',
+      props: {
+        placeholder: '请输入...'
+      },
+      designKey: 'form-qx0M',
+      name: 'phoneNumber',
+      required: true
+    },
+    {
+      label: '验证码',
+      component: 'Input',
+      props: {
+        placeholder: '请输入...'
+      },
+      designKey: 'form-M7xE',
+      name: 'code'
     }
   ]
-}
+} satisfies FormSchema

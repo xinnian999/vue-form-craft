@@ -23,4 +23,4 @@ export default [
   { name: '联动案例5', schema: linkage5, id: 'linkage5' },
   { name: '大量表单项测试', schema: MostTest, id: 'MostTest' },
   { name: '容器嵌套', schema: nest, id: '容器嵌套' }
-] as TemplateData
+] satisfies TemplateData

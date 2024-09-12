@@ -1,3 +1,5 @@
+import type { FormSchema } from "@/release";
+
 export default {
   labelWidth: 150,
   labelAlign: 'right',
@@ -41,4 +43,4 @@ export default {
       name: 'item3'
     }
   ]
-}
+} satisfies FormSchema

@@ -1,3 +1,5 @@
+import type { FormSchema } from "@/release";
+
 export default {
   labelWidth: 150,
   labelAlign: 'right',
@@ -32,4 +34,4 @@ export default {
       hidden: '{{!$values.rate||$values.rate>3}}'
     }
   ]
-}
+} satisfies FormSchema
