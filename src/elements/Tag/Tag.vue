@@ -6,10 +6,10 @@
 import { ElTag } from 'element-plus'
 
 withDefaults(
-  defineProps<{ text?: string; type?: "" | "success" | "info" | "warning" | "danger" }>(),
+  defineProps<{ text?: string; type?: 'primary' | 'success' | 'info' | 'warning' | 'danger' }>(),
   {
     text: '标签',
-    type: ''
+    type: 'primary'
   }
 )
 </script>

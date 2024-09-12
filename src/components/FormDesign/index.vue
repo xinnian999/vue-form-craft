@@ -74,8 +74,8 @@ const current = computed({
   get() {
     return getCurrentByKey(list.value, currentKey.value) || {}
   },
-  set(element) {
-    currentKey.value = element.designKey
+  set(element:FormItemType) {
+    currentKey.value = element.designKey!
     list.value = setCurrentByKey(currentSchema.value.items, element)
   }
 })

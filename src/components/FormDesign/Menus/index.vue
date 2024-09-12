@@ -46,7 +46,7 @@
 
 <script setup lang="ts">
 import draggable from 'vuedraggable-es'
-import { inject, defineProps, computed, isVNode } from 'vue'
+import { inject, defineProps, computed } from 'vue'
 import { ElButton, ElDrawer, ElSpace } from 'element-plus'
 import { $global, $schema } from '@/config/symbol'
 import { ref } from 'vue'

@@ -13,7 +13,7 @@ export default {
     component: 'Tag',
     props: {
       text: 'Tag',
-      type: ''
+      type: 'primary'
     },
     hideLabel:true
   },
@@ -32,7 +32,7 @@ export default {
         props: {
           mode: 'static',
           options: [
-            { label: '默认', value: '' },
+            { label: '主题色', value: 'primary' },
             { label: '成功', value: 'success' },
             { label: '信息', value: 'info' },
             { label: '警告', value: 'warning' },
