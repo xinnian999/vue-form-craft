@@ -29,7 +29,6 @@
         v-if="dialogState.type === 'exec'"
         model-value="json"
         class="demo-tabs"
-        @tab-click="handleClick"
       >
         <el-tab-pane label="JsonSchema" name="json">
           <json-editor-vue
@@ -117,10 +116,6 @@ const { schema, updateSchema } = inject($schema)
 
 const { handleSave } = inject($methods)
 
-const { elements } = inject($global)
-
-const JsonEdit = elements.JsonEdit?.component
-
 const json = computed({
   get() {
     return schema.value
@@ -133,8 +128,6 @@ const json = computed({
 const formRef = ref(null)
 
 const formValues = ref({})
-
-const formContext = computed(() => formRef.value?.context)
 
 const dialogState = reactive({
   visible: false,

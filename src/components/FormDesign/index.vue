@@ -23,7 +23,7 @@ import {
   defineProps,
   defineEmits,
   defineOptions,
-  defineModel
+  defineModel,
 } from 'vue'
 import { recursionDelete } from '@/utils'
 import Menus from './Menus/index.vue'
@@ -53,12 +53,12 @@ const currentKey = ref('')
 const hoverKey = ref<string>('')
 
 const currentSchema = defineModel<FormSchema>({
-  default: {
+  default: () => ({
     labelWidth: 150,
     labelAlign: 'right',
     size: 'default',
     items: []
-  }
+  })
 })
 
 const list = computed({
