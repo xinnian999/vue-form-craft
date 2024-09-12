@@ -22,7 +22,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
-import VueFormCraft from 'vue-form-craft-4'
+import VueFormCraft from 'vue-form-craft'
 import extendElements from './extendElements'
 
 const app = createApp(App)
@@ -42,7 +42,7 @@ app.mount('#app')
 interface FormElement {
   name: string
   component: VNode | Component
-  icon: string | VNode | Component
+  icon: VNode | Component
   type: 'assist' | 'layout' | 'basic'
   order: number
   initialValues: Omit<FormItemType, 'name'>

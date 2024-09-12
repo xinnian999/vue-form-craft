@@ -34,7 +34,7 @@
         <template #item="{ element }">
           <li class="form-item-btn">
             <div class="ico">
-              <component v-if="isVNode(element.icon)" :is="element.icon" />
+              <component class="ico-content" :is="element.icon" />
             </div>
             <div class="name">{{ element.name }}</div>
           </li>
@@ -143,6 +143,13 @@ const useTemplate = (templateSchema: FormSchema) => {
         align-items: center;
         font-size: 20px;
         justify-content: center;
+        .ico-content {
+          display: inline-block;
+          width: 1em;
+          height: 1em;
+          overflow: hidden;
+          fill: currentColor;
+        }
       }
       .name {
         font-size: 13px;

@@ -14,9 +14,10 @@ export default {
       const { default: VueFormCraft } = await import('vue-form-craft')
       const { default: ElementPlus } = await import('element-plus')
       const { default: request } = await import('./request')
+      const { default: extendElements } = await import('./extendElements')
 
       app.use(ElementPlus)
-      app.use(VueFormCraft, { request })
+      app.use(VueFormCraft, { request,extendElements })
 
       app.use(mdVueDemo, { modules })
     }
