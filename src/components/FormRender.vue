@@ -32,7 +32,7 @@ import { handleLinkages, deepParse, setDataByPath, getDataByPath } from '@/utils
 import FormItemRender from './FormItemRender.vue'
 import { cloneDeep, merge } from 'lodash'
 import type { FormSchema } from '@/config/commonType'
-import { $schema, $formValues, $selectData, $formEvents, $initialValues } from '@/config/symbol'
+import { $schema, $formValues, $selectData, $initialValues } from '@/config/symbol'
 
 defineOptions({
   name: 'FormRender'
@@ -53,9 +53,9 @@ const emit = defineEmits<{
 
 const formRef = ref<FormInstance>()
 
-const selectData = reactive({})
+const selectData = reactive<Record<string, Record<string, any>>>({})
 
-const initialValues = reactive({})
+const initialValues = reactive<Record<string, any>>({})
 
 const stateFormValues = ref({})
 
@@ -116,13 +116,20 @@ provide($schema, {
 
 provide($formValues, {
   formValues,
-  updateFormValues: (values: Record<string, any>) => (formValues.value = values)
+  updateFormValues: (values) => (formValues.value = values)
 })
-provide($selectData, selectData)
-provide($formEvents, { validate, resetFields })
+provide($selectData, {
+  selectData,
+  updateSelectData: (key, value) => {
+    selectData[key] = value
+  }
+})
+
 provide($initialValues, {
   initialValues,
-  updateInitialValues: (values: Record<string, any>) => Object.assign(initialValues, values)
+  updateInitialValues: (values) => {
+    Object.assign(initialValues, values)
+  }
 })
 
 defineExpose({ validate, context, resetFields })

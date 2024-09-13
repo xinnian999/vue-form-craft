@@ -17,10 +17,9 @@ type Props = {
 type Option = Record<string, any>
 
 const useSelect = (props: Props) => {
-  const selectData = inject($selectData)
+  const { selectData ,updateSelectData } = inject($selectData)!
 
   const { request } = inject($global)!
-
 
   const currentOptions = ref<Option[]>([])
 
@@ -88,7 +87,7 @@ const useSelect = (props: Props) => {
     () => props.mode,
     (newVal) => {
       if (newVal === 'static') {
-        currentOptions.value = props.options||[]
+        currentOptions.value = props.options || []
       }
       if (newVal === 'remote') {
         currentOptions.value = []
@@ -97,7 +96,7 @@ const useSelect = (props: Props) => {
     }
   )
 
-  const selectChange = (val:any) => {
+  const selectChange = (val: any) => {
     const { valueKey = 'value', multiple, name } = props
 
     let valueData = {}
@@ -114,7 +113,7 @@ const useSelect = (props: Props) => {
 
     //如果接到了selectData，给顶级组件保存当前值对应得数据源
     if (selectData && name) {
-      selectData[name] = valueData
+      updateSelectData(name, valueData)
     }
   }
 

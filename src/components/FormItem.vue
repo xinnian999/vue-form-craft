@@ -84,12 +84,7 @@ const { elements } = inject($global)!
 
 const { schema } = inject($schema)!
 
-const { formValues, updateFormValues } = inject($formValues, {
-  formValues: ref({}),
-  updateFormValues: (values: Record<string, any>) => {
-    console.log(values)
-  }
-})
+const { formValues, updateFormValues } = inject($formValues)!
 
 const { initialValues, updateInitialValues } = inject($initialValues, {
   initialValues: {},
