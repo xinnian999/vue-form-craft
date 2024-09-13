@@ -9,7 +9,7 @@
   </el-tabs>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ElTabs, ElTabPane } from 'element-plus'
 
 import AttrEdit from './AttrEdit.vue'

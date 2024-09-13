@@ -1,4 +1,5 @@
 import type FormRender from '@/components/FormRender.vue'
+import type { AxiosInstance, AxiosStatic } from 'axios'
 import type { Component, VNode } from 'vue'
 
 export type FormRule = {
@@ -56,9 +57,8 @@ export type FormElement = {
 }
 
 export type $Global = {
-  request?: any
+  request:  AxiosStatic | AxiosInstance | Function
   elements: { [key: string]: FormElement }
-  customElements?: { [key: string]: FormElement }
 }
 
 export type TemplateData = { name: string; schema: FormSchema; id?: string }[]

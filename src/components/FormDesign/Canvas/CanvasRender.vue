@@ -23,7 +23,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineProps, inject, computed } from 'vue'
 import { omit } from 'lodash'
 import { FormItem ,IconRender} from '@/components'
@@ -33,7 +33,7 @@ const props = defineProps({
   data: Object
 })
 
-const { current, updateCurrent } = inject($current)
+const { current, updateCurrent } = inject($current)!
 
 const { hoverKey, updateHoverKey } = inject($hoverKey)
 

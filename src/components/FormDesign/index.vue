@@ -16,15 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-  ref,
-  provide,
-  computed,
-  defineProps,
-  defineEmits,
-  defineOptions,
-  defineModel,
-} from 'vue'
+import { ref, provide, computed, defineProps, defineEmits, defineOptions, defineModel } from 'vue'
 import { recursionDelete } from '@/utils'
 import Menus from './Menus/index.vue'
 import Canvas from './Canvas/index.vue'
@@ -72,9 +64,9 @@ const list = computed({
 
 const current = computed({
   get() {
-    return getCurrentByKey(list.value, currentKey.value) || {}
+    return getCurrentByKey(list.value, currentKey.value)
   },
-  set(element:FormItemType) {
+  set(element: FormItemType) {
     currentKey.value = element.designKey!
     list.value = setCurrentByKey(currentSchema.value.items, element)
   }
@@ -82,9 +74,11 @@ const current = computed({
 
 provide($schema, {
   schema: currentSchema,
-  updateSchema: (schema) => {currentSchema.value = schema}
+  updateSchema: (schema) => {
+    currentSchema.value = schema
+  }
 })
-provide($current, { current, updateCurrent: (data: FormItemType) => (current.value = data) })
+provide($current, { current, updateCurrent: (data) => (current.value = data) })
 provide($hoverKey, { hoverKey, updateHoverKey: (key: string) => (hoverKey.value = key) })
 provide($methods, {
   onAdd: () => {
