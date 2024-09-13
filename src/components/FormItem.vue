@@ -75,15 +75,14 @@ import { computed, defineProps, inject, onMounted, reactive, ref } from 'vue'
 import { ElFormItem, ElTooltip, ElDialog, ElButton } from 'element-plus'
 import { isRegexString, getDataByPath, setDataByPath } from '@/utils'
 import { $global, $schema, $formValues, $initialValues } from '@/config/symbol'
-import defaultSchema from '@/config/defaultSchema'
-import type { FormItemType, FormSchema } from '@/config/commonType'
+import type { FormItemType } from '@/config/commonType'
 import { IconRender } from '@/components'
 
 const thisProps = defineProps<FormItemType>()
 
-const { elements = {} } = inject($global)!
+const { elements } = inject($global)!
 
-const schema = inject<FormSchema>($schema, defaultSchema)
+const { schema } = inject($schema)!
 
 const { formValues, updateFormValues } = inject($formValues, {
   formValues: ref({}),
@@ -167,7 +166,7 @@ const config = computed(() => {
   if (!data.modelName) {
     data.modelName = 'modelValue'
   }
-  
+
   return data
 })
 

@@ -109,7 +109,11 @@ watch(initialValues, (newVal) => {
   formValues.value = merge(formValues.value, newVal)
 })
 
-provide($schema, currentSchema)
+provide($schema, {
+  schema: currentSchema,
+  updateSchema: () => {}
+})
+
 provide($formValues, {
   formValues,
   updateFormValues: (values: Record<string, any>) => (formValues.value = values)

@@ -82,7 +82,7 @@ const current = computed({
 
 provide($schema, {
   schema: currentSchema,
-  updateSchema: (json: FormSchema) => (currentSchema.value = json)
+  updateSchema: (schema: FormSchema) => {currentSchema.value = schema}
 })
 provide($current, { current, updateCurrent: (data: FormItemType) => (current.value = data) })
 provide($hoverKey, { hoverKey, updateHoverKey: (key: string) => (hoverKey.value = key) })

@@ -64,7 +64,7 @@ const props = withDefaults(
 
 const drawerVisible = ref(false)
 
-const { updateSchema } = inject($schema, { updateSchema: (schema) => {} })
+const { updateSchema } = inject($schema)!
 
 const { elements } = inject($global)!
 
