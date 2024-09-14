@@ -5,7 +5,7 @@
     @mousemove.stop="handleHoverEnter"
     @mouseleave.stop="handleHoverLeave"
   >
-    <div class="actions-left-top" v-if="data.designKey === current.designKey">
+    <div class="actions-left-top" v-if="data.designKey === current?.designKey">
       <div class="canvas-move" size="small" type="primary">
         <icon-render name="move" />
       </div>
@@ -13,7 +13,7 @@
 
     <div class="hidden-ico" v-if="data.hidden"><icon-render name="hidden" /></div>
 
-    <ul class="actions-right-bottom" v-if="data.designKey === current.designKey">
+    <ul class="actions-right-bottom" v-if="data.designKey === current?.designKey">
       <li v-for="{ icon, handle } in rightBottomActions" @click.stop="handle(data)" :key="icon">
         <icon-render :name="icon" />
       </li>
@@ -26,35 +26,36 @@
 <script setup lang="ts">
 import { defineProps, inject, computed } from 'vue'
 import { omit } from 'lodash'
-import { FormItem ,IconRender} from '@/components'
+import { FormItem, IconRender } from '@/components'
 import { $current, $methods, $hoverKey } from '@/config/symbol'
+import type { FormItemType } from '@/release'
 
-const props = defineProps({
-  data: Object
-})
+const props = defineProps<{ data: FormItemType }>()
 
 const { current, updateCurrent } = inject($current)!
 
-const { hoverKey, updateHoverKey } = inject($hoverKey)
+const { hoverKey, updateHoverKey } = inject($hoverKey)!
 
-const { handleDeleteItem, handleCopyItem } = inject($methods)
+const { handleDeleteItem, handleCopyItem } = inject($methods)!
 
 const canvasItemClass = computed(() => ({
   'canvas-item': true,
-  active: props.data.designKey === current.value.designKey,
+  active: props.data.designKey === current.value?.designKey,
   hover: props.data.designKey === hoverKey.value,
   mask: props.data.designKey === hoverKey.value && !props.data.children
 }))
 
 const handleHoverEnter = () => {
-  updateHoverKey(props.data.designKey)
+  if (props.data.designKey) {
+    updateHoverKey(props.data.designKey)
+  }
 }
 
 const handleHoverLeave = () => {
-  updateHoverKey(null)
+  updateHoverKey('')
 }
 
-const handleSelect = (element) => {
+const handleSelect = (element:FormItemType) => {
   updateCurrent(element)
 }
 
@@ -69,7 +70,7 @@ const rightBottomActions = [
   }
 ]
 
-const checkProps = (props) => {
+const checkProps = (props: Record<string, any> = {}) => {
   return omit(props, ['multiple', 'api'])
 }
 </script>

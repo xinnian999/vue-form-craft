@@ -27,5 +27,16 @@ export const $current = Symbol() as InjectionKey<{
   readonly current: Ref<FormItemType|null>
   updateCurrent: (current: FormItemType) => void
 }>
-export const $methods = Symbol()
-export const $hoverKey = Symbol()
+
+export const $methods = Symbol() as InjectionKey<{
+  onAdd: () => void
+  handleDeleteItem: (element: FormItemType) => void
+  handleCopyItem: (element: FormItemType) => void
+  handleSave: () => void
+}>
+
+
+export const $hoverKey = Symbol() as InjectionKey<{
+  readonly hoverKey: Ref<string>
+  updateHoverKey: (key: string) => void
+}>

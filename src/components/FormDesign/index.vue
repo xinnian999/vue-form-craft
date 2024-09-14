@@ -84,10 +84,10 @@ provide($methods, {
   onAdd: () => {
     list.value = changeItems(list.value)
   },
-  handleDeleteItem: (element: FormItemType) => {
+  handleDeleteItem: (element) => {
     list.value = recursionDelete(list.value, (item) => item.designKey !== element.designKey)
   },
-  handleCopyItem: (element: FormItemType) => {
+  handleCopyItem: (element) => {
     list.value = copyItems(list.value, element.designKey!)
   },
   handleSave: () => {

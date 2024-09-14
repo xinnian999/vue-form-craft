@@ -20,7 +20,7 @@ export interface FormItemType {
   name: string
   component: string
   required?: boolean
-  props?: object
+  props?: Record<string, any>
   initialValue?: any
   help?: string
   children?: FormItemType[]

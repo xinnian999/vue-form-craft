@@ -27,16 +27,16 @@
   </FormRender>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject } from 'vue'
 import draggable from 'vuedraggable-es'
 import { FormRender,IconRender } from '@/components'
 import { $schema, $methods } from '@/config/symbol'
 import CanvasRender from './CanvasRender.vue'
 
-const { schema } = inject($schema)
+const { schema } = inject($schema)!
 
-const { onAdd } = inject($methods)
+const { onAdd } = inject($methods)!
 </script>
 
 <style lang="less">
