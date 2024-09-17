@@ -101,11 +101,10 @@ provide($methods, {
   display: flex;
   height: 100%;
   box-sizing: border-box;
-  background-color: #eee;
+  background-color: var(--el-bg-color);
   .formItemList {
     width: 18%;
     padding: 10px;
-    background-color: #fff;
     position: relative;
     overflow: auto;
   }
@@ -115,7 +114,6 @@ provide($methods, {
     overflow: hidden;
     border-left: 1px solid #eee;
     border-right: 1px solid #eee;
-    background-color: #fff;
     padding: 0 15px;
     display: flex;
     flex-direction: column;
@@ -125,7 +123,6 @@ provide($methods, {
     width: 20%;
     overflow: auto;
     padding: 20px;
-    background-color: #fff;
   }
 
   .editor {

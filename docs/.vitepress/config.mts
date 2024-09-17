@@ -71,6 +71,7 @@ export default defineConfig({
           text: '更多',
           items: [
             { text: '类型声明', link: '/doc/interface' },
+            { text: '黑夜模式', link: '/doc/dark' },
           ]
         }
       ]
