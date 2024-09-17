@@ -35,6 +35,9 @@ export default defineConfig({
       { text: '文档', link: '/doc/introduce' },
       { text: '表单设计', link: '/form-design' }
     ],
+    search: {
+      provider: 'local'
+    },
 
     sidebar: {
       '/doc/': [
@@ -71,7 +74,7 @@ export default defineConfig({
           text: '更多',
           items: [
             { text: '类型声明', link: '/doc/interface' },
-            { text: '黑夜模式', link: '/doc/dark' },
+            { text: '暗黑模式', link: '/doc/dark' },
           ]
         }
       ]
@@ -82,6 +85,20 @@ export default defineConfig({
   markdown: {
     config: (md) => {
       md.use(mdVueDemoPlugin)
+    }
+  },
+  locales: {
+    root: {
+      label: 'English',
+      lang: 'en',
+      title:'vue-form-craft'
+    },
+    zh: {
+      label: '中文',
+      lang: 'zh', // 可选，将作为 `lang` 属性添加到 `html` 标签中
+      link: '/zh/guide' // 默认 /fr/ -- 显示在导航栏翻译菜单上，可以是外部的
+
+      // 其余 locale 特定属性...
     }
   }
 })
