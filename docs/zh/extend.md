@@ -57,7 +57,7 @@ interface FormElement {
 
 组件名称，也就是位于设计器左栏上，某个组件的名称
 
-![name](./assets/name.png)
+![name](../assets/name.png)
 
 ### icon
 
@@ -65,7 +65,7 @@ interface FormElement {
 
 icon格式为vue的SFC组件
 
-![icon](./assets/icon.png)
+![icon](../assets/icon.png)
 
 ### component
 
@@ -95,4 +95,4 @@ icon格式为vue的SFC组件
 
 对应设计器右侧的配置表单，建议用设计器去拖拽生成！
 
-![alt text](./assets/attr.png)
+![alt text](../assets/attr.png)

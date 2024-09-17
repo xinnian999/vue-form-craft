@@ -32,7 +32,7 @@ export default defineConfig({
     logo: '/favicon.svg',
     nav: [
       { text: '首页', link: '/' },
-      { text: '文档', link: '/doc/introduce' },
+      { text: '文档', link: '/zh/introduce' },
       { text: '表单设计', link: '/form-design' }
     ],
     search: {
@@ -40,41 +40,41 @@ export default defineConfig({
     },
 
     sidebar: {
-      '/doc/': [
+      '/zh/': [
         {
           text: '基础',
           items: [
-            { text: '简介', link: '/doc/introduce' },
-            { text: '快速开始', link: '/doc/use' }
+            { text: '简介', link: '/zh/introduce' },
+            { text: '快速开始', link: '/zh/use' }
           ]
         },
         {
           text: '进阶',
           items: [
-            { text: 'JsonSchema详解', link: '/doc/schema' },
-            { text: '表单联动', link: '/doc/linkage' },
-            { text: '深层数据绑定', link: '/doc/deepName' }
+            { text: 'JsonSchema详解', link: '/zh/schema' },
+            { text: '表单联动', link: '/zh/linkage' },
+            { text: '深层数据绑定', link: '/zh/deepName' }
           ]
         },
         {
           text: '组件',
           items: [
-            { text: 'FormDesign 表单设计器', link: '/doc/form-design-doc' },
-            { text: 'FormRender 表单渲染器', link: '/doc/form-render-doc' }
+            { text: 'FormDesign 表单设计器', link: '/zh/form-design-doc' },
+            { text: 'FormRender 表单渲染器', link: '/zh/form-render-doc' }
           ]
         },
         {
           text: '扩展',
           items: [
-            { text: '扩展表单设计器', link: '/doc/extend' },
-            { text: '扩展一个markdown输入框', link: '/doc/extendMd' },
+            { text: '扩展表单设计器', link: '/zh/extend' },
+            { text: '扩展一个markdown输入框', link: '/zh/extendMd' },
           ]
         },
         {
           text: '更多',
           items: [
-            { text: '类型声明', link: '/doc/interface' },
-            { text: '暗黑模式', link: '/doc/dark' },
+            { text: '类型声明', link: '/zh/interface' },
+            { text: '暗黑模式', link: '/zh/dark' },
           ]
         }
       ]
@@ -89,16 +89,16 @@ export default defineConfig({
   },
   locales: {
     root: {
+      label: '中文',
+      lang: 'zh', // 可选，将作为 `lang` 属性添加到 `html` 标签中
+      link: '/zh/introduce' // 默认 /fr/ -- 显示在导航栏翻译菜单上，可以是外部的
+
+      // 其余 locale 特定属性...
+    },
+    en: {
       label: 'English',
       lang: 'en',
       title:'vue-form-craft'
     },
-    zh: {
-      label: '中文',
-      lang: 'zh', // 可选，将作为 `lang` 属性添加到 `html` 标签中
-      link: '/zh/guide' // 默认 /fr/ -- 显示在导航栏翻译菜单上，可以是外部的
-
-      // 其余 locale 特定属性...
-    }
   }
 })

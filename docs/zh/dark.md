@@ -6,4 +6,4 @@
 
 [如何将element-plus切成黑夜模式？](https://element-plus.org/zh-CN/guide/dark-mode.html)
 
-![dark](./assets/dark.png)
+![dark](../assets/dark.png)
