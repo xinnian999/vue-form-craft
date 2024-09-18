@@ -18,7 +18,6 @@ export default {
       placeholder: '请选择日期',
       clearable: false
     },
-    hideLabel:true
   },
   attrSchema
 } satisfies FormElement
