@@ -56,11 +56,6 @@ export type FormElement = {
   attrSchema: FormSchema
 }
 
-export type $Global = {
-  request:  AxiosStatic | AxiosInstance | Function
-  elements: { [key: string]: FormElement }
-}
-
 export type TemplateData = { name: string; schema: FormSchema; id?: string }[]
 
 export type SchemaApi = {
@@ -88,3 +83,15 @@ export interface SelectProps {
 export type SelectValue = string | number | boolean
 
 export type FormRenderInstance = InstanceType<typeof FormRender>
+
+export type Locale = {
+  actions: {
+    previewJson: string
+  }
+}
+
+export type $Global = {
+  request: AxiosStatic | AxiosInstance | Function
+  elements: { [key: string]: FormElement }
+  locale: Locale
+}

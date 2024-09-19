@@ -77,7 +77,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed, inject, defineProps, reactive } from 'vue'
 import { ElButton, ElDialog, ElTabs, ElTabPane, ElMessageBox } from 'element-plus'
 import JsonEditorVue from 'json-editor-vue3'
@@ -86,10 +86,26 @@ import { $schema, $methods, $global } from '@/config/symbol'
 import { changeItems } from '../utils'
 import vueEditStr from './vueEditStr'
 import helpStr from './helpStr'
+import type { FormRenderInstance } from '@/release'
+
+
+
+defineProps({
+  schemaContext: {
+    type: Object,
+    default: () => ({})
+  }
+})
+
+const { schema, updateSchema } = inject($schema)!
+
+const { handleSave } = inject($methods)!
+
+const { locale } = inject($global)!
 
 const previewActions = [
   {
-    label: '预览JSON脚本',
+    label: locale.actions.previewJson,
     btnType: 'primary',
     type: 'exec'
   },
@@ -105,17 +121,6 @@ const previewActions = [
   }
 ]
 
-defineProps({
-  schemaContext: {
-    type: Object,
-    default: () => ({})
-  }
-})
-
-const { schema, updateSchema } = inject($schema)
-
-const { handleSave } = inject($methods)
-
 const json = computed({
   get() {
     return schema.value
@@ -125,7 +130,7 @@ const json = computed({
   }
 })
 
-const formRef = ref(null)
+const formRef = ref<FormRenderInstance>()
 
 const formValues = ref({})
 
@@ -135,21 +140,21 @@ const dialogState = reactive({
   title: ''
 })
 
-const handlePreview = (type, label) => {
+const handlePreview = (type:string, label:string) => {
   dialogState.visible = true
   dialogState.type = type
   dialogState.title = label
 }
 
-const onBlur = (editor) => {
+const onBlur = (editor:any) => {
   schema.value = { ...schema.value, items: changeItems(schema.value.items) }
   editor.repair()
 }
 
 const handleSubmit = async () => {
-  await formRef.value.validate()
+  await formRef.value?.validate()
 
-  alert(JSON.stringify(formValues.value, null, 2), '模拟提交')
+  alert(JSON.stringify(formValues.value, null, 2))
 }
 
 const handleClear = async () => {

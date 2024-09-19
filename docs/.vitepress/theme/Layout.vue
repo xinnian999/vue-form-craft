@@ -2,16 +2,23 @@
 import DefaultTheme from 'vitepress/theme'
 import { useData } from 'vitepress'
 import { onMounted } from 'vue'
+import { ElConfigProvider } from 'element-plus'
+import zhCn from 'element-plus/es/locale/lang/zh-cn'
+import en from 'element-plus/es/locale/lang/en'
 
 const { lang } = useData()
+
+
 onMounted(() => {
   document.cookie = `nf_lang=${lang.value}; expires=Mon, 1 Jan 2030 00:00:00 UTC; path=/`
   if (location.pathname === '/vue-form-craft/') {
-    location.href = location.href + 'zh/'
+    location.href = location.href + `${lang.value}/`
   }
 })
 </script>
 
 <template>
-  <DefaultTheme.Layout />
+  <el-config-provider :locale="lang === 'en' ? en : zhCn">
+    <DefaultTheme.Layout />
+  </el-config-provider>
 </template>

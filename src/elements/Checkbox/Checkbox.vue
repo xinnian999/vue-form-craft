@@ -5,7 +5,7 @@
     v-bind="$attrs"
     v-model="value"
     @change="selectChange"
-    v-el-loading="loading"
+    v-loading="loading"
   >
     <template v-if="optionType === 'circle' || optionType === 'border'">
       <el-checkbox
