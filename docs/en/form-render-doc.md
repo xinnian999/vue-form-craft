@@ -21,7 +21,7 @@ demo/FormRender.vue
 | ------------- | -------- | ------ | ---------------------------------------- |
 | v-model       | `object` | {}     | 表单值                                   |
 | schema        | `object` | ——     | 表单Schema配置，纯JSON，用于描述表单结构 |
-| schemaContext | `object` | {}     | Schema自定义的 [联动变量](/doc/linkage)  |
+| schemaContext | `object` | {}     | Schema自定义的 [联动变量](/en/linkage)  |
 
 ## Exposes
 
@@ -31,4 +31,4 @@ demo/FormRender.vue
 | ----------- | ---------------- | --------------------------------------------------------------------------------- |
 | validate    | `() => Promise`  | 校验表单                                                                          |
 | resetFields | `name[] => void` | 接收一个name数组，例如`['name','age']` 来重置一组字段为初始值，不传会重置所有字段 |
-| context     | `object`         | 表单的[联动变量](/doc/linkage)                                                    |
+| context     | `object`         | 表单的[联动变量](/en/linkage)                                                    |
