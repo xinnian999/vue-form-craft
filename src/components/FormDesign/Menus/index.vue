@@ -1,6 +1,8 @@
 <template>
   <div class="formDesign-menus">
-    <el-button class="template-btn" size="small" @click="drawerVisible = true">使用模板</el-button>
+    <el-button class="template-btn" size="small" @click="drawerVisible = true">{{
+      locale.menus.useTemplateBtn
+    }}</el-button>
     <el-drawer
       v-model="drawerVisible"
       title="模板列表"
@@ -48,7 +50,7 @@
 import draggable from 'vuedraggable-es'
 import { inject, defineProps, computed } from 'vue'
 import { ElButton, ElDrawer, ElSpace } from 'element-plus'
-import { $global, $schema } from '@/config/symbol'
+import { $global, $locale, $schema } from '@/config/symbol'
 import { ref } from 'vue'
 import parseMenus from './menus'
 import template from '@/template'
@@ -68,7 +70,9 @@ const { updateSchema } = inject($schema)!
 
 const { elements } = inject($global)!
 
-const menus = parseMenus(elements)
+const locale = inject($locale)!
+
+const menus = parseMenus(elements,locale)
 
 const menuList = computed(() => {
   return menus.map((item) => ({

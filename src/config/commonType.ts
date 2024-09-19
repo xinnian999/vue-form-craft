@@ -90,6 +90,12 @@ export type $Global = {
 }
 
 export type Locale = {
+  menus:{
+    basicTitle:string,
+    layoutTitle:string,
+    assistTitle:string,
+    useTemplateBtn:string
+  },
   actions: {
     previewJson: string
     previewVueCode: string

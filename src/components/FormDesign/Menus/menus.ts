@@ -1,6 +1,8 @@
+import type { Locale } from '@/config/commonType'
 import type { FormElement } from '@/release'
+import type { Ref } from 'vue'
 
-export default (elements: Record<string,FormElement>) => {
+export default (elements: Record<string, FormElement>, locale:Ref<Locale> ) => {
   const getChildren = (type: string) => {
     return Object.values(elements)
       .filter((item) => item?.type === type)
@@ -11,15 +13,15 @@ export default (elements: Record<string,FormElement>) => {
 
   const menus = [
     {
-      title: '基础字段',
+      title: locale.value.menus.basicTitle,
       children: getChildren('basic')
     },
     {
-      title: '布局字段',
+      title: locale.value.menus.layoutTitle,
       children: getChildren('layout')
     },
     {
-      title: '辅助字段',
+      title: locale.value.menus.assistTitle,
       children: getChildren('assist')
     }
   ]

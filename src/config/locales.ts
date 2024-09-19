@@ -2,6 +2,12 @@ import type { Locale } from './commonType'
 
 export default {
   zh: {
+    menus:{
+      basicTitle:'基础字段',
+      layoutTitle:'布局字段',
+      assistTitle:'辅助字段',
+      useTemplateBtn:'使用模板'
+    },
     actions: {
       previewJson: '预览JSON脚本',
       previewVueCode: '生成VUE代码',
@@ -29,6 +35,12 @@ export default {
     }
   },
   en: {
+    menus:{
+      basicTitle:'Basic Fields',
+      layoutTitle:'Layout Fields',
+      assistTitle:'Assist Fields',
+      useTemplateBtn:'Use Template'
+    },
     actions: {
       previewJson: 'Preview JSON Script',
       previewVueCode: 'Generate VUE code',
