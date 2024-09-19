@@ -1,16 +1,12 @@
 import { FormDesign, FormRender } from '@/components'
-import type {
-  $Global,
-  FormElement,
-} from '@/config/commonType'
+import type { $Global, FormElement } from '@/config/commonType'
 import { $global } from '@/config/symbol'
 import hljsVuePlugin from '@highlightjs/vue-plugin'
 import axios, { type AxiosInstance, type AxiosStatic } from 'axios'
 import 'highlight.js/lib/common'
 import 'highlight.js/styles/panda-syntax-dark.css'
-import type { App } from 'vue'
+import { ref, type App } from 'vue'
 import elements from '@/elements'
-import locales from '@/config/locales'
 
 type Options = {
   request?: AxiosStatic | AxiosInstance | Function
@@ -21,8 +17,7 @@ type Options = {
 export default (app: App<Element>, options?: Options) => {
   const globalConfig: $Global = {
     request: axios,
-    elements,
-    locale: locales.zh
+    elements
   }
 
   if (options) {
@@ -30,7 +25,7 @@ export default (app: App<Element>, options?: Options) => {
     Object.assign(globalConfig.elements, options.extendElements)
 
     if (options.lang) {
-      globalConfig.locale = locales[options.lang]
+      app.provide('vfc-lang', ref(options.lang))
     }
   }
 

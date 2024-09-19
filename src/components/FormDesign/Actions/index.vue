@@ -64,7 +64,7 @@
 
       <template #footer v-if="dialogState.type === 'form'">
         <el-button @click="handleSubmit" type="primary">模拟提交</el-button>
-        <el-button @click="formRef.resetFields()" type="primary">重置</el-button>
+        <el-button @click="formRef?.resetFields([])" type="primary">重置</el-button>
         <!-- <JsonEdit
           v-model="formContext"
           height="400px"
@@ -82,13 +82,11 @@ import { ref, computed, inject, defineProps, reactive } from 'vue'
 import { ElButton, ElDialog, ElTabs, ElTabPane, ElMessageBox } from 'element-plus'
 import JsonEditorVue from 'json-editor-vue3'
 import { FormRender } from '@/components'
-import { $schema, $methods, $global } from '@/config/symbol'
+import { $schema, $methods, $locale } from '@/config/symbol'
 import { changeItems } from '../utils'
 import vueEditStr from './vueEditStr'
 import helpStr from './helpStr'
 import type { FormRenderInstance } from '@/release'
-
-
 
 defineProps({
   schemaContext: {
@@ -101,11 +99,11 @@ const { schema, updateSchema } = inject($schema)!
 
 const { handleSave } = inject($methods)!
 
-const { locale } = inject($global)!
+const locale = inject($locale)!
 
 const previewActions = [
   {
-    label: locale.actions.previewJson,
+    label: locale.value.actions.previewJson,
     btnType: 'primary',
     type: 'exec'
   },

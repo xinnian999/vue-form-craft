@@ -93,5 +93,4 @@ export type Locale = {
 export type $Global = {
   request: AxiosStatic | AxiosInstance | Function
   elements: { [key: string]: FormElement }
-  locale: Locale
 }

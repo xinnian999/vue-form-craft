@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import DefaultTheme from 'vitepress/theme'
 import { useData } from 'vitepress'
-import { onMounted } from 'vue'
+import { onMounted, provide } from 'vue'
 import { ElConfigProvider } from 'element-plus'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import en from 'element-plus/es/locale/lang/en'
 
 const { lang } = useData()
+
+provide('vfc-lang',lang)
 
 
 onMounted(() => {

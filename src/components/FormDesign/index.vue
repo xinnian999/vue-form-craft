@@ -16,15 +16,26 @@
 </template>
 
 <script setup lang="ts">
-import { ref, provide, computed, defineProps, defineEmits, defineOptions, defineModel } from 'vue'
+import {
+  ref,
+  provide,
+  computed,
+  defineProps,
+  defineEmits,
+  defineOptions,
+  defineModel,
+  inject,
+  type Ref,
+} from 'vue'
 import { recursionDelete } from '@/utils'
 import Menus from './Menus/index.vue'
 import Canvas from './Canvas/index.vue'
 import Current from './Current/index.vue'
 import Actions from './Actions/index.vue'
 import { getCurrentByKey, setCurrentByKey, changeItems, copyItems } from './utils'
-import { $schema, $current, $methods, $hoverKey } from '@/config/symbol'
+import { $schema, $current, $methods, $hoverKey, $locale } from '@/config/symbol'
 import type { FormSchema, FormItemType, TemplateData } from '@/config/commonType'
+import locales from '@/config/locales'
 
 defineOptions({
   name: 'FormDesign'
@@ -94,6 +105,12 @@ provide($methods, {
     emit('onSave')
   }
 })
+
+const lang = inject<Ref<'zh' | 'en'>>('vfc-lang', ref('zh'))
+
+const locale = computed(() => locales[lang.value])
+
+provide($locale, locale)
 </script>
 
 <style lang="less">
