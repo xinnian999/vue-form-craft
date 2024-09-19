@@ -1,93 +1,91 @@
-# 类型声明
-
+# Type Declarations
 ## FormRule
 
-`input`输入框的校验规则
+Validation rules for the `input` field.
 
 ```ts
 type FormRule = {
-  type: 'email' | 'url' | 'custom' | string   //校验类型
-  customReg?: string  // type为'custom'时，输入自定义正则
-  message?: string   // 校验不通过的提示语
-  trigger: 'blur' | 'change'   //校验时机
+  type: 'email' | 'url' | 'custom' | string   // Validation type
+  customReg?: string  // Custom regular expression for type 'custom'
+  message?: string   // Error message for validation failure
+  trigger: 'blur' | 'change'   // Validation trigger
 }
 ```
 
 ## FormChange
 
-表单项的值联动
+Value linkage for form fields.
 
 ```ts
 type FormChange = {
-  target: string // 目标字段
-  value: any // 新值
-  condition?: any // 触发条件
+  target: string // Target field
+  value: any // New value
+  condition?: any // Trigger condition
 }
 ```
 
-
 ## FormItemType
 
-JsonSchema的单个表单项
+Single form item in JsonSchema.
 
 ```ts
 interface FormItemType {
-  label?: string // 字段标签
-  name: string // 字段唯一标识
-  component: string // 使用什么组件
-  props?: object // 传给这个组件的参数
-  required?: boolean // 是否必填
-  initialValue?: any // 默认值
-  help?: string // 提示信息
-  children?: FormItemType[] // 子项配置，嵌套组件专用
-  hidden?: boolean | string // 是否隐藏
-  hideLabel?: boolean   // 隐藏标签
-  designKey?: string    // 设计器用的key，会自动生成
-  rules?: FormRule[]    // 校验规则，input组件专用
-  class?: any   // 字段类名
-  style?: any   // 字段行内样式
-  design?: boolean  // 设计模式，扩展组件时用的
-  change?: FormChange[] // 值联动配置
-  dialog?: boolean  // 用弹窗展示组件
+  label?: string // Field label
+  name: string // Unique field identifier
+  component: string // Component to use
+  props?: object // Parameters passed to the component
+  required?: boolean // Whether it is required
+  initialValue?: any // Default value
+  help?: string // Help information
+  children?: FormItemType[] // Configuration for nested components
+  hidden?: boolean | string // Whether it is hidden
+  hideLabel?: boolean   // Hide label
+  designKey?: string    // Key used by the designer, automatically generated
+  rules?: FormRule[]    // Validation rules, specific to the input component
+  class?: any   // Field class
+  style?: any   // Field inline style
+  design?: boolean  // Design mode, used for extending components
+  change?: FormChange[] // Value linkage configuration
+  dialog?: boolean  // Display component in a dialog
 }
 ```
 
 ## FormSchema
 
-JsonSchema的接口类型
+Interface type for JsonSchema.
 
 ```ts
 type FormSchema = {
-  labelWidth?: number // 表单标签宽度
-  labelAlign?: 'top' | 'left' | 'right' // 表单的标签对齐方式
-  size?: 'default' | 'small' | 'large' // 表单的组件大小
-  disabled?: boolean // 禁用所有表单项
-  hideRequiredAsterisk?: boolean // 隐藏必填星号
-  labelBold?: boolean // 标签是否加粗
-  items: FormItemType[] // 表单项配置
+  labelWidth?: number // Form label width
+  labelAlign?: 'top' | 'left' | 'right' // Form label alignment
+  size?: 'default' | 'small' | 'large' // Form component size
+  disabled?: boolean // Disable all form items
+  hideRequiredAsterisk?: boolean // Hide required asterisk
+  labelBold?: boolean // Whether labels are bold
+  items: FormItemType[] // Form item configuration
 }
 ```
 
 ## FormElement
 
-表单设计器的组件配置，为表单设计器扩展组件时使用
+Component configuration for the form designer, used when extending the form designer.
 
 ```ts
 type FormElement = {
-  name: string      // 组件的名字
-  component: VNode | Component  // vue的SFC组件，需要可以接收v-model
-  icon:  VNode | Component      // 组件的icon ， SFC组件
-  type: 'assist' | 'layout' | 'basic'   // 组件类型
-  order: number     // 设计器会按照order大小排序所有组件
-  initialValues: Omit<FormItemType, 'name'>     // 拖拽生成组件时，生成的默认配置
-  modelName?: string    // 组件的v-model名称，默认时modelValue
-  attrSchema: FormSchema    // 组件的配置表单，schema
+  name: string      // Component name
+  component: VNode | Component  // Vue SFC component that can accept v-model
+  icon:  VNode | Component      // Component icon, SFC component
+  type: 'assist' | 'layout' | 'basic'   // Component type
+  order: number     // The designer will sort all components based on the order
+  initialValues: Omit<FormItemType, 'name'>     // Default configuration when dragging and dropping components
+  modelName?: string    // v-model name of the component, default is modelValue
+  attrSchema: FormSchema    // Component configuration form, schema
 }
 ```
 
 ## TemplateData
 
-设计器的左侧模版数据
+Template data on the left side of the designer.
 
 ```ts
 type TemplateData = { name: string; schema: FormSchema; id?: string }[]

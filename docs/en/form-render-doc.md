@@ -1,13 +1,8 @@
-<script setup>
-import FormRender from '../demo/FormRender.vue'
+# Form Render
 
-</script>
+## Introduction
 
-# FormRender 表单渲染器
-
-## 简介
-
-FormRender 是 vue-form-craft 的渲染组件。
+FormRender is the rendering component of vue-form-craft.
 
 ::: demo expand
 
@@ -17,18 +12,19 @@ demo/FormRender.vue
 
 ## Props
 
-| 参数名        | 类型     | 默认值 | 描述                                     |
+| Name          | Type     | Default | Description                                 |
 | ------------- | -------- | ------ | ---------------------------------------- |
-| v-model       | `object` | {}     | 表单值                                   |
-| schema        | `object` | ——     | 表单Schema配置，纯JSON，用于描述表单结构 |
-| schemaContext | `object` | {}     | Schema自定义的 [联动变量](/en/linkage)  |
+| v-model       | `object` | {}     | Form value                                   |
+| schema        | `object` | ——     | Form Schema configuration, pure JSON, used to describe the form structure |
+| schemaContext | `object` | {}     | Schema custom [linkage variables](/en/linkage)  |
 
 ## Exposes
 
-> 组件暴露出的方法，通过ref调用
+> Methods exposed by the component, called through ref
 
-| 名称        | 类型             | 描述                                                                              |
+| Name        | Type             | Description                                                                              |
 | ----------- | ---------------- | --------------------------------------------------------------------------------- |
-| validate    | `() => Promise`  | 校验表单                                                                          |
-| resetFields | `name[] => void` | 接收一个name数组，例如`['name','age']` 来重置一组字段为初始值，不传会重置所有字段 |
-| context     | `object`         | 表单的[联动变量](/en/linkage)                                                    |
+| validate    | `() => Promise`  | Validate the form                                                                          |
+| resetFields | `name[] => void` | Accepts an array of names, such as `['name','age']`, to reset a group of fields to their initial values. If not passed, all fields will be reset |
+| context     | `object`         | [Linkage variables](/en/linkage) of the form                                                    |
+

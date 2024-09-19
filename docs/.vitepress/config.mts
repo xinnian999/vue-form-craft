@@ -86,6 +86,7 @@ export default defineConfig({
               items: [
                 { text: '类型声明', link: '/zh/interface' },
                 { text: '暗黑模式', link: '/zh/dark' },
+                { text: '国际化', link: '/zh/internationalization' },
               ]
             }
           ]
@@ -129,8 +130,8 @@ export default defineConfig({
             {
               text: 'Components',
               items: [
-                { text: 'FormDesign Form Designer', link: '/en/form-design-doc' },
-                { text: 'FormRender Form Renderer', link: '/en/form-render-doc' }
+                { text: 'Form Design', link: '/en/form-design-doc' },
+                { text: 'Form Render', link: '/en/form-render-doc' }
               ]
             },
             {
@@ -145,6 +146,7 @@ export default defineConfig({
               items: [
                 { text: 'Type Declarations', link: '/en/interface' },
                 { text: 'Dark Mode', link: '/en/dark' },
+                { text: 'Internationalization', link: '/zh/internationalization' },
               ]
             }
           ]

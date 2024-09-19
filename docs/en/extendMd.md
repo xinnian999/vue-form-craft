@@ -1,12 +1,11 @@
-# 扩展一个markdown输入框
+# Extend a Markdown Input Box
+Here is the translated markdown content:
 
-下面展示一下，如何给表单设计器扩展一个markdown输入框
+## Creating Directories
 
-## 创建目录
+To facilitate management, we will put the newly extended components into a directory, which includes subdirectories for each extension component.
 
-为了方便管理，我们将新扩展的组件放到一个目录下，这个目录下包含各个扩展组件的子目录
-
-可以按照我的这种格式创建目录
+You can create directories in the following format:
 
 ```
 src
@@ -19,19 +18,19 @@ src
     └── index.ts
 ```
 
-## 安装markdown插件
+## Installing the Markdown Plugin
 
-可以在任意找一款开源的markdown插件，这里我选择了`md-editor-v3`
+You can choose any open-source markdown plugin. Here, I have chosen `md-editor-v3`.
 
 ```xml
 npm install md-editor-v3
 ```
 
-## 封装markdown组件
+## Wrapping the Markdown Component
 
-组件需要接收`v-model`，来与表单建立数据双向绑定！
+The component needs to receive `v-model` to establish two-way data binding with the form!
 
-这里利用了`vue3.4+`的新api`defineModel`来快速实现！
+Here, we utilize the new API `defineModel` introduced in `vue3.4+` to quickly implement this!
 
 ```vue
 // src/extendElements/Markdown/Component.vue
@@ -48,11 +47,11 @@ const value = defineModel<string>()
 
 ```
 
-## 封装Icon
+## Wrapping the Icon
 
-在 [阿里iconfont](https://www.iconfont.cn/) 找一个合适的icon ，复制svg代码 ， 写到一个vue文件里即可！
+Find a suitable icon on [Ali Iconfont](https://www.iconfont.cn/), copy the SVG code, and write it in a Vue file!
 
-**当然如果你项目里，有封装好的Icon渲染组件，可以直接用，跳过这一步！**
+**Of course, if you have an encapsulated Icon rendering component in your project, you can directly use it and skip this step!**
 
 ```vue
 // src/extendElements/Markdown/Icon.vue
@@ -68,6 +67,7 @@ const value = defineModel<string>()
     height="20"
   >
     <path
+    <path
       d="M854.6 288.6L639.4 73.4c-6-6-14.1-9.4-22.6-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.7-9.4-22.7zM790.2 326H602V137.8L790.2 326z m1.8 562H232V136h302v216c0 23.2 18.8 42 42 42h216v494z"
       p-id="3898"
     ></path>
@@ -80,9 +80,9 @@ const value = defineModel<string>()
 
 ```
 
-## 配置项表单
+## Configuration Item Form
 
-通过设计器拖拽，制作的表单，将JsonSchema导了出来
+Drag and drop through the designer to create a form that exports JsonSchema
 
 ```ts
 // src/extendElements/Markdown/attrSchema.ts
@@ -139,9 +139,10 @@ export default {
 } as FormSchema
 ```
 
-## 总配置
 
-上面的几个文件，合并成一个`FormElement`对象，也就是一个完整的扩展组件！
+## Overall configuration
+
+Merge the above files into a 'FormElement' object, which is a complete extension component!
 
 ```ts
 // src/extendElements/Markdown/index.ts
@@ -161,7 +162,7 @@ export default {
 } satisfies FormElement
 ```
 
-## 导出，使用
+## Export, use
 
 ```ts
 // src/extendElements/index.ts

@@ -1,38 +1,37 @@
-# JsonSchema详解
+# JsonSchema in Detail
+Low-code form development is all about JSON Schema. Understanding this protocol allows us to develop forms more efficiently and quickly.
 
-低代码表单开发，最核心的就是JSON Schema，理解了这套协议之后，我们就能更高效，更快速的来开发表单了。
+## Structure
 
-## 结构
+First, we need to understand that JSON Schema is an abstraction of a form.
 
-首先，我们要理解，JSON Schema就是 **表单的抽象** 。
+The outermost layer of JSON represents the overall configuration of the form, and the `items` field contains the configuration of each form item.
 
-JSON的最外层是表单整体的配置，items里面是每个表单项的配置。
+Within `items`, each form item is represented by its own set of properties, such as `label`, `name`, and `component`.
 
-items里是每个表单项的抽象，label、name、component等是每个表单项的通用配置。
-
-component代表该表单项使用什么组件，props是传给该组件的props。大部分组件都是基于**element-plus**二次封装，所以也支持该组件在el文档的所有props
+The `component` property indicates which component should be used for the form item, and `props` contains the props passed to that component. Most components are based on the **element-plus** library, so they support all the props documented in the `el` documentation.
 
 ```json
 {
-  "labelWidth": 150, //表单label宽度
-  "labelAlign": "right", //表单label对齐方式
-  "size": "default", //表单表单项大小
+  "labelWidth": 150, // Width of the form label
+  "labelAlign": "right", // Alignment of the form label
+  "size": "default", // Size of the form items
   "items": [
-    //表单所有表单项的配置
+    // Configuration of all form items
     {
-      "label": "用户名", //表单项的label
-      "component": "input", //表单项使用的组件
+      "label": "Username", // Label of the form item
+      "component": "input", // Component used for the form item
       "props": {
-        //传给该组件的props，支持该组件在element plus的所有props
-        "placeholder": "请输入用户名"
+        // Props passed to the component, supporting all the props of the element-plus component
+        "placeholder": "Please enter your username"
       },
-      "name": "username" //唯一标识，也就是值key
+      "name": "username" // Unique identifier, i.e., the value key
     },
     {
-      "label": "密码",
+      "label": "Password",
       "component": "password",
       "props": {
-        "placeholder": "请输入密码"
+        "placeholder": "Please enter your password"
       },
       "name": "password"
     }
@@ -40,36 +39,36 @@ component代表该表单项使用什么组件，props是传给该组件的props�
 }
 ```
 
-## 配置
+## Configuration
 
-了解了上面的简单用例后，下面是所有可选配置：
+After understanding the simple example above, here are all the optional configurations:
 
-### 表单整体配置
+### Overall Form Configuration
 
-| 参数名               | 类型                              | 默认值      | 描述              |
-| -------------------- | --------------------------------- | ----------- | ----------------- |
-| labelWidth           | `number`                          | `150`       | 表单label宽度     |
-| labelAlign           | `'left' \| 'top' \| 'right' `     | `'right'`   | 表单label对齐方式 |
-| size                 | `'small' \| 'default' \| 'large'` | `'default'` | 表单表单项大小      |
-| hideRequiredAsterisk | `boolean`                         | `false`     | 表单隐藏必填星号  |
-| labelBold            | `boolean`                         | `false`     | 表单label加粗     |
-| disabled             | `boolean`                         | `false`     | 禁用所有表单项    |
+| Parameter             | Type                                | Default     | Description           |
+| --------------------- | ----------------------------------- | ----------- | --------------------- |
+| labelWidth             | `number`                            | `150`       | Width of the form label |
+| labelAlign             | `'left' \| 'top' \| 'right' `       | `'right'`   | Alignment of the form label |
+| size                   | `'small' \| 'default' \| 'large'`   | `'default'` | Size of the form items |
+| hideRequiredAsterisk   | `boolean`                           | `false`     | Hide the required asterisk in the form |
+| labelBold              | `boolean`                           | `false`     | Make the form label bold |
+| disabled               | `boolean`                           | `false`     | Disable all form items |
 
-### 表单项配置
+### Form Item Configuration
 
-| 参数名       | 类型             | 默认值 | 描述                                             |
-| ------------ | ---------------- | ------ | ------------------------------------------------ |
-| label        | `string`         | -      | 标签                                             |
-| name         | `string`         | -      | 唯一标识，值key                                  |
-| component    | `string`         | -      | 使用的组件                                       |
-| props        | object           | {}     | 传给组件的props，具体参考element-plus文档        |
-| required     | `boolean`        | false  | 表单项是否必填                                     |
-| initialValue | any              | -      | 表单项初始值                                       |
-| help         | `string`         | -      | 表单项的提示信息                                   |
-| hidden       | `boolean`        | false  | 是否隐藏表单项                                   |
-| hideLabel    | `boolean`        | false  | 是否隐藏表单项的标签                               |
-| rules        | `FormRule[]`     | -      | 表单项校验规则，Input组件专用                      |
-| children     | `FormItemType[]` | -      | 子表单项数据，嵌套表单项专用，如自增容器，卡片，栅格 |
-| change       | `FormChange[]`   | -      | 表单项值变化时，触发的联动配置                     |
-| designKey    | `string`         | -      | 给表单设计器用的标识key，自动生成                |
+| Parameter       | Type               | Default | Description                                      |
+| --------------- | ------------------ | ------- | ------------------------------------------------ |
+| label           | `string`           | -       | Label                                            |
+| name            | `string`           | -       | Unique identifier, i.e., the value key            |
+| component       | `string`           | -       | Component to be used                             |
+| props           | object             | {}      | Props passed to the component, refer to the element-plus documentation for details |
+| required        | `boolean`          | false   | Whether the form item is required                 |
+| initialValue   | any                | -       | Initial value of the form item                    |
+| help            | `string`           | -       | Help information for the form item                |
+| hidden          | `boolean`          | false   | Whether to hide the form item                     |
+| hideLabel       | `boolean`          | false   | Whether to hide the label of the form item        |
+| rules           | `FormRule[]`       | -       | Validation rules for the form item, specific to the Input component |
+| children        | `FormItemType[]`   | -       | Data for nested form items, used for containers, cards, grids, etc. |
+| change          | `FormChange[]`     | -       | Configuration for triggering actions when the value of the form item changes |
+| designKey       | `string`           | -       | Key used by the form designer, automatically generated |
 

@@ -1,8 +1,8 @@
-# FormDesign 表单设计器
+# Form Design
 
-## 简介
+## Introduction
 
-FormDesign 是 vue-form-craft 的可视化表单设计器组件。
+FormDesign is a visual form designer component for vue-form-craft.
 
 ```vue
 <template>
@@ -18,15 +18,16 @@ const onSave = (newSchema) => {
 
 ## Props
 
-| 参数名        | 类型           | 默认值 | 描述                                          |
-| ------------- | -------------- | ------ | --------------------------------------------- |
-| v-model       | `FormSchema`   | -      | 设计器的Schema                            |
-| schemaContext | `object`       | -      | Schema自定义的 [联动变量](/en/linkage) |
-| omitMenus     | `string[]`     | []     | 隐藏左侧组件key数组                           |
-| templates     | `TemplateData` | -      | 定制左侧可用模板                              |
+| Name          | Type           | Default | Description                                 |
+| ------------- | -------------- | ------ | ------------------------------------------- |
+| v-model       | `FormSchema`   | -      | The schema of the designer.                  |
+| schemaContext | `object`       | -      | Custom [linkage variables](/en/linkage) for the schema. |
+| omitMenus     | `string[]`     | []     | An array of component keys to hide in the left menu. |
+| templates     | `TemplateData` | -      | Custom templates available in the left menu.  |
 
 ## Events
 
-| 事件名 | 类型       | 描述               |
+| Name   | Type       | Description       |
 | ------ | ---------- | ------------------ |
-| onSave | `()=>void` | 点击保存按钮时触发 |
+| onSave | `()=>void` | Triggered when the save button is clicked. |
+

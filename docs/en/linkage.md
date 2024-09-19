@@ -1,40 +1,32 @@
-<script setup>
-import Linkage from './linkageDemo/linkage.vue'
-import Linkage1 from './linkageDemo/linkage1.vue'
-import Linkage2 from './linkageDemo/linkage2.vue'
-import Linkage3 from './linkageDemo/linkage3.vue'
-import Linkage4 from './linkageDemo/linkage4.vue'
-</script>
+# Form Linkage
 
-# 表单联动
+To evaluate the strength of a form tool, form linkage capability is crucial.
 
-要评价一个表单工具能力强不强，表单联动能力至关重要。
+`vue-form-craft` provides a set of **extremely simple and flexible** form linkage implementation methods!
 
-`vue-form-craft` 提供了一套【**极其简单且灵活**】的表单联动实现方式！
+It is divided into two types of implementations: **configuration linkage** and **value linkage**.
 
-分为【配置级联动】和【值联动】两种实现方式
-
-## 模板表达式（配置级联动）
+## Template Expression (Configuration Linkage)
 
 ::: v-pre
-模板表达式为字符串格式，以双花括号 {{ ... }} 为语法特征，对于字段间联动提供一种简洁的配置方式。
+The template expression is in string format and is characterized by double curly braces {{ ... }}. It provides a concise configuration method for field linkage.
 
-在JsonSchema中，被双花括号包裹的字符串一律会被解析为 **js表达式并返回结果**，且可以使用一些联动变量。
+In JsonSchema, strings wrapped in double curly braces will be parsed as **JavaScript expressions and return results**, and can use some linkage variables.
 
-> Schema插值表达式 可以使用的联动变量：
+> Linkage variables that can be used in schema interpolation expressions:
 
-| 变量名      | 类型   | 描述                            |
-| ----------- | ------ | ------------------------------- |
-| $values     | Object | 整个表单的值                    |
-| $selectData | Object | 【选择类字段】选中项数据源合集  |
-| $item       | Object | 【自增组件】专用，单行的数据值  |
-| $index      | Object | 【自增组件】专用，单行的下标    |
-| ...         | any    | 由schemaContext传入的自定义变量 |
+| Variable Name | Type   | Description                      |
+| ------------- | ------ | -------------------------------- |
+| $values       | Object | Values of the entire form        |
+| $selectData   | Object | Collection of selected item data for **select-type fields** |
+| $item         | Object | **Special for increment components**, the value of a single row |
+| $index        | Object | **Special for increment components**, the index of a single row |
+| ...           | any    | Custom variables passed in by schemaContext |
 
-这种联动方式能应对大部分联动场景，例如：控制字段禁用、隐藏、文案提示等交互。
+This type of linkage can handle most linkage scenarios, such as controlling field disablement, hiding, and text prompts.
 :::
 
-**JsonSchema 所有协议字段都支持模板表达式。** 这意味着你可以动态的控制表单的任何细粒度的配置，实现各种复杂的联动效果！
+**Template expressions are supported for all protocol fields in JsonSchema.** This means that you can dynamically control any fine-grained configuration of the form and achieve various complex linkage effects!
 
 ::: demo expand
 
@@ -42,16 +34,13 @@ demo/linkageDemo/linkage.vue
 
 :::
 
+## Change Configuration (Value Linkage)
 
+The template expressions mentioned above can only achieve linkage between configurations and cannot achieve linkage of **modifying form values**. Therefore, a change configuration is provided for each field.
 
+When change is configured, the change linkage will only be triggered when the value of this field changes.
 
-## change配置（值联动）
-
-上面的模版表达式只可以实现配置间的联动，不能实现 **修改表单值** 类的联动，所以给每个字段提供了一个change配置。
-
-配置了change，就会在这个字段的值改变时，才会触发change联动
-
-change是一个数组，可以同时联动多个字段。target为目标字段，value是修改的值，也支持模版表达式。
+Change is an array that can link multiple fields simultaneously. The target is the target field, and the value is the modified value, which also supports template expressions.
 
 ::: demo expand
 
@@ -59,11 +48,9 @@ demo/linkageDemo/linkage3.vue
 
 :::
 
+## More Examples
 
-
-## 更多示例
-
-1、评分低于3星可以输入差评原因
+1. Input negative feedback reasons when the rating is below 3 stars.
 
 ::: demo 
 
@@ -73,7 +60,7 @@ demo/linkageDemo/linkage1.vue
 
 <br/>
 
-2、选完商品，显示价格
+2. Display the price after selecting a product.
 
 ::: demo 
 

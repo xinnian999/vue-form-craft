@@ -1,19 +1,16 @@
-# 扩展表单设计器
+# Extend Form Designer
+`vue-form-craft` provides some basic components, such as input, select, and radio.
 
-`vue-form-craft` 提供了一些基础组件，例如 input、select 和 radio 等。
+However, sometimes these components may not fully meet our business needs. In such cases, we can consider extending the form designer of `vue-form-craft` with more draggable components to meet additional requirements and facilitate future use!
 
-但有时候这些组件并不能完全满足我们的业务需求，此时可以考虑为 `vue-form-craft` 的表单设计器扩展更多可拖拽组件，以满足更多需求且方便下次使用！
+## How to Extend?
 
+Simply register `vue-form-craft` globally and pass in an `extendElements` configuration!
 
-## 如何扩展？
-
-只需要在全局注册`vue-form-craft`时，传入一个`extendElements`配置即可！
-
-`extendElements`是一个对象！组件名作为key值，`FormElement`作为value值！ 
+`extendElements` is an object! The component name serves as the key, and `FormElement` serves as the value!
 
 ```ts
 type extendElements = { [key: string]: FormElement }
-
 ```
 
 ```ts
@@ -33,10 +30,9 @@ app.mount('#app')
 
 ```
 
+## FormElement Object
 
-## 组件对象FormElement
-
-表单设计器的组件全部是由`FormElement`对象组成的，同理我们想扩展更多组件，需要按照`FormElement`的接口格式去配置，然后传给`vue-form-craft`即可！
+The components in the form designer are all composed of `FormElement` objects. Similarly, if we want to extend more components, we need to configure them according to the interface format of `FormElement` and then pass them to `vue-form-craft`!
 
 ```ts
 interface FormElement {
@@ -51,48 +47,48 @@ interface FormElement {
 }
 ```
 
-下面详细介绍每个`FormElement`的每个属性：
+Below is a detailed description of each property of `FormElement`:
 
-### name 
+### name
 
-组件名称，也就是位于设计器左栏上，某个组件的名称
+The component name, which appears on the left sidebar of the designer as the name of a specific component.
 
 ![name](../assets/name.png)
 
 ### icon
 
-组件Icon，也就是位于设计器左栏上，某个组件的icon。
+The component icon, which appears on the left sidebar of the designer as the icon of a specific component.
 
-icon格式为vue的SFC组件
+The icon format is a Vue Single-File Component.
 
 ![icon](../assets/icon.png)
 
 ### component
 
-渲染该组件所用的Vue-SFC组件
+The Vue Single-File Component used to render the component.
 
 ### type
 
-组件类型，这个参数决定了组件位于左侧菜单的哪个分类，如果`type='basic'`，那么组件需要能接收v-model
+The component type, which determines the category in the left menu where the component appears. If `type='basic'`, the component should be able to accept v-model.
 
 ### order
 
-左侧菜单会按照order大小排序所有组件
+The components in the left menu are sorted based on the order value.
 
 ### initialValues
 
-拖拽生成组件时，会在schema中的items里，增添的该字段默认配置。
+When a component is dragged and generated, this field is added as the default configuration in the schema's items.
 
-设计器右侧的表单，实际上编辑的也是这个参数！
+The form on the right side of the designer actually edits this parameter!
 
 ### modelName
 
-传给组件的v-model名称，默认是modelValue
+The v-model name passed to the component. The default is modelValue.
 
 ### attrSchema
 
-组件的配置表单的schema.
+The schema for the component's configuration form.
 
-对应设计器右侧的配置表单，建议用设计器去拖拽生成！
+Corresponds to the configuration form on the right side of the designer. It is recommended to use the designer to drag and generate!
 
 ![alt text](../assets/attr.png)
