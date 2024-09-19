@@ -84,13 +84,36 @@ export type SelectValue = string | number | boolean
 
 export type FormRenderInstance = InstanceType<typeof FormRender>
 
-export type Locale = {
-  actions: {
-    previewJson: string
-  }
-}
-
 export type $Global = {
   request: AxiosStatic | AxiosInstance | Function
   elements: { [key: string]: FormElement }
+}
+
+export type Locale = {
+  actions: {
+    previewJson: string
+    previewVueCode: string
+    previewForm: string
+    clear: string
+    save: string
+  }
+  canvas: {
+    emptyTip: string
+    wrapperEmptyTip: string
+  }
+  attr:{
+    tab1:{
+      title:string
+      emptyTip:string
+      linkage:{
+        text:string
+        action1:string
+        action2:string
+      }
+    }
+    tab2:{
+      title:string
+      
+    }
+  }
 }

@@ -83,6 +83,12 @@ const current = computed({
   }
 })
 
+const lang = inject<Ref<'zh' | 'en'>>('vfc-lang', ref('zh'))
+
+const locale = computed(() => locales[lang.value])
+
+provide($locale, locale)
+
 provide($schema, {
   schema: currentSchema,
   updateSchema: (schema) => {
@@ -105,12 +111,6 @@ provide($methods, {
     emit('onSave')
   }
 })
-
-const lang = inject<Ref<'zh' | 'en'>>('vfc-lang', ref('zh'))
-
-const locale = computed(() => locales[lang.value])
-
-provide($locale, locale)
 </script>
 
 <style lang="less">

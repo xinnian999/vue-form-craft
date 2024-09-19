@@ -12,8 +12,8 @@
     </div>
 
     <div class="formDesign-actions-right">
-      <el-button size="small" type="danger" @click="handleClear">清空</el-button>
-      <el-button size="small" @click="handleSave" type="primary">保存</el-button>
+      <el-button size="small" type="danger" @click="handleClear">{{ locale.actions.clear }}</el-button>
+      <el-button size="small" @click="handleSave" type="primary">{{ locale.actions.save }}</el-button>
     </div>
 
     <el-dialog
@@ -101,6 +101,7 @@ const { handleSave } = inject($methods)!
 
 const locale = inject($locale)!
 
+
 const previewActions = [
   {
     label: locale.value.actions.previewJson,
@@ -108,12 +109,12 @@ const previewActions = [
     type: 'exec'
   },
   {
-    label: '生成VUE代码',
+    label: locale.value.actions.previewVueCode,
     btnType: 'default',
     type: 'vue'
   },
   {
-    label: '预览表单',
+    label: locale.value.actions.previewForm,
     btnType: 'default',
     type: 'form'
   }
