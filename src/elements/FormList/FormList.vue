@@ -63,7 +63,7 @@
           :label="item.label"
           :key="item.name"
           v-for="item in children"
-          :width="item.width"
+          v-bind="item"
           :formatter="(row, _, __, index) => formatter(item, row, index)"
         />
         <el-table-column fixed="right" min-width="60">

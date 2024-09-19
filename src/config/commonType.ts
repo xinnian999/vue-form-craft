@@ -85,17 +85,17 @@ export type SelectValue = string | number | boolean
 export type FormRenderInstance = InstanceType<typeof FormRender>
 
 export type $Global = {
-  request: AxiosStatic | AxiosInstance | Function
+  request: AxiosStatic | AxiosInstance
   elements: { [key: string]: FormElement }
 }
 
 export type Locale = {
-  menus:{
-    basicTitle:string,
-    layoutTitle:string,
-    assistTitle:string,
-    useTemplateBtn:string
-  },
+  menus: {
+    basicTitle: string
+    layoutTitle: string
+    assistTitle: string
+    useTemplateBtn: string
+  }
   actions: {
     previewJson: string
     previewVueCode: string
@@ -107,19 +107,25 @@ export type Locale = {
     emptyTip: string
     wrapperEmptyTip: string
   }
-  attr:{
-    tab1:{
-      title:string
-      emptyTip:string
-      linkage:{
-        text:string
-        action1:string
-        action2:string
+  attr: {
+    tab1: {
+      title: string
+      emptyTip: string
+      linkage: {
+        text: string
+        action1: string
+        action2: string
       }
     }
-    tab2:{
-      title:string
-      
+    tab2: {
+      title: string
     }
   }
+}
+
+export type CollapseItem = {
+  title: string
+  name: string
+  checked?: boolean
+  children: FormItemType[]
 }

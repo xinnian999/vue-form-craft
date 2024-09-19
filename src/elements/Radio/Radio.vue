@@ -17,7 +17,7 @@
           v-for="item in currentOptions"
           :key="item[valueKey]"
           :label="item[valueKey]"
-          :size="$attrs.size"
+          v-bind="$attrs"
           >{{ item[labelKey] }}
         </el-radio-button>
       </template>

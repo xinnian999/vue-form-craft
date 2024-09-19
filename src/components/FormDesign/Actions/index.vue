@@ -12,8 +12,12 @@
     </div>
 
     <div class="formDesign-actions-right">
-      <el-button size="small" type="danger" @click="handleClear">{{ locale.actions.clear }}</el-button>
-      <el-button size="small" @click="handleSave" type="primary">{{ locale.actions.save }}</el-button>
+      <el-button size="small" type="danger" @click="handleClear">{{
+        locale.actions.clear
+      }}</el-button>
+      <el-button size="small" @click="handleSave" type="primary">{{
+        locale.actions.save
+      }}</el-button>
     </div>
 
     <el-dialog
@@ -25,11 +29,7 @@
       top="10vh"
       @close="formValues = {}"
     >
-      <el-tabs
-        v-if="dialogState.type === 'exec'"
-        model-value="json"
-        class="demo-tabs"
-      >
+      <el-tabs v-if="dialogState.type === 'exec'" model-value="json" class="demo-tabs">
         <el-tab-pane label="JsonSchema" name="json">
           <json-editor-vue
             class="editor"
@@ -88,6 +88,12 @@ import vueEditStr from './vueEditStr'
 import helpStr from './helpStr'
 import type { FormRenderInstance } from '@/release'
 
+type PreviewAction = {
+  label: string
+  btnType: 'default' | 'primary' | 'text' | 'success' | 'warning' | 'info' | 'danger'
+  type: string
+}
+
 defineProps({
   schemaContext: {
     type: Object,
@@ -101,8 +107,7 @@ const { handleSave } = inject($methods)!
 
 const locale = inject($locale)!
 
-
-const previewActions = [
+const previewActions: PreviewAction[] = [
   {
     label: locale.value.actions.previewJson,
     btnType: 'primary',
@@ -139,13 +144,13 @@ const dialogState = reactive({
   title: ''
 })
 
-const handlePreview = (type:string, label:string) => {
+const handlePreview = (type: string, label: string) => {
   dialogState.visible = true
   dialogState.type = type
   dialogState.title = label
 }
 
-const onBlur = (editor:any) => {
+const onBlur = (editor: any) => {
   schema.value = { ...schema.value, items: changeItems(schema.value.items) }
   editor.repair()
 }

@@ -34,7 +34,7 @@ import type { FormItemType } from '@/release'
 
 defineProps<{
   children: FormItemType[],
-  style: any
+  style?: any
 }>()
 
 const { onAdd } = inject($methods)!

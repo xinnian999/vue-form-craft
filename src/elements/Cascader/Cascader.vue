@@ -1,6 +1,6 @@
 <template>
   <el-cascader
-    v-model="selectVal"
+    v-model="value"
     :options="currentOptions"
     :loading="loading"
     :props="{
@@ -11,11 +11,11 @@
   />
 </template>
 
-<script setup  lang="ts">
+<script setup lang="ts">
 import { defineProps } from 'vue'
 import { ElCascader, type CascaderValue } from 'element-plus'
 import useSelect from '@/hooks/useSelect'
-import type { SelectProps } from '@/config/commonType';
+import type { SelectProps } from '@/config/commonType'
 
 const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],
@@ -26,8 +26,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   name: ''
 })
 
+const value = defineModel<CascaderValue>()
 
-
-
-const { selectVal, currentOptions, selectChange, loading } = useSelect<CascaderValue>(props)
+const { currentOptions, selectChange, loading } = useSelect(props)
 </script>
