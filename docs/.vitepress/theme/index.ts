@@ -6,6 +6,7 @@ import type { Component } from 'vue'
 import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
+import Layout from './Layout.vue'
 import './custom.css'
 
 const modules = import.meta.glob<Component>('../../demo/**/*', { eager: true, import: 'default' })
@@ -13,6 +14,7 @@ const modules = import.meta.glob<Component>('../../demo/**/*', { eager: true, im
 
 export default {
   extends: DefaultTheme,
+  Layout,
   async enhanceApp({ app }) {
     if (!import.meta.env.SSR) {
       const { default: VueFormCraft } = await import('vue-form-craft')
