@@ -46,12 +46,22 @@
         </el-tab-pane>
       </el-tabs>
 
-      <highlightjs
-        v-if="dialogState.type === 'vue'"
-        class="vueCode"
-        language="js"
-        :code="vueEditStr(schema)"
-      />
+      <el-tabs v-if="dialogState.type === 'vue'" model-value="ts" class="demo-tabs">
+        <el-tab-pane label="Typescript" name="ts">
+          <highlightjs
+            class="vueCode"
+            language="js"
+            :code="tsVue(schema)"
+          />
+        </el-tab-pane>
+        <el-tab-pane label="Javascript" name="js">
+          <highlightjs
+            class="vueCode"
+            language="js"
+            :code="jsVue(schema)"
+          />
+        </el-tab-pane>
+      </el-tabs>
 
       <FormRender
         v-if="dialogState.type === 'form'"
@@ -84,7 +94,7 @@ import JsonEditorVue from 'json-editor-vue3'
 import { FormRender } from '@/components'
 import { $schema, $methods, $locale } from '@/config/symbol'
 import { changeItems } from '../utils'
-import vueEditStr from './vueEditStr'
+import {tsVue,jsVue} from './vueEditStr'
 import helpStr from './helpStr'
 import type { FormRenderInstance } from '@/release'
 
