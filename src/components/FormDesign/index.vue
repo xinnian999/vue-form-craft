@@ -24,6 +24,8 @@ import {
   defineEmits,
   defineOptions,
   defineModel,
+  inject,
+  type Ref,
 } from 'vue'
 import { recursionDelete } from '@/utils'
 import Menus from './Menus/index.vue'
@@ -31,8 +33,9 @@ import Canvas from './Canvas/index.vue'
 import Current from './Current/index.vue'
 import Actions from './Actions/index.vue'
 import { getCurrentByKey, setCurrentByKey, changeItems, copyItems } from './utils'
-import { $schema, $current, $methods, $hoverKey } from '@/config/symbol'
+import { $schema, $current, $methods, $hoverKey, $locale } from '@/config/symbol'
 import type { FormSchema, FormItemType, TemplateData } from '@/config/commonType'
+import locales from '@/config/locales'
 
 defineOptions({
   name: 'FormDesign'
@@ -72,28 +75,36 @@ const list = computed({
 
 const current = computed({
   get() {
-    return getCurrentByKey(list.value, currentKey.value) || {}
+    return getCurrentByKey(list.value, currentKey.value)
   },
-  set(element:FormItemType) {
+  set(element: FormItemType) {
     currentKey.value = element.designKey!
     list.value = setCurrentByKey(currentSchema.value.items, element)
   }
 })
 
+const lang = inject<Ref<'zh' | 'en'>>('vfc-lang', ref('zh'))
+
+const locale = computed(() => locales[lang.value])
+
+provide($locale, locale)
+
 provide($schema, {
   schema: currentSchema,
-  updateSchema: (schema) => {currentSchema.value = schema}
+  updateSchema: (schema) => {
+    currentSchema.value = schema
+  }
 })
-provide($current, { current, updateCurrent: (data: FormItemType) => (current.value = data) })
+provide($current, { current, updateCurrent: (data) => (current.value = data) })
 provide($hoverKey, { hoverKey, updateHoverKey: (key: string) => (hoverKey.value = key) })
 provide($methods, {
   onAdd: () => {
     list.value = changeItems(list.value)
   },
-  handleDeleteItem: (element: FormItemType) => {
+  handleDeleteItem: (element) => {
     list.value = recursionDelete(list.value, (item) => item.designKey !== element.designKey)
   },
-  handleCopyItem: (element: FormItemType) => {
+  handleCopyItem: (element) => {
     list.value = copyItems(list.value, element.designKey!)
   },
   handleSave: () => {
@@ -107,11 +118,10 @@ provide($methods, {
   display: flex;
   height: 100%;
   box-sizing: border-box;
-  background-color: #eee;
+  background-color: var(--el-bg-color);
   .formItemList {
     width: 18%;
     padding: 10px;
-    background-color: #fff;
     position: relative;
     overflow: auto;
   }
@@ -121,7 +131,6 @@ provide($methods, {
     overflow: hidden;
     border-left: 1px solid #eee;
     border-right: 1px solid #eee;
-    background-color: #fff;
     padding: 0 15px;
     display: flex;
     flex-direction: column;
@@ -131,7 +140,6 @@ provide($methods, {
     width: 20%;
     overflow: auto;
     padding: 20px;
-    background-color: #fff;
   }
 
   .editor {

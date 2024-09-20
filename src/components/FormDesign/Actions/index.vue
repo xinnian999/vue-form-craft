@@ -12,8 +12,12 @@
     </div>
 
     <div class="formDesign-actions-right">
-      <el-button size="small" type="danger" @click="handleClear">清空</el-button>
-      <el-button size="small" @click="handleSave" type="primary">保存</el-button>
+      <el-button size="small" type="danger" @click="handleClear">{{
+        locale.actions.clear
+      }}</el-button>
+      <el-button size="small" @click="handleSave" type="primary">{{
+        locale.actions.save
+      }}</el-button>
     </div>
 
     <el-dialog
@@ -25,11 +29,7 @@
       top="10vh"
       @close="formValues = {}"
     >
-      <el-tabs
-        v-if="dialogState.type === 'exec'"
-        model-value="json"
-        class="demo-tabs"
-      >
+      <el-tabs v-if="dialogState.type === 'exec'" model-value="json" class="demo-tabs">
         <el-tab-pane label="JsonSchema" name="json">
           <json-editor-vue
             class="editor"
@@ -64,7 +64,7 @@
 
       <template #footer v-if="dialogState.type === 'form'">
         <el-button @click="handleSubmit" type="primary">模拟提交</el-button>
-        <el-button @click="formRef.resetFields()" type="primary">重置</el-button>
+        <el-button @click="formRef?.resetFields([])" type="primary">重置</el-button>
         <!-- <JsonEdit
           v-model="formContext"
           height="400px"
@@ -77,33 +77,22 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed, inject, defineProps, reactive } from 'vue'
 import { ElButton, ElDialog, ElTabs, ElTabPane, ElMessageBox } from 'element-plus'
 import JsonEditorVue from 'json-editor-vue3'
 import { FormRender } from '@/components'
-import { $schema, $methods, $global } from '@/config/symbol'
+import { $schema, $methods, $locale } from '@/config/symbol'
 import { changeItems } from '../utils'
 import vueEditStr from './vueEditStr'
 import helpStr from './helpStr'
+import type { FormRenderInstance } from '@/release'
 
-const previewActions = [
-  {
-    label: '预览JSON脚本',
-    btnType: 'primary',
-    type: 'exec'
-  },
-  {
-    label: '生成VUE代码',
-    btnType: 'default',
-    type: 'vue'
-  },
-  {
-    label: '预览表单',
-    btnType: 'default',
-    type: 'form'
-  }
-]
+type PreviewAction = {
+  label: string
+  btnType: 'default' | 'primary' | 'text' | 'success' | 'warning' | 'info' | 'danger'
+  type: string
+}
 
 defineProps({
   schemaContext: {
@@ -112,9 +101,29 @@ defineProps({
   }
 })
 
-const { schema, updateSchema } = inject($schema)
+const { schema, updateSchema } = inject($schema)!
 
-const { handleSave } = inject($methods)
+const { handleSave } = inject($methods)!
+
+const locale = inject($locale)!
+
+const previewActions: PreviewAction[] = [
+  {
+    label: locale.value.actions.previewJson,
+    btnType: 'primary',
+    type: 'exec'
+  },
+  {
+    label: locale.value.actions.previewVueCode,
+    btnType: 'default',
+    type: 'vue'
+  },
+  {
+    label: locale.value.actions.previewForm,
+    btnType: 'default',
+    type: 'form'
+  }
+]
 
 const json = computed({
   get() {
@@ -125,7 +134,7 @@ const json = computed({
   }
 })
 
-const formRef = ref(null)
+const formRef = ref<FormRenderInstance>()
 
 const formValues = ref({})
 
@@ -135,21 +144,21 @@ const dialogState = reactive({
   title: ''
 })
 
-const handlePreview = (type, label) => {
+const handlePreview = (type: string, label: string) => {
   dialogState.visible = true
   dialogState.type = type
   dialogState.title = label
 }
 
-const onBlur = (editor) => {
+const onBlur = (editor: any) => {
   schema.value = { ...schema.value, items: changeItems(schema.value.items) }
   editor.repair()
 }
 
 const handleSubmit = async () => {
-  await formRef.value.validate()
+  await formRef.value?.validate()
 
-  alert(JSON.stringify(formValues.value, null, 2), '模拟提交')
+  alert(JSON.stringify(formValues.value, null, 2))
 }
 
 const handleClear = async () => {

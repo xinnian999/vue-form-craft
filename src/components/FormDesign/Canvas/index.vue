@@ -4,7 +4,7 @@
       <div class="ico">
         <icon-render name="add" />
       </div>
-      <div class="text">请从左侧拖拽字段来组成表单</div>
+      <div class="text">{{ locale.canvas.emptyTip }}</div>
     </div>
 
     <draggable
@@ -27,16 +27,18 @@
   </FormRender>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { inject } from 'vue'
 import draggable from 'vuedraggable-es'
 import { FormRender,IconRender } from '@/components'
-import { $schema, $methods } from '@/config/symbol'
+import { $schema, $methods, $locale } from '@/config/symbol'
 import CanvasRender from './CanvasRender.vue'
 
-const { schema } = inject($schema)
+const { schema } = inject($schema)!
 
-const { onAdd } = inject($methods)
+const { onAdd } = inject($methods)!
+
+const locale = inject($locale)!
 </script>
 
 <style lang="less">

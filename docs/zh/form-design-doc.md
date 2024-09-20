@@ -21,7 +21,7 @@ const onSave = (newSchema) => {
 | 参数名        | 类型           | 默认值 | 描述                                          |
 | ------------- | -------------- | ------ | --------------------------------------------- |
 | v-model       | `FormSchema`   | -      | 设计器的Schema                            |
-| schemaContext | `object`       | -      | Schema自定义的 [联动变量](/doc/linkage) |
+| schemaContext | `object`       | -      | Schema自定义的 [联动变量](/zh/linkage) |
 | omitMenus     | `string[]`     | []     | 隐藏左侧组件key数组                           |
 | templates     | `TemplateData` | -      | 定制左侧可用模板                              |
 

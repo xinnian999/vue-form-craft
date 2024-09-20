@@ -15,14 +15,7 @@ import { defineProps, onMounted, ref } from 'vue'
 import { ElCollapse, ElCollapseItem } from 'element-plus'
 import { FormItemRender, CanvasWrapper } from '@/components'
 import Title from '../Title/Title.vue'
-import type { FormItemType } from '@/config/commonType';
-
-type CollapseItem={
-  title: string
-  name:string
-  checked?: boolean
-  children: FormItemType[]
-}
+import type { CollapseItem } from '@/config/commonType';
 
 const thisProps = defineProps<{
   props:Record<string,any>

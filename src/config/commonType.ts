@@ -1,4 +1,5 @@
 import type FormRender from '@/components/FormRender.vue'
+import type { AxiosInstance, AxiosStatic } from 'axios'
 import type { Component, VNode } from 'vue'
 
 export type FormRule = {
@@ -19,7 +20,7 @@ export interface FormItemType {
   name: string
   component: string
   required?: boolean
-  props?: object
+  props?: Record<string, any>
   initialValue?: any
   help?: string
   children?: FormItemType[]
@@ -55,12 +56,6 @@ export type FormElement = {
   attrSchema: FormSchema
 }
 
-export type $Global = {
-  request?: any
-  elements: { [key: string]: FormElement }
-  customElements?: { [key: string]: FormElement }
-}
-
 export type TemplateData = { name: string; schema: FormSchema; id?: string }[]
 
 export type SchemaApi = {
@@ -88,3 +83,49 @@ export interface SelectProps {
 export type SelectValue = string | number | boolean
 
 export type FormRenderInstance = InstanceType<typeof FormRender>
+
+export type $Global = {
+  request: AxiosStatic | AxiosInstance
+  elements: { [key: string]: FormElement }
+}
+
+export type Locale = {
+  menus: {
+    basicTitle: string
+    layoutTitle: string
+    assistTitle: string
+    useTemplateBtn: string
+  }
+  actions: {
+    previewJson: string
+    previewVueCode: string
+    previewForm: string
+    clear: string
+    save: string
+  }
+  canvas: {
+    emptyTip: string
+    wrapperEmptyTip: string
+  }
+  attr: {
+    tab1: {
+      title: string
+      emptyTip: string
+      linkage: {
+        text: string
+        action1: string
+        action2: string
+      }
+    }
+    tab2: {
+      title: string
+    }
+  }
+}
+
+export type CollapseItem = {
+  title: string
+  name: string
+  checked?: boolean
+  children: FormItemType[]
+}

@@ -11,7 +11,7 @@ import type { FormItemType } from '@/release';
 
 defineProps<{
   name: string,
-  style: any,
+  style?: any,
   children: FormItemType[],
   title: string
 }>()

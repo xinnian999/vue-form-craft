@@ -16,21 +16,19 @@
 - 可视化设计表单
 - 支持三十多种的表单组件(el所有表单组件、内置组件)
 - 支持收集Array数据（自增组件）
-- 用法简单，又非常高效的表单联动
+- 用法简单，又非常灵活高效的表单联动
 - 可预览生成的json配置
 - 可预览生成的VUE组件
 - 高扩展性、支持自定义组件、支持各种ui组件库来替换ui
 - 支持表单填写校验
 - 组件无限深层嵌套，深层校验
-- 支持远程获取表单的schema，后台存储表单，前端在线修改
 
 ## 第三方插件
 
 - vuedraggable
-- element-ui
+- element-plus
 - json-editor-vue3
 - lodash
-- md-editor-v3
 
 ## 使用
 
@@ -52,10 +50,14 @@ pnpm i vue-form-craft
 
 ```js
 import { createApp } from 'vue'
-import App from './App.vue'
 import VueFormCraft from 'vue-form-craft'
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
+import App from './App.vue'
+
 const app = createApp(App)
 
+app.use(ElementPlus)
 app.use(VueFormCraft)
 app.mount('#app')
 ```
@@ -66,29 +68,29 @@ app.mount('#app')
 
 ```vue
 <template>
-  <form-design @onSave="onSave" />
+  <div style="width:100vw;height:100vh">
+    <FormDesign />
+  </div>
 </template>
-
-<script setup>
-const onSave = (schema) => {
-  console.log(schema)
-}
-</script>
 ```
 
 > 使用表单渲染器
 
 ```vue
 <template>
-  <FormRender :schema="schema" footer @onFinish="onFinish" />
+  <FormRender v-model="formValues" :schema="schema" ref="formRef" />
+  <el-button @click="handleSubmit">提交</el-button>
 </template>
 
-<script setup>
-const onFinish = (values) => {
-  alert(JSON.stringify(values))
-}
+<script setup lang="ts">
+import { ref } from 'vue'
+import type { FormSchema,FormRenderInstance } from 'vue-form-craft'
 
-const schema = {
+const formRef = ref<FormRenderInstance>()
+
+const formValues = ref({})
+
+const schema: FormSchema = {
   labelWidth: 150,
   labelAlign: 'right',
   size: 'default',
@@ -96,24 +98,27 @@ const schema = {
     {
       label: '用户名',
       component: 'Input',
+      name: 'username',
+      required: true,
       props: {
         placeholder: '请输入用户名'
-      },
-      designKey: 'form-eNR0',
-      name: 'username',
-      required: true
+      }
     },
     {
       label: '密码',
       component: 'Password',
+      name: 'password',
+      required: true,
       props: {
         placeholder: '请输入密码'
-      },
-      designKey: 'form-D1x7',
-      name: 'password',
-      required: true
+      }
     }
   ]
+}
+
+const handleSubmit = async () => {
+  await formRef.value?.validate()
+  alert(JSON.stringify(formValues.value))
 }
 </script>
 ```
