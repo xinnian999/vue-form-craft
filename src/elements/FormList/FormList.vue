@@ -110,7 +110,6 @@ interface Props {
   children: FormItemType[]
   allowAdd?: boolean
   allowReduce?: boolean
-  defaultLineCount?: number
   maxLines?: number
   mode?: 'table' | 'card' | 'inline'
   title?: string
@@ -124,14 +123,12 @@ const props = withDefaults(defineProps<Props>(), {
   children: () => [],
   allowAdd: true,
   allowReduce: true,
-  defaultLineCount: 0,
   maxLines: 999,
   mode: 'table',
   title: '卡片',
   newItemDefaults: () => ({}),
   name: ''
 })
-
 
 const list = defineModel<Record<string, any>[]>({ default: [] })
 
@@ -178,8 +175,15 @@ watch(list, (newVal, oldVal) => {
 
   const fields = deepParse(props.children, { $item: newVal[changeIndex], $index: changeIndex })
 
+  const newChangeData = newVal[changeIndex]
+  const oldChangeData = oldVal[changeIndex]
+
   fields.forEach((item: FormItemType) => {
-    if (item.change) {
+    if (
+      item.change &&
+      oldChangeData &&
+      !isEqual(newChangeData[item.name], oldChangeData[item.name])
+    ) {
       item.change.forEach((v) => {
         if (v.condition !== false) {
           if (isString(v.condition) && /^{{\s*(.*?)\s*}}$/.test(v.condition)) return

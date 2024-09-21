@@ -1,5 +1,5 @@
 <template>
-  <FormRender :schema="schema"  />
+  <FormRender :schema="schema" footer @onFinish="onFinish" />
 </template>
 
 <script setup lang="ts">
@@ -39,7 +39,7 @@ const schema = {
   ]
 }
 
-const onFinish = (values) => {
+const onFinish = (values:Record<string,any>) => {
   alert(JSON.stringify(values, null, 2))
 }
 </script>

@@ -11,6 +11,11 @@
     <FormItemRender v-if="!design" :formItems="formItems" />
     <slot />
   </el-form>
+
+  <div class="vue-form-craft-footer" v-if="footer">
+    <el-button type="primary" @click="handleSubmit">提交</el-button>
+    <el-button @click="() => resetFields()">重置</el-button>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -26,7 +31,7 @@ import {
   defineOptions,
   nextTick
 } from 'vue'
-import { ElForm } from 'element-plus'
+import { ElForm, ElButton } from 'element-plus'
 import type { FormInstance } from 'element-plus'
 import { handleLinkages, deepParse, setDataByPath, getDataByPath } from '@/utils'
 import FormItemRender from './FormItemRender.vue'
@@ -44,11 +49,13 @@ const props = defineProps<
     schema: FormSchema
     schemaContext?: Record<string, any>
     design?: boolean
+    footer?: boolean
   }>
 >()
 
 const emit = defineEmits<{
   'update:modelValue': [values: Record<string, any>]
+  onFinish: [values: Record<string, any>]
 }>()
 
 const formRef = ref<FormInstance>()
@@ -78,12 +85,14 @@ const context = computed(() => ({
 
 const formItems = computed(() => deepParse(props.schema.items || [], context.value))
 
+const formLabelWidth = computed(() => props.schema.labelWidth + 'px')
+
 // 保持schema的响应 传递给后代使用
 const currentSchema = computed(() => props.schema)
 
 const validate = () => formRef.value?.validate()
 
-const resetFields = (names: string[]) => {
+const resetFields = (names?: string[]) => {
   if (names) {
     let temp = cloneDeep(formValues.value)
     names.forEach((name) => {
@@ -93,6 +102,11 @@ const resetFields = (names: string[]) => {
   } else {
     formValues.value = initialValues
   }
+}
+
+const handleSubmit = async () => {
+  await validate()
+  emit('onFinish', formValues.value)
 }
 
 watch(
@@ -134,3 +148,9 @@ provide($initialValues, {
 
 defineExpose({ validate, context, resetFields })
 </script>
+
+<style lang="less">
+.vue-form-craft-footer{
+    margin-left: v-bind(formLabelWidth);
+}
+</style>

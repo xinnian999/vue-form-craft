@@ -20,6 +20,9 @@ const schema: FormSchema = {
       label: '批量设置密码',
       name: 'batchPassword',
       component: 'Password',
+      props:{
+         "show-password":true
+      },
       designKey: 'design-kVO2111',
       change: [
         {
@@ -36,7 +39,8 @@ const schema: FormSchema = {
           label: '用户名',
           component: 'Input',
           props: {
-            placeholder: '请输入文本'
+            placeholder: '请输入文本',
+            clearable:true
           },
           designKey: 'design-M91n',
           name: 'username',
@@ -52,7 +56,8 @@ const schema: FormSchema = {
           label: '密码',
           component: 'Password',
           props: {
-            placeholder: '请输入密码'
+            placeholder: '请输入密码',
+            "show-password":true
           },
           designKey: 'design-kVO2',
           name: 'password'
@@ -61,6 +66,7 @@ const schema: FormSchema = {
       props: {
         mode: 'table'
       },
+      initialValue:[{},{}],
       designKey: 'design-pMUa',
       name: 'users'
     }

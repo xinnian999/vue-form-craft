@@ -1,9 +1,9 @@
-# 暗黑模式
+# Dark Mode
 
-由于 `vue-form-craft` 是基于`element-plus`开发的，所以颜色变量也基本都使用它的变量。
+Since `vue-form-craft` is developed based on `element-plus`, most of the color variables are also using its variables.
 
-直接将`element-plus`切换成黑夜模式即可。
+You can directly switch `element-plus` to dark mode.
 
-[如何将element-plus切成黑夜模式？](https://element-plus.org/zh-CN/guide/dark-mode.html)
+[How to switch `element-plus` to dark mode?](https://element-plus.org/en-US/guide/dark-mode.html)
 
 ![dark](../assets/dark.png)

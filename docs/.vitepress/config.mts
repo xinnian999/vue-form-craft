@@ -146,7 +146,7 @@ export default defineConfig({
               items: [
                 { text: 'Type Declarations', link: '/en/interface' },
                 { text: 'Dark Mode', link: '/en/dark' },
-                { text: 'Internationalization', link: '/zh/internationalization' },
+                { text: 'Internationalization', link: '/en/internationalization' },
               ]
             }
           ]
