@@ -102,7 +102,7 @@ const schema: FormSchema = {
 
 const handleSubmit = async () => {
   await formRef.value?.validate()
-  alert(JSON.stringify(formValues.value))
+  alert(JSON.stringify(formValues.value,null,2))
 }
 </script>
 ```
@@ -148,7 +148,7 @@ const schema = {
 
 const handleSubmit = async () => {
   await formRef.value?.validate()
-  alert(JSON.stringify(formValues.value))
+  alert(JSON.stringify(formValues.value,null,2))
 }
 </script>
 ```

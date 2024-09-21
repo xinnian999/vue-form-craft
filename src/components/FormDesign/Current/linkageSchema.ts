@@ -20,7 +20,7 @@ const build = (nodes: FormItemType[]) =>
   }, [])
 
 export default (schema: FormSchema, current: FormItemType): FormSchema => {
-  const targetOptions = build(schema.items).filter((item) => item.value !== current.name)
+  // const targetOptions = build(schema.items).filter((item) => item.value !== current.name)
 
   return {
     labelWidth: 100,
@@ -33,17 +33,23 @@ export default (schema: FormSchema, current: FormItemType): FormSchema => {
         name: 'change',
         component: 'FormList',
         children: [
+          // {
+          //   label: '目标字段',
+          //   name: 'target',
+          //   component: 'Select',
+          //   props: {
+          //     mode: 'static',
+          //     options: targetOptions,
+          //     placeholder: '请选择目标字段',
+          //     labelKey: 'label',
+          //     valueKey: 'value'
+          //   }
+          // },
           {
             label: '目标字段',
             name: 'target',
-            component: 'Select',
-            props: {
-              mode: 'static',
-              options: targetOptions,
-              placeholder: '请选择目标字段',
-              labelKey: 'label',
-              valueKey: 'value'
-            }
+            component: 'Input',
+            help: '如果是自增组件内部联动，直接输入子组件的name。如果是外部联动自增组件，就是formlist.*.key'
           },
           {
             label: '触发条件',

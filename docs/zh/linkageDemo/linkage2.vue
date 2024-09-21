@@ -79,6 +79,6 @@ const schema = {
 }
 
 const onFinish = (values) => {
-  alert(JSON.stringify(values))
+  alert(JSON.stringify(values, null, 2))
 }
 </script>

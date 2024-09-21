@@ -80,3 +80,11 @@ demo/linkageDemo/linkage1.vue
 demo/linkageDemo/linkage4.vue
 
 :::
+
+3、自增组件联动，用户名清空时，会自动清空密码。批量设置密码会联动所有密码框
+
+::: demo 
+
+demo/linkageDemo/linkageFormlist.vue
+
+:::

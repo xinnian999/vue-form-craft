@@ -140,7 +140,9 @@ const json = computed({
     return schema.value
   },
   set(value) {
-    updateSchema(value)
+    if(value.items){
+      updateSchema(value)
+    }
   }
 })
 
