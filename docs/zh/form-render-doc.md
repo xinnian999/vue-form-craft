@@ -20,8 +20,15 @@ demo/FormRender.vue
 | 参数名        | 类型     | 默认值 | 描述                                     |
 | ------------- | -------- | ------ | ---------------------------------------- |
 | v-model       | `object` | {}     | 表单值                                   |
-| schema        | `object` | ——     | 表单Schema配置，纯JSON，用于描述表单结构 |
+| schema        | `object` | —     | 表单Schema配置，纯JSON，用于描述表单结构 |
 | schemaContext | `object` | {}     | Schema自定义的 [联动变量](/zh/linkage)  |
+| footer        | `boolean`| {}     | 启用表单内置的提交和重置按钮  |
+
+## Event
+
+| 参数名        | 类型      | 描述                                     |
+| ------------- | -------- | ---------------------------------------- |
+| onFinish       | `(values) => void`     | 点击表单内置的提交按钮时触发                                   |
 
 ## Exposes
 

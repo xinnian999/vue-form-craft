@@ -11,7 +11,7 @@ export type FormRule = {
 
 export type FormChange = {
   target: string
-  value: any
+  value?: any
   condition?: any
 }
 

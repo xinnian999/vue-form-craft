@@ -21,7 +21,7 @@ import Linkage4 from './linkageDemo/linkage4.vue'
 
 在JsonSchema中，被双花括号包裹的字符串一律会被解析为 **js表达式并返回结果**，且可以使用一些联动变量。
 
-> Schema插值表达式 可以使用的联动变量：
+> Schema 可以使用的联动变量：
 
 | 变量名      | 类型   | 描述                            |
 | ----------- | ------ | ------------------------------- |
@@ -31,16 +31,19 @@ import Linkage4 from './linkageDemo/linkage4.vue'
 | $index      | Object | 【自增组件】专用，单行的下标    |
 | ...         | any    | 由schemaContext传入的自定义变量 |
 
+**这些变量一旦发生更新时，Schema就会基于这些变量重新计算。**
+
 这种联动方式能应对大部分联动场景，例如：控制字段禁用、隐藏、文案提示等交互。
 :::
 
-**JsonSchema 所有协议字段都支持模板表达式。** 这意味着你可以动态的控制表单的任何细粒度的配置，实现各种复杂的联动效果！
 
 ::: demo expand
 
 demo/linkageDemo/linkage.vue
 
 :::
+
+**JsonSchema 所有协议字段都支持模板表达式。** 这意味着你可以动态的控制表单的任何细粒度的配置，实现各种复杂的联动效果！
 
 
 
@@ -51,7 +54,9 @@ demo/linkageDemo/linkage.vue
 
 配置了change，就会在这个字段的值改变时，才会触发change联动
 
-change是一个数组，可以同时联动多个字段。target为目标字段，value是修改的值，也支持模版表达式。
+change是一个数组，可以同时联动多个字段。
+
+**target为目标字段（必传），condition是触发条件（不传默认会一直触发）， value是修改的值（不传默认会将字段值清掉）。**
 
 ::: demo expand
 
@@ -73,7 +78,7 @@ demo/linkageDemo/linkage1.vue
 
 <br/>
 
-2、选完商品，显示价格
+2、选完商品，将其价格传给下一个字段
 
 ::: demo 
 
@@ -81,7 +86,19 @@ demo/linkageDemo/linkage4.vue
 
 :::
 
-3、自增组件联动：`用户名` 清空时，会自动清空密码。`批量设置密码`会联动所有密码框
+<br/>
+
+3、串行联动：`性别`为女时，需要填写是否怀孕，已怀孕可以继续填写怀孕周期。（切换为男性时，清除填写过的怀孕信息）
+
+::: demo 
+
+demo/linkageDemo/linkage5.vue
+
+:::
+
+<br/>
+
+4、自增组件联动：`批量设置密码`会联动所有密码框。`用户名` 清空时，会自动清空对应的密码。
 
 ::: demo 
 
