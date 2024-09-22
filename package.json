@@ -52,8 +52,8 @@
     "dist",
     "global.d.ts"
   ],
-  "main": "./dist/vue-form-craft.mjs",
-  "module": "./dist/vue-form-craft.mjs",
+  "main": "./dist/vue-form-craft.js",
+  "module": "./dist/vue-form-craft.js",
   "keywords": [
     "component",
     "vue",
