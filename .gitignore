@@ -31,3 +31,4 @@ coverage
 
 /vue-form-craft
 /docs/.vitepress/cache
+.vscode

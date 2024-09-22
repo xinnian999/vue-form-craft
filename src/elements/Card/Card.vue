@@ -1,20 +1,21 @@
 <template>
-  <ElCard v-bind="{ ...props, ...$attrs }">
+  <ElCard v-bind="props">
     <CanvasWrapper :children="children" v-if="design" />
-    <FormRender :formItems="children" v-else />
+    <FormItemRender :formItems="children" v-else />
   </ElCard>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineProps } from 'vue'
 import { ElCard } from 'element-plus'
-import { FormRender, CanvasWrapper } from '@/components'
+import { FormItemRender, CanvasWrapper } from '@/components'
+import type { FormItemType } from '@/config/commonType';
 
-defineProps({
-  props: Object,
-  children: Array,
-  design: Boolean
-})
+defineProps<{
+  props:Record<string,any>
+  children:FormItemType[]
+  design: boolean
+}>()
 </script>
 
 <style lang="less">

@@ -63,7 +63,7 @@
           :label="item.label"
           :key="item.name"
           v-for="item in children"
-          :width="item.width"
+          v-bind="item"
           :formatter="(row, _, __, index) => formatter(item, row, index)"
         />
         <el-table-column fixed="right" min-width="60">
@@ -98,55 +98,42 @@
   </div>
 </template>
 
-<script setup>
-import { computed, defineProps, defineEmits, h } from 'vue'
+<script setup lang="ts">
+import { computed, defineProps, defineModel, h, watch } from 'vue'
 import { ElFormItem, ElSpace, ElButton, ElCard, ElTableColumn, ElTable } from 'element-plus'
-import { FormItem, DefaultCanvasWrapper } from '@/components'
+import { FormItem, DefaultCanvasWrapper, IconRender } from '@/components'
 import { deepParse } from '@/utils'
+import type { FormItemType } from '@/release'
+import { isEqual, isString } from 'lodash'
 
-const props = defineProps({
-  modelValue: Array,
-  children: Array,
-  allowAdd: {
-    default: true,
-    type: Boolean
-  },
-  allowReduce: {
-    default: true,
-    type: Boolean
-  },
-  defaultLineCount: {
-    default: 0,
-    type: Number
-  },
-  maxLines: {
-    default: 999,
-    type: Number
-  },
-  mode: {
-    default: 'table',
-    type: String
-  },
-  title: {
-    default: '卡片',
-    type: String
-  },
-  newItemDefaults: {
-    type: Function,
-    default: () => ({})
-  },
-  name: String,
-  design: Boolean,
-  disabled: Boolean
-})
-const emit = defineEmits(['update:modelValue'])
+interface Props {
+  children: FormItemType[]
+  allowAdd?: boolean
+  allowReduce?: boolean
+  maxLines?: number
+  mode?: 'table' | 'card' | 'inline'
+  title?: string
+  newItemDefaults?: (index: number) => Record<string, any>
+  name?: string
+  design?: boolean
+  disabled?: boolean
+}
 
-const list = computed(() => {
-  return props.modelValue || []
+const props = withDefaults(defineProps<Props>(), {
+  children: () => [],
+  allowAdd: true,
+  allowReduce: true,
+  maxLines: 999,
+  mode: 'table',
+  title: '卡片',
+  newItemDefaults: () => ({}),
+  name: ''
 })
+
+const list = defineModel<Record<string, any>[]>({ default: [] })
 
 const fields = computed(
-  () => (index) => deepParse(props.children, { $item: list.value[index], $index: index })
+  () => (index: number) => deepParse(props.children, { $item: list.value[index], $index: index })
 )
 
 const isMax = computed(() => {
@@ -157,30 +144,57 @@ const handleAddItem = () => {
   if (isMax.value) {
     return
   }
-  emit('update:modelValue', [...list.value, props.newItemDefaults(list.value.length)])
+  list.value = [...list.value, props.newItemDefaults(list.value.length)]
 }
 
-const handleReduceItem = (index) => {
+const handleReduceItem = (index: number) => {
   const newData = list.value.filter((v, i) => i !== index)
-  emit('update:modelValue', newData)
+  list.value = newData
 }
 
-const formatter = (item, data, index) => {
+const formatter = (item: FormItemType, data: Record<string, any>, index: number) => {
   return h(FormItem, {
     ...deepParse(item, { $item: list.value[index], $index: index }),
     hideLabel: true,
     style: { marginBottom: 0 },
     name: `${props.name}.${index}.${item.name}`
   })
-  // return (
-  //   <FormItem
-  //     {...deepParse(item, { $item: list.value[index], $index: index })}
-  //     hideLabel
-  //     style={{ marginBottom: 0 }}
-  //     name={`${props.name}.${index}.${item.name}`}
-  //   />
-  // )
 }
+
+// formList 值联动
+watch(list, (newVal, oldVal) => {
+  if (!props.children.some((item) => item.change)) return
+
+  const changeIndex = newVal.reduce((acc, cur, index) => {
+    if (!isEqual(cur, oldVal[index])) {
+      acc = index
+    }
+
+    return acc
+  }, 0)
+
+  const fields = deepParse(props.children, { $item: newVal[changeIndex], $index: changeIndex })
+
+  const newChangeData = newVal[changeIndex]
+  const oldChangeData = oldVal[changeIndex]
+
+  fields.forEach((item: FormItemType) => {
+    if (
+      item.change &&
+      oldChangeData &&
+      !isEqual(newChangeData[item.name], oldChangeData[item.name])
+    ) {
+      item.change.forEach((v) => {
+        if (v.condition !== false) {
+          if (isString(v.condition) && /^{{\s*(.*?)\s*}}$/.test(v.condition)) return
+
+          const name = v.target.split('.').pop()!
+          list.value[changeIndex][name] = v.value
+        }
+      })
+    }
+  })
+})
 </script>
 
 <style lang="less">

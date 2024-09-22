@@ -1,12 +1,11 @@
 import { cloneDeep } from 'lodash'
-import type { formValuesType } from '@/config/commonType'
 
-const setDataByPath = (object: formValuesType, path: string, value: any) => {
+const setDataByPath = (object: Record<string,any>, path: string, value: any) => {
   const cloneObj = cloneDeep(object)
   // 将路径字符串分割成路径数组
   const pathArray = path.split('.')
   // 递归函数，用于在对象的深层级找到要修改的位置并更新其值
-  function update(obj: formValuesType, pathArray: string[], value: any) {
+  function update(obj: Record<string,any>, pathArray: string[], value: any) {
     // 如果路径数组为空，表示已经到达了最后一级，更新值并返回
     if (pathArray.length === 1) {
       obj[pathArray[0]] = value

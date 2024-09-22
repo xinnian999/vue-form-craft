@@ -1,25 +1,30 @@
 <template>
-  <component id="icon-render" :is="icon" v-bind="$attrs" />
+  <component id="icon-render" :is="icons[name]" v-bind="$attrs" />
 </template>
 
 <script setup lang="ts">
-import { defineProps, shallowRef, defineOptions, watchEffect } from 'vue'
+import { defineProps,  defineOptions} from 'vue'
+
+const modules = import.meta.glob('@/assets/icons/*.vue', { eager: true })
+
+const icons = Object.entries(modules).reduce((acc, [key, value]) => {
+  const fileName = key.split('/').pop()
+
+  const newKey = fileName?.split('.')[0]!
+
+  acc[newKey]=(value as Record<string,any>).default
+  
+  return acc
+}, {} as Record<string,any>)
+
 
 defineOptions({
   name: 'IconRender'
 })
 
-const props = defineProps({
-  name: String
-})
+defineProps<{name:string}>()
 
-const icon = shallowRef(null)
 
-watchEffect(() => {
-  import(`@/assets/icons/${props.name}.vue`).then((module) => {
-    icon.value = module.default
-  })
-})
 </script>
 
 <style scoped>

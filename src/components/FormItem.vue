@@ -10,9 +10,9 @@
       />
     </div>
 
-    <div v-else-if="config.type === 'assist'" :style="itemStyle">
+    <!-- <div v-else-if="config.type === 'assist'" :style="itemStyle">
       <component :is="config.component" v-bind="props" />
-    </div>
+    </div> -->
 
     <el-form-item
       v-else
@@ -24,8 +24,8 @@
       :rules="computeRules"
       :class="thisProps.class"
     >
-      <template #label v-if="!hideLabel">
-        <div class="form-item-label">
+      <template #label>
+        <div v-if="!hideLabel" class="form-item-label">
           <div :style="schema.labelBold && 'font-weight: bold'">{{ label }}</div>
           <div class="ico" v-if="help">
             <el-tooltip class="box-item" effect="dark" :content="help">
@@ -35,12 +35,35 @@
         </div>
       </template>
 
+      <!-- 弹窗展示复杂组件 -->
+      <template v-if="dialog">
+        <el-dialog
+          v-model="dialogState.visible"
+          :title="dialogState.title"
+          width="70%"
+          center
+          destroy-on-close
+        >
+          <component
+            :is="config.component"
+            :disabled="schema.disabled"
+            :size="schema.size"
+            v-bind="formItemProps"
+            v-model:[config.modelName!]="value"
+            :design="design"
+          />
+        </el-dialog>
+
+        <el-button type="primary" @click="handleDialog">配置</el-button>
+      </template>
+
       <component
+        v-else
         :is="config.component"
         :disabled="schema.disabled"
         :size="schema.size"
         v-bind="formItemProps"
-        v-model:[config.modelName]="value"
+        v-model:[config.modelName!]="value"
         :design="design"
       />
     </el-form-item>
@@ -48,59 +71,37 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps, inject, onMounted, ref } from 'vue'
-import { ElFormItem, ElTooltip } from 'element-plus'
-import { isString } from 'lodash'
+import { computed, defineProps, inject, onMounted, reactive, ref } from 'vue'
+import { ElFormItem, ElTooltip, ElDialog, ElButton } from 'element-plus'
 import { isRegexString, getDataByPath, setDataByPath } from '@/utils'
 import { $global, $schema, $formValues, $initialValues } from '@/config/symbol'
-import defaultSchema from '@/config/defaultSchema'
-import type {
-  formItemType,
-  changeItemType,
-  schemaType,
-  anyObject,
-  $globalType
-} from '@/config/commonType'
-import defaultElements from '@/elements'
+import type { FormItemType } from '@/config/commonType'
+import { IconRender } from '@/components'
 
-type FormItemProps = {
-  label?: string
-  name: string
-  component: string
-  required?: boolean
-  props?: object
-  initialValue?: any
-  help?: string
-  children?: formItemType[]
-  hidden?: boolean | string
-  hideLabel?: boolean
-  designKey?: string
-  rules?: any[]
-  class?: any
-  style?: any
-  design?: boolean
-  change?: changeItemType[]
-}
+const thisProps = defineProps<FormItemType>()
 
-const thisProps = defineProps<FormItemProps>()
+const { elements } = inject($global)!
 
-const { elements = {} } = inject<$globalType>($global, { elements: defaultElements })
+const { schema } = inject($schema)!
 
-const schema = inject<schemaType>($schema, defaultSchema)
-
-const { formValues, updateFormValues } = inject($formValues, {
-  formValues: ref({}),
-  updateFormValues: (values: anyObject) => {
-    console.log(values)
-  }
-})
+const { formValues, updateFormValues } = inject($formValues)!
 
 const { initialValues, updateInitialValues } = inject($initialValues, {
   initialValues: {},
-  updateInitialValues: (values: anyObject) => {
+  updateInitialValues: (values: Record<string, any>) => {
     console.log(values)
   }
 })
+
+const dialogState = reactive({
+  visible: false,
+  title: ''
+})
+
+const handleDialog = () => {
+  dialogState.visible = true
+  dialogState.title = thisProps.label!
+}
 
 const value = computed({
   get() {
@@ -155,20 +156,17 @@ const computeRules = computed(() => {
   return ruleData
 })
 
-const currentComponent = computed(() => {
-  if (isString(value.value) && /^{{\s*(.*?)\s*}}$/.test(value.value)) {
-    return 'Input'
+const config = computed(() => {
+  const data = elements[thisProps.component] || {}
+  if (!data.modelName) {
+    data.modelName = 'modelValue'
   }
 
-  return thisProps.component
-})
-
-const config = computed(() => {
-  return elements[currentComponent.value] || {}
+  return data
 })
 
 const formItemProps = computed(() => {
-  const initProps: anyObject = {
+  const initProps: Record<string, any> = {
     ...thisProps.props,
     name: thisProps.name
   }

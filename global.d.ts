@@ -1,7 +1,7 @@
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    SchemaForm: (typeof import('vue-form-craft'))['SchemaForm']
-    FormDesign: (typeof import('vue-form-craft'))['FormDesign']
+    FormRender: (typeof import('vue-form-craft-4'))['FormRender']
+    FormDesign: (typeof import('vue-form-craft-4'))['FormDesign']
   }
 }
 

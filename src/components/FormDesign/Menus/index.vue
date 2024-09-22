@@ -1,6 +1,8 @@
 <template>
   <div class="formDesign-menus">
-    <el-button class="template-btn" size="small" @click="drawerVisible = true">使用模板</el-button>
+    <el-button class="template-btn" size="small" @click="drawerVisible = true">{{
+      locale.menus.useTemplateBtn
+    }}</el-button>
     <el-drawer
       v-model="drawerVisible"
       title="模板列表"
@@ -33,7 +35,9 @@
       >
         <template #item="{ element }">
           <li class="form-item-btn">
-            <div class="ico"><IconRender :name="element.icon" /></div>
+            <div class="ico">
+              <component class="ico-content" :is="element.icon" />
+            </div>
             <div class="name">{{ element.name }}</div>
           </li>
         </template>
@@ -46,16 +50,15 @@
 import draggable from 'vuedraggable-es'
 import { inject, defineProps, computed } from 'vue'
 import { ElButton, ElDrawer, ElSpace } from 'element-plus'
-import IconRender from '@/components/IconRender.vue'
-import { $schema } from '@/config/symbol'
+import { $global, $locale, $schema } from '@/config/symbol'
 import { ref } from 'vue'
-import menus from './menus'
+import parseMenus from './menus'
 import template from '@/template'
-import type { schemaType, templateDataType } from '@/config/commonType'
+import type { FormSchema, TemplateData } from '@/config/commonType'
 
 const props = withDefaults(
   defineProps<{
-    templates?: templateDataType
+    templates?: TemplateData
     omitMenus?: string[]
   }>(),
   { omitMenus: () => [] }
@@ -63,7 +66,13 @@ const props = withDefaults(
 
 const drawerVisible = ref(false)
 
-const { updateSchema } = inject($schema, { updateSchema: (schema) => {} })
+const { updateSchema } = inject($schema)!
+
+const { elements } = inject($global)!
+
+const locale = inject($locale)!
+
+const menus = parseMenus(elements,locale)
 
 const menuList = computed(() => {
   return menus.map((item) => ({
@@ -74,7 +83,7 @@ const menuList = computed(() => {
   }))
 })
 
-const useTemplate = (templateSchema: schemaType) => {
+const useTemplate = (templateSchema: FormSchema) => {
   updateSchema(templateSchema)
 }
 </script>
@@ -138,6 +147,13 @@ const useTemplate = (templateSchema: schemaType) => {
         align-items: center;
         font-size: 20px;
         justify-content: center;
+        .ico-content {
+          display: inline-block;
+          width: 1em;
+          height: 1em;
+          overflow: hidden;
+          fill: currentColor;
+        }
       }
       .name {
         font-size: 13px;

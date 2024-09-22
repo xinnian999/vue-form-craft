@@ -1,83 +1,131 @@
-type anyObject = { [key: string]: any }
+import type FormRender from '@/components/FormRender.vue'
+import type { AxiosInstance, AxiosStatic } from 'axios'
+import type { Component, VNode } from 'vue'
 
-type formValuesType = anyObject
-
-type contextType = {
-  $values: formValuesType
-  $selectData: formValuesType
-  $initialValues: formValuesType
-  [key: string]: any
+export type FormRule = {
+  type: 'email' | 'url' | 'custom' | string
+  customReg?: string
+  message?: string
+  trigger: 'blur' | 'change'
 }
 
-type changeItemType = {
+export type FormChange = {
   target: string
-  value: any
+  value?: any
+  condition?: any
 }
 
-interface formItemType {
+export interface FormItemType {
   label?: string
   name: string
   component: string
   required?: boolean
-  props?: object
+  props?: Record<string, any>
   initialValue?: any
   help?: string
-  children?: formItemType[]
+  children?: FormItemType[]
   hidden?: boolean | string
   hideLabel?: boolean
   designKey?: string
-  rules?: any[]
+  rules?: FormRule[]
   class?: any
   style?: any
   design?: boolean
-  change?: changeItemType[]
+  change?: FormChange[]
+  dialog?: boolean
 }
 
-type formItemsType = formItemType[]
-
-type schemaType = {
-  labelWidth: number
-  labelAlign: 'top' | 'left' | 'right' | string
-  size: 'default' | 'small' | 'large' | string
+export type FormSchema = {
+  labelWidth?: number
+  labelAlign?: 'top' | 'left' | 'right'
+  size?: 'default' | 'small' | 'large'
   disabled?: boolean
   hideRequiredAsterisk?: boolean
   labelBold?: boolean
-  items: formItemsType
+  items: FormItemType[]
 }
 
-type formElement = {
+export type FormElement = {
   name: string
-  component: any
-  icon: string
-  type: 'assist' | 'layout' | 'basic' | 'high'
+  component: VNode | Component
+  icon: string | VNode | Component
+  type: 'assist' | 'layout' | 'basic'
   order: number
-  attr: formItemsType
-  initialValues: formItemType
-  modelName: string
+  initialValues: Omit<FormItemType, 'name'>
+  modelName?: string
+  attrSchema: FormSchema
 }
 
-type iconSelectConfigType = { component?: any; propKey?: string; iconList?: string[] }
+export type TemplateData = { name: string; schema: FormSchema; id?: string }[]
 
-type $globalType = {
-  request?: any
-  getSchema?: (schemaId: string) => Promise<schemaType>
-  elements?: { [key: string]: formElement }
-  iconSelectConfig?: iconSelectConfigType
-  customElements?: { [key: string]: formElement }
+export type SchemaApi = {
+  url: string
+  method: 'GET' | 'POST'
+  data?: Record<string, any>
+  params?: Record<string, any>
+  dataPath?: string
 }
 
-type templateDataType = { name: string; schema: schemaType; id?: string }[]
+export type OptionType = 'circle' | 'border' | 'button'
 
-export type {
-  anyObject,
-  schemaType,
-  formValuesType,
-  contextType,
-  formItemType,
-  formItemsType,
-  formElement,
-  changeItemType,
-  $globalType,
-  iconSelectConfigType,
-  templateDataType
+export type Direction = 'horizontal' | 'vertical'
+
+export interface SelectProps {
+  options?: Record<string, any>[]
+  multiple?: boolean
+  mode?: string
+  labelKey?: string
+  valueKey?: string
+  api?: SchemaApi
+  name?: string
+}
+
+export type SelectValue = string | number | boolean
+
+export type FormRenderInstance = InstanceType<typeof FormRender>
+
+export type $Global = {
+  request: AxiosStatic | AxiosInstance
+  elements: { [key: string]: FormElement }
+}
+
+export type Locale = {
+  menus: {
+    basicTitle: string
+    layoutTitle: string
+    assistTitle: string
+    useTemplateBtn: string
+  }
+  actions: {
+    previewJson: string
+    previewVueCode: string
+    previewForm: string
+    clear: string
+    save: string
+  }
+  canvas: {
+    emptyTip: string
+    wrapperEmptyTip: string
+  }
+  attr: {
+    tab1: {
+      title: string
+      emptyTip: string
+      linkage: {
+        text: string
+        action1: string
+        action2: string
+      }
+    }
+    tab2: {
+      title: string
+    }
+  }
+}
+
+export type CollapseItem = {
+  title: string
+  name: string
+  checked?: boolean
+  children: FormItemType[]
 }

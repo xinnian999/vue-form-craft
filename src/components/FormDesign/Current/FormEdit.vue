@@ -1,12 +1,12 @@
 <template>
   <div class="attrForm">
-    <schema-form v-model="form" :schema="formOptions"></schema-form>
+    <FormRender v-model="form" :schema="formOptions"></FormRender>
   </div>
 </template>
 
 <script setup>
 import { computed, inject } from 'vue'
-import { SchemaForm } from '@/components'
+import { FormRender } from '@/components'
 import { $schema } from '@/config/symbol'
 import formOptions from './formOptions'
 

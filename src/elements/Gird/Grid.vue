@@ -9,21 +9,22 @@
     />
 
     <div v-else :style="gridStyle">
-      <FormRender :formItems="children" />
+      <FormItemRender :formItems="children" />
     </div>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineProps, computed } from 'vue'
-import { FormRender, DefaultCanvasWrapper } from '@/components'
+import { FormItemRender, DefaultCanvasWrapper } from '@/components'
+import type { FormItemType } from '@/release';
 
-const thisProps = defineProps({
-  name: String,
-  props: Object,
-  children: Array,
-  design: Boolean
-})
+const thisProps = defineProps<{
+  props:Record<string,any>
+  children:FormItemType[]
+  design: boolean
+  name:string
+}>()
 
 const gridStyle = computed(() => ({
   display: 'grid',

@@ -1,10 +1,43 @@
-export const $global = Symbol()
-export const $schema = Symbol()
-export const $formValues = Symbol()
-export const $selectData = Symbol()
-export const $formEvents = Symbol()
-export const $initialValues = Symbol()
+import type { InjectionKey, Ref } from 'vue'
+import type { $Global, FormItemType, FormSchema, Locale } from './commonType'
 
-export const $current = Symbol()
-export const $methods = Symbol()
-export const $hoverKey = Symbol()
+export const $global = Symbol() as InjectionKey<$Global>
+
+export const $schema = Symbol() as InjectionKey<{
+  readonly schema: Ref<FormSchema>
+  updateSchema: (schema: FormSchema) => void
+}>
+
+export const $formValues = Symbol() as InjectionKey<{
+  readonly formValues: Record<string, any>
+  updateFormValues: (values: Record<string, any>) => void
+}>
+
+export const $selectData = Symbol() as InjectionKey<{
+  readonly selectData: Record<string, Record<string, any>>
+  updateSelectData: (key: string, value: Record<string, any>) => void
+}>
+
+export const $initialValues = Symbol() as InjectionKey<{
+  readonly initialValues: Record<string, Record<string, any>>
+  updateInitialValues: (values: Record<string, any>) => void
+}>
+
+export const $current = Symbol() as InjectionKey<{
+  readonly current: Ref<FormItemType | null>
+  updateCurrent: (current: FormItemType) => void
+}>
+
+export const $methods = Symbol() as InjectionKey<{
+  onAdd: () => void
+  handleDeleteItem: (element: FormItemType) => void
+  handleCopyItem: (element: FormItemType) => void
+  handleSave: () => void
+}>
+
+export const $hoverKey = Symbol() as InjectionKey<{
+  readonly hoverKey: Ref<string>
+  updateHoverKey: (key: string) => void
+}>
+
+export const $locale = Symbol() as InjectionKey<Ref<Locale>>

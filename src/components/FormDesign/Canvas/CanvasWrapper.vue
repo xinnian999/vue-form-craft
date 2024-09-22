@@ -4,7 +4,7 @@
       <div class="ico">
         <icon-render name="add" />
       </div>
-      <div class="text">请拖入子字段</div>
+      <div class="text">{{ locale.canvas.wrapperEmptyTip }}</div>
     </div>
     <draggable
       :list="children"
@@ -24,18 +24,22 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineProps, inject } from 'vue'
 import Draggable from 'vuedraggable-es'
 import CanvasRender from './CanvasRender.vue'
-import { $methods } from '@/config/symbol'
+import { $locale, $methods } from '@/config/symbol'
+import { IconRender } from '@/components'
+import type { FormItemType } from '@/release'
 
-defineProps({
-  children: Array,
-  style: null
-})
+defineProps<{
+  children: FormItemType[],
+  style?: any
+}>()
 
-const { onAdd } = inject($methods)
+const { onAdd } = inject($methods)!
+
+const locale = inject($locale)!
 </script>
 
 <style scoped lang="less">
