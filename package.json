@@ -1,6 +1,6 @@
 {
   "name": "vue-form-craft",
-  "version": "4.0.1",
+  "version": "4.0.5",
   "private": false,
   "type": "module",
   "types": "dist/index.d.ts",
