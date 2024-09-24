@@ -17,7 +17,7 @@ type Props = {
 type Option = Record<string, any>
 
 const useSelect = (props: Props) => {
-  const { selectData ,updateSelectData } = inject($selectData)!
+  const { selectData, updateSelectData } = inject($selectData)!
 
   const { request } = inject($global)!
 
@@ -26,6 +26,7 @@ const useSelect = (props: Props) => {
   const loading = ref(false)
 
   const fetchData = debounce(async () => {
+    if (!request) return
     if (!props.api) return
 
     const { url, method, params, data, dataPath } = props.api

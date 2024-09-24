@@ -1,4 +1,4 @@
-import type { FormSchema } from "@/release";
+import type { FormSchema } from '@/release'
 
 export default {
   size: 'small',
@@ -128,9 +128,7 @@ export default {
     },
     {
       component: 'Card',
-      props: {
-        // header: '远程数据'
-      },
+      props: {},
       designKey: 'id-pGeN',
       name: 'form-6vzT',
       hidden: '{{$values.props.mode==="static"}}',
@@ -144,8 +142,9 @@ export default {
         },
         {
           label: '请求方式',
-          component: 'Radio',
+          component: 'Select',
           name: 'props.api.method',
+          initialValue: 'GET',
           props: {
             mode: 'static',
             options: [
@@ -173,21 +172,8 @@ export default {
           label: '请求参数',
           component: 'JsonEdit',
           name: 'props.api.params',
-          hidden: '{{ ["POST"].includes($values.props.api.method) }}',
           initialValue: {},
-          props: {
-            mode: 'dialog'
-          }
-        },
-        {
-          label: '请求参数',
-          component: 'JsonEdit',
-          name: 'props.api.data',
-          hidden: '{{ ["GET"].includes($values.props.api.method) }}',
-          initialValue: {},
-          props: {
-            mode: 'dialog'
-          }
+          dialog: true
         },
         {
           label: '数据路径',
