@@ -150,7 +150,7 @@ defineExpose({ validate, context, resetFields })
 </script>
 
 <style lang="less">
-.vue-form-craft-footer{
-    margin-left: v-bind(formLabelWidth);
+.vue-form-craft-footer {
+  margin-left: v-bind(formLabelWidth);
 }
 </style>

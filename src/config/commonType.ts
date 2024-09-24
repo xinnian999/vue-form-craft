@@ -1,5 +1,4 @@
 import type FormRender from '@/components/FormRender.vue'
-import type { AxiosInstance, AxiosStatic } from 'axios'
 import type { Component, VNode } from 'vue'
 
 export type FormRule = {
@@ -85,8 +84,8 @@ export type SelectValue = string | number | boolean
 export type FormRenderInstance = InstanceType<typeof FormRender>
 
 export type $Global = {
-  request: AxiosStatic | AxiosInstance
-  elements: { [key: string]: FormElement }
+  request?: (options: Record<string, any>) => Promise<Record<string, any>>
+  elements: Record<string, FormElement>
 }
 
 export type Locale = {

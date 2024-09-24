@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const request = axios.create({
-  baseURL: 'https://hyl999.co/api',
+  baseURL: 'http://101.42.108.39:7777',
   paramsSerializer: (params) => {
     return Object.keys(params)
       .map((key) => {

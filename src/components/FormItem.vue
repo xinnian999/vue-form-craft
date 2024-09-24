@@ -71,7 +71,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps, inject, onMounted, reactive, ref } from 'vue'
+import { computed, defineProps, inject, onMounted, reactive } from 'vue'
 import { ElFormItem, ElTooltip, ElDialog, ElButton } from 'element-plus'
 import { isRegexString, getDataByPath, setDataByPath } from '@/utils'
 import { $global, $schema, $formValues, $initialValues } from '@/config/symbol'
@@ -86,12 +86,7 @@ const { schema } = inject($schema)!
 
 const { formValues, updateFormValues } = inject($formValues)!
 
-const { initialValues, updateInitialValues } = inject($initialValues, {
-  initialValues: {},
-  updateInitialValues: (values: Record<string, any>) => {
-    console.log(values)
-  }
-})
+const { initialValues, updateInitialValues } = inject($initialValues)!
 
 const dialogState = reactive({
   visible: false,
