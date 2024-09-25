@@ -8,8 +8,8 @@ import { ref, type App } from 'vue'
 import elements from '@/elements'
 
 type Options = {
-  request?: Pick<$Global, 'request'>
-  extendElements?: Pick<$Global, 'elements'>
+  request?: $Global['request']
+  extendElements?: $Global['elements']
   lang?: 'zh' | 'en'
 }
 

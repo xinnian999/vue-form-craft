@@ -22,11 +22,11 @@ export default defineConfig({
     },
     plugins: [viteCommonjs() as any]
   },
-  vue: {
-    script: {
-      defineModel: true
-    }
-  },
+  // vue: {
+  //   script: {
+  //     defineModel: true
+  //   }
+  // },
   head: [['link', { rel: 'icon', href: '/favicon.svg' }]],
   markdown: {
     config: (md) => {
