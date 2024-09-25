@@ -10,8 +10,6 @@
 </template>
 
 <script setup lang="ts">
-import { ElTabs, ElTabPane } from 'element-plus'
-
 import AttrEdit from './AttrEdit.vue'
 import FormEdit from './FormEdit.vue'
 import { $locale } from '@/config/symbol';

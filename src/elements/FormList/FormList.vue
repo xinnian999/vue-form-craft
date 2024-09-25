@@ -100,7 +100,6 @@
 
 <script setup lang="ts">
 import { computed, defineProps, defineModel, h, watch } from 'vue'
-import { ElFormItem, ElSpace, ElButton, ElCard, ElTableColumn, ElTable } from 'element-plus'
 import { FormItem, DefaultCanvasWrapper, IconRender } from '@/components'
 import { deepParse } from '@/utils'
 import type { FormItemType } from '@/release'

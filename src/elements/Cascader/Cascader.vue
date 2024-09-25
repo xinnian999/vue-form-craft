@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 import { defineProps } from 'vue'
-import { ElCascader, type CascaderValue } from 'element-plus'
+import { type CascaderValue } from 'element-plus'
 import useSelect from '@/hooks/useSelect'
 import type { SelectProps } from '@/config/commonType'
 

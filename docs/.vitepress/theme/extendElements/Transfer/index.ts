@@ -1,11 +1,10 @@
 import type { FormElement } from 'vue-form-craft'
 import icon from './Icon.vue'
 import attrSchema from './attrSchema'
-import { ElTransfer } from 'element-plus'
 
 export default {
   name: '穿梭框',
-  component: ElTransfer,
+  component: 'ElTransfer',
   icon,
   type: 'basic',
   order: 12,

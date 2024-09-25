@@ -9,7 +9,7 @@
         :label="item[labelKey]"
         :value="item[valueKey]"
         :border="optionType === 'border'"
-        />
+      />
     </template>
 
     <el-space v-if="optionType === 'button'" wrap :size="[space, space]">
@@ -19,20 +19,14 @@
         :label="item[labelKey]"
         :value="item[valueKey]"
         size="large"
-        />
+      />
     </el-space>
   </el-checkbox-group>
 </template>
 
 <script setup lang="ts">
 import { defineProps, defineModel } from 'vue'
-import {
-  ElCheckboxGroup,
-  ElCheckbox,
-  ElCheckboxButton,
-  ElSpace,
-  type CheckboxGroupValueType
-} from 'element-plus'
+import { type CheckboxGroupValueType } from 'element-plus'
 import useSelect from '@/hooks/useSelect'
 import type { Direction, OptionType, SelectProps } from '@/config/commonType'
 

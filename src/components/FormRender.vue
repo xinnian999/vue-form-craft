@@ -31,7 +31,6 @@ import {
   defineOptions,
   nextTick
 } from 'vue'
-import { ElForm, ElButton } from 'element-plus'
 import type { FormInstance } from 'element-plus'
 import { handleLinkages, deepParse, setDataByPath, getDataByPath } from '@/utils'
 import FormItemRender from './FormItemRender.vue'

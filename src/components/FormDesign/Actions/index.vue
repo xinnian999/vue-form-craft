@@ -89,7 +89,7 @@
 
 <script setup lang="ts">
 import { ref, computed, inject, defineProps, reactive } from 'vue'
-import { ElButton, ElDialog, ElTabs, ElTabPane, ElMessageBox } from 'element-plus'
+import { ElMessageBox } from 'element-plus'
 import JsonEditorVue from 'json-editor-vue3'
 import { FormRender } from '@/components'
 import { $schema, $methods, $locale } from '@/config/symbol'

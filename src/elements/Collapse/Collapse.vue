@@ -11,8 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, onMounted, ref } from 'vue'
-import { ElCollapse, ElCollapseItem } from 'element-plus'
+import { onMounted, ref } from 'vue'
 import { FormItemRender, CanvasWrapper } from '@/components'
 import Title from '../Title/Title.vue'
 import type { CollapseItem } from '@/config/commonType';

@@ -72,7 +72,6 @@
 
 <script setup lang="ts">
 import { computed, defineProps, inject, onMounted, reactive } from 'vue'
-import { ElFormItem, ElTooltip, ElDialog, ElButton } from 'element-plus'
 import { isRegexString, getDataByPath, setDataByPath } from '@/utils'
 import { $global, $schema, $formValues, $initialValues } from '@/config/symbol'
 import type { FormItemType } from '@/config/commonType'

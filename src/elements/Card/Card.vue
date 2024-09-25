@@ -6,8 +6,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue'
-import { ElCard } from 'element-plus'
 import { FormItemRender, CanvasWrapper } from '@/components'
 import type { FormItemType } from '@/config/commonType';
 

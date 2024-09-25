@@ -49,7 +49,6 @@
 <script setup lang="ts">
 import { computed, inject, reactive } from 'vue'
 import JsonEditorVue from 'json-editor-vue3'
-import { ElButton, ElDialog, ElDivider } from 'element-plus'
 import { $current, $global, $locale } from '@/config/symbol'
 import { FormRender } from '@/components'
 import linkageSchema from './linkageSchema'

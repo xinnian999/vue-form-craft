@@ -1,11 +1,10 @@
 import { IconRender } from '@/components'
 import type { FormElement } from '@/release'
-import { ElSlider } from 'element-plus'
 import { h } from 'vue'
 
 export default {
   name: '滑块',
-  component: ElSlider,
+  component: 'ElSlider',
   icon: h(IconRender, { name: 'slider' }),
   type: 'basic',
   order: 12,

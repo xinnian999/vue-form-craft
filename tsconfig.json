@@ -1,16 +1,24 @@
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue",  "src/**/*.d.ts","src/**/**/*","docs/.vitepress/**/*","docs/**/*.vue" ],
+  "include": [
+    "env.d.ts",
+    "src/**/*",
+    "src/**/*.vue",
+    "src/**/*.d.ts",
+    "src/**/**/*",
+    "docs/.vitepress/**/*",
+    "docs/**/*.vue"
+  ],
   "exclude": [],
   "compilerOptions": {
-    "types": ["vite/client","./global.d.ts"],
+    "types": ["vite/client", "global", "element-plus/global"],
     // "composite": true,
     // "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "vue-form-craft": ["./src/release/index.ts"],
+      "vue-form-craft": ["./src/release/index.ts"]
     },
-    "allowJs": true,
+    "allowJs": true
   }
 }
