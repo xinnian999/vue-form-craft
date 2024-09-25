@@ -1,36 +1,31 @@
 <template>
   <div v-if="!currentOptions.length && !loading" style="font-size: 12px">暂无选项</div>
 
-  <el-checkbox-group
-    v-bind="$attrs"
-    v-model="value"
-    @change="selectChange"
-    v-loading="loading"
-  >
+  <el-checkbox-group v-bind="$attrs" v-model="value" @change="selectChange" v-loading="loading">
     <template v-if="optionType === 'circle' || optionType === 'border'">
       <el-checkbox
         v-for="item in currentOptions"
         :key="item[valueKey]"
-        :label="item[valueKey]"
+        :label="item[labelKey]"
+        :value="item[valueKey]"
         :border="optionType === 'border'"
-        >{{ item[labelKey] }}</el-checkbox
-      >
+        />
     </template>
 
     <el-space v-if="optionType === 'button'" wrap :size="[space, space]">
       <el-checkbox-button
         v-for="item in currentOptions"
         :key="item[valueKey]"
-        :label="item[valueKey]"
+        :label="item[labelKey]"
+        :value="item[valueKey]"
         size="large"
-        >{{ item[labelKey] }}</el-checkbox-button
-      >
+        />
     </el-space>
   </el-checkbox-group>
 </template>
 
 <script setup lang="ts">
-import { defineProps,defineModel  } from 'vue'
+import { defineProps, defineModel } from 'vue'
 import {
   ElCheckboxGroup,
   ElCheckbox,

@@ -6,30 +6,30 @@
         <el-radio
           v-for="item in currentOptions"
           :key="item[valueKey]"
-          :label="item[valueKey]"
+          :label="item[labelKey]"
+          :value="item[valueKey]"
           :border="optionType === 'border'"
-          >{{ item[labelKey] }}</el-radio
-        >
+        />
       </template>
 
       <template v-else>
         <el-radio-button
           v-for="item in currentOptions"
           :key="item[valueKey]"
-          :label="item[valueKey]"
+          :label="item[labelKey]"
+          :value="item[valueKey]"
           v-bind="$attrs"
-          >{{ item[labelKey] }}
-        </el-radio-button>
+        />
       </template>
     </el-space>
   </el-radio-group>
 </template>
 
 <script setup lang="ts">
-import type { Direction, OptionType, SelectProps, SelectValue } from '@/config/commonType';
-import useSelect from '@/hooks/useSelect';
-import { ElRadio, ElRadioButton, ElRadioGroup, ElSpace } from 'element-plus';
-import { defineModel, defineProps } from 'vue';
+import type { Direction, OptionType, SelectProps, SelectValue } from '@/config/commonType'
+import useSelect from '@/hooks/useSelect'
+import { ElRadio, ElRadioButton, ElRadioGroup, ElSpace } from 'element-plus'
+import { defineModel, defineProps } from 'vue'
 
 type Props = Omit<SelectProps, 'multiple'> & {
   optionType?: OptionType
@@ -52,4 +52,3 @@ const value = defineModel<SelectValue>({ default: '' })
 
 const { currentOptions, selectChange, loading } = useSelect(props)
 </script>
-
