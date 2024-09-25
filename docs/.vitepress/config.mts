@@ -22,11 +22,6 @@ export default defineConfig({
     },
     plugins: [viteCommonjs() as any]
   },
-  // vue: {
-  //   script: {
-  //     defineModel: true
-  //   }
-  // },
   head: [['link', { rel: 'icon', href: '/favicon.svg' }]],
   markdown: {
     config: (md) => {
@@ -78,7 +73,8 @@ export default defineConfig({
               text: '扩展',
               items: [
                 { text: '扩展表单设计器', link: '/zh/extend' },
-                { text: '扩展一个markdown输入框', link: '/zh/extendMd' },
+                { text: '例：扩展markdown输入框', link: '/zh/extendMd' },
+                { text: '例：扩展穿梭框', link: '/zh/extendTransfer' },
               ]
             },
             {
