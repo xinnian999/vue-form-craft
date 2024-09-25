@@ -1,4 +1,3 @@
-import { ElDatePicker } from 'element-plus'
 import attrSchema from './attrSchema'
 import type { FormElement } from '@/release'
 import IconRender from '@/components/IconRender.vue'
@@ -6,7 +5,7 @@ import { h } from 'vue'
 
 export default {
   name: '日期选择器',
-  component: ElDatePicker,
+  component: 'ElDatePicker',
   icon: h(IconRender, { name: 'datePicker' }),
   type: 'basic',
   order: 9,

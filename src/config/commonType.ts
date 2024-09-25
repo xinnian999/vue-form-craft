@@ -46,7 +46,7 @@ export type FormSchema = {
 
 export type FormElement = {
   name: string
-  component: VNode | Component
+  component: string | VNode | Component
   icon: string | VNode | Component
   type: 'assist' | 'layout' | 'basic'
   order: number
