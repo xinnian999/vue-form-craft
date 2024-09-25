@@ -1,0 +1,46 @@
+<template>
+  <FormDesign
+    v-model="schema"
+    class="docs-form-design"
+    style="height: calc(100vh - 65px)"
+    @save="onSave"
+  />
+</template>
+
+<script setup lang="ts">
+import { ElMessage } from 'element-plus'
+import { onMounted, ref } from 'vue'
+import { FormDesign, type FormSchema } from 'vue-form-craft'
+
+const schema = ref<FormSchema>({
+  items: []
+})
+
+const onSave = () => {
+  localStorage.setItem('schema', JSON.stringify(schema.value))
+  ElMessage.success('保存成功')
+}
+
+onMounted(() => {
+  const localSchema = localStorage.getItem('schema')
+  if (localSchema) {
+    schema.value = JSON.parse(localSchema)
+  }
+})
+</script>
+
+<style>
+.docs-form-design {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0;
+    line-height: auto;
+    font-size: 16px;
+    font-weight: bold;
+  }
+}
+</style>

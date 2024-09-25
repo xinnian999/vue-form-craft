@@ -48,7 +48,8 @@ defineProps<{
 }>()
 
 const emit = defineEmits<{
-  onSave: []
+  onSave: [],
+  save: [],
 }>()
 
 const currentKey = ref('')
@@ -109,6 +110,7 @@ provide($methods, {
   },
   handleSave: () => {
     emit('onSave')
+    emit('save')
   }
 })
 </script>

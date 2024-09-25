@@ -4,16 +4,14 @@
 
 FormDesign 是 vue-form-craft 的可视化表单设计器组件。
 
+建议将设计器渲染在一个大的容器里！
+
 ```vue
 <template>
-  <form-design @onSave="onSave" />
+  <div style="width:100vw;height:100vh">
+    <FormDesign />
+  </div>
 </template>
-
-<script setup>
-const onSave = (newSchema) => {
-  console.log(newSchema)
-}
-</script>
 ```
 
 ## Props
@@ -29,4 +27,4 @@ const onSave = (newSchema) => {
 
 | 事件名 | 类型       | 描述               |
 | ------ | ---------- | ------------------ |
-| onSave | `()=>void` | 点击保存按钮时触发 |
+| save | `()=>void` | 点击保存按钮时触发 |
