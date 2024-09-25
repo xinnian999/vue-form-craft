@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, computed } from 'vue'
+import { defineProps, computed, type StyleValue } from 'vue'
 import { FormItemRender, DefaultCanvasWrapper } from '@/components'
 import type { FormItemType } from '@/release';
 
@@ -26,7 +26,7 @@ const thisProps = defineProps<{
   design: boolean
 }>()
 
-const InlineStyle = computed(() => ({
+const InlineStyle = computed<StyleValue>(() => ({
   width: '100%',
   display: 'flex',
   'justify-content': thisProps.props.align,
