@@ -77,10 +77,11 @@ const attrSchema = computed(() => {
     const config = elements[current.value.component]
 
     if (config.attrSchema) {
-      const parseItems = (nodes:FormItemType[]) => {
+      const parseItems = (nodes: FormItemType[]) => {
         return nodes.map((item) => {
           const value = getDataByPath(current.value!, item.name)
           if (isString(value) && /^{{\s*(.*?)\s*}}$/.test(value)) {
+            // 将联动组件改用弹窗展示
             return { ...item, component: 'Input', dialog: true }
           }
           if (item.children) {
@@ -94,12 +95,11 @@ const attrSchema = computed(() => {
 
       return {
         ...config.attrSchema,
-        // 将联动组件改用弹窗展示
         items: [
           {
             label: '组件类型',
             component: 'Tag',
-            name:'componentType',
+            name: 'componentType',
             props: {
               text: config.name
             }

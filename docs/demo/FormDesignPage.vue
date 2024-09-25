@@ -13,6 +13,9 @@ import { onMounted, ref } from 'vue'
 import { FormDesign, type FormSchema } from 'vue-form-craft'
 
 const schema = ref<FormSchema>({
+  labelWidth: 150,
+  labelAlign: 'right',
+  size: 'default',
   items: []
 })
 
