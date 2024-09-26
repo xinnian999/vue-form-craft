@@ -3,7 +3,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue'
 import type { FormItemType } from '@/config/commonType'
 import FormItem from './FormItem.vue'
 

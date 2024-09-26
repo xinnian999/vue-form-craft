@@ -99,7 +99,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps, defineModel, h, watch } from 'vue'
+import { computed, h, watch } from 'vue'
 import { FormItem, DefaultCanvasWrapper, IconRender } from '@/components'
 import { deepParse } from '@/utils'
 import type { FormItemType } from '@/release'

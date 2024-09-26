@@ -8,6 +8,7 @@
           :key="item[valueKey]"
           :label="item[labelKey]"
           :value="item[valueKey]"
+          :disabled="item[disabledKey]"
           :border="optionType === 'border'"
         />
       </template>
@@ -18,6 +19,7 @@
           :key="item[valueKey]"
           :label="item[labelKey]"
           :value="item[valueKey]"
+          :disabled="item[disabledKey]"
           v-bind="$attrs"
         />
       </template>
@@ -28,7 +30,6 @@
 <script setup lang="ts">
 import type { Direction, OptionType, SelectProps, SelectValue } from '@/config/commonType'
 import useSelect from '@/hooks/useSelect'
-import { defineModel, defineProps } from 'vue'
 
 type Props = Omit<SelectProps, 'multiple'> & {
   optionType?: OptionType
@@ -41,6 +42,7 @@ const props = withDefaults(defineProps<Props>(), {
   mode: 'static',
   labelKey: 'label',
   valueKey: 'value',
+  disabledKey: 'disabled',
   name: '',
   optionType: 'circle',
   direction: 'horizontal',

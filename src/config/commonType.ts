@@ -75,6 +75,7 @@ export interface SelectProps {
   mode?: string
   labelKey?: string
   valueKey?: string
+  disabledKey?: string
   api?: SchemaApi
   name?: string
 }

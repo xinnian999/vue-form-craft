@@ -25,7 +25,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineModel } from 'vue'
 import { type CheckboxGroupValueType } from 'element-plus'
 import useSelect from '@/hooks/useSelect'
 import type { Direction, OptionType, SelectProps } from '@/config/commonType'

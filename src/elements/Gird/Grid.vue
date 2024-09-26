@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, computed } from 'vue'
+import {  computed } from 'vue'
 import { FormItemRender, DefaultCanvasWrapper } from '@/components'
 import type { FormItemType } from '@/release';
 

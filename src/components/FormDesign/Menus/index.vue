@@ -48,7 +48,7 @@
 
 <script setup lang="ts">
 import draggable from 'vuedraggable-es'
-import { inject, defineProps, computed } from 'vue'
+import { inject,  computed } from 'vue'
 import { $global, $locale, $schema } from '@/config/symbol'
 import { ref } from 'vue'
 import parseMenus from './menus'
