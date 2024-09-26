@@ -59,7 +59,8 @@ export default defineConfig({
               items: [
                 { text: 'JsonSchema详解', link: '/zh/schema' },
                 { text: '表单联动', link: '/zh/linkage' },
-                { text: '深层数据绑定', link: '/zh/deepName' }
+                { text: '深层数据绑定', link: '/zh/deepName' },
+                { text: '自定义组件', link: '/zh/custom-component' }
               ]
             },
             {

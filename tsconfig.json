@@ -7,6 +7,7 @@
     "src/**/*.d.ts",
     "src/**/**/*",
     "docs/.vitepress/**/*",
+    "docs/.vitepress/**/*.vue",
     "docs/**/*.vue"
   ],
   "exclude": [],

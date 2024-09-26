@@ -6,6 +6,7 @@ import type { Component } from 'vue'
 import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
 import Layout from './Layout.vue'
+import components from './components/index'
 import './custom.css'
 
 const modules = import.meta.glob<Component>('../../demo/**/*', { eager: true, import: 'default' })
@@ -23,6 +24,7 @@ export default {
 
       app.use(ElementPlus)
       app.use(VueFormCraft, { request,extendElements })
+      app.use(components)
 
       app.use(mdVueDemo, { modules })
     }

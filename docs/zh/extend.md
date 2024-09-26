@@ -9,7 +9,7 @@
 
 只需要在全局注册`vue-form-craft`时，传入一个`extendElements`配置即可！
 
-`extendElements`是一个对象！组件名作为键值，`FormElement`作为value值！ 
+`extendElements`是一个对象！组件名作为键，`FormElement`作为值！ 
 
 ```ts
 type extendElements = { [key: string]: FormElement }
@@ -85,7 +85,7 @@ icon格式为vue的SFC组件
 
 设计器右侧的表单，实际上编辑的也是这个参数！
 
-`initialValues.component` 是必传的，这个参数决定了使用哪个组件，所以需要和`FormElement`的键值一致，才能正确渲染
+`initialValues.component` 是必传的，这个参数决定了使用哪个组件，所以需要和`FormElement`的键一致，才能正确渲染
 
 ### modelName
 
