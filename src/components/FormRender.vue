@@ -21,14 +21,10 @@
 <script setup lang="ts">
 import {
   ref,
-  defineProps,
-  defineExpose,
-  defineEmits,
   computed,
   reactive,
   provide,
   watch,
-  defineOptions,
   nextTick
 } from 'vue'
 import type { FormInstance } from 'element-plus'

@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, inject, computed } from 'vue'
+import {  inject, computed } from 'vue'
 import { omit } from 'lodash'
 import { FormItem, IconRender } from '@/components'
 import { $current, $methods, $hoverKey } from '@/config/symbol'

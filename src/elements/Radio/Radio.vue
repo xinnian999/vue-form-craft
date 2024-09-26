@@ -28,7 +28,6 @@
 <script setup lang="ts">
 import type { Direction, OptionType, SelectProps, SelectValue } from '@/config/commonType'
 import useSelect from '@/hooks/useSelect'
-import { defineModel, defineProps } from 'vue'
 
 type Props = Omit<SelectProps, 'multiple'> & {
   optionType?: OptionType

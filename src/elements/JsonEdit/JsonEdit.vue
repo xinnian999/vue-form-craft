@@ -12,7 +12,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineModel } from 'vue'
 import JsonEditorVue from 'json-editor-vue3'
 import { Disabled } from '@/components'
 

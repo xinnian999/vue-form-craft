@@ -20,7 +20,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps,defineModel } from 'vue'
 import useSelect from '@/hooks/useSelect'
 import type { SelectProps, SelectValue } from '@/config/commonType'
 

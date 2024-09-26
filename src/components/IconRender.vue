@@ -3,8 +3,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps,  defineOptions} from 'vue'
-
 const modules = import.meta.glob('@/assets/icons/*.vue', { eager: true })
 
 const icons = Object.entries(modules).reduce((acc, [key, value]) => {

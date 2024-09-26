@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, inject } from 'vue'
+import {  inject } from 'vue'
 import Draggable from 'vuedraggable-es'
 import CanvasRender from './CanvasRender.vue'
 import { $locale, $methods } from '@/config/symbol'

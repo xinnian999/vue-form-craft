@@ -88,7 +88,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, inject, defineProps, reactive } from 'vue'
+import { ref, computed, inject,  reactive } from 'vue'
 import { ElMessageBox } from 'element-plus'
 import JsonEditorVue from 'json-editor-vue3'
 import { FormRender } from '@/components'

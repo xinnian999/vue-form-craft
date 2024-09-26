@@ -16,17 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-  ref,
-  provide,
-  computed,
-  defineProps,
-  defineEmits,
-  defineOptions,
-  defineModel,
-  inject,
-  type Ref,
-} from 'vue'
+import { ref, provide, computed, inject, type Ref } from 'vue'
 import { recursionDelete } from '@/utils'
 import Menus from './Menus/index.vue'
 import Canvas from './Canvas/index.vue'
@@ -48,8 +38,8 @@ defineProps<{
 }>()
 
 const emit = defineEmits<{
-  onSave: [],
-  save: [],
+  onSave: []
+  save: []
 }>()
 
 const currentKey = ref('')
