@@ -8,6 +8,7 @@
           :key="item[valueKey]"
           :label="item[labelKey]"
           :value="item[valueKey]"
+          :disabled="item[disabledKey]"
           :border="optionType === 'border'"
         />
       </template>
@@ -18,6 +19,7 @@
           :key="item[valueKey]"
           :label="item[labelKey]"
           :value="item[valueKey]"
+          :disabled="item[disabledKey]"
           v-bind="$attrs"
         />
       </template>
@@ -40,6 +42,7 @@ const props = withDefaults(defineProps<Props>(), {
   mode: 'static',
   labelKey: 'label',
   valueKey: 'value',
+  disabledKey: 'disabled',
   name: '',
   optionType: 'circle',
   direction: 'horizontal',

@@ -2,21 +2,11 @@ import { ref, watch, onMounted, inject } from 'vue'
 import { isEqual, isPlainObject, debounce } from 'lodash'
 import { getDataByPath } from '@/utils'
 import { $selectData, $global } from '@/config/symbol'
-import type { SchemaApi } from '@/config/commonType'
-
-type Props = {
-  options?: Array<Record<string, any>>
-  multiple?: boolean
-  mode?: string
-  labelKey?: string
-  valueKey?: string
-  api?: SchemaApi
-  name?: string
-}
+import type {  SelectProps } from '@/config/commonType'
 
 type Option = Record<string, any>
 
-const useSelect = (props: Props) => {
+const useSelect = (props: SelectProps) => {
   const { selectData, updateSelectData } = inject($selectData)!
 
   const { request } = inject($global)!
@@ -29,15 +19,15 @@ const useSelect = (props: Props) => {
     if (!request) return
     if (!props.api) return
 
-    const { url, method, params, data, dataPath } = props.api
+    const { url, method, params, dataPath } = props.api
 
     loading.value = true
 
     const res = await request({
       url,
       method,
-      params,
-      data
+      params: method === 'GET' ? params : {},
+      data: method === 'POST' ? params : {}
     })
 
     const resData = getDataByPath(res, dataPath) || []
