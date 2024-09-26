@@ -56,10 +56,10 @@ src
 
 ## 配置项表单
 
-通过设计器拖拽，制作的表单，将JsonSchema导了出来
+通过设计器拖拽，制作的表单，将JsonSchema导出使用！
 
 ```ts
-// src/extendElements/Markdown/attrSchema.ts
+// src/extendElements/Transfer/attrSchema.ts
 import type { FormSchema } from 'vue-form-craft'
 
 export default {
@@ -85,7 +85,6 @@ export default {
       component: 'Grid',
       children: [
         { label: '是否必填', component: 'Switch', name: 'required' },
-        { label: '是否只读', component: 'Switch', name: 'props.readonly' },
         { label: '是否禁用', component: 'Switch', name: 'props.disabled' },
         { label: '隐藏字段', component: 'Switch', name: 'hidden' },
         { label: '隐藏标签', component: 'Switch', name: 'hideLabel' }
@@ -101,14 +100,50 @@ export default {
         marginBottom: 0
       }
     },
+
     { label: '自定义class', component: 'Input', name: 'props.class' },
+
     {
-      label: '自定义style',
-      component: 'JsonEdit',
-      name: 'props.style',
-      help: '与vue的style对象格式一样',
-      dialog: true
-    }
+      component: 'Divider',
+      props: {
+        title: '选项设置',
+        contentPosition: 'center'
+      },
+      designKey: 'design-gSnX',
+      name: 'form-xDEe',
+      style: {
+        marginTop: '40px'
+      }
+    },
+    {
+      label: '静态选项',
+      name: 'props.data',
+      component: 'FormList',
+      children: [
+        {
+          label: '选项名',
+          name: 'label',
+          component: 'Input',
+          props: {
+            placeholder: '请输入...'
+          },
+          designKey: 'form-LnGh'
+        },
+        {
+          label: '选项值',
+          name: 'key',
+          component: 'Input',
+          props: {},
+          designKey: 'form-HYtW'
+        }
+      ],
+      designKey: 'form-Iwpd',
+      props: {
+        mode: 'table',
+        newItemDefaults:
+          '{{ (index) => ({ label: `选项${index + 1}`, key: `value${index + 1}` }) }}'
+      }
+    },
   ]
 } satisfies FormSchema
 ```
@@ -122,13 +157,12 @@ export default {
 ```ts
 // src/extendElements/Transfer/index.ts
 import type { FormElement } from 'vue-form-craft'
-import { ElTransfer } from 'element-plus'
 import icon from './Icon.vue'
 import attrSchema from './attrSchema'
 
 export default {
   name: '穿梭框',
-  component: ElTransfer,
+  component: 'ElTransfer',
   icon,
   type: 'basic',
   order: 12,

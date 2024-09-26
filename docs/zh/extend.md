@@ -9,7 +9,7 @@
 
 只需要在全局注册`vue-form-craft`时，传入一个`extendElements`配置即可！
 
-`extendElements`是一个对象！组件名作为key值，`FormElement`作为value值！ 
+`extendElements`是一个对象！组件名作为键值，`FormElement`作为value值！ 
 
 ```ts
 type extendElements = { [key: string]: FormElement }
@@ -41,7 +41,7 @@ app.mount('#app')
 ```ts
 interface FormElement {
   name: string
-  component: VNode | Component
+  component: string | VNode | Component
   icon: VNode | Component
   type: 'assist' | 'layout' | 'basic'
   order: number
@@ -57,7 +57,7 @@ interface FormElement {
 
 组件名称，也就是位于设计器左栏上，某个组件的名称
 
-![name](../assets/name.png)
+<img src="../assets/name.png" style="height:150px" />
 
 ### icon
 
@@ -65,11 +65,11 @@ interface FormElement {
 
 icon格式为vue的SFC组件
 
-![icon](../assets/icon.png)
+<img src="../assets/icon.png" style="height:150px" />
 
 ### component
 
-渲染该组件所用的Vue-SFC组件
+渲染该组件所用的Vue-SFC组件，可以是一个已经被全局注册的组件字符串，也可以直接传入组件定义或者VNode!
 
 ### type
 
@@ -81,9 +81,11 @@ icon格式为vue的SFC组件
 
 ### initialValues
 
-拖拽生成组件时，会在schema中的items里，增添的该字段默认配置。
+拖拽生成组件时，会在schema中的items里，增添的该字段默认配置。 
 
 设计器右侧的表单，实际上编辑的也是这个参数！
+
+`initialValues.component` 是必传的，这个参数决定了使用哪个组件，所以需要和`FormElement`的键值一致，才能正确渲染
 
 ### modelName
 
