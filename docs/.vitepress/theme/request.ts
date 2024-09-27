@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { ElMessage } from 'element-plus'
 
 const request = axios.create({
   baseURL: 'http://101.42.108.39:7777',
@@ -12,8 +13,13 @@ const request = axios.create({
   }
 })
 
-request.interceptors.response.use((res) => {
-  return res.data
-})
+request.interceptors.response.use(
+  (res) => {
+    return res.data
+  },
+  (err) => {
+    ElMessage.error(err.message)
+  }
+)
 
 export default request

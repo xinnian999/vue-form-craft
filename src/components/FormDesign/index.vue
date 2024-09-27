@@ -129,7 +129,7 @@ provide($methods, {
     padding-bottom: 20px;
   }
   .formItemOptions {
-    width: 20%;
+    width: 22%;
     overflow: auto;
     padding: 20px;
   }

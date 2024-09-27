@@ -2,7 +2,7 @@ import { ref, watch, onMounted, inject } from 'vue'
 import { isEqual, isPlainObject, debounce } from 'lodash'
 import { getDataByPath } from '@/utils'
 import { $selectData, $global } from '@/config/symbol'
-import type {  SelectProps } from '@/config/commonType'
+import type { SelectProps } from '@/config/commonType'
 
 type Option = Record<string, any>
 
@@ -23,25 +23,27 @@ const useSelect = (props: SelectProps) => {
 
     loading.value = true
 
-    const res = await request({
-      url,
-      method,
-      params: method === 'GET' ? params : {},
-      data: method === 'POST' ? params : {}
-    })
+    try {
+      const res = await request({
+        url,
+        method,
+        params: method === 'GET' ? params : {},
+        data: method === 'POST' ? params : {}
+      })
 
-    const resData = getDataByPath(res, dataPath) || []
+      const resData = getDataByPath(res, dataPath) || []
 
-    const resDataParse = resData.map((item: any) => {
-      if (isPlainObject(item)) {
-        return item
-      }
-      return { label: item, value: item }
-    })
+      const resDataParse = resData.map((item: any) => {
+        if (isPlainObject(item)) {
+          return item
+        }
+        return { label: item, value: item }
+      })
 
-    currentOptions.value = [...currentOptions.value, ...resDataParse]
-
-    loading.value = false
+      currentOptions.value = [...currentOptions.value, ...resDataParse]
+    } finally {
+      loading.value = false
+    }
   }, 300)
 
   onMounted(() => {

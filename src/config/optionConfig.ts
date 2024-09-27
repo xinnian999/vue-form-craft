@@ -9,9 +9,6 @@ export default [
         },
         designKey: 'design-gSnX',
         name: 'form-xDEe',
-        style: {
-          marginTop: '40px'
-        }
     },
     {
         label: '数据模式',
