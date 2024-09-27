@@ -2,10 +2,14 @@
   <div class="attrForm">
     <FormRender :key="current!.designKey" v-model="current!" :schema="attrSchema" />
 
+    <!-- <StyleConfig v-model="current!.props?.style" /> -->
+
+    <br>
+
     <el-divider>{{ locale.attr.tab1.linkage.text }}</el-divider>
 
     <div class="current-footer">
-      <el-button v-for="{ title, onClick } in linkageBtns" :key="title" type="primary" plain @click="onClick">{{ title }}</el-button>
+      <el-button v-for="{ title, onClick } in linkageBtns" :key="title" type="primary" plain size="small" @click="onClick">{{ title }}</el-button>
     </div>
 
     <ConfigLinkage v-model="configLinkageVisible" />
@@ -22,6 +26,7 @@ import { isString } from 'lodash'
 import type { FormItemType, FormSchema } from '@/release'
 import ConfigLinkage from './ConfigLinkage.vue'
 import ValueLinkage from './ValueLinkage.vue'
+import StyleConfig from './StyleConfig.vue'
 
 const { elements } = inject($global)!
 
