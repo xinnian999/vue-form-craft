@@ -18,29 +18,26 @@
       <json-editor-vue
         v-if="type === 'config'"
         class="editor"
-        v-model="current"
+        v-model="model"
         currentMode="code"
         :modeList="['text', 'view', 'tree', 'code', 'form']"
         :options="{ search: true, history: true }"
         language="zh"
       />
-      <FormRender
-        v-if="type === 'value'"
-        v-model="current!"
-        :schema="linkageSchema(schema, current!)"
-      />
+      <FormRender v-if="type === 'value'" v-model="model" :schema="linkageSchema(schema, model!)" />
     </el-dialog>
   </div>
 </template>
 
 <script setup lang="ts">
 import { inject, ref } from 'vue'
-import { $current, $locale, $schema } from '@/config/symbol'
+import { $locale, $schema } from '@/config/symbol'
 import { FormRender } from '@/components'
 import JsonEditorVue from 'json-editor-vue3'
 import linkageSchema from '../linkageSchema'
+import type { FormItemType } from '@/release'
 
-const { current } = inject($current)!
+const model = defineModel<FormItemType>()
 
 const locale = inject($locale)!
 

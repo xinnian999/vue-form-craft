@@ -2,17 +2,17 @@
   <div class="attrForm" v-if="current">
     <FormRender :key="current.designKey" v-model="current" :schema="attrSchema" />
 
-    <StyleConfig :key="current.designKey" v-model="current" />
+    <StyleConfig :key="current.designKey" v-model="currentProps" />
 
-    <LinkageConfig />
+    <LinkageConfig v-model="current" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, inject, ref } from 'vue'
-import { $current, $global, $locale } from '@/config/symbol'
+import { computed, inject } from 'vue'
+import { $current, $global } from '@/config/symbol'
 import { FormRender } from '@/components'
-import { getDataByPath } from '@/utils'
+import { getDataByPath, setDataByPath } from '@/utils'
 import { isString } from 'lodash'
 import type { FormItemType, FormSchema } from '@/release'
 import LinkageConfig from './LinkageConfig.vue'
@@ -21,11 +21,6 @@ import StyleConfig from './StyleConfig.vue'
 const { elements } = inject($global)!
 
 const { current } = inject($current)!
-
-const locale = inject($locale)!
-
-const configLinkageVisible = ref(false)
-const valueLinkageVisible = ref(false)
 
 const attrSchema = computed(() => {
   if (current.value) {
@@ -68,16 +63,14 @@ const attrSchema = computed(() => {
   return { size: 'small', labelAlign: 'top', items: [] } satisfies FormSchema
 })
 
-const linkageBtns = [
-  {
-    title: locale.value.attr.tab1.linkage.action1,
-    onClick: () => (configLinkageVisible.value = true)
+const currentProps = computed({
+  get() {
+    return current.value?.props || {}
   },
-  {
-    title: locale.value.attr.tab1.linkage.action2,
-    onClick: () => (valueLinkageVisible.value = true)
+  set(value) {
+    current.value = setDataByPath(current.value!, 'props', value) as FormItemType
   }
-]
+})
 </script>
 
 <style scoped lang="less">

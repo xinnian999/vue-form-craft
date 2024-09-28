@@ -1,22 +1,21 @@
 <template>
-  <div style="text-align: center">
+  <div class="vfc-style-config">
     <el-divider>组件样式</el-divider>
-    <FormRender v-model="props" :schema="schemaMini" ref="formRef" />
+    <FormRender v-model="currentProps" :schema="schemaMini" ref="formRef" />
     <el-button type="primary" plain size="small" @click="visible = true">自定义更多样式</el-button>
 
     <el-drawer v-model="visible" title="组件样式">
-      <FormRender v-model="props" :schema="schema" ref="formRef" />
+      <FormRender v-model="currentProps" :schema="schema" ref="formRef" />
     </el-drawer>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import { setDataByPath } from '@/utils'
-import type { FormItemType, FormSchema } from '@/release'
+import { ref } from 'vue'
+import type { FormSchema } from '@/release'
 import FormRender from '@/components/FormRender.vue'
 
-const current = defineModel<FormItemType>()
+const currentProps = defineModel<Record<string, any>>()
 
 const visible = ref(false)
 
@@ -204,13 +203,10 @@ const schema: FormSchema = {
     }
   ]
 }
-
-const props = computed({
-  get() {
-    return current.value?.props || {}
-  },
-  set(value) {
-    current.value = setDataByPath(current.value!, 'props', value) as FormItemType
-  }
-})
 </script>
+
+<style>
+.vfc-style-config{
+  text-align: center;
+}
+</style>
