@@ -17,6 +17,10 @@ export default (elements: Record<string, FormElement>, locale:Ref<Locale> ) => {
       children: getChildren('basic')
     },
     {
+      title: locale.value.menus.highBasicTitle,
+      children: getChildren('highBasic')
+    },
+    {
       title: locale.value.menus.layoutTitle,
       children: getChildren('layout')
     },

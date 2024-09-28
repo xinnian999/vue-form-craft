@@ -64,9 +64,9 @@ export default [
         ],
         designKey: 'form-Iwpd',
         props: {
-          mode: 'table',
-          newItemDefaults:
-            '{{ (index) => ({ [$values.props.labelKey]: `选项${index + 1}`, [$values.props.valueKey]: `value${index + 1}` }) }}'
+          mode: 'table'
+          // newItemDefaults:
+          //   '{{ (index) => ({ [$values.props.labelKey]: `选项${index + 1}`, [$values.props.valueKey]: `value${index + 1}` }) }}'
         }
       },
       {

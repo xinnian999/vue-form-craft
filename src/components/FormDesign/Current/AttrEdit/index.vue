@@ -2,7 +2,7 @@
   <div class="attrForm">
     <FormRender :key="current!.designKey" v-model="current!" :schema="attrSchema" />
 
-    <!-- <StyleConfig v-model="current!.props?.style" /> -->
+    <StyleConfig :key="current!.designKey" />
 
     <br>
 

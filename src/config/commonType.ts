@@ -48,7 +48,7 @@ export type FormElement = {
   name: string
   component: string | VNode | Component
   icon: string | VNode | Component
-  type: 'assist' | 'layout' | 'basic'
+  type: 'assist' | 'layout' | 'basic' | 'highBasic'
   order: number
   initialValues: Omit<FormItemType, 'name'>
   modelName?: string
@@ -92,6 +92,7 @@ export type $Global = {
 export type Locale = {
   menus: {
     basicTitle: string
+    highBasicTitle: string
     layoutTitle: string
     assistTitle: string
     useTemplateBtn: string

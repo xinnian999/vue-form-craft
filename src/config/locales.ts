@@ -3,9 +3,10 @@ import type { Locale } from './commonType'
 export default {
   zh: {
     menus:{
-      basicTitle:'基础字段',
-      layoutTitle:'布局字段',
-      assistTitle:'辅助字段',
+      basicTitle:'输入组件',
+      highBasicTitle:'高级输入组件',
+      layoutTitle:'布局组件',
+      assistTitle:'辅助组件',
       useTemplateBtn:'使用模板'
     },
     actions: {
@@ -37,6 +38,7 @@ export default {
   en: {
     menus:{
       basicTitle:'Basic Fields',
+      highBasicTitle:'High Basic Fields',
       layoutTitle:'Layout Fields',
       assistTitle:'Assist Fields',
       useTemplateBtn:'Use Template'
