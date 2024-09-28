@@ -40,7 +40,7 @@ export default {
       }
     },
 
-    { label: '自定义class', component: 'Input', name: 'props.class' },
+    
 
     {
       label: '选项样式类型',

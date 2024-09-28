@@ -36,13 +36,7 @@ export default {
 
     { label: '最大分值', component: 'InputNumber', name: 'props.max', initialValue: 5 },
     { label: '是否允许半选', component: 'Switch', name: 'props.allow-half' },
-    { label: '自定义class', component: 'Input', name: 'props.class' },
-    {
-      label: '自定义style',
-      component: 'JsonEdit',
-      name: 'props.style',
-      help: '与vue的style对象格式一样',
-      dialog: true
-    }
+    
+
   ]
 } satisfies FormSchema

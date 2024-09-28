@@ -48,7 +48,7 @@ export default {
       designKey: 'form-eTxc'
     },
 
-    { label: '自定义class', component: 'Input', name: 'props.class' },
+    
 
     {
       component: 'Divider',

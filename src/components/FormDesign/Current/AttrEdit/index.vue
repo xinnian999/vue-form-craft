@@ -4,16 +4,7 @@
 
     <StyleConfig :key="current.designKey" v-model="current" />
 
-    <br>
-
-    <el-divider>{{ locale.attr.tab1.linkage.text }}</el-divider>
-
-    <div class="current-footer">
-      <el-button v-for="{ title, onClick } in linkageBtns" :key="title" type="primary" plain size="small" @click="onClick">{{ title }}</el-button>
-    </div>
-
-    <ConfigLinkage v-model:visible="configLinkageVisible" v-model:current="current" />
-    <ValueLinkage v-model:visible="valueLinkageVisible" v-model:current="current" />
+    <LinkageConfig />
   </div>
 </template>
 
@@ -24,8 +15,7 @@ import { FormRender } from '@/components'
 import { getDataByPath } from '@/utils'
 import { isString } from 'lodash'
 import type { FormItemType, FormSchema } from '@/release'
-import ConfigLinkage from './ConfigLinkage.vue'
-import ValueLinkage from './ValueLinkage.vue'
+import LinkageConfig from './LinkageConfig.vue'
 import StyleConfig from './StyleConfig.vue'
 
 const { elements } = inject($global)!

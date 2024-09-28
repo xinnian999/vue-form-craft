@@ -44,7 +44,7 @@ export default {
       { label: '开启选择范围', component: 'Switch', name: 'props.range' },
       { label: '步长', component: 'InputNumber', name: 'props.step', initialValue: 1 },
       { label: '最小值', component: 'InputNumber', name: 'props.min', initialValue: 0 },
-      { label: '自定义class', component: 'Input', name: 'props.class' },
+      
       {
         label: '自定义style',
         component: 'JsonEdit',

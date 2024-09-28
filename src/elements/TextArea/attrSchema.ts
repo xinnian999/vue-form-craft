@@ -57,13 +57,7 @@ export default {
       name: 'props.autosize.maxRows',
       initialValue: 999
     },
-    { label: '自定义class', component: 'Input', name: 'props.class' },
-    {
-      label: '自定义style',
-      component: 'JsonEdit',
-      name: 'props.style',
-      help: '与vue的style对象格式一样',
-      dialog: true
-    }
+    
+
   ]
 } satisfies FormSchema

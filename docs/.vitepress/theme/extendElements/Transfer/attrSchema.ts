@@ -39,7 +39,7 @@ export default {
       }
     },
 
-    { label: '自定义class', component: 'Input', name: 'props.class' },
+    
 
     {
       component: 'Divider',

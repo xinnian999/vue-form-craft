@@ -56,13 +56,7 @@ export default {
       name: 'props.title',
       hidden: "{{$values.props.mode!=='card'}}"
     },
-    { label: '自定义class', component: 'Input', name: 'props.class' },
-    {
-      label: '自定义style',
-      component: 'JsonEdit',
-      name: 'props.style',
-      help: '与vue的style对象格式一样',
-      dialog: true
-    }
+    
+
   ]
 } satisfies FormSchema
