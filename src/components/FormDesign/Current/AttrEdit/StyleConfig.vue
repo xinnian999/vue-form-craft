@@ -7,13 +7,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject } from 'vue'
-import { $current } from '@/config/symbol'
+import { computed } from 'vue'
 import { setDataByPath } from '@/utils'
 import type { FormItemType, FormSchema } from '@/release'
 import FormRender from '@/components/FormRender.vue'
 
-const { current, updateCurrent } = inject($current)!
+const current = defineModel<FormItemType>()
 
 const schema: FormSchema = {
   labelWidth: 60,
@@ -90,8 +89,7 @@ const style = computed({
     return current.value?.props?.style || {}
   },
   set(value) {
-    const newValues = setDataByPath(current.value!, 'props.style', value) as FormItemType
-    updateCurrent(newValues)
+    current.value = setDataByPath(current.value!, 'props.style', value) as FormItemType
   }
 })
 </script>

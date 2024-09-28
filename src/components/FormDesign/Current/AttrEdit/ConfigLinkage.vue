@@ -16,12 +16,9 @@
 </template>
 
 <script setup lang="ts">
-import { inject } from 'vue'
+import type { FormItemType } from '@/release';
 import JsonEditorVue from 'json-editor-vue3'
-import { $current } from '@/config/symbol'
 
-const { current } = inject($current)!
-
-const visible = defineModel<boolean>()
+const visible = defineModel<boolean>('visible')
+const current = defineModel<FormItemType>('current')
 </script>
-

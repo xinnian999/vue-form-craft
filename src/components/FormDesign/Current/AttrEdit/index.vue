@@ -1,8 +1,8 @@
 <template>
-  <div class="attrForm">
-    <FormRender :key="current!.designKey" v-model="current!" :schema="attrSchema" />
+  <div class="attrForm" v-if="current">
+    <FormRender :key="current.designKey" v-model="current" :schema="attrSchema" />
 
-    <StyleConfig :key="current!.designKey" />
+    <StyleConfig :key="current.designKey" v-model="current" />
 
     <br>
 
@@ -12,8 +12,8 @@
       <el-button v-for="{ title, onClick } in linkageBtns" :key="title" type="primary" plain size="small" @click="onClick">{{ title }}</el-button>
     </div>
 
-    <ConfigLinkage v-model="configLinkageVisible" />
-    <ValueLinkage v-model="valueLinkageVisible" />
+    <ConfigLinkage v-model:visible="configLinkageVisible" v-model:current="current" />
+    <ValueLinkage v-model:visible="valueLinkageVisible" v-model:current="current" />
   </div>
 </template>
 
