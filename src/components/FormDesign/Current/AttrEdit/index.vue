@@ -1,5 +1,5 @@
 <template>
-  <div class="attrForm" v-if="current">
+  <div class="attrForm">
     <FormRender :key="current.designKey" v-model="current" :schema="attrSchema" />
 
     <StyleConfig :key="current.designKey" v-model="currentProps" />
@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import { computed, inject } from 'vue'
-import { $current, $global } from '@/config/symbol'
+import { $global } from '@/config/symbol'
 import { FormRender } from '@/components'
 import { getDataByPath, setDataByPath } from '@/utils'
 import { isString } from 'lodash'
@@ -20,43 +20,41 @@ import StyleConfig from './StyleConfig.vue'
 
 const { elements } = inject($global)!
 
-const { current } = inject($current)!
+const current = defineModel<FormItemType>({ required: true })
 
 const attrSchema = computed(() => {
-  if (current.value) {
-    const config = elements[current.value.component]
+  const config = elements[current.value.component]
 
-    if (config.attrSchema) {
-      const parseItems = (nodes: FormItemType[]) => {
-        return nodes.map((item) => {
-          const value = getDataByPath(current.value!, item.name)
-          if (isString(value) && /^{{\s*(.*?)\s*}}$/.test(value)) {
-            // 将联动组件改用弹窗展示
-            return { ...item, component: 'Input', dialog: true }
+  if (config?.attrSchema) {
+    const parseItems = (nodes: FormItemType[]) => {
+      return nodes.map((item) => {
+        const value = getDataByPath(current.value!, item.name)
+        if (isString(value) && /^{{\s*(.*?)\s*}}$/.test(value)) {
+          // 将联动组件改用弹窗展示
+          return { ...item, component: 'Input', dialog: true }
+        }
+        if (item.children) {
+          item.children = parseItems(item.children)
+        }
+        return item
+      })
+    }
+
+    const items = parseItems(config.attrSchema.items)
+
+    return {
+      ...config.attrSchema,
+      items: [
+        {
+          label: '组件类型',
+          component: 'Tag',
+          name: 'componentType',
+          props: {
+            text: config.name
           }
-          if (item.children) {
-            item.children = parseItems(item.children)
-          }
-          return item
-        })
-      }
-
-      const items = parseItems(config.attrSchema.items)
-
-      return {
-        ...config.attrSchema,
-        items: [
-          {
-            label: '组件类型',
-            component: 'Tag',
-            name: 'componentType',
-            props: {
-              text: config.name
-            }
-          },
-          ...items
-        ]
-      }
+        },
+        ...items
+      ]
     }
   }
 
@@ -75,7 +73,6 @@ const currentProps = computed({
 
 <style scoped lang="less">
 .attrForm {
-
   padding-bottom: 20px;
 }
 </style>

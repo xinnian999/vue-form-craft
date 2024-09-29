@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import {  inject, computed } from 'vue'
+import { inject, computed } from 'vue'
 import { omit } from 'lodash'
 import { FormItem, IconRender } from '@/components'
 import { $current, $methods, $hoverKey } from '@/config/symbol'
@@ -55,7 +55,7 @@ const handleHoverLeave = () => {
   updateHoverKey('')
 }
 
-const handleSelect = (element:FormItemType) => {
+const handleSelect = (element: FormItemType) => {
   updateCurrent(element)
 }
 
@@ -103,8 +103,8 @@ const checkProps = (props: Record<string, any> = {}) => {
       font-size: 16px;
       box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
       color: #fff;
-      padding: 0 11px;
-      line-height: 24px;
+      padding:3px 11px;
+      display: flex;
       cursor: pointer;
       &:hover {
         opacity: 0.7;
@@ -133,14 +133,15 @@ const checkProps = (props: Record<string, any> = {}) => {
     display: flex;
 
     li {
-      padding: 2px 4px;
+      padding: 4px;
       background-color: var(--el-color-primary);
       border-radius: 3px;
       cursor: pointer;
       font-size: 12px;
       margin-left: 3px;
       box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
-      line-height: 16px;
+      display: flex
+      // line-height: 16px;
     }
   }
 

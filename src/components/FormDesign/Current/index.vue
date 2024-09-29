@@ -1,7 +1,7 @@
 <template>
   <el-tabs class="current-config">
     <el-tab-pane v-if="current" :label="locale.attr.tab1.title">
-      <AttrEdit />
+      <AttrEdit v-model="current" />
     </el-tab-pane>
     <el-tab-pane :label="locale.attr.tab2.title">
       <FormEdit />
