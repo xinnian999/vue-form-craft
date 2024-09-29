@@ -64,6 +64,8 @@ const handleCopy = async () => {
   }
 
   &-content {
+    overflow: auto;
+    height: 100%;
   }
 }
 </style>

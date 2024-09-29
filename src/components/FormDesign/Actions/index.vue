@@ -192,7 +192,7 @@ const handleClear = async () => {
   }
 
   .vueCode {
-    max-height: 60vh;
+    height: 60vh;
   }
 }
 </style>
