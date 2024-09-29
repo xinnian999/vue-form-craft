@@ -48,16 +48,14 @@
 
       <el-tabs v-if="dialogState.type === 'vue'" model-value="ts" class="demo-tabs">
         <el-tab-pane label="Typescript" name="ts">
-          <highlightjs
+          <CodeHighLight
             class="vueCode"
-            language="js"
             :code="tsVue(schema)"
           />
         </el-tab-pane>
         <el-tab-pane label="Javascript" name="js">
-          <highlightjs
+          <CodeHighLight
             class="vueCode"
-            language="js"
             :code="jsVue(schema)"
           />
         </el-tab-pane>
@@ -91,7 +89,7 @@
 import { ref, computed, inject,  reactive } from 'vue'
 import { ElMessageBox } from 'element-plus'
 import JsonEditorVue from 'json-editor-vue3'
-import { FormRender } from '@/components'
+import { FormRender ,CodeHighLight} from '@/components'
 import { $schema, $methods, $locale } from '@/config/symbol'
 import { changeItems } from '../utils'
 import {tsVue,jsVue} from './vueEditStr'
@@ -195,7 +193,6 @@ const handleClear = async () => {
 
   .vueCode {
     max-height: 60vh;
-    overflow: auto;
   }
 }
 </style>

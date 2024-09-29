@@ -10,7 +10,7 @@ export default {
       useTemplateBtn:'使用模板'
     },
     actions: {
-      previewJson: '预览JSON脚本',
+      previewJson: '预览JSON Schema',
       previewVueCode: '生成VUE代码',
       previewForm: '预览表单',
       clear: '清空',
