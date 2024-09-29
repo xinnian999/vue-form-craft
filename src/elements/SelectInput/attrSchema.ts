@@ -133,8 +133,6 @@ export default {
       component: 'InputNumber',
       name: 'props.maxlength'
     },
-    
-,
     {
       label: '选择框位置',
       component: 'Radio',

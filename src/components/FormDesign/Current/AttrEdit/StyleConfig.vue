@@ -208,5 +208,6 @@ const schema: FormSchema = {
 <style>
 .vfc-style-config{
   text-align: center;
+  padding-top: 20px;
 }
 </style>

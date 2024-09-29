@@ -75,8 +75,7 @@ const currentProps = computed({
 
 <style scoped lang="less">
 .attrForm {
-  .current-footer {
-    text-align: center;
-  }
+
+  padding-bottom: 20px;
 }
 </style>

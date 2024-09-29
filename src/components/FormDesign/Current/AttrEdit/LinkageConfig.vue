@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="vfc-linkageConfig">
     <el-divider>{{ locale.attr.tab1.linkage.text }}</el-divider>
 
     <div class="current-footer">
@@ -66,9 +66,8 @@ const linkageBtns = [
 </script>
 
 <style scoped lang="less">
-.attrForm {
-  .current-footer {
-    text-align: center;
-  }
+.vfc-linkageConfig{
+  padding-top: 30px;
+  text-align: center;
 }
 </style>

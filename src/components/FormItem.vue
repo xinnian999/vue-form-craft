@@ -54,7 +54,7 @@
           />
         </el-dialog>
 
-        <el-button type="primary" @click="handleDialog">配置</el-button>
+        <el-button type="primary" plain @click="handleDialog">配置</el-button>
       </template>
 
       <component
