@@ -4,6 +4,8 @@
 
 但有时候这些组件并不能完全满足我们的业务需求，此时可以考虑为 `vue-form-craft` 的表单设计器扩展更多可拖拽组件，以满足更多需求且方便下次使用！
 
+**了解以下教程后，你就可以扩展任何自定义的组件，或者任意组件库的组件过来拖拽使用！**
+
 
 ## 如何扩展？
 
@@ -55,13 +57,13 @@ interface FormElement {
 
 ### name 
 
-组件名称，也就是位于设计器左栏上，某个组件的名称
+组件名称
 
 <img src="../assets/name.png" style="height:150px" />
 
 ### icon
 
-组件Icon，也就是位于设计器左栏上，某个组件的icon。
+组件Icon
 
 icon格式为vue的SFC组件
 
@@ -81,11 +83,11 @@ icon格式为vue的SFC组件
 
 ### initialValues
 
-拖拽生成组件时，会在schema中的items里，增添的该字段默认配置。 
+拖拽生成组件时，会向`schema.items`里，增添的该组件默认配置。 
 
-设计器右侧的表单，实际上编辑的也是这个参数！
+设计器右侧，实际上编辑的也是这个参数！
 
-`initialValues.component` 是必传的，这个参数决定了使用哪个组件，所以需要和`FormElement`的键一致，才能正确渲染
+> `initialValues.component` 是必传的，它代表调用哪个`FormElement`！ 所以，这个参数决定了使用哪个组件，所以需要和`FormElement`的键一致，才能正确渲染
 
 ### modelName
 
@@ -95,6 +97,6 @@ icon格式为vue的SFC组件
 
 组件的配置表单的schema.
 
-对应设计器右侧的配置表单，建议用设计器去拖拽生成！
+当选中某个表单项时，在右侧可以编辑该表单项的各种配置，实际上这个右侧也是用`FormRender`渲染的！ 所以，建议用设计器去拖拽生成，然后copy过来！
 
 ![alt text](../assets/attr.png)

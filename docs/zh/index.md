@@ -12,10 +12,10 @@ hero:
   actions:
     - theme: brand
       text: 快速开始
-      link: /doc/introduce
+      link: /zh/introduce
     - theme: alt
       text: 表单设计器
-      link: /form-design
+      link: /zh/form-design
 
 features:
   - title: 最大化减少表单开发成本
