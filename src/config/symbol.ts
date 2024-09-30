@@ -29,7 +29,7 @@ export const $current = Symbol() as InjectionKey<{
 }>
 
 export const $methods = Symbol() as InjectionKey<{
-  onAdd: () => void
+  onAdd: (params: Record<string, any>) => void
   handleDeleteItem: (element: FormItemType) => void
   handleCopyItem: (element: FormItemType) => void
   handleSave: () => void

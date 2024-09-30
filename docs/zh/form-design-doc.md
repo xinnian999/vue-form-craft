@@ -28,3 +28,4 @@ FormDesign 是 vue-form-craft 的可视化表单设计器组件。
 | 事件名 | 类型       | 描述               |
 | ------ | ---------- | ------------------ |
 | save | `()=>void` | 点击保存按钮时触发 |
+| add | `(element:FormElement)=>void` | 拖拽组件到画布上时触发 |

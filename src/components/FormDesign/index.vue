@@ -24,7 +24,7 @@ import Current from './Current/index.vue'
 import Actions from './Actions/index.vue'
 import { getCurrentByKey, setCurrentByKey, changeItems, copyItems } from './utils'
 import { $schema, $current, $methods, $hoverKey, $locale } from '@/config/symbol'
-import type { FormSchema, FormItemType, TemplateData } from '@/config/commonType'
+import type { FormSchema, FormItemType, TemplateData, FormElement } from '@/config/commonType'
 import locales from '@/config/locales'
 
 defineOptions({
@@ -40,6 +40,7 @@ defineProps<{
 const emit = defineEmits<{
   onSave: []
   save: []
+  add: [element: FormElement]
 }>()
 
 const currentKey = ref('')
@@ -89,8 +90,9 @@ provide($schema, {
 provide($current, { current, updateCurrent: (data) => (current.value = data) })
 provide($hoverKey, { hoverKey, updateHoverKey: (key: string) => (hoverKey.value = key) })
 provide($methods, {
-  onAdd: () => {
+  onAdd: (params) => {
     list.value = changeItems(list.value)
+    emit('add', params.item.__draggable_context.element)
   },
   handleDeleteItem: (element) => {
     list.value = recursionDelete(list.value, (item) => item.designKey !== element.designKey)
