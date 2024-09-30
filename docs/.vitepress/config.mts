@@ -84,6 +84,7 @@ export default defineConfig({
                 { text: '类型声明', link: '/zh/interface' },
                 { text: '暗黑模式', link: '/zh/dark' },
                 { text: '国际化', link: '/zh/internationalization' },
+                { text: '二次开发指南', link: '/zh/dev' },
               ]
             }
           ]
