@@ -22,11 +22,17 @@ export default defineConfig({
     },
     plugins: [viteCommonjs() as any]
   },
-  head: [['link', { rel: 'icon', href: '/favicon.svg' }]],
+  head: [['link', { rel: 'icon', href: '/vue-form-craft/favicon.svg' }]],
   markdown: {
     config: (md) => {
       md.use(mdVueDemoPlugin)
     }
+  },
+  themeConfig:{
+    search: {
+      provider: 'local',
+    },
+    socialLinks: [{ icon: 'github', link: 'https://github.com/xinnian999/vue-form-craft' }]
   },
   locales: {
     root: {
@@ -41,9 +47,6 @@ export default defineConfig({
           { text: '文档', link: '/zh/introduce' },
           { text: '表单设计', link: '/zh/form-design' }
         ],
-        search: {
-          provider: 'local'
-        },
     
         sidebar: {
           '/zh/': [
@@ -85,12 +88,12 @@ export default defineConfig({
                 { text: '暗黑模式', link: '/zh/dark' },
                 { text: '国际化', link: '/zh/internationalization' },
                 { text: '二次开发指南', link: '/zh/dev' },
+                { text: '意见&建议&捐赠', link: '/zh/advice' },
               ]
             }
           ]
         },
     
-        socialLinks: [{ icon: 'github', link: 'https://github.com/vuejs/vitepress' }]
       },
     },
     en: {
@@ -150,7 +153,6 @@ export default defineConfig({
           ]
         },
     
-        socialLinks: [{ icon: 'github', link: 'https://github.com/vuejs/vitepress' }]
       },
     },
   }

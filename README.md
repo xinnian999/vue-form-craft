@@ -27,7 +27,7 @@
 
 - vuedraggable
 - element-plus
-- json-editor-vue3
+- vue-form-craft
 - lodash
 
 ## 使用
@@ -122,3 +122,12 @@ const handleSubmit = async () => {
 }
 </script>
 ```
+
+## 捐赠 vue-form-craft 的开发
+
+`vue-form-craft` 的文档和代码完全开源，如果该项目有帮助到你的开发工作，你可以捐赠`vue-form-craft`的研发工作，捐赠无门槛，哪怕是一杯可乐也好。
+
+<div style="display:flex;gap:15px">
+<img src="../assets/wechat.png" style="height:400px" />
+<img src="../assets/zhifubao.png" style="height:400px" />
+</div>
