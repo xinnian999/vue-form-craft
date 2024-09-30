@@ -24,18 +24,20 @@ import Current from './Current/index.vue'
 import Actions from './Actions/index.vue'
 import { getCurrentByKey, setCurrentByKey, changeItems, copyItems } from './utils'
 import { $schema, $current, $methods, $hoverKey, $locale } from '@vue-form-craft/config/symbol'
-import type { FormSchema, FormItemType, TemplateData, FormElement } from '@vue-form-craft/config/commonType'
-import locales from '@vue-form-craft/config/locales'
+import type { FormSchema, FormItemType, TemplateData, FormElement, Locale } from '@vue-form-craft/config/commonType'
+import locales from '@vue-form-craft/config/locales/index'
 
 defineOptions({
   name: 'FormDesign'
 })
 
-defineProps<{
+withDefaults(defineProps<{
   schemaContext?: Record<string, any>
   templates?: TemplateData
   omitMenus?: string[]
-}>()
+}>(),{
+  schemaContext:()=>({})
+}) 
 
 const emit = defineEmits<{
   onSave: []
@@ -75,9 +77,9 @@ const current = computed({
   }
 })
 
-const lang = inject<Ref<'zh' | 'en'>>('vfc-lang', ref('zh'))
+const lang = inject<Ref<'zh' | 'en'>>('vfc-lang')!
 
-const locale = computed(() => locales[lang.value])
+const locale = computed<Locale>(() => locales[lang.value])
 
 provide($locale, locale)
 

@@ -25,14 +25,17 @@ import {
   reactive,
   provide,
   watch,
-  nextTick
+  nextTick,
+  inject,
+  type Ref
 } from 'vue'
 import type { FormInstance } from 'element-plus'
 import { handleLinkages, deepParse, setDataByPath, getDataByPath } from '@vue-form-craft/utils'
 import FormItemRender from './FormItemRender.vue'
 import { cloneDeep, merge } from 'lodash'
-import type { FormSchema } from '@vue-form-craft/config/commonType'
-import { $schema, $formValues, $selectData, $initialValues } from '@vue-form-craft/config/symbol'
+import type { FormSchema, Locale } from '@vue-form-craft/config/commonType'
+import { $schema, $formValues, $selectData, $initialValues} from '@vue-form-craft/config/symbol'
+import locales from '@vue-form-craft/config/locales'
 
 defineOptions({
   name: 'FormRender'
@@ -71,11 +74,16 @@ const formValues = computed({
   }
 })
 
+const lang = inject<Ref<'zh' | 'en'>>('vfc-lang')!
+
+const locale = computed<Locale>(() => locales[lang.value])
+
 const context = computed(() => ({
+  ...props.schemaContext,
   $values: formValues.value,
   $selectData: selectData,
   $initialValues: initialValues,
-  ...props.schemaContext
+  $locale:locale.value
 }))
 
 const formItems = computed(() => deepParse(props.schema.items || [], context.value))

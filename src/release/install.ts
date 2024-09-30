@@ -22,12 +22,10 @@ export default (app: App<Element>, options?: Options) => {
     Object.assign(globalConfig, options)
     Object.assign(globalConfig.elements, options.extendElements)
 
-    if (options.lang) {
-      app.provide('vfc-lang', ref(options.lang))
-    }
   }
 
   app.provide($global, globalConfig)
+  app.provide('vfc-lang', ref(options?.lang || 'zh'))
 
   app.use(hljsVuePlugin)
 

@@ -102,12 +102,9 @@ type PreviewAction = {
   type: string
 }
 
-defineProps({
-  schemaContext: {
-    type: Object,
-    default: () => ({})
-  }
-})
+defineProps<{
+  schemaContext:Record<string,any>
+}>()
 
 const { schema, updateSchema } = inject($schema)!
 

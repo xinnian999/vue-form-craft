@@ -122,6 +122,10 @@ export type Locale = {
       title: string
     }
   }
+  elementTitle: {
+    Input: string
+    Textarea: string
+  }
 }
 
 export type CollapseItem = {
