@@ -30,8 +30,8 @@
 <script setup lang="ts">
 import { inject } from 'vue'
 import draggable from 'vuedraggable-es'
-import { FormRender,IconRender } from '@/components'
-import { $schema, $methods, $locale } from '@/config/symbol'
+import { FormRender,IconRender } from '@vue-form-craft/components'
+import { $schema, $methods, $locale } from '@vue-form-craft/config/symbol'
 import CanvasRender from './CanvasRender.vue'
 
 const { schema } = inject($schema)!

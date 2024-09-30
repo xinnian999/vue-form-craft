@@ -1,7 +1,7 @@
-import { IconRender } from '@/components'
+import { IconRender } from '@vue-form-craft/components'
 import { h } from 'vue'
 import { ElInput } from 'element-plus'
-import type { FormElement } from '@/config/commonType'
+import type { FormElement } from '@vue-form-craft/config/commonType'
 import attrSchema from './attrSchema'
 
 export default {

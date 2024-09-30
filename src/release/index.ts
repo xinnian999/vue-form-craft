@@ -1,4 +1,4 @@
-import { FormDesign, FormRender } from '@/components'
+import { FormDesign, FormRender } from '@vue-form-craft/components'
 import install from './install'
 
 export default { install }
@@ -12,4 +12,4 @@ export type {
   FormSchema,
   TemplateData,
   FormRenderInstance
-} from '@/config/commonType'
+} from '@vue-form-craft/config/commonType'

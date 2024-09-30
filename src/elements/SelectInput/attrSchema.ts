@@ -1,4 +1,4 @@
-import type { FormSchema } from '@/config/commonType'
+import type { FormSchema } from '@vue-form-craft/config/commonType'
 
 export default {
   size: 'small',

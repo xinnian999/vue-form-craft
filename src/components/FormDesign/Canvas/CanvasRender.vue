@@ -26,9 +26,9 @@
 <script setup lang="ts">
 import { inject, computed } from 'vue'
 import { omit } from 'lodash'
-import { FormItem, IconRender } from '@/components'
-import { $current, $methods, $hoverKey } from '@/config/symbol'
-import type { FormItemType } from '@/release'
+import { FormItem, IconRender } from '@vue-form-craft/components'
+import { $current, $methods, $hoverKey } from '@vue-form-craft/config/symbol'
+import type { FormItemType } from '@vue-form-craft/release'
 
 const props = defineProps<{ data: FormItemType }>()
 

@@ -1,5 +1,5 @@
-import { IconRender } from '@/components'
-import type { FormElement } from '@/config/commonType'
+import { IconRender } from '@vue-form-craft/components'
+import type { FormElement } from '@vue-form-craft/config/commonType'
 import { h } from 'vue'
 import Radio from './Radio.vue'
 import attrSchema from './attrSchema'

@@ -28,9 +28,9 @@
 import {  inject } from 'vue'
 import Draggable from 'vuedraggable-es'
 import CanvasRender from './CanvasRender.vue'
-import { $locale, $methods } from '@/config/symbol'
-import { IconRender } from '@/components'
-import type { FormItemType } from '@/release'
+import { $locale, $methods } from '@vue-form-craft/config/symbol'
+import { IconRender } from '@vue-form-craft/components'
+import type { FormItemType } from '@vue-form-craft/release'
 
 defineProps<{
   children: FormItemType[],

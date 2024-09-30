@@ -6,8 +6,8 @@
 
 <script setup>
 import { computed, inject } from 'vue'
-import { FormRender } from '@/components'
-import { $schema } from '@/config/symbol'
+import { FormRender } from '@vue-form-craft/components'
+import { $schema } from '@vue-form-craft/config/symbol'
 import formOptions from './formOptions'
 
 const { schema, updateSchema } = inject($schema)

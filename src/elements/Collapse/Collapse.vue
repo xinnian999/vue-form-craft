@@ -12,9 +12,9 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { FormItemRender, CanvasWrapper } from '@/components'
+import { FormItemRender, CanvasWrapper } from '@vue-form-craft/components'
 import Title from '../Title/Title.vue'
-import type { CollapseItem } from '@/config/commonType';
+import type { CollapseItem } from '@vue-form-craft/config/commonType';
 
 const thisProps = defineProps<{
   props:Record<string,any>

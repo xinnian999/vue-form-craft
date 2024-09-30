@@ -1,6 +1,6 @@
-import type { FormElement } from '@/release'
+import type { FormElement } from '@vue-form-craft/release'
 import Grid from './Grid.vue'
-import { IconRender } from '@/components'
+import { IconRender } from '@vue-form-craft/components'
 import { h } from 'vue'
 
 export default {

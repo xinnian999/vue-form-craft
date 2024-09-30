@@ -12,7 +12,7 @@
 <script setup lang="ts">
 import AttrEdit from './AttrEdit/index.vue'
 import FormEdit from './FormEdit.vue'
-import { $current, $locale } from '@/config/symbol'
+import { $current, $locale } from '@vue-form-craft/config/symbol'
 import { inject } from 'vue'
 
 const locale = inject($locale)!

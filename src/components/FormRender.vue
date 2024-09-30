@@ -28,11 +28,11 @@ import {
   nextTick
 } from 'vue'
 import type { FormInstance } from 'element-plus'
-import { handleLinkages, deepParse, setDataByPath, getDataByPath } from '@/utils'
+import { handleLinkages, deepParse, setDataByPath, getDataByPath } from '@vue-form-craft/utils'
 import FormItemRender from './FormItemRender.vue'
 import { cloneDeep, merge } from 'lodash'
-import type { FormSchema } from '@/config/commonType'
-import { $schema, $formValues, $selectData, $initialValues } from '@/config/symbol'
+import type { FormSchema } from '@vue-form-craft/config/commonType'
+import { $schema, $formValues, $selectData, $initialValues } from '@vue-form-craft/config/symbol'
 
 defineOptions({
   name: 'FormRender'

@@ -1,7 +1,7 @@
-import { IconRender } from '@/components'
+import { IconRender } from '@vue-form-craft/components'
 import attrSchema from './attrSchema'
 import { h } from 'vue'
-import type { FormElement } from '@/config/commonType'
+import type { FormElement } from '@vue-form-craft/config/commonType'
 
 export default {
   name: '开关',

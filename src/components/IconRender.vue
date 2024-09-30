@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-const modules = import.meta.glob('@/assets/icons/*.vue', { eager: true })
+const modules = import.meta.glob('@vue-form-craft/assets/icons/*.vue', { eager: true })
 
 const icons = Object.entries(modules).reduce((acc, [key, value]) => {
   const fileName = key.split('/').pop()

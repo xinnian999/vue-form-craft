@@ -1,8 +1,8 @@
-import type { FormElement } from '@/config/commonType'
+import type { FormElement } from '@vue-form-craft/config/commonType'
 import Select from './Select.vue'
 import attrSchema from './attrSchema'
 import { h } from 'vue'
-import { IconRender } from '@/components'
+import { IconRender } from '@vue-form-craft/components'
 
 export default {
   name: '下拉选择框',

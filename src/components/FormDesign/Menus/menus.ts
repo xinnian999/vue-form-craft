@@ -1,5 +1,5 @@
-import type { Locale } from '@/config/commonType'
-import type { FormElement } from '@/release'
+import type { Locale } from '@vue-form-craft/config/commonType'
+import type { FormElement } from '@vue-form-craft/release'
 import type { Ref } from 'vue'
 
 export default (elements: Record<string, FormElement>, locale:Ref<Locale> ) => {

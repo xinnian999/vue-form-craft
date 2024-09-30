@@ -1,5 +1,5 @@
-import type { FormSchema, FormItemType } from '@/release'
-import elements from '@/elements'
+import type { FormSchema, FormItemType } from '@vue-form-craft/release'
+import elements from '@vue-form-craft/elements'
 
 type option = {
   label?: string

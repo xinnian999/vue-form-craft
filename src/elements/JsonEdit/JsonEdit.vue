@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 import JsonEditorVue from 'json-editor-vue3'
-import { Disabled } from '@/components'
+import { Disabled } from '@vue-form-craft/components'
 
 defineOptions({
   inheritAttrs: false

@@ -13,8 +13,8 @@
 
 <script setup lang="ts">
 import { type CascaderValue } from 'element-plus'
-import useSelect from '@/hooks/useSelect'
-import type { SelectProps } from '@/config/commonType'
+import useSelect from '@vue-form-craft/hooks/useSelect'
+import type { SelectProps } from '@vue-form-craft/config/commonType'
 
 const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],

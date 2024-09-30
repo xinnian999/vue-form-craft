@@ -31,11 +31,11 @@
 
 <script setup lang="ts">
 import { inject, ref } from 'vue'
-import { $locale, $schema } from '@/config/symbol'
-import { FormRender } from '@/components'
+import { $locale, $schema } from '@vue-form-craft/config/symbol'
+import { FormRender } from '@vue-form-craft/components'
 import JsonEditorVue from 'json-editor-vue3'
 import linkageSchema from '../linkageSchema'
-import type { FormItemType } from '@/release'
+import type { FormItemType } from '@vue-form-craft/release'
 
 const model = defineModel<FormItemType>()
 

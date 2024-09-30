@@ -1,8 +1,8 @@
-import { IconRender } from '@/components'
+import { IconRender } from '@vue-form-craft/components'
 import attrSchema from './attrSchema'
 import Checkbox from './Checkbox.vue'
 import { h } from 'vue'
-import type { FormElement } from '@/release'
+import type { FormElement } from '@vue-form-craft/release'
 
 export default {
   name: '多选框组',

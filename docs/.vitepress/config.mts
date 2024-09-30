@@ -13,7 +13,7 @@ export default defineConfig({
   vite: {
     resolve: {
       alias: {
-        '@': fileURLToPath(new URL('../../src/', import.meta.url)),
+        '@vue-form-craft': fileURLToPath(new URL('../../src/', import.meta.url)),
         'vue-form-craft': fileURLToPath(new URL('../../src/release', import.meta.url))
       }
     },

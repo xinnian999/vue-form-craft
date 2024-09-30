@@ -1,8 +1,8 @@
 import { h } from 'vue'
-import IconRender from '@/components/IconRender.vue'
+import IconRender from '@vue-form-craft/components/IconRender.vue'
 import Cascader from './Cascader.vue'
 import attrSchema from './attrSchema'
-import type { FormElement } from '@/release'
+import type { FormElement } from '@vue-form-craft/release'
 
 export default {
   name: '级联选择器',

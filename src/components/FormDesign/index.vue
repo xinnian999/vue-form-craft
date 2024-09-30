@@ -17,15 +17,15 @@
 
 <script setup lang="ts">
 import { ref, provide, computed, inject, type Ref } from 'vue'
-import { recursionDelete } from '@/utils'
+import { recursionDelete } from '@vue-form-craft/utils'
 import Menus from './Menus/index.vue'
 import Canvas from './Canvas/index.vue'
 import Current from './Current/index.vue'
 import Actions from './Actions/index.vue'
 import { getCurrentByKey, setCurrentByKey, changeItems, copyItems } from './utils'
-import { $schema, $current, $methods, $hoverKey, $locale } from '@/config/symbol'
-import type { FormSchema, FormItemType, TemplateData, FormElement } from '@/config/commonType'
-import locales from '@/config/locales'
+import { $schema, $current, $methods, $hoverKey, $locale } from '@vue-form-craft/config/symbol'
+import type { FormSchema, FormItemType, TemplateData, FormElement } from '@vue-form-craft/config/commonType'
+import locales from '@vue-form-craft/config/locales'
 
 defineOptions({
   name: 'FormDesign'

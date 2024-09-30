@@ -1,8 +1,8 @@
 import { ref, watch, onMounted, inject } from 'vue'
 import { isEqual, isPlainObject, debounce } from 'lodash'
-import { getDataByPath } from '@/utils'
-import { $selectData, $global } from '@/config/symbol'
-import type { SelectProps } from '@/config/commonType'
+import { getDataByPath } from '@vue-form-craft/utils'
+import { $selectData, $global } from '@vue-form-craft/config/symbol'
+import type { SelectProps } from '@vue-form-craft/config/commonType'
 
 type Option = Record<string, any>
 

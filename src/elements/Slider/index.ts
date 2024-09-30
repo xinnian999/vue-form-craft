@@ -1,5 +1,5 @@
-import { IconRender } from '@/components'
-import type { FormElement } from '@/release'
+import { IconRender } from '@vue-form-craft/components'
+import type { FormElement } from '@vue-form-craft/release'
 import { h } from 'vue'
 
 export default {

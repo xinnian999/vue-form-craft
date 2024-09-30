@@ -1,5 +1,5 @@
-import optionConfig from "@/config/optionConfig";
-import type { FormSchema } from "@/release";
+import optionConfig from "@vue-form-craft/config/optionConfig";
+import type { FormSchema } from "@vue-form-craft/release";
 
 export default {
   size: 'small',

@@ -6,8 +6,8 @@
 </template>
 
 <script setup lang="ts">
-import { FormItemRender, CanvasWrapper } from '@/components'
-import type { FormItemType } from '@/config/commonType';
+import { FormItemRender, CanvasWrapper } from '@vue-form-craft/components'
+import type { FormItemType } from '@vue-form-craft/config/commonType';
 
 defineProps<{
   props:Record<string,any>

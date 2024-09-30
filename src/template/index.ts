@@ -9,7 +9,7 @@ import linkage5 from './linkage5'
 import formList from './formList'
 import MostTest from './300Test'
 import nest from './nest'
-import type { TemplateData } from '@/config/commonType'
+import type { TemplateData } from '@vue-form-craft/config/commonType'
 
 export default [
   { name: '登陆账号', schema: login, id: 'login' },

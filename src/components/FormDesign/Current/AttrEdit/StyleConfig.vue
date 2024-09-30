@@ -12,8 +12,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { FormSchema } from '@/release'
-import FormRender from '@/components/FormRender.vue'
+import type { FormSchema } from '@vue-form-craft/release'
+import FormRender from '@vue-form-craft/components/FormRender.vue'
 
 const currentProps = defineModel<Record<string, any>>()
 

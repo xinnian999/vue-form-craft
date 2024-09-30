@@ -26,8 +26,8 @@
 
 <script setup lang="ts">
 import { type CheckboxGroupValueType } from 'element-plus'
-import useSelect from '@/hooks/useSelect'
-import type { Direction, OptionType, SelectProps } from '@/config/commonType'
+import useSelect from '@vue-form-craft/hooks/useSelect'
+import type { Direction, OptionType, SelectProps } from '@vue-form-craft/config/commonType'
 
 type Props = Omit<SelectProps, 'multiple'> & {
   optionType?: OptionType

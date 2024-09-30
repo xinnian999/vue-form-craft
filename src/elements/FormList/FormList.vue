@@ -100,9 +100,9 @@
 
 <script setup lang="ts">
 import { computed, h, watch } from 'vue'
-import { FormItem, DefaultCanvasWrapper, IconRender } from '@/components'
-import { deepParse } from '@/utils'
-import type { FormItemType } from '@/release'
+import { FormItem, DefaultCanvasWrapper, IconRender } from '@vue-form-craft/components'
+import { deepParse } from '@vue-form-craft/utils'
+import type { FormItemType } from '@vue-form-craft/release'
 import { isEqual, isString } from 'lodash'
 
 interface Props {

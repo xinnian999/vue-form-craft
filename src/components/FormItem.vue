@@ -72,10 +72,10 @@
 
 <script setup lang="ts">
 import { computed,  inject, onMounted, reactive } from 'vue'
-import { isRegexString, getDataByPath, setDataByPath } from '@/utils'
-import { $global, $schema, $formValues, $initialValues } from '@/config/symbol'
-import type { FormItemType } from '@/config/commonType'
-import { IconRender } from '@/components'
+import { isRegexString, getDataByPath, setDataByPath } from '@vue-form-craft/utils'
+import { $global, $schema, $formValues, $initialValues } from '@vue-form-craft/config/symbol'
+import type { FormItemType } from '@vue-form-craft/config/commonType'
+import { IconRender } from '@vue-form-craft/components'
 
 const thisProps = defineProps<FormItemType>()
 

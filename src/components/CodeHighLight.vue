@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { IconRender } from '@/components'
+import { IconRender } from '@vue-form-craft/components'
 import { ElMessage } from 'element-plus'
 
 const props = withDefaults(

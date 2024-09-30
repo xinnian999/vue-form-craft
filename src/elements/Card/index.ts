@@ -1,7 +1,7 @@
 import { h } from 'vue'
-import IconRender from '@/components/IconRender.vue'
+import IconRender from '@vue-form-craft/components/IconRender.vue'
 import Card from './Card.vue'
-import type { FormElement } from '@/config/commonType'
+import type { FormElement } from '@vue-form-craft/config/commonType'
 
 export default {
   name: '卡片',

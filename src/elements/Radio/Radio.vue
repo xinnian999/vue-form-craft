@@ -28,8 +28,8 @@
 </template>
 
 <script setup lang="ts">
-import type { Direction, OptionType, SelectProps, SelectValue } from '@/config/commonType'
-import useSelect from '@/hooks/useSelect'
+import type { Direction, OptionType, SelectProps, SelectValue } from '@vue-form-craft/config/commonType'
+import useSelect from '@vue-form-craft/hooks/useSelect'
 
 type Props = Omit<SelectProps, 'multiple'> & {
   optionType?: OptionType

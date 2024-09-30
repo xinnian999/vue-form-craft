@@ -16,8 +16,8 @@
 
 <script setup lang="ts">
 import {  computed } from 'vue'
-import { FormItemRender, DefaultCanvasWrapper } from '@/components'
-import type { FormItemType } from '@/release';
+import { FormItemRender, DefaultCanvasWrapper } from '@vue-form-craft/components'
+import type { FormItemType } from '@vue-form-craft/release';
 
 const thisProps = defineProps<{
   props:Record<string,any>

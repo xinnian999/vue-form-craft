@@ -21,8 +21,8 @@
 </template>
 
 <script setup lang="ts">
-import useSelect from '@/hooks/useSelect'
-import type { SelectProps, SelectValue } from '@/config/commonType'
+import useSelect from '@vue-form-craft/hooks/useSelect'
+import type { SelectProps, SelectValue } from '@vue-form-craft/config/commonType'
 import { watchEffect } from 'vue';
 
 const props = withDefaults(defineProps<SelectProps>(), {

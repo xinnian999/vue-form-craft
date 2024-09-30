@@ -1,6 +1,6 @@
 import { h } from 'vue'
-import IconRender from '@/components/IconRender.vue'
-import type { FormElement } from '@/release'
+import IconRender from '@vue-form-craft/components/IconRender.vue'
+import type { FormElement } from '@vue-form-craft/release'
 import attrSchema from './attrSchema'
 
 export default {

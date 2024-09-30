@@ -1,11 +1,11 @@
-import { FormDesign, FormRender } from '@/components'
-import type { $Global } from '@/config/commonType'
-import { $global } from '@/config/symbol'
+import { FormDesign, FormRender } from '@vue-form-craft/components'
+import type { $Global } from '@vue-form-craft/config/commonType'
+import { $global } from '@vue-form-craft/config/symbol'
 import hljsVuePlugin from '@highlightjs/vue-plugin'
 import 'highlight.js/lib/common'
 import 'highlight.js/styles/panda-syntax-dark.css'
 import { ref, type App } from 'vue'
-import elements from '@/elements'
+import elements from '@vue-form-craft/elements'
 
 type Options = {
   request?: $Global['request']

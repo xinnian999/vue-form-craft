@@ -89,12 +89,12 @@
 import { ref, computed, inject,  reactive } from 'vue'
 import { ElMessageBox } from 'element-plus'
 import JsonEditorVue from 'json-editor-vue3'
-import { FormRender ,CodeHighLight} from '@/components'
-import { $schema, $methods, $locale } from '@/config/symbol'
+import { FormRender ,CodeHighLight} from '@vue-form-craft/components'
+import { $schema, $methods, $locale } from '@vue-form-craft/config/symbol'
 import { changeItems } from '../utils'
 import {tsVue,jsVue} from './vueEditStr'
 import helpStr from './helpStr'
-import type { FormRenderInstance } from '@/release'
+import type { FormRenderInstance } from '@vue-form-craft/release'
 
 type PreviewAction = {
   label: string

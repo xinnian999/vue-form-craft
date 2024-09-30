@@ -1,4 +1,4 @@
-import type FormRender from '@/components/FormRender.vue'
+import type FormRender from '@vue-form-craft/components/FormRender.vue'
 import type { Component, VNode } from 'vue'
 
 export type FormRule = {
