@@ -19,7 +19,17 @@ export default {
       name: 'props.placeholder',
       designKey: 'form-ekRL'
     },
-    { label: '初始值', component: 'Input', name: 'initialValue' },
+    {
+      label: '初始值',
+      component: 'Select',
+      name: 'initialValue',
+      hidden: '{{ $values.props.mode==="remote" }}',
+      props: {
+        mode: 'static',
+        options: '{{$values.props.options}}',
+        multiple: '{{$values.props.multiple}}',
+      }
+    },
     {
       component: 'Grid',
       children: [
@@ -49,8 +59,6 @@ export default {
       },
       designKey: 'form-eTxc'
     },
-
-    
 
     ...optionConfig
   ]
