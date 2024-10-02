@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject } from 'vue'
+import { computed, inject, type Ref } from 'vue'
 import { $global } from '@vue-form-craft/config/symbol'
 import { FormRender } from '@vue-form-craft/components'
 import { getDataByPath, setDataByPath } from '@vue-form-craft/utils'
@@ -20,23 +20,26 @@ import StyleConfig from './StyleConfig.vue'
 
 const { elements } = inject($global)!
 
+const lang = inject<Ref<'zh' | 'en'>>('vfc-lang')!
+
 const current = defineModel<FormItemType>({ required: true })
 
-const attrSchema = computed(() => {
+const attrSchema = computed<FormSchema>(() => {
   const config = elements[current.value.component]
 
   if (config?.attrSchema) {
-    const parseItems = (nodes: FormItemType[]) => {
+    const parseItems = (nodes: FormItemType[] = []): FormItemType[] => {
       return nodes.map((item) => {
         const value = getDataByPath(current.value!, item.name)
-        if (isString(value) && /^{{\s*(.*?)\s*}}$/.test(value)) {
-          // 将联动组件改用弹窗展示
-          return { ...item, component: 'Input', dialog: true }
+        const isTemplate = isString(value) && /^{{\s*(.*?)\s*}}$/.test(value)
+
+        return {
+          ...item,
+          label: lang.value === 'zh' ? item.label : item.name.split('.').pop(), //国际化翻译
+          component: isTemplate ? 'Input' : item.component, // 将联动组件改用弹窗展示
+          dialog: isTemplate, // 将联动组件改用弹窗展示,
+          children: parseItems(item.children)
         }
-        if (item.children) {
-          item.children = parseItems(item.children)
-        }
-        return item
       })
     }
 

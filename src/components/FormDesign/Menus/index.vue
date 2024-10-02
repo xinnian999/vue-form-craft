@@ -34,7 +34,9 @@
             <div class="ico">
               <component class="ico-content" :is="element.icon" />
             </div>
-            <div class="name">{{ element.name }}</div>
+            <div class="name" :style="{ fontSize: lang === 'zh' ? '12px' : '10px' }">
+              {{ element.name }}
+            </div>
           </li>
         </template>
       </draggable>
@@ -44,7 +46,7 @@
 
 <script setup lang="ts">
 import draggable from 'vuedraggable-es'
-import { computed, inject } from 'vue'
+import { computed, inject, type Ref } from 'vue'
 import { $global, $locale, $schema } from '@vue-form-craft/config/symbol'
 import { ref } from 'vue'
 import parseMenus from './menus'
@@ -67,7 +69,9 @@ const { elements } = inject($global)!
 
 const locale = inject($locale)!
 
-const menus = computed(() => parseMenus({ elements, locale:locale.value, omits: props.omitMenus }))
+const lang = inject<Ref<'zh' | 'en'>>('vfc-lang')!
+
+const menus = computed(() => parseMenus({ elements, omits: props.omitMenus, lang: lang.value }))
 
 const useTemplate = (templateSchema: FormSchema) => {
   updateSchema(templateSchema)

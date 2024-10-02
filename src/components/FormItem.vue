@@ -71,7 +71,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed,  inject, onMounted, reactive } from 'vue'
+import { computed,  inject, onMounted, reactive, type Ref } from 'vue'
 import { isRegexString, getDataByPath, setDataByPath } from '@vue-form-craft/utils'
 import { $global, $schema, $formValues, $initialValues } from '@vue-form-craft/config/symbol'
 import type { FormItemType } from '@vue-form-craft/config/commonType'
@@ -83,9 +83,12 @@ const { elements } = inject($global)!
 
 const { schema } = inject($schema)!
 
+// const lang = inject<Ref<'zh' | 'en'>>('vfc-lang')!
+
 const { formValues, updateFormValues } = inject($formValues)!
 
 const { initialValues, updateInitialValues } = inject($initialValues)!
+
 
 const dialogState = reactive({
   visible: false,
@@ -96,6 +99,8 @@ const handleDialog = () => {
   dialogState.visible = true
   dialogState.title = thisProps.label!
 }
+
+// const label=computed(()=>lang.value==='zh'?thisProps.label:thisProps.name)
 
 const value = computed({
   get() {
@@ -171,6 +176,7 @@ const formItemProps = computed(() => {
 
   return initProps
 })
+
 
 onMounted(() => {
   if (!value.value && thisProps.initialValue !== undefined) {

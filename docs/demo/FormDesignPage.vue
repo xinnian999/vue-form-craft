@@ -5,6 +5,7 @@
     style="height: calc(100vh - 65px)"
     @save="onSave"
     @add="onAdd"
+    :omitMenus="['Select']"
   />
 </template>
 

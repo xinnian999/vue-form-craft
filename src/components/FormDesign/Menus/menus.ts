@@ -1,21 +1,28 @@
-import type { Locale } from '@vue-form-craft/config/commonType'
+import locales from '@vue-form-craft/config/locales'
 import type { FormElement } from '@vue-form-craft/release'
 
 type Params = {
   elements: Record<string, FormElement>
-  locale: Locale
+  lang: 'zh' | 'en'
   omits: string[]
 }
 
-export default ({ elements, locale, omits }: Params) => {
+export default ({ elements, lang, omits }: Params) => {
   const getChildren = (type: string) => {
     return Object.values(elements)
-      .filter((item) => item?.type === type)
-      .filter((item) => !omits.includes(item.initialValues.component))
+      .filter((item) => item.type === type && !omits.includes(item.initialValues.component))
       .sort((a, b) => {
         return a.order - b.order
       })
+      .map((item) => {
+        return {
+          ...item,
+          name: lang === 'zh' ? item.name : item.initialValues.component
+        }
+      })
   }
+
+  const locale = locales[lang]
 
   const menus = [
     {
