@@ -37,6 +37,7 @@ export interface FormItemType {
 export type FormSchema = {
   labelWidth?: number
   labelAlign?: 'top' | 'left' | 'right'
+  labelSuffix?: string
   size?: 'default' | 'small' | 'large'
   disabled?: boolean
   hideRequiredAsterisk?: boolean
@@ -78,6 +79,7 @@ export interface SelectProps {
   disabledKey?: string
   api?: SchemaApi
   name?: string
+  read?:boolean
 }
 
 export type SelectValue = string | number | boolean

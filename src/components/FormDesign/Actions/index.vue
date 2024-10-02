@@ -48,16 +48,10 @@
 
       <el-tabs v-if="dialogState.type === 'vue'" model-value="ts" class="demo-tabs">
         <el-tab-pane label="Typescript" name="ts">
-          <CodeHighLight
-            class="vueCode"
-            :code="tsVue(schema)"
-          />
+          <CodeHighLight class="vueCode" :code="tsVue(schema)" />
         </el-tab-pane>
         <el-tab-pane label="Javascript" name="js">
-          <CodeHighLight
-            class="vueCode"
-            :code="jsVue(schema)"
-          />
+          <CodeHighLight class="vueCode" :code="jsVue(schema)" />
         </el-tab-pane>
       </el-tabs>
 
@@ -67,32 +61,29 @@
         :schema="schema"
         ref="formRef"
         :schemaContext="schemaContext"
-        :style="{ minHeight: '200px' }"
+        :style="{ minHeight: '200px', padding: '20px' }"
+        :read="read"
       />
 
       <template #footer v-if="dialogState.type === 'form'">
-        <el-button @click="handleSubmit" type="primary">模拟提交</el-button>
-        <el-button @click="formRef?.resetFields([])" type="primary">重置</el-button>
-        <!-- <JsonEdit
-          v-model="formContext"
-          height="400px"
-          title="联动变量"
-          description="实时预览表单的联动变量，调试联动"
-          mode="dialog"
-        /> -->
+        <el-button v-if="!read" @click="handleSubmit" type="primary">模拟提交</el-button>
+        <el-button v-if="!read" @click="handleReset" type="primary" plain>重置</el-button>
+        <el-button @click="handleRead" type="primary" :plain="read">{{
+          read ? '编辑模式' : '阅读模式'
+        }}</el-button>
       </template>
     </el-dialog>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, inject,  reactive } from 'vue'
+import { ref, computed, inject, reactive } from 'vue'
 import { ElMessageBox } from 'element-plus'
 import JsonEditorVue from 'json-editor-vue3'
-import { FormRender ,CodeHighLight} from '@vue-form-craft/components'
+import { FormRender, CodeHighLight } from '@vue-form-craft/components'
 import { $schema, $methods, $locale } from '@vue-form-craft/config/symbol'
 import { changeItems } from '../utils'
-import {tsVue,jsVue} from './vueEditStr'
+import { tsVue, jsVue } from './vueEditStr'
 import helpStr from './helpStr'
 import type { FormRenderInstance } from '@vue-form-craft/release'
 
@@ -103,7 +94,7 @@ type PreviewAction = {
 }
 
 defineProps<{
-  schemaContext:Record<string,any>
+  schemaContext: Record<string, any>
 }>()
 
 const { schema, updateSchema } = inject($schema)!
@@ -135,7 +126,7 @@ const json = computed({
     return schema.value
   },
   set(value) {
-    if(value.items){
+    if (value.items) {
       updateSchema(value)
     }
   }
@@ -144,6 +135,8 @@ const json = computed({
 const formRef = ref<FormRenderInstance>()
 
 const formValues = ref({})
+
+const read = ref(false)
 
 const dialogState = reactive({
   visible: false,
@@ -155,6 +148,11 @@ const handlePreview = (type: string, label: string) => {
   dialogState.visible = true
   dialogState.type = type
   dialogState.title = label
+  read.value = false
+  updateSchema({
+    ...schema.value,
+    labelSuffix: ''
+  })
 }
 
 const onBlur = (editor: any) => {
@@ -171,6 +169,26 @@ const handleSubmit = async () => {
 const handleClear = async () => {
   await ElMessageBox.confirm('确认清空当前设计吗？')
   schema.value = { ...schema.value, items: [] }
+}
+
+const handleReset = async () => {
+  formRef.value?.resetFields([])
+}
+
+const handleRead = () => {
+  read.value = !read.value
+
+  if (read.value) {
+    updateSchema({
+      ...schema.value,
+      labelSuffix: ':'
+    })
+  } else {
+    updateSchema({
+      ...schema.value,
+      labelSuffix: ''
+    })
+  }
 }
 </script>
 

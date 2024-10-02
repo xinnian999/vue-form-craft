@@ -37,7 +37,7 @@ const attrSchema = computed<FormSchema>(() => {
           ...item,
           label: lang.value === 'zh' ? item.label : item.name.split('.').pop(), //国际化翻译
           component: isTemplate ? 'Input' : item.component, // 将联动组件改用弹窗展示
-          dialog: isTemplate, // 将联动组件改用弹窗展示,
+          dialog: isTemplate||item.dialog, // 将联动组件改用弹窗展示,
           children: parseItems(item.children)
         }
       })

@@ -10,10 +10,6 @@
       />
     </div>
 
-    <!-- <div v-else-if="config.type === 'assist'" :style="itemStyle">
-      <component :is="config.component" v-bind="props" />
-    </div> -->
-
     <el-form-item
       v-else
       id="form-item"
@@ -31,6 +27,9 @@
             <el-tooltip class="box-item" effect="dark" :content="help">
               <div><icon-render name="help" /></div>
             </el-tooltip>
+          </div>
+          <div class="suffix" v-if="schema.labelSuffix">
+            {{ schema.labelSuffix }}
           </div>
         </div>
       </template>
@@ -51,6 +50,7 @@
             v-bind="formItemProps"
             v-model:[config.modelName!]="value"
             :design="design"
+            :read="read"
           />
         </el-dialog>
 
@@ -65,13 +65,14 @@
         v-bind="formItemProps"
         v-model:[config.modelName!]="value"
         :design="design"
+        :read="read"
       />
     </el-form-item>
   </template>
 </template>
 
 <script setup lang="ts">
-import { computed,  inject, onMounted, reactive, type Ref } from 'vue'
+import { computed, inject, onMounted, reactive, type Ref } from 'vue'
 import { isRegexString, getDataByPath, setDataByPath } from '@vue-form-craft/utils'
 import { $global, $schema, $formValues, $initialValues } from '@vue-form-craft/config/symbol'
 import type { FormItemType } from '@vue-form-craft/config/commonType'
@@ -83,12 +84,11 @@ const { elements } = inject($global)!
 
 const { schema } = inject($schema)!
 
-// const lang = inject<Ref<'zh' | 'en'>>('vfc-lang')!
+const read = inject('vfc-read')!
 
 const { formValues, updateFormValues } = inject($formValues)!
 
 const { initialValues, updateInitialValues } = inject($initialValues)!
-
 
 const dialogState = reactive({
   visible: false,
@@ -99,8 +99,6 @@ const handleDialog = () => {
   dialogState.visible = true
   dialogState.title = thisProps.label!
 }
-
-// const label=computed(()=>lang.value==='zh'?thisProps.label:thisProps.name)
 
 const value = computed({
   get() {
@@ -177,7 +175,6 @@ const formItemProps = computed(() => {
   return initProps
 })
 
-
 onMounted(() => {
   if (!value.value && thisProps.initialValue !== undefined) {
     const newInitialValues = setDataByPath(initialValues, thisProps.name, thisProps.initialValue)
@@ -191,6 +188,7 @@ onMounted(() => {
   .form-item-label {
     display: flex;
     position: relative;
+    white-space: nowrap;
     .ico {
       margin-left: 3px;
       font-size: 15px;
@@ -201,6 +199,9 @@ onMounted(() => {
         flex-direction: column;
         justify-content: center;
       }
+    }
+    .suffix{
+      margin-left: 3px;
     }
   }
 }

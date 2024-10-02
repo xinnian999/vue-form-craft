@@ -36,7 +36,6 @@ export default [
         name: 'props.options',
         component: 'FormList',
         hidden: '{{$values.props.mode!=="static"}}',
-        dialog:true,
         children: [
           {
             label: '选项名',

@@ -48,6 +48,7 @@ const props = defineProps<
     schemaContext?: Record<string, any>
     design?: boolean
     footer?: boolean
+    read?:boolean
   }>
 >()
 
@@ -148,6 +149,8 @@ provide($initialValues, {
     Object.assign(initialValues, values)
   }
 })
+
+provide('vfc-read', computed(()=>props.read))
 
 defineExpose({ validate, context, resetFields })
 </script>

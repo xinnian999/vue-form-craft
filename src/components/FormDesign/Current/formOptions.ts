@@ -30,6 +30,11 @@ export default {
       initialValue: 'right'
     },
     {
+      label: 'label后缀',
+      component: 'Input',
+      name: 'labelSuffix'
+    },
+    {
       label: '表单组件尺寸',
       component: 'Radio',
       name: 'size',
