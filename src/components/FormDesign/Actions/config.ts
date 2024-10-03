@@ -95,3 +95,17 @@ export const schemaHelp = `// JSON Schema 配置说明
     }
   ]
 }`
+
+export const tsJsonSchema = (schema: FormSchema) => {
+  const str = JSON.stringify(schema, null, 2)
+  
+  return `import type { FormSchema } from "vue-form-craft";
+
+export default ${str} satisfies FormSchema`
+}
+
+export const jsJsonSchema = (schema: FormSchema) => {
+  const str = JSON.stringify(schema, null, 2)
+  
+  return `export default ${str}`
+}

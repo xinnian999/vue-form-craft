@@ -8,8 +8,8 @@
     top="10vh"
     @close="formValues = {}"
   >
-    <el-tabs model-value="json" class="demo-tabs">
-      <el-tab-pane label="JsonSchema" name="json">
+    <el-tabs model-value="edit" class="demo-tabs">
+      <el-tab-pane label="在线编辑" name="edit">
         <json-editor-vue
           class="editor"
           v-model="json"
@@ -19,6 +19,12 @@
           language="zh"
           @blur="onBlur"
         />
+      </el-tab-pane>
+      <el-tab-pane label="生成ts文件" name="ts">
+        <CodeHighLight style="height: 70vh;" language="ts" :code="tsJsonSchema(schema)" />
+      </el-tab-pane>
+      <el-tab-pane label="生成js文件" name="js">
+        <CodeHighLight style="height: 70vh;" language="js" :code="jsJsonSchema(schema)" />
       </el-tab-pane>
       <el-tab-pane label="帮助" name="help">
         <CodeHighLight style="height: 70vh;" language="json" :code="schemaHelp" />
@@ -33,7 +39,7 @@ import JsonEditorVue from 'json-editor-vue3'
 import { $locale, $schema } from '@vue-form-craft/config/symbol'
 import { CodeHighLight } from '@vue-form-craft/components'
 import { changeItems } from '../utils'
-import { schemaHelp } from './config'
+import { schemaHelp ,tsJsonSchema,jsJsonSchema} from './config'
 
 const { schema, updateSchema } = inject($schema)!
 
