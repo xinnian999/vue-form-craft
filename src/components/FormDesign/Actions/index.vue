@@ -1,213 +1,114 @@
 <template>
-  <div class="formDesign-actions">
-    <div class="formDesign-actions-left">
+  <div class="vfc-formDesign-actions">
+    <div class="vfc-formDesign-actions-left">
       <el-button
-        v-for="{ label, type, btnType } in previewActions"
-        :key="type"
+        v-for="{ label, btnType, onClick } in leftActions"
+        :key="label"
         :type="btnType"
         size="small"
-        @click="handlePreview(type, label)"
+        @click="onClick"
         >{{ label }}</el-button
       >
     </div>
 
-    <div class="formDesign-actions-right">
-      <el-button size="small" type="danger" @click="handleClear">{{
-        locale.actions.clear
-      }}</el-button>
-      <el-button size="small" @click="handleSave" type="primary">{{
-        locale.actions.save
-      }}</el-button>
+    <div class="vfc-formDesign-actions-right">
+      <el-button
+        v-for="{ label, btnType, onClick } in rightActions"
+        :key="label"
+        :type="btnType"
+        size="small"
+        @click="onClick"
+        >{{ label }}</el-button
+      >
     </div>
 
-    <el-dialog
-      v-model="dialogState.visible"
-      :title="dialogState.title"
-      width="70%"
-      center
-      destroy-on-close
-      top="10vh"
-      @close="formValues = {}"
-    >
-      <el-tabs v-if="dialogState.type === 'exec'" model-value="json" class="demo-tabs">
-        <el-tab-pane label="JsonSchema" name="json">
-          <json-editor-vue
-            class="editor"
-            v-model="json"
-            currentMode="code"
-            :modeList="['text', 'view', 'tree', 'code', 'form']"
-            :options="{ search: true, history: true }"
-            language="zh"
-            @blur="onBlur"
-          />
-        </el-tab-pane>
-        <el-tab-pane label="帮助" name="help">
-          <highlightjs class="vueCode" language="json" :code="helpStr" />
-        </el-tab-pane>
-      </el-tabs>
-
-      <el-tabs v-if="dialogState.type === 'vue'" model-value="ts" class="demo-tabs">
-        <el-tab-pane label="Typescript" name="ts">
-          <CodeHighLight class="vueCode" :code="tsVue(schema)" />
-        </el-tab-pane>
-        <el-tab-pane label="Javascript" name="js">
-          <CodeHighLight class="vueCode" :code="jsVue(schema)" />
-        </el-tab-pane>
-      </el-tabs>
-
-      <FormRender
-        v-if="dialogState.type === 'form'"
-        v-model="formValues"
-        :schema="schema"
-        ref="formRef"
-        :schemaContext="schemaContext"
-        :style="{ minHeight: '200px', padding: '20px' }"
-        :read="read"
-      />
-
-      <template #footer v-if="dialogState.type === 'form'">
-        <el-button v-if="!read" @click="handleSubmit" type="primary">模拟提交</el-button>
-        <el-button v-if="!read" @click="handleReset" type="primary" plain>重置</el-button>
-        <el-button @click="handleRead" type="primary" :plain="read">{{
-          read ? '编辑模式' : '阅读模式'
-        }}</el-button>
-      </template>
-    </el-dialog>
+    <JsonSchema v-model="JsonSchemaVisible" />
+    <VueCode v-model="VueCodeVisible" />
+    <Preview v-model="PreviewVisible" :schema-context="schemaContext" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, inject, reactive } from 'vue'
+import { ref, inject } from 'vue'
 import { ElMessageBox } from 'element-plus'
-import JsonEditorVue from 'json-editor-vue3'
-import { FormRender, CodeHighLight } from '@vue-form-craft/components'
 import { $schema, $methods, $locale } from '@vue-form-craft/config/symbol'
-import { changeItems } from '../utils'
-import { tsVue, jsVue } from './vueEditStr'
-import helpStr from './helpStr'
-import type { FormRenderInstance } from '@vue-form-craft/release'
+import JsonSchema from './JsonSchema.vue'
+import VueCode from './VueCode.vue'
+import Preview from './Preview.vue'
 
 type PreviewAction = {
   label: string
   btnType: 'default' | 'primary' | 'text' | 'success' | 'warning' | 'info' | 'danger'
-  type: string
+  onClick: () => void
 }
 
 defineProps<{
   schemaContext: Record<string, any>
 }>()
 
-const { schema, updateSchema } = inject($schema)!
+const { schema } = inject($schema)!
 
 const { handleSave } = inject($methods)!
 
 const locale = inject($locale)!
 
-const previewActions: PreviewAction[] = [
+const JsonSchemaVisible = ref(false)
+const VueCodeVisible = ref(false)
+const PreviewVisible = ref(false)
+
+const leftActions: PreviewAction[] = [
   {
     label: locale.value.actions.previewJson,
     btnType: 'primary',
-    type: 'exec'
+    onClick: () => {
+      JsonSchemaVisible.value = true
+    }
   },
   {
     label: locale.value.actions.previewVueCode,
     btnType: 'default',
-    type: 'vue'
+    onClick: () => {
+      VueCodeVisible.value = true
+    }
   },
   {
     label: locale.value.actions.previewForm,
     btnType: 'default',
-    type: 'form'
+    onClick: () => {
+      PreviewVisible.value = true
+    }
   }
 ]
 
-const json = computed({
-  get() {
-    return schema.value
-  },
-  set(value) {
-    if (value.items) {
-      updateSchema(value)
+const rightActions: PreviewAction[] = [
+  {
+    label: locale.value.actions.clear,
+    btnType: 'danger',
+    onClick: async () => {
+      await ElMessageBox.confirm('确认清空当前设计吗？')
+      schema.value = { ...schema.value, items: [] }
     }
+  },
+  {
+    label: locale.value.actions.save,
+    btnType: 'primary',
+    onClick: handleSave
   }
-})
-
-const formRef = ref<FormRenderInstance>()
-
-const formValues = ref({})
-
-const read = ref(false)
-
-const dialogState = reactive({
-  visible: false,
-  type: '',
-  title: ''
-})
-
-const handlePreview = (type: string, label: string) => {
-  dialogState.visible = true
-  dialogState.type = type
-  dialogState.title = label
-  read.value = false
-  updateSchema({
-    ...schema.value,
-    labelSuffix: ''
-  })
-}
-
-const onBlur = (editor: any) => {
-  schema.value = { ...schema.value, items: changeItems(schema.value.items) }
-  editor.repair()
-}
-
-const handleSubmit = async () => {
-  await formRef.value?.validate()
-
-  alert(JSON.stringify(formValues.value, null, 2))
-}
-
-const handleClear = async () => {
-  await ElMessageBox.confirm('确认清空当前设计吗？')
-  schema.value = { ...schema.value, items: [] }
-}
-
-const handleReset = async () => {
-  formRef.value?.resetFields([])
-}
-
-const handleRead = () => {
-  read.value = !read.value
-
-  if (read.value) {
-    updateSchema({
-      ...schema.value,
-      labelSuffix: ':'
-    })
-  } else {
-    updateSchema({
-      ...schema.value,
-      labelSuffix: ''
-    })
-  }
-}
+]
 </script>
 
 <style scoped lang="less">
-.formDesign-actions {
-  /* padding: 10px; */
+.vfc-formDesign-actions {
   margin-top: 10px;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  .formDesign-actions-left,
-  .formDesign-actions-right {
+  .vfc-formDesign-actions-left,
+  .vfc-formDesign-actions-right {
     button {
       margin-bottom: 10px;
     }
   }
 
-  .vueCode {
-    height: 60vh;
-  }
 }
 </style>

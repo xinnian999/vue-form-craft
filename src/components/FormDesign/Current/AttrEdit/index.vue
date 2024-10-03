@@ -1,5 +1,5 @@
 <template>
-  <div class="attrForm">
+  <div class="vfc-attrForm">
     <FormRender :key="current.designKey" v-model="current" :schema="attrSchema" />
 
     <StyleConfig :key="current.designKey" v-model="currentProps" />
@@ -37,8 +37,8 @@ const attrSchema = computed<FormSchema>(() => {
           ...item,
           label: lang.value === 'zh' ? item.label : item.name.split('.').pop(), //国际化翻译
           component: isTemplate ? 'Input' : item.component, // 将联动组件改用弹窗展示
-          dialog: isTemplate||item.dialog, // 将联动组件改用弹窗展示,
-          children: parseItems(item.children)
+          dialog: isTemplate || item.dialog, // 将联动组件改用弹窗展示,
+          children: item.children && parseItems(item.children)
         }
       })
     }
@@ -75,7 +75,7 @@ const currentProps = computed({
 </script>
 
 <style scoped lang="less">
-.attrForm {
+.vfc-attrForm {
   padding-bottom: 20px;
 }
 </style>

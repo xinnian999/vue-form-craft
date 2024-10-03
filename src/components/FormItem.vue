@@ -176,7 +176,7 @@ const formItemProps = computed(() => {
 })
 
 onMounted(() => {
-  if (!value.value && thisProps.initialValue !== undefined) {
+  if (!value.value && thisProps.initialValue !== undefined&&!thisProps.design) {
     const newInitialValues = setDataByPath(initialValues, thisProps.name, thisProps.initialValue)
     updateInitialValues(newInitialValues)
   }
