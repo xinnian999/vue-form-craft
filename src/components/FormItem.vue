@@ -72,7 +72,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, onMounted, reactive, type Ref } from 'vue'
+import { computed, inject, onMounted, reactive, watch, type Ref } from 'vue'
 import { isRegexString, getDataByPath, setDataByPath } from '@vue-form-craft/utils'
 import { $global, $schema, $formValues, $initialValues } from '@vue-form-craft/config/symbol'
 import type { FormItemType } from '@vue-form-craft/config/commonType'
@@ -176,11 +176,21 @@ const formItemProps = computed(() => {
 })
 
 onMounted(() => {
-  if (!value.value && thisProps.initialValue !== undefined&&!thisProps.design) {
+  if (!value.value && thisProps.initialValue !== undefined && !thisProps.design) {
     const newInitialValues = setDataByPath(initialValues, thisProps.name, thisProps.initialValue)
     updateInitialValues(newInitialValues)
   }
 })
+
+// watch(
+//   () => thisProps.initialValue,
+//   (newVal) => {
+//     if (read) {
+//       value.value = newVal
+//     }
+//   },
+//   { immediate: true }
+// )
 </script>
 
 <style lang="less">
@@ -200,7 +210,7 @@ onMounted(() => {
         justify-content: center;
       }
     }
-    .suffix{
+    .suffix {
       margin-left: 3px;
     }
   }

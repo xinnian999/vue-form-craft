@@ -19,22 +19,13 @@
 </template>
 
 <script setup lang="ts">
-import {
-  ref,
-  computed,
-  reactive,
-  provide,
-  watch,
-  nextTick,
-  inject,
-  type Ref
-} from 'vue'
+import { ref, computed, reactive, provide, watch, nextTick, inject, type Ref } from 'vue'
 import type { FormInstance } from 'element-plus'
 import { handleLinkages, deepParse, setDataByPath, getDataByPath } from '@vue-form-craft/utils'
 import FormItemRender from './FormItemRender.vue'
 import { cloneDeep, merge } from 'lodash'
 import type { FormSchema, Locale } from '@vue-form-craft/config/commonType'
-import { $schema, $formValues, $selectData, $initialValues} from '@vue-form-craft/config/symbol'
+import { $schema, $formValues, $selectData, $initialValues } from '@vue-form-craft/config/symbol'
 import locales from '@vue-form-craft/config/locales'
 
 defineOptions({
@@ -48,7 +39,7 @@ const props = defineProps<
     schemaContext?: Record<string, any>
     design?: boolean
     footer?: boolean
-    read?:boolean
+    read?: boolean
   }>
 >()
 
@@ -84,15 +75,12 @@ const context = computed(() => ({
   $values: formValues.value,
   $selectData: selectData,
   $initialValues: initialValues,
-  $locale:locale.value
+  $locale: locale.value
 }))
 
 const formItems = computed(() => deepParse(props.schema.items || [], context.value))
 
 const formLabelWidth = computed(() => props.schema.labelWidth + 'px')
-
-// 保持schema的响应 传递给后代使用
-const currentSchema = computed(() => props.schema)
 
 const validate = () => formRef.value?.validate()
 
@@ -128,7 +116,7 @@ watch(initialValues, (newVal) => {
 })
 
 provide($schema, {
-  schema: currentSchema,
+  schema: computed(() => props.schema),
   updateSchema: () => {}
 })
 
@@ -150,7 +138,10 @@ provide($initialValues, {
   }
 })
 
-provide('vfc-read', computed(()=>props.read))
+provide(
+  'vfc-read',
+  computed(() => props.read)
+)
 
 defineExpose({ validate, context, resetFields })
 </script>
