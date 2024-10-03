@@ -79,6 +79,7 @@ export default defineConfig({
                 { text: '扩展表单设计器', link: '/zh/extend' },
                 { text: '例：扩展markdown输入框', link: '/zh/extendMd' },
                 { text: '例：扩展穿梭框', link: '/zh/extendTransfer' },
+                { text: '例：扩展其他组件库', link: '/zh/extendOther' },
               ]
             },
             {
