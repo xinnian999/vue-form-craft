@@ -29,8 +29,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: fileURLToPath(new URL('./src/release/index.ts', import.meta.url)), //指定组件编译入口文件
-      name: 'vue-form-craft', // 包名
-      fileName: 'vue-form-craft' // 打包文件名
+      name: 'VueFormCraft', // umd全局变量名
+      fileName: 'vue-form-craft', // 打包文件名
     },
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖
