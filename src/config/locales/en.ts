@@ -32,9 +32,5 @@ export default {
     tab2: {
       title: 'Form Settings'
     }
-  },
-  elementTitle:{
-    Input:'Input',
-    Textarea:'Textarea'
   }
 } satisfies Locale

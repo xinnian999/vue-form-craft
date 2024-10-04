@@ -3,13 +3,15 @@
     <div class="vfc-codeHighLight-copy" @click="handleCopy">
       <icon-render name="copy" />
     </div>
-    <highlightjs class="vfc-codeHighLight-content" language="js" :code="code" />
+    <div class="vfc-codeHighLight-content" v-html="html" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { IconRender } from '@vue-form-craft/components'
 import { ElMessage } from 'element-plus'
+import { codeToHtml } from 'shiki'
+import { onMounted, ref } from 'vue'
 
 const props = withDefaults(
   defineProps<{
@@ -29,6 +31,15 @@ const handleCopy = async () => {
     ElMessage.error('复制文本到剪贴板时出错')
   }
 }
+
+const html = ref('')
+
+onMounted(async () => {
+  html.value = await codeToHtml(props.code, {
+    lang: props.language,
+    theme: 'github-light'
+  })
+})
 </script>
 
 <style lang="less">
@@ -39,9 +50,7 @@ const handleCopy = async () => {
   &:hover &-copy {
     opacity: 1;
   }
-  pre {
-    margin: 0;
-  }
+
   &-copy {
     transition: 0.5s all;
     opacity: 0;
@@ -50,22 +59,29 @@ const handleCopy = async () => {
     top: 15px;
     width: 40px;
     height: 40px;
-    border: 1px solid #999;
+    border: 1px solid #c0bebe;
     font-size: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 7px;
-    color: #fff;
+    color: #999;
     cursor: pointer;
     &:hover {
-      color: var(--el-color-primary);
+      background-color: #fff;
     }
   }
 
   &-content {
     overflow: auto;
     height: 100%;
+    background-color: #f6f6f7;
+    padding: 15px;
+    border-radius: 10px;
+    pre {
+      margin: 0;
+      background-color: transparent!important;
+    }
   }
 }
 </style>

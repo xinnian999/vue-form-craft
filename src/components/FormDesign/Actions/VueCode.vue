@@ -9,10 +9,10 @@
   >
     <el-tabs model-value="ts" class="demo-tabs">
       <el-tab-pane label="Typescript" name="ts">
-        <CodeHighLight style="height: 70vh" :code="tsVue(schema)" />
+        <CodeHighLight style="height: 70vh" :code="tsVue(schema)" language="vue" />
       </el-tab-pane>
       <el-tab-pane label="Javascript" name="js">
-        <CodeHighLight style="height: 70vh" :code="jsVue(schema)" />
+        <CodeHighLight style="height: 70vh" :code="jsVue(schema)" language="vue" />
       </el-tab-pane>
     </el-tabs>
   </el-dialog>
