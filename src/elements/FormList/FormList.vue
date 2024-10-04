@@ -1,5 +1,5 @@
 <template>
-  <div id="formList">
+  <div class="vfc-formList">
     <DefaultCanvasWrapper v-if="design" :children="children" title="自增容器" :name="name" />
 
     <div v-else>
@@ -23,6 +23,7 @@
               type="primary"
               class="list-btn"
               :disabled="disabled"
+              size="small"
             >
               <template #icon> <icon-render name="reduce" color="#fff" /> </template
             ></el-button>
@@ -42,6 +43,7 @@
                 type="primary"
                 class="list-btn"
                 :disabled="disabled"
+                size="small"
               >
                 <template #icon> <icon-render name="reduce" color="#fff" /> </template>
               </el-button>
@@ -75,23 +77,27 @@
               type="primary"
               class="list-btn"
               :disabled="disabled"
+              size="small"
+              plain
             >
-              <template #icon> <icon-render name="reduce" color="#fff" /> </template
+              <template #icon> <icon-render name="reduce" /> </template
             ></el-button>
           </template>
         </el-table-column>
       </el-table>
 
-      <div>
+      <div style="margin-top:5px">
         <el-button
           v-if="allowAdd && !isMax"
           @click="handleAddItem"
-          circle
           type="primary"
           class="list-btn addBtn"
           :disabled="disabled"
+          size="small"
+          plain
         >
-          <template #icon> <icon-render name="add" color="#fff" /></template>
+          <template #icon> <icon-render name="add" /></template>
+          {{ title }}
         </el-button>
       </div>
     </div>
@@ -124,7 +130,7 @@ const props = withDefaults(defineProps<Props>(), {
   allowReduce: true,
   maxLines: 999,
   mode: 'table',
-  title: '卡片',
+  title: '',
   newItemDefaults: () => ({}),
   name: ''
 })
@@ -197,7 +203,7 @@ watch(list, (newVal, oldVal) => {
 </script>
 
 <style lang="less">
-#formList {
+.vfc-formList {
   position: relative;
   width: 100%;
   .list-item {
@@ -219,6 +225,9 @@ watch(list, (newVal, oldVal) => {
   }
   .list-btn {
     margin-left: 10px;
+  }
+  .list-btn.addBtn{
+    margin-left: 0;
   }
 }
 </style>

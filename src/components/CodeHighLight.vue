@@ -61,6 +61,7 @@ onMounted(async () => {
 .vfc-codeHighLight {
   position: relative;
   overflow: auto;
+  line-height: 24px;
 
   &:hover &-copy {
     opacity: 1;
