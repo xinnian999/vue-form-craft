@@ -10,8 +10,14 @@
 <script setup lang="ts">
 import { IconRender } from '@vue-form-craft/components'
 import { ElMessage } from 'element-plus'
-import { codeToHtml } from 'shiki'
 import { onMounted, ref } from 'vue'
+import { createHighlighterCore } from 'shiki/core'
+import getWasm from 'shiki/wasm'
+import githubLight from 'shiki/themes/github-light.mjs'
+import javascript from 'shiki/langs/javascript.mjs'
+import typescript from 'shiki/langs/typescript.mjs'
+import vue from 'shiki/langs/vue-html.mjs'
+import json from 'shiki/langs/json.mjs'
 
 const props = withDefaults(
   defineProps<{
@@ -35,7 +41,16 @@ const handleCopy = async () => {
 const html = ref('')
 
 onMounted(async () => {
-  html.value = await codeToHtml(props.code, {
+  const highlighter = await createHighlighterCore({
+    themes: [
+      // 传入导入的包，而不是字符串
+      githubLight
+    ],
+    langs: [javascript, typescript, vue, json],
+    loadWasm: getWasm
+  })
+
+  html.value = highlighter.codeToHtml(props.code, {
     lang: props.language,
     theme: 'github-light'
   })
@@ -80,7 +95,7 @@ onMounted(async () => {
     border-radius: 10px;
     pre {
       margin: 0;
-      background-color: transparent!important;
+      background-color: transparent !important;
     }
   }
 }
