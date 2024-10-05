@@ -2,23 +2,28 @@
   <div class="vfc-formDesign-actions">
     <div class="vfc-formDesign-actions-left">
       <el-button
-        v-for="{ label, btnType, onClick } in leftActions"
+        v-for="{ label, btnType, icon, onClick } in leftActions"
         :key="label"
         :type="btnType"
         size="small"
         @click="onClick"
-        >{{ label }}</el-button
+      >
+        <template #icon v-if="icon">
+          <icon-render :name="icon" />
+        </template>
+        {{ label }}</el-button
       >
     </div>
 
     <div class="vfc-formDesign-actions-right">
       <el-button
-        v-for="{ label, btnType, onClick } in rightActions"
+        v-for="{ label, btnType, icon, onClick } in rightActions"
         :key="label"
         :type="btnType"
         size="small"
         @click="onClick"
-        >{{ label }}</el-button
+      >
+        <template #icon v-if="icon"> <icon-render :name="icon" /> </template>{{ label }}</el-button
       >
     </div>
 
@@ -32,6 +37,7 @@
 import { ref, inject } from 'vue'
 import { ElMessageBox } from 'element-plus'
 import { $schema, $methods, $locale } from '@vue-form-craft/config/symbol'
+import IconRender from '@vue-form-craft/components/IconRender.vue'
 import JsonSchema from './JsonSchema.vue'
 import VueCode from './VueCode.vue'
 import Preview from './Preview.vue'
@@ -39,6 +45,7 @@ import Preview from './Preview.vue'
 type PreviewAction = {
   label: string
   btnType: 'default' | 'primary' | 'text' | 'success' | 'warning' | 'info' | 'danger'
+  icon?: string
   onClick: () => void
 }
 
@@ -60,6 +67,7 @@ const leftActions: PreviewAction[] = [
   {
     label: locale.value.actions.previewJson,
     btnType: 'primary',
+    icon:'script',
     onClick: () => {
       JsonSchemaVisible.value = true
     }
@@ -67,6 +75,7 @@ const leftActions: PreviewAction[] = [
   {
     label: locale.value.actions.previewVueCode,
     btnType: 'default',
+    icon: 'vue',
     onClick: () => {
       VueCodeVisible.value = true
     }
@@ -74,6 +83,7 @@ const leftActions: PreviewAction[] = [
   {
     label: locale.value.actions.previewForm,
     btnType: 'default',
+    icon:'eye',
     onClick: () => {
       PreviewVisible.value = true
     }
@@ -84,6 +94,7 @@ const rightActions: PreviewAction[] = [
   {
     label: locale.value.actions.clear,
     btnType: 'danger',
+    icon: 'trash',
     onClick: async () => {
       await ElMessageBox.confirm('确认清空当前设计吗？')
       schema.value = { ...schema.value, items: [] }
@@ -91,6 +102,7 @@ const rightActions: PreviewAction[] = [
   },
   {
     label: locale.value.actions.save,
+    icon:'save',
     btnType: 'primary',
     onClick: handleSave
   }
@@ -109,6 +121,5 @@ const rightActions: PreviewAction[] = [
       margin-bottom: 10px;
     }
   }
-
 }
 </style>
