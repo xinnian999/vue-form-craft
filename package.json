@@ -3,7 +3,6 @@
   "version": "4.2.1",
   "private": false,
   "type": "module",
-  "types": "dist/index.d.ts",
   "scripts": {
     "dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
@@ -54,10 +53,12 @@
   ],
   "main": "./dist/vue-form-craft.umd.cjs",
   "module": "./dist/vue-form-craft.js",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/vue-form-craft.js",
-      "require": "./dist/vue-form-craft.umd.cjs"
+      "require": "./dist/vue-form-craft.umd.cjs",
+      "types": "./dist/index.d.ts"
     }
   },
   "keywords": [
