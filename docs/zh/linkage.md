@@ -1,11 +1,3 @@
-<script setup>
-import Linkage from './linkageDemo/linkage.vue'
-import Linkage1 from './linkageDemo/linkage1.vue'
-import Linkage2 from './linkageDemo/linkage2.vue'
-import Linkage3 from './linkageDemo/linkage3.vue'
-import Linkage4 from './linkageDemo/linkage4.vue'
-</script>
-
 # 表单联动
 
 要评价一个表单工具能力强不强，表单联动能力至关重要。
