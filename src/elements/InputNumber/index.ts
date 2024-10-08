@@ -2,13 +2,15 @@ import { IconRender } from '@vue-form-craft/components'
 import attrSchema from './attrSchema'
 import { h } from 'vue'
 import type { FormElement } from '@vue-form-craft/config/commonType'
+import component from "./Component.vue";
+
 
 export default {
   name: '计数器',
   icon: h(IconRender, { name: 'inputNumber' }),
   type: 'basic',
   order: 5,
-  component: 'ElInputNumber',
+  component,
   attrSchema,
   initialValues: {
     label: '计数器',

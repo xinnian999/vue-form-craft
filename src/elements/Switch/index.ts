@@ -2,10 +2,11 @@ import { IconRender } from '@vue-form-craft/components'
 import attrSchema from './attrSchema'
 import { h } from 'vue'
 import type { FormElement } from '@vue-form-craft/config/commonType'
+import component from "./Component.vue";
 
 export default {
   name: '开关',
-  component: 'ElSwitch',
+  component,
   icon: h(IconRender, { name: 'switch' }),
   type: 'basic',
   order: 8,

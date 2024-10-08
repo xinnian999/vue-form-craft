@@ -1,9 +1,6 @@
 import { FormDesign, FormRender } from '@vue-form-craft/components'
 import type { $Global } from '@vue-form-craft/config/commonType'
 import { $global } from '@vue-form-craft/config/symbol'
-import hljsVuePlugin from '@highlightjs/vue-plugin'
-import 'highlight.js/lib/common'
-import 'highlight.js/styles/panda-syntax-dark.css'
 import { ref, type App } from 'vue'
 import elements from '@vue-form-craft/elements'
 
@@ -22,14 +19,11 @@ export default (app: App<Element>, options?: Options) => {
     Object.assign(globalConfig, options)
     Object.assign(globalConfig.elements, options.extendElements)
 
-    if (options.lang) {
-      app.provide('vfc-lang', ref(options.lang))
-    }
   }
 
   app.provide($global, globalConfig)
+  app.provide('vfc-lang', ref(options?.lang || 'zh'))
 
-  app.use(hljsVuePlugin)
 
   app.component('FormRender', FormRender)
   app.component('FormDesign', FormDesign)

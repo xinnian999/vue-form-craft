@@ -1,6 +1,8 @@
-# 扩展一个穿梭框
+# 扩展其他组件库
 
-下面展示一下，如何给表单设计器扩展一个**穿梭框**
+可能你的项目用的是其他组件库的组件，那么你也可以选择`vue-form-craft`。因为你可以根据下面的示例，来扩展任意组件库到表单设计器里。
+
+下面以扩展`Arce-design`的`Input`为例
 
 ## 创建目录
 
@@ -15,7 +17,11 @@ src
     └── Component.vue
     └── Icon.vue
     └── index.ts
-+ └── Transfer 
+  └── Transfer 
+    └── attrSchema.ts
+    └── Icon.vue
+    └── index.ts
++ └── AInput 
   + └── attrSchema.ts
   + └── Icon.vue
   + └── index.ts
@@ -29,7 +35,7 @@ src
 **当然如果你项目里，有封装好的Icon渲染组件，可以直接用，跳过这一步！**
 
 ```vue
-// src/extendElements/Transfer/Icon.vue
+// src/extendElements/AInput/Icon.vue
 <template>
   <svg
     t="1726107434564"
@@ -59,7 +65,7 @@ src
 通过设计器拖拽，制作的表单，将JsonSchema导出使用！
 
 ```ts
-// src/extendElements/Transfer/attrSchema.ts
+// src/extendElements/AInput/attrSchema.ts
 import type { FormSchema } from 'vue-form-craft'
 
 export default {
@@ -85,6 +91,7 @@ export default {
       component: 'Grid',
       children: [
         { label: '是否必填', component: 'Switch', name: 'required' },
+        { label: '是否只读', component: 'Switch', name: 'props.readonly' },
         { label: '是否禁用', component: 'Switch', name: 'props.disabled' },
         { label: '隐藏字段', component: 'Switch', name: 'hidden' },
         { label: '隐藏标签', component: 'Switch', name: 'hideLabel' }
@@ -100,50 +107,102 @@ export default {
         marginBottom: 0
       }
     },
-
-    
-
     {
-      component: 'Divider',
-      props: {
-        title: '选项设置',
-        contentPosition: 'center'
-      },
-      designKey: 'design-gSnX',
-      name: 'form-xDEe',
-      style: {
-        marginTop: '40px'
-      }
-    },
-    {
-      label: '静态选项',
-      name: 'props.data',
+      label: '文本校验规则',
       component: 'FormList',
+      name: 'rules',
+      dialog: true,
       children: [
         {
-          label: '选项名',
-          name: 'label',
+          label: '类型',
+          component: 'Select',
+          props: {
+            mode: 'static',
+            options: [
+              {
+                label: '邮箱',
+                value: 'email'
+              },
+              {
+                label: '字母+数字',
+                value: '^(?=.*[a-zA-Z])(?=.*\\d)[a-zA-Z\\d]+$'
+              },
+              {
+                label: '手机号码',
+                value: '^1[3456789]\\d{9}$'
+              },
+              {
+                label: '网址',
+                value: 'url'
+              },
+              {
+                label: '自定义正则',
+                value: 'custom'
+              }
+            ],
+            placeholder: '请选择...',
+            labelKey: 'label',
+            valueKey: 'value'
+          },
+          designKey: 'form-3L0P',
+          name: 'type'
+        },
+        {
+          label: '自定义正则',
+          component: 'Input',
+          props: {
+            placeholder: '请输入正则表达式'
+          },
+          designKey: 'form-Wdb2Reg',
+          name: 'customReg',
+          hidden: '{{$item.type!=="custom"}}'
+        },
+        {
+          label: '提示语',
           component: 'Input',
           props: {
             placeholder: '请输入...'
           },
-          designKey: 'form-LnGh'
+          designKey: 'form-Wdb2',
+          name: 'message'
         },
         {
-          label: '选项值',
-          name: 'key',
-          component: 'Input',
-          props: {},
-          designKey: 'form-HYtW'
+          label: '校验时机',
+          component: 'Checkbox',
+          props: {
+            mode: 'static',
+            options: [
+              {
+                label: '失去焦点时',
+                value: 'blur'
+              },
+              {
+                label: '输入时',
+                value: 'change'
+              }
+            ],
+            placeholder: '请选择...',
+            labelKey: 'label',
+            valueKey: 'value'
+          },
+          designKey: 'form-3L0P6666',
+          name: 'trigger'
         }
       ],
-      designKey: 'form-Iwpd',
+      designKey: 'form-89tI',
       props: {
-        mode: 'table',
-        newItemDefaults:
-          '{{ (index) => ({ label: `选项${index + 1}`, key: `value${index + 1}` }) }}'
+        mode: 'card',
+        title: '校验规则'
       }
     },
+    { label: '显示清除按钮', component: 'Switch', name: 'props.clearable' },
+    {
+      label: '最长字数',
+      component: 'InputNumber',
+      name: 'props.maxlength'
+    },
+    
+
   ]
 } satisfies FormSchema
 ```
@@ -152,29 +211,27 @@ export default {
 
 上面的几个文件，合并成一个`FormElement`对象，也就是一个完整的扩展组件！
 
-> 这里可以直接使用 `ElTransfer` 作为渲染组件，无需二次封装
+> 这里可以直接使用`Arco`的`Input` 作为渲染组件，无需二次封装
+
 
 ```ts
 // src/extendElements/Transfer/index.ts
 import type { FormElement } from 'vue-form-craft'
 import icon from './Icon.vue'
 import attrSchema from './attrSchema'
+import { Input } from "@arco-design/web-vue";
 
 export default {
-  name: '穿梭框',
-  component: 'ElTransfer',
+  name: '单行文本',
+  component: Input,
   icon,
   type: 'basic',
-  order: 12,
+  order: 1,
   initialValues: {
-    label: '穿梭框',
-    component: 'Transfer',
+    label: '单行文本',
+    component: 'AInput', // A开头是为了和内置的Input做区分
     props: {
-      data: [
-        { label: '选项一', key: 'value1' },
-        { label: '选项二', key: 'value2' },
-        { label: '选项三', key: 'value3' }
-      ]
+      placeholder: '请输入文本'
     }
   },
   attrSchema
@@ -187,10 +244,12 @@ export default {
 // src/extendElements/index.ts
 import Markdown from './Markdown'
 import Transfer from './Transfer'
+import AInput from './AInput'
 
 export default {
     Markdown,
-    Transfer
+    Transfer,
+    AInput
 }
 ```
 
@@ -200,13 +259,30 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+import ArcoVue from '@arco-design/web-vue';
+import '@arco-design/web-vue/dist/arco.css';
 import VueFormCraft from 'vue-form-craft'
 import extendElements from './extendElements'
 
 const app = createApp(App)
 
 app.use(ElementPlus)
+app.use(ArcoVue)
 app.use(VueFormCraft, { extendElements })
 app.mount('#app')
 
 ```
+
+
+最后，将`element-plus`的`Input`隐藏掉
+
+```vue
+<template>
+  <div style="width:100vw;height:100vh">
+    <FormDesign :omit="['Input']" />
+  </div>
+</template>
+```
+
+
+![md](../assets/ArcoIuput.png)

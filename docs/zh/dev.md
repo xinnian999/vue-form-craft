@@ -78,10 +78,10 @@ export default defineConfig({
 }
 ```
 
-5、最后，你的项目里还需要安装这些依赖
+5、最后，你的项目里还需要安装一些依赖，可以根据报错提示来安装缺少的依赖。
 
 ```sh
-pnpm i @highlightjs/vue-plugin highlight.js lodash vuedraggable-es  json-editor-vue3
+npm i lodash vuedraggable-es  json-editor-vue3 ... 
 ```
 
 6、如果出现报错`Uncaught SyntaxError: The requested module '/node_modules/.pnpm/jsoneditor@9.10.5/node_modules/jsoneditor/dist/jsoneditor.min.js?v=3fb8ead3' does not provide an export named 'default' (at json-editor.vue:2:8)`

@@ -5,6 +5,7 @@
     style="height: calc(100vh - 65px)"
     @save="onSave"
     @add="onAdd"
+    :omitMenus="omitMenus"
   />
 </template>
 
@@ -28,6 +29,8 @@ const onSave = () => {
 const onAdd = (element: FormElement) => {
   console.log('onAdd===>', element)
 }
+
+const omitMenus:string[]=[]
 
 onMounted(() => {
   const localSchema = localStorage.getItem('schema')

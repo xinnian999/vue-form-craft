@@ -11,17 +11,13 @@
       :append-to-body="false"
     >
       <el-space wrap>
-        <el-button
-          :key="name"
-          v-for="{ name, schema } in templates || template"
-          @click="useTemplate(schema)"
-        >
+        <el-button :key="name" v-for="{ name, schema } in templates" @click="useTemplate(schema)">
           {{ name }}
         </el-button>
       </el-space>
     </el-drawer>
 
-    <div v-for="{ title, children } in menuList" :key="title">
+    <div v-for="{ title, children } in menus" :key="title">
       <h4 class="type-title">{{ title }}</h4>
       <draggable
         class="list"
@@ -38,7 +34,9 @@
             <div class="ico">
               <component class="ico-content" :is="element.icon" />
             </div>
-            <div class="name">{{ element.name }}</div>
+            <div class="name" :style="{ fontSize: lang === 'zh' ? '12px' : '10px' }">
+              {{ element.name }}
+            </div>
           </li>
         </template>
       </draggable>
@@ -48,11 +46,11 @@
 
 <script setup lang="ts">
 import draggable from 'vuedraggable-es'
-import { inject,  computed } from 'vue'
+import { computed, inject, type Ref } from 'vue'
 import { $global, $locale, $schema } from '@vue-form-craft/config/symbol'
 import { ref } from 'vue'
 import parseMenus from './menus'
-import template from '@vue-form-craft/template'
+import templateMock from '@vue-form-craft/template'
 import type { FormSchema, TemplateData } from '@vue-form-craft/config/commonType'
 
 const props = withDefaults(
@@ -60,7 +58,7 @@ const props = withDefaults(
     templates?: TemplateData
     omitMenus?: string[]
   }>(),
-  { omitMenus: () => [] }
+  { templates: () => templateMock, omitMenus: () => [] }
 )
 
 const drawerVisible = ref(false)
@@ -71,16 +69,9 @@ const { elements } = inject($global)!
 
 const locale = inject($locale)!
 
-const menus = parseMenus(elements,locale)
+const lang = inject<Ref<'zh' | 'en'>>('vfc-lang')!
 
-const menuList = computed(() => {
-  return menus.map((item) => ({
-    ...item,
-    children: item.children.filter(
-      (item) => !props.omitMenus.includes(item.initialValues.component)
-    )
-  }))
-})
+const menus = computed(() => parseMenus({ elements, omits: props.omitMenus, lang: lang.value }))
 
 const useTemplate = (templateSchema: FormSchema) => {
   updateSchema(templateSchema)

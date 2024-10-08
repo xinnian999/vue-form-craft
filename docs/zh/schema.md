@@ -50,26 +50,26 @@ component代表该表单项使用什么组件，props是传给该组件的props�
 | -------------------- | --------------------------------- | ----------- | ----------------- |
 | labelWidth           | `number`                          | `150`       | 表单label宽度     |
 | labelAlign           | `'left' \| 'top' \| 'right' `     | `'right'`   | 表单label对齐方式 |
-| size                 | `'small' \| 'default' \| 'large'` | `'default'` | 表单表单项大小      |
-| hideRequiredAsterisk | `boolean`                         | `false`     | 表单隐藏必填星号  |
+| labelSuffix          | `string`                          | -           | 表单label后缀     |
 | labelBold            | `boolean`                         | `false`     | 表单label加粗     |
+| size                 | `'small' \| 'default' \| 'large'` | `'default'` | 表单表单项大小    |
+| hideRequiredAsterisk | `boolean`                         | `false`     | 表单隐藏必填星号  |
 | disabled             | `boolean`                         | `false`     | 禁用所有表单项    |
 
 ### 表单项配置
 
-| 参数名       | 类型             | 默认值 | 描述                                             |
-| ------------ | ---------------- | ------ | ------------------------------------------------ |
-| label        | `string`         | -      | 标签                                             |
-| name         | `string`         | -      | 唯一标识，值key                                  |
-| component    | `string`         | -      | 组件标识。对应`FormElement`的键。                                       |
-| props        | object           | {}     | 传给组件的props，具体参考element-plus文档        |
-| required     | `boolean`        | false  | 表单项是否必填                                     |
-| initialValue | any              | -      | 表单项初始值                                       |
-| help         | `string`         | -      | 表单项的提示信息                                   |
-| hidden       | `boolean`        | false  | 是否隐藏表单项                                   |
-| hideLabel    | `boolean`        | false  | 是否隐藏表单项的标签                               |
-| rules        | `FormRule[]`     | -      | 表单项校验规则，Input组件专用                      |
+| 参数名       | 类型             | 默认值 | 描述                                                 |
+| ------------ | ---------------- | ------ | ---------------------------------------------------- |
+| label        | `string`         | -      | 标签                                                 |
+| name         | `string`         | -      | 唯一标识，值key                                      |
+| component    | `string`         | -      | 组件标识。对应`FormElement`的键。                    |
+| props        | object           | {}     | 传给组件的props，具体参考element-plus文档            |
+| required     | `boolean`        | false  | 表单项是否必填                                       |
+| initialValue | any              | -      | 表单项初始值                                         |
+| help         | `string`         | -      | 表单项的提示信息                                     |
+| hidden       | `boolean`        | false  | 是否隐藏表单项                                       |
+| hideLabel    | `boolean`        | false  | 是否隐藏表单项的标签                                 |
+| rules        | `FormRule[]`     | -      | 表单项校验规则，Input组件专用                        |
 | children     | `FormItemType[]` | -      | 子表单项数据，嵌套表单项专用，如自增容器，卡片，栅格 |
-| change       | `FormChange[]`   | -      | 表单项值变化时，触发的联动配置                     |
-| designKey    | `string`         | -      | 给表单设计器用的标识key，自动生成                |
-
+| change       | `FormChange[]`   | -      | 表单项值变化时，触发的联动配置                       |
+| designKey    | `string`         | -      | 给表单设计器用的标识key，自动生成                    |

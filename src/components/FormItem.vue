@@ -10,10 +10,6 @@
       />
     </div>
 
-    <!-- <div v-else-if="config.type === 'assist'" :style="itemStyle">
-      <component :is="config.component" v-bind="props" />
-    </div> -->
-
     <el-form-item
       v-else
       id="form-item"
@@ -31,6 +27,9 @@
             <el-tooltip class="box-item" effect="dark" :content="help">
               <div><icon-render name="help" /></div>
             </el-tooltip>
+          </div>
+          <div class="suffix" v-if="schema.labelSuffix">
+            {{ schema.labelSuffix }}
           </div>
         </div>
       </template>
@@ -51,6 +50,7 @@
             v-bind="formItemProps"
             v-model:[config.modelName!]="value"
             :design="design"
+            :read="read"
           />
         </el-dialog>
 
@@ -65,13 +65,14 @@
         v-bind="formItemProps"
         v-model:[config.modelName!]="value"
         :design="design"
+        :read="read"
       />
     </el-form-item>
   </template>
 </template>
 
 <script setup lang="ts">
-import { computed,  inject, onMounted, reactive } from 'vue'
+import { computed, inject, onMounted, reactive, watch, type Ref } from 'vue'
 import { isRegexString, getDataByPath, setDataByPath } from '@vue-form-craft/utils'
 import { $global, $schema, $formValues, $initialValues } from '@vue-form-craft/config/symbol'
 import type { FormItemType } from '@vue-form-craft/config/commonType'
@@ -82,6 +83,8 @@ const thisProps = defineProps<FormItemType>()
 const { elements } = inject($global)!
 
 const { schema } = inject($schema)!
+
+const read = inject('vfc-read')!
 
 const { formValues, updateFormValues } = inject($formValues)!
 
@@ -173,11 +176,21 @@ const formItemProps = computed(() => {
 })
 
 onMounted(() => {
-  if (!value.value && thisProps.initialValue !== undefined) {
+  if (!value.value && thisProps.initialValue !== undefined && !thisProps.design) {
     const newInitialValues = setDataByPath(initialValues, thisProps.name, thisProps.initialValue)
     updateInitialValues(newInitialValues)
   }
 })
+
+// watch(
+//   () => thisProps.initialValue,
+//   (newVal) => {
+//     if (read) {
+//       value.value = newVal
+//     }
+//   },
+//   { immediate: true }
+// )
 </script>
 
 <style lang="less">
@@ -185,6 +198,7 @@ onMounted(() => {
   .form-item-label {
     display: flex;
     position: relative;
+    white-space: nowrap;
     .ico {
       margin-left: 3px;
       font-size: 15px;
@@ -195,6 +209,9 @@ onMounted(() => {
         flex-direction: column;
         justify-content: center;
       }
+    }
+    .suffix {
+      margin-left: 3px;
     }
   }
 }

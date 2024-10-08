@@ -3,13 +3,21 @@
     <div class="vfc-codeHighLight-copy" @click="handleCopy">
       <icon-render name="copy" />
     </div>
-    <highlightjs class="vfc-codeHighLight-content" language="js" :code="code" />
+    <div class="vfc-codeHighLight-content" v-html="html" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { IconRender } from '@vue-form-craft/components'
 import { ElMessage } from 'element-plus'
+import { onMounted, ref } from 'vue'
+import { createHighlighterCore } from 'shiki/core'
+import getWasm from 'shiki/wasm'
+import githubLight from 'shiki/themes/github-light.mjs'
+import javascript from 'shiki/langs/javascript.mjs'
+import typescript from 'shiki/langs/typescript.mjs'
+import vue from 'shiki/langs/vue-html.mjs'
+import json from 'shiki/langs/json.mjs'
 
 const props = withDefaults(
   defineProps<{
@@ -29,19 +37,36 @@ const handleCopy = async () => {
     ElMessage.error('复制文本到剪贴板时出错')
   }
 }
+
+const html = ref('')
+
+onMounted(async () => {
+  const highlighter = await createHighlighterCore({
+    themes: [
+      // 传入导入的包，而不是字符串
+      githubLight
+    ],
+    langs: [javascript, typescript, vue, json],
+    loadWasm: getWasm
+  })
+
+  html.value = highlighter.codeToHtml(props.code, {
+    lang: props.language,
+    theme: 'github-light'
+  })
+})
 </script>
 
 <style lang="less">
 .vfc-codeHighLight {
   position: relative;
   overflow: auto;
+  line-height: 24px;
 
   &:hover &-copy {
     opacity: 1;
   }
-  pre {
-    margin: 0;
-  }
+
   &-copy {
     transition: 0.5s all;
     opacity: 0;
@@ -50,22 +75,29 @@ const handleCopy = async () => {
     top: 15px;
     width: 40px;
     height: 40px;
-    border: 1px solid #999;
+    border: 1px solid #c0bebe;
     font-size: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 7px;
-    color: #fff;
+    color: #999;
     cursor: pointer;
     &:hover {
-      color: var(--el-color-primary);
+      background-color: #fff;
     }
   }
 
   &-content {
     overflow: auto;
     height: 100%;
+    background-color: #f6f6f7;
+    padding: 15px;
+    border-radius: 10px;
+    pre {
+      margin: 0;
+      background-color: transparent !important;
+    }
   }
 }
 </style>

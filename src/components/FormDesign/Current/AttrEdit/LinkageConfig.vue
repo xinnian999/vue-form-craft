@@ -2,7 +2,7 @@
   <div class="vfc-linkageConfig">
     <el-divider>{{ locale.attr.tab1.linkage.text }}</el-divider>
 
-    <div class="current-footer">
+    <div class="vfc-linkageConfig-btns">
       <el-button
         v-for="{ title, onClick } in linkageBtns"
         :key="title"
@@ -14,7 +14,7 @@
       >
     </div>
 
-    <el-dialog destroy-on-close v-model="visible" top="3vh" title="值联动">
+    <el-dialog destroy-on-close v-model="visible" top="3vh" :title="title">
       <json-editor-vue
         v-if="type === 'config'"
         class="editor"
@@ -47,12 +47,15 @@ const visible = ref(false)
 
 const type = ref('config')
 
+const title = ref('')
+
 const linkageBtns = [
   {
     title: locale.value.attr.tab1.linkage.action1,
     onClick: () => {
       visible.value = true
       type.value = 'config'
+      title.value = '配置项联动'
     }
   },
   {
@@ -60,6 +63,7 @@ const linkageBtns = [
     onClick: () => {
       visible.value = true
       type.value = 'value'
+      title.value = '值联动'
     }
   }
 ]
@@ -68,6 +72,8 @@ const linkageBtns = [
 <style scoped lang="less">
 .vfc-linkageConfig{
   padding-top: 30px;
-  text-align: center;
+  &-btns{
+    text-align: center;
+  }
 }
 </style>
