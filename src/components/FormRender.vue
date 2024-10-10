@@ -19,13 +19,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, reactive, provide, watch, nextTick, inject, type Ref } from 'vue'
+import { ref, computed, reactive, provide, watch, nextTick, inject, readonly, type Ref } from 'vue'
 import type { FormInstance } from 'element-plus'
 import { handleLinkages, deepParse, setDataByPath, getDataByPath } from '@vue-form-craft/utils'
 import FormItemRender from './FormItemRender.vue'
 import { cloneDeep, merge } from 'lodash'
 import type { FormSchema, Locale } from '@vue-form-craft/config/commonType'
-import { $schema, $formValues, $selectData, $initialValues } from '@vue-form-craft/config/symbol'
+import {
+  $schema,
+  $formValues,
+  $selectData,
+  $initialValues,
+  $useFormInstance
+} from '@vue-form-craft/config/symbol'
 import locales from '@vue-form-craft/config/locales'
 
 defineOptions({
@@ -142,6 +148,16 @@ provide(
   'vfc-read',
   computed(() => props.read)
 )
+
+provide($useFormInstance, {
+  formValues: readonly(formValues),
+  selectData: readonly(selectData),
+  schema: computed(() => props.schema),
+  updateFormValues: (values) => (formValues.value = values),
+  updateSelectData: (key, value) => {
+    selectData[key] = value
+  }
+})
 
 defineExpose({ validate, context, resetFields })
 </script>

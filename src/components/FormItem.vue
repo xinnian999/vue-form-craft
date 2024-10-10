@@ -72,21 +72,20 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, onMounted, reactive, watch, type Ref } from 'vue'
+import { computed, inject, onMounted, reactive } from 'vue'
 import { isRegexString, getDataByPath, setDataByPath } from '@vue-form-craft/utils'
-import { $global, $schema, $formValues, $initialValues } from '@vue-form-craft/config/symbol'
+import { $global, $initialValues } from '@vue-form-craft/config/symbol'
 import type { FormItemType } from '@vue-form-craft/config/commonType'
 import { IconRender } from '@vue-form-craft/components'
+import { useFormInstance } from '@vue-form-craft/release'
 
 const thisProps = defineProps<FormItemType>()
 
+const { schema, formValues, updateFormValues } = useFormInstance()
+
 const { elements } = inject($global)!
 
-const { schema } = inject($schema)!
-
 const read = inject('vfc-read')!
-
-const { formValues, updateFormValues } = inject($formValues)!
 
 const { initialValues, updateInitialValues } = inject($initialValues)!
 
@@ -181,16 +180,6 @@ onMounted(() => {
     updateInitialValues(newInitialValues)
   }
 })
-
-// watch(
-//   () => thisProps.initialValue,
-//   (newVal) => {
-//     if (read) {
-//       value.value = newVal
-//     }
-//   },
-//   { immediate: true }
-// )
 </script>
 
 <style lang="less">

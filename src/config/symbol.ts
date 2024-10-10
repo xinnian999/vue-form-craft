@@ -9,12 +9,12 @@ export const $schema = Symbol() as InjectionKey<{
 }>
 
 export const $formValues = Symbol() as InjectionKey<{
-  readonly formValues: Record<string, any>
+  readonly formValues: Ref<Record<string, any>>
   updateFormValues: (values: Record<string, any>) => void
 }>
 
 export const $selectData = Symbol() as InjectionKey<{
-  readonly selectData: Record<string, Record<string, any>>
+  readonly selectData:  Record<string, Record<string, any>>
   updateSelectData: (key: string, value: Record<string, any>) => void
 }>
 
@@ -41,3 +41,11 @@ export const $hoverKey = Symbol() as InjectionKey<{
 }>
 
 export const $locale = Symbol() as InjectionKey<Ref<Locale>>
+
+export const $useFormInstance= Symbol() as InjectionKey<{
+  readonly formValues: Ref<Record<string, any>>
+  readonly selectData:  Record<string, Record<string, any>>
+  readonly schema: Ref<FormSchema>
+  updateFormValues: (values: Record<string, any>) => void
+  updateSelectData: (key: string, value: Record<string, any>) => void
+}>

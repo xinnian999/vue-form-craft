@@ -8,7 +8,7 @@
     top="10vh"
     @close="formValues = {}"
   >
-    <el-tabs model-value="edit">
+    <el-tabs v-model="tabKey">
       <el-tab-pane label="编辑模式" name="edit">
         <FormRender
           v-model="formValues"
@@ -17,29 +17,36 @@
           :schemaContext="schemaContext"
           :style="{ minHeight: '200px', padding: '20px' }"
         />
-        <div style="text-align: center;">
+        <div style="text-align: center">
           <el-button @click="handleSubmit" type="primary">模拟提交</el-button>
           <el-button @click="handleReset" type="primary" plain>重置</el-button>
         </div>
       </el-tab-pane>
+
       <el-tab-pane label="阅读模式" name="read">
         <FormRender
           v-model="formValues"
-          :schema="{...schema,labelSuffix:':'}"
+          :schema="{ ...schema, labelSuffix: ':' }"
           :schemaContext="schemaContext"
           :style="{ minHeight: '200px', padding: '20px' }"
           read
         />
+      </el-tab-pane>
+
+      <el-tab-pane label="联动变量" name="context">
+        <p>实时预览的联动变量，在JsonSchema中可以通过双大括号模版语法使用，用于触发各种联动</p>
+        <JsonEdit v-model="context" style="height: 60vh" :key="tabKey" />
       </el-tab-pane>
     </el-tabs>
   </el-dialog>
 </template>
 
 <script setup lang="ts">
-import { ref, inject } from 'vue'
+import { ref, inject, computed } from 'vue'
 import { FormRender } from '@vue-form-craft/components'
 import { $locale, $schema } from '@vue-form-craft/config/symbol'
 import type { FormRenderInstance } from '@vue-form-craft/release'
+import JsonEdit from '@vue-form-craft/elements/JsonEdit/JsonEdit.vue'
 
 defineProps<{
   schemaContext: Record<string, any>
@@ -47,11 +54,15 @@ defineProps<{
 
 const { schema } = inject($schema)!
 
+const tabKey = ref('edit')
+
 const formRef = ref<FormRenderInstance>()
 
 const formValues = ref({})
 
 const visible = defineModel<boolean>()
+
+const context = computed(() => formRef.value?.context)
 
 const locale = inject($locale)!
 
