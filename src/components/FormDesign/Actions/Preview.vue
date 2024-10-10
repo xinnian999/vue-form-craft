@@ -23,7 +23,7 @@
         </div>
       </el-tab-pane>
 
-      <el-tab-pane label="阅读模式" name="read">
+      <el-tab-pane label="阅读模式" name="read" lazy>
         <FormRender
           v-model="formValues"
           :schema="{ ...schema, labelSuffix: ':' }"

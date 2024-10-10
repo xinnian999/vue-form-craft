@@ -76,13 +76,18 @@ const lang = inject<Ref<'zh' | 'en'>>('vfc-lang')!
 
 const locale = computed<Locale>(() => locales[lang.value])
 
-const context = computed(() => ({
-  ...props.schemaContext,
-  $values: formValues.value,
-  $selectData: selectData,
-  $initialValues: initialValues,
-  $locale: locale.value
-}))
+const context = computed(() => {
+  // console.log('selectData===>',selectData);
+  // console.log('read===>',props.read);
+  
+  return {
+    ...props.schemaContext,
+    $values: formValues.value,
+    $selectData: selectData,
+    $initialValues: initialValues,
+    $locale: locale.value
+  }
+})
 
 const formItems = computed(() => deepParse(props.schema.items || [], context.value))
 
