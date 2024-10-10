@@ -46,6 +46,7 @@ export const $useFormInstance= Symbol() as InjectionKey<{
   readonly formValues: Ref<Record<string, any>>
   readonly selectData:  Record<string, Record<string, any>>
   readonly schema: Ref<FormSchema>
+  readonly read: Ref<boolean>
   updateFormValues: (values: Record<string, any>) => void
   updateSelectData: (key: string, value: Record<string, any>) => void
 }>

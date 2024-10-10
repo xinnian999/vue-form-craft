@@ -4,9 +4,9 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{
-  read?: boolean
-}>()
+import { useFormInstance } from '@vue-form-craft/hooks'
 
 const value = defineModel<number>()
+
+const { read } = useFormInstance()
 </script>

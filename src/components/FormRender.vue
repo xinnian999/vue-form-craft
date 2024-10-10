@@ -79,12 +79,11 @@ const locale = computed<Locale>(() => locales[lang.value])
 const context = computed(() => {
   // console.log('selectData===>',selectData);
   // console.log('read===>',props.read);
-  
+
   return {
     ...props.schemaContext,
     $values: formValues.value,
     $selectData: selectData,
-    $initialValues: initialValues,
     $locale: locale.value
   }
 })
@@ -149,15 +148,11 @@ provide($initialValues, {
   }
 })
 
-provide(
-  'vfc-read',
-  computed(() => props.read)
-)
-
 provide($useFormInstance, {
   formValues: readonly(formValues),
   selectData: readonly(selectData),
   schema: computed(() => props.schema),
+  read: computed(() => props.read),
   updateFormValues: (values) => (formValues.value = values),
   updateSelectData: (key, value) => {
     selectData[key] = value

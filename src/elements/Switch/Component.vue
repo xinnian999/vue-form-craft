@@ -3,10 +3,13 @@
 </template>
 
 <script setup lang="ts">
+import { useFormInstance } from '@vue-form-craft/hooks';
+
 defineProps<{
-  read?: boolean
   disabled?: boolean
 }>()
+
+const { read } = useFormInstance()
 
 const value = defineModel<any>()
 </script>

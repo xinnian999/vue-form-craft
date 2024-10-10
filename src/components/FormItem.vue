@@ -50,7 +50,6 @@
             v-bind="formItemProps"
             v-model:[config.modelName!]="value"
             :design="design"
-            :read="read"
           />
         </el-dialog>
 
@@ -65,7 +64,6 @@
         v-bind="formItemProps"
         v-model:[config.modelName!]="value"
         :design="design"
-        :read="read"
       />
     </el-form-item>
   </template>
@@ -84,8 +82,6 @@ const thisProps = defineProps<FormItemType>()
 const { schema, formValues, updateFormValues } = useFormInstance()
 
 const { elements } = inject($global)!
-
-const read = inject('vfc-read')!
 
 const { initialValues, updateInitialValues } = inject($initialValues)!
 
