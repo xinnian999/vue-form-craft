@@ -1,5 +1,5 @@
 import type FormRender from '@vue-form-craft/components/FormRender.vue'
-import type { Component, VNode } from 'vue'
+import type { Component, Ref, VNode } from 'vue'
 
 export type FormRule = {
   type: 'email' | 'url' | 'custom' | string
@@ -89,6 +89,8 @@ export type $Global = {
   request?: (options: Record<string, any>) => Promise<Record<string, any>>
   elements: Record<string, FormElement>
 }
+
+export type Lang = Ref<'en' | 'zh'>
 
 export type Locale = {
   menus: {

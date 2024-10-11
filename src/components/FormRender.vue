@@ -24,7 +24,7 @@ import type { FormInstance } from 'element-plus'
 import { handleLinkages, deepParse, setDataByPath, getDataByPath } from '@vue-form-craft/utils'
 import FormItemRender from './FormItemRender.vue'
 import { cloneDeep, merge } from 'lodash'
-import type { FormSchema, Locale } from '@vue-form-craft/config/commonType'
+import type { FormSchema, Lang, Locale } from '@vue-form-craft/config/commonType'
 import { $useFormInstance } from '@vue-form-craft/config/symbol'
 import locales from '@vue-form-craft/config/locales'
 
@@ -62,7 +62,7 @@ const formValues = computed({
   }
 })
 
-const lang = inject<Ref<'zh' | 'en'>>('vfc-lang')!
+const lang = inject<Lang>('vfc-lang')!
 
 const locale = computed<Locale>(() => locales[lang.value])
 

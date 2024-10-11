@@ -51,7 +51,7 @@ import { $global, $locale, $schema } from '@vue-form-craft/config/symbol'
 import { ref } from 'vue'
 import parseMenus from './menus'
 import templateMock from '@vue-form-craft/template'
-import type { FormSchema, TemplateData } from '@vue-form-craft/config/commonType'
+import type { FormSchema, Lang, TemplateData } from '@vue-form-craft/config/commonType'
 
 const props = withDefaults(
   defineProps<{
@@ -69,7 +69,7 @@ const { elements } = inject($global)!
 
 const locale = inject($locale)!
 
-const lang = inject<Ref<'zh' | 'en'>>('vfc-lang')!
+const lang = inject<Lang>('vfc-lang')!
 
 const menus = computed(() => parseMenus({ elements, omits: props.omitMenus, lang: lang.value }))
 

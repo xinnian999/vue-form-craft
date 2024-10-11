@@ -36,11 +36,12 @@
 <script setup lang="ts">
 import { ref, inject } from 'vue'
 import { ElMessageBox } from 'element-plus'
-import { $schema, $methods, $locale } from '@vue-form-craft/config/symbol'
+import { $schema, $methods } from '@vue-form-craft/config/symbol'
 import IconRender from '@vue-form-craft/components/IconRender.vue'
 import JsonSchema from './JsonSchema.vue'
 import VueCode from './VueCode.vue'
 import Preview from './Preview.vue'
+import { useLocale } from '@vue-form-craft/hooks'
 
 type PreviewAction = {
   label: string
@@ -57,7 +58,7 @@ const { schema } = inject($schema)!
 
 const { handleSave } = inject($methods)!
 
-const locale = inject($locale)!
+const locale = useLocale()
 
 const JsonSchemaVisible = ref(false)
 const VueCodeVisible = ref(false)
@@ -65,7 +66,7 @@ const PreviewVisible = ref(false)
 
 const leftActions: PreviewAction[] = [
   {
-    label: locale.value.actions.previewJson,
+    label: locale.actions.previewJson,
     btnType: 'primary',
     icon:'script',
     onClick: () => {
@@ -73,7 +74,7 @@ const leftActions: PreviewAction[] = [
     }
   },
   {
-    label: locale.value.actions.previewVueCode,
+    label: locale.actions.previewVueCode,
     btnType: 'default',
     icon: 'vue',
     onClick: () => {
@@ -81,7 +82,7 @@ const leftActions: PreviewAction[] = [
     }
   },
   {
-    label: locale.value.actions.previewForm,
+    label: locale.actions.previewForm,
     btnType: 'default',
     icon:'eye',
     onClick: () => {
@@ -92,7 +93,7 @@ const leftActions: PreviewAction[] = [
 
 const rightActions: PreviewAction[] = [
   {
-    label: locale.value.actions.clear,
+    label: locale.actions.clear,
     btnType: 'danger',
     icon: 'trash',
     onClick: async () => {
@@ -101,7 +102,7 @@ const rightActions: PreviewAction[] = [
     }
   },
   {
-    label: locale.value.actions.save,
+    label: locale.actions.save,
     icon:'save',
     btnType: 'primary',
     onClick: handleSave

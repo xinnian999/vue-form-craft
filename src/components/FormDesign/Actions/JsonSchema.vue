@@ -36,14 +36,15 @@
 <script setup lang="ts">
 import { ref, computed, inject } from 'vue'
 import JsonEditorVue from 'json-editor-vue3'
-import { $locale, $schema } from '@vue-form-craft/config/symbol'
+import { $schema } from '@vue-form-craft/config/symbol'
 import { CodeHighLight } from '@vue-form-craft/components'
 import { changeItems } from '../utils'
 import { schemaHelp ,tsJsonSchema,jsJsonSchema} from './config'
+import { useLocale } from '@vue-form-craft/hooks'
 
 const { schema, updateSchema } = inject($schema)!
 
-const locale = inject($locale)!
+const locale = useLocale()
 
 const json = computed({
   get() {

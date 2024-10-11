@@ -24,7 +24,7 @@ import Current from './Current/index.vue'
 import Actions from './Actions/index.vue'
 import { getCurrentByKey, setCurrentByKey, changeItems, copyItems } from './utils'
 import { $schema, $current, $methods, $hoverKey, $locale } from '@vue-form-craft/config/symbol'
-import type { FormSchema, FormItemType, TemplateData, FormElement, Locale } from '@vue-form-craft/config/commonType'
+import type { FormSchema, FormItemType, TemplateData, FormElement, Locale, Lang } from '@vue-form-craft/config/commonType'
 import locales from '@vue-form-craft/config/locales/index'
 
 withDefaults(defineProps<{
@@ -73,7 +73,7 @@ const current = computed({
   }
 })
 
-const lang = inject<Ref<'zh' | 'en'>>('vfc-lang')!
+const lang = inject<Lang>('vfc-lang')!
 
 const locale = computed<Locale>(() => locales[lang.value])
 
