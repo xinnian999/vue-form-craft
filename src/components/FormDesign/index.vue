@@ -27,10 +27,6 @@ import { $schema, $current, $methods, $hoverKey, $locale } from '@vue-form-craft
 import type { FormSchema, FormItemType, TemplateData, FormElement, Locale } from '@vue-form-craft/config/commonType'
 import locales from '@vue-form-craft/config/locales/index'
 
-defineOptions({
-  name: 'FormDesign'
-})
-
 withDefaults(defineProps<{
   schemaContext?: Record<string, any>
   templates?: TemplateData

@@ -72,18 +72,17 @@
 <script setup lang="ts">
 import { computed, inject, onMounted, reactive } from 'vue'
 import { isRegexString, getDataByPath, setDataByPath } from '@vue-form-craft/utils'
-import { $global, $initialValues } from '@vue-form-craft/config/symbol'
+import { $global } from '@vue-form-craft/config/symbol'
 import type { FormItemType } from '@vue-form-craft/config/commonType'
 import { IconRender } from '@vue-form-craft/components'
 import { useFormInstance } from '@vue-form-craft/release'
 
 const thisProps = defineProps<FormItemType>()
 
-const { schema, formValues, updateFormValues } = useFormInstance()
+const { schema, formValues, initialValues, updateInitialValues, updateFormValues } =
+  useFormInstance()
 
 const { elements } = inject($global)!
-
-const { initialValues, updateInitialValues } = inject($initialValues)!
 
 const dialogState = reactive({
   visible: false,

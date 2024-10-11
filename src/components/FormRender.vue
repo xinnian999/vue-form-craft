@@ -25,18 +25,8 @@ import { handleLinkages, deepParse, setDataByPath, getDataByPath } from '@vue-fo
 import FormItemRender from './FormItemRender.vue'
 import { cloneDeep, merge } from 'lodash'
 import type { FormSchema, Locale } from '@vue-form-craft/config/commonType'
-import {
-  $schema,
-  $formValues,
-  $selectData,
-  $initialValues,
-  $useFormInstance
-} from '@vue-form-craft/config/symbol'
+import { $useFormInstance } from '@vue-form-craft/config/symbol'
 import locales from '@vue-form-craft/config/locales'
-
-defineOptions({
-  name: 'FormRender'
-})
 
 const props = defineProps<
   Readonly<{
@@ -125,38 +115,21 @@ watch(initialValues, (newVal) => {
   formValues.value = merge(formValues.value, newVal)
 })
 
-provide($schema, {
-  schema: computed(() => props.schema),
-  updateSchema: () => {}
-})
-
-provide($formValues, {
-  formValues,
-  updateFormValues: (values) => (formValues.value = values)
-})
-provide($selectData, {
-  selectData,
-  updateSelectData: (key, value) => {
-    selectData[key] = value
-  }
-})
-
-provide($initialValues, {
-  initialValues,
-  updateInitialValues: (values) => {
-    Object.assign(initialValues, values)
-  }
-})
-
 provide($useFormInstance, {
   formValues: readonly(formValues),
   selectData: readonly(selectData),
+  initialValues: readonly(initialValues),
   schema: computed(() => props.schema),
   read: computed(() => props.read),
   updateFormValues: (values) => (formValues.value = values),
   updateSelectData: (key, value) => {
     selectData[key] = value
-  }
+  },
+  updateInitialValues: (values) => {
+    Object.assign(initialValues, values)
+  },
+  validate,
+  resetFields
 })
 
 defineExpose({ validate, context, resetFields })
