@@ -25,7 +25,7 @@ import { handleLinkages, deepParse, setDataByPath, getDataByPath } from '@vue-fo
 import FormItemRender from './FormItemRender.vue'
 import { cloneDeep, merge } from 'lodash'
 import type { FormSchema, Lang, Locale } from '@vue-form-craft/config/commonType'
-import { $useFormInstance } from '@vue-form-craft/config/symbol'
+import { $formInstance } from '@vue-form-craft/config/symbol'
 import locales from '@vue-form-craft/config/locales'
 
 const props = defineProps<
@@ -115,7 +115,7 @@ watch(initialValues, (newVal) => {
   formValues.value = merge(formValues.value, newVal)
 })
 
-provide($useFormInstance, {
+provide($formInstance, {
   formValues: readonly(formValues),
   selectData: readonly(selectData),
   initialValues: readonly(initialValues),

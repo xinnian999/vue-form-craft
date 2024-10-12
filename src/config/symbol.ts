@@ -33,7 +33,7 @@ export const $hoverKey = Symbol() as InjectionKey<{
 
 export const $locale = Symbol() as InjectionKey<Ref<Locale>>
 
-export const $useFormInstance = Symbol() as InjectionKey<{
+export const $formInstance = Symbol() as InjectionKey<{
   readonly formValues: Ref<Record<string, any>>
   readonly selectData: Record<string, Record<string, any>>
   readonly initialValues: Record<string, Record<string, any>>
