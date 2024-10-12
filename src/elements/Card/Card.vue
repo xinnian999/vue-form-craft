@@ -7,13 +7,15 @@
 
 <script setup lang="ts">
 import { FormItemRender, CanvasWrapper } from '@vue-form-craft/components'
-import type { FormItemType } from '@vue-form-craft/config/commonType';
+import type { FormItemType } from '@vue-form-craft/config/commonType'
+import { useFormInstance } from '@vue-form-craft/release'
 
 defineProps<{
-  props:Record<string,any>
-  children:FormItemType[]
-  design: boolean
+  props: Record<string, any>
+  children: FormItemType[]
 }>()
+
+const { design } = useFormInstance()
 </script>
 
 <style lang="less">

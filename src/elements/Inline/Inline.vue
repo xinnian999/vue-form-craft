@@ -17,14 +17,15 @@
 <script setup lang="ts">
 import {  computed, type StyleValue } from 'vue'
 import { FormItemRender, DefaultCanvasWrapper } from '@vue-form-craft/components'
-import type { FormItemType } from '@vue-form-craft/release';
+import { useFormInstance, type FormItemType } from '@vue-form-craft/release';
 
 const thisProps = defineProps<{
   name:string,
   props:Record<string,any>,
   children:FormItemType[],
-  design: boolean
 }>()
+
+const { design } = useFormInstance()
 
 const InlineStyle = computed<StyleValue>(() => ({
   width: '100%',

@@ -108,7 +108,7 @@
 import { computed, h, watch } from 'vue'
 import { FormItem, DefaultCanvasWrapper, IconRender } from '@vue-form-craft/components'
 import { deepParse } from '@vue-form-craft/utils'
-import type { FormItemType } from '@vue-form-craft/release'
+import { useFormInstance, type FormItemType } from '@vue-form-craft/release'
 import { isEqual, isString } from 'lodash'
 
 interface Props {
@@ -120,7 +120,6 @@ interface Props {
   title?: string
   newItemDefaults?: (index: number) => Record<string, any>
   name?: string
-  design?: boolean
   disabled?: boolean
 }
 
@@ -136,6 +135,8 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const list = defineModel<Record<string, any>[]>({ default: [] })
+
+const { design } = useFormInstance()
 
 const fields = computed(
   () => (index: number) => deepParse(props.children, { $item: list.value[index], $index: index })

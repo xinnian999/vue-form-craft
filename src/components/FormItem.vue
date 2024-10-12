@@ -3,7 +3,6 @@
     <div v-if="config.type === 'layout'" :style="itemStyle">
       <component
         :is="config.component"
-        :design="design"
         :name="name"
         :props="props"
         :children="children"
@@ -49,7 +48,6 @@
             :size="schema.size"
             v-bind="formItemProps"
             v-model:[config.modelName!]="value"
-            :design="design"
           />
         </el-dialog>
 
@@ -63,7 +61,6 @@
         :size="schema.size"
         v-bind="formItemProps"
         v-model:[config.modelName!]="value"
-        :design="design"
       />
     </el-form-item>
   </template>

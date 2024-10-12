@@ -1,5 +1,6 @@
 import type FormRender from '@vue-form-craft/components/FormRender.vue'
-import type { Component, Ref, VNode } from 'vue'
+import type { FormValidationResult } from 'element-plus'
+import type { Component, Ref, VNode, ToRefs } from 'vue'
 
 export type FormRule = {
   type: 'email' | 'url' | 'custom' | string
@@ -29,7 +30,6 @@ export interface FormItemType {
   rules?: FormRule[]
   class?: any
   style?: any
-  design?: boolean
   change?: FormChange[]
   dialog?: boolean
 }
@@ -83,8 +83,6 @@ export interface SelectProps {
 
 export type SelectValue = string | number | boolean
 
-export type FormRenderInstance = InstanceType<typeof FormRender>
-
 export type $Global = {
   request?: (options: Record<string, any>) => Promise<Record<string, any>>
   elements: Record<string, FormElement>
@@ -132,4 +130,27 @@ export type CollapseItem = {
   name: string
   checked?: boolean
   children: FormItemType[]
+}
+
+export interface FormRenderProps {
+  schema: FormSchema
+  schemaContext?: Record<string, any>
+  design?: boolean
+  footer?: boolean
+  read?: boolean
+}
+
+export interface FormInstance extends ToRefs<FormRenderProps> {
+  readonly formValues: Ref<Record<string, any>>
+  readonly selectData: Record<string, Record<string, any>>
+  readonly initialValues: Record<string, Record<string, any>>
+  readonly schema: Ref<FormSchema>
+  readonly read: Ref<boolean>
+  readonly context: Ref<Record<string, any>>
+  updateFormValues: (values: Record<string, any>) => void
+  updateSelectData: (key: string, value: Record<string, any>) => void
+  updateInitialValues: (values: Record<string, any>) => void
+  validate: () => FormValidationResult | undefined
+  resetFields: (names?: string[]) => void
+  submit: () => Promise<void>
 }

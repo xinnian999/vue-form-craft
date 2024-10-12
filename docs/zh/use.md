@@ -68,9 +68,9 @@ app.mount('#app')
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { FormSchema,FormRenderInstance } from 'vue-form-craft'
+import type { FormSchema,FormInstance } from 'vue-form-craft'
 
-const formRef = ref<FormRenderInstance>()
+const formRef = ref<FormInstance>()
 
 const formValues = ref({})
 

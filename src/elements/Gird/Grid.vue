@@ -17,14 +17,15 @@
 <script setup lang="ts">
 import {  computed } from 'vue'
 import { FormItemRender, DefaultCanvasWrapper } from '@vue-form-craft/components'
-import type { FormItemType } from '@vue-form-craft/release';
+import { useFormInstance, type FormItemType } from '@vue-form-craft/release';
 
 const thisProps = defineProps<{
   props:Record<string,any>
   children:FormItemType[]
-  design: boolean
   name:string
 }>()
+
+const { design } = useFormInstance()
 
 const gridStyle = computed(() => ({
   display: 'grid',

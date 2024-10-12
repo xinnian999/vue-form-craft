@@ -13,5 +13,5 @@ export type {
   FormItemType,
   FormSchema,
   TemplateData,
-  FormRenderInstance
+  FormInstance
 } from '@vue-form-craft/config/commonType'

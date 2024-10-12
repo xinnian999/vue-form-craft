@@ -1,6 +1,5 @@
 import type { InjectionKey, Ref } from 'vue'
-import type { $Global, FormItemType, FormSchema } from './commonType'
-import type { FormValidationResult } from 'element-plus'
+import type { $Global, FormItemType, FormInstance, FormSchema } from './commonType'
 
 export const $global = Symbol() as InjectionKey<$Global>
 
@@ -26,15 +25,4 @@ export const $hoverKey = Symbol() as InjectionKey<{
   updateHoverKey: (key: string) => void
 }>
 
-export const $formInstance = Symbol() as InjectionKey<{
-  readonly formValues: Ref<Record<string, any>>
-  readonly selectData: Record<string, Record<string, any>>
-  readonly initialValues: Record<string, Record<string, any>>
-  readonly schema: Ref<FormSchema>
-  readonly read: Ref<boolean>
-  updateFormValues: (values: Record<string, any>) => void
-  updateSelectData: (key: string, value: Record<string, any>) => void
-  updateInitialValues: (values: Record<string, any>) => void
-  validate: () => FormValidationResult | undefined
-  resetFields: (names: string[]) => void
-}>
+export const $formInstance = Symbol() as InjectionKey<FormInstance>
