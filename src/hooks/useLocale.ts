@@ -1,11 +1,12 @@
-import type { Lang, Locale } from '@vue-form-craft/config/commonType'
+import type { Locale } from '@vue-form-craft/config/commonType'
 import locales from '@vue-form-craft/config/locales'
-import { computed, inject, toValue } from 'vue'
+import { computed } from 'vue'
+import useLang from './useLang'
 
 export default function useLocale() {
-  const lang = inject<Lang>('vfc-lang')!
+  const lang = useLang()
 
   const locale = computed<Locale>(() => locales[lang.value])
 
-  return toValue(locale)
+  return locale
 }

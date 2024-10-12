@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject} from 'vue'
+import { computed, inject } from 'vue'
 import { $global } from '@vue-form-craft/config/symbol'
 import { FormRender } from '@vue-form-craft/components'
 import { getDataByPath, setDataByPath } from '@vue-form-craft/utils'
@@ -17,11 +17,11 @@ import { isString } from 'lodash'
 import type { FormItemType, FormSchema } from '@vue-form-craft/release'
 import LinkageConfig from './LinkageConfig.vue'
 import StyleConfig from './StyleConfig.vue'
-import type { Lang } from '@vue-form-craft/config/commonType'
+import { useLang } from '@vue-form-craft/hooks'
 
 const { elements } = inject($global)!
 
-const lang = inject<Lang>('vfc-lang')!
+const lang = useLang()
 
 const current = defineModel<FormItemType>({ required: true })
 

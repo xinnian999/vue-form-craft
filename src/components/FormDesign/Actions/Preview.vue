@@ -44,9 +44,10 @@
 <script setup lang="ts">
 import { ref, inject, computed } from 'vue'
 import { FormRender } from '@vue-form-craft/components'
-import { $locale, $schema } from '@vue-form-craft/config/symbol'
+import { $schema } from '@vue-form-craft/config/symbol'
 import type { FormRenderInstance } from '@vue-form-craft/release'
 import JsonEdit from '@vue-form-craft/elements/JsonEdit/JsonEdit.vue'
+import { useLocale } from '@vue-form-craft/hooks'
 
 defineProps<{
   schemaContext: Record<string, any>
@@ -64,7 +65,7 @@ const visible = defineModel<boolean>()
 
 const context = computed(() => formRef.value?.context)
 
-const locale = inject($locale)!
+const locale = useLocale()
 
 const handleSubmit = async () => {
   await formRef.value?.validate()

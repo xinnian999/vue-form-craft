@@ -18,12 +18,13 @@ export default (app: App<Element>, options?: Options) => {
   if (options) {
     Object.assign(globalConfig, options)
     Object.assign(globalConfig.elements, options.extendElements)
-
   }
 
   app.provide($global, globalConfig)
-  app.provide('vfc-lang', ref(options?.lang || 'zh'))
 
+  if (options?.lang) {
+    app.provide('vfc-lang', ref(options.lang))
+  }
 
   app.component('FormRender', FormRender)
   app.component('FormDesign', FormDesign)

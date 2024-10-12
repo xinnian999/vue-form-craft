@@ -20,13 +20,14 @@
 
 <script setup lang="ts">
 import { inject } from 'vue'
-import { $locale, $schema } from '@vue-form-craft/config/symbol'
+import { $schema } from '@vue-form-craft/config/symbol'
 import { CodeHighLight } from '@vue-form-craft/components'
 import { tsVue, jsVue } from './config'
+import { useLocale } from '@vue-form-craft/hooks';
 
 const { schema } = inject($schema)!
 
-const locale = inject($locale)!
+const locale = useLocale()
 
 const visible = defineModel<boolean>()
 </script>

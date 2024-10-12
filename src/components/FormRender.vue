@@ -24,9 +24,9 @@ import type { FormInstance } from 'element-plus'
 import { handleLinkages, deepParse, setDataByPath, getDataByPath } from '@vue-form-craft/utils'
 import FormItemRender from './FormItemRender.vue'
 import { cloneDeep, merge } from 'lodash'
-import type { FormSchema, Lang, Locale } from '@vue-form-craft/config/commonType'
+import type { FormSchema } from '@vue-form-craft/config/commonType'
 import { $formInstance } from '@vue-form-craft/config/symbol'
-import locales from '@vue-form-craft/config/locales'
+import { useLocale } from '@vue-form-craft/hooks'
 
 const props = defineProps<
   Readonly<{
@@ -46,25 +46,13 @@ const emit = defineEmits<{
 
 const formRef = ref<FormInstance>()
 
+const formValues = defineModel<Record<string, any>>({ default: () => ({}) })
+
 const selectData = reactive<Record<string, Record<string, any>>>({})
 
 const initialValues = reactive<Record<string, any>>({})
 
-const stateFormValues = ref({})
-
-const formValues = computed({
-  get() {
-    return props.modelValue || stateFormValues.value
-  },
-  set(values) {
-    emit('update:modelValue', values)
-    stateFormValues.value = values
-  }
-})
-
-const lang = inject<Lang>('vfc-lang')!
-
-const locale = computed<Locale>(() => locales[lang.value])
+const locale = useLocale()
 
 const context = computed(() => {
   // console.log('selectData===>',selectData);
@@ -112,7 +100,9 @@ watch(
 )
 
 watch(initialValues, (newVal) => {
-  formValues.value = merge(formValues.value, newVal)
+  nextTick(() => {
+    formValues.value = merge(formValues.value, newVal)
+  })
 })
 
 provide($formInstance, {

@@ -66,7 +66,7 @@ const PreviewVisible = ref(false)
 
 const leftActions: PreviewAction[] = [
   {
-    label: locale.actions.previewJson,
+    label: locale.value.actions.previewJson,
     btnType: 'primary',
     icon:'script',
     onClick: () => {
@@ -74,7 +74,7 @@ const leftActions: PreviewAction[] = [
     }
   },
   {
-    label: locale.actions.previewVueCode,
+    label: locale.value.actions.previewVueCode,
     btnType: 'default',
     icon: 'vue',
     onClick: () => {
@@ -82,7 +82,7 @@ const leftActions: PreviewAction[] = [
     }
   },
   {
-    label: locale.actions.previewForm,
+    label: locale.value.actions.previewForm,
     btnType: 'default',
     icon:'eye',
     onClick: () => {
@@ -93,7 +93,7 @@ const leftActions: PreviewAction[] = [
 
 const rightActions: PreviewAction[] = [
   {
-    label: locale.actions.clear,
+    label: locale.value.actions.clear,
     btnType: 'danger',
     icon: 'trash',
     onClick: async () => {
@@ -102,7 +102,7 @@ const rightActions: PreviewAction[] = [
     }
   },
   {
-    label: locale.actions.save,
+    label: locale.value.actions.save,
     icon:'save',
     btnType: 'primary',
     onClick: handleSave

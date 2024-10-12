@@ -1,5 +1,5 @@
 import type { InjectionKey, Ref } from 'vue'
-import type { $Global, FormItemType, FormSchema, Locale } from './commonType'
+import type { $Global, FormItemType, FormSchema } from './commonType'
 import type { FormValidationResult } from 'element-plus'
 
 export const $global = Symbol() as InjectionKey<$Global>
@@ -7,11 +7,6 @@ export const $global = Symbol() as InjectionKey<$Global>
 export const $schema = Symbol() as InjectionKey<{
   readonly schema: Ref<FormSchema>
   updateSchema: (schema: FormSchema) => void
-}>
-
-export const $initialValues = Symbol() as InjectionKey<{
-  readonly initialValues: Record<string, Record<string, any>>
-  updateInitialValues: (values: Record<string, any>) => void
 }>
 
 export const $current = Symbol() as InjectionKey<{
@@ -30,8 +25,6 @@ export const $hoverKey = Symbol() as InjectionKey<{
   readonly hoverKey: Ref<string>
   updateHoverKey: (key: string) => void
 }>
-
-export const $locale = Symbol() as InjectionKey<Ref<Locale>>
 
 export const $formInstance = Symbol() as InjectionKey<{
   readonly formValues: Ref<Record<string, any>>
