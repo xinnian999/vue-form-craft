@@ -8,8 +8,12 @@
     ref="formRef"
     v-bind="$attrs"
   >
-    <FormItemRender v-if="!design" :formItems="formItems" />
+    <template v-if="!design">
+      <FormItem v-for="item in formItems" :key="item.name" v-bind="item" />
+    </template>
+
     <slot />
+
     <FormFooter />
   </el-form>
 </template>
@@ -18,12 +22,12 @@
 import { ref, computed, reactive, provide, watch, nextTick, readonly, toRefs } from 'vue'
 import type { FormInstance as ElFormInstance } from 'element-plus'
 import { handleLinkages, deepParse, setDataByPath, getDataByPath } from '@vue-form-craft/utils'
-import FormItemRender from './FormItemRender.vue'
 import { cloneDeep, merge } from 'lodash'
 import type { FormInstance, FormRenderProps } from '@vue-form-craft/config/commonType'
 import { $formInstance } from '@vue-form-craft/config/symbol'
 import { useLocale } from '@vue-form-craft/hooks'
 import FormFooter from './FormFooter.vue'
+import FormItem from './FormItem.vue'
 
 const props = defineProps<FormRenderProps>()
 

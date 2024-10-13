@@ -1,12 +1,7 @@
 <template>
   <template v-if="design || !hidden">
     <div v-if="config.type === 'layout'" :style="itemStyle">
-      <component
-        :is="config.component"
-        :name="name"
-        :props="props"
-        :children="children"
-      />
+      <component :is="config.component" :name="name" :props="props" :children="children" />
     </div>
 
     <el-form-item
@@ -76,7 +71,7 @@ import { useFormInstance } from '@vue-form-craft/release'
 
 const thisProps = defineProps<FormItemType>()
 
-const { schema, formValues, initialValues, updateInitialValues, updateFormValues } =
+const { schema, formValues, initialValues, updateInitialValues, updateFormValues, design } =
   useFormInstance()
 
 const { elements } = inject($global)!
@@ -102,7 +97,7 @@ const value = computed({
 })
 
 const itemStyle = computed(() => ({
-  marginBottom: thisProps.design ? 0 : '18px',
+  marginBottom: design?.value ? 0 : '18px',
   ...thisProps.style
 }))
 
@@ -154,20 +149,21 @@ const config = computed(() => {
 })
 
 const formItemProps = computed(() => {
-  const initProps: Record<string, any> = {
+  const props: Record<string, any> = {
     ...thisProps.props,
     name: thisProps.name
   }
 
   if (thisProps.children) {
-    initProps.children = thisProps.children
+    
+    props.children = thisProps.children
   }
 
-  return initProps
+  return props
 })
 
 onMounted(() => {
-  if (!value.value && thisProps.initialValue !== undefined && !thisProps.design) {
+  if (!value.value && thisProps.initialValue !== undefined && !design?.value) {
     const newInitialValues = setDataByPath(initialValues, thisProps.name, thisProps.initialValue)
     updateInitialValues(newInitialValues)
   }

@@ -19,7 +19,7 @@
       </li>
     </ul>
 
-    <form-item v-bind="data" :props="checkProps(data.props)" design />
+    <form-item v-bind="data" :props="checkProps(data.props)" />
   </div>
 </template>
 
