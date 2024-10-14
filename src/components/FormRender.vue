@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, reactive, provide, watch, nextTick, readonly, toRefs } from 'vue'
+import { ref, computed, reactive, provide, watch, nextTick, toRefs } from 'vue'
 import type { FormInstance as ElFormInstance } from 'element-plus'
 import { handleLinkages, deepParse, setDataByPath, getDataByPath } from '@vue-form-craft/utils'
 import { cloneDeep, merge } from 'lodash'

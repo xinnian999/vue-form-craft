@@ -1,5 +1,5 @@
 import type { FormValidationResult } from 'element-plus'
-import type { Component, Ref, VNode, ToRefs, UnwrapNestedRefs } from 'vue'
+import type { Component, Ref, VNode, ToRefs, UnwrapNestedRefs, DeepReadonly } from 'vue'
 
 export type FormRule = {
   type: 'email' | 'url' | 'custom' | string
@@ -153,4 +153,4 @@ export interface FormInstanceSource extends ToRefs<FormRenderProps> {
 }
 
 // 对 FormInstanceSource 里的 ref 解包
-export type FormInstance= UnwrapNestedRefs<FormInstanceSource>
+export type FormInstance = UnwrapNestedRefs<DeepReadonly<FormInstanceSource>>
