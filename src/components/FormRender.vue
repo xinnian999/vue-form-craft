@@ -19,11 +19,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, reactive, provide, watch, nextTick, toRefs } from 'vue'
+import { ref, computed, reactive, provide, watch, nextTick, toRefs, readonly } from 'vue'
 import type { FormInstance as ElFormInstance } from 'element-plus'
 import { handleLinkages, deepParse, setDataByPath, getDataByPath } from '@vue-form-craft/utils'
 import { cloneDeep, merge } from 'lodash'
-import type { FormInstanceSource, FormRenderProps } from '@vue-form-craft/config/commonType'
+import type { FormInstance, FormRenderProps } from '@vue-form-craft/config/commonType'
 import { $formInstance } from '@vue-form-craft/config/symbol'
 import { useLocale } from '@vue-form-craft/hooks'
 import FormFooter from './FormFooter.vue'
@@ -68,14 +68,14 @@ watch(initialValues, async (newVal) => {
   formValues.value = merge(formValues.value, newVal)
 })
 
-const validate: FormInstanceSource['validate'] = () => formRef.value?.validate()
+const validate: FormInstance['validate'] = () => formRef.value?.validate()
 
-const submit: FormInstanceSource['submit'] = async () => {
+const submit: FormInstance['submit'] = async () => {
   await validate()
   emit('onFinish', formValues.value)
 }
 
-const resetFields: FormInstanceSource['resetFields'] = (names) => {
+const resetFields: FormInstance['resetFields'] = (names) => {
   if (names) {
     let temp = cloneDeep(formValues.value)
     names.forEach((name) => {
@@ -87,19 +87,19 @@ const resetFields: FormInstanceSource['resetFields'] = (names) => {
   }
 }
 
-const updateFormValues: FormInstanceSource['updateFormValues'] = (values) => {
+const updateFormValues: FormInstance['updateFormValues'] = (values) => {
   formValues.value = values
 }
 
-const updateSelectData: FormInstanceSource['updateSelectData'] = (key, value) => {
+const updateSelectData: FormInstance['updateSelectData'] = (key, value) => {
   selectData[key] = value
 }
 
-const updateInitialValues: FormInstanceSource['updateInitialValues'] = (values) => {
+const updateInitialValues: FormInstance['updateInitialValues'] = (values) => {
   Object.assign(initialValues, values)
 }
 
-const instance = {
+const instance = readonly({
   ...toRefs(props),
   formValues,
   selectData,
@@ -111,7 +111,7 @@ const instance = {
   validate,
   resetFields,
   submit
-}
+})
 
 provide($formInstance, instance)
 
