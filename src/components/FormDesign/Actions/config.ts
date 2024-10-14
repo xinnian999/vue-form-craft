@@ -10,9 +10,9 @@ export const tsVue = (schema: FormSchema) => {
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { FormSchema,FormInstance } from 'vue-form-craft'
+import type { FormSchema,FormRenderInstance } from 'vue-form-craft'
 
-const formRef = ref<FormInstance>()
+const formRef = ref<FormRenderInstance>()
 
 const formValues = ref({})
 

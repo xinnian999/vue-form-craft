@@ -92,3 +92,34 @@ type FormElement = {
 ```ts
 type TemplateData = { name: string; schema: FormSchema; id?: string }[]
 ```
+
+## FormRenderProps
+
+```ts
+export interface FormRenderProps {
+  schema: FormSchema
+  schemaContext?: Record<string, any>
+  design?: boolean
+  footer?: boolean
+  read?: boolean
+}
+```
+
+## FormInstance
+
+```ts
+import type { Ref, ToRefs } from 'vue'
+
+interface FormInstance extends ToRefs<FormRenderProps> {
+  readonly formValues: Ref<Record<string, any>>
+  readonly selectData: Record<string, Record<string, any>>
+  readonly initialValues: Record<string, Record<string, any>>
+  readonly context: Ref<Record<string, any>>
+  updateFormValues: (values: Record<string, any>) => void
+  updateSelectData: (key: string, value: Record<string, any>) => void
+  updateInitialValues: (values: Record<string, any>) => void
+  validate: () => FormValidationResult | undefined
+  resetFields: (names?: string[]) => void
+  submit: () => Promise<void>
+}
+```

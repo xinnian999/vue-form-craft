@@ -56,18 +56,16 @@ const formItems = computed(() => deepParse(props.schema.items || [], context.val
 
 watch(
   formValues,
-  (newVal, oldVal) => {
-    nextTick(() => {
-      handleLinkages({ newVal, oldVal, formValues, formItems: formItems.value })
-    })
+  async (newVal, oldVal) => {
+    await nextTick()
+    handleLinkages({ newVal, oldVal, formValues, formItems: formItems.value })
   },
   { deep: true }
 )
 
-watch(initialValues, (newVal) => {
-  nextTick(() => {
-    formValues.value = merge(formValues.value, newVal)
-  })
+watch(initialValues, async (newVal) => {
+  await nextTick()
+  formValues.value = merge(formValues.value, newVal)
 })
 
 const validate: FormInstance['validate'] = () => formRef.value?.validate()

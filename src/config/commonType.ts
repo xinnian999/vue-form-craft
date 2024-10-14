@@ -1,4 +1,4 @@
-import type FormRender from '@vue-form-craft/components/FormRender.vue'
+import type { FormRender } from '@vue-form-craft/components'
 import type { FormValidationResult } from 'element-plus'
 import type { Component, Ref, VNode, ToRefs } from 'vue'
 
@@ -144,8 +144,6 @@ export interface FormInstance extends ToRefs<FormRenderProps> {
   readonly formValues: Ref<Record<string, any>>
   readonly selectData: Record<string, Record<string, any>>
   readonly initialValues: Record<string, Record<string, any>>
-  readonly schema: Ref<FormSchema>
-  readonly read: Ref<boolean>
   readonly context: Ref<Record<string, any>>
   updateFormValues: (values: Record<string, any>) => void
   updateSelectData: (key: string, value: Record<string, any>) => void
@@ -154,3 +152,5 @@ export interface FormInstance extends ToRefs<FormRenderProps> {
   resetFields: (names?: string[]) => void
   submit: () => Promise<void>
 }
+
+export type FormRenderInstance = InstanceType<typeof FormRender>

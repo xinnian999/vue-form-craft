@@ -45,7 +45,7 @@
 import { ref, inject, computed } from 'vue'
 import { FormRender } from '@vue-form-craft/components'
 import { $schema } from '@vue-form-craft/config/symbol'
-import type { FormInstance } from '@vue-form-craft/release'
+import type { FormRenderInstance } from '@vue-form-craft/release'
 import JsonEdit from '@vue-form-craft/elements/JsonEdit/JsonEdit.vue'
 import { useLocale } from '@vue-form-craft/hooks'
 
@@ -57,7 +57,7 @@ const { schema } = inject($schema)!
 
 const tabKey = ref('edit')
 
-const formRef = ref<FormInstance>()
+const formRef = ref<FormRenderInstance>()
 
 const formValues = ref({})
 
