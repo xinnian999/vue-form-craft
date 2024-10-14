@@ -1,7 +1,7 @@
 <template>
   <div class="form-item-inline">
     <DefaultCanvasWrapper
-      v-if="design"
+      v-if="formInstance.design"
       :children="children"
       :style="InlineStyle"
       title="行内布局"
@@ -25,7 +25,7 @@ const thisProps = defineProps<{
   children:FormItemType[],
 }>()
 
-const { design } = useFormInstance()
+const formInstance = useFormInstance()
 
 const InlineStyle = computed<StyleValue>(() => ({
   width: '100%',

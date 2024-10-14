@@ -1,6 +1,6 @@
 <template>
   <ElCard v-bind="props">
-    <CanvasWrapper :children="children" v-if="design" />
+    <CanvasWrapper :children="children" v-if="formInstance.design" />
     <FormItemRender :formItems="children" v-else />
   </ElCard>
 </template>
@@ -15,7 +15,7 @@ defineProps<{
   children: FormItemType[]
 }>()
 
-const { design } = useFormInstance()
+const formInstance = useFormInstance()
 </script>
 
 <style lang="less">

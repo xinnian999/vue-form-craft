@@ -8,10 +8,10 @@ import { useFormInstance } from 'vue-form-craft'
 
 const props = defineProps<{ name: string; data: TransferDataItem[] }>()
 
-const { updateSelectData } = useFormInstance()
+const formInstance = useFormInstance()
 
 const onChange = (value: TransferKey[]) => {
   const source = value.map((val) => props.data.find((v) => v.key === val))
-  updateSelectData(props.name, source)
+  formInstance.updateSelectData(props.name, source)
 }
 </script>

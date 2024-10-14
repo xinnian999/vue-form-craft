@@ -1,5 +1,5 @@
 import type { InjectionKey, Ref } from 'vue'
-import type { $Global, FormItemType, FormInstance, FormSchema } from './commonType'
+import type { $Global, FormItemType, FormInstanceSource, FormSchema } from './commonType'
 
 export const $global = Symbol() as InjectionKey<$Global>
 
@@ -25,4 +25,4 @@ export const $hoverKey = Symbol() as InjectionKey<{
   updateHoverKey: (key: string) => void
 }>
 
-export const $formInstance = Symbol() as InjectionKey<FormInstance>
+export const $formInstance = Symbol() as InjectionKey<FormInstanceSource>

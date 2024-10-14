@@ -1,7 +1,7 @@
 <template>
-  <div class="vue-form-craft-footer" v-if="footer">
-    <el-button type="primary" @click="submit">提交</el-button>
-    <el-button @click="() => resetFields()">重置</el-button>
+  <div class="vue-form-craft-footer" v-if="formInstance.footer">
+    <el-button type="primary" @click="formInstance.submit">提交</el-button>
+    <el-button @click="() => formInstance.resetFields()">重置</el-button>
   </div>
 </template>
 
@@ -9,9 +9,9 @@
 import { useFormInstance } from '@vue-form-craft/release'
 import { computed } from 'vue';
 
-const { submit, resetFields, footer,schema } = useFormInstance()
+const formInstance = useFormInstance()
 
-const formLabelWidth = computed(() => schema.value.labelWidth + 'px')
+const formLabelWidth = computed(() => formInstance.schema.labelWidth + 'px')
 </script>
 
 <style lang="less">

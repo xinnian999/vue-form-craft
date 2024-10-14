@@ -4,7 +4,7 @@
       <template #title>
         <Title :title="item.title" italic type="h4" />
       </template>
-      <CanvasWrapper :children="item.children" v-if="design" />
+      <CanvasWrapper :children="item.children" v-if="formInstance.design" />
       <FormItemRender :formItems="item.children!" v-else />
     </ElCollapseItem>
   </ElCollapse>
@@ -22,7 +22,7 @@ const thisProps = defineProps<{
   children: CollapseItem[]
 }>()
 
-const { design } = useFormInstance()
+const formInstance = useFormInstance()
 
 const activeKey = ref<string[]>([])
 

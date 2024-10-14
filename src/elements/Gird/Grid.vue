@@ -1,7 +1,7 @@
 <template>
   <div class="form-item-grid">
     <DefaultCanvasWrapper
-      v-if="design"
+      v-if="formInstance.design"
       :children="children"
       :style="gridStyle"
       title="栅格布局"
@@ -25,7 +25,7 @@ const thisProps = defineProps<{
   name:string
 }>()
 
-const { design } = useFormInstance()
+const formInstance = useFormInstance()
 
 const gridStyle = computed(() => ({
   display: 'grid',

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="read">{{ value }}</div>
+  <div v-if="formInstance.read">{{ value }}</div>
   <el-input v-else v-bind="$attrs" v-model="value" />
 </template>
 
@@ -8,5 +8,5 @@ import { useFormInstance } from '@vue-form-craft/hooks'
 
 const value = defineModel<string>()
 
-const { read } = useFormInstance()
+const formInstance = useFormInstance()
 </script>

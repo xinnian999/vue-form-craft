@@ -23,7 +23,7 @@ import { ref, computed, reactive, provide, watch, nextTick, readonly, toRefs } f
 import type { FormInstance as ElFormInstance } from 'element-plus'
 import { handleLinkages, deepParse, setDataByPath, getDataByPath } from '@vue-form-craft/utils'
 import { cloneDeep, merge } from 'lodash'
-import type { FormInstance, FormRenderProps } from '@vue-form-craft/config/commonType'
+import type { FormInstanceSource, FormRenderProps } from '@vue-form-craft/config/commonType'
 import { $formInstance } from '@vue-form-craft/config/symbol'
 import { useLocale } from '@vue-form-craft/hooks'
 import FormFooter from './FormFooter.vue'
@@ -68,14 +68,14 @@ watch(initialValues, async (newVal) => {
   formValues.value = merge(formValues.value, newVal)
 })
 
-const validate: FormInstance['validate'] = () => formRef.value?.validate()
+const validate: FormInstanceSource['validate'] = () => formRef.value?.validate()
 
-const submit: FormInstance['submit'] = async () => {
+const submit: FormInstanceSource['submit'] = async () => {
   await validate()
   emit('onFinish', formValues.value)
 }
 
-const resetFields: FormInstance['resetFields'] = (names) => {
+const resetFields: FormInstanceSource['resetFields'] = (names) => {
   if (names) {
     let temp = cloneDeep(formValues.value)
     names.forEach((name) => {
@@ -87,23 +87,23 @@ const resetFields: FormInstance['resetFields'] = (names) => {
   }
 }
 
-const updateFormValues: FormInstance['updateFormValues'] = (values) => {
+const updateFormValues: FormInstanceSource['updateFormValues'] = (values) => {
   formValues.value = values
 }
 
-const updateSelectData: FormInstance['updateSelectData'] = (key, value) => {
+const updateSelectData: FormInstanceSource['updateSelectData'] = (key, value) => {
   selectData[key] = value
 }
 
-const updateInitialValues: FormInstance['updateInitialValues'] = (values) => {
+const updateInitialValues: FormInstanceSource['updateInitialValues'] = (values) => {
   Object.assign(initialValues, values)
 }
 
-const instance: FormInstance = {
+const instance = {
   ...toRefs(props),
-  formValues: readonly(formValues),
-  selectData: readonly(selectData),
-  initialValues: readonly(initialValues),
+  formValues,
+  selectData,
+  initialValues,
   context,
   updateFormValues,
   updateSelectData,

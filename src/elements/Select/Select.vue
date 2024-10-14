@@ -1,5 +1,5 @@
 <template>
-  <div v-if="read">
+  <div v-if="formInstance.read">
     <div v-if="multiple">
       {{
         value &&
@@ -49,7 +49,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
 
 const value = defineModel<SelectValue | SelectValue[]>({ default: [] })
 
-const { read } = useFormInstance()
+const formInstance = useFormInstance()
 
 const { currentOptions, selectChange, loading } = useSelect(props)
 </script>

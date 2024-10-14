@@ -1,5 +1,5 @@
 <template>
-  <div v-if="read">
+  <div v-if="formInstance.read">
     {{
       value?.map((item) => currentOptions.find((v) => v[valueKey] === item)?.[labelKey]).join('、')
     }}
@@ -56,7 +56,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const value = defineModel<CheckboxGroupValueType>()
 
-const { read } = useFormInstance()
+const formInstance = useFormInstance()
 
 const { currentOptions, selectChange, loading } = useSelect(props)
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="vfc-formList">
-    <DefaultCanvasWrapper v-if="design" :children="children" title="自增容器" :name="name" />
+    <DefaultCanvasWrapper v-if="formInstance.design" :children="children" title="自增容器" :name="name" />
 
     <div v-else>
       <template v-if="mode === 'inline'">
@@ -136,7 +136,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const list = defineModel<Record<string, any>[]>({ default: [] })
 
-const { design } = useFormInstance()
+const formInstance = useFormInstance()
 
 const fields = computed(
   () => (index: number) => deepParse(props.children, { $item: list.value[index], $index: index })

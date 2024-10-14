@@ -1,5 +1,5 @@
 <template>
-  <template v-if="design || !hidden">
+  <template v-if="formInstance.design || !hidden">
     <div v-if="config.type === 'layout'" :style="itemStyle">
       <component :is="config.component" :name="name" :props="props" :children="children" />
     </div>
@@ -10,20 +10,20 @@
       :style="itemStyle"
       :key="name"
       :prop="name"
-      :label-width="hideLabel ? '0' : schema.labelWidth"
+      :label-width="hideLabel ? '0' : formInstance.schema.labelWidth"
       :rules="computeRules"
       :class="thisProps.class"
     >
       <template #label>
         <div v-if="!hideLabel" class="form-item-label">
-          <div :style="schema.labelBold && 'font-weight: bold'">{{ label }}</div>
+          <div :style="formInstance.schema.labelBold && 'font-weight: bold'">{{ label }}</div>
           <div class="ico" v-if="help">
             <el-tooltip class="box-item" effect="dark" :content="help">
               <div><icon-render name="help" /></div>
             </el-tooltip>
           </div>
-          <div class="suffix" v-if="schema.labelSuffix">
-            {{ schema.labelSuffix }}
+          <div class="suffix" v-if="formInstance.schema.labelSuffix">
+            {{ formInstance.schema.labelSuffix }}
           </div>
         </div>
       </template>
@@ -39,8 +39,8 @@
         >
           <component
             :is="config.component"
-            :disabled="schema.disabled"
-            :size="schema.size"
+            :disabled="formInstance.schema.disabled"
+            :size="formInstance.schema.size"
             v-bind="formItemProps"
             v-model:[config.modelName!]="value"
           />
@@ -52,8 +52,8 @@
       <component
         v-else
         :is="config.component"
-        :disabled="schema.disabled"
-        :size="schema.size"
+        :disabled="formInstance.schema.disabled"
+        :size="formInstance.schema.size"
         v-bind="formItemProps"
         v-model:[config.modelName!]="value"
       />
@@ -71,8 +71,7 @@ import { useFormInstance } from '@vue-form-craft/release'
 
 const thisProps = defineProps<FormItemType>()
 
-const { schema, formValues, initialValues, updateInitialValues, updateFormValues, design } =
-  useFormInstance()
+const formInstance = useFormInstance()
 
 const { elements } = inject($global)!
 
@@ -88,16 +87,16 @@ const handleDialog = () => {
 
 const value = computed({
   get() {
-    return getDataByPath(formValues.value, thisProps.name)
+    return getDataByPath(formInstance.formValues, thisProps.name)
   },
   set(val) {
-    const newValues = setDataByPath(formValues.value, thisProps.name, val)
-    updateFormValues(newValues)
+    const newValues = setDataByPath(formInstance.formValues, thisProps.name, val)
+    formInstance.updateFormValues(newValues)
   }
 })
 
 const itemStyle = computed(() => ({
-  marginBottom: design?.value ? 0 : '18px',
+  marginBottom: formInstance.design ? 0 : '18px',
   ...thisProps.style
 }))
 
@@ -155,7 +154,6 @@ const formItemProps = computed(() => {
   }
 
   if (thisProps.children) {
-    
     props.children = thisProps.children
   }
 
@@ -163,9 +161,13 @@ const formItemProps = computed(() => {
 })
 
 onMounted(() => {
-  if (!value.value && thisProps.initialValue !== undefined && !design?.value) {
-    const newInitialValues = setDataByPath(initialValues, thisProps.name, thisProps.initialValue)
-    updateInitialValues(newInitialValues)
+  if (!value.value && thisProps.initialValue !== undefined && !formInstance.design) {
+    const newInitialValues = setDataByPath(
+      formInstance.initialValues,
+      thisProps.name,
+      thisProps.initialValue
+    )
+    formInstance.updateInitialValues(newInitialValues)
   }
 })
 </script>

@@ -8,7 +8,7 @@ import useFormInstance from './useFormInstance'
 type Option = Record<string, any>
 
 const useSelect = (props: SelectProps) => {
-  const { selectData, updateSelectData } = useFormInstance()
+  const   formInstance = useFormInstance()
 
   const { request } = inject($global)!
 
@@ -106,8 +106,8 @@ const useSelect = (props: SelectProps) => {
     }
 
     //如果接到了selectData，给顶级组件保存当前值对应得数据源
-    if (selectData && name) {
-      updateSelectData(name, valueData)
+    if (formInstance.selectData && name) {
+      formInstance.updateSelectData(name, valueData)
     }
   }
 

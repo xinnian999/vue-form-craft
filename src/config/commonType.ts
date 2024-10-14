@@ -1,6 +1,5 @@
-import type { FormRender } from '@vue-form-craft/components'
 import type { FormValidationResult } from 'element-plus'
-import type { Component, Ref, VNode, ToRefs } from 'vue'
+import type { Component, Ref, VNode, ToRefs, UnwrapNestedRefs } from 'vue'
 
 export type FormRule = {
   type: 'email' | 'url' | 'custom' | string
@@ -140,7 +139,7 @@ export interface FormRenderProps {
   read?: boolean
 }
 
-export interface FormInstance extends ToRefs<FormRenderProps> {
+export interface FormInstanceSource extends ToRefs<FormRenderProps> {
   readonly formValues: Ref<Record<string, any>>
   readonly selectData: Record<string, Record<string, any>>
   readonly initialValues: Record<string, Record<string, any>>
@@ -153,4 +152,5 @@ export interface FormInstance extends ToRefs<FormRenderProps> {
   submit: () => Promise<void>
 }
 
-export type FormRenderInstance = InstanceType<typeof FormRender>
+// 对 FormInstanceSource 里的 ref 解包
+export type FormInstance= UnwrapNestedRefs<FormInstanceSource>
