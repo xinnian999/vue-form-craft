@@ -1,6 +1,6 @@
 <template>
   <div class="vfc-formList">
-    <DefaultCanvasWrapper v-if="design" :children="children" title="自增容器" :name="name" />
+    <DefaultCanvasWrapper v-if="formInstance.design" :children="children" title="自增容器" :name="name" />
 
     <div v-else>
       <template v-if="mode === 'inline'">
@@ -65,7 +65,7 @@
           :label="item.label"
           :key="item.name"
           v-for="item in children"
-          v-bind="item"
+          v-bind="pickBy(item, Boolean)"
           :formatter="(row, _, __, index) => formatter(item, row, index)"
         />
         <el-table-column fixed="right" min-width="60">
@@ -86,7 +86,7 @@
         </el-table-column>
       </el-table>
 
-      <div style="margin-top:5px">
+      <div style="margin-top: 5px">
         <el-button
           v-if="allowAdd && !isMax"
           @click="handleAddItem"
@@ -108,8 +108,8 @@
 import { computed, h, watch } from 'vue'
 import { FormItem, DefaultCanvasWrapper, IconRender } from '@vue-form-craft/components'
 import { deepParse } from '@vue-form-craft/utils'
-import type { FormItemType } from '@vue-form-craft/release'
-import { isEqual, isString } from 'lodash'
+import { useFormInstance, type FormItemType } from '@vue-form-craft/release'
+import { isEqual, isString, pickBy } from 'lodash'
 
 interface Props {
   children: FormItemType[]
@@ -120,7 +120,6 @@ interface Props {
   title?: string
   newItemDefaults?: (index: number) => Record<string, any>
   name?: string
-  design?: boolean
   disabled?: boolean
 }
 
@@ -136,6 +135,8 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const list = defineModel<Record<string, any>[]>({ default: [] })
+
+const formInstance = useFormInstance()
 
 const fields = computed(
   () => (index: number) => deepParse(props.children, { $item: list.value[index], $index: index })
@@ -158,6 +159,7 @@ const handleReduceItem = (index: number) => {
 }
 
 const formatter = (item: FormItemType, data: Record<string, any>, index: number) => {
+  
   return h(FormItem, {
     ...deepParse(item, { $item: list.value[index], $index: index }),
     hideLabel: true,
@@ -226,7 +228,7 @@ watch(list, (newVal, oldVal) => {
   .list-btn {
     margin-left: 10px;
   }
-  .list-btn.addBtn{
+  .list-btn.addBtn {
     margin-left: 0;
   }
 }

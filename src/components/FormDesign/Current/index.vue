@@ -10,12 +10,13 @@
 </template>
 
 <script setup lang="ts">
+import { useLocale } from '@vue-form-craft/hooks';
 import AttrEdit from './AttrEdit/index.vue'
 import FormEdit from './FormEdit.vue'
-import { $current, $locale } from '@vue-form-craft/config/symbol'
+import { $current } from '@vue-form-craft/config/symbol'
 import { inject } from 'vue'
 
-const locale = inject($locale)!
+const locale = useLocale()
 
 const { current } = inject($current)!
 </script>

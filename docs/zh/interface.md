@@ -92,3 +92,34 @@ type FormElement = {
 ```ts
 type TemplateData = { name: string; schema: FormSchema; id?: string }[]
 ```
+
+## FormRenderProps
+
+```ts
+export interface FormRenderProps {
+  schema: FormSchema
+  schemaContext?: Record<string, any>
+  design?: boolean
+  footer?: boolean
+  read?: boolean
+}
+```
+
+## FormInstance
+
+表单实例
+
+```ts 
+interface FormInstance extends FormRenderProps {
+  formValues: Record<string, any>
+  selectData: Record<string, Record<string, any>>
+  initialValues: Record<string, Record<string, any>>
+  context: Record<string, any>
+  updateFormValues: (values: Record<string, any>) => void
+  updateSelectData: (key: string, value: Record<string, any>) => void
+  updateInitialValues: (values: Record<string, any>) => void
+  validate: () => FormValidationResult | undefined
+  resetFields: (names?: string[]) => void
+  submit: () => Promise<void>
+}
+```

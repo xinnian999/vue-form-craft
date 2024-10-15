@@ -1,13 +1,14 @@
 import { ref, watch, onMounted, inject } from 'vue'
 import { isEqual, isPlainObject, debounce } from 'lodash'
 import { getDataByPath } from '@vue-form-craft/utils'
-import { $selectData, $global } from '@vue-form-craft/config/symbol'
+import { $global } from '@vue-form-craft/config/symbol'
 import type { SelectProps } from '@vue-form-craft/config/commonType'
+import useFormInstance from './useFormInstance'
 
 type Option = Record<string, any>
 
 const useSelect = (props: SelectProps) => {
-  const { selectData, updateSelectData } = inject($selectData)!
+  const   formInstance = useFormInstance()
 
   const { request } = inject($global)!
 
@@ -105,8 +106,8 @@ const useSelect = (props: SelectProps) => {
     }
 
     //如果接到了selectData，给顶级组件保存当前值对应得数据源
-    if (selectData && name) {
-      updateSelectData(name, valueData)
+    if (formInstance.selectData && name) {
+      formInstance.updateSelectData(name, valueData)
     }
   }
 

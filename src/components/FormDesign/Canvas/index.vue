@@ -31,14 +31,15 @@
 import { inject } from 'vue'
 import draggable from 'vuedraggable-es'
 import { FormRender,IconRender } from '@vue-form-craft/components'
-import { $schema, $methods, $locale } from '@vue-form-craft/config/symbol'
+import { $schema, $methods } from '@vue-form-craft/config/symbol'
 import CanvasRender from './CanvasRender.vue'
+import { useLocale } from '@vue-form-craft/hooks'
 
 const { schema } = inject($schema)!
 
 const { onAdd } = inject($methods)!
 
-const locale = inject($locale)!
+const locale = useLocale()
 </script>
 
 <style lang="less">

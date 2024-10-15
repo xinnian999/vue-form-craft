@@ -1,10 +1,8 @@
 <template>
-  <div v-if="read">
-      {{
-        value
-          ?.map((item) => currentOptions.find((v) => v[valueKey] === item)?.[labelKey])
-          .join('、')
-      }}
+  <div v-if="formInstance.read">
+    {{
+      value?.map((item) => currentOptions.find((v) => v[valueKey] === item)?.[labelKey]).join('、')
+    }}
   </div>
   <template v-else>
     <div v-if="!currentOptions.length && !loading" style="font-size: 12px">暂无选项</div>
@@ -35,8 +33,8 @@
 
 <script setup lang="ts">
 import { type CheckboxGroupValueType } from 'element-plus'
-import useSelect from '@vue-form-craft/hooks/useSelect'
 import type { Direction, OptionType, SelectProps } from '@vue-form-craft/config/commonType'
+import { useFormInstance, useSelect } from '@vue-form-craft/hooks'
 
 type Props = Omit<SelectProps, 'multiple'> & {
   optionType?: OptionType
@@ -57,6 +55,8 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const value = defineModel<CheckboxGroupValueType>()
+
+const formInstance = useFormInstance()
 
 const { currentOptions, selectChange, loading } = useSelect(props)
 </script>

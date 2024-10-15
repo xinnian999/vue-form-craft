@@ -8,83 +8,74 @@
     ref="formRef"
     v-bind="$attrs"
   >
-    <FormItemRender v-if="!design" :formItems="formItems" />
-    <slot />
-  </el-form>
+    <template v-if="!design">
+      <FormItem v-for="item in formItems" :key="item.name" v-bind="item" />
+    </template>
 
-  <div class="vue-form-craft-footer" v-if="footer">
-    <el-button type="primary" @click="handleSubmit">提交</el-button>
-    <el-button @click="() => resetFields()">重置</el-button>
-  </div>
+    <slot />
+
+    <FormFooter />
+  </el-form>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, reactive, provide, watch, nextTick, inject, type Ref } from 'vue'
-import type { FormInstance } from 'element-plus'
+import { ref, computed, reactive, provide, watch, nextTick, toRefs, readonly } from 'vue'
+import type { FormInstance as ElFormInstance } from 'element-plus'
 import { handleLinkages, deepParse, setDataByPath, getDataByPath } from '@vue-form-craft/utils'
-import FormItemRender from './FormItemRender.vue'
 import { cloneDeep, merge } from 'lodash'
-import type { FormSchema, Locale } from '@vue-form-craft/config/commonType'
-import { $schema, $formValues, $selectData, $initialValues } from '@vue-form-craft/config/symbol'
-import locales from '@vue-form-craft/config/locales'
+import type { FormInstance, FormRenderProps } from '@vue-form-craft/config/commonType'
+import { $formInstance } from '@vue-form-craft/config/symbol'
+import { useLocale } from '@vue-form-craft/hooks'
+import FormFooter from './FormFooter.vue'
+import FormItem from './FormItem.vue'
 
-defineOptions({
-  name: 'FormRender'
-})
-
-const props = defineProps<
-  Readonly<{
-    modelValue?: Record<string, any>
-    schema: FormSchema
-    schemaContext?: Record<string, any>
-    design?: boolean
-    footer?: boolean
-    read?: boolean
-  }>
->()
+const props = defineProps<FormRenderProps>()
 
 const emit = defineEmits<{
-  'update:modelValue': [values: Record<string, any>]
   onFinish: [values: Record<string, any>]
 }>()
 
-const formRef = ref<FormInstance>()
+const formRef = ref<ElFormInstance>()
+
+const formValues = defineModel<Record<string, any>>({ default: () => ({}) })
 
 const selectData = reactive<Record<string, Record<string, any>>>({})
 
 const initialValues = reactive<Record<string, any>>({})
 
-const stateFormValues = ref({})
-
-const formValues = computed({
-  get() {
-    return props.modelValue || stateFormValues.value
-  },
-  set(values) {
-    emit('update:modelValue', values)
-    stateFormValues.value = values
-  }
-})
-
-const lang = inject<Ref<'zh' | 'en'>>('vfc-lang')!
-
-const locale = computed<Locale>(() => locales[lang.value])
+const locale = useLocale()
 
 const context = computed(() => ({
   ...props.schemaContext,
   $values: formValues.value,
   $selectData: selectData,
-  $initialValues: initialValues,
   $locale: locale.value
 }))
 
 const formItems = computed(() => deepParse(props.schema.items || [], context.value))
 
-const formLabelWidth = computed(() => props.schema.labelWidth + 'px')
+watch(
+  formValues,
+  async (newVal, oldVal) => {
+    await nextTick()
+    handleLinkages({ newVal, oldVal, formValues, formItems: formItems.value })
+  },
+  { deep: true }
+)
 
-const validate = () => formRef.value?.validate()
+watch(initialValues, async (newVal) => {
+  await nextTick()
+  formValues.value = merge(formValues.value, newVal)
+})
 
-const resetFields = (names?: string[]) => {
+const validate: FormInstance['validate'] = () => formRef.value?.validate()
+
+const submit: FormInstance['submit'] = async () => {
+  await validate()
+  emit('onFinish', formValues.value)
+}
+
+const resetFields: FormInstance['resetFields'] = (names) => {
   if (names) {
     let temp = cloneDeep(formValues.value)
     names.forEach((name) => {
@@ -96,58 +87,33 @@ const resetFields = (names?: string[]) => {
   }
 }
 
-const handleSubmit = async () => {
-  await validate()
-  emit('onFinish', formValues.value)
+const updateFormValues: FormInstance['updateFormValues'] = (values) => {
+  formValues.value = values
 }
 
-watch(
+const updateSelectData: FormInstance['updateSelectData'] = (key, value) => {
+  selectData[key] = value
+}
+
+const updateInitialValues: FormInstance['updateInitialValues'] = (values) => {
+  Object.assign(initialValues, values)
+}
+
+const instance = readonly({
+  ...toRefs(props),
   formValues,
-  (newVal, oldVal) => {
-    nextTick(() => {
-      handleLinkages({ newVal, oldVal, formValues, formItems: formItems.value })
-    })
-  },
-  { deep: true }
-)
-
-watch(initialValues, (newVal) => {
-  formValues.value = merge(formValues.value, newVal)
-})
-
-provide($schema, {
-  schema: computed(() => props.schema),
-  updateSchema: () => {}
-})
-
-provide($formValues, {
-  formValues,
-  updateFormValues: (values) => (formValues.value = values)
-})
-provide($selectData, {
   selectData,
-  updateSelectData: (key, value) => {
-    selectData[key] = value
-  }
-})
-
-provide($initialValues, {
   initialValues,
-  updateInitialValues: (values) => {
-    Object.assign(initialValues, values)
-  }
+  context,
+  updateFormValues,
+  updateSelectData,
+  updateInitialValues,
+  validate,
+  resetFields,
+  submit
 })
 
-provide(
-  'vfc-read',
-  computed(() => props.read)
-)
+provide($formInstance, instance)
 
-defineExpose({ validate, context, resetFields })
+defineExpose(instance)
 </script>
-
-<style lang="less">
-.vue-form-craft-footer {
-  margin-left: v-bind(formLabelWidth);
-}
-</style>

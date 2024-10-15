@@ -1,19 +1,21 @@
 <template>
   <ElCard v-bind="props">
-    <CanvasWrapper :children="children" v-if="design" />
+    <CanvasWrapper :children="children" v-if="formInstance.design" />
     <FormItemRender :formItems="children" v-else />
   </ElCard>
 </template>
 
 <script setup lang="ts">
 import { FormItemRender, CanvasWrapper } from '@vue-form-craft/components'
-import type { FormItemType } from '@vue-form-craft/config/commonType';
+import type { FormItemType } from '@vue-form-craft/config/commonType'
+import { useFormInstance } from '@vue-form-craft/release'
 
 defineProps<{
-  props:Record<string,any>
-  children:FormItemType[]
-  design: boolean
+  props: Record<string, any>
+  children: FormItemType[]
 }>()
+
+const formInstance = useFormInstance()
 </script>
 
 <style lang="less">

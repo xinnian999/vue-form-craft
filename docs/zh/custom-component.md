@@ -28,6 +28,8 @@ demo/CustomComponent.vue
 :::
 
 
+> vfc-code组件代码
+
 ```vue
 <template>
   <div class="vfc-code">

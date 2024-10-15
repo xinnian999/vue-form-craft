@@ -46,12 +46,13 @@
 
 <script setup lang="ts">
 import draggable from 'vuedraggable-es'
-import { computed, inject, type Ref } from 'vue'
-import { $global, $locale, $schema } from '@vue-form-craft/config/symbol'
+import { computed, inject } from 'vue'
+import { $global, $schema } from '@vue-form-craft/config/symbol'
 import { ref } from 'vue'
 import parseMenus from './menus'
 import templateMock from '@vue-form-craft/template'
 import type { FormSchema, TemplateData } from '@vue-form-craft/config/commonType'
+import { useLang, useLocale } from '@vue-form-craft/hooks'
 
 const props = withDefaults(
   defineProps<{
@@ -67,9 +68,9 @@ const { updateSchema } = inject($schema)!
 
 const { elements } = inject($global)!
 
-const locale = inject($locale)!
+const locale = useLocale()
 
-const lang = inject<Ref<'zh' | 'en'>>('vfc-lang')!
+const lang = useLang()
 
 const menus = computed(() => parseMenus({ elements, omits: props.omitMenus, lang: lang.value }))
 

@@ -1,10 +1,11 @@
 <template>
-  <div v-if="read">
+  <div v-if="formInstance.read">
     <div v-if="multiple">
       {{
-        value&&(value as SelectValue[]).map(
-          (item) => currentOptions.find((v) => v[valueKey] === item)?.[labelKey]
-        ).join('、')
+        value &&
+        (value as SelectValue[])
+          .map((item) => currentOptions.find((v) => v[valueKey] === item)?.[labelKey])
+          .join('、')
       }}
     </div>
     <div v-else>{{ currentOptions.find((item) => item[valueKey] === value)?.[labelKey] }}</div>
@@ -33,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-import useSelect from '@vue-form-craft/hooks/useSelect'
+import { useFormInstance, useSelect } from '@vue-form-craft/hooks'
 import type { SelectProps, SelectValue } from '@vue-form-craft/config/commonType'
 
 const props = withDefaults(defineProps<SelectProps>(), {
@@ -43,11 +44,12 @@ const props = withDefaults(defineProps<SelectProps>(), {
   labelKey: 'label',
   valueKey: 'value',
   disabledKey: 'disabled',
-  name: '',
-  read: false
+  name: ''
 })
 
 const value = defineModel<SelectValue | SelectValue[]>({ default: [] })
+
+const formInstance = useFormInstance()
 
 const { currentOptions, selectChange, loading } = useSelect(props)
 </script>

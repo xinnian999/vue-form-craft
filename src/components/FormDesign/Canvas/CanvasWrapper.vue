@@ -28,9 +28,10 @@
 import {  inject } from 'vue'
 import Draggable from 'vuedraggable-es'
 import CanvasRender from './CanvasRender.vue'
-import { $locale, $methods } from '@vue-form-craft/config/symbol'
+import { $methods } from '@vue-form-craft/config/symbol'
 import { IconRender } from '@vue-form-craft/components'
 import type { FormItemType } from '@vue-form-craft/release'
+import { useLocale } from '@vue-form-craft/hooks'
 
 defineProps<{
   children: FormItemType[],
@@ -39,7 +40,7 @@ defineProps<{
 
 const { onAdd } = inject($methods)!
 
-const locale = inject($locale)!
+const locale = useLocale()
 </script>
 
 <style scoped lang="less">

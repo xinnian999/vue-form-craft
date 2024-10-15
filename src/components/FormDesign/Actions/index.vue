@@ -36,11 +36,12 @@
 <script setup lang="ts">
 import { ref, inject } from 'vue'
 import { ElMessageBox } from 'element-plus'
-import { $schema, $methods, $locale } from '@vue-form-craft/config/symbol'
+import { $schema, $methods } from '@vue-form-craft/config/symbol'
 import IconRender from '@vue-form-craft/components/IconRender.vue'
 import JsonSchema from './JsonSchema.vue'
 import VueCode from './VueCode.vue'
 import Preview from './Preview.vue'
+import { useLocale } from '@vue-form-craft/hooks'
 
 type PreviewAction = {
   label: string
@@ -57,7 +58,7 @@ const { schema } = inject($schema)!
 
 const { handleSave } = inject($methods)!
 
-const locale = inject($locale)!
+const locale = useLocale()
 
 const JsonSchemaVisible = ref(false)
 const VueCodeVisible = ref(false)

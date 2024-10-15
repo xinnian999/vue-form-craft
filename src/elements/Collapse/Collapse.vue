@@ -4,7 +4,7 @@
       <template #title>
         <Title :title="item.title" italic type="h4" />
       </template>
-      <CanvasWrapper :children="item.children" v-if="design" />
+      <CanvasWrapper :children="item.children" v-if="formInstance.design" />
       <FormItemRender :formItems="item.children!" v-else />
     </ElCollapseItem>
   </ElCollapse>
@@ -14,13 +14,15 @@
 import { onMounted, ref } from 'vue'
 import { FormItemRender, CanvasWrapper } from '@vue-form-craft/components'
 import Title from '../Title/Title.vue'
-import type { CollapseItem } from '@vue-form-craft/config/commonType';
+import type { CollapseItem } from '@vue-form-craft/config/commonType'
+import { useFormInstance } from '@vue-form-craft/release'
 
 const thisProps = defineProps<{
-  props:Record<string,any>
-  children:CollapseItem[]
-  design: boolean
+  props: Record<string, any>
+  children: CollapseItem[]
 }>()
+
+const formInstance = useFormInstance()
 
 const activeKey = ref<string[]>([])
 

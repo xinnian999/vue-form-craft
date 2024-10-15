@@ -1,5 +1,5 @@
-import type FormRender from '@vue-form-craft/components/FormRender.vue'
-import type { Component, VNode } from 'vue'
+import type { FormValidationResult } from 'element-plus'
+import type { Component, Ref, VNode, ToRefs, UnwrapNestedRefs, DeepReadonly } from 'vue'
 
 export type FormRule = {
   type: 'email' | 'url' | 'custom' | string
@@ -29,7 +29,6 @@ export interface FormItemType {
   rules?: FormRule[]
   class?: any
   style?: any
-  design?: boolean
   change?: FormChange[]
   dialog?: boolean
 }
@@ -79,17 +78,16 @@ export interface SelectProps {
   disabledKey?: string
   api?: SchemaApi
   name?: string
-  read?:boolean
 }
 
 export type SelectValue = string | number | boolean
-
-export type FormRenderInstance = InstanceType<typeof FormRender>
 
 export type $Global = {
   request?: (options: Record<string, any>) => Promise<Record<string, any>>
   elements: Record<string, FormElement>
 }
+
+export type Lang = Ref<'en' | 'zh'>
 
 export type Locale = {
   menus: {
@@ -132,3 +130,27 @@ export type CollapseItem = {
   checked?: boolean
   children: FormItemType[]
 }
+
+export interface FormRenderProps {
+  schema: FormSchema
+  schemaContext?: Record<string, any>
+  design?: boolean
+  footer?: boolean
+  read?: boolean
+}
+
+export interface FormInstanceSource extends ToRefs<FormRenderProps> {
+  formValues: Ref<Record<string, any>>
+  selectData: Record<string, Record<string, any>>
+  initialValues: Record<string, Record<string, any>>
+  context: Ref<Record<string, any>>
+  updateFormValues: (values: Record<string, any>) => void
+  updateSelectData: (key: string, value: Record<string, any>) => void
+  updateInitialValues: (values: Record<string, any>) => void
+  validate: () => FormValidationResult | undefined
+  resetFields: (names?: string[]) => void
+  submit: () => Promise<void>
+}
+
+// 对 FormInstanceSource 深度只读， ref 解包
+export type FormInstance = DeepReadonly<UnwrapNestedRefs<FormInstanceSource>>

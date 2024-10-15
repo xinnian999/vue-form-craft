@@ -1,5 +1,5 @@
 <template>
-  <div v-if="read">{{ currentOptions.find((item) => item[valueKey] === value)?.[labelKey] }}</div>
+  <div v-if="formInstance.read">{{ currentOptions.find((item) => item[valueKey] === value)?.[labelKey] }}</div>
   <template v-else>
     <div v-if="!currentOptions.length && !loading" style="font-size: 12px">暂无选项</div>
     <el-radio-group v-model="value" @change="selectChange" v-loading="loading" v-bind="$attrs">
@@ -37,7 +37,7 @@ import type {
   SelectProps,
   SelectValue
 } from '@vue-form-craft/config/commonType'
-import useSelect from '@vue-form-craft/hooks/useSelect'
+import { useFormInstance, useSelect } from '@vue-form-craft/hooks'
 
 type Props = Omit<SelectProps, 'multiple'> & {
   optionType?: OptionType
@@ -58,6 +58,8 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const value = defineModel<SelectValue>({ default: '' })
+
+const formInstance = useFormInstance()
 
 const { currentOptions, selectChange, loading } = useSelect(props)
 </script>

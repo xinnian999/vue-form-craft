@@ -16,20 +16,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, provide, computed, inject, type Ref } from 'vue'
+import { ref, provide, computed } from 'vue'
 import { recursionDelete } from '@vue-form-craft/utils'
 import Menus from './Menus/index.vue'
 import Canvas from './Canvas/index.vue'
 import Current from './Current/index.vue'
 import Actions from './Actions/index.vue'
 import { getCurrentByKey, setCurrentByKey, changeItems, copyItems } from './utils'
-import { $schema, $current, $methods, $hoverKey, $locale } from '@vue-form-craft/config/symbol'
-import type { FormSchema, FormItemType, TemplateData, FormElement, Locale } from '@vue-form-craft/config/commonType'
-import locales from '@vue-form-craft/config/locales/index'
-
-defineOptions({
-  name: 'FormDesign'
-})
+import { $schema, $current, $methods, $hoverKey } from '@vue-form-craft/config/symbol'
+import type { FormSchema, FormItemType, TemplateData, FormElement } from '@vue-form-craft/config/commonType'
 
 withDefaults(defineProps<{
   schemaContext?: Record<string, any>
@@ -76,12 +71,6 @@ const current = computed({
     list.value = setCurrentByKey(currentSchema.value.items, element)
   }
 })
-
-const lang = inject<Ref<'zh' | 'en'>>('vfc-lang')!
-
-const locale = computed<Locale>(() => locales[lang.value])
-
-provide($locale, locale)
 
 provide($schema, {
   schema: currentSchema,

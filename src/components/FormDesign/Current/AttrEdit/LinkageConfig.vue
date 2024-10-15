@@ -31,15 +31,16 @@
 
 <script setup lang="ts">
 import { inject, ref } from 'vue'
-import { $locale, $schema } from '@vue-form-craft/config/symbol'
+import { $schema } from '@vue-form-craft/config/symbol'
 import { FormRender } from '@vue-form-craft/components'
 import JsonEditorVue from 'json-editor-vue3'
 import linkageSchema from '../linkageSchema'
 import type { FormItemType } from '@vue-form-craft/release'
+import { useLocale } from '@vue-form-craft/hooks'
 
 const model = defineModel<FormItemType>()
 
-const locale = inject($locale)!
+const locale = useLocale()
 
 const { schema } = inject($schema)!
 
