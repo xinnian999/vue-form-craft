@@ -107,14 +107,14 @@ export interface FormRenderProps {
 
 ## FormInstance
 
-```ts
-import type { Ref, ToRefs } from 'vue'
+表单实例
 
-interface FormInstance extends ToRefs<FormRenderProps> {
-  readonly formValues: Ref<Record<string, any>>
-  readonly selectData: Record<string, Record<string, any>>
-  readonly initialValues: Record<string, Record<string, any>>
-  readonly context: Ref<Record<string, any>>
+```ts 
+interface FormInstance extends FormRenderProps {
+  formValues: Record<string, any>
+  selectData: Record<string, Record<string, any>>
+  initialValues: Record<string, Record<string, any>>
+  context: Record<string, any>
   updateFormValues: (values: Record<string, any>) => void
   updateSelectData: (key: string, value: Record<string, any>) => void
   updateInitialValues: (values: Record<string, any>) => void

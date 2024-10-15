@@ -3,10 +3,9 @@ import { fileURLToPath, URL } from 'node:url'
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
 import { mdVueDemoPlugin } from 'vitepress-vue-demo'
 
-
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  lang:'zh',
+  lang: 'zh',
   title: 'Vue Form Craft',
   description: '基于vue3的一个开箱即用低代码表单方案',
   base: '/vue-form-craft/',
@@ -18,7 +17,9 @@ export default defineConfig({
       }
     },
     server: {
-      port: 9999
+      port: 9999,
+      // host:'172.20.72.37'
+      host: true
     },
     plugins: [viteCommonjs() as any]
   },
@@ -28,9 +29,9 @@ export default defineConfig({
       md.use(mdVueDemoPlugin)
     }
   },
-  themeConfig:{
+  themeConfig: {
     search: {
-      provider: 'local',
+      provider: 'local'
     },
     socialLinks: [{ icon: 'github', link: 'https://github.com/xinnian999/vue-form-craft' }]
   },
@@ -47,7 +48,7 @@ export default defineConfig({
           { text: '文档', link: '/zh/introduce' },
           { text: '表单设计', link: '/zh/form-design' }
         ],
-    
+
         sidebar: {
           '/zh/': [
             {
@@ -63,8 +64,8 @@ export default defineConfig({
                 { text: 'JsonSchema详解', link: '/zh/schema' },
                 { text: '表单联动', link: '/zh/linkage' },
                 { text: '深层数据绑定', link: '/zh/deepName' },
-                { text: 'useFormInstance', link: '/zh/useFormInstance' },
-                { text: '自定义组件', link: '/zh/custom-component' }
+                { text: '自定义组件', link: '/zh/custom-component' },
+                { text: 'useFormInstance', link: '/zh/useFormInstance' }
               ]
             },
             {
@@ -80,7 +81,7 @@ export default defineConfig({
                 { text: '扩展表单设计器', link: '/zh/extend' },
                 { text: '例：扩展markdown输入框', link: '/zh/extendMd' },
                 { text: '例：扩展穿梭框', link: '/zh/extendTransfer' },
-                { text: '例：扩展其他组件库', link: '/zh/extendOther' },
+                { text: '例：扩展其他组件库', link: '/zh/extendOther' }
               ]
             },
             {
@@ -90,13 +91,12 @@ export default defineConfig({
                 { text: '暗黑模式', link: '/zh/dark' },
                 { text: '国际化', link: '/zh/internationalization' },
                 { text: '二次开发指南', link: '/zh/dev' },
-                { text: '意见&建议&捐赠', link: '/zh/advice' },
+                { text: '意见&建议&捐赠', link: '/zh/advice' }
               ]
             }
           ]
-        },
-    
-      },
+        }
+      }
     },
     en: {
       label: 'English',
@@ -112,7 +112,7 @@ export default defineConfig({
         search: {
           provider: 'local'
         },
-    
+
         sidebar: {
           '/en/': [
             {
@@ -141,7 +141,7 @@ export default defineConfig({
               text: 'Extensions',
               items: [
                 { text: 'Extend Form Designer', link: '/en/extend' },
-                { text: 'Extend a Markdown Input Box', link: '/en/extendMd' },
+                { text: 'Extend a Markdown Input Box', link: '/en/extendMd' }
               ]
             },
             {
@@ -149,13 +149,12 @@ export default defineConfig({
               items: [
                 { text: 'Type Declarations', link: '/en/interface' },
                 { text: 'Dark Mode', link: '/en/dark' },
-                { text: 'Internationalization', link: '/en/internationalization' },
+                { text: 'Internationalization', link: '/en/internationalization' }
               ]
             }
           ]
-        },
-    
-      },
-    },
+        }
+      }
+    }
   }
 })
