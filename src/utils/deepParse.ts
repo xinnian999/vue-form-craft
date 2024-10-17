@@ -12,7 +12,12 @@ const templateParse = (str: string, context: Record<string,any>) => {
 
       return parse(...Object.values(context))
     } catch (e) {
-      // console.log(str, '模板转换错误：', e)
+      console.log({
+        message:'模板转换错误：',
+        context,
+        e
+      });
+
       return str
     }
   } else {

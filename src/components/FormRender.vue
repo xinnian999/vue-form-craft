@@ -52,11 +52,20 @@ const context = computed(() => ({
   $locale: locale.value
 }))
 
-const formItems = computed(() => deepParse(props.schema.items || [], context.value))
+const formItems = computed(() => {
+  if (props.read) {
+    return props.schema.items
+  }
+
+  return deepParse(props.schema.items || [], context.value)
+})
 
 watch(
   formValues,
   async (newVal, oldVal) => {
+    if (props.read) {
+      return
+    }
     await nextTick()
     handleLinkages({ newVal, oldVal, formValues, formItems: formItems.value })
   },
