@@ -1,16 +1,16 @@
-import { ref, watch, onMounted, inject } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import { isEqual, isPlainObject, debounce } from 'lodash'
 import { getDataByPath } from '@vue-form-craft/utils'
-import { $global } from '@vue-form-craft/config/symbol'
 import type { SelectProps } from '@vue-form-craft/config/commonType'
 import useFormInstance from './useFormInstance'
+import useRequest from './useRequest'
 
 type Option = Record<string, any>
 
 const useSelect = (props: SelectProps) => {
   const formInstance = useFormInstance()
 
-  const { request } = inject($global)!
+  const request = useRequest()
 
   const currentOptions = ref<Option[]>([])
 

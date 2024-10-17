@@ -35,7 +35,7 @@
 
       <el-tab-pane label="联动变量" name="context">
         <p>实时预览的联动变量，在JsonSchema中可以通过双大括号模版语法使用，用于触发各种联动</p>
-        <JsonEdit v-model="context" style="height: 60vh" :key="tabKey" />
+        <JsonEdit.component v-model="context" style="height: 60vh" :key="tabKey" />
       </el-tab-pane>
     </el-tabs>
   </el-dialog>
@@ -46,14 +46,15 @@ import { ref, inject, computed } from 'vue'
 import { FormRender } from '@vue-form-craft/components'
 import { $schema } from '@vue-form-craft/config/symbol'
 import type { FormInstance } from '@vue-form-craft/release'
-import JsonEdit from '@vue-form-craft/elements/JsonEdit/JsonEdit.vue'
-import { useLocale } from '@vue-form-craft/hooks'
+import { useElements, useLocale } from '@vue-form-craft/hooks'
 
 defineProps<{
   schemaContext: Record<string, any>
 }>()
 
 const { schema } = inject($schema)!
+
+const { JsonEdit } = useElements()
 
 const tabKey = ref('edit')
 

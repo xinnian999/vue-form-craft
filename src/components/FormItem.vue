@@ -62,18 +62,18 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, onMounted, reactive } from 'vue'
+import { computed, onMounted, reactive } from 'vue'
 import { isRegexString, getDataByPath, setDataByPath } from '@vue-form-craft/utils'
-import { $global } from '@vue-form-craft/config/symbol'
 import type { FormItemType } from '@vue-form-craft/config/commonType'
 import { IconRender } from '@vue-form-craft/components'
 import { useFormInstance } from '@vue-form-craft/release'
+import { useElements } from '@vue-form-craft/hooks'
 
 const thisProps = defineProps<FormItemType>()
 
 const formInstance = useFormInstance()
 
-const { elements } = inject($global)!
+const elements = useElements()
 
 const dialogState = reactive({
   visible: false,
@@ -161,11 +161,7 @@ const formItemProps = computed(() => {
 })
 
 onMounted(() => {
-  if (
-    value.value === undefined &&
-    thisProps.initialValue !== undefined &&
-    !formInstance.design
-  ) {
+  if (value.value === undefined && thisProps.initialValue !== undefined && !formInstance.design) {
     const newInitialValues = setDataByPath(
       formInstance.initialValues,
       thisProps.name,

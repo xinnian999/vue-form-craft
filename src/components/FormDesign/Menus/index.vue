@@ -47,12 +47,12 @@
 <script setup lang="ts">
 import draggable from 'vuedraggable-es'
 import { computed, inject } from 'vue'
-import { $global, $schema } from '@vue-form-craft/config/symbol'
+import { $schema } from '@vue-form-craft/config/symbol'
 import { ref } from 'vue'
 import parseMenus from './menus'
 import templateMock from '@vue-form-craft/template'
 import type { FormSchema, TemplateData } from '@vue-form-craft/config/commonType'
-import { useLang, useLocale } from '@vue-form-craft/hooks'
+import { useElements, useLang, useLocale } from '@vue-form-craft/hooks'
 
 const props = withDefaults(
   defineProps<{
@@ -66,7 +66,7 @@ const drawerVisible = ref(false)
 
 const { updateSchema } = inject($schema)!
 
-const { elements } = inject($global)!
+const elements = useElements()
 
 const locale = useLocale()
 

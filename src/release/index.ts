@@ -8,7 +8,6 @@ export { FormDesign, FormRender }
 export { default as useFormInstance } from '@vue-form-craft/hooks/useFormInstance'
 
 export type {
-  $Global,
   FormElement,
   FormItemType,
   FormSchema,

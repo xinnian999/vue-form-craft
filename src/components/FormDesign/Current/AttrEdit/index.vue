@@ -9,17 +9,16 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject } from 'vue'
-import { $global } from '@vue-form-craft/config/symbol'
+import { computed } from 'vue'
 import { FormRender } from '@vue-form-craft/components'
 import { getDataByPath, setDataByPath } from '@vue-form-craft/utils'
 import { isString } from 'lodash'
 import type { FormItemType, FormSchema } from '@vue-form-craft/release'
 import LinkageConfig from './LinkageConfig.vue'
 import StyleConfig from './StyleConfig.vue'
-import { useLang } from '@vue-form-craft/hooks'
+import { useElements, useLang } from '@vue-form-craft/hooks'
 
-const { elements } = inject($global)!
+const elements = useElements()
 
 const lang = useLang()
 

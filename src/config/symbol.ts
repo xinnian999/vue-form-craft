@@ -1,7 +1,5 @@
 import type { InjectionKey, Ref } from 'vue'
-import type { $Global, FormItemType, FormInstance, FormSchema } from './commonType'
-
-export const $global = Symbol() as InjectionKey<$Global>
+import type { FormItemType, FormInstance, FormSchema, FormElement } from './commonType'
 
 export const $schema = Symbol() as InjectionKey<{
   readonly schema: Ref<FormSchema>
@@ -26,3 +24,9 @@ export const $hoverKey = Symbol() as InjectionKey<{
 }>
 
 export const $formInstance = Symbol() as InjectionKey<FormInstance>
+
+export const $elements = Symbol() as InjectionKey<Record<string, FormElement>>
+
+export const $request = Symbol() as InjectionKey<
+  (options: Record<string, any>) => Promise<Record<string, any>>
+>

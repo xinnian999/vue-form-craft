@@ -83,11 +83,6 @@ export interface SelectProps {
 
 export type SelectValue = string | number | boolean
 
-export type $Global = {
-  request?: (options: Record<string, any>) => Promise<Record<string, any>>
-  elements: Record<string, FormElement>
-}
-
 export type Lang = Ref<'en' | 'zh'>
 
 export type Locale = {
