@@ -18,6 +18,7 @@ const schema = ref<FormSchema>({
   labelWidth: 150,
   labelAlign: 'right',
   size: 'default',
+  scrollToError: true,
   items: []
 })
 
@@ -30,7 +31,7 @@ const onAdd = (element: FormElement) => {
   console.log('onAdd===>', element)
 }
 
-const omitMenus:string[]=[]
+const omitMenus: string[] = []
 
 onMounted(() => {
   const localSchema = localStorage.getItem('schema')
