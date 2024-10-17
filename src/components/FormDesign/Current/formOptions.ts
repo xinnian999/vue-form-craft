@@ -1,4 +1,4 @@
-import type { FormSchema } from "@vue-form-craft/release";
+import type { FormSchema } from '@vue-form-craft/release'
 
 export default {
   size: 'small',
@@ -58,6 +58,11 @@ export default {
       component: 'Switch',
       name: 'hideRequiredAsterisk'
     },
-    { label: 'label加粗', component: 'Switch', name: 'labelBold' }
+    { label: 'label加粗', component: 'Switch', name: 'labelBold' },
+    {
+      label: '自动滚动到校验失败的第一项',
+      component: 'Switch',
+      name: 'scrollToError'
+    }
   ]
 } satisfies FormSchema

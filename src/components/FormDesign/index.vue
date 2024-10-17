@@ -24,15 +24,23 @@ import Current from './Current/index.vue'
 import Actions from './Actions/index.vue'
 import { getCurrentByKey, setCurrentByKey, changeItems, copyItems } from './utils'
 import { $schema, $current, $methods, $hoverKey } from '@vue-form-craft/config/symbol'
-import type { FormSchema, FormItemType, TemplateData, FormElement } from '@vue-form-craft/config/commonType'
+import type {
+  FormSchema,
+  FormItemType,
+  TemplateData,
+  FormElement
+} from '@vue-form-craft/config/commonType'
 
-withDefaults(defineProps<{
-  schemaContext?: Record<string, any>
-  templates?: TemplateData
-  omitMenus?: string[]
-}>(),{
-  schemaContext:()=>({})
-}) 
+withDefaults(
+  defineProps<{
+    schemaContext?: Record<string, any>
+    templates?: TemplateData
+    omitMenus?: string[]
+  }>(),
+  {
+    schemaContext: () => ({})
+  }
+)
 
 const emit = defineEmits<{
   onSave: []
@@ -48,6 +56,7 @@ const currentSchema = defineModel<FormSchema>({
   default: () => ({
     labelWidth: 150,
     labelAlign: 'right',
+    scrollToError: true,
     size: 'default',
     items: []
   })

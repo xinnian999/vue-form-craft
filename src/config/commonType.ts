@@ -41,6 +41,7 @@ export type FormSchema = {
   disabled?: boolean
   hideRequiredAsterisk?: boolean
   labelBold?: boolean
+  scrollToError?: boolean
   items: FormItemType[]
 }
 

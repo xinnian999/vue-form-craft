@@ -5,6 +5,7 @@
     :size="schema.size"
     :disabled="schema.disabled"
     :hide-required-asterisk="schema.hideRequiredAsterisk"
+    :scroll-to-error="schema.scrollToError"
     ref="formRef"
     v-bind="$attrs"
   >
