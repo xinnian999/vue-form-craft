@@ -1,7 +1,8 @@
 import { isString, isPlainObject, isArray } from 'lodash'
 
 //模板转换函数，将一个由双大括号包裹的字符串，转化为js表达式并返回结果（context限制变量范围）
-const templateParse = (str: string, context: Record<string,any>) => {
+const templateParse = (str: string, context: Record<string, any>) => {
+        // console.log(JSON.stringify(context.$selectData) );
   if (!str) return str
   if (typeof str !== 'string') return str
 
@@ -13,10 +14,10 @@ const templateParse = (str: string, context: Record<string,any>) => {
       return parse(...Object.values(context))
     } catch (e) {
       console.log({
-        message:'模板转换错误：',
+        message: `模板转换错误：${str}`,
         context,
-        e
-      });
+        reason: e
+      })
 
       return str
     }
@@ -25,15 +26,13 @@ const templateParse = (str: string, context: Record<string,any>) => {
   }
 }
 
-const deepParse = (prop: any, context: Record<string,any>): any => {
-
+const deepParse = (prop: any, context: Record<string, any>): any => {
   if (isString(prop)) {
     return templateParse(prop, context)
   }
 
   if (isPlainObject(prop)) {
     return Object.keys(prop).reduce((all, key) => {
-
       return { ...all, [key]: deepParse(prop[key], context) }
     }, {})
   }

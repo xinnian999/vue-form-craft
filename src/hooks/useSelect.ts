@@ -8,7 +8,7 @@ import useFormInstance from './useFormInstance'
 type Option = Record<string, any>
 
 const useSelect = (props: SelectProps) => {
-  const   formInstance = useFormInstance()
+  const formInstance = useFormInstance()
 
   const { request } = inject($global)!
 

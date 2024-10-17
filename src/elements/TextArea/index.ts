@@ -1,12 +1,12 @@
 import { IconRender } from '@vue-form-craft/components'
 import { h } from 'vue'
-import { ElInput } from 'element-plus'
 import type { FormElement } from '@vue-form-craft/config/commonType'
 import attrSchema from './attrSchema'
+import component from './Component.vue'
 
 export default {
   name: '多行文本',
-  component: h(ElInput, { type: 'textarea', showWordLimit: true, autocomplete: 'off' }),
+  component,
   icon: h(IconRender, { name: 'textarea' }),
   type: 'basic',
   order: 2,

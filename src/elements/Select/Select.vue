@@ -36,6 +36,7 @@
 <script setup lang="ts">
 import { useFormInstance, useSelect } from '@vue-form-craft/hooks'
 import type { SelectProps, SelectValue } from '@vue-form-craft/config/commonType'
+import { watch } from 'vue'
 
 const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],
@@ -47,9 +48,11 @@ const props = withDefaults(defineProps<SelectProps>(), {
   name: ''
 })
 
-const value = defineModel<SelectValue | SelectValue[]>({ default: [] })
+const value = defineModel<SelectValue | SelectValue[]>()
 
 const formInstance = useFormInstance()
 
 const { currentOptions, selectChange, loading } = useSelect(props)
+
+watch(value, selectChange)
 </script>

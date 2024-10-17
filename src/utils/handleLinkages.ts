@@ -4,13 +4,13 @@ import setDataByPath from './setDataByPath'
 import getDataByPath from './getDataByPath'
 
 type handleLinkagesType = (obj: {
-  newVal: Object
-  oldVal: Object
+  newVal: Record<string, any>
+  oldVal?: Record<string, any>
   formValues: Record<string, any>
   formItems: FormItemType[]
 }) => void
 
-const handleLinkages: handleLinkagesType = ({ newVal, oldVal, formValues, formItems }) => {
+const handleLinkages: handleLinkagesType = ({ newVal, oldVal={}, formValues, formItems }) => {
   for (const item of formItems) {
     const newValue = getDataByPath(newVal, item.name)
     const oldValue = getDataByPath(oldVal, item.name)

@@ -38,6 +38,7 @@ import type {
   SelectValue
 } from '@vue-form-craft/config/commonType'
 import { useFormInstance, useSelect } from '@vue-form-craft/hooks'
+import { watch } from 'vue';
 
 type Props = Omit<SelectProps, 'multiple'> & {
   optionType?: OptionType
@@ -62,4 +63,6 @@ const value = defineModel<SelectValue>({ default: '' })
 const formInstance = useFormInstance()
 
 const { currentOptions, selectChange, loading } = useSelect(props)
+
+watch(value, selectChange)
 </script>

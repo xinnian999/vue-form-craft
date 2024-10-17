@@ -35,6 +35,7 @@
 import { type CheckboxGroupValueType } from 'element-plus'
 import type { Direction, OptionType, SelectProps } from '@vue-form-craft/config/commonType'
 import { useFormInstance, useSelect } from '@vue-form-craft/hooks'
+import { watch } from 'vue';
 
 type Props = Omit<SelectProps, 'multiple'> & {
   optionType?: OptionType
@@ -59,6 +60,8 @@ const value = defineModel<CheckboxGroupValueType>()
 const formInstance = useFormInstance()
 
 const { currentOptions, selectChange, loading } = useSelect(props)
+
+watch(value, selectChange)
 </script>
 
 <style lang="scss" scoped></style>
