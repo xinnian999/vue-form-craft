@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      element-plus:
+        specifier: ^2.8.3
+        version: 2.8.3(vue@3.5.10(typescript@5.3.3))
       json-editor-vue3:
         specifier: ^1.0.9
         version: 1.1.1
@@ -60,9 +63,6 @@ importers:
       axios:
         specifier: ^1.6.2
         version: 1.7.7
-      element-plus:
-        specifier: ^2.8.3
-        version: 2.8.3(vue@3.5.10(typescript@5.3.3))
       eslint:
         specifier: ^8.49.0
         version: 8.57.1
