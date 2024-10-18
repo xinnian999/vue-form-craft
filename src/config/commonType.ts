@@ -150,3 +150,11 @@ export interface FormInstanceSource extends ToRefs<FormRenderProps> {
 
 // 对 FormInstanceSource 深度只读， ref 解包
 export type FormInstance = DeepReadonly<UnwrapNestedRefs<FormInstanceSource>>
+
+
+export type Options = {
+  request?: (options: Record<string, any>) => Promise<Record<string, any>>
+  extendElements?: Record<string, FormElement>
+  lang?: 'zh' | 'en'
+}
+

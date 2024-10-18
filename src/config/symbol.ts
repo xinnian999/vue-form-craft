@@ -1,5 +1,5 @@
 import type { InjectionKey, Ref } from 'vue'
-import type { FormItemType, FormInstance, FormSchema, FormElement } from './commonType'
+import type { FormItemType, FormInstance, FormSchema, Options } from './commonType'
 
 export const $schema = Symbol() as InjectionKey<{
   readonly schema: Ref<FormSchema>
@@ -25,8 +25,4 @@ export const $hoverKey = Symbol() as InjectionKey<{
 
 export const $formInstance = Symbol() as InjectionKey<FormInstance>
 
-export const $elements = Symbol() as InjectionKey<Record<string, FormElement>>
-
-export const $request = Symbol() as InjectionKey<
-  (options: Record<string, any>) => Promise<Record<string, any>>
->
+export const $options = Symbol() as InjectionKey<Options>

@@ -14,7 +14,8 @@
     "json-editor-vue3": "^1.0.9",
     "lodash": "^4.17.21",
     "vue": "^3.5.8",
-    "vuedraggable-es": "^4.1.1"
+    "vuedraggable-es": "^4.1.1",
+    "element-plus": "^2.8.3"
   },
   "devDependencies": {
     "@arco-design/web-vue": "^2.56.2",
@@ -30,7 +31,6 @@
     "@vue/shared": "^3.4.38",
     "@vue/tsconfig": "^0.5.1",
     "axios": "^1.6.2",
-    "element-plus": "^2.8.3",
     "eslint": "^8.49.0",
     "eslint-plugin-vue": "^9.17.0",
     "less": "^4.2.0",
