@@ -149,8 +149,8 @@ const config = computed(() => {
 
 const formItemProps = computed(() => {
   const props: Record<string, any> = {
+    name: thisProps.name,
     ...thisProps.props,
-    name: thisProps.name
   }
 
   if (thisProps.children) {
