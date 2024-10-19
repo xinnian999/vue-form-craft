@@ -11,11 +11,12 @@
     "release": "pnpm build && npm version patch && npm publish"
   },
   "dependencies": {
+    "element-plus": "^2.8.3",
     "json-editor-vue3": "^1.0.9",
     "lodash": "^4.17.21",
     "vue": "^3.5.8",
-    "vuedraggable-es": "^4.1.1",
-    "element-plus": "^2.8.3"
+    "vue-esign": "^1.1.4",
+    "vuedraggable-es": "^4.1.1"
   },
   "devDependencies": {
     "@arco-design/web-vue": "^2.56.2",
