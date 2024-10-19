@@ -33,9 +33,9 @@ export default {
     },
     { label: '画板宽度(px)', component: 'InputNumber', name: 'props.width' },
     { label: '画板高度(px)', component: 'InputNumber', name: 'props.height' },
-    { label: '画笔粗细', component: 'InputNumber', name: 'props.lineWidth' },
-    { label: '画笔颜色', component: 'ColorPicker', name: 'props.lineColor' },
-    { label: '画板背景色', component: 'ColorPicker', name: 'props.bgColor' },
+    { label: '画笔粗细-初始', component: 'InputNumber', name: 'props.lineWidth' },
+    { label: '画笔颜色-初始', component: 'ColorPicker', name: 'props.lineColor' },
+    { label: '画板背景色-初始', component: 'ColorPicker', name: 'props.bgColor' },
     {
       label: '生成图片格式',
       component: 'Radio',

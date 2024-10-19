@@ -7,7 +7,7 @@ import component from './Component.vue'
 export default {
   name: '电子签名',
   component,
-  icon: h(IconRender, { name: 'input' }),
+  icon: h(IconRender, { name: 'esign' }),
   type: 'basic',
   order: 11,
   initialValues: {

@@ -17,9 +17,6 @@ dependencies:
   vue:
     specifier: ^3.5.8
     version: 3.5.10(typescript@5.3.3)
-  vue-esign:
-    specifier: ^1.1.4
-    version: 1.1.4
   vuedraggable-es:
     specifier: ^4.1.1
     version: 4.1.1(vue@3.5.10)
@@ -2119,16 +2116,6 @@ packages:
       '@vue/shared': 3.5.7
     dev: true
 
-  /@vue/compiler-sfc@2.7.16:
-    resolution: {integrity: sha512-KWhJ9k5nXuNtygPU7+t1rX6baZeqOYLEforUPjgNDBnLicfHCoi48H87Q8XyLZOrNNsmhuwKqtpDQWjEFe6Ekg==}
-    dependencies:
-      '@babel/parser': 7.25.6
-      postcss: 8.4.47
-      source-map: 0.6.1
-    optionalDependencies:
-      prettier: 2.8.8
-    dev: false
-
   /@vue/compiler-sfc@3.5.10:
     resolution: {integrity: sha512-to8E1BgpakV7224ZCm8gz1ZRSyjNCAWEplwFMWKlzCdP9DkMKhRRwt0WkCjY7jkzi/Vz3xgbpeig5Pnbly4Tow==}
     dependencies:
@@ -4128,14 +4115,6 @@ packages:
       fast-diff: 1.3.0
     dev: true
 
-  /prettier@2.8.8:
-    resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
-    engines: {node: '>=10.13.0'}
-    hasBin: true
-    requiresBuild: true
-    dev: false
-    optional: true
-
   /prettier@3.3.3:
     resolution: {integrity: sha512-i2tDNA0O5IrMO757lfrdQZCc2jPNDVntV0m/+4whiDfWaTKfMNgR7Qz0NAeGz/nRqF4m5/6CLzbP4/liHt12Ew==}
     engines: {node: '>=14'}
@@ -4363,6 +4342,7 @@ packages:
   /source-map@0.6.1:
     resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==}
     engines: {node: '>=0.10.0'}
+    dev: true
 
   /space-separated-tokens@2.0.2:
     resolution: {integrity: sha512-PEGlAwrG8yXGXRjW32fGbg66JAlOAwbObuqVoJpv/mRgoWDQfgH1wDPvtzWyUSNAXBGSk8h755YDbbcEy3SH2Q==}
@@ -4762,12 +4742,6 @@ packages:
     dependencies:
       vue: 3.5.10(typescript@5.3.3)
 
-  /vue-esign@1.1.4:
-    resolution: {integrity: sha512-7Ix5PdcyyhVfsvrT9a+yp5+36gbQ0/bpDO+QSLT58IgJ5t164PEptOy5Nslw8bZbk3n3Hc7SP5B8eXQ8X8W+OA==}
-    dependencies:
-      vue: 2.7.16
-    dev: false
-
   /vue-eslint-parser@9.4.3(eslint@8.57.1):
     resolution: {integrity: sha512-2rYRLWlIpaiN8xbPiDyXZXRgLGOtWxERV7ND5fFAv5qo1D2N9Fu9MNajBNc6o13lZ+24DAWCkQCvj4klgmcITg==}
     engines: {node: ^14.17.0 || >=16.0.0}
@@ -4804,14 +4778,6 @@ packages:
       semver: 7.6.3
       typescript: 5.3.3
     dev: true
-
-  /vue@2.7.16:
-    resolution: {integrity: sha512-4gCtFXaAA3zYZdTp5s4Hl2sozuySsgz4jy1EnpBHNfpMa9dK1ZCG7viqBPCwXtmgc8nHqUsAu3G4gtmXkkY3Sw==}
-    deprecated: Vue 2 has reached EOL and is no longer actively maintained. See https://v2.vuejs.org/eol/ for more details.
-    dependencies:
-      '@vue/compiler-sfc': 2.7.16
-      csstype: 3.1.3
-    dev: false
 
   /vue@3.5.10(typescript@5.3.3):
     resolution: {integrity: sha512-Vy2kmJwHPlouC/tSnIgXVg03SG+9wSqT1xu1Vehc+ChsXsRd7jLkKgMltVEFOzUdBr3uFwBCG+41LJtfAcBRng==}

@@ -15,7 +15,6 @@
     "json-editor-vue3": "^1.0.9",
     "lodash": "^4.17.21",
     "vue": "^3.5.8",
-    "vue-esign": "^1.1.4",
     "vuedraggable-es": "^4.1.1"
   },
   "devDependencies": {
