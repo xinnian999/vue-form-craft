@@ -32,7 +32,7 @@ export default {
     },
     isClearBgColor: {
       type: Boolean,
-      default: true
+      default: false
     },
     format: {
       type: String,
