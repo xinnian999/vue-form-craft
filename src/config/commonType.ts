@@ -151,10 +151,25 @@ export interface FormInstanceSource extends ToRefs<FormRenderProps> {
 // 对 FormInstanceSource 深度只读， ref 解包
 export type FormInstance = DeepReadonly<UnwrapNestedRefs<FormInstanceSource>>
 
-
 export type Options = {
   request?: (options: Record<string, any>) => Promise<Record<string, any>>
   extendElements?: Record<string, FormElement>
   lang?: 'zh' | 'en'
 }
 
+export interface FormDesignProps {
+  schemaContext?: Record<string, any>
+  templates?: TemplateData
+  omitMenus?: string[]
+}
+
+export interface DesignInstance extends FormDesignProps {
+  currentKey: string
+  hoverKey:string
+  schema:FormSchema
+  current:FormItemType
+  onAdd: (params: Record<string, any>) => void
+  handleDeleteItem: (element: FormItemType) => void
+  handleCopyItem: (element: FormItemType) => void
+  handleSave: () => void
+}

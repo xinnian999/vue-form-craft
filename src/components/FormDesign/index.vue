@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, provide, computed } from 'vue'
+import { ref, provide, computed, reactive, readonly, toRefs } from 'vue'
 import { recursionDelete } from '@vue-form-craft/utils'
 import Menus from './Menus/index.vue'
 import Canvas from './Canvas/index.vue'
@@ -28,10 +28,11 @@ import type {
   FormSchema,
   FormItemType,
   TemplateData,
-  FormElement
+  FormElement,
+  DesignInstance
 } from '@vue-form-craft/config/commonType'
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     schemaContext?: Record<string, any>
     templates?: TemplateData
@@ -50,10 +51,10 @@ const emit = defineEmits<{
 
 const currentKey = ref('')
 
-const hoverKey = ref<string>('')
+const hoverKey = ref('')
 
 const currentSchema = defineModel<FormSchema>({
-  default: () => ({
+  default: reactive({
     labelWidth: 150,
     labelAlign: 'right',
     scrollToError: true,
@@ -67,7 +68,7 @@ const list = computed({
     return currentSchema.value.items
   },
   set(value) {
-    currentSchema.value = { ...currentSchema.value, items: value }
+    currentSchema.value.items = value
   }
 })
 
@@ -90,6 +91,28 @@ provide($schema, {
 provide($current, { current, updateCurrent: (data) => (current.value = data) })
 provide($hoverKey, { hoverKey, updateHoverKey: (key: string) => (hoverKey.value = key) })
 provide($methods, {
+  onAdd: (params) => {
+    list.value = changeItems(list.value)
+    emit('add', params.item.__draggable_context.element)
+  },
+  handleDeleteItem: (element) => {
+    list.value = recursionDelete(list.value, (item) => item.designKey !== element.designKey)
+  },
+  handleCopyItem: (element) => {
+    list.value = copyItems(list.value, element.designKey!)
+  },
+  handleSave: () => {
+    emit('onSave')
+    emit('save')
+  }
+})
+
+const instance = readonly({
+  ...toRefs(props),
+  currentKey,
+  hoverKey,
+  schema: currentSchema,
+  current,
   onAdd: (params) => {
     list.value = changeItems(list.value)
     emit('add', params.item.__draggable_context.element)
