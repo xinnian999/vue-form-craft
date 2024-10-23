@@ -1,5 +1,5 @@
-import type { DeepReadonly, InjectionKey, Ref, UnwrapNestedRefs } from 'vue'
-import type { FormItemType, FormInstance, FormSchema, Options } from './commonType'
+import type { DeepReadonly, InjectionKey, Ref } from 'vue'
+import type { FormItemType, FormInstance, FormSchema, Options, DesignInstance } from './commonType'
 
 export const $schema = Symbol() as InjectionKey<{
   readonly schema: Ref<FormSchema>
@@ -23,6 +23,8 @@ export const $hoverKey = Symbol() as InjectionKey<{
   updateHoverKey: (key: string) => void
 }>
 
-export const $formInstance = Symbol() as InjectionKey<DeepReadonly<UnwrapNestedRefs<FormInstance>>>
-
 export const $options = Symbol() as InjectionKey<Options>
+
+export const $formInstance = Symbol() as InjectionKey<DeepReadonly<FormInstance>>
+export const $designInstance = Symbol() as InjectionKey<DeepReadonly<DesignInstance>>
+

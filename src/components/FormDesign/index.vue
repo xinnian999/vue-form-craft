@@ -16,14 +16,29 @@
 </template>
 
 <script setup lang="ts">
-import { ref, provide, computed, reactive, readonly, toRefs } from 'vue'
+import {
+  ref,
+  provide,
+  computed,
+  reactive,
+  readonly,
+  toRefs,
+  type UnwrapNestedRefs,
+  type DeepReadonly
+} from 'vue'
 import { recursionDelete } from '@vue-form-craft/utils'
 import Menus from './Menus/index.vue'
 import Canvas from './Canvas/index.vue'
 import Current from './Current/index.vue'
 import Actions from './Actions/index.vue'
 import { getCurrentByKey, setCurrentByKey, changeItems, copyItems } from './utils'
-import { $schema, $current, $methods, $hoverKey } from '@vue-form-craft/config/symbol'
+import {
+  $schema,
+  $current,
+  $methods,
+  $hoverKey,
+  $designInstance
+} from '@vue-form-craft/config/symbol'
 import type {
   FormSchema,
   FormItemType,
@@ -113,14 +128,14 @@ const instance = readonly({
   hoverKey,
   schema: currentSchema,
   current,
-  onAdd: (params) => {
+  onAdd: (params: Record<string, any>) => {
     list.value = changeItems(list.value)
     emit('add', params.item.__draggable_context.element)
   },
-  handleDeleteItem: (element) => {
+  handleDeleteItem: (element: FormItemType) => {
     list.value = recursionDelete(list.value, (item) => item.designKey !== element.designKey)
   },
-  handleCopyItem: (element) => {
+  handleCopyItem: (element: FormItemType) => {
     list.value = copyItems(list.value, element.designKey!)
   },
   handleSave: () => {
@@ -128,6 +143,8 @@ const instance = readonly({
     emit('save')
   }
 })
+
+provide($designInstance, instance)
 </script>
 
 <style lang="less">

@@ -127,6 +127,12 @@ export type CollapseItem = {
   children: FormItemType[]
 }
 
+export type Options = {
+  request?: (options: Record<string, any>) => Promise<Record<string, any>>
+  extendElements?: Record<string, FormElement>
+  lang?: 'zh' | 'en'
+}
+
 export interface FormRenderProps {
   schema: FormSchema
   schemaContext?: Record<string, any>
@@ -148,15 +154,6 @@ export interface FormInstance extends FormRenderProps {
   submit: () => Promise<void>
 }
 
-// 对 FormInstanceSource 深度只读， ref 解包
-// export type FormInstance = DeepReadonly<UnwrapNestedRefs<FormInstanceSource>>
-
-export type Options = {
-  request?: (options: Record<string, any>) => Promise<Record<string, any>>
-  extendElements?: Record<string, FormElement>
-  lang?: 'zh' | 'en'
-}
-
 export interface FormDesignProps {
   schemaContext?: Record<string, any>
   templates?: TemplateData
@@ -165,9 +162,9 @@ export interface FormDesignProps {
 
 export interface DesignInstance extends FormDesignProps {
   currentKey: string
-  hoverKey:string
-  schema:FormSchema
-  current:FormItemType
+  hoverKey: string
+  schema: FormSchema
+  current: FormItemType|null
   onAdd: (params: Record<string, any>) => void
   handleDeleteItem: (element: FormItemType) => void
   handleCopyItem: (element: FormItemType) => void
