@@ -135,11 +135,11 @@ export interface FormRenderProps {
   read?: boolean
 }
 
-export interface FormInstanceSource extends ToRefs<FormRenderProps> {
-  formValues: Ref<Record<string, any>>
+export interface FormInstance extends FormRenderProps {
+  formValues: Record<string, any>
   selectData: Record<string, Record<string, any>>
   initialValues: Record<string, Record<string, any>>
-  context: Ref<Record<string, any>>
+  context: Record<string, any>
   updateFormValues: (values: Record<string, any>) => void
   updateSelectData: (key: string, value: Record<string, any>) => void
   updateInitialValues: (values: Record<string, any>) => void
@@ -149,7 +149,7 @@ export interface FormInstanceSource extends ToRefs<FormRenderProps> {
 }
 
 // 对 FormInstanceSource 深度只读， ref 解包
-export type FormInstance = DeepReadonly<UnwrapNestedRefs<FormInstanceSource>>
+// export type FormInstance = DeepReadonly<UnwrapNestedRefs<FormInstanceSource>>
 
 export type Options = {
   request?: (options: Record<string, any>) => Promise<Record<string, any>>
