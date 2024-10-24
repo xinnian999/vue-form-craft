@@ -169,4 +169,7 @@ export interface DesignInstance extends FormDesignProps {
   handleDeleteItem: (element: FormItemType) => void
   handleCopyItem: (element: FormItemType) => void
   handleSave: () => void
+  updateCurrent: (current: FormItemType) => void
+  updateHoverKey: (key: string) => void
+  updateSchema: (schema: FormSchema) => void
 }

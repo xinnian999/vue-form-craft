@@ -15,7 +15,7 @@
       class="childrenContainer"
       :animation="300"
       :style="style"
-      @add="onAdd"
+      @add="designInstance.onAdd"
     >
       <template #item="{ element: child }">
         <CanvasRender v-if="child.designKey" :data="child" />
@@ -25,20 +25,18 @@
 </template>
 
 <script setup lang="ts">
-import {  inject } from 'vue'
 import Draggable from 'vuedraggable-es'
 import CanvasRender from './CanvasRender.vue'
-import { $methods } from '@vue-form-craft/config/symbol'
 import { IconRender } from '@vue-form-craft/components'
 import type { FormItemType } from '@vue-form-craft/release'
-import { useLocale } from '@vue-form-craft/hooks'
+import { useDesignInstance, useLocale } from '@vue-form-craft/hooks'
 
 defineProps<{
   children: FormItemType[],
   style?: any
 }>()
 
-const { onAdd } = inject($methods)!
+const designInstance = useDesignInstance()
 
 const locale = useLocale()
 </script>

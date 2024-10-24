@@ -23,8 +23,6 @@ import {
   reactive,
   readonly,
   toRefs,
-  type UnwrapNestedRefs,
-  type DeepReadonly
 } from 'vue'
 import { recursionDelete } from '@vue-form-craft/utils'
 import Menus from './Menus/index.vue'
@@ -44,7 +42,6 @@ import type {
   FormItemType,
   TemplateData,
   FormElement,
-  DesignInstance
 } from '@vue-form-craft/config/commonType'
 
 const props = withDefaults(
@@ -128,6 +125,11 @@ const instance = readonly({
   hoverKey,
   schema: currentSchema,
   current,
+  updateCurrent: (data:FormItemType) => (current.value = data),
+  updateHoverKey: (key: string) => (hoverKey.value = key),
+  updateSchema: (schema:FormSchema) => {
+    currentSchema.value = schema
+  },
   onAdd: (params: Record<string, any>) => {
     list.value = changeItems(list.value)
     emit('add', params.item.__draggable_context.element)
@@ -141,7 +143,7 @@ const instance = readonly({
   handleSave: () => {
     emit('onSave')
     emit('save')
-  }
+  } 
 })
 
 provide($designInstance, instance)
