@@ -26,5 +26,5 @@ export const $hoverKey = Symbol() as InjectionKey<{
 export const $options = Symbol() as InjectionKey<Options>
 
 export const $formInstance = Symbol() as InjectionKey<DeepReadonly<FormInstance>>
-export const $designInstance = Symbol() as InjectionKey<DeepReadonly<DesignInstance>>
+export const $designInstance = Symbol() as InjectionKey<DesignInstance>
 

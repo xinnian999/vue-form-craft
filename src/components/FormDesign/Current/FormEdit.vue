@@ -5,20 +5,20 @@
 </template>
 
 <script setup>
-import { computed, inject } from 'vue'
+import { computed } from 'vue'
 import { FormRender } from '@vue-form-craft/components'
-import { $schema } from '@vue-form-craft/config/symbol'
 import formOptions from './formOptions'
+import { useDesignInstance } from '@vue-form-craft/hooks';
 
-const { schema, updateSchema } = inject($schema)
+const designInstance = useDesignInstance()
 
 //修改schema除了items的其他属性
 const form = computed({
   get() {
-    return schema.value
+    return designInstance.schema
   },
   set(value) {
-    updateSchema(value)
+    designInstance.updateSchema(value)
   }
 })
 </script>

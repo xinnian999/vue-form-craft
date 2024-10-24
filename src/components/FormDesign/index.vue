@@ -119,7 +119,7 @@ provide($methods, {
   }
 })
 
-const instance = readonly({
+const instance = reactive({
   ...toRefs(props),
   currentKey,
   hoverKey,

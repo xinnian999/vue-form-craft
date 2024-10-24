@@ -46,13 +46,12 @@
 
 <script setup lang="ts">
 import draggable from 'vuedraggable-es'
-import { computed, inject } from 'vue'
-import { $schema } from '@vue-form-craft/config/symbol'
+import { computed } from 'vue'
 import { ref } from 'vue'
 import parseMenus from './menus'
 import templateMock from '@vue-form-craft/template'
 import type { FormSchema, TemplateData } from '@vue-form-craft/config/commonType'
-import { useElements, useLang, useLocale } from '@vue-form-craft/hooks'
+import { useDesignInstance, useElements, useLang, useLocale } from '@vue-form-craft/hooks'
 
 const props = withDefaults(
   defineProps<{
@@ -64,7 +63,7 @@ const props = withDefaults(
 
 const drawerVisible = ref(false)
 
-const { updateSchema } = inject($schema)!
+const designInstance = useDesignInstance()
 
 const elements = useElements()
 
@@ -75,7 +74,7 @@ const lang = useLang()
 const menus = computed(() => parseMenus({ elements, omits: props.omitMenus, lang: lang.value }))
 
 const useTemplate = (templateSchema: FormSchema) => {
-  updateSchema(templateSchema)
+  designInstance.updateSchema(templateSchema)
 }
 </script>
 
