@@ -1,7 +1,7 @@
 <template>
-  <div :class="namespace('canvas-group')">
-    <div :class="namespace('canvas-group-empty')" v-if="!children.length">
-      <div :class="namespace('canvas-group-empty-ico')">
+  <div :class="ns('canvas-group')">
+    <div :class="ns('canvas-group-empty')" v-if="!children.length">
+      <div :class="ns('canvas-group-empty-ico')">
         <icon-render name="add" />
       </div>
       <p>{{ locale.canvas.wrapperEmptyTip }}</p>
@@ -12,7 +12,7 @@
       itemKey="name"
       chosenClass="active"
       ghost-class="ghost"
-      :class="namespace('canvas-group-draggable')"
+      :class="ns('canvas-group-draggable')"
       :animation="300"
       :style="style"
       @add="designInstance.onAdd"
@@ -30,7 +30,7 @@ import CanvasRender from './CanvasRender.vue'
 import { IconRender } from '@vue-form-craft/components'
 import type { FormItemType } from '@vue-form-craft/release'
 import { useDesignInstance, useLocale } from '@vue-form-craft/hooks'
-import { namespace } from '@vue-form-craft/utils'
+import { ns } from '@vue-form-craft/utils'
 
 defineProps<{
   children: FormItemType[],

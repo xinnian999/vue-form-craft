@@ -1,19 +1,17 @@
 <template>
-  <div :class="namespace('form-design')" v-bind="$attrs">
-    <Menus />
-
+  <div :class="ns('form-design')" v-bind="$attrs">
+    <Left />
     <Center />
-
-    <Current />
+    <Right />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, provide, computed, reactive, toRefs } from 'vue'
-import { namespace, recursionDelete } from '@vue-form-craft/utils'
-import Menus from './Menus/index.vue'
+import { ns, recursionDelete } from '@vue-form-craft/utils'
+import Left from './Left/index.vue'
 import Center from './Center/index.vue'
-import Current from './Current/index.vue'
+import Right from './Right/index.vue'
 import { getCurrentByKey, setCurrentByKey, changeItems, copyItems } from '@vue-form-craft/utils'
 import { $designInstance } from '@vue-form-craft/config/symbol'
 import type {

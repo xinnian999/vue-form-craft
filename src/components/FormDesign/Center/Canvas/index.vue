@@ -1,18 +1,18 @@
 <template>
-  <FormRender :class="namespace('form-design-canvas-form')" design :schema="designInstance.schema">
-    <div :class="namespace('form-design-canvas-form-tip')" v-if="!designInstance.list.length">
-      <div :class="namespace('form-design-canvas-form-tip-ico')">
+  <FormRender :class="ns('canvas')" design :schema="designInstance.schema">
+    <div :class="ns('canvas-empty')" v-if="!designInstance.list.length">
+      <div :class="ns('canvas-empty-ico')">
         <icon-render name="add" />
       </div>
       <p>{{ locale.canvas.emptyTip }}</p>
     </div>
 
     <draggable
-      style="height: 100%"
+      :class="ns('canvas-draggable')"
       :list="designInstance.list"
       :group="{ name: 'formDesign', pull: true, put: true }"
       itemKey="name"
-      :ghost-class="namespace('form-design-canvas-form-ghost')"
+      :ghost-class="ns('canvas-draggable-ghost')"
       @add="designInstance.onAdd"
       handle=".canvas-move"
       :animation="300"
@@ -30,7 +30,7 @@ import draggable from 'vuedraggable-es'
 import { FormRender, IconRender } from '@vue-form-craft/components'
 import CanvasRender from './CanvasRender.vue'
 import { useDesignInstance, useLocale } from '@vue-form-craft/hooks'
-import { namespace } from '@vue-form-craft/utils'
+import { ns } from '@vue-form-craft/utils'
 
 const designInstance = useDesignInstance()
 

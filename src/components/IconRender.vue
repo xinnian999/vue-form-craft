@@ -1,9 +1,9 @@
 <template>
-  <component :class="namespace('icon-render')" :is="icons[name]" v-bind="$attrs" />
+  <component :class="ns('icon-render')" :is="icons[name]" v-bind="$attrs" />
 </template>
 
 <script setup lang="ts">
-import { namespace } from '@vue-form-craft/utils'
+import { ns } from '@vue-form-craft/utils'
 
 const modules = import.meta.glob('@vue-form-craft/assets/icons/*.vue', { eager: true })
 

@@ -15,14 +15,14 @@
       :class="thisProps.class"
     >
       <template #label>
-        <div v-if="!hideLabel" :class="namespace('form-item-label')">
+        <div v-if="!hideLabel" :class="ns('form-item-label')">
           <div :style="formInstance.schema.labelBold && 'font-weight: bold'">{{ label }}</div>
-          <div :class="namespace('form-item-label-ico')" v-if="help">
+          <div :class="ns('form-item-label-ico')" v-if="help">
             <el-tooltip effect="dark" :content="help">
               <div><icon-render name="help" /></div>
             </el-tooltip>
           </div>
-          <div :class="namespace('form-item-label-suffix')" v-if="formInstance.schema.labelSuffix">
+          <div :class="ns('form-item-label-suffix')" v-if="formInstance.schema.labelSuffix">
             {{ formInstance.schema.labelSuffix }}
           </div>
         </div>
@@ -63,7 +63,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted, reactive } from 'vue'
-import { isRegexString, getDataByPath, setDataByPath, namespace } from '@vue-form-craft/utils'
+import { isRegexString, getDataByPath, setDataByPath, ns } from '@vue-form-craft/utils'
 import type { FormItemType } from '@vue-form-craft/config/commonType'
 import { IconRender } from '@vue-form-craft/components'
 import { useFormInstance } from '@vue-form-craft/release'
