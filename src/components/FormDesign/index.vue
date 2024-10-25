@@ -1,7 +1,7 @@
 <template>
   <div id="FormDesign" v-bind="$attrs">
     <div class="formItemList">
-      <Menus :templates="templates" :omitMenus="omitMenus" />
+      <Menus />
     </div>
 
     <div class="formRender">
@@ -16,44 +16,27 @@
 </template>
 
 <script setup lang="ts">
-import {
-  ref,
-  provide,
-  computed,
-  reactive,
-  readonly,
-  toRefs,
-} from 'vue'
+import { ref, provide, computed, reactive, toRefs } from 'vue'
 import { recursionDelete } from '@vue-form-craft/utils'
 import Menus from './Menus/index.vue'
 import Canvas from './Canvas/index.vue'
 import Current from './Current/index.vue'
 import Actions from './Actions/index.vue'
 import { getCurrentByKey, setCurrentByKey, changeItems, copyItems } from './utils'
-import {
-  $schema,
-  $current,
-  $methods,
-  $hoverKey,
-  $designInstance
-} from '@vue-form-craft/config/symbol'
+import { $designInstance } from '@vue-form-craft/config/symbol'
 import type {
   FormSchema,
   FormItemType,
-  TemplateData,
   FormElement,
+  FormDesignProps
 } from '@vue-form-craft/config/commonType'
+import templateMock from '@vue-form-craft/template'
 
-const props = withDefaults(
-  defineProps<{
-    schemaContext?: Record<string, any>
-    templates?: TemplateData
-    omitMenus?: string[]
-  }>(),
-  {
-    schemaContext: () => ({})
-  }
-)
+const props = withDefaults(defineProps<FormDesignProps>(), {
+  templates: () => templateMock,
+  omitMenus: () => [],
+  schemaContext: () => ({})
+})
 
 const emit = defineEmits<{
   onSave: []
@@ -94,40 +77,16 @@ const current = computed({
   }
 })
 
-provide($schema, {
-  schema: currentSchema,
-  updateSchema: (schema) => {
-    currentSchema.value = schema
-  }
-})
-provide($current, { current, updateCurrent: (data) => (current.value = data) })
-provide($hoverKey, { hoverKey, updateHoverKey: (key: string) => (hoverKey.value = key) })
-provide($methods, {
-  onAdd: (params) => {
-    list.value = changeItems(list.value)
-    emit('add', params.item.__draggable_context.element)
-  },
-  handleDeleteItem: (element) => {
-    list.value = recursionDelete(list.value, (item) => item.designKey !== element.designKey)
-  },
-  handleCopyItem: (element) => {
-    list.value = copyItems(list.value, element.designKey!)
-  },
-  handleSave: () => {
-    emit('onSave')
-    emit('save')
-  }
-})
-
 const instance = reactive({
   ...toRefs(props),
   currentKey,
   hoverKey,
   schema: currentSchema,
   current,
-  updateCurrent: (data:FormItemType) => (current.value = data),
+  list,
+  updateCurrent: (data: FormItemType) => (current.value = data),
   updateHoverKey: (key: string) => (hoverKey.value = key),
-  updateSchema: (schema:FormSchema) => {
+  updateSchema: (schema: FormSchema) => {
     currentSchema.value = schema
   },
   onAdd: (params: Record<string, any>) => {
@@ -143,7 +102,7 @@ const instance = reactive({
   handleSave: () => {
     emit('onSave')
     emit('save')
-  } 
+  }
 })
 
 provide($designInstance, instance)

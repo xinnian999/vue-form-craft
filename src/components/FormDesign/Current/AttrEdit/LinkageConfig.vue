@@ -24,25 +24,24 @@
         :options="{ search: true, history: true }"
         language="zh"
       />
-      <FormRender v-if="type === 'value'" v-model="model" :schema="linkageSchema(schema, model!)" />
+      <FormRender v-if="type === 'value'" v-model="model" :schema="linkageSchema(designInstance.schema, model!)" />
     </el-dialog>
   </div>
 </template>
 
 <script setup lang="ts">
-import { inject, ref } from 'vue'
-import { $schema } from '@vue-form-craft/config/symbol'
+import { ref } from 'vue'
 import { FormRender } from '@vue-form-craft/components'
 import JsonEditorVue from 'json-editor-vue3'
 import linkageSchema from '../linkageSchema'
 import type { FormItemType } from '@vue-form-craft/release'
-import { useLocale } from '@vue-form-craft/hooks'
+import { useDesignInstance, useLocale } from '@vue-form-craft/hooks'
 
 const model = defineModel<FormItemType>()
 
 const locale = useLocale()
 
-const { schema } = inject($schema)!
+const designInstance = useDesignInstance()
 
 const visible = ref(false)
 

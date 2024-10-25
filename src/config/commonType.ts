@@ -160,11 +160,12 @@ export interface FormDesignProps {
   omitMenus?: string[]
 }
 
-export interface DesignInstance extends FormDesignProps {
+export interface DesignInstance extends Required<FormDesignProps> {
   currentKey: string
   hoverKey: string
   schema: FormSchema
-  current: FormItemType|null
+  list: FormItemType[]
+  current: FormItemType | null
   onAdd: (params: Record<string, any>) => void
   handleDeleteItem: (element: FormItemType) => void
   handleCopyItem: (element: FormItemType) => void

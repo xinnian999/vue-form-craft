@@ -36,7 +36,7 @@ const designInstance = useDesignInstance()
 
 const canvasItemClass = computed(() => ({
   'canvas-item': true,
-  active: props.data.designKey === designInstance.current?.designKey,
+  active: props.data.designKey === designInstance.current?.designKey, 
   hover: props.data.designKey === designInstance.hoverKey,
   mask: props.data.designKey === designInstance.hoverKey && !props.data.children
 }))

@@ -1,6 +1,6 @@
 <template>
-  <FormRender design class="canvas" :schema="schema">
-    <div class="tip" v-if="!schema.items.length">
+  <FormRender design class="canvas" :schema="designInstance.schema">
+    <div class="tip" v-if="!designInstance.list.length">
       <div class="ico">
         <icon-render name="add" />
       </div>
@@ -9,12 +9,12 @@
 
     <draggable
       style="height: 100%"
-      :list="schema.items"
+      :list="designInstance.list"
       :group="{ name: 'formDesign', pull: true, put: true }"
       itemKey="name"
       chooseClass="choose"
       ghost-class="ghost"
-      @add="onAdd"
+      @add="designInstance.onAdd"
       drag-class="drag"
       handle=".canvas-move"
       :animation="300"
@@ -28,16 +28,12 @@
 </template>
 
 <script setup lang="ts">
-import { inject } from 'vue'
 import draggable from 'vuedraggable-es'
-import { FormRender,IconRender } from '@vue-form-craft/components'
-import { $schema, $methods } from '@vue-form-craft/config/symbol'
+import { FormRender, IconRender } from '@vue-form-craft/components'
 import CanvasRender from './CanvasRender.vue'
-import { useLocale } from '@vue-form-craft/hooks'
+import { useDesignInstance, useLocale } from '@vue-form-craft/hooks'
 
-const { schema } = inject($schema)!
-
-const { onAdd } = inject($methods)!
+const designInstance = useDesignInstance()
 
 const locale = useLocale()
 </script>
