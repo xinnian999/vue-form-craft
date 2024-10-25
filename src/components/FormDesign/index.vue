@@ -1,28 +1,20 @@
 <template>
-  <div id="FormDesign" v-bind="$attrs">
-    <div class="formItemList">
-      <Menus />
-    </div>
+  <div :class="namespace('form-design')" v-bind="$attrs">
+    <Menus />
 
-    <div class="formRender">
-      <Actions :schemaContext="schemaContext" />
-      <Canvas />
-    </div>
+    <Center />
 
-    <div class="formItemOptions">
-      <Current />
-    </div>
+    <Current />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, provide, computed, reactive, toRefs } from 'vue'
-import { recursionDelete } from '@vue-form-craft/utils'
+import { namespace, recursionDelete } from '@vue-form-craft/utils'
 import Menus from './Menus/index.vue'
-import Canvas from './Canvas/index.vue'
+import Center from './Center/index.vue'
 import Current from './Current/index.vue'
-import Actions from './Actions/index.vue'
-import { getCurrentByKey, setCurrentByKey, changeItems, copyItems } from './utils'
+import { getCurrentByKey, setCurrentByKey, changeItems, copyItems } from '@vue-form-craft/utils'
 import { $designInstance } from '@vue-form-craft/config/symbol'
 import type {
   FormSchema,
@@ -107,60 +99,3 @@ const instance = reactive({
 
 provide($designInstance, instance)
 </script>
-
-<style lang="less">
-#FormDesign {
-  display: flex;
-  height: 100%;
-  box-sizing: border-box;
-  background-color: var(--el-bg-color);
-  .formItemList {
-    width: 18%;
-    padding: 10px;
-    position: relative;
-    overflow: auto;
-  }
-  .formRender {
-    flex: 1;
-    margin: 0 10px;
-    overflow: hidden;
-    border-left: 1px solid #eee;
-    border-right: 1px solid #eee;
-    padding: 0 15px;
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 20px;
-  }
-  .formItemOptions {
-    width: 22%;
-    min-width: 300px;
-    overflow: auto;
-    padding: 20px;
-  }
-
-  .editor {
-    height: 70vh;
-  }
-}
-
-::-webkit-scrollbar {
-  /*滚动条整体样式*/
-  width: 7px;
-  /*高宽分别对应横竖滚动条的尺寸*/
-  background-color: #fff;
-  // position: fixed;
-}
-
-::-webkit-scrollbar-track {
-  /*滚动条里面轨道*/
-  box-shadow: none;
-  background: transparent;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  /*滚动条里面小方块*/
-  border-radius: 10px;
-  background-color: #ccc;
-}
-</style>

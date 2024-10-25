@@ -69,7 +69,7 @@ const linkageBtns = [
 ]
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .vfc-linkageConfig{
   padding-top: 30px;
   &-btns{

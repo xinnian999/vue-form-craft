@@ -1,10 +1,10 @@
 <template>
-  <div id="CanvasWrapper">
-    <div class="tip" v-if="!children.length">
-      <div class="ico">
+  <div :class="namespace('canvas-group')">
+    <div :class="namespace('canvas-group-empty')" v-if="!children.length">
+      <div :class="namespace('canvas-group-empty-ico')">
         <icon-render name="add" />
       </div>
-      <div class="text">{{ locale.canvas.wrapperEmptyTip }}</div>
+      <p>{{ locale.canvas.wrapperEmptyTip }}</p>
     </div>
     <draggable
       :list="children"
@@ -12,7 +12,7 @@
       itemKey="name"
       chosenClass="active"
       ghost-class="ghost"
-      class="childrenContainer"
+      :class="namespace('canvas-group-draggable')"
       :animation="300"
       :style="style"
       @add="designInstance.onAdd"
@@ -30,6 +30,7 @@ import CanvasRender from './CanvasRender.vue'
 import { IconRender } from '@vue-form-craft/components'
 import type { FormItemType } from '@vue-form-craft/release'
 import { useDesignInstance, useLocale } from '@vue-form-craft/hooks'
+import { namespace } from '@vue-form-craft/utils'
 
 defineProps<{
   children: FormItemType[],
@@ -40,28 +41,3 @@ const designInstance = useDesignInstance()
 
 const locale = useLocale()
 </script>
-
-<style scoped lang="less">
-#CanvasWrapper {
-  position: relative;
-  .tip {
-    color: #999;
-    font-size: 12px;
-    width: 100%;
-    text-align: center;
-    position: absolute;
-    left: 0;
-    top: 40%;
-    transform: translateY(-50%);
-    pointer-events: none;
-
-    .ico {
-      font-size: 15px;
-      margin-bottom: 10px;
-    }
-  }
-  .childrenContainer {
-    min-height: 150px;
-  }
-}
-</style>

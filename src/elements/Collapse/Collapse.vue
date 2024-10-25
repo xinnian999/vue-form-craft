@@ -31,7 +31,7 @@ onMounted(() => {
 })
 </script>
 
-<style lang="less">
+<style lang="scss">
 .form-item-grid {
   .el-form-item {
     margin-bottom: 0;

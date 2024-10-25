@@ -103,7 +103,7 @@ const rightActions: PreviewAction[] = [
 ]
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .vfc-formDesign-actions {
   margin-top: 10px;
   display: flex;

@@ -37,7 +37,7 @@
 import { ref, computed } from 'vue'
 import JsonEditorVue from 'json-editor-vue3'
 import { CodeHighLight } from '@vue-form-craft/components'
-import { changeItems } from '../utils'
+import { changeItems } from '@vue-form-craft/utils'
 import { schemaHelp ,tsJsonSchema,jsJsonSchema} from './config'
 import { useDesignInstance, useLocale } from '@vue-form-craft/hooks'
 

@@ -37,7 +37,7 @@ const InlineStyle = computed<StyleValue>(() => ({
 }))
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .form-item-inline {
   .el-form-item {
     margin-bottom: 0;

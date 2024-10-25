@@ -204,7 +204,7 @@ watch(list, (newVal, oldVal) => {
 })
 </script>
 
-<style lang="less">
+<style lang="scss">
 .vfc-formList {
   position: relative;
   width: 100%;

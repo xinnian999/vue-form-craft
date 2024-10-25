@@ -1,5 +1,6 @@
 import { FormDesign, FormRender } from '@vue-form-craft/components'
 import install from './install'
+import '@vue-form-craft/styles/index.scss'
 
 export default { install }
 

@@ -1,0 +1,72 @@
+<template>
+  <div
+    :class="canvasItemClass"
+    @click.stop="handleSelect(data)"
+    @mousemove.stop="handleHoverEnter"
+    @mouseleave.stop="handleHoverLeave"
+  >
+    <div class="actions-left-top" v-if="data.designKey === designInstance.current?.designKey">
+      <div class="canvas-move" size="small" type="primary">
+        <icon-render name="move" />
+      </div>
+    </div>
+
+    <div class="hidden-ico" v-if="data.hidden"><icon-render name="hidden" /></div>
+
+    <ul class="actions-right-bottom" v-if="data.designKey === designInstance.current?.designKey">
+      <li v-for="{ icon, handle } in rightBottomActions" @click.stop="handle(data)" :key="icon">
+        <icon-render :name="icon" />
+      </li>
+    </ul>
+
+    <form-item v-bind="data" :props="checkProps(data.props)" />
+  </div>
+</template>
+
+<script setup lang="ts">
+import { computed } from 'vue'
+import { omit } from 'lodash'
+import { FormItem, IconRender } from '@vue-form-craft/components'
+import type { FormItemType } from '@vue-form-craft/release'
+import { useDesignInstance } from '@vue-form-craft/hooks'
+
+const props = defineProps<{ data: FormItemType }>()
+
+const designInstance = useDesignInstance()
+
+const canvasItemClass = computed(() => ({
+  'canvas-item': true,
+  active: props.data.designKey === designInstance.current?.designKey, 
+  hover: props.data.designKey === designInstance.hoverKey,
+  mask: props.data.designKey === designInstance.hoverKey && !props.data.children
+}))
+
+const handleHoverEnter = () => {
+  if (props.data.designKey) {
+    designInstance.updateHoverKey(props.data.designKey)
+  }
+}
+
+const handleHoverLeave = () => {
+  designInstance.updateHoverKey('')
+}
+
+const handleSelect = (element: FormItemType) => {
+  designInstance.updateCurrent(element)
+}
+
+const rightBottomActions = [
+  {
+    icon: 'copy',
+    handle: designInstance.handleCopyItem
+  },
+  {
+    icon: 'delete',
+    handle: designInstance.handleDeleteItem
+  }
+]
+
+const checkProps = (props: Record<string, any> = {}) => {
+  return omit(props, ['multiple', 'api'])
+}
+</script>

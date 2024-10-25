@@ -74,7 +74,7 @@ const currentProps = computed({
 })
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .vfc-attrForm {
   padding-bottom: 20px;
 }

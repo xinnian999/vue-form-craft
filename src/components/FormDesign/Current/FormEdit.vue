@@ -23,7 +23,7 @@ const form = computed({
 })
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .attrForm {
   height: 100%;
   overflow: auto;

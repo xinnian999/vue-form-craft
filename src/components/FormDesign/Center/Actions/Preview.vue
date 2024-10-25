@@ -74,7 +74,7 @@ const handleReset = async () => {
 }
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .formDesign-actions {
   /* padding: 10px; */
   margin-top: 10px;

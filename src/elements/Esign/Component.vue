@@ -132,7 +132,7 @@ onMounted(() => {
 })
 </script>
 
-<style lang="less">
+<style lang="scss">
 .vfc-esign {
   position: relative;
   width: 100%;

@@ -17,7 +17,7 @@ defineProps<{
 }>()
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 #DefaultCanvasWrapper {
   border: 2px dashed var(--el-color-primary);
   margin: 10px;
