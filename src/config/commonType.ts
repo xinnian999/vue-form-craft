@@ -1,5 +1,5 @@
 import type { FormValidationResult } from 'element-plus'
-import type { Component, Ref, VNode, ToRefs, UnwrapNestedRefs, DeepReadonly } from 'vue'
+import type { Component, Ref, VNode } from 'vue'
 
 export type FormRule = {
   type: 'email' | 'url' | 'custom' | string
