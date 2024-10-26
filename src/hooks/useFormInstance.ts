@@ -1,8 +1,8 @@
 import { $formInstance } from '@vue-form-craft/config/symbol'
-import type { FormInstance } from '@vue-form-craft/release'
 import { inject } from 'vue'
 
-const useFormInstance = (): FormInstance => {
+// 返回一个响应式的Proxy，所以不可解构使用
+const useFormInstance = () => {
   const instance = inject($formInstance)!
 
   return instance

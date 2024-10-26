@@ -21,10 +21,10 @@
         />
       </el-tab-pane>
       <el-tab-pane label="生成ts文件" name="ts">
-        <CodeHighLight style="height: 70vh;" language="ts" :code="tsJsonSchema(schema)" />
+        <CodeHighLight style="height: 70vh;" language="ts" :code="tsJsonSchema(json)" />
       </el-tab-pane>
       <el-tab-pane label="生成js文件" name="js">
-        <CodeHighLight style="height: 70vh;" language="js" :code="jsJsonSchema(schema)" />
+        <CodeHighLight style="height: 70vh;" language="js" :code="jsJsonSchema(json)" />
       </el-tab-pane>
       <el-tab-pane label="帮助" name="help">
         <CodeHighLight style="height: 70vh;" language="json" :code="schemaHelp" />
@@ -34,25 +34,24 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, inject } from 'vue'
+import { ref, computed } from 'vue'
 import JsonEditorVue from 'json-editor-vue3'
-import { $schema } from '@vue-form-craft/config/symbol'
 import { CodeHighLight } from '@vue-form-craft/components'
-import { changeItems } from '../utils'
+import { changeItems } from '@vue-form-craft/utils'
 import { schemaHelp ,tsJsonSchema,jsJsonSchema} from './config'
-import { useLocale } from '@vue-form-craft/hooks'
+import { useDesignInstance, useLocale } from '@vue-form-craft/hooks'
 
-const { schema, updateSchema } = inject($schema)!
+const designInstance = useDesignInstance()
 
 const locale = useLocale()
 
 const json = computed({
   get() {
-    return schema.value
+    return designInstance.schema
   },
   set(value) {
     if (value.items) {
-      updateSchema(value)
+      designInstance.updateSchema(value)
     }
   }
 })
@@ -62,7 +61,7 @@ const formValues = ref({})
 const visible = defineModel<boolean>()
 
 const onBlur = (editor: any) => {
-  schema.value = { ...schema.value, items: changeItems(schema.value.items) }
+  designInstance.updateSchema( { ...designInstance.schema, items: changeItems(designInstance.schema.items) })
   editor.repair()
 }
 </script>

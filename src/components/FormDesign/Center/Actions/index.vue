@@ -1,6 +1,6 @@
 <template>
-  <div class="vfc-formDesign-actions">
-    <div class="vfc-formDesign-actions-left">
+  <div :class="ns('actions')">
+    <div :class="ns('actions-left')">
       <el-button
         v-for="{ label, btnType, icon, onClick } in leftActions"
         :key="label"
@@ -15,7 +15,7 @@
       >
     </div>
 
-    <div class="vfc-formDesign-actions-right">
+    <div :class="ns('actions-right')">
       <el-button
         v-for="{ label, btnType, icon, onClick } in rightActions"
         :key="label"
@@ -29,19 +29,19 @@
 
     <JsonSchema v-model="JsonSchemaVisible" />
     <VueCode v-model="VueCodeVisible" />
-    <Preview v-model="PreviewVisible" :schema-context="schemaContext" />
+    <Preview v-model="PreviewVisible" :schema-context="designInstance.schemaContext" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, inject } from 'vue'
+import { ref } from 'vue'
 import { ElMessageBox } from 'element-plus'
-import { $schema, $methods } from '@vue-form-craft/config/symbol'
 import IconRender from '@vue-form-craft/components/IconRender.vue'
 import JsonSchema from './JsonSchema.vue'
 import VueCode from './VueCode.vue'
 import Preview from './Preview.vue'
-import { useLocale } from '@vue-form-craft/hooks'
+import { useDesignInstance, useLocale } from '@vue-form-craft/hooks'
+import { ns } from '@vue-form-craft/utils'
 
 type PreviewAction = {
   label: string
@@ -50,13 +50,7 @@ type PreviewAction = {
   onClick: () => void
 }
 
-defineProps<{
-  schemaContext: Record<string, any>
-}>()
-
-const { schema } = inject($schema)!
-
-const { handleSave } = inject($methods)!
+const designInstance = useDesignInstance()
 
 const locale = useLocale()
 
@@ -68,7 +62,7 @@ const leftActions: PreviewAction[] = [
   {
     label: locale.value.actions.previewJson,
     btnType: 'primary',
-    icon:'script',
+    icon: 'script',
     onClick: () => {
       JsonSchemaVisible.value = true
     }
@@ -84,7 +78,7 @@ const leftActions: PreviewAction[] = [
   {
     label: locale.value.actions.previewForm,
     btnType: 'default',
-    icon:'eye',
+    icon: 'eye',
     onClick: () => {
       PreviewVisible.value = true
     }
@@ -98,29 +92,14 @@ const rightActions: PreviewAction[] = [
     icon: 'trash',
     onClick: async () => {
       await ElMessageBox.confirm('确认清空当前设计吗？')
-      schema.value = { ...schema.value, items: [] }
+      designInstance.updateSchema({ ...designInstance.schema, items: [] })
     }
   },
   {
     label: locale.value.actions.save,
-    icon:'save',
+    icon: 'save',
     btnType: 'primary',
-    onClick: handleSave
+    onClick: designInstance.handleSave
   }
 ]
 </script>
-
-<style scoped lang="less">
-.vfc-formDesign-actions {
-  margin-top: 10px;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  .vfc-formDesign-actions-left,
-  .vfc-formDesign-actions-right {
-    button {
-      margin-bottom: 10px;
-    }
-  }
-}
-</style>

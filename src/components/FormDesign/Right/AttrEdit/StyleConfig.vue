@@ -1,5 +1,5 @@
 <template>
-  <div class="vfc-style-config">
+  <div :class="ns('style-config')">
     <el-divider>组件样式</el-divider>
     <FormRender v-model="currentProps" :schema="schemaMini" ref="formRef" />
     <el-button type="primary" plain size="small" @click="visible = true">自定义更多样式</el-button>
@@ -14,6 +14,7 @@
 import { ref } from 'vue'
 import type { FormSchema } from '@vue-form-craft/release'
 import FormRender from '@vue-form-craft/components/FormRender.vue'
+import { ns } from '@vue-form-craft/utils';
 
 const currentProps = defineModel<Record<string, any>>()
 
@@ -204,10 +205,3 @@ const schema: FormSchema = {
   ]
 }
 </script>
-
-<style>
-.vfc-style-config{
-  text-align: center;
-  padding-top: 20px;
-}
-</style>

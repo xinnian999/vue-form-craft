@@ -1,46 +1,32 @@
 <template>
-  <div id="FormDesign" v-bind="$attrs">
-    <div class="formItemList">
-      <Menus :templates="templates" :omitMenus="omitMenus" />
-    </div>
-
-    <div class="formRender">
-      <Actions :schemaContext="schemaContext" />
-      <Canvas />
-    </div>
-
-    <div class="formItemOptions">
-      <Current />
-    </div>
+  <div :class="ns('form-design')" v-bind="$attrs">
+    <Left />
+    <Center />
+    <Right />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, provide, computed } from 'vue'
-import { recursionDelete } from '@vue-form-craft/utils'
-import Menus from './Menus/index.vue'
-import Canvas from './Canvas/index.vue'
-import Current from './Current/index.vue'
-import Actions from './Actions/index.vue'
-import { getCurrentByKey, setCurrentByKey, changeItems, copyItems } from './utils'
-import { $schema, $current, $methods, $hoverKey } from '@vue-form-craft/config/symbol'
+import { ref, provide, computed, reactive, toRefs } from 'vue'
+import { ns, recursionDelete } from '@vue-form-craft/utils'
+import Left from './Left/index.vue'
+import Center from './Center/index.vue'
+import Right from './Right/index.vue'
+import { getCurrentByKey, setCurrentByKey, changeItems, copyItems } from '@vue-form-craft/utils'
+import { $designInstance } from '@vue-form-craft/config/symbol'
 import type {
   FormSchema,
   FormItemType,
-  TemplateData,
-  FormElement
+  FormElement,
+  FormDesignProps
 } from '@vue-form-craft/config/commonType'
+import templateMock from '@vue-form-craft/template'
 
-withDefaults(
-  defineProps<{
-    schemaContext?: Record<string, any>
-    templates?: TemplateData
-    omitMenus?: string[]
-  }>(),
-  {
-    schemaContext: () => ({})
-  }
-)
+const props = withDefaults(defineProps<FormDesignProps>(), {
+  templates: () => templateMock,
+  omitMenus: () => [],
+  schemaContext: () => ({})
+})
 
 const emit = defineEmits<{
   onSave: []
@@ -50,10 +36,10 @@ const emit = defineEmits<{
 
 const currentKey = ref('')
 
-const hoverKey = ref<string>('')
+const hoverKey = ref('')
 
 const currentSchema = defineModel<FormSchema>({
-  default: () => ({
+  default: reactive({
     labelWidth: 150,
     labelAlign: 'right',
     scrollToError: true,
@@ -67,7 +53,7 @@ const list = computed({
     return currentSchema.value.items
   },
   set(value) {
-    currentSchema.value = { ...currentSchema.value, items: value }
+    currentSchema.value.items = value
   }
 })
 
@@ -81,23 +67,26 @@ const current = computed({
   }
 })
 
-provide($schema, {
+const instance = reactive({
+  ...toRefs(props),
+  currentKey,
+  hoverKey,
   schema: currentSchema,
-  updateSchema: (schema) => {
+  current,
+  list,
+  updateCurrent: (data: FormItemType) => (current.value = data),
+  updateHoverKey: (key: string) => (hoverKey.value = key),
+  updateSchema: (schema: FormSchema) => {
     currentSchema.value = schema
-  }
-})
-provide($current, { current, updateCurrent: (data) => (current.value = data) })
-provide($hoverKey, { hoverKey, updateHoverKey: (key: string) => (hoverKey.value = key) })
-provide($methods, {
-  onAdd: (params) => {
+  },
+  onAdd: (params: Record<string, any>) => {
     list.value = changeItems(list.value)
     emit('add', params.item.__draggable_context.element)
   },
-  handleDeleteItem: (element) => {
+  handleDeleteItem: (element: FormItemType) => {
     list.value = recursionDelete(list.value, (item) => item.designKey !== element.designKey)
   },
-  handleCopyItem: (element) => {
+  handleCopyItem: (element: FormItemType) => {
     list.value = copyItems(list.value, element.designKey!)
   },
   handleSave: () => {
@@ -105,61 +94,6 @@ provide($methods, {
     emit('save')
   }
 })
+
+provide($designInstance, instance)
 </script>
-
-<style lang="less">
-#FormDesign {
-  display: flex;
-  height: 100%;
-  box-sizing: border-box;
-  background-color: var(--el-bg-color);
-  .formItemList {
-    width: 18%;
-    padding: 10px;
-    position: relative;
-    overflow: auto;
-  }
-  .formRender {
-    flex: 1;
-    margin: 0 10px;
-    overflow: hidden;
-    border-left: 1px solid #eee;
-    border-right: 1px solid #eee;
-    padding: 0 15px;
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 20px;
-  }
-  .formItemOptions {
-    width: 22%;
-    min-width: 300px;
-    overflow: auto;
-    padding: 20px;
-  }
-
-  .editor {
-    height: 70vh;
-  }
-}
-
-::-webkit-scrollbar {
-  /*滚动条整体样式*/
-  width: 7px;
-  /*高宽分别对应横竖滚动条的尺寸*/
-  background-color: #fff;
-  // position: fixed;
-}
-
-::-webkit-scrollbar-track {
-  /*滚动条里面轨道*/
-  box-shadow: none;
-  background: transparent;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  /*滚动条里面小方块*/
-  border-radius: 10px;
-  background-color: #ccc;
-}
-</style>

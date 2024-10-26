@@ -1,5 +1,5 @@
 <template>
-  <div class="vfc-attrForm">
+  <div :class="ns('attr')">
     <FormRender :key="current.designKey" v-model="current" :schema="attrSchema" />
 
     <StyleConfig :key="current.designKey" v-model="currentProps" />
@@ -11,7 +11,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { FormRender } from '@vue-form-craft/components'
-import { getDataByPath, setDataByPath } from '@vue-form-craft/utils'
+import { getDataByPath, ns, setDataByPath } from '@vue-form-craft/utils'
 import { isString } from 'lodash'
 import type { FormItemType, FormSchema } from '@vue-form-craft/release'
 import LinkageConfig from './LinkageConfig.vue'
@@ -73,9 +73,3 @@ const currentProps = computed({
   }
 })
 </script>
-
-<style scoped lang="less">
-.vfc-attrForm {
-  padding-bottom: 20px;
-}
-</style>

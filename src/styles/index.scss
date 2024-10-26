@@ -1,0 +1,15 @@
+$namespace: 'vfc';
+
+@mixin ns($cls) {
+  $NS: $namespace + '-' + $cls;
+
+  .#{$NS} {
+    @content;
+  }
+}
+
+@import './form-render.scss';
+
+@import './icon-render.scss';
+
+@import './form-design//index.scss';

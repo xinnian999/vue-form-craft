@@ -13,7 +13,7 @@ defineProps<{
 }>()
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .disabled-wrapper {
   background-color: var(--el-disabled-bg-color);
   position: relative;

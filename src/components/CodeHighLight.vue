@@ -57,7 +57,7 @@ onMounted(async () => {
 })
 </script>
 
-<style lang="less">
+<style lang="scss">
 .vfc-codeHighLight {
   position: relative;
   overflow: auto;

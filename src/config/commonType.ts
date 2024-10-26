@@ -1,5 +1,5 @@
 import type { FormValidationResult } from 'element-plus'
-import type { Component, Ref, VNode, ToRefs, UnwrapNestedRefs, DeepReadonly } from 'vue'
+import type { Component, Ref, VNode } from 'vue'
 
 export type FormRule = {
   type: 'email' | 'url' | 'custom' | string
@@ -127,6 +127,12 @@ export type CollapseItem = {
   children: FormItemType[]
 }
 
+export type Options = {
+  request?: (options: Record<string, any>) => Promise<Record<string, any>>
+  extendElements?: Record<string, FormElement>
+  lang?: 'zh' | 'en'
+}
+
 export interface FormRenderProps {
   schema: FormSchema
   schemaContext?: Record<string, any>
@@ -148,13 +154,23 @@ export interface FormInstance extends FormRenderProps {
   submit: () => Promise<void>
 }
 
-// 对 FormInstanceSource 深度只读， ref 解包
-// export type FormInstance = DeepReadonly<UnwrapNestedRefs<FormInstanceSource>>
-
-
-export type Options = {
-  request?: (options: Record<string, any>) => Promise<Record<string, any>>
-  extendElements?: Record<string, FormElement>
-  lang?: 'zh' | 'en'
+export interface FormDesignProps {
+  schemaContext?: Record<string, any>
+  templates?: TemplateData
+  omitMenus?: string[]
 }
 
+export interface DesignInstance extends Required<FormDesignProps> {
+  currentKey: string
+  hoverKey: string
+  schema: FormSchema
+  list: FormItemType[]
+  current: FormItemType | null
+  onAdd: (params: Record<string, any>) => void
+  handleDeleteItem: (element: FormItemType) => void
+  handleCopyItem: (element: FormItemType) => void
+  handleSave: () => void
+  updateCurrent: (current: FormItemType) => void
+  updateHoverKey: (key: string) => void
+  updateSchema: (schema: FormSchema) => void
+}

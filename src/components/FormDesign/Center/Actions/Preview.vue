@@ -12,9 +12,9 @@
       <el-tab-pane label="编辑模式" name="edit">
         <FormRender
           v-model="formValues"
-          :schema="schema"
+          :schema="designInstance.schema"
           ref="formRef"
-          :schemaContext="schemaContext"
+          :schemaContext="designInstance.schemaContext"
           :style="{ minHeight: '200px', padding: '20px' }"
         />
         <div style="text-align: center">
@@ -26,8 +26,8 @@
       <el-tab-pane label="阅读模式" name="read" lazy>
         <FormRender
           v-model="formValues"
-          :schema="{ ...schema, labelSuffix: ':' }"
-          :schemaContext="schemaContext"
+          :schema="{ ...designInstance.schema, labelSuffix: ':' }"
+          :schemaContext="designInstance.schemaContext"
           :style="{ minHeight: '200px', padding: '20px' }"
           read
         />
@@ -42,17 +42,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, inject, computed } from 'vue'
+import { ref, computed } from 'vue'
 import { FormRender } from '@vue-form-craft/components'
-import { $schema } from '@vue-form-craft/config/symbol'
 import type { FormInstance } from '@vue-form-craft/release'
-import { useElements, useLocale } from '@vue-form-craft/hooks'
+import { useDesignInstance, useElements, useLocale } from '@vue-form-craft/hooks'
 
-defineProps<{
-  schemaContext: Record<string, any>
-}>()
-
-const { schema } = inject($schema)!
+const designInstance = useDesignInstance()
 
 const { JsonEdit } = useElements()
 
@@ -79,7 +74,7 @@ const handleReset = async () => {
 }
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .formDesign-actions {
   /* padding: 10px; */
   margin-top: 10px;
