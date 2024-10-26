@@ -1,6 +1,6 @@
 <template>
-  <div class="vfc-formDesign-actions">
-    <div class="vfc-formDesign-actions-left">
+  <div :class="ns('actions')">
+    <div :class="ns('actions-left')">
       <el-button
         v-for="{ label, btnType, icon, onClick } in leftActions"
         :key="label"
@@ -15,7 +15,7 @@
       >
     </div>
 
-    <div class="vfc-formDesign-actions-right">
+    <div :class="ns('actions-right')">
       <el-button
         v-for="{ label, btnType, icon, onClick } in rightActions"
         :key="label"
@@ -41,6 +41,7 @@ import JsonSchema from './JsonSchema.vue'
 import VueCode from './VueCode.vue'
 import Preview from './Preview.vue'
 import { useDesignInstance, useLocale } from '@vue-form-craft/hooks'
+import { ns } from '@vue-form-craft/utils'
 
 type PreviewAction = {
   label: string
@@ -102,18 +103,3 @@ const rightActions: PreviewAction[] = [
   }
 ]
 </script>
-
-<style scoped lang="scss">
-.vfc-formDesign-actions {
-  margin-top: 10px;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  .vfc-formDesign-actions-left,
-  .vfc-formDesign-actions-right {
-    button {
-      margin-bottom: 10px;
-    }
-  }
-}
-</style>

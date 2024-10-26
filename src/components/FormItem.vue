@@ -14,8 +14,8 @@
       :rules="computeRules"
       :class="thisProps.class"
     >
-      <template #label>
-        <div v-if="!hideLabel" :class="ns('form-item-label')">
+      <template #label v-if="!hideLabel">
+        <div :class="ns('form-item-label')">
           <div :style="formInstance.schema.labelBold && 'font-weight: bold'">{{ label }}</div>
           <div :class="ns('form-item-label-ico')" v-if="help">
             <el-tooltip effect="dark" :content="help">
@@ -150,7 +150,7 @@ const config = computed(() => {
 const formItemProps = computed(() => {
   const props: Record<string, any> = {
     name: thisProps.name,
-    ...thisProps.props,
+    ...thisProps.props
   }
 
   if (thisProps.children) {
@@ -171,4 +171,3 @@ onMounted(() => {
   }
 })
 </script>
-

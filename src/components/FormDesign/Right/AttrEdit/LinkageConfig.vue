@@ -1,8 +1,8 @@
 <template>
-  <div class="vfc-linkageConfig">
+  <div :class="ns('linkageConfig')">
     <el-divider>{{ locale.attr.tab1.linkage.text }}</el-divider>
 
-    <div class="vfc-linkageConfig-btns">
+    <div :class="ns('linkageConfig-btns')">
       <el-button
         v-for="{ title, onClick } in linkageBtns"
         :key="title"
@@ -36,6 +36,7 @@ import JsonEditorVue from 'json-editor-vue3'
 import linkageSchema from '../linkageSchema'
 import type { FormItemType } from '@vue-form-craft/release'
 import { useDesignInstance, useLocale } from '@vue-form-craft/hooks'
+import { ns } from '@vue-form-craft/utils'
 
 const model = defineModel<FormItemType>()
 
@@ -68,12 +69,3 @@ const linkageBtns = [
   }
 ]
 </script>
-
-<style scoped lang="scss">
-.vfc-linkageConfig{
-  padding-top: 30px;
-  &-btns{
-    text-align: center;
-  }
-}
-</style>

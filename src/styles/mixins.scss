@@ -1,9 +1,0 @@
-$namespace: 'vfc';
-
-@mixin ns($cls) {
-  $NS: $namespace + '-' + $cls;
-
-  .#{$NS} {
-    @content;
-  }
-}

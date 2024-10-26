@@ -1,7 +1,5 @@
 <template>
-  <div class="attrForm">
     <FormRender v-model="form" :schema="formOptions"></FormRender>
-  </div>
 </template>
 
 <script setup>
@@ -22,13 +20,3 @@ const form = computed({
   }
 })
 </script>
-
-<style scoped lang="scss">
-.attrForm {
-  height: 100%;
-  overflow: auto;
-  h3 {
-    margin-bottom: 10px;
-  }
-}
-</style>

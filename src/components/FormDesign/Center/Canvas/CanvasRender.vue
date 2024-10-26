@@ -5,7 +5,7 @@
     @mousemove.stop="handleHoverEnter"
     @mouseleave.stop="handleHoverLeave"
   >
-    <div class="actions-left-top" v-if="data.designKey === designInstance.current?.designKey">
+    <div class="actions-lt" v-if="data.designKey === designInstance.current?.designKey">
       <div class="canvas-move" size="small" type="primary">
         <icon-render name="move" />
       </div>
@@ -13,8 +13,8 @@
 
     <div class="hidden-ico" v-if="data.hidden"><icon-render name="hidden" /></div>
 
-    <ul class="actions-right-bottom" v-if="data.designKey === designInstance.current?.designKey">
-      <li v-for="{ icon, handle } in rightBottomActions" @click.stop="handle(data)" :key="icon">
+    <ul class="actions-rb" v-if="data.designKey === designInstance.current?.designKey">
+      <li class="actions-rb-item" v-for="{ icon, handle } in rightBottomActions" @click.stop="handle(data)" :key="icon">
         <icon-render :name="icon" />
       </li>
     </ul>

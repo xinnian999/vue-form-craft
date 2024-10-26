@@ -63,5 +63,3 @@ const { currentOptions, selectChange, loading } = useSelect(props)
 
 watch(value, selectChange)
 </script>
-
-<style lang="scss" scoped></style>
