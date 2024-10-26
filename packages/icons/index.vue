@@ -5,7 +5,7 @@
 <script setup lang="ts">
 import { ns } from '@vue-form-craft/utils'
 
-const modules = import.meta.glob('@vue-form-craft/assets/icons/*.vue', { eager: true })
+const modules = import.meta.glob('./*.vue', { eager: true })
 
 const icons = Object.entries(modules).reduce(
   (acc, [key, value]) => {

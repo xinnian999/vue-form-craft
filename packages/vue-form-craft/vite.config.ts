@@ -21,11 +21,11 @@ export default defineConfig({
     viteCommonjs(),
     libCss()
   ],
-  resolve: {
-    alias: {
-      '@vue-form-craft': fileURLToPath(new URL('./src', import.meta.url))
-    }
-  },
+  // resolve: {
+  //   alias: {
+  //     '@vue-form-craft': fileURLToPath(new URL('./src', import.meta.url))
+  //   }
+  // },
   build: {
     lib: {
       entry: fileURLToPath(new URL('./src/release/index.ts', import.meta.url)), //指定组件编译入口文件

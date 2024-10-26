@@ -10,12 +10,12 @@ export default defineConfig({
   description: '基于vue3的一个开箱即用低代码表单方案',
   base: '/vue-form-craft/',
   vite: {
-    resolve: {
-      alias: {
-        '@vue-form-craft': fileURLToPath(new URL('../../src/', import.meta.url)),
-        'vue-form-craft': fileURLToPath(new URL('../../src/release', import.meta.url))
-      }
-    },
+    // resolve: {
+    //   alias: {
+    //     '@vue-form-craft': fileURLToPath(new URL('../../src/', import.meta.url)),
+    //     'vue-form-craft': fileURLToPath(new URL('../../src/release', import.meta.url))
+    //   }
+    // },
     server: {
       port: 9999,
       // host:'172.20.72.37'

@@ -1,0 +1,6 @@
+{
+  "name": "@vue-form-craft/entry",
+  "version": "4.3.2",
+  "private": false,
+  "type": "module"
+}
