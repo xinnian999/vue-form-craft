@@ -9,7 +9,7 @@
         @click="onClick"
       >
         <template #icon v-if="icon">
-          <icon-render :name="icon" />
+          <Icon :name="icon" />
         </template>
         {{ label }}</el-button
       >
@@ -23,7 +23,7 @@
         size="small"
         @click="onClick"
       >
-        <template #icon v-if="icon"> <icon-render :name="icon" /> </template>{{ label }}</el-button
+        <template #icon v-if="icon"> <Icon :name="icon" /> </template>{{ label }}</el-button
       >
     </div>
 
@@ -36,7 +36,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { ElMessageBox } from 'element-plus'
-import IconRender from '@vue-form-craft/components/IconRender.vue'
+import Icon from '@vue-form-craft/icons'
 import JsonSchema from './JsonSchema.vue'
 import VueCode from './VueCode.vue'
 import Preview from './Preview.vue'

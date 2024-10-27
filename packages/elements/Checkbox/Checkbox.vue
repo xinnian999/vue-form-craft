@@ -33,7 +33,7 @@
 
 <script setup lang="ts">
 import { type CheckboxGroupValueType } from 'element-plus'
-import type { Direction, OptionType, SelectProps } from '@vue-form-craft/config/commonType'
+import type { Direction, OptionType, SelectProps } from '@vue-form-craft/types'
 import { useFormInstance, useSelect } from '@vue-form-craft/hooks'
 import { watch } from 'vue';
 

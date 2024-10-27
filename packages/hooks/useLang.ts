@@ -1,4 +1,4 @@
-import type { Lang } from '@vue-form-craft/config/commonType'
+import type { Lang } from '@vue-form-craft/types'
 import { $options } from '@vue-form-craft/config/symbol'
 import { inject, ref } from 'vue'
 

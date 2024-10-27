@@ -25,7 +25,7 @@
               :disabled="disabled"
               size="small"
             >
-              <template #icon> <icon-render name="reduce" color="#fff" /> </template
+              <template #icon> <Icon name="reduce" color="#fff" /> </template
             ></el-button>
           </div>
         </el-form-item>
@@ -45,7 +45,7 @@
                 :disabled="disabled"
                 size="small"
               >
-                <template #icon> <icon-render name="reduce" color="#fff" /> </template>
+                <template #icon> <Icon name="reduce" color="#fff" /> </template>
               </el-button>
             </div>
           </template>
@@ -80,7 +80,7 @@
               size="small"
               plain
             >
-              <template #icon> <icon-render name="reduce" /> </template
+              <template #icon> <Icon name="reduce" /> </template
             ></el-button>
           </template>
         </el-table-column>
@@ -96,7 +96,7 @@
           size="small"
           plain
         >
-          <template #icon> <icon-render name="add" /></template>
+          <template #icon> <Icon name="add" /></template>
           {{ title }}
         </el-button>
       </div>
@@ -106,10 +106,12 @@
 
 <script setup lang="ts">
 import { computed, h, watch } from 'vue'
-import { FormItem, DefaultCanvasWrapper, IconRender } from '@vue-form-craft/components'
+import { FormItem, DefaultCanvasWrapper } from '@vue-form-craft/components'
 import { deepParse } from '@vue-form-craft/utils'
-import { useFormInstance, type FormItemType } from '@vue-form-craft/release'
 import { isEqual, isString, pickBy } from 'lodash'
+import type { FormItemType } from '@vue-form-craft/types';
+import { useFormInstance } from '@vue-form-craft/hooks';
+import Icon from '@vue-form-craft/icons';
 
 interface Props {
   children: FormItemType[]

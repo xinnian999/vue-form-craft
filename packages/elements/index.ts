@@ -1,6 +1,6 @@
-import type { FormElement } from '@vue-form-craft/config/commonType'
+import type { FormElement } from '@vue-form-craft/types'
 
-const modules = import.meta.glob('@vue-form-craft/elements/*/index.ts', { eager: true })
+const modules = import.meta.glob('./*/index.ts', { eager: true })
 
 const elements: { [component: string]: FormElement } = {}
 

@@ -1,13 +1,13 @@
-import type { FormElement } from '@vue-form-craft/release'
+import type { FormElement } from '@vue-form-craft/types'
 import JsonEdit from './JsonEdit.vue'
 import attrSchema from './attrSchema'
-import { IconRender } from '@vue-form-craft/components'
+import Icon from '@vue-form-craft/icons'
 import { h } from 'vue'
 
 export default {
   name: 'JSON编辑',
   component: JsonEdit,
-  icon: h(IconRender, { name: 'jsonEdit' }),
+  icon: h(Icon, { name: 'jsonEdit' }),
   type: 'basic',
   order: 14,
   attrSchema,

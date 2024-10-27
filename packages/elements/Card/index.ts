@@ -1,12 +1,12 @@
 import { h } from 'vue'
-import IconRender from '@vue-form-craft/components/IconRender.vue'
+import Icon from '@vue-form-craft/icons'
 import Card from './Card.vue'
-import type { FormElement } from '@vue-form-craft/config/commonType'
+import type { FormElement } from '@vue-form-craft/types'
 
 export default {
   name: '卡片',
   component: Card,
-  icon: h(IconRender, { name: 'card' }),
+  icon: h(Icon, { name: 'card' }),
   type: 'layout',
   order: 1,
   initialValues: {

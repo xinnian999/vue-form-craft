@@ -38,7 +38,7 @@
 <script lang="ts" setup>
 import { ElMessage, ElMessageBox } from 'element-plus'
 import type { UploadProps, UploadUserFile } from 'element-plus'
-import { IconRender } from '@vue-form-craft/components'
+import Icon from '@vue-form-craft/icons'
 
 interface Props {
   action: string

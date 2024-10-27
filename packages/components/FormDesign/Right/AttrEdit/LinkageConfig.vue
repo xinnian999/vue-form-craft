@@ -34,7 +34,7 @@ import { ref } from 'vue'
 import { FormRender } from '@vue-form-craft/components'
 import JsonEditorVue from 'json-editor-vue3'
 import linkageSchema from '../linkageSchema'
-import type { FormItemType } from '@vue-form-craft/release'
+import type { FormItemType } from '@vue-form-craft/types'
 import { useDesignInstance, useLocale } from '@vue-form-craft/hooks'
 import { ns } from '@vue-form-craft/utils'
 

@@ -1,13 +1,13 @@
 import { h } from 'vue'
-import IconRender from '@vue-form-craft/components/IconRender.vue'
+import Icon from '@vue-form-craft/icons'
 import attrSchema from './attrSchema'
-import type { FormElement } from '@vue-form-craft/config/commonType'
+import type { FormElement } from '@vue-form-craft/types'
 import component from './Component.vue'
 
 export default {
   name: '电子签名',
   component,
-  icon: h(IconRender, { name: 'esign' }),
+  icon: h(Icon, { name: 'esign' }),
   type: 'basic',
   order: 11,
   initialValues: {

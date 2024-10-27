@@ -24,7 +24,7 @@ import { ref, computed, reactive, provide, watch, nextTick, toRefs, readonly } f
 import type { FormInstance as ElFormInstance } from 'element-plus'
 import { handleLinkages, deepParse, setDataByPath, getDataByPath } from '@vue-form-craft/utils'
 import { cloneDeep, merge } from 'lodash'
-import type { FormInstance, FormRenderProps } from '@vue-form-craft/config/commonType'
+import type { FormInstance, FormRenderProps } from '@vue-form-craft/types'
 import { $formInstance } from '@vue-form-craft/config/symbol'
 import { useLocale } from '@vue-form-craft/hooks'
 import FormFooter from './FormFooter.vue'

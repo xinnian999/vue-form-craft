@@ -1,7 +1,7 @@
 import { ref, watch, onMounted } from 'vue'
 import { isEqual, isPlainObject, debounce } from 'lodash'
 import { getDataByPath } from '@vue-form-craft/utils'
-import type { SelectProps } from '@vue-form-craft/config/commonType'
+import type { SelectProps } from '@vue-form-craft/types'
 import useFormInstance from './useFormInstance'
 import useRequest from './useRequest'
 

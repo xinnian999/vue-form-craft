@@ -1,12 +1,12 @@
-import type { FormElement } from '@vue-form-craft/release'
+import type { FormElement } from '@vue-form-craft/types'
 import Title from './Title.vue'
-import { IconRender } from '@vue-form-craft/components'
+import Icon from '@vue-form-craft/icons'
 import { h } from 'vue'
 
 export default {
   name: '标题',
   component: Title,
-  icon: h(IconRender, { name: 'title' }),
+  icon: h(Icon, { name: 'title' }),
   type: 'assist',
   order: 3,
   initialValues: {

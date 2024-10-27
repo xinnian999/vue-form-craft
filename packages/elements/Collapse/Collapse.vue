@@ -14,8 +14,8 @@
 import { onMounted, ref } from 'vue'
 import { FormItemRender, CanvasWrapper } from '@vue-form-craft/components'
 import Title from '../Title/Title.vue'
-import type { CollapseItem } from '@vue-form-craft/config/commonType'
-import { useFormInstance } from '@vue-form-craft/release'
+import type { CollapseItem } from '@vue-form-craft/types'
+import { useFormInstance } from '@vue-form-craft/hooks';
 
 const thisProps = defineProps<{
   props: Record<string, any>

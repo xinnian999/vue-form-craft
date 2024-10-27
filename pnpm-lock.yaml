@@ -51,6 +51,9 @@ importers:
       '@vue-form-craft/components':
         specifier: workspace:*
         version: link:packages/components
+      '@vue-form-craft/config':
+        specifier: workspace:*
+        version: link:packages/config
       '@vue-form-craft/elements':
         specifier: workspace:*
         version: link:packages/elements
@@ -60,6 +63,9 @@ importers:
       '@vue-form-craft/hooks':
         specifier: workspace:*
         version: link:packages/hooks
+      '@vue-form-craft/icons':
+        specifier: workspace:*
+        version: link:packages/icons
       '@vue-form-craft/styles':
         specifier: workspace:*
         version: link:packages/styles
@@ -135,11 +141,15 @@ importers:
 
   packages/components: {}
 
+  packages/config: {}
+
   packages/elements: {}
 
   packages/entry: {}
 
   packages/hooks: {}
+
+  packages/icons: {}
 
   packages/styles: {}
 

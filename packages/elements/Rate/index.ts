@@ -1,12 +1,12 @@
 import attrSchema from './attrSchema'
-import { IconRender } from '@vue-form-craft/components'
+import Icon from '@vue-form-craft/icons'
 import { h } from 'vue'
-import type { FormElement } from '@vue-form-craft/config/commonType'
+import type { FormElement } from '@vue-form-craft/types'
 
 export default {
   name: '评分',
   component: 'ElRate',
-  icon: h(IconRender, { name: 'rate' }),
+  icon: h(Icon, { name: 'rate' }),
   type: 'basic',
   order: 12,
   attrSchema,

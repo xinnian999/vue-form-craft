@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import { useFormInstance } from '@vue-form-craft/release'
+import { useFormInstance } from '@vue-form-craft/hooks'
 import { computed } from 'vue'
 
 const formInstance = useFormInstance()

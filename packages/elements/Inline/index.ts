@@ -1,11 +1,11 @@
 import Inline from './Inline.vue'
-import { IconRender } from '@vue-form-craft/components'
-import type { FormElement } from '@vue-form-craft/release'
+import Icon from '@vue-form-craft/icons'
+import type { FormElement } from '@vue-form-craft/types'
 import { h } from 'vue'
 
 export default {
   name: '行内布局',
-  icon: h(IconRender, { name: 'inline' }),
+  icon: h(Icon, { name: 'inline' }),
   type: 'layout',
   component: Inline,
   order: 2,

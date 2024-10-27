@@ -1,11 +1,11 @@
-import { IconRender } from '@vue-form-craft/components'
-import type { FormElement } from '@vue-form-craft/release'
+import Icon from '@vue-form-craft/icons'
+import type { FormElement } from '@vue-form-craft/types'
 import { h } from 'vue'
 
 export default {
   name: '滑块',
   component: 'ElSlider',
-  icon: h(IconRender, { name: 'slider' }),
+  icon: h(Icon, { name: 'slider' }),
   type: 'basic',
   order: 12,
   initialValues: { label: '滑块', component: 'Slider' },

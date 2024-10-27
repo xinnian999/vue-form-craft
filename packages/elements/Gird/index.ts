@@ -1,12 +1,12 @@
-import type { FormElement } from '@vue-form-craft/release'
+import type { FormElement } from '@vue-form-craft/types'
 import Grid from './Grid.vue'
-import { IconRender } from '@vue-form-craft/components'
+import Icon from '@vue-form-craft/icons'
 import { h } from 'vue'
 
 export default {
   name: '栅格布局',
   type: 'layout',
-  icon: h(IconRender, { name: 'grid' }),
+  icon: h(Icon, { name: 'grid' }),
   component: Grid,
   order: 3,
   initialValues: {

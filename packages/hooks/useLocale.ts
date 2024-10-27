@@ -1,4 +1,4 @@
-import type { Locale } from '@vue-form-craft/config/commonType'
+import type { Locale } from '@vue-form-craft/types'
 import locales from '@vue-form-craft/config/locales'
 import { computed } from 'vue'
 import useLang from './useLang'

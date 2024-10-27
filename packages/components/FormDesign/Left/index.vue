@@ -59,7 +59,7 @@ import draggable from 'vuedraggable-es'
 import { computed } from 'vue'
 import { ref } from 'vue'
 import parseMenus from './menus'
-import type { FormSchema } from '@vue-form-craft/config/commonType'
+import type { FormSchema } from '@vue-form-craft/types'
 import { useDesignInstance, useElements, useLang, useLocale } from '@vue-form-craft/hooks'
 import { ns } from '@vue-form-craft/utils'
 

@@ -1,12 +1,12 @@
-import { IconRender } from '@vue-form-craft/components'
-import type { FormElement } from '@vue-form-craft/config/commonType'
+import Icon from '@vue-form-craft/icons'
+import type { FormElement } from '@vue-form-craft/types'
 import { h } from 'vue'
 import Radio from './Radio.vue'
 import attrSchema from './attrSchema'
 
 export default {
   name: '单选框组',
-  icon: h(IconRender, { name: 'radio' }),
+  icon: h(Icon, { name: 'radio' }),
   type: 'basic',
   component: Radio,
   order: 3.5,

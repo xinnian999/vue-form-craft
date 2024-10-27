@@ -1,12 +1,12 @@
-import { IconRender } from '@vue-form-craft/components'
+import type { FormElement } from '@vue-form-craft/types'
 import attrSchema from './attrSchema'
 import Checkbox from './Checkbox.vue'
 import { h } from 'vue'
-import type { FormElement } from '@vue-form-craft/release'
+import Icon from '@vue-form-craft/icons'
 
 export default {
   name: '多选框组',
-  icon: h(IconRender, { name: 'checkbox' }),
+  icon: h(Icon, { name: 'checkbox' }),
   type: 'basic',
   component: Checkbox,
   order: 4,
@@ -27,5 +27,5 @@ export default {
       direction: 'horizontal',
       space: 20
     }
-  },
+  }
 } satisfies FormElement

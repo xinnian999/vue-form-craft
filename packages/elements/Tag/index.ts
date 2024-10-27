@@ -1,12 +1,12 @@
-import type { FormElement } from '@vue-form-craft/release'
+import type { FormElement } from '@vue-form-craft/types'
 import Tag from './Tag.vue'
-import { IconRender } from '@vue-form-craft/components'
+import Icon from '@vue-form-craft/icons'
 import { h } from 'vue'
 
 export default {
   name: '标签',
   component: Tag,
-  icon: h(IconRender, { name: 'tag' }),
+  icon: h(Icon, { name: 'tag' }),
   type: 'assist',
   order: 4,
   initialValues: {

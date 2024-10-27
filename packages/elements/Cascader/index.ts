@@ -1,12 +1,12 @@
 import { h } from 'vue'
-import IconRender from '@vue-form-craft/components/IconRender.vue'
+import Icon from '@vue-form-craft/icons'
 import Cascader from './Cascader.vue'
 import attrSchema from './attrSchema'
-import type { FormElement } from '@vue-form-craft/release'
+import type { FormElement } from '@vue-form-craft/types'
 
 export default {
   name: '级联选择器',
-  icon: h(IconRender, { name: 'cascader' }),
+  icon: h(Icon, { name: 'cascader' }),
   type: 'basic',
   component: Cascader,
   attrSchema,

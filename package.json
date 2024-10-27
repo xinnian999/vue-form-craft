@@ -53,6 +53,8 @@
     "@vue-form-craft/utils":"workspace:*",
     "@vue-form-craft/types":"workspace:*",
     "@vue-form-craft/entry":"workspace:*",
+    "@vue-form-craft/config":"workspace:*",
+    "@vue-form-craft/icons":"workspace:*",
     "vue-form-craft":"workspace:*"
   },
   "files": [

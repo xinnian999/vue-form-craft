@@ -7,15 +7,15 @@
   >
     <div class="actions-lt" v-if="data.designKey === designInstance.current?.designKey">
       <div class="canvas-move" size="small" type="primary">
-        <icon-render name="move" />
+        <Icon name="move" />
       </div>
     </div>
 
-    <div class="hidden-ico" v-if="data.hidden"><icon-render name="hidden" /></div>
+    <div class="hidden-ico" v-if="data.hidden"><Icon name="hidden" /></div>
 
     <ul class="actions-rb" v-if="data.designKey === designInstance.current?.designKey">
       <li class="actions-rb-item" v-for="{ icon, handle } in rightBottomActions" @click.stop="handle(data)" :key="icon">
-        <icon-render :name="icon" />
+        <Icon :name="icon" />
       </li>
     </ul>
 
@@ -26,9 +26,10 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { omit } from 'lodash'
-import { FormItem, IconRender } from '@vue-form-craft/components'
-import type { FormItemType } from '@vue-form-craft/release'
+import { FormItem } from '@vue-form-craft/components'
+import type { FormItemType } from '@vue-form-craft/types'
 import { useDesignInstance } from '@vue-form-craft/hooks'
+import Icon from '@vue-form-craft/icons'
 
 const props = defineProps<{ data: FormItemType }>()
 

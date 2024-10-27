@@ -17,7 +17,8 @@
 <script setup lang="ts">
 import {  computed, type StyleValue } from 'vue'
 import { FormItemRender, DefaultCanvasWrapper } from '@vue-form-craft/components'
-import { useFormInstance, type FormItemType } from '@vue-form-craft/release';
+import { useFormInstance } from '@vue-form-craft/hooks';
+import type { FormItemType } from '@vue-form-craft/types';
 
 const thisProps = defineProps<{
   name:string,

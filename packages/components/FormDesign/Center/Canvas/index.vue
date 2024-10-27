@@ -2,7 +2,7 @@
   <FormRender :class="ns('canvas')" design :schema="designInstance.schema">
     <div :class="ns('canvas-empty')" v-if="!designInstance.list.length">
       <div :class="ns('canvas-empty-ico')">
-        <icon-render name="add" />
+        <Icon name="add" />
       </div>
       <p>{{ locale.canvas.emptyTip }}</p>
     </div>
@@ -27,10 +27,11 @@
 
 <script setup lang="ts">
 import draggable from 'vuedraggable-es'
-import { FormRender, IconRender } from '@vue-form-craft/components'
+import { FormRender } from '@vue-form-craft/components'
 import CanvasRender from './CanvasRender.vue'
 import { useDesignInstance, useLocale } from '@vue-form-craft/hooks'
 import { ns } from '@vue-form-craft/utils'
+import Icon from '@vue-form-craft/icons'
 
 const designInstance = useDesignInstance()
 

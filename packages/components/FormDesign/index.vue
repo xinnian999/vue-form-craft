@@ -13,17 +13,17 @@ import Left from './Left/index.vue'
 import Center from './Center/index.vue'
 import Right from './Right/index.vue'
 import { getCurrentByKey, setCurrentByKey, changeItems, copyItems } from '@vue-form-craft/utils'
-import { $designInstance } from '@vue-form-craft/config/symbol'
+import { $designInstance } from '@vue-form-craft/config'
 import type {
   FormSchema,
   FormItemType,
   FormElement,
   FormDesignProps
-} from '@vue-form-craft/config/commonType'
-import templateMock from '@vue-form-craft/template'
+} from '@vue-form-craft/types'
+import {template} from '@vue-form-craft/config'
 
 const props = withDefaults(defineProps<FormDesignProps>(), {
-  templates: () => templateMock,
+  templates: () => template,
   omitMenus: () => [],
   schemaContext: () => ({})
 })

@@ -1,12 +1,12 @@
-import type { FormElement } from '@vue-form-craft/release'
+import type { FormElement } from '@vue-form-craft/types'
 import Collapse from './Collapse.vue'
 import { h } from 'vue'
-import IconRender from '@vue-form-craft/components/IconRender.vue'
+import Icon from '@vue-form-craft/icons'
 
 export default {
   name: '折叠面板',
   component: Collapse,
-  icon: h(IconRender, { name: 'collapse' }),
+  icon: h(Icon, { name: 'collapse' }),
   type: 'layout',
   order: 4,
   initialValues: {

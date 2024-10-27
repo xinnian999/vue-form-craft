@@ -19,7 +19,7 @@
           <div :style="formInstance.schema.labelBold && 'font-weight: bold'">{{ label }}</div>
           <div :class="ns('form-item-label-ico')" v-if="help">
             <el-tooltip effect="dark" :content="help">
-              <div><icon-render name="help" /></div>
+              <div><Icon name="help" /></div>
             </el-tooltip>
           </div>
           <div :class="ns('form-item-label-suffix')" v-if="formInstance.schema.labelSuffix">
@@ -64,10 +64,11 @@
 <script setup lang="ts">
 import { computed, onMounted, reactive } from 'vue'
 import { isRegexString, getDataByPath, setDataByPath, ns } from '@vue-form-craft/utils'
-import type { FormItemType } from '@vue-form-craft/config/commonType'
-import { IconRender } from '@vue-form-craft/components'
-import { useFormInstance } from '@vue-form-craft/release'
+import type { FormItemType } from '@vue-form-craft/types'
+import Icon from '@vue-form-craft/icons'
+import { useFormInstance } from '@vue-form-craft/hooks'
 import { useElements } from '@vue-form-craft/hooks'
+
 
 const thisProps = defineProps<FormItemType>()
 
