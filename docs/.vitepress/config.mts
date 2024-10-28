@@ -26,7 +26,7 @@ export default defineConfig({
   head: [['link', { rel: 'icon', href: '/vue-form-craft/favicon.svg' }]],
   markdown: {
     config: (md) => {
-      md.use(mdVueDemoPlugin)
+      md.use(mdVueDemoPlugin,{root:'./'})
     }
   },
   themeConfig: {
