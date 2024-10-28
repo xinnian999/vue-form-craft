@@ -13,7 +13,7 @@ export default defineConfig({
     vue(),
     dts({
       outDir: './dist',
-      include: ['src/**/*', 'src/**/*.vue'],
+      include: ['../entry/index/**/*', '../entry/index/**/*.vue'],
       pathsToAliases: true,
       rollupTypes: true
     }),
@@ -28,7 +28,7 @@ export default defineConfig({
   // },
   build: {
     lib: {
-      entry: fileURLToPath(new URL('./src/release/index.ts', import.meta.url)), //指定组件编译入口文件
+      entry: fileURLToPath(new URL('index.ts', import.meta.url)), //指定组件编译入口文件
       name: 'VueFormCraft', // umd全局变量名
       fileName: 'vue-form-craft', // 打包文件名
     },

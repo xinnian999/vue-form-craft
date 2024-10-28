@@ -1,4 +1,4 @@
-import type { FormSchema } from "@vue-form-craft/release";
+import type { FormSchema } from "@vue-form-craft/types";
 
 export default {
   size: 'small',

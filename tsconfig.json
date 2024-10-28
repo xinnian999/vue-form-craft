@@ -2,10 +2,10 @@
   "extends": "@vue/tsconfig/tsconfig.dom.json",
   "include": [
     "env.d.ts",
-    "src/**/*",
-    "src/**/*.vue",
-    "src/**/*.d.ts",
-    "src/**/**/*",
+    "packages/**/*",
+    "packages/**/*.vue",
+    "packages/**/*.d.ts",
+    "packages/**/**/*",
     "docs/.vitepress/**/*",
     "docs/.vitepress/**/*.vue",
     "docs/**/*.vue"
@@ -17,8 +17,6 @@
     // "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "baseUrl": ".",
     "paths": {
-      "@vue-form-craft/*": ["./src/*"],
-      "vue-form-craft": ["./src/release/index.ts"]
     },
     "allowJs": true
   }

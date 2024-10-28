@@ -1,4 +1,4 @@
-import type {  FormItemType } from '@vue-form-craft/release'
+import type { FormItemType } from '@vue-form-craft/types'
 import { getRandomId } from '@vue-form-craft/utils'
 import { cloneDeep } from 'lodash'
 
@@ -40,7 +40,7 @@ const copyChildren = (children: FormItemType[]) => {
   })
 }
 
-export const copyItems = (list:FormItemType[], id:string):FormItemType[] => {
+export const copyItems = (list: FormItemType[], id: string): FormItemType[] => {
   return list.reduce<FormItemType[]>((all, current) => {
     if (current.children) {
       all.push({ ...current, children: copyItems(current.children, id) })
@@ -67,11 +67,9 @@ export const copyItems = (list:FormItemType[], id:string):FormItemType[] => {
   }, [])
 }
 
-
 export const changeItems = (items: FormItemType[]) => {
-  return items.map((item:any) => {
-
-    const config = item.initialValues|| item
+  return items.map((item: any) => {
+    const config = item.initialValues || item
 
     const data = {
       ...config,

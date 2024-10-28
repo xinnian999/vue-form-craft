@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { FormSchema } from '@vue-form-craft/release'
+import type { FormSchema } from '@vue-form-craft/types'
 import FormRender from '@vue-form-craft/components/FormRender.vue'
 import { ns } from '@vue-form-craft/utils';
 

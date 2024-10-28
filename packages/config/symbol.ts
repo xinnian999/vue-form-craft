@@ -1,5 +1,5 @@
 import type { DeepReadonly, InjectionKey } from 'vue'
-import type { FormInstance, Options, DesignInstance } from './commonType'
+import type { FormInstance, Options, DesignInstance } from '@vue-form-craft/types'
 
 export const $options = Symbol() as InjectionKey<Options>
 

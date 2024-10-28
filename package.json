@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "pnpm -C play dev",
+    "build": "pnpm -C packages/vue-form-craft build",
+    "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "preview": "vitepress preview docs",
-    "build": "vite build",
     "release": "pnpm build && npm version patch && npm publish"
   },
   "dependencies": {
