@@ -42,6 +42,8 @@
     "@vue-form-craft/entry": "workspace:*",
     "@vue-form-craft/config": "workspace:*",
     "@vue-form-craft/icons": "workspace:*",
+    "@vue-form-craft/form-render": "workspace:*",
+    "@vue-form-craft/form-design": "workspace:*",
     "vue-form-craft": "workspace:*"
   }
 }

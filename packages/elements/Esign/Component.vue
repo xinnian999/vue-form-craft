@@ -38,7 +38,7 @@ import { onMounted, ref } from 'vue'
 import VueEsign from './VueEsign.vue'
 import { useFormInstance } from '@vue-form-craft/hooks'
 import type { FormSchema } from '@vue-form-craft/types'
-import FormRender from '@vue-form-craft/components/FormRender.vue'
+import FormRender from '@vue-form-craft/form-render'
 
 interface Props {
   lineWidth?: number

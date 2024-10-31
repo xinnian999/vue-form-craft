@@ -9,21 +9,21 @@
     />
 
     <div v-else :style="gridStyle">
-      <FormItemRender :formItems="children" />
+      <FormItem v-for="item in children" :key="item.name" v-bind="item" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import {  computed } from 'vue'
-import { FormItemRender, DefaultCanvasWrapper } from '@vue-form-craft/components'
-import type { FormItemType } from '@vue-form-craft/types';
-import { useFormInstance } from '@vue-form-craft/hooks';
+import { computed } from 'vue'
+import { FormItem, DefaultCanvasWrapper } from '@vue-form-craft/components'
+import type { FormItemType } from '@vue-form-craft/types'
+import { useFormInstance } from '@vue-form-craft/hooks'
 
 const thisProps = defineProps<{
-  props:Record<string,any>
-  children:FormItemType[]
-  name:string
+  props: Record<string, any>
+  children: FormItemType[]
+  name: string
 }>()
 
 const formInstance = useFormInstance()

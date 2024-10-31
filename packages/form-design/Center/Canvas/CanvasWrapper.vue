@@ -2,7 +2,7 @@
   <div :class="ns('canvas-group')">
     <div :class="ns('canvas-group-empty')" v-if="!children.length">
       <div :class="ns('canvas-group-empty-ico')">
-        <icon-render name="add" />
+        <Icon name="add" />
       </div>
       <p>{{ locale.canvas.wrapperEmptyTip }}</p>
     </div>

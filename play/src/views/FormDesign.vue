@@ -1,5 +1,5 @@
 <template>
-  <FormDesign v-model="schema" />
+  <FormDesign />
 </template>
 
 <script setup lang="ts">

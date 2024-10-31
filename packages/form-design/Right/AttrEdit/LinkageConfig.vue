@@ -31,7 +31,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { FormRender } from '@vue-form-craft/components'
+import FormRender from '../../../form-render'
 import JsonEditorVue from 'json-editor-vue3'
 import linkageSchema from '../linkageSchema'
 import type { FormItemType } from '@vue-form-craft/types'

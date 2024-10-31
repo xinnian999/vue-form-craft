@@ -1,12 +1,15 @@
 <template>
   <ElCard v-bind="props">
     <CanvasWrapper :children="children" v-if="formInstance.design" />
-    <FormItemRender :formItems="children" v-else />
+    <template v-else>
+      <FormItem v-for="item in children" :key="item.name" v-bind="item" />
+    </template>
   </ElCard>
 </template>
 
 <script setup lang="ts">
-import { FormItemRender, CanvasWrapper } from '@vue-form-craft/components'
+import { FormItem } from '@vue-form-craft/components'
+import { CanvasWrapper } from '@vue-form-craft/form-design';
 import type { FormItemType } from '@vue-form-craft/types'
 import { useFormInstance } from '@vue-form-craft/hooks'
 

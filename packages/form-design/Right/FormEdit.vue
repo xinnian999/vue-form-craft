@@ -4,7 +4,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import { FormRender } from '@vue-form-craft/components'
+import FormRender from '../../form-render'
 import formOptions from './formOptions'
 import { useDesignInstance } from '@vue-form-craft/hooks';
 

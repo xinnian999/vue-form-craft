@@ -1,4 +1,5 @@
-import { FormDesign, FormRender } from '@vue-form-craft/components'
+import FormRender from '@vue-form-craft/form-render'
+import FormDesign from '@vue-form-craft/form-design'
 import install from './install'
 import '@vue-form-craft/styles'
 

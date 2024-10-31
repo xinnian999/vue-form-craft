@@ -7,8 +7,8 @@ export default function useLang() {
   const options = inject($options)!
 
   // 用户可能自行通过provide注入 动态的
-  const lang = inject<Lang>('vfc-lang')
+  const lang = inject<Lang>('vfc-lang', ref('zh'))
 
-  // 动态的 优先级更高
-  return lang || ref(options.lang || 'zh')
+  // 静态的 优先级更高
+  return options.lang ? ref(options.lang) : lang
 }

@@ -1,11 +1,11 @@
 {
-  "name": "@vue-form-craft/components",
+  "name": "@vue-form-craft/form-design",
   "version": "4.3.2",
-  "description": "",
   "main": "index.ts",
   "author": "",
   "license": "ISC",
+  "description": "",
   "dependencies": {
-    "shiki": "^1.21.0"
+    "vuedraggable-es": "^4.1.1"
   }
 }

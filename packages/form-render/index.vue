@@ -15,7 +15,7 @@
 
     <slot />
 
-    <FormFooter />
+    <Footer />
   </el-form>
 </template>
 
@@ -27,8 +27,8 @@ import { cloneDeep, merge } from 'lodash'
 import type { FormInstance, FormRenderProps } from '@vue-form-craft/types'
 import { $formInstance } from '@vue-form-craft/config/symbol'
 import { useLocale } from '@vue-form-craft/hooks'
-import FormFooter from './FormFooter.vue'
-import FormItem from './FormItem.vue'
+import Footer from './Footer.vue'
+import { FormItem } from '@vue-form-craft/components'
 
 const props = defineProps<FormRenderProps>()
 
@@ -62,8 +62,8 @@ watch(
       return
     }
     await nextTick()
-    
-    setTimeout(()=>{
+
+    setTimeout(() => {
       handleLinkages({ newVal, oldVal, formValues, formItems: formItems.value })
     })
   },

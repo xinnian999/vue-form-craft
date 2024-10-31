@@ -1,7 +1,7 @@
 <template>
   <div class="vfc-codeHighLight">
     <div class="vfc-codeHighLight-copy" @click="handleCopy">
-      <icon-render name="copy" />
+      <Icon name="copy" />
     </div>
     <div class="vfc-codeHighLight-content" v-html="html" />
   </div>

@@ -1,7 +1,3 @@
-import VueFormCraft from '@vue-form-craft/entry'
-
-export default VueFormCraft
+export { default } from '@vue-form-craft/entry'
 
 export * from '@vue-form-craft/entry'
-
-export type * from '@vue-form-craft/entry'

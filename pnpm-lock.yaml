@@ -51,6 +51,12 @@ importers:
       '@vue-form-craft/entry':
         specifier: workspace:*
         version: link:packages/entry
+      '@vue-form-craft/form-design':
+        specifier: workspace:*
+        version: link:packages/form-design
+      '@vue-form-craft/form-render':
+        specifier: workspace:*
+        version: link:packages/form-render
       '@vue-form-craft/hooks':
         specifier: workspace:*
         version: link:packages/hooks
@@ -126,15 +132,20 @@ importers:
       shiki:
         specifier: ^1.21.0
         version: 1.22.1
-      vuedraggable-es:
-        specifier: ^4.1.1
-        version: 4.1.1(vue@3.5.12(typescript@5.6.3))
 
   packages/config: {}
 
   packages/elements: {}
 
   packages/entry: {}
+
+  packages/form-design:
+    dependencies:
+      vuedraggable-es:
+        specifier: ^4.1.1
+        version: 4.1.1(vue@3.5.12(typescript@5.6.3))
+
+  packages/form-render: {}
 
   packages/hooks: {}
 
