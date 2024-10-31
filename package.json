@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "pnpm -C play dev",
     "build": "pnpm -C packages/vue-form-craft build",
+    "release": "pnpm version patch && pnpm -C packages/vue-form-craft release",
     "docs:dev": "pnpm -C docs dev",
     "docs:build": "pnpm -C docs build",
     "docs:preview": "pnpm -C docs preview"

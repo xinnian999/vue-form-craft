@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
-    "release": "pnpm build && npm version patch && npm publish"
+    "release": "vite build && nrm use npm && npm publish"
   },
   "peerDependencies": {
     "vue": "^3.2.0",
