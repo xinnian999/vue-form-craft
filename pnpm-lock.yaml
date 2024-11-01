@@ -106,8 +106,8 @@ importers:
         specifier: ^5.0.10
         version: 5.4.10(@types/node@20.17.1)(sass@1.32.13)
       vue-form-craft:
-        specifier: npm:vue-form-craft@latest
-        version: 4.4.0(element-plus@2.8.6(vue@3.5.12(typescript@5.3.3)))(vue@3.5.12(typescript@5.3.3))
+        specifier: ^4.4.1
+        version: 4.4.1(element-plus@2.8.6(vue@3.5.12(typescript@5.3.3)))(vue@3.5.12(typescript@5.3.3))
 
   docs:
     devDependencies:
@@ -2620,8 +2620,8 @@ packages:
     peerDependencies:
       eslint: '>=6.0.0'
 
-  vue-form-craft@4.4.0:
-    resolution: {integrity: sha512-7m0ZVEXmNNC0JpAXqtAWqre6XWdNGQ/Eh2N+6Ick6eOBussBF2ZWjjBm5JJFfpObKJ1FSzVlJy5CJkiQNJyElw==}
+  vue-form-craft@4.4.1:
+    resolution: {integrity: sha512-KRjHXySAdRrWPtQjw6v+1q/ohtHOuI8hFUOC0FKBG7CrOP3m1l8bT7kVkwOoVaRfq0O4tSQBjHDW91x5X+Dt6A==}
     peerDependencies:
       element-plus: ^2.6.0
       vue: ^3.2.0
@@ -5515,7 +5515,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  vue-form-craft@4.4.0(element-plus@2.8.6(vue@3.5.12(typescript@5.3.3)))(vue@3.5.12(typescript@5.3.3)):
+  vue-form-craft@4.4.1(element-plus@2.8.6(vue@3.5.12(typescript@5.3.3)))(vue@3.5.12(typescript@5.3.3)):
     dependencies:
       element-plus: 2.8.6(vue@3.5.12(typescript@5.3.3))
       vue: 3.5.12(typescript@5.3.3)

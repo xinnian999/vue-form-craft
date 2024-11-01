@@ -12,12 +12,11 @@
   ],
   "exclude": [],
   "compilerOptions": {
-    "types": ["vite/client", "element-plus/global"],
+    "types": ["vite/client", "element-plus/global", "vue-form-craft/global"],
     // "composite": true,
     // "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "baseUrl": ".",
-    "paths": {
-    },
+    "paths": {},
     "allowJs": true
   }
 }
