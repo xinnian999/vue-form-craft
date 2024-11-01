@@ -23,16 +23,9 @@
     "dist",
     "global.d.ts"
   ],
-  "main": "./dist/vue-form-craft.umd.cjs",
+  "main": "./dist/vue-form-craft.js",
   "module": "./dist/vue-form-craft.js",
   "types": "dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/vue-form-craft.js",
-      "require": "./dist/vue-form-craft.umd.cjs",
-      "types": "./dist/index.d.ts"
-    }
-  },
   "keywords": [
     "component",
     "vue",
