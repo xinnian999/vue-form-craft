@@ -30,12 +30,22 @@ const props = withDefaults(
 )
 
 const handleCopy = async () => {
-  try {
-    await navigator.clipboard.writeText(props.code)
+    // 创建一个隐藏的 textarea 元素
+    const textarea = document.createElement('textarea');
+    textarea.value = props.code;
+    document.body.appendChild(textarea);
+    
+    // 选择文本
+    textarea.select();
+    textarea.setSelectionRange(0, 99999); // 对于移动设备的支持
+
+    // 执行复制
+    document.execCommand('copy');
+
+    // 移除 textarea 元素
+    document.body.removeChild(textarea);
+
     ElMessage.success('已成功复制到剪贴板')
-  } catch (error) {
-    ElMessage.error('复制文本到剪贴板时出错')
-  }
 }
 
 const html = ref('')
