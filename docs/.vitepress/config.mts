@@ -1,27 +1,16 @@
 import { defineConfig } from 'vitepress'
-import { fileURLToPath, URL } from 'node:url'
-import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
 import { mdVueDemoPlugin } from 'vitepress-vue-demo'
 
-// https://vitepress.dev/reference/site-config
 export default defineConfig({
   lang: 'zh',
   title: 'Vue Form Craft',
   description: '基于vue3的一个开箱即用低代码表单方案',
   base: '/vue-form-craft/',
   vite: {
-    // resolve: {
-    //   alias: {
-    //     '@vue-form-craft': fileURLToPath(new URL('../../src/', import.meta.url)),
-    //     'vue-form-craft': fileURLToPath(new URL('../../src/release', import.meta.url))
-    //   }
-    // },
     server: {
       port: 9999,
-      // host:'172.20.72.37'
       host: true
-    },
-    plugins: [viteCommonjs() as any]
+    }
   },
   head: [['link', { rel: 'icon', href: '/vue-form-craft/favicon.svg' }]],
   markdown: {

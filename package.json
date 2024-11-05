@@ -7,7 +7,9 @@
     "release": "pnpm -C packages/vue-form-craft release",
     "docs:dev": "pnpm -C docs dev",
     "docs:build": "pnpm -C docs build",
-    "docs:preview": "pnpm -C docs preview"
+    "docs:preview": "pnpm -C docs preview",
+    "change": "changeset",
+    "change-v": "changeset version"
   },
   "dependencies": {
     "element-plus": "^2.8.3",
