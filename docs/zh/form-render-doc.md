@@ -1,8 +1,3 @@
-<script setup>
-import FormRender from '../demo/FormRender.vue'
-
-</script>
-
 # FormRender 表单渲染器
 
 ## 简介

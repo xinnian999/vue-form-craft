@@ -1,0 +1,11 @@
+{
+  "name": "@vue-form-craft/elements",
+  "version": "4.4.0",
+  "description": "",
+  "main": "index.ts",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jsoneditor": "10.1.0"
+  }
+}

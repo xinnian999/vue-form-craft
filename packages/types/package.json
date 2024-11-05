@@ -1,0 +1,8 @@
+{
+  "name": "@vue-form-craft/types",
+  "version": "4.4.0",
+  "description": "",
+  "main": "index.ts",
+  "author": "",
+  "license": "ISC"
+}
