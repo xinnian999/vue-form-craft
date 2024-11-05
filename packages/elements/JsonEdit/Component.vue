@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import JsonEditorVue from 'json-editor-vue3'
+import JsonEditorVue from './JsonEditVue.vue'
 import { Disabled } from '@vue-form-craft/components'
 
 defineOptions({
@@ -29,6 +29,7 @@ const json = defineModel<Record<string, any>>()
 <style>
 .editor-direct {
   width: 100%;
+  height: 70vh;
 }
 
 .jsoneditor-undo,

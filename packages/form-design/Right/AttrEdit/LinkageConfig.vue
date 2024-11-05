@@ -15,14 +15,9 @@
     </div>
 
     <el-dialog destroy-on-close v-model="visible" top="3vh" :title="title">
-      <json-editor-vue
+      <JsonEditor
         v-if="type === 'config'"
-        class="editor"
         v-model="model"
-        currentMode="code"
-        :modeList="['text', 'view', 'tree', 'code', 'form']"
-        :options="{ search: true, history: true }"
-        language="zh"
       />
       <FormRender v-if="type === 'value'" v-model="model" :schema="linkageSchema(designInstance.schema, model!)" />
     </el-dialog>
@@ -32,15 +27,18 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import FormRender from '../../../form-render'
-import JsonEditorVue from 'json-editor-vue3'
 import linkageSchema from '../linkageSchema'
 import type { FormItemType } from '@vue-form-craft/types'
-import { useDesignInstance, useLocale } from '@vue-form-craft/hooks'
+import { useDesignInstance, useElements, useLocale } from '@vue-form-craft/hooks'
 import { ns } from '@vue-form-craft/utils'
 
 const model = defineModel<FormItemType>()
 
 const locale = useLocale()
+
+const elements = useElements()
+
+const JsonEditor = elements.JsonEdit.component
 
 const designInstance = useDesignInstance()
 

@@ -77,7 +77,7 @@ const instance = reactive({
   updateCurrent: (data: FormItemType) => (current.value = data),
   updateHoverKey: (key: string) => (hoverKey.value = key),
   updateSchema: (schema: FormSchema) => {
-    currentSchema.value = schema
+    Object.assign(currentSchema.value, schema)
   },
   onAdd: (params: Record<string, any>) => {
     list.value = changeItems(list.value)

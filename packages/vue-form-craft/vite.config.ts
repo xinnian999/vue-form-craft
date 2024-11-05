@@ -2,7 +2,6 @@ import { fileURLToPath, URL } from 'node:url'
 
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
 import libCss from 'vite-plugin-libcss'
 import dts from 'vite-plugin-dts'
 
@@ -16,7 +15,6 @@ export default defineConfig({
       pathsToAliases: true,
       rollupTypes: true
     }),
-    viteCommonjs(),
     libCss()
   ],
   resolve: {
