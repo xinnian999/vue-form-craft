@@ -4,7 +4,9 @@
     :options="currentOptions"
     :loading="loading"
     :props="{
-      multiple
+      multiple,
+      label: labelKey,
+      value: valueKey
     }"
     v-bind="$attrs"
     @change="selectChange"

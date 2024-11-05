@@ -11,7 +11,7 @@ export default {
   order: 4,
   initialValues: {
     component: 'Collapse',
-    children: [{ title: '折叠面板1', name: 'name1', children: [] }] as any
+    children: [{ title: '面板1', name: 'name1', children: [] }] as any
   },
   attrSchema: {
     size: 'small',
@@ -29,7 +29,8 @@ export default {
               placeholder: '请输入标题'
             },
             designKey: 'id-l8cI',
-            name: 'title'
+            name: 'title',
+            initialValue: '{{ "面板" + ($index + 1) }}'
           },
           {
             label: '唯一标识',
@@ -38,7 +39,8 @@ export default {
               placeholder: '请输入唯一标识'
             },
             designKey: 'form-YE6U',
-            name: 'name'
+            name: 'name',
+            initialValue: '{{ "name" + ($index + 1) }}'
           },
           {
             label: '默认展开',
@@ -49,13 +51,11 @@ export default {
         ],
         props: {
           mode: 'card',
-          title: '子面板',
-          newItemDefaults:
-            '{{ (index) => ({ title: `折叠面板${index + 1}`, name: `name${index + 1}`,children: [] }) }}'
+          title: '面板'
         },
         designKey: 'id-RQ1a',
         name: 'children'
       }
     ]
   }
-} satisfies FormElement 
+} satisfies FormElement

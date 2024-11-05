@@ -44,28 +44,27 @@ export default [
         props: {
           placeholder: '请输入...'
         },
-        designKey: 'form-LnGh'
+        designKey: 'form-LnGh',
+        initialValue: '{{ "选项" + ($index + 1) }}'
       },
       {
         label: '选项值',
         name: 'value',
         component: 'Input',
-        props: {},
-        designKey: 'form-HYtW'
+        designKey: 'form-HYtW',
+        initialValue: '{{ "value" + ($index + 1) }}'
       },
       {
         label: '是否禁用',
         name: 'disabled',
         component: 'Switch',
-        props: {},
         designKey: 'form-HYtW2'
       }
     ],
     designKey: 'form-Iwpd',
     props: {
       mode: 'table',
-      title: '选项',
-      newItemDefaults: (index:number) => ({ label: `选项${index + 1}`, value: `value${index + 1}` })
+      title: '选项'
     }
   },
   {

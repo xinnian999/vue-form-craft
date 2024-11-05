@@ -39,8 +39,6 @@ export default {
       }
     },
 
-    
-
     {
       component: 'Divider',
       props: {
@@ -65,22 +63,21 @@ export default {
           props: {
             placeholder: '请输入...'
           },
-          designKey: 'form-LnGh'
+          designKey: 'form-LnGh',
+          initialValue: '{{ "选项" + ($index + 1) }}'
         },
         {
           label: '选项值',
           name: 'key',
           component: 'Input',
-          props: {},
-          designKey: 'form-HYtW'
+          designKey: 'form-HYtW',
+          initialValue: '{{ "value" + ($index + 1) }}'
         }
       ],
       designKey: 'form-Iwpd',
       props: {
-        mode: 'table',
-        newItemDefaults:
-          '{{ (index) => ({ label: `选项${index + 1}`, key: `value${index + 1}` }) }}'
+        mode: 'table'
       }
-    },
+    }
   ]
 } satisfies FormSchema

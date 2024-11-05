@@ -1,4 +1,4 @@
-import type { FormSchema } from "@vue-form-craft/types";
+import type { FormSchema } from '@vue-form-craft/types'
 
 export default {
   size: 'small',
@@ -9,7 +9,7 @@ export default {
       label: '唯一标识',
       component: 'Input',
       name: 'name',
-      help: "既是唯一标识，也是数据路径。比如输入【props.name】，数据就会保存为 { props: { name:'xxx' } }",
+      help: "既是唯一标识，也是数据路径。比如输入【props.name】，数据就会保存为 { props: { name:'xxx' } }"
     },
     { label: '字段说明', component: 'Textarea', name: 'help' },
     {
@@ -47,8 +47,6 @@ export default {
       },
       designKey: 'form-eTxc'
     },
-
-    
 
     {
       component: 'Divider',
@@ -98,32 +96,8 @@ export default {
     {
       label: '静态选项',
       name: 'props.options',
-      component: 'FormList',
-      hidden: '{{$values.props.mode!=="static"}}',
-      children: [
-        {
-          label: '选项名',
-          name: '{{$values.props.labelKey}}',
-          component: 'Input',
-          props: {
-            placeholder: '请输入...'
-          },
-          designKey: 'form-LnGh'
-        },
-        {
-          label: '选项值',
-          name: '{{$values.props.valueKey}}',
-          component: 'Input',
-          props: {},
-          designKey: 'form-HYtW'
-        }
-      ],
-      designKey: 'form-Iwpd',
-      props: {
-        mode: 'table',
-        newItemDefaults:
-          '{{ (index) => ({ [$values.props.labelKey]: `选项${index + 1}`, [$values.props.valueKey]: `value${index + 1}` }) }}'
-      }
+      component: 'JsonEdit',
+      dialog: true
     },
     {
       component: 'Card',
@@ -172,21 +146,8 @@ export default {
           label: '请求参数',
           component: 'JsonEdit',
           name: 'props.api.params',
-          hidden: '{{ ["POST"].includes($values.props.api.method) }}',
           initialValue: {},
-          props: {
-            mode: 'dialog'
-          }
-        },
-        {
-          label: '请求参数',
-          component: 'JsonEdit',
-          name: 'props.api.data',
-          hidden: '{{ ["GET"].includes($values.props.api.method) }}',
-          initialValue: {},
-          props: {
-            mode: 'dialog'
-          }
+          dialog: true
         },
         {
           label: '数据路径',

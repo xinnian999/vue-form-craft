@@ -124,7 +124,7 @@ export type CollapseItem = {
   title: string
   name: string
   checked?: boolean
-  children: FormItemType[]
+  children?: FormItemType[]
 }
 
 export type Options = {

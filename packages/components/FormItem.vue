@@ -69,7 +69,6 @@ import Icon from '@vue-form-craft/icons'
 import { useFormInstance } from '@vue-form-craft/hooks'
 import { useElements } from '@vue-form-craft/hooks'
 
-
 const thisProps = defineProps<FormItemType>()
 
 const formInstance = useFormInstance()

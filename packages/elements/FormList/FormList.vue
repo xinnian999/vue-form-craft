@@ -1,6 +1,11 @@
 <template>
   <div class="vfc-formList">
-    <DefaultCanvasWrapper v-if="formInstance.design" :children="children" title="自增容器" :name="name" />
+    <DefaultCanvasWrapper
+      v-if="formInstance.design"
+      :children="children"
+      title="自增容器"
+      :name="name"
+    />
 
     <div v-else>
       <template v-if="mode === 'inline'">
@@ -8,7 +13,7 @@
           <div class="list-item-content">
             <el-space>
               <form-item
-                v-for="field in fields(index)"
+                v-for="field in parseFields(index)"
                 v-bind="field"
                 :key="field.label"
                 :name="`${name}.${index}.${field.name}`"
@@ -50,7 +55,7 @@
             </div>
           </template>
           <form-item
-            v-for="field in fields(index)"
+            v-for="field in parseFields(index)"
             v-bind="field"
             :key="field.label"
             class="list-card-item"
@@ -66,7 +71,7 @@
           :key="item.name"
           v-for="item in children"
           v-bind="pickBy(item, Boolean)"
-          :formatter="(row, _, __, index) => formatter(item, row, index)"
+          :formatter="formatter"
         />
         <el-table-column fixed="right" min-width="60">
           <template #default="record">
@@ -109,9 +114,10 @@ import { computed, h, watch } from 'vue'
 import { FormItem, DefaultCanvasWrapper } from '@vue-form-craft/components'
 import { deepParse } from '@vue-form-craft/utils'
 import { isEqual, isString, pickBy } from 'lodash'
-import type { FormItemType } from '@vue-form-craft/types';
-import { useFormInstance } from '@vue-form-craft/hooks';
-import Icon from '@vue-form-craft/icons';
+import type { FormItemType } from '@vue-form-craft/types'
+import { useFormInstance } from '@vue-form-craft/hooks'
+import Icon from '@vue-form-craft/icons'
+import type { TableColumnCtx } from 'element-plus'
 
 interface Props {
   children: FormItemType[]
@@ -140,9 +146,8 @@ const list = defineModel<Record<string, any>[]>({ default: [] })
 
 const formInstance = useFormInstance()
 
-const fields = computed(
-  () => (index: number) => deepParse(props.children, { $item: list.value[index], $index: index })
-)
+const parseFields = (index: number) =>
+  deepParse(props.children, { $item: list.value[index], $index: index })
 
 const isMax = computed(() => {
   return list.value.length >= props.maxLines
@@ -160,13 +165,15 @@ const handleReduceItem = (index: number) => {
   list.value = newData
 }
 
-const formatter = (item: FormItemType, data: Record<string, any>, index: number) => {
-  
+const formatter = (row: any, column: TableColumnCtx<any>, cellValue: any, index: number) => {
+  const colIndex = column.no
+  const field = parseFields(index)[colIndex]
+
   return h(FormItem, {
-    ...deepParse(item, { $item: list.value[index], $index: index }),
+    ...field,
     hideLabel: true,
     style: { marginBottom: 0 },
-    name: `${props.name}.${index}.${item.name}`
+    name: `${props.name}.${index}.${field.name}`
   })
 }
 
@@ -182,7 +189,7 @@ watch(list, (newVal, oldVal) => {
     return acc
   }, 0)
 
-  const fields = deepParse(props.children, { $item: newVal[changeIndex], $index: changeIndex })
+  const fields = parseFields(changeIndex)
 
   const newChangeData = newVal[changeIndex]
   const oldChangeData = oldVal[changeIndex]
