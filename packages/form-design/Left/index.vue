@@ -13,18 +13,14 @@
         :append-to-body="false"
       >
         <el-space wrap>
-          <el-button
-            :key="name"
-            v-for="{ name, schema } in designInstance.templates"
-            @click="useTemplate(schema)"
-          >
+          <el-button :key="name" v-for="{ name, schema } in templates" @click="useTemplate(schema)">
             {{ name }}
           </el-button>
         </el-space>
       </el-drawer>
     </div>
 
-    <div  v-for="{ title, children } in menus" :key="title" :class="ns('menu')">
+    <div v-for="{ title, children } in menus" :key="title" :class="ns('menu')">
       <h4 :class="ns('menu-title')">{{ title }}</h4>
       <draggable
         :class="ns('menu-list')"
@@ -62,6 +58,7 @@ import parseMenus from './menus'
 import type { FormSchema } from '@vue-form-craft/types'
 import { useDesignInstance, useElements, useLang, useLocale } from '@vue-form-craft/hooks'
 import { ns } from '@vue-form-craft/utils'
+import { template } from '@vue-form-craft/config'
 
 const drawerVisible = ref(false)
 
@@ -72,6 +69,8 @@ const elements = useElements()
 const locale = useLocale()
 
 const lang = useLang()
+
+const templates = designInstance.templates.length ? designInstance.templates : template
 
 const menus = computed(() =>
   parseMenus({ elements, omits: designInstance.omitMenus, lang: lang.value })

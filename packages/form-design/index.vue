@@ -20,10 +20,9 @@ import type {
   FormElement,
   FormDesignProps
 } from '@vue-form-craft/types'
-import {template} from '@vue-form-craft/config'
 
 const props = withDefaults(defineProps<FormDesignProps>(), {
-  templates: () => template,
+  templates: () => [],
   omitMenus: () => [],
   schemaContext: () => ({})
 })
