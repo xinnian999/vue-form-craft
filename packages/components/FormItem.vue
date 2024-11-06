@@ -101,7 +101,7 @@ const itemStyle = computed(() => ({
 }))
 
 const computeRules = computed(() => {
-  const { rules, required } = thisProps
+  const { rules, required, component } = thisProps
 
   const ruleData = []
 
@@ -133,6 +133,16 @@ const computeRules = computed(() => {
       return {}
     })
     return [...ruleData, ...ruleParse]
+  }
+
+  if (component === 'VerifyCode') {
+    const vCodeRule = {
+      trigger: 'blur',
+      message: '验证码错误！',
+      validator: () => formInstance.vCodePass
+    }
+
+    return [...ruleData, vCodeRule]
   }
 
   return ruleData

@@ -44,6 +44,8 @@ const selectData = reactive<Record<string, Record<string, any>>>({})
 
 const initialValues = reactive<Record<string, any>>({})
 
+const vCodePass = ref(false)
+
 const locale = useLocale()
 
 const context = computed(() => ({
@@ -106,15 +108,21 @@ const updateInitialValues: FormInstance['updateInitialValues'] = (values) => {
   Object.assign(initialValues, values)
 }
 
+const updateVCodePass = (value: boolean) => {
+  vCodePass.value = value
+}
+
 const instance = readonly({
   ...toRefs(props),
   formValues,
   selectData,
   initialValues,
   context,
+  vCodePass,
   updateFormValues,
   updateSelectData,
   updateInitialValues,
+  updateVCodePass,
   validate,
   resetFields,
   submit

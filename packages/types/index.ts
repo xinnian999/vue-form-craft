@@ -146,9 +146,11 @@ export interface FormInstance extends FormRenderProps {
   selectData: Record<string, Record<string, any>>
   initialValues: Record<string, Record<string, any>>
   context: Record<string, any>
+  vCodePass: boolean
   updateFormValues: (values: Record<string, any>) => void
   updateSelectData: (key: string, value: Record<string, any>) => void
   updateInitialValues: (values: Record<string, any>) => void
+  updateVCodePass: (value: boolean) => void
   validate: () => FormValidationResult | undefined
   resetFields: (names?: string[]) => void
   submit: () => Promise<void>

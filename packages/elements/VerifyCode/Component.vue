@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-// import { ElMessage } from 'element-plus';
+import { useFormInstance } from '@vue-form-craft/hooks'
 import GVerify from './gVerify'
 import { onMounted, ref } from 'vue'
 
@@ -20,14 +20,14 @@ const codeEl = ref<HTMLElement | null>(null)
 
 const code = ref<GVerify | null>(null)
 
+const formInstance = useFormInstance()
+
 const onBlur = () => {
-  if(!value.value) return
+  if (!value.value) return
 
   const res = code.value?.validate(value.value)
   if (res) {
-    // console.log('验证正确')
-  } else {
-    // ElMessage.error('验证码错误')
+    formInstance.updateVCodePass(res)
   }
 }
 
