@@ -12,23 +12,23 @@
     :before-remove="beforeRemove"
     :on-exceed="handleExceed"
   >
-  <template v-if="listType==='text'">
-    <template v-if="drag">
-      <div style="min-width: 300px">
-        <IconRender class="el-icon--upload" name="upload"></IconRender>
-        <div class="el-upload__text">
-          拖拽文件到此处上传 <br />
-          或<em>点击上传</em>
+    <template v-if="listType === 'text'">
+      <template v-if="drag">
+        <div style="min-width: 300px">
+          <Icon class="el-icon--upload" name="upload" />
+          <div class="el-upload__text">
+            拖拽文件到此处上传 <br />
+            或<em>点击上传</em>
+          </div>
         </div>
-      </div>
+      </template>
+
+      <el-button v-else type="primary">{{ btnText }}</el-button>
     </template>
 
-    <el-button v-else type="primary">{{ btnText }}</el-button>
-  </template>
-
-  <template v-if="listType==='picture-card'">
-    <IconRender name="add"></IconRender>
-  </template>
+    <template v-if="listType === 'picture-card'">
+      <Icon name="add" />
+    </template>
 
     <template #tip v-if="tip">
       <div class="el-upload__tip">{{ tip }}</div>
@@ -55,7 +55,7 @@ withDefaults(defineProps<Props>(), {
   btnText: '点击上传',
   limit: 3,
   name: 'file',
-  listType:'text'
+  listType: 'text'
 })
 
 const fileList = defineModel<UploadUserFile[]>({

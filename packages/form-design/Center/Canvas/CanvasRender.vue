@@ -14,7 +14,12 @@
     <div class="hidden-ico" v-if="data.hidden"><Icon name="hidden" /></div>
 
     <ul class="actions-rb" v-if="data.designKey === designInstance.current?.designKey">
-      <li class="actions-rb-item" v-for="{ icon, handle } in rightBottomActions" @click.stop="handle(data)" :key="icon">
+      <li
+        class="actions-rb-item"
+        v-for="{ icon, handle } in rightBottomActions"
+        @click.stop="handle(data)"
+        :key="icon"
+      >
         <Icon :name="icon" />
       </li>
     </ul>
@@ -37,7 +42,7 @@ const designInstance = useDesignInstance()
 
 const canvasItemClass = computed(() => ({
   'canvas-item': true,
-  active: props.data.designKey === designInstance.current?.designKey, 
+  active: props.data.designKey === designInstance.current?.designKey,
   hover: props.data.designKey === designInstance.hoverKey,
   mask: props.data.designKey === designInstance.hoverKey && !props.data.children
 }))
@@ -54,6 +59,7 @@ const handleHoverLeave = () => {
 
 const handleSelect = (element: FormItemType) => {
   designInstance.updateCurrent(element)
+  designInstance.rightTab = 'attr'
 }
 
 const rightBottomActions = [

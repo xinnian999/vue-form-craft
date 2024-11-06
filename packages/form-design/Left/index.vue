@@ -1,5 +1,5 @@
 <template>
-  <div :class="ns('form-design-left')">
+  <div :class="ns('form-design-left')" :style="{ overflow: drawerVisible ? 'hidden' : 'auto' }">
     <div :class="ns('template')">
       <el-button :class="ns('template-button')" size="small" @click="drawerVisible = true">{{
         locale.menus.useTemplateBtn
@@ -8,11 +8,11 @@
       <el-drawer
         v-model="drawerVisible"
         title="模板列表"
-        size="60%"
+        size="70%"
         :class="ns('template-drawer')"
         :append-to-body="false"
       >
-        <el-space wrap>
+        <el-space wrap direction="vertical" alignment="start">
           <el-button :key="name" v-for="{ name, schema } in templates" @click="useTemplate(schema)">
             {{ name }}
           </el-button>

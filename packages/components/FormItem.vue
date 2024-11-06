@@ -110,28 +110,45 @@ const computeRules = computed(() => {
   }
 
   if (rules) {
-    const ruleParse = rules.map(({ type, message, trigger, customReg }) => {
+    const ruleParse = rules.map((rule) => {
+      const { type, message, trigger, customReg, templateExp } = rule
+
       const ruleDef = {
         message,
         trigger
       }
+
       if (['email', 'url'].includes(type)) {
         return { ...ruleDef, type }
       }
+      // 自定义正则
       if (type === 'custom') {
         return {
           ...ruleDef,
           pattern: customReg
         }
       }
+
+      // 解析字符串的正则
       if (isRegexString(type)) {
         return {
           ...ruleDef,
           pattern: type
         }
       }
+
+      // 模板表达式
+      if (type === 'template') {
+        return {
+          ...ruleDef,
+          validator: () => templateExp
+        }
+      }
+
       return {}
     })
+    console.log([...ruleData, ...ruleParse]);
+    
     return [...ruleData, ...ruleParse]
   }
 

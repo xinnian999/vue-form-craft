@@ -18,7 +18,8 @@ import type {
   FormSchema,
   FormItemType,
   FormElement,
-  FormDesignProps
+  FormDesignProps,
+  DesignInstance
 } from '@vue-form-craft/types'
 
 const props = withDefaults(defineProps<FormDesignProps>(), {
@@ -62,21 +63,23 @@ const current = computed({
   },
   set(element: FormItemType) {
     currentKey.value = element.designKey!
-    list.value = setCurrentByKey(currentSchema.value.items, element)
+    list.value = setCurrentByKey(list.value, element)
   }
 })
 
-const instance = reactive({
+const instance: DesignInstance = reactive({
   ...toRefs(props),
   currentKey,
   hoverKey,
   schema: currentSchema,
   current,
   list,
+  rightTab: 'form',
   updateCurrent: (data: FormItemType) => (current.value = data),
   updateHoverKey: (key: string) => (hoverKey.value = key),
   updateSchema: (schema: FormSchema) => {
     Object.assign(currentSchema.value, schema)
+    currentKey.value = ''
   },
   onAdd: (params: Record<string, any>) => {
     list.value = changeItems(list.value)

@@ -4,8 +4,9 @@ import type { Component, Ref, VNode } from 'vue'
 export type FormRule = {
   type: 'email' | 'url' | 'custom' | string
   customReg?: string
+  templateExp?: any
   message?: string
-  trigger: 'blur' | 'change'
+  trigger: string[]
 }
 
 export type FormChange = {
@@ -168,6 +169,7 @@ export interface DesignInstance extends Required<FormDesignProps> {
   schema: FormSchema
   list: FormItemType[]
   current: FormItemType | null
+  rightTab: 'attr' | 'form'
   onAdd: (params: Record<string, any>) => void
   handleDeleteItem: (element: FormItemType) => void
   handleCopyItem: (element: FormItemType) => void
