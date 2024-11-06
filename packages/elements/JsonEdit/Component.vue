@@ -29,7 +29,7 @@ const json = defineModel<Record<string, any>>()
 <style>
 .editor-direct {
   width: 100%;
-  height: 70vh;
+  height: 350px;
 }
 
 .jsoneditor-undo,

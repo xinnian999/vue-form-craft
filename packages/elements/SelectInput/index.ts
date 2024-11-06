@@ -8,7 +8,7 @@ export default {
   name: '选择+输入',
   component,
   icon: h(Icon, { name: 'input' }),
-  type: 'highBasic',
+  type: 'high',
   order: 1,
   initialValues: {
     label: '选择框+输入框',

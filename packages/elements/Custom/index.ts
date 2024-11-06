@@ -8,7 +8,7 @@ export default {
   name: '自定义组件',
   component,
   icon: h(Icon, { name: 'custom' }),
-  type: 'basic',
+  type: 'high',
   order: 99,
   initialValues: {
     label: '自定义组件',

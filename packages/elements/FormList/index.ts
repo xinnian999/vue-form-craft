@@ -8,7 +8,7 @@ export default {
   name: '自增容器',
   component: FormList,
   icon: h(Icon, { name: 'formList' }),
-  type: 'basic',
+  type: 'high',
   order: 20,
   initialValues: {
     label: '自增容器',

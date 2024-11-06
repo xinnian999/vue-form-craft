@@ -7,8 +7,8 @@ import component from './Component.vue'
 export default {
   name: '图形验证码',
   component,
-  icon: h(Icon, { name: 'textarea' }),
-  type: 'basic',
+  icon: h(Icon, { name: 'verifyCode' }),
+  type: 'high',
   order: 18,
   attrSchema,
   initialValues: {

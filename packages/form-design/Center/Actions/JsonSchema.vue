@@ -12,6 +12,7 @@
       <el-tab-pane label="在线编辑" name="edit">
         <JsonEditor
           v-model="json"
+          style="height:70vh"
           @blur="onBlur"
         />
       </el-tab-pane>

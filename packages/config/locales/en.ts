@@ -3,7 +3,7 @@ import type { Locale } from '@vue-form-craft/types'
 export default {
   menus: {
     basicTitle: 'Basic Fields',
-    highBasicTitle: 'High Basic Fields',
+    highTitle: 'High Basic Fields',
     layoutTitle: 'Layout Fields',
     assistTitle: 'Assist Fields',
     useTemplateBtn: 'Use Template'

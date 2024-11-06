@@ -49,7 +49,7 @@ export type FormElement = {
   name: string
   component: string | VNode | Component
   icon: string | VNode | Component
-  type: 'assist' | 'layout' | 'basic' | 'highBasic'
+  type: 'assist' | 'layout' | 'basic' | 'high'
   order: number
   initialValues: Omit<FormItemType, 'name'>
   modelName?: string
@@ -88,7 +88,7 @@ export type Lang = Ref<'en' | 'zh'>
 export type Locale = {
   menus: {
     basicTitle: string
-    highBasicTitle: string
+    highTitle: string
     layoutTitle: string
     assistTitle: string
     useTemplateBtn: string

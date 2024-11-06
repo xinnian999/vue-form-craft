@@ -2,8 +2,8 @@ import type { Locale } from '@vue-form-craft/types'
 
 export default {
   menus: {
-    basicTitle: '输入组件',
-    highBasicTitle: '高级输入组件',
+    basicTitle: '基础组件',
+    highTitle: '高级组件',
     layoutTitle: '布局组件',
     assistTitle: '辅助组件',
     useTemplateBtn: '使用模板'

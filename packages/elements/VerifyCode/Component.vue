@@ -26,8 +26,12 @@ const onBlur = () => {
   if (!value.value) return
 
   const res = code.value?.validate(value.value)
+  console.log('res',res);
+  
   if (res) {
-    formInstance.updateVCodePass(res)
+    formInstance.updateVCodePass(true)
+  }else{
+    formInstance.updateVCodePass(false)
   }
 }
 

@@ -30,8 +30,8 @@ export default ({ elements, lang, omits }: Params) => {
       children: getChildren('basic')
     },
     {
-      title: locale.menus.highBasicTitle,
-      children: getChildren('highBasic')
+      title: locale.menus.highTitle,
+      children: getChildren('high')
     },
     {
       title: locale.menus.layoutTitle,

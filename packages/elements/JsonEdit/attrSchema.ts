@@ -1,4 +1,4 @@
-import type { FormSchema } from "@vue-form-craft/types";
+import type { FormSchema } from '@vue-form-craft/types'
 
 export default {
   size: 'small',
@@ -35,9 +35,8 @@ export default {
     {
       label: '初始值',
       component: 'JsonEdit',
-      name: 'initialValue'
-    },
-    
-
+      name: 'initialValue',
+      dialog: true
+    }
   ]
 } satisfies FormSchema

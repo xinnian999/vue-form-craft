@@ -8,7 +8,7 @@ export default {
   name: '颜色输入框',
   component,
   icon: h(Icon, { name: 'colorPicker' }),
-  type: 'highBasic',
+  type: 'high',
   order: 2,
   initialValues: {
     label: '颜色输入框',
