@@ -9,11 +9,15 @@ import linkage5 from './linkage5'
 import formList from './formList'
 import MostTest from './300Test'
 import nest from './nest'
+import bugGood from './bugGood'
+import satisfaction from './satisfaction'
 import type { TemplateData } from '@vue-form-craft/types'
 
 export default [
   { name: '登陆账号', schema: login, id: 'login' },
   { name: '注册账号', schema: register, id: 'register' },
+  { name: '商品购买', schema: bugGood, id: 'bugGood' },
+  { name: '用户满意度调查', schema: satisfaction, id: 'satisfaction' },
   { name: '写文章', schema: article, id: 'article' },
   { name: '自增组件', schema: formList, id: 'formList' },
   { name: '联动案例1', schema: linkage1, id: 'linkage1' },

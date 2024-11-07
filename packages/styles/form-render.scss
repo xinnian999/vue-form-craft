@@ -1,6 +1,6 @@
 @include ns('form-item') {
   &-label {
-    display: flex;
+    display: inline-flex;
     position: relative;
     white-space: nowrap;
     &-ico {
