@@ -2,9 +2,9 @@
   <div :class="ns('attr')">
     <FormRender :key="current.designKey" v-model="current" :schema="attrSchema" />
 
-    <StyleConfig :key="current.designKey" v-model="currentProps" />
+    <!-- <StyleConfig :key="current.designKey" v-model="currentProps" /> -->
 
-    <LinkageConfig v-model="current" />
+    <!-- <LinkageConfig v-model="current" /> -->
   </div>
 </template>
 

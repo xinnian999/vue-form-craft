@@ -83,7 +83,10 @@ const instance: DesignInstance = reactive({
   },
   onAdd: (params: Record<string, any>) => {
     list.value = changeItems(list.value)
+
+    
     emit('add', params.item.__draggable_context.element)
+    
   },
   handleDeleteItem: (element: FormItemType) => {
     list.value = recursionDelete(list.value, (item) => item.designKey !== element.designKey)

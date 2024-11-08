@@ -1,10 +1,10 @@
-import type { FormSchema } from "@vue-form-craft/types";
+import type { FormSchema } from '@vue-form-craft/types'
 
 export default {
   size: 'small',
   labelAlign: 'top',
   items: [
-    { label: '标签', component: 'Input', name: 'label' },
+    { label: '标签', component: 'Input', name: 'label', initialValue: '单行文本' },
     {
       label: '唯一标识',
       component: 'Input',
@@ -16,7 +16,8 @@ export default {
       label: '占位提示',
       component: 'Input',
       name: 'props.placeholder',
-      designKey: 'form-ekRL'
+      designKey: 'form-ekRL',
+      initialValue: '请输入文本'
     },
     { label: '初始值', component: 'Input', name: 'initialValue' },
     {
@@ -132,8 +133,6 @@ export default {
       label: '最长字数',
       component: 'InputNumber',
       name: 'props.maxlength'
-    },
-    
-
+    }
   ]
 } satisfies FormSchema

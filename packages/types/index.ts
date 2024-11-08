@@ -47,12 +47,13 @@ export type FormSchema = {
 }
 
 export type FormElement = {
-  name: string
-  component: string | VNode | Component
+  title: string
+  component: string
+  render: string | VNode | Component
   icon: string | VNode | Component
   type: 'assist' | 'layout' | 'basic' | 'high'
   order: number
-  initialValues: Omit<FormItemType, 'name'>
+  // initialValues: Omit<FormItemType, 'name'>
   modelName?: string
   attrSchema: FormSchema
 }

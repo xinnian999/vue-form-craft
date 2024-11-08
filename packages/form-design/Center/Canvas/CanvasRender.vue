@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { omit } from 'lodash'
 import { FormItem } from '@vue-form-craft/components'
 import type { FormItemType } from '@vue-form-craft/types'
@@ -76,4 +76,9 @@ const rightBottomActions = [
 const checkProps = (props: Record<string, any> = {}) => {
   return omit(props, ['multiple', 'api'])
 }
+
+onMounted(()=>{
+  handleSelect(props.data)
+  
+})
 </script>

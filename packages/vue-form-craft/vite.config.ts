@@ -37,7 +37,8 @@ export default defineConfig({
           vue: 'Vue',
           'element-plus': 'ElementPlus',
         },
-        exports: 'named'
+        exports: 'named',
+        chunkFileNames:'lazy/[name]-[hash].js'
       }
     }
     // sourcemap: true

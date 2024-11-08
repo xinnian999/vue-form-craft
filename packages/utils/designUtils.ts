@@ -69,16 +69,18 @@ export const copyItems = (list: FormItemType[], id: string): FormItemType[] => {
 
 export const changeItems = (items: FormItemType[]) => {
   return items.map((item: any) => {
-    const config = item.initialValues || item
-
-    const data = {
-      ...config,
-      designKey: config.designKey || `design-${getRandomId(4)}`,
-      name: config.name || `form-${getRandomId(4)}`
+    if (item.designKey) {
+      return item
     }
 
-    if (config.children) {
-      data.children = changeItems(config.children)
+    const data: FormItemType = {
+      component: item.component,
+      designKey: item.designKey || `design-${getRandomId(4)}`,
+      name: item.name || `form-${getRandomId(4)}`
+    }
+
+    if (item.children) {
+      data.children = changeItems(item.children)
     }
 
     return data

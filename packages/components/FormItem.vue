@@ -1,7 +1,7 @@
 <template>
   <template v-if="formInstance.design || !hidden">
     <div v-if="config.type === 'layout'" :style="itemStyle">
-      <component :is="config.component" :name="name" :props="props" :children="children" />
+      <component :is="config.render" :name="name" :props="props" :children="children" />
     </div>
 
     <el-form-item
@@ -38,7 +38,7 @@
           destroy-on-close
         >
           <component
-            :is="config.component"
+            :is="config.render"
             :disabled="formInstance.schema.disabled"
             :size="formInstance.schema.size"
             v-bind="formItemProps"
@@ -51,7 +51,7 @@
 
       <component
         v-else
-        :is="config.component"
+        :is="config.render"
         :disabled="formInstance.schema.disabled"
         :size="formInstance.schema.size"
         v-bind="formItemProps"
@@ -147,7 +147,6 @@ const computeRules = computed(() => {
 
       return {}
     })
-    console.log([...ruleData, ...ruleParse]);
     
     return [...ruleData, ...ruleParse]
   }
