@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
+import { computed } from 'vue'
 import { omit } from 'lodash'
 import { FormItem } from '@vue-form-craft/components'
 import type { FormItemType } from '@vue-form-craft/types'
@@ -77,7 +77,4 @@ const checkProps = (props: Record<string, any> = {}) => {
   return omit(props, ['multiple', 'api'])
 }
 
-// onMounted(()=>{
-//   handleSelect(props.data)
-// })
 </script>

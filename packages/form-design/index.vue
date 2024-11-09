@@ -81,14 +81,10 @@ const instance: DesignInstance = reactive({
     Object.assign(currentSchema.value, schema)
     currentKey.value = ''
   },
-  onAdd: (params: Record<string, any>) => {
-    const source = params.item.__draggable_context.element
-    const designKey = `design-${getRandomId(4)}`
-    source.designKey = designKey
+  onAdd: (e: Record<string, any>) => {
+    const source = e.item.__draggable_context.element
 
-    list.value = changeItems(list.value)
-
-    current.value = getCurrentByKey(list.value, designKey)!
+    current.value = getCurrentByKey(list.value, source.designKey)!
 
     emit('add', source)
   },

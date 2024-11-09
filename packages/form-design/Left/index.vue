@@ -31,6 +31,7 @@
         :drag-class="ns('menu-list-drag')"
         :fallback-class="ns('menu-list-fallback')"
         item-key="designKey"
+        @clone="onClone"
       >
         <template #item="{ element }">
           <li :class="ns('menu-list-item')">
@@ -57,7 +58,7 @@ import { ref } from 'vue'
 import parseMenus from './menus'
 import type { FormSchema } from '@vue-form-craft/types'
 import { useDesignInstance, useElements, useLang, useLocale } from '@vue-form-craft/hooks'
-import { ns } from '@vue-form-craft/utils'
+import { getRandomId, ns } from '@vue-form-craft/utils'
 import { template } from '@vue-form-craft/config'
 
 const drawerVisible = ref(false)
@@ -78,5 +79,14 @@ const menus = computed(() =>
 
 const useTemplate = (templateSchema: FormSchema) => {
   designInstance.updateSchema(templateSchema)
+}
+
+const onClone = (e:Record<string,any>) => {
+  const source = e.item.__draggable_context.element
+  e.item.__draggable_context.element = {
+    component: source.component,
+    designKey: `design-${getRandomId(4)}`,
+    name: `form-${getRandomId(4)}`
+  }
 }
 </script>
