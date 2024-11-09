@@ -77,8 +77,7 @@ const checkProps = (props: Record<string, any> = {}) => {
   return omit(props, ['multiple', 'api'])
 }
 
-onMounted(()=>{
-  handleSelect(props.data)
-  
-})
+// onMounted(()=>{
+//   handleSelect(props.data)
+// })
 </script>

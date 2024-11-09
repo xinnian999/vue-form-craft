@@ -41,7 +41,7 @@
               :class="ns('menu-list-item-name')"
               :style="{ fontSize: lang === 'zh' ? '12px' : '10px' }"
             >
-              {{ element.name }}
+              {{ element.title }}
             </div>
           </li>
         </template>

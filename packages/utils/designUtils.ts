@@ -69,7 +69,8 @@ export const copyItems = (list: FormItemType[], id: string): FormItemType[] => {
 
 export const changeItems = (items: FormItemType[]) => {
   return items.map((item: any) => {
-    if (item.designKey) {
+    
+    if (!item.render) {
       return item
     }
 

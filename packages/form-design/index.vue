@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 import { ref, provide, computed, reactive, toRefs } from 'vue'
-import { ns, recursionDelete } from '@vue-form-craft/utils'
+import { getRandomId, ns, recursionDelete } from '@vue-form-craft/utils'
 import Left from './Left/index.vue'
 import Center from './Center/index.vue'
 import Right from './Right/index.vue'
@@ -82,11 +82,15 @@ const instance: DesignInstance = reactive({
     currentKey.value = ''
   },
   onAdd: (params: Record<string, any>) => {
+    const source = params.item.__draggable_context.element
+    const designKey = `design-${getRandomId(4)}`
+    source.designKey = designKey
+
     list.value = changeItems(list.value)
 
-    
-    emit('add', params.item.__draggable_context.element)
-    
+    current.value = getCurrentByKey(list.value, designKey)!
+
+    emit('add', source)
   },
   handleDeleteItem: (element: FormItemType) => {
     list.value = recursionDelete(list.value, (item) => item.designKey !== element.designKey)
