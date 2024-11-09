@@ -17,7 +17,7 @@ export default ({ elements, lang, omits }: Params) => {
       .map((item) => {
         return {
           ...item,
-          name: lang === 'zh' ? item.name : item.component
+          name: lang === 'zh' ? item.title : item.component
         }
       })
   }
