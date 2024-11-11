@@ -1,8 +1,17 @@
-import type { FormSchema } from "@vue-form-craft/types";
+import type { FormSchema } from '@vue-form-craft/types'
 
 export default {
   size: 'small',
   labelAlign: 'top',
+  initialValues: {
+    label: '计数器',
+    props: {
+      min: 1,
+      max: 999,
+      step: 1,
+      controlsPosition: ''
+    }
+  },
   items: [
     { label: '标签', component: 'Input', name: 'label' },
     {
@@ -60,19 +69,17 @@ export default {
     {
       label: '最小值',
       component: 'InputNumber',
-      name: 'props.min',
+      name: 'props.min'
     },
     {
       label: '最大值',
       component: 'InputNumber',
-      name: 'props.max',
+      name: 'props.max'
     },
     {
       label: '步长',
       component: 'InputNumber',
-      name: 'props.step',
-    },
-    
-
+      name: 'props.step'
+    }
   ]
 } satisfies FormSchema

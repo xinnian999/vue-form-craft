@@ -3,6 +3,14 @@ import type { FormSchema } from "@vue-form-craft/types";
 export default {
   size: 'small',
   labelAlign: 'top',
+  initialValues: {
+    label: '日期选择器',
+    props: {
+      type: 'datetime',
+      placeholder: '请选择日期',
+      clearable: false
+    },
+  },
   items: [
     { label: '标签', component: 'Input', name: 'label' },
     {

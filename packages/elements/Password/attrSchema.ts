@@ -5,6 +5,12 @@ export default {
   labelAlign: 'right',
   size: 'default',
   scrollToError: true,
+  initialValues: {
+    label: '密码输入框',
+    props: {
+      placeholder: '请输入密码'
+    }
+  },
   items: [
     {
       label: '头像',

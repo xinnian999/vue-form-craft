@@ -3,6 +3,17 @@ import type { FormSchema } from '@vue-form-craft/types'
 export default {
   size: 'small',
   labelAlign: 'top',
+  initialValues: {
+    label: '电子签名',
+    props: {
+      width: 700,
+      height: 300,
+      lineWidth: 6,
+      lineColor: '#000000',
+      bgColor: '#eeeeee',
+      format: 'image/png'
+    }
+  },
   items: [
     { label: '标签', component: 'Input', name: 'label' },
     {
@@ -61,7 +72,6 @@ export default {
           }
         ]
       },
-      initialValue: 'center',
       designKey: 'form-PLpj'
     }
   ]

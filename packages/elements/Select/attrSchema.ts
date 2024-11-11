@@ -4,6 +4,18 @@ import type { FormSchema } from '@vue-form-craft/types'
 export default {
   size: 'small',
   labelAlign: 'top',
+  initialValues: {
+    label: '下拉选择框',
+    props: {
+      mode: 'static',
+      options: [
+        { label: '选项1', value: 'value1' },
+        { label: '选项2', value: 'value2' },
+        { label: '选项3', value: 'value3' }
+      ],
+      placeholder: '请选择...'
+    }
+  },
   items: [
     { label: '标签', component: 'Input', name: 'label' },
     {
@@ -27,7 +39,7 @@ export default {
       props: {
         mode: 'static',
         options: '{{$values.props.options}}',
-        multiple: '{{$values.props.multiple}}',
+        multiple: '{{$values.props.multiple}}'
       }
     },
     {

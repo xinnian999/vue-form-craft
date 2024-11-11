@@ -1,25 +1,23 @@
-import Inline from './Inline.vue'
 import Icon from '@vue-form-craft/icons'
 import type { FormElement } from '@vue-form-craft/types'
-import { h } from 'vue'
+import { defineAsyncComponent, h } from 'vue'
 
 export default {
-  name: '行内布局',
+  title: '行内布局',
   icon: h(Icon, { name: 'inline' }),
   type: 'layout',
-  component: Inline,
+  component: 'Inline',
+  render:defineAsyncComponent(() => import('./Inline.vue')),
   order: 2,
-  initialValues: {
-    component: 'Inline',
-    children: [],
-    props: {
-      align: 'left',
-      gap: 20
-    }
-  },
   attrSchema: {
     size: 'small',
     labelAlign: 'top',
+    initialValues: {
+      props: {
+        align: 'left',
+        gap: 20
+      }
+    },
     items: [
       { label: '唯一标识', component: 'Input', name: 'name' },
       {

@@ -1,31 +1,14 @@
 import Icon from '@vue-form-craft/icons'
 import type { FormElement } from '@vue-form-craft/types'
-import { h } from 'vue'
-import Radio from './Radio.vue'
+import { defineAsyncComponent, h } from 'vue'
 import attrSchema from './attrSchema'
 
 export default {
-  name: '单选框组',
+  title: '单选框组',
   icon: h(Icon, { name: 'radio' }),
   type: 'basic',
-  component: Radio,
+  component: 'Radio',
+  render: defineAsyncComponent(() => import('./Radio.vue')),
   order: 3.5,
-  attrSchema,
-  initialValues: {
-    label: '单选框组',
-    component: 'Radio',
-    props: {
-      mode: 'static',
-      options: [
-        { label: '选项1', value: 'value1' },
-        { label: '选项2', value: 'value2' },
-        { label: '选项3', value: 'value3' }
-      ],
-      labelKey: 'label',
-      valueKey: 'value',
-      optionType: 'circle',
-      direction: 'horizontal',
-      space: 20
-    }
-  }
+  attrSchema
 } satisfies FormElement
