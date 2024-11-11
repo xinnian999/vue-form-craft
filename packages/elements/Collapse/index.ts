@@ -1,21 +1,20 @@
 import type { FormElement } from '@vue-form-craft/types'
-import Collapse from './Collapse.vue'
-import { h } from 'vue'
+import { defineAsyncComponent, h } from 'vue'
 import Icon from '@vue-form-craft/icons'
 
 export default {
-  name: '折叠面板',
-  component: Collapse,
+  title: '折叠面板',
+  component: 'Collapse',
+  render: defineAsyncComponent(() => import('./Collapse.vue')),
   icon: h(Icon, { name: 'collapse' }),
   type: 'layout',
   order: 4,
-  initialValues: {
-    component: 'Collapse',
-    children: [{ title: '面板1', name: 'name1', children: [] }] as any
-  },
   attrSchema: {
     size: 'small',
     labelAlign: 'top',
+    initialValues: {
+      children: [{ title: '面板1', name: 'name1', children: [] }] as any
+    },
     items: [
       { label: '唯一标识', component: 'Input', name: 'name' },
       {

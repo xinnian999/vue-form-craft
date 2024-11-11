@@ -43,6 +43,7 @@ export type FormSchema = {
   hideRequiredAsterisk?: boolean
   labelBold?: boolean
   scrollToError?: boolean
+  initialValues?: Record<string, any>
   items: FormItemType[]
 }
 

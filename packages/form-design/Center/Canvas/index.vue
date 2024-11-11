@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 import draggable from 'vuedraggable-es'
-import FormRender from '../../../form-render'
+import FormRender from '@vue-form-craft/form-render'
 import CanvasRender from './CanvasRender.vue'
 import { useDesignInstance, useLocale } from '@vue-form-craft/hooks'
 import { ns } from '@vue-form-craft/utils'

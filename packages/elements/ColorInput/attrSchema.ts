@@ -3,6 +3,10 @@ import type { FormSchema } from "@vue-form-craft/types";
 export default {
   size: 'small',
   labelAlign: 'top',
+  initialValues: {
+    label: '颜色输入框',
+    component: 'ColorInput'
+  },
   items: [
     { label: '标签', component: 'Input', name: 'label' },
     {

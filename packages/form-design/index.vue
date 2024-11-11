@@ -8,11 +8,11 @@
 
 <script setup lang="ts">
 import { ref, provide, computed, reactive, toRefs } from 'vue'
-import { getRandomId, ns, recursionDelete } from '@vue-form-craft/utils'
+import { ns, recursionDelete } from '@vue-form-craft/utils'
 import Left from './Left/index.vue'
 import Center from './Center/index.vue'
 import Right from './Right/index.vue'
-import { getCurrentByKey, setCurrentByKey, changeItems, copyItems } from '@vue-form-craft/utils'
+import { getCurrentByKey, setCurrentByKey, copyItems } from '@vue-form-craft/utils'
 import { $designInstance } from '@vue-form-craft/config'
 import type {
   FormSchema,
@@ -85,6 +85,8 @@ const instance: DesignInstance = reactive({
     const source = e.item.__draggable_context.element
 
     current.value = getCurrentByKey(list.value, source.designKey)!
+
+    instance.rightTab = 'attr'
 
     emit('add', source)
   },

@@ -4,7 +4,7 @@ export default {
   size: 'small',
   labelAlign: 'top',
   items: [
-    { label: '标签', component: 'Input', name: 'label' },
+    { label: '标签', component: 'Input', name: 'label', initialValue: '级联选择器' },
     {
       label: '唯一标识',
       component: 'Input',
@@ -16,7 +16,8 @@ export default {
       label: '占位提示',
       component: 'Input',
       name: 'props.placeholder',
-      designKey: 'form-ekRL'
+      designKey: 'form-ekRL',
+      initialValue: '请选择...'
     },
     {
       component: 'Grid',
@@ -64,13 +65,15 @@ export default {
       label: '标签key',
       component: 'Input',
       name: 'props.labelKey',
-      designKey: 'form-X6hs'
+      designKey: 'form-X6hs',
+      initialValue: 'label'
     },
     {
       label: '值Key',
       component: 'Input',
       name: 'props.valueKey',
-      designKey: 'form-STkl'
+      designKey: 'form-STkl',
+      initialValue: 'value'
     },
     {
       label: '数据模式',
@@ -91,13 +94,56 @@ export default {
         optionType: 'button',
         space: 0
       },
+      initialValue: 'static',
       designKey: 'form-PLpj'
     },
     {
       label: '静态选项',
       name: 'props.options',
       component: 'JsonEdit',
-      dialog: true
+      dialog: true,
+      initialValue: [
+        {
+          label: '选项1',
+          value: 'value1',
+          children: [
+            {
+              label: '选项1-1',
+              value: 'value1-1'
+            },
+            {
+              label: '选项1-2',
+              value: 'value1-2'
+            },
+            {
+              label: '选项1-3',
+              value: 'value1-2'
+            }
+          ]
+        },
+        {
+          label: '选项2',
+          value: 'value2',
+          children: [
+            {
+              label: '选项2-1',
+              value: 'value2-1'
+            },
+            {
+              label: '选项2-2',
+              value: 'value2-2'
+            },
+            {
+              label: '选项2-3',
+              value: 'value2-2'
+            }
+          ]
+        },
+        {
+          label: '选项3',
+          value: 'value3'
+        }
+      ]
     },
     {
       component: 'Card',

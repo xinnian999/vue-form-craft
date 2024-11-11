@@ -60,6 +60,7 @@ import type { FormSchema } from '@vue-form-craft/types'
 import { useDesignInstance, useElements, useLang, useLocale } from '@vue-form-craft/hooks'
 import { getRandomId, ns } from '@vue-form-craft/utils'
 import { template } from '@vue-form-craft/config'
+import { cloneDeep } from 'lodash'
 
 const drawerVisible = ref(false)
 
@@ -81,12 +82,17 @@ const useTemplate = (templateSchema: FormSchema) => {
   designInstance.updateSchema(templateSchema)
 }
 
-const onClone = (e:Record<string,any>) => {
-  const source = e.item.__draggable_context.element
+const onClone = (e: Record<string, any>) => {
+  const source = cloneDeep(e.item.__draggable_context.element)
+
   e.item.__draggable_context.element = {
     component: source.component,
     designKey: `design-${getRandomId(4)}`,
     name: `form-${getRandomId(4)}`
+  }
+
+  if (source.type === 'layout') {
+    e.item.__draggable_context.element.children = []
   }
 }
 </script>

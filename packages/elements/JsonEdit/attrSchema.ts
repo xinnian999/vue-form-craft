@@ -4,7 +4,7 @@ export default {
   size: 'small',
   labelAlign: 'top',
   items: [
-    { label: '标签', component: 'Input', name: 'label' },
+    { label: '标签', component: 'Input', name: 'label',initialValue:'JSON编辑器' },
     {
       label: '唯一标识',
       component: 'Input',

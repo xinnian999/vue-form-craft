@@ -72,6 +72,15 @@ watch(
   { deep: true, immediate: true }
 )
 
+watch(
+  () => props.schema?.initialValues,
+  async (newVal) => {
+    await nextTick()
+    Object.assign(initialValues, newVal)
+  },
+  { immediate: true }
+)
+
 watch(initialValues, async (newVal) => {
   await nextTick()
   formValues.value = merge(formValues.value, newVal)
