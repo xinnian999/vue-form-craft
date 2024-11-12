@@ -50,8 +50,14 @@
         height: 100%;
 
         &-ghost {
-          border-top: 5px solid rgb(248, 47, 47);
+          // border-top: 5px solid rgb(248, 47, 47);
           list-style: none;
+          text-align: center;
+          margin: 5px 0;
+          border: 1px dashed #c0bdbd;
+          background-color: var(--el-color-primary-light-9);
+          border-radius: 7px;
+          padding: 10px 0;
         }
 
         .canvas-item {
