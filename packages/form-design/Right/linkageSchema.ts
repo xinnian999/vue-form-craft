@@ -1,23 +1,23 @@
 import type { FormSchema, FormItemType } from '@vue-form-craft/types'
-import * as elements from '@vue-form-craft/elements'
+// import * as elements from '@vue-form-craft/elements'
 
-type option = {
-  label?: string
-  value: string
-}
+// type option = {
+//   label?: string
+//   value: string
+// }
 
 // 将表单树 递归转换为下拉选项 ，并且只取基础字段
-const build = (nodes: FormItemType[]) =>
-  nodes.reduce<option[]>((acc, cur) => {
-    if (elements[cur.component].type === 'basic') {
-      acc = [...acc, { label: `${cur.label} (${cur.name})`, value: cur.name }]
-    }
+// const build = (nodes: FormItemType[]) =>
+//   nodes.reduce<option[]>((acc, cur) => {
+//     if (elements[cur.component].type === 'basic') {
+//       acc = [...acc, { label: `${cur.label} (${cur.name})`, value: cur.name }]
+//     }
 
-    if (cur.children) {
-      acc = [...acc, ...build(cur.children)]
-    }
-    return acc
-  }, [])
+//     if (cur.children) {
+//       acc = [...acc, ...build(cur.children)]
+//     }
+//     return acc
+//   }, [])
 
 export default (schema: FormSchema, current: FormItemType): FormSchema => {
   // const targetOptions = build(schema.items).filter((item) => item.value !== current.name)
