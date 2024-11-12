@@ -1,10 +1,10 @@
-import type { FormSchema } from "@vue-form-craft/types";
+import type { FormSchema } from '@vue-form-craft/types'
 
 export default {
   size: 'small',
   labelAlign: 'top',
   items: [
-    { label: '标签', component: 'Input', name: 'label' },
+    { label: '标签', component: 'Input', name: 'label', initialValue: '评分' },
     {
       label: '唯一标识',
       component: 'Input',
@@ -35,8 +35,6 @@ export default {
     },
 
     { label: '最大分值', component: 'InputNumber', name: 'props.max', initialValue: 5 },
-    { label: '是否允许半选', component: 'Switch', name: 'props.allow-half' },
-    
-
+    { label: '是否允许半选', component: 'Switch', name: 'props.allow-half' }
   ]
 } satisfies FormSchema

@@ -4,14 +4,11 @@ import { h } from 'vue'
 import type { FormElement } from '@vue-form-craft/types'
 
 export default {
-  name: '评分',
-  component: 'ElRate',
+  title: '评分',
+  component: 'Rate',
+  render: 'ElRate',
   icon: h(Icon, { name: 'rate' }),
   type: 'basic',
   order: 12,
-  attrSchema,
-  initialValues: {
-    label: '评分',
-    component: 'Rate'
-  }
+  attrSchema
 } satisfies FormElement

@@ -3,15 +3,16 @@ import type { FormElement } from '@vue-form-craft/types'
 import { h } from 'vue'
 
 export default {
-  name: '滑块',
-  component: 'ElSlider',
+  title: '滑块',
+  render: 'ElSlider',
+  component: 'Slider',
   icon: h(Icon, { name: 'slider' }),
   type: 'basic',
   order: 12,
-  initialValues: { label: '滑块', component: 'Slider' },
   attrSchema: {
     size: 'small',
     labelAlign: 'top',
+    initialValues: { label: '滑块' },
     items: [
       { label: '标签', component: 'Input', name: 'label' },
       {

@@ -1,8 +1,15 @@
-import type { FormSchema } from "@vue-form-craft/types";
+import type { FormSchema } from '@vue-form-craft/types'
 
 export default {
   size: 'small',
   labelAlign: 'top',
+  initialValues: {
+    label: '验证码',
+    required: true,
+    props: {
+      placeholder: '请输入验证码'
+    }
+  },
   items: [
     { label: '标签', component: 'Input', name: 'label' },
     {

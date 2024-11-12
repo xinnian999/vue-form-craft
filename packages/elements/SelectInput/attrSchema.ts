@@ -3,6 +3,14 @@ import type { FormSchema } from '@vue-form-craft/types'
 export default {
   size: 'small',
   labelAlign: 'top',
+  initialValues: {
+    label: '选择框+输入框',
+    props: {
+      placeholder: '请输入文本',
+      selectPosition: 'append',
+      selectWidth: 70
+    }
+  },
   items: [
     { label: '标签', component: 'Input', name: 'label' },
     {

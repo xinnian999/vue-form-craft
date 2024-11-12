@@ -3,6 +3,19 @@ import type { FormSchema } from '@vue-form-craft/types'
 export default {
   size: 'small',
   labelAlign: 'top',
+  initialValues: {
+    label: '上传',
+    props: {
+      action: 'https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15',
+      name: 'file',
+      multiple: true,
+      btnText: '点击上传',
+      limit: 3,
+      showFileList: true,
+      withCredentials: true,
+      listType: 'text'
+    }
+  },
   items: [
     { label: '标签', component: 'Input', name: 'label' },
     {
@@ -51,9 +64,9 @@ export default {
         mode: 'static',
         options: [
           { label: '文本', value: 'text' },
-          { label: '图片墙', value: 'picture-card' },
+          { label: '图片墙', value: 'picture-card' }
         ]
       }
-    },
+    }
   ]
 } satisfies FormSchema
