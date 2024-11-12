@@ -5,7 +5,7 @@ import attrSchema from './attrSchema'
 
 export default {
   title: '多行文本',
-  component:'TextArea',
+  component: 'TextArea',
   icon: h(Icon, { name: 'textarea' }),
   type: 'basic',
   order: 2,

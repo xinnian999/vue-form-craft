@@ -95,7 +95,7 @@ export default {
     },
     {
       label: '改进建议',
-      component: 'Textarea',
+      component: 'TextArea',
       props: {
         placeholder: '请留下您的建议'
       },

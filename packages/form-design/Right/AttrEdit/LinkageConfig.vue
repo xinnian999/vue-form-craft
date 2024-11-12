@@ -38,7 +38,7 @@ const locale = useLocale()
 
 const elements = useElements()
 
-const JsonEditor = elements.JsonEdit.component
+const JsonEditor = elements.JsonEdit.render
 
 const designInstance = useDesignInstance()
 

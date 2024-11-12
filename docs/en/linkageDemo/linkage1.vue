@@ -21,7 +21,7 @@ const schema = {
     },
     {
       label: '差评原因',
-      component: 'Textarea',
+      component: 'TextArea',
       props: {
         autocomplete: 'off',
         showWordLimit: true,

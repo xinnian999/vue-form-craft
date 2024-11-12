@@ -12,14 +12,6 @@ const useElements = (): Record<string, FormElement> => {
     Object.assign(FormElements, options.extendElements)
   }
 
-  // if (opts?.eager) {
-  //   return Object.entries(FormElements).reduce<UseElementRenders>((acc, [key, value]) => {
-  //     acc[key] = value.render
-
-  //     return acc
-  //   }, {})
-  // }
-
   return FormElements
 }
 

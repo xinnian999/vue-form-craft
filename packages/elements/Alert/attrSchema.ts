@@ -10,7 +10,7 @@ export default {
     { label: '标题', component: 'Input', name: 'props.title', initialValue: '提示信息' },
     {
       label: '描述',
-      component: 'Textarea',
+      component: 'TextArea',
       name: 'props.description',
       initialValue: '这是一个描述'
     },
