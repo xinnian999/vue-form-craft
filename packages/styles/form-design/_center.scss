@@ -23,7 +23,6 @@
       }
     }
 
-
     @include ns('canvas') {
       flex: 1;
       padding: 20px;
@@ -50,14 +49,7 @@
         height: 100%;
 
         &-ghost {
-          // border-top: 5px solid rgb(248, 47, 47);
-          list-style: none;
-          text-align: center;
-          margin: 5px 0;
-          border: 1px dashed #c0bdbd;
-          background-color: var(--el-color-primary-light-9);
-          border-radius: 7px;
-          padding: 10px 0;
+          @include ghost
         }
 
         .canvas-item {
@@ -176,6 +168,10 @@
 
           &-draggable {
             min-height: 150px;
+          }
+
+          &-ghost {
+            @include ghost
           }
         }
       }

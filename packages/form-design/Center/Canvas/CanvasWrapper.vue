@@ -11,7 +11,7 @@
       group="formDesign"
       itemKey="name"
       chosenClass="active"
-      ghost-class="ghost"
+      :ghost-class="ns('canvas-group-ghost')"
       :class="ns('canvas-group-draggable')"
       :animation="300"
       :style="style"

@@ -8,6 +8,16 @@ $namespace: 'vfc';
   }
 }
 
+@mixin ghost {
+  list-style: none;
+  text-align: center;
+  margin: 5px 0;
+  border: 1px dashed #c0bdbd;
+  background-color: var(--el-color-primary-light-9);
+  border-radius: 7px;
+  padding: 10px 0;
+}
+
 @import './form-render.scss';
 
 @import './icon-render.scss';
