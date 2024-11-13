@@ -1,7 +1,12 @@
 <template>
   <template v-if="formInstance.design || !hidden">
     <div v-if="config.type === 'layout'" :style="itemStyle">
-      <component :is="config.render" :name="name" :props="props" :children="children" />
+      <component :is="config.render" v-bind="props" :children="children" :props="props">
+        <CanvasWrapper :children="children!" v-if="formInstance.design" /> 
+        <template v-else>
+          <FormItem v-for="item in children" :key="item.name" v-bind="item" />
+        </template>
+      </component>
     </div>
 
     <el-form-item
@@ -68,6 +73,7 @@ import type { FormItemType } from '@vue-form-craft/types'
 import Icon from '@vue-form-craft/icons'
 import { useFormInstance } from '@vue-form-craft/hooks'
 import { useElements } from '@vue-form-craft/hooks'
+import { CanvasWrapper } from '@vue-form-craft/form-design'
 
 const thisProps = defineProps<FormItemType>()
 
@@ -147,7 +153,7 @@ const computeRules = computed(() => {
 
       return {}
     })
-    
+
     return [...ruleData, ...ruleParse]
   }
 

@@ -36,7 +36,7 @@ const gridStyle = computed(() => ({
 }))
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .form-item-grid {
   .el-form-item {
     margin-bottom: 0;

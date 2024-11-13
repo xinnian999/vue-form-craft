@@ -1,11 +1,11 @@
-import { defineAsyncComponent, h } from 'vue'
+import { h } from 'vue'
 import Icon from '@vue-form-craft/icons'
 import type { FormElement } from '@vue-form-craft/types'
 
 export default {
   title: '卡片',
   component: 'Card',
-  render: defineAsyncComponent(() => import('./Card.vue')),
+  render: 'ElCard',
   icon: h(Icon, { name: 'card' }),
   type: 'layout',
   order: 1,
