@@ -30,23 +30,31 @@
       position: relative;
       overflow-y: auto;
       overflow-x: hidden;
-      &-empty {
-        color: #999;
-        font-size: 18px;
-        width: 100%;
-        text-align: center;
-        position: absolute;
-        left: 0;
-        top: 40%;
-        transform: translateY(-50%);
-        &-ico {
-          font-size: 30px;
-          margin-bottom: 15px;
-        }
-      }
 
-      &-draggable {
+
+      @include ns('canvas-group') {
+        position: relative;
         height: 100%;
+
+        &-empty {
+          color: #999;
+          width: 100%;
+          text-align: center;
+          position: absolute;
+          left: 0;
+          top: 40%;
+          transform: translateY(-50%);
+          pointer-events: none;
+
+          &-ico {
+            margin-bottom: 5px;
+          }
+        }
+
+        &-draggable {
+          min-height: 150px;
+          height: 100%;
+        }
 
         &-ghost {
           @include ghost
@@ -148,31 +156,20 @@
           }
         }
 
-        @include ns('canvas-group') {
-          position: relative;
-          &-empty {
-            color: #999;
-            font-size: 12px;
-            width: 100%;
-            text-align: center;
-            position: absolute;
-            left: 0;
-            top: 40%;
-            transform: translateY(-50%);
-            pointer-events: none;
+      }
 
-            &-ico {
-              font-size: 15px;
-            }
-          }
-
-          &-draggable {
-            min-height: 150px;
-          }
-
-          &-ghost {
-            @include ghost
-          }
+      &-empty {
+        color: #999;
+        font-size: 18px;
+        width: 100%;
+        text-align: center;
+        position: absolute;
+        left: 0;
+        top: 40%;
+        transform: translateY(-50%);
+        &-ico {
+          font-size: 30px;
+          margin-bottom: 15px;
         }
       }
     }

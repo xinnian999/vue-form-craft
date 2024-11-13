@@ -1,11 +1,16 @@
 <template>
   <div :class="ns('canvas-group')">
-    <div :class="ns('canvas-group-empty')" v-if="!children.length">
+    <div
+      v-if="!children.length"
+      :class="ns('canvas-group-empty')"
+      :style="{ fontSize: emptySize + 'px' }"
+    >
       <div :class="ns('canvas-group-empty-ico')">
         <Icon name="add" />
       </div>
-      <p>{{ locale.canvas.wrapperEmptyTip }}</p>
+      <p>{{ emptyText }}</p>
     </div>
+
     <draggable
       :list="children"
       group="formDesign"
@@ -14,6 +19,8 @@
       :ghost-class="ns('canvas-group-ghost')"
       :class="ns('canvas-group-draggable')"
       :animation="300"
+      handle=".canvas-move"
+      force-fallback
       :style="style"
       @add="designInstance.onAdd"
     >
@@ -29,15 +36,21 @@ import Draggable from 'vuedraggable-es'
 import CanvasRender from './CanvasRender.vue'
 import Icon from '@vue-form-craft/icons'
 import type { FormItemType } from '@vue-form-craft/types'
-import { useDesignInstance, useLocale } from '@vue-form-craft/hooks'
+import { useDesignInstance } from '@vue-form-craft/hooks'
 import { ns } from '@vue-form-craft/utils'
 
-defineProps<{
-  children: FormItemType[],
-  style?: any
-}>()
+withDefaults(
+  defineProps<{
+    children: FormItemType[]
+    style?: any
+    emptyText?: string
+    emptySize?: number
+  }>(),
+  {
+    emptyText: '请拖入子字段',
+    emptySize: 12
+  }
+)
 
 const designInstance = useDesignInstance()
-
-const locale = useLocale()
 </script>

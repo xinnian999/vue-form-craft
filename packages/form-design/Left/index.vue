@@ -85,14 +85,22 @@ const useTemplate = (templateSchema: FormSchema) => {
 const onClone = (e: Record<string, any>) => {
   const source = cloneDeep(e.item.__draggable_context.element)
 
-  e.item.__draggable_context.element = {
-    component: source.component,
-    designKey: `design-${getRandomId(4)}`,
-    name: `form-${getRandomId(4)}`
-  }
+  if (source.render) {
+    e.item.__draggable_context.element = {
+      component: source.component,
+      designKey: `design-${getRandomId(4)}`,
+      name: `form-${getRandomId(4)}`
+    }
 
-  if (source.type === 'layout') {
-    e.item.__draggable_context.element.children = []
+    if (source.type === 'layout') {
+      e.item.__draggable_context.element.children = []
+    }
+  } else {
+    e.item.__draggable_context.element = {
+      ...source,
+      designKey: `design-${getRandomId(4)}`,
+      name: `form-${getRandomId(4)}`
+    }
   }
 }
 </script>
