@@ -1,30 +1,18 @@
 <template>
   <div class="form-item-inline">
-    <DefaultCanvasGroup
-      v-if="formInstance.design"
-      :children="children"
-      :style="InlineStyle"
-      title="行内布局"
-    />
-
-    <div v-else :style="InlineStyle">
-      <FormItem v-for="item in children" :key="item.name" v-bind="item" />
-    </div>
+    <LayoutRender :style="InlineStyle" :children="children" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, type StyleValue } from 'vue'
-import { FormItem, DefaultCanvasGroup } from '@vue-form-craft/components'
-import { useFormInstance } from '@vue-form-craft/hooks'
+import { LayoutRender } from '@vue-form-craft/components'
 import type { FormItemType } from '@vue-form-craft/types'
 
 const thisProps = defineProps<{
   props: Record<string, any>
   children: FormItemType[]
 }>()
-
-const formInstance = useFormInstance()
 
 const InlineStyle = computed<StyleValue>(() => ({
   width: '100%',
@@ -38,6 +26,7 @@ const InlineStyle = computed<StyleValue>(() => ({
 
 <style scoped lang="scss">
 .form-item-inline {
+  width: 100%;
   .el-form-item {
     margin-bottom: 0;
   }

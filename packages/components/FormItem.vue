@@ -1,18 +1,17 @@
 <template>
   <template v-if="formInstance.design || !hidden">
-    <div v-if="config.type === 'layout'" :style="itemStyle">
+    <div v-if="config.type === 'layout'" :class="[ns('form-item'), thisProps.class]" :style="style">
       <component :is="config.render" :children="children" :props="props" />
     </div>
 
     <el-form-item
       v-else
-      id="form-item"
-      :style="itemStyle"
+      :class="[ns('form-item'), thisProps.class]"
+      :style="style"
       :key="name"
       :prop="name"
       :label-width="hideLabel ? '0' : formInstance.schema.labelWidth"
       :rules="computeRules"
-      :class="thisProps.class"
     >
       <template #label v-if="!hideLabel">
         <div :class="ns('form-item-label')">
@@ -94,11 +93,6 @@ const value = computed({
     formInstance.updateFormValues(newValues)
   }
 })
-
-const itemStyle = computed(() => ({
-  marginBottom: formInstance.design ? 0 : '18px',
-  ...thisProps.style
-}))
 
 const computeRules = computed(() => {
   const { rules, required, component } = thisProps

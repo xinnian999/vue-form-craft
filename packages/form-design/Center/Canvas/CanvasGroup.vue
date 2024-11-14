@@ -17,11 +17,11 @@
       itemKey="name"
       chosenClass="active"
       :ghost-class="ns('canvas-group-ghost')"
-      :class="ns('canvas-group-draggable')"
+      :class="[ns('canvas-group-draggable'), props.class]"
+      :style="style"
       :animation="300"
       handle=".canvas-move"
       force-fallback
-      :style="style"
       @add="designInstance.onAdd"
     >
       <template #item="{ element: child }">
@@ -39,10 +39,11 @@ import type { FormItemType } from '@vue-form-craft/types'
 import { useDesignInstance } from '@vue-form-craft/hooks'
 import { ns } from '@vue-form-craft/utils'
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     children: FormItemType[]
     style?: any
+    class?: string
     emptyText?: string
     emptySize?: number
   }>(),

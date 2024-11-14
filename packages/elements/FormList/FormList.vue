@@ -1,11 +1,6 @@
 <template>
   <div class="vfc-formList">
-    <DefaultCanvasGroup
-      v-if="formInstance.design"
-      :children="children"
-      title="自增容器"
-      :name="name"
-    />
+    <LayoutRender v-if="formInstance.design" :children="children" class="layoutRender" />
 
     <div v-else>
       <template v-if="mode === 'inline'">
@@ -111,7 +106,7 @@
 
 <script setup lang="ts">
 import { computed, h, watch } from 'vue'
-import { FormItem, DefaultCanvasGroup } from '@vue-form-craft/components'
+import { FormItem, LayoutRender } from '@vue-form-craft/components'
 import { deepParse } from '@vue-form-craft/utils'
 import { isEqual, isString, pickBy } from 'lodash'
 import type { FormItemType } from '@vue-form-craft/types'
@@ -239,6 +234,11 @@ watch(list, (newVal, oldVal) => {
   }
   .list-btn.addBtn {
     margin-left: 0;
+  }
+
+  .layoutRender{
+    border: 2px dashed var(--el-color-primary);
+    padding: 5px;
   }
 }
 </style>

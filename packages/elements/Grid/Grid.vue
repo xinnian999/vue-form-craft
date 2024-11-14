@@ -1,30 +1,18 @@
 <template>
   <div class="form-item-grid">
-    <DefaultCanvasGroup
-      v-if="formInstance.design"
-      :children="children"
-      :style="gridStyle"
-      title="栅格布局"
-    />
-
-    <div v-else :style="gridStyle">
-      <FormItem v-for="item in children" :key="item.name" v-bind="item" />
-    </div>
+    <LayoutRender :style="gridStyle" :children="children" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { FormItem, DefaultCanvasGroup } from '@vue-form-craft/components'
+import { LayoutRender } from '@vue-form-craft/components'
 import type { FormItemType } from '@vue-form-craft/types'
-import { useFormInstance } from '@vue-form-craft/hooks'
 
 const thisProps = defineProps<{
   props: Record<string, any>
   children: FormItemType[]
 }>()
-
-const formInstance = useFormInstance()
 
 const gridStyle = computed(() => ({
   display: 'grid',
@@ -36,6 +24,7 @@ const gridStyle = computed(() => ({
 
 <style lang="scss">
 .form-item-grid {
+  width: 100%;
   .el-form-item {
     margin-bottom: 0;
   }

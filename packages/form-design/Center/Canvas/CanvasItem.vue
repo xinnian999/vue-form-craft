@@ -22,7 +22,11 @@
       >
         <Icon :name="icon" />
       </li>
-    </ul>
+    </ul> 
+
+    <div class="layout-title" v-if="config.type==='layout'">
+      {{ config.title }}
+    </div>
 
     <form-item v-bind="data" :props="checkProps(data.props)" />
   </div>
@@ -33,13 +37,17 @@ import { computed } from 'vue'
 import { omit } from 'lodash'
 import { FormItem } from '@vue-form-craft/components'
 import type { FormItemType } from '@vue-form-craft/types'
-import { useDesignInstance } from '@vue-form-craft/hooks'
+import { useDesignInstance, useElements } from '@vue-form-craft/hooks'
 import Icon from '@vue-form-craft/icons'
 import { ns } from '@vue-form-craft/utils'
 
 const props = defineProps<{ data: FormItemType }>()
 
 const designInstance = useDesignInstance()
+
+const elements = useElements()
+
+const config= elements[props.data.component]
 
 const canvasItemClass = computed(() => ({
   [ns('canvas-item')]: true,

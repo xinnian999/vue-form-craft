@@ -1,4 +1,6 @@
 @include ns('form-item') {
+  margin-bottom: 18px;
+
   &-label {
     display: inline-flex;
     position: relative;
@@ -18,4 +20,8 @@
       margin-left: 3px;
     }
   }
+}
+
+@include ns('form-item-layout') {
+  margin-bottom: 18px;
 }
