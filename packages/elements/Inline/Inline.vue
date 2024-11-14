@@ -1,11 +1,10 @@
 <template>
   <div class="form-item-inline">
-    <DefaultCanvasWrapper
+    <DefaultCanvasGroup
       v-if="formInstance.design"
       :children="children"
       :style="InlineStyle"
       title="行内布局"
-      :name="name"
     />
 
     <div v-else :style="InlineStyle">
@@ -16,12 +15,11 @@
 
 <script setup lang="ts">
 import { computed, type StyleValue } from 'vue'
-import { FormItem, DefaultCanvasWrapper } from '@vue-form-craft/components'
+import { FormItem, DefaultCanvasGroup } from '@vue-form-craft/components'
 import { useFormInstance } from '@vue-form-craft/hooks'
 import type { FormItemType } from '@vue-form-craft/types'
 
 const thisProps = defineProps<{
-  name: string
   props: Record<string, any>
   children: FormItemType[]
 }>()

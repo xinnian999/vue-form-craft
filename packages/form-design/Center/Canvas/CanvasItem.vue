@@ -35,13 +35,14 @@ import { FormItem } from '@vue-form-craft/components'
 import type { FormItemType } from '@vue-form-craft/types'
 import { useDesignInstance } from '@vue-form-craft/hooks'
 import Icon from '@vue-form-craft/icons'
+import { ns } from '@vue-form-craft/utils'
 
 const props = defineProps<{ data: FormItemType }>()
 
 const designInstance = useDesignInstance()
 
 const canvasItemClass = computed(() => ({
-  'canvas-item': true,
+  [ns('canvas-item')]: true,
   active: props.data.designKey === designInstance.current?.designKey,
   hover: props.data.designKey === designInstance.hoverKey,
   mask: props.data.designKey === designInstance.hoverKey && !props.data.children

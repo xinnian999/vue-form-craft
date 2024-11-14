@@ -1,3 +1,3 @@
 export { default } from './index.vue'
 
-export { default as CanvasWrapper } from './Center/Canvas/CanvasWrapper.vue'
+export { default as CanvasGroup } from './Center/Canvas/CanvasGroup.vue'

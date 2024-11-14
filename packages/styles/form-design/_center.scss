@@ -31,7 +31,6 @@
       overflow-y: auto;
       overflow-x: hidden;
 
-
       @include ns('canvas-group') {
         position: relative;
         height: 100%;
@@ -57,119 +56,109 @@
         }
 
         &-ghost {
-          @include ghost
-        }
-
-        .canvas-item {
-          border: 2px solid transparent;
-          margin-bottom: 5px;
-          padding: 10px;
-          position: relative;
-          z-index: 2;
-          &::before {
-            content: '';
-            z-index: -1;
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            left: 0;
-            top: 0;
-            border: 1px dashed #c0bdbd;
-          }
-
-          .actions-lt {
-            position: absolute;
-            left: -1px;
-            top: -1px;
-            z-index: 20;
-            background-color: var(--el-color-primary);
-            .canvas-move {
-              font-size: 16px;
-              box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
-              color: #fff;
-              padding: 3px 11px;
-              display: flex;
-              cursor: pointer;
-              &:hover {
-                opacity: 0.7;
-              }
-            }
-          }
-
-          .hidden-ico {
-            position: absolute;
-            right: 0;
-            top: 0;
-            z-index: 10;
-            padding: 0px 5px;
-            font-size: 13px;
-            background-color: var(--el-color-primary);
-            color: #fff;
-          }
-
-          .actions-rb {
-            position: absolute;
-            right: 0;
-            bottom: -1px;
-            z-index: 20;
-            color: #fff;
-            list-style: none;
-            padding: 1px;
-            display: flex;
-
-            &-item {
-              padding: 4px;
-              background-color: var(--el-color-primary);
-              border-radius: 3px;
-              cursor: pointer;
-              font-size: 12px;
-              margin-left: 3px;
-              box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
-              display: flex;
-            }
-          }
-        }
-
-        .canvas-item.hover {
-          border: 2px solid var(--el-color-primary-light-5);
+          list-style: none;
+          text-align: center;
+          margin: 5px 0;
+          border: 1px dashed #c0bdbd;
           background-color: var(--el-color-primary-light-9);
+          border-radius: 7px;
+          padding: 10px 0;
         }
-
-        .canvas-item.mask {
-          &::before {
-            position: absolute;
-            height: 100%;
-            width: 100%;
-            left: 0;
-            top: 0;
-            content: '';
-            background-color: transparent;
-            z-index: 15;
-          }
-        }
-
-        .canvas-item.active {
-          border: 2px solid var(--el-color-primary) !important;
-
-          &:hover {
-            border: 2px solid var(--el-color-primary) !important;
-          }
-        }
-
       }
 
-      &-empty {
-        color: #999;
-        font-size: 18px;
-        width: 100%;
-        text-align: center;
-        position: absolute;
-        left: 0;
-        top: 40%;
-        transform: translateY(-50%);
-        &-ico {
-          font-size: 30px;
-          margin-bottom: 15px;
+      @include ns('canvas-item') {
+        border: 2px solid transparent;
+        margin-bottom: 5px;
+        padding: 10px;
+        position: relative;
+        z-index: 2;
+        &::before {
+          content: '';
+          z-index: -1;
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          left: 0;
+          top: 0;
+          border: 1px dashed #c0bdbd;
+        }
+
+        .actions-lt {
+          position: absolute;
+          left: -1px;
+          top: -1px;
+          z-index: 20;
+          background-color: var(--el-color-primary);
+          .canvas-move {
+            font-size: 16px;
+            box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+            color: #fff;
+            padding: 3px 11px;
+            display: flex;
+            cursor: pointer;
+            &:hover {
+              opacity: 0.7;
+            }
+          }
+        }
+
+        .hidden-ico {
+          position: absolute;
+          right: 0;
+          top: 0;
+          z-index: 10;
+          padding: 0px 5px;
+          font-size: 13px;
+          background-color: var(--el-color-primary);
+          color: #fff;
+        }
+
+        .actions-rb {
+          position: absolute;
+          right: 0;
+          bottom: -1px;
+          z-index: 20;
+          color: #fff;
+          list-style: none;
+          padding: 1px;
+          display: flex;
+
+          &-item {
+            padding: 4px;
+            background-color: var(--el-color-primary);
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 3px;
+            box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+            display: flex;
+          }
+        }
+      }
+
+      @include ns('canvas-item.hover') {
+        border: 2px solid var(--el-color-primary-light-5);
+        background-color: var(--el-color-primary-light-9);
+      }
+
+      @include ns('canvas-item.mask') {
+        &::before {
+          position: absolute;
+          height: 100%;
+          width: 100%;
+          left: 0;
+          top: 0;
+          content: '';
+          background-color: transparent;
+          z-index: 15;
+        }
+      }
+
+      @include ns('canvas-item.active') {
+        border: 2px solid var(--el-color-primary) !important;
+
+        &:hover {
+          border: 2px solid var(--el-color-primary) !important;
         }
       }
     }

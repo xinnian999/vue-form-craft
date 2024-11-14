@@ -1,11 +1,10 @@
 <template>
   <div class="form-item-grid">
-    <DefaultCanvasWrapper
+    <DefaultCanvasGroup
       v-if="formInstance.design"
       :children="children"
       :style="gridStyle"
       title="栅格布局"
-      :name="name"
     />
 
     <div v-else :style="gridStyle">
@@ -16,14 +15,13 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { FormItem, DefaultCanvasWrapper } from '@vue-form-craft/components'
+import { FormItem, DefaultCanvasGroup } from '@vue-form-craft/components'
 import type { FormItemType } from '@vue-form-craft/types'
 import { useFormInstance } from '@vue-form-craft/hooks'
 
 const thisProps = defineProps<{
   props: Record<string, any>
   children: FormItemType[]
-  name: string
 }>()
 
 const formInstance = useFormInstance()

@@ -1,6 +1,6 @@
 <template>
   <div class="vfc-formList">
-    <DefaultCanvasWrapper
+    <DefaultCanvasGroup
       v-if="formInstance.design"
       :children="children"
       title="自增容器"
@@ -111,7 +111,7 @@
 
 <script setup lang="ts">
 import { computed, h, watch } from 'vue'
-import { FormItem, DefaultCanvasWrapper } from '@vue-form-craft/components'
+import { FormItem, DefaultCanvasGroup } from '@vue-form-craft/components'
 import { deepParse } from '@vue-form-craft/utils'
 import { isEqual, isString, pickBy } from 'lodash'
 import type { FormItemType } from '@vue-form-craft/types'

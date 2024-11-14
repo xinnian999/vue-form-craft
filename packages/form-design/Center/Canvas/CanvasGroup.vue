@@ -25,7 +25,7 @@
       @add="designInstance.onAdd"
     >
       <template #item="{ element: child }">
-        <CanvasRender v-if="child.designKey" :data="child" />
+        <CanvasItem v-if="child.designKey" :data="child" />
       </template>
     </draggable>
   </div>
@@ -33,7 +33,7 @@
 
 <script setup lang="ts">
 import Draggable from 'vuedraggable-es'
-import CanvasRender from './CanvasRender.vue'
+import CanvasItem from './CanvasItem.vue'
 import Icon from '@vue-form-craft/icons'
 import type { FormItemType } from '@vue-form-craft/types'
 import { useDesignInstance } from '@vue-form-craft/hooks'

@@ -1,16 +1,15 @@
 <template>
   <div id="DefaultCanvasWrapper">
-    <div class="title">【{{ title }}】 {{ name }}</div>
-    <CanvasWrapper :children="children" :style="style" />
+    <div class="title">【{{ title }}】</div>
+    <CanvasGroup :children="children" :style="style" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { CanvasWrapper } from '@vue-form-craft/form-design'
+import { CanvasGroup } from '@vue-form-craft/form-design'
 import type { FormItemType } from '@vue-form-craft/types';
 
 defineProps<{
-  name: string,
   style?: any,
   children: FormItemType[],
   title: string
