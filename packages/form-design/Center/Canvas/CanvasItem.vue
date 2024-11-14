@@ -5,7 +5,10 @@
     @mousemove.stop="handleHoverEnter"
     @mouseleave.stop="handleHoverLeave"
   >
-    <div class="actions-lt" v-if="data.designKey === designInstance.current?.designKey">
+    <div
+      class="actions-lt"
+      v-if="data.designKey === designInstance.current?.designKey"
+    >
       <div class="canvas-move" size="small" type="primary">
         <Icon name="move" />
       </div>
@@ -16,15 +19,19 @@
     <ul class="actions-rb" v-if="data.designKey === designInstance.current?.designKey">
       <li
         class="actions-rb-item"
-        v-for="{ icon, handle } in rightBottomActions"
+        v-for="{ icon, handle, bg } in rightBottomActions"
         @click.stop="handle(data)"
         :key="icon"
+        :style="{ backgroundColor: bg }"
       >
         <Icon :name="icon" />
       </li>
-    </ul> 
+    </ul>
 
-    <div class="layout-title" v-if="config.type==='layout'">
+    <div
+      class="layout-title"
+      v-if="config.type === 'layout' && designInstance.currentKey === data.designKey"
+    >
       {{ config.title }}
     </div>
 
@@ -47,7 +54,7 @@ const designInstance = useDesignInstance()
 
 const elements = useElements()
 
-const config= elements[props.data.component]
+const config = elements[props.data.component]
 
 const canvasItemClass = computed(() => ({
   [ns('canvas-item')]: true,
@@ -78,6 +85,7 @@ const rightBottomActions = [
   },
   {
     icon: 'delete',
+    bg: 'var(--el-color-danger)',
     handle: designInstance.handleDeleteItem
   }
 ]
@@ -85,5 +93,4 @@ const rightBottomActions = [
 const checkProps = (props: Record<string, any> = {}) => {
   return omit(props, ['multiple', 'api'])
 }
-
 </script>

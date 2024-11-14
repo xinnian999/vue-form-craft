@@ -83,7 +83,7 @@ watch(
 
 watch(initialValues, async (newVal) => {
   await nextTick()
-  formValues.value = merge(formValues.value, newVal)
+  formValues.value = merge(newVal, formValues.value)
 })
 
 const validate: FormInstance['validate'] = () => formRef.value?.validate()

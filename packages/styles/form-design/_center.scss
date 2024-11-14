@@ -25,6 +25,7 @@
       overflow: hidden;
       background-color: #fff;
       border-radius: 5px;
+      padding: 5px 0;
 
       @include ns('canvas-group') {
         position: relative;
@@ -132,6 +133,9 @@
             margin-left: 3px;
             box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
             display: flex;
+            &:hover{
+              opacity: 0.7;
+            }
           }
         }
 

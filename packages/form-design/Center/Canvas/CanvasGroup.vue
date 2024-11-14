@@ -1,5 +1,5 @@
 <template>
-  <div :class="ns('canvas-group')">
+  <div :class="ns('canvas-group')" :style="{ overflow: children.length ? 'auto' : 'hidden' }">
     <div
       v-if="!children.length"
       :class="ns('canvas-group-empty')"

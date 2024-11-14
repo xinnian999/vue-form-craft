@@ -79,7 +79,7 @@ const instance: DesignInstance = reactive({
   updateHoverKey: (key: string) => (hoverKey.value = key),
   updateSchema: (schema: FormSchema) => {
     Object.assign(currentSchema.value, schema)
-    currentKey.value = ''
+    // currentKey.value = ''
   },
   onAdd: (e: Record<string, any>) => {
     const source = e.item.__draggable_context.element
