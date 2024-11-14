@@ -15,7 +15,6 @@
       :list="children"
       group="formDesign"
       itemKey="name"
-      chosenClass="active"
       :ghost-class="ns('canvas-group-ghost')"
       :class="[ns('canvas-group-draggable'), props.class]"
       :style="style"

@@ -5,10 +5,7 @@
     @mousemove.stop="handleHoverEnter"
     @mouseleave.stop="handleHoverLeave"
   >
-    <div
-      class="actions-lt"
-      v-if="data.designKey === designInstance.current?.designKey"
-    >
+    <div class="actions-lt" v-if="data.designKey === designInstance.current?.designKey">
       <div class="canvas-move" size="small" type="primary">
         <Icon name="move" />
       </div>
@@ -35,13 +32,12 @@
       {{ config.title }}
     </div>
 
-    <form-item v-bind="data" :props="checkProps(data.props)" />
+    <form-item v-bind="data" :props="data.props" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { omit } from 'lodash'
 import { FormItem } from '@vue-form-craft/components'
 import type { FormItemType } from '@vue-form-craft/types'
 import { useDesignInstance, useElements } from '@vue-form-craft/hooks'
@@ -56,12 +52,14 @@ const elements = useElements()
 
 const config = elements[props.data.component]
 
-const canvasItemClass = computed(() => ({
-  [ns('canvas-item')]: true,
-  active: props.data.designKey === designInstance.current?.designKey,
-  hover: props.data.designKey === designInstance.hoverKey,
-  mask: props.data.designKey === designInstance.hoverKey && !props.data.children
-}))
+const canvasItemClass = computed(() => {
+  return {
+    [ns('canvas-item')]: true,
+    active: props.data.designKey === designInstance.current?.designKey,
+    hover: props.data.designKey === designInstance.hoverKey,
+    mask: props.data.designKey === designInstance.hoverKey && !props.data.children
+  }
+})
 
 const handleHoverEnter = () => {
   if (props.data.designKey) {
@@ -89,8 +87,4 @@ const rightBottomActions = [
     handle: designInstance.handleDeleteItem
   }
 ]
-
-const checkProps = (props: Record<string, any> = {}) => {
-  return omit(props, ['multiple', 'api'])
-}
 </script>

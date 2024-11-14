@@ -16,9 +16,9 @@ const thisProps = defineProps<{
 
 const gridStyle = computed(() => ({
   display: 'grid',
-  'grid-template-columns': `repeat(${thisProps.props.columns}, 1fr)`,
-  'row-gap': thisProps.props['row-gap'] + 'px',
-  'column-gap': thisProps.props['column-gap'] + 'px'
+  'grid-template-columns': `repeat(${thisProps.props?.columns}, 1fr)`,
+  'row-gap': thisProps.props?.['row-gap'] + 'px',
+  'column-gap': thisProps.props?.['column-gap'] + 'px'
 }))
 </script>
 

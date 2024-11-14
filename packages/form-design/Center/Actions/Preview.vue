@@ -35,7 +35,7 @@
 
       <el-tab-pane label="联动变量" name="context">
         <p>实时预览的联动变量，在JsonSchema中可以通过双大括号模版语法使用，用于触发各种联动</p>
-        <JsonEdit.component v-model="context" style="height: 60vh" :key="tabKey" />
+        <JsonEdit.render v-model="context" style="height: 60vh" :key="tabKey" />
       </el-tab-pane>
     </el-tabs>
   </el-dialog>
