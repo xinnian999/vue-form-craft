@@ -8,18 +8,18 @@
 
 <script setup lang="ts">
 import { ref, provide, computed, reactive, toRefs } from 'vue'
-import { ns, recursionDelete } from '@vue-form-craft/utils'
+import { ns } from '@vue-form-craft/utils'
 import Left from './Left/index.vue'
 import Center from './Center/index.vue'
 import Right from './Right/index.vue'
-import { getCurrentByKey, setCurrentByKey, copyItems } from '@vue-form-craft/utils'
+import { getCurrentByKey, setCurrentByKey } from '@vue-form-craft/utils'
 import { $designInstance } from '@vue-form-craft/config'
 import type {
   FormSchema,
   FormItemType,
-  FormElement,
   FormDesignProps,
-  DesignInstance
+  DesignInstance,
+  FormElement
 } from '@vue-form-craft/types'
 
 const props = withDefaults(defineProps<FormDesignProps>(), {
@@ -28,15 +28,13 @@ const props = withDefaults(defineProps<FormDesignProps>(), {
   schemaContext: () => ({})
 })
 
-const emit = defineEmits<{
+const emits = defineEmits<{
   onSave: []
   save: []
   add: [element: FormElement]
 }>()
 
 const currentKey = ref('')
-
-const hoverKey = ref('')
 
 const currentSchema = defineModel<FormSchema>({
   default: reactive({
@@ -67,39 +65,28 @@ const current = computed({
   }
 })
 
-const instance: DesignInstance = reactive({
+const instance = reactive<DesignInstance>({
   ...toRefs(props),
   currentKey,
-  hoverKey,
+  hoverKey: '',
   schema: currentSchema,
   current,
   list,
   rightTab: 'form',
-  updateCurrent: (data: FormItemType) => (current.value = data),
-  updateHoverKey: (key: string) => (hoverKey.value = key),
-  updateSchema: (schema: FormSchema) => {
+  updateCurrent(newCurrent) {
+    instance.current = newCurrent
+  },
+  updateHoverKey(key) {
+    instance.hoverKey = key
+  },
+  updateSchema: (schema) => {
     Object.assign(currentSchema.value, schema)
   },
-  onAdd: (e: Record<string, any>) => {
-    const source = e.item.__draggable_context.element
-
-    current.value = getCurrentByKey(list.value, source.designKey)!
-
-    hoverKey.value = source.designKey
-
-    instance.rightTab = 'attr'
-
-    emit('add', source)
+  updateList: (newList) => {
+    list.value = newList
   },
-  handleDeleteItem: (element: FormItemType) => {
-    list.value = recursionDelete(list.value, (item) => item.designKey !== element.designKey)
-  },
-  handleCopyItem: (element: FormItemType) => {
-    list.value = copyItems(list.value, element.designKey!)
-  },
-  handleSave: () => {
-    emit('onSave')
-    emit('save')
+  handleEmit: (name, params) => {
+    emits(name, params)
   }
 })
 

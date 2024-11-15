@@ -42,7 +42,7 @@ import { FormItem } from '@vue-form-craft/components'
 import type { FormItemType } from '@vue-form-craft/types'
 import { useDesignInstance, useElements } from '@vue-form-craft/hooks'
 import Icon from '@vue-form-craft/icons'
-import { ns } from '@vue-form-craft/utils'
+import { copyItems, ns, recursionDelete } from '@vue-form-craft/utils'
 
 const props = defineProps<{ data: FormItemType }>()
 
@@ -79,12 +79,21 @@ const handleSelect = (element: FormItemType) => {
 const rightBottomActions = [
   {
     icon: 'copy',
-    handle: designInstance.handleCopyItem
+    handle: (element: FormItemType) => {
+      const newList = copyItems(designInstance.list, element.designKey!)
+      designInstance.updateList(newList)
+    }
   },
   {
     icon: 'delete',
     bg: 'var(--el-color-danger)',
-    handle: designInstance.handleDeleteItem
+    handle: (element: FormItemType) => {
+      const newList = recursionDelete(
+        designInstance.list,
+        (item) => item.designKey !== element.designKey
+      )
+      designInstance.updateList(newList)
+    }
   }
 ]
 </script>

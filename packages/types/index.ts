@@ -1,5 +1,5 @@
 import type { FormValidationResult } from 'element-plus'
-import type { Component, Ref, VNode } from 'vue'
+import type { Component, Ref, ToRefs, VNode } from 'vue'
 
 export type FormRule = {
   type: 'email' | 'url' | 'custom' | string
@@ -165,18 +165,16 @@ export interface FormDesignProps {
   omitMenus?: string[]
 }
 
-export interface DesignInstance extends Required<FormDesignProps> {
-  currentKey: string
+export interface DesignInstance extends Required<ToRefs<FormDesignProps>> {
+  currentKey: Ref<string>
   hoverKey: string
-  schema: FormSchema
-  list: FormItemType[]
-  current: FormItemType | null
+  schema: Ref<FormSchema>
+  list: Ref<FormItemType[]>
+  current: Ref<FormItemType | null>
   rightTab: 'attr' | 'form'
-  onAdd: (params: Record<string, any>) => void
-  handleDeleteItem: (element: FormItemType) => void
-  handleCopyItem: (element: FormItemType) => void
-  handleSave: () => void
   updateCurrent: (current: FormItemType) => void
   updateHoverKey: (key: string) => void
   updateSchema: (schema: FormSchema) => void
+  updateList: (newList: FormItemType[]) => void
+  handleEmit: (event: any, ...args: any[]) => void
 }

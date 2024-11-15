@@ -21,7 +21,7 @@
       :animation="300"
       handle=".canvas-move"
       force-fallback
-      @add="designInstance.onAdd"
+      @add="onAdd"
     >
       <template #item="{ element: child }">
         <CanvasItem v-if="child.designKey" :data="child" />
@@ -36,7 +36,7 @@ import CanvasItem from './CanvasItem.vue'
 import Icon from '@vue-form-craft/icons'
 import type { FormItemType } from '@vue-form-craft/types'
 import { useDesignInstance } from '@vue-form-craft/hooks'
-import { ns } from '@vue-form-craft/utils'
+import { getCurrentByKey, ns } from '@vue-form-craft/utils'
 
 const props = withDefaults(
   defineProps<{
@@ -53,4 +53,16 @@ const props = withDefaults(
 )
 
 const designInstance = useDesignInstance()
+
+const onAdd = (e: Record<string, any>) => {
+  const source = e.item.__draggable_context.element
+
+  designInstance.updateCurrent(getCurrentByKey(designInstance.list, source.designKey)!)
+
+  designInstance.hoverKey = source.designKey
+
+  designInstance.rightTab = 'attr'
+
+  designInstance.handleEmit('add', source)
+}
 </script>

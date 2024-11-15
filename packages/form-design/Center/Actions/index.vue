@@ -99,7 +99,10 @@ const rightActions: PreviewAction[] = [
     label: locale.value.actions.save,
     icon: 'save',
     btnType: 'primary',
-    onClick: designInstance.handleSave
+    onClick: () => {
+      designInstance.handleEmit('save')
+      designInstance.handleEmit('onSave')
+    }
   }
 ]
 </script>
