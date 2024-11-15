@@ -15,8 +15,8 @@ export default {
     initialValues: {
       props: {
         columns: 2,
-        'column-gap': 20,
-        'row-gap': 20
+        columnGap: 20,
+        rowGap: 20
       }
     },
     items: [
@@ -25,10 +25,10 @@ export default {
       {
         label: '列间距',
         component: 'InputNumber',
-        name: 'props.column-gap',
+        name: 'props.columnGap',
         props: { unit: 'px' }
       },
-      { label: '行间距', component: 'InputNumber', name: 'props.row-gap', props: { unit: 'px' } }
+      { label: '行间距', component: 'InputNumber', name: 'props.rowGap', props: { unit: 'px' } }
     ]
   }
 } satisfies FormElement

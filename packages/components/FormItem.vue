@@ -1,7 +1,7 @@
 <template>
   <template v-if="formInstance.design || !hidden">
     <div v-if="config.type === 'layout'" :class="[ns('form-item'), thisProps.class]" :style="style">
-      <component :is="config.render" :children="children" :props="props" />
+      <component :is="config.render" :children="children" v-bind="formItemProps" />
     </div>
 
     <el-form-item

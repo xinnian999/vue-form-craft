@@ -9,18 +9,20 @@ import { computed, type StyleValue } from 'vue'
 import { FormItemGroup } from '@vue-form-craft/components'
 import type { FormItemType } from '@vue-form-craft/types'
 
-const thisProps = defineProps<{
-  props: Record<string, any>
+const props = defineProps<{
   children: FormItemType[]
+  align: 'center' | 'flex-start' | 'flex-end' | 'space-between' | 'space-around' | 'space-evenly'
+  autoWrap: boolean
+  gap: number
 }>()
 
 const InlineStyle = computed<StyleValue>(() => ({
   width: '100%',
   display: 'flex',
-  'justify-content': thisProps.props.align,
-  'flex-wrap': thisProps.props.autoWrap ? 'wrap' : 'nowrap',
+  'justify-content': props.align,
+  'flex-wrap': props.autoWrap ? 'wrap' : 'nowrap',
   'overflow-x': 'auto',
-  gap: `${thisProps.props.gap}px`
+  gap: `${props.gap}px`
 }))
 </script>
 

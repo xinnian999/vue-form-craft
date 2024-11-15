@@ -1,5 +1,5 @@
 <template>
-  <ElCollapse v-bind="props" v-model="activeKey">
+  <ElCollapse v-bind="$attrs" v-model="activeKey">
     <ElCollapseItem v-for="item in children" :key="item.name" :name="item.name">
       <template #title>
         <Title :title="item.title" italic type="h4" />
@@ -14,24 +14,30 @@
 import { onMounted, ref, watch } from 'vue'
 import { FormItemGroup } from '@vue-form-craft/components'
 import Title from '../Title/Title.vue'
-import type { CollapseItem } from '@vue-form-craft/types'
+import type { FormItemType } from '@vue-form-craft/types'
 
-const thisProps = defineProps<{
-  props: Record<string, any>
+type CollapseItem = {
+  title: string
+  name: string
+  checked?: boolean
+  children?: FormItemType[]
+}
+
+const props = defineProps<{
   children: CollapseItem[]
 }>()
 
 const activeKey = ref<string[]>([])
 
 onMounted(() => {
-  activeKey.value = thisProps.children.filter((item) => item.checked).map((item) => item.name)
+  activeKey.value = props.children.filter((item) => item.checked).map((item) => item.name)
 })
 
 // 补children
 watch(
-  () => thisProps.children,
+  () => props.children,
   () => {
-    thisProps.children.forEach((item) => {
+    props.children.forEach((item) => {
       if (!item.children) {
         item.children = []
       }

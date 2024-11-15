@@ -1,5 +1,5 @@
 <template>
-  <ElCard v-bind="props">
+  <ElCard v-bind="$attrs">
     <FormItemGroup :children="children" />
   </ElCard>
 </template>
@@ -9,7 +9,6 @@ import { FormItemGroup } from '@vue-form-craft/components'
 import type { FormItemType } from '@vue-form-craft/types'
 
 defineProps<{
-  props: Record<string, any>
   children: FormItemType[]
 }>()
  

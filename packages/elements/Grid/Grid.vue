@@ -9,16 +9,18 @@ import { computed } from 'vue'
 import { FormItemGroup } from '@vue-form-craft/components'
 import type { FormItemType } from '@vue-form-craft/types'
 
-const thisProps = defineProps<{
-  props: Record<string, any>
+const props = defineProps<{
   children: FormItemType[]
+  columns: number
+  rowGap: number
+  columnGap: number
 }>()
 
 const gridStyle = computed(() => ({
   display: 'grid',
-  'grid-template-columns': `repeat(${thisProps.props?.columns}, 1fr)`,
-  'row-gap': thisProps.props?.['row-gap'] + 'px',
-  'column-gap': thisProps.props?.['column-gap'] + 'px'
+  'grid-template-columns': `repeat(${props.columns}, 1fr)`,
+  'row-gap': props.rowGap + 'px',
+  'column-gap': props.columnGap + 'px'
 }))
 </script>
 

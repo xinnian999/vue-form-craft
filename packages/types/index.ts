@@ -123,13 +123,6 @@ export type Locale = {
   }
 }
 
-export type CollapseItem = {
-  title: string
-  name: string
-  checked?: boolean
-  children?: FormItemType[]
-}
-
 export type Options = {
   request?: (options: Record<string, any>) => Promise<Record<string, any>>
   extendElements?: Record<string, FormElement>
