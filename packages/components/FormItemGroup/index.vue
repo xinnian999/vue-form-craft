@@ -6,10 +6,10 @@
 </template>
 
 <script setup lang="ts">
-import { FormItem } from '@vue-form-craft/components'
-import { CanvasGroup } from '@vue-form-craft/components'
 import type { FormItemType } from '@vue-form-craft/types'
 import { useFormInstance } from '@vue-form-craft/hooks'
+import CanvasGroup from './CanvasGroup.vue'
+import FormItem from './FormItem.vue'
 
 defineProps<{
   list: FormItemType[]
