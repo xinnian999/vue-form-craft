@@ -1,7 +1,7 @@
 <template>
-  <div :class="ns('canvas-group')" :style="{ overflow: children.length ? 'auto' : 'hidden' }">
+  <div :class="ns('canvas-group')" :style="{ overflow: list.length ? 'auto' : 'hidden' }">
     <div
-      v-if="!children.length"
+      v-if="!list.length"
       :class="ns('canvas-group-empty')"
       :style="{ fontSize: emptySize + 'px' }"
     >
@@ -12,7 +12,7 @@
     </div>
 
     <draggable
-      :list="children"
+      :list="list"
       group="formDesign"
       itemKey="name"
       :ghost-class="ns('canvas-group-ghost')"
@@ -40,7 +40,7 @@ import { getCurrentByKey, ns } from '@vue-form-craft/utils'
 
 const props = withDefaults(
   defineProps<{
-    children: FormItemType[]
+    list: FormItemType[]
     style?: any
     class?: string
     emptyText?: string

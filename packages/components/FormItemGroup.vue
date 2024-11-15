@@ -1,7 +1,7 @@
 <template>
-  <CanvasGroup v-if="formInstance.design" :children="children" />
+  <CanvasGroup v-if="formInstance.design" :list="list" />
   <div v-else>
-    <FormItem v-for="item in children" :key="item.name" v-bind="item" />
+    <FormItem v-for="item in list" :key="item.name" v-bind="item" />
   </div>
 </template>
 
@@ -12,7 +12,7 @@ import type { FormItemType } from '@vue-form-craft/types'
 import { useFormInstance } from '@vue-form-craft/hooks'
 
 defineProps<{
-  children: FormItemType[]
+  list: FormItemType[]
 }>()
 
 const formInstance = useFormInstance()

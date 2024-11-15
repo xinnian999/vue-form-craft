@@ -1,6 +1,6 @@
 <template>
   <ElCard v-bind="$attrs">
-    <FormItemGroup :children="children" />
+    <FormItemGroup :list="children" />
   </ElCard>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <div class="vfc-formList">
-    <FormItemGroup v-if="formInstance.design" :children="children" class="layoutRender" />
+    <FormItemGroup v-if="formInstance.design" :list="children" class="layoutRender" />
 
     <div v-else>
       <template v-if="mode === 'inline'">

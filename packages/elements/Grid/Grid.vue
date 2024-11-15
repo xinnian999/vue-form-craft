@@ -1,6 +1,6 @@
 <template>
   <div class="form-item-grid">
-    <FormItemGroup :style="gridStyle" :children="children" />
+    <FormItemGroup :style="gridStyle" :list="children" />
   </div>
 </template>
 

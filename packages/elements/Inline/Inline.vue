@@ -1,6 +1,6 @@
 <template>
   <div class="form-item-inline">
-    <FormItemGroup :style="InlineStyle" :children="children" />
+    <FormItemGroup :style="InlineStyle" :list="children" />
   </div>
 </template>
 

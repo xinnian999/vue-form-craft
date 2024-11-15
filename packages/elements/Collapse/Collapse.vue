@@ -5,7 +5,7 @@
         <Title :title="item.title" italic type="h4" />
       </template>
 
-      <FormItemGroup :children="item.children!" />
+      <FormItemGroup :list="item.children!" />
     </ElCollapseItem>
   </ElCollapse>
 </template>
