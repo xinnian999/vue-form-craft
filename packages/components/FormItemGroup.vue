@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
 import { FormItem } from '@vue-form-craft/components'
-import { CanvasGroup } from '@vue-form-craft/form-design'
+import { CanvasGroup } from '@vue-form-craft/components'
 import type { FormItemType } from '@vue-form-craft/types'
 import { useFormInstance } from '@vue-form-craft/hooks'
 

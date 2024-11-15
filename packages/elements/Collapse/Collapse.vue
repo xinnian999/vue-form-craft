@@ -5,14 +5,14 @@
         <Title :title="item.title" italic type="h4" />
       </template>
 
-      <LayoutRender :children="item.children!" />
+      <FormItemGroup :children="item.children!" />
     </ElCollapseItem>
   </ElCollapse>
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
-import { LayoutRender } from '@vue-form-craft/components'
+import { FormItemGroup } from '@vue-form-craft/components'
 import Title from '../Title/Title.vue'
 import type { CollapseItem } from '@vue-form-craft/types'
 

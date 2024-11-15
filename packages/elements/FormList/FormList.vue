@@ -1,6 +1,6 @@
 <template>
   <div class="vfc-formList">
-    <LayoutRender v-if="formInstance.design" :children="children" class="layoutRender" />
+    <FormItemGroup v-if="formInstance.design" :children="children" class="layoutRender" />
 
     <div v-else>
       <template v-if="mode === 'inline'">
@@ -106,7 +106,7 @@
 
 <script setup lang="ts">
 import { computed, h, watch } from 'vue'
-import { FormItem, LayoutRender } from '@vue-form-craft/components'
+import { FormItem, FormItemGroup } from '@vue-form-craft/components'
 import { deepParse } from '@vue-form-craft/utils'
 import { isEqual, isString, pickBy } from 'lodash'
 import type { FormItemType } from '@vue-form-craft/types'

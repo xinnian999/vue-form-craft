@@ -1,12 +1,12 @@
 <template>
   <div class="form-item-inline">
-    <LayoutRender :style="InlineStyle" :children="children" />
+    <FormItemGroup :style="InlineStyle" :children="children" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, type StyleValue } from 'vue'
-import { LayoutRender } from '@vue-form-craft/components'
+import { FormItemGroup } from '@vue-form-craft/components'
 import type { FormItemType } from '@vue-form-craft/types'
 
 const thisProps = defineProps<{

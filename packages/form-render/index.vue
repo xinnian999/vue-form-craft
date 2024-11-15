@@ -9,12 +9,7 @@
     ref="formRef"
     v-bind="$attrs"
   >
-    <template v-if="!design">
-      <FormItem v-for="item in formItems" :key="item.name" v-bind="item" />
-    </template>
-
-    <slot />
-
+    <FormItemGroup :children="formItems" :empty-text="locale.canvas.emptyTip" :empty-size="18" />
     <Footer />
   </el-form>
 </template>
@@ -24,11 +19,11 @@ import { ref, computed, reactive, provide, watch, nextTick, toRefs, readonly } f
 import type { FormInstance as ElFormInstance } from 'element-plus'
 import { handleLinkages, deepParse, setDataByPath, getDataByPath } from '@vue-form-craft/utils'
 import { cloneDeep, merge } from 'lodash'
-import type { FormInstance, FormRenderProps } from '@vue-form-craft/types'
+import type { FormInstance, FormRenderProps, FormSchema } from '@vue-form-craft/types'
 import { $formInstance } from '@vue-form-craft/config/symbol'
 import { useLocale } from '@vue-form-craft/hooks'
 import Footer from './Footer.vue'
-import { FormItem } from '@vue-form-craft/components'
+import { FormItemGroup } from '@vue-form-craft/components'
 
 const props = defineProps<FormRenderProps>()
 
@@ -39,6 +34,29 @@ const emit = defineEmits<{
 const formRef = ref<ElFormInstance>()
 
 const formValues = defineModel<Record<string, any>>({ default: () => ({}) })
+
+const schema = defineModel<FormSchema>('schema', {
+  default: reactive({
+    labelWidth: 150,
+    labelAlign: 'right',
+    scrollToError: true,
+    size: 'default',
+    items: []
+  })
+})
+
+const formItems = computed({
+  get() {
+    if (props.design) {
+      return schema.value.items
+    }
+
+    return deepParse(props.schema.items || [], context.value)
+  },
+  set(values) {
+    schema.value.items = values
+  }
+})
 
 const selectData = reactive<Record<string, Record<string, any>>>({})
 
@@ -54,8 +72,6 @@ const context = computed(() => ({
   $selectData: selectData,
   $locale: locale.value
 }))
-
-const formItems = computed(() => deepParse(props.schema.items || [], context.value))
 
 watch(
   formValues,

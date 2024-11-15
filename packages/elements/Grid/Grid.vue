@@ -1,12 +1,12 @@
 <template>
   <div class="form-item-grid">
-    <LayoutRender :style="gridStyle" :children="children" />
+    <FormItemGroup :style="gridStyle" :children="children" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { LayoutRender } from '@vue-form-craft/components'
+import { FormItemGroup } from '@vue-form-craft/components'
 import type { FormItemType } from '@vue-form-craft/types'
 
 const thisProps = defineProps<{
