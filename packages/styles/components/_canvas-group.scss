@@ -1,0 +1,35 @@
+@include ns('canvas-group') {
+  position: relative;
+  height: 100%;
+  overflow-y: auto;
+  &-empty {
+    color: #999;
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    top: 40%;
+    transform: translateY(-50%);
+    pointer-events: none;
+
+    &-ico {
+      margin-bottom: 5px;
+    }
+  }
+
+  &-draggable {
+    min-height: 150px;
+    height: 100%;
+  }
+
+  &-ghost {
+    list-style: none;
+    text-align: center;
+    margin: 5px 0;
+    border: 1px dashed #c0bdbd;
+    background-color: var(--el-color-primary-light-9);
+    border-radius: 7px;
+    padding: 10px 0;
+    min-width: 150px;
+  }
+}
