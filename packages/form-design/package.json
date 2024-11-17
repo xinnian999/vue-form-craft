@@ -4,8 +4,5 @@
   "main": "index.ts",
   "author": "",
   "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "vuedraggable-es": "^4.1.1"
-  }
+  "description": ""
 }

@@ -8,7 +8,7 @@ const useElements = (): Record<string, FormElement> => {
 
   const FormElements = elements
 
-  if (options.extendElements) {
+  if (options?.extendElements) {
     Object.assign(FormElements, options.extendElements)
   }
 

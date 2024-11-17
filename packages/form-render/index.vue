@@ -9,6 +9,8 @@
     ref="formRef"
     v-bind="$attrs"
   >
+    <slot />
+
     <FormItemGroup :list="formItems" :empty-text="locale.canvas.emptyTip" :empty-size="18" />
     <Footer />
   </el-form>

@@ -10,5 +10,5 @@ export default function useLang() {
   const lang = inject<Lang>('vfc-lang', ref('zh'))
 
   // 静态的 优先级更高
-  return options.lang ? ref(options.lang) : lang
+  return options?.lang ? ref(options.lang) : lang
 }
