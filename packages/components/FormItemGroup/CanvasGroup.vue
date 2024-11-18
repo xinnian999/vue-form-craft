@@ -31,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import Draggable from 'vuedraggable-es'
+import Draggable from 'vuedraggable-es-fix'
 import CanvasItem from './CanvasItem.vue'
 import Icon from '@vue-form-craft/icons'
 import type { FormItemType } from '@vue-form-craft/types'

@@ -16,7 +16,7 @@
     "element-plus": "^2.8.3",
     "lodash": "^4.17.21",
     "vue": "^3.5.8",
-    "vuedraggable-es": "^4.1.1"
+    "vuedraggable-es-fix": "^1.0.1"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.9",

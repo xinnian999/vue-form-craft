@@ -52,7 +52,7 @@
 </template>
 
 <script setup lang="ts">
-import draggable from 'vuedraggable-es'
+import draggable from 'vuedraggable-es-fix'
 import { computed } from 'vue'
 import { ref } from 'vue'
 import parseMenus from './menus'
