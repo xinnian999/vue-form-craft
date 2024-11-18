@@ -86,7 +86,7 @@ describe('FormRender Attrs', () => {
     })
 
     expect(wrapper.find('input[name="username"]').exists()).toBe(false)
-    // expect(wrapper.find('input[name="password"]').exists()).toBe(false)
+    expect(wrapper.find('input[name="password"]').exists()).toBe(false)
   })
 
   it('props.footer', async () => {

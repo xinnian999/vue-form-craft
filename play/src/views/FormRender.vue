@@ -19,7 +19,10 @@ import type { FormSchema, FormInstance } from 'vue-form-craft'
 
 const formRef = ref<FormInstance>()
 
-const formValues = ref({})
+const formValues = ref({
+  username: 'hyl',
+  password: '991015'
+})
 
 const schema: FormSchema = {
   labelWidth: 150,
