@@ -149,7 +149,7 @@ export interface FormInstance extends FormRenderProps {
   updateVCodePass: (value: boolean) => void
   validate: () => FormValidationResult | undefined
   resetFields: (names?: string[]) => void
-  submit: () => Promise<void>
+  submit: () => void
 }
 
 export interface FormDesignProps {

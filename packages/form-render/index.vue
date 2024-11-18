@@ -31,6 +31,14 @@ const props = defineProps<FormRenderProps>()
 
 const emit = defineEmits<{
   finish: [values: Record<string, any>]
+  failed: [
+    errors: {
+      message?: string
+      fieldValue?: any
+      field?: string
+    }[]
+  ]
+  reset: []
 }>()
 
 const formRef = ref<ElFormInstance>()
@@ -106,12 +114,18 @@ watch(initialValues, async (newVal) => {
 
 const validate: FormInstance['validate'] = () => formRef.value?.validate()
 
-const submit: FormInstance['submit'] = async () => {
-  await validate()
-  emit('finish', formValues.value)
+const submit: FormInstance['submit'] = () => {
+  validate()
+    ?.then(() => {
+      emit('finish', formValues.value)
+    })
+    .catch((e) => {
+      emit('failed', e)
+    })
 }
 
 const resetFields: FormInstance['resetFields'] = (names) => {
+  emit('reset')
   if (names) {
     let temp = cloneDeep(formValues.value)
     names.forEach((name) => {

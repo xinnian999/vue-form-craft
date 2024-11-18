@@ -1,6 +1,14 @@
 <template>
   <div class="FormRenderPage">
-    <FormRender v-model="formValues" :schema="schema" ref="formRef" footer @finish="onFinish" />
+    <FormRender
+      v-model="formValues"
+      :schema="schema"
+      ref="formRef"
+      footer
+      read
+      @finish="onFinish"
+      @failed="onFailed"
+    />
     <!-- <el-button @click="handleSubmit">提交</el-button> -->
   </div>
 </template>
@@ -41,6 +49,10 @@ const schema: FormSchema = {
 
 const onFinish = (values: Record<string, any>) => {
   console.log(values)
+}
+
+const onFailed = (err: any[]) => {
+  console.log(err)
 }
 
 // const handleSubmit = async () => {

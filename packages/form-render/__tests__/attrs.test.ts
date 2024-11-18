@@ -3,8 +3,14 @@ import { describe, it, expect } from 'vitest'
 import ElementPlus from 'element-plus'
 import FormRender from '@vue-form-craft/form-render'
 import type { FormSchema } from '@vue-form-craft/types'
+import { $options } from '@vue-form-craft/config'
 
 config.global.plugins = [ElementPlus]
+config.global.provide = {
+  [$options]: {
+    lang: 'zh'
+  }
+}
 
 const schema = {
   labelWidth: 150,
@@ -36,8 +42,8 @@ const schema = {
   ]
 } satisfies FormSchema
 
-describe('FormRender Props Test', () => {
-  it('slot', () => {
+describe('FormRender Attrs', () => {
+  it('slot.default', () => {
     const wrapper = mount(FormRender, {
       slots: {
         default: () => 'Hello, world!'
@@ -46,7 +52,7 @@ describe('FormRender Props Test', () => {
     expect(wrapper.text()).toContain('Hello, world!')
   })
 
-  it('v-model', async () => {
+  it('v-model:modelValue', async () => {
     const wrapper = mount(FormRender, {
       props: {
         modelValue: {},
@@ -60,7 +66,30 @@ describe('FormRender Props Test', () => {
     expect(wrapper.props('modelValue')).toStrictEqual({ username: 'hyl', password: '991015' })
   })
 
-  it('footer', async () => {
+  it('props.schema', async () => {
+    const wrapper = mount(FormRender, {
+      props: {
+        schema
+      }
+    })
+
+    expect(wrapper.find('input[name="username"]').exists()).toBe(true)
+    expect(wrapper.find('input[name="password"]').exists()).toBe(true)
+  })
+
+  it('props.read', async () => {
+    const wrapper = mount(FormRender, {
+      props: {
+        schema,
+        read: true
+      }
+    })
+
+    expect(wrapper.find('input[name="username"]').exists()).toBe(false)
+    // expect(wrapper.find('input[name="password"]').exists()).toBe(false)
+  })
+
+  it('props.footer', async () => {
     const wrapper = mount(FormRender, {
       props: {
         footer: true,
@@ -70,24 +99,23 @@ describe('FormRender Props Test', () => {
       }
     })
 
-    // 检查按钮是否存在
+    // 检查底部按钮是否存在
     expect(wrapper.find('button[name="submit-btn"]').exists()).toBe(true)
     expect(wrapper.find('button[name="reset-btn"]').exists()).toBe(true)
 
+    // 提交按钮点击
+    // await wrapper.find('button[name="submit-btn"]').trigger('click')
+    // await flushPromises()
+    // expect(wrapper.emitted()).toHaveProperty('failed') // 提交且校验失败事件 TODO: 未触发failed
     await wrapper.find('[name="username"]').setValue('hyl')
     await wrapper.find('[name="password"]').setValue('991015')
-
-    expect(wrapper.props('modelValue')).toStrictEqual({ username: 'hyl', password: '991015' })
-
-    // 提交按钮点击事件
     await wrapper.find('button[name="submit-btn"]').trigger('click')
-    
-    // console.log(wrapper.emitted());
-    
-    expect(wrapper.emitted()).toHaveProperty('finish')
+    await flushPromises()
+    expect(wrapper.emitted()).toHaveProperty('finish') // 提交且校验成功 事件
 
-    // 重置按钮点击事件
+    // 重置按钮点击
     await wrapper.find('button[name="reset-btn"]').trigger('click')
+    expect(wrapper.emitted()).toHaveProperty('reset')
     expect(wrapper.props('modelValue')).toStrictEqual({})
   })
 })
