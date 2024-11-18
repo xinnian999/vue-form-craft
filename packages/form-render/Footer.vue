@@ -1,7 +1,7 @@
 <template>
   <div :style="styles" v-if="formInstance.footer">
-    <el-button type="primary" @click="formInstance.submit">提交</el-button>
-    <el-button @click="() => formInstance.resetFields()">重置</el-button>
+    <el-button type="primary" @click="formInstance.submit" name="submit-btn">提交</el-button>
+    <el-button @click="() => formInstance.resetFields()"  name="reset-btn">重置</el-button>
   </div>
 </template>
 

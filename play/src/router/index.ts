@@ -8,6 +8,11 @@ const router = createRouter({
       redirect: '/form-design'
     },
     {
+      path: '/form-render',
+      name: 'FormRender',
+      component: () => import('../views/FormRender.vue')
+    },
+    {
       path: '/form-design',
       name: 'FormDesign',
       component: () => import('../views/FormDesign.vue')

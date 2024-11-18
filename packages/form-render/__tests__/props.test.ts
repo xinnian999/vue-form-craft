@@ -46,16 +46,6 @@ describe('FormRender Props Test', () => {
     expect(wrapper.text()).toContain('Hello, world!')
   })
 
-  it('footer',async () => {
-    const wrapper = mount(FormRender, {
-      props: {
-        footer: true,
-        schema
-      }
-    })
-    expect(wrapper.find('button').exists()).toBe(true)
-  })
-
   it('v-model', async () => {
     const wrapper = mount(FormRender, {
       props: {
@@ -68,5 +58,36 @@ describe('FormRender Props Test', () => {
     await wrapper.find('[name="username"]').setValue('hyl')
     await wrapper.find('[name="password"]').setValue('991015')
     expect(wrapper.props('modelValue')).toStrictEqual({ username: 'hyl', password: '991015' })
+  })
+
+  it('footer', async () => {
+    const wrapper = mount(FormRender, {
+      props: {
+        footer: true,
+        schema,
+        modelValue: {},
+        'onUpdate:modelValue': (e) => wrapper.setProps({ modelValue: e })
+      }
+    })
+
+    // 检查按钮是否存在
+    expect(wrapper.find('button[name="submit-btn"]').exists()).toBe(true)
+    expect(wrapper.find('button[name="reset-btn"]').exists()).toBe(true)
+
+    await wrapper.find('[name="username"]').setValue('hyl')
+    await wrapper.find('[name="password"]').setValue('991015')
+
+    expect(wrapper.props('modelValue')).toStrictEqual({ username: 'hyl', password: '991015' })
+
+    // 提交按钮点击事件
+    await wrapper.find('button[name="submit-btn"]').trigger('click')
+    
+    // console.log(wrapper.emitted());
+    
+    expect(wrapper.emitted()).toHaveProperty('finish')
+
+    // 重置按钮点击事件
+    await wrapper.find('button[name="reset-btn"]').trigger('click')
+    expect(wrapper.props('modelValue')).toStrictEqual({})
   })
 })

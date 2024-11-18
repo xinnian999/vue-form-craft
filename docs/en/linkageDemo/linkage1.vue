@@ -39,7 +39,7 @@ const schema = {
   ]
 }
 
-const onFinish = (values) => {
+const finish = (values) => {
   alert(JSON.stringify(values, null, 2))
 }
 </script>

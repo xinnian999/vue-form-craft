@@ -30,7 +30,7 @@ import { FormItemGroup } from '@vue-form-craft/components'
 const props = defineProps<FormRenderProps>()
 
 const emit = defineEmits<{
-  onFinish: [values: Record<string, any>]
+  finish: [values: Record<string, any>]
 }>()
 
 const formRef = ref<ElFormInstance>()
@@ -108,7 +108,7 @@ const validate: FormInstance['validate'] = () => formRef.value?.validate()
 
 const submit: FormInstance['submit'] = async () => {
   await validate()
-  emit('onFinish', formValues.value)
+  emit('finish', formValues.value)
 }
 
 const resetFields: FormInstance['resetFields'] = (names) => {
