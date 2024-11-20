@@ -4,6 +4,7 @@ import ElementPlus from 'element-plus'
 import FormRender from '@vue-form-craft/form-render'
 import type { FormSchema } from '@vue-form-craft/types'
 import { $options } from '@vue-form-craft/config'
+import { nextTick, ref } from 'vue'
 
 config.global.plugins = [ElementPlus]
 config.global.provide = {
@@ -13,8 +14,85 @@ config.global.provide = {
 }
 
 describe('FormRender Schema Test', () => {
+  it('label', async () => {
+    const schema = {
+      labelWidth: 150,
+      labelAlign: 'right',
+      size: 'default',
+      scrollToError: true,
+      items: [
+        {
+          label: '用户名',
+          component: 'Input',
+          props: {
+            placeholder: '请输入用户名',
+            clearable: true
+          },
+          name: 'username'
+        },
+        {
+          label: '密码',
+          component: 'Password',
+          props: {
+            placeholder: '请输入密码'
+          },
+          name: 'password'
+        }
+      ]
+    } satisfies FormSchema
+    const wrapper = mount(FormRender, {
+      props: {
+        schema: schema
+      }
+    })
 
-  it('item initialValue', async () => {
+    await flushPromises()
+
+    expect(wrapper.find('.username-label').html()).toContain('用户名')
+    expect(wrapper.find('.password-label').html()).toContain('密码')
+  })
+
+  it('required', async () => {
+    const schema = {
+      labelWidth: 150,
+      labelAlign: 'right',
+      size: 'default',
+      scrollToError: true,
+      items: [
+        {
+          label: '用户名',
+          component: 'Input',
+          props: {
+            placeholder: '请输入用户名',
+            clearable: true
+          },
+          designKey: 'form-eNR0',
+          name: 'username',
+          required: true
+        },
+        {
+          label: '密码',
+          component: 'Password',
+          props: {
+            placeholder: '请输入密码'
+          },
+          designKey: 'form-D1x7',
+          name: 'password',
+          required: true
+        }
+      ]
+    } satisfies FormSchema
+
+    const values = ref({})
+    const wrapper = mount(FormRender, {
+      props: {
+        schema: schema,
+        modelValue: values
+      }
+    })
+  })
+
+  it('initialValue', async () => {
     const schema = {
       labelWidth: 150,
       labelAlign: 'right',
@@ -32,6 +110,17 @@ describe('FormRender Schema Test', () => {
           name: 'username',
           required: true,
           initialValue: 'huyilin'
+        },
+        {
+          label: '密码',
+          component: 'Password',
+          props: {
+            placeholder: '请输入密码'
+          },
+          designKey: 'form-D1x7',
+          name: 'password',
+          required: true,
+          initialValue: 'qs666666'
         }
       ]
     } satisfies FormSchema
@@ -43,6 +132,6 @@ describe('FormRender Schema Test', () => {
       }
     })
     await flushPromises()
-    expect(wrapper.props('modelValue')).toStrictEqual({ username: 'huyilin' })
+    expect(wrapper.props('modelValue')).toStrictEqual({ username: 'huyilin', password: 'qs666666' })
   })
 })

@@ -14,7 +14,7 @@
       :rules="computeRules"
     >
       <template #label v-if="!hideLabel">
-        <div :class="ns('form-item-label')">
+        <div :class="[ns('form-item-label'), label && `${name}-label`]">
           <div :style="formInstance.schema.labelBold && 'font-weight: bold'">{{ label }}</div>
           <div :class="ns('form-item-label-ico')" v-if="help">
             <el-tooltip effect="dark" :content="help">

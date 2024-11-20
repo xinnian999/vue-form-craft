@@ -4,6 +4,7 @@ import ElementPlus from 'element-plus'
 import FormRender from '@vue-form-craft/form-render'
 import type { FormSchema } from '@vue-form-craft/types'
 import { $options } from '@vue-form-craft/config'
+import { nextTick } from 'vue'
 
 config.global.plugins = [ElementPlus]
 config.global.provide = {
@@ -106,11 +107,14 @@ describe('FormRender Attrs', () => {
     // 提交按钮点击
     // await wrapper.find('button[name="submit-btn"]').trigger('click')
     // await flushPromises()
+    // await nextTick();
     // expect(wrapper.emitted()).toHaveProperty('failed') // 提交且校验失败事件 TODO: 未触发failed
+
     await wrapper.find('[name="username"]').setValue('hyl')
     await wrapper.find('[name="password"]').setValue('991015')
     await wrapper.find('button[name="submit-btn"]').trigger('click')
     await flushPromises()
+    await nextTick();
     expect(wrapper.emitted()).toHaveProperty('finish') // 提交且校验成功 事件
 
     // 重置按钮点击

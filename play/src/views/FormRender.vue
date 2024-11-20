@@ -5,7 +5,6 @@
       :schema="schema"
       ref="formRef"
       footer
-      read
       @finish="onFinish"
       @failed="onFailed"
     />
@@ -20,35 +19,39 @@ import type { FormSchema, FormInstance } from 'vue-form-craft'
 const formRef = ref<FormInstance>()
 
 const formValues = ref({
-  username: 'hyl',
-  password: '991015'
+  // username: 'hyl',
+  // password: '991015'
 })
 
-const schema: FormSchema = {
+const schema = {
   labelWidth: 150,
   labelAlign: 'right',
   size: 'default',
+  scrollToError: true,
   items: [
     {
       label: '用户名',
       component: 'Input',
-      name: 'username',
-      required: true,
       props: {
-        placeholder: '请输入用户名'
-      }
+        placeholder: '请输入用户名',
+        clearable: true
+      },
+      designKey: 'form-eNR0',
+      name: 'username',
+      required: true
     },
     {
       label: '密码',
       component: 'Password',
-      name: 'password',
-      required: true,
       props: {
         placeholder: '请输入密码'
-      }
+      },
+      designKey: 'form-D1x7',
+      name: 'password',
+      required: true
     }
   ]
-}
+} satisfies FormSchema
 
 const onFinish = (values: Record<string, any>) => {
   console.log(values)
