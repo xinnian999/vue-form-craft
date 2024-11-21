@@ -1,6 +1,7 @@
 @include ns('canvas-group') {
   position: relative;
   height: 100%;
+  width: 100%;
   overflow-y: auto;
   &-empty {
     color: #999;
