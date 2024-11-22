@@ -1,8 +1,18 @@
-import type { FormSchema } from 'vue-form-craft'
+import type { FormSchema } from '@vue-form-craft/types'
 
 export default {
   size: 'small',
   labelAlign: 'top',
+  initialValues: {
+    label: '穿梭框',
+    props: {
+      data: [
+        { label: '选项一', key: 'value1' },
+        { label: '选项二', key: 'value2' },
+        { label: '选项三', key: 'value3' }
+      ]
+    }
+  },
   items: [
     { label: '标签', component: 'Input', name: 'label' },
     {

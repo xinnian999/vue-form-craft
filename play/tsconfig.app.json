@@ -8,8 +8,7 @@
      "types": ["vue-form-craft/global"],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "~/*": ["../*"]
+      "@/*": ["./src/*"]
     }
   }
 }

@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "vue": "^3.5.12",
-    "vue-router": "^4.4.5"
+    "vue-router": "^4.4.5",
+    "vue-form-craft": "workspace:*"
   },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.4",

@@ -4,11 +4,11 @@ import icon from './Icon.vue'
 import attrSchema from './attrSchema'
 
 export default {
-  name: 'markdown',
-  component,
+  title: 'markdown',
+  component: 'Markdown',
+  render: component,
   icon,
   type: 'basic',
   order: 11,
-  initialValues: { label: 'markdown编辑器', component: 'Markdown' },
   attrSchema
 } satisfies FormElement
