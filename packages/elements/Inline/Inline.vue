@@ -1,7 +1,5 @@
 <template>
-  <div class="form-item-inline">
-    <FormItemGroup :style="InlineStyle" :list="children" />
-  </div>
+  <FormItemGroup class="form-item-inline" :style="InlineStyle" :list="children" />
 </template>
 
 <script setup lang="ts">

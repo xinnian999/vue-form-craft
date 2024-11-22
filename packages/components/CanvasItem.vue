@@ -27,7 +27,7 @@
 
     <div
       class="layout-title"
-      v-if="config.type === 'layout' && designInstance.currentKey === data.designKey"
+      v-if="config.lbTitle"
     >
       {{ config.title }}
     </div>

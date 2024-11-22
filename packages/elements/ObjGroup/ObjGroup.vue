@@ -3,10 +3,6 @@
     <CanvasGroup
       v-if="formInstance.design"
       :list="children"
-      :style="{
-        border: '2px dashed var(--el-color-primary)',
-        padding: '5px'
-      }"
     />
     <div v-else class="vfc-ObjGroup-render">
       <FormItem

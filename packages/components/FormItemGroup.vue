@@ -1,5 +1,6 @@
 <template>
   <CanvasGroup v-if="formInstance.design" :list="list" />
+
   <div v-else>
     <FormItem v-for="item in list" :key="item.name" v-bind="item" />
   </div>

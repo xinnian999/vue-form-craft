@@ -9,6 +9,7 @@ export default {
   component: 'Grid',
   render: defineAsyncComponent(() => import('./Grid.vue')),
   order: 3,
+  lbTitle: true,
   attrSchema: {
     size: 'small',
     labelAlign: 'top',

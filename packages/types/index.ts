@@ -57,6 +57,7 @@ export type FormElement = {
   // initialValues: Omit<FormItemType, 'name'>
   modelName?: string
   attrSchema: FormSchema
+  lbTitle?: boolean
 }
 
 export type TemplateData = { name: string; schema: FormSchema; id?: string }[]

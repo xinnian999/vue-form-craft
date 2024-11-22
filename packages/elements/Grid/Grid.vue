@@ -1,7 +1,5 @@
 <template>
-  <div class="form-item-grid">
-    <FormItemGroup :style="gridStyle" :list="children" />
-  </div>
+  <FormItemGroup class="form-item-grid" :style="gridStyle" :list="children" />
 </template>
 
 <script setup lang="ts">
@@ -26,8 +24,8 @@ const gridStyle = computed(() => ({
 
 <style lang="scss">
 .form-item-grid {
-  width: 100%;
-  .el-form-item {
+  .el-form-item,
+  .vfc-canvas-item {
     margin-bottom: 0;
   }
   .el-form-item__content {
