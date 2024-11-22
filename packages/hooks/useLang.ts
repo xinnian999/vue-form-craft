@@ -1,5 +1,5 @@
 import type { Lang } from '@vue-form-craft/types'
-import { $options } from '@vue-form-craft/config/symbol'
+import { $options } from '@vue-form-craft/config'
 import { inject, ref } from 'vue'
 
 export default function useLang() {
@@ -10,5 +10,5 @@ export default function useLang() {
   const lang = inject<Lang>('vfc-lang', ref('zh'))
 
   // 静态的 优先级更高
-  return options.lang ? ref(options.lang) : lang
+  return options?.lang ? ref(options.lang) : lang
 }

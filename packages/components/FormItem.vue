@@ -1,21 +1,20 @@
 <template>
   <template v-if="formInstance.design || !hidden">
-    <div v-if="config.type === 'layout'" :style="itemStyle">
-      <component :is="config.component" :name="name" :props="props" :children="children" />
+    <div v-if="config.type === 'layout'" :class="[ns('form-item'), thisProps.class]" :style="style">
+      <component :is="config.render" v-bind="formItemProps" />
     </div>
 
     <el-form-item
       v-else
-      id="form-item"
-      :style="itemStyle"
+      :class="[ns('form-item'), thisProps.class]"
+      :style="style"
       :key="name"
       :prop="name"
       :label-width="hideLabel ? '0' : formInstance.schema.labelWidth"
       :rules="computeRules"
-      :class="thisProps.class"
     >
       <template #label v-if="!hideLabel">
-        <div :class="ns('form-item-label')">
+        <div :class="[ns('form-item-label'), label && `${name}-label`]">
           <div :style="formInstance.schema.labelBold && 'font-weight: bold'">{{ label }}</div>
           <div :class="ns('form-item-label-ico')" v-if="help">
             <el-tooltip effect="dark" :content="help">
@@ -38,7 +37,7 @@
           destroy-on-close
         >
           <component
-            :is="config.component"
+            :is="config.render"
             :disabled="formInstance.schema.disabled"
             :size="formInstance.schema.size"
             v-bind="formItemProps"
@@ -51,7 +50,7 @@
 
       <component
         v-else
-        :is="config.component"
+        :is="config.render"
         :disabled="formInstance.schema.disabled"
         :size="formInstance.schema.size"
         v-bind="formItemProps"
@@ -94,11 +93,6 @@ const value = computed({
     formInstance.updateFormValues(newValues)
   }
 })
-
-const itemStyle = computed(() => ({
-  marginBottom: formInstance.design ? 0 : '18px',
-  ...thisProps.style
-}))
 
 const computeRules = computed(() => {
   const { rules, required, component } = thisProps
@@ -147,8 +141,7 @@ const computeRules = computed(() => {
 
       return {}
     })
-    console.log([...ruleData, ...ruleParse]);
-    
+
     return [...ruleData, ...ruleParse]
   }
 

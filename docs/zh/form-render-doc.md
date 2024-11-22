@@ -24,7 +24,7 @@ demo/FormRender.vue
 
 | 参数名   | 类型               | 描述                         |
 | -------- | ------------------ | ---------------------------- |
-| onFinish | `(values) => void` | 点击表单内置的提交按钮时触发 |
+| finish | `(values) => void` | 点击表单内置的提交按钮时触发 |
 
 ## Exposes
 
@@ -43,6 +43,6 @@ demo/FormRender.vue
 | updateInitialValues | ` (values: Record<string, any>) => void`            | 更新**表单初始值**的方法                                                          |
 | validate            | ` () => Promise<boolean>`                           | 校验表单                                                                          |
 | resetFields         | `name[] => void`                                    | 接收一个name数组，例如`['name','age']` 来重置一组字段为初始值，不传会重置所有字段 |
-| submit              | `() => void`                                        | 校验表单，校验通过后会触发`onFinish`事件                                          |
+| submit              | `() => void`                                        | 校验表单，校验通过后会触发`finish`事件                                          |
 
 

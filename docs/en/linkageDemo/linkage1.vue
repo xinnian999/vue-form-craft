@@ -21,7 +21,7 @@ const schema = {
     },
     {
       label: '差评原因',
-      component: 'Textarea',
+      component: 'TextArea',
       props: {
         autocomplete: 'off',
         showWordLimit: true,
@@ -39,7 +39,7 @@ const schema = {
   ]
 }
 
-const onFinish = (values) => {
+const finish = (values) => {
   alert(JSON.stringify(values, null, 2))
 }
 </script>

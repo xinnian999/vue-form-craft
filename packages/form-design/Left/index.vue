@@ -31,6 +31,7 @@
         :drag-class="ns('menu-list-drag')"
         :fallback-class="ns('menu-list-fallback')"
         item-key="designKey"
+        @clone="onClone"
       >
         <template #item="{ element }">
           <li :class="ns('menu-list-item')">
@@ -41,7 +42,7 @@
               :class="ns('menu-list-item-name')"
               :style="{ fontSize: lang === 'zh' ? '12px' : '10px' }"
             >
-              {{ element.name }}
+              {{ element.title }}
             </div>
           </li>
         </template>
@@ -51,14 +52,15 @@
 </template>
 
 <script setup lang="ts">
-import draggable from 'vuedraggable-es'
+import draggable from 'vuedraggable-es-fix'
 import { computed } from 'vue'
 import { ref } from 'vue'
 import parseMenus from './menus'
 import type { FormSchema } from '@vue-form-craft/types'
 import { useDesignInstance, useElements, useLang, useLocale } from '@vue-form-craft/hooks'
-import { ns } from '@vue-form-craft/utils'
+import { getRandomId, ns } from '@vue-form-craft/utils'
 import { template } from '@vue-form-craft/config'
+import { cloneDeep } from 'lodash'
 
 const drawerVisible = ref(false)
 
@@ -70,13 +72,35 @@ const locale = useLocale()
 
 const lang = useLang()
 
-const templates = designInstance.templates.length ? designInstance.templates : template
+const templates = designInstance.templates ? designInstance.templates : template
 
 const menus = computed(() =>
-  parseMenus({ elements, omits: designInstance.omitMenus, lang: lang.value })
+  parseMenus({ elements, omits: designInstance.omitMenus || [], lang: lang.value })
 )
 
 const useTemplate = (templateSchema: FormSchema) => {
   designInstance.updateSchema(templateSchema)
+}
+
+const onClone = (e: Record<string, any>) => {
+  const source = cloneDeep(e.item.__draggable_context.element)
+
+  if (source.render) {
+    e.item.__draggable_context.element = {
+      component: source.component,
+      designKey: `design-${getRandomId(4)}`,
+      name: `form-${getRandomId(4)}`
+    }
+
+    if (source.type === 'layout') {
+      e.item.__draggable_context.element.children = []
+    }
+  } else {
+    e.item.__draggable_context.element = {
+      ...source,
+      designKey: `design-${getRandomId(4)}`,
+      name: `form-${getRandomId(4)}`
+    }
+  }
 }
 </script>

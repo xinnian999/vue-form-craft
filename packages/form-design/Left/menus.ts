@@ -10,14 +10,14 @@ type Params = {
 export default ({ elements, lang, omits }: Params) => {
   const getChildren = (type: string) => {
     return Object.values(elements)
-      .filter((item) => item.type === type && !omits.includes(item.initialValues.component))
+      .filter((item) => item.type === type && !omits.includes(item.component))
       .sort((a, b) => {
         return a.order - b.order
       })
       .map((item) => {
         return {
           ...item,
-          name: lang === 'zh' ? item.name : item.initialValues.component
+          title: lang === 'zh' ? item.title : item.component
         }
       })
   }

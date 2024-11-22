@@ -9,12 +9,9 @@
     ref="formRef"
     v-bind="$attrs"
   >
-    <template v-if="!design">
-      <FormItem v-for="item in formItems" :key="item.name" v-bind="item" />
-    </template>
-
     <slot />
 
+    <FormItemGroup :list="formItems" :empty-text="locale.canvas.emptyTip" :empty-size="18" />
     <Footer />
   </el-form>
 </template>
@@ -24,21 +21,52 @@ import { ref, computed, reactive, provide, watch, nextTick, toRefs, readonly } f
 import type { FormInstance as ElFormInstance } from 'element-plus'
 import { handleLinkages, deepParse, setDataByPath, getDataByPath } from '@vue-form-craft/utils'
 import { cloneDeep, merge } from 'lodash'
-import type { FormInstance, FormRenderProps } from '@vue-form-craft/types'
+import type { FormInstance, FormRenderProps, FormSchema } from '@vue-form-craft/types'
 import { $formInstance } from '@vue-form-craft/config/symbol'
 import { useLocale } from '@vue-form-craft/hooks'
 import Footer from './Footer.vue'
-import { FormItem } from '@vue-form-craft/components'
+import { FormItemGroup } from '@vue-form-craft/components'
 
 const props = defineProps<FormRenderProps>()
 
 const emit = defineEmits<{
-  onFinish: [values: Record<string, any>]
+  finish: [values: Record<string, any>]
+  failed: [
+    errors: {
+      message?: string
+      fieldValue?: any
+      field?: string
+    }[]
+  ]
+  reset: []
 }>()
 
 const formRef = ref<ElFormInstance>()
 
 const formValues = defineModel<Record<string, any>>({ default: () => ({}) })
+
+const schema = defineModel<FormSchema>('schema', {
+  default: reactive({
+    labelWidth: 150,
+    labelAlign: 'right',
+    scrollToError: true,
+    size: 'default',
+    items: []
+  })
+})
+
+const formItems = computed({
+  get() {
+    if (props.design) {
+      return schema.value.items
+    }
+
+    return deepParse(props.schema.items || [], context.value)
+  },
+  set(values) {
+    schema.value.items = values
+  }
+})
 
 const selectData = reactive<Record<string, Record<string, any>>>({})
 
@@ -55,8 +83,6 @@ const context = computed(() => ({
   $locale: locale.value
 }))
 
-const formItems = computed(() => deepParse(props.schema.items || [], context.value))
-
 watch(
   formValues,
   async (newVal, oldVal) => {
@@ -72,19 +98,34 @@ watch(
   { deep: true, immediate: true }
 )
 
+watch(
+  () => props.schema?.initialValues,
+  async (newVal) => {
+    await nextTick()
+    Object.assign(initialValues, newVal)
+  },
+  { immediate: true }
+)
+
 watch(initialValues, async (newVal) => {
   await nextTick()
-  formValues.value = merge(formValues.value, newVal)
+  formValues.value = merge(newVal, formValues.value)
 })
 
 const validate: FormInstance['validate'] = () => formRef.value?.validate()
 
-const submit: FormInstance['submit'] = async () => {
-  await validate()
-  emit('onFinish', formValues.value)
+const submit: FormInstance['submit'] = () => {
+  validate()
+    ?.then(() => {
+      emit('finish', formValues.value)
+    })
+    .catch((e) => {
+      emit('failed', e)
+    })
 }
 
 const resetFields: FormInstance['resetFields'] = (names) => {
+  emit('reset')
   if (names) {
     let temp = cloneDeep(formValues.value)
     names.forEach((name) => {

@@ -23,7 +23,7 @@ const schema: FormSchema = {
     },
     {
       label: '简介',
-      component: 'Textarea',
+      component: 'TextArea',
       name: 'desc',
       props: {
         placeholder: "{{ $values.name + '的简介' }}",

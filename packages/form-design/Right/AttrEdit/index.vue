@@ -53,7 +53,7 @@ const attrSchema = computed<FormSchema>(() => {
           component: 'Tag',
           name: 'componentType',
           props: {
-            text: config.name
+            text: config.title
           }
         },
         ...items

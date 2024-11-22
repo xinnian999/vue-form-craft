@@ -1,26 +1,25 @@
 import type { FormElement } from '@vue-form-craft/types'
-import Tag from './Tag.vue'
 import Icon from '@vue-form-craft/icons'
-import { h } from 'vue'
+import { defineAsyncComponent, h } from 'vue'
 
 export default {
-  name: '标签',
-  component: Tag,
+  title: '标签',
+  component: 'Tag',
+  render: defineAsyncComponent(() => import('./Tag.vue')),
   icon: h(Icon, { name: 'tag' }),
   type: 'assist',
   order: 4,
-  initialValues: {
-    component: 'Tag',
-    props: {
-      text: 'Tag',
-      type: 'primary'
-    },
-    hideLabel:true
-  },
-  attrSchema:{
+  attrSchema: {
     size: 'small',
     labelAlign: 'top',
-    items:[
+    initialValues: {
+      props: {
+        text: 'Tag',
+        type: 'primary'
+      },
+      hideLabel: true
+    },
+    items: [
       { label: '唯一标识', component: 'Input', name: 'name' },
       { label: '隐藏字段', component: 'Switch', name: 'hidden' },
       { label: '隐藏标签', component: 'Switch', name: 'hideLabel' },
@@ -36,9 +35,10 @@ export default {
             { label: '成功', value: 'success' },
             { label: '信息', value: 'info' },
             { label: '警告', value: 'warning' },
-            { label: '危险', value: 'danger' },
+            { label: '危险', value: 'danger' }
           ]
         }
-      },
-    ]}
+      }
+    ]
+  }
 } satisfies FormElement

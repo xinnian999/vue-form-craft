@@ -10,7 +10,9 @@
     "docs/.vitepress/**/*.vue",
     "docs/**/*.vue"
   ],
-  "exclude": [],
+  "exclude": [
+    "packages/**/*.test.ts",
+  ],
   "compilerOptions": {
     // "module": "ES2020",
     "types": ["vite/client", "element-plus/global", "vue-form-craft/global"],
@@ -18,6 +20,7 @@
     // "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "baseUrl": ".",
     "paths": {},
-    "allowJs": true
+    "allowJs": false,
+    "jsx": "preserve"
   }
 }

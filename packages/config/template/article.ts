@@ -17,7 +17,7 @@ export default {
     },
     {
       label: '文章简介',
-      component: 'Textarea',
+      component: 'TextArea',
       props: {
         autosize: {
           minRows: 4,

@@ -1,5 +1,5 @@
 import type { FormValidationResult } from 'element-plus'
-import type { Component, Ref, VNode } from 'vue'
+import type { Component, Ref, ToRefs, VNode } from 'vue'
 
 export type FormRule = {
   type: 'email' | 'url' | 'custom' | string
@@ -43,18 +43,21 @@ export type FormSchema = {
   hideRequiredAsterisk?: boolean
   labelBold?: boolean
   scrollToError?: boolean
+  initialValues?: Record<string, any>
   items: FormItemType[]
 }
 
 export type FormElement = {
-  name: string
-  component: string | VNode | Component
+  title: string
+  component: string
+  render: string | VNode | Component
   icon: string | VNode | Component
   type: 'assist' | 'layout' | 'basic' | 'high'
   order: number
-  initialValues: Omit<FormItemType, 'name'>
+  // initialValues: Omit<FormItemType, 'name'>
   modelName?: string
   attrSchema: FormSchema
+  lbTitle?: boolean
 }
 
 export type TemplateData = { name: string; schema: FormSchema; id?: string }[]
@@ -121,13 +124,6 @@ export type Locale = {
   }
 }
 
-export type CollapseItem = {
-  title: string
-  name: string
-  checked?: boolean
-  children?: FormItemType[]
-}
-
 export type Options = {
   request?: (options: Record<string, any>) => Promise<Record<string, any>>
   extendElements?: Record<string, FormElement>
@@ -154,7 +150,7 @@ export interface FormInstance extends FormRenderProps {
   updateVCodePass: (value: boolean) => void
   validate: () => FormValidationResult | undefined
   resetFields: (names?: string[]) => void
-  submit: () => Promise<void>
+  submit: () => void
 }
 
 export interface FormDesignProps {
@@ -163,18 +159,16 @@ export interface FormDesignProps {
   omitMenus?: string[]
 }
 
-export interface DesignInstance extends Required<FormDesignProps> {
-  currentKey: string
+export interface DesignInstance extends Required<ToRefs<FormDesignProps>> {
+  currentKey: Ref<string>
   hoverKey: string
-  schema: FormSchema
-  list: FormItemType[]
-  current: FormItemType | null
+  schema: Ref<FormSchema>
+  list: Ref<FormItemType[]>
+  current: Ref<FormItemType | null>
   rightTab: 'attr' | 'form'
-  onAdd: (params: Record<string, any>) => void
-  handleDeleteItem: (element: FormItemType) => void
-  handleCopyItem: (element: FormItemType) => void
-  handleSave: () => void
   updateCurrent: (current: FormItemType) => void
   updateHoverKey: (key: string) => void
   updateSchema: (schema: FormSchema) => void
+  updateList: (newList: FormItemType[]) => void
+  handleEmit: (event: any, ...args: any[]) => void
 }

@@ -3,15 +3,16 @@ import type { FormElement } from '@vue-form-craft/types'
 import { h } from 'vue'
 
 export default {
-  name: '滑块',
-  component: 'ElSlider',
+  title: '滑块',
+  render: 'ElSlider',
+  component: 'Slider',
   icon: h(Icon, { name: 'slider' }),
   type: 'basic',
   order: 12,
-  initialValues: { label: '滑块', component: 'Slider' },
   attrSchema: {
     size: 'small',
     labelAlign: 'top',
+    initialValues: { label: '滑块' },
     items: [
       { label: '标签', component: 'Input', name: 'label' },
       {
@@ -20,7 +21,7 @@ export default {
         name: 'name',
         help: "既是唯一标识，也是数据路径。比如输入【props.name】，数据就会保存为 { props: { name:'xxx' } }"
       },
-      { label: '字段说明', component: 'Textarea', name: 'help' },
+      { label: '字段说明', component: 'TextArea', name: 'help' },
       {
         component: 'Grid',
         children: [

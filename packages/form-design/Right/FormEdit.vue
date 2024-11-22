@@ -2,7 +2,7 @@
     <FormRender v-model="form" :schema="formOptions"></FormRender>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 import FormRender from '../../form-render'
 import formOptions from './formOptions'

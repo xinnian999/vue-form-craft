@@ -16,36 +16,50 @@
     <ul class="actions-rb" v-if="data.designKey === designInstance.current?.designKey">
       <li
         class="actions-rb-item"
-        v-for="{ icon, handle } in rightBottomActions"
+        v-for="{ icon, handle, bg } in rightBottomActions"
         @click.stop="handle(data)"
         :key="icon"
+        :style="{ backgroundColor: bg }"
       >
         <Icon :name="icon" />
       </li>
     </ul>
 
-    <form-item v-bind="data" :props="checkProps(data.props)" />
+    <div
+      class="layout-title"
+      v-if="config.lbTitle"
+    >
+      {{ config.title }}
+    </div>
+
+    <form-item v-bind="data" :props="data.props" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { omit } from 'lodash'
-import { FormItem } from '@vue-form-craft/components'
+import FormItem from './FormItem.vue'
 import type { FormItemType } from '@vue-form-craft/types'
-import { useDesignInstance } from '@vue-form-craft/hooks'
+import { useDesignInstance, useElements } from '@vue-form-craft/hooks'
 import Icon from '@vue-form-craft/icons'
+import { copyItems, ns, recursionDelete } from '@vue-form-craft/utils'
 
 const props = defineProps<{ data: FormItemType }>()
 
 const designInstance = useDesignInstance()
 
-const canvasItemClass = computed(() => ({
-  'canvas-item': true,
-  active: props.data.designKey === designInstance.current?.designKey,
-  hover: props.data.designKey === designInstance.hoverKey,
-  mask: props.data.designKey === designInstance.hoverKey && !props.data.children
-}))
+const elements = useElements()
+
+const config = elements[props.data.component]
+
+const canvasItemClass = computed(() => {
+  return {
+    [ns('canvas-item')]: true,
+    active: props.data.designKey === designInstance.current?.designKey,
+    hover: props.data.designKey === designInstance.hoverKey,
+    mask: props.data.designKey === designInstance.hoverKey && !props.data.children
+  }
+})
 
 const handleHoverEnter = () => {
   if (props.data.designKey) {
@@ -65,15 +79,21 @@ const handleSelect = (element: FormItemType) => {
 const rightBottomActions = [
   {
     icon: 'copy',
-    handle: designInstance.handleCopyItem
+    handle: (element: FormItemType) => {
+      const newList = copyItems(designInstance.list, element.designKey!)
+      designInstance.updateList(newList)
+    }
   },
   {
     icon: 'delete',
-    handle: designInstance.handleDeleteItem
+    bg: 'var(--el-color-danger)',
+    handle: (element: FormItemType) => {
+      const newList = recursionDelete(
+        designInstance.list,
+        (item) => item.designKey !== element.designKey
+      )
+      designInstance.updateList(newList)
+    }
   }
 ]
-
-const checkProps = (props: Record<string, any> = {}) => {
-  return omit(props, ['multiple', 'api'])
-}
 </script>

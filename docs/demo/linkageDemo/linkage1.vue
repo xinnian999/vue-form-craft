@@ -1,5 +1,5 @@
 <template>
-  <FormRender :schema="schema" footer @onFinish="onFinish" />
+  <FormRender :schema="schema" footer @finish="finish" />
 </template>
 
 <script setup lang="ts">
@@ -21,7 +21,7 @@ const schema = {
     },
     {
       label: '差评原因',
-      component: 'Textarea',
+      component: 'TextArea',
       props: {
         autocomplete: 'off',
         showWordLimit: true,
@@ -39,7 +39,7 @@ const schema = {
   ]
 }
 
-const onFinish = (values:Record<string,any>) => {
+const finish = (values:Record<string,any>) => {
   alert(JSON.stringify(values, null, 2))
 }
 </script>

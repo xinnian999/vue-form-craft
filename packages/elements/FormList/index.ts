@@ -1,22 +1,14 @@
 import type { FormElement } from '@vue-form-craft/types'
 import attrSchema from './attrSchema'
-import FormList from './FormList.vue'
 import Icon from '@vue-form-craft/icons'
-import { h } from 'vue'
+import { defineAsyncComponent, h } from 'vue'
 
 export default {
-  name: '自增容器',
-  component: FormList,
+  title: '自增容器',
+  component: 'FormList',
+  render:defineAsyncComponent(() => import('./FormList.vue')),
   icon: h(Icon, { name: 'formList' }),
   type: 'high',
   order: 20,
-  initialValues: {
-    label: '自增容器',
-    component: 'FormList',
-    children: [],
-    props: {
-      mode: 'table'
-    }
-  },
   attrSchema
 } satisfies FormElement

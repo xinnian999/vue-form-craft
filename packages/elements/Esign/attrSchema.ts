@@ -3,6 +3,17 @@ import type { FormSchema } from '@vue-form-craft/types'
 export default {
   size: 'small',
   labelAlign: 'top',
+  initialValues: {
+    label: '电子签名',
+    props: {
+      width: 700,
+      height: 300,
+      lineWidth: 6,
+      lineColor: '#000000',
+      bgColor: '#eeeeee',
+      format: 'image/png'
+    }
+  },
   items: [
     { label: '标签', component: 'Input', name: 'label' },
     {
@@ -11,7 +22,7 @@ export default {
       name: 'name',
       help: "既是唯一标识，也是数据路径。比如输入【props.name】，数据就会保存为 { props: { name:'xxx' } }"
     },
-    { label: '字段说明', component: 'Textarea', name: 'help' },
+    { label: '字段说明', component: 'TextArea', name: 'help' },
     {
       component: 'Grid',
       children: [
@@ -61,7 +72,6 @@ export default {
           }
         ]
       },
-      initialValue: 'center',
       designKey: 'form-PLpj'
     }
   ]

@@ -1,26 +1,25 @@
 import type { FormElement } from '@vue-form-craft/types'
-import Title from './Title.vue'
 import Icon from '@vue-form-craft/icons'
-import { h } from 'vue'
+import { defineAsyncComponent, h } from 'vue'
 
 export default {
-  name: '标题',
-  component: Title,
+  title: '标题',
+  component: 'Title',
+  render: defineAsyncComponent(() => import('./Title.vue')),
   icon: h(Icon, { name: 'title' }),
   type: 'assist',
   order: 3,
-  initialValues: {
-    component: 'Title',
-    props: {
-      title: '标题',
-      type: 'h3'
-    },
-    hideLabel:true
-  },
-  attrSchema:{
+  attrSchema: {
     size: 'small',
     labelAlign: 'top',
-    items:[
+    initialValues: {
+      props: {
+        title: '标题',
+        type: 'h3'
+      },
+      hideLabel: true
+    },
+    items: [
       { label: '唯一标识', component: 'Input', name: 'name' },
       { label: '隐藏字段', component: 'Switch', name: 'hidden' },
       { label: '隐藏标签', component: 'Switch', name: 'hideLabel' },
@@ -41,5 +40,6 @@ export default {
         }
       },
       { label: '字体倾斜', component: 'Switch', name: 'props.italic' }
-    ]}
+    ]
+  }
 } satisfies FormElement

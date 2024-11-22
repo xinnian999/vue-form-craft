@@ -1,9 +1,26 @@
-import optionConfig from "@vue-form-craft/config/optionConfig";
-import type { FormSchema } from "@vue-form-craft/types";
+import optionConfig from '@vue-form-craft/config/optionConfig'
+import type { FormSchema } from '@vue-form-craft/types'
 
 export default {
   size: 'small',
   labelAlign: 'top',
+  initialValues: {
+    label: '多选框组',
+    component: 'Checkbox',
+    props: {
+      mode: 'static',
+      options: [
+        { label: '选项1', value: 'value1' },
+        { label: '选项2', value: 'value2' },
+        { label: '选项3', value: 'value3' }
+      ],
+      labelKey: 'label',
+      valueKey: 'value',
+      optionType: 'circle',
+      direction: 'horizontal',
+      space: 20
+    }
+  },
   items: [
     { label: '标签', component: 'Input', name: 'label' },
     {
@@ -12,7 +29,7 @@ export default {
       name: 'name',
       help: "既是唯一标识，也是数据路径。比如输入【props.name】，数据就会保存为 { props: { name:'xxx' } }"
     },
-    { label: '字段说明', component: 'Textarea', name: 'help' },
+    { label: '字段说明', component: 'TextArea', name: 'help' },
     {
       label: '占位提示',
       component: 'Input',
@@ -27,7 +44,7 @@ export default {
       props: {
         mode: 'static',
         options: '{{$values.props.options}}',
-        multiple:true
+        multiple: true
       }
     },
     {
@@ -49,8 +66,6 @@ export default {
         marginBottom: 0
       }
     },
-
-    
 
     {
       label: '选项样式类型',
