@@ -14,6 +14,7 @@
 </template>
 
 <script>
+//@ts-nocheck
 import JsonEditor from 'jsoneditor'
 import 'jsoneditor/dist/jsoneditor.min.css'
 
