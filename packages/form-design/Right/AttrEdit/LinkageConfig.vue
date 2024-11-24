@@ -15,8 +15,12 @@
     </div>
 
     <el-dialog destroy-on-close v-model="visible" top="3vh" :title="title">
-      <FormRender v-if="type === 'config'" v-model="model" :schema="configLinkageSchema" />
-      <FormRender v-if="type === 'value'" v-model="model" :schema="linkageSchema(designInstance.schema, model!)" />
+      <FormRender v-if="type === 'config'" v-model="model" :schema="configSchema" />
+      <FormRender
+        v-if="type === 'value'"
+        v-model="model"
+        :schema="valueSchema(designInstance.schema, model!)"
+      />
     </el-dialog>
   </div>
 </template>
@@ -27,8 +31,7 @@ import FormRender from '@vue-form-craft/form-render'
 import type { FormItemType } from '@vue-form-craft/types'
 import { useDesignInstance, useLocale } from '@vue-form-craft/hooks'
 import { ns } from '@vue-form-craft/utils'
-import linkageSchema from './valueLinkageSchema'
-import configLinkageSchema from './configLinkageSchema'
+import { configSchema, valueSchema } from './linkageSchema'
 
 const model = defineModel<FormItemType>()
 
