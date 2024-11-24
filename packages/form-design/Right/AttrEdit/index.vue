@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import FormRender from '../../../form-render'
+import FormRender from '@vue-form-craft/form-render'
 import { getDataByPath, ns, setDataByPath } from '@vue-form-craft/utils'
 import { isString } from 'lodash'
 import type { FormItemType, FormSchema } from '@vue-form-craft/types'

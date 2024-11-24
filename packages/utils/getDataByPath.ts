@@ -1,4 +1,8 @@
-const getDataByPath = (obj: Record<string, any>, path: string="data") => {
+const getDataByPath = (obj: Record<string, any>, path: string = 'data') => {
+  if (path === '.') {
+    return obj
+  }
+
   // 使用正则表达式分割路径字符串
   const keys = path.split('.')
 

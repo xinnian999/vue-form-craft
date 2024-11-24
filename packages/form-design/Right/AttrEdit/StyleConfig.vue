@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import type { FormSchema } from '@vue-form-craft/types'
-import FormRender from '../../../form-render'
+import FormRender from '@vue-form-craft/form-render'
 import { ns } from '@vue-form-craft/utils';
 
 const currentProps = defineModel<Record<string, any>>()
