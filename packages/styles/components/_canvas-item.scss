@@ -40,8 +40,8 @@
 
   .hidden-ico {
     position: absolute;
-    right: 0;
-    top: 0;
+    left: -1px;
+    bottom: -1px;
     z-index: 10;
     padding: 0px 5px;
     font-size: 13px;
@@ -76,8 +76,8 @@
 
   .layout-title {
     position: absolute;
-    left: -1px;
-    bottom: -1px;
+    right: -1px;
+    top: -1px;
     padding: 1px 5px;
     background-color: var(--el-color-primary);
     font-size: 12px;

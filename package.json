@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "pnpm -C play dev",
     "build": "pnpm -C packages/vue-form-craft build",
+    "small-v": "pnpm -C packages/vue-form-craft v",
     "release": "pnpm -C packages/vue-form-craft release",
     "docs:dev": "pnpm -C docs dev",
     "docs:build": "pnpm -C docs build",

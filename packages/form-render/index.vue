@@ -102,7 +102,7 @@ watch(
   () => props.schema?.initialValues,
   async (newVal) => {
     await nextTick()
-    Object.assign(initialValues, newVal)
+    Object.assign(initialValues, cloneDeep(newVal))
   },
   { immediate: true }
 )

@@ -54,8 +54,8 @@ const props = withDefaults(
 
 const designInstance = useDesignInstance()
 
-const onAdd = (e: Record<string, any>) => {
-  const source = e.item.__draggable_context.element
+const onAdd = (e: Record<string, any>) => {  
+  const source = e.item._underlying_vm_
 
   designInstance.updateCurrent(getCurrentByKey(designInstance.list, source.designKey)!)
 

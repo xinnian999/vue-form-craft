@@ -4,7 +4,7 @@ import { defineAsyncComponent, h } from 'vue'
 
 export default {
   title: '对象容器',
-  icon: h(Icon, { name: 'inline' }),
+  icon: h(Icon, { name: 'itemGroup' }),
   type: 'high',
   component: 'ObjGroup',
   render: defineAsyncComponent(() => import('./ObjGroup.vue')),

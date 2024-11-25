@@ -31,7 +31,7 @@
         :drag-class="ns('menu-list-drag')"
         :fallback-class="ns('menu-list-fallback')"
         item-key="designKey"
-        @clone="onClone"
+        :clone="onClone"
       >
         <template #item="{ element }">
           <li :class="ns('menu-list-item')">
@@ -56,11 +56,10 @@ import draggable from 'vuedraggable-es-fix'
 import { computed } from 'vue'
 import { ref } from 'vue'
 import parseMenus from './menus'
-import type { FormSchema } from '@vue-form-craft/types'
+import type { FormElement, FormItemType, FormSchema } from '@vue-form-craft/types'
 import { useDesignInstance, useElements, useLang, useLocale } from '@vue-form-craft/hooks'
 import { getRandomId, ns } from '@vue-form-craft/utils'
 import { template } from '@vue-form-craft/config'
-import { cloneDeep } from 'lodash'
 
 const drawerVisible = ref(false)
 
@@ -82,25 +81,17 @@ const useTemplate = (templateSchema: FormSchema) => {
   designInstance.updateSchema(templateSchema)
 }
 
-const onClone = (e: Record<string, any>) => {
-  const source = cloneDeep(e.item.__draggable_context.element)
-
-  if (source.render) {
-    e.item.__draggable_context.element = {
-      component: source.component,
-      designKey: `design-${getRandomId(4)}`,
-      name: `form-${getRandomId(4)}`
-    }
-
-    if (source.type === 'layout') {
-      e.item.__draggable_context.element.children = []
-    }
-  } else {
-    e.item.__draggable_context.element = {
-      ...source,
-      designKey: `design-${getRandomId(4)}`,
-      name: `form-${getRandomId(4)}`
-    }
+const onClone = (source: FormElement) => {
+  const parse: FormItemType = {
+    component: source.component,
+    designKey: `design-${getRandomId(4)}`,
+    name: `form-${getRandomId(4)}`
   }
+
+  if (source.type === 'layout' || source.attrSchema.initialValues?.children) {
+    parse.children = []
+  }
+
+  return parse
 }
 </script>

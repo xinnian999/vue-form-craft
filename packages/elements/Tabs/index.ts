@@ -6,7 +6,7 @@ export default {
   title: '选项卡',
   component: 'Tabs',
   render: defineAsyncComponent(() => import('./Tabs.vue')),
-  icon: h(Icon, { name: 'collapse' }),
+  icon: h(Icon, { name: 'tabs' }),
   type: 'layout',
   order: 4,
   attrSchema: {
