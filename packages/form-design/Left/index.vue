@@ -71,7 +71,7 @@ const locale = useLocale()
 
 const lang = useLang()
 
-const templates = designInstance.templates ? designInstance.templates : template
+const templates = designInstance.templates?.length ? designInstance.templates : template
 
 const menus = computed(() =>
   parseMenus({ elements, omits: designInstance.omitMenus || [], lang: lang.value })

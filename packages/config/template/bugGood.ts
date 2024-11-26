@@ -98,15 +98,6 @@ export default {
         "text": "{{ $selectData.product ? $selectData.product?.price + '元' : '请选择商品' }}"
       },
       "designKey": "design-0oHv"
-    },
-    {
-      "label": "文本",
-      "component": "Text",
-      "props": {
-        "text": "这是一段文本"
-      },
-      "designKey": "design-47hM",
-      "name": "form-9Gy2"
     }
   ]
 } satisfies FormSchema
