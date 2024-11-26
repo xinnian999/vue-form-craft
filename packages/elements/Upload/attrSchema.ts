@@ -36,14 +36,12 @@ export default {
       ],
       props: {
         columns: 3,
-        'row-gap': 0,
+        'row-gap': 20,
         'column-gap': 20
       },
       designKey: 'form-R003',
       name: 'cNmCuu',
-      style: {
-        marginBottom: 0
-      }
+
     },
     { label: '上传地址', component: 'Input', name: 'props.action' },
     { label: '上传的文件字段名', component: 'Input', name: 'props.name' },

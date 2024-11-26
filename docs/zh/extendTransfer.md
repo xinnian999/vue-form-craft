@@ -120,14 +120,12 @@ export default {
       ],
       props: {
         columns: 3,
-        'row-gap': 0,
+        'row-gap': 20,
         'column-gap': 20
       },
       designKey: 'form-R003',
       name: 'cNmCuu',
-      style: {
-        marginBottom: 0
-      }
+
     },
     {
       component: 'Divider',
