@@ -105,7 +105,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, h, watch } from 'vue'
+import { computed, h, provide, ref, watch } from 'vue'
 import { FormItem, CanvasGroup } from '@vue-form-craft/components'
 import { deepParse } from '@vue-form-craft/utils'
 import { isEqual, isString, pickBy } from 'lodash'
@@ -138,6 +138,8 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const list = defineModel<Record<string, any>[]>({ default: [] })
+
+const cIndex = ref(0)
 
 const formInstance = useFormInstance()
 
@@ -174,8 +176,6 @@ const formatter = (row: any, column: TableColumnCtx<any>, cellValue: any, index:
 
 // formList 值联动
 watch(list, (newVal, oldVal) => {
-  if (!props.children.some((item) => item.change)) return
-
   const changeIndex = newVal.reduce((acc, cur, index) => {
     if (!isEqual(cur, oldVal[index])) {
       acc = index
@@ -183,6 +183,10 @@ watch(list, (newVal, oldVal) => {
 
     return acc
   }, 0)
+
+  cIndex.value = changeIndex
+
+  if (!props.children.some((item) => item.change)) return
 
   const fields = parseFields(changeIndex)
 
@@ -206,6 +210,11 @@ watch(list, (newVal, oldVal) => {
     }
   })
 })
+
+provide(
+  '$objGroupBase',
+  computed(() => `${props.name}.${cIndex.value}`)
+)
 </script>
 
 <style lang="scss">
@@ -236,7 +245,7 @@ watch(list, (newVal, oldVal) => {
     margin-left: 0;
   }
 
-  .layoutRender{
+  .layoutRender {
     border: 2px dashed var(--el-color-primary);
     padding: 5px;
   }

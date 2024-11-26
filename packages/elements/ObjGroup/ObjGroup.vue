@@ -16,7 +16,7 @@
 import { CanvasGroup, FormItem } from '@vue-form-craft/components'
 import type { FormItemType } from '@vue-form-craft/types'
 import { useFormInstance } from '@vue-form-craft/hooks'
-import { computed, inject, provide } from 'vue'
+import { inject, provide, ref, type Ref } from 'vue'
 
 const props = defineProps<{
   children: FormItemType[]
@@ -25,12 +25,16 @@ const props = defineProps<{
 
 const formInstance = useFormInstance()
 
-const objGroupBase = inject('$objGroupBase')
+const objGroupBase = inject<Ref<string>>('$objGroupBase')
 
+// 只初始化一次
+const base = objGroupBase ? `${objGroupBase.value}.${props.name}` : props.name
 
-const base = computed(() => (objGroupBase ? `${objGroupBase}.${props.name}` : props.name))
+// watchEffect(()=>{
+//   console.log(objGroupBase?.value);
+// })
 
-provide('$objGroupBase', base.value)
+provide('$objGroupBase', ref(base))
 </script>
 
 <style lang="scss">
