@@ -17,7 +17,7 @@
             </el-space>
 
             <el-button
-              v-if="allowReduce"
+              v-if="allowReduce && !isMin"
               @click="handleReduceItem(index)"
               circle
               type="primary"
@@ -37,7 +37,7 @@
             <div class="card-header">
               <span>{{ title + (index + 1) }}</span>
               <el-button
-                v-if="allowReduce"
+                v-if="allowReduce && !isMin"
                 @click="handleReduceItem(index)"
                 circle
                 type="primary"
@@ -71,7 +71,7 @@
         <el-table-column fixed="right" min-width="60">
           <template #default="record">
             <el-button
-              v-if="allowReduce"
+              v-if="allowReduce && !isMin"
               @click="handleReduceItem(record.$index)"
               circle
               type="primary"
@@ -105,7 +105,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, h, provide, ref, watch } from 'vue'
+import { computed, h, onMounted, provide, ref, watch } from 'vue'
 import { FormItem, CanvasGroup } from '@vue-form-craft/components'
 import { deepParse } from '@vue-form-craft/utils'
 import { isEqual, isString, pickBy } from 'lodash'
@@ -118,10 +118,10 @@ interface Props {
   children: FormItemType[]
   allowAdd?: boolean
   allowReduce?: boolean
+  minLines?: number
   maxLines?: number
   mode?: 'table' | 'card' | 'inline'
   title?: string
-  newItemDefaults?: (index: number) => Record<string, any>
   name?: string
   disabled?: boolean
 }
@@ -130,10 +130,10 @@ const props = withDefaults(defineProps<Props>(), {
   children: () => [],
   allowAdd: true,
   allowReduce: true,
+  minLines: 0,
   maxLines: 999,
   mode: 'table',
   title: '',
-  newItemDefaults: () => ({}),
   name: ''
 })
 
@@ -150,11 +150,15 @@ const isMax = computed(() => {
   return list.value.length >= props.maxLines
 })
 
+const isMin = computed(() => {
+  return list.value.length <= props.minLines
+})
+
 const handleAddItem = () => {
   if (isMax.value) {
     return
   }
-  list.value = [...list.value, props.newItemDefaults(list.value.length)]
+  list.value = [...list.value, {}]
 }
 
 const handleReduceItem = (index: number) => {
@@ -176,6 +180,8 @@ const formatter = (row: any, column: TableColumnCtx<any>, cellValue: any, index:
 
 // formList 值联动
 watch(list, (newVal, oldVal) => {
+  // console.log(newVal, oldVal);
+  
   const changeIndex = newVal.reduce((acc, cur, index) => {
     if (!isEqual(cur, oldVal[index])) {
       acc = index
@@ -209,6 +215,12 @@ watch(list, (newVal, oldVal) => {
       })
     }
   })
+})
+
+onMounted(() => {
+  if (props.minLines && !list.value?.length) {
+    list.value = Array.from({ length: props.minLines }, () => ({}))
+  }
 })
 
 provide(

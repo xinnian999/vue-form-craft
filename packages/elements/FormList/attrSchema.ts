@@ -1,4 +1,4 @@
-import type { FormSchema } from "@vue-form-craft/types";
+import type { FormSchema } from '@vue-form-craft/types'
 
 export default {
   size: 'small',
@@ -7,7 +7,12 @@ export default {
     label: '自增容器',
     children: [],
     props: {
-      mode: 'table'
+      mode: 'table',
+      title: '数据',
+      minLines: 0,
+      maxLines: 999,
+      allowAdd: true,
+      allowReduce: true
     }
   },
   items: [
@@ -39,8 +44,7 @@ export default {
         'column-gap': 20
       },
       designKey: 'form-R003',
-      name: 'cNmCuu',
-
+      name: 'cNmCuu'
     },
     {
       label: '显示模式',
@@ -56,12 +60,21 @@ export default {
       }
     },
     {
-      label: '卡片标题',
+      label: '自增前缀',
       component: 'Input',
-      name: 'props.title',
-      hidden: "{{$values.props.mode!=='card'}}"
+      name: 'props.title'
     },
-    
-
+    {
+      label: '最小行数',
+      component: 'InputNumber',
+      name: 'props.minLines'
+    },
+    {
+      label: '最大行数',
+      component: 'InputNumber',
+      name: 'props.maxLines'
+    },
+    { label: '允许新增行', component: 'Switch', name: 'props.allowAdd' },
+    { label: '允许删除行', component: 'Switch', name: 'props.allowReduce' }
   ]
 } satisfies FormSchema

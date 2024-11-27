@@ -61,7 +61,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, reactive } from 'vue'
+import { computed, onBeforeMount, reactive } from 'vue'
 import { isRegexString, getDataByPath, setDataByPath, ns } from '@vue-form-craft/utils'
 import type { FormItemType } from '@vue-form-craft/types'
 import Icon from '@vue-form-craft/icons'
@@ -180,14 +180,17 @@ const formItemProps = computed(() => {
   return props
 })
 
-onMounted(() => {
+onBeforeMount(() => {
   if (value.value === undefined && thisProps.initialValue !== undefined && !formInstance.design) {
     const newInitialValues = setDataByPath(
       formInstance.initialValues,
       thisProps.name,
       thisProps.initialValue
     )
+
     formInstance.updateInitialValues(newInitialValues)
+
+    value.value = thisProps.initialValue
   }
 })
 </script>

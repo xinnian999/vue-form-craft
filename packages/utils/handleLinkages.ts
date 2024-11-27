@@ -1,5 +1,5 @@
 import { isEqual, cloneDeep, isArray } from 'lodash'
-import type { FormItemType } from '@vue-form-craft/types'
+import type { FormInstance, FormItemType } from '@vue-form-craft/types'
 import setDataByPath from './setDataByPath'
 import getDataByPath from './getDataByPath'
 
@@ -8,9 +8,16 @@ type handleLinkagesType = (obj: {
   oldVal?: Record<string, any>
   formValues: Record<string, any>
   formItems: FormItemType[]
+  updateFormValues: FormInstance['updateFormValues']
 }) => void
 
-const handleLinkages: handleLinkagesType = ({ newVal, oldVal={}, formValues, formItems }) => {
+const handleLinkages: handleLinkagesType = ({
+  newVal,
+  oldVal = {},
+  formValues,
+  formItems,
+  updateFormValues
+}) => {
   for (const item of formItems) {
     const newValue = getDataByPath(newVal, item.name)
     const oldValue = getDataByPath(oldVal, item.name)
@@ -42,7 +49,7 @@ const handleLinkages: handleLinkagesType = ({ newVal, oldVal={}, formValues, for
           }
         }
       })
-      formValues.value = temp
+      updateFormValues(temp)
     }
 
     if (item.children && item.component !== 'FormList') {
@@ -50,7 +57,8 @@ const handleLinkages: handleLinkagesType = ({ newVal, oldVal={}, formValues, for
         newVal,
         oldVal,
         formValues,
-        formItems: item.children
+        formItems: item.children,
+        updateFormValues
       })
     }
   }

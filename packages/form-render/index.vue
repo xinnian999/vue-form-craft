@@ -17,10 +17,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, reactive, provide, watch, nextTick, toRefs, readonly } from 'vue'
+import { ref, computed, reactive, provide, watch, nextTick, toRefs, readonly, onMounted } from 'vue'
 import type { FormInstance as ElFormInstance } from 'element-plus'
 import { handleLinkages, deepParse, setDataByPath, getDataByPath } from '@vue-form-craft/utils'
-import { cloneDeep, merge } from 'lodash'
+import { cloneDeep } from 'lodash'
 import type { FormInstance, FormRenderProps, FormSchema } from '@vue-form-craft/types'
 import { $formInstance } from '@vue-form-craft/config/symbol'
 import { useLocale } from '@vue-form-craft/hooks'
@@ -43,7 +43,7 @@ const emit = defineEmits<{
 
 const formRef = ref<ElFormInstance>()
 
-const formValues = defineModel<Record<string, any>>({ default: () => ({}) })
+const formValues = defineModel<Record<string, any>>({ default: reactive({}) })
 
 const schema = defineModel<FormSchema>('schema', {
   default: reactive({
@@ -84,32 +84,25 @@ const context = computed(() => ({
 }))
 
 watch(
-  formValues,
+  () => cloneDeep(formValues.value),
   async (newVal, oldVal) => {
     if (props.read) {
       return
     }
     await nextTick()
 
-    setTimeout(() => {
-      handleLinkages({ newVal, oldVal, formValues, formItems: formItems.value })
-    })
+    handleLinkages({ newVal, oldVal, formValues, formItems: formItems.value,updateFormValues })
   },
   { deep: true, immediate: true }
 )
 
-watch(
-  () => props.schema?.initialValues,
-  async (newVal) => {
-    await nextTick()
-    Object.assign(initialValues, cloneDeep(newVal))
-  },
-  { immediate: true }
-)
-
-watch(initialValues, async (newVal) => {
-  await nextTick()
-  formValues.value = merge(newVal, formValues.value)
+// 支持从schema初始化默认值对象
+onMounted(() => {
+  if (props.schema?.initialValues) {
+    const initialValues = cloneDeep(props.schema?.initialValues)
+    // 暂时使用浅合并，可能会造成原默认值props会被当前props永久覆盖
+    formValues.value = Object.assign(initialValues, formValues.value)
+  }
 })
 
 const validate: FormInstance['validate'] = () => formRef.value?.validate()
@@ -126,6 +119,7 @@ const submit: FormInstance['submit'] = () => {
 
 const resetFields: FormInstance['resetFields'] = (names) => {
   emit('reset')
+
   if (names) {
     let temp = cloneDeep(formValues.value)
     names.forEach((name) => {
@@ -138,7 +132,7 @@ const resetFields: FormInstance['resetFields'] = (names) => {
 }
 
 const updateFormValues: FormInstance['updateFormValues'] = (values) => {
-  formValues.value = values
+  Object.assign(formValues.value, values)
 }
 
 const updateSelectData: FormInstance['updateSelectData'] = (key, value) => {
