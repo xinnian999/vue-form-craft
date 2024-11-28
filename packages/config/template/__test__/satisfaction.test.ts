@@ -1,9 +1,8 @@
 import { expect, describe, it } from 'vitest'
-import { configTest } from '@vue-form-craft/utils'
-import { flushPromises, mount } from '@vue/test-utils'
+import { configTest, wait } from '@vue-form-craft/utils'
+import { mount } from '@vue/test-utils'
 import formRender from '@vue-form-craft/form-render'
 import schema from '../satisfaction'
-import { nextTick } from 'vue'
 
 configTest()
 
@@ -14,16 +13,14 @@ describe('template satisfaction', async () => {
         schema
       }
     })
-    await nextTick()
-    await flushPromises()
 
-    await new Promise((resolve) => setTimeout(resolve, 100))
+    await wait()
 
     const satisfactionEl = wrapper.findAll('.Radio-satisfaction .el-radio__original')
 
     await satisfactionEl[0].setValue(true)
 
-    await new Promise((resolve) => setTimeout(resolve, 100))
+    expect(wrapper.vm.formValues).toStrictEqual({ satisfaction: 5 })
 
     expect(wrapper.find('.TextArea-improvementSuggestions').exists()).toBe(false)
   })
@@ -34,16 +31,14 @@ describe('template satisfaction', async () => {
         schema
       }
     })
-    await nextTick()
-    await flushPromises()
 
-    await new Promise((resolve) => setTimeout(resolve, 100))
+    await wait()
 
     const satisfactionEl = wrapper.findAll('.Radio-satisfaction .el-radio__original')
 
     await satisfactionEl[satisfactionEl.length - 1].setValue(true)
 
-    await new Promise((resolve) => setTimeout(resolve, 100))
+    expect(wrapper.vm.formValues).toStrictEqual({ satisfaction: 1 })
 
     expect(wrapper.find('.TextArea-improvementSuggestions').exists()).toBe(true)
   })

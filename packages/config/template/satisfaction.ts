@@ -49,8 +49,7 @@ export default {
       },
       designKey: 'form-age',
       name: 'age',
-      required: true,
-      initialValue: null
+      required: true
     },
     {
       label: '您对我们的服务满意吗？',
@@ -111,13 +110,7 @@ export default {
       },
       designKey: 'form-contact',
       name: 'contact',
-      required: true,
-      change: [
-        {
-          target: 'participate',
-          value: true
-        }
-      ]
+      required: true
     }
   ],
   labelBold: false,

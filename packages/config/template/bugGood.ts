@@ -9,7 +9,7 @@ export default {
     {
       "label": "商品选择",
       "name": "product",
-      "component": "Select",
+      "component": "Radio",
       "props": {
         "placeholder": "请选择商品",
         "options": [
