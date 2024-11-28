@@ -6,7 +6,7 @@
 
     <el-form-item
       v-else
-      :class="[ns('form-item'), thisProps.class]"
+      :class="[ns('form-item'), thisProps.class, `${component}-${name}`]"
       :style="style"
       :key="name"
       :prop="name"

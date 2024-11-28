@@ -1,17 +1,11 @@
-import { mount, config, flushPromises } from '@vue/test-utils'
+import { mount, flushPromises } from '@vue/test-utils'
 import { describe, it, expect } from 'vitest'
-import ElementPlus from 'element-plus'
 import FormRender from '@vue-form-craft/form-render'
 import type { FormSchema } from '@vue-form-craft/types'
-import { $options } from '@vue-form-craft/config'
-import { nextTick, ref } from 'vue'
+import { ref } from 'vue'
+import { configTest } from '@vue-form-craft/utils'
 
-config.global.plugins = [ElementPlus]
-config.global.provide = {
-  [$options]: {
-    lang: 'zh'
-  }
-}
+configTest()
 
 describe('FormRender Schema Test', () => {
   it('label', async () => {

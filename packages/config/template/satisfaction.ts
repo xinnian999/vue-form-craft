@@ -59,23 +59,23 @@ export default {
         options: [
           {
             label: '非常满意',
-            value: 4
+            value: 5
           },
           {
             label: '满意',
-            value: 3
+            value: 4
           },
           {
             label: '一般',
-            value: 2
+            value: 3
           },
           {
             label: '不满意',
-            value: 1
+            value: 2
           },
           {
             label: '非常不满意',
-            value: 0
+            value: 1
           }
         ],
         labelKey: 'label',
@@ -101,7 +101,7 @@ export default {
       },
       designKey: 'form-improvementSuggestions',
       name: 'improvementSuggestions',
-      hidden: '{{ !$values.satisfaction || $values.satisfaction > 2 }}'
+      hidden: '{{ !$values.satisfaction || $values.satisfaction > 3 }}'
     },
     {
       label: '联系方式',

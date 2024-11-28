@@ -1,17 +1,11 @@
-import { mount, config, flushPromises } from '@vue/test-utils'
+import { mount, flushPromises } from '@vue/test-utils'
 import { describe, it, expect } from 'vitest'
-import ElementPlus from 'element-plus'
 import FormRender from '@vue-form-craft/form-render'
 import type { FormSchema } from '@vue-form-craft/types'
-import { $options } from '@vue-form-craft/config'
 import { nextTick } from 'vue'
+import { configTest } from '@vue-form-craft/utils'
 
-config.global.plugins = [ElementPlus]
-config.global.provide = {
-  [$options]: {
-    lang: 'zh'
-  }
-}
+configTest()
 
 const schema = {
   labelWidth: 150,
@@ -114,7 +108,7 @@ describe('FormRender Attrs', () => {
     await wrapper.find('[name="password"]').setValue('991015')
     await wrapper.find('button[name="submit-btn"]').trigger('click')
     await flushPromises()
-    await nextTick();
+    await nextTick()
     expect(wrapper.emitted()).toHaveProperty('finish') // 提交且校验成功 事件
 
     // 重置按钮点击
