@@ -14,8 +14,8 @@ describe('template bugGood', async () => {
       }
     })
 
-    await wait()
-
+    await wait(100)
+    
     expect(wrapper.find('.Text-price').html()).toContain('请选择商品')
 
     const productEl = wrapper.findAll('.Radio-product .el-radio__original')

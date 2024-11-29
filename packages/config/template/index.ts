@@ -7,7 +7,7 @@ import formList from './formList'
 import article from './article'
 // import linkage1 from './linkage1'
 // import linkage2 from './linkage2'
-// import linkage3 from './linkage3'
+import valueLinkage from './valueLinkage'
 // import linkage4 from './linkage4'
 // import MostTest from './300Test'
 // import nest from './nest'
@@ -20,6 +20,7 @@ export default [
   { name: '用户满意度调查', schema: satisfaction, id: 'satisfaction' },
   { name: '写文章', schema: article, id: 'article' },
   { name: '自增组件', schema: formList, id: 'formList' },
+  { name: '值联动', schema: valueLinkage, id: 'valueLinkage' },
   // { name: '联动案例1', schema: linkage1, id: 'linkage1' },
   // { name: '联动案例2', schema: linkage2, id: 'linkage2' },
   // { name: '联动案例3', schema: linkage3, id: 'linkage3' },
