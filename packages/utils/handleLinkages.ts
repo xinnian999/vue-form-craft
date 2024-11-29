@@ -52,6 +52,7 @@ const handleLinkages: handleLinkagesType = ({
       updateFormValues(temp)
     }
 
+    // 跳过FormList的子项
     if (item.children && item.component !== 'FormList') {
       handleLinkages({
         newVal,

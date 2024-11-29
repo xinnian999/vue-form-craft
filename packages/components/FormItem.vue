@@ -61,12 +61,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeMount, reactive } from 'vue'
+import { computed, onBeforeMount, reactive, watch } from 'vue'
 import { isRegexString, getDataByPath, setDataByPath, ns } from '@vue-form-craft/utils'
 import type { FormItemType } from '@vue-form-craft/types'
 import Icon from '@vue-form-craft/icons'
 import { useFormInstance } from '@vue-form-craft/hooks'
 import { useElements } from '@vue-form-craft/hooks'
+import { cloneDeep, isArray, isEqual } from 'lodash'
 
 const thisProps = defineProps<FormItemType>()
 
@@ -192,5 +193,43 @@ onBeforeMount(() => {
 
     value.value = thisProps.initialValue
   }
+})
+
+watch(value, (newVal, oldVal) => {
+  const change = thisProps.change
+  const diff = isEqual(newVal, oldVal)
+
+  if (!change || diff) return
+
+  let temp = cloneDeep(formInstance.formValues)
+
+  change.forEach(({ target, value, condition }) => {
+    if (condition === false) return
+    
+    if (target.includes('.*.')) {
+      //自增组件特殊处理
+      const targetArr = target.split('.*.')
+      const listTarget = targetArr.pop()!
+      const targetParse = targetArr.join('.')
+      const list = getDataByPath(formInstance.formValues, targetParse)
+      if (isArray(list)) {
+        temp = setDataByPath(
+          temp,
+          targetParse,
+          list.map((item) => {
+            return {
+              ...item,
+              [listTarget]: value
+            }
+          })
+        )
+      }
+      return
+    }
+
+    temp = setDataByPath(temp, target, value)
+  })
+
+  formInstance.updateFormValues(temp)
 })
 </script>

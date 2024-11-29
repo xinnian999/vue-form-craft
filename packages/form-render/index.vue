@@ -83,18 +83,18 @@ const context = computed(() => ({
   $locale: locale.value
 }))
 
-watch(
-  () => cloneDeep(formValues.value),
-  async (newVal, oldVal) => {
-    if (props.read) {
-      return
-    }
-    await nextTick()
+// watch(
+//   () => cloneDeep(formValues.value),
+//   async (newVal, oldVal) => {
+//     if (props.read) {
+//       return
+//     }
+//     await nextTick()
 
-    handleLinkages({ newVal, oldVal, formValues, formItems: formItems.value,updateFormValues })
-  },
-  { deep: true, immediate: true }
-)
+//     handleLinkages({ newVal, oldVal, formValues, formItems: formItems.value,updateFormValues })
+//   },
+//   { deep: true, immediate: true }
+// )
 
 // 支持从schema初始化默认值对象
 onMounted(() => {
