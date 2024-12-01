@@ -21,7 +21,7 @@
               @click="handleReduceItem(index)"
               circle
               type="primary"
-              class="list-btn"
+              class="list-btn reduceBtn"
               :disabled="disabled"
               size="small"
             >
@@ -41,7 +41,7 @@
                 @click="handleReduceItem(index)"
                 circle
                 type="primary"
-                class="list-btn"
+                class="list-btn reduceBtn"
                 :disabled="disabled"
                 size="small"
               >
@@ -75,7 +75,7 @@
               @click="handleReduceItem(record.$index)"
               circle
               type="primary"
-              class="list-btn"
+              class="list-btn reduceBtn"
               :disabled="disabled"
               size="small"
               plain
@@ -180,8 +180,8 @@ const formatter = (row: any, column: TableColumnCtx<any>, cellValue: any, index:
 
 // formList 值联动
 watch(list, (newVal, oldVal) => {
-  // console.log(newVal, oldVal);
-  
+  console.log(newVal, oldVal)
+
   const changeIndex = newVal.reduce((acc, cur, index) => {
     if (!isEqual(cur, oldVal[index])) {
       acc = index
@@ -196,8 +196,8 @@ watch(list, (newVal, oldVal) => {
 
   const fields = parseFields(changeIndex)
 
-  const newChangeData = newVal[changeIndex]
-  const oldChangeData = oldVal[changeIndex]
+  const newChangeData = newVal[changeIndex] || {}
+  const oldChangeData = oldVal[changeIndex] || {}
 
   fields.forEach((item: FormItemType) => {
     if (

@@ -4,7 +4,6 @@ import type { TemplateData } from '@vue-form-craft/types'
 import login from './login'
 import register from './register'
 import formList from './formList'
-import article from './article'
 // import linkage1 from './linkage1'
 // import linkage2 from './linkage2'
 import valueLinkage from './valueLinkage'
@@ -18,7 +17,6 @@ export default [
   { name: '注册账号', schema: register, id: 'register' },
   { name: '商品购买', schema: bugGood, id: 'bugGood' },
   { name: '用户满意度调查', schema: satisfaction, id: 'satisfaction' },
-  { name: '写文章', schema: article, id: 'article' },
   { name: '自增组件', schema: formList, id: 'formList' },
   { name: '值联动', schema: valueLinkage, id: 'valueLinkage' },
   // { name: '联动案例1', schema: linkage1, id: 'linkage1' },
