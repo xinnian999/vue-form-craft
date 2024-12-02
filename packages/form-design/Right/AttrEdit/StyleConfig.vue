@@ -14,7 +14,7 @@
 import { ref } from 'vue'
 import type { FormSchema } from '@vue-form-craft/types'
 import FormRender from '../../../form-render'
-import { ns } from '@vue-form-craft/utils';
+import { ns } from '@vue-form-craft/utils'
 
 const currentProps = defineModel<Record<string, any>>()
 
@@ -195,6 +195,23 @@ const schema: FormSchema = {
       component: 'ColorInput',
       designKey: 'design-A2bj',
       name: 'style.color'
+    },
+    {
+      label: '缩放',
+      component: 'Slider',
+      designKey: 'design-A2sf',
+      name: 'style.transform',
+      props: {
+        min: 50,
+        max: 150
+      },
+      initialValue:100,
+      change: [
+        {
+          target: 'style.transform',
+          value: '{{ `scale(${$values.style.transform / 100 })`  }}'
+        }
+      ]
     },
     {
       label: '自定义',

@@ -231,5 +231,5 @@ watch(value, (newVal, oldVal) => {
   })
 
   formInstance.updateFormValues(temp)
-})
+},{immediate:true})
 </script>
