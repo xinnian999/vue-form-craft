@@ -1,6 +1,10 @@
 import { cloneDeep } from 'lodash'
 
 const setDataByPath = (object: Record<string, any>, path: string, value: any) => {
+  if (path === '.') {
+    return value
+  }
+  
   // 深拷贝对象，避免直接修改原对象
   const cloneObj = cloneDeep(object)
 

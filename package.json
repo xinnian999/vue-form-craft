@@ -11,7 +11,8 @@
     "docs:preview": "pnpm -C docs preview",
     "change": "changeset",
     "change-v": "changeset version",
-    "test": "vitest --config ./vitest.config.ts"
+    "test": "vitest --config ./vitest.config.ts",
+    "clear": "find . -type d -name 'node_modules' -exec rm -rf {} \\;"
   },
   "dependencies": {
     "element-plus": "^2.8.3",

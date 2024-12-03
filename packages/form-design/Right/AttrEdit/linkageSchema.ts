@@ -1,5 +1,78 @@
 import type { FormSchema, FormItemType } from '@vue-form-craft/types'
-// import * as elements from '@vue-form-craft/elements'
+
+export const configSchema = {
+  labelWidth: 150,
+  labelAlign: 'top',
+  size: 'default',
+  scrollToError: true,
+  items: [
+    {
+      label: '快速配置',
+      children: [
+        {
+          label: '配置选择',
+          props: {
+            mode: 'static',
+            options: [
+              {
+                label: '选项1',
+                value: 'value1'
+              },
+              {
+                label: '选项2',
+                value: 'value2'
+              },
+              {
+                label: '选项3',
+                value: 'value3'
+              }
+            ],
+            placeholder: '请选择...'
+          },
+          component: 'Select',
+          designKey: 'design-fQVo',
+          name: 'config'
+        },
+        {
+          label: '改变方式',
+          props: {
+            mode: 'static',
+            options: [
+              {
+                label: '选项1',
+                value: 'value1'
+              },
+              {
+                label: '选项2',
+                value: 'value2'
+              },
+              {
+                label: '选项3',
+                value: 'value3'
+              }
+            ],
+            placeholder: '请选择...'
+          },
+          component: 'Select',
+          designKey: 'design-a0Z8',
+          name: 'form-XlpX'
+        }
+      ],
+      props: {
+        mode: 'table'
+      },
+      component: 'FormList',
+      designKey: 'design-QohS',
+      name: 'quick'
+    },
+    {
+      label: '自定义',
+      component: 'JsonEdit',
+      designKey: 'design-A2bj',
+      name: '.'
+    }
+  ]
+} satisfies FormSchema
 
 // type option = {
 //   label?: string
@@ -19,7 +92,7 @@ import type { FormSchema, FormItemType } from '@vue-form-craft/types'
 //     return acc
 //   }, [])
 
-export default (schema: FormSchema, current: FormItemType): FormSchema => {
+export const valueSchema = (schema: FormSchema, current: FormItemType): FormSchema => {
   // const targetOptions = build(schema.items).filter((item) => item.value !== current.name)
 
   return {
