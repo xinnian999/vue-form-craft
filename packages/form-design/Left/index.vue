@@ -88,9 +88,9 @@ const onClone = (source: FormElement) => {
     name: `form-${getRandomId(4)}`
   }
 
-  if (source.type === 'layout' || source.attrSchema.initialValues?.children) {
-    parse.children = []
-  }
+  // if (source.type === 'layout' || source.attrSchema.initialValues?.children) {
+  //   parse.children = []
+  // }
 
   return parse
 }

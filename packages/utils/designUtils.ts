@@ -52,7 +52,7 @@ export const copyItems = (list: FormItemType[], id: string): FormItemType[] => {
       const newItem = {
         ...cloneDeep(current),
         designKey: `form-${getRandomId(4)}`,
-        name: getRandomId(8)
+        name: `${current.name}-${getRandomId(2)}`
       }
       if (current.children) {
         newItem.children = copyChildren(current.children)

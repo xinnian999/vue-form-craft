@@ -15,7 +15,7 @@ import { getDataByPath, ns, setDataByPath } from '@vue-form-craft/utils'
 import { isString } from 'lodash'
 import type { FormItemType, FormSchema } from '@vue-form-craft/types'
 import LinkageConfig from './LinkageConfig.vue'
-import StyleConfig from './StyleConfig.vue'
+import StyleConfig from './StyleConfig/index.vue'
 import { useElements, useLang } from '@vue-form-craft/hooks'
 
 const elements = useElements()

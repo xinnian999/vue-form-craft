@@ -16,8 +16,11 @@
       }
 
       @include ns('style-config') {
-        text-align: center;
         padding-top: 20px;
+
+        .more {
+          text-align: center;
+        }
       }
     }
   }
