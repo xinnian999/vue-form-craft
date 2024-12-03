@@ -9,7 +9,7 @@
     </div>
 
     <el-drawer v-model="visible" title="组件样式">
-      <FormRender v-model="currentProps" :schema="schema" ref="formRef" />
+      <FormRender v-model="currentProps" :schema="schema" ref="formRef" style="padding: 0 15px;" />
     </el-drawer>
   </div>
 </template>

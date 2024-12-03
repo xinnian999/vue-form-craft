@@ -1,5 +1,5 @@
 <template>
-  <el-dialog destroy-on-close v-model="visible" top="3vh" title="配置级联动">
+  <el-dialog destroy-on-close v-model="visible" top="3vh"  title="配置级联动" width="70vw">
     <FormRender v-model="designInstance.current!" :schema="configSchema" />
   </el-dialog>
 </template>
