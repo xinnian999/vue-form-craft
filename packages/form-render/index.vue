@@ -17,10 +17,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, reactive, provide, watch, nextTick, toRefs, readonly, onMounted } from 'vue'
+import { ref, computed, reactive, provide, toRefs, readonly, onMounted } from 'vue'
 import type { FormInstance as ElFormInstance } from 'element-plus'
-import { handleLinkages, deepParse, setDataByPath, getDataByPath } from '@vue-form-craft/utils'
-import { cloneDeep } from 'lodash'
+import { deepParse, setDataByPath, getDataByPath } from '@vue-form-craft/utils'
+import { cloneDeep, merge, mergeWith } from 'lodash'
 import type { FormInstance, FormRenderProps, FormSchema } from '@vue-form-craft/types'
 import { $formInstance } from '@vue-form-craft/config/symbol'
 import { useLocale } from '@vue-form-craft/hooks'
@@ -83,25 +83,16 @@ const context = computed(() => ({
   $locale: locale.value
 }))
 
-// watch(
-//   () => cloneDeep(formValues.value),
-//   async (newVal, oldVal) => {
-//     if (props.read) {
-//       return
-//     }
-//     await nextTick()
-
-//     handleLinkages({ newVal, oldVal, formValues, formItems: formItems.value,updateFormValues })
-//   },
-//   { deep: true, immediate: true }
-// )
-
 // 支持从schema初始化默认值对象
 onMounted(() => {
   if (props.schema?.initialValues) {
     const initialValues = cloneDeep(props.schema?.initialValues)
-    // 暂时使用浅合并，可能会造成原默认值props会被当前props永久覆盖
-    formValues.value = Object.assign(initialValues, formValues.value)
+
+    formValues.value = mergeWith(initialValues, formValues.value, (objValue, srcValue) => {
+      if (Array.isArray(objValue)) {
+        return srcValue // 不深度合并数组
+      }
+    })
   }
 })
 

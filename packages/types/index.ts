@@ -32,6 +32,7 @@ export interface FormItemType {
   style?: any
   change?: FormChange[]
   dialog?: boolean
+  width?: number
 }
 
 export type FormSchema = {
