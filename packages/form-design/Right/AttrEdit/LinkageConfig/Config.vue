@@ -37,13 +37,33 @@ const visible = defineModel<boolean>()
 const quickValues = ref<Record<string, any>>({})
 
 const handleUseQuick = () => {
-  console.log(quickValues.value.quick);
-  
+  console.log(quickValues.value.quick)
+
   quickValues.value.quick.map((item) => {
-    const { name, type, variable } = item
+    const { name, type, variable, compute, numValue } = item
 
     if (type === 'var') {
-      const newCurrent = setDataByPath(designInstance.current!, name, `{{ ${variable.slice(1).join('.')} }}`)
+      const newCurrent = setDataByPath(designInstance.current!, name, `{{ ${variable.join('.')} }}`)
+      designInstance.updateCurrent(newCurrent)
+    }
+
+    if (type === 'computeVar') {
+      const [computeType, valueType] = compute
+
+      let all = variable.join('.')
+
+      const computeTypeParse = computeType
+        .replaceAll('greater', ' > ')
+        .replaceAll('equal', ' === ')
+        .replaceAll('less', ' < ')
+
+      all += computeTypeParse
+
+      if (valueType === 'numValue') {
+        all += numValue
+      }
+
+      const newCurrent = setDataByPath(designInstance.current!, name, `{{ ${all} }}`)
       designInstance.updateCurrent(newCurrent)
     }
   })
@@ -51,13 +71,13 @@ const handleUseQuick = () => {
 </script>
 
 <style lang="scss" scoped>
-.config-linkages{
+.config-linkages {
   display: flex;
   gap: 20px;
-  .quick{
+  .quick {
     width: 50%;
   }
-  .edit{
+  .edit {
     width: 50%;
   }
 }

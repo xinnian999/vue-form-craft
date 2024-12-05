@@ -13,6 +13,19 @@ const basicField = [
   { label: '占位提示', value: 'props.placeholder' }
 ]
 
+const extendChildren = (list: CascaderOptions, children: CascaderOptions): CascaderOptions => {
+  return list.map((item) => {
+    if (item.children) {
+      return { ...item, children: extendChildren(item.children, children) }
+    } else {
+      return {
+        ...item,
+        children
+      }
+    }
+  })
+}
+
 export const quickSchema = (schema: FormSchema) => {
   const varOptions: CascaderOptions = [
     {
@@ -63,7 +76,8 @@ export const quickSchema = (schema: FormSchema) => {
         }
       ]
     },
-    { label: '手写值', value: 'value' }
+    { label: '手写字符串', value: 'strValue' },
+    { label: '手写数字', value: 'numValue' }
   ]
 
   const compareOptions: CascaderOptions = [
@@ -84,22 +98,11 @@ export const quickSchema = (schema: FormSchema) => {
     }
   ]
 
-  const set = (list: CascaderOptions): CascaderOptions => {
-    return list.map((item) => {
-      if (item.children) {
-        return { ...item, children: set(item.children) }
-      } else {
-        return {
-          ...item,
-          children: compareOptions
-        }
-      }
-    })
-  }
 
-  const conditionOptions: CascaderOptions = set(varOptions)
 
-  console.log(conditionOptions)
+  // const conditionOptions: CascaderOptions = extendChildren(varOptions, compareOptions)
+
+  // console.log(conditionOptions)
 
   return {
     labelWidth: 100,
@@ -115,7 +118,6 @@ export const quickSchema = (schema: FormSchema) => {
               options: basicField
             },
             component: 'Select',
-            designKey: 'design-aaa',
             name: 'name',
             width: 150
           },
@@ -125,82 +127,113 @@ export const quickSchema = (schema: FormSchema) => {
               mode: 'static',
               options: [
                 {
-                  label: '直接返回值',
+                  label: '使用变量',
                   value: 'var'
                 },
                 {
-                  label: '根据条件返回值',
-                  value: 'conditionVar'
-                }
+                  label: '判断变量',
+                  value: 'computeVar'
+                },
+                // {
+                //   label: '条件判断',
+                //   value: 'conditionVar'
+                // }
               ],
               placeholder: '请选择...'
             },
             component: 'Select',
-            designKey: 'design-icI8',
             name: 'type'
           },
 
           {
             component: 'Cascader',
-            designKey: 'design-vFIl',
             name: 'variable',
-            label: '返回值',
-            hidden: '{{ $item.type !== "var" }}',
+            label: '选择变量',
+            hidden: '{{ $item.type !== "var" && $item.type !== "computeVar"}}',
             props: {
               placeholder: '请选择...',
               labelKey: 'label',
               valueKey: 'value',
               mode: 'static',
               showAllLevels: false,
-              options: valueOptions
+              options: varOptions
+            }
+          },
+          
+
+          {
+            component: 'Cascader',
+            name: 'compute',
+            label: '判断依据',
+            hidden: '{{ $item.type !== "computeVar" }}',
+            props: {
+              placeholder: '请选择...',
+              labelKey: 'label',
+              valueKey: 'value',
+              mode: 'static',
+              options: compareOptions
             }
           },
 
           {
-            component: 'Cascader',
-            designKey: 'design-vFIl1111',
-            name: 'condition',
-            label: '条件',
-            hidden: '{{ $item.type !== "conditionVar" }}',
-            props: {
-              placeholder: '请选择...',
-              labelKey: 'label',
-              valueKey: 'value',
-              mode: 'static',
-              options: conditionOptions
-            }
+            component: 'Input',
+            name: 'strValue',
+            label: '手写字符串',
+            hidden: '{{ !$item.compute.includes("strValue")  }}'
           },
 
           {
-            component: 'Cascader',
-            designKey: 'design-vFIl',
-            name: 'trueVariable',
-            label: '条件满足时 - 返回值',
-            hidden: '{{ $item.type !== "conditionVar" }}',
-            props: {
-              placeholder: '请选择...',
-              labelKey: 'label',
-              valueKey: 'value',
-              mode: 'static',
-              showAllLevels: false,
-              options: valueOptions
-            }
+            component: 'InputNumber',
+            name: 'numValue',
+            label: '手写数字',
+            hidden: '{{ !$item.compute.includes("numValue") }}'
           },
-          {
-            component: 'Cascader',
-            designKey: 'design-vFIl',
-            name: 'falseVariable',
-            label: '条件不满足时 - 返回值',
-            hidden: '{{ $item.type !== "conditionVar" }}',
-            props: {
-              placeholder: '请选择...',
-              labelKey: 'label',
-              valueKey: 'value',
-              mode: 'static',
-              showAllLevels: false,
-              options: valueOptions
-            }
-          }
+
+          // {
+          //   component: 'Cascader',
+          //   designKey: 'design-vFIl1111',
+          //   name: 'condition',
+          //   label: '条件',
+          //   hidden: '{{ $item.type !== "conditionVar" }}',
+          //   props: {
+          //     placeholder: '请选择...',
+          //     labelKey: 'label',
+          //     valueKey: 'value',
+          //     mode: 'static',
+          //     options: conditionOptions
+          //   }
+          // },
+
+          // {
+          //   component: 'Cascader',
+          //   designKey: 'design-vFIl',
+          //   name: 'trueVariable',
+          //   label: '条件满足时 - 返回值',
+          //   hidden: '{{ $item.type !== "conditionVar" }}',
+          //   props: {
+          //     placeholder: '请选择...',
+          //     labelKey: 'label',
+          //     valueKey: 'value',
+          //     mode: 'static',
+          //     showAllLevels: false,
+          //     options: valueOptions
+          //   }
+          // },
+          // {
+          //   component: 'Cascader',
+          //   designKey: 'design-vFIl',
+          //   name: 'falseVariable',
+          //   label: '条件不满足时 - 返回值',
+          //   hidden: '{{ $item.type !== "conditionVar" }}',
+          //   props: {
+          //     placeholder: '请选择...',
+          //     labelKey: 'label',
+          //     valueKey: 'value',
+          //     mode: 'static',
+          //     showAllLevels: false,
+          //     options: valueOptions
+          //   }
+          // }
         ],
         props: {
           mode: 'card',
@@ -229,7 +262,12 @@ export const editSchema = {
       label: '手动配置',
       component: 'JsonEdit',
       designKey: 'design-A2bj',
-      name: '.'
+      name: '.',
+      props: {
+        style: {
+          height: '70vh'
+        }
+      }
     }
   ]
 } satisfies FormSchema
