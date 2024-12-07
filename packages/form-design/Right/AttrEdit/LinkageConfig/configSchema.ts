@@ -13,6 +13,8 @@ const basicField = [
   { label: '占位提示', value: 'props.placeholder' }
 ]
 
+const selectKeys = ['Select', 'Radio', 'Checkbox']
+
 const extendChildren = (list: CascaderOptions, children: CascaderOptions): CascaderOptions => {
   return list.map((item) => {
     if (item.children) {
@@ -37,22 +39,14 @@ export const quickSchema = (schema: FormSchema) => {
       }))
     },
     {
-      label: '选择类字段数据源-$selectData',
+      label: '选中项数据源-$selectData',
       value: 'value2',
-      children: [
-        {
-          label: '选项2-1',
-          value: 'value2-1'
-        },
-        {
-          label: '选项2-2',
-          value: 'value2-2'
-        },
-        {
-          label: '选项2-3',
-          value: 'value2-2'
-        }
-      ]
+      children: schema.items
+        .filter((item) => selectKeys.includes(item.component))
+        .map((item) => ({
+          label: `【${item.label}】数据源`,
+          value: `$selectData.${item.name}`
+        }))
     }
   ]
 
@@ -61,20 +55,6 @@ export const quickSchema = (schema: FormSchema) => {
       label: '变量',
       value: 'var',
       children: varOptions
-    },
-    {
-      label: '布尔值',
-      value: 'boolean',
-      children: [
-        {
-          label: 'true',
-          value: true
-        },
-        {
-          label: 'false',
-          value: false
-        }
-      ]
     },
     { label: '手写字符串', value: 'strValue' },
     { label: '手写数字', value: 'numValue' }
@@ -95,10 +75,18 @@ export const quickSchema = (schema: FormSchema) => {
       label: '小于',
       value: 'less',
       children: valueOptions
+    },
+    {
+      label: '为真',
+      value: 'true',
+      children: []
+    },
+    {
+      label: '为假',
+      value: 'false',
+      children: []
     }
   ]
-
-
 
   // const conditionOptions: CascaderOptions = extendChildren(varOptions, compareOptions)
 
@@ -133,7 +121,7 @@ export const quickSchema = (schema: FormSchema) => {
                 {
                   label: '判断变量',
                   value: 'computeVar'
-                },
+                }
                 // {
                 //   label: '条件判断',
                 //   value: 'conditionVar'
@@ -148,7 +136,7 @@ export const quickSchema = (schema: FormSchema) => {
           {
             component: 'Cascader',
             name: 'variable',
-            label: '选择变量',
+            label: '变量',
             hidden: '{{ $item.type !== "var" && $item.type !== "computeVar"}}',
             props: {
               placeholder: '请选择...',
@@ -159,7 +147,6 @@ export const quickSchema = (schema: FormSchema) => {
               options: varOptions
             }
           },
-          
 
           {
             component: 'Cascader',
@@ -187,7 +174,7 @@ export const quickSchema = (schema: FormSchema) => {
             name: 'numValue',
             label: '手写数字',
             hidden: '{{ !$item.compute.includes("numValue") }}'
-          },
+          }
 
           // {
           //   component: 'Cascader',

@@ -25,8 +25,8 @@ export default {
       emptyTip: '未选中字段',
       linkage: {
         text: '联动',
-        action1: '配置项联动',
-        action2: '值联动'
+        action1: '配置联动',
+        action2: '数据联动'
       }
     },
     tab2: {

@@ -20,6 +20,8 @@ describe('template satisfaction', async () => {
 
     await satisfactionEl[0].setValue(true)
 
+    await wait()
+
     expect(wrapper.vm.formValues).toStrictEqual({ satisfaction: 5 })
 
     expect(wrapper.find('.TextArea-improvementSuggestions').exists()).toBe(false)

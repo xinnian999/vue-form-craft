@@ -47,7 +47,7 @@ const handleUseQuick = () => {
       designInstance.updateCurrent(newCurrent)
     }
 
-    if (type === 'computeVar') {
+    if (type === 'computeVar' && compute.length > 1) {
       const [computeType, valueType] = compute
 
       let all = variable.join('.')
@@ -64,6 +64,19 @@ const handleUseQuick = () => {
       }
 
       const newCurrent = setDataByPath(designInstance.current!, name, `{{ ${all} }}`)
+      designInstance.updateCurrent(newCurrent)
+    }
+
+    if (type === 'computeVar' && compute.length === 1) {
+      const [bool] = compute
+
+      const parseBoolean = bool.replaceAll('true', '!!').replaceAll('false', '!')
+
+      const newCurrent = setDataByPath(
+        designInstance.current!,
+        name,
+        `{{ ${parseBoolean}${variable.join('.')} }}`
+      )
       designInstance.updateCurrent(newCurrent)
     }
   })
