@@ -100,7 +100,7 @@ export const quickSchema = (schema: FormSchema) => {
         label: '快速配置',
         children: [
           {
-            label: '选择一个你想动态改变的配置',
+            label: '选择配置',
             props: {
               mode: 'static',
               options: basicField
@@ -110,16 +110,16 @@ export const quickSchema = (schema: FormSchema) => {
             width: 150
           },
           {
-            label: '动态改变它的方式',
+            label: '改变方式',
             props: {
               mode: 'static',
               options: [
                 {
-                  label: '使用变量',
+                  label: '读取变量',
                   value: 'var'
                 },
                 {
-                  label: '判断变量',
+                  label: '条件判断',
                   value: 'computeVar'
                 }
                 // {
@@ -134,7 +134,7 @@ export const quickSchema = (schema: FormSchema) => {
           },
 
           {
-            component: 'Cascader',
+            component: 'TreeSelect',
             name: 'variable',
             label: '变量',
             hidden: '{{ $item.type !== "var" && $item.type !== "computeVar"}}',
@@ -149,7 +149,7 @@ export const quickSchema = (schema: FormSchema) => {
           },
 
           {
-            component: 'Cascader',
+            component: 'TreeSelect',
             name: 'compute',
             label: '判断依据',
             hidden: '{{ $item.type !== "computeVar" }}',
@@ -177,7 +177,7 @@ export const quickSchema = (schema: FormSchema) => {
           }
 
           // {
-          //   component: 'Cascader',
+          //   component: 'TreeSelect',
           //   designKey: 'design-vFIl1111',
           //   name: 'condition',
           //   label: '条件',
@@ -192,7 +192,7 @@ export const quickSchema = (schema: FormSchema) => {
           // },
 
           // {
-          //   component: 'Cascader',
+          //   component: 'TreeSelect',
           //   designKey: 'design-vFIl',
           //   name: 'trueVariable',
           //   label: '条件满足时 - 返回值',
@@ -207,7 +207,7 @@ export const quickSchema = (schema: FormSchema) => {
           //   }
           // },
           // {
-          //   component: 'Cascader',
+          //   component: 'TreeSelect',
           //   designKey: 'design-vFIl',
           //   name: 'falseVariable',
           //   label: '条件不满足时 - 返回值',
@@ -223,7 +223,7 @@ export const quickSchema = (schema: FormSchema) => {
           // }
         ],
         props: {
-          mode: 'card',
+          mode: 'inline',
           title: '联动规则',
           minLines: 0,
           maxLines: 999,

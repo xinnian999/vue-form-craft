@@ -4,9 +4,9 @@
 
     <div v-else>
       <template v-if="mode === 'inline'">
-        <el-form-item v-for="(item, index) in list" :key="item.key" class="list-item">
+        <div v-for="(item, index) in list" :key="item.key" class="list-item">
           <div class="list-item-content">
-            <el-space>
+            <el-space style="width: 100%;">
               <form-item
                 v-for="field in parseFields(index)"
                 v-bind="field"
@@ -28,7 +28,7 @@
               <template #icon> <Icon name="reduce" color="#fff" /> </template
             ></el-button>
           </div>
-        </el-form-item>
+        </div>
       </template>
 
       <template v-if="mode === 'card'">
@@ -236,6 +236,8 @@ provide(
     margin-bottom: 10px;
     .list-item-content {
       display: flex;
+      align-items: center;
+      // width: 100%;
     }
   }
   .list-card {

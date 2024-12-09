@@ -86,12 +86,13 @@ const handleUseQuick = () => {
 <style lang="scss" scoped>
 .config-linkages {
   display: flex;
+  flex-direction: column;
   gap: 20px;
-  .quick {
-    width: 50%;
-  }
-  .edit {
-    width: 50%;
-  }
+  // .quick {
+  //   width: 50%;
+  // }
+  // .edit {
+  //   width: 50%;
+  // }
 }
 </style>
