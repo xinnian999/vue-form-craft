@@ -33,7 +33,7 @@ withDefaults(defineProps<Props>(), {
 })
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .list-card {
   margin-bottom: 10px;
   .card-header {

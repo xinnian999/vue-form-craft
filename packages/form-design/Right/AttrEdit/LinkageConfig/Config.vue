@@ -4,7 +4,7 @@
     v-model="visible"
     top="3vh"
     :title="`${designInstance.current?.label} - 配置级联动`"
-    width="70vw"
+    width="75vw"
     center
   >
     <div class="config-linkages">
@@ -18,7 +18,10 @@
           >应用快速配置</el-button
         >
       </div>
-      <FormRender v-model="designInstance.current!" :schema="editSchema" class="edit" />
+
+      <ElAffix class="edit">
+      <FormRender v-model="designInstance.current!" :schema="editSchema"  />
+      </ElAffix>
     </div>
   </el-dialog>
 </template>
@@ -27,7 +30,7 @@
 import FormRender from '@vue-form-craft/form-render'
 import { quickSchema, editSchema } from './configSchema'
 import { useDesignInstance } from '@vue-form-craft/hooks'
-import { ref } from 'vue'
+import { ref ,watch} from 'vue'
 import { setDataByPath } from '@vue-form-craft/utils'
 
 const designInstance = useDesignInstance()
@@ -81,19 +84,22 @@ const handleUseQuick = () => {
     }
   })
 }
+
+// watch(quickValues,newVal=>{
+//   console.log(newVal);
+  
+// },{deep:true})
 </script>
 
 <style lang="scss" scoped>
 .config-linkages {
   display: flex;
-  flex-direction: column;
   gap: 20px;
-  flex-direction: column
-  // .quick {
-  //   width: 50%;
-  // }
-  // .edit {
-  //   width: 50%;
-  // }
+  .quick {
+    width: 50%;
+  }
+  .edit {
+    width: 50%;
+  }
 }
 </style>

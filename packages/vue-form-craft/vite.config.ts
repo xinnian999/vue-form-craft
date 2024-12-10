@@ -4,11 +4,13 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import libCss from 'vite-plugin-libcss'
 import dts from 'vite-plugin-dts'
+import vueJsxPlugin from '@vitejs/plugin-vue-jsx'
 
 export default defineConfig({
   base: '/vue-form-craft/',
   plugins: [
     vue(),
+    vueJsxPlugin(),
     dts({
       outDir: './dist',
       include: ['../../packages/**/*', '../../packages/**/*.vue'],

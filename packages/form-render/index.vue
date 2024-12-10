@@ -20,7 +20,7 @@
 import { ref, computed, reactive, provide, toRefs, readonly, onMounted } from 'vue'
 import type { FormInstance as ElFormInstance } from 'element-plus'
 import { deepParse, setDataByPath, getDataByPath } from '@vue-form-craft/utils'
-import { cloneDeep, merge, mergeWith } from 'lodash'
+import { cloneDeep, mergeWith } from 'lodash'
 import type { FormInstance, FormRenderProps, FormSchema } from '@vue-form-craft/types'
 import { $formInstance } from '@vue-form-craft/config/symbol'
 import { useLocale } from '@vue-form-craft/hooks'

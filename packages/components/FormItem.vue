@@ -10,7 +10,8 @@
       :style="style"
       :key="name"
       :prop="name"
-      :label-width="hideLabel ? '0' : formInstance.schema.labelWidth"
+      :label-width="hideLabel ? '0' : labelWidth || formInstance.schema.labelWidth"
+      :label-position="labelAlign || formInstance.schema.labelAlign"
       :rules="computeRules"
     >
       <template #label v-if="!hideLabel">
@@ -45,7 +46,7 @@
           />
         </el-dialog>
 
-        <el-button type="primary" plain @click="handleDialog">配置</el-button>
+        <el-button type="primary" plain @click="handleDialog">{{ dialogState.btnText }}</el-button>
       </template>
 
       <component
@@ -67,7 +68,7 @@ import type { FormItemType } from '@vue-form-craft/types'
 import Icon from '@vue-form-craft/icons'
 import { useFormInstance } from '@vue-form-craft/hooks'
 import { useElements } from '@vue-form-craft/hooks'
-import { cloneDeep, isArray, isEqual } from 'lodash'
+import { cloneDeep, isArray, isEqual, isString } from 'lodash'
 
 const thisProps = defineProps<FormItemType>()
 
@@ -77,7 +78,8 @@ const elements = useElements()
 
 const dialogState = reactive({
   visible: false,
-  title: ''
+  title: '',
+  btnText: isString(thisProps.dialog) ? thisProps.dialog : '配置'
 })
 
 const handleDialog = () => {
@@ -195,41 +197,45 @@ onBeforeMount(() => {
   }
 })
 
-watch(value, (newVal, oldVal) => {
-  const change = thisProps.change
-  const diff = isEqual(newVal, oldVal)
+watch(
+  value,
+  (newVal, oldVal) => {
+    const change = thisProps.change
+    const diff = isEqual(newVal, oldVal)
 
-  if (!change || diff) return
+    if (!change || diff) return
 
-  let temp = cloneDeep(formInstance.formValues)
+    let temp = cloneDeep(formInstance.formValues)
 
-  change.forEach(({ target, value, condition }) => {
-    if (condition === false) return
-    
-    if (target.includes('.*.')) {
-      //自增组件特殊处理
-      const targetArr = target.split('.*.')
-      const listTarget = targetArr.pop()!
-      const targetParse = targetArr.join('.')
-      const list = getDataByPath(formInstance.formValues, targetParse)
-      if (isArray(list)) {
-        temp = setDataByPath(
-          temp,
-          targetParse,
-          list.map((item) => {
-            return {
-              ...item,
-              [listTarget]: value
-            }
-          })
-        )
+    change.forEach(({ target, value, condition }) => {
+      if (condition === false) return
+
+      if (target.includes('.*.')) {
+        //自增组件特殊处理
+        const targetArr = target.split('.*.')
+        const listTarget = targetArr.pop()!
+        const targetParse = targetArr.join('.')
+        const list = getDataByPath(formInstance.formValues, targetParse)
+        if (isArray(list)) {
+          temp = setDataByPath(
+            temp,
+            targetParse,
+            list.map((item) => {
+              return {
+                ...item,
+                [listTarget]: value
+              }
+            })
+          )
+        }
+        return
       }
-      return
-    }
 
-    temp = setDataByPath(temp, target, value)
-  })
+      temp = setDataByPath(temp, target, value)
+    })
 
-  formInstance.updateFormValues(temp)
-},{immediate:true})
+    formInstance.updateFormValues(temp)
+  },
+  { immediate: true }
+)
 </script>

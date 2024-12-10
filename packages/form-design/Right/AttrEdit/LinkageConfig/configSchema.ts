@@ -1,7 +1,9 @@
 import type { FormSchema } from '@vue-form-craft/types'
+import { h } from 'vue'
+import { renderTreeNode } from './utils'
 
 type CascaderOptions = {
-  label: string
+  label?: string
   value: any
   children?: CascaderOptions
 }[]
@@ -15,82 +17,68 @@ const basicField = [
 
 const selectKeys = ['Select', 'Radio', 'Checkbox']
 
-const extendChildren = (list: CascaderOptions, children: CascaderOptions): CascaderOptions => {
-  return list.map((item) => {
-    if (item.children) {
-      return { ...item, children: extendChildren(item.children, children) }
-    } else {
-      return {
-        ...item,
-        children
-      }
-    }
-  })
-}
-
 export const quickSchema = (schema: FormSchema) => {
   const varOptions: CascaderOptions = [
     {
-      label: '表单值-$values',
+      label: '表单值',
       value: '$values',
       children: schema.items.map((item) => ({
-        label: `【${item.label}】字段值`,
-        value: item.name
+        label: item.label,
+        value: `$values.${item.name}`
       }))
     },
     {
-      label: '选中项数据源-$selectData',
-      value: 'value2',
+      label: '选中项数据源',
+      value: '$selectData',
       children: schema.items
         .filter((item) => selectKeys.includes(item.component))
         .map((item) => ({
-          label: `【${item.label}】数据源`,
+          label: item.label,
           value: `$selectData.${item.name}`
         }))
     }
   ]
 
   const valueOptions: CascaderOptions = [
+    ...varOptions,
     {
-      label: '变量',
-      value: 'var',
-      children: varOptions
-    },
-    { label: '手写字符串', value: 'strValue' },
-    { label: '手写数字', value: 'numValue' }
+      label: '布尔值',
+      value: 'boolean',
+      children: [
+        {
+          label: 'true',
+          value: true
+        },
+        {
+          label: 'false',
+          value: false
+        }
+      ]
+    }
   ]
 
   const compareOptions: CascaderOptions = [
     {
       label: '等于',
-      value: 'equal',
-      children: valueOptions
+      value: 'equal'
     },
     {
       label: '大于',
-      value: 'greater',
-      children: valueOptions
+      value: 'greater'
     },
     {
       label: '小于',
-      value: 'less',
-      children: valueOptions
+      value: 'less'
     },
     {
       label: '为真',
-      value: 'true',
-      children: []
+      value: 'true'
     },
     {
       label: '为假',
-      value: 'false',
-      children: []
+      value: 'false'
     }
   ]
-
-  // const conditionOptions: CascaderOptions = extendChildren(varOptions, compareOptions)
-
-  // console.log(conditionOptions)
 
   return {
     labelWidth: 100,
@@ -109,126 +97,127 @@ export const quickSchema = (schema: FormSchema) => {
             name: 'name',
             width: 150
           },
+
           {
-            label: '改变方式',
+            component: 'FormList',
+            name: 'conditions',
+            label: '联动条件',
+            dialog: '{{ `已配置条件：${$item.conditions?.length||0}个` }}',
             props: {
-              mode: 'static',
-              options: [
-                {
-                  label: '读取变量',
-                  value: 'var'
-                },
-                {
-                  label: '条件判断',
-                  value: 'computeVar'
-                }
-                // {
-                //   label: '条件判断',
-                //   value: 'conditionVar'
-                // }
-              ],
-              placeholder: '请选择...'
+              mode: 'table',
+              title: '条件'
             },
-            component: 'Select',
-            name: 'type'
+            children: [
+              {
+                label: '',
+                props: {
+                  mode: 'static',
+                  options: [
+                    {
+                      label: '且',
+                      value: '&&'
+                    },
+                    {
+                      label: '或',
+                      value: '||'
+                    }
+                  ],
+                  placeholder: ''
+                },
+                component: 'Select',
+                designKey: 'design-oLXv',
+                name: 'with',
+                width: 100,
+                initialValue: '&&',
+                hidden: '{{ $index === 0 }}'
+              },
+              {
+                label: '变量',
+                props: {
+                  placeholder: '请选择...',
+                  mode: 'static',
+                  options: varOptions,
+                  labelKey: 'label',
+                  valueKey: 'value',
+                  showAllLevels: true,
+                  renderContent: renderTreeNode
+                },
+                component: 'TreeSelect',
+                designKey: 'design-ydGG',
+                name: 'variable'
+              },
+              {
+                label: '判断',
+                props: {
+                  mode: 'static',
+                  options: compareOptions,
+                  placeholder: '请选择...'
+                },
+                component: 'Select',
+                designKey: 'design-NAHt',
+                name: 'compare'
+              },
+              {
+                label: '值',
+                props: {
+                  placeholder: '',
+                  mode: 'static',
+                  options: valueOptions,
+                  labelKey: 'label',
+                  valueKey: 'value',
+                  showAllLevels: true,
+                  renderContent: renderTreeNode
+                },
+                component: 'TreeSelect',
+                designKey: 'form-wqmg',
+                name: 'value'
+              }
+            ]
           },
 
           {
             component: 'TreeSelect',
-            name: 'variable',
-            label: '变量',
-            hidden: '{{ $item.type !== "var" && $item.type !== "computeVar"}}',
+            designKey: 'design-vFIl',
+            name: 'trueVariable',
+            label: '条件满足时 - 返回值',
             props: {
               placeholder: '请选择...',
               labelKey: 'label',
               valueKey: 'value',
               mode: 'static',
               showAllLevels: false,
-              options: varOptions
-            }
+              options: varOptions,
+              renderContent: renderTreeNode
+            },
+            initialValue: true
           },
-
           {
             component: 'TreeSelect',
-            name: 'compute',
-            label: '判断依据',
-            hidden: '{{ $item.type !== "computeVar" }}',
+            designKey: 'design-vFIl',
+            name: 'falseVariable',
+            label: '条件不满足时 - 返回值',
             props: {
               placeholder: '请选择...',
               labelKey: 'label',
               valueKey: 'value',
               mode: 'static',
-              options: compareOptions
-            }
-          },
-
-          {
-            component: 'Input',
-            name: 'strValue',
-            label: '手写字符串',
-            hidden: '{{ !$item.compute.includes("strValue")  }}'
-          },
-
-          {
-            component: 'InputNumber',
-            name: 'numValue',
-            label: '手写数字',
-            hidden: '{{ !$item.compute.includes("numValue") }}'
+              showAllLevels: false,
+              options: varOptions,
+              renderContent: renderTreeNode
+            },
+            initialValue: false
           }
-
-          // {
-          //   component: 'TreeSelect',
-          //   designKey: 'design-vFIl1111',
-          //   name: 'condition',
-          //   label: '条件',
-          //   hidden: '{{ $item.type !== "conditionVar" }}',
-          //   props: {
-          //     placeholder: '请选择...',
-          //     labelKey: 'label',
-          //     valueKey: 'value',
-          //     mode: 'static',
-          //     options: conditionOptions
-          //   }
-          // },
-
-          // {
-          //   component: 'TreeSelect',
-          //   designKey: 'design-vFIl',
-          //   name: 'trueVariable',
-          //   label: '条件满足时 - 返回值',
-          //   hidden: '{{ $item.type !== "conditionVar" }}',
-          //   props: {
-          //     placeholder: '请选择...',
-          //     labelKey: 'label',
-          //     valueKey: 'value',
-          //     mode: 'static',
-          //     showAllLevels: false,
-          //     options: valueOptions
-          //   }
-          // },
-          // {
-          //   component: 'TreeSelect',
-          //   designKey: 'design-vFIl',
-          //   name: 'falseVariable',
-          //   label: '条件不满足时 - 返回值',
-          //   hidden: '{{ $item.type !== "conditionVar" }}',
-          //   props: {
-          //     placeholder: '请选择...',
-          //     labelKey: 'label',
-          //     valueKey: 'value',
-          //     mode: 'static',
-          //     showAllLevels: false,
-          //     options: valueOptions
-          //   }
-          // }
         ],
         props: {
-          mode: 'table',
+          mode: 'card',
           title: '联动规则',
           minLines: 0,
           maxLines: 999,
           allowAdd: true,
-          allowReduce: true
+          allowReduce: true,
+          style: {
+            // width: '50%'
+          }
         },
         component: 'FormList',
         designKey: 'design-NyLz',
@@ -252,7 +241,7 @@ export const editSchema = {
       name: '.',
       props: {
         style: {
-          height: '70vh'
+          height: '75vh'
         }
       }
     }

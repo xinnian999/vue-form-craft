@@ -31,8 +31,10 @@ export interface FormItemType {
   class?: any
   style?: any
   change?: FormChange[]
-  dialog?: boolean
+  dialog?: boolean | string
   width?: number
+  labelWidth?: number
+  labelAlign?: 'top' | 'left' | 'right'
 }
 
 export type FormSchema = {

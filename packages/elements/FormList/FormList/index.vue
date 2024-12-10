@@ -3,7 +3,7 @@
     <CanvasGroup v-if="formInstance.design" :list="children" class="layoutRender" />
 
     <div v-else>
-      <component :is="contaniners[mode]" :list :fields="children" :name :parseFields>
+      <component :is="contaniners[mode]" :list :fields="children" :name :parseFields :title>
         <template #reduce="{ index }">
           <ReduceButton :index="index" />
         </template>

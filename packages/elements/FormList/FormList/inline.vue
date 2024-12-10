@@ -1,15 +1,12 @@
 <template>
   <div v-for="(item, index) in list" :key="item.key" class="list-item">
     <div class="list-item-content">
-      <el-space style="width: 100%">
-        <form-item
-          v-for="field in parseFields(index)"
-          v-bind="field"
-          :key="field.label"
-          :name="`${name}.${index}.${field.name}`"
-          hideLabel
-        />
-      </el-space>
+      <form-item
+        v-for="field in parseFields(index)"
+        v-bind="field"
+        :key="field.label"
+        :name="`${name}.${index}.${field.name}`"
+      />
 
       <slot name="reduce" :index="index" />
     </div>
