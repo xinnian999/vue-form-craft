@@ -46,7 +46,9 @@
           />
         </el-dialog>
 
-        <el-button type="primary" plain @click="handleDialog">{{ dialogState.btnText }}</el-button>
+        <el-button type="primary" plain @click="handleDialog">{{
+          isString(dialog) ? dialog : '配置'
+        }}</el-button>
       </template>
 
       <component
@@ -78,8 +80,7 @@ const elements = useElements()
 
 const dialogState = reactive({
   visible: false,
-  title: '',
-  btnText: isString(thisProps.dialog) ? thisProps.dialog : '配置'
+  title: ''
 })
 
 const handleDialog = () => {

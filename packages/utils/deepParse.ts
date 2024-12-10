@@ -2,7 +2,7 @@ import { isString, isPlainObject, isArray } from 'lodash'
 
 //模板转换函数，将一个由双大括号包裹的字符串，转化为js表达式并返回结果（context限制变量范围）
 const templateParse = (str: string, context: Record<string, any>) => {
-        // console.log(JSON.stringify(context.$selectData) );
+  // console.log(JSON.stringify(context.$selectData) );
   if (!str) return str
   if (typeof str !== 'string') return str
 
@@ -39,6 +39,13 @@ const deepParse = (prop: any, context: Record<string, any>): any => {
 
   if (isArray(prop)) {
     return prop.map((item) => {
+      if (item.component === 'FormList') {
+        return {
+          ...deepParse(item, context),
+          children: item.children
+        }
+      }
+
       return deepParse(item, context)
     })
   }

@@ -102,7 +102,7 @@ export const quickSchema = (schema: FormSchema) => {
             component: 'FormList',
             name: 'conditions',
             label: '联动条件',
-            dialog: '{{ `已配置条件：${$item.conditions?.length||0}个` }}',
+            dialog: '{{ `${$item.conditions?.length||0} 个` }}',
             props: {
               mode: 'table',
               title: '条件'

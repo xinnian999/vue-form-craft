@@ -75,8 +75,9 @@ const cIndex = ref(0)
 
 const formInstance = useFormInstance()
 
-const parseFields = (index: number) =>
-  deepParse(props.children, { $item: list.value[index], $index: index })
+const parseFields = (index: number) => {
+  return deepParse(props.children, { $item: list.value[index], $index: index })
+}
 
 const isMax = computed(() => {
   return list.value.length >= props.maxLines
