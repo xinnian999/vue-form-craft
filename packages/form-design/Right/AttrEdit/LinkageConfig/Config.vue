@@ -8,7 +8,7 @@
     center
   >
     <div class="config-linkages">
-      <!-- <div class="quick">
+      <div class="quick">
         <FormRender v-model="quickValues" :schema="quickSchema(designInstance.schema)" />
         <el-button
           v-if="quickValues.quick?.length"
@@ -17,7 +17,7 @@
           type="primary"
           >应用快速配置</el-button
         >
-      </div> -->
+      </div>
       <FormRender v-model="designInstance.current!" :schema="editSchema" class="edit" />
     </div>
   </el-dialog>

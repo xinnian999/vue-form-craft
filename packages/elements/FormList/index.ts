@@ -6,7 +6,7 @@ import { defineAsyncComponent, h } from 'vue'
 export default {
   title: '自增容器',
   component: 'FormList',
-  render:defineAsyncComponent(() => import('./FormList.vue')),
+  render:defineAsyncComponent(() => import('./FormList/index.vue')),
   icon: h(Icon, { name: 'formList' }),
   type: 'high',
   order: 20,

@@ -15,7 +15,7 @@ describe('template formList', async () => {
       }
     })
 
-    await wait(100)
+    await wait(200)
 
     const listDom = wrapper.find('.FormList-users')
 
@@ -25,7 +25,9 @@ describe('template formList', async () => {
 
     expect(wrapper.vm.formValues.users.length).toBe(2)
 
-    await listDom.find('.reduceBtn').trigger('click')
+    await listDom.findAll('.reduceBtn').pop()?.trigger('click')
+
+    await wait(100)
 
     expect(wrapper.vm.formValues.users.length).toBe(1)
   })

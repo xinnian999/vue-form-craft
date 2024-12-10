@@ -223,7 +223,7 @@ export const quickSchema = (schema: FormSchema) => {
           // }
         ],
         props: {
-          mode: 'inline',
+          mode: 'table',
           title: '联动规则',
           minLines: 0,
           maxLines: 999,

@@ -92,7 +92,13 @@ const rightActions: PreviewAction[] = [
     icon: 'trash',
     onClick: async () => {
       await ElMessageBox.confirm('确认清空当前设计吗？')
-      designInstance.updateSchema({ ...designInstance.schema, items: [] })
+      designInstance.updateSchema({
+        labelWidth: 150,
+        labelAlign: 'right',
+        scrollToError: true,
+        size: 'default',
+        items: []
+      })
     }
   },
   {
