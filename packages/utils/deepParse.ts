@@ -39,14 +39,14 @@ const deepParse = (prop: any, context: Record<string, any>): any => {
 
   if (isArray(prop)) {
     return prop.map((item) => {
+      const newItem = deepParse(item, context)
+
+      // 跳过对自增容器子项的解析
       if (item.component === 'FormList') {
-        return {
-          ...deepParse(item, context),
-          children: item.children
-        }
+        newItem.children = item.children
       }
 
-      return deepParse(item, context)
+      return newItem
     })
   }
 

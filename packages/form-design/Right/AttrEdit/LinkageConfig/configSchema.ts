@@ -166,7 +166,10 @@ export const quickSchema = (schema: FormSchema) => {
                   labelKey: 'label',
                   valueKey: 'value',
                   showAllLevels: true,
-                  renderContent: renderTreeNode
+                  renderContent: renderTreeNode,
+                  props:{
+                    label:'value'
+                  }
                 },
                 component: 'TreeSelect',
                 designKey: 'form-wqmg',
@@ -186,7 +189,7 @@ export const quickSchema = (schema: FormSchema) => {
               valueKey: 'value',
               mode: 'static',
               showAllLevels: false,
-              options: varOptions,
+              options: valueOptions,
               renderContent: renderTreeNode
             },
             initialValue: true
@@ -202,7 +205,7 @@ export const quickSchema = (schema: FormSchema) => {
               valueKey: 'value',
               mode: 'static',
               showAllLevels: false,
-              options: varOptions,
+              options: valueOptions,
               renderContent: renderTreeNode
             },
             initialValue: false
