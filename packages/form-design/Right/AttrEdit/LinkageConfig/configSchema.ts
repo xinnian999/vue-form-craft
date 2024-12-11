@@ -78,7 +78,7 @@ export const quickSchema = (schema: FormSchema) => {
             component: 'Select',
             name: 'name',
             width: 150,
-            required:true
+            required: true
           },
 
           {
@@ -168,7 +168,7 @@ export const quickSchema = (schema: FormSchema) => {
             props: {
               varOptions,
               renderTreeNode,
-              initType: 'boolean'
+              initType: '{{ $item.trueReturn? "string" : "boolean" }}'
             },
             initialValue: true
           },
@@ -180,7 +180,7 @@ export const quickSchema = (schema: FormSchema) => {
             props: {
               varOptions,
               renderTreeNode,
-              initType: 'boolean'
+               initType: '{{ $item.falseReturn? "string" : "boolean" }}'
             },
             initialValue: false
           }

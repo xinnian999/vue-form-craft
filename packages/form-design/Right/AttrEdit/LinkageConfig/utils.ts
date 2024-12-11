@@ -1,3 +1,5 @@
+import type { FormItemType } from '@vue-form-craft/types'
+import { isArray, isPlainObject, isString } from 'lodash'
 import { h } from 'vue'
 
 export type Condition = {
@@ -9,7 +11,7 @@ export type Condition = {
 
 export type ConfigLinkage = {
   name: string
-  conditions: Condition[],
+  conditions: Condition[]
   trueReturn: any
   falseReturn: any
 }
@@ -34,7 +36,7 @@ export const renderTreeNode = (_: any, { node, data, store }: any) => {
             {
               style: {
                 fontSize: '12px',
-                marginLeft:'100px'
+                marginLeft: '100px'
               }
             },
             data.value
@@ -75,4 +77,47 @@ export const generateCondition = (conditions: Condition[]) => {
   }, '')
 
   return value
+}
+
+const deepFetchLinkages = (data: FormItemType) => {
+  return Object.entries(data).reduce<Record<string, any>>((acc, [key, value]) => {
+    const isTemplate = isString(value) && /^{{\s*(.*?)\s*}}$/.test(value)
+    if (isTemplate) {
+      acc[key] = value
+    }
+
+    if (isPlainObject(value)) {
+      acc = { ...acc, ...deepFetchLinkages(value) }
+    }
+
+    if (isArray(value)) {
+      value.forEach((item) => {
+        acc = { ...acc, ...deepFetchLinkages(item) }
+      })
+    }
+
+    return acc
+  }, {})
+}
+
+export const parseQuick = (data: FormItemType) => {
+  const parse = deepFetchLinkages(data)
+  // console.log(parse)
+
+  return Object.entries(parse).reduce<ConfigLinkage[]>((acc, [key, value]) => {
+    const [, condition] = value.match(/{{(.+?)}}/)
+
+    const [conStr, resStr] = condition.trim().split(' ? ')
+
+    const [trueReturn, falseReturn] = resStr?.trim().split(':') || []
+
+    acc.push({
+      name: key,
+      conditions: [],
+      trueReturn,
+      falseReturn
+    })
+
+    return acc
+  }, [])
 }

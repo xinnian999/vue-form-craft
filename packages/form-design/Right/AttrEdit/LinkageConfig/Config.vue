@@ -34,10 +34,10 @@
 import FormRender from '@vue-form-craft/form-render'
 import { quickSchema, editSchema } from './configSchema'
 import { useDesignInstance } from '@vue-form-craft/hooks'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { setDataByPath } from '@vue-form-craft/utils'
 import type { FormInstance } from '@vue-form-craft/types'
-import { generateCondition, type ConfigLinkage } from './utils'
+import { generateCondition, parseQuick, type ConfigLinkage } from './utils'
 import { cloneDeep, isBoolean } from 'lodash'
 
 const designInstance = useDesignInstance()
@@ -66,6 +66,7 @@ const handleUseQuick = async () => {
       value
     }
   })
+  
 
   const newCurrent = linkages.reduce((acc, { name, value }) => {
     return setDataByPath(acc, name, `{{ ${value} }}`)
@@ -73,6 +74,16 @@ const handleUseQuick = async () => {
 
   designInstance.updateCurrent(newCurrent)
 }
+
+watch(visible, (newVal) => {
+  if (newVal) {
+    quickValues.value = {
+      quick: parseQuick(designInstance.current!)
+    }
+  } else {
+    quickValues.value = {}
+  }
+})
 </script>
 
 <style lang="scss" scoped>
