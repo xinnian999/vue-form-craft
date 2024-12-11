@@ -33,7 +33,8 @@ export const renderTreeNode = (_: any, { node, data, store }: any) => {
             'span',
             {
               style: {
-                fontSize: '12px'
+                fontSize: '12px',
+                marginLeft:'100px'
               }
             },
             data.value
