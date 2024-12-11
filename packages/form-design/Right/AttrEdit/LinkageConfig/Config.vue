@@ -9,7 +9,11 @@
   >
     <div class="config-linkages">
       <div class="quick">
-        <FormRender v-model="quickValues" :schema="quickSchema(designInstance.schema)" />
+        <FormRender
+          v-model="quickValues"
+          :schema="quickSchema(designInstance.schema)"
+          ref="quickRef"
+        />
         <el-button
           v-if="quickValues.quick?.length"
           @click="handleUseQuick"
@@ -20,7 +24,7 @@
       </div>
 
       <ElAffix class="edit">
-      <FormRender v-model="designInstance.current!" :schema="editSchema"  />
+        <FormRender v-model="designInstance.current!" :schema="editSchema" />
       </ElAffix>
     </div>
   </el-dialog>
@@ -30,65 +34,45 @@
 import FormRender from '@vue-form-craft/form-render'
 import { quickSchema, editSchema } from './configSchema'
 import { useDesignInstance } from '@vue-form-craft/hooks'
-import { ref ,watch} from 'vue'
+import { ref } from 'vue'
 import { setDataByPath } from '@vue-form-craft/utils'
+import type { FormInstance } from '@vue-form-craft/types'
+import { generateCondition, type ConfigLinkage } from './utils'
+import { cloneDeep, isBoolean } from 'lodash'
 
 const designInstance = useDesignInstance()
 
 const visible = defineModel<boolean>()
 
+const quickRef = ref<FormInstance>()
+
 const quickValues = ref<Record<string, any>>({})
 
-const handleUseQuick = () => {
-  console.log(quickValues.value.quick)
+const handleUseQuick = async () => {
+  // console.log(quickValues.value.quick)
+  await quickRef.value?.validate()
 
-  quickValues.value.quick.map((item) => {
-    const { name, type, variable, compute, numValue } = item
+  const linkages: Record<string, string>[] = quickValues.value.quick.map((item: ConfigLinkage) => {
+    const { name, conditions, trueReturn, falseReturn } = item
 
-    if (type === 'var') {
-      const newCurrent = setDataByPath(designInstance.current!, name, `{{ ${variable.join('.')} }}`)
-      designInstance.updateCurrent(newCurrent)
+    let value = generateCondition(conditions)
+
+    if (!isBoolean(trueReturn) && !isBoolean(falseReturn)) {
+      value += ` ? ${trueReturn} : ${falseReturn}`
     }
 
-    if (type === 'computeVar' && compute.length > 1) {
-      const [computeType, valueType] = compute
-
-      let all = variable.join('.')
-
-      const computeTypeParse = computeType
-        .replaceAll('greater', ' > ')
-        .replaceAll('equal', ' === ')
-        .replaceAll('less', ' < ')
-
-      all += computeTypeParse
-
-      if (valueType === 'numValue') {
-        all += numValue
-      }
-
-      const newCurrent = setDataByPath(designInstance.current!, name, `{{ ${all} }}`)
-      designInstance.updateCurrent(newCurrent)
-    }
-
-    if (type === 'computeVar' && compute.length === 1) {
-      const [bool] = compute
-
-      const parseBoolean = bool.replaceAll('true', '!!').replaceAll('false', '!')
-
-      const newCurrent = setDataByPath(
-        designInstance.current!,
-        name,
-        `{{ ${parseBoolean}${variable.join('.')} }}`
-      )
-      designInstance.updateCurrent(newCurrent)
+    return {
+      name,
+      value
     }
   })
-}
 
-// watch(quickValues,newVal=>{
-//   console.log(newVal);
-  
-// },{deep:true})
+  const newCurrent = linkages.reduce((acc, { name, value }) => {
+    return setDataByPath(acc, name, `{{ ${value} }}`)
+  }, cloneDeep(designInstance.current!))
+
+  designInstance.updateCurrent(newCurrent)
+}
 </script>
 
 <style lang="scss" scoped>

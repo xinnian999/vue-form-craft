@@ -1,10 +1,10 @@
 <template>
   <el-table :data="list" style="width: 100%">
     <el-table-column
+      v-for="item in fields"
       :prop="item.name"
       :label="item.label"
       :key="item.name"
-      v-for="item in fields"
       v-bind="pickBy(item, Boolean)"
       :formatter="formatter"
     />
@@ -46,4 +46,5 @@ const formatter = (row: any, column: TableColumnCtx<any>, cellValue: any, index:
     name: `${name}.${index}.${field.name}`
   })
 }
+
 </script>

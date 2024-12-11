@@ -39,24 +39,6 @@ export const quickSchema = (schema: FormSchema) => {
     }
   ]
 
-  const valueOptions: CascaderOptions = [
-    ...varOptions,
-    {
-      label: '布尔值',
-      value: 'boolean',
-      children: [
-        {
-          label: 'true',
-          value: true
-        },
-        {
-          label: 'false',
-          value: false
-        }
-      ]
-    }
-  ]
-
   const compareOptions: CascaderOptions = [
     {
       label: '等于',
@@ -95,7 +77,8 @@ export const quickSchema = (schema: FormSchema) => {
             },
             component: 'Select',
             name: 'name',
-            width: 150
+            width: 150,
+            required:true
           },
 
           {
@@ -140,7 +123,10 @@ export const quickSchema = (schema: FormSchema) => {
                   labelKey: 'label',
                   valueKey: 'value',
                   showAllLevels: true,
-                  renderContent: renderTreeNode
+                  renderContent: renderTreeNode,
+                  props: {
+                    label: 'value'
+                  }
                 },
                 component: 'TreeSelect',
                 designKey: 'design-ydGG',
@@ -148,6 +134,7 @@ export const quickSchema = (schema: FormSchema) => {
               },
               {
                 label: '判断',
+                width: 150,
                 props: {
                   mode: 'static',
                   options: compareOptions,
@@ -159,54 +146,41 @@ export const quickSchema = (schema: FormSchema) => {
               },
               {
                 label: '值',
+                width: 280,
                 props: {
-                  placeholder: '',
-                  mode: 'static',
-                  options: valueOptions,
-                  labelKey: 'label',
-                  valueKey: 'value',
-                  showAllLevels: true,
-                  renderContent: renderTreeNode,
-                  props:{
-                    label:'value'
-                  }
+                  varOptions,
+                  renderTreeNode,
+                  initType: 'var'
                 },
-                component: 'TreeSelect',
-                designKey: 'form-wqmg',
-                name: 'value'
+                component: 'CompositeInput',
+                designKey: 'design-NAH1t',
+                name: 'value',
+                hidden: '{{ $item.compare === "true" || $item.compare === "false" }}'
               }
             ]
           },
 
           {
-            component: 'TreeSelect',
+            component: 'CompositeInput',
             designKey: 'design-vFIl',
-            name: 'trueVariable',
+            name: 'trueReturn',
             label: '条件满足时 - 返回值',
             props: {
-              placeholder: '请选择...',
-              labelKey: 'label',
-              valueKey: 'value',
-              mode: 'static',
-              showAllLevels: false,
-              options: valueOptions,
-              renderContent: renderTreeNode
+              varOptions,
+              renderTreeNode,
+              initType: 'boolean'
             },
             initialValue: true
           },
           {
-            component: 'TreeSelect',
+            component: 'CompositeInput',
             designKey: 'design-vFIl',
-            name: 'falseVariable',
+            name: 'falseReturn',
             label: '条件不满足时 - 返回值',
             props: {
-              placeholder: '请选择...',
-              labelKey: 'label',
-              valueKey: 'value',
-              mode: 'static',
-              showAllLevels: false,
-              options: valueOptions,
-              renderContent: renderTreeNode
+              varOptions,
+              renderTreeNode,
+              initType: 'boolean'
             },
             initialValue: false
           }
