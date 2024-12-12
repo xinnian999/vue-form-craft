@@ -85,7 +85,8 @@ export const quickSchema = (schema: FormSchema) => {
             component: 'FormList',
             name: 'conditions',
             label: '联动条件',
-            dialog: '{{ `${$item.conditions?.length||0} 个` }}',
+            dialog: true,
+            dialogBtnText: '{{ `${$item.conditions?.length||0} 个` }}',
             props: {
               mode: 'table',
               title: '条件'
@@ -124,6 +125,7 @@ export const quickSchema = (schema: FormSchema) => {
                   valueKey: 'value',
                   showAllLevels: true,
                   renderContent: renderTreeNode,
+                  defaultExpandAll: true,
                   props: {
                     label: 'value'
                   }
@@ -150,6 +152,7 @@ export const quickSchema = (schema: FormSchema) => {
                 props: {
                   varOptions,
                   renderTreeNode,
+                  defaultExpandAll: true,
                   initType: 'var'
                 },
                 component: 'CompositeInput',
@@ -168,7 +171,8 @@ export const quickSchema = (schema: FormSchema) => {
             props: {
               varOptions,
               renderTreeNode,
-              initType: '{{ $item.trueReturn? "string" : "boolean" }}'
+              defaultExpandAll: true,
+              initType: 'boolean'
             },
             initialValue: true
           },
@@ -180,7 +184,8 @@ export const quickSchema = (schema: FormSchema) => {
             props: {
               varOptions,
               renderTreeNode,
-               initType: '{{ $item.falseReturn? "string" : "boolean" }}'
+              defaultExpandAll: true,
+              initType: 'boolean'
             },
             initialValue: false
           }

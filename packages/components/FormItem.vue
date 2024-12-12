@@ -47,7 +47,7 @@
         </el-dialog>
 
         <el-button type="primary" plain @click="handleDialog">{{
-          isString(dialog) ? dialog : '配置'
+          dialogBtnText || '配置'
         }}</el-button>
       </template>
 
@@ -70,7 +70,7 @@ import type { FormItemType } from '@vue-form-craft/types'
 import Icon from '@vue-form-craft/icons'
 import { useFormInstance } from '@vue-form-craft/hooks'
 import { useElements } from '@vue-form-craft/hooks'
-import { cloneDeep, isArray, isEqual, isString } from 'lodash'
+import { cloneDeep, isArray, isEqual } from 'lodash'
 
 const thisProps = defineProps<FormItemType>()
 
@@ -85,7 +85,7 @@ const dialogState = reactive({
 
 const handleDialog = () => {
   dialogState.visible = true
-  dialogState.title = thisProps.label!
+  dialogState.title = thisProps.dialogTitle || thisProps.label || ''
 }
 
 const value = computed({

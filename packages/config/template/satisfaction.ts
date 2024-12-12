@@ -100,7 +100,7 @@ export default {
       },
       designKey: 'form-improvementSuggestions',
       name: 'improvementSuggestions',
-      hidden: '{{ !$values.satisfaction || $values.satisfaction > 3 }}'
+      hidden: '{{ !$values.satisfaction || $values.satisfaction>3 }}'
     },
     {
       label: '联系方式',

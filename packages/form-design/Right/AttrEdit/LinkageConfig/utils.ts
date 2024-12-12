@@ -64,9 +64,9 @@ export const generateCondition = (conditions: Condition[]) => {
       all += variable
 
       const computeParse = compare
-        .replaceAll('greater', ' > ')
-        .replaceAll('equal', ' === ')
-        .replaceAll('less', ' < ')
+        .replaceAll('greater', '>')
+        .replaceAll('equal', '===')
+        .replaceAll('less', '<')
 
       all += computeParse
 
@@ -109,11 +109,52 @@ export const parseQuick = (data: FormItemType) => {
 
     const [conStr, resStr] = condition.trim().split(' ? ')
 
+    const conArr: any[] = conStr.split(' ')
+
+    const conditions = conArr.reduce((all, con, index) => {
+      if (['||', '&&'].includes(con)) {
+        return all
+      }
+
+      const source = {
+        compare: '',
+        variable: con,
+        value: con,
+        with: ''
+      }
+
+      if (con.startsWith('!!')) {
+        source.compare = 'true'
+        source.variable = con.replace('!!', '')
+      }
+
+      if (con.startsWith('!')) {
+        source.compare = 'false'
+        source.variable = con.replace('!', '')
+      }
+
+      if (con.split('>').length > 1) {
+        source.compare = 'greater'
+        source.variable = con.split('>')[0]
+        source.value = con.split('>')[1]
+      }
+
+      if (index !== 0 && index % 2 === 0) {
+        source.with = all[index - 1]
+      }
+
+      all.push(source)
+
+      return all
+    }, [])
+
+    console.log(conditions)
+
     const [trueReturn, falseReturn] = resStr?.trim().split(':') || []
 
     acc.push({
       name: key,
-      conditions: [],
+      conditions: conditions,
       trueReturn,
       falseReturn
     })

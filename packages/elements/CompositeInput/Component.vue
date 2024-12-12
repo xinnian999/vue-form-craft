@@ -31,7 +31,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { isBoolean, isNumber } from 'lodash'
+import { onMounted, ref } from 'vue'
 
 type Props = {
   varOptions?: any[]
@@ -65,6 +66,16 @@ const typeOptions = [
     value: 'boolean'
   }
 ]
+
+onMounted(() => {
+  if (isBoolean(value.value)) {
+    return (typeValue.value = 'boolean')
+  }
+
+  if (isNumber(value.value)) {
+    return (typeValue.value = 'number')
+  }
+})
 </script>
 
 <style lang="scss">
