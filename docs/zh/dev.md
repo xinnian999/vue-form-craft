@@ -18,96 +18,56 @@ pnpm i
 pnpm dev
 ```
 
-4、构建项目，生成`dist`目录。 `dist/vue-form-craft.js`就是依赖入口！
+4、构建项目，生成`dist`目录。 
 
 ```sh
 pnpm build
 ```
 
-## 方法二
+`packages/vue-form-craft/dist/vue-form-craft.js`就是依赖入口！
 
-1、将本项目的 `src` 目录copy到你项目里的组件目录下。 比如 `src/components`下，并重命名为 `vue-form-craft`
+## 方法二 （copy源码）
+
+>由于本项目采用了`monerepo`组织代码，所以源码搬到你项目里，会让你的项目也变成这种模式。所以看情况选用
 
 
-2、引入 `vue-form-craft/release` 到 `main.ts` 里注册即可。
+1、将本项目的 `packages` 目录copy到你项目里的组件目录下。 比如 `src/components`下，并重命名为 `vue-form-craft`
 
-<img src="../assets/dev.png" />
+2、在你的项目根目录下，新建`pnpm-workspace.yaml`，写入以下配置(可根据你放入的位置调整)
 
-3、`vite.config.ts`增加一条路径别名配置
+```yaml
 
-```ts
-import { fileURLToPath, URL } from 'node:url'
-
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import vueJsx from '@vitejs/plugin-vue-jsx'
-
-// https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [
-    vue(),
-    vueJsx(),
-  ],
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
-      '@vue-form-craft': fileURLToPath(new URL('./src/components/vue-form-craft', import.meta.url))
-    }
-  }
-})
+packages:
+  - 'src/components/vue-form-craft/*'
 
 ```
 
-4、如果你项目里使用了`TypeScript`，则需要在`tsconfig.json`里也增加一条路径别名配置
+3、`修改package.json` 增加以下依赖，然后pnpm i
 
 ```json
-{
-  "extends": "@vue/tsconfig/tsconfig.dom.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
-  "exclude": ["src/**/__tests__/*"],
-  "compilerOptions": {
-    "composite": true,
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
-    "types": ["vue-form-craft/global"],
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"],
-      "@vue-form-craft/*": ["./src/components/vue-form-craft/*"],
-    }
-  }
-}
+  ...
+  "dependencies": {
+    ...
+    "@vue-form-craft/components": "workspace:*",
+    "@vue-form-craft/config": "workspace:*",
+    "@vue-form-craft/elements": "workspace:*",
+    "@vue-form-craft/form-design": "workspace:*",
+    "@vue-form-craft/form-render": "workspace:*",
+    "@vue-form-craft/hooks": "workspace:*",
+    "@vue-form-craft/icons": "workspace:*",
+    "@vue-form-craft/styles": "workspace:*",
+    "@vue-form-craft/types": "workspace:*",
+    "@vue-form-craft/utils": "workspace:*",
+    "vue-form-craft": "workspace:*",
+    "@vue/test-utils": "^2.4.6",
+    "element-plus": "^2.8.3",
+    "lodash": "^4.17.21",
+    "vue": "^3.5.13",
+    "vuedraggable-es-fix": "^1.0.1",
+    "sass": "~1.32.6"
+  },
 ```
 
-5、最后，你的项目里还需要安装一些依赖，可以根据报错提示来安装缺少的依赖。
+4、引入 `vue-form-craft/` 到 `main.ts` 里注册即可。
 
-```sh
-npm i lodash vuedraggable-es  json-editor-vue3 ... 
-```
-
-6、如果出现报错`Uncaught SyntaxError: The requested module '/node_modules/.pnpm/jsoneditor@9.10.5/node_modules/jsoneditor/dist/jsoneditor.min.js?v=3fb8ead3' does not provide an export named 'default' (at json-editor.vue:2:8)`
-
-那么还需要增加依赖`@originjs/vite-plugin-commonjs`。
-
-```ts
-import { fileURLToPath, URL } from 'node:url'
-
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import vueJsx from '@vitejs/plugin-vue-jsx'
-import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
-
-// https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [
-    vue(),
-    vueJsx(),
-    viteCommonjs()
-  ],
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
-      '@vue-form-craft': fileURLToPath(new URL('./src/components/vue-form-craft', import.meta.url))
-    }
-  }
-})
-```
+<img src="../assets/dev.png" />
