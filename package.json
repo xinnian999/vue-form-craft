@@ -6,6 +6,7 @@
     "build": "pnpm -C packages/vue-form-craft build",
     "small-v": "pnpm -C packages/vue-form-craft v",
     "release": "pnpm -C packages/vue-form-craft release",
+    "release:docs": "pnpm -C docs release",
     "docs:dev": "pnpm -C docs dev",
     "docs:build": "pnpm -C docs build",
     "docs:preview": "pnpm -C docs preview",
