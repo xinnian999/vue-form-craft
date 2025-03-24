@@ -41,6 +41,7 @@
     "@vue-form-craft/utils": "workspace:*",
     "@vue/eslint-config-prettier": "^8.0.0",
     "@vue/eslint-config-typescript": "^12.0.0",
+    "vue-form-craft": "workspace:*",
     "@vue/shared": "^3.4.38",
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.5.1",

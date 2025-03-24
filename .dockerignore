@@ -1,0 +1,12 @@
+Dockerfile
+.dockerignore
+npm-debug.log
+README.md
+.next
+.git
+node_modules
+dist
+.vscode
+.github
+.changeset
+cache

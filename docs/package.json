@@ -16,8 +16,5 @@
     "postcss": "^8.4.47",
     "vitepress": "^1.2.3",
     "vitepress-vue-demo": "^1.0.10"
-  },
-  "dependencies": {
-    "vue-form-craft": "workspace:*"
   }
 }
