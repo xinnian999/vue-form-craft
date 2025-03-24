@@ -1,1 +1,0 @@
-scp -r .vitepress/dist root@8.141.86.20:/www/wwwroot/vue-form-craft
