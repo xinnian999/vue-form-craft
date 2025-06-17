@@ -18,14 +18,14 @@ export default {
   Layout,
   async enhanceApp({ app }) {
     if (!import.meta.env.SSR) {
-      const { default: VueFormCraft } = await import('vue-form-craft')
+      const { default: FormMagic } = await import('@form-magic/element-plus')
       const { default: ElementPlus } = await import('element-plus')
       const { default: request } = await import('./request')
       const { default: extendElements } = await import('./extendElements')
 
       app.use(ElementPlus)
       app.use(ArcoVue)
-      app.use(VueFormCraft, { request, extendElements })
+      app.use(FormMagic, { request, extendElements })
       app.use(components)
 
       app.use(mdVueDemo, { modules })

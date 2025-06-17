@@ -1,11 +1,11 @@
 # Extend Form Designer
-`vue-form-craft` provides some basic components, such as input, select, and radio.
+`form-magic` provides some basic components, such as input, select, and radio.
 
-However, sometimes these components may not fully meet our business needs. In such cases, we can consider extending the form designer of `vue-form-craft` with more draggable components to meet additional requirements and facilitate future use!
+However, sometimes these components may not fully meet our business needs. In such cases, we can consider extending the form designer of `form-magic` with more draggable components to meet additional requirements and facilitate future use!
 
 ## How to Extend?
 
-Simply register `vue-form-craft` globally and pass in an `extendElements` configuration!
+Simply register `form-magic` globally and pass in an `extendElements` configuration!
 
 `extendElements` is an object! The component name serves as the key, and `FormElement` serves as the value!
 
@@ -19,20 +19,20 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
-import VueFormCraft from 'vue-form-craft'
+import FormMagic from '@form-magic/element-plus'
 import extendElements from './extendElements'
 
 const app = createApp(App)
 
 app.use(ElementPlus)
-app.use(VueFormCraft, { extendElements })
+app.use(FormMagic, { extendElements })
 app.mount('#app')
 
 ```
 
 ## FormElement Object
 
-The components in the form designer are all composed of `FormElement` objects. Similarly, if we want to extend more components, we need to configure them according to the interface format of `FormElement` and then pass them to `vue-form-craft`!
+The components in the form designer are all composed of `FormElement` objects. Similarly, if we want to extend more components, we need to configure them according to the interface format of `FormElement` and then pass them to `form-magic`!
 
 ```ts
 interface FormElement {

@@ -1,0 +1,37 @@
+{
+  "name": "@form-magic/element-plus",
+  "version": "5.0.0",
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "v": "npm version patch",
+    "release": "vite build && nrm use npm && npm publish"
+  },
+  "peerDependencies": {
+    "vue": "^3.2.0",
+    "element-plus": "^2.6.0"
+  },
+  "dependencies": {
+    "element-plus": "^2.8.3",
+    "vue": "^3.5.8"
+  },
+  "devDependencies": {
+    "vite-plugin-dts": "^3.7.3",
+    "vite-plugin-libcss": "^1.1.1"
+  },
+  "files": [
+    "dist",
+    "global.d.ts"
+  ],
+  "exports": {
+    ".": "./dist/form-magic.js",
+    "./dev": "./index.ts"
+  },
+  "keywords": [
+    "component",
+    "vue",
+    "form",
+    "element-ui"
+  ]
+}

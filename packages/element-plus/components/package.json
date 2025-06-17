@@ -1,0 +1,11 @@
+{
+  "name": "@/components",
+  "version": "4.6.0",
+  "description": "",
+  "main": "index.ts",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "shiki": "^1.21.0"
+  }
+}

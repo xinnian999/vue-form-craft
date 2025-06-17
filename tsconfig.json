@@ -15,7 +15,7 @@
   ],
   "compilerOptions": {
     // "module": "ES2020",
-    "types": ["vite/client", "element-plus/global", "vue-form-craft/global"],
+    "types": ["vite/client", "element-plus/global", "form-magic/global"],
     // "composite": true,
     // "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "baseUrl": ".",

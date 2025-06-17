@@ -5,14 +5,14 @@ export default defineConfig({
   lang: 'zh',
   title: 'Vue Form Craft',
   description: '基于vue3的一个开箱即用低代码表单方案',
-  base: '/vue-form-craft/',
+  base: '/form-magic/',
   vite: {
     server: {
       port: 9999,
       host: true
     }
   },
-  head: [['link', { rel: 'icon', href: '/vue-form-craft/favicon.svg' }]],
+  head: [['link', { rel: 'icon', href: '/form-magic/favicon.svg' }]],
   markdown: {
     config: (md) => {
       md.use(mdVueDemoPlugin,{root:'./'})
@@ -22,7 +22,7 @@ export default defineConfig({
     search: {
       provider: 'local'
     },
-    socialLinks: [{ icon: 'github', link: 'https://github.com/xinnian999/vue-form-craft' }]
+    socialLinks: [{ icon: 'github', link: 'https://github.com/xinnian999/form-magic' }]
   },
   locales: {
     root: {

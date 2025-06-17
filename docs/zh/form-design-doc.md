@@ -2,7 +2,7 @@
 
 ## 简介
 
-FormDesign 是 vue-form-craft 的可视化表单设计器组件。
+FormDesign 是 form-magic 的可视化表单设计器组件。
 
 建议将设计器渲染在一个大的容器里！
 

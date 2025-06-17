@@ -1,0 +1,8 @@
+{
+  "name": "@/styles",
+  "version": "4.6.0",
+  "description": "",
+  "main": "index.scss",
+  "author": "",
+  "license": "ISC"
+}

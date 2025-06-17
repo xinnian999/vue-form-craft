@@ -2,7 +2,7 @@
 
 ## Introduction
 
-FormRender is the rendering component of vue-form-craft.
+FormRender is the rendering component of form-magic.
 
 ::: demo expand
 

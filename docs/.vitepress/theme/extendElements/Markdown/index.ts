@@ -1,4 +1,4 @@
-import type { FormElement } from 'vue-form-craft'
+import type { FormElement } from '@form-magic/element-plus'
 import component from './Component.vue'
 import icon from './Icon.vue'
 import attrSchema from './attrSchema'

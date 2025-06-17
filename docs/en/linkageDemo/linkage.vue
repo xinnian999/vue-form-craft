@@ -4,7 +4,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { FormSchema } from 'vue-form-craft'
+import type { FormSchema } from '@form-magic/element-plus'
 
 const formValues = ref({})
 

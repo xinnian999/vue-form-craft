@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { FormSchema, FormInstance } from 'vue-form-craft'
+import type { FormSchema, FormInstance } from '@form-magic/element-plus'
 
 const formRef = ref<FormInstance>()
 

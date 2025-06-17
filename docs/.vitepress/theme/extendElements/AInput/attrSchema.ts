@@ -1,4 +1,4 @@
-import type { FormSchema } from 'vue-form-craft'
+import type { FormSchema } from '@form-magic/element-plus'
 
 export default {
   size: 'small',

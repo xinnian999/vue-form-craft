@@ -1,4 +1,4 @@
-# @vue-form-craft/docs
+# @/docs
 
 ## 4.6.0
 

@@ -2,7 +2,7 @@
 
 ## 简介
 
-FormRender 是 vue-form-craft 的渲染组件。
+FormRender 是 form-magic 的渲染组件。
 
 ::: demo expand
 

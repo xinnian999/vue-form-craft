@@ -11,9 +11,15 @@ importers:
       element-plus:
         specifier: ^2.8.3
         version: 2.8.8(vue@3.5.13(typescript@5.3.3))
+      jsoneditor:
+        specifier: 10.1.0
+        version: 10.1.0
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
+      shiki:
+        specifier: ^1.21.0
+        version: 1.23.1
       vue:
         specifier: ^3.5.8
         version: 3.5.13(typescript@5.3.3)
@@ -24,6 +30,9 @@ importers:
       '@changesets/cli':
         specifier: ^2.27.9
         version: 2.27.10
+      '@form-magic/element-plus':
+        specifier: workspace:*
+        version: link:packages/element-plus
       '@rushstack/eslint-patch':
         specifier: ^1.3.3
         version: 1.10.4
@@ -42,36 +51,6 @@ importers:
       '@vitejs/plugin-vue-jsx':
         specifier: ^4.1.0
         version: 4.1.0(vite@5.4.11(@types/node@20.17.7)(sass@1.32.13))(vue@3.5.13(typescript@5.3.3))
-      '@vue-form-craft/components':
-        specifier: workspace:*
-        version: link:packages/components
-      '@vue-form-craft/config':
-        specifier: workspace:*
-        version: link:packages/config
-      '@vue-form-craft/elements':
-        specifier: workspace:*
-        version: link:packages/elements
-      '@vue-form-craft/form-design':
-        specifier: workspace:*
-        version: link:packages/form-design
-      '@vue-form-craft/form-render':
-        specifier: workspace:*
-        version: link:packages/form-render
-      '@vue-form-craft/hooks':
-        specifier: workspace:*
-        version: link:packages/hooks
-      '@vue-form-craft/icons':
-        specifier: workspace:*
-        version: link:packages/icons
-      '@vue-form-craft/styles':
-        specifier: workspace:*
-        version: link:packages/styles
-      '@vue-form-craft/types':
-        specifier: workspace:*
-        version: link:packages/types
-      '@vue-form-craft/utils':
-        specifier: workspace:*
-        version: link:packages/utils
       '@vue/eslint-config-prettier':
         specifier: ^8.0.0
         version: 8.0.0(eslint@8.57.1)(prettier@3.3.3)
@@ -111,9 +90,6 @@ importers:
       vitest:
         specifier: ^2.1.5
         version: 2.1.5(@types/node@20.17.7)(jsdom@25.0.1)(sass@1.32.13)
-      vue-form-craft:
-        specifier: workspace:*
-        version: link:packages/vue-form-craft
 
   docs:
     devDependencies:
@@ -136,35 +112,7 @@ importers:
         specifier: ^1.0.10
         version: 1.0.10(typescript@5.6.3)
 
-  packages/components:
-    dependencies:
-      shiki:
-        specifier: ^1.21.0
-        version: 1.23.1
-
-  packages/config: {}
-
-  packages/elements:
-    dependencies:
-      jsoneditor:
-        specifier: 10.1.0
-        version: 10.1.0
-
-  packages/form-design: {}
-
-  packages/form-render: {}
-
-  packages/hooks: {}
-
-  packages/icons: {}
-
-  packages/styles: {}
-
-  packages/types: {}
-
-  packages/utils: {}
-
-  packages/vue-form-craft:
+  packages/element-plus:
     dependencies:
       element-plus:
         specifier: ^2.8.3
@@ -185,9 +133,6 @@ importers:
       vue:
         specifier: ^3.5.12
         version: 3.5.13(typescript@5.6.3)
-      vue-form-craft:
-        specifier: workspace:*
-        version: link:../packages/vue-form-craft
       vue-router:
         specifier: ^4.4.5
         version: 4.4.5(vue@3.5.13(typescript@5.6.3))
@@ -1400,8 +1345,8 @@ packages:
     resolution: {integrity: sha512-6/mh1E2u2YgEsCHdY0Yx5oW+61gZU+1vXaoiHHrpKeuRNNgFvS+/jrwHiQhB5apAf5oB7UB7E19ol2R2LKH8hQ==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
 
-  ace-builds@1.36.5:
-    resolution: {integrity: sha512-mZ5KVanRT6nLRDLqtG/1YQQLX/gZVC/v526cm1Ru/MTSlrbweSmqv2ZT0d2GaHpJq035MwCMIrj+LgDAUnDXrg==}
+  ace-builds@1.42.0:
+    resolution: {integrity: sha512-nRDbpHguujCh9Lb00jtJAblR6d5JEi6RVrHtj+TAlUqRYwWl5Es7iHnyXUOmTcMfkzQ2/TPn45G/yvdQGa0ZXw==}
 
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -1535,10 +1480,10 @@ packages:
     engines: {node: '>=10'}
 
   character-entities-html4@2.1.0:
-    resolution: {integrity: sha512-1v7fgQRj6hnSwFpq1Eu0ynr/CDEw0rXo2B61qXrLNdHZmPKgb7fqS1a2JwF0rISo9q77jDI8VMEHoApn8qDoZA==}
+    resolution: {integrity: sha1-HxrblAyXGksiujndymthjcblays=}
 
   character-entities-legacy@3.0.0:
-    resolution: {integrity: sha512-RpPp0asT/6ufRm//AJVwpViZbGM/MkjQFxJccQRHmISF/22NBtsHqAWmL+/pmkPWoIUJdWyeVleTl1wydHATVQ==}
+    resolution: {integrity: sha1-dryDqQc4kB17wiOp6TdZ/dVgEls=}
 
   chardet@0.7.0:
     resolution: {integrity: sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==}
@@ -1711,7 +1656,7 @@ packages:
     resolution: {integrity: sha512-LRlerrMYoIDrT6jgpeZ2YYl/L8EulRTt5hQcYjy5AInh7HWXKimpqx68aknBFpGL2+/IcogTcaydJEgaTmOpDg==}
 
   emoji-regex@8.0.0:
-    resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
+    resolution: {integrity: sha1-6Bj9ac5cz8tARZT4QpY79TFkzDc=}
 
   emoji-regex@9.2.2:
     resolution: {integrity: sha512-L18DaJsXSUk2+42pv8mLs5jJT2hqFkFE4j21wOmgbUqsZ2hL72NsUU785g9RXgo3s0ZNgVl42TiHp3ZtOv/Vyg==}
@@ -2004,7 +1949,7 @@ packages:
     engines: {node: '>=6'}
 
   import-lazy@4.0.0:
-    resolution: {integrity: sha512-rKtvo6a868b5Hu3heneU+L4yEQ4jYKLtjpnPeUdK7h0yzXGmyBTypknlkCvHFBqfX9YlorEiMM6Dnq/5atfHkw==}
+    resolution: {integrity: sha1-6OtidIOgpD2jwD8+NVSL5csMwVM=}
     engines: {node: '>=8'}
 
   imurmurhash@0.1.4:
@@ -2037,7 +1982,7 @@ packages:
     engines: {node: '>=0.10.0'}
 
   is-fullwidth-code-point@3.0.0:
-    resolution: {integrity: sha512-zymm5+u+sCsSWyD9qNaejV3DFvhCKclKdizYaJUuHA83RLjb7nSuGnddCHGv0hk+KY7BMAlsWeK4Ueg6EV6XQg==}
+    resolution: {integrity: sha1-8Rb4Bk/pCz94RKOJl8C3UFEmnx0=}
     engines: {node: '>=8'}
 
   is-glob@4.0.3:
@@ -2148,8 +2093,8 @@ packages:
   jsonfile@4.0.0:
     resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
 
-  jsonrepair@3.10.0:
-    resolution: {integrity: sha512-0Ex64Exiw0rPUEcSbhPN0ae4/5D0DZLIob9yagAF1OG5iU0mP+/t7q4gcxtQdn6i7FuQy2J/w1XbOdu/uhGV0w==}
+  jsonrepair@3.12.0:
+    resolution: {integrity: sha512-SWfjz8SuQ0wZjwsxtSJ3Zy8vvLg6aO/kxcp9TWNPGwJKgTZVfhNEQBMk/vPOpYCDFWRxD6QWuI6IHR1t615f0w==}
     hasBin: true
 
   keyv@4.5.4:
@@ -2184,7 +2129,7 @@ packages:
       lodash-es: '*'
 
   lodash.get@4.4.2:
-    resolution: {integrity: sha512-z+Uw/vLuy6gQe8cfaFWD7p0wVv8fJl3mbzXh33RS+0oW2wvUqiRXiQ69gLWSLpgB5/6sU+r6BlQR0MBILadqTQ==}
+    resolution: {integrity: sha1-LRd/ZS+jHpObRDjVNBSZ36OCXpk=}
 
   lodash.isequal@4.5.0:
     resolution: {integrity: sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==}
@@ -2208,7 +2153,7 @@ packages:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
 
   lru-cache@6.0.0:
-    resolution: {integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==}
+    resolution: {integrity: sha1-bW/mVw69lqr5D8rR2vo7JWbbOpQ=}
     engines: {node: '>=10'}
 
   magic-string@0.30.13:
@@ -2447,7 +2392,7 @@ packages:
     engines: {node: '>=8'}
 
   path-parse@1.0.7:
-    resolution: {integrity: sha512-LDJzPVEEEPR+y48z93A0Ed0yXb8pAByGWo/k5YYdYgpY2/2EsOsksJrq7lOHxryrVOn1ejG6oAp8ahvOIQD8sw==}
+    resolution: {integrity: sha1-+8EUtgykKzDZ2vWFjkvWi77bZzU=}
 
   path-scurry@1.11.1:
     resolution: {integrity: sha512-Xa4Nw17FS9ApQFJ9umLiJS4orGjm7ZzwUrwamcGQuHSzDyth9boKDaycYdDcZDuqYATXw4HFXgaqWTctW/v1HA==}
@@ -2575,7 +2520,7 @@ packages:
     engines: {node: '>=8'}
 
   resolve@1.19.0:
-    resolution: {integrity: sha512-rArEXAgsBG4UgRGcynxWIWKFvh/XZCcS8UJdHhwy91zwAvCZIbcs+vAbflgBnNjYMs/i/i+/Ux6IZhML1yPvxg==}
+    resolution: {integrity: sha1-GvW/YwQJc0oGfK4pMYqsf6KaJnw=}
 
   resolve@1.22.8:
     resolution: {integrity: sha512-oKWePCxqpd6FlLvGV1VU0x7bkPmmCNolxzjMf4NczoDnQcIWrAF+cPtZn5i6n+RfD2d9i0tzpKnG6Yk168yIyw==}
@@ -2672,7 +2617,7 @@ packages:
     engines: {node: '>=0.10.0'}
 
   source-map@0.6.1:
-    resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==}
+    resolution: {integrity: sha1-dHIq8y6WFOnCh6jQu95IteLxomM=}
     engines: {node: '>=0.10.0'}
 
   space-separated-tokens@2.0.2:
@@ -2699,7 +2644,7 @@ packages:
     engines: {node: '>=0.6.19'}
 
   string-width@4.2.3:
-    resolution: {integrity: sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==}
+    resolution: {integrity: sha1-JpxxF9J7Ba0uU2gwqOyJXvnG0BA=}
     engines: {node: '>=8'}
 
   string-width@5.1.2:
@@ -2737,7 +2682,7 @@ packages:
     engines: {node: '>=8'}
 
   supports-color@8.1.1:
-    resolution: {integrity: sha512-MpUEN2OodtUzxvKQl72cUF7RQ5EiHsGvSsVG0ia9c5RbWGL2CI4C7EpPS8UTBIplnlzZiNuV56w+FuNxy3ty2Q==}
+    resolution: {integrity: sha1-zW/BfihQDP9WwbhsCn/UpUpzAFw=}
     engines: {node: '>=10'}
 
   supports-preserve-symlinks-flag@1.0.0:
@@ -3083,7 +3028,7 @@ packages:
     engines: {node: '>=0.10.0'}
 
   wrap-ansi@7.0.0:
-    resolution: {integrity: sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==}
+    resolution: {integrity: sha1-Z+FFz/UQpqaYS98RUpEdadLrnkM=}
     engines: {node: '>=10'}
 
   wrap-ansi@8.1.0:
@@ -3125,7 +3070,7 @@ packages:
     resolution: {integrity: sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g==}
 
   yallist@4.0.0:
-    resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}
+    resolution: {integrity: sha1-m7knkNnA7/7GO+c1GeEaNQGaOnI=}
 
   yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
@@ -4765,7 +4710,7 @@ snapshots:
 
   abbrev@2.0.0: {}
 
-  ace-builds@1.36.5: {}
+  ace-builds@1.42.0: {}
 
   acorn-jsx@5.3.2(acorn@8.14.0):
     dependencies:
@@ -5580,12 +5525,12 @@ snapshots:
 
   jsoneditor@10.1.0:
     dependencies:
-      ace-builds: 1.36.5
+      ace-builds: 1.42.0
       ajv: 6.12.6
       javascript-natural-sort: 0.7.1
       jmespath: 0.16.0
       json-source-map: 0.6.1
-      jsonrepair: 3.10.0
+      jsonrepair: 3.12.0
       mobius1-selectr: 2.4.13
       picomodal: 3.0.0
       vanilla-picker: 2.12.3
@@ -5594,7 +5539,7 @@ snapshots:
     optionalDependencies:
       graceful-fs: 4.2.11
 
-  jsonrepair@3.10.0: {}
+  jsonrepair@3.12.0: {}
 
   keyv@4.5.4:
     dependencies:

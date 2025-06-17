@@ -1,6 +1,6 @@
 # 暗黑模式
 
-由于 `vue-form-craft` 是基于`element-plus`开发的，所以颜色变量也基本都使用它的变量。
+由于 `form-magic` 是基于`element-plus`开发的，所以颜色变量也基本都使用它的变量。
 
 直接将`element-plus`切换成黑夜模式即可。
 

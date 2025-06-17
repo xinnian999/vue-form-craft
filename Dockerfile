@@ -20,11 +20,11 @@ RUN pnpm docs:build
 FROM nginx:latest AS deploy
 
 # 将构建好的静态文件复制到 nginx 默认路径
-COPY --from=build /app/docs/.vitepress/dist /usr/share/nginx/html/vue-form-craft
+COPY --from=build /app/docs/.vitepress/dist /usr/share/nginx/html/form-magic
 
 # 暴露 80 端口
 EXPOSE 80
 
-# 启动 nginx，访问localhost:9999/vue-form-craft/zh
+# 启动 nginx，访问localhost:9999/form-magic/zh
 CMD ["nginx", "-g", "daemon off;"]
 

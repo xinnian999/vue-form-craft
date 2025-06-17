@@ -1,6 +1,6 @@
 # 自定义组件
 
-`vue-form-craft` 提供了一些基础组件，例如 input、select 和 radio 等。
+`form-magic` 提供了一些基础组件，例如 input、select 和 radio 等。
 
 但有时候这些组件并不能完全满足我们的业务需求，此时可以考虑使用**自定义组件**。
 
@@ -8,7 +8,7 @@
 
 自定义组件的键为 `Custom` 组件，然后我们再为它传递一个关键的props ：`componentName`。
 
-componentName是一个你项目里的全局组件的名称，`vue-form-craft`会自动为这个组件传递`v-model`，来与表单建立数据连接。
+componentName是一个你项目里的全局组件的名称，`form-magic`会自动为这个组件传递`v-model`，来与表单建立数据连接。
 
 
 > 也可以通过设计器快速生成

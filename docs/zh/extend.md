@@ -1,15 +1,15 @@
 # 扩展表单设计器
 
-`vue-form-craft` 提供了一些基础组件，例如 input、select 和 radio 等。
+`form-magic` 提供了一些基础组件，例如 input、select 和 radio 等。
 
-但有时候这些组件并不能完全满足我们的业务需求，此时可以考虑为 `vue-form-craft` 的表单设计器扩展更多可拖拽组件，以满足更多需求且方便下次使用！
+但有时候这些组件并不能完全满足我们的业务需求，此时可以考虑为 `form-magic` 的表单设计器扩展更多可拖拽组件，以满足更多需求且方便下次使用！
 
 **了解以下教程后，你就可以扩展任何自定义的组件，或者任意组件库的组件过来拖拽使用！**
 
 
 ## 如何扩展？
 
-只需要在全局注册`vue-form-craft`时，传入一个`extendElements`配置即可！
+只需要在全局注册`form-magic`时，传入一个`extendElements`配置即可！
 
 `extendElements`是一个对象！组件名作为键，`FormElement`作为值！ 
 
@@ -24,13 +24,13 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
-import VueFormCraft from 'vue-form-craft'
+import FormMagic from '@form-magic/element-plus'
 import extendElements from './extendElements'
 
 const app = createApp(App)
 
 app.use(ElementPlus)
-app.use(VueFormCraft, { extendElements })
+app.use(FormMagic, { extendElements })
 app.mount('#app')
 
 ```
@@ -38,7 +38,7 @@ app.mount('#app')
 
 ## 组件对象FormElement
 
-表单设计器的组件全部是由`FormElement`对象组成的，同理我们想扩展更多组件，需要按照`FormElement`的接口格式去配置，然后传给`vue-form-craft`即可！
+表单设计器的组件全部是由`FormElement`对象组成的，同理我们想扩展更多组件，需要按照`FormElement`的接口格式去配置，然后传给`form-magic`即可！
 
 ```ts
 interface FormElement {

@@ -2,7 +2,7 @@
 
 To evaluate the strength of a form tool, form linkage capability is crucial.
 
-`vue-form-craft` provides a set of **extremely simple and flexible** form linkage implementation methods!
+`form-magic` provides a set of **extremely simple and flexible** form linkage implementation methods!
 
 It is divided into two types of implementations: **configuration linkage** and **value linkage**.
 
