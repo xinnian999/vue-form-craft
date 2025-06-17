@@ -1,7 +1,7 @@
 import FormRender from '@/form-render'
 import FormDesign from '@/form-design'
 import install from './install'
-import '@/styles'
+import '@/styles/index.scss'
 
 export default { install }
 

@@ -1,7 +1,7 @@
 import type { FormElement } from '@/types/index'
 import attrSchema from './attrSchema'
 import { defineAsyncComponent, h } from 'vue'
-import Icon from '@/icons'
+import { Icon } from '@form-magic/core'
 
 export default {
   title: '多选框组',

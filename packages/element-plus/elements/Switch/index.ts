@@ -1,4 +1,4 @@
-import Icon from '@/icons'
+import { Icon } from '@form-magic/core'
 import attrSchema from './attrSchema'
 import { defineAsyncComponent, h } from 'vue'
 import type { FormElement } from '@/types/index'

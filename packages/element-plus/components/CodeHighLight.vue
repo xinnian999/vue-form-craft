@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import Icon from '@/icons'
+import { Icon } from '@form-magic/core'
 import { ElMessage } from 'element-plus'
 import { onMounted, ref } from 'vue'
 import { createHighlighterCore } from 'shiki/core'

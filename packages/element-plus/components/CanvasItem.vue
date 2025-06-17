@@ -41,7 +41,7 @@ import { computed } from 'vue'
 import FormItem from './FormItem.vue'
 import type { FormItemType } from '@/types/index'
 import { useDesignInstance, useElements } from '@/hooks'
-import Icon from '@/icons'
+import { Icon } from '@form-magic/core'
 import { copyItems, ns, recursionDelete } from '@/utils'
 
 const props = defineProps<{ data: FormItemType }>()

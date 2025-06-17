@@ -38,7 +38,7 @@
 <script lang="ts" setup>
 import { ElMessage, ElMessageBox } from 'element-plus'
 import type { UploadProps, UploadUserFile } from 'element-plus'
-import Icon from '@/icons'
+import { Icon } from '@form-magic/core'
 
 interface Props {
   action: string

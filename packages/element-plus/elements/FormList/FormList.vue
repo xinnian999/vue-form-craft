@@ -111,7 +111,7 @@ import { deepParse } from '@/utils'
 import { isEqual, isString, pickBy } from 'lodash'
 import type { FormItemType } from '@/types/index'
 import { useFormInstance } from '@/hooks'
-import Icon from '@/icons'
+import { Icon } from '@form-magic/core'
 import type { TableColumnCtx } from 'element-plus'
 
 interface Props {

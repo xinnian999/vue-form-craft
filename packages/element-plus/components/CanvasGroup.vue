@@ -33,7 +33,7 @@
 <script setup lang="ts">
 import Draggable from 'vuedraggable-es-fix'
 import CanvasItem from './CanvasItem.vue'
-import Icon from '@/icons'
+import { Icon } from '@form-magic/core'
 import type { FormItemType } from '@/types/index'
 import { useDesignInstance } from '@/hooks'
 import { getCurrentByKey, ns } from '@/utils'

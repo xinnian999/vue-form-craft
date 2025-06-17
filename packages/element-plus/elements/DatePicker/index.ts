@@ -1,6 +1,6 @@
 import attrSchema from './attrSchema'
 import type { FormElement } from '@/types/index'
-import Icon from '@/icons'
+import { Icon } from '@form-magic/core'
 import { h } from 'vue'
 
 export default {

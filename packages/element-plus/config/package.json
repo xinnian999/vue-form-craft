@@ -1,8 +1,0 @@
-{
-  "name": "@/config",
-  "version": "4.6.0",
-  "description": "",
-  "main": "index.ts",
-  "author": "",
-  "license": "ISC"
-}

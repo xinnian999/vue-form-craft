@@ -64,7 +64,7 @@
 import { computed, onBeforeMount, reactive, watch } from 'vue'
 import { isRegexString, getDataByPath, setDataByPath, ns } from '@/utils'
 import type { FormItemType } from '@/types/index'
-import Icon from '@/icons'
+import { Icon } from '@form-magic/core'
 import { useFormInstance } from '@/hooks'
 import { useElements } from '@/hooks'
 import { cloneDeep, isArray, isEqual } from 'lodash'

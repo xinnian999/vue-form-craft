@@ -1,4 +1,4 @@
-import Icon from '@/icons'
+import { Icon } from '@form-magic/core'
 import type { FormElement } from '@/types/index'
 import { h } from 'vue'
 
