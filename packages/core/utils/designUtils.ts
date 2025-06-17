@@ -1,5 +1,5 @@
-import type { FormItemType } from '@/types/index'
-import { getRandomId } from '@/utils'
+import type { FormItemType } from '../types/index'
+import getRandomId from './getRandomId'
 import { cloneDeep } from 'lodash'
 
 export const getCurrentByKey = (items: FormItemType[], key: string): FormItemType | null => {
@@ -69,7 +69,6 @@ export const copyItems = (list: FormItemType[], id: string): FormItemType[] => {
 
 export const changeItems = (items: FormItemType[]) => {
   return items.map((item: any) => {
-    
     if (!item.render) {
       return item
     }

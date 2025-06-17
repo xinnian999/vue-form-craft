@@ -1,4 +1,4 @@
-import type { Locale } from '@/types/index'
+import type { Locale } from '@form-magic/core'
 
 export default {
   menus: {

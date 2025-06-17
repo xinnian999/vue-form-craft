@@ -1,5 +1,5 @@
 import { expect, describe, it } from 'vitest'
-import { configTest, wait } from '@/utils'
+import { configTest, wait } from '@form-magic/core'
 import { mount } from '@vue/test-utils'
 import formRender from '@/form-render'
 import schema from '../formList'

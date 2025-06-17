@@ -19,9 +19,9 @@
 <script setup lang="ts">
 import { ref, computed, reactive, provide, toRefs, readonly, onMounted } from 'vue'
 import type { FormInstance as ElFormInstance } from 'element-plus'
-import { deepParse, setDataByPath, getDataByPath } from '@/utils'
+import { deepParse, setDataByPath, getDataByPath } from '@form-magic/core'
 import { cloneDeep, merge, mergeWith } from 'lodash'
-import type { FormInstance, FormRenderProps, FormSchema } from '@/types/index'
+import type { FormInstance, FormRenderProps, FormSchema } from '@form-magic/core'
 import { $formInstance } from '@/config/symbol'
 import { useLocale } from '@/hooks'
 import Footer from './Footer.vue'

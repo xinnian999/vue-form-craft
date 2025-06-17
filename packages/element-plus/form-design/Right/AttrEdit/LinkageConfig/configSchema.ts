@@ -1,4 +1,4 @@
-import type { FormSchema } from '@/types/index'
+import type { FormSchema } from '@form-magic/core'
 
 type CascaderOptions = {
   label: string

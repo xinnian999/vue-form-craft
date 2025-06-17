@@ -36,7 +36,7 @@ import type {
   OptionType,
   SelectProps,
   SelectValue
-} from '@/types/index'
+} from '@form-magic/core'
 import { useFormInstance, useSelect } from '@/hooks'
 import { watch } from 'vue';
 

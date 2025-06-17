@@ -107,9 +107,9 @@
 <script setup lang="ts">
 import { computed, h, onMounted, provide, ref, watch } from 'vue'
 import { FormItem, CanvasGroup } from '@/components'
-import { deepParse } from '@/utils'
+import { deepParse } from '@form-magic/core'
 import { isEqual, isString, pickBy } from 'lodash'
-import type { FormItemType } from '@/types/index'
+import type { FormItemType } from '@form-magic/core'
 import { useFormInstance } from '@/hooks'
 import { Icon } from '@form-magic/core'
 import type { TableColumnCtx } from 'element-plus'

@@ -1,5 +1,5 @@
 import { isEqual, cloneDeep, isArray } from 'lodash'
-import type { FormInstance, FormItemType } from '@/types/index'
+import type { FormInstance, FormItemType } from '@form-magic/core'
 import setDataByPath from './setDataByPath'
 import getDataByPath from './getDataByPath'
 

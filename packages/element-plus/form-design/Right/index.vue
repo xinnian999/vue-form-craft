@@ -15,7 +15,7 @@
 import { useDesignInstance, useLocale } from '@/hooks'
 import AttrEdit from './AttrEdit/index.vue'
 import FormEdit from './FormEdit.vue'
-import { ns } from '@/utils'
+import { ns } from '@form-magic/core'
 import { watch } from 'vue'
 
 const locale = useLocale()

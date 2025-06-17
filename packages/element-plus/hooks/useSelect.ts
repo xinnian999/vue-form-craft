@@ -1,7 +1,7 @@
 import { ref, watch, onMounted } from 'vue'
 import { isEqual, isPlainObject, debounce } from 'lodash'
-import { getDataByPath } from '@/utils'
-import type { SelectProps } from '@/types/index'
+import { getDataByPath } from '@form-magic/core'
+import type { SelectProps } from '@form-magic/core'
 import useFormInstance from './useFormInstance'
 import useRequest from './useRequest'
 

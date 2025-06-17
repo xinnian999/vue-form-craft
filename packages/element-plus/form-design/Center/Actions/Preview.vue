@@ -44,7 +44,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import FormRender from '@/form-render'
-import type { FormInstance } from '@/types/index'
+import type { FormInstance } from '@form-magic/core'
 import { useDesignInstance, useElements, useLocale } from '@/hooks'
 
 const designInstance = useDesignInstance()

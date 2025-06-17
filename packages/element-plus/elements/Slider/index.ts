@@ -1,5 +1,5 @@
 import { Icon } from '@form-magic/core'
-import type { FormElement } from '@/types/index'
+import type { FormElement } from '@form-magic/core'
 import { h } from 'vue'
 
 export default {

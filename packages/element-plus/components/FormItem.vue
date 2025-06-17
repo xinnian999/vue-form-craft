@@ -62,8 +62,8 @@
 
 <script setup lang="ts">
 import { computed, onBeforeMount, reactive, watch } from 'vue'
-import { isRegexString, getDataByPath, setDataByPath, ns } from '@/utils'
-import type { FormItemType } from '@/types/index'
+import { isRegexString, getDataByPath, setDataByPath, ns } from '@form-magic/core'
+import type { FormItemType } from '@form-magic/core'
 import { Icon } from '@form-magic/core'
 import { useFormInstance } from '@/hooks'
 import { useElements } from '@/hooks'

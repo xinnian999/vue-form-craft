@@ -56,9 +56,9 @@ import draggable from 'vuedraggable-es-fix'
 import { computed } from 'vue'
 import { ref } from 'vue'
 import parseMenus from './menus'
-import type { FormElement, FormItemType, FormSchema } from '@/types/index'
+import type { FormElement, FormItemType, FormSchema } from '@form-magic/core'
 import { useDesignInstance, useElements, useLang, useLocale } from '@/hooks'
-import { getRandomId, ns } from '@/utils'
+import { getRandomId, ns } from '@form-magic/core'
 import { template } from '@/config'
 
 const drawerVisible = ref(false)

@@ -1,9 +1,9 @@
 import { mount, flushPromises } from '@vue/test-utils'
 import { describe, it, expect } from 'vitest'
 import FormRender from '@/form-render'
-import type { FormSchema } from '@/types/index'
+import type { FormSchema } from '@form-magic/core'
 import { ref } from 'vue'
-import { configTest } from '@/utils'
+import { configTest } from '@form-magic/core'
 
 configTest()
 

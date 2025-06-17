@@ -33,7 +33,7 @@
 
 <script setup lang="ts">
 import { type CheckboxGroupValueType } from 'element-plus'
-import type { Direction, OptionType, SelectProps } from '@/types/index'
+import type { Direction, OptionType, SelectProps } from '@form-magic/core'
 import { useFormInstance, useSelect } from '@/hooks'
 import { watch } from 'vue';
 

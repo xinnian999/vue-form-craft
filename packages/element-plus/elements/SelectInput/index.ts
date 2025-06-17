@@ -1,7 +1,7 @@
 import { defineAsyncComponent, h } from 'vue'
 import { Icon } from '@form-magic/core'
 import attrSchema from './attrSchema'
-import type { FormElement } from '@/types/index'
+import type { FormElement } from '@form-magic/core'
 
 export default {
   title: '选择+输入',

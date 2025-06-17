@@ -1,4 +1,4 @@
-import type { Lang } from '@/types/index'
+import type { Lang } from '@form-magic/core'
 import { $options } from '@/config'
 import { inject, ref } from 'vue'
 

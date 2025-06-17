@@ -1,4 +1,4 @@
-import type { FormElement } from '@/types/index'
+import type { FormElement } from '@form-magic/core'
 import icon from './Icon.vue'
 import attrSchema from './attrSchema'
 import Transfer from './Transfer.vue'

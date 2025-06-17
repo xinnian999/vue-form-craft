@@ -8,11 +8,11 @@
 
 <script setup lang="ts">
 import { ref, provide, computed, reactive, toRefs } from 'vue'
-import { ns } from '@/utils'
+import { ns } from '@form-magic/core'
 import Left from './Left/index.vue'
 import Center from './Center/index.vue'
 import Right from './Right/index.vue'
-import { getCurrentByKey, setCurrentByKey } from '@/utils'
+import { getCurrentByKey, setCurrentByKey } from '@form-magic/core'
 import { $designInstance } from '@/config'
 import type {
   FormSchema,
@@ -20,7 +20,7 @@ import type {
   FormDesignProps,
   DesignInstance,
   FormElement
-} from '@/types/index'
+} from '@form-magic/core'
 
 const props = withDefaults(defineProps<FormDesignProps>(), {
   templates: () => [],

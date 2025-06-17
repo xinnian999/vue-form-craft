@@ -1,6 +1,6 @@
 import { $options } from '@/config/symbol'
 import * as elements from '@/elements'
-import type { FormElement } from '@/types/index'
+import type { FormElement } from '@form-magic/core'
 import { inject } from 'vue'
 
 const useElements = (): Record<string, FormElement> => {

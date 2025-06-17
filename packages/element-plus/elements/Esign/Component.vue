@@ -37,7 +37,7 @@
 import { onMounted, ref } from 'vue'
 import VueEsign from './VueEsign.vue'
 import { useFormInstance } from '@/hooks'
-import type { FormSchema } from '@/types/index'
+import type { FormSchema } from '@form-magic/core'
 import FormRender from '@/form-render'
 
 interface Props {

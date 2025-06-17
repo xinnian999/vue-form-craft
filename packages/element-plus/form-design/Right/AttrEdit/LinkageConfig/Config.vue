@@ -28,7 +28,7 @@ import FormRender from '@/form-render'
 import { quickSchema, editSchema } from './configSchema'
 import { useDesignInstance } from '@/hooks'
 import { ref } from 'vue'
-import { setDataByPath } from '@/utils'
+import { setDataByPath } from '@form-magic/core'
 
 const designInstance = useDesignInstance()
 

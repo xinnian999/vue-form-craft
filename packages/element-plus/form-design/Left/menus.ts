@@ -1,5 +1,5 @@
 import locales from '@/config/locales'
-import type { FormElement } from '@/types/index'
+import type { FormElement } from '@form-magic/core'
 
 type Params = {
   elements: Record<string, FormElement>

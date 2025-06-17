@@ -15,4 +15,4 @@ export type {
   FormSchema,
   TemplateData,
   FormInstance
-} from '@/types/index'
+} from '@form-magic/core'

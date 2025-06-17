@@ -41,7 +41,7 @@ import JsonSchema from './JsonSchema.vue'
 import VueCode from './VueCode.vue'
 import Preview from './Preview.vue'
 import { useDesignInstance, useLocale } from '@/hooks'
-import { ns } from '@/utils'
+import { ns } from '@form-magic/core'
 
 type PreviewAction = {
   label: string

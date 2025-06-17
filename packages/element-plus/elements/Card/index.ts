@@ -1,6 +1,6 @@
 import { defineAsyncComponent, h } from 'vue'
 import { Icon } from '@form-magic/core'
-import type { FormElement } from '@/types/index'
+import type { FormElement } from '@form-magic/core'
 
 export default {
   title: '卡片',

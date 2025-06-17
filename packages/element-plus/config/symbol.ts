@@ -1,5 +1,5 @@
 import type { DeepReadonly, InjectionKey, Reactive } from 'vue'
-import type { FormInstance, Options, DesignInstance } from '@/types/index'
+import type { FormInstance, Options, DesignInstance } from '@form-magic/core'
 
 export const $options = Symbol() as InjectionKey<Options>
 

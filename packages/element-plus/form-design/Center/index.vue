@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import { ns } from '@/utils'
+import { ns } from '@form-magic/core'
 import Actions from './Actions/index.vue'
 import FormRender from '@/form-render'
 import { useDesignInstance } from '@/hooks'

@@ -39,10 +39,10 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import FormItem from './FormItem.vue'
-import type { FormItemType } from '@/types/index'
+import type { FormItemType } from '@form-magic/core'
 import { useDesignInstance, useElements } from '@/hooks'
 import { Icon } from '@form-magic/core'
-import { copyItems, ns, recursionDelete } from '@/utils'
+import { copyItems, ns, recursionDelete } from '@form-magic/core'
 
 const props = defineProps<{ data: FormItemType }>()
 

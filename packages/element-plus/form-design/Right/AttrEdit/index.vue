@@ -11,9 +11,9 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import FormRender from '@/form-render'
-import { getDataByPath, ns, setDataByPath } from '@/utils'
+import { getDataByPath, ns, setDataByPath } from '@form-magic/core'
 import { isString } from 'lodash'
-import type { FormItemType, FormSchema } from '@/types/index'
+import type { FormItemType, FormSchema } from '@form-magic/core'
 import LinkageConfig from './LinkageConfig/index.vue'
 import StyleConfig from './StyleConfig/index.vue'
 import { useElements, useLang } from '@/hooks'

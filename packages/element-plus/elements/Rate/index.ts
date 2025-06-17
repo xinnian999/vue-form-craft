@@ -1,7 +1,7 @@
 import attrSchema from './attrSchema'
 import { Icon } from '@form-magic/core'
 import { h } from 'vue'
-import type { FormElement } from '@/types/index'
+import type { FormElement } from '@form-magic/core'
 
 export default {
   title: '评分',

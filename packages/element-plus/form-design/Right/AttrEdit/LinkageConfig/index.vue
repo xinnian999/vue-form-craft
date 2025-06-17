@@ -22,7 +22,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useLocale } from '@/hooks'
-import { ns } from '@/utils'
+import { ns } from '@form-magic/core'
 import Change from './Change.vue';
 import Config from './Config.vue';
 
