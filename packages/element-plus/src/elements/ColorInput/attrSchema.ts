@@ -1,15 +1,11 @@
-import type { FormSchema } from "@/types/index";
+import type { FormSchema } from "@form-magic/core";
 
 export default {
   size: 'small',
   labelAlign: 'top',
   initialValues: {
-    label: '日期选择器',
-    props: {
-      type: 'datetime',
-      placeholder: '请选择日期',
-      clearable: false
-    },
+    label: '颜色输入框',
+    component: 'ColorInput'
   },
   items: [
     { label: '标签', component: 'Input', name: 'label' },
@@ -26,6 +22,7 @@ export default {
       name: 'props.placeholder',
       designKey: 'form-ekRL'
     },
+    { label: '初始值', component: 'ColorPicker', name: 'initialValue' },
     {
       component: 'Grid',
       children: [
@@ -42,21 +39,6 @@ export default {
       designKey: 'form-R003',
       name: 'cNmCuu',
 
-    },
-    {
-      label: '类型',
-      component: 'Radio',
-      name: 'props.type',
-      props: {
-        mode: 'static',
-        options: [
-          { label: '日期时间', value: 'datetime' },
-          { label: '日期', value: 'date' },
-          { label: '年月', value: 'month' },
-          { label: '日期范围', value: 'daterange' },
-          { label: '日期时间范围', value: 'datetimerange' }
-        ]
-      }
     },
     
 

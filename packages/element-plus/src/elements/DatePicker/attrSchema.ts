@@ -1,24 +1,17 @@
-import type { FormSchema } from "@/types/index";
+import type { FormSchema } from "@form-magic/core";
 
 export default {
   size: 'small',
   labelAlign: 'top',
   initialValues: {
-    label: '自定义组件'
+    label: '日期选择器',
+    props: {
+      type: 'datetime',
+      placeholder: '请选择日期',
+      clearable: false
+    },
   },
   items: [
-    {
-      label: '自定义组件名称',
-      component: 'Input',
-      name: 'props.componentName',
-      props: { placeholder: '全局组件名称' }
-    },
-    {
-      label: 'props',
-      component: 'JsonEdit',
-      name: 'props',
-      dialog:true
-    },
     { label: '标签', component: 'Input', name: 'label' },
     {
       label: '唯一标识',
@@ -27,7 +20,12 @@ export default {
       help: "既是唯一标识，也是数据路径。比如输入【props.name】，数据就会保存为 { props: { name:'xxx' } }"
     },
     { label: '字段说明', component: 'TextArea', name: 'help' },
-    { label: '初始值', component: 'Input', name: 'initialValue' },
+    {
+      label: '占位提示',
+      component: 'Input',
+      name: 'props.placeholder',
+      designKey: 'form-ekRL'
+    },
     {
       component: 'Grid',
       children: [
@@ -44,6 +42,21 @@ export default {
       designKey: 'form-R003',
       name: 'cNmCuu',
 
+    },
+    {
+      label: '类型',
+      component: 'Radio',
+      name: 'props.type',
+      props: {
+        mode: 'static',
+        options: [
+          { label: '日期时间', value: 'datetime' },
+          { label: '日期', value: 'date' },
+          { label: '年月', value: 'month' },
+          { label: '日期范围', value: 'daterange' },
+          { label: '日期时间范围', value: 'datetimerange' }
+        ]
+      }
     },
     
 

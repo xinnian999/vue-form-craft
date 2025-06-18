@@ -56,7 +56,7 @@ packages:
     "@/hooks": "workspace:*",
     "@/icons": "workspace:*",
     "@/styles": "workspace:*",
-    "@/types/index": "workspace:*",
+    "@form-magic/core": "workspace:*",
     "@/utils": "workspace:*",
     "form-magic": "workspace:*",
     "@vue/test-utils": "^2.4.6",

@@ -3,29 +3,26 @@ import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import libCss from 'vite-plugin-libcss'
-// import dts from 'vite-plugin-dts'
+import dts from 'vite-plugin-dts'
 
 export default defineConfig({
   base: '/form-magic/',
   plugins: [
     vue(),
-    // dts({
-    //   outDir: './dist',
-    //   include: ['./**/*', './**/*.vue', '../../packages/**/*', '../../packages/**/*.vue'],
-    //   pathsToAliases: true,
-    //   rollupTypes: true
-    // }),
-    libCss()
+    libCss(),
+    dts({
+      rollupTypes: true
+    })
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./', import.meta.url)),
-      // '@form-magic': fileURLToPath(new URL('../../packages', import.meta.url))
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '@form-magic/core': fileURLToPath(new URL('../core/index.ts', import.meta.url))
     }
   },
   build: {
     lib: {
-      entry: fileURLToPath(new URL('index.ts', import.meta.url)), //指定组件编译入口文件
+      entry: fileURLToPath(new URL('src/index.ts', import.meta.url)), //指定组件编译入口文件
       name: 'FormMagic', // umd全局变量名
       fileName: 'form-magic' // 打包文件名
     },

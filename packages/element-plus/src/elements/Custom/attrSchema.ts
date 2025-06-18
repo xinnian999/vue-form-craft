@@ -1,13 +1,24 @@
-import type { FormSchema } from "@/types/index";
+import type { FormSchema } from "@form-magic/core";
 
 export default {
   size: 'small',
   labelAlign: 'top',
   initialValues: {
-    label: '颜色选择器',
-    component: 'ColorPicker'
+    label: '自定义组件'
   },
   items: [
+    {
+      label: '自定义组件名称',
+      component: 'Input',
+      name: 'props.componentName',
+      props: { placeholder: '全局组件名称' }
+    },
+    {
+      label: 'props',
+      component: 'JsonEdit',
+      name: 'props',
+      dialog:true
+    },
     { label: '标签', component: 'Input', name: 'label' },
     {
       label: '唯一标识',
@@ -16,13 +27,7 @@ export default {
       help: "既是唯一标识，也是数据路径。比如输入【props.name】，数据就会保存为 { props: { name:'xxx' } }"
     },
     { label: '字段说明', component: 'TextArea', name: 'help' },
-    {
-      label: '占位提示',
-      component: 'Input',
-      name: 'props.placeholder',
-      designKey: 'form-ekRL'
-    },
-    { label: '初始值', component: 'ColorPicker', name: 'initialValue' },
+    { label: '初始值', component: 'Input', name: 'initialValue' },
     {
       component: 'Grid',
       children: [

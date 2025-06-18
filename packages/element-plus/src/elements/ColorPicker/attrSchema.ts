@@ -1,11 +1,11 @@
-import type { FormSchema } from "@/types/index";
+import type { FormSchema } from "@form-magic/core";
 
 export default {
   size: 'small',
   labelAlign: 'top',
   initialValues: {
-    label: '颜色输入框',
-    component: 'ColorInput'
+    label: '颜色选择器',
+    component: 'ColorPicker'
   },
   items: [
     { label: '标签', component: 'Input', name: 'label' },

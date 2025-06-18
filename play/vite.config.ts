@@ -8,7 +8,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('../packages/element-plus', import.meta.url))
+      '@': fileURLToPath(new URL('../packages/element-plus/src', import.meta.url))
     }
   },
   server:{
