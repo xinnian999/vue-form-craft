@@ -36,9 +36,9 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import VueEsign from './VueEsign.vue'
-import { useFormInstance } from '@/hooks'
+import { useFormInstance } from '@form-magic/core'
 import type { FormSchema } from '@form-magic/core'
-import FormRender from '@/form-render'
+import { FormRender } from '@/components'
 
 interface Props {
   lineWidth?: number

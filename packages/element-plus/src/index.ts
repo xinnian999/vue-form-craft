@@ -1,13 +1,11 @@
-import FormRender from '@/form-render'
-import FormDesign from '@/form-design'
 import install from './install'
 import '@/styles/index.scss'
 
+export { FormRender, FormDesign } from '@/components'
+
 export default { install }
 
-export { FormDesign, FormRender }
-
-export { useFormInstance } from '@/hooks'
+export { useFormInstance } from '@form-magic/core'
 
 export type {
   FormElement,

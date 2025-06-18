@@ -4,7 +4,7 @@
 </template>
 
 <script setup lang="ts">
-import { useFormInstance } from '@/hooks'
+import { useFormInstance } from '@form-magic/core'
 
 const value = defineModel<string>()
 

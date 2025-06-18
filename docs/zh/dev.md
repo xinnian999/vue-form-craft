@@ -53,7 +53,7 @@ packages:
     "@/elements": "workspace:*",
     "@/form-design": "workspace:*",
     "@/form-render": "workspace:*",
-    "@/hooks": "workspace:*",
+    "@form-magic/core": "workspace:*",
     "@/icons": "workspace:*",
     "@/styles": "workspace:*",
     "@form-magic/core": "workspace:*",

@@ -65,8 +65,8 @@ import { computed, onBeforeMount, reactive, watch } from 'vue'
 import { isRegexString, getDataByPath, setDataByPath, ns } from '@form-magic/core'
 import type { FormItemType } from '@form-magic/core'
 import { Icon } from '@form-magic/core'
-import { useFormInstance } from '@/hooks'
-import { useElements } from '@/hooks'
+import { useFormInstance } from '@form-magic/core'
+import { useElements } from '@form-magic/core'
 import { cloneDeep, isArray, isEqual } from 'lodash'
 
 const thisProps = defineProps<FormItemType>()

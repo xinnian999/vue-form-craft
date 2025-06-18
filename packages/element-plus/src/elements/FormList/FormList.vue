@@ -110,7 +110,7 @@ import { FormItem, CanvasGroup } from '@/components'
 import { deepParse } from '@form-magic/core'
 import { isEqual, isString, pickBy } from 'lodash'
 import type { FormItemType } from '@form-magic/core'
-import { useFormInstance } from '@/hooks'
+import { useFormInstance } from '@form-magic/core'
 import { Icon } from '@form-magic/core'
 import type { TableColumnCtx } from 'element-plus'
 

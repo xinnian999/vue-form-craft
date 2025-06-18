@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import { CanvasGroup, FormItem } from '@/components'
 import type { FormItemType } from '@form-magic/core'
-import { useFormInstance } from '@/hooks'
+import { useFormInstance } from '@form-magic/core'
 import { inject, provide, ref, type Ref } from 'vue'
 
 const props = defineProps<{
