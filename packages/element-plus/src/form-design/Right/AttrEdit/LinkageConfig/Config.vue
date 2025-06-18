@@ -39,7 +39,7 @@ const quickValues = ref<Record<string, any>>({})
 const handleUseQuick = () => {
   console.log(quickValues.value.quick)
 
-  quickValues.value.quick.map((item) => {
+  quickValues.value.quick.map((item: any) => {
     const { name, type, variable, compute, numValue } = item
 
     if (type === 'var') {
