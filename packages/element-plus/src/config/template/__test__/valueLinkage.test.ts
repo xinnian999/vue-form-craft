@@ -1,14 +1,15 @@
 import { expect, describe, it } from 'vitest'
-import { configTest, wait } from '@form-magic/core'
+import { wait } from '@form-magic/core'
 import { mount } from '@vue/test-utils'
-import formRender from '@/form-render'
+import { FormRender } from '@/components'
+import { configTest } from '@/config'
 import schema from '../valueLinkage'
 
 configTest()
 
 describe('template valueLinkage', async () => {
   it('linkage: satisfaction.value > 3 && improvementSuggestions hidden', async () => {
-    const wrapper = mount(formRender, {
+    const wrapper = mount(FormRender, {
       props: {
         schema
       }
@@ -22,7 +23,7 @@ describe('template valueLinkage', async () => {
 
     expect(wrapper.vm.formValues).toStrictEqual({
       item1: '111',
-      item2: 222,
+      item2: '222',
       item3: '111元'
     })
   })

@@ -3,7 +3,7 @@ import { describe, it, expect } from 'vitest'
 import { FormRender } from '@/components'
 import type { FormSchema } from '@form-magic/core'
 import { nextTick } from 'vue'
-import { configTest } from '@form-magic/core'
+import { configTest } from '@/config'
 
 configTest()
 
@@ -55,6 +55,7 @@ describe('FormRender Attrs', () => {
         schema: schema
       }
     })
+    
 
     await wrapper.find('[name="username"]').setValue('hyl')
     await wrapper.find('[name="password"]').setValue('991015')

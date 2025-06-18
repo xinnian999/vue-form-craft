@@ -1,14 +1,15 @@
 import { expect, describe, it } from 'vitest'
-import { configTest, wait } from '@form-magic/core'
+import { wait } from '@form-magic/core'
 import { mount } from '@vue/test-utils'
-import formRender from '@/form-render'
+import { FormRender } from '@/components'
+import { configTest } from '@/config'
 import schema from '../formList'
 
 configTest()
 
 describe('template formList', async () => {
   it('list add or reduce', async () => {
-    const wrapper = mount(formRender, {
+    const wrapper = mount(FormRender, {
       props: {
         schema,
         modelValue: {}
@@ -31,7 +32,7 @@ describe('template formList', async () => {
   })
 
   it('list batch set vip', async () => {
-    const wrapper = mount(formRender, {
+    const wrapper = mount(FormRender, {
       props: {
         schema,
         modelValue: {}
@@ -56,7 +57,7 @@ describe('template formList', async () => {
   })
 
   it('username has admin && set row vip true', async () => {
-    const wrapper = mount(formRender, {
+    const wrapper = mount(FormRender, {
       props: {
         schema,
         modelValue: {}

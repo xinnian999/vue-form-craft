@@ -1,21 +1,22 @@
 import { expect, describe, it } from 'vitest'
-import { configTest, wait } from '@form-magic/core'
+import { wait } from '@form-magic/core'
+import { configTest } from '@/config'
 import { mount } from '@vue/test-utils'
-import formRender from '@/form-render'
+import { FormRender } from '@/components'
 import schema from '../bugGood'
 
 configTest()
 
 describe('template bugGood', async () => {
   it('linkage: product selected && price visible', async () => {
-    const wrapper = mount(formRender, {
+    const wrapper = mount(FormRender, {
       props: {
         schema
       }
     })
 
-    await wait(100)
-    
+    await wait(1000)
+
     expect(wrapper.find('.Text-price').html()).toContain('请选择商品')
 
     const productEl = wrapper.findAll('.Radio-product .el-radio__original')

@@ -1,4 +1,4 @@
-import type { FormSchema } from "@form-magic/core";
+import type { FormSchema } from '@form-magic/core'
 
 export default {
   labelWidth: 150,
@@ -16,7 +16,7 @@ export default {
       change: [
         {
           target: 'item2',
-          value: '{{$values.item1 * 2}}'
+          value: '{{$values.item1 * 2 + ""}}'
         },
         {
           target: 'item3',
