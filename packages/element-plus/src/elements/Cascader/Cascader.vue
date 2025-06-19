@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import { type CascaderValue } from 'element-plus'
-import useSelect from '@form-magic/core/useSelect'
+import { useSelect } from '@form-magic/core'
 import type { SelectProps } from '@form-magic/core'
 
 const props = withDefaults(defineProps<SelectProps>(), {

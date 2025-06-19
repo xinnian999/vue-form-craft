@@ -1,5 +1,5 @@
 import install from './install'
-import '@/styles/index.scss'
+import '@form-magic/styles'
 
 export { FormRender, FormDesign } from '@/components'
 

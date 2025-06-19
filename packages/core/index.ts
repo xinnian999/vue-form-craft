@@ -7,3 +7,7 @@ export type * from './types'
 export * from './config'
 
 export * from './hooks'
+
+export * from './components'
+
+export * as elements from './elements'

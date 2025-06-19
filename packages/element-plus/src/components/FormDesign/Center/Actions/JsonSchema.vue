@@ -31,7 +31,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { CodeHighLight } from '@/components'
+import { CodeHighLight } from '@form-magic/core'
 import { changeItems } from '@form-magic/core'
 import { schemaHelp, tsJsonSchema, jsJsonSchema } from './config'
 import { useDesignInstance, useElements, useLocale } from '@form-magic/core'

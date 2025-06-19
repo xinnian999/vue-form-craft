@@ -8,9 +8,8 @@
 </template>
 
 <script setup lang="ts">
-import { Icon } from '@form-magic/core'
-import { ElMessage } from 'element-plus'
-import { onMounted, ref } from 'vue'
+import { Icon, $components } from '@form-magic/core'
+import { inject, onMounted, ref } from 'vue'
 import { createHighlighterCore } from 'shiki/core'
 import getWasm from 'shiki/wasm'
 import githubLight from 'shiki/themes/github-light.mjs'
@@ -29,23 +28,25 @@ const props = withDefaults(
   }
 )
 
+const { successMessage } = inject($components)!
+
 const handleCopy = async () => {
-    // 创建一个隐藏的 textarea 元素
-    const textarea = document.createElement('textarea');
-    textarea.value = props.code;
-    document.body.appendChild(textarea);
-    
-    // 选择文本
-    textarea.select();
-    textarea.setSelectionRange(0, 99999); // 对于移动设备的支持
+  // 创建一个隐藏的 textarea 元素
+  const textarea = document.createElement('textarea')
+  textarea.value = props.code
+  document.body.appendChild(textarea)
 
-    // 执行复制
-    document.execCommand('copy');
+  // 选择文本
+  textarea.select()
+  textarea.setSelectionRange(0, 99999) // 对于移动设备的支持
 
-    // 移除 textarea 元素
-    document.body.removeChild(textarea);
+  // 执行复制
+  document.execCommand('copy')
 
-    ElMessage.success('已成功复制到剪贴板')
+  // 移除 textarea 元素
+  document.body.removeChild(textarea)
+
+  successMessage('已成功复制到剪贴板')
 }
 
 const html = ref('')
