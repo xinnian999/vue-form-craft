@@ -2,7 +2,7 @@
   <ElCollapse v-bind="$attrs" v-model="activeKey">
     <ElCollapseItem v-for="item in children" :key="item.name" :name="item.name">
       <template #title>
-        <Title :title="item.title" italic type="h4" />
+        <Title.render :title="item.title" italic type="h4" />
       </template>
 
       <FormItemGroup :list="item.children!" />
@@ -12,9 +12,8 @@
 
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
-import { FormItemGroup } from '@/components'
-import Title from '../Title/Title.vue'
-import type { FormItemType } from '@form-magic/core'
+import { FormItemGroup } from '@form-magic/components'
+import { useElements, type FormItemType } from '@form-magic/core'
 
 type CollapseItem = {
   title: string
@@ -26,6 +25,8 @@ type CollapseItem = {
 const props = defineProps<{
   children: CollapseItem[]
 }>()
+
+const { Title } = useElements()
 
 const activeKey = ref<string[]>([])
 

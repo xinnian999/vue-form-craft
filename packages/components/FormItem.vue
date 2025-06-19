@@ -1,0 +1,241 @@
+<template>
+  <template v-if="formInstance.design || !hidden">
+    <div v-if="config.type === 'layout'" :class="[ns('form-item'), thisProps.class]" :style="style">
+      <component :is="config.render" v-bind="formItemProps" />
+    </div>
+
+    <FormItem
+      v-else
+      :class="[ns('form-item'), thisProps.class, `${component}-${name}`]"
+      :style="style"
+      :key="name"
+      :prop="name"
+      :label-width="hideLabel ? '0' : formInstance.schema.labelWidth"
+      :rules="computeRules"
+    >
+      <template #label v-if="!hideLabel">
+        <div :class="[ns('form-item-label'), label && `${name}-label`]">
+          <div :style="formInstance.schema.labelBold && 'font-weight: bold'">{{ label }}</div>
+          <div :class="ns('form-item-label-ico')" v-if="help">
+            <Tooltip effect="dark" :content="help">
+              <div><Icon name="help" /></div>
+            </Tooltip>
+          </div>
+          <div :class="ns('form-item-label-suffix')" v-if="formInstance.schema.labelSuffix">
+            {{ formInstance.schema.labelSuffix }}
+          </div>
+        </div>
+      </template>
+
+      <!-- 弹窗展示复杂组件 -->
+      <template v-if="dialog">
+        <Dialog
+          v-model="dialogState.visible"
+          :title="dialogState.title"
+          width="70%"
+          center
+          destroy-on-close
+        >
+          <component
+            :is="config.render"
+            :disabled="formInstance.schema.disabled"
+            :size="formInstance.schema.size"
+            v-bind="formItemProps"
+            v-model:[config.modelName!]="value"
+          />
+        </Dialog>
+
+        <Button type="primary" plain @click="handleDialog">配置</Button>
+      </template>
+
+      <component
+        v-else
+        :is="config.render"
+        :disabled="formInstance.schema.disabled"
+        :size="formInstance.schema.size"
+        v-bind="formItemProps"
+        v-model:[config.modelName!]="value"
+      />
+    </FormItem>
+  </template>
+</template>
+
+<script setup lang="ts">
+import { computed, onBeforeMount, reactive, watch } from 'vue'
+import { isRegexString, getDataByPath, setDataByPath, ns, useComponents } from '@form-magic/core'
+import type { FormItemType } from '@form-magic/core'
+import { Icon } from '@form-magic/core'
+import { useFormInstance } from '@form-magic/core'
+import { useElements } from '@form-magic/core'
+import { cloneDeep, isArray, isEqual } from 'lodash'
+
+const thisProps = defineProps<FormItemType>()
+
+const { FormItem, Dialog, Tooltip, Button } = useComponents()
+
+const formInstance = useFormInstance()
+
+const elements = useElements()
+
+const dialogState = reactive({
+  visible: false,
+  title: ''
+})
+
+const handleDialog = () => {
+  dialogState.visible = true
+  dialogState.title = thisProps.label!
+}
+
+const value = computed({
+  get() {
+    return getDataByPath(formInstance.formValues, thisProps.name)
+  },
+  set(val) {
+    const newValues = setDataByPath(formInstance.formValues, thisProps.name, val)
+    formInstance.updateFormValues(newValues)
+  }
+})
+
+const computeRules = computed(() => {
+  const { rules, required, component } = thisProps
+
+  const ruleData = []
+
+  if (required) {
+    ruleData.push({ required: true, message: '该字段是必填字段', trigger: 'blur' })
+  }
+
+  if (rules) {
+    const ruleParse = rules.map((rule) => {
+      const { type, message, trigger, customReg, templateExp } = rule
+
+      const ruleDef = {
+        message,
+        trigger
+      }
+
+      if (['email', 'url'].includes(type)) {
+        return { ...ruleDef, type }
+      }
+      // 自定义正则
+      if (type === 'custom') {
+        return {
+          ...ruleDef,
+          pattern: customReg
+        }
+      }
+
+      // 解析字符串的正则
+      if (isRegexString(type)) {
+        return {
+          ...ruleDef,
+          pattern: type
+        }
+      }
+
+      // 模板表达式
+      if (type === 'template') {
+        return {
+          ...ruleDef,
+          validator: () => templateExp
+        }
+      }
+
+      return {}
+    })
+
+    return [...ruleData, ...ruleParse]
+  }
+
+  if (component === 'VerifyCode') {
+    const vCodeRule = {
+      trigger: 'blur',
+      message: '验证码错误！',
+      validator: () => formInstance.vCodePass
+    }
+
+    return [...ruleData, vCodeRule]
+  }
+
+  return ruleData
+})
+
+const config = computed(() => {
+  const data = elements[thisProps.component] || {}
+  if (!data.modelName) {
+    data.modelName = 'modelValue'
+  }
+
+  return data
+})
+
+const formItemProps = computed(() => {
+  const props: Record<string, any> = {
+    name: thisProps.name,
+    ...thisProps.props
+  }
+
+  if (thisProps.children) {
+    props.children = thisProps.children
+  }
+
+  return props
+})
+
+onBeforeMount(() => {
+  if (value.value === undefined && thisProps.initialValue !== undefined && !formInstance.design) {
+    const newInitialValues = setDataByPath(
+      formInstance.initialValues,
+      thisProps.name,
+      thisProps.initialValue
+    )
+
+    formInstance.updateInitialValues(newInitialValues)
+
+    value.value = thisProps.initialValue
+  }
+})
+
+watch(
+  value,
+  (newVal, oldVal) => {
+    const change = thisProps.change
+    const diff = isEqual(newVal, oldVal)
+
+    if (!change || diff) return
+
+    let temp = cloneDeep(formInstance.formValues)
+
+    change.forEach(({ target, value, condition }) => {
+      if (condition === false) return
+
+      if (target.includes('.*.')) {
+        //自增组件特殊处理
+        const targetArr = target.split('.*.')
+        const listTarget = targetArr.pop()!
+        const targetParse = targetArr.join('.')
+        const list = getDataByPath(formInstance.formValues, targetParse)
+        if (isArray(list)) {
+          temp = setDataByPath(
+            temp,
+            targetParse,
+            list.map((item) => {
+              return {
+                ...item,
+                [listTarget]: value
+              }
+            })
+          )
+        }
+        return
+      }
+
+      temp = setDataByPath(temp, target, value)
+    })
+
+    formInstance.updateFormValues(temp)
+  },
+  { immediate: true }
+)
+</script>

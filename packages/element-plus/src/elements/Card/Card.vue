@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { FormItemGroup } from '@/components'
+import { FormItemGroup } from '@form-magic/components'
 import type { FormItemType } from '@form-magic/core'
 
 defineProps<{

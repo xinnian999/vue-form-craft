@@ -2,7 +2,7 @@ import { expect, describe, it } from 'vitest'
 import { wait } from '@form-magic/core'
 import { configTest } from '@/config'
 import { mount } from '@vue/test-utils'
-import { FormRender } from '@/components'
+import { FormRender } from '@form-magic/components'
 import schema from '../bugGood'
 
 configTest()

@@ -1,7 +1,7 @@
 import install from './install'
 import '@form-magic/styles'
 
-export { FormRender, FormDesign } from '@/components'
+export { FormRender, FormDesign } from '@form-magic/components'
 
 export default { install }
 

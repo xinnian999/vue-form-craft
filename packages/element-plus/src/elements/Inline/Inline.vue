@@ -4,7 +4,7 @@
 
 <script setup lang="ts">
 import { computed, type StyleValue } from 'vue'
-import { FormItemGroup } from '@/components'
+import { FormItemGroup } from '@form-magic/components'
 import type { FormItemType } from '@form-magic/core'
 
 const props = defineProps<{

@@ -46,6 +46,7 @@
     "vitest": "^2.1.5",
     "@form-magic/core": "workspace:*",
     "@form-magic/element-plus": "workspace:*",
-    "@form-magic/styles": "workspace:*"
+    "@form-magic/styles": "workspace:*",
+    "@form-magic/components": "workspace:*"
   }
 }

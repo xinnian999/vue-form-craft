@@ -1,7 +1,7 @@
 import { expect, describe, it } from 'vitest'
 import {  wait } from '@form-magic/core'
 import { mount } from '@vue/test-utils'
-import { FormRender } from '@/components'
+import { FormRender } from '@form-magic/components'
 import { configTest } from '@/config'
 import schema from '../satisfaction'
 

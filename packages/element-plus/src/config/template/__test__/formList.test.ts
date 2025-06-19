@@ -1,7 +1,7 @@
 import { expect, describe, it } from 'vitest'
 import { wait } from '@form-magic/core'
 import { mount } from '@vue/test-utils'
-import { FormRender } from '@/components'
+import { FormRender } from '@form-magic/components'
 import { configTest } from '@/config'
 import schema from '../formList'
 
@@ -49,11 +49,11 @@ describe('template formList', async () => {
 
     expect(wrapper.vm.formValues.users.length).toBe(2)
 
-    expect(wrapper.vm.formValues.users.every((item) => item.vip === 0)).toBe(true)
+    expect(wrapper.vm.formValues.users.every((item: any) => item.vip === 0)).toBe(true)
 
     await wrapper.find('.Switch-vip input').trigger('click') // 批量设为管理员
 
-    expect(wrapper.vm.formValues.users.every((item) => item.vip === 1)).toBe(true)
+    expect(wrapper.vm.formValues.users.every((item: any) => item.vip === 1)).toBe(true)
   })
 
   it('username has admin && set row vip true', async () => {

@@ -11,13 +11,17 @@ export default defineConfig({
     vue(),
     libCss(),
     dts({
-      rollupTypes: true
+      rollupTypes: true,
+      afterBuild: (emittedFiles) => {
+        console.log(emittedFiles)
+      }
     })
   ],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
-      '@form-magic/core': fileURLToPath(new URL('../core/index.ts', import.meta.url))
+      '@form-magic/core': fileURLToPath(new URL('../core/index.ts', import.meta.url)),
+      '@form-magic/components': fileURLToPath(new URL('../components/index.ts', import.meta.url))
     }
   },
   build: {

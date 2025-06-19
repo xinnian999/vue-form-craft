@@ -38,7 +38,7 @@ import { onMounted, ref } from 'vue'
 import VueEsign from './VueEsign.vue'
 import { useFormInstance } from '@form-magic/core'
 import type { FormSchema } from '@form-magic/core'
-import { FormRender } from '@/components'
+import { FormRender } from '@form-magic/components'
 
 interface Props {
   lineWidth?: number

@@ -1,5 +1,0 @@
-export { default as CanvasGroup } from './CanvasGroup.vue'
-export { default as FormItemGroup } from './FormItemGroup.vue'
-export { default as FormItem } from './FormItem.vue'
-export { default as FormDesign } from './FormDesign/index.vue'
-export { default as FormRender } from './FormRender/index.vue'

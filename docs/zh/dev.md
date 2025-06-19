@@ -48,7 +48,7 @@ packages:
   ...
   "dependencies": {
     ...
-    "@/components": "workspace:*",
+    "@form-magic/components": "workspace:*",
     "@/config": "workspace:*",
     "@/elements": "workspace:*",
     "@/form-design": "workspace:*",

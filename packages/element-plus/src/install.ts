@@ -1,18 +1,17 @@
-import { FormRender, FormDesign } from '@/components'
-import { $components, $elements, $options } from '@form-magic/core'
+// import { FormRender, FormDesign } from '@form-magic/components'
+import { $options } from '@form-magic/core'
 import { type App } from 'vue'
 import type { Options } from '@form-magic/core'
-import * as elements from '@/elements'
-import { elements as coreElements } from '@form-magic/core'
-import { ElMessage } from 'element-plus'
+import { provide } from '@/config'
+import { FormRender, FormDesign } from '@form-magic/components'
 
 export default (app: App<Element>, options: Options = {}) => {
-  app.provide($options, options)
-
-  app.provide($elements, { ...coreElements, ...elements })
-
-  app.provide($components, {
-    successMessage: (msg: string) => ElMessage.success(msg)
+  Reflect.ownKeys(provide).forEach((key) => {
+    if (key === $options) {
+      app.provide(key, options)
+    } else {
+      app.provide(key, provide[key as keyof typeof provide])
+    }
   })
 
   app.component('FormRender', FormRender)

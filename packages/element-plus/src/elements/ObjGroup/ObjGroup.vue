@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { CanvasGroup, FormItem } from '@/components'
+import { CanvasGroup, FormItem } from '@form-magic/components'
 import type { FormItemType } from '@form-magic/core'
 import { useFormInstance } from '@form-magic/core'
 import { inject, provide, ref, type Ref } from 'vue'

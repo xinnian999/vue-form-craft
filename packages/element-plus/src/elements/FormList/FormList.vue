@@ -106,7 +106,7 @@
 
 <script setup lang="ts">
 import { computed, h, onMounted, provide, ref, watch } from 'vue'
-import { FormItem, CanvasGroup } from '@/components'
+import { FormItem, CanvasGroup } from '@form-magic/components'
 import { deepParse } from '@form-magic/core'
 import { isEqual, isString, pickBy } from 'lodash'
 import type { FormItemType } from '@form-magic/core'
