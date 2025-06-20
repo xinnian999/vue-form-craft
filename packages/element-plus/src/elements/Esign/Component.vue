@@ -40,7 +40,7 @@ import { useFormInstance } from '@form-magic/core'
 import type { FormSchema } from '@form-magic/core'
 import { FormRender } from '@form-magic/components'
 
-interface Props {
+export interface Props {
   lineWidth?: number
   lineColor?: string
   bgColor?: string

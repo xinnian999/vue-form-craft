@@ -40,7 +40,7 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import type { UploadProps, UploadUserFile } from 'element-plus'
 import { Icon } from '@form-magic/core'
 
-interface Props {
+export interface Props {
   action: string
   multiple?: boolean
   btnText?: string

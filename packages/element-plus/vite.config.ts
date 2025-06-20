@@ -11,10 +11,7 @@ export default defineConfig({
     vue(),
     libCss(),
     dts({
-      rollupTypes: true,
-      afterBuild: (emittedFiles) => {
-        console.log(emittedFiles)
-      }
+      rollupTypes: true
     })
   ],
   resolve: {

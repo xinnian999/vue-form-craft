@@ -114,7 +114,7 @@ import { useFormInstance } from '@form-magic/core'
 import { Icon } from '@form-magic/core'
 import type { TableColumnCtx } from 'element-plus'
 
-interface Props {
+export interface Props {
   children: FormItemType[]
   allowAdd?: boolean
   allowReduce?: boolean
