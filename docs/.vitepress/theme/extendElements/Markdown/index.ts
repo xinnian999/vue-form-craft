@@ -1,12 +1,12 @@
 import type { FormElement } from 'vue-form-craft'
-import component from './Component.vue'
+import render from './Render.vue'
 import icon from './Icon.vue'
 import attrSchema from './attrSchema'
 
 export default {
   title: 'markdown',
   component: 'Markdown',
-  render: component,
+  render,
   icon,
   type: 'basic',
   order: 11,

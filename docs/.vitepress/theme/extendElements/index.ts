@@ -1,7 +1,7 @@
 import Markdown from './Markdown'
-import AInput from './AInput'
+import Transfer from './Transfer'
 
 export default {
     Markdown,
-    AInput
+    Transfer
 }

@@ -9,14 +9,14 @@
 可以按照我的这种格式创建目录
 
 ```
-src
-└── extendElements
-  └── index.ts
-  └── Markdown
-    └── attrSchema.ts
-    └── Component.vue
-    └── Icon.vue
-    └── index.ts
+src/
+└── extendElements/
+    ├── index.ts
+    └── Markdown/
+        ├── attrSchema.ts
+        ├── Render.vue
+        ├── Icon.vue
+        └── index.ts
 ```
 
 ## 安装markdown插件
@@ -33,8 +33,9 @@ npm install md-editor-v3
 
 这里利用了`vue3.4+`的新api`defineModel`来快速实现！
 
+`src/extendElements/Markdown/Render.vue`
+
 ```vue
-// src/extendElements/Markdown/Component.vue
 <template>
   <MdEditor v-model="value" />
 </template>
@@ -54,8 +55,9 @@ const value = defineModel<string>()
 
 **当然如果你项目里，有封装好的Icon渲染组件，可以直接用，跳过这一步！**
 
+`src/extendElements/Markdown/Icon.vue`
+
 ```vue
-// src/extendElements/Markdown/Icon.vue
 <template>
   <svg
     t="1726107434564"
@@ -91,6 +93,7 @@ import type { FormSchema } from 'vue-form-craft'
 export default {
   size: 'small',
   labelAlign: 'top',
+  initialValues: { label: 'markdown编辑器' },
   items: [
     { label: '标签', component: 'Input', name: 'label' },
     {
@@ -123,7 +126,6 @@ export default {
       },
       designKey: 'form-R003',
       name: 'cNmCuu',
-
     },
     
 
@@ -138,17 +140,17 @@ export default {
 ```ts
 // src/extendElements/Markdown/index.ts
 import type { FormElement } from 'vue-form-craft'
-import component from './Component.vue'
+import render from './Render.vue'
 import icon from './Icon.vue'
 import attrSchema from './attrSchema'
 
 export default {
-  name: 'markdown',
-  component,
+  title: 'markdown',
+  component: 'Markdown',
+  render,
   icon,
   type: 'basic',
   order: 11,
-  initialValues: { label: 'markdown编辑器', component: 'Markdown' },
   attrSchema
 } satisfies FormElement
 ```

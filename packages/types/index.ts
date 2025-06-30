@@ -55,7 +55,6 @@ export type FormElement = {
   icon: string | VNode | Component
   type: 'assist' | 'layout' | 'basic' | 'high'
   order: number
-  // initialValues: Omit<FormItemType, 'name'>
   modelName?: string
   attrSchema: FormSchema
   lbTitle?: boolean

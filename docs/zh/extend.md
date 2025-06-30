@@ -1,21 +1,18 @@
 # 扩展表单设计器
 
-`vue-form-craft` 提供了一些基础组件，例如 input、select 和 radio 等。
-
-但有时候这些组件并不能完全满足我们的业务需求，此时可以考虑为 `vue-form-craft` 的表单设计器扩展更多可拖拽组件，以满足更多需求且方便下次使用！
-
-**了解以下教程后，你就可以扩展任何自定义的组件，或者任意组件库的组件过来拖拽使用！**
+如果`vue-form-craft`的内置组件不能完全满足我们的业务需求，可以为 `vue-form-craft` 扩展更多可拖拽组件！
 
 
 ## 如何扩展？
 
-只需要在全局注册`vue-form-craft`时，传入一个`extendElements`配置即可！
+只需要在全局注册`vue-form-craft`时，传入`extendElements`！
 
-`extendElements`是一个对象！组件名作为键，`FormElement`作为值！ 
+`extendElements`是一个对象！key是**组件标识**，value是`FormElement`！
+
+> 注意：key必须与`FormElement.component`字段一致！
 
 ```ts
 type extendElements = { [key: string]: FormElement }
-
 ```
 
 ```ts
@@ -32,22 +29,22 @@ const app = createApp(App)
 app.use(ElementPlus)
 app.use(VueFormCraft, { extendElements })
 app.mount('#app')
-
 ```
-
 
 ## 组件对象FormElement
 
-表单设计器的组件全部是由`FormElement`对象组成的，同理我们想扩展更多组件，需要按照`FormElement`的接口格式去配置，然后传给`vue-form-craft`即可！
+一个`FormElement`对象代表一个可拖拽组件。
+
+同理我们想扩展更多组件，需要按照`FormElement`的接口格式去配置，然后传给`vue-form-craft`即可！
 
 ```ts
 interface FormElement {
-  name: string
-  component: string | VNode | Component
-  icon: VNode | Component
-  type: 'assist' | 'layout' | 'basic'
+  title: string
+  component: string
+  render: string | VNode | Component
+  icon: string | VNode | Component
+  type: 'assist' | 'layout' | 'basic' | 'high'
   order: number
-  initialValues: Omit<FormItemType, 'name'>
   modelName?: string
   attrSchema: FormSchema
 }
@@ -55,7 +52,7 @@ interface FormElement {
 
 下面详细介绍每个`FormElement`的每个属性：
 
-### name 
+### title
 
 组件名称
 
@@ -71,7 +68,13 @@ icon格式为vue的SFC组件
 
 ### component
 
-渲染该组件所用的Vue-SFC组件，可以是一个已经被全局注册的组件字符串，也可以直接传入组件定义或者VNode!
+组件标识字段，必须与`FormElement`的键一致，才能正确渲染！
+
+### render
+
+渲染该组件所用的Vue-SFC组件，可以是一个已经被全局注册的组件名称。
+
+内部会通过`<component is="render"/>`去渲染它。
 
 ### type
 
@@ -80,14 +83,6 @@ icon格式为vue的SFC组件
 ### order
 
 左侧菜单会按照order大小排序所有组件
-
-### initialValues
-
-拖拽生成组件时，会向`schema.items`里，增添的该组件默认配置。 
-
-设计器右侧，实际上编辑的也是这个参数！
-
-> `initialValues.component` 是必传的，它代表调用哪个`FormElement`！ 所以，这个参数决定了使用哪个组件，所以需要和`FormElement`的键一致，才能正确渲染
 
 ### modelName
 

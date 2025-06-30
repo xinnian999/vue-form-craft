@@ -7,25 +7,34 @@
 和上一篇 [例：扩展markdown输入框](/zh/extendMd.html) 差不多，与`/Markdown`同级，创建目录
 
 ```
-src
-└── extendElements
-  └── index.ts
-  └── Markdown
-    └── attrSchema.ts
-    └── Component.vue
-    └── Icon.vue
-    └── index.ts
-+ └── Transfer 
-  + └── attrSchema.ts
-  + └── Component.vue
-  + └── Icon.vue
-  + └── index.ts
+src/
+└── extendElements/
+    ├── index.ts
+    └── Markdown/
+        ├── attrSchema.ts
+        ├── Render.vue
+        ├── Icon.vue
+        └── index.ts
+   +└── Transfer/
+      +├── attrSchema.ts
+      +├── Render.vue
+      +├── Icon.vue
+      +└── index.ts
 ```
 
 ## 封装穿梭框组件
 
+这里基于`element-plus`的`Transfer`组件进行二次封装，
+
+注意事项：
+
+1. 组件需要接收`v-model`，来与表单建立数据双向绑定！这里利用了`vue3.4+`的新api`defineModel`来快速实现！
+
+2. 通过`useFormInstance`获取到表单实例，根据`formInstance.read`来判断是只读模式还是编辑模式，使用`formInstance.updateSelectData`来更新选中项的数据源
+
+`src/extendElements/Transfer/Render.vue`
+
 ```vue
-// src/extendElements/Transfer/Component.vue
 <template>
   <div v-if="formInstance.read">
     {{ value?.map((val) => data.find((v) => v.key === val)?.label).join('、') }}
@@ -50,15 +59,14 @@ const onChange = (value: TransferKey[]) => {
 </script>
 ```
 
-
 ## 封装Icon
 
 在 [阿里iconfont](https://www.iconfont.cn/) 找一个合适的icon ，复制svg代码 ， 写到一个vue文件里即可！
 
 **当然如果你项目里，有封装好的Icon渲染组件，可以直接用，跳过这一步！**
 
+`src/extendElements/Transfer/Icon.vue`
 ```vue
-// src/extendElements/Transfer/Icon.vue
 <template>
   <svg
     t="1726107434564"
@@ -80,7 +88,6 @@ const onChange = (value: TransferKey[]) => {
     ></path>
   </svg>
 </template>
-
 ```
 
 ## 配置项表单
@@ -94,6 +101,16 @@ import type { FormSchema } from 'vue-form-craft'
 export default {
   size: 'small',
   labelAlign: 'top',
+  initialValues: {
+    label: '穿梭框',
+    props: {
+      data: [
+        { label: '选项一', key: 'value1' },
+        { label: '选项二', key: 'value2' },
+        { label: '选项三', key: 'value3' }
+      ]
+    }
+  },
   items: [
     { label: '标签', component: 'Input', name: 'label' },
     {
@@ -124,9 +141,9 @@ export default {
         'column-gap': 20
       },
       designKey: 'form-R003',
-      name: 'cNmCuu',
-
+      name: 'cNmCuu'
     },
+
     {
       component: 'Divider',
       props: {
@@ -158,7 +175,6 @@ export default {
           label: '选项值',
           name: 'key',
           component: 'Input',
-          props: {},
           designKey: 'form-HYtW',
           initialValue: '{{ "value" + ($index + 1) }}'
         }
@@ -167,7 +183,7 @@ export default {
       props: {
         mode: 'table'
       }
-    },
+    }
   ]
 } satisfies FormSchema
 ```
@@ -176,33 +192,24 @@ export default {
 
 上面的几个文件，合并成一个`FormElement`对象，也就是一个完整的扩展组件！
 
-> 这里可以直接使用 `ElTransfer` 作为渲染组件，无需二次封装
+`src/extendElements/Transfer/index.ts`
 
 ```ts
-// src/extendElements/Transfer/index.ts
 import type { FormElement } from 'vue-form-craft'
 import icon from './Icon.vue'
 import attrSchema from './attrSchema'
+import render from './Render.vue'
 
 export default {
-  name: '穿梭框',
-  component: 'ElTransfer',
+  title: '穿梭框',
+  component: 'Transfer',
+  render,
   icon,
   type: 'basic',
   order: 12,
-  initialValues: {
-    label: '穿梭框',
-    component: 'Transfer',
-    props: {
-      data: [
-        { label: '选项一', key: 'value1' },
-        { label: '选项二', key: 'value2' },
-        { label: '选项三', key: 'value3' }
-      ]
-    }
-  },
   attrSchema
 } satisfies FormElement
+
 ```
 
 ## 导出，使用
@@ -213,8 +220,8 @@ import Markdown from './Markdown'
 import Transfer from './Transfer'
 
 export default {
-    Markdown,
-    Transfer
+  Markdown,
+  Transfer
 }
 ```
 
@@ -232,5 +239,4 @@ const app = createApp(App)
 app.use(ElementPlus)
 app.use(VueFormCraft, { extendElements })
 app.mount('#app')
-
 ```

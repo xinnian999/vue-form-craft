@@ -1,12 +1,12 @@
-import type { FormElement } from '@vue-form-craft/types'
+import type { FormElement } from 'vue-form-craft'
 import icon from './Icon.vue'
 import attrSchema from './attrSchema'
-import Transfer from './Transfer.vue'
+import render from './Render.vue'
 
 export default {
   title: '穿梭框',
   component: 'Transfer',
-  render: Transfer,
+  render,
   icon,
   type: 'basic',
   order: 12,
