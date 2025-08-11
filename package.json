@@ -31,7 +31,6 @@
     "@vitejs/plugin-vue": "^4.6.2",
     "@vitejs/plugin-vue-jsx": "^4.1.0",
     "@vue-form-craft/icons": "workspace:*", 
-    "@vue-form-craft/styles": "workspace:*",
     "@vue-form-craft/utils": "workspace:*",
     "@vue/eslint-config-prettier": "^8.0.0",
     "@vue/eslint-config-typescript": "^12.0.0",
