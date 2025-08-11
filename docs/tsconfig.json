@@ -1,0 +1,16 @@
+{
+    "extends": "@vue/tsconfig/tsconfig.dom.json",
+    "include": [
+      "./.vitepress/**/*",
+      "./.vitepress/**/*.vue",
+      "./**/*.vue"
+    ],
+    "compilerOptions": {
+      "types": ["vite/client", "element-plus/global", "vue-form-craft/global"],
+      "baseUrl": ".",
+      "paths": {},
+      "allowJs": false,
+      "jsx": "preserve",
+      "module": "ES2020"
+    }
+}

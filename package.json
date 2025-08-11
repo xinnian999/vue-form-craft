@@ -19,7 +19,8 @@
     "element-plus": "^2.8.3",
     "lodash": "^4.17.21",
     "vue": "^3.5.8",
-    "vuedraggable-es-fix": "^1.0.1"
+    "vuedraggable-es-fix": "^1.0.1",
+    "shiki": "^1.21.0"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.9",
@@ -29,15 +30,8 @@
     "@types/node": "^20.10.5",
     "@vitejs/plugin-vue": "^4.6.2",
     "@vitejs/plugin-vue-jsx": "^4.1.0",
-    "@vue-form-craft/components": "workspace:*",
-    "@vue-form-craft/config": "workspace:*",
-    "@vue-form-craft/elements": "workspace:*",
-    "@vue-form-craft/form-design": "workspace:*",
-    "@vue-form-craft/form-render": "workspace:*",
-    "@vue-form-craft/hooks": "workspace:*",
-    "@vue-form-craft/icons": "workspace:*",
+    "@vue-form-craft/icons": "workspace:*", 
     "@vue-form-craft/styles": "workspace:*",
-    "@vue-form-craft/types": "workspace:*",
     "@vue-form-craft/utils": "workspace:*",
     "@vue/eslint-config-prettier": "^8.0.0",
     "@vue/eslint-config-typescript": "^12.0.0",

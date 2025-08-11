@@ -48,15 +48,11 @@ packages:
   ...
   "dependencies": {
     ...
-    "@vue-form-craft/components": "workspace:*",
-    "@vue-form-craft/config": "workspace:*",
-    "@vue-form-craft/elements": "workspace:*",
-    "@vue-form-craft/form-design": "workspace:*",
-    "@vue-form-craft/form-render": "workspace:*",
-    "@vue-form-craft/hooks": "workspace:*",
+    "@/config": "workspace:*",
+    "@/hooks": "workspace:*",
     "@vue-form-craft/icons": "workspace:*",
     "@vue-form-craft/styles": "workspace:*",
-    "@vue-form-craft/types": "workspace:*",
+    "@/types": "workspace:*",
     "@vue-form-craft/utils": "workspace:*",
     "vue-form-craft": "workspace:*",
     "@vue/test-utils": "^2.4.6",

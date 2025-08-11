@@ -11,7 +11,7 @@ export default defineConfig({
     vue(),
     dts({
       outDir: './dist',
-      include: ['../../packages/**/*', '../../packages/**/*.vue'],
+      // include: ['../../packages/**/*', '../../packages/**/*.vue'],
       pathsToAliases: true,
       rollupTypes: true
     }),
@@ -19,12 +19,13 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@vue-form-craft': fileURLToPath(new URL('../../packages', import.meta.url))
+      // '@vue-form-craft': fileURLToPath(new URL('../../packages', import.meta.url)),
+      '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
   build: {
     lib: {
-      entry: fileURLToPath(new URL('index.ts', import.meta.url)), //指定组件编译入口文件
+      entry: fileURLToPath(new URL('src/index.ts', import.meta.url)), //指定组件编译入口文件
       name: 'VueFormCraft', // umd全局变量名
       fileName: 'vue-form-craft', // 打包文件名
     },
