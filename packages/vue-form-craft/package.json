@@ -25,7 +25,10 @@
     "global.d.ts"
   ],
   "exports": {
-    ".": "./dist/vue-form-craft.js",
+    ".": {
+      "import": "./dist/vue-form-craft.js",
+      "types": "./dist/vue-form-craft.d.ts"
+    },
     "./dev": "./src/index.ts"
   },
   "keywords": [
