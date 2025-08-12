@@ -1,4 +1,4 @@
-import type { Locale } from '@vue-form-craft/types'
+import type { Locale } from '@vue-form-craft/core'
 
 export default {
   menus: {

@@ -14,7 +14,7 @@
 import { onMounted, ref, watch } from 'vue'
 import { FormItemGroup } from '@/components'
 import Title from '../Title/Title.vue'
-import type { FormItemType } from '@vue-form-craft/types'
+import type { FormItemType } from '@vue-form-craft/core'
 
 type CollapseItem = {
   title: string

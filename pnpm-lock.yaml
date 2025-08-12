@@ -51,7 +51,7 @@ importers:
       '@vue-form-craft/icons':
         specifier: workspace:*
         version: link:packages/icons
-      '@vue-form-craft/types':
+      '@vue-form-craft/core':
         specifier: workspace:*
         version: link:packages/types
       '@vue-form-craft/utils':

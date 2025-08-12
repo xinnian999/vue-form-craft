@@ -4,10 +4,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@vue-form-craft/types": ["../types/index.ts"],
       "@vue-form-craft/core": ["../core/index.ts"]
     },
     "types": ["vite/client"]
   },
-  "include": ["src", "vite.config.ts", "../types", "../core"]
+  "include": ["src", "vite.config.ts", "../core"]
 }

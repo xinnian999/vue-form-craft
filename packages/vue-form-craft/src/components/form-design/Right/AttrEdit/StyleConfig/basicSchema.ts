@@ -1,4 +1,4 @@
-import type { FormSchema } from "@vue-form-craft/types"
+import type { FormSchema } from "@vue-form-craft/core"
 
 const schema: FormSchema = {
     labelWidth: 60,

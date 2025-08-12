@@ -21,7 +21,7 @@ import { ref, computed, reactive, provide, toRefs, readonly, onMounted } from 'v
 import type { FormInstance as ElFormInstance } from 'element-plus'
 import { tools } from '@vue-form-craft/core'
 import { cloneDeep, mergeWith } from 'lodash'
-import type { FormInstance, FormRenderProps, FormSchema } from '@vue-form-craft/types'
+import type { FormInstance, FormRenderProps, FormSchema } from '@vue-form-craft/core'
 import { $formInstance } from '@/config/symbol'
 import { useLocale } from '@/hooks'
 import Footer from './Footer.vue'

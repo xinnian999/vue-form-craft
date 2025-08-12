@@ -1,4 +1,4 @@
-import type { Lang } from '@vue-form-craft/types'
+import type { Lang } from '@vue-form-craft/core'
 import { $options } from '@/config'
 import { inject, ref } from 'vue'
 

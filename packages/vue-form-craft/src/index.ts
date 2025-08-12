@@ -13,6 +13,6 @@ export type {
   FormSchema,
   TemplateData,
   FormInstance
-} from '@vue-form-craft/types'
+} from '@vue-form-craft/core'
 
 export { tools } from '@vue-form-craft/core'

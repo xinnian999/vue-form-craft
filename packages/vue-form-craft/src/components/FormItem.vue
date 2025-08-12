@@ -63,7 +63,7 @@
 <script setup lang="ts">
 import { computed, onBeforeMount, reactive, watch } from 'vue'
 import { tools } from '@vue-form-craft/core'
-import type { FormItemType } from '@vue-form-craft/types'
+import type { FormItemType } from '@vue-form-craft/core'
 import { Icon } from '@vue-form-craft/core'
 import { useFormInstance } from '@/hooks'
 import { useElements } from '@/hooks'

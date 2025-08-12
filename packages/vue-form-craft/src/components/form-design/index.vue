@@ -19,7 +19,7 @@ import type {
   FormDesignProps,
   DesignInstance,
   FormElement
-} from '@vue-form-craft/types'
+} from '@vue-form-craft/core'
 
 const { getCurrentByKey, setCurrentByKey, ns } = tools
 

@@ -52,7 +52,7 @@ packages:
     "@/hooks": "workspace:*",
     "@vue-form-craft/icons": "workspace:*",
     "@vue-form-craft/styles": "workspace:*",
-    "@vue-form-craft/types": "workspace:*",
+    "@vue-form-craft/core": "workspace:*",
     "vue-form-craft": "workspace:*",
     "@vue/test-utils": "^2.4.6",
     "element-plus": "^2.8.3",

@@ -34,7 +34,7 @@
 import Draggable from 'vuedraggable-es-fix'
 import CanvasItem from './CanvasItem.vue'
 import { Icon } from '@vue-form-craft/core'
-import type { FormItemType } from '@vue-form-craft/types'
+import type { FormItemType } from '@vue-form-craft/core'
 import { useDesignInstance } from '@/hooks'
 import { tools } from '@vue-form-craft/core'
 

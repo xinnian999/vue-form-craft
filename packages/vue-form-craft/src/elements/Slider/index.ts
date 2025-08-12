@@ -1,5 +1,5 @@
 import { Icon } from '@vue-form-craft/core'
-import type { FormElement } from '@vue-form-craft/types'
+import type { FormElement } from '@vue-form-craft/core'
 import { h } from 'vue'
 
 export default {
