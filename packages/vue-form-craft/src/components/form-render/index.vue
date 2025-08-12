@@ -19,13 +19,15 @@
 <script setup lang="ts">
 import { ref, computed, reactive, provide, toRefs, readonly, onMounted } from 'vue'
 import type { FormInstance as ElFormInstance } from 'element-plus'
-import { deepParse, setDataByPath, getDataByPath } from '@vue-form-craft/utils'
-import { cloneDeep, merge, mergeWith } from 'lodash'
+import { tools } from '@vue-form-craft/core'
+import { cloneDeep, mergeWith } from 'lodash'
 import type { FormInstance, FormRenderProps, FormSchema } from '@vue-form-craft/types'
 import { $formInstance } from '@/config/symbol'
 import { useLocale } from '@/hooks'
 import Footer from './Footer.vue'
 import { FormItemGroup } from '@/components'
+
+const { deepParse, setDataByPath, getDataByPath } = tools
 
 const props = defineProps<FormRenderProps>()
 

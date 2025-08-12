@@ -8,11 +8,10 @@
 
 <script setup lang="ts">
 import { ref, provide, computed, reactive, toRefs } from 'vue'
-import { ns } from '@vue-form-craft/utils'
+import { tools } from '@vue-form-craft/core'
 import Left from './Left/index.vue'
 import Center from './Center/index.vue'
 import Right from './Right/index.vue'
-import { getCurrentByKey, setCurrentByKey } from '@vue-form-craft/utils'
 import { $designInstance } from '@/config'
 import type {
   FormSchema,
@@ -21,6 +20,8 @@ import type {
   DesignInstance,
   FormElement
 } from '@vue-form-craft/types'
+
+const { getCurrentByKey, setCurrentByKey, ns } = tools
 
 const props = withDefaults(defineProps<FormDesignProps>(), {
   templates: () => [],

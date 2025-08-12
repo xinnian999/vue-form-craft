@@ -1,4 +1,4 @@
-import Icon from '@vue-form-craft/icons'
+import { Icon } from '@vue-form-craft/core'
 import attrSchema from './attrSchema'
 import { defineAsyncComponent, h } from 'vue'
 import type { FormElement } from '@vue-form-craft/types'

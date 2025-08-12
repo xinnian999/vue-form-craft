@@ -1,6 +1,6 @@
 import type { FormElement } from '@vue-form-craft/types'
 import { defineAsyncComponent, h } from 'vue'
-import Icon from '@vue-form-craft/icons'
+import { Icon } from '@vue-form-craft/core'
 
 export default {
   title: '折叠面板',

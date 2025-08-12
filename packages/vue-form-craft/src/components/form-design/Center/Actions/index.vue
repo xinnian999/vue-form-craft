@@ -36,12 +36,14 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { ElMessageBox } from 'element-plus'
-import Icon from '@vue-form-craft/icons'
+import { Icon } from '@vue-form-craft/core'
 import JsonSchema from './JsonSchema.vue'
 import VueCode from './VueCode.vue'
 import Preview from './Preview.vue'
 import { useDesignInstance, useLocale } from '@/hooks'
-import { ns } from '@vue-form-craft/utils'
+import { tools } from '@vue-form-craft/core'
+
+const { ns } = tools
 
 type PreviewAction = {
   label: string

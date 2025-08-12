@@ -6,10 +6,12 @@
 </template>
 
 <script setup lang="ts">
-import { ns } from '@vue-form-craft/utils'
+import { tools } from '@vue-form-craft/core'
 import Actions from './Actions/index.vue'
 import { FormRender } from '@/components'
 import { useDesignInstance } from '@/hooks'
+
+const { ns } = tools
 
 const designInstance = useDesignInstance()
 </script>

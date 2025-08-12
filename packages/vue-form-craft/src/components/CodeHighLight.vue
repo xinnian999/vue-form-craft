@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import Icon from '@vue-form-craft/icons'
+import { Icon } from '@vue-form-craft/core'
 import { ElMessage } from 'element-plus'
 import { onMounted, ref } from 'vue'
 import { createHighlighterCore } from 'shiki/core'

@@ -7,4 +7,12 @@ export { FormRender, FormDesign } from './components'
 
 export { useFormInstance } from '@/hooks'
 
-export type { FormElement, FormItemType, FormSchema, TemplateData, FormInstance } from '@vue-form-craft/types'
+export type {
+  FormElement,
+  FormItemType,
+  FormSchema,
+  TemplateData,
+  FormInstance
+} from '@vue-form-craft/types'
+
+export { tools } from '@vue-form-craft/core'

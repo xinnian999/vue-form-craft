@@ -62,12 +62,14 @@
 
 <script setup lang="ts">
 import { computed, onBeforeMount, reactive, watch } from 'vue'
-import { isRegexString, getDataByPath, setDataByPath, ns } from '@vue-form-craft/utils'
+import { tools } from '@vue-form-craft/core'
 import type { FormItemType } from '@vue-form-craft/types'
-import Icon from '@vue-form-craft/icons'
+import { Icon } from '@vue-form-craft/core'
 import { useFormInstance } from '@/hooks'
 import { useElements } from '@/hooks'
 import { cloneDeep, isArray, isEqual } from 'lodash'
+
+const { getDataByPath, setDataByPath, ns, isRegexString } = tools
 
 const thisProps = defineProps<FormItemType>()
 

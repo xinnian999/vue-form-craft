@@ -58,8 +58,10 @@ import { ref } from 'vue'
 import parseMenus from './menus'
 import type { FormElement, FormItemType, FormSchema } from '@vue-form-craft/types'
 import { useDesignInstance, useElements, useLang, useLocale } from '@/hooks'
-import { getRandomId, ns } from '@vue-form-craft/utils'
+import { tools } from '@vue-form-craft/core'
 import { template } from '@/config'
+
+const { getRandomId, ns } = tools
 
 const drawerVisible = ref(false)
 

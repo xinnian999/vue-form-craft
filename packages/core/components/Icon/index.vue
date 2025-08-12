@@ -3,7 +3,9 @@
 </template>
 
 <script setup lang="ts">
-import { ns } from '@vue-form-craft/utils'
+import { tools } from '@vue-form-craft/core'
+
+const { ns } = tools
 
 const modules = import.meta.glob('./icons/*.vue', { eager: true })
 

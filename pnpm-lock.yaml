@@ -45,6 +45,9 @@ importers:
       '@vitejs/plugin-vue-jsx':
         specifier: ^4.1.0
         version: 4.1.0(vite@5.4.11(@types/node@20.17.7)(sass@1.32.13))(vue@3.5.13(typescript@5.3.3))
+      '@vue-form-craft/core':
+        specifier: workspace:*
+        version: link:packages/core
       '@vue-form-craft/icons':
         specifier: workspace:*
         version: link:packages/icons
@@ -117,6 +120,8 @@ importers:
       vitepress-vue-demo:
         specifier: ^1.0.10
         version: 1.0.10(typescript@5.6.3)
+
+  packages/core: {}
 
   packages/icons: {}
 

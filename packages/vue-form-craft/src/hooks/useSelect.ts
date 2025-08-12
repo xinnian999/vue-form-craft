@@ -1,11 +1,13 @@
 import { ref, watch, onMounted } from 'vue'
 import { isEqual, isPlainObject, debounce } from 'lodash'
-import { getDataByPath } from '@vue-form-craft/utils'
+import { tools } from '@vue-form-craft/core'
 import type { SelectProps } from '@vue-form-craft/types'
 import useFormInstance from './useFormInstance'
 import useRequest from './useRequest'
 
 type Option = Record<string, any>
+
+const { getDataByPath } = tools
 
 const useSelect = (props: SelectProps) => {
   const formInstance = useFormInstance()

@@ -41,8 +41,10 @@ import { computed } from 'vue'
 import FormItem from './FormItem.vue'
 import type { FormItemType } from '@vue-form-craft/types'
 import { useDesignInstance, useElements } from '@/hooks'
-import Icon from '@vue-form-craft/icons'
-import { copyItems, ns, recursionDelete } from '@vue-form-craft/utils'
+import { Icon } from '@vue-form-craft/core'
+import { tools } from '@vue-form-craft/core'
+
+const { ns, copyItems, recursionDelete } = tools
 
 const props = defineProps<{ data: FormItemType }>()
 

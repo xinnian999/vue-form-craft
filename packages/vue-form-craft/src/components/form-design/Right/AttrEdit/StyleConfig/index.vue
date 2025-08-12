@@ -17,9 +17,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { FormRender } from '@/components'
-import { ns } from '@vue-form-craft/utils'
+import { tools } from '@vue-form-craft/core'
 import basicSchema from './basicSchema'
 import schema from './schema'
+
+const { ns } = tools
 
 const currentProps = defineModel<Record<string, any>>()
 

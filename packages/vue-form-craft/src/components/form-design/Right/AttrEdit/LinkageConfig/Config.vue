@@ -25,10 +25,12 @@
 
 <script setup lang="ts">
 import { FormRender } from '@/components'
-import { quickSchema, editSchema } from './configSchema'
+import { editSchema } from './configSchema'
+import { tools } from '@vue-form-craft/core'
 import { useDesignInstance } from '@/hooks'
 import { ref } from 'vue'
-import { setDataByPath } from '@vue-form-craft/utils'
+
+const { setDataByPath } = tools
 
 const designInstance = useDesignInstance()
 

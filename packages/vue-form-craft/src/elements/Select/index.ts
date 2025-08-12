@@ -1,7 +1,7 @@
 import type { FormElement } from '@vue-form-craft/types'
 import attrSchema from './attrSchema'
 import { defineAsyncComponent, h } from 'vue'
-import Icon from '@vue-form-craft/icons'
+import { Icon } from '@vue-form-craft/core'
 
 export default {
   title: '下拉选择框',

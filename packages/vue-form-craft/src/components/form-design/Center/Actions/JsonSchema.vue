@@ -32,9 +32,11 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { CodeHighLight } from '@/components'
-import { changeItems } from '@vue-form-craft/utils'
+import { tools } from '@vue-form-craft/core'
 import { schemaHelp, tsJsonSchema, jsJsonSchema } from './config'
 import { useDesignInstance, useElements, useLocale } from '@/hooks'
+
+const { changeItems } = tools
 
 const designInstance = useDesignInstance()
 

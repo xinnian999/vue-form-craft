@@ -3,7 +3,9 @@ import { configTest } from '@/utils'
 import { mount } from '@vue/test-utils'
 import { FormRender } from '@/components'
 import schema from '../bugGood'
-import { wait } from '@vue-form-craft/utils'
+import { tools } from '@vue-form-craft/core'
+
+const { wait } = tools
 
 configTest()
 

@@ -22,9 +22,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useLocale } from '@/hooks'
-import { ns } from '@vue-form-craft/utils'
+import { tools } from '@vue-form-craft/core'
 import Change from './Change.vue';
 import Config from './Config.vue';
+
+const { ns } = tools
 
 const locale = useLocale()
 

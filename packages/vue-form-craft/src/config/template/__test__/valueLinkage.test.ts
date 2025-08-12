@@ -3,7 +3,7 @@ import { configTest } from '@/utils'
 import { mount } from '@vue/test-utils'
 import { FormRender } from '@/components'
 import schema from '../valueLinkage'
-import { wait } from '@vue-form-craft/utils'
+import { tools } from '@vue-form-craft/core'
 
 configTest()
 
@@ -15,7 +15,7 @@ describe('template valueLinkage', async () => {
       }
     })
 
-    await wait()
+    await tools.wait()
 
     const satisfactionEl = wrapper.find('.Input-item1 input')
 

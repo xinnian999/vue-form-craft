@@ -11,12 +11,14 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { FormRender } from '@/components'
-import { getDataByPath, ns, setDataByPath } from '@vue-form-craft/utils'
+import { tools } from '@vue-form-craft/core'
 import { isString } from 'lodash'
 import type { FormItemType, FormSchema } from '@vue-form-craft/types'
 import LinkageConfig from './LinkageConfig/index.vue'
 import StyleConfig from './StyleConfig/index.vue'
 import { useElements, useLang } from '@/hooks'
+
+const { getDataByPath, setDataByPath, ns } = tools
 
 const elements = useElements()
 

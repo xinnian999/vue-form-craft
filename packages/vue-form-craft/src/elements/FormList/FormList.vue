@@ -107,11 +107,11 @@
 <script setup lang="ts">
 import { computed, h, onMounted, provide, ref, watch } from 'vue'
 import { FormItem, CanvasGroup } from '@/components'
-import { deepParse } from '@vue-form-craft/utils'
+import { tools } from '@vue-form-craft/core'
 import { isEqual, isString, pickBy } from 'lodash'
 import type { FormItemType } from '@vue-form-craft/types'
 import { useFormInstance } from '@/hooks'
-import Icon from '@vue-form-craft/icons'
+import { Icon } from '@vue-form-craft/core'
 import type { TableColumnCtx } from 'element-plus'
 
 interface Props {
@@ -144,7 +144,7 @@ const cIndex = ref(0)
 const formInstance = useFormInstance()
 
 const parseFields = (index: number) =>
-  deepParse(props.children, { $item: list.value[index], $index: index })
+  tools.deepParse(props.children, { $item: list.value[index], $index: index })
 
 const isMax = computed(() => {
   return list.value.length >= props.maxLines

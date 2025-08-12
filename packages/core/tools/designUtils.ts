@@ -1,5 +1,5 @@
 import type { FormItemType } from '@vue-form-craft/types'
-import { getRandomId } from '@vue-form-craft/utils'
+import getRandomId from './getRandomId'
 import { cloneDeep } from 'lodash'
 
 export const getCurrentByKey = (items: FormItemType[], key: string): FormItemType | null => {
