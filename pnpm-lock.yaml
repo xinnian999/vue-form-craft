@@ -48,9 +48,9 @@ importers:
       '@vue-form-craft/icons':
         specifier: workspace:*
         version: link:packages/icons
-      '@vue-form-craft/styles':
+      '@vue-form-craft/types':
         specifier: workspace:*
-        version: link:packages/styles
+        version: link:packages/types
       '@vue-form-craft/utils':
         specifier: workspace:*
         version: link:packages/utils
@@ -120,7 +120,7 @@ importers:
 
   packages/icons: {}
 
-  packages/styles: {}
+  packages/types: {}
 
   packages/utils: {}
 
