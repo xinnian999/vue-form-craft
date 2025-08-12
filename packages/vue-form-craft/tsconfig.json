@@ -1,12 +1,12 @@
 {
-    "extends": "@vue/tsconfig/tsconfig.dom.json",
-    "compilerOptions": {
-      "baseUrl": ".",
-      "paths": {
-        "@/*": ["./src/*"]
-      },
-      "types": ["vite/client"]
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@vue-form-craft/types": ["../types/index.ts"]
     },
-    "include": ["src","vite.config.ts"]
-    // "exclude": ["**/*.test.ts", "**/vitest.config.ts"]
-  }
+    "types": ["vite/client"]
+  },
+  "include": ["src", "vite.config.ts", "../types"]
+}

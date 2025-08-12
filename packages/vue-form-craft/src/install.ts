@@ -2,7 +2,7 @@ import FormRender from './components/form-render'
 import FormDesign from './components/form-design'
 import { $options } from '@/config/symbol'
 import { type App } from 'vue'
-import type { Options } from '@/types'
+import type { Options } from '@vue-form-craft/types'
 
 export default (app: App<Element>, options: Options = {}) => {
   app.provide($options, options)

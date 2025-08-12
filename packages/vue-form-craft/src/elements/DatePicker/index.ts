@@ -1,5 +1,5 @@
 import attrSchema from './attrSchema'
-import type { FormElement } from '@/types'
+import type { FormElement } from '@vue-form-craft/types'
 import Icon from '@vue-form-craft/icons'
 import { h } from 'vue'
 

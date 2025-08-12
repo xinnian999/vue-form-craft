@@ -20,7 +20,7 @@ import type {
   FormDesignProps,
   DesignInstance,
   FormElement
-} from '@/types'
+} from '@vue-form-craft/types'
 
 const props = withDefaults(defineProps<FormDesignProps>(), {
   templates: () => [],

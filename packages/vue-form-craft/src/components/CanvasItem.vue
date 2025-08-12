@@ -39,7 +39,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import FormItem from './FormItem.vue'
-import type { FormItemType } from '@/types'
+import type { FormItemType } from '@vue-form-craft/types'
 import { useDesignInstance, useElements } from '@/hooks'
 import Icon from '@vue-form-craft/icons'
 import { copyItems, ns, recursionDelete } from '@vue-form-craft/utils'

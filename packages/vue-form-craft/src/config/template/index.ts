@@ -1,6 +1,6 @@
 import bugGood from './bugGood'
 import satisfaction from './satisfaction'
-import type { TemplateData } from '@/types'
+import type { TemplateData } from '@vue-form-craft/types'
 import login from './login'
 import register from './register'
 import formList from './formList'

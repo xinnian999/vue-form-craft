@@ -1,4 +1,4 @@
-import type { FormItemType } from '@/types'
+import type { FormItemType } from '@vue-form-craft/types'
 import { getRandomId } from '@vue-form-craft/utils'
 import { cloneDeep } from 'lodash'
 

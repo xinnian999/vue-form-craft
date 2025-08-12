@@ -1,4 +1,4 @@
-import type { FormSchema } from "@/types";
+import type { FormSchema } from "@vue-form-craft/types";
 export default {
   labelWidth: 150,
   labelAlign: 'right',

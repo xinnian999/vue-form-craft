@@ -35,7 +35,7 @@
 
 <script setup lang="ts">
 import { useFormInstance, useSelect } from '@/hooks'
-import type { SelectProps, SelectValue } from '@/types'
+import type { SelectProps, SelectValue } from '@vue-form-craft/types'
 import { watch } from 'vue'
 
 const props = withDefaults(defineProps<SelectProps>(), {

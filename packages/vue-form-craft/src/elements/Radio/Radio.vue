@@ -36,7 +36,7 @@ import type {
   OptionType,
   SelectProps,
   SelectValue
-} from '@/types'
+} from '@vue-form-craft/types'
 import { useFormInstance, useSelect } from '@/hooks'
 import { watch } from 'vue';
 

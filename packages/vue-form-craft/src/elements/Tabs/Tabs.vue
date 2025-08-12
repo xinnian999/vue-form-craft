@@ -9,7 +9,7 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
 import { FormItemGroup } from '@/components'
-import type { FormItemType } from '@/types'
+import type { FormItemType } from '@vue-form-craft/types'
 
 type tabItem = {
   label: string

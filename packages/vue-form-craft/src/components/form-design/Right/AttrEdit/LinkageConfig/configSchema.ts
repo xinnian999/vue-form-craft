@@ -1,4 +1,4 @@
-import type { FormSchema } from '@/types'
+import type { FormSchema } from '@vue-form-craft/types'
 
 type CascaderOptions = {
   label: string
