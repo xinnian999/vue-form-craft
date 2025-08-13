@@ -3,7 +3,7 @@
 ## 安装
 
 ```sh
-$ npm i vue-form-craft
+$ npm i magic-form
 ```
 
 ## 全局注册
@@ -14,7 +14,7 @@ $ npm i vue-form-craft
 
 ```ts
 import { createApp } from 'vue'
-import VueFormCraft from 'vue-form-craft'
+import VueFormCraft from 'magic-form'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import App from './App.vue'
@@ -35,7 +35,7 @@ app.mount('#app')
 {
   "compilerOptions": {
     // ...
-    "types": ["vue-form-craft/global"]
+    "types": ["magic-form/global"]
   }
 }
 ```
@@ -68,7 +68,7 @@ app.mount('#app')
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { FormSchema,FormInstance } from 'vue-form-craft'
+import type { FormSchema,FormInstance } from 'magic-form'
 
 const formRef = ref<FormInstance>()
 

@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { tools } from '@vue-form-craft/core'
+import { tools } from '@magic-form/core'
 
 const { ns } = tools
 

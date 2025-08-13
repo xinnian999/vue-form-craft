@@ -24,21 +24,21 @@ pnpm dev
 pnpm build
 ```
 
-`packages/vue-form-craft/dist/vue-form-craft.js`就是依赖入口！
+`packages/magic-form/dist/magic-form.js`就是依赖入口！
 
 ## 方法二 （copy源码）
 
 >由于本项目采用了`monerepo`组织代码，所以源码搬到你项目里，会让你的项目也变成这种模式。所以看情况选用
 
 
-1、将本项目的 `packages` 目录copy到你项目里的组件目录下。 比如 `src/components`下，并重命名为 `vue-form-craft`
+1、将本项目的 `packages` 目录copy到你项目里的组件目录下。 比如 `src/components`下，并重命名为 `magic-form`
 
 2、在你的项目根目录下，新建`pnpm-workspace.yaml`，写入以下配置(可根据你放入的位置调整)
 
 ```yaml
 
 packages:
-  - 'src/components/vue-form-craft/*'
+  - 'src/components/magic-form/*'
 
 ```
 
@@ -50,10 +50,10 @@ packages:
     ...
     "@/config": "workspace:*",
     "@/hooks": "workspace:*",
-    "@vue-form-craft/icons": "workspace:*",
-    "@vue-form-craft/styles": "workspace:*",
-    "@vue-form-craft/core": "workspace:*",
-    "vue-form-craft": "workspace:*",
+    "@magic-form/icons": "workspace:*",
+    "@magic-form/styles": "workspace:*",
+    "@magic-form/core": "workspace:*",
+    "magic-form": "workspace:*",
     "@vue/test-utils": "^2.4.6",
     "element-plus": "^2.8.3",
     "lodash": "^4.17.21",
@@ -63,6 +63,6 @@ packages:
   },
 ```
 
-4、引入 `vue-form-craft/` 到 `main.ts` 里注册即可。
+4、引入 `magic-form/` 到 `main.ts` 里注册即可。
 
 <img src="../assets/dev.png" />

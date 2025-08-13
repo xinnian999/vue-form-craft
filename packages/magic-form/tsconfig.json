@@ -1,0 +1,12 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@magic-form/core": ["../core/index.ts"]
+    },
+    "types": ["vite/client"]
+  },
+  "include": ["src", "vite.config.ts", "../core"]
+}

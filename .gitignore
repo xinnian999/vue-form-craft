@@ -29,6 +29,6 @@ coverage
 
 *.tsbuildinfo
 
-/vue-form-craft
+/magic-form
 /docs/.vitepress/cache
 .vscode

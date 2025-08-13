@@ -1,4 +1,4 @@
-# @vue-form-craft/docs
+# @magic-form/docs
 
 ## 4.6.0
 

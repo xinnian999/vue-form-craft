@@ -8,7 +8,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('../packages/vue-form-craft/src', import.meta.url))
+      '@': fileURLToPath(new URL('../packages/magic-form/src', import.meta.url))
     }
   },
   server:{
