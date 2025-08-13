@@ -48,15 +48,6 @@ importers:
       '@vue-form-craft/core':
         specifier: workspace:*
         version: link:packages/core
-      '@vue-form-craft/icons':
-        specifier: workspace:*
-        version: link:packages/icons
-      '@vue-form-craft/core':
-        specifier: workspace:*
-        version: link:packages/types
-      '@vue-form-craft/utils':
-        specifier: workspace:*
-        version: link:packages/utils
       '@vue/eslint-config-prettier':
         specifier: ^8.0.0
         version: 8.0.0(eslint@8.57.1)(prettier@3.3.3)
@@ -122,12 +113,6 @@ importers:
         version: 1.0.10(typescript@5.6.3)
 
   packages/core: {}
-
-  packages/icons: {}
-
-  packages/types: {}
-
-  packages/utils: {}
 
   packages/vue-form-craft:
     dependencies:
