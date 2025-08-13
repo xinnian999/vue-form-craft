@@ -14,7 +14,9 @@
 <script setup lang="ts">
 //@ts-nocheck
 import JsonEditorVue from './JsonEditVue.vue'
-import { Disabled } from '@/components'
+import { components } from '@vue-form-craft/core'
+
+const { Disabled } = components
 
 defineOptions({
   inheritAttrs: false

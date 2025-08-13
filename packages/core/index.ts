@@ -1,8 +1,8 @@
 import * as tools from './tools'
 import * as components from './components'
 
-const { Icon } = components
+export { tools, components }
 
-export { tools, components, Icon }
+export { Icon } from './components'
 
 export * from './types'
