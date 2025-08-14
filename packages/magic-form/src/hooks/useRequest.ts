@@ -1,4 +1,4 @@
-import { $options } from '@/config/symbol'
+import { $options } from '@magic-form/core'
 import { inject } from 'vue'
 
 const useRequest = () => {

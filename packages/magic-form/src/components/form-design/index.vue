@@ -12,7 +12,7 @@ import { tools } from '@magic-form/core'
 import Left from './Left/index.vue'
 import Center from './Center/index.vue'
 import Right from './Right/index.vue'
-import { $designInstance } from '@/config'
+import { $designInstance } from '@magic-form/core'
 import type {
   FormSchema,
   FormItemType,

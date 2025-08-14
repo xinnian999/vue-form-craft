@@ -1,5 +1,5 @@
 import type { Lang } from '@magic-form/core'
-import { $options } from '@/config'
+import { $options } from '@magic-form/core'
 import { inject, ref } from 'vue'
 
 export default function useLang() {

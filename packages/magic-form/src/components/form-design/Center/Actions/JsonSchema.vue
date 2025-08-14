@@ -31,7 +31,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { CodeHighLight } from '@/components'
+import { CodeHighLight } from '@magic-form/core'
 import { tools } from '@magic-form/core'
 import { schemaHelp, tsJsonSchema, jsJsonSchema } from './config'
 import { useDesignInstance, useElements, useLocale } from '@/hooks'

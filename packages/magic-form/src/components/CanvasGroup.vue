@@ -33,10 +33,9 @@
 <script setup lang="ts">
 import Draggable from 'vuedraggable-es-fix'
 import CanvasItem from './CanvasItem.vue'
-import { Icon } from '@magic-form/core'
+import { Icon, tools } from '@magic-form/core'
 import type { FormItemType } from '@magic-form/core'
 import { useDesignInstance } from '@/hooks'
-import { tools } from '@magic-form/core'
 
 const { getCurrentByKey, ns } = tools
 
@@ -56,7 +55,7 @@ const props = withDefaults(
 
 const designInstance = useDesignInstance()
 
-const onAdd = (e: Record<string, any>) => {  
+const onAdd = (e: Record<string, any>) => {
   const source = e.item._underlying_vm_
 
   designInstance.updateCurrent(getCurrentByKey(designInstance.list, source.designKey)!)

@@ -3,12 +3,12 @@
 layout: home
 
 hero:
-  name: "Vue Form Craft"
+  name: "Magic Form"
   text: "VUE表单快速生成工具"
   tagline: 让你免去vue项目中表单的烦恼
   image:
     src: /favicon.svg
-    alt: Vue Form Craft
+    alt: Magic Form
   actions:
     - theme: brand
       text: 快速开始

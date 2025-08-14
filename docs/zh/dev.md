@@ -2,8 +2,6 @@
 
 如果你需要更灵活的定制化功能，那么可以选择二次开发本项目。
 
-## 方法一
-
 1、将本项目`clone`下来
 
 2、安装依赖
@@ -26,43 +24,3 @@ pnpm build
 
 `packages/magic-form/dist/magic-form.js`就是依赖入口！
 
-## 方法二 （copy源码）
-
->由于本项目采用了`monerepo`组织代码，所以源码搬到你项目里，会让你的项目也变成这种模式。所以看情况选用
-
-
-1、将本项目的 `packages` 目录copy到你项目里的组件目录下。 比如 `src/components`下，并重命名为 `magic-form`
-
-2、在你的项目根目录下，新建`pnpm-workspace.yaml`，写入以下配置(可根据你放入的位置调整)
-
-```yaml
-
-packages:
-  - 'src/components/magic-form/*'
-
-```
-
-3、`修改package.json` 增加以下依赖，然后pnpm i
-
-```json
-  ...
-  "dependencies": {
-    ...
-    "@/config": "workspace:*",
-    "@/hooks": "workspace:*",
-    "@magic-form/icons": "workspace:*",
-    "@magic-form/styles": "workspace:*",
-    "@magic-form/core": "workspace:*",
-    "magic-form": "workspace:*",
-    "@vue/test-utils": "^2.4.6",
-    "element-plus": "^2.8.3",
-    "lodash": "^4.17.21",
-    "vue": "^3.5.13",
-    "vuedraggable-es-fix": "^1.0.1",
-    "sass": "~1.32.6"
-  },
-```
-
-4、引入 `magic-form/` 到 `main.ts` 里注册即可。
-
-<img src="../assets/dev.png" />

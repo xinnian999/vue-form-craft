@@ -1,6 +1,6 @@
 import { config } from '@vue/test-utils'
 import ElementPlus from 'element-plus'
-import { $options } from '@/config'
+import { $options } from '@magic-form/core'
 
 export default () => {
   config.global.plugins = [ElementPlus]

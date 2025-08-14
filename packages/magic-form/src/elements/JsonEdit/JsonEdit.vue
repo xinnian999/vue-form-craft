@@ -14,9 +14,7 @@
 <script setup lang="ts">
 //@ts-nocheck
 import JsonEditorVue from './JsonEditVue.vue'
-import { components } from '@magic-form/core'
-
-const { Disabled } = components
+import { Disabled } from '@magic-form/core'
 
 defineOptions({
   inheritAttrs: false

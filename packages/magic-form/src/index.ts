@@ -14,5 +14,3 @@ export type {
   TemplateData,
   FormInstance
 } from '@magic-form/core'
-
-export { tools } from '@magic-form/core'

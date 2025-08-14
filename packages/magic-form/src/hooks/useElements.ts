@@ -1,4 +1,4 @@
-import { $options } from '@/config/symbol'
+import { $options } from '@magic-form/core'
 import * as elements from '@/elements'
 import type { FormElement } from '@magic-form/core'
 import { inject } from 'vue'
