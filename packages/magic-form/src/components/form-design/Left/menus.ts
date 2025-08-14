@@ -1,4 +1,4 @@
-import locales from '@/config/locales'
+import locales from '@magic-form/core/locales'
 import type { FormElement } from '@magic-form/core'
 
 type Params = {
