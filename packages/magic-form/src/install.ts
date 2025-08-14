@@ -1,5 +1,4 @@
-import FormRender from './components/form-render'
-import FormDesign from './components/form-design'
+import { FormRender, FormDesign } from '@/components'
 import { $options } from '@/config/symbol'
 import { type App } from 'vue'
 import type { Options } from '@magic-form/core'

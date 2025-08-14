@@ -1,12 +1,12 @@
 <template>
-    <FormRender v-model="form" :schema="formOptions"></FormRender>
+  <FormRender v-model="form" :schema="formOptions"></FormRender>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import FormRender from '../../form-render'
+import { FormRender } from '@/components'
 import formOptions from './formOptions'
-import { useDesignInstance } from '@/hooks';
+import { useDesignInstance } from '@/hooks'
 
 const designInstance = useDesignInstance()
 
