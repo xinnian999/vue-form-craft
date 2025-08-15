@@ -1,0 +1,31 @@
+<template>
+  <a-modal
+    v-model:open="visible"
+    :title="locale.actions.previewVueCode"
+    width="70%"
+    centered
+    destroy-on-close
+    top="10vh"
+  >
+    <a-tabs activeKey="ts" class="demo-tabs">
+      <a-tab-pane label="Typescript" name="ts">
+        <CodeHighLight style="height: 70vh" :code="tsVue(designInstance.schema)" language="vue" />
+      </a-tab-pane>
+      <a-tab-pane label="Javascript" name="js">
+        <CodeHighLight style="height: 70vh" :code="jsVue(designInstance.schema)" language="vue" />
+      </a-tab-pane>
+    </a-tabs>
+  </a-modal>
+</template>
+
+<script setup lang="ts">
+import { CodeHighLight } from '@form-magic/core'
+import { tsVue, jsVue } from './config'
+import { useDesignInstance, useLocale } from '@form-magic/core'
+
+const designInstance = useDesignInstance()
+
+const locale = useLocale()
+
+const visible = defineModel<boolean>()
+</script>

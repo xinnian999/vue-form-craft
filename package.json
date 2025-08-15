@@ -3,6 +3,7 @@
   "type": "module",
   "scripts": {
     "dev:el": "pnpm -C play/element-plus dev",
+    "dev:antd": "pnpm -C play/ant-design dev",
     "build:el": "pnpm -C packages/element-plus build",
     "small-v:el": "pnpm -C packages/element-plus v",
     "release:el": "pnpm -C packages/element-plus release",
@@ -16,18 +17,20 @@
     "clear": "find . -type d -name 'node_modules' -exec rm -rf {} \\;"
   },
   "dependencies": {
+    "ant-design-vue": "^4.2.6",
     "element-plus": "^2.8.3",
     "jsoneditor": "^10.3.0",
     "lodash": "^4.17.21",
     "shiki": "^1.21.0",
     "vue": "^3.5.8",
-    "vuedraggable-es-fix": "^1.0.1"
+    "vuedraggable-es-fix": "^1.0.1",
+    "@form-magic/core": "workspace:*",
+    "@form-magic/element-plus": "workspace:*",
+    "@form-magic/ant-design": "workspace:*",
+    "@form-magic/styles": "workspace:*"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.9",
-    "@form-magic/core": "workspace:*",
-    "@form-magic/element-plus": "workspace:*",
-    "@form-magic/styles": "workspace:*",
     "@rushstack/eslint-patch": "^1.3.3",
     "@tsconfig/node20": "^20.1.2",
     "@types/lodash": "^4.14.202",
@@ -46,8 +49,8 @@
     "sass": "~1.32.6",
     "typescript": "~5.3.0",
     "vite": "^5.0.10",
-    "vitest": "^2.1.5",
     "vite-plugin-dts": "^3.7.3",
-    "vite-plugin-libcss": "^1.1.1"
+    "vite-plugin-libcss": "^1.1.1",
+    "vitest": "^2.1.5"
   }
 }

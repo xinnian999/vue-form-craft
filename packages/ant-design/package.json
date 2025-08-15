@@ -1,0 +1,32 @@
+{
+  "name": "@form-magic/ant-design",
+  "version": "5.0.0",
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "v": "npm version patch",
+    "release": "vite build && nrm use npm && npm publish"
+  },
+  "peerDependencies": {
+    "vue": "^3.2.0",
+    "ant-design-vue": "^4.2.6"
+  },
+  "files": [
+    "dist",
+    "global.d.ts"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./dev": "./src/index.ts"
+  },
+  "keywords": [
+    "component",
+    "vue",
+    "form",
+    "ant-design"
+  ]
+}
