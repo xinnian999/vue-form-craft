@@ -25,7 +25,7 @@ const gridStyle = computed(() => ({
 <style lang="scss">
 .form-item-grid {
   .a-form-item,
-  .mf-canvas-item {
+  .fm-canvas-item {
     margin-bottom: 0;
   }
   .a-form-item__content {

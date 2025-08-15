@@ -2,5 +2,5 @@ import type { App } from 'vue'
 import Code from './Code.vue'
 
 export default (app: App) => {
-  app.component('mf-code', Code)
+  app.component('fm-code', Code)
 }

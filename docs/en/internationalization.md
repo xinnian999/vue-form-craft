@@ -43,7 +43,7 @@ import Layout from './Layout'
 
 const lang  = ref('zh')
 
-provide('mf-lang',lang)
+provide('fm-lang',lang)
 
 </script>
 

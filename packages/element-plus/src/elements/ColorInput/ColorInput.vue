@@ -1,5 +1,5 @@
 <template>
-  <div class="mf-color-input">
+  <div class="fm-color-input">
     <el-input v-model="value" />
     <el-color-picker v-model="value" />
   </div>
@@ -10,7 +10,7 @@ const value=defineModel<string>()
 </script>
 
 <style>
-.mf-color-input{
+.fm-color-input{
     display: flex;
 }
 </style>

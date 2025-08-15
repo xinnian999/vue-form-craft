@@ -8,8 +8,8 @@
     top="10vh"
     @cancel="formValues = {}"
   >
-    <a-tabs v-model="tabKey">
-      <a-tab-pane label="编辑模式" name="edit">
+    <a-tabs v-model:activeKey="tabKey">
+      <a-tab-pane tab="编辑模式" key="edit">
         <FormRender
           v-model="formValues"
           :schema="designInstance.schema"
@@ -23,7 +23,7 @@
         </div>
       </a-tab-pane>
 
-      <a-tab-pane label="阅读模式" name="read" lazy>
+      <a-tab-pane tab="阅读模式" key="read" lazy>
         <FormRender
           v-model="formValues"
           :schema="{ ...designInstance.schema, labelSuffix: ':' }"
@@ -33,7 +33,7 @@
         />
       </a-tab-pane>
 
-      <a-tab-pane label="联动变量" name="context">
+      <a-tab-pane tab="联动变量" key="context">
         <p>实时预览的联动变量，在JsonSchema中可以通过双大括号模版语法使用，用于触发各种联动</p>
         <JsonEdit.render v-model="context" style="height: 60vh" :key="tabKey" />
       </a-tab-pane>

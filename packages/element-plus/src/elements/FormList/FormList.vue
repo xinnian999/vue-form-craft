@@ -1,5 +1,5 @@
 <template>
-  <div class="mf-formList">
+  <div class="fm-formList">
     <CanvasGroup v-if="formInstance.design" :list="children" class="layoutRender" />
 
     <div v-else>
@@ -229,7 +229,7 @@ provide(
 </script>
 
 <style lang="scss">
-.mf-formList {
+.fm-formList {
   position: relative;
   width: 100%;
   .list-item {

@@ -1,10 +1,10 @@
 <template>
   <div :class="ns('form-design-right')">
-    <a-tabs v-model="designInstance.rightTab">
-      <a-tab-pane v-if="designInstance.current" :label="locale.attr.tab1.title" name="attr">
+    <a-tabs v-model:activeKey="designInstance.rightTab">
+      <a-tab-pane v-if="designInstance.current" :tab="locale.attr.tab1.title" key="attr">
         <AttrEdit v-model="designInstance.current" />
       </a-tab-pane>
-      <a-tab-pane :label="locale.attr.tab2.title" name="form">
+      <a-tab-pane :tab="locale.attr.tab2.title" key="form">
         <FormEdit />
       </a-tab-pane>
     </a-tabs>

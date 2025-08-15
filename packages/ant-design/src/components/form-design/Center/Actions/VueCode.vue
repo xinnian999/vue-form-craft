@@ -7,11 +7,11 @@
     destroy-on-close
     top="10vh"
   >
-    <a-tabs activeKey="ts" class="demo-tabs">
-      <a-tab-pane label="Typescript" name="ts">
+    <a-tabs v-model="tabKey" class="demo-tabs">
+      <a-tab-pane tab="Typescript" key="ts">
         <CodeHighLight style="height: 70vh" :code="tsVue(designInstance.schema)" language="vue" />
       </a-tab-pane>
-      <a-tab-pane label="Javascript" name="js">
+      <a-tab-pane tab="Javascript" key="js">
         <CodeHighLight style="height: 70vh" :code="jsVue(designInstance.schema)" language="vue" />
       </a-tab-pane>
     </a-tabs>
@@ -22,6 +22,9 @@
 import { CodeHighLight } from '@form-magic/core'
 import { tsVue, jsVue } from './config'
 import { useDesignInstance, useLocale } from '@form-magic/core'
+import { ref } from 'vue'
+
+const tabKey = ref('ts')
 
 const designInstance = useDesignInstance()
 
