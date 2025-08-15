@@ -1,8 +1,8 @@
-import { $options } from '@magic-form/core'
+import { $globals } from '@magic-form/core'
 import { inject } from 'vue'
 
 const useRequest = () => {
-  const { request } = inject($options)!
+  const { request } = inject($globals)!
 
   return request
 }

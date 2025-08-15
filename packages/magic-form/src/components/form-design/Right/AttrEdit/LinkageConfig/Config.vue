@@ -27,7 +27,7 @@
 import { FormRender } from '@/components'
 import { editSchema } from './configSchema'
 import { tools } from '@magic-form/core'
-import { useDesignInstance } from '@/hooks'
+import { useDesignInstance } from '@magic-form/core'
 import { ref } from 'vue'
 
 const { setDataByPath } = tools

@@ -21,7 +21,7 @@
 <script setup lang="ts">
 import { CodeHighLight } from '@magic-form/core'
 import { tsVue, jsVue } from './config'
-import { useDesignInstance, useLocale } from '@/hooks'
+import { useDesignInstance, useLocale } from '@magic-form/core'
 
 const designInstance = useDesignInstance()
 

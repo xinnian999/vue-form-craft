@@ -34,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-import { useFormInstance, useSelect } from '@/hooks'
+import { useFormInstance, useSelect } from '@magic-form/core'
 import type { SelectProps, SelectValue } from '@magic-form/core'
 import { watch } from 'vue'
 

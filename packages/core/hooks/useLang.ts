@@ -1,10 +1,10 @@
 import type { Lang } from '@magic-form/core'
-import { $options } from '@magic-form/core'
+import { $globals } from '@magic-form/core'
 import { inject, ref } from 'vue'
 
 export default function useLang() {
   // 用户可能从入口注入 静态的
-  const options = inject($options)!
+  const options = inject($globals)!
 
   // 用户可能自行通过provide注入 动态的
   const lang = inject<Lang>('vfc-lang', ref('zh'))

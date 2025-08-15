@@ -57,7 +57,7 @@ import { computed } from 'vue'
 import { ref } from 'vue'
 import parseMenus from './menus'
 import type { FormElement, FormItemType, FormSchema } from '@magic-form/core'
-import { useDesignInstance, useElements, useLang, useLocale } from '@/hooks'
+import { useDesignInstance, useElements, useLang, useLocale } from '@magic-form/core'
 import { tools } from '@magic-form/core'
 import { template } from '@/config'
 

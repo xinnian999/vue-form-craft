@@ -45,7 +45,7 @@
 import { ref, computed } from 'vue'
 import { FormRender } from '@/components'
 import type { FormInstance } from '@magic-form/core'
-import { useDesignInstance, useElements, useLocale } from '@/hooks'
+import { useDesignInstance, useElements, useLocale } from '@magic-form/core'
 
 const designInstance = useDesignInstance()
 

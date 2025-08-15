@@ -40,7 +40,7 @@ import { Icon } from '@magic-form/core'
 import JsonSchema from './JsonSchema.vue'
 import VueCode from './VueCode.vue'
 import Preview from './Preview.vue'
-import { useDesignInstance, useLocale } from '@/hooks'
+import { useDesignInstance, useLocale } from '@magic-form/core'
 import { tools } from '@magic-form/core'
 
 const { ns } = tools

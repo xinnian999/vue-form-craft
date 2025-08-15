@@ -16,7 +16,7 @@ import { isString } from 'lodash'
 import type { FormItemType, FormSchema } from '@magic-form/core'
 import LinkageConfig from './LinkageConfig/index.vue'
 import StyleConfig from './StyleConfig/index.vue'
-import { useElements, useLang } from '@/hooks'
+import { useElements, useLang } from '@magic-form/core'
 
 const { getDataByPath, setDataByPath, ns } = tools
 

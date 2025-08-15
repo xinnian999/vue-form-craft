@@ -37,7 +37,7 @@ import type {
   SelectProps,
   SelectValue
 } from '@magic-form/core'
-import { useFormInstance, useSelect } from '@/hooks'
+import { useFormInstance, useSelect } from '@magic-form/core'
 import { watch } from 'vue';
 
 type Props = Omit<SelectProps, 'multiple'> & {

@@ -40,7 +40,7 @@
 import { computed } from 'vue'
 import FormItem from './FormItem.vue'
 import type { FormItemType } from '@magic-form/core'
-import { useDesignInstance, useElements } from '@/hooks'
+import { useDesignInstance, useElements } from '@magic-form/core'
 import { Icon } from '@magic-form/core'
 import { tools } from '@magic-form/core'
 

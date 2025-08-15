@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 import type { FormItemType } from '@magic-form/core'
-import { useFormInstance } from '@/hooks'
+import { useFormInstance } from '@magic-form/core'
 import CanvasGroup from './CanvasGroup.vue'
 import FormItem from './FormItem.vue'
 

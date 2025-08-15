@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { useDesignInstance, useLocale } from '@/hooks'
+import { useDesignInstance, useLocale } from '@magic-form/core'
 import AttrEdit from './AttrEdit/index.vue'
 import FormEdit from './FormEdit.vue'
 import { tools } from '@magic-form/core'

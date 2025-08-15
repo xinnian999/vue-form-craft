@@ -1,12 +1,13 @@
 import { config } from '@vue/test-utils'
 import ElementPlus from 'element-plus'
-import { $options } from '@magic-form/core'
+import { $globals } from '@magic-form/core'
+import { mergeGlobals } from '@/utils'
 
 export default () => {
   config.global.plugins = [ElementPlus]
   config.global.provide = {
-    [$options]: {
+    [$globals]: mergeGlobals({
       lang: 'zh'
-    }
+    })
   }
 }

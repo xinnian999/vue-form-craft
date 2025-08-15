@@ -23,7 +23,7 @@ import { tools } from '@magic-form/core'
 import { cloneDeep, mergeWith } from 'lodash'
 import type { FormInstance, FormRenderProps, FormSchema } from '@magic-form/core'
 import { $formInstance } from '@magic-form/core'
-import { useLocale } from '@/hooks'
+import { useLocale } from '@magic-form/core'
 import Footer from './Footer.vue'
 import { FormItemGroup } from '@/components'
 

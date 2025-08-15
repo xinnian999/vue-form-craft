@@ -9,7 +9,7 @@
 import { tools } from '@magic-form/core'
 import Actions from './Actions/index.vue'
 import { FormRender } from '@/components'
-import { useDesignInstance } from '@/hooks'
+import { useDesignInstance } from '@magic-form/core'
 
 const { ns } = tools
 

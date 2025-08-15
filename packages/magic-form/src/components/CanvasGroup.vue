@@ -35,7 +35,7 @@ import Draggable from 'vuedraggable-es-fix'
 import CanvasItem from './CanvasItem.vue'
 import { Icon, tools } from '@magic-form/core'
 import type { FormItemType } from '@magic-form/core'
-import { useDesignInstance } from '@/hooks'
+import { useDesignInstance } from '@magic-form/core'
 
 const { getCurrentByKey, ns } = tools
 

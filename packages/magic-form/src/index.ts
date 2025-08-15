@@ -5,7 +5,7 @@ export default { install }
 
 export { FormRender, FormDesign } from './components'
 
-export { useFormInstance } from '@/hooks'
+export { useFormInstance } from '@magic-form/core'
 
 export type {
   FormElement,

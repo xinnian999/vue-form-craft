@@ -64,7 +64,7 @@
 import { computed, onBeforeMount, reactive, watch } from 'vue'
 import { tools, Icon } from '@magic-form/core'
 import type { FormItemType } from '@magic-form/core'
-import { useFormInstance, useElements } from '@/hooks'
+import { useFormInstance, useElements } from '@magic-form/core'
 import { cloneDeep, isArray, isEqual } from 'lodash'
 
 const { getDataByPath, setDataByPath, ns, isRegexString } = tools

@@ -6,7 +6,7 @@
 import { computed } from 'vue'
 import { FormRender } from '@/components'
 import formOptions from './formOptions'
-import { useDesignInstance } from '@/hooks'
+import { useDesignInstance } from '@magic-form/core'
 
 const designInstance = useDesignInstance()
 

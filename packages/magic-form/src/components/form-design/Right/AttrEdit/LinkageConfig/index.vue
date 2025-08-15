@@ -21,7 +21,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useLocale } from '@/hooks'
+import { useLocale } from '@magic-form/core'
 import { tools } from '@magic-form/core'
 import Change from './Change.vue';
 import Config from './Config.vue';

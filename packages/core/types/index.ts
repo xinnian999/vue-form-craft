@@ -130,6 +130,13 @@ export type Options = {
   lang?: 'zh' | 'en'
 }
 
+export interface Globals extends Options {
+  elements: Record<string, FormElement>
+  message: {
+    success: (message: string) => void
+  }
+}
+
 export interface FormRenderProps {
   schema: FormSchema
   schemaContext?: Record<string, any>

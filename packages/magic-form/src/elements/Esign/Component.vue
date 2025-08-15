@@ -36,7 +36,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import VueEsign from './VueEsign.vue'
-import { useFormInstance } from '@/hooks'
+import { useFormInstance } from '@magic-form/core'
 import type { FormSchema } from '@magic-form/core'
 import { FormRender } from '@/components'
 
