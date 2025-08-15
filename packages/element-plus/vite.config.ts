@@ -6,7 +6,6 @@ import libCss from 'vite-plugin-libcss'
 import dts from 'vite-plugin-dts'
 
 export default defineConfig({
-  base: '/form-magic/',
   plugins: [
     vue(),
     dts({
@@ -26,8 +25,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: fileURLToPath(new URL('src/index.ts', import.meta.url)), //指定组件编译入口文件
-      name: 'VueFormCraft', // umd全局变量名
-      fileName: '@form-magic/element-plus', // 打包文件名
+      name: 'FormMagicElementPlus', // umd全局变量名
+      fileName: 'index', // 打包文件名
     },
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖
