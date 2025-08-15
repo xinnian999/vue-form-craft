@@ -1,7 +1,7 @@
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    FormRender: (typeof import('magic-form'))['FormRender']
-    FormDesign: (typeof import('magic-form'))['FormDesign']
+    FormRender: (typeof import('@form-magic/element-plus'))['FormRender']
+    FormDesign: (typeof import('@form-magic/element-plus'))['FormDesign']
   }
 }
 

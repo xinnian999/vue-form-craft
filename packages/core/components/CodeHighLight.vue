@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { $globals, Icon } from '@magic-form/core'
+import { $globals, Icon } from '@form-magic/core'
 import { onMounted, ref, inject } from 'vue'
 import { createHighlighterCore } from 'shiki/core'
 import getWasm from 'shiki/wasm'

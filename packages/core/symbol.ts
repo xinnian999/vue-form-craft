@@ -1,5 +1,5 @@
 import type { DeepReadonly, InjectionKey, Reactive } from 'vue'
-import type { FormInstance, Globals, DesignInstance } from '@magic-form/core'
+import type { FormInstance, Globals, DesignInstance } from '@form-magic/core'
 
 export const $globals = Symbol() as InjectionKey<Globals>
 

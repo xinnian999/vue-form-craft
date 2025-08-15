@@ -1,4 +1,4 @@
-import type { FormItemType } from '@magic-form/core'
+import type { FormItemType } from '@form-magic/core'
 
 const recursionDelete = (
   items: FormItemType[],

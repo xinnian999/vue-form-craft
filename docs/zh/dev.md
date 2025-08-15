@@ -22,5 +22,5 @@ pnpm dev
 pnpm build
 ```
 
-`packages/magic-form/dist/magic-form.js`就是依赖入口！
+`packages/form-magic/dist/form-magic.js`就是依赖入口！
 

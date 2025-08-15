@@ -1,5 +1,5 @@
-import { $globals } from '@magic-form/core'
-import type { FormElement } from '@magic-form/core'
+import { $globals } from '@form-magic/core'
+import type { FormElement } from '@form-magic/core'
 import { inject } from 'vue'
 
 const useElements = (): Record<string, FormElement> => {

@@ -1,11 +1,11 @@
 import install from './install'
-import '@magic-form/styles'
+import '@form-magic/styles'
 
 export default { install }
 
 export { FormRender, FormDesign } from './components'
 
-export { useFormInstance } from '@magic-form/core'
+export { useFormInstance } from '@form-magic/core'
 
 export type {
   FormElement,
@@ -13,4 +13,4 @@ export type {
   FormSchema,
   TemplateData,
   FormInstance
-} from '@magic-form/core'
+} from '@form-magic/core'

@@ -7,7 +7,7 @@
 <script setup lang="ts">
 import { FormRender } from '@/components'
 import linkageSchema from './changeSchema'
-import { useDesignInstance } from '@magic-form/core'
+import { useDesignInstance } from '@form-magic/core'
 
 const designInstance = useDesignInstance()
 

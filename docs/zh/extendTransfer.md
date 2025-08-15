@@ -44,7 +44,7 @@ src/
 
 <script setup lang="ts">
 import type { TransferDataItem, TransferKey } from 'element-plus'
-import { useFormInstance } from 'magic-form'
+import { useFormInstance } from '@form-magic/element-plus'
 
 const props = defineProps<{ name: string; data: TransferDataItem[] }>()
 
@@ -96,7 +96,7 @@ const onChange = (value: TransferKey[]) => {
 
 ```ts
 // src/extendElements/Transfer/attrSchema.ts
-import type { FormSchema } from 'magic-form'
+import type { FormSchema } from '@form-magic/element-plus'
 
 export default {
   size: 'small',
@@ -195,7 +195,7 @@ export default {
 `src/extendElements/Transfer/index.ts`
 
 ```ts
-import type { FormElement } from 'magic-form'
+import type { FormElement } from '@form-magic/element-plus'
 import icon from './Icon.vue'
 import attrSchema from './attrSchema'
 import render from './Render.vue'
@@ -231,7 +231,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
-import VueFormCraft from 'magic-form'
+import VueFormCraft from '@form-magic/element-plus'
 import extendElements from './extendElements'
 
 const app = createApp(App)

@@ -56,9 +56,9 @@ import draggable from 'vuedraggable-es-fix'
 import { computed } from 'vue'
 import { ref } from 'vue'
 import parseMenus from './menus'
-import type { FormElement, FormItemType, FormSchema } from '@magic-form/core'
-import { useDesignInstance, useElements, useLang, useLocale } from '@magic-form/core'
-import { tools } from '@magic-form/core'
+import type { FormElement, FormItemType, FormSchema } from '@form-magic/core'
+import { useDesignInstance, useElements, useLang, useLocale } from '@form-magic/core'
+import { tools } from '@form-magic/core'
 import { template } from '@/config'
 
 const { getRandomId, ns } = tools

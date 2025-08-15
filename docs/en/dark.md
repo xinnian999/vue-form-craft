@@ -1,6 +1,6 @@
 # Dark Mode
 
-Since `magic-form` is developed based on `element-plus`, most of the color variables are also using its variables.
+Since `form-magic` is developed based on `element-plus`, most of the color variables are also using its variables.
 
 You can directly switch `element-plus` to dark mode.
 

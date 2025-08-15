@@ -26,8 +26,8 @@
   ],
   "exports": {
     ".": {
-      "import": "./dist/magic-form.js",
-      "types": "./dist/magic-form.d.ts"
+      "import": "./dist/form-magic.js",
+      "types": "./dist/form-magic.d.ts"
     },
     "./dev": "./src/index.ts"
   },

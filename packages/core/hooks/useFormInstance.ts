@@ -1,4 +1,4 @@
-import { $formInstance } from '@magic-form/core'
+import { $formInstance } from '@form-magic/core'
 import { inject, reactive } from 'vue'
 
 // 返回一个响应式的Proxy，所以不可解构使用

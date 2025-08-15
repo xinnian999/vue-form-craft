@@ -1,4 +1,4 @@
-# magic-form
+# form-magic
 
 ## 4.6.0
 

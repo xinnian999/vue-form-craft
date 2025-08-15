@@ -8,18 +8,18 @@
 
 <script setup lang="ts">
 import { ref, provide, computed, reactive, toRefs } from 'vue'
-import { tools } from '@magic-form/core'
+import { tools } from '@form-magic/core'
 import Left from './Left/index.vue'
 import Center from './Center/index.vue'
 import Right from './Right/index.vue'
-import { $designInstance } from '@magic-form/core'
+import { $designInstance } from '@form-magic/core'
 import type {
   FormSchema,
   FormItemType,
   FormDesignProps,
   DesignInstance,
   FormElement
-} from '@magic-form/core'
+} from '@form-magic/core'
 
 const { getCurrentByKey, setCurrentByKey, ns } = tools
 

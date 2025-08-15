@@ -2,7 +2,7 @@
 
 ## Introduction
 
-FormRender is the rendering component of magic-form.
+FormRender is the rendering component of form-magic.
 
 ::: demo expand
 

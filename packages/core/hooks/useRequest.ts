@@ -1,4 +1,4 @@
-import { $globals } from '@magic-form/core'
+import { $globals } from '@form-magic/core'
 import { inject } from 'vue'
 
 const useRequest = () => {

@@ -1,10 +1,10 @@
-<template>
+sss<template>
   <FormRender v-model="formValues" :schema="schema" />
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { FormSchema } from 'magic-form'
+import type { FormSchema } from '@form-magic/element-plus'
 
 const formValues = ref({})
 

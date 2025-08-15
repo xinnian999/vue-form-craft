@@ -3,7 +3,7 @@ import { configTest } from '@/utils'
 import { mount } from '@vue/test-utils'
 import { FormRender } from '@/components'
 import schema from '../valueLinkage'
-import { tools } from '@magic-form/core'
+import { tools } from '@form-magic/core'
 
 configTest()
 

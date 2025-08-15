@@ -36,12 +36,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { ElMessageBox } from 'element-plus'
-import { Icon } from '@magic-form/core'
+import { Icon } from '@form-magic/core'
 import JsonSchema from './JsonSchema.vue'
 import VueCode from './VueCode.vue'
 import Preview from './Preview.vue'
-import { useDesignInstance, useLocale } from '@magic-form/core'
-import { tools } from '@magic-form/core'
+import { useDesignInstance, useLocale } from '@form-magic/core'
+import { tools } from '@form-magic/core'
 
 const { ns } = tools
 

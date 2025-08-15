@@ -1,5 +1,5 @@
-import type { Locale } from '@magic-form/core'
-import { locales } from '@magic-form/core'
+import type { Locale } from '@form-magic/core'
+import { locales } from '@form-magic/core'
 import { computed } from 'vue'
 import useLang from './useLang'
 

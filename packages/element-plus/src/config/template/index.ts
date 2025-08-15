@@ -1,6 +1,6 @@
 import bugGood from './bugGood'
 import satisfaction from './satisfaction'
-import type { TemplateData } from '@magic-form/core'
+import type { TemplateData } from '@form-magic/core'
 import login from './login'
 import register from './register'
 import formList from './formList'

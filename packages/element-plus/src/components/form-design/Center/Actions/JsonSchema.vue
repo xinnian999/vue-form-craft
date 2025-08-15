@@ -31,10 +31,10 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { CodeHighLight } from '@magic-form/core'
-import { tools } from '@magic-form/core'
+import { CodeHighLight } from '@form-magic/core'
+import { tools } from '@form-magic/core'
 import { schemaHelp, tsJsonSchema, jsJsonSchema } from './config'
-import { useDesignInstance, useElements, useLocale } from '@magic-form/core'
+import { useDesignInstance, useElements, useLocale } from '@form-magic/core'
 
 const { changeItems } = tools
 

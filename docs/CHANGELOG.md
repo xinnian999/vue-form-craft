@@ -1,4 +1,4 @@
-# @magic-form/docs
+# @form-magic/docs
 
 ## 4.6.0
 

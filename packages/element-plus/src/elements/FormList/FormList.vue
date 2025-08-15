@@ -107,11 +107,11 @@
 <script setup lang="ts">
 import { computed, h, onMounted, provide, ref, watch } from 'vue'
 import { FormItem, CanvasGroup } from '@/components'
-import { tools } from '@magic-form/core'
+import { tools } from '@form-magic/core'
 import { isEqual, isString, pickBy } from 'lodash'
-import type { FormItemType } from '@magic-form/core'
-import { useFormInstance } from '@magic-form/core'
-import { Icon } from '@magic-form/core'
+import type { FormItemType } from '@form-magic/core'
+import { useFormInstance } from '@form-magic/core'
+import { Icon } from '@form-magic/core'
 import type { TableColumnCtx } from 'element-plus'
 
 interface Props {

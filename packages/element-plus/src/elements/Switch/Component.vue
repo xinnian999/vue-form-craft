@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { useFormInstance } from '@magic-form/core';
+import { useFormInstance } from '@form-magic/core';
 
 defineProps<{
   disabled?: boolean

@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import {tools} from '@magic-form/core'  
+import {tools} from '@form-magic/core'  
 
 const {deepParse} = tools
 

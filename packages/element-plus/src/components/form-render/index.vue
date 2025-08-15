@@ -19,11 +19,11 @@
 <script setup lang="ts">
 import { ref, computed, reactive, provide, toRefs, readonly, onMounted } from 'vue'
 import type { FormInstance as ElFormInstance } from 'element-plus'
-import { tools } from '@magic-form/core'
+import { tools } from '@form-magic/core'
 import { cloneDeep, mergeWith } from 'lodash'
-import type { FormInstance, FormRenderProps, FormSchema } from '@magic-form/core'
-import { $formInstance } from '@magic-form/core'
-import { useLocale } from '@magic-form/core'
+import type { FormInstance, FormRenderProps, FormSchema } from '@form-magic/core'
+import { $formInstance } from '@form-magic/core'
+import { useLocale } from '@form-magic/core'
 import Footer from './Footer.vue'
 import { FormItemGroup } from '@/components'
 

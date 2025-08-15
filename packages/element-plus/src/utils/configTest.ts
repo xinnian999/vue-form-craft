@@ -1,6 +1,6 @@
 import { config } from '@vue/test-utils'
 import ElementPlus from 'element-plus'
-import { $globals } from '@magic-form/core'
+import { $globals } from '@form-magic/core'
 import { mergeGlobals } from '@/utils'
 
 export default () => {

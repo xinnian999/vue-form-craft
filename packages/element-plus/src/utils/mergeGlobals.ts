@@ -1,4 +1,4 @@
-import type { Options } from '@magic-form/core'
+import type { Options } from '@form-magic/core'
 import { ElMessage } from 'element-plus'
 import * as elements from '@/elements'
 

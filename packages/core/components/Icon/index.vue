@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { tools } from '@magic-form/core'
+import { tools } from '@form-magic/core'
 
 const { ns } = tools
 

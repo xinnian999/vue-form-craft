@@ -15,8 +15,8 @@
 
 <script setup lang="ts">
 import { type CascaderValue } from 'element-plus'
-import { useSelect } from '@magic-form/core'
-import type { SelectProps } from '@magic-form/core'
+import { useSelect } from '@form-magic/core'
+import type { SelectProps } from '@form-magic/core'
 
 const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],

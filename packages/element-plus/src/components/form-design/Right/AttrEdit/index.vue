@@ -11,12 +11,12 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { FormRender } from '@/components'
-import { tools } from '@magic-form/core'
+import { tools } from '@form-magic/core'
 import { isString } from 'lodash'
-import type { FormItemType, FormSchema } from '@magic-form/core'
+import type { FormItemType, FormSchema } from '@form-magic/core'
 import LinkageConfig from './LinkageConfig/index.vue'
 import StyleConfig from './StyleConfig/index.vue'
-import { useElements, useLang } from '@magic-form/core'
+import { useElements, useLang } from '@form-magic/core'
 
 const { getDataByPath, setDataByPath, ns } = tools
 

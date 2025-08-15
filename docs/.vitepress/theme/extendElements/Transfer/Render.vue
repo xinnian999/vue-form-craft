@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
 import type { TransferDataItem, TransferKey } from 'element-plus'
-import { useFormInstance } from 'magic-form'
+import { useFormInstance } from '@form-magic/element-plus'
 
 const props = defineProps<{ name: string; data: TransferDataItem[] }>()
 

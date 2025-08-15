@@ -39,10 +39,10 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import FormItem from './FormItem.vue'
-import type { FormItemType } from '@magic-form/core'
-import { useDesignInstance, useElements } from '@magic-form/core'
-import { Icon } from '@magic-form/core'
-import { tools } from '@magic-form/core'
+import type { FormItemType } from '@form-magic/core'
+import { useDesignInstance, useElements } from '@form-magic/core'
+import { Icon } from '@form-magic/core'
+import { tools } from '@form-magic/core'
 
 const { ns, copyItems, recursionDelete } = tools
 

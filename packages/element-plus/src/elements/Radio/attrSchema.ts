@@ -1,5 +1,5 @@
 import optionConfig from "@/config/optionConfig";
-import type { FormSchema } from "@magic-form/core";
+import type { FormSchema } from "@form-magic/core";
 
 export default {
   size: 'small',

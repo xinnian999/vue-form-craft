@@ -1,7 +1,7 @@
-import { Icon } from '@magic-form/core'
+import { Icon } from '@form-magic/core'
 import attrSchema from './attrSchema'
 import { defineAsyncComponent, h } from 'vue'
-import type { FormElement } from '@magic-form/core'
+import type { FormElement } from '@form-magic/core'
 
 export default {
   title: '开关',

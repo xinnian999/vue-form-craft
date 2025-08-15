@@ -1,4 +1,4 @@
-import { $designInstance } from '@magic-form/core'
+import { $designInstance } from '@form-magic/core'
 import { inject } from 'vue'
 
 // 返回一个响应式的Proxy，所以不可解构使用

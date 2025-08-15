@@ -1,4 +1,4 @@
-import type { FormSchema } from '@magic-form/core'
+import type { FormSchema } from '@form-magic/core'
 
 export const tsVue = (schema: FormSchema) => {
   const str = JSON.stringify(schema, null, 2)
@@ -10,7 +10,7 @@ export const tsVue = (schema: FormSchema) => {
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { FormSchema,FormInstance } from 'magic-form'
+import type { FormSchema,FormInstance } from '@form-magic/element-plus'
 
 const formRef = ref<FormInstance>()
 
@@ -99,7 +99,7 @@ export const schemaHelp = `// JSON Schema 配置说明
 export const tsJsonSchema = (schema: FormSchema) => {
   const str = JSON.stringify(schema, null, 2)
   
-  return `import type { FormSchema } from "magic-form";
+  return `import type { FormSchema } from "form-magic";
 
 export default ${str} satisfies FormSchema`
 }

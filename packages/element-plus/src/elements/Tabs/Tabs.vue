@@ -9,7 +9,7 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
 import { FormItemGroup } from '@/components'
-import type { FormItemType } from '@magic-form/core'
+import type { FormItemType } from '@form-magic/core'
 
 type tabItem = {
   label: string

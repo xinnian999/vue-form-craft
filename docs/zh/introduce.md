@@ -4,7 +4,7 @@ import StarAlert from '../demo/StarAlert.vue'
 
 # 简介
 
-magic-form是一款基于Vue 3.+的低代码表单工具，基于Element Plus UI库。
+form-magic是一款基于Vue 3.+的低代码表单工具，基于Element Plus UI库。
 
 目的是为前端开发同学提供快速搭建表单、实现表单交互和数据收集的功能。
 
@@ -12,7 +12,7 @@ magic-form是一款基于Vue 3.+的低代码表单工具，基于Element Plus UI
 
 ## 核心
 
-magic-form主要由 **表单设计器FormDesign** 、 **表单渲染器FormRender**两部分构成。
+form-magic主要由 **表单设计器FormDesign** 、 **表单渲染器FormRender**两部分构成。
 
 - FormDesign通过拖拽生成JsonSchema
 

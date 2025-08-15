@@ -1,8 +1,0 @@
-{
-  "compilerOptions": {
-    "paths": {
-      // "@magic-form/*": ["./packages/*"]
-    }
-  },
-  "exclude": ["node_modules", "dist"]
-}
