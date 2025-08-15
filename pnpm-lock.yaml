@@ -93,6 +93,12 @@ importers:
       vite:
         specifier: ^5.0.10
         version: 5.4.11(@types/node@20.17.7)(sass@1.32.13)
+      vite-plugin-dts:
+        specifier: ^3.7.3
+        version: 3.9.1(@types/node@20.17.7)(rollup@4.27.4)(typescript@5.3.3)(vite@5.4.11(@types/node@20.17.7)(sass@1.32.13))
+      vite-plugin-libcss:
+        specifier: ^1.1.1
+        version: 1.1.1(vite@5.4.11(@types/node@20.17.7)(sass@1.32.13))
       vitest:
         specifier: ^2.1.5
         version: 2.1.5(@types/node@20.17.7)(jsdom@25.0.1)(sass@1.32.13)
@@ -123,26 +129,19 @@ importers:
   packages/element-plus:
     dependencies:
       element-plus:
-        specifier: ^2.8.3
+        specifier: ^2.6.0
         version: 2.8.8(vue@3.5.13(typescript@5.6.3))
       vue:
-        specifier: ^3.5.8
+        specifier: ^3.2.0
         version: 3.5.13(typescript@5.6.3)
-    devDependencies:
-      vite-plugin-dts:
-        specifier: ^3.7.3
-        version: 3.9.1(@types/node@20.17.7)(rollup@4.27.4)(typescript@5.6.3)(vite@5.4.11(@types/node@20.17.7)(sass@1.32.13))
-      vite-plugin-libcss:
-        specifier: ^1.1.1
-        version: 1.1.1(vite@5.4.11(@types/node@20.17.7)(sass@1.32.13))
 
   packages/styles: {}
 
-  play:
+  play/element-plus:
     dependencies:
       '@form-magic/element-plus':
         specifier: workspace:*
-        version: link:../packages/element-plus
+        version: link:../../packages/element-plus
       vue:
         specifier: ^3.5.12
         version: 3.5.13(typescript@5.6.3)
@@ -4587,7 +4586,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vue/language-core@1.8.27(typescript@5.6.3)':
+  '@vue/language-core@1.8.27(typescript@5.3.3)':
     dependencies:
       '@volar/language-core': 1.11.1
       '@volar/source-map': 1.11.1
@@ -4599,7 +4598,7 @@ snapshots:
       path-browserify: 1.0.1
       vue-template-compiler: 2.7.16
     optionalDependencies:
-      typescript: 5.6.3
+      typescript: 5.3.3
 
   '@vue/language-core@2.1.10(typescript@5.6.3)':
     dependencies:
@@ -6244,16 +6243,16 @@ snapshots:
       - supports-color
       - terser
 
-  vite-plugin-dts@3.9.1(@types/node@20.17.7)(rollup@4.27.4)(typescript@5.6.3)(vite@5.4.11(@types/node@20.17.7)(sass@1.32.13)):
+  vite-plugin-dts@3.9.1(@types/node@20.17.7)(rollup@4.27.4)(typescript@5.3.3)(vite@5.4.11(@types/node@20.17.7)(sass@1.32.13)):
     dependencies:
       '@microsoft/api-extractor': 7.43.0(@types/node@20.17.7)
       '@rollup/pluginutils': 5.1.3(rollup@4.27.4)
-      '@vue/language-core': 1.8.27(typescript@5.6.3)
+      '@vue/language-core': 1.8.27(typescript@5.3.3)
       debug: 4.3.7
       kolorist: 1.8.0
       magic-string: 0.30.13
-      typescript: 5.6.3
-      vue-tsc: 1.8.27(typescript@5.6.3)
+      typescript: 5.3.3
+      vue-tsc: 1.8.27(typescript@5.3.3)
     optionalDependencies:
       vite: 5.4.11(@types/node@20.17.7)(sass@1.32.13)
     transitivePeerDependencies:
@@ -6407,12 +6406,12 @@ snapshots:
       de-indent: 1.0.2
       he: 1.2.0
 
-  vue-tsc@1.8.27(typescript@5.6.3):
+  vue-tsc@1.8.27(typescript@5.3.3):
     dependencies:
       '@volar/typescript': 1.11.1
-      '@vue/language-core': 1.8.27(typescript@5.6.3)
+      '@vue/language-core': 1.8.27(typescript@5.3.3)
       semver: 7.6.3
-      typescript: 5.6.3
+      typescript: 5.3.3
 
   vue-tsc@2.1.10(typescript@5.6.3):
     dependencies:
