@@ -21,7 +21,7 @@ const schema: FormSchema = {
       component: 'Custom',
       name: 'form-oEBQ',
       props: {
-        componentName: 'vfc-code'
+        componentName: 'mf-code'
       },
       designKey: 'design-tDWe'
     }

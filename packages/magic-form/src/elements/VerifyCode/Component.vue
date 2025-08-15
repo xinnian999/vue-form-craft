@@ -1,5 +1,5 @@
 <template>
-  <div class="vfc-verify-code">
+  <div class="mf-verify-code">
     <el-input v-model="value" class="verify-input" :placeholder="placeholder" @blur="onBlur" />
     <div class="verify-code" ref="codeEl"></div>
   </div>
@@ -41,7 +41,7 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.vfc-verify-code {
+.mf-verify-code {
   display: flex;
   align-items: center;
   gap: 10px;

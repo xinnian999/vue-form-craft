@@ -1,18 +1,18 @@
 <template>
   <template v-if="formInstance.read || value">
     <div>
-      <div class="vfc-esign-preview"><img :src="value" alt="未签名" /></div>
+      <div class="mf-esign-preview"><img :src="value" alt="未签名" /></div>
       <el-button v-if="!formInstance.read" :disabled @click="handleClear" type="primary"
         >重写</el-button
       >
     </div>
   </template>
 
-  <div v-else class="vfc-esign">
-    <FormRender v-model="actionValues" :schema="actionSchema" class="vfc-esign-actions" />
+  <div v-else class="mf-esign">
+    <FormRender v-model="actionValues" :schema="actionSchema" class="mf-esign-actions" />
 
     <VueEsign
-      class="vfc-esign-canvas"
+      class="mf-esign-canvas"
       ref="esign"
       :width
       :height
@@ -133,18 +133,18 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-.vfc-esign {
+.mf-esign {
   position: relative;
   width: 100%;
 }
 
-.vfc-esign-actions {
+.mf-esign-actions {
   #form-item {
     margin-bottom: 0 !important;
   }
 }
 
-.vfc-esign-canvas {
+.mf-esign-canvas {
   min-height: 300px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -152,7 +152,7 @@ onMounted(() => {
   z-index: 10;
 }
 
-.vfc-esign-preview {
+.mf-esign-preview {
   width: 350px;
   height: 150px;
   border: 1px solid #ccc;

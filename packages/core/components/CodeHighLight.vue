@@ -1,9 +1,9 @@
 <template>
-  <div class="vfc-codeHighLight">
-    <div class="vfc-codeHighLight-copy" @click="handleCopy">
+  <div class="mf-codeHighLight">
+    <div class="mf-codeHighLight-copy" @click="handleCopy">
       <Icon name="copy" />
     </div>
-    <div class="vfc-codeHighLight-content" v-html="html" />
+    <div class="mf-codeHighLight-content" v-html="html" />
   </div>
 </template>
 
@@ -69,7 +69,7 @@ onMounted(async () => {
 </script>
 
 <style lang="scss">
-.vfc-codeHighLight {
+.mf-codeHighLight {
   position: relative;
   overflow: auto;
   line-height: 24px;

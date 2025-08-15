@@ -8,7 +8,7 @@ import en from 'element-plus/es/locale/lang/en'
 
 const { lang } = useData()
 
-provide('vfc-lang',lang)
+provide('mf-lang',lang)
 
 
 onMounted(() => {

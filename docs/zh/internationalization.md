@@ -45,7 +45,7 @@ import Layout from './Layout'
 
 const lang  = ref('zh')
 
-provide('vfc-lang',lang)
+provide('mf-lang',lang)
 
 </script>
 

@@ -1,4 +1,4 @@
-$namespace: 'vfc';
+$namespace: 'mf';
 
 @mixin ns($cls) {
   $NS: $namespace + '-' + $cls;

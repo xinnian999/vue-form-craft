@@ -1,7 +1,7 @@
 <template>
-  <div class="vfc-ObjGroup">
+  <div class="mf-ObjGroup">
     <CanvasGroup v-if="formInstance.design" :list="children" />
-    <div v-else class="vfc-ObjGroup-render">
+    <div v-else class="mf-ObjGroup-render">
       <FormItem
         v-for="item in children"
         :key="item.name"
@@ -38,11 +38,11 @@ provide('$objGroupBase', ref(base))
 </script>
 
 <style lang="scss">
-.vfc-ObjGroup {
+.mf-ObjGroup {
   position: relative;
   width: 100%;
 
-  .vfc-ObjGroup-render {
+  .mf-ObjGroup-render {
     .el-form-item {
       margin-bottom: 18px;
     }
