@@ -11,3 +11,4 @@ export * from './symbol'
 export * from './hooks'
 
 export { default as locales } from './locales'
+

@@ -1,5 +1,5 @@
 import install from './install'
-import './styles/index.scss'
+import '@magic-form/styles'
 
 export default { install }
 
