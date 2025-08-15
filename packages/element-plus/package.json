@@ -1,6 +1,6 @@
 {
-  "name": "magic-form",
-  "version": "4.6.6",
+  "name": "@form-magic/element-plus",
+  "version": "5.0.0",
   "private": false,
   "type": "module",
   "scripts": {
