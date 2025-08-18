@@ -1,9 +1,9 @@
 <template>
-  <a-switch v-bind="$attrs" v-model="value" :disabled="formInstance.read||disabled" />
+  <a-switch v-bind="$attrs" v-model:checked="value" :disabled="formInstance.read || disabled" />
 </template>
 
 <script setup lang="ts">
-import { useFormInstance } from '@form-magic/core';
+import { useFormInstance } from '@form-magic/core'
 
 defineProps<{
   disabled?: boolean

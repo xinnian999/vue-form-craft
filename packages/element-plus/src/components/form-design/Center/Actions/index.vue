@@ -1,6 +1,6 @@
 <template>
-  <div :class="ns('actions')">
-    <div :class="ns('actions-left')">
+  <div :class="ns('form-design-center-actions')">
+    <div class="left">
       <el-button
         v-for="{ label, btnType, icon, onClick } in leftActions"
         :key="label"
@@ -15,7 +15,7 @@
       >
     </div>
 
-    <div :class="ns('actions-right')">
+    <div class="right">
       <el-button
         v-for="{ label, btnType, icon, onClick } in rightActions"
         :key="label"

@@ -1,7 +1,7 @@
 <template>
   <a-form
     :model="formValues"
-    :laba-position="schema.labelAlign"
+    :label-align="schema.labelAlign"
     :size="schema.size"
     :disabled="schema.disabled"
     :hide-required-asterisk="schema.hideRequiredAsterisk"

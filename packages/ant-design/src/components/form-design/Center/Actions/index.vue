@@ -1,6 +1,6 @@
 <template>
-  <div :class="ns('actions')">
-    <div :class="ns('actions-left')">
+  <div>
+    <div class="left">
       <a-button
         v-for="{ label, btnType, icon, onClick } in leftActions"
         :key="label"
@@ -15,12 +15,13 @@
       >
     </div>
 
-    <div :class="ns('actions-right')">
+    <div class="right">
       <a-button
-        v-for="{ label, btnType, icon, onClick } in rightActions"
+        v-for="{ label, btnType, danger, icon, onClick } in rightActions"
         :key="label"
-        :type="btnType"
         size="small"
+        :type="btnType"
+        :danger="danger"
         @click="onClick"
       >
         <template #icon v-if="icon"> <Icon :name="icon" /> </template>{{ label }}</a-button
@@ -36,19 +37,16 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { ElMessageBox } from 'element-plus'
-import { Icon } from '@form-magic/core'
 import JsonSchema from './JsonSchema.vue'
 import VueCode from './VueCode.vue'
 import Preview from './Preview.vue'
-import { useDesignInstance, useLocale } from '@form-magic/core'
-import { tools } from '@form-magic/core'
-
-const { ns } = tools
+import { useDesignInstance, useLocale, Icon } from '@form-magic/core'
 
 type PreviewAction = {
   label: string
   btnType: 'default' | 'primary' | 'text' | 'success' | 'warning' | 'info' | 'danger'
   icon?: string
+  danger?: boolean
   onClick: () => void
 }
 
@@ -90,7 +88,8 @@ const leftActions: PreviewAction[] = [
 const rightActions: PreviewAction[] = [
   {
     label: locale.value.actions.clear,
-    btnType: 'danger',
+    btnType: 'primary',
+    danger: true,
     icon: 'trash',
     onClick: async () => {
       await ElMessageBox.confirm('确认清空当前设计吗？')

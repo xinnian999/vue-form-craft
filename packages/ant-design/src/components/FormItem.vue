@@ -9,7 +9,7 @@
       :class="[ns('form-item'), thisProps.class, `${component}-${name}`]"
       :style="style"
       :key="name"
-      :prop="name"
+      :name="name"
       :laba-width="hideLabel ? '0' : formInstance.schema.labelWidth"
       :rules="computeRules"
     >

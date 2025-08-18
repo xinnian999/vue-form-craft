@@ -1,0 +1,22 @@
+@import '@form-magic/styles';
+
+@include ns('form-design') {
+  &-center-actions {
+    .left {
+      display: flex;
+      gap: 5px;
+    }
+
+    .right {
+      display: flex;
+      gap: 5px;
+    }
+
+    .ant-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+  }
+}

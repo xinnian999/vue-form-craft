@@ -1,7 +1,11 @@
 <template>
   <div :class="ns('form-design-center')">
-    <Actions />
-    <FormRender :class="ns('canvas')" v-model:schema="designInstance.schema" design />
+    <Actions :class="ns('form-design-center-actions')" />
+    <FormRender
+      :class="ns('form-design-center-canvas')"
+      v-model:schema="designInstance.schema"
+      design
+    />
   </div>
 </template>
 
