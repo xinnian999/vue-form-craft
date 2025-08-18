@@ -8,13 +8,13 @@
 
 <script setup lang="ts">
 import type { FormItemType } from '@form-magic/core'
-import { useFormInstance } from '@form-magic/core'
-import CanvasGroup from './CanvasGroup.vue'
-import FormItem from './FormItem.vue'
+import { useFormInstance, useGlobals, CanvasGroup } from '@form-magic/core'
 
 defineProps<{
   list: FormItemType[]
 }>()
 
 const formInstance = useFormInstance()
+
+const { FormItem } = useGlobals()
 </script>

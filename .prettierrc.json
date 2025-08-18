@@ -4,5 +4,9 @@
   "tabWidth": 2,
   "singleQuote": true,
   "printWidth": 100,
-  "trailingComma": "none"
+  "trailingComma": "none",
+  "plugins": ["@ianvs/prettier-plugin-sort-imports"],
+  "importOrder": ["^@form-magic/core", "^[./]"],
+  "importOrderSeparation": true,
+  "importOrderMergeDuplicateImports": true
 }

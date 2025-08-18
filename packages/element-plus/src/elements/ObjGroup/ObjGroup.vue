@@ -13,10 +13,10 @@
 </template>
 
 <script setup lang="ts">
-import { CanvasGroup, FormItem } from '@/components'
-import type { FormItemType } from '@form-magic/core'
-import { useFormInstance } from '@form-magic/core'
+import { FormItem } from '@/components'
 import { inject, provide, ref, type Ref } from 'vue'
+import type { FormItemType } from '@form-magic/core'
+import { CanvasGroup, useFormInstance } from '@form-magic/core'
 
 const props = defineProps<{
   children: FormItemType[]

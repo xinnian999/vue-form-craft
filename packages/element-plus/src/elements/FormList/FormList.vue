@@ -105,14 +105,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed, h, onMounted, provide, ref, watch } from 'vue'
-import { FormItem, CanvasGroup } from '@/components'
-import { tools } from '@form-magic/core'
-import { isEqual, isString, pickBy } from 'lodash'
-import type { FormItemType } from '@form-magic/core'
-import { useFormInstance } from '@form-magic/core'
-import { Icon } from '@form-magic/core'
+import { FormItem } from '@/components'
 import type { TableColumnCtx } from 'element-plus'
+import { isEqual, isString, pickBy } from 'lodash'
+import { computed, h, onMounted, provide, ref, watch } from 'vue'
+import { CanvasGroup, Icon, tools, useFormInstance } from '@form-magic/core'
+import type { FormItemType } from '@form-magic/core'
 
 interface Props {
   children: FormItemType[]
@@ -180,7 +178,6 @@ const formatter = (row: any, column: TableColumnCtx<any>, cellValue: any, index:
 
 // formList 值联动
 watch(list, (newVal, oldVal) => {
-
   const changeIndex = newVal.reduce((acc, cur, index) => {
     if (!isEqual(cur, oldVal[index])) {
       acc = index

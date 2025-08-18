@@ -19,9 +19,8 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
 import type { FormRenderEmits, FormRenderProps, FormSchema } from '@form-magic/core'
+import { FormItemGroup, useFormRender, useLocale } from '@form-magic/core'
 import Footer from './Footer.vue'
-import { FormItemGroup } from '@/components'
-import { useFormRender, useLocale } from '@form-magic/core'
 
 const props = defineProps<FormRenderProps>()
 

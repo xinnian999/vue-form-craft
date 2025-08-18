@@ -25,24 +25,18 @@
       </li>
     </ul>
 
-    <div
-      class="layout-title"
-      v-if="config.lbTitle"
-    >
+    <div class="layout-title" v-if="config.lbTitle">
       {{ config.title }}
     </div>
 
-    <form-item v-bind="data" :props="data.props" />
+    <FormItem v-bind="data" :props="data.props" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import FormItem from './FormItem.vue'
 import type { FormItemType } from '@form-magic/core'
-import { useDesignInstance, useElements } from '@form-magic/core'
-import { Icon } from '@form-magic/core'
-import { tools } from '@form-magic/core'
+import { useDesignInstance, useElements, useGlobals, Icon, tools } from '@form-magic/core'
 
 const { ns, copyItems, recursionDelete } = tools
 
@@ -50,7 +44,11 @@ const props = defineProps<{ data: FormItemType }>()
 
 const designInstance = useDesignInstance()
 
+const globals = useGlobals()
+
 const elements = useElements()
+
+const { FormItem } = globals
 
 const config = elements[props.data.component]
 

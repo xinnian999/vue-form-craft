@@ -12,9 +12,9 @@
 
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
-import { FormItemGroup } from '@/components'
-import Title from '../Title/Title.vue'
 import type { FormItemType } from '@form-magic/core'
+import { FormItemGroup } from '@form-magic/core'
+import Title from '../Title/Title.vue'
 
 type CollapseItem = {
   title: string
