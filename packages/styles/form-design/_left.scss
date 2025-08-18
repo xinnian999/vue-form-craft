@@ -16,10 +16,6 @@
         position: absolute;
         text-align: left;
       }
-
-      .el-overlay {
-        position: absolute;
-      }
     }
 
     @include ns('menu') {
@@ -59,9 +55,9 @@
           transition: 0.3s all;
           &:hover {
             box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
-            color: var(--el-color-primary);
+            color: $themeColor;
           }
-          background-color: var(--el-color-primary-light-9);
+          background-color: $lightThemeColor;
           text-align: center;
           &-ico {
             height: 40px;

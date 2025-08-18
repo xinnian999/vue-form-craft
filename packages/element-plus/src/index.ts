@@ -1,5 +1,5 @@
 import install from './install'
-import '@form-magic/styles'
+import './theme.scss'
 
 export default { install }
 

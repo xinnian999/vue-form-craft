@@ -1,4 +1,4 @@
-$namespace: 'mf';
+$namespace: 'mf' !default;
 
 @mixin ns($cls) {
   $NS: $namespace + '-' + $cls;
@@ -7,6 +7,10 @@ $namespace: 'mf';
     @content;
   }
 }
+
+$themeColor: #409eff !default;
+$lightThemeColor: rgb(235.9, 245.3, 255) !default;
+$bgColor: #fff !default;
 
 @import './form-render.scss';
 

@@ -24,7 +24,7 @@
     left: -1px;
     top: -1px;
     z-index: 20;
-    background-color: var(--el-color-primary);
+    background-color: $themeColor;
     .canvas-move {
       font-size: 16px;
       box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
@@ -45,7 +45,7 @@
     z-index: 10;
     padding: 0px 5px;
     font-size: 13px;
-    background-color: var(--el-color-primary);
+    background-color: $themeColor;
     color: #fff;
   }
 
@@ -61,7 +61,7 @@
 
     &-item {
       padding: 4px;
-      background-color: var(--el-color-primary);
+      background-color: $themeColor;
       border-radius: 3px;
       cursor: pointer;
       font-size: 12px;
@@ -79,7 +79,7 @@
     right: -1px;
     top: -1px;
     padding: 1px 5px;
-    background-color: var(--el-color-primary);
+    background-color: $themeColor;
     font-size: 12px;
     color: #fff;
     z-index: 10;
@@ -88,8 +88,8 @@
 }
 
 @include ns('canvas-item.hover') {
-  border: 2px solid var(--el-color-primary-light-5);
-  background-color: var(--el-color-primary-light-9);
+  border: 2px solid $themeColor;
+  background-color: $lightThemeColor;
 
   &::before {
     border: none;
@@ -110,13 +110,13 @@
 }
 
 @include ns('canvas-item.active') {
-  border: 2px solid var(--el-color-primary) !important;
+  border: 2px solid $themeColor !important;
 
   &::before {
     border: none;
   }
 
   &:hover {
-    border: 2px solid var(--el-color-primary) !important;
+    border: 2px solid $themeColor !important;
   }
 }
