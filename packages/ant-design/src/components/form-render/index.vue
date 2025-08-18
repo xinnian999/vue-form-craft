@@ -6,6 +6,8 @@
     :disabled="schema.disabled"
     :hide-required-asterisk="schema.hideRequiredAsterisk"
     :scroll-to-error="schema.scrollToError"
+    :layout="schema.labelAlign === 'top' ? 'vertical' : 'horizontal'"
+    :label-col="{span: schema.labelWidth}"
     ref="formRef"
     v-bind="$attrs"
   >
@@ -49,7 +51,7 @@ const formValues = defineModel<Record<string, any>>({ default: reactive({}) })
 
 const schema = defineModel<FormSchema>('schema', {
   default: reactive({
-    labelWidth: 150,
+    labelWidth: 3,
     labelAlign: 'right',
     scrollToError: true,
     size: 'default',

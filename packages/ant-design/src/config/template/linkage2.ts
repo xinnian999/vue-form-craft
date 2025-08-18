@@ -1,6 +1,6 @@
 import type { FormSchema } from "@form-magic/core";
 export default {
-  labelWidth: 150,
+  labelWidth: 3,
   labelAlign: 'right',
   size: 'default',
   items: [

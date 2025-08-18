@@ -22,7 +22,7 @@ export default {
         { label: '隐藏标签', component: 'Switch', name: 'hideLabel' }
       ],
       props: {
-        columns: 3,
+        columns: 2,
         'row-gap': 20,
         'column-gap': 20
       },

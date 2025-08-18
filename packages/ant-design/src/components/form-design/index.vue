@@ -39,7 +39,7 @@ const currentKey = ref('')
 
 const currentSchema = defineModel<FormSchema>({
   default: reactive({
-    labelWidth: 150,
+    labelWidth: 3,
     labelAlign: 'right',
     scrollToError: true,
     size: 'default',

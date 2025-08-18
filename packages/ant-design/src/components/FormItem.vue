@@ -17,8 +17,11 @@
         <div :class="[ns('form-item-label'), label && `${name}-label`]">
           <div :style="formInstance.schema.labelBold && 'font-weight: bold'">{{ label }}</div>
           <div :class="ns('form-item-laba-ico')" v-if="help">
-            <a-tooltip effect="dark" :content="help">
-              <div><Icon name="help" /></div>
+            <a-tooltip effect="dark">
+              <template #title>
+                {{ help }}
+              </template>
+              <Icon name="help" />
             </a-tooltip>
           </div>
           <div :class="ns('form-item-laba-suffix')" v-if="formInstance.schema.labelSuffix">

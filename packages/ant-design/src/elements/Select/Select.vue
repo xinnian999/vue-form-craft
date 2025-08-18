@@ -12,7 +12,7 @@
   </div>
 
   <a-select
-    v-model="value"
+    v-model:value="value"
     v-bind="$attrs"
     @change="selectChange"
     :multiple="multiple"

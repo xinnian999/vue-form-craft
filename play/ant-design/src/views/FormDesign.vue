@@ -14,7 +14,7 @@ import { onMounted, ref } from 'vue'
 import type { FormElement, FormSchema } from '@form-magic/element-plus'
 
 const schema = ref<FormSchema>({
-  labelWidth: 150,
+  labelWidth: 4,
   labelAlign: 'right',
   size: 'default',
   scrollToError: true,

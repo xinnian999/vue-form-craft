@@ -6,11 +6,11 @@
       }}</a-button>
 
       <a-drawer
-        v-model="drawerVisible"
+        :open="drawerVisible"
         title="模板列表"
-        size="70%"
         :class="ns('template-drawer')"
-        :append-to-body="false"
+        :get-container="false"
+        @close="drawerVisible = false"
       >
         <a-space wrap direction="vertical" alignment="start">
           <a-button :key="name" v-for="{ name, schema } in templates" @click="useTemplate(schema)">

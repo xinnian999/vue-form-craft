@@ -9,11 +9,10 @@ export default {
       component: 'InputNumber',
       name: 'labelWidth',
       props: {
-        min: 60,
+        min: 3,
         unit: 'px',
-        step: 10
       },
-      initialValue: 150
+      initialValue: 3
     },
     {
       label: 'label对齐方式',

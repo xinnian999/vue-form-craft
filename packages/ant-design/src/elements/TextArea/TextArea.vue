@@ -1,6 +1,6 @@
 <template>
   <div v-if="formInstance.read">{{ value }}</div>
-  <a-input v-else v-bind="$attrs" v-model="value" type="textarea" />
+  <a-textarea v-else v-bind="$attrs" v-model:value="value" />
 </template>
 
 <script setup lang="ts">
