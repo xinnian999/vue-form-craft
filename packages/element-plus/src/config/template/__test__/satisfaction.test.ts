@@ -17,7 +17,7 @@ describe('template satisfaction', async () => {
       }
     })
 
-    await wait(100)
+    await wait(500)
 
     const satisfactionEl = wrapper.findAll('.Radio-satisfaction .el-radio__original')
 

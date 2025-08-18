@@ -23,7 +23,7 @@ describe('template valueLinkage', async () => {
 
     expect(wrapper.vm.formValues).toStrictEqual({
       item1: '111',
-      item2: 222,
+      item2: '222',
       item3: '111元'
     })
   })

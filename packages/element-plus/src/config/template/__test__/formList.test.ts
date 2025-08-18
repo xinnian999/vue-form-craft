@@ -18,7 +18,7 @@ describe('template formList', async () => {
       }
     })
 
-    await wait(100)
+    await wait(500)
 
     const listDom = wrapper.find('.FormList-users')
 
@@ -41,7 +41,7 @@ describe('template formList', async () => {
       }
     })
 
-    await wait(100)
+    await wait(500)
 
     const listDom = wrapper.find('.FormList-users')
 
@@ -66,7 +66,7 @@ describe('template formList', async () => {
       }
     })
 
-    await wait(100)
+    await wait(500)
 
     const listDom = wrapper.find('.FormList-users')
 

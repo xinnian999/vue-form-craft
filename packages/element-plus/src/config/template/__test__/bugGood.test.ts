@@ -17,7 +17,7 @@ describe('template bugGood', async () => {
       }
     })
 
-    await wait(100)
+    await wait(500)
 
     expect(wrapper.find('.Text-price').html()).toContain('请选择商品')
 
