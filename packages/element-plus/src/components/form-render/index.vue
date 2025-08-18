@@ -17,33 +17,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, reactive, provide, toRefs, readonly, onMounted } from 'vue'
-import type { FormInstance as ElFormInstance } from 'element-plus'
-import { tools } from '@form-magic/core'
-import { cloneDeep, mergeWith } from 'lodash'
-import type { FormInstance, FormRenderProps, FormSchema } from '@form-magic/core'
-import { $formInstance } from '@form-magic/core'
-import { useLocale } from '@form-magic/core'
+import { reactive } from 'vue'
+import type { FormRenderEmits, FormRenderProps, FormSchema } from '@form-magic/core'
 import Footer from './Footer.vue'
 import { FormItemGroup } from '@/components'
-
-const { deepParse, setDataByPath, getDataByPath } = tools
+import { useFormRender, useLocale } from '@form-magic/core'
 
 const props = defineProps<FormRenderProps>()
 
-const emit = defineEmits<{
-  finish: [values: Record<string, any>]
-  failed: [
-    errors: {
-      message?: string
-      fieldValue?: any
-      field?: string
-    }[]
-  ]
-  reset: []
-}>()
-
-const formRef = ref<ElFormInstance>()
+const emits = defineEmits<FormRenderEmits>()
 
 const formValues = defineModel<Record<string, any>>({ default: reactive({}) })
 
@@ -57,106 +39,14 @@ const schema = defineModel<FormSchema>('schema', {
   })
 })
 
-const formItems = computed({
-  get() {
-    if (props.design) {
-      return schema.value.items
-    }
-
-    return deepParse(props.schema.items || [], context.value)
-  },
-  set(values) {
-    schema.value.items = values
-  }
-})
-
-const selectData = reactive<Record<string, Record<string, any>>>({})
-
-const initialValues = reactive<Record<string, any>>({})
-
-const vCodePass = ref(false)
-
 const locale = useLocale()
 
-const context = computed(() => ({
-  ...props.schemaContext,
-  $values: formValues.value,
-  $selectData: selectData,
-  $locale: locale.value
-}))
-
-// 支持从schema初始化默认值对象
-onMounted(() => {
-  if (props.schema?.initialValues) {
-    const initialValues = cloneDeep(props.schema?.initialValues)
-
-    formValues.value = mergeWith(initialValues, formValues.value, (objValue, srcValue) => {
-      if (Array.isArray(objValue)) {
-        return srcValue // 不深度合并数组
-      }
-    })
-  }
+const { instance, formItems, formRef } = useFormRender({
+  props,
+  emits,
+  schema,
+  formValues
 })
-
-const validate: FormInstance['validate'] = () => formRef.value?.validate()
-
-const submit: FormInstance['submit'] = () => {
-  validate()
-    ?.then(() => {
-      emit('finish', formValues.value)
-    })
-    .catch((e) => {
-      emit('failed', e)
-    })
-}
-
-const resetFields: FormInstance['resetFields'] = (names) => {
-  emit('reset')
-
-  if (names) {
-    let temp = cloneDeep(formValues.value)
-    names.forEach((name) => {
-      temp = setDataByPath(temp, name, getDataByPath(initialValues, name))
-    })
-    formValues.value = temp
-  } else {
-    formValues.value = initialValues
-  }
-}
-
-const updateFormValues: FormInstance['updateFormValues'] = (values) => {
-  Object.assign(formValues.value, values)
-}
-
-const updateSelectData: FormInstance['updateSelectData'] = (key, value) => {
-  selectData[key] = value
-}
-
-const updateInitialValues: FormInstance['updateInitialValues'] = (values) => {
-  Object.assign(initialValues, values)
-}
-
-const updateVCodePass = (value: boolean) => {
-  vCodePass.value = value
-}
-
-const instance = readonly({
-  ...toRefs(props),
-  formValues,
-  selectData,
-  initialValues,
-  context,
-  vCodePass,
-  updateFormValues,
-  updateSelectData,
-  updateInitialValues,
-  updateVCodePass,
-  validate,
-  resetFields,
-  submit
-})
-
-provide($formInstance, instance)
 
 defineExpose(instance)
 </script>

@@ -145,6 +145,18 @@ export interface FormRenderProps {
   read?: boolean
 }
 
+export interface FormRenderEmits {
+  finish: [values: Record<string, any>]
+  failed: [
+    errors: {
+      message?: string
+      fieldValue?: any
+      field?: string
+    }[]
+  ]
+  reset: []
+}
+
 export interface FormInstance extends FormRenderProps {
   formValues: Record<string, any>
   selectData: Record<string, Record<string, any>>
