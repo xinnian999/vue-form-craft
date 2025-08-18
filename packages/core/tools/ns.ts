@@ -1,4 +1,4 @@
-const namespace = 'mf'
+const namespace = 'fm'
 
 export default (name: string = '') => {
   return `${namespace}-${name}`
