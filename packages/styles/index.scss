@@ -1,4 +1,8 @@
 $namespace: 'mf' !default;
+$themeColor: #409eff !default;
+$lightThemeColor: rgb(235.9, 245.3, 255) !default;
+$dangerColor: #f56c6c !default;
+$bgColor: #fff !default;
 
 @mixin ns($cls) {
   $NS: $namespace + '-' + $cls;
@@ -8,9 +12,9 @@ $namespace: 'mf' !default;
   }
 }
 
-$themeColor: #409eff !default;
-$lightThemeColor: rgb(235.9, 245.3, 255) !default;
-$bgColor: #fff !default;
+:root {
+  --#{$namespace}-danger-color: #{$dangerColor};
+}
 
 @import './form-render.scss';
 

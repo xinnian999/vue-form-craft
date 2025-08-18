@@ -13,8 +13,8 @@
 
     <div class="hidden-ico" v-if="data.hidden"><Icon name="hidden" /></div>
 
-    <ul class="actions-rb" v-if="data.designKey === designInstance.current?.designKey">
-      <li
+    <div class="actions-rb" v-if="data.designKey === designInstance.current?.designKey">
+      <div
         class="actions-rb-item"
         v-for="{ icon, handle, bg } in rightBottomActions"
         @click.stop="handle(data)"
@@ -22,13 +22,10 @@
         :style="{ backgroundColor: bg }"
       >
         <Icon :name="icon" />
-      </li>
-    </ul>
+      </div>
+    </div>
 
-    <div
-      class="layout-title"
-      v-if="config.lbTitle"
-    >
+    <div class="layout-title" v-if="config.lbTitle">
       {{ config.title }}
     </div>
 
@@ -40,9 +37,7 @@
 import { computed } from 'vue'
 import FormItem from './FormItem.vue'
 import type { FormItemType } from '@form-magic/core'
-import { useDesignInstance, useElements } from '@form-magic/core'
-import { Icon } from '@form-magic/core'
-import { tools } from '@form-magic/core'
+import { useDesignInstance, useElements, Icon, tools } from '@form-magic/core'
 
 const { ns, copyItems, recursionDelete } = tools
 
@@ -88,7 +83,7 @@ const rightBottomActions = [
   },
   {
     icon: 'delete',
-    bg: 'var(--a-color-danger)',
+    bg: `var(--${ns('danger-color')})`,
     handle: (element: FormItemType) => {
       const newList = recursionDelete(
         designInstance.list,
