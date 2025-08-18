@@ -134,7 +134,8 @@ export interface Globals extends Options {
   elements: Record<string, FormElement>
   message: {
     success: (message: string) => void
-  }
+  },
+  FormItem: Component
 }
 
 export interface FormRenderProps {

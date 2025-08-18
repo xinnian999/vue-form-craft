@@ -1,8 +1,7 @@
-import { $globals } from '@form-magic/core'
-import { inject } from 'vue'
+import { useGlobals } from '@form-magic/core'
 
 const useRequest = () => {
-  const { request } = inject($globals)!
+  const { request } = useGlobals()
 
   return request
 }

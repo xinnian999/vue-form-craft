@@ -88,7 +88,7 @@ const rightBottomActions = [
   },
   {
     icon: 'delete',
-    bg: 'var(--el-color-danger)',
+    bg: `var(--${ns('danger-color')})`,
     handle: (element: FormItemType) => {
       const newList = recursionDelete(
         designInstance.list,

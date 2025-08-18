@@ -8,8 +8,8 @@
 </template>
 
 <script setup lang="ts">
-import { $globals, Icon } from '@form-magic/core'
-import { onMounted, ref, inject } from 'vue'
+import { Icon, useGlobals } from '@form-magic/core'
+import { onMounted, ref } from 'vue'
 import { createHighlighterCore } from 'shiki/core'
 import getWasm from 'shiki/wasm'
 import githubLight from 'shiki/themes/github-light.mjs'
@@ -28,7 +28,7 @@ const props = withDefaults(
   }
 )
 
-const { message } = inject($globals)
+const { message } = useGlobals()
 
 const handleCopy = async () => {
   // 创建一个隐藏的 textarea 元素
