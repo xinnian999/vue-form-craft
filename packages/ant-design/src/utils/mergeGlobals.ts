@@ -1,6 +1,7 @@
 import { FormItem } from '@/components'
 import * as elements from '@/elements'
 import { ElMessage } from 'element-plus'
+import { commonElements } from '@form-magic/core'
 import type { Globals, Options } from '@form-magic/core'
 
 const mergeGlobals = (options: Options) => {
@@ -8,6 +9,7 @@ const mergeGlobals = (options: Options) => {
     ...options,
     elements: {
       ...elements,
+      ...commonElements,
       ...options.extendElements
     },
     message: {

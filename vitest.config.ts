@@ -1,16 +1,16 @@
-import { defineConfig } from 'vitest/config'
+import path from 'node:path'
 import vue from '@vitejs/plugin-vue'
-import vueJsx from '@vitejs/plugin-vue-jsx';
+import vueJsx from '@vitejs/plugin-vue-jsx'
+import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   test: {
-    // 自定义选项，例如包含测试文件的目录等
     globals: true,
-    environment: 'jsdom', // 如果你进行前端测试，通常使用 'jsdom'
+    environment: 'jsdom',
     coverage: {
       reporter: ['text', 'json', 'html']
     },
-    // include: ['packages/**/*.test.{js,ts,tsx,vue}'],
+    setupFiles: path.resolve(__dirname, 'vitest.setup.ts')
   },
-  plugins: [vue(),vueJsx()]
+  plugins: [vue(), vueJsx()]
 })

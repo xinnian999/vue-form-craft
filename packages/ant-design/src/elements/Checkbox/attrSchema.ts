@@ -18,7 +18,7 @@ export default {
       valueKey: 'value',
       optionType: 'circle',
       direction: 'horizontal',
-      space: 20
+      space: 0
     }
   },
   items: [
@@ -61,22 +61,7 @@ export default {
         'column-gap': 20
       },
       designKey: 'form-R003',
-      name: 'cNmCuu',
-
-    },
-
-    {
-      label: '选项样式类型',
-      component: 'Radio',
-      name: 'props.optionType',
-      props: {
-        mode: 'static',
-        options: [
-          { label: '无边框', value: 'circle' },
-          { label: '边框', value: 'border' },
-          { label: '按钮', value: 'button' }
-        ]
-      }
+      name: 'cNmCuu'
     },
     {
       label: '选项排列方向',

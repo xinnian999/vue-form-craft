@@ -42,27 +42,12 @@ export default {
         'column-gap': 20
       },
       designKey: 'form-R003',
-      name: 'cNmCuu',
-
+      name: 'cNmCuu'
     },
     {
       label: '初始值',
       component: 'InputNumber',
       name: 'initialValue'
-    },
-
-    {
-      label: '按钮位置',
-      component: 'Radio',
-      name: 'props.controlsPosition',
-      props: {
-        mode: 'static',
-        options: [
-          { label: '两侧', value: '' },
-          { label: '内部', value: 'right' }
-        ]
-      },
-      initialValue: ''
     },
     {
       label: '最小值',

@@ -1,5 +1,5 @@
-import optionConfig from "@/config/optionConfig";
-import type { FormSchema } from "@form-magic/core";
+import optionConfig from '@/config/optionConfig'
+import type { FormSchema } from '@form-magic/core'
 
 export default {
   size: 'small',
@@ -17,7 +17,7 @@ export default {
       valueKey: 'value',
       optionType: 'circle',
       direction: 'horizontal',
-      space: 20
+      space: 0
     }
   },
   items: [
@@ -42,7 +42,7 @@ export default {
       hidden: '{{ $values.props.mode==="remote" }}',
       props: {
         mode: 'static',
-        options: '{{$values.props.options}}',
+        options: '{{$values.props.options}}'
       }
     },
     {
@@ -59,11 +59,8 @@ export default {
         'column-gap': 20
       },
       designKey: 'form-R003',
-      name: 'cNmCuu',
-
+      name: 'cNmCuu'
     },
-
-    
 
     {
       label: '选项样式类型',
@@ -72,8 +69,7 @@ export default {
       props: {
         mode: 'static',
         options: [
-          { label: '无边框', value: 'circle' },
-          { label: '边框', value: 'border' },
+          { label: '圆形', value: 'circle' },
           { label: '按钮', value: 'button' }
         ]
       }
@@ -88,14 +84,16 @@ export default {
           { label: '水平排列', value: 'horizontal' },
           { label: '垂直排列', value: 'vertical' }
         ]
-      }
+      },
+      hidden: '{{ $values.props.optionType === "button" }}'
     },
     {
       label: '选项间距（px）',
       component: 'InputNumber',
-      name: 'props.space'
+      name: 'props.space',
+      hidden: '{{ $values.props.optionType === "button" }}'
     },
 
-     ...optionConfig
+    ...optionConfig
   ]
 } satisfies FormSchema

@@ -1,10 +1,9 @@
 <template>
   <a-cascader
-    v-model="value"
+    v-model:value="value"
     :options="currentOptions"
     :loading="loading"
-    :props="{
-      multiple,
+    :fieldNames="{
       label: labelKey,
       value: valueKey
     }"
@@ -20,7 +19,6 @@ import type { SelectProps } from '@form-magic/core'
 
 const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],
-  multiple: false,
   mode: 'static',
   labelKey: 'label',
   valueKey: 'value',

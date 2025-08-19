@@ -1,7 +1,7 @@
 <template>
-  <ElCard v-bind="$attrs">
+  <a-card v-bind="$attrs">
     <FormItemGroup :list="children" />
-  </ElCard>
+  </a-card>
 </template>
 
 <script setup lang="ts">

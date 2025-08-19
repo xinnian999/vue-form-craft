@@ -7,25 +7,16 @@
   <template v-else>
     <div v-if="!currentOptions.length && !loading" style="font-size: 12px">暂无选项</div>
 
-    <a-checkbox-group v-bind="$attrs" v-model="value" @change="selectChange" v-loading="loading">
-      <template v-if="optionType === 'circle' || optionType === 'border'">
-        <a-checkbox
-          v-for="item in currentOptions"
-          :key="item[valueKey]"
-          :label="item[labelKey]"
-          :value="item[valueKey]"
-          :border="optionType === 'border'"
-        />
-      </template>
-
-      <a-space v-if="optionType === 'button'" wrap :size="[space, space]">
-        <a-checkbox-button
-          v-for="item in currentOptions"
-          :key="item[valueKey]"
-          :label="item[labelKey]"
-          :value="item[valueKey]"
-          size="large"
-        />
+    <a-checkbox-group
+      v-bind="$attrs"
+      v-model:value="value"
+      @change="selectChange"
+      v-loading="loading"
+    >
+      <a-space wrap :direction="direction" :size="[space, space]" alignment="normal">
+        <a-checkbox v-for="item in currentOptions" :key="item[valueKey]" :value="item[valueKey]">
+          {{ item[labelKey] }}
+        </a-checkbox>
       </a-space>
     </a-checkbox-group>
   </template>
@@ -33,12 +24,11 @@
 
 <script setup lang="ts">
 import { type CheckboxGroupValueType } from 'element-plus'
-import type { Direction, OptionType, SelectProps } from '@form-magic/core'
+import { watch } from 'vue'
+import type { Direction, SelectProps } from '@form-magic/core'
 import { useFormInstance, useSelect } from '@form-magic/core'
-import { watch } from 'vue';
 
 type Props = Omit<SelectProps, 'multiple'> & {
-  optionType?: OptionType
   direction?: Direction
   space?: number
 }
@@ -49,7 +39,6 @@ const props = withDefaults(defineProps<Props>(), {
   labelKey: 'label',
   valueKey: 'value',
   name: '',
-  optionType: 'circle',
   direction: 'horizontal',
   space: 20,
   multiple: true

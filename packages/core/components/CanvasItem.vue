@@ -13,8 +13,8 @@
 
     <div class="hidden-ico" v-if="data.hidden"><Icon name="hidden" /></div>
 
-    <ul class="actions-rb" v-if="data.designKey === designInstance.current?.designKey">
-      <li
+    <div class="actions-rb" v-if="data.designKey === designInstance.current?.designKey">
+      <div
         class="actions-rb-item"
         v-for="{ icon, handle, bg } in rightBottomActions"
         @click.stop="handle(data)"
@@ -22,8 +22,8 @@
         :style="{ backgroundColor: bg }"
       >
         <Icon :name="icon" />
-      </li>
-    </ul>
+      </div>
+    </div>
 
     <div class="layout-title" v-if="config.lbTitle">
       {{ config.title }}
@@ -36,7 +36,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { FormItemType } from '@form-magic/core'
-import { useDesignInstance, useElements, useGlobals, Icon, tools } from '@form-magic/core'
+import { Icon, tools, useDesignInstance, useElements, useGlobals } from '@form-magic/core'
 
 const { ns, copyItems, recursionDelete } = tools
 

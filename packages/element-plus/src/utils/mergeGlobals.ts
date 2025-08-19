@@ -1,13 +1,14 @@
-import type { Globals, Options } from '@form-magic/core'
-import { ElMessage } from 'element-plus'
-import * as elements from '@/elements'
 import { FormItem } from '@/components'
+import * as elements from '@/elements'
+import { ElMessage } from 'element-plus'
+import { commonElements, type Globals, type Options } from '@form-magic/core'
 
 const mergeGlobals = (options: Options) => {
   return {
     ...options,
     elements: {
       ...elements,
+      ...commonElements,
       ...options.extendElements
     },
     message: {
