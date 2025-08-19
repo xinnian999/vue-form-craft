@@ -38,6 +38,7 @@
           width="70%"
           centered
           destroy-on-close
+          :footer="null"
         >
           <component
             :is="config.render"
@@ -64,7 +65,7 @@
 </template>
 
 <script setup lang="ts">
-import { useFormItem, tools, Icon, type FormItemType } from '@form-magic/core'
+import { Icon, tools, useFormItem, type FormItemType } from '@form-magic/core'
 
 const thisProps = defineProps<FormItemType>()
 

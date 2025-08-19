@@ -59,33 +59,6 @@
         </a-card>
       </template>
 
-      <a-table v-if="mode === 'table' && list.length" :data="list" style="width: 100%">
-        <a-table-column
-          :prop="item.name"
-          :label="item.label"
-          :key="item.name"
-          v-for="item in children"
-          v-bind="pickBy(item, Boolean)"
-          :formatter="formatter"
-        />
-        <a-table-column fixed="right" min-width="60">
-          <template #default="record">
-            <a-button
-              v-if="allowReduce && !isMin"
-              @click="handleReduceItem(record.$index)"
-              circle
-              type="primary"
-              class="list-btn reduceBtn"
-              :disabled="disabled"
-              size="small"
-              plain
-            >
-              <template #icon> <Icon name="reduce" /> </template
-            ></a-button>
-          </template>
-        </a-table-column>
-      </a-table>
-
       <div style="margin-top: 5px">
         <a-button
           v-if="allowAdd && !isMax"

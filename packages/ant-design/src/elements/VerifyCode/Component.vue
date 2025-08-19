@@ -1,14 +1,14 @@
 <template>
   <div class="fm-verify-code">
-    <a-input v-model="value" class="verify-input" :placeholder="placeholder" @blur="onBlur" />
+    <a-input v-model:value="value" class="verify-input" :placeholder="placeholder" @blur="onBlur" />
     <div class="verify-code" ref="codeEl"></div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { onMounted, ref } from 'vue'
 import { useFormInstance } from '@form-magic/core'
 import GVerify from './gVerify'
-import { onMounted, ref } from 'vue'
 
 defineProps<{
   placeholder: string
@@ -26,11 +26,11 @@ const onBlur = () => {
   if (!value.value) return
 
   const res = code.value?.validate(value.value)
-  console.log('res',res);
-  
+  console.log('res', res)
+
   if (res) {
     formInstance.updateVCodePass(true)
-  }else{
+  } else {
     formInstance.updateVCodePass(false)
   }
 }

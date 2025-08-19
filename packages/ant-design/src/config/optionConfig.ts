@@ -36,6 +36,7 @@ export default [
     name: 'props.options',
     component: 'FormList',
     hidden: '{{$values.props.mode!=="static"}}',
+    dialog: true,
     children: [
       {
         label: '选项名',
@@ -63,7 +64,7 @@ export default [
     ],
     designKey: 'form-Iwpd',
     props: {
-      mode: 'table',
+      mode: 'card',
       title: '选项'
     }
   },

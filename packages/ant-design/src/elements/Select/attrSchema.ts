@@ -56,16 +56,15 @@ export default {
         'column-gap': 20
       },
       designKey: 'form-R003',
-      name: 'cNmCuu',
-
+      name: 'cNmCuu'
     },
     {
       label: '选择模式',
       component: 'Switch',
       name: 'props.multiple',
       props: {
-        'active-text': '多选',
-        'inactive-text': '单选'
+        checkedChildren: '多选',
+        unCheckedChildren: '单选'
       },
       designKey: 'form-eTxc'
     },

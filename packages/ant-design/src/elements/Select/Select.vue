@@ -21,22 +21,21 @@
     v-loading="loading"
     v-else
   >
-    <a-option
+    <a-select-option
       v-for="item in currentOptions"
       :key="item[valueKey]"
-      :label="item[labelKey]"
       :value="item[valueKey]"
       :disabled="item[disabledKey]"
     >
       {{ item[labelKey] }}
-    </a-option>
+    </a-select-option>
   </a-select>
 </template>
 
 <script setup lang="ts">
+import { watch } from 'vue'
 import { useFormInstance, useSelect } from '@form-magic/core'
 import type { SelectProps, SelectValue } from '@form-magic/core'
-import { watch } from 'vue'
 
 const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],

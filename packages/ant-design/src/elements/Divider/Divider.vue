@@ -1,8 +1,7 @@
 <template>
-  <ElDivider v-bind="$attrs">{{ title }}</ElDivider>
+  <a-divider v-bind="$attrs">{{ title }}</a-divider>
 </template>
 
 <script setup lang="ts">
-defineProps<{title:string}>()
+defineProps<{ title: string }>()
 </script>
-

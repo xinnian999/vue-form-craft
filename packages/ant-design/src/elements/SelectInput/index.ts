@@ -4,11 +4,11 @@ import attrSchema from './attrSchema'
 import type { FormElement } from '@form-magic/core'
 
 export default {
-  title: '电子签名',
-  component: 'Esign',
-  render:defineAsyncComponent(() => import('./Component.vue')),
-  icon: h(Icon, { name: 'esign' }),
-  type: 'basic',
-  order: 11,
+  title: '选择+输入',
+  component: 'SelectInput',
+  render: defineAsyncComponent(() => import('./Component.vue')),
+  icon: h(Icon, { name: 'input' }),
+  type: 'high',
+  order: 1,
   attrSchema
 } satisfies FormElement

@@ -4,12 +4,12 @@
   &-center-actions {
     .left {
       display: flex;
-      gap: 5px;
+      gap: 12px;
     }
 
     .right {
       display: flex;
-      gap: 5px;
+      gap: 12px;
     }
 
     .ant-btn {
@@ -19,7 +19,7 @@
       gap: 5px;
     }
   }
-  
+
   @include ns('form-item-laba-ico') {
     display: flex;
     align-items: center;
