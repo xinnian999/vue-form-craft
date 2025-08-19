@@ -42,8 +42,7 @@ export default {
         'column-gap': 20
       },
       designKey: 'form-R003',
-      name: 'cNmCuu',
-
+      name: 'cNmCuu'
     },
     {
       label: '文本校验规则',
@@ -146,8 +145,8 @@ export default {
       props: {
         mode: 'static',
         options: [
-          { label: '前置', value: 'prepend' },
-          { label: '后置', value: 'append' }
+          { label: '前置', value: 'prefix' },
+          { label: '后置', value: 'suffix' }
         ]
       }
     },

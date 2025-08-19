@@ -5,11 +5,9 @@
     display: inline-flex;
     position: relative;
     white-space: nowrap;
-    &-ico {
-      margin-left: 3px;
-      font-size: 15px;
-      position: relative;
-    }
+    gap: 3px;
+    align-items: center;
+
     &-suffix {
       margin-left: 3px;
     }

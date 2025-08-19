@@ -2,13 +2,14 @@
   <a-input show-word-limit autocomplete="off" v-bind="$attrs" v-model:value="parseValue">
     <template #[selectPosition]>
       <a-select v-model:value="selectValue" :style="{ width: selectWidth + 'px' }" placeholder=" ">
-        <a-option
+        <a-select-option
           v-for="item in options"
-          :label="item.label"
           :value="item.value"
           :disabled="item.disabled"
           :key="item.value"
-        />
+        >
+          {{ item.label }}
+        </a-select-option>
       </a-select>
     </template>
   </a-input>
@@ -19,7 +20,7 @@ import { computed, onMounted, ref, watch } from 'vue'
 
 const props = withDefaults(
   defineProps<{
-    selectPosition?: 'prepend' | 'append'
+    selectPosition?: 'prefix' | 'suffix'
     selectWidth?: number
     selectInitialValue?: string
     options?: {
@@ -30,7 +31,7 @@ const props = withDefaults(
     parse?: (value: string, selectValue: any) => string
   }>(),
   {
-    selectPosition: 'append',
+    selectPosition: 'suffix',
     selectWidth: 70,
     options: () => []
   }

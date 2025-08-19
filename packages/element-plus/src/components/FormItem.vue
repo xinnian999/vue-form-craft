@@ -16,11 +16,9 @@
       <template #label v-if="!hideLabel">
         <div :class="[ns('form-item-label'), label && `${name}-label`]">
           <div :style="formInstance.schema.labelBold && 'font-weight: bold'">{{ label }}</div>
-          <div :class="ns('form-item-label-ico')" v-if="help">
-            <el-tooltip effect="dark" :content="help">
-              <div><Icon name="help" /></div>
-            </el-tooltip>
-          </div>
+          <el-tooltip effect="dark" :content="help" v-if="help">
+            <Icon name="help" />
+          </el-tooltip>
           <div :class="ns('form-item-label-suffix')" v-if="formInstance.schema.labelSuffix">
             {{ formInstance.schema.labelSuffix }}
           </div>
@@ -61,7 +59,7 @@
 </template>
 
 <script setup lang="ts">
-import { useFormItem, tools, Icon, type FormItemType } from '@form-magic/core'
+import { Icon, tools, useFormItem, type FormItemType } from '@form-magic/core'
 
 const thisProps = defineProps<FormItemType>()
 

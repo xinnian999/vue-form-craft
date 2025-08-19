@@ -1,16 +1,20 @@
 @import '@form-magic/styles';
 
 @include ns('form-design') {
-  &-center-actions {
-    .left {
-      display: flex;
-      gap: 12px;
-    }
+  .ant-btn + .ant-btn {
+    margin-left: 12px;
+  }
 
-    .right {
-      display: flex;
-      gap: 12px;
-    }
+  &-center-actions {
+    // .left {
+    //   display: flex;
+    //   gap: 12px;
+    // }
+
+    // .right {
+    //   display: flex;
+    //   gap: 12px;
+    // }
 
     .ant-btn {
       display: inline-flex;
