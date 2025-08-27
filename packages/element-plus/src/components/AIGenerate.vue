@@ -61,6 +61,11 @@ const handleGenerate = async () => {
   transform: translateX(-50%);
   display: flex;
   gap: 10px;
-  width: 400px;
+  width: 500px;
+  z-index: 9999;
+  background: #fff;
+  padding: 15px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
 }
 </style>

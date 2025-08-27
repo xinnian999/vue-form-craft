@@ -14,8 +14,9 @@ app.use(express.json());
 
 // 读取文档作为上下文
 const schema = fs.readFileSync('../../docs/zh/schema.md', 'utf-8')
+const linkage = fs.readFileSync('../../docs/zh/linkage.md', 'utf-8')
 
-const docs = [schema];
+const docs = [schema,linkage];
 
 // 初始化 DeepSeek 模型
 const model = new ChatDeepSeek({
@@ -25,7 +26,7 @@ const model = new ChatDeepSeek({
 
 // Prompt 模板
 const prompt = ChatPromptTemplate.fromMessages([
-  ['system', '你是表单生成器，只输出 vue-form-craft JSON，不要输出其他内容，每个表单项要包含 designKey，不要重复，参考文档：{context}'],
+  ['system', '你是表单生成器，只输出 表单JSON，不要输出其他内容，每个表单项要包含 designKey，不要重复，参考文档：{context}'],
   ['human', '{input}']
 ]);
 
