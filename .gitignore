@@ -32,3 +32,4 @@ coverage
 /form-magic
 /docs/.vitepress/cache
 .vscode
+.env

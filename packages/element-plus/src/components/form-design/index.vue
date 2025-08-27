@@ -3,6 +3,7 @@
     <Left />
     <Center />
     <Right />
+    <AIGenerate />
   </div>
 </template>
 
@@ -20,6 +21,7 @@ import type {
   DesignInstance,
   FormElement
 } from '@form-magic/core'
+import AIGenerate from '../AIGenerate.vue'
 
 const { getCurrentByKey, setCurrentByKey, ns } = tools
 
