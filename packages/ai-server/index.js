@@ -19,7 +19,7 @@ const docs = [schema, linkage]
 const context = docs.join('\n')
 
 let timer = null
-let timeout = 0
+let duration = 0
 
 // POST /generateForm
 app.post('/generateForm', async (req, res) => {
@@ -44,11 +44,11 @@ app.post('/generateForm', async (req, res) => {
 
     if (timer) {
       clearInterval(timer)
-      timeout = 0
+      duration = 0
     }
 
     timer = setInterval(() => {
-      timeout++
+      duration++
     }, 1000)
 
     // 调用本地 DeepSeek（假设兼容 OpenAI API 格式）
@@ -66,11 +66,11 @@ app.post('/generateForm', async (req, res) => {
 
     clearInterval(timer)
 
-    console.log('总耗时', `${timeout / 1000}s`)
+    console.log('总耗时', `${duration}s`)
 
     const data = await response.json()
 
-    console.log(data)
+    console.log('data', data)
 
     // 提取 AI 返回的内容
     const text = data?.choices?.[0]?.message?.content?.trim()
