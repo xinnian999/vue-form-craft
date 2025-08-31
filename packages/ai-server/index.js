@@ -1,57 +1,90 @@
 // server.js
-import 'dotenv/config';
-import express from 'express';
-import fs from 'fs';
-import process from 'process';
-import { ChatPromptTemplate } from '@langchain/core/prompts';
-import { ChatDeepSeek } from '@langchain/deepseek';
+import 'dotenv/config'
+import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import express from 'express'
 
-const app = express();
-const port = process.env.PORT || 3000;
+const app = express()
+const port = process.env.PORT || 3000
 
-// 支持 JSON body
-app.use(express.json());
+// 解析 JSON body
+app.use(express.json())
 
-// 读取文档作为上下文
-const schema = fs.readFileSync('../../docs/zh/schema.md', 'utf-8')
-const linkage = fs.readFileSync('../../docs/zh/linkage.md', 'utf-8')
+// 保证路径正确
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const schema = fs.readFileSync(path.join(__dirname, '../../docs/zh/schema.md'), 'utf-8')
+const linkage = fs.readFileSync(path.join(__dirname, '../../docs/zh/linkage.md'), 'utf-8')
+const docs = [schema, linkage]
+const context = docs.join('\n')
 
-const docs = [schema,linkage];
-
-// 初始化 DeepSeek 模型
-const model = new ChatDeepSeek({
-  apiKey: process.env.API_KEY,
-  model: 'deepseek-chat'
-});
-
-// Prompt 模板
-const prompt = ChatPromptTemplate.fromMessages([
-  ['system', '你是表单生成器，只输出 表单JSON，不要输出其他内容，每个表单项要包含 designKey，不要重复，参考文档：{context}'],
-  ['human', '{input}']
-]);
+let timer = null
+let timeout = 0
 
 // POST /generateForm
 app.post('/generateForm', async (req, res) => {
   try {
-    const { input } = req.body;
+    const { input } = req.body
     if (!input) {
-      return res.status(400).json({ error: '缺少 input 字段' });
+      return res.status(400).json({ error: '缺少 input 字段' })
     }
 
-    const context = docs.join('\n');
-    const promptValue = await prompt.formatPromptValue({ input, context });
+    // 手搓 Prompt
+    const messages = [
+      {
+        role: 'system',
+        content: `你是表单生成器，只输出严格的 JSON，不要输出其他内容。
+每个表单项要包含唯一的 designKey。参考文档：${context}`
+      },
+      {
+        role: 'user',
+        content: input
+      }
+    ]
 
-    // 调用 DeepSeek
-    const response = await model.invoke(promptValue.toChatMessages());
+    if (timer) {
+      clearInterval(timer)
+      timeout = 0
+    }
 
-    // 返回 JSON
-    res.json({ data: response.text });
+    timer = setInterval(() => {
+      timeout++
+    }, 1000)
+
+    // 调用本地 DeepSeek（假设兼容 OpenAI API 格式）
+    const response = await fetch('https://api.siliconflow.cn/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${process.env.API_KEY || 'sk-local'}` // 如果本地不需要认证，可以去掉
+      },
+      body: JSON.stringify({
+        model: 'deepseek-ai/DeepSeek-R1', // 本地模型名称
+        messages
+      })
+    })
+
+    clearInterval(timer)
+
+    console.log('总耗时', `${timeout / 1000}s`)
+
+    const data = await response.json()
+
+    console.log(data)
+
+    // 提取 AI 返回的内容
+    const text = data?.choices?.[0]?.message?.content?.trim()
+    if (!text) {
+      return res.status(500).json({ error: '模型未返回结果' })
+    }
+
+    res.json({ data: text })
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: '生成失败', detail: err.message });
+    console.error(err)
+    res.status(500).json({ error: '生成失败', detail: err.message })
   }
-});
+})
 
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
-});
+  console.log(`Server running at http://localhost:${port}`)
+})
