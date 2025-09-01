@@ -23,16 +23,13 @@ const designInstance = useDesignInstance()
 
 const handleGenerate = async () => {
   loading.value = true
-  const res = await axios.post('/ai/generateForm', { input: input.value })
-  const data = res.data.data
-  loading.value = false
 
-  const match = data.match(/```json\s*([\s\S]*?)```/)
-  if (match) {
-    const jsonContent = match[1].trim()
-    const json = JSON.parse(jsonContent)
-    console.log('json', json)
-    designInstance.updateSchema(json)
-  }
+  const res = await axios.post('/ai/generateForm', { input: input.value })
+
+  const data = res.data.data
+
+  designInstance.updateSchema(data)
+
+  loading.value = false
 }
 </script>
