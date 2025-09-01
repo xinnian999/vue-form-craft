@@ -14,7 +14,8 @@
     "change": "changeset",
     "change-v": "changeset version",
     "test": "vitest --config ./vitest.config.ts",
-    "clear": "find . -type d -name 'node_modules' -exec rm -rf {} \\;"
+    "clear": "find . -type d -name 'node_modules' -exec rm -rf {} \\;",
+    "dev:ai": "pnpm -C packages/ai-server dev"
   },
   "dependencies": {
     "@form-magic/ant-design": "workspace:*",

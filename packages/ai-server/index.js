@@ -6,7 +6,9 @@ import { fileURLToPath } from 'url'
 import express from 'express'
 
 const app = express()
+const host = 'https://api.siliconflow.cn'
 const port = process.env.PORT || 3000
+const apiKey = process.env.API_KEY
 
 // 解析 JSON body
 app.use(express.json())
@@ -18,8 +20,9 @@ const linkage = fs.readFileSync(path.join(__dirname, '../../docs/zh/linkage.md')
 const docs = [schema, linkage]
 const context = docs.join('\n')
 
-let timer = null
-let duration = 0
+app.get('/', (req, res) => {
+  res.send('Hello AI Server!')
+})
 
 // POST /generateForm
 app.post('/generateForm', async (req, res) => {
@@ -42,21 +45,14 @@ app.post('/generateForm', async (req, res) => {
       }
     ]
 
-    if (timer) {
-      clearInterval(timer)
-      duration = 0
-    }
-
-    timer = setInterval(() => {
-      duration++
-    }, 1000)
+    let startTime = Date.now()
 
     // 调用本地 DeepSeek（假设兼容 OpenAI API 格式）
-    const response = await fetch('https://api.siliconflow.cn/v1/chat/completions', {
+    const response = await fetch(`${host}/v1/chat/completions`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${process.env.API_KEY || 'sk-local'}` // 如果本地不需要认证，可以去掉
+        Authorization: `Bearer ${apiKey}` // 如果本地不需要认证，可以去掉
       },
       body: JSON.stringify({
         model: 'deepseek-ai/DeepSeek-R1', // 本地模型名称
@@ -64,9 +60,7 @@ app.post('/generateForm', async (req, res) => {
       })
     })
 
-    clearInterval(timer)
-
-    console.log('总耗时', `${duration}s`)
+    console.log('总耗时', `${Math.ceil((Date.now() - startTime) / 1000)}s`)
 
     const data = await response.json()
 
