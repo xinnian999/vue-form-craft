@@ -12,13 +12,10 @@
 </template>
 
 <script setup lang="ts">
-import { useDesignInstance, useLocale } from '@form-magic/core'
+import { watch } from 'vue'
+import { ns, useDesignInstance, useLocale } from '@form-magic/core'
 import AttrEdit from './AttrEdit/index.vue'
 import FormEdit from './FormEdit.vue'
-import { tools } from '@form-magic/core'
-import { watch } from 'vue'
-
-const { ns } = tools
 
 const locale = useLocale()
 

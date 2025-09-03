@@ -1,13 +1,11 @@
-import { ref, watch, onMounted } from 'vue'
-import { isEqual, isPlainObject, debounce } from 'lodash'
-import { tools } from '@form-magic/core'
+import { debounce, isEqual, isPlainObject } from 'lodash'
+import { onMounted, ref, watch } from 'vue'
+import { getDataByPath } from '@form-magic/core'
 import type { SelectProps } from '@form-magic/core'
 import useFormInstance from './useFormInstance'
 import useRequest from './useRequest'
 
 type Option = Record<string, any>
-
-const { getDataByPath } = tools
 
 const useSelect = (props: SelectProps) => {
   const formInstance = useFormInstance()

@@ -10,12 +10,9 @@
 </template>
 
 <script setup lang="ts">
-import { tools } from '@form-magic/core'
-import Actions from './Actions/index.vue'
 import { FormRender } from '@/components'
-import { useDesignInstance } from '@form-magic/core'
-
-const { ns } = tools
+import { ns, useDesignInstance } from '@form-magic/core'
+import Actions from './Actions/index.vue'
 
 const designInstance = useDesignInstance()
 </script>

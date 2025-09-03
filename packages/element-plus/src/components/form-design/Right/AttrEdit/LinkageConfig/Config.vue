@@ -25,12 +25,9 @@
 
 <script setup lang="ts">
 import { FormRender } from '@/components'
-import { editSchema } from './configSchema'
-import { tools } from '@form-magic/core'
-import { useDesignInstance } from '@form-magic/core'
 import { ref } from 'vue'
-
-const { setDataByPath } = tools
+import { setDataByPath, useDesignInstance } from '@form-magic/core'
+import { editSchema } from './configSchema'
 
 const designInstance = useDesignInstance()
 
@@ -89,7 +86,7 @@ const handleUseQuick = () => {
 .config-linkages {
   display: flex;
   gap: 20px;
-  flex-direction: column
+  flex-direction: column;
   // .quick {
   //   width: 50%;
   // }

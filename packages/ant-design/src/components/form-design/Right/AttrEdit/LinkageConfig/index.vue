@@ -21,12 +21,9 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useLocale } from '@form-magic/core'
-import { tools } from '@form-magic/core'
-import Change from './Change.vue';
-import Config from './Config.vue';
-
-const { ns } = tools
+import { ns, useLocale } from '@form-magic/core'
+import Change from './Change.vue'
+import Config from './Config.vue'
 
 const locale = useLocale()
 

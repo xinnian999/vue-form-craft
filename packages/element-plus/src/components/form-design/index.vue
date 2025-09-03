@@ -8,22 +8,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref, provide, computed, reactive, toRefs } from 'vue'
-import { tools } from '@form-magic/core'
-import Left from './Left/index.vue'
-import Center from './Center/index.vue'
-import Right from './Right/index.vue'
-import { $designInstance } from '@form-magic/core'
+import { computed, provide, reactive, ref, toRefs } from 'vue'
+import { $designInstance, getCurrentByKey, ns, setCurrentByKey } from '@form-magic/core'
 import type {
-  FormSchema,
-  FormItemType,
-  FormDesignProps,
   DesignInstance,
-  FormElement
+  FormDesignProps,
+  FormElement,
+  FormItemType,
+  FormSchema
 } from '@form-magic/core'
 import AIGenerate from '../AIGenerate.vue'
-
-const { getCurrentByKey, setCurrentByKey, ns } = tools
+import Center from './Center/index.vue'
+import Left from './Left/index.vue'
+import Right from './Right/index.vue'
 
 const props = withDefaults(defineProps<FormDesignProps>(), {
   templates: () => [],

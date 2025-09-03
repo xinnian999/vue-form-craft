@@ -109,7 +109,7 @@ import { FormItem } from '@/components'
 import type { TableColumnCtx } from 'element-plus'
 import { isEqual, isString, pickBy } from 'lodash'
 import { computed, h, onMounted, provide, ref, watch } from 'vue'
-import { CanvasGroup, Icon, tools, useFormInstance } from '@form-magic/core'
+import { CanvasGroup, deepParse, Icon, useFormInstance } from '@form-magic/core'
 import type { FormItemType } from '@form-magic/core'
 
 interface Props {
@@ -142,7 +142,7 @@ const cIndex = ref(0)
 const formInstance = useFormInstance()
 
 const parseFields = (index: number) =>
-  tools.deepParse(props.children, { $item: list.value[index], $index: index })
+  deepParse(props.children, { $item: list.value[index], $index: index })
 
 const isMax = computed(() => {
   return list.value.length >= props.maxLines

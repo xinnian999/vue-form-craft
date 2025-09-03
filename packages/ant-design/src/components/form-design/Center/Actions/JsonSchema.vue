@@ -10,11 +10,7 @@
   >
     <a-tabs v-model:activeKey="tabKey">
       <a-tab-pane tab="在线编辑" key="edit">
-        <JsonEditor
-          v-model="json"
-          style="height:70vh"
-          @blur="onBlur"
-        />
+        <JsonEditor v-model="json" style="height: 70vh" @blur="onBlur" />
       </a-tab-pane>
       <a-tab-pane tab="生成ts文件" key="ts">
         <CodeHighLight style="height: 70vh" language="ts" :code="tsJsonSchema(json)" />
@@ -30,13 +26,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { CodeHighLight } from '@form-magic/core'
-import { tools } from '@form-magic/core'
-import { schemaHelp, tsJsonSchema, jsJsonSchema } from './config'
-import { useDesignInstance, useElements, useLocale } from '@form-magic/core'
-
-const { changeItems } = tools
+import { computed, ref } from 'vue'
+import {
+  changeItems,
+  CodeHighLight,
+  useDesignInstance,
+  useElements,
+  useLocale
+} from '@form-magic/core'
+import { jsJsonSchema, schemaHelp, tsJsonSchema } from './config'
 
 const tabKey = ref('edit')
 

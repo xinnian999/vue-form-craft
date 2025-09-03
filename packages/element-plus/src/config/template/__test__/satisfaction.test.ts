@@ -1,11 +1,9 @@
-import { expect, describe, it } from 'vitest'
+import { FormRender } from '@/components'
 import { configTest } from '@/utils'
 import { mount } from '@vue/test-utils'
-import { FormRender } from '@/components'
+import { describe, expect, it } from 'vitest'
+import { wait } from '@form-magic/core'
 import schema from '../satisfaction'
-import { tools } from '@form-magic/core'
-
-const { wait } = tools
 
 configTest()
 

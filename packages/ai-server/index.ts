@@ -4,6 +4,7 @@ import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import express from 'express'
+import { extractJsonFromText } from '@form-magic/core'
 
 const app = express()
 const host = 'https://api.siliconflow.cn'
@@ -18,16 +19,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const schema = fs.readFileSync(path.join(__dirname, '../../docs/zh/schema.md'), 'utf-8')
 const linkage = fs.readFileSync(path.join(__dirname, '../../docs/zh/linkage.md'), 'utf-8')
 const context = [schema, linkage].join('\n')
-
-function extractJsonFromText(text) {
-  if (!text) return null
-  // 去掉 markdown 代码块标记
-  const match = text.match(/```json([\s\S]*?)```/)
-  if (match) {
-    return match[1].trim()
-  }
-  return text.trim()
-}
 
 app.get('/', (req, res) => {
   res.send('Hello AI Server!')

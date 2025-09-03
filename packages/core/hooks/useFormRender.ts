@@ -1,10 +1,8 @@
-import { ref, computed, reactive, provide, toRefs, readonly, onMounted, type Ref } from 'vue'
 import type { FormInstance as ElFormInstance } from 'element-plus'
 import { cloneDeep, mergeWith } from 'lodash'
+import { computed, onMounted, provide, reactive, readonly, ref, toRefs, type Ref } from 'vue'
 import type { FormInstance, FormRenderProps, FormSchema } from '@form-magic/core'
-import { $formInstance, useLocale, tools } from '@form-magic/core'
-
-const { deepParse, setDataByPath, getDataByPath } = tools
+import { $formInstance, deepParse, getDataByPath, setDataByPath, useLocale } from '@form-magic/core'
 
 const useFormRender = ({
   props,

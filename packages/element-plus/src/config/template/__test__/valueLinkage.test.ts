@@ -1,9 +1,9 @@
-import { expect, describe, it } from 'vitest'
+import { FormRender } from '@/components'
 import { configTest } from '@/utils'
 import { mount } from '@vue/test-utils'
-import { FormRender } from '@/components'
+import { describe, expect, it } from 'vitest'
+import { wait } from '@form-magic/core'
 import schema from '../valueLinkage'
-import { tools } from '@form-magic/core'
 
 configTest()
 
@@ -15,7 +15,7 @@ describe('template valueLinkage', async () => {
       }
     })
 
-    await tools.wait()
+    await wait()
 
     const satisfactionEl = wrapper.find('.Input-item1 input')
 

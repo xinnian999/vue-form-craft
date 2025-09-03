@@ -9,19 +9,17 @@
     </div>
 
     <el-drawer v-model="visible" title="组件样式">
-      <FormRender v-model="currentProps" :schema="schema" ref="formRef" style="padding: 0 15px;" />
+      <FormRender v-model="currentProps" :schema="schema" ref="formRef" style="padding: 0 15px" />
     </el-drawer>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import { FormRender } from '@/components'
-import { tools } from '@form-magic/core'
+import { ref } from 'vue'
+import { ns } from '@form-magic/core'
 import basicSchema from './basicSchema'
 import schema from './schema'
-
-const { ns } = tools
 
 const currentProps = defineModel<Record<string, any>>()
 

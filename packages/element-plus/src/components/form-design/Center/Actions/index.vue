@@ -34,16 +34,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import { ElMessageBox } from 'element-plus'
-import { Icon } from '@form-magic/core'
+import { ref } from 'vue'
+import { Icon, ns, useDesignInstance, useLocale } from '@form-magic/core'
 import JsonSchema from './JsonSchema.vue'
-import VueCode from './VueCode.vue'
 import Preview from './Preview.vue'
-import { useDesignInstance, useLocale } from '@form-magic/core'
-import { tools } from '@form-magic/core'
-
-const { ns } = tools
+import VueCode from './VueCode.vue'
 
 type PreviewAction = {
   label: string

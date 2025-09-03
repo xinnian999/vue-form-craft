@@ -59,12 +59,10 @@
 </template>
 
 <script setup lang="ts">
-import { Icon, tools, useFormItem, type FormItemType } from '@form-magic/core'
+import { Icon, ns, useFormItem, type FormItemType } from '@form-magic/core'
 
 const thisProps = defineProps<FormItemType>()
 
 const { value, computeRules, config, formItemProps, dialogState, handleDialog, formInstance } =
   useFormItem(thisProps)
-
-const { ns } = tools
 </script>

@@ -1,12 +1,15 @@
-import { computed, onBeforeMount, reactive, watch } from 'vue'
-import { tools } from '@form-magic/core'
-import type { FormItemType } from '@form-magic/core'
-import { useFormInstance, useElements } from '@form-magic/core'
 import { cloneDeep, isArray, isEqual } from 'lodash'
+import { computed, onBeforeMount, reactive, watch } from 'vue'
+import {
+  getDataByPath,
+  isRegexString,
+  setDataByPath,
+  useElements,
+  useFormInstance
+} from '@form-magic/core'
+import type { FormItemType } from '@form-magic/core'
 
 const useFormItem = (props: FormItemType) => {
-  const { getDataByPath, setDataByPath, ns, isRegexString } = tools
-
   const formInstance = useFormInstance()
 
   const elements = useElements()

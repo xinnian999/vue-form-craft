@@ -11,9 +11,7 @@
 <script setup lang="ts">
 import axios from 'axios'
 import { ref } from 'vue'
-import { tools, useDesignInstance } from '@form-magic/core'
-
-const { ns } = tools
+import { ns, useDesignInstance } from '@form-magic/core'
 
 const input = ref('')
 

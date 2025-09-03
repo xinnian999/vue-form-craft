@@ -3,9 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { tools } from '@form-magic/core'
-
-const { ns } = tools
+import { ns } from '@form-magic/core'
 
 const modules = import.meta.glob('./icons/*.vue', { eager: true })
 
