@@ -1,4 +1,4 @@
-const extractJsonFromText = (text: string) => {
+const extractJsonFromText = (text) => {
   if (!text) return null
   // 去掉 markdown 代码块标记
   const match = text.match(/```json([\s\S]*?)```/)

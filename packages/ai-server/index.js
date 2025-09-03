@@ -4,7 +4,7 @@ import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import express from 'express'
-import { extractJsonFromText } from '@form-magic/core'
+import extractJsonFromText from './tools/extractJsonFromText.js'
 
 const app = express()
 const host = 'https://api.siliconflow.cn'
