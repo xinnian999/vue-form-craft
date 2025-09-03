@@ -24,6 +24,7 @@
     "@form-magic/styles": "workspace:*",
     "@langchain/core": "^0.3.72",
     "@langchain/deepseek": "^0.1.0",
+    "@xenova/transformers": "^2.17.2",
     "ant-design-vue": "^4.2.6",
     "axios": "^1.6.2",
     "dotenv": "^17.2.1",
