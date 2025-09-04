@@ -1,9 +1,13 @@
 import OpenAI from 'openai'
 import 'dotenv/config'
 import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // 读取 embeddings.json
-const embeddings = JSON.parse(fs.readFileSync('embeddings.json', 'utf-8'))
+const embeddings = JSON.parse(fs.readFileSync(path.join(__dirname, 'embeddings.json'), 'utf-8'))
 
 const openai = new OpenAI({
   apiKey: process.env.DASHSCOPE_API_KEY,
