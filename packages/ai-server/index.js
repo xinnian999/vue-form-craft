@@ -5,6 +5,7 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import express from 'express'
 import extractJsonFromText from './tools/extractJsonFromText.js'
+import search from './tools/search.js'
 
 const app = express()
 const host = 'https://api.siliconflow.cn'
@@ -31,6 +32,10 @@ app.post('/generateForm', async (req, res) => {
     if (!input) {
       return res.status(400).json({ error: '缺少 input 字段' })
     }
+
+    const topDocs = await search(input)
+
+    console.log('topDocs:', topDocs)
 
     const messages = [
       {
