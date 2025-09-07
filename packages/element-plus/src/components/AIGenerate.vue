@@ -19,16 +19,12 @@ const loading = ref(false)
 
 const designInstance = useDesignInstance()
 
-const apiKey = 'pat_yDSj47CI8ckH6ZEIXHlchHuYp0j8BgStXGVqliil9AtHzz4DUAajj89h2WY4E0WT'
+const apiKey = import.meta.env.VITE_COZE_API_KEY
 
 const pollResult = async (conversation_id: string, chat_id: string) => {
   return await new Promise((resolve) => {
     const interval = setInterval(async () => {
-      const res = await axios.get('https://api.coze.cn/v3/chat/retrieve', {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${apiKey}`
-        },
+      const res = await axios.get('/coze-api/v3/chat/retrieve', {
         params: {
           conversation_id,
           chat_id
@@ -50,37 +46,24 @@ const pollResult = async (conversation_id: string, chat_id: string) => {
 const handleGenerate = async () => {
   loading.value = true
 
-  const res = await axios.post(
-    'https://api.coze.cn/v3/chat',
-    {
-      input: input.value,
-      bot_id: '7546913648569729039',
-      user_id: '123456',
-      additional_messages: [
-        {
-          role: 'user',
-          content: input.value,
-          content_type: 'text'
-        }
-      ]
-    },
-    {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`
+  const res = await axios.post('/coze-api/v3/chat', {
+    input: input.value,
+    bot_id: '7546913648569729039',
+    user_id: '123456',
+    additional_messages: [
+      {
+        role: 'user',
+        content: input.value,
+        content_type: 'text'
       }
-    }
-  )
+    ]
+  })
 
   const info = res.data.data
 
   await pollResult(info.conversation_id, info.id)
 
-  const result = await axios.get('https://api.coze.cn/v3/chat/message/list', {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${apiKey}`
-    },
+  const result = await axios.get('/coze-api/v3/chat/message/list', {
     params: {
       conversation_id: info.conversation_id,
       chat_id: info.id
