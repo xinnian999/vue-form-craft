@@ -1,20 +1,11 @@
-import axios from "axios"
-
-const headers = {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${import.meta.env.VITE_COZE_API_KEY}`
-}
+const token = `Bearer ${import.meta.env.VITE_COZE_API_KEY}`
 
 export const runChatApi = async (data: Record<string, any>) => {
-    const res = await axios(
-        {
-            url: '/coze-api/v3/chat',
-            method: 'POST',
-            data,
-            headers
-        }
-    )
 
-    return res.data
+    return await fetch('/coze-api/v3/chat', {
+        headers: { 'Content-Type': 'application/json', token },
+        method: 'POST',
+        body: JSON.stringify(data)
+    })
 }
 

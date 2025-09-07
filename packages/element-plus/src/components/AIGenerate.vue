@@ -47,7 +47,7 @@ const handleGenerate = async () => {
   loading.value = true
 
   const res = await axios.post('/coze-api/v3/chat', {
-    input: input.value,
+    // input: input.value,
     bot_id: '7546913648569729039',
     user_id: '123456',
     additional_messages: [
