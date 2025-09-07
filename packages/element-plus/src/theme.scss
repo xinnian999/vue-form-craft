@@ -11,4 +11,10 @@ $dangerColor: var(--el-color-danger);
       position: absolute;
     }
   }
+
+  &-tabs {
+    border: none;
+    height: 100%;
+    box-sizing: border-box;
+  }
 }

@@ -1,32 +1,10 @@
 @include ns('form-design') {
   &-left {
-    width: 18%;
-    padding: 10px;
+    width: 20%;
     position: relative;
     overflow: auto;
 
-    @include ns('template') {
-      &-button {
-        position: absolute;
-        right: 10px;
-        top: 15px;
-      }
-
-      &-drawer {
-        position: absolute;
-        text-align: left;
-      }
-    }
-
     @include ns('menu') {
-      margin-bottom: 10px !important;
-      margin-top: 10px !important;
-
-      &-title {
-        margin-bottom: 10px !important;
-        margin-top: 10px !important;
-      }
-
       &-list {
         &-ghost,
         &-fallback,

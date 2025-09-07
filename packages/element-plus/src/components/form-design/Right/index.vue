@@ -1,6 +1,6 @@
 <template>
   <div :class="ns('form-design-right')">
-    <el-tabs v-model="designInstance.rightTab">
+    <el-tabs v-model="designInstance.rightTab" type="border-card" :class="ns('form-design-tabs')">
       <el-tab-pane v-if="designInstance.current" :label="locale.attr.tab1.title" name="attr">
         <AttrEdit v-model="designInstance.current" />
       </el-tab-pane>
