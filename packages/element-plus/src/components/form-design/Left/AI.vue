@@ -29,7 +29,8 @@ const input = ref('生成登陆表单')
 
 type Message = BubbleListItemProps & {
   key: number
-  role: 'user' | 'ai'
+  role: 'user' | 'ai',
+  result?: string
 }
 
 const list: Ref<Message[]> = ref([])
@@ -71,21 +72,34 @@ async function startSSE() {
       ],
       stream: true
     })
-    const readableStream = response.body!
-    await startStream({ readableStream })
 
-    // console.log('data', data.value)
+    const contentType = response.headers.get('content-type') || ''
+    if (contentType.includes('application/json')) {
+      const errData = await response.json()
+      if (errData.code === 4101) {
+        const current = list.value.at(-1)!
+        current.loading = false
+        current.content = `❌ 出错了： 请设置token！`
+        return
+      }
+    }
+
+    const readableStream = response.body!
+
+    await startStream({ readableStream })
   } catch (err) {
-    // console.error('Fetch error:', err)
+    console.error('Fetch error:', err)
   }
 }
 
 watch(
   data,
-  (oldValue, newValue) => {
+  (newValue) => {
     if (!newValue.length) return
 
     const current = list.value.at(-1)
+
+    // console.log('newValue', newValue)
 
     const text = newValue.reduce((acc: string, cur: any) => {
       const event = cur.event
@@ -93,18 +107,20 @@ watch(
 
       const parsedChunk = JSON.parse(chunk)
 
-      try {
-        if (event === 'conversation.message.delta') {
-          acc += parsedChunk.content
-          current!.loading = false
-        }
-        if (event === 'conversation.chat.completed') {
-          input.value = ''
-        }
-      } catch (error) {
-        //   console.log({ parsedChunk })
-        //   text += parsedChunk.content
+      if (event === 'conversation.message.delta') {
+        acc += parsedChunk.content
+        current!.loading = false
       }
+
+      // if (event === 'conversation.message.completed') {
+      //   input.value = ''
+      // }
+
+      if (event === 'done') {
+        input.value = ''
+        current!.result = acc
+      }
+
       return acc
     }, '')
 
