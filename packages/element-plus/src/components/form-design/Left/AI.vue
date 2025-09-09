@@ -37,7 +37,7 @@ import type { BubbleListItemProps } from 'vue-element-plus-x/types/BubbleList'
 import type { PromptsItemsProps } from 'vue-element-plus-x/types/Prompts'
 import { $designInstance, generateJsonApi, ns } from '@form-magic/core'
 
-const input = ref('生成登陆表单')
+const input = ref('')
 
 const inputLoading = ref(false)
 
@@ -80,7 +80,12 @@ const startSSE = async () => {
       additional_messages: [
         {
           role: 'user',
-          content: input.value,
+          content: JSON.stringify(designInstance.schema),
+          content_type: 'text'
+        },
+        {
+          role: 'user',
+          content: `请基于当前表单，${input.value}`,
           content_type: 'text'
         }
       ]
