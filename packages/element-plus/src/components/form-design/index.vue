@@ -3,6 +3,7 @@
     <Left />
     <Center />
     <Right />
+    <!-- <AIGenerate /> -->
   </div>
 </template>
 
@@ -16,6 +17,7 @@ import type {
   FormItemType,
   FormSchema
 } from '@form-magic/core'
+// import AIGenerate from '../AIGenerate.vue'
 import Center from './Center/index.vue'
 import Left from './Left/index.vue'
 import Right from './Right/index.vue'

@@ -57,5 +57,46 @@
         }
       }
     }
+
+    @include ns('form-design-ai') {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      font-size: 12px;
+
+      --el-font-size-base: 12px;
+
+      .content {
+        flex: 1;
+        overflow-y: auto;
+
+        .welcome {
+          .title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+          }
+
+          .desc {
+            color: #999;
+            margin-bottom: 10px;
+          }
+
+          .prompt-title {
+            margin-bottom: 10px;
+            color: #333;
+          }
+        }
+
+        .el-bubble-end .el-bubble-content {
+          background-color: var(--el-color-primary-light-7);
+        }
+
+        .el-bubble-start .el-bubble-content {
+          background-color: var(--el-color-success-light-9);
+        }
+      }
+    }
   }
 }

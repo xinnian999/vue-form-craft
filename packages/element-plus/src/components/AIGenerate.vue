@@ -19,35 +19,10 @@ const loading = ref(false)
 
 const designInstance = useDesignInstance()
 
-const apiKey = import.meta.env.VITE_COZE_API_KEY
-
-const pollResult = async (conversation_id: string, chat_id: string) => {
-  return await new Promise((resolve) => {
-    const interval = setInterval(async () => {
-      const res = await axios.get('/coze-api/v3/chat/retrieve', {
-        params: {
-          conversation_id,
-          chat_id
-        }
-      })
-
-      const { status } = res.data.data
-
-      console.log('status', status)
-
-      if (status === 'completed') {
-        clearInterval(interval)
-        resolve(undefined)
-      }
-    }, 1000)
-  })
-}
-
 const handleGenerate = async () => {
   loading.value = true
 
   const res = await axios.post('/coze-api/v3/chat', {
-    // input: input.value,
     bot_id: '7546913648569729039',
     user_id: '123456',
     additional_messages: [
@@ -61,7 +36,23 @@ const handleGenerate = async () => {
 
   const info = res.data.data
 
-  await pollResult(info.conversation_id, info.id)
+  await new Promise((resolve) => {
+    const interval = setInterval(async () => {
+      const res = await axios.get('/coze-api/v3/chat/retrieve', {
+        params: {
+          conversation_id: info.conversation_id,
+          chat_id: info.id
+        }
+      })
+
+      const { status } = res.data.data
+
+      if (status === 'completed') {
+        clearInterval(interval)
+        resolve(undefined)
+      }
+    }, 1000)
+  })
 
   const result = await axios.get('/coze-api/v3/chat/message/list', {
     params: {
