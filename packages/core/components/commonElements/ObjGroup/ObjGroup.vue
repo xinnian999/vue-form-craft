@@ -15,8 +15,8 @@
 <script setup lang="ts">
 import { FormItem } from '@/components'
 import { inject, provide, ref, type Ref } from 'vue'
-import type { FormItemType } from '@form-magic/core'
-import { CanvasGroup, useFormInstance } from '@form-magic/core'
+import type { FormItemType } from '@vue-form-craft/core'
+import { CanvasGroup, useFormInstance } from '@vue-form-craft/core'
 
 const props = defineProps<{
   children: FormItemType[]

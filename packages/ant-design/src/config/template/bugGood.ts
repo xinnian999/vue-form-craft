@@ -1,4 +1,4 @@
-import type { FormSchema } from "@form-magic/core";
+import type { FormSchema } from "@vue-form-craft/core";
 
 export default {
   "labelWidth": 150,

@@ -1,7 +1,7 @@
 import { FormRender, FormDesign } from '@/components'
-import { $globals } from '@form-magic/core'
+import { $globals } from '@vue-form-craft/core'
 import { type App } from 'vue'
-import type { Options } from '@form-magic/core'
+import type { Options } from '@vue-form-craft/core'
 import { mergeGlobals } from '@/utils'
 
 export default (app: App<Element>, options: Options = {}) => {

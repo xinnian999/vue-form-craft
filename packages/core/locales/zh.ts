@@ -1,4 +1,4 @@
-import type { Locale } from '@form-magic/core'
+import type { Locale } from '@vue-form-craft/core'
 
 export default {
   menus: {

@@ -1,6 +1,6 @@
-import type { FormElement } from '@form-magic/core'
+import type { FormElement } from '@vue-form-craft/core'
 import { defineAsyncComponent, h } from 'vue'
-import { Icon } from '@form-magic/core'
+import { Icon } from '@vue-form-craft/core'
 
 export default {
   title: '折叠面板',

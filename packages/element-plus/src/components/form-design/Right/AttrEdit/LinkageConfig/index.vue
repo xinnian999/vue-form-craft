@@ -21,7 +21,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { ns, useLocale } from '@form-magic/core'
+import { ns, useLocale } from '@vue-form-craft/core'
 import Change from './Change.vue'
 import Config from './Config.vue'
 

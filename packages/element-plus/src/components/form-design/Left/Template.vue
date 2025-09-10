@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 import { template } from '@/config'
-import { useDesignInstance } from '@form-magic/core'
+import { useDesignInstance } from '@vue-form-craft/core'
 
 const designInstance = useDesignInstance()
 

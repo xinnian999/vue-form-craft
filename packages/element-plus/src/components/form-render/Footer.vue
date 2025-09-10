@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import { useFormInstance } from '@form-magic/core'
+import { useFormInstance } from '@vue-form-craft/core'
 import { computed } from 'vue'
 
 const formInstance = useFormInstance()

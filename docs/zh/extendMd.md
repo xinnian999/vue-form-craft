@@ -88,7 +88,7 @@ const value = defineModel<string>()
 
 ```ts
 // src/extendElements/Markdown/attrSchema.ts
-import type { FormSchema } from '@form-magic/element-plus'
+import type { FormSchema } from 'vue-form-craft'
 
 export default {
   size: 'small',
@@ -139,7 +139,7 @@ export default {
 
 ```ts
 // src/extendElements/Markdown/index.ts
-import type { FormElement } from '@form-magic/element-plus'
+import type { FormElement } from 'vue-form-craft'
 import render from './Render.vue'
 import icon from './Icon.vue'
 import attrSchema from './attrSchema'
@@ -172,7 +172,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
-import VueFormCraft from '@form-magic/element-plus'
+import VueFormCraft from 'vue-form-craft'
 import extendElements from './extendElements'
 
 const app = createApp(App)

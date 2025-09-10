@@ -1,5 +1,5 @@
-import type { Lang } from '@form-magic/core'
-import { useGlobals } from '@form-magic/core'
+import type { Lang } from '@vue-form-craft/core'
+import { useGlobals } from '@vue-form-craft/core'
 import { inject, ref } from 'vue'
 
 export default function useLang() {

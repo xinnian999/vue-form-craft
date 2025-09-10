@@ -12,5 +12,5 @@ export default defineConfig({
     },
     setupFiles: path.resolve(__dirname, 'vitest.setup.ts')
   },
-  plugins: [vue(), vueJsx()]
+  plugins: [vue(), vueJsx()],
 })

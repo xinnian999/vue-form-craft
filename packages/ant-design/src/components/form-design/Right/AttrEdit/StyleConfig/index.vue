@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import { FormRender } from '@/components'
 import { ref } from 'vue'
-import { ns } from '@form-magic/core'
+import { ns } from '@vue-form-craft/core'
 import basicSchema from './basicSchema'
 import schema from './schema'
 

@@ -1,5 +1,5 @@
-import { useGlobals } from '@form-magic/core'
-import type { FormElement } from '@form-magic/core'
+import { useGlobals } from '@vue-form-craft/core'
+import type { FormElement } from '@vue-form-craft/core'
 
 const useElements = (): Record<string, FormElement> => {
   const globals = useGlobals()

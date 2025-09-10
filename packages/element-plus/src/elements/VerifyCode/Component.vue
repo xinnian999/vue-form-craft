@@ -6,7 +6,7 @@ sss<template>
 </template>
 
 <script setup lang="ts">
-import { useFormInstance } from '@form-magic/core'
+import { useFormInstance } from '@vue-form-craft/core'
 import GVerify from './gVerify'
 import { onMounted, ref } from 'vue'
 

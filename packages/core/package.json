@@ -1,7 +1,8 @@
 {
-    "name": "@form-magic/core",
+    "name": "@vue-form-craft/core",
     "version": "5.0.0",
     "description": "",
+    "type": "module",
     "main": "index.ts",
     "author": "",
     "license": "ISC"

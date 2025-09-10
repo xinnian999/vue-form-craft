@@ -1,6 +1,6 @@
 <template>
   <div :class="ns('ai-welcome')">
-    <div class="title">Form Magic 表单助手</div>
+    <div class="title">Vue Form Craft 表单助手</div>
     <div class="desc">
       您好！我是智能表单助手。我可以帮你快速生成 or 修改表单。祝您高效完成表单设计！
     </div>
@@ -20,7 +20,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { ns } from '@form-magic/core'
+import { ns } from '@vue-form-craft/core'
 
 const emit = defineEmits(['itemClick'])
 
@@ -53,7 +53,7 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-@import '@form-magic/styles';
+@import '@vue-form-craft/styles';
 
 @include ns('ai-welcome') {
   padding: 10px;

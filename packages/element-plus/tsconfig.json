@@ -4,7 +4,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@form-magic/core": ["../core/index.ts"]
+      "@vue-form-craft/core": ["../core/index.ts"]
     },
     "types": ["vite/client", "element-plus/global"]
   },

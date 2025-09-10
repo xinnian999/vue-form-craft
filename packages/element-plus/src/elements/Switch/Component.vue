@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { useFormInstance } from '@form-magic/core';
+import { useFormInstance } from '@vue-form-craft/core';
 
 defineProps<{
   disabled?: boolean

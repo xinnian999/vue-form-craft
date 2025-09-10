@@ -35,7 +35,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { FormItemType } from '@form-magic/core'
+import type { FormItemType } from '@vue-form-craft/core'
 import {
   copyItems,
   Icon,
@@ -44,7 +44,7 @@ import {
   useDesignInstance,
   useElements,
   useGlobals
-} from '@form-magic/core'
+} from '@vue-form-craft/core'
 
 const props = defineProps<{ data: FormItemType }>()
 

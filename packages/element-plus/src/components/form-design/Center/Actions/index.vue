@@ -36,7 +36,7 @@
 <script setup lang="ts">
 import { ElMessageBox } from 'element-plus'
 import { ref } from 'vue'
-import { Icon, ns, useDesignInstance, useLocale } from '@form-magic/core'
+import { Icon, ns, useDesignInstance, useLocale } from '@vue-form-craft/core'
 import JsonSchema from './JsonSchema.vue'
 import Preview from './Preview.vue'
 import VueCode from './VueCode.vue'

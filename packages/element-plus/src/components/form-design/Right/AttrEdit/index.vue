@@ -12,8 +12,8 @@
 import { FormRender } from '@/components'
 import { isString } from 'lodash'
 import { computed } from 'vue'
-import { getDataByPath, ns, setDataByPath, useElements, useLang } from '@form-magic/core'
-import type { FormItemType, FormSchema } from '@form-magic/core'
+import { getDataByPath, ns, setDataByPath, useElements, useLang } from '@vue-form-craft/core'
+import type { FormItemType, FormSchema } from '@vue-form-craft/core'
 import LinkageConfig from './LinkageConfig/index.vue'
 import StyleConfig from './StyleConfig/index.vue'
 

@@ -33,7 +33,7 @@ import {
   useDesignInstance,
   useElements,
   useLocale
-} from '@form-magic/core'
+} from '@vue-form-craft/core'
 import { jsJsonSchema, schemaHelp, tsJsonSchema } from './config'
 
 const tabKey = ref('edit')

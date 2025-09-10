@@ -20,9 +20,9 @@
 
 <script setup lang="ts">
 import { reactive } from 'vue'
-import type { FormRenderEmits, FormRenderProps, FormSchema } from '@form-magic/core'
+import type { FormRenderEmits, FormRenderProps, FormSchema } from '@vue-form-craft/core'
 import Footer from './Footer.vue'
-import { useFormRender, useLocale, FormItemGroup } from '@form-magic/core'
+import { useFormRender, useLocale, FormItemGroup } from '@vue-form-craft/core'
 
 const props = defineProps<FormRenderProps>()
 

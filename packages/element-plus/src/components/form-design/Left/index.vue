@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { ns } from '@form-magic/core'
+import { ns } from '@vue-form-craft/core'
 import AI from './AI/index.vue'
 import List from './List.vue'
 import Template from './Template.vue'

@@ -2,7 +2,7 @@ import { FormRender } from '@/components'
 import { configTest } from '@/utils'
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import { wait } from '@form-magic/core'
+import { wait } from '@vue-form-craft/core'
 import schema from '../valueLinkage'
 
 configTest()

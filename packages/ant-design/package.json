@@ -1,5 +1,5 @@
 {
-  "name": "@form-magic/ant-design",
+  "name": "@vue-form-craft/ant-design",
   "version": "5.0.0",
   "private": false,
   "type": "module",

@@ -40,7 +40,7 @@ import { ElMessageBox } from 'element-plus'
 import JsonSchema from './JsonSchema.vue'
 import VueCode from './VueCode.vue'
 import Preview from './Preview.vue'
-import { useDesignInstance, useLocale, Icon } from '@form-magic/core'
+import { useDesignInstance, useLocale, Icon } from '@vue-form-craft/core'
 
 type PreviewAction = {
   label: string

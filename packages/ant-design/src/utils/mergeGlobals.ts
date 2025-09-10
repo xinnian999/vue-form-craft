@@ -1,8 +1,8 @@
 import { FormItem } from '@/components'
 import * as elements from '@/elements'
 import { ElMessage } from 'element-plus'
-import { commonElements } from '@form-magic/core'
-import type { Globals, Options } from '@form-magic/core'
+import { commonElements } from '@vue-form-craft/core'
+import type { Globals, Options } from '@vue-form-craft/core'
 
 const mergeGlobals = (options: Options) => {
   return {

@@ -25,8 +25,8 @@
 <script setup lang="ts">
 import { type CheckboxGroupValueType } from 'element-plus'
 import { watch } from 'vue'
-import type { Direction, SelectProps } from '@form-magic/core'
-import { useFormInstance, useSelect } from '@form-magic/core'
+import type { Direction, SelectProps } from '@vue-form-craft/core'
+import { useFormInstance, useSelect } from '@vue-form-craft/core'
 
 type Props = Omit<SelectProps, 'multiple'> & {
   direction?: Direction

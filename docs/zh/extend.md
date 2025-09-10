@@ -1,11 +1,11 @@
 # 扩展表单设计器
 
-如果`form-magic`的内置组件不能完全满足我们的业务需求，可以为 `form-magic` 扩展更多可拖拽组件！
+如果`vue-form-craft`的内置组件不能完全满足我们的业务需求，可以为 `vue-form-craft` 扩展更多可拖拽组件！
 
 
 ## 如何扩展？
 
-只需要在全局注册`form-magic`时，传入`extendElements`！
+只需要在全局注册`vue-form-craft`时，传入`extendElements`！
 
 `extendElements`是一个对象！key是**组件标识**，value是`FormElement`！
 
@@ -21,7 +21,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
-import VueFormCraft from '@form-magic/element-plus'
+import VueFormCraft from 'vue-form-craft'
 import extendElements from './extendElements'
 
 const app = createApp(App)
@@ -35,7 +35,7 @@ app.mount('#app')
 
 一个`FormElement`对象代表一个可拖拽组件。
 
-同理我们想扩展更多组件，需要按照`FormElement`的接口格式去配置，然后传给`form-magic`即可！
+同理我们想扩展更多组件，需要按照`FormElement`的接口格式去配置，然后传给`vue-form-craft`即可！
 
 ```ts
 interface FormElement {

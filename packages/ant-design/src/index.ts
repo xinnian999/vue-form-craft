@@ -5,7 +5,7 @@ export default { install }
 
 export { FormRender, FormDesign } from './components'
 
-export { useFormInstance } from '@form-magic/core'
+export { useFormInstance } from '@vue-form-craft/core'
 
 export type {
   FormElement,
@@ -13,4 +13,4 @@ export type {
   FormSchema,
   TemplateData,
   FormInstance
-} from '@form-magic/core'
+} from '@vue-form-craft/core'

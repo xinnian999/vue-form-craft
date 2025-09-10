@@ -1,14 +1,14 @@
 # Internationalization
 
-Since `form-magic` is developed based on `element-plus`, please follow the official documentation of `element-plus` to internationalize its components.
+Since `vue-form-craft` is developed based on `element-plus`, please follow the official documentation of `element-plus` to internationalize its components.
 
 [How to internationalize element-plus?](https://element-plus.org/guide/i18n.html)
 
-Then, we also need to internationalize the designer components of `form-magic`, which is also simple, just pass a configuration!
+Then, we also need to internationalize the designer components of `vue-form-craft`, which is also simple, just pass a configuration!
 
 ```ts
 import { createApp } from 'vue'
-import VueFormCraft from '@form-magic/element-plus'
+import VueFormCraft from 'vue-form-craft'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import App from './App.vue'

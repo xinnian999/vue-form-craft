@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import { FormRender } from '@/components'
-import { ns, useDesignInstance } from '@form-magic/core'
+import { ns, useDesignInstance } from '@vue-form-craft/core'
 import Actions from './Actions/index.vue'
 
 const designInstance = useDesignInstance()

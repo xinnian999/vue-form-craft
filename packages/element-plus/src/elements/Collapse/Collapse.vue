@@ -12,8 +12,8 @@
 
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
-import type { FormItemType } from '@form-magic/core'
-import { FormItemGroup } from '@form-magic/core'
+import type { FormItemType } from '@vue-form-craft/core'
+import { FormItemGroup } from '@vue-form-craft/core'
 import Title from '../Title/Title.vue'
 
 type CollapseItem = {

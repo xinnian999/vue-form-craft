@@ -55,7 +55,7 @@
 import { template } from '@/config'
 import { computed, ref } from 'vue'
 import draggable from 'vuedraggable-es-fix'
-import type { FormElement, FormItemType, FormSchema } from '@form-magic/core'
+import type { FormElement, FormItemType, FormSchema } from '@vue-form-craft/core'
 import {
   getRandomId,
   ns,
@@ -63,7 +63,7 @@ import {
   useElements,
   useLang,
   useLocale
-} from '@form-magic/core'
+} from '@vue-form-craft/core'
 import parseMenus from './menus'
 
 const drawerVisible = ref(false)

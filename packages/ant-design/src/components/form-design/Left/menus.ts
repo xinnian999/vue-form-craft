@@ -1,5 +1,5 @@
-import { locales } from '@form-magic/core'
-import type { FormElement } from '@form-magic/core'
+import { locales } from '@vue-form-craft/core'
+import type { FormElement } from '@vue-form-craft/core'
 
 type Params = {
   elements: Record<string, FormElement>

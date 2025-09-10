@@ -38,8 +38,8 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import draggable from 'vuedraggable-es-fix'
-import type { FormElement, FormItemType } from '@form-magic/core'
-import { getRandomId, ns, useDesignInstance, useElements, useLang } from '@form-magic/core'
+import type { FormElement, FormItemType } from '@vue-form-craft/core'
+import { getRandomId, ns, useDesignInstance, useElements, useLang } from '@vue-form-craft/core'
 import parseMenus from './menus'
 
 const designInstance = useDesignInstance()

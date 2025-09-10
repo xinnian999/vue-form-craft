@@ -1,4 +1,4 @@
-# form-magic
+# vue-form-craft
 
 ## 4.6.0
 

@@ -6,8 +6,8 @@ import {
   setDataByPath,
   useElements,
   useFormInstance
-} from '@form-magic/core'
-import type { FormItemType } from '@form-magic/core'
+} from '@vue-form-craft/core'
+import type { FormItemType } from '@vue-form-craft/core'
 
 const useFormItem = (props: FormItemType) => {
   const formInstance = useFormInstance()

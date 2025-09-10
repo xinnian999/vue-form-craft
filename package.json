@@ -19,10 +19,10 @@
     "ai:start": "pnpm -C packages/ai-server start"
   },
   "dependencies": {
-    "@form-magic/ant-design": "workspace:*",
-    "@form-magic/core": "workspace:*",
-    "@form-magic/element-plus": "workspace:*",
-    "@form-magic/styles": "workspace:*",
+    "@vue-form-craft/ant-design": "workspace:*",
+    "@vue-form-craft/core": "workspace:*",
+    "vue-form-craft": "workspace:*",
+    "@vue-form-craft/styles": "workspace:*",
     "@langchain/core": "^0.3.72",
     "@langchain/deepseek": "^0.1.0",
     "ant-design-vue": "^4.2.6",

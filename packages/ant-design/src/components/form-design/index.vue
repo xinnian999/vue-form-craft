@@ -8,14 +8,14 @@
 
 <script setup lang="ts">
 import { computed, provide, reactive, ref, toRefs } from 'vue'
-import { $designInstance, getCurrentByKey, ns, setCurrentByKey } from '@form-magic/core'
+import { $designInstance, getCurrentByKey, ns, setCurrentByKey } from '@vue-form-craft/core'
 import type {
   DesignInstance,
   FormDesignProps,
   FormElement,
   FormItemType,
   FormSchema
-} from '@form-magic/core'
+} from '@vue-form-craft/core'
 import Center from './Center/index.vue'
 import Left from './Left/index.vue'
 import Right from './Right/index.vue'

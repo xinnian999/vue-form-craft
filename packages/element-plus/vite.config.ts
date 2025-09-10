@@ -18,14 +18,14 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      // '@form-magic': fileURLToPath(new URL('../../packages', import.meta.url)),
+      // '@vue-form-craft': fileURLToPath(new URL('../../packages', import.meta.url)),
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
   build: {
     lib: {
       entry: fileURLToPath(new URL('src/index.ts', import.meta.url)), //指定组件编译入口文件
-      name: 'FormMagicElementPlus', // umd全局变量名
+      name: 'VueFormCraftElementPlus', // umd全局变量名
       fileName: 'index', // 打包文件名
     },
     rollupOptions: {

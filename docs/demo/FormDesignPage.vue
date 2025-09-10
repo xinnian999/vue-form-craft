@@ -12,7 +12,7 @@
 <script setup lang="ts">
 import { ElMessage } from 'element-plus'
 import { onMounted, ref } from 'vue'
-import type { FormElement, FormSchema } from '@form-magic/element-plus'
+import type { FormElement, FormSchema } from 'vue-form-craft'
 
 const schema = ref<FormSchema>({
   labelWidth: 150,

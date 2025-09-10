@@ -44,8 +44,8 @@
 
 <script setup lang="ts">
 import { watch } from 'vue'
-import type { Direction, OptionType, SelectProps, SelectValue } from '@form-magic/core'
-import { useFormInstance, useSelect } from '@form-magic/core'
+import type { Direction, OptionType, SelectProps, SelectValue } from '@vue-form-craft/core'
+import { useFormInstance, useSelect } from '@vue-form-craft/core'
 
 type Props = Omit<SelectProps, 'multiple'> & {
   optionType?: OptionType

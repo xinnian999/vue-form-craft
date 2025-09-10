@@ -59,7 +59,7 @@
 </template>
 
 <script setup lang="ts">
-import { Icon, ns, useFormItem, type FormItemType } from '@form-magic/core'
+import { Icon, ns, useFormItem, type FormItemType } from '@vue-form-craft/core'
 
 const thisProps = defineProps<FormItemType>()
 

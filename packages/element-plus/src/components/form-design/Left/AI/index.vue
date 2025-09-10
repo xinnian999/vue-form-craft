@@ -27,7 +27,7 @@
 import { inject, ref, type Ref } from 'vue'
 import { BubbleList, Sender } from 'vue-element-plus-x'
 import type { BubbleListItemProps } from 'vue-element-plus-x/types/BubbleList'
-import { $designInstance, ns } from '@form-magic/core'
+import { $designInstance, ns } from '@vue-form-craft/core'
 import generateJsonApi from './generateJsonApi'
 import Welcome from './Welcome.vue'
 

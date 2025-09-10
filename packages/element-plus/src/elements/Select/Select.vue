@@ -34,8 +34,8 @@
 </template>
 
 <script setup lang="ts">
-import { useFormInstance, useSelect } from '@form-magic/core'
-import type { SelectProps, SelectValue } from '@form-magic/core'
+import { useFormInstance, useSelect } from '@vue-form-craft/core'
+import type { SelectProps, SelectValue } from '@vue-form-craft/core'
 import { watch } from 'vue'
 
 const props = withDefaults(defineProps<SelectProps>(), {

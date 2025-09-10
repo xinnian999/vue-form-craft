@@ -1,5 +1,5 @@
 import { isEqual, cloneDeep, isArray } from 'lodash'
-import type { FormInstance, FormItemType } from '@form-magic/core'
+import type { FormInstance, FormItemType } from '@vue-form-craft/core'
 import setDataByPath from './setDataByPath'
 import getDataByPath from './getDataByPath'
 

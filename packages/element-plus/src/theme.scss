@@ -3,7 +3,7 @@ $lightThemeColor: var(--el-color-primary-light-9);
 $bgColor: var(--el-bg-color);
 $dangerColor: var(--el-color-danger);
 
-@import '@form-magic/styles';
+@import '@vue-form-craft/styles';
 
 @include ns('form-design') {
   &-left {

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-FormDesign is a visual form designer component for form-magic.
+FormDesign is a visual form designer component for vue-form-craft.
 
 ```vue
 <template>

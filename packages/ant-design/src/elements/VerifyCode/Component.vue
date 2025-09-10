@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { useFormInstance } from '@form-magic/core'
+import { useFormInstance } from '@vue-form-craft/core'
 import GVerify from './gVerify'
 
 defineProps<{

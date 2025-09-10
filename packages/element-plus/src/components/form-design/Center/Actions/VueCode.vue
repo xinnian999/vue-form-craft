@@ -19,9 +19,9 @@
 </template>
 
 <script setup lang="ts">
-import { CodeHighLight } from '@form-magic/core'
+import { CodeHighLight } from '@vue-form-craft/core'
 import { tsVue, jsVue } from './config'
-import { useDesignInstance, useLocale } from '@form-magic/core'
+import { useDesignInstance, useLocale } from '@vue-form-craft/core'
 
 const designInstance = useDesignInstance()
 

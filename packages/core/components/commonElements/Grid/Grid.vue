@@ -4,8 +4,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { FormItemType } from '@form-magic/core'
-import { FormItemGroup } from '@form-magic/core'
+import type { FormItemType } from '@vue-form-craft/core'
+import { FormItemGroup } from '@vue-form-craft/core'
 
 const props = defineProps<{
   children: FormItemType[]
