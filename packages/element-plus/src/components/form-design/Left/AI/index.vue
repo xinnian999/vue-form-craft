@@ -1,16 +1,9 @@
 <template>
   <div :class="ns('form-design-ai')">
     <div class="content">
-      <el-alert v-if="!list.length" type="primary" :closable="false" class="welcome">
-        <template #title>
-          <div class="title">Form Magic 表单助手</div>
-        </template>
-        <div class="desc">我可以帮你生成 or 修改表单。</div>
-        <div class="prompt-title">可以试着问我：</div>
-        <Prompts vertical :items="items" @item-click="handleItemClick" />
-      </el-alert>
+      <Welcome v-if="list.length === 0" @item-click="handleItemClick" />
 
-      <BubbleList v-else :list="list" style="height: 100%; max-height: 100%">
+      <BubbleList v-else :list="list">
         <template #loading>
           <div :class="ns('bubble-loading')">
             <div :class="ns('bubble-loading-loader')"></div>
@@ -32,10 +25,11 @@
 
 <script setup lang="ts">
 import { inject, ref, type Ref } from 'vue'
-import { BubbleList, Prompts, Sender } from 'vue-element-plus-x'
+import { BubbleList, Sender } from 'vue-element-plus-x'
 import type { BubbleListItemProps } from 'vue-element-plus-x/types/BubbleList'
-import type { PromptsItemsProps } from 'vue-element-plus-x/types/Prompts'
-import { $designInstance, generateJsonApi, ns } from '@form-magic/core'
+import { $designInstance, ns } from '@form-magic/core'
+import generateJsonApi from './generateJsonApi'
+import Welcome from './Welcome.vue'
 
 const input = ref('')
 
@@ -85,7 +79,7 @@ const startSSE = async () => {
         },
         {
           role: 'user',
-          content: `请基于当前表单，${input.value}`,
+          content: `请基于当前表单，${input.value}，返回 JosnSchema`,
           content_type: 'text'
         }
       ]
@@ -94,22 +88,16 @@ const startSSE = async () => {
     input.value = ''
     inputLoading.value = false
 
-    // const contentType = response.headers.get('content-type') || ''
-    // if (contentType.includes('application/json')) {
-    //   const errData = await response.json()
-    //   if (errData.code === 4101) {
-    //     const current = list.value.at(-1)!
-    //     current.loading = false
-    //     current.content = `❌ 出错了： 请设置token！`
-    //     inputLoading.value = false
-    //     return
-    //   }
-    // }
     const current = list.value.at(-1)!
-    current.loading = false
-    current.content = '✓ 已为您修改表单'
 
-    designInstance.updateSchema(json)
+    current.loading = false
+
+    if (typeof json === 'string') {
+      current.content = json
+    } else {
+      current.content = '✓ 已为您修改表单'
+      designInstance.updateSchema(json)
+    }
   } catch (err) {
     console.error('Fetch error:', err)
   }
@@ -120,19 +108,8 @@ const handleCancel = () => {
   inputLoading.value = false
 }
 
-const items = ref<PromptsItemsProps[]>([
-  {
-    key: '1',
-    label: '生成一个登录表单'
-  },
-  {
-    key: '2',
-    label: '生成一个就诊满意度表单'
-  }
-])
-
-function handleItemClick(item: PromptsItemsProps) {
-  input.value = item.label!
+function handleItemClick(item: string) {
+  input.value = item
   startSSE()
 }
 </script>

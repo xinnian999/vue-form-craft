@@ -1,17 +1,11 @@
 import axios from 'axios'
 
-const token = `Bearer ${import.meta.env.VITE_COZE_API_KEY}`
-
-export const runChatApi = async (data: Record<string, any>) => {
-  return await fetch('/coze-api/v3/chat', {
-    headers: { 'Content-Type': 'application/json', token },
-    method: 'POST',
-    body: JSON.stringify(data)
-  })
-}
-
-export const generateJsonApi = async (data: Record<string, any>) => {
+const generateJsonApi = async (data: Record<string, any>) => {
   const res = await axios.post('/coze-api/v3/chat', data)
+
+  if (res.data.code === 4101) {
+    return '× 请设置token'
+  }
 
   const info = res.data.data
 
@@ -47,3 +41,5 @@ export const generateJsonApi = async (data: Record<string, any>) => {
     return json
   }
 }
+
+export default generateJsonApi

@@ -25,7 +25,7 @@
       </div>
     </div>
 
-    <div class="layout-title" v-if="config.lbTitle">
+    <div class="layout-title" v-if="config?.lbTitle">
       {{ config.title }}
     </div>
 

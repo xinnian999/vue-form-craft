@@ -16,8 +16,15 @@ $dangerColor: var(--el-color-danger);
     border: none;
     height: 100%;
     box-sizing: border-box;
+    .el-tabs__content {
+      padding: 0 !important;
+    }
     .el-tab-pane {
       height: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 15px;
+      box-sizing: border-box;
     }
   }
 }
