@@ -6,16 +6,16 @@
       <BubbleList v-else :list="list" />
     </div>
 
-    <Sender v-model="input" @submit="startSSE" />
+    <Sender v-model="input" @submit="startSSE" @cancel="onCancel" :loading="inputLoading" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, type Ref } from 'vue'
-import { useDesignInstance, ns } from '@vue-form-craft/core'
+import { Sender } from 'vue-element-plus-x'
+import { ns, useDesignInstance } from '@vue-form-craft/core'
 import BubbleList from './BubbleList.vue'
 import generateJsonApi from './generateJsonApi'
-import { Sender } from 'vue-element-plus-x';
 import type { BubbleItem } from './type'
 import Welcome from './Welcome.vue'
 
@@ -26,6 +26,8 @@ const inputLoading = ref(false)
 const list: Ref<BubbleItem[]> = ref([])
 
 const designInstance = useDesignInstance()
+
+let controller: AbortController | null = null
 
 // 默认支持 SSE 协议
 const startSSE = async () => {
@@ -44,46 +46,54 @@ const startSSE = async () => {
     }
   ]
 
+  const prompt = `请基于当前表单，${input.value}，返回 JosnSchema`
+
   inputLoading.value = true
 
+  input.value = ''
+
+  const current = list.value.at(-1)!
+
   try {
-    const json = await generateJsonApi({
-      bot_id: '7546913648569729039',
-      user_id: '123456',
-      additional_messages: [
-        {
-          role: 'user',
-          content: JSON.stringify(designInstance.schema),
-          content_type: 'text'
-        },
-        {
-          role: 'user',
-          content: `请基于当前表单，${input.value}，返回 JosnSchema`,
-          content_type: 'text'
-        }
-      ]
-    })
+    controller = new AbortController()
 
-    input.value = ''
-    inputLoading.value = false
+    const json = await generateJsonApi(
+      {
+        bot_id: '7546913648569729039',
+        user_id: '123456',
+        additional_messages: [
+          {
+            role: 'user',
+            content: JSON.stringify(designInstance.schema),
+            content_type: 'text'
+          },
+          {
+            role: 'user',
+            content: prompt,
+            content_type: 'text'
+          }
+        ]
+      },
+      controller.signal
+    )
 
-    const current = list.value.at(-1)!
-
-    current.loading = false
-
-    if (typeof json === 'string') {
-      current.content = json
-    } else {
-      current.content = '✓ 已为您修改表单'
-      designInstance.updateSchema(json)
-    }
+    current.content = '✓ 已为您修改表单'
+    designInstance.updateSchema(json)
   } catch (err) {
-    console.error('Fetch error:', err)
+    current.content = err
+  } finally {
+    inputLoading.value = false
+    current.loading = false
   }
 }
 
-function handleItemClick(item: string) {
+const handleItemClick = (item: string) => {
   input.value = item
   startSSE()
+}
+
+const onCancel = () => {
+  inputLoading.value = false
+  controller?.abort()
 }
 </script>

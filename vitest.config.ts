@@ -10,7 +10,13 @@ export default defineConfig({
     coverage: {
       reporter: ['text', 'json', 'html']
     },
-    setupFiles: path.resolve(__dirname, 'vitest.setup.ts')
+    setupFiles: path.resolve(__dirname, 'vitest.setup.ts'),
+    css: false,
+    server: {
+      deps: {
+        inline: [/vue-element-plus-x/]
+      }
+    }
   },
-  plugins: [vue(), vueJsx()],
+  plugins: [vue(), vueJsx()]
 })
