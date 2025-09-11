@@ -3,48 +3,29 @@
     <div class="content">
       <Welcome v-if="list.length === 0" @item-click="handleItemClick" />
 
-      <BubbleList v-else :list="list">
-        <template #loading>
-          <div :class="ns('bubble-loading')">
-            <div :class="ns('bubble-loading-loader')"></div>
-            <div :class="ns('bubble-loading-text')">表单制作中 请稍等...</div>
-          </div>
-        </template>
-      </BubbleList>
+      <BubbleList v-else :list="list" />
     </div>
 
-    <Sender
-      v-model="input"
-      @submit="startSSE"
-      @cancel="handleCancel"
-      :loading="inputLoading"
-      clearable
-    />
+    <Sender v-model="input" @submit="startSSE" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { inject, ref, type Ref } from 'vue'
-import { BubbleList, Sender } from 'vue-element-plus-x'
-import type { BubbleListItemProps } from 'vue-element-plus-x/types/BubbleList'
-import { $designInstance, ns } from '@vue-form-craft/core'
+import { ref, type Ref } from 'vue'
+import { useDesignInstance, ns } from '@vue-form-craft/core'
+import BubbleList from './BubbleList.vue'
 import generateJsonApi from './generateJsonApi'
+import { Sender } from 'vue-element-plus-x';
+import type { BubbleItem } from './type'
 import Welcome from './Welcome.vue'
 
 const input = ref('')
 
 const inputLoading = ref(false)
 
-type Message = BubbleListItemProps & {
-  key: number
-  role: 'user' | 'ai'
-  result?: string
-  done?: boolean
-}
+const list: Ref<BubbleItem[]> = ref([])
 
-const list: Ref<Message[]> = ref([])
-
-const designInstance = inject($designInstance)!
+const designInstance = useDesignInstance()
 
 // 默认支持 SSE 协议
 const startSSE = async () => {
@@ -53,14 +34,12 @@ const startSSE = async () => {
     {
       key: Date.now(),
       role: 'user',
-      placement: 'end',
       content: input.value
     },
     {
       key: Date.now(),
       role: 'ai',
       content: '',
-      placement: 'start', // start | end 气泡位置
       loading: true
     }
   ]
@@ -101,11 +80,6 @@ const startSSE = async () => {
   } catch (err) {
     console.error('Fetch error:', err)
   }
-}
-
-const handleCancel = () => {
-  // cancel()
-  inputLoading.value = false
 }
 
 function handleItemClick(item: string) {

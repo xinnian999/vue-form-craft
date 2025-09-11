@@ -1,7 +1,10 @@
 $themeColor: var(--el-color-primary);
 $lightThemeColor: var(--el-color-primary-light-9);
-$bgColor: var(--el-bg-color);
+$successColor: var(--el-color-success);
+$lightSuccessColor: var(--el-color-success-light-9);
 $dangerColor: var(--el-color-danger);
+$bgColor: var(--el-bg-color);
+
 
 @import '@vue-form-craft/styles';
 
