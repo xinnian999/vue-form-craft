@@ -5,11 +5,12 @@
 `input`输入框的校验规则
 
 ```ts
-type FormRule = {
-  type: 'email' | 'url' | 'custom' | string   //校验类型
-  customReg?: string  // type为'custom'时，输入自定义正则
-  message?: string   // 校验不通过的提示语
-  trigger: 'blur' | 'change'   //校验时机
+export type TriggerType = 'blur' | 'change'
+
+export type FormRule = {
+  type: 'email' | 'url' | boolean | string
+  message?: string
+  trigger?: TriggerType | TriggerType[]
 }
 ```
 

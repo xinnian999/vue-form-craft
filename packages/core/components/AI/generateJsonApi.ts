@@ -74,7 +74,10 @@ const generateJsonApi = async (data: Record<string, any>, signal?: AbortSignal) 
 
   // 尝试解析 JSON，即使没有 ```json ``` 包裹
   let jsonStr = content
-  jsonStr = jsonStr.replace(/^```json\s*/, '').replace(/```$/, '')
+  jsonStr = jsonStr
+    .replace(/^```json\s*/, '')
+    .replace(/```$/, '')
+    .replace(/\\{\\{([^}]*)\\}\\}/g, '{{$1}}')
 
   try {
     return JSON.parse(jsonStr)

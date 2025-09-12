@@ -4,11 +4,12 @@
 Validation rules for the `input` field.
 
 ```ts
-type FormRule = {
-  type: 'email' | 'url' | 'custom' | string   // Validation type
-  customReg?: string  // Custom regular expression for type 'custom'
-  message?: string   // Error message for validation failure
-  trigger: 'blur' | 'change'   // Validation trigger
+export type TriggerType = 'blur' | 'change'
+
+export type FormRule = {
+  type: 'email' | 'url' | boolean | string
+  message?: string
+  trigger?: TriggerType | TriggerType[]
 }
 ```
 

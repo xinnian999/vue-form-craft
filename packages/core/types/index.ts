@@ -1,12 +1,12 @@
 import type { FormValidationResult } from 'element-plus'
 import type { Component, Ref, ToRefs, VNode } from 'vue'
 
+export type TriggerType = 'blur' | 'change'
+
 export type FormRule = {
-  type: 'email' | 'url' | 'custom' | string
-  customReg?: string
-  templateExp?: any
+  type: 'email' | 'url' | boolean | string
   message?: string
-  trigger: string[]
+  trigger?: TriggerType | TriggerType[]
 }
 
 export type FormChange = {
@@ -134,7 +134,7 @@ export interface Globals extends Options {
   elements: Record<string, FormElement>
   message: {
     success: (message: string) => void
-  },
+  }
   FormItem: Component
 }
 

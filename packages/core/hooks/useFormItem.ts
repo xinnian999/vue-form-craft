@@ -45,22 +45,23 @@ const useFormItem = (props: FormItemType) => {
 
     if (rules) {
       const ruleParse = rules.map((rule) => {
-        const { type, message, trigger, customReg, templateExp } = rule
+        const { type, message, trigger = 'blur' } = rule
 
         const ruleDef = {
           message,
           trigger
         }
 
-        if (['email', 'url'].includes(type)) {
-          return { ...ruleDef, type }
-        }
-        // 自定义正则
-        if (type === 'custom') {
+        // 模板表达式
+        if (typeof type === 'boolean') {
           return {
             ...ruleDef,
-            pattern: customReg
+            validator: () => type
           }
+        }
+
+        if (['email', 'url'].includes(type)) {
+          return { ...ruleDef, type }
         }
 
         // 解析字符串的正则
@@ -68,14 +69,6 @@ const useFormItem = (props: FormItemType) => {
           return {
             ...ruleDef,
             pattern: type
-          }
-        }
-
-        // 模板表达式
-        if (type === 'template') {
-          return {
-            ...ruleDef,
-            validator: () => templateExp
           }
         }
 
