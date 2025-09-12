@@ -14,7 +14,7 @@ hero:
       text: 快速开始
       link: /zh/introduce
     - theme: alt
-      text: 表单设计器
+      text: 在线体验
       link: /zh/form-design
 
 features:

@@ -4,19 +4,19 @@ import StarAlert from '../demo/StarAlert.vue'
 
 # 简介
 
-vue-form-craft是一款基于Vue 3.+的低代码表单工具，基于Element Plus UI库。
+《Vue Form Craft》是一款基于`Vue3`和`Element Plus`开发的低代码表单。
 
-目的是为前端开发同学提供快速搭建表单、实现表单交互和数据收集的功能。
+目的是为前端同学提供快速搭建表单、实现表单交互和数据收集的功能。
 
 <StarAlert/>
 
 ## 核心
 
-vue-form-craft主要由 **表单设计器FormDesign** 、 **表单渲染器FormRender**两部分构成。
+vue-form-craft主要由 `FormDesign` 、 `FormRender`两个组件构成。
 
-- FormDesign通过拖拽生成JsonSchema
+- `FormDesign`通过拖拽生成`JsonSchema`
 
-- FormRender负责将JsonSchema渲染为表单
+- `FormRender`负责将`JsonSchema`渲染为表单
 
 ## 特性
 
