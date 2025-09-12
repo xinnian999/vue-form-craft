@@ -3,7 +3,27 @@
     <div class="content">
       <Welcome v-if="list.length === 0" @item-click="handleItemClick" />
 
-      <BubbleList v-else :list="list" />
+      <BubbleList :list="list" class="bubble-list">
+        <template #loading>
+          <div class="loading">
+            <div class="loading-loader"></div>
+            <div class="loading-text">表单制作中 请稍等...</div>
+          </div>
+        </template>
+
+        <template #footer="{ item }">
+          <div class="footer" v-if="item.role === 'user'">
+            <div
+              class="item"
+              v-for="{ icon, onClick } in footerConfig"
+              @click="onClick(item)"
+              :key="icon"
+            >
+              <Icon :name="icon" />
+            </div>
+          </div>
+        </template>
+      </BubbleList>
     </div>
 
     <Sender v-model="input" @submit="startSSE" @cancel="onCancel" :loading="inputLoading" />
@@ -12,12 +32,16 @@
 
 <script setup lang="ts">
 import { ref, type Ref } from 'vue'
-import { Sender } from 'vue-element-plus-x'
-import { ns, useDesignInstance } from '@vue-form-craft/core'
-import BubbleList from './BubbleList.vue'
+import { BubbleList, Sender } from 'vue-element-plus-x'
+import type { BubbleListItemProps } from 'vue-element-plus-x/types/BubbleList'
+import { Icon, ns, useDesignInstance } from '@vue-form-craft/core'
 import generateJsonApi from './generateJsonApi'
-import type { BubbleItem } from './type'
 import Welcome from './Welcome.vue'
+
+type BubbleItem = BubbleListItemProps & {
+  key: number
+  role: 'user' | 'ai'
+}
 
 const input = ref('')
 
@@ -31,12 +55,19 @@ let controller: AbortController | null = null
 
 // 默认支持 SSE 协议
 const startSSE = async () => {
+  if (input.value === '') {
+    return
+  }
+
+  onCancel()
+
   list.value = [
     ...list.value,
     {
       key: Date.now(),
       role: 'user',
-      content: input.value
+      content: input.value,
+      placement: 'end'
     },
     {
       key: Date.now(),
@@ -46,7 +77,7 @@ const startSSE = async () => {
     }
   ]
 
-  const prompt = `请基于当前表单，${input.value}，返回 JosnSchema`
+  const prompt = `请基于当前表单，${input.value}`
 
   inputLoading.value = true
 
@@ -79,7 +110,7 @@ const startSSE = async () => {
 
     current.content = '✓ 已为您修改表单'
     designInstance.updateSchema(json)
-  } catch (err) {
+  } catch (err: any) {
     current.content = err
   } finally {
     inputLoading.value = false
@@ -96,4 +127,20 @@ const onCancel = () => {
   inputLoading.value = false
   controller?.abort()
 }
+
+const footerConfig = [
+  {
+    icon: 'copy',
+    onClick: (item: BubbleItem) => {
+      input.value = item.content!
+    }
+  },
+  {
+    icon: 'refresh',
+    onClick: (item: BubbleItem) => {
+      input.value = item.content!
+      startSSE()
+    }
+  }
+]
 </script>

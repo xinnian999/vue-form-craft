@@ -58,30 +58,5 @@
       }
     }
 
-    @include ns('form-design-ai') {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      font-size: 12px;
-
-      --el-font-size-base: 12px;
-
-      .content {
-        flex: 1;
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-
-        .el-bubble-end .el-bubble-content {
-          background-color: var(--el-color-primary-light-7);
-        }
-
-        .el-bubble-start .el-bubble-content {
-          background-color: var(--el-color-success-light-9);
-        }
-      }
-    }
   }
 }

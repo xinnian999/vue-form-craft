@@ -13,8 +13,7 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
 import type { FormItemType } from '@vue-form-craft/core'
-import { FormItemGroup } from '@vue-form-craft/core'
-import Title from '../Title/Title.vue'
+import { commonElements, FormItemGroup } from '@vue-form-craft/core'
 
 type CollapseItem = {
   title: string
@@ -28,6 +27,8 @@ const props = defineProps<{
 }>()
 
 const activeKey = ref<string[]>([])
+
+const Title = commonElements.Title
 
 onMounted(() => {
   activeKey.value = props.children.filter((item) => item.checked).map((item) => item.name)

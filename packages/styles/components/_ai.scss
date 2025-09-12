@@ -1,4 +1,20 @@
 @include ns('form-design-ai') {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-size: 12px;
+
+  --el-font-size-base: 12px;
+
+  .content {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
   .welcome {
     padding: 10px;
     border: 1px solid #ececec;
@@ -48,33 +64,14 @@
   }
 
   .bubble-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-
-    .bubble {
-      width: 100%;
-
-      .bubble-content {
-        display: inline-block;
-        padding: 10px 15px;
-        box-sizing: border-box;
-        border-radius: 10px;
-      }
+    max-height: 100%;
+    padding-bottom: 50px;
+    .el-bubble-end .el-bubble-content {
+      background-color: $lightThemeColor;
     }
 
-    .bubble.user {
-      text-align: right;
-      .bubble-content {
-        background-color: $lightThemeColor;
-      }
-    }
-
-    .bubble.ai {
-      text-align: left;
-      .bubble-content {
-        background-color: $lightSuccessColor;
-      }
+    .el-bubble-start .el-bubble-content {
+      background-color: $lightSuccessColor;
     }
 
     .loading {
@@ -165,6 +162,31 @@
           box-shadow:
             0.5em 1em rgba(61, 184, 143, 0.75),
             -0.5em -1em rgba(233, 169, 32, 0.75);
+        }
+      }
+    }
+    
+    .el-bubble-footer{
+      margin-top: 5px;
+    }
+
+    .footer {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+
+      .item{
+        cursor: pointer;
+        padding: 3px;
+        border-radius: 50%;
+        background-color: $themeColor;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        &:hover {
+          opacity: 0.7;
         }
       }
     }
