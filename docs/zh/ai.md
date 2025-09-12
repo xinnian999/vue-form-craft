@@ -15,7 +15,7 @@ setx VFC_AI_TOKEN "your_token"
 macOS/Linux：
 
 ```sh
-export VFC_AI_TOKEN=your_token
+echo 'export COZE_TOKEN="your-token-value"' >> ~/.zshrc && source ~/.zshrc
 ```
 
 ## 配置方法二
