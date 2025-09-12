@@ -2,7 +2,7 @@ import { loadEnv, type DefaultTheme, type UserConfig } from 'vitepress'
 import { mdVueDemoPlugin } from 'vitepress-vue-demo'
 
 export default ({ mode }: { mode: string }) => {
-  const { COZE_TOKEN } = loadEnv(mode, process.cwd(), '')
+  const { VFC_AI_TOKEN } = loadEnv(mode, process.cwd(), '')
 
   return {
     lang: 'zh',
@@ -14,12 +14,12 @@ export default ({ mode }: { mode: string }) => {
         port: 9999,
         host: true,
         proxy: {
-          '/coze-api': {
+          '/vfc-ai-api': {
             target: 'https://api.coze.cn',
             changeOrigin: true,
-            rewrite: (path) => path.replace(/^\/coze-api/, ''),
+            rewrite: (path) => path.replace(/^\/vfc-ai-api/, ''),
             headers: {
-              Authorization: `Bearer ${COZE_TOKEN}`
+              Authorization: `Bearer ${VFC_AI_TOKEN}`
             }
           }
         }
@@ -67,7 +67,8 @@ export default ({ mode }: { mode: string }) => {
                   { text: '表单联动', link: '/zh/linkage' },
                   { text: '深层数据绑定', link: '/zh/deepName' },
                   { text: '自定义组件', link: '/zh/custom-component' },
-                  { text: 'useFormInstance', link: '/zh/useFormInstance' }
+                  { text: 'useFormInstance', link: '/zh/useFormInstance' },
+                  { text: 'AI助手', link: '/zh/ai' }
                 ]
               },
               {

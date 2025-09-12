@@ -23,4 +23,3 @@ pnpm build
 ```
 
 `packages/vue-form-craft/dist/vue-form-craft.js`就是依赖入口！
-

@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import { defineConfig, loadEnv } from 'vite'
 
 export default defineConfig(({ mode }) => {
-  const { COZE_TOKEN } = loadEnv(mode, process.cwd(), '')
+  const { VFC_AI_TOKEN } = loadEnv(mode, process.cwd(), '')
 
   return {
     plugins: [vue()],
@@ -15,12 +15,12 @@ export default defineConfig(({ mode }) => {
     server: {
       host: true,
       proxy: {
-        '/coze-api': {
+        '/vfc-ai-api': {
           target: 'https://api.coze.cn',
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/coze-api/, ''),
+          rewrite: (path) => path.replace(/^\/vfc-ai-api/, ''),
           headers: {
-            Authorization: `Bearer ${COZE_TOKEN}`
+            Authorization: `Bearer ${VFC_AI_TOKEN}`
           }
         }
       }
