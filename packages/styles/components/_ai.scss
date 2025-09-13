@@ -165,8 +165,8 @@
         }
       }
     }
-    
-    .el-bubble-footer{
+
+    .el-bubble-footer {
       margin-top: 5px;
     }
 
@@ -175,7 +175,7 @@
       gap: 5px;
       align-items: center;
 
-      .item{
+      .item {
         cursor: pointer;
         padding: 3px;
         border-radius: 50%;
@@ -188,6 +188,27 @@
         &:hover {
           opacity: 0.7;
         }
+      }
+    }
+  }
+
+  .sender {
+    position: relative;
+    .clear {
+      position: absolute;
+      // right: 50%;
+      left: 0;
+      // transform: translateX(50%);
+      top: -35px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      z-index: 10;
+      background-color: #fff;
+      padding: 5px;
+      font-size: 16px;
+      border-radius: 50%;
+      &:hover {
+        background-color: $lightThemeColor;
       }
     }
   }

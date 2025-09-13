@@ -26,7 +26,11 @@
       </BubbleList>
     </div>
 
-    <Sender v-model="input" @submit="startSSE" @cancel="onCancel" :loading="inputLoading" />
+    <div class="sender">
+      <Icon v-if="list.length" class="clear" name="clear" @click="handleClear" />
+
+      <Sender v-model="input" @submit="startSSE" @cancel="onCancel" :loading="inputLoading" />
+    </div>
   </div>
 </template>
 
@@ -143,4 +147,9 @@ const footerConfig = [
     }
   }
 ]
+
+const handleClear = () => {
+  list.value = []
+  input.value = ''
+}
 </script>
