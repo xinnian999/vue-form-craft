@@ -7,16 +7,14 @@
     "small-v": "pnpm -C packages/element-plus v",
     "release": "pnpm -C packages/element-plus release",
     "dev:antd": "pnpm -C play/ant-design dev",
-    "release:docs": "pnpm -C docs release",
     "docs:dev": "pnpm -C docs dev",
     "docs:build": "pnpm -C docs build",
     "docs:preview": "pnpm -C docs preview",
+    "docs:release": "sh release_docs.sh",
     "change": "changeset",
     "change-v": "changeset version",
     "test": "vitest --config ./vitest.config.ts",
-    "clear": "find . -type d -name 'node_modules' -exec rm -rf {} \\;",
-    "ai:import": "pnpm -C packages/ai-server import-docs",
-    "ai:start": "pnpm -C packages/ai-server start"
+    "clear": "find . -type d -name 'node_modules' -exec rm -rf {} \\;"
   },
   "dependencies": {
     "@langchain/core": "^0.3.72",

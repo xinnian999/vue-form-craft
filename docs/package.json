@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "vitepress",
     "build": "vitepress build",
-    "preview": "vitepress preview",
-    "release": "vitepress build && sh release.sh"
+    "preview": "vitepress preview"
   },
   "devDependencies": {
     "@arco-design/web-vue": "^2.56.2",
