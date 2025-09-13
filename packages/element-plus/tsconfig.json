@@ -6,7 +6,8 @@
       "@/*": ["./src/*"],
       "@vue-form-craft/core": ["../core/index.ts"]
     },
-    "types": ["vite/client", "element-plus/global"]
+    "types": ["vite/client", "element-plus/global"],
+    "lib": ["es2021", "dom"]
   },
   "include": ["src", "vite.config.ts", "../core"]
 }
