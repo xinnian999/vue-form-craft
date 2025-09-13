@@ -1,18 +1,18 @@
 <template>
   <template v-if="formInstance.read || value">
     <div>
-      <div class="fm-esign-preview"><img :src="value" alt="未签名" /></div>
+      <div class="vfc-esign-preview"><img :src="value" alt="未签名" /></div>
       <el-button v-if="!formInstance.read" :disabled @click="handleClear" type="primary"
         >重写</el-button
       >
     </div>
   </template>
 
-  <div v-else class="fm-esign">
-    <FormRender v-model="actionValues" :schema="actionSchema" class="fm-esign-actions" />
+  <div v-else class="vfc-esign">
+    <FormRender v-model="actionValues" :schema="actionSchema" class="vfc-esign-actions" />
 
     <VueEsign
-      class="fm-esign-canvas"
+      class="vfc-esign-canvas"
       ref="esign"
       :width
       :height
@@ -34,11 +34,11 @@
 </template>
 
 <script setup lang="ts">
+import { FormRender } from '@/components'
 import { onMounted, ref } from 'vue'
-import VueEsign from './VueEsign.vue'
 import { useFormInstance } from '@vue-form-craft/core'
 import type { FormSchema } from '@vue-form-craft/core'
-import { FormRender } from '@/components'
+import VueEsign from './VueEsign.vue'
 
 interface Props {
   lineWidth?: number
@@ -133,18 +133,18 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-.fm-esign {
+.vfc-esign {
   position: relative;
   width: 100%;
 }
 
-.fm-esign-actions {
+.vfc-esign-actions {
   #form-item {
     margin-bottom: 0 !important;
   }
 }
 
-.fm-esign-canvas {
+.vfc-esign-canvas {
   min-height: 300px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -152,7 +152,7 @@ onMounted(() => {
   z-index: 10;
 }
 
-.fm-esign-preview {
+.vfc-esign-preview {
   width: 350px;
   height: 150px;
   border: 1px solid #ccc;

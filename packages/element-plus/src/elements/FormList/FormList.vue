@@ -1,5 +1,5 @@
 <template>
-  <div class="fm-formList">
+  <div class="vfc-formList">
     <CanvasGroup v-if="formInstance.design" :list="children" class="layoutRender" />
 
     <div v-else>
@@ -226,7 +226,7 @@ provide(
 </script>
 
 <style lang="scss">
-.fm-formList {
+.vfc-formList {
   position: relative;
   width: 100%;
   .list-item {

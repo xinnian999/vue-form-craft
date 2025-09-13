@@ -44,8 +44,7 @@ export default {
       required: true,
       rules: [
         {
-          type: 'template',
-          templateExp: '{{ $values.password ===  $values.confirmPassword }}',
+          type: '{{ $values.password === $values.confirmPassword }}',
           message: '两次密码不一致！',
           trigger: ['blur']
         }

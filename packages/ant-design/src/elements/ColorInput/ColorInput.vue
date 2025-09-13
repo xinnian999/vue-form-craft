@@ -1,16 +1,16 @@
 <template>
-  <div class="fm-color-input">
+  <div class="vfc-color-input">
     <a-input v-model="value" />
     <a-color-picker v-model="value" />
   </div>
 </template>
 
 <script setup lang="ts">
-const value=defineModel<string>()
+const value = defineModel<string>()
 </script>
 
 <style>
-.fm-color-input{
-    display: flex;
+.vfc-color-input {
+  display: flex;
 }
 </style>

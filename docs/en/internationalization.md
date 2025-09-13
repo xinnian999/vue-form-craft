@@ -7,20 +7,20 @@ Since `vue-form-craft` is developed based on `element-plus`, please follow the o
 Then, we also need to internationalize the designer components of `vue-form-craft`, which is also simple, just pass a configuration!
 
 ```ts
+import ElementPlus from 'element-plus'
 import { createApp } from 'vue'
 import VueFormCraft from 'vue-form-craft'
-import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
-import App from './App.vue'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
+import App from './App.vue'
 
 const app = createApp(App)
 
 app.use(ElementPlus, {
-  locale: zhCn,
+  locale: zhCn
 })
 app.use(VueFormCraft, {
-  lang: 'zh', // zh-Chinese, en-English
+  lang: 'zh' // zh-Chinese, en-English
 })
 app.mount('#app')
 ```
@@ -35,16 +35,15 @@ If you need to dynamically switch the language for internationalization, you can
 //App.vue
 
 <script setup lang="ts">
-import { provide, ref } from 'vue'
 import { ElConfigProvider } from 'element-plus'
-import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import en from 'element-plus/es/locale/lang/en'
+import zhCn from 'element-plus/es/locale/lang/zh-cn'
+import { provide, ref } from 'vue'
 import Layout from './Layout'
 
-const lang  = ref('zh')
+const lang = ref('zh')
 
-provide('fm-lang',lang)
-
+provide('vfc-lang', lang)
 </script>
 
 <template>
@@ -52,6 +51,4 @@ provide('fm-lang',lang)
     <Layout />
   </el-config-provider>
 </template>
-
 ```
-

@@ -2,27 +2,25 @@
 
 由于 `vue-form-craft` 是基于`element-plus`开发的，所以请先按照 `element-plus` 官网的方式对它的组件进行国际化。
 
-
 [如何将element-plus国际化？](https://element-plus.org/zh-CN/guide/i18n.html)
-
 
 然后我们还需要对`vue-form-craft`的设计器组件进行国际化，也很简单，只需要传递一个配置！
 
 ```ts
+import ElementPlus from 'element-plus'
 import { createApp } from 'vue'
 import VueFormCraft from 'vue-form-craft'
-import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
-import App from './App.vue'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
+import App from './App.vue'
 
 const app = createApp(App)
 
 app.use(ElementPlus, {
-  locale: zhCn,
+  locale: zhCn
 })
 app.use(VueFormCraft, {
-  lang: 'zh', // zh-中文、en-英文
+  lang: 'zh' // zh-中文、en-英文
 })
 app.mount('#app')
 ```
@@ -37,16 +35,15 @@ app.mount('#app')
 //App.vue
 
 <script setup lang="ts">
-import { provide, ref } from 'vue'
 import { ElConfigProvider } from 'element-plus'
-import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import en from 'element-plus/es/locale/lang/en'
+import zhCn from 'element-plus/es/locale/lang/zh-cn'
+import { provide, ref } from 'vue'
 import Layout from './Layout'
 
-const lang  = ref('zh')
+const lang = ref('zh')
 
-provide('fm-lang',lang)
-
+provide('vfc-lang', lang)
 </script>
 
 <template>
@@ -54,5 +51,4 @@ provide('fm-lang',lang)
     <Layout />
   </el-config-provider>
 </template>
-
 ```

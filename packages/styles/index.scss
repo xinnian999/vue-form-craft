@@ -1,10 +1,10 @@
-$namespace: 'fm' !default;
+$namespace: 'vfc' !default;
 $themeColor: #409eff !default;
 $lightThemeColor: rgb(235.9, 245.3, 255) !default;
 $dangerColor: #f56c6c !default;
 $bgColor: #fff !default;
 $successColor: #67c23a !default;
-$lightSuccessColor: rgb(240,249,235) !default;
+$lightSuccessColor: rgb(240, 249, 235) !default;
 
 @mixin ns($cls) {
   $NS: $namespace + '-' + $cls;

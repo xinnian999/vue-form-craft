@@ -1,22 +1,22 @@
 <template>
-  <div class="fm-codeHighLight">
-    <div class="fm-codeHighLight-copy" @click="handleCopy">
+  <div class="vfc-codeHighLight">
+    <div class="vfc-codeHighLight-copy" @click="handleCopy">
       <Icon name="copy" />
     </div>
-    <div class="fm-codeHighLight-content" v-html="html" />
+    <div class="vfc-codeHighLight-content" v-html="html" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { Icon, useGlobals } from '@vue-form-craft/core'
-import { onMounted, ref } from 'vue'
 import { createHighlighterCore } from 'shiki/core'
-import getWasm from 'shiki/wasm'
-import githubLight from 'shiki/themes/github-light.mjs'
 import javascript from 'shiki/langs/javascript.mjs'
+import json from 'shiki/langs/json.mjs'
 import typescript from 'shiki/langs/typescript.mjs'
 import vue from 'shiki/langs/vue-html.mjs'
-import json from 'shiki/langs/json.mjs'
+import githubLight from 'shiki/themes/github-light.mjs'
+import getWasm from 'shiki/wasm'
+import { onMounted, ref } from 'vue'
+import { Icon, useGlobals } from '@vue-form-craft/core'
 
 const props = withDefaults(
   defineProps<{
@@ -69,7 +69,7 @@ onMounted(async () => {
 </script>
 
 <style lang="scss">
-.fm-codeHighLight {
+.vfc-codeHighLight {
   position: relative;
   overflow: auto;
   line-height: 24px;

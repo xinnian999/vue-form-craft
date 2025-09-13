@@ -10,12 +10,9 @@
 
 componentName是一个你项目里的全局组件的名称，`vue-form-craft`会自动为这个组件传递`v-model`，来与表单建立数据连接。
 
-
 > 也可以通过设计器快速生成
 
 <img src="../assets/custom-component.png" style="height:300px" />
-
-
 
 ## 示例
 
@@ -27,12 +24,11 @@ demo/CustomComponent.vue
 
 :::
 
-
-> fm-code组件代码
+> vfc-code组件代码
 
 ```vue
 <template>
-  <div class="fm-code">
+  <div class="vfc-code">
     <el-input v-model="value" placeholder="请输入验证码" />
     <el-button>发送验证码</el-button>
   </div>
@@ -43,7 +39,7 @@ const value = defineModel<string>()
 </script>
 
 <style>
-.fm-code {
+.vfc-code {
   display: flex;
 }
 </style>

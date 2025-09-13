@@ -7,7 +7,7 @@ export default function useLang() {
   const globals = useGlobals()
 
   // 用户可能自行通过provide注入 动态的
-  const lang = inject<Lang>('fm-lang', ref('zh'))
+  const lang = inject<Lang>('vfc-lang', ref('zh'))
 
   // 静态的 优先级更高
   return globals?.lang ? ref(globals.lang) : lang
