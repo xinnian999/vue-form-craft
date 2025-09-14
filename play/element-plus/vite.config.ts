@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => {
     plugins: [vue()],
     resolve: {
       alias: {
-        '@': fileURLToPath(new URL('../../packages/element-plus/src', import.meta.url))
+        '@': fileURLToPath(new URL('../../packages/vue-form-craft/src', import.meta.url))
       }
     },
     server: {
