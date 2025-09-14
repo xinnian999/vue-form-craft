@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@vue-form-craft/ant-design':
-        specifier: workspace:*
-        version: link:packages/ant-design
       '@vue-form-craft/core':
         specifier: workspace:*
         version: link:packages/core
@@ -23,6 +20,9 @@ importers:
       axios:
         specifier: ^1.6.2
         version: 1.12.1
+      dotenv:
+        specifier: ^17.2.2
+        version: 17.2.2
       element-plus:
         specifier: ^2.8.3
         version: 2.11.2(vue@3.5.21)
@@ -199,6 +199,43 @@ importers:
         version: 2.2.12(typescript@5.6.3)
 
   play/element-plus:
+    dependencies:
+      vue:
+        specifier: ^3.5.12
+        version: 3.5.21(typescript@5.6.3)
+      vue-form-craft:
+        specifier: workspace:*
+        version: link:../../packages/vue-form-craft
+      vue-router:
+        specifier: ^4.4.5
+        version: 4.5.1(vue@3.5.21)
+    devDependencies:
+      '@tsconfig/node20':
+        specifier: ^20.1.4
+        version: 20.1.6
+      '@types/node':
+        specifier: ^20.17.0
+        version: 20.19.14
+      '@vitejs/plugin-vue':
+        specifier: ^5.1.4
+        version: 5.2.4(vite@5.4.20)(vue@3.5.21)
+      '@vue/tsconfig':
+        specifier: ^0.5.1
+        version: 0.5.1
+      npm-run-all2:
+        specifier: ^7.0.1
+        version: 7.0.2
+      typescript:
+        specifier: ~5.6.0
+        version: 5.6.3
+      vite:
+        specifier: ^5.4.10
+        version: 5.4.20(@types/node@20.19.14)(sass@1.32.13)
+      vue-tsc:
+        specifier: ^2.1.6
+        version: 2.2.12(typescript@5.6.3)
+
+  play/vue-form-craft:
     dependencies:
       vue:
         specifier: ^3.5.12
@@ -3609,6 +3646,11 @@ packages:
     resolution: {integrity: sha512-/2GogDQlohXPZe6D6NOgQvXLPSYBqIWMnZ8zzOhn09REE4eyAzb+Hed3jhoM9OkuaJ8P6ZGTTVWQKAi8ieIzfQ==}
     optionalDependencies:
       '@types/trusted-types': 2.0.7
+    dev: false
+
+  /dotenv@17.2.2:
+    resolution: {integrity: sha512-Sf2LSQP+bOlhKWWyhFsn0UsfdK/kCWRv1iuA2gXAwt3dyNabr6QSj00I2V10pidqz69soatm9ZwZvpQMTIOd5Q==}
+    engines: {node: '>=12'}
     dev: false
 
   /dunder-proto@1.0.1:
