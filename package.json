@@ -2,11 +2,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "pnpm -C play/element-plus dev",
-    "build": "pnpm -C packages/element-plus build",
-    "small-v": "pnpm -C packages/element-plus v",
-    "release": "pnpm -C packages/element-plus release",
+    "dev": "pnpm -C play/vue-form-craft dev",
+    "build": "pnpm -C packages/vue-form-craft build",
+    "small-v": "pnpm -C packages/vue-form-craft v",
+    "release": "pnpm -C packages/vue-form-craft release",
     "dev:antd": "pnpm -C play/ant-design dev",
+    "build:antd": "pnpm -C play/ant-design build",
     "docs:dev": "pnpm -C docs dev",
     "docs:build": "pnpm -C docs build",
     "docs:preview": "pnpm -C docs preview",
@@ -17,7 +18,6 @@
     "clear": "find . -type d -name 'node_modules' -exec rm -rf {} \\;"
   },
   "dependencies": {
-    "@vue-form-craft/ant-design": "workspace:*",
     "@vue-form-craft/core": "workspace:*",
     "@vue-form-craft/styles": "workspace:*",
     "ant-design-vue": "^4.2.6",
