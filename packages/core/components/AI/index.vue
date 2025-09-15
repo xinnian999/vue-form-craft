@@ -55,7 +55,7 @@ const list: Ref<BubbleItem[]> = ref([])
 
 const designInstance = useDesignInstance()
 
-const { aiBaseURL } = useGlobals()
+const { aiConfig } = useGlobals()
 
 let controller: AbortController | null = null
 
@@ -112,7 +112,7 @@ const startSSE = async () => {
         ]
       },
       signal: controller.signal,
-      baseURL: aiBaseURL
+      aiConfig
     })
 
     current.content = '✓ 已为您修改表单'

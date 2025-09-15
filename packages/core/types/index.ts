@@ -128,7 +128,10 @@ export type Options = {
   request?: (options: Record<string, any>) => Promise<Record<string, any>>
   extendElements?: Record<string, FormElement>
   lang?: 'zh' | 'en'
-  aiBaseURL?: string,
+  aiConfig?: {
+    token?: string
+    baseURL?: string
+  }
 }
 
 export interface Globals extends Options {

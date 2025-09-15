@@ -9,7 +9,11 @@ import zhCn from 'element-plus/es/locale/lang/zh-cn'
 const app = createApp(App)
 
 app.use(router)
-app.use(VueFormCraft)
+app.use(VueFormCraft, {
+  aiConfig: {
+    token: import.meta.env.VITE_COZE_TOKEN
+  }
+})
 app.use(ElementPlus, {
   locale: zhCn
 })

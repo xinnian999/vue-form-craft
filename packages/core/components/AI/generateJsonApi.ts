@@ -1,20 +1,29 @@
 import axios from 'axios'
+import type { Globals } from '@vue-form-craft/core'
 
 const generateJsonApi = async ({
   data,
   signal,
-  baseURL = '/coze-api'
+  aiConfig
 }: {
   data: Record<string, any>
   signal?: AbortSignal
-  baseURL?: string
+  aiConfig?: Globals['aiConfig']
 }) => {
-  const request = axios.create({ baseURL })
+  let request = axios.create({ baseURL: aiConfig?.baseURL ?? '/coze-api' })
+
+  // 如果传入了token，直接请求coze官方
+  if (aiConfig?.token) {
+    request = axios.create({
+      baseURL: 'https://api.coze.cn',
+      headers: { Authorization: `Bearer ${aiConfig.token}` }
+    })
+  }
 
   const res = await request.post('/v3/chat', data, { signal })
 
   if (res.data.code === 4101) {
-    throw new Error('请设置token')
+    throw new Error('token验证未通过')
   }
 
   const { conversation_id, id: chat_id } = res.data.data

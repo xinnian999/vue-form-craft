@@ -10,7 +10,6 @@ export default defineConfig({
     vue(),
     dts({
       outDir: './dist',
-      // include: ['../../packages/**/*', '../../packages/**/*.vue'],
       pathsToAliases: true,
       rollupTypes: true
     }),
@@ -18,7 +17,6 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      // '@vue-form-craft': fileURLToPath(new URL('../../packages', import.meta.url)),
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
@@ -41,6 +39,5 @@ export default defineConfig({
         chunkFileNames:'lazy/[name]-[hash].js'
       }
     }
-    // sourcemap: true
   }
 })
