@@ -9,23 +9,23 @@ AI助手需要配置`token`,才可使用。
 windows：
 
 ```sh
-setx VFC_AI_TOKEN "your_token"
+setx VITE_COZE_TOKEN "your_token"
 ```
 
 macOS/Linux：
 
 ```sh
-echo 'export VFC_AI_TOKEN="your-token-value"' >> ~/.zshrc && source ~/.zshrc
+echo 'export VITE_COZE_TOKEN="your-token-value"' >> ~/.zshrc && source ~/.zshrc
 ```
 
 ## 配置方法二
 
 在项目中配置。
 
-在项目根目录下创建`.env`文件，添加`VFC_AI_TOKEN=your_token`。
+在项目根目录下创建`.env`文件，添加`VITE_COZE_TOKEN=your_token`。
 
 例如vite会自动读取。
 
 ```sh
-VFC_AI_TOKEN=your_token
+VITE_COZE_TOKEN=your_token
 ```
