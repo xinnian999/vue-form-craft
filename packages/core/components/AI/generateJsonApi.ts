@@ -23,7 +23,7 @@ const pollRetrieve = async ({
     if (Date.now() - start > timeout) throw '生成超时'
     await new Promise((resolve) => setTimeout(resolve, interval))
     try {
-      const res = await axios.get('/vfc-ai-api/v3/chat/retrieve', {
+      const res = await axios.get('/coze-api/v3/chat/retrieve', {
         params: { conversation_id, chat_id },
         signal
       })
@@ -39,7 +39,7 @@ const pollRetrieve = async ({
  */
 const generateJsonApi = async (data: Record<string, any>, signal?: AbortSignal) => {
   // 发起聊天请求
-  const res = await axios.post('/vfc-ai-api/v3/chat', data, { signal })
+  const res = await axios.post('/coze-api/v3/chat', data, { signal })
 
   if (res.data.code === 4101) {
     throw '请设置token'
@@ -55,7 +55,7 @@ const generateJsonApi = async (data: Record<string, any>, signal?: AbortSignal) 
   })
 
   // 获取消息列表
-  const result = await axios.get('/vfc-ai-api/v3/chat/message/list', {
+  const result = await axios.get('/coze-api/v3/chat/message/list', {
     params: { conversation_id: info.conversation_id, chat_id: info.id },
     signal
   })

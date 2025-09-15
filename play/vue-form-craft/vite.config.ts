@@ -15,10 +15,10 @@ export default defineConfig(({ mode }) => {
     server: {
       host: true,
       proxy: {
-        '/vfc-ai-api': {
+        '/coze-api': {
           target: 'https://api.coze.cn',
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/vfc-ai-api/, ''),
+          rewrite: (path) => path.replace(/^\/coze-api/, ''),
           headers: {
             Authorization: `Bearer ${VFC_AI_TOKEN}`
           }

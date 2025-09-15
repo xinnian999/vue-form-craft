@@ -10,3 +10,6 @@ dist
 .github
 .changeset
 cache
+.github
+.vscode
+play
