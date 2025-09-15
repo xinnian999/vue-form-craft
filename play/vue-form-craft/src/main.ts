@@ -1,8 +1,8 @@
+import ElementPlus from 'element-plus'
 import { createApp } from 'vue'
+import VueFormCraft from 'vue-form-craft/dev'
 import App from './App.vue'
 import router from './router'
-import VueFormCraft from 'vue-form-craft/dev'
-import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 

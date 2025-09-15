@@ -38,7 +38,7 @@
 import { ref, type Ref } from 'vue'
 import { BubbleList, Sender } from 'vue-element-plus-x'
 import type { BubbleListItemProps } from 'vue-element-plus-x/types/BubbleList'
-import { Icon, ns, useDesignInstance } from '@vue-form-craft/core'
+import { Icon, ns, useDesignInstance, useGlobals } from '@vue-form-craft/core'
 import generateJsonApi from './generateJsonApi'
 import Welcome from './Welcome.vue'
 
@@ -54,6 +54,8 @@ const inputLoading = ref(false)
 const list: Ref<BubbleItem[]> = ref([])
 
 const designInstance = useDesignInstance()
+
+const { aiBaseURL } = useGlobals()
 
 let controller: AbortController | null = null
 
@@ -92,8 +94,8 @@ const startSSE = async () => {
   try {
     controller = new AbortController()
 
-    const json = await generateJsonApi(
-      {
+    const json = await generateJsonApi({
+      data: {
         bot_id: '7546913648569729039',
         user_id: '123456',
         additional_messages: [
@@ -109,8 +111,9 @@ const startSSE = async () => {
           }
         ]
       },
-      controller.signal
-    )
+      signal: controller.signal,
+      baseURL: aiBaseURL
+    })
 
     current.content = '✓ 已为您修改表单'
     designInstance.updateSchema(json)

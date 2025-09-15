@@ -1,67 +1,52 @@
 import axios from 'axios'
 
-/**
- * 轮询获取 AI 消息状态，直到完成或超时
- */
-const pollRetrieve = async ({
-  conversation_id,
-  chat_id,
-  timeout = 60000,
-  interval = 1000,
-  signal
+const generateJsonApi = async ({
+  data,
+  signal,
+  baseURL = '/coze-api'
 }: {
-  conversation_id: string
-  chat_id: string
-  timeout?: number
-  interval?: number
+  data: Record<string, any>
   signal?: AbortSignal
+  baseURL?: string
 }) => {
+  const request = axios.create({ baseURL })
+
+  const res = await request.post('/v3/chat', data, { signal })
+
+  if (res.data.code === 4101) {
+    throw new Error('请设置token')
+  }
+
+  const { conversation_id, id: chat_id } = res.data.data
+
   const start = Date.now()
+  const timeout = 60000
   let status = ''
 
   while (status !== 'completed') {
-    if (Date.now() - start > timeout) throw '生成超时'
-    await new Promise((resolve) => setTimeout(resolve, interval))
+    if (Date.now() - start > timeout) throw new Error('生成超时')
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+
     try {
-      const res = await axios.get('/coze-api/v3/chat/retrieve', {
+      const retrieveRes = await request.get('/v3/chat/retrieve', {
         params: { conversation_id, chat_id },
         signal
       })
-      status = res.data.data.status
-    } catch (e) {
-      throw '已取消生成'
+      status = retrieveRes.data.data.status
+    } catch (e: any) {
+      if (axios.isCancel(e)) throw new Error('已取消生成')
+      throw e
     }
   }
-}
-
-/**
- * 生成 JSON 数据
- */
-const generateJsonApi = async (data: Record<string, any>, signal?: AbortSignal) => {
-  // 发起聊天请求
-  const res = await axios.post('/coze-api/v3/chat', data, { signal })
-
-  if (res.data.code === 4101) {
-    throw '请设置token'
-  }
-
-  const info = res.data.data
-
-  // 轮询直到完成
-  await pollRetrieve({
-    conversation_id: info.conversation_id,
-    chat_id: info.id,
-    signal
-  })
 
   // 获取消息列表
-  const result = await axios.get('/coze-api/v3/chat/message/list', {
-    params: { conversation_id: info.conversation_id, chat_id: info.id },
+  const result = await request.get('/v3/chat/message/list', {
+    params: { conversation_id, chat_id },
     signal
   })
 
   if (result.data.code !== 0) {
-    throw `API Error: ${result.data.code}`
+    throw new Error(`API Error: ${result.data.code}`)
   }
 
   const content = result.data.data.find(
@@ -69,12 +54,11 @@ const generateJsonApi = async (data: Record<string, any>, signal?: AbortSignal) 
   )?.content
 
   if (!content) {
-    throw 'No answer found'
+    throw new Error('No answer found')
   }
 
   // 尝试解析 JSON，即使没有 ```json ``` 包裹
-  let jsonStr = content
-  jsonStr = jsonStr
+  const jsonStr = content
     .replace(/^```json\s*/, '')
     .replace(/```$/, '')
     .replace(/\\{\\{([^}]*)\\}\\}/g, '{{$1}}')
@@ -82,7 +66,7 @@ const generateJsonApi = async (data: Record<string, any>, signal?: AbortSignal) 
   try {
     return JSON.parse(jsonStr)
   } catch (e) {
-    throw 'AI生成错误'
+    throw new Error('AI生成错误')
   }
 }
 
