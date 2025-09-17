@@ -1,5 +1,5 @@
 {
-  "name": "@vue-form-craft/ant-design",
+  "name": "@vue-form-craft/antd",
   "version": "5.0.0",
   "private": false,
   "type": "module",

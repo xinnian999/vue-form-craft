@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@vue-form-craft/antd':
+        specifier: workspace:*
+        version: link:packages/antd
       '@vue-form-craft/core':
         specifier: workspace:*
         version: link:packages/core
@@ -139,7 +142,7 @@ importers:
         specifier: ^1.0.10
         version: 1.0.10(typescript@5.6.3)
 
-  packages/ant-design:
+  packages/antd:
     dependencies:
       ant-design-vue:
         specifier: ^4.2.6

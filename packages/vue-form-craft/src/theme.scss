@@ -9,12 +9,6 @@ $bgColor: var(--el-bg-color);
 @import '@vue-form-craft/styles';
 
 @include ns('form-design') {
-  &-left {
-    .el-overlay {
-      position: absolute;
-    }
-  }
-
   &-tabs {
     border: none;
     height: 100%;

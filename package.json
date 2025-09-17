@@ -6,8 +6,6 @@
     "build": "pnpm -C packages/vue-form-craft build",
     "small-v": "pnpm -C packages/vue-form-craft v",
     "release": "pnpm -C packages/vue-form-craft release",
-    "dev:antd": "pnpm -C play/ant-design dev",
-    "build:antd": "pnpm -C play/ant-design build",
     "docs:dev": "pnpm -C docs dev",
     "docs:build": "pnpm -C docs build",
     "docs:preview": "pnpm -C docs preview",
@@ -15,9 +13,12 @@
     "change": "changeset",
     "change-v": "changeset version",
     "test": "vitest --config ./vitest.config.ts",
-    "clear": "find . -type d -name 'node_modules' -exec rm -rf {} \\;"
+    "clear": "find . -type d -name 'node_modules' -exec rm -rf {} \\;",
+    "dev:antd": "pnpm -C play/ant-design dev",
+    "build:antd": "pnpm -C play/ant-design build"
   },
   "dependencies": {
+    "@vue-form-craft/antd": "workspace:*",
     "@vue-form-craft/core": "workspace:*",
     "@vue-form-craft/styles": "workspace:*",
     "ant-design-vue": "^4.2.6",

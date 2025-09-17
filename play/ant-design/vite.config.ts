@@ -8,7 +8,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('../../packages/ant-design/src', import.meta.url))
+      '@': fileURLToPath(new URL('../../packages/antd/src', import.meta.url))
     }
   },
   server:{
