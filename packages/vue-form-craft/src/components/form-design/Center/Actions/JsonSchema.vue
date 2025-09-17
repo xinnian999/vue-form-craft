@@ -56,7 +56,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, h, ref } from 'vue'
+import { computed, ref } from 'vue'
 import {
   changeItems,
   CodeHighLight,

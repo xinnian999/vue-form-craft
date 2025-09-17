@@ -19,8 +19,8 @@ $bgColor: var(--el-bg-color);
     .el-tab-pane {
       height: 100%;
       overflow-y: auto;
-      overflow-x: hidden;
-      padding: 15px;
+      overflow-x: visible;
+      padding: 10px;
       box-sizing: border-box;
     }
   }
