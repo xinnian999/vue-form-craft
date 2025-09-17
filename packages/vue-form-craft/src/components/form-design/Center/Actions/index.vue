@@ -28,7 +28,6 @@
     </div>
 
     <JsonSchema v-model="JsonSchemaVisible" />
-    <VueCode v-model="VueCodeVisible" />
     <Preview v-model="PreviewVisible" :schema-context="designInstance.schemaContext" />
   </div>
 </template>
@@ -39,7 +38,6 @@ import { ref } from 'vue'
 import { Icon, ns, useDesignInstance, useLocale } from '@vue-form-craft/core'
 import JsonSchema from './JsonSchema.vue'
 import Preview from './Preview.vue'
-import VueCode from './VueCode.vue'
 
 type PreviewAction = {
   label: string
@@ -53,7 +51,6 @@ const designInstance = useDesignInstance()
 const locale = useLocale()
 
 const JsonSchemaVisible = ref(false)
-const VueCodeVisible = ref(false)
 const PreviewVisible = ref(false)
 
 const leftActions: PreviewAction[] = [
@@ -64,13 +61,17 @@ const leftActions: PreviewAction[] = [
     onClick: () => {
       JsonSchemaVisible.value = true
     }
-  },
+  }
+]
+
+const rightActions: PreviewAction[] = [
   {
-    label: locale.value.actions.previewVueCode,
-    btnType: 'default',
-    icon: 'vue',
+    label: locale.value.actions.save,
+    icon: 'save',
+    btnType: 'primary',
     onClick: () => {
-      VueCodeVisible.value = true
+      designInstance.handleEmit('save')
+      designInstance.handleEmit('onSave')
     }
   },
   {
@@ -80,10 +81,7 @@ const leftActions: PreviewAction[] = [
     onClick: () => {
       PreviewVisible.value = true
     }
-  }
-]
-
-const rightActions: PreviewAction[] = [
+  },
   {
     label: locale.value.actions.clear,
     btnType: 'danger',
@@ -91,15 +89,6 @@ const rightActions: PreviewAction[] = [
     onClick: async () => {
       await ElMessageBox.confirm('确认清空当前设计吗？')
       designInstance.updateSchema({ ...designInstance.schema, items: [] })
-    }
-  },
-  {
-    label: locale.value.actions.save,
-    icon: 'save',
-    btnType: 'primary',
-    onClick: () => {
-      designInstance.handleEmit('save')
-      designInstance.handleEmit('onSave')
     }
   }
 ]

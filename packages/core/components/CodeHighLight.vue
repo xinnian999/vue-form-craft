@@ -94,6 +94,7 @@ onMounted(async () => {
     border-radius: 7px;
     color: #999;
     cursor: pointer;
+    z-index: 30;
     &:hover {
       background-color: #fff;
     }
@@ -104,6 +105,7 @@ onMounted(async () => {
     height: 100%;
     background-color: #f6f6f7;
     padding: 15px;
+    box-sizing: border-box;
     border-radius: 10px;
     pre {
       margin: 0;
