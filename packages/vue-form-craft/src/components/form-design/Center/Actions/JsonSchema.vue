@@ -2,7 +2,7 @@
   <el-dialog
     v-model="visible"
     :title="locale.actions.previewJson"
-    width="70%"
+    width="75%"
     center
     destroy-on-close
     top="10vh"
