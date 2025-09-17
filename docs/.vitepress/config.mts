@@ -44,14 +44,15 @@ export default defineConfig({
               text: '基础',
               items: [
                 { text: '简介', link: '/zh/introduce' },
-                { text: '快速开始', link: '/zh/use' }
+                { text: '快速开始', link: '/zh/use' },
+                { text: 'JsonSchema协议', link: '/zh/schema' },
+                { text: '表单联动', link: '/zh/linkage' },
+                { text: '数据校验', link: '/zh/rules' },
               ]
             },
             {
               text: '进阶',
               items: [
-                { text: 'JsonSchema详解', link: '/zh/schema' },
-                { text: '表单联动', link: '/zh/linkage' },
                 { text: '深层数据绑定', link: '/zh/deepName' },
                 { text: '自定义组件', link: '/zh/custom-component' },
                 { text: 'useFormInstance', link: '/zh/useFormInstance' },

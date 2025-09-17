@@ -1,4 +1,4 @@
-sss<template>
+<template>
   <FormRender v-model="formValues" :schema="schema" />
 </template>
 
@@ -26,7 +26,7 @@ const schema: FormSchema = {
       component: 'TextArea',
       name: 'desc',
       props: {
-        placeholder: "{{ $values.name + '的简介' }}",
+        placeholder: "{{ $values.name ? $values.name + '的简介' : '请输入简介' }}",
         disabled: '{{ !$values.name }}'
       }
     }
