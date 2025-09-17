@@ -71,7 +71,6 @@ const rightActions: PreviewAction[] = [
     btnType: 'primary',
     onClick: () => {
       designInstance.handleEmit('save')
-      designInstance.handleEmit('onSave')
     }
   },
   {

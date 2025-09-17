@@ -1,7 +1,8 @@
+import { h } from 'vue'
 import type { FormElement } from '@vue-form-craft/core'
-import attrSchema from './attrSchema'
 import { Icon } from '@vue-form-craft/core'
-import { defineAsyncComponent, h } from 'vue'
+import attrSchema from './attrSchema'
+import JsonEdit from './JsonEdit.vue'
 
 export default {
   title: 'JSON编辑',
@@ -10,5 +11,5 @@ export default {
   type: 'basic',
   order: 14,
   attrSchema,
-  render: defineAsyncComponent(() => import('./JsonEdit.vue'))
+  render: JsonEdit
 } satisfies FormElement

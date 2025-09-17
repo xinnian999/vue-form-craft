@@ -9,42 +9,42 @@
     @close="formValues = {}"
   >
     <el-tabs model-value="edit" class="demo-tabs">
-      <el-tab-pane name="edit">
+      <el-tab-pane name="edit" lazy>
         <template #label>
           <Icon name="script" style="margin-right: 5px" />
           <span>在线编辑</span>
         </template>
         <JsonEditor v-model="json" style="height: 70vh" @blur="onBlur" />
       </el-tab-pane>
-      <el-tab-pane name="ts">
+      <el-tab-pane name="ts" lazy>
         <template #label>
           <Icon name="ts" style="margin-right: 5px" />
           <span>生成TS文件</span>
         </template>
         <CodeHighLight style="height: 70vh" language="ts" :code="tsJsonSchema(json)" />
       </el-tab-pane>
-      <el-tab-pane name="js">
+      <el-tab-pane name="js" lazy>
         <template #label>
           <Icon name="js" style="margin-right: 5px" />
           <span>生成JS文件</span>
         </template>
         <CodeHighLight style="height: 70vh" language="js" :code="jsJsonSchema(json)" />
       </el-tab-pane>
-      <el-tab-pane name="tsVue">
+      <el-tab-pane name="tsVue" lazy>
         <template #label>
           <Icon name="vue" style="margin-right: 5px" />
           <span>生成TS组件</span>
         </template>
         <CodeHighLight style="height: 70vh" :code="tsVue(designInstance.schema)" language="vue" />
       </el-tab-pane>
-      <el-tab-pane name="jsVue">
+      <el-tab-pane name="jsVue" lazy>
         <template #label>
           <Icon name="vue" style="margin-right: 5px" />
           <span>生成JS组件</span>
         </template>
         <CodeHighLight style="height: 70vh" :code="jsVue(designInstance.schema)" language="vue" />
       </el-tab-pane>
-      <el-tab-pane name="help">
+      <el-tab-pane name="help" lazy>
         <template #label>
           <Icon name="help" style="margin-right: 5px" />
           <span>帮助</span>

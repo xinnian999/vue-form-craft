@@ -29,7 +29,6 @@ const props = withDefaults(defineProps<FormDesignProps>(), {
 })
 
 const emits = defineEmits<{
-  onSave: []
   save: []
   add: [element: FormElement]
 }>()

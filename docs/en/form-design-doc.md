@@ -6,7 +6,7 @@ FormDesign is a visual form designer component for vue-form-craft.
 
 ```vue
 <template>
-  <form-design @onSave="onSave" />
+  <form-design @save="onSave" />
 </template>
 
 <script setup>
