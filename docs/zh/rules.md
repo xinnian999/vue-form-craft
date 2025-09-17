@@ -15,14 +15,12 @@
 ### 复杂校验
 当字段需要更复杂的校验，如邮箱、URL 或自定义正则时，使用 rules。
 
-Rule 结构：
-```ts
-interface FormRule {
-  type: 'email' | 'url' | string; // 校验类型，可为内置类型或自定义正则字符串
-  message?: string; // 校验失败提示
-  trigger: 'blur' | 'change'; // 校验触发时机
-}
-```
+> rules是一个数组，可以配置多个校验规则。
+
+- pass: 校验通过条件，字符串格式，可设置为【正则表达式】或【JS表达式】
+- message: 校验失败提示
+- trigger: 校验触发时机
+
 
 示例：
 ```json
@@ -32,7 +30,7 @@ interface FormRule {
   "component": "Input",
   "rules": [
     {
-      "type": "email",
+      "pass": "email",
       "message": "请输入有效的邮箱地址",
       "trigger": "blur"
     }
@@ -44,7 +42,7 @@ interface FormRule {
   "component": "Input",
   "rules": [
     {
-      "type": "^1[3-9]\\d{9}$",
+      "pass": "^1[3-9]\\d{9}$",
       "message": "请输入有效的手机号",
       "trigger": "blur"
     }
