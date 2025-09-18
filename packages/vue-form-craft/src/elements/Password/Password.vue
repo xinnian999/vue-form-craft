@@ -1,6 +1,6 @@
 <template>
   <span v-if="formInstance.read">{{ value?.replace(/./g, '*') }}</span>
-  <el-input v-else v-bind="$attrs" v-model="value" type="password" />
+  <el-input v-else v-bind="$attrs" v-model="value" show-password />
 </template>
 
 <script setup lang="ts">

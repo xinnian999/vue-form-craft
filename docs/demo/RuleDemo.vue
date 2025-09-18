@@ -1,6 +1,17 @@
-import type { FormSchema } from '@vue-form-craft/core'
+<template>
+  <FormRender v-model="formValues" :schema="schema" ref="formRef" />
+  <el-button @click="handleSubmit">提交</el-button>
+</template>
 
-export default {
+<script setup lang="ts">
+import { ref } from 'vue'
+import type { FormInstance, FormSchema } from 'vue-form-craft'
+
+const formRef = ref<FormInstance>()
+
+const formValues = ref({})
+
+const schema: FormSchema = {
   labelWidth: 150,
   labelAlign: 'right',
   size: 'default',
@@ -90,4 +101,10 @@ export default {
       designKey: 'design-emal'
     }
   ]
-} satisfies FormSchema
+}
+
+const handleSubmit = async () => {
+  await formRef.value?.validate()
+  alert(JSON.stringify(formValues.value, null, 2))
+}
+</script>

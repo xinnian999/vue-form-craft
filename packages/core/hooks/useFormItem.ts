@@ -3,6 +3,7 @@ import { computed, onBeforeMount, reactive, watch } from 'vue'
 import {
   getDataByPath,
   isRegexString,
+  parseRegexString,
   setDataByPath,
   useElements,
   useFormInstance
@@ -35,7 +36,7 @@ const useFormItem = (props: FormItemType) => {
   })
 
   const computeRules = computed(() => {
-    const { rules, required, component } = props
+    const { rules, required } = props
 
     const ruleData = []
 
@@ -44,49 +45,39 @@ const useFormItem = (props: FormItemType) => {
     }
 
     if (rules) {
-      const ruleParse = rules.map((rule) => {
-        const { type, message, trigger = 'blur' } = rule
+      rules.forEach((rule) => {
+        const { expr, message, trigger = 'blur' } = rule
 
         const ruleDef = {
           message,
           trigger
         }
 
-        // 模板表达式
-        if (typeof type === 'boolean') {
-          return {
-            ...ruleDef,
-            validator: () => type
-          }
-        }
-
-        if (['email', 'url'].includes(type)) {
-          return { ...ruleDef, type }
-        }
-
         // 解析字符串的正则
-        if (isRegexString(type)) {
-          return {
+        if (isRegexString(expr)) {
+          ruleData.push({
             ...ruleDef,
-            pattern: type
-          }
+            pattern: parseRegexString(expr)
+          })
+          return
         }
 
-        return {}
+        ruleData.push({
+          ...ruleDef,
+          validator: () => !!expr
+        })
       })
-
-      return [...ruleData, ...ruleParse]
     }
 
-    if (component === 'VerifyCode') {
-      const vCodeRule = {
-        trigger: 'blur',
-        message: '验证码错误！',
-        validator: () => formInstance.vCodePass
-      }
+    // if (component === 'VerifyCode') {
+    //   const vCodeRule = {
+    //     trigger: 'blur',
+    //     message: '验证码错误！',
+    //     validator: () => formInstance.vCodePass
+    //   }
 
-      return [...ruleData, vCodeRule]
-    }
+    //   return [...ruleData, vCodeRule]
+    // }
 
     return ruleData
   })

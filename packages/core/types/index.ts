@@ -4,10 +4,12 @@ import type { Component, Ref, ToRefs, VNode } from 'vue'
 export type TriggerType = 'blur' | 'change'
 
 export type FormRule = {
-  type: 'email' | 'url' | boolean | string
+  expr: string
   message?: string
   trigger?: TriggerType | TriggerType[]
 }
+
+export type FormRules = FormRule[]
 
 export type FormChange = {
   target: string
@@ -27,7 +29,7 @@ export interface FormItemType {
   hidden?: boolean | string
   hideLabel?: boolean
   designKey?: string
-  rules?: FormRule[]
+  rules?: FormRules
   class?: any
   style?: any
   change?: FormChange[]

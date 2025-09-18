@@ -1,4 +1,3 @@
-sss
 <template>
   <div class="vfc-verify-code">
     <el-input v-model="value" class="verify-input" :placeholder="placeholder" @blur="onBlur" />
