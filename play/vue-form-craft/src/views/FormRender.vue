@@ -1,27 +1,18 @@
 <template>
   <div class="FormRenderPage">
-    <FormRender
-      v-model="formValues"
-      :schema="schema"
-      ref="formRef"
-      footer
-      @finish="onFinish"
-      @failed="onFailed"
-    />
-    <!-- <el-button @click="handleSubmit">提交</el-button> -->
+    <FormRender v-model="formValues1" :schema="schema" ref="formRef" footer @finish="onFinish1" />
+    <FormRender v-model="formValues2" :schema="schema" ref="formRef" footer @finish="onFinish2" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { FormSchema, FormInstance } from 'vue-form-craft'
+import type { FormInstance, FormSchema } from 'vue-form-craft'
 
 const formRef = ref<FormInstance>()
 
-const formValues = ref({
-  // username: 'hyl',
-  // password: '991015'
-})
+const formValues1 = ref({})
+const formValues2 = ref({})
 
 const schema = {
   labelWidth: 150,
@@ -38,7 +29,6 @@ const schema = {
       },
       designKey: 'form-eNR0',
       name: 'username',
-      required: true
     },
     {
       label: '密码',
@@ -48,17 +38,16 @@ const schema = {
       },
       designKey: 'form-D1x7',
       name: 'password',
-      required: true
     }
   ]
 } satisfies FormSchema
 
-const onFinish = (values: Record<string, any>) => {
-  console.log(values)
+const onFinish1 = (values: Record<string, any>) => {
+  alert(JSON.stringify(values, null, 2))
 }
 
-const onFailed = (err: any[]) => {
-  console.log(err)
+const onFinish2 = (values: Record<string, any>) => {
+  alert(JSON.stringify(values, null, 2))
 }
 
 // const handleSubmit = async () => {

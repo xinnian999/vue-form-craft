@@ -26,10 +26,11 @@ const props = defineProps<FormRenderProps>()
 
 const emits = defineEmits<FormRenderEmits>()
 
-const formValues = defineModel<Record<string, any>>({ default: reactive({}) })
+// 注意：默认值必须使用工厂函数返回新对象，避免跨实例共享
+const formValues = defineModel<Record<string, any>>({ default: () => reactive({}) })
 
 const schema = defineModel<FormSchema>('schema', {
-  default: reactive({
+  default: () => reactive({
     labelWidth: 150,
     labelAlign: 'right',
     scrollToError: true,
