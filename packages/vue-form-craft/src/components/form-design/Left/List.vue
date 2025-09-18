@@ -65,6 +65,10 @@ const onClone = (source: FormElement) => {
     parse.children = []
   }
 
+  if(source.attrSchema.initialValues?.name){
+    parse.name = source.attrSchema.initialValues.name
+  }
+
   return parse
 }
 </script>

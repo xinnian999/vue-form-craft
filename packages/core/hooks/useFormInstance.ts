@@ -13,11 +13,9 @@ const useFormInstance = () => {
     selectData: {},
     initialValues: {},
     context: {},
-    vCodePass: false,
     updateFormValues: () => {},
     updateSelectData: () => {},
     updateInitialValues: () => {},
-    updateVCodePass: () => {},
     validate: () => Promise.reject(),
     resetFields: () => {},
     submit: () => {}

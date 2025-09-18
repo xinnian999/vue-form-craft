@@ -8,7 +8,15 @@ export default {
     required: true,
     props: {
       placeholder: '请输入验证码'
-    }
+    },
+    name: 'isVerify',
+    rules: [
+      {
+        expr: '{{$values.isVerify}}',
+        message: '验证码有误',
+        trigger: 'blur'
+      }
+    ]
   },
   items: [
     { label: '标签', component: 'Input', name: 'label' },

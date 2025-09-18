@@ -1,38 +1,30 @@
 <template>
   <div class="vfc-verify-code">
-    <el-input v-model="value" class="verify-input" :placeholder="placeholder" @blur="onBlur" />
+    <el-input v-model="input" class="verify-input" :placeholder="placeholder" @blur="onBlur" />
     <div class="verify-code" ref="codeEl"></div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { useFormInstance } from '@vue-form-craft/core'
 import GVerify from './gVerify'
 
 defineProps<{
   placeholder: string
 }>()
 
-const value = defineModel<string>()
+const value = defineModel<boolean>()
+
+const input = ref<string>()
 
 const codeEl = ref<HTMLElement | null>(null)
 
 const code = ref<GVerify | null>(null)
 
-const formInstance = useFormInstance()
-
 const onBlur = () => {
-  if (!value.value) return
+  if (!input.value) return
 
-  const res = code.value?.validate(value.value)
-  console.log('res', res)
-
-  if (res) {
-    formInstance.updateVCodePass(true)
-  } else {
-    formInstance.updateVCodePass(false)
-  }
+  value.value = code.value?.validate(input.value)
 }
 
 onMounted(() => {

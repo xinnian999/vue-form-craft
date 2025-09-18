@@ -1,3 +1,4 @@
+import type { FormItemRule } from 'element-plus'
 import { cloneDeep, isArray, isEqual } from 'lodash'
 import { computed, onBeforeMount, reactive, watch } from 'vue'
 import {
@@ -38,7 +39,7 @@ const useFormItem = (props: FormItemType) => {
   const computeRules = computed(() => {
     const { rules, required } = props
 
-    const ruleData = []
+    const ruleData: FormItemRule[] = []
 
     if (required) {
       ruleData.push({ required: true, message: '该字段是必填字段', trigger: 'blur' })
@@ -68,16 +69,6 @@ const useFormItem = (props: FormItemType) => {
         })
       })
     }
-
-    // if (component === 'VerifyCode') {
-    //   const vCodeRule = {
-    //     trigger: 'blur',
-    //     message: '验证码错误！',
-    //     validator: () => formInstance.vCodePass
-    //   }
-
-    //   return [...ruleData, vCodeRule]
-    // }
 
     return ruleData
   })

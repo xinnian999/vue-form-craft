@@ -2,7 +2,13 @@ import type { FormInstance as ElFormInstance } from 'element-plus'
 import { cloneDeep, mergeWith } from 'lodash'
 import { computed, onMounted, provide, reactive, readonly, ref, toRefs, type Ref } from 'vue'
 import type { FormInstance, FormRenderProps, FormSchema } from '@vue-form-craft/core'
-import { $formInstance, deepParse, getDataByPath, setDataByPath, useLocale } from '@vue-form-craft/core'
+import {
+  $formInstance,
+  deepParse,
+  getDataByPath,
+  setDataByPath,
+  useLocale
+} from '@vue-form-craft/core'
 
 const useFormRender = ({
   props,
@@ -33,8 +39,6 @@ const useFormRender = ({
   const selectData = reactive<Record<string, Record<string, any>>>({})
 
   const initialValues = reactive<Record<string, any>>({})
-
-  const vCodePass = ref(false)
 
   const locale = useLocale()
 
@@ -96,21 +100,15 @@ const useFormRender = ({
     Object.assign(initialValues, values)
   }
 
-  const updateVCodePass = (value: boolean) => {
-    vCodePass.value = value
-  }
-
   const instance = readonly({
     ...toRefs(props),
     formValues,
     selectData,
     initialValues,
     context,
-    vCodePass,
     updateFormValues,
     updateSelectData,
     updateInitialValues,
-    updateVCodePass,
     validate,
     resetFields,
     submit

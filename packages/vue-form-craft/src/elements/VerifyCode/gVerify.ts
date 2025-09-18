@@ -140,11 +140,11 @@ export default class GVerify {
   validate = (code: string): boolean => {
     const lowerCaseCode = code.toLowerCase()
     const lowerCaseVCode = this.options.code.toLowerCase()
-    console.log(lowerCaseVCode)
+    // console.log(lowerCaseVCode)
     if (lowerCaseCode === lowerCaseVCode) {
       return true
     } else {
-      this.refresh()
+      // this.refresh()
       return false
     }
   }
