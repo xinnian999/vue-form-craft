@@ -35,8 +35,7 @@ export default {
         'column-gap': 20
       },
       designKey: 'form-R003',
-      name: 'cNmCuu',
-
+      name: 'cNmCuu'
     },
     {
       label: '文本校验规则',
@@ -45,51 +44,15 @@ export default {
       dialog: true,
       children: [
         {
-          label: '类型',
-          component: 'Select',
-          props: {
-            mode: 'static',
-            options: [
-              {
-                label: '邮箱',
-                value: 'email'
-              },
-              {
-                label: '字母+数字',
-                value: '^(?=.*[a-zA-Z])(?=.*\\d)[a-zA-Z\\d]+$'
-              },
-              {
-                label: '手机号码',
-                value: '^1[3456789]\\d{9}$'
-              },
-              {
-                label: '网址',
-                value: 'url'
-              },
-              {
-                label: '自定义正则',
-                value: 'custom'
-              }
-            ],
-            placeholder: '请选择...',
-            labelKey: 'label',
-            valueKey: 'value'
-          },
-          designKey: 'form-3L0P',
-          name: 'type'
-        },
-        {
-          label: '自定义正则',
+          label: '表达式',
           component: 'Input',
-          props: {
-            placeholder: '请输入正则表达式'
-          },
-          designKey: 'form-Wdb2Reg',
-          name: 'customReg',
-          hidden: '{{$item.type!=="custom"}}'
+          props: {},
+          help: '可设置为字符串格式的【正则表达式】或【JS表达式】。【正则表达式】应该将\\转义，【JS表达式】应该返回一个布尔值。',
+          designKey: 'form-3L0P',
+          name: 'expr'
         },
         {
-          label: '提示语',
+          label: '校验失败提示语',
           component: 'Input',
           props: {
             placeholder: '请输入...'

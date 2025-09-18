@@ -18,6 +18,8 @@
 
 当字段需要更复杂的校验，如邮箱、URL、手机号时，使用 `rules`。
 
+> `FormRules` 类型定义
+
 ```ts
 type TriggerType = 'blur' | 'change'
 
