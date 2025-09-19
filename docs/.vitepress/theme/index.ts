@@ -30,7 +30,7 @@ export default {
       app.use(VueFormCraft, {
         request,
         extendElements,
-        aiConfig: {
+        ai: {
           token: mode === 'production' ? null : import.meta.env.VITE_COZE_TOKEN
         }
       })

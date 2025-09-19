@@ -10,7 +10,7 @@ const app = createApp(App)
 
 app.use(router)
 app.use(VueFormCraft, {
-  aiConfig: {
+  ai: {
     token: import.meta.env.VITE_COZE_TOKEN
   }
 })

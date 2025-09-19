@@ -4,19 +4,19 @@ import type { Globals } from '@vue-form-craft/core'
 const generateJsonApi = async ({
   data,
   signal,
-  aiConfig
+  ai
 }: {
   data: Record<string, any>
   signal?: AbortSignal
-  aiConfig?: Globals['aiConfig']
+  ai?: Globals['ai']
 }) => {
-  let request = axios.create({ baseURL: aiConfig?.baseURL ?? '/coze-api' })
+  let request = axios.create({ baseURL: ai?.baseURL ?? '/coze-api' })
 
   // 如果传入了token，直接请求coze官方
-  if (aiConfig?.token) {
+  if (ai?.token) {
     request = axios.create({
       baseURL: 'https://api.coze.cn',
-      headers: { Authorization: `Bearer ${aiConfig.token}` }
+      headers: { Authorization: `Bearer ${ai.token}` }
     })
   }
 
