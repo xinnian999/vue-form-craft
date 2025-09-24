@@ -6,7 +6,7 @@
 
 ## 使用方式
 
-自定义组件的键为 `Custom` 组件，然后我们再为它传递一个关键的props ：`componentName`。
+自定义组件的标识为 `Custom`，然后我们再为它传递一个关键的props ：`componentName`。
 
 componentName是一个你项目里的全局组件的名称，`vue-form-craft`会自动为这个组件传递`v-model`，来与表单建立数据连接。
 
@@ -28,7 +28,7 @@ demo/CustomComponent.vue
 
 ```vue
 <template>
-  <div class="vfc-code">
+  <div style="display: flex">
     <el-input v-model="value" placeholder="请输入验证码" />
     <el-button>发送验证码</el-button>
   </div>
@@ -37,10 +37,4 @@ demo/CustomComponent.vue
 <script setup lang="ts">
 const value = defineModel<string>()
 </script>
-
-<style>
-.vfc-code {
-  display: flex;
-}
-</style>
 ```
