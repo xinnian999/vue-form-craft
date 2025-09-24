@@ -24,6 +24,7 @@ export default {
       const { default: extendElements } = await import('./extendElements')
 
       const mode = import.meta.env.MODE
+      const cozeToken = import.meta.env.VITE_COZE_TOKEN
 
       app.use(ElementPlus)
       app.use(ArcoVue)
@@ -31,7 +32,7 @@ export default {
         request,
         extendElements,
         ai: {
-          token: mode === 'production' ? null : import.meta.env.VITE_COZE_TOKEN
+          token: mode === 'production' ? null : cozeToken
         }
       })
       app.use(components)

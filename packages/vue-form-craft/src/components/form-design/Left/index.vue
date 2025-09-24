@@ -10,11 +10,13 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { ns,AI } from '@vue-form-craft/core'
+import { AI, ns, useGlobals } from '@vue-form-craft/core'
 import List from './List.vue'
 import Template from './Template.vue'
 
 const tabKey = ref('elements')
+
+const { ai } = useGlobals()
 
 const tabs = [
   {
@@ -26,11 +28,14 @@ const tabs = [
     title: '模板',
     key: 'templates',
     render: Template
-  },
-  {
+  }
+]
+
+if (ai) {
+  tabs.push({
     title: 'AI',
     key: 'ai',
     render: AI
-  }
-]
+  })
+}
 </script>
