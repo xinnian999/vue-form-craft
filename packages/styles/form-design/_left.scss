@@ -59,5 +59,19 @@
         }
       }
     }
+
+    .template-list {
+      .title {
+        font-size: 14px;
+        font-weight: bold;
+        margin: 5px 0px;
+      }
+      .description {
+        font-size: 12px;
+        color: #999;
+        margin: 5px 0px;
+        margin-bottom: 20px;
+      }
+    }
   }
 }
