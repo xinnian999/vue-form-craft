@@ -2,23 +2,43 @@
   <div class="template-list">
     <div class="title">表单模板</div>
     <div class="description">用于管理和切换表单模板，方便在不同业务场景中快速切换和配置表单。</div>
-    <el-space wrap alignment="center">
-      <el-button :key="name" v-for="{ name, schema } in templates" @click="useTemplate(schema)">
-        {{ name }}
-      </el-button>
-    </el-space>
+    <el-tree style="max-width: 600px" :data="templates" @node-click="handleNodeClick">
+      <template #default="{ data }">
+        <div class="catalog" v-if="data.children">
+          <Icon name="catalog" />
+          <span> {{ data.label }}</span>
+        </div>
+        <div class="form" v-else>
+          <div class="form-header">
+            <Icon name="form" />
+            <span>{{ data.label }}</span>
+            <Icon name="edit" class="edit" @click="useTemplate(data.schema)" />
+          </div>
+          <div class="form-description" v-if="data.description">
+            {{ data.description }}
+          </div>
+        </div>
+      </template>
+    </el-tree>
   </div>
 </template>
 
 <script setup lang="ts">
-import { template } from '@/config'
-import { useDesignInstance } from '@vue-form-craft/core'
+import { templates } from '@/config'
+import { Icon, useDesignInstance } from '@vue-form-craft/core'
 
 const designInstance = useDesignInstance()
 
-const templates = designInstance.templates?.length ? designInstance.templates : template
-
 const useTemplate = (schema: any) => {
   designInstance.updateSchema(schema)
+}
+
+const defaultProps = {
+  children: 'children',
+  label: 'label'
+}
+
+const handleNodeClick = (data: any) => {
+  console.log(data)
 }
 </script>
