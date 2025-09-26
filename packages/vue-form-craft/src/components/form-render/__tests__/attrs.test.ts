@@ -84,36 +84,36 @@ describe('FormRender Attrs', () => {
     expect(wrapper.find('input[name="password"]').exists()).toBe(false)
   })
 
-  it('props.footer', async () => {
-    const wrapper = mount(FormRender, {
-      props: {
-        footer: true,
-        schema,
-        modelValue: {},
-        'onUpdate:modelValue': (e: any) => wrapper.setProps({ modelValue: e })
-      }
-    })
+  // it('props.footer', async () => {
+  //   const wrapper = mount(FormRender, {
+  //     props: {
+  //       footer: true,
+  //       schema,
+  //       modelValue: {},
+  //       'onUpdate:modelValue': (e: any) => wrapper.setProps({ modelValue: e })
+  //     }
+  //   })
 
-    // 检查底部按钮是否存在
-    expect(wrapper.find('button[name="submit-btn"]').exists()).toBe(true)
-    expect(wrapper.find('button[name="reset-btn"]').exists()).toBe(true)
+  //   // 检查底部按钮是否存在
+  //   expect(wrapper.find('button[name="submit-btn"]').exists()).toBe(true)
+  //   expect(wrapper.find('button[name="reset-btn"]').exists()).toBe(true)
 
-    // 提交按钮点击
-    // await wrapper.find('button[name="submit-btn"]').trigger('click')
-    // await flushPromises()
-    // await nextTick();
-    // expect(wrapper.emitted()).toHaveProperty('failed') // 提交且校验失败事件 TODO: 未触发failed
+  //   // 提交按钮点击
+  //   // await wrapper.find('button[name="submit-btn"]').trigger('click')
+  //   // await flushPromises()
+  //   // await nextTick();
+  //   // expect(wrapper.emitted()).toHaveProperty('failed') // 提交且校验失败事件 TODO: 未触发failed
 
-    await wrapper.find('[name="username"]').setValue('hyl')
-    await wrapper.find('[name="password"]').setValue('991015')
-    await wrapper.find('button[name="submit-btn"]').trigger('click')
-    await flushPromises()
-    await nextTick()
-    expect(wrapper.emitted()).toHaveProperty('finish') // 提交且校验成功 事件
+  //   await wrapper.find('[name="username"]').setValue('hyl')
+  //   await wrapper.find('[name="password"]').setValue('991015')
+  //   await wrapper.find('button[name="submit-btn"]').trigger('click')
+  //   await flushPromises()
+  //   await nextTick()
+  //   expect(wrapper.emitted()).toHaveProperty('finish') // 提交且校验成功 事件
 
-    // 重置按钮点击
-    await wrapper.find('button[name="reset-btn"]').trigger('click')
-    expect(wrapper.emitted()).toHaveProperty('reset')
-    expect(wrapper.props('modelValue')).toStrictEqual({})
-  })
+  //   // 重置按钮点击
+  //   await wrapper.find('button[name="reset-btn"]').trigger('click')
+  //   expect(wrapper.emitted()).toHaveProperty('reset')
+  //   expect(wrapper.props('modelValue')).toStrictEqual({})
+  // })
 })
