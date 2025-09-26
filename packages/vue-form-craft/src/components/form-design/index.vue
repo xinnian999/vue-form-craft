@@ -21,7 +21,6 @@ import Left from './Left/index.vue'
 import Right from './Right/index.vue'
 
 const props = withDefaults(defineProps<FormDesignProps>(), {
-  templates: () => [],
   omitMenus: () => [],
   schemaContext: () => ({})
 })

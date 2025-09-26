@@ -1,20 +1,18 @@
 <template>
-  <FormRender v-model="formValues" :schema="schema" ref="formRef" />
-  <el-button @click="handleSubmit">提交</el-button>
+  <FormRender v-model="formValues" :schema="schema" @finish="onFinish" />
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { FormSchema, FormInstance } from 'vue-form-craft'
-
-const formRef = ref<FormInstance>()
+import type { FormSchema } from 'vue-form-craft'
 
 const formValues = ref({})
 
 const schema: FormSchema = {
-  labelWidth: 150,
+  labelWidth: 120,
   labelAlign: 'right',
   size: 'default',
+  submitBtn: true,
   items: [
     {
       label: '用户名',
@@ -37,8 +35,9 @@ const schema: FormSchema = {
   ]
 }
 
-const handleSubmit = async () => {
-  await formRef.value?.validate()
-  alert(JSON.stringify(formValues.value,null,2))
+const onFinish = async () => {
+  const data = JSON.stringify(formValues.value, null, 2)
+
+  alert(data)
 }
 </script>

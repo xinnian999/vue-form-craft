@@ -16,16 +16,15 @@ FormDesign 是 vue-form-craft 的可视化表单设计器组件。
 
 ## Props
 
-| 参数名        | 类型           | 默认值 | 描述                                          |
-| ------------- | -------------- | ------ | --------------------------------------------- |
-| v-model       | `FormSchema`   | -      | 设计器的Schema                            |
-| schemaContext | `object`       | -      | Schema自定义的 [联动变量](/zh/linkage) |
-| omitMenus     | `string[]`     | []     | 隐藏左侧组件key数组                           |
-| templates     | `TemplateData` | -      | 定制左侧可用模板                              |
+| 参数名        | 类型         | 默认值 | 描述                                       |
+| ------------- | ------------ | ------ | ------------------------------------------ |
+| v-model       | `FormSchema` | -      | 设计器的JsonSchema数据，双向绑定           |
+| schemaContext | `object`     | -      | JsonSchema自定义的 [联动变量](/zh/linkage) |
+| omitMenus     | `string[]`   | []     | 隐藏左侧组件key数组                        |
 
 ## Events
 
-| 事件名 | 类型       | 描述               |
-| ------ | ---------- | ------------------ |
-| save | `()=>void` | 点击保存按钮时触发 |
-| add | `(element:FormElement)=>void` | 拖拽组件到画布上时触发 |
+| 事件名 | 类型                          | 描述                   |
+| ------ | ----------------------------- | ---------------------- |
+| save   | `()=>void`                    | 点击保存按钮时触发     |
+| add    | `(element:FormElement)=>void` | 拖拽组件到画布上时触发 |
