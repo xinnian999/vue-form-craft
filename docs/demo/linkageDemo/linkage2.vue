@@ -79,7 +79,9 @@ const schema = {
   ]
 }
 
-const finish = (values) => {
-  alert(JSON.stringify(values, null, 2))
+const finish = (values: Record<string, any>) => {
+  const data = JSON.stringify(values, null, 2)
+
+  alert(data)
 }
 </script>

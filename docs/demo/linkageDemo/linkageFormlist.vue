@@ -1,27 +1,22 @@
 <template>
-  <FormRender v-model="formValues" :schema="schema" ref="formRef" />
-  <el-button @click="handleSubmit">提交</el-button>
+  <FormRender :schema="schema" @finish="finish" />
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import type { FormSchema, FormInstance } from 'vue-form-craft'
-
-const formRef = ref<FormInstance>()
-
-const formValues = ref({})
+import type { FormSchema } from 'vue-form-craft'
 
 const schema: FormSchema = {
   labelWidth: 150,
   labelAlign: 'right',
   size: 'default',
+  submitBtn: true,
   items: [
     {
       label: '批量设置密码',
       name: 'batchPassword',
       component: 'Password',
-      props:{
-         "show-password":true
+      props: {
+        'show-password': true
       },
       designKey: 'design-kVO2111',
       change: [
@@ -40,7 +35,7 @@ const schema: FormSchema = {
           component: 'Input',
           props: {
             placeholder: '请输入文本',
-            clearable:true
+            clearable: true
           },
           designKey: 'design-M91n',
           name: 'username',
@@ -57,7 +52,7 @@ const schema: FormSchema = {
           component: 'Password',
           props: {
             placeholder: '请输入密码',
-            "show-password":true
+            'show-password': true
           },
           designKey: 'design-kVO2',
           name: 'password'
@@ -66,15 +61,16 @@ const schema: FormSchema = {
       props: {
         mode: 'table'
       },
-      initialValue:[{},{}],
+      initialValue: [{}, {}],
       designKey: 'design-pMUa',
       name: 'users'
     }
   ]
 }
 
-const handleSubmit = async () => {
-  await formRef.value?.validate()
-  alert(JSON.stringify(formValues.value,null,2))
+const finish = (values: Record<string, any>) => {
+  const data = JSON.stringify(values, null, 2)
+
+  alert(data)
 }
 </script>

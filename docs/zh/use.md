@@ -13,9 +13,9 @@ $ npm i vue-form-craft
 （自行导入`element-plus`）
 
 ```ts
+import ElementPlus from 'element-plus'
 import { createApp } from 'vue'
 import VueFormCraft from 'vue-form-craft'
-import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import App from './App.vue'
 
@@ -62,22 +62,20 @@ app.mount('#app')
 
 ```vue [TypeScript]
 <template>
-  <FormRender v-model="formValues" :schema="schema" ref="formRef" />
-  <el-button @click="handleSubmit">提交</el-button>
+  <FormRender v-model="formValues" :schema="schema" @finish="onFinish" />
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { FormSchema,FormInstance } from 'vue-form-craft'
-
-const formRef = ref<FormInstance>()
+import type { FormSchema } from 'vue-form-craft'
 
 const formValues = ref({})
 
 const schema: FormSchema = {
-  labelWidth: 150,
+  labelWidth: 120,
   labelAlign: 'right',
   size: 'default',
+  submitBtn: true,
   items: [
     {
       label: '用户名',
@@ -100,30 +98,29 @@ const schema: FormSchema = {
   ]
 }
 
-const handleSubmit = async () => {
-  await formRef.value?.validate()
-  alert(JSON.stringify(formValues.value,null,2))
+const onFinish = async () => {
+  const data = JSON.stringify(formValues.value, null, 2)
+
+  alert(data)
 }
 </script>
 ```
 
 ```vue [JavaScript]
 <template>
-  <FormRender v-model="formValues" :schema="schema" ref="formRef" />
-  <el-button @click="handleSubmit">提交</el-button>
+  <FormRender v-model="formValues" :schema="schema" @finish="onFinish" />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
-
-const formRef = ref()
 
 const formValues = ref({})
 
 const schema = {
-  labelWidth: 150,
+  labelWidth: 120,
   labelAlign: 'right',
   size: 'default',
+  submitBtn: true,
   items: [
     {
       label: '用户名',
@@ -146,9 +143,10 @@ const schema = {
   ]
 }
 
-const handleSubmit = async () => {
-  await formRef.value?.validate()
-  alert(JSON.stringify(formValues.value,null,2))
+const onFinish = async () => {
+  const data = JSON.stringify(formValues.value, null, 2)
+
+  alert(data)
 }
 </script>
 ```
