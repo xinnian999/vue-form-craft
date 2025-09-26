@@ -57,15 +57,15 @@ const menus = computed(() =>
 const onClone = (source: FormElement) => {
   const parse: FormItemType = {
     component: source.component,
-    designKey: `design-${getRandomId(4)}`,
-    name: `form-${getRandomId(4)}`
+    designKey: `design${getRandomId(8)}`,
+    name: `${source.component.toLowerCase()}${getRandomId(8)}`
   }
 
   if (source.type === 'layout') {
     parse.children = []
   }
 
-  if(source.attrSchema.initialValues?.name){
+  if (source.attrSchema.initialValues?.name) {
     parse.name = source.attrSchema.initialValues.name
   }
 

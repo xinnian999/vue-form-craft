@@ -9,7 +9,7 @@ export default {
     useTemplateBtn: '使用模板'
   },
   actions: {
-    previewJson: '生成JSON Schema',
+    previewJson: '导出',
     previewVueCode: '生成VUE代码',
     previewForm: '预览',
     clear: '清空',
