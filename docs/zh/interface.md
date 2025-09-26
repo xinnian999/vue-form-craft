@@ -26,7 +26,6 @@ type FormChange = {
 }
 ```
 
-
 ## FormItemType
 
 JsonSchema的单个表单项
@@ -42,14 +41,14 @@ interface FormItemType {
   help?: string // 提示信息
   children?: FormItemType[] // 子项配置，嵌套组件专用
   hidden?: boolean | string // 是否隐藏
-  hideLabel?: boolean   // 隐藏标签
-  designKey?: string    // 设计器用的key，会自动生成
-  rules?: FormRule[]    // 校验规则，input组件专用
-  class?: any   // 字段类名
-  style?: any   // 字段行内样式
-  design?: boolean  // 设计模式，扩展组件时用的
+  hideLabel?: boolean // 隐藏标签
+  designKey?: string // 设计器用的key，会自动生成
+  rules?: FormRule[] // 校验规则，input组件专用
+  class?: any // 字段类名
+  style?: any // 字段行内样式
+  design?: boolean // 设计模式，扩展组件时用的
   change?: FormChange[] // 值联动配置
-  dialog?: boolean  // 用弹窗展示组件
+  dialog?: boolean // 用弹窗展示组件
 }
 ```
 
@@ -75,14 +74,14 @@ type FormSchema = {
 
 ```ts
 type FormElement = {
-  name: string      // 组件的名字
-  component: VNode | Component  // vue的SFC组件，需要可以接收v-model
-  icon:  VNode | Component      // 组件的icon ， SFC组件
-  type: 'assist' | 'layout' | 'basic'   // 组件类型
-  order: number     // 设计器会按照order大小排序所有组件
-  initialValues: Omit<FormItemType, 'name'>     // 拖拽生成组件时，生成的默认配置
-  modelName?: string    // 组件的v-model名称，默认时modelValue
-  attrSchema: FormSchema    // 组件的配置表单，schema
+  name: string // 组件的名字
+  component: VNode | Component // vue的SFC组件，需要可以接收v-model
+  icon: VNode | Component // 组件的icon ， SFC组件
+  type: 'assist' | 'layout' | 'basic' // 组件类型
+  order: number // 设计器会按照order大小排序所有组件
+  initialValues: Omit<FormItemType, 'name'> // 拖拽生成组件时，生成的默认配置
+  modelName?: string // 组件的v-model名称，默认时modelValue
+  attrSchema: FormSchema // 组件的配置表单，schema
 }
 ```
 
@@ -101,7 +100,6 @@ export interface FormRenderProps {
   schema: FormSchema
   schemaContext?: Record<string, any>
   design?: boolean
-  footer?: boolean
   read?: boolean
 }
 ```
@@ -110,7 +108,7 @@ export interface FormRenderProps {
 
 表单实例
 
-```ts 
+```ts
 interface FormInstance extends FormRenderProps {
   formValues: Record<string, any>
   selectData: Record<string, Record<string, any>>

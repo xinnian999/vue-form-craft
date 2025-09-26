@@ -1,11 +1,12 @@
 <template>
-  <FormRender :schema="schema" footer @finish="finish" style="max-width: 600px" />
+  <FormRender :schema="schema" @finish="finish" style="max-width: 600px" />
 </template>
 
 <script setup lang="ts">
 const schema = {
   labelWidth: 150,
   labelAlign: 'right',
+  submitBtn: true,
   size: 'default',
   items: [
     {

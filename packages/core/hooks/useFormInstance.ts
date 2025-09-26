@@ -1,5 +1,5 @@
-import { $formInstance } from '@vue-form-craft/core'
 import { inject, reactive } from 'vue'
+import { $formInstance } from '@vue-form-craft/core'
 
 // 返回一个响应式的Proxy，所以不可解构使用
 const useFormInstance = () => {
@@ -7,7 +7,6 @@ const useFormInstance = () => {
     schema: { items: [] },
     schemaContext: {},
     design: false,
-    footer: false,
     read: false,
     formValues: {},
     selectData: {},

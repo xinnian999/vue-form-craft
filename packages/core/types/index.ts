@@ -49,6 +49,8 @@ export type FormSchema = {
   initialValues?: Record<string, any>
   items: FormItemType[]
   style?: any
+  submitBtn?: boolean
+  resetBtn?: boolean
 }
 
 export type FormElement = {
@@ -149,7 +151,6 @@ export interface FormRenderProps {
   schema: FormSchema
   schemaContext?: Record<string, any>
   design?: boolean
-  footer?: boolean
   read?: boolean
 }
 

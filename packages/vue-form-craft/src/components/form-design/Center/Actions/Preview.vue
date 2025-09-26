@@ -14,13 +14,10 @@
           <FormRender
             v-model="formValues"
             :schema="designInstance.schema"
-            ref="formRef"
             :schemaContext="designInstance.schemaContext"
+            ref="formRef"
+            @finish="handleFinish"
           />
-        </div>
-        <div style="text-align: center">
-          <el-button @click="handleSubmit" type="primary">模拟提交</el-button>
-          <el-button @click="handleReset" type="primary" plain>重置</el-button>
         </div>
       </el-tab-pane>
 
@@ -70,14 +67,8 @@ const previewStyle = {
   padding: '20px'
 }
 
-const handleSubmit = async () => {
-  await formRef.value?.validate()
-
+const handleFinish = async () => {
   alert(JSON.stringify(formValues.value, null, 2))
-}
-
-const handleReset = async () => {
-  formRef.value?.resetFields()
 }
 </script>
 

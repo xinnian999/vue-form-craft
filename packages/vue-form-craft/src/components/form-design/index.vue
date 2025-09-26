@@ -39,6 +39,7 @@ const currentSchema = defineModel<FormSchema>({
     labelAlign: 'right',
     scrollToError: true,
     size: 'default',
+    submitBtn: true,
     items: []
   })
 })
@@ -91,6 +92,7 @@ const instance = reactive<DesignInstance>({
       labelAlign: 'right',
       scrollToError: true,
       size: 'default',
+      submitBtn: true,
       items: []
     }
   }

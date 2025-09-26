@@ -42,6 +42,7 @@ export default {
       component: 'Input',
       name: 'labelSuffix'
     },
+    { label: 'label加粗', component: 'Switch', name: 'labelBold' },
     {
       label: '表单组件尺寸',
       component: 'Radio',
@@ -66,11 +67,20 @@ export default {
       component: 'Switch',
       name: 'hideRequiredAsterisk'
     },
-    { label: 'label加粗', component: 'Switch', name: 'labelBold' },
     {
       label: '自动滚动到校验失败的第一项',
       component: 'Switch',
       name: 'scrollToError'
+    },
+    {
+      label: '表单提交按钮',
+      component: 'Switch',
+      name: 'submitBtn'
+    },
+    {
+      label: '表单重置按钮',
+      component: 'Switch',
+      name: 'resetBtn'
     }
   ]
 } satisfies FormSchema

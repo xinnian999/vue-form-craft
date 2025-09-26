@@ -1,5 +1,5 @@
 <template>
-  <FormRender :schema="schema" footer @finish="finish" style="max-width: 600px" />
+  <FormRender :schema="schema" @finish="finish" style="max-width: 600px" />
 </template>
 
 <script setup lang="ts">
@@ -7,6 +7,7 @@ const schema = {
   labelWidth: 150,
   labelAlign: 'right',
   size: 'default',
+  submitBtn: true,
   items: [
     {
       label: '选择商品',

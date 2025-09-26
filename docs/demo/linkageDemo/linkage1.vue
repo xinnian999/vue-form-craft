@@ -1,5 +1,5 @@
 <template>
-  <FormRender :schema="schema" footer @finish="finish" />
+  <FormRender :schema="schema" @finish="finish" />
 </template>
 
 <script setup lang="ts">
@@ -7,6 +7,7 @@ const schema = {
   labelWidth: 150,
   labelAlign: 'right',
   size: 'default',
+  submitBtn: true,
   items: [
     {
       label: '评分',
@@ -39,7 +40,7 @@ const schema = {
   ]
 }
 
-const finish = (values:Record<string,any>) => {
+const finish = (values: Record<string, any>) => {
   alert(JSON.stringify(values, null, 2))
 }
 </script>

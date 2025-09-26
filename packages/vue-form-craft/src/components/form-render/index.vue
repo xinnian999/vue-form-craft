@@ -3,18 +3,21 @@
     :class="ns('form')"
     :model="formValues"
     :label-position="schema.labelAlign"
-    :size="schema.size"
-    :disabled="schema.disabled"
-    :hide-required-asterisk="schema.hideRequiredAsterisk"
-    :scroll-to-error="schema.scrollToError"
-    :style="schema.style"
     ref="formRef"
-    v-bind="$attrs"
+    v-bind="{ ...$attrs, ...schema }"
   >
     <slot />
 
     <FormItemGroup :list="formItems" :empty-text="locale.canvas.emptyTip" :empty-size="18" />
-    <Footer />
+
+    <el-form-item v-if="!design">
+      <el-button v-if="schema.submitBtn" type="primary" @click="instance.submit" name="submit-btn">
+        提交
+      </el-button>
+      <el-button v-if="schema.resetBtn" @click="() => instance.resetFields()" name="reset-btn">
+        重置
+      </el-button>
+    </el-form-item>
   </el-form>
 </template>
 
@@ -22,7 +25,6 @@
 import { reactive } from 'vue'
 import type { FormRenderEmits, FormRenderProps, FormSchema } from '@vue-form-craft/core'
 import { FormItemGroup, ns, useFormRender, useLocale } from '@vue-form-craft/core'
-import Footer from './Footer.vue'
 
 const props = defineProps<FormRenderProps>()
 
