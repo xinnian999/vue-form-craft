@@ -1,11 +1,10 @@
 @include ns('form-design') {
   &-right {
-    width: 22%;
-    min-width: 300px;
+    width: 350px;
     overflow: auto;
-    // padding: 20px;
 
     @include ns('attr') {
+      padding: 5px;
       padding-bottom: 20px;
 
       @include ns('linkageConfig') {

@@ -10,13 +10,14 @@
   >
     <el-tabs v-model="tabKey">
       <el-tab-pane label="编辑模式" name="edit">
-        <FormRender
-          v-model="formValues"
-          :schema="designInstance.schema"
-          ref="formRef"
-          :schemaContext="designInstance.schemaContext"
-          :style="{ minHeight: '200px', padding: '20px' }"
-        />
+        <div :style="previewStyle">
+          <FormRender
+            v-model="formValues"
+            :schema="designInstance.schema"
+            ref="formRef"
+            :schemaContext="designInstance.schemaContext"
+          />
+        </div>
         <div style="text-align: center">
           <el-button @click="handleSubmit" type="primary">模拟提交</el-button>
           <el-button @click="handleReset" type="primary" plain>重置</el-button>
@@ -24,13 +25,14 @@
       </el-tab-pane>
 
       <el-tab-pane label="阅读模式" name="read" lazy>
-        <FormRender
-          v-model="formValues"
-          :schema="{ ...designInstance.schema, labelSuffix: ':' }"
-          :schemaContext="designInstance.schemaContext"
-          :style="{ minHeight: '200px', padding: '20px' }"
-          read
-        />
+        <div :style="previewStyle">
+          <FormRender
+            v-model="formValues"
+            :schema="{ ...designInstance.schema, labelSuffix: ':' }"
+            :schemaContext="designInstance.schemaContext"
+            read
+          />
+        </div>
       </el-tab-pane>
 
       <el-tab-pane label="联动变量" name="context">
@@ -42,8 +44,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
 import { FormRender } from '@/components'
+import { computed, ref } from 'vue'
 import type { FormInstance } from '@vue-form-craft/core'
 import { useDesignInstance, useElements, useLocale } from '@vue-form-craft/core'
 
@@ -62,6 +64,11 @@ const visible = defineModel<boolean>()
 const context = computed(() => formRef.value?.context)
 
 const locale = useLocale()
+
+const previewStyle = {
+  minHeight: '200px',
+  padding: '20px'
+}
 
 const handleSubmit = async () => {
   await formRef.value?.validate()

@@ -87,7 +87,7 @@ const rightActions: PreviewAction[] = [
     icon: 'trash',
     onClick: async () => {
       await ElMessageBox.confirm('确认清空当前设计吗？')
-      designInstance.updateSchema({ ...designInstance.schema, items: [] })
+      designInstance.resetSchema()
     }
   }
 ]

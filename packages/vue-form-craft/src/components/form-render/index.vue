@@ -1,11 +1,13 @@
 <template>
   <el-form
+    :class="ns('form')"
     :model="formValues"
     :label-position="schema.labelAlign"
     :size="schema.size"
     :disabled="schema.disabled"
     :hide-required-asterisk="schema.hideRequiredAsterisk"
     :scroll-to-error="schema.scrollToError"
+    :style="schema.style"
     ref="formRef"
     v-bind="$attrs"
   >
@@ -19,7 +21,7 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
 import type { FormRenderEmits, FormRenderProps, FormSchema } from '@vue-form-craft/core'
-import { FormItemGroup, useFormRender, useLocale } from '@vue-form-craft/core'
+import { FormItemGroup, ns, useFormRender, useLocale } from '@vue-form-craft/core'
 import Footer from './Footer.vue'
 
 const props = defineProps<FormRenderProps>()
@@ -30,13 +32,14 @@ const emits = defineEmits<FormRenderEmits>()
 const formValues = defineModel<Record<string, any>>({ default: () => reactive({}) })
 
 const schema = defineModel<FormSchema>('schema', {
-  default: () => reactive({
-    labelWidth: 150,
-    labelAlign: 'right',
-    scrollToError: true,
-    size: 'default',
-    items: []
-  })
+  default: () =>
+    reactive({
+      labelWidth: 150,
+      labelAlign: 'right',
+      scrollToError: true,
+      size: 'default',
+      items: []
+    })
 })
 
 const locale = useLocale()

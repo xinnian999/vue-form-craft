@@ -22,10 +22,16 @@
       flex: 1;
       margin: 10px;
       position: relative;
-      overflow: hidden;
-      background-color: #fff;
-      border-radius: 5px;
-      padding: 5px;
+      overflow-y: hidden;
+      overflow-x: auto;
+      @include ns('form') {
+        background-color: #fff;
+        border-radius: 5px;
+        padding: 5px;
+        box-sizing: border-box;
+        height: 100%;
+        margin: 0 auto;
+      }
     }
   }
 }

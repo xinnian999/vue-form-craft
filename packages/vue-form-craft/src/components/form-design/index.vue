@@ -3,7 +3,6 @@
     <Left />
     <Center />
     <Right />
-    <!-- <AIGenerate /> -->
   </div>
 </template>
 
@@ -17,7 +16,6 @@ import type {
   FormItemType,
   FormSchema
 } from '@vue-form-craft/core'
-// import AIGenerate from '../AIGenerate.vue'
 import Center from './Center/index.vue'
 import Left from './Left/index.vue'
 import Right from './Right/index.vue'
@@ -86,6 +84,15 @@ const instance = reactive<DesignInstance>({
   },
   handleEmit: (name, params) => {
     emits(name, params)
+  },
+  resetSchema: () => {
+    currentSchema.value = {
+      labelWidth: 150,
+      labelAlign: 'right',
+      scrollToError: true,
+      size: 'default',
+      items: []
+    }
   }
 })
 

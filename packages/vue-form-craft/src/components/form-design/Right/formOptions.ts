@@ -5,6 +5,14 @@ export default {
   labelAlign: 'top',
   items: [
     {
+      label: '表单宽度',
+      component: 'Input',
+      name: 'style.width',
+      props: {
+        placeholder: '100%'
+      }
+    },
+    {
       label: 'label宽度',
       component: 'InputNumber',
       name: 'labelWidth',

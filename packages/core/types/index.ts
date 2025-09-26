@@ -48,6 +48,7 @@ export type FormSchema = {
   scrollToError?: boolean
   initialValues?: Record<string, any>
   items: FormItemType[]
+  style?: any
 }
 
 export type FormElement = {
@@ -195,4 +196,5 @@ export interface DesignInstance extends Required<ToRefs<FormDesignProps>> {
   updateSchema: (schema: FormSchema) => void
   updateList: (newList: FormItemType[]) => void
   handleEmit: (event: any, ...args: any[]) => void
+  resetSchema: () => void
 }
