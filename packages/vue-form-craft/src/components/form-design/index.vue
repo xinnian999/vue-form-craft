@@ -78,23 +78,14 @@ const instance = reactive<DesignInstance>({
     instance.hoverKey = key
   },
   updateSchema: (schema) => {
-    Object.assign(currentSchema.value, schema)
+    // Object.assign(currentSchema.value, schema)
+    currentSchema.value = schema
   },
   updateList: (newList) => {
     list.value = newList
   },
   handleEmit: (name, params) => {
     emits(name, params)
-  },
-  resetSchema: () => {
-    currentSchema.value = {
-      labelWidth: 150,
-      labelAlign: 'right',
-      scrollToError: true,
-      size: 'default',
-      submitBtn: true,
-      items: []
-    }
   }
 })
 

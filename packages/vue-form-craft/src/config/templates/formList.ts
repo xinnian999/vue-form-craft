@@ -4,6 +4,7 @@ export default {
   labelWidth: 150,
   labelAlign: 'right',
   size: 'default',
+  submitBtn: true,
   items: [
     {
       label: '增添管理员',
@@ -63,4 +64,4 @@ export default {
       name: 'users'
     }
   ]
-}  satisfies FormSchema
+} satisfies FormSchema

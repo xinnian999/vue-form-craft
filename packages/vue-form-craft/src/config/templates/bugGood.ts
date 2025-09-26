@@ -5,6 +5,7 @@ export default {
   "labelAlign": "right",
   "size": "default",
   "scrollToError": true,
+  "submitBtn": true,
   "items": [
     {
       "label": "商品选择",

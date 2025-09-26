@@ -4,6 +4,7 @@ export default {
   labelWidth: 150,
   labelAlign: 'right',
   size: 'default',
+  submitBtn: true,
   items: [
     {
       label: '附件上传',

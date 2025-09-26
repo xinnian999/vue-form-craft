@@ -4,6 +4,7 @@ export default {
   labelWidth: 120,
   labelAlign: 'right',
   size: 'default',
+  submitBtn: true,
   items: [
     {
       label: '关键词',

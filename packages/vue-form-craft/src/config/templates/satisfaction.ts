@@ -5,6 +5,7 @@ export default {
   labelAlign: 'top',
   size: 'default',
   scrollToError: true,
+  submitBtn: true,
   items: [
     {
       label: '您的姓名',

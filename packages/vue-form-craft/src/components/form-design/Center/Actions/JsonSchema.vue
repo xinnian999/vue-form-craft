@@ -91,10 +91,10 @@ const formValues = ref({})
 const visible = defineModel<boolean>()
 
 const onBlur = (editor: any) => {
-  designInstance.updateSchema({
-    ...designInstance.schema,
-    items: changeItems(designInstance.schema.items)
-  })
+  // designInstance.updateSchema({
+  //   ...designInstance.schema,
+  //   items: changeItems(designInstance.schema.items)
+  // })
   editor.repair()
 }
 </script>

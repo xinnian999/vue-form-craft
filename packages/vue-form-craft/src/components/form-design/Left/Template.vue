@@ -2,7 +2,7 @@
   <div class="template-list">
     <div class="title">表单模板</div>
     <div class="description">用于管理和切换表单模板，方便在不同业务场景中快速切换和配置表单。</div>
-    <el-tree style="max-width: 600px" :data="templates" @node-click="handleNodeClick">
+    <el-tree style="max-width: 600px" :data="templates">
       <template #default="{ data }">
         <div class="catalog" v-if="data.children">
           <Icon name="catalog" />
@@ -31,14 +31,5 @@ const designInstance = useDesignInstance()
 
 const useTemplate = (schema: any) => {
   designInstance.updateSchema(schema)
-}
-
-const defaultProps = {
-  children: 'children',
-  label: 'label'
-}
-
-const handleNodeClick = (data: any) => {
-  console.log(data)
 }
 </script>
