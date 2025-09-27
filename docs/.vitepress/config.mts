@@ -89,6 +89,7 @@ export default defineConfig({
               items: [
                 { text: '读写表单数据', link: '/zh/teach/vmodel' },
                 { text: '提交表单', link: '/zh/teach/submit' },
+                { text: '函数传递', link: '/zh/teach/func' },
                 { text: '事件传递', link: '/zh/teach/event' },
               ]
             }
