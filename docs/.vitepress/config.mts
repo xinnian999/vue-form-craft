@@ -35,6 +35,7 @@ export default defineConfig({
         nav: [
           { text: '首页', link: '/zh/' },
           { text: '文档', link: '/zh/introduce' },
+          { text: '教程', link: '/zh/teach/submit' },
           { text: '在线体验', link: '/zh/form-design' }
         ],
 
@@ -56,7 +57,6 @@ export default defineConfig({
                 { text: 'AI助手', link: '/zh/ai' },
                 { text: '深层数据绑定', link: '/zh/deepName' },
                 { text: '自定义组件', link: '/zh/custom-component' },
-                { text: 'useFormInstance', link: '/zh/useFormInstance' }
               ]
             },
             {
@@ -67,11 +67,9 @@ export default defineConfig({
               ]
             },
             {
-              text: '扩展',
+              text: 'Hooks',
               items: [
-                { text: '扩展表单设计器', link: '/zh/extend' },
-                { text: '例：扩展markdown输入框', link: '/zh/extendMd' },
-                { text: '例：扩展穿梭框', link: '/zh/extendTransfer' }
+                { text: 'useFormInstance', link: '/zh/useFormInstance' }
               ]
             },
             {
@@ -82,6 +80,16 @@ export default defineConfig({
                 { text: '国际化', link: '/zh/internationalization' },
                 { text: '二次开发指南', link: '/zh/dev' },
                 { text: '意见&建议&捐赠', link: '/zh/advice' }
+              ]
+            }
+          ],
+          '/zh/teach/': [
+            {
+              text: '教程',
+              items: [
+                { text: '读写表单数据', link: '/zh/teach/vmodel' },
+                { text: '提交表单', link: '/zh/teach/submit' },
+                { text: '事件传递', link: '/zh/teach/event' },
               ]
             }
           ]

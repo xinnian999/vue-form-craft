@@ -1,15 +1,22 @@
 <template>
-  <FormRender :schema="schema" @finish="onFinish" />
+  <div style="width: 400px; margin: 20px auto">
+    <FormRender v-model="formValues" ref="form" :schema="schema" />
+    <el-button style="width: 100%" type="primary" @click="handleSubmit"> 立即登陆 </el-button>
+  </div>
 </template>
 
 <script setup lang="ts">
+import { ref, useTemplateRef } from 'vue'
 import type { FormSchema } from 'vue-form-craft'
+
+const formValues = ref({})
+
+const form = useTemplateRef('form')
 
 const schema: FormSchema = {
   labelWidth: 120,
-  labelAlign: 'right',
+  labelAlign: 'top',
   size: 'default',
-  submitBtn: true,
   items: [
     {
       label: '用户名',
@@ -32,8 +39,10 @@ const schema: FormSchema = {
   ]
 }
 
-const onFinish = async (values: Record<string, any>) => {
-  const data = JSON.stringify(values, null, 2)
+const handleSubmit = async () => {
+  await form.value.validate()
+
+  const data = JSON.stringify(formValues.value, null, 2)
 
   alert(data)
 }
