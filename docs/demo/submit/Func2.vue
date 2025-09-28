@@ -5,7 +5,7 @@
 <script setup lang="ts">
 import type { FormSchema } from 'vue-form-craft'
 
-// 中等复杂度：通过函数生成快捷日期
+// 通过函数生成快捷日期
 const getTomorrow = () => {
   const d = new Date()
   d.setDate(d.getDate() + 1)
@@ -36,8 +36,8 @@ const schema: FormSchema = {
         type: 'date',
         placeholder: '请选择日期',
         shortcuts: [
-          { text: '明天', value: '{{ getTomorrow() }}' },
-          { text: '下周一', value: '{{ getNextMonday() }}' }
+          { text: '明天', value: '{{ getTomorrow }}' },
+          { text: '下周一', value: '{{ getNextMonday }}' }
         ]
       },
       designKey: 'design-dp01'

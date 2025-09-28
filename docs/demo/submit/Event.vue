@@ -17,7 +17,7 @@ const schema: FormSchema = {
       required: true,
       props: {
         placeholder: '请输入姓名',
-        onBlur: '{{ () => { alert("你输入了：" + $values.name) } }}'
+        onBlur: '{{ e => { alert("你输入了：" + e.target.value) } }}'
       }
     }
   ]
