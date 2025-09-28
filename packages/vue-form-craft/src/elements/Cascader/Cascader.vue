@@ -14,8 +14,8 @@
 </template>
 
 <script setup lang="ts">
+import { useSelect } from '@/hooks'
 import { type CascaderValue } from 'element-plus'
-import { useSelect } from '@vue-form-craft/core'
 import type { SelectProps } from '@vue-form-craft/core'
 
 const props = withDefaults(defineProps<SelectProps>(), {

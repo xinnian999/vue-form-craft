@@ -1,6 +1,6 @@
-import { Icon } from '@vue-form-craft/core'
-import type { FormElement } from '@vue-form-craft/core'
+import { Icon } from '@/components'
 import { h } from 'vue'
+import type { FormElement } from '@vue-form-craft/core'
 
 export default {
   title: '滑块',

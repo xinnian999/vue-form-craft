@@ -37,7 +37,7 @@ import type {
   SelectProps,
   SelectValue
 } from '@vue-form-craft/core'
-import { useFormInstance, useSelect } from '@vue-form-craft/core'
+import { useFormInstance, useSelect } from '@/hooks'
 import { watch } from 'vue';
 
 type Props = Omit<SelectProps, 'multiple'> & {

@@ -32,10 +32,10 @@
 </template>
 
 <script setup lang="ts">
+import { useFormInstance, useSelect } from '@/hooks'
 import { type CheckboxGroupValueType } from 'element-plus'
+import { watch } from 'vue'
 import type { Direction, OptionType, SelectProps } from '@vue-form-craft/core'
-import { useFormInstance, useSelect } from '@vue-form-craft/core'
-import { watch } from 'vue';
 
 type Props = Omit<SelectProps, 'multiple'> & {
   optionType?: OptionType

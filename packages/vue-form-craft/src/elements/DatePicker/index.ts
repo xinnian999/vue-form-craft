@@ -1,7 +1,7 @@
-import attrSchema from './attrSchema'
-import type { FormElement } from '@vue-form-craft/core'
-import { Icon } from '@vue-form-craft/core'
+import { Icon } from '@/components'
 import { h } from 'vue'
+import type { FormElement } from '@vue-form-craft/core'
+import attrSchema from './attrSchema'
 
 export default {
   title: '日期选择器',

@@ -10,9 +10,10 @@
 
 <script setup lang="ts">
 import { FormRender } from '@/components'
+import { useElements, useLang } from '@/hooks'
 import { isString } from 'lodash'
 import { computed } from 'vue'
-import { getDataByPath, ns, setDataByPath, useElements, useLang } from '@vue-form-craft/core'
+import { getDataByPath, ns, setDataByPath } from '@vue-form-craft/core'
 import type { FormItemType, FormSchema } from '@vue-form-craft/core'
 import LinkageConfig from './LinkageConfig/index.vue'
 import StyleConfig from './StyleConfig/index.vue'

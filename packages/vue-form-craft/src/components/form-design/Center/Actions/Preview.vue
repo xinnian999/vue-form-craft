@@ -42,9 +42,9 @@
 
 <script setup lang="ts">
 import { FormRender } from '@/components'
+import { useDesignInstance, useElements, useLocale } from '@/hooks'
 import { computed, ref } from 'vue'
 import type { FormInstance } from '@vue-form-craft/core'
-import { useDesignInstance, useElements, useLocale } from '@vue-form-craft/core'
 
 const designInstance = useDesignInstance()
 

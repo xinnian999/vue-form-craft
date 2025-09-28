@@ -5,7 +5,7 @@ export default { install }
 
 export { FormRender, FormDesign } from './components'
 
-export { useFormInstance } from '@vue-form-craft/core'
+export { useFormInstance } from '@/hooks'
 
 export type {
   FormElement,

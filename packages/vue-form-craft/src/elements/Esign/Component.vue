@@ -35,8 +35,8 @@
 
 <script setup lang="ts">
 import { FormRender } from '@/components'
+import { useFormInstance } from '@/hooks'
 import { onMounted, ref } from 'vue'
-import { useFormInstance } from '@vue-form-craft/core'
 import type { FormSchema } from '@vue-form-craft/core'
 import VueEsign from './VueEsign.vue'
 

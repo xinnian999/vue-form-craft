@@ -1,12 +1,12 @@
+import { Icon } from '@/components'
+import { defineAsyncComponent, h } from 'vue'
 import type { FormElement } from '@vue-form-craft/core'
 import attrSchema from './attrSchema'
-import { Icon } from '@vue-form-craft/core'
-import { defineAsyncComponent, h } from 'vue'
 
 export default {
   title: '分割线',
   component: 'Divider',
-  render:defineAsyncComponent(() => import('./Divider.vue')),
+  render: defineAsyncComponent(() => import('./Divider.vue')),
   icon: h(Icon, { name: 'divider' }),
   type: 'assist',
   order: 6,

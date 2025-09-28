@@ -3,10 +3,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import { FormRender } from '@/components'
+import { useDesignInstance } from '@/hooks'
+import { computed } from 'vue'
 import formOptions from './formOptions'
-import { useDesignInstance } from '@vue-form-craft/core'
 
 const designInstance = useDesignInstance()
 

@@ -56,15 +56,9 @@
 </template>
 
 <script setup lang="ts">
+import { CodeHighLight, Icon } from '@/components'
+import { useDesignInstance, useElements, useLocale } from '@/hooks'
 import { computed, ref } from 'vue'
-import {
-  changeItems,
-  CodeHighLight,
-  Icon,
-  useDesignInstance,
-  useElements,
-  useLocale
-} from '@vue-form-craft/core'
 import { jsJsonSchema, jsVue, schemaHelp, tsJsonSchema, tsVue } from './config'
 
 const designInstance = useDesignInstance()

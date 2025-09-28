@@ -24,8 +24,9 @@
 </template>
 
 <script setup lang="ts">
+import { Icon } from '@/components'
 import { templates } from '@/config'
-import { Icon, useDesignInstance } from '@vue-form-craft/core'
+import { useDesignInstance } from '@/hooks'
 
 const designInstance = useDesignInstance()
 

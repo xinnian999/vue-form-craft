@@ -4,7 +4,7 @@
 </template>
 
 <script setup lang="ts">
-import { useFormInstance } from '@vue-form-craft/core'
+import { useFormInstance } from '@/hooks'
 
 const value = defineModel<number>()
 

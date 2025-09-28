@@ -9,8 +9,10 @@
 </template>
 
 <script setup lang="ts">
+import { AI } from '@/components'
+import { useGlobals } from '@/hooks'
 import { ref } from 'vue'
-import { AI, ns, useGlobals } from '@vue-form-craft/core'
+import { ns } from '@vue-form-craft/core'
 import List from './List.vue'
 import Template from './Template.vue'
 

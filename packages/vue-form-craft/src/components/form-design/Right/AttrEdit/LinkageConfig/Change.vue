@@ -6,8 +6,8 @@
 
 <script setup lang="ts">
 import { FormRender } from '@/components'
+import { useDesignInstance } from '@/hooks'
 import linkageSchema from './changeSchema'
-import { useDesignInstance } from '@vue-form-craft/core'
 
 const designInstance = useDesignInstance()
 
