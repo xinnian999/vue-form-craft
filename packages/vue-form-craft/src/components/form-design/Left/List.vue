@@ -39,8 +39,8 @@
 import { useDesignInstance, useElements, useLang } from '@/hooks'
 import { computed, ref } from 'vue'
 import draggable from 'vuedraggable-es-fix'
-import type { FormElement, FormItemType } from '@vue-form-craft/core'
-import { getRandomId, ns } from '@vue-form-craft/core'
+import type { FormElement, FormItemType } from '@/types'
+import { getRandomId, ns } from '@/tools'
 import parseMenus from './menus'
 
 const designInstance = useDesignInstance()

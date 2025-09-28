@@ -1,6 +1,6 @@
 import { Icon } from '@/components'
 import { h } from 'vue'
-import type { FormElement } from '@vue-form-craft/core'
+import type { FormElement } from '@/types'
 import attrSchema from './attrSchema'
 import Password from './Password.vue'
 

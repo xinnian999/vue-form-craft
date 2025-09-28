@@ -64,14 +64,8 @@ import { useElements, useFormInstance } from '@/hooks'
 import type { FormItemRule } from 'element-plus'
 import { cloneDeep, isEqual } from 'lodash'
 import { computed, onBeforeMount, reactive, watch } from 'vue'
-import {
-  getDataByPath,
-  isRegexString,
-  ns,
-  parseRegexString,
-  setDataByPath,
-  type FormItemType
-} from '@vue-form-craft/core'
+import { getDataByPath, isRegexString, ns, parseRegexString, setDataByPath } from '@/tools'
+import type { FormItemType } from '@/types'
 
 const props = defineProps<FormItemType>()
 

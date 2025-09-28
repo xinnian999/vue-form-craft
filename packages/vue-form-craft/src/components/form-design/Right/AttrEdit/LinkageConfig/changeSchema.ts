@@ -1,4 +1,4 @@
-import type { FormSchema } from '@vue-form-craft/core'
+import type { FormSchema } from '@/types'
 
  const schema = (): FormSchema => {
   // const targetOptions = build(schema.items).filter((item) => item.value !== current.name)

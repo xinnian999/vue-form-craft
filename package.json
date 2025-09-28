@@ -16,7 +16,6 @@
     "clear": "find . -type d -name 'node_modules' -exec rm -rf {} \\;"
   },
   "dependencies": {
-    "@vue-form-craft/core": "workspace:*",
     "@vue-form-craft/styles": "workspace:*",
     "ant-design-vue": "^4.2.6",
     "axios": "^1.6.2",

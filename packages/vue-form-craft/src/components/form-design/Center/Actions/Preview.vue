@@ -44,7 +44,7 @@
 import { FormRender } from '@/components'
 import { useDesignInstance, useElements, useLocale } from '@/hooks'
 import { computed, ref } from 'vue'
-import type { FormInstance } from '@vue-form-craft/core'
+import type { FormInstance } from '@/types'
 
 const designInstance = useDesignInstance()
 

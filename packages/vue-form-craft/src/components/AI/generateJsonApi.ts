@@ -1,5 +1,5 @@
 import axios from 'axios'
-import type { Globals } from '@vue-form-craft/core'
+import type { Globals } from '@/types'
 
 const generateJsonApi = async ({
   data,

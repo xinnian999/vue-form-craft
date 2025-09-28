@@ -1,5 +1,5 @@
 import { inject } from 'vue'
-import { $globals } from '@vue-form-craft/core'
+import { $globals } from '@/symbol'
 
 const useGlobals = () => {
   const globals = inject($globals)!

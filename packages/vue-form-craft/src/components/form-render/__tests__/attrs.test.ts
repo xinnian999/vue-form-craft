@@ -1,7 +1,7 @@
 import { mount, flushPromises } from '@vue/test-utils'
 import { describe, it, expect } from 'vitest'
 import { FormRender } from '@/components'
-import type { FormSchema } from '@vue-form-craft/core'
+import type { FormSchema } from '@/types'
 import { nextTick } from 'vue'
 import { configTest } from '@/utils'
 

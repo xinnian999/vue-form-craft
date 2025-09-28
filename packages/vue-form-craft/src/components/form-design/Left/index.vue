@@ -12,7 +12,7 @@
 import { AI } from '@/components'
 import { useGlobals } from '@/hooks'
 import { ref } from 'vue'
-import { ns } from '@vue-form-craft/core'
+import { ns } from '@/tools'
 import List from './List.vue'
 import Template from './Template.vue'
 

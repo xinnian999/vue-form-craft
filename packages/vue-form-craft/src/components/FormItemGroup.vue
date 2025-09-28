@@ -9,7 +9,7 @@
 <script setup lang="ts">
 import { CanvasGroup, FormItem } from '@/components'
 import { useFormInstance } from '@/hooks'
-import type { FormItemType } from '@vue-form-craft/core'
+import type { FormItemType } from '@/types'
 
 defineProps<{
   list: FormItemType[]

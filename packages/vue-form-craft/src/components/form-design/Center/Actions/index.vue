@@ -37,7 +37,7 @@ import { Icon } from '@/components'
 import { useDesignInstance, useLocale } from '@/hooks'
 import { ElMessageBox } from 'element-plus'
 import { ref } from 'vue'
-import { ns } from '@vue-form-craft/core'
+import { ns } from '@/tools'
 import JsonSchema from './JsonSchema.vue'
 import Preview from './Preview.vue'
 

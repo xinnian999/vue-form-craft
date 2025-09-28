@@ -1,4 +1,4 @@
-import type { FormSchema } from '@vue-form-craft/core'
+import type { FormSchema } from '@/types'
 
 export const tsVue = (schema: FormSchema) => {
   const str = JSON.stringify(schema, null, 2)

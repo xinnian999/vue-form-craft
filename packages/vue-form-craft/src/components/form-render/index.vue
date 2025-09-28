@@ -26,13 +26,9 @@ import { FormItemGroup } from '@/components'
 import { useLocale } from '@/hooks'
 import { cloneDeep, mergeWith } from 'lodash'
 import { computed, onMounted, provide, reactive, readonly, ref, toRefs, useTemplateRef } from 'vue'
-import type {
-  FormInstance,
-  FormRenderEmits,
-  FormRenderProps,
-  FormSchema
-} from '@vue-form-craft/core'
-import { $formInstance, deepParse, getDataByPath, ns, setDataByPath } from '@vue-form-craft/core'
+import type { FormInstance, FormRenderEmits, FormRenderProps, FormSchema } from '@/types'
+import { $formInstance } from '@/symbol'
+import { deepParse, getDataByPath, ns, setDataByPath } from '@/tools'
 
 const props = defineProps<FormRenderProps>()
 

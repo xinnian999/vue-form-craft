@@ -5,7 +5,7 @@
 <script setup lang="ts">
 import { FormItemGroup } from '@/components'
 import { computed, type StyleValue } from 'vue'
-import type { FormItemType } from '@vue-form-craft/core'
+import type { FormItemType } from '@/types'
 
 const props = defineProps<{
   children: FormItemType[]

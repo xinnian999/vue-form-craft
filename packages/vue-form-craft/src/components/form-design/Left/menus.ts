@@ -1,5 +1,5 @@
 import locales from '@/locales'
-import type { FormElement } from '@vue-form-craft/core'
+import type { FormElement } from '@/types'
 
 type Params = {
   elements: Record<string, FormElement>

@@ -31,12 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import type {
-  Direction,
-  OptionType,
-  SelectProps,
-  SelectValue
-} from '@vue-form-craft/core'
+import type { Direction, OptionType, SelectProps, SelectValue } from '@/types'
 import { useFormInstance, useSelect } from '@/hooks'
 import { watch } from 'vue';
 

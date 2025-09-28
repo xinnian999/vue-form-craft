@@ -34,8 +34,8 @@
 import { Icon } from '@/components'
 import { useDesignInstance } from '@/hooks'
 import Draggable from 'vuedraggable-es-fix'
-import { getCurrentByKey, ns } from '@vue-form-craft/core'
-import type { FormItemType } from '@vue-form-craft/core'
+import { getCurrentByKey, ns } from '@/tools'
+import type { FormItemType } from '@/types'
 import CanvasItem from './CanvasItem.vue'
 
 const props = withDefaults(

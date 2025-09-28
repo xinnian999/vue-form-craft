@@ -1,4 +1,4 @@
-import type { FormItemType } from '@vue-form-craft/core'
+import type { FormItemType } from '@/types'
 
 const recursionDelete = (
   items: FormItemType[],

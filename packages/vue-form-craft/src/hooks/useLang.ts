@@ -1,6 +1,6 @@
 import { useGlobals } from '@/hooks'
 import { inject, ref } from 'vue'
-import type { Lang } from '@vue-form-craft/core'
+import type { Lang } from '@/types'
 
 export default function useLang() {
   // 用户可能从入口注入 静态的

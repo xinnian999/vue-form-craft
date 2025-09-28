@@ -22,7 +22,7 @@
 <script setup lang="ts">
 import { useLocale } from '@/hooks'
 import { ref } from 'vue'
-import { ns } from '@vue-form-craft/core'
+import { ns } from '@/tools'
 import Change from './Change.vue'
 import Config from './Config.vue'
 

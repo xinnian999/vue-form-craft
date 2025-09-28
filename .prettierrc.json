@@ -6,7 +6,7 @@
   "printWidth": 100,
   "trailingComma": "none",
   "plugins": ["@ianvs/prettier-plugin-sort-imports"],
-  "importOrder": ["^@vue-form-craft/core", "^[./]"],
+  "importOrder": ["^@/", "^[./]"],
   "importOrderSeparation": true,
   "importOrderMergeDuplicateImports": true
 }

@@ -13,4 +13,4 @@ export type {
   FormSchema,
   TemplateData,
   FormInstance
-} from '@vue-form-craft/core'
+} from '@/types'

@@ -8,14 +8,9 @@
 
 <script setup lang="ts">
 import { computed, provide, reactive, ref, toRefs } from 'vue'
-import { $designInstance, getCurrentByKey, ns, setCurrentByKey } from '@vue-form-craft/core'
-import type {
-  DesignInstance,
-  FormDesignProps,
-  FormElement,
-  FormItemType,
-  FormSchema
-} from '@vue-form-craft/core'
+import { $designInstance } from '@/symbol'
+import { getCurrentByKey, ns, setCurrentByKey } from '@/tools'
+import type { DesignInstance, FormDesignProps, FormElement, FormItemType, FormSchema } from '@/types'
 import Center from './Center/index.vue'
 import Left from './Left/index.vue'
 import Right from './Right/index.vue'

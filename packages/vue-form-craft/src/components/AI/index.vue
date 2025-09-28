@@ -40,7 +40,7 @@ import { useDesignInstance, useGlobals } from '@/hooks'
 import { ref, type Ref } from 'vue'
 import { BubbleList, Sender } from 'vue-element-plus-x'
 import type { BubbleListItemProps } from 'vue-element-plus-x/types/BubbleList'
-import { ns } from '@vue-form-craft/core'
+import { ns } from '@/tools'
 import generateJsonApi from './generateJsonApi'
 import Welcome from './Welcome.vue'
 

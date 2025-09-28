@@ -110,8 +110,8 @@ import { useFormInstance } from '@/hooks'
 import type { TableColumnCtx } from 'element-plus'
 import { isEqual, isString, pickBy } from 'lodash'
 import { computed, h, onMounted, provide, ref, watch } from 'vue'
-import { deepParse } from '@vue-form-craft/core'
-import type { FormItemType } from '@vue-form-craft/core'
+import { deepParse } from '@/tools'
+import type { FormItemType } from '@/types'
 
 interface Props {
   children: FormItemType[]

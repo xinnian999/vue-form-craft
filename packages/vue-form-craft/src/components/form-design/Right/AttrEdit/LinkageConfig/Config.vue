@@ -27,7 +27,7 @@
 import { FormRender } from '@/components'
 import { useDesignInstance } from '@/hooks'
 import { ref } from 'vue'
-import { setDataByPath } from '@vue-form-craft/core'
+import { setDataByPath } from '@/tools'
 import { editSchema } from './configSchema'
 
 const designInstance = useDesignInstance()

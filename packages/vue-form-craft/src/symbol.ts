@@ -1,5 +1,5 @@
 import type { DeepReadonly, InjectionKey, Reactive } from 'vue'
-import type { FormInstance, Globals, DesignInstance } from '@vue-form-craft/core'
+import type { FormInstance, Globals, DesignInstance } from '@/types'
 
 export const $globals = Symbol() as InjectionKey<Globals>
 

@@ -37,8 +37,8 @@
 import { Icon } from '@/components'
 import { useDesignInstance, useElements, useGlobals } from '@/hooks'
 import { computed } from 'vue'
-import type { FormItemType } from '@vue-form-craft/core'
-import { copyItems, ns, recursionDelete } from '@vue-form-craft/core'
+import type { FormItemType } from '@/types'
+import { copyItems, ns, recursionDelete } from '@/tools'
 
 const props = defineProps<{ data: FormItemType }>()
 

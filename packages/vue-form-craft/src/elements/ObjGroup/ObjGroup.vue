@@ -16,7 +16,7 @@
 import { CanvasGroup, FormItem } from '@/components'
 import { useFormInstance } from '@/hooks'
 import { inject, provide, ref, type Ref } from 'vue'
-import type { FormItemType } from '@vue-form-craft/core'
+import type { FormItemType } from '@/types'
 
 const props = defineProps<{
   children: FormItemType[]

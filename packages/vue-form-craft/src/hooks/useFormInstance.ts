@@ -1,5 +1,5 @@
 import { inject, reactive } from 'vue'
-import { $formInstance } from '@vue-form-craft/core'
+import { $formInstance } from '@/symbol'
 
 // 返回一个响应式的Proxy，所以不可解构使用
 const useFormInstance = () => {

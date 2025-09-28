@@ -1,6 +1,6 @@
 import { config } from '@vue/test-utils'
 import ElementPlus from 'element-plus'
-import { $globals } from '@vue-form-craft/core'
+import { $globals } from '@/symbol'
 import { mergeGlobals } from '@/utils'
 
 export default () => {

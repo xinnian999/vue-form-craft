@@ -14,7 +14,7 @@
 <script setup lang="ts">
 import { useDesignInstance, useLocale } from '@/hooks'
 import { watch } from 'vue'
-import { ns } from '@vue-form-craft/core'
+import { ns } from '@/tools'
 import AttrEdit from './AttrEdit/index.vue'
 import FormEdit from './FormEdit.vue'
 
