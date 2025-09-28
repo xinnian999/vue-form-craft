@@ -1,5 +1,5 @@
 import type { Locale } from '@vue-form-craft/core'
-import { locales } from '@vue-form-craft/core'
+import locales from '@/locales'
 import { computed } from 'vue'
 import useLang from './useLang'
 

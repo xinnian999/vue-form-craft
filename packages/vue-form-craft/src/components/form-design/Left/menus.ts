@@ -1,4 +1,4 @@
-import { locales } from '@vue-form-craft/core'
+import locales from '@/locales'
 import type { FormElement } from '@vue-form-craft/core'
 
 type Params = {
