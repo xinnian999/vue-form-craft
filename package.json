@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "axios": "^1.6.2",
-    "element-plus": "^2.8.3",
+    "element-plus": "^2.11.4",
     "jsoneditor": "^10.3.0",
     "lodash": "^4.17.21",
     "shiki": "^1.21.0",
