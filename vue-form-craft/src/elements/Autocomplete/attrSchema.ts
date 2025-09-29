@@ -1,4 +1,4 @@
-import { optionConfig } from '@/config'
+import { optionConfig, ruleConfig } from '@/config'
 import type { FormSchema } from '@/types'
 
 export default {
@@ -55,6 +55,7 @@ export default {
       component: 'InputNumber',
       name: 'props.maxlength'
     },
+    ...ruleConfig,
     ...optionConfig
   ]
 } satisfies FormSchema

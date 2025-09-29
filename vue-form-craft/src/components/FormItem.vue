@@ -104,7 +104,7 @@ const computeRules = computed(() => {
 
   if (rules) {
     rules.forEach((rule) => {
-      const { expr, message, trigger = 'blur' } = rule
+      const { expr, message = '校验不通过', trigger = 'blur' } = rule
 
       const ruleDef = {
         message,

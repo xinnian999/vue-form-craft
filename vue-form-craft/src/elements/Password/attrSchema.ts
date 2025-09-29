@@ -39,57 +39,39 @@ export default {
         'column-gap': 20
       },
       designKey: 'form-R003',
-      name: 'cNmCuu',
-
+      name: 'cNmCuu'
     },
+    { label: '显示清除按钮', component: 'Switch', name: 'props.clearable' },
     {
       label: '密码校验规则',
       component: 'FormList',
       name: 'rules',
-      dialog:true,
       children: [
         {
-          label: '类型',
-          component: 'Select',
+          label: '表达式',
+          component: 'Autocomplete',
           props: {
-            mode: 'static',
             options: [
               {
                 label: '不少于8位，由字母+数字组成',
-                value: '^(?=.*[a-zA-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$'
+                value: '/^(?=.*[a-zA-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$/'
               },
               {
-                label: '不少于8位，至少包含一个大写字母、一个小写字母和一个数字',
-                value: '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{8,}$'
+                label: '不少于8位，且同时包含大小写字母、数字',
+                value: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$/'
               },
               {
-                label: '不包含空格',
-                value: '^\\S*$'
-              },
-              {
-                label: '自定义正则',
-                value: 'custom'
+                label: '不少于8位，至少包含大小写字母、数字、特殊符号其中的三种',
+                value: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*])[a-zA-Z\\d!@#$%^&*]{8,}$/'
               }
-            ],
-            placeholder: '请选择...',
-            labelKey: 'label',
-            valueKey: 'value'
+            ]
           },
+          help: '<pre>可设置为【正则表达式】或【JS表达式】。\n【正则表达式】应该将\\转义成\\\\。\n【JS表达式】最终应返回一个布尔值。</pre>',
           designKey: 'form-3L0P',
-          name: 'type'
+          name: 'expr'
         },
         {
-          label: '自定义正则',
-          component: 'Input',
-          props: {
-            placeholder: '请输入正则表达式'
-          },
-          designKey: 'form-Wdb2Reg',
-          name: 'customReg',
-          hidden: '{{$item.type!=="custom"}}'
-        },
-        {
-          label: '提示语',
+          label: '校验失败提示语',
           component: 'Input',
           props: {
             placeholder: '请输入...'
@@ -122,11 +104,9 @@ export default {
       ],
       designKey: 'form-89tI',
       props: {
-        mode: 'card'
+        mode: 'card',
+        title: '校验规则'
       }
-    },
-    { label: '显示清除按钮', component: 'Switch', name: 'props.clearable' },
-    
-
+    }
   ]
 } satisfies FormSchema
