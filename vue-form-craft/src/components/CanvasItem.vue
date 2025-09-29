@@ -35,20 +35,17 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useDesignInstance, useElements, useGlobals } from '@/hooks'
+import { useDesignInstance, useElements } from '@/hooks'
 import Icon from '@/Icon/index.vue'
 import type { FormItemType } from '@/types'
 import { copyItems, ns, recursionDelete } from '@/utils'
+import FormItem from './FormItem.vue'
 
 const props = defineProps<{ data: FormItemType }>()
 
 const designInstance = useDesignInstance()
 
-const globals = useGlobals()
-
 const elements = useElements()
-
-const { FormItem } = globals
 
 const config = elements[props.data.component]
 
