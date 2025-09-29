@@ -16,7 +16,7 @@
       <template #label v-if="!hideLabel">
         <div :class="[ns('form-item-label'), label && `${name}-label`]">
           <div :style="formInstance.schema.labelBold && 'font-weight: bold'">{{ label }}</div>
-          <el-tooltip effect="dark" :content="help" v-if="help">
+          <el-tooltip effect="dark" :content="help" raw-content v-if="help">
             <Icon name="help" />
           </el-tooltip>
           <div :class="ns('form-item-label-suffix')" v-if="formInstance.schema.labelSuffix">
