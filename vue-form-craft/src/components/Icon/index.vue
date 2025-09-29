@@ -26,3 +26,15 @@ defineOptions({
 
 defineProps<{ name: string }>()
 </script>
+
+<style lang="scss">
+@import '@/style';
+
+@include ns('icon-render') {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  overflow: hidden;
+  fill: currentColor;
+}
+</style>

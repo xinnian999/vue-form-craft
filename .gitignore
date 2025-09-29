@@ -27,6 +27,5 @@ coverage
 
 *.tsbuildinfo
 
-/vue-form-craft
 /docs/.vitepress/cache
 .env

@@ -1,4 +1,4 @@
 packages:
-  - 'packages/*'
+  - 'vue-form-craft'
   - 'play'
   - 'docs'

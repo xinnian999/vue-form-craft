@@ -10,10 +10,17 @@
 import { computed, provide, reactive, ref, toRefs } from 'vue'
 import { $designInstance } from '@/symbol'
 import { getCurrentByKey, ns, setCurrentByKey } from '@/tools'
-import type { DesignInstance, FormDesignProps, FormElement, FormItemType, FormSchema } from '@/types'
+import type {
+  DesignInstance,
+  FormDesignProps,
+  FormElement,
+  FormItemType,
+  FormSchema
+} from '@/types'
 import Center from './Center/index.vue'
 import Left from './Left/index.vue'
 import Right from './Right/index.vue'
+import './styles/index.scss'
 
 const props = withDefaults(defineProps<FormDesignProps>(), {
   omitMenus: () => [],

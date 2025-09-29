@@ -59,11 +59,11 @@
 </template>
 
 <script setup lang="ts">
-import { Icon } from '@/components'
-import { useElements, useFormInstance } from '@/hooks'
 import type { FormItemRule } from 'element-plus'
 import { cloneDeep, isEqual } from 'lodash'
 import { computed, onBeforeMount, reactive, watch } from 'vue'
+import { Icon } from '@/components'
+import { useElements, useFormInstance } from '@/hooks'
 import { getDataByPath, isRegexString, ns, parseRegexString, setDataByPath } from '@/tools'
 import type { FormItemType } from '@/types'
 
@@ -208,3 +208,27 @@ watch(
   { immediate: true }
 )
 </script>
+
+<style lang="scss" scoped>
+@import '@/style';
+
+@include ns('form-item') {
+  margin-bottom: 18px;
+
+  &-label {
+    display: inline-flex;
+    position: relative;
+    white-space: nowrap;
+    gap: 3px;
+    align-items: center;
+
+    &-suffix {
+      margin-left: 3px;
+    }
+  }
+}
+
+@include ns('form-item-layout') {
+  margin-bottom: 18px;
+}
+</style>

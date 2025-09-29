@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
+    "test": "vitest",
     "v": "npm version patch",
     "release": "vite build && nrm use npm && npm publish"
   },

@@ -50,3 +50,55 @@ onMounted(() => {
   refresh()
 })
 </script>
+
+<style lang="scss" scoped>
+@import '@/style';
+
+.welcome {
+  padding: 10px;
+  border: 1px solid #ececec;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  .title {
+    font-size: 14px;
+    font-weight: bold;
+  }
+  .desc {
+    font-size: 12px;
+    color: #aaa;
+  }
+
+  .prompt-title {
+    display: flex;
+    justify-content: space-between;
+    span {
+      cursor: pointer;
+      color: $themeColor;
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+
+  .prompts {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .prompt-item {
+      cursor: pointer;
+      background-color: #f5f5f5;
+      padding: 5px 10px;
+      border-radius: 5px;
+      &:hover {
+        background-color: #e5e5e5;
+      }
+    }
+  }
+}
+</style>
