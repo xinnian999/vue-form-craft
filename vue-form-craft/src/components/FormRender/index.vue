@@ -22,13 +22,13 @@
 </template>
 
 <script setup lang="ts">
-import { FormItemGroup } from '@/components'
-import { useLocale } from '@/hooks'
 import { cloneDeep, mergeWith } from 'lodash'
 import { computed, onMounted, provide, reactive, readonly, ref, toRefs, useTemplateRef } from 'vue'
-import type { FormInstance, FormRenderEmits, FormRenderProps, FormSchema } from '@/types'
+import { FormItemGroup } from '@/components'
+import { useLocale } from '@/hooks'
 import { $formInstance } from '@/symbol'
-import { deepParse, getDataByPath, ns, setDataByPath } from '@/tools'
+import type { FormInstance, FormRenderEmits, FormRenderProps, FormSchema } from '@/types'
+import { deepParse, getDataByPath, ns, setDataByPath } from '@/utils'
 
 const props = defineProps<FormRenderProps>()
 

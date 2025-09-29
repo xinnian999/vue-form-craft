@@ -105,13 +105,14 @@
 </template>
 
 <script setup lang="ts">
-import { CanvasGroup, FormItem, Icon } from '@/components'
-import { useFormInstance } from '@/hooks'
 import type { TableColumnCtx } from 'element-plus'
 import { isEqual, isString, pickBy } from 'lodash'
 import { computed, h, onMounted, provide, ref, watch } from 'vue'
-import { deepParse } from '@/tools'
+import { CanvasGroup, FormItem } from '@/components'
+import { useFormInstance } from '@/hooks'
+import Icon from '@/Icon/index.vue'
 import type { FormItemType } from '@/types'
+import { deepParse } from '@/utils'
 
 interface Props {
   children: FormItemType[]

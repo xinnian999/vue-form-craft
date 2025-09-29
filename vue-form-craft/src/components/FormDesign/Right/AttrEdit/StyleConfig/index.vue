@@ -15,9 +15,9 @@
 </template>
 
 <script setup lang="ts">
-import { FormRender } from '@/components'
 import { ref } from 'vue'
-import { ns } from '@/tools'
+import { FormRender } from '@/components'
+import { ns } from '@/utils'
 import basicSchema from './basicSchema'
 import schema from './schema'
 

@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { ns } from '@/tools'
+import { ns } from '@/utils'
 
 const modules = import.meta.glob('./icons/*.vue', { eager: true })
 

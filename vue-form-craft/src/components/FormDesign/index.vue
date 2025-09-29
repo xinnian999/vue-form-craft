@@ -9,7 +9,6 @@
 <script setup lang="ts">
 import { computed, provide, reactive, ref, toRefs } from 'vue'
 import { $designInstance } from '@/symbol'
-import { getCurrentByKey, ns, setCurrentByKey } from '@/tools'
 import type {
   DesignInstance,
   FormDesignProps,
@@ -17,6 +16,7 @@ import type {
   FormItemType,
   FormSchema
 } from '@/types'
+import { getCurrentByKey, ns, setCurrentByKey } from '@/utils'
 import Center from './Center/index.vue'
 import Left from './Left/index.vue'
 import Right from './Right/index.vue'

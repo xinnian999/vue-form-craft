@@ -9,12 +9,12 @@
 </template>
 
 <script setup lang="ts">
-import { FormRender } from '@/components'
-import { useElements, useLang } from '@/hooks'
 import { isString } from 'lodash'
 import { computed } from 'vue'
-import { getDataByPath, ns, setDataByPath } from '@/tools'
+import { FormRender } from '@/components'
+import { useElements, useLang } from '@/hooks'
 import type { FormItemType, FormSchema } from '@/types'
+import { getDataByPath, ns, setDataByPath } from '@/utils'
 import LinkageConfig from './LinkageConfig/index.vue'
 import StyleConfig from './StyleConfig/index.vue'
 

@@ -38,9 +38,9 @@
 import { ref, type Ref } from 'vue'
 import { BubbleList, Sender } from 'vue-element-plus-x'
 import type { BubbleListItemProps } from 'vue-element-plus-x/types/BubbleList'
-import { Icon } from '@/components'
 import { useDesignInstance, useGlobals } from '@/hooks'
-import { ns } from '@/tools'
+import Icon from '@/Icon/index.vue'
+import { ns } from '@/utils'
 import generateJsonApi from './generateJsonApi'
 import Welcome from './Welcome.vue'
 

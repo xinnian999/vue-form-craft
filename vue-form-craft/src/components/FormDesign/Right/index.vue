@@ -12,9 +12,9 @@
 </template>
 
 <script setup lang="ts">
-import { useDesignInstance, useLocale } from '@/hooks'
 import { watch } from 'vue'
-import { ns } from '@/tools'
+import { useDesignInstance, useLocale } from '@/hooks'
+import { ns } from '@/utils'
 import AttrEdit from './AttrEdit/index.vue'
 import FormEdit from './FormEdit.vue'
 

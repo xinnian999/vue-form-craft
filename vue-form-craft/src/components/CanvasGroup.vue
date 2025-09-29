@@ -32,10 +32,10 @@
 
 <script setup lang="ts">
 import Draggable from 'vuedraggable-es-fix'
-import { Icon } from '@/components'
 import { useDesignInstance } from '@/hooks'
-import { getCurrentByKey, ns } from '@/tools'
+import Icon from '@/Icon/index.vue'
 import type { FormItemType } from '@/types'
+import { getCurrentByKey, ns } from '@/utils'
 import CanvasItem from './CanvasItem.vue'
 
 const props = withDefaults(

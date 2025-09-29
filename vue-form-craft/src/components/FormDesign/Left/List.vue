@@ -36,11 +36,11 @@
 </template>
 
 <script setup lang="ts">
-import { useDesignInstance, useElements, useLang } from '@/hooks'
 import { computed, ref } from 'vue'
 import draggable from 'vuedraggable-es-fix'
+import { useDesignInstance, useElements, useLang } from '@/hooks'
 import type { FormElement, FormItemType } from '@/types'
-import { getRandomId, ns } from '@/tools'
+import { getRandomId, ns } from '@/utils'
 import parseMenus from './menus'
 
 const designInstance = useDesignInstance()

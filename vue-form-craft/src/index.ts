@@ -1,7 +1,5 @@
 import install from './install'
 
-// import './theme.scss'
-
 export default { install }
 
 export { FormRender, FormDesign } from './components'

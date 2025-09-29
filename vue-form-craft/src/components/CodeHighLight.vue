@@ -8,8 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { Icon } from '@/components'
-import { useGlobals } from '@/hooks'
+import { ElMessage } from 'element-plus'
 import { createHighlighterCore } from 'shiki/core'
 import javascript from 'shiki/langs/javascript.mjs'
 import json from 'shiki/langs/json.mjs'
@@ -18,6 +17,7 @@ import vue from 'shiki/langs/vue-html.mjs'
 import githubLight from 'shiki/themes/github-light.mjs'
 import getWasm from 'shiki/wasm'
 import { onMounted, ref } from 'vue'
+import Icon from '@/Icon/index.vue'
 
 const props = withDefaults(
   defineProps<{
@@ -28,8 +28,6 @@ const props = withDefaults(
     language: 'js'
   }
 )
-
-const { message } = useGlobals()
 
 const handleCopy = async () => {
   // 创建一个隐藏的 textarea 元素
@@ -47,7 +45,7 @@ const handleCopy = async () => {
   // 移除 textarea 元素
   document.body.removeChild(textarea)
 
-  message.success('已成功复制到剪贴板')
+  ElMessage.success('已成功复制到剪贴板')
 }
 
 const html = ref('')

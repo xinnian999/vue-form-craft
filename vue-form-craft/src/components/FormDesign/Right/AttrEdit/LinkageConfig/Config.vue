@@ -24,10 +24,10 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import { FormRender } from '@/components'
 import { useDesignInstance } from '@/hooks'
-import { ref } from 'vue'
-import { setDataByPath } from '@/tools'
+import { setDataByPath } from '@/utils'
 import { editSchema } from './configSchema'
 
 const designInstance = useDesignInstance()

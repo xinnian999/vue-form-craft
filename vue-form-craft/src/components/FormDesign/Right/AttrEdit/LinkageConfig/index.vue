@@ -20,9 +20,9 @@
 </template>
 
 <script setup lang="ts">
-import { useLocale } from '@/hooks'
 import { ref } from 'vue'
-import { ns } from '@/tools'
+import { useLocale } from '@/hooks'
+import { ns } from '@/utils'
 import Change from './Change.vue'
 import Config from './Config.vue'
 

@@ -1,13 +1,14 @@
 import { config } from '@vue/test-utils'
 import ElementPlus from 'element-plus'
+import * as elements from '@/elements'
 import { $globals } from '@/symbol'
-import { mergeGlobals } from '@/utils'
 
 export default () => {
   config.global.plugins = [ElementPlus]
   config.global.provide = {
-    [$globals]: mergeGlobals({
-      lang: 'zh'
-    })
+    [$globals]: {
+      lang: 'zh',
+      elements
+    }
   }
 }

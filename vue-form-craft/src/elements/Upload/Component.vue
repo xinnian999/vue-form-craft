@@ -36,9 +36,9 @@
   </el-upload>
 </template>
 <script lang="ts" setup>
-import { Icon } from '@/components'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import type { UploadProps, UploadUserFile } from 'element-plus'
+import Icon from '@/Icon/index.vue'
 
 interface Props {
   action: string

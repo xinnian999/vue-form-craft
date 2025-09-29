@@ -62,10 +62,10 @@
 import type { FormItemRule } from 'element-plus'
 import { cloneDeep, isEqual } from 'lodash'
 import { computed, onBeforeMount, reactive, watch } from 'vue'
-import { Icon } from '@/components'
 import { useElements, useFormInstance } from '@/hooks'
-import { getDataByPath, isRegexString, ns, parseRegexString, setDataByPath } from '@/tools'
+import Icon from '@/Icon/index.vue'
 import type { FormItemType } from '@/types'
+import { getDataByPath, isRegexString, ns, parseRegexString, setDataByPath } from '@/utils'
 
 const props = defineProps<FormItemType>()
 

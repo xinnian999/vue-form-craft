@@ -56,9 +56,10 @@
 </template>
 
 <script setup lang="ts">
-import { CodeHighLight, Icon } from '@/components'
-import { useDesignInstance, useElements, useLocale } from '@/hooks'
 import { computed, ref } from 'vue'
+import { CodeHighLight } from '@/components'
+import { useDesignInstance, useElements, useLocale } from '@/hooks'
+import Icon from '@/Icon/index.vue'
 import { jsJsonSchema, jsVue, schemaHelp, tsJsonSchema, tsVue } from './config'
 
 const designInstance = useDesignInstance()

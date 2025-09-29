@@ -1,5 +1,5 @@
-import { Icon } from '@/components'
 import { defineAsyncComponent, h } from 'vue'
+import Icon from '@/Icon/index.vue'
 import type { FormElement } from '@/types'
 import attrSchema from './attrSchema'
 

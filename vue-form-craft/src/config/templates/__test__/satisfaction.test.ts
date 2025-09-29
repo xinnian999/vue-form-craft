@@ -1,8 +1,7 @@
-import { FormRender } from '@/components'
-import { configTest } from '@/utils'
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import { wait } from '@/tools'
+import { FormRender } from '@/components'
+import { configTest, wait } from '@/utils'
 import schema from '../satisfaction'
 
 configTest()

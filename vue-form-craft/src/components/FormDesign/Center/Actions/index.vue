@@ -33,11 +33,11 @@
 </template>
 
 <script setup lang="ts">
-import { Icon } from '@/components'
-import { useDesignInstance, useLocale } from '@/hooks'
 import { ElMessageBox } from 'element-plus'
 import { ref } from 'vue'
-import { ns } from '@/tools'
+import { useDesignInstance, useLocale } from '@/hooks'
+import Icon from '@/Icon/index.vue'
+import { ns } from '@/utils'
 import JsonSchema from './JsonSchema.vue'
 import Preview from './Preview.vue'
 
