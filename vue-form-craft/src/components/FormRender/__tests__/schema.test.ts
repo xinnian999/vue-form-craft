@@ -1,11 +1,8 @@
-import { mount, flushPromises } from '@vue/test-utils'
-import { describe, it, expect } from 'vitest'
+import { flushPromises, mount } from '@vue/test-utils'
+import { describe, expect, it } from 'vitest'
+import { ref } from 'vue'
 import { FormRender } from '@/components'
 import type { FormSchema } from '@/types'
-import { ref } from 'vue'
-import { configTest } from '@/utils'
-
-configTest()
 
 describe('FormRender Schema Test', () => {
   it('label', async () => {

@@ -1,10 +1,8 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { FormRender } from '@/components'
-import { configTest, wait } from '@/utils'
+import { wait } from '@/utils'
 import schema from '../satisfaction'
-
-configTest()
 
 describe('template satisfaction', async () => {
   it('linkage: satisfaction.value > 3 && improvementSuggestions hidden', async () => {

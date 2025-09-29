@@ -1,11 +1,12 @@
-// vitest.setup.ts
-const originalWarn = console.warn
+import { config } from '@vue/test-utils'
+import ElementPlus from 'element-plus'
+import * as elements from '@/elements'
+import { $globals } from '@/symbol'
 
-console.warn = (...args) => {
-  const message = args[0]
-  // 屏蔽 Vue 的 vnode undefined 警告
-  if (typeof message === 'string' && message.includes('Invalid vnode type')) {
-    return
+config.global.plugins = [ElementPlus]
+config.global.provide = {
+  [$globals]: {
+    lang: 'zh',
+    elements
   }
-  originalWarn(...args)
 }

@@ -1,4 +1,3 @@
-export { default as configTest } from './configTest'
 export { default as deepParse } from './deepParse'
 export { default as handleLinkages } from './handleLinkages'
 export { default as getRandomId } from './getRandomId'

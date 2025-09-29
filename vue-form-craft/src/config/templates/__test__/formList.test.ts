@@ -1,10 +1,8 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { FormRender } from '@/components'
-import { configTest, wait } from '@/utils'
+import { wait } from '@/utils'
 import schema from '../formList'
-
-configTest()
 
 describe('template formList', async () => {
   it('list add or reduce', async () => {
