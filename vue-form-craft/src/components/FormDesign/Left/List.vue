@@ -18,7 +18,7 @@
         :clone="onClone"
       >
         <template #item="{ element }">
-          <li :class="ns('menu-list-item')">
+          <li :class="ns('menu-list-item')" @dblclick="handleDbClick(element)">
             <div :class="ns('menu-list-item-ico')">
               <component class="ico-content" :is="element.icon" />
             </div>
@@ -71,5 +71,13 @@ const onClone = (source: FormElement) => {
   }
 
   return parse
+}
+
+const handleDbClick = (element: FormElement) => {
+  const item = onClone(element)
+  designInstance.updateSchema({
+    ...designInstance.schema,
+    items: [...designInstance.schema.items, item]
+  })
 }
 </script>

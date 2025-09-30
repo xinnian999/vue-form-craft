@@ -6,6 +6,17 @@
   </div>
 </template>
 
+<script lang="ts">
+const initJsonSchema: FormSchema = {
+  labelWidth: 150,
+  labelAlign: 'right',
+  scrollToError: true,
+  size: 'default',
+  submitBtn: true,
+  items: []
+}
+</script>
+
 <script setup lang="ts">
 import { cloneDeep } from 'lodash'
 import { computed, provide, reactive, ref, toRefs } from 'vue'
@@ -33,18 +44,11 @@ const emits = defineEmits<{
   add: [element: FormElement]
 }>()
 
-const currentKey = ref('')
-
 const jsonSchema = defineModel<FormSchema>({
-  default: reactive({
-    labelWidth: 150,
-    labelAlign: 'right',
-    scrollToError: true,
-    size: 'default',
-    submitBtn: true,
-    items: []
-  })
+  default: () => reactive(initJsonSchema)
 })
+
+const currentKey = ref('')
 
 const history = ref<FormSchema[]>([])
 
@@ -58,14 +62,9 @@ const updateHistory = (schema: FormSchema) => {
 const handleHistoryBack = () => {
   if (historyIndex.value > -1) {
     historyIndex.value--
-    jsonSchema.value = cloneDeep(history.value[historyIndex.value]) || {
-      labelWidth: 150,
-      labelAlign: 'right',
-      scrollToError: true,
-      size: 'default',
-      submitBtn: true,
-      items: []
-    }
+    jsonSchema.value = cloneDeep(
+      history.value[historyIndex.value] ? history.value[historyIndex.value] : initJsonSchema
+    )
   }
 }
 
@@ -82,6 +81,7 @@ const updateSchema = (newSchema: FormSchema, isUpdateHistory = true) => {
   // 本次更新是否需要记录到历史中
   if (isUpdateHistory) {
     // 如果改动了回退的某次记录，将从此开始重新记录
+
     if (historyIndex.value < history.value.length - 1) {
       history.value = history.value.slice(0, historyIndex.value + 1)
     }
@@ -111,6 +111,7 @@ const instance = reactive<DesignInstance>({
   rightTab: 'form',
   history,
   historyIndex,
+  updateSchema,
   updateCurrent(newCurrent) {
     instance.current = newCurrent
   },
@@ -120,9 +121,11 @@ const instance = reactive<DesignInstance>({
   updateHoverKey(key) {
     instance.hoverKey = key
   },
-  updateSchema,
   handleEmit: (name, params) => {
     emits(name, params)
+  },
+  handleResetSchema: () => {
+    updateSchema(initJsonSchema)
   },
   handleHistoryBack,
   handleHistoryForward
