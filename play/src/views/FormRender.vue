@@ -1,7 +1,7 @@
 <template>
   <div class="FormRenderPage">
-    <FormRender v-model="formValues1" :schema="schema" ref="formRef" footer @finish="onFinish1" />
-    <FormRender v-model="formValues2" :schema="schema" ref="formRef" footer @finish="onFinish2" />
+    <FormRender v-model="formValues1" :schema="schema" ref="formRef" @finish="onFinish1" />
+    <FormRender v-model="formValues2" :schema="schema" ref="formRef" @finish="onFinish2" />
   </div>
 </template>
 
@@ -19,6 +19,7 @@ const schema = {
   labelAlign: 'right',
   size: 'default',
   scrollToError: true,
+  submitBtn: true,
   items: [
     {
       label: '用户名',
@@ -28,7 +29,7 @@ const schema = {
         clearable: true
       },
       designKey: 'form-eNR0',
-      name: 'username',
+      name: 'username'
     },
     {
       label: '密码',
@@ -37,7 +38,7 @@ const schema = {
         placeholder: '请输入密码'
       },
       designKey: 'form-D1x7',
-      name: 'password',
+      name: 'password'
     }
   ]
 } satisfies FormSchema
