@@ -21,7 +21,7 @@ import Center from './Center/index.vue'
 import Left from './Left/index.vue'
 import Right from './Right/index.vue'
 import './styles/index.scss'
-import { cloneDeep, isEqual } from 'lodash'
+import { cloneDeep } from 'lodash'
 
 const props = withDefaults(defineProps<FormDesignProps>(), {
   omitMenus: () => [],
@@ -35,7 +35,7 @@ const emits = defineEmits<{
 
 const currentKey = ref('')
 
-const currentSchema = defineModel<FormSchema>({
+const jsonSchema = defineModel<FormSchema>({
   default: reactive({
     labelWidth: 150,
     labelAlign: 'right',
@@ -51,6 +51,7 @@ const history = ref<FormSchema[]>([])
 const historyIndex = ref(0)
 
 const updateHistory = (schema: FormSchema) => {
+  console.log('updateHistory')
   history.value.push(schema)
   historyIndex.value = history.value.length - 1
 }
@@ -58,45 +59,36 @@ const updateHistory = (schema: FormSchema) => {
 const handleHistoryBack = () => {
   if (historyIndex.value > 0) {
     historyIndex.value--
-    currentSchema.value = history.value[historyIndex.value]
+    jsonSchema.value = cloneDeep(history.value[historyIndex.value])
   }
 }
 
 const handleHistoryForward = () => {
   if (historyIndex.value < history.value.length - 1) {
     historyIndex.value++
-    currentSchema.value = history.value[historyIndex.value]
+    jsonSchema.value = cloneDeep(history.value[historyIndex.value])
   }
 }
 
-const updateSchema = (newSchema: FormSchema) => {
-  currentSchema.value = newSchema
-  updateHistory(cloneDeep(newSchema))
-  // updateHistory(newSchema)
-}
+const updateSchema = (newSchema: FormSchema, isUpdateHistory = true) => {
+  jsonSchema.value = newSchema
 
-const list = computed({
-  get() {
-    return currentSchema.value.items
-  },
-  set(value) {
-    updateSchema({
-      ...currentSchema.value,
-      items: value
-    })
+  // 本次更新是否需要记录到历史中
+  if (isUpdateHistory) {
+    if (historyIndex.value < history.value.length - 1) {
+      history.value = history.value.slice(0, historyIndex.value + 1)
+    }
+    updateHistory(cloneDeep(newSchema))
   }
-})
+}
 
 const current = computed({
   get() {
-    return getCurrentByKey(list.value, currentKey.value)
+    return getCurrentByKey(jsonSchema.value.items, currentKey.value)
   },
   set(element: FormItemType) {
-    if (isEqual(getCurrentByKey(list.value, currentKey.value), element)) {
-      return
-    }
     currentKey.value = element.designKey!
-    list.value = setCurrentByKey(list.value, element)
+    jsonSchema.value.items = setCurrentByKey(jsonSchema.value.items, element)
   }
 })
 
@@ -104,14 +96,16 @@ const instance = reactive<DesignInstance>({
   ...toRefs(props),
   currentKey,
   hoverKey: '',
-  schema: currentSchema,
+  schema: jsonSchema,
   current,
-  list,
   rightTab: 'form',
   history,
   historyIndex,
   updateCurrent(newCurrent) {
     instance.current = newCurrent
+  },
+  updateCurrentKey(key) {
+    currentKey.value = key
   },
   updateHoverKey(key) {
     instance.hoverKey = key
@@ -126,11 +120,11 @@ const instance = reactive<DesignInstance>({
 
 provide($designInstance, instance)
 
-// watch(
-//   history,
-//   (newValue) => {
-//     console.log(newValue)
-//   },
-//   { deep: true }
-// )
+watch(
+  history,
+  (newValue) => {
+    console.log(newValue)
+  },
+  { deep: true }
+)
 </script>

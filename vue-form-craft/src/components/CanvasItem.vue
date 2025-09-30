@@ -77,7 +77,7 @@ const rightBottomActions = [
   {
     icon: 'copy',
     handle: (element: FormItemType) => {
-      const newList = copyItems(designInstance.list, element.designKey!)
+      const newList = copyItems(designInstance.schema.items, element.designKey!)
       designInstance.updateSchema({ ...designInstance.schema, items: newList })
     }
   },
@@ -86,7 +86,7 @@ const rightBottomActions = [
     bg: `var(--${ns('danger-color')})`,
     handle: (element: FormItemType) => {
       const newList = recursionDelete(
-        designInstance.list,
+        designInstance.schema.items,
         (item) => item.designKey !== element.designKey
       )
       designInstance.updateSchema({ ...designInstance.schema, items: newList })

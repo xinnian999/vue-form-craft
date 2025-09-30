@@ -61,7 +61,10 @@ const formItems = computed({
     return deepParse(props.schema.items || [], context.value)
   },
   set(values) {
-    schema.value.items = values
+    schema.value = {
+      ...schema.value,
+      items: values
+    }
   }
 })
 

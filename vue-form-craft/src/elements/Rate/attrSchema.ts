@@ -3,8 +3,14 @@ import type { FormSchema } from '@/types'
 export default {
   size: 'small',
   labelAlign: 'top',
+  initialValues: {
+    label: '评分',
+    props: {
+      max: 5
+    }
+  },
   items: [
-    { label: '标签', component: 'Input', name: 'label', initialValue: '评分' },
+    { label: '标签', component: 'Input', name: 'label' },
     {
       label: '唯一标识',
       component: 'Input',
@@ -28,11 +34,10 @@ export default {
         'column-gap': 20
       },
       designKey: 'form-R003',
-      name: 'cNmCuu',
-
+      name: 'cNmCuu'
     },
 
-    { label: '最大分值', component: 'InputNumber', name: 'props.max', initialValue: 5 },
+    { label: '最大分值', component: 'InputNumber', name: 'props.max' },
     { label: '是否允许半选', component: 'Switch', name: 'props.allow-half' }
   ]
 } satisfies FormSchema

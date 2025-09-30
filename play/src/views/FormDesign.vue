@@ -2,7 +2,7 @@
   <FormDesign
     v-model="schema"
     class="docs-form-design"
-    style="height:100vh"
+    style="height: 100vh"
     @save="onSave"
     @add="onAdd"
   />
@@ -27,7 +27,7 @@ const onSave = () => {
 }
 
 const onAdd = (element: FormElement) => {
-  console.log('onAdd===>', element)
+  // console.log('onAdd===>', element)
 }
 
 onMounted(() => {
