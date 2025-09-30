@@ -188,9 +188,12 @@ export interface DesignInstance extends Required<ToRefs<FormDesignProps>> {
   list: Ref<FormItemType[]>
   current: Ref<FormItemType | null>
   rightTab: 'attr' | 'form'
+  history: Ref<FormSchema[]>
+  historyIndex: Ref<number>
   updateCurrent: (current: FormItemType) => void
   updateHoverKey: (key: string) => void
   updateSchema: (schema: FormSchema) => void
-  updateList: (newList: FormItemType[]) => void
   handleEmit: (event: any, ...args: any[]) => void
+  handleHistoryBack: () => void
+  handleHistoryForward: () => void
 }

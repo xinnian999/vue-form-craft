@@ -3,8 +3,19 @@ import type { FormSchema } from '@/types'
 export default {
   size: 'small',
   labelAlign: 'top',
+  initialValues: {
+    label: '多行文本',
+    name: 'textarea',
+    props: {
+      placeholder: '请输入...',
+      autosize: {
+        minRows: 4,
+        maxRows: 999
+      }
+    }
+  },
   items: [
-    { label: '标签', component: 'Input', name: 'label', initialValue: '多行文本' },
+    { label: '标签', component: 'Input', name: 'label' },
     {
       label: '唯一标识',
       component: 'Input',
@@ -16,8 +27,7 @@ export default {
       label: '占位提示',
       component: 'Input',
       name: 'props.placeholder',
-      designKey: 'form-ekRL',
-      initialValue: '请输入...'
+      designKey: 'form-ekRL'
     },
     { label: '初始值', component: 'Input', name: 'initialValue' },
     {
@@ -35,8 +45,7 @@ export default {
         'column-gap': 20
       },
       designKey: 'form-R003',
-      name: 'cNmCuu',
-
+      name: 'cNmCuu'
     },
     { label: '显示清除按钮', component: 'Switch', name: 'props.clearable' },
     {
@@ -47,14 +56,12 @@ export default {
     {
       label: '最小行数',
       component: 'InputNumber',
-      name: 'props.autosize.minRows',
-      initialValue: 4
+      name: 'props.autosize.minRows'
     },
     {
       label: '最大行数',
       component: 'InputNumber',
-      name: 'props.autosize.maxRows',
-      initialValue: 999
+      name: 'props.autosize.maxRows'
     }
   ]
 } satisfies FormSchema

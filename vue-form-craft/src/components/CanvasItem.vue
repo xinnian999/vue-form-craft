@@ -78,7 +78,7 @@ const rightBottomActions = [
     icon: 'copy',
     handle: (element: FormItemType) => {
       const newList = copyItems(designInstance.list, element.designKey!)
-      designInstance.updateList(newList)
+      designInstance.updateSchema({ ...designInstance.schema, items: newList })
     }
   },
   {
@@ -89,7 +89,7 @@ const rightBottomActions = [
         designInstance.list,
         (item) => item.designKey !== element.designKey
       )
-      designInstance.updateList(newList)
+      designInstance.updateSchema({ ...designInstance.schema, items: newList })
     }
   }
 ]
