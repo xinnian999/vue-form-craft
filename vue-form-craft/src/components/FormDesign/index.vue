@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, provide, reactive, ref, toRefs, watch } from 'vue'
+import { computed, provide, reactive, ref, toRefs, watch, watchEffect } from 'vue'
 import { $designInstance } from '@/symbol'
 import type {
   DesignInstance,
@@ -48,18 +48,24 @@ const jsonSchema = defineModel<FormSchema>({
 
 const history = ref<FormSchema[]>([])
 
-const historyIndex = ref(0)
+const historyIndex = ref(-1)
 
 const updateHistory = (schema: FormSchema) => {
-  console.log('updateHistory')
   history.value.push(schema)
   historyIndex.value = history.value.length - 1
 }
 
 const handleHistoryBack = () => {
-  if (historyIndex.value > 0) {
+  if (historyIndex.value > -1) {
     historyIndex.value--
-    jsonSchema.value = cloneDeep(history.value[historyIndex.value])
+    jsonSchema.value = cloneDeep(history.value[historyIndex.value]) || {
+      labelWidth: 150,
+      labelAlign: 'right',
+      scrollToError: true,
+      size: 'default',
+      submitBtn: true,
+      items: []
+    }
   }
 }
 
@@ -75,6 +81,7 @@ const updateSchema = (newSchema: FormSchema, isUpdateHistory = true) => {
 
   // 本次更新是否需要记录到历史中
   if (isUpdateHistory) {
+    // 如果改动了回退的某次记录，将从此开始重新记录
     if (historyIndex.value < history.value.length - 1) {
       history.value = history.value.slice(0, historyIndex.value + 1)
     }
@@ -120,11 +127,15 @@ const instance = reactive<DesignInstance>({
 
 provide($designInstance, instance)
 
-watch(
-  history,
-  (newValue) => {
-    console.log(newValue)
-  },
-  { deep: true }
-)
+// watch(
+//   history,
+//   (newValue) => {
+//     console.log(newValue)
+//   },
+//   { deep: true }
+// )
+
+watchEffect(() => {
+  console.log(historyIndex.value)
+})
 </script>

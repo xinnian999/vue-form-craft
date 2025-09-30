@@ -4,7 +4,7 @@
       <el-button-group size="small">
         <el-button
           type="primary"
-          :disabled="designInstance.historyIndex === 0"
+          :disabled="designInstance.historyIndex === -1"
           @click="designInstance.handleHistoryBack"
         >
           <template #icon><Icon name="back" /></template>
