@@ -32,7 +32,6 @@
 </template>
 
 <script setup lang="ts">
-import { cloneDeep } from 'lodash'
 import Draggable from 'vuedraggable-es-fix'
 import { useDesignInstance } from '@/hooks'
 import Icon from '@/Icon/index.vue'
@@ -58,11 +57,10 @@ const designInstance = useDesignInstance()
 
 // 拖入后回调
 const onAdd = (e: Record<string, any>) => {
-  // console.log('onAdd')
   const source = e.item._underlying_vm_
 
   // 更新schema并记录到历史中
-  designInstance.updateSchema(cloneDeep(designInstance.schema))
+  designInstance.updateSchema(designInstance.schema)
 
   // 将当前选中设置为新添加的表单项
   designInstance.updateCurrentKey(source.designKey)
@@ -76,9 +74,8 @@ const onAdd = (e: Record<string, any>) => {
 
 // 排序后回调
 const onUpdate = () => {
-  // console.log('onUpdate')
   // 更新schema并记录到历史中
-  designInstance.updateSchema(cloneDeep(designInstance.schema))
+  designInstance.updateSchema(designInstance.schema)
 }
 </script>
 

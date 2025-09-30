@@ -7,7 +7,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, provide, reactive, ref, toRefs, watch, watchEffect } from 'vue'
+import { cloneDeep } from 'lodash'
+import { computed, provide, reactive, ref, toRefs } from 'vue'
 import { $designInstance } from '@/symbol'
 import type {
   DesignInstance,
@@ -21,7 +22,6 @@ import Center from './Center/index.vue'
 import Left from './Left/index.vue'
 import Right from './Right/index.vue'
 import './styles/index.scss'
-import { cloneDeep } from 'lodash'
 
 const props = withDefaults(defineProps<FormDesignProps>(), {
   omitMenus: () => [],
@@ -95,7 +95,10 @@ const current = computed({
   },
   set(element: FormItemType) {
     currentKey.value = element.designKey!
-    jsonSchema.value.items = setCurrentByKey(jsonSchema.value.items, element)
+    updateSchema(
+      { ...jsonSchema.value, items: setCurrentByKey(jsonSchema.value.items, element) },
+      false
+    )
   }
 })
 
@@ -126,16 +129,4 @@ const instance = reactive<DesignInstance>({
 })
 
 provide($designInstance, instance)
-
-// watch(
-//   history,
-//   (newValue) => {
-//     console.log(newValue)
-//   },
-//   { deep: true }
-// )
-
-watchEffect(() => {
-  console.log(historyIndex.value)
-})
 </script>
