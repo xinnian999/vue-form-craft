@@ -44,7 +44,7 @@ const emits = defineEmits<{
   add: [element: FormElement]
 }>()
 
-const formDesignWrapper = useTemplateRef('formDesignWrapper')
+const formDesignWrapper = useTemplateRef<HTMLDivElement>('formDesignWrapper')
 
 const currentKey = ref('')
 

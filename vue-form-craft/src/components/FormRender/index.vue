@@ -22,8 +22,9 @@
 </template>
 
 <script setup lang="ts">
+import type { FormInstance as ElFormInstance } from 'element-plus'
 import { cloneDeep, mergeWith } from 'lodash'
-import { computed, onMounted, provide, reactive, readonly, ref, toRefs, useTemplateRef } from 'vue'
+import { computed, onMounted, provide, reactive, readonly, toRefs, useTemplateRef } from 'vue'
 import { FormItemGroup } from '@/components'
 import { useLocale } from '@/hooks'
 import { $formInstance } from '@/symbol'
@@ -50,7 +51,7 @@ const schema = defineModel<FormSchema>('schema', {
 
 const locale = useLocale()
 
-const form = useTemplateRef('form')
+const form = useTemplateRef<ElFormInstance>('form')
 
 const formItems = computed({
   get() {
