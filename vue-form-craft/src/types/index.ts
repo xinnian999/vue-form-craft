@@ -187,6 +187,7 @@ export interface DesignInstance extends Required<ToRefs<FormDesignProps>> {
   schema: Ref<FormSchema>
   current: Ref<FormItemType | null>
   rightTab: 'attr' | 'form'
+  fullScreen: Ref<boolean>
   history: Ref<FormSchema[]>
   historyIndex: Ref<number>
   updateCurrent: (current: FormItemType) => void
@@ -197,4 +198,5 @@ export interface DesignInstance extends Required<ToRefs<FormDesignProps>> {
   handleEmit: (event: any, ...args: any[]) => void
   handleHistoryBack: () => void
   handleHistoryForward: () => void
+  handleToggleFullScreen: () => void
 }

@@ -5,7 +5,6 @@ export default {
   labelAlign: 'top',
   initialValues: {
     label: '多行文本',
-    name: 'textarea',
     props: {
       placeholder: '请输入...',
       autosize: {

@@ -1,5 +1,5 @@
 <template>
-  <div :class="ns('form-design')" v-bind="$attrs">
+  <div :class="ns('form-design')" v-bind="$attrs" ref="formDesignWrapper">
     <Left />
     <Center />
     <Right />
@@ -19,7 +19,7 @@ const initJsonSchema: FormSchema = {
 
 <script setup lang="ts">
 import { cloneDeep } from 'lodash'
-import { computed, provide, reactive, ref, toRefs } from 'vue'
+import { computed, provide, reactive, ref, toRefs, useTemplateRef, watch } from 'vue'
 import { $designInstance } from '@/symbol'
 import type {
   DesignInstance,
@@ -44,11 +44,15 @@ const emits = defineEmits<{
   add: [element: FormElement]
 }>()
 
+const formDesignWrapper = useTemplateRef('formDesignWrapper')
+
+const currentKey = ref('')
+
 const jsonSchema = defineModel<FormSchema>({
   default: () => reactive(initJsonSchema)
 })
 
-const currentKey = ref('')
+const fullScreen = ref(false)
 
 const history = ref<FormSchema[]>([])
 
@@ -102,6 +106,14 @@ const current = computed({
   }
 })
 
+watch(fullScreen, (val) => {
+  if (val) {
+    formDesignWrapper.value?.requestFullscreen()
+  } else {
+    document.exitFullscreen()
+  }
+})
+
 const instance = reactive<DesignInstance>({
   ...toRefs(props),
   currentKey,
@@ -109,6 +121,7 @@ const instance = reactive<DesignInstance>({
   schema: jsonSchema,
   current,
   rightTab: 'form',
+  fullScreen,
   history,
   historyIndex,
   updateSchema,
@@ -128,7 +141,10 @@ const instance = reactive<DesignInstance>({
     updateSchema(initJsonSchema)
   },
   handleHistoryBack,
-  handleHistoryForward
+  handleHistoryForward,
+  handleToggleFullScreen() {
+    fullScreen.value = !fullScreen.value
+  }
 })
 
 provide($designInstance, instance)

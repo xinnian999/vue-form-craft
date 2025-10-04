@@ -92,7 +92,7 @@ onMounted(() => {
   }
 })
 
-const validate: FormInstance['validate'] = () => form.value?.validate()
+const validate: FormInstance['validate'] = () => form.value!.validate()
 
 const submit: FormInstance['submit'] = () => {
   validate()

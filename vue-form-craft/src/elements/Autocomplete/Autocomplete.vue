@@ -14,13 +14,11 @@
 <script setup lang="ts">
 import { useFormInstance } from '@/hooks'
 
-interface Option {
-  value: string
-  label: string
-}
-
 const props = defineProps<{
-  options: Option[]
+  options: {
+    value: string
+    label: string
+  }[]
 }>()
 
 const value = defineModel<string>()
@@ -33,7 +31,7 @@ const querySearch = (queryString: string, cb: any) => {
   cb(results)
 }
 const createFilter = (queryString: string) => {
-  return (restaurant: Option) => {
+  return (restaurant: { value: string; label: string }) => {
     return restaurant.label.toLowerCase().indexOf(queryString.toLowerCase()) === 0
   }
 }

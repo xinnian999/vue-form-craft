@@ -20,6 +20,13 @@
           <template #icon><Icon name="forward" /></template>
         </el-button>
       </el-button-group>
+      <el-button
+        @click="designInstance.handleToggleFullScreen"
+        size="small"
+        style="margin-left: 12px"
+      >
+        <template #icon><Icon name="fullScreen" /></template>
+      </el-button>
     </div>
 
     <div class="right">
