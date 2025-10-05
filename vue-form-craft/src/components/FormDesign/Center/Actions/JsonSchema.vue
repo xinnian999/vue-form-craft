@@ -49,18 +49,23 @@
           <Icon name="help" style="margin-right: 5px" />
           <span>帮助</span>
         </template>
-        <CodeHighLight style="height: 70vh" language="json" :code="schemaHelp" />
+        <div style="height: 70vh; overflow-y: auto">
+          <MdPreview v-model="help" :code-foldable="false" />
+        </div>
       </el-tab-pane>
     </el-tabs>
   </el-dialog>
 </template>
 
 <script setup lang="ts">
+import { MdPreview } from 'md-editor-v3'
 import { computed, ref } from 'vue'
 import { CodeHighLight } from '@/components'
 import { useDesignInstance, useElements, useLocale } from '@/hooks'
 import Icon from '@/Icon/index.vue'
-import { jsJsonSchema, jsVue, schemaHelp, tsJsonSchema, tsVue } from './config'
+import { jsJsonSchema, jsVue, tsJsonSchema, tsVue } from './config'
+import help from './help.md?raw'
+import 'md-editor-v3/lib/style.css'
 
 const designInstance = useDesignInstance()
 
