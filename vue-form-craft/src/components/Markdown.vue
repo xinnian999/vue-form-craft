@@ -1,12 +1,13 @@
 <template>
   <div v-if="read || formInstance.read" :class="ns('md-preview')" :style="previewStyle">
-    <MdPreview v-model="value" v-bind="$attrs" />
+    <MdCatalog editorId="vfc-md-preview" scrollElement="#vfc-md-preview" class="catalog" />
+    <MdPreview :modelValue="value" v-bind="$attrs" id="vfc-md-preview" class="content" />
   </div>
   <MdEditor v-else v-model="value" v-bind="$attrs" />
 </template>
 
 <script setup lang="ts">
-import { MdEditor, MdPreview } from 'md-editor-v3'
+import { MdCatalog, MdEditor, MdPreview } from 'md-editor-v3'
 import { useFormInstance } from '@/hooks'
 import 'md-editor-v3/lib/style.css'
 import { ns } from '@/utils'
@@ -28,5 +29,19 @@ const formInstance = useFormInstance()
   width: 100%;
   border: 1px solid #eee;
   box-sizing: border-box;
+  display: flex;
+
+  .catalog {
+    width: 200px;
+    border-right: 1px solid #eee;
+    padding: 10px;
+  }
+
+  .content {
+    flex: 1;
+    overflow: auto;
+    position: relative;
+    padding: 0 20px;
+  }
 }
 </style>
