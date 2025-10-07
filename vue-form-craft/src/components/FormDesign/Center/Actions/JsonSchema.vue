@@ -49,18 +49,20 @@
           <Icon name="help" style="margin-right: 5px" />
           <span>帮助</span>
         </template>
-        <div style="height: 70vh; overflow-y: auto">
-          <MdPreview v-model="help" :code-foldable="false" />
-        </div>
+        <Markdown
+          v-model="help"
+          read
+          :code-foldable="false"
+          previewStyle="height: 70vh; overflow-y: auto"
+        />
       </el-tab-pane>
     </el-tabs>
   </el-dialog>
 </template>
 
 <script setup lang="ts">
-import { MdPreview } from 'md-editor-v3'
 import { computed, ref } from 'vue'
-import { CodeHighLight } from '@/components'
+import { CodeHighLight, Markdown } from '@/components'
 import { useDesignInstance, useElements, useLocale } from '@/hooks'
 import Icon from '@/Icon/index.vue'
 import { jsJsonSchema, jsVue, tsJsonSchema, tsVue } from './config'
@@ -73,7 +75,7 @@ const locale = useLocale()
 
 const elements = useElements()
 
-const JsonEditor = elements.JsonEdit?.render
+const JsonEditor = elements.JsonEdit.render
 
 const json = computed({
   get() {
