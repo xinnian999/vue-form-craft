@@ -25,7 +25,9 @@
         size="small"
         style="margin-left: 12px"
       >
-        <template #icon><Icon name="fullScreen" /></template>
+        <template #icon>
+          <Icon :name="designInstance.fullScreen ? 'cancelFullScreen' : 'fullScreen'" />
+        </template>
       </el-button>
     </div>
 
