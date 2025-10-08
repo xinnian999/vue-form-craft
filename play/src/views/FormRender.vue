@@ -1,18 +1,9 @@
 <template>
-  <div class="FormRenderPage">
-    <FormRender v-model="formValues1" :schema="schema" ref="formRef" @finish="onFinish1" />
-    <FormRender v-model="formValues2" :schema="schema" ref="formRef" @finish="onFinish2" />
-  </div>
+  <FormRender :schema="schema" @finish="onFinish" />
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import type { FormInstance, FormSchema } from 'vue-form-craft'
-
-const formRef = ref<FormInstance>()
-
-const formValues1 = ref({})
-const formValues2 = ref({})
+import type { FormSchema } from 'vue-form-craft'
 
 const schema = {
   labelWidth: 150,
@@ -43,26 +34,7 @@ const schema = {
   ]
 } satisfies FormSchema
 
-const onFinish1 = (values: Record<string, any>) => {
+const onFinish = (values: Record<string, any>) => {
   alert(JSON.stringify(values, null, 2))
 }
-
-const onFinish2 = (values: Record<string, any>) => {
-  alert(JSON.stringify(values, null, 2))
-}
-
-// const handleSubmit = async () => {
-//   await formRef.value?.validate()
-//   alert(JSON.stringify(formValues.value, null, 2))
-// }
 </script>
-
-<style>
-.FormRenderPage {
-  width: 600px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-</style>
