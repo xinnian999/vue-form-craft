@@ -1,6 +1,6 @@
 import type { FormSchema } from '@/types'
 
- const schema = (): FormSchema => {
+const schema = (): FormSchema => {
   // const targetOptions = build(schema.items).filter((item) => item.value !== current.name)
 
   return {
@@ -8,7 +8,7 @@ import type { FormSchema } from '@/types'
     labelAlign: 'top',
     items: [
       {
-        // label: '值联动',
+        // label: '数据联动',
         // help: '本字段值改变时触发，修改其他字段的值',
         hideLabel: true,
         name: 'change',

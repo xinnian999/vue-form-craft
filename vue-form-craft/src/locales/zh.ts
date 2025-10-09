@@ -25,7 +25,7 @@ export default {
       emptyTip: '未选中表单项',
       linkage: {
         text: '联动',
-        action1: '配置联动',
+        action1: 'JS表达式',
         action2: '数据联动'
       }
     },

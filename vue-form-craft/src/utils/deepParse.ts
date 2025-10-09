@@ -1,8 +1,8 @@
-import { isString, isPlainObject, isArray } from 'lodash'
+import { isArray, isPlainObject, isString } from 'lodash'
 
-//模板转换函数，将一个由双大括号包裹的字符串，转化为js表达式并返回结果（context限制变量范围）
+//模板转换函数，将一个由双大括号包裹的字符串，转化为并返回结果（context限制变量范围）
 const templateParse = (str: string, context: Record<string, any>) => {
-        // console.log(JSON.stringify(context.$selectData) );
+  // console.log(JSON.stringify(context.$selectData) );
   if (!str) return str
   if (typeof str !== 'string') return str
 

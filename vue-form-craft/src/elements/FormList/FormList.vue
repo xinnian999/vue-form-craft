@@ -178,7 +178,7 @@ const formatter = (row: any, column: TableColumnCtx<any>, cellValue: any, index:
   })
 }
 
-// formList 值联动
+// formList 数据联动
 watch(list, (newVal, oldVal) => {
   const changeIndex = newVal.reduce((acc, cur, index) => {
     if (!isEqual(cur, oldVal[index])) {

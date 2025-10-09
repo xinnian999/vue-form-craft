@@ -1,5 +1,5 @@
 <template>
-  <el-dialog destroy-on-close v-model="visible" top="3vh" title="值联动">
+  <el-dialog destroy-on-close v-model="visible" top="3vh" title="数据联动">
     <FormRender v-model="designInstance.current!" :schema="linkageSchema()" />
   </el-dialog>
 </template>
