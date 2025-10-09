@@ -11,6 +11,21 @@ import searchFilter from './searchFilter'
 import userProfile from './userProfile'
 import valueLinkage from './valueLinkage'
 
+export {
+  addressContact,
+  bugGood,
+  dateRangeBooking,
+  fileUpload,
+  formList,
+  login,
+  orderInvoice,
+  register,
+  satisfaction,
+  searchFilter,
+  userProfile,
+  valueLinkage
+}
+
 export default [
   {
     label: '常见表单',

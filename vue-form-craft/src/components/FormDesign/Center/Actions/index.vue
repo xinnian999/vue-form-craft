@@ -5,12 +5,14 @@
         <el-button
           type="primary"
           :disabled="designInstance.historyIndex === -1"
+          name="history-back"
           @click="designInstance.handleHistoryBack"
         >
           <template #icon><Icon name="back" /></template>
         </el-button>
         <el-button
           type="primary"
+          name="history-forward"
           :disabled="
             designInstance.historyIndex === designInstance.history.length - 1 ||
             designInstance.history.length === 0

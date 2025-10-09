@@ -148,4 +148,6 @@ const instance = reactive<DesignInstance>({
 })
 
 provide($designInstance, instance)
+
+defineExpose(instance)
 </script>
