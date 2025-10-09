@@ -35,9 +35,10 @@
 
     <div class="right">
       <el-button
-        v-for="{ label, btnType, icon, onClick } in rightActions"
+        v-for="{ label, btnType, icon, name, onClick } in rightActions"
         :key="label"
         :type="btnType"
+        :name="name"
         size="small"
         @click="onClick"
       >
@@ -63,6 +64,7 @@ type PreviewAction = {
   label: string
   btnType: 'default' | 'primary' | 'text' | 'success' | 'warning' | 'info' | 'danger'
   icon?: string
+  name?: string
   onClick: () => void
 }
 
@@ -102,6 +104,7 @@ const rightActions: PreviewAction[] = [
     label: locale.value.actions.clear,
     btnType: 'danger',
     icon: 'trash',
+    name: 'clear-design',
     onClick: async () => {
       await ElMessageBox.confirm('确认清空当前设计吗？')
       designInstance.handleResetSchema()

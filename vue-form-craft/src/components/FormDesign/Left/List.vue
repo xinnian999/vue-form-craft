@@ -18,7 +18,10 @@
         :clone="onClone"
       >
         <template #item="{ element }">
-          <li :class="ns('menu-list-item')" @dblclick="handleDbClick(element)">
+          <li
+            :class="[ns('menu-list-item'), `menu-${element.component}`]"
+            @dblclick="handleDbClick(element)"
+          >
             <div :class="ns('menu-list-item-ico')">
               <component class="ico-content" :is="element.icon" />
             </div>
