@@ -70,7 +70,7 @@ const handleHoverLeave = () => {
 }
 
 const handleSelect = (element: FormItemType) => {
-  designInstance.updateCurrent(element)
+  designInstance.updateCurrentKey(element.designKey!)
   designInstance.rightTab = 'attr'
 }
 

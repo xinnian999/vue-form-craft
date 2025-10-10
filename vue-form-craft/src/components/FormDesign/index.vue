@@ -120,9 +120,6 @@ const instance = reactive<DesignInstance>({
   history,
   historyIndex,
   updateSchema,
-  updateCurrent(newCurrent) {
-    instance.current = newCurrent
-  },
   updateCurrentKey(key) {
     currentKey.value = key
   },
