@@ -58,11 +58,6 @@ const history = ref<FormSchema[]>([])
 
 const historyIndex = ref(-1)
 
-const updateHistory = (schema: FormSchema) => {
-  history.value.push(schema)
-  historyIndex.value = history.value.length - 1
-}
-
 const handleHistoryBack = () => {
   if (historyIndex.value > -1) {
     historyIndex.value--
@@ -88,7 +83,8 @@ const updateSchema = (newSchema: FormSchema, isUpdateHistory = true) => {
     if (historyIndex.value < history.value.length - 1) {
       history.value = history.value.slice(0, historyIndex.value + 1)
     }
-    updateHistory(cloneDeep(newSchema))
+    history.value.push(cloneDeep(newSchema))
+    historyIndex.value = history.value.length - 1
   }
 }
 
