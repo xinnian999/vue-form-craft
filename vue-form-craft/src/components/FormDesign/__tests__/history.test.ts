@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { FormDesignTest, wait } from '@/utils'
+import { FormDesignTest } from '@/utils'
 
 describe('《表单设计器》历史记录测试', async () => {
   it('（后退/前进）按钮初始化 - 全部禁用', async () => {
@@ -11,48 +11,43 @@ describe('《表单设计器》历史记录测试', async () => {
   })
 
   it('双击添加 - 历史', async () => {
-    const { leftWrapper, backBtn, forwardBtn, schema } = FormDesignTest()
+    const { backBtn, forwardBtn, itemsLength, dblclickAdd } = FormDesignTest()
 
-    await leftWrapper.find(`.menu-Input`).trigger('dblclick')
+    await dblclickAdd('Input')
 
-    await leftWrapper.find(`.menu-Input`).trigger('dblclick')
+    await dblclickAdd('Input')
 
-    expect(schema.value.items.length).toBe(2)
+    expect(itemsLength.value).toBe(2) // 添加2次
 
     await backBtn.trigger('click')
 
-    expect(schema.value.items.length).toBe(1)
+    expect(itemsLength.value).toBe(1) // 后退1次
 
     await forwardBtn.trigger('click')
 
-    expect(schema.value.items.length).toBe(2)
+    expect(itemsLength.value).toBe(2) // 前进1次
   })
 
   it('清空设计 - 历史', async () => {
-    const { leftWrapper, backBtn, forwardBtn, schema, clearBtn } = FormDesignTest()
+    const { backBtn, forwardBtn, itemsLength, dblclickAdd, clearDesign } = FormDesignTest()
 
-    await leftWrapper.find(`.menu-Input`).trigger('dblclick')
+    await dblclickAdd('Input')
 
-    await leftWrapper.find(`.menu-Input`).trigger('dblclick')
+    await dblclickAdd('Input')
 
-    expect(schema.value.items.length).toBe(2)
+    expect(itemsLength.value).toBe(2) // 添加2次
 
-    // 清空设计 + 弹窗确认
-    await clearBtn.trigger('click')
-    const confirmBtn = document.querySelector(
-      '.el-message-box__btns .el-button--primary'
-    ) as HTMLButtonElement
-    confirmBtn.click()
-    await wait(500)
+    // 清空设计
+    await clearDesign()
 
-    expect(schema.value.items.length).toBe(0)
+    expect(itemsLength.value).toBe(0) // 清空设计
 
     await backBtn.trigger('click')
 
-    expect(schema.value.items.length).toBe(2)
+    expect(itemsLength.value).toBe(2) // 后退1次
 
     await forwardBtn.trigger('click')
 
-    expect(schema.value.items.length).toBe(0)
+    expect(itemsLength.value).toBe(0) // 前进1次
   })
 })
