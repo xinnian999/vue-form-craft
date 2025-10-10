@@ -16,10 +16,11 @@
     <div class="actions-rb" v-if="data.designKey === designInstance.current?.designKey">
       <div
         class="actions-rb-item"
-        v-for="{ icon, handle, bg } in rightBottomActions"
+        v-for="{ icon, handle, bg, name } in rightBottomActions"
         @click.stop="handle(data)"
         :key="icon"
         :style="{ backgroundColor: bg }"
+        :name="name"
       >
         <Icon :name="icon" />
       </div>
@@ -76,6 +77,7 @@ const handleSelect = (element: FormItemType) => {
 const rightBottomActions = [
   {
     icon: 'copy',
+    name: 'copy-btn',
     handle: (element: FormItemType) => {
       const newList = copyItems(designInstance.schema.items, element.designKey!)
       designInstance.updateSchema({ ...designInstance.schema, items: newList })
@@ -83,6 +85,7 @@ const rightBottomActions = [
   },
   {
     icon: 'delete',
+    name: 'delete-btn',
     bg: `var(--${ns('danger-color')})`,
     handle: (element: FormItemType) => {
       const newList = recursionDelete(

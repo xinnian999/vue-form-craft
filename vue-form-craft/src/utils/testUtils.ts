@@ -7,15 +7,19 @@ export function FormDesignTest() {
   const wrapper = mount(FormDesign)
   const leftWrapper = wrapper.find(`.${ns('form-design-left')}`)
   const rightWrapper = wrapper.find(`.${ns('form-design-right')}`)
+  const centerWrapper = wrapper.find(`.${ns('form-design-center')}`)
   const backBtn = wrapper.find(`.el-button[name="history-back"]`)
   const forwardBtn = wrapper.find(`.el-button[name="history-forward"]`)
   const clearBtn = wrapper.find(`.el-button[name="clear-design"]`)
+
   const schema = computed(() => wrapper.vm.schema)
   const itemsLength = computed(() => wrapper.vm.schema.items.length)
+
   // 双击添加元素
   const dblclickAdd = async (menuName: string) => {
     await leftWrapper.find(`.menu-${menuName}`).trigger('dblclick')
   }
+
   // 点击清除按钮 + 确认
   const clearDesign = async () => {
     await clearBtn.trigger('click')
@@ -24,6 +28,23 @@ export function FormDesignTest() {
     ) as HTMLButtonElement
     confirmBtn.click()
     await wait(500)
+  }
+
+  // 选中元素并返回
+  const clickItem = async () => {
+    await centerWrapper.find(`.${ns('canvas-item')}`).trigger('click')
+
+    await wait(500)
+
+    const el = centerWrapper.find(`.${ns('canvas-item')}.active`)
+    const copyBtn = el.find(`.actions-rb-item[name="copy-btn"]`)
+    const deleteBtn = el.find(`.actions-rb-item[name="delete-btn"]`)
+
+    return {
+      el,
+      copyBtn,
+      deleteBtn
+    }
   }
 
   return {
@@ -36,6 +57,7 @@ export function FormDesignTest() {
     clearBtn,
     itemsLength,
     dblclickAdd,
-    clearDesign
+    clearDesign,
+    clickItem
   }
 }

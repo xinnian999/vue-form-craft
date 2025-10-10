@@ -1,18 +1,18 @@
-import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import { FormDesign } from '@/components'
-import { ns } from '@/utils'
+import { FormDesignTest } from '@/utils'
 
-describe('FormDesign Menu', async () => {
-  it('dblclick', async () => {
-    const wrapper = mount(FormDesign)
+describe('《表单设计器》元素菜单测试', async () => {
+  it('双击添加元素', async () => {
+    const { itemsLength, dblclickAdd } = FormDesignTest()
 
-    expect(wrapper.vm.schema.items.length).toBe(0)
+    expect(itemsLength.value).toBe(0)
 
-    const menusItem1 = wrapper.find(`.${ns('menu-list-item')}`) // 单行文本
+    await dblclickAdd('Input')
 
-    await menusItem1.trigger('dblclick')
+    expect(itemsLength.value).toBe(1)
 
-    expect(wrapper.vm.schema.items.length).toBe(1)
+    await dblclickAdd('Input')
+
+    expect(itemsLength.value).toBe(2)
   })
 })
