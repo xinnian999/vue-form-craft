@@ -85,7 +85,6 @@ const updateSchema = (newSchema: FormSchema, isUpdateHistory = true) => {
   // 本次更新是否需要记录到历史中
   if (isUpdateHistory) {
     // 如果改动了回退的某次记录，将从此开始重新记录
-
     if (historyIndex.value < history.value.length - 1) {
       history.value = history.value.slice(0, historyIndex.value + 1)
     }
