@@ -1,10 +1,11 @@
-import type { FormSchema } from '@/types'
+import type { FormSchema } from 'vue-form-craft'
 
 export default {
   size: 'small',
   labelAlign: 'top',
+  initialValues: { label: 'Markdown编辑器' },
   items: [
-    { label: '标签', component: 'Input', name: 'label',initialValue:'JSON编辑器' },
+    { label: '标签', component: 'Input', name: 'label' },
     {
       label: '唯一标识',
       component: 'Input',
@@ -12,6 +13,13 @@ export default {
       help: "既是唯一标识，也是数据路径。比如输入【props.name】，数据就会保存为 { props: { name:'xxx' } }"
     },
     { label: '字段说明', component: 'TextArea', name: 'help' },
+    {
+      label: '占位提示',
+      component: 'Input',
+      name: 'props.placeholder',
+      designKey: 'form-ekRL'
+    },
+    { label: '初始值', component: 'Input', name: 'initialValue' },
     {
       component: 'Grid',
       children: [
@@ -30,11 +38,7 @@ export default {
       name: 'cNmCuu',
 
     },
-    {
-      label: '初始值',
-      component: 'JsonEdit',
-      name: 'initialValue',
-      dialog: true
-    }
+
+
   ]
-} satisfies FormSchema
+} as FormSchema

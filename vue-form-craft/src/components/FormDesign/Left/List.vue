@@ -18,7 +18,10 @@
         :clone="onClone"
       >
         <template #item="{ element }">
-          <li :class="ns('menu-list-item')">
+          <li
+            :class="[ns('menu-list-item'), `menu-${element.component}`]"
+            @dblclick="handleDbClick(element)"
+          >
             <div :class="ns('menu-list-item-ico')">
               <component class="ico-content" :is="element.icon" />
             </div>
@@ -66,10 +69,18 @@ const onClone = (source: FormElement) => {
     parse.children = []
   }
 
-  if (source.attrSchema.initialValues?.name) {
-    parse.name = source.attrSchema.initialValues.name
+  if (source.attrSchema.initialValues) {
+    Object.assign(parse, source.attrSchema.initialValues)
   }
 
   return parse
+}
+
+const handleDbClick = (element: FormElement) => {
+  const item = onClone(element)
+  designInstance.updateSchema({
+    ...designInstance.schema,
+    items: [...designInstance.schema.items, item]
+  })
 }
 </script>

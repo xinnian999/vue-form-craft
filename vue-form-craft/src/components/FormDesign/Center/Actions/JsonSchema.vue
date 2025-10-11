@@ -49,7 +49,12 @@
           <Icon name="help" style="margin-right: 5px" />
           <span>帮助</span>
         </template>
-        <CodeHighLight style="height: 70vh" language="json" :code="schemaHelp" />
+        <Markdown
+          v-model="help"
+          read
+          :code-foldable="false"
+          previewStyle="height: 70vh; overflow-y: auto"
+        />
       </el-tab-pane>
     </el-tabs>
   </el-dialog>
@@ -57,10 +62,12 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { CodeHighLight } from '@/components'
+import { CodeHighLight, Markdown } from '@/components'
 import { useDesignInstance, useElements, useLocale } from '@/hooks'
 import Icon from '@/Icon/index.vue'
-import { jsJsonSchema, jsVue, schemaHelp, tsJsonSchema, tsVue } from './config'
+import { jsJsonSchema, jsVue, tsJsonSchema, tsVue } from './config'
+import help from './help.md?raw'
+import 'md-editor-v3/lib/style.css'
 
 const designInstance = useDesignInstance()
 
@@ -68,7 +75,7 @@ const locale = useLocale()
 
 const elements = useElements()
 
-const JsonEditor = elements.JsonEdit?.render
+const JsonEditor = elements.JsonEdit.render
 
 const json = computed({
   get() {
@@ -86,10 +93,6 @@ const formValues = ref({})
 const visible = defineModel<boolean>()
 
 const onBlur = (editor: any) => {
-  // designInstance.updateSchema({
-  //   ...designInstance.schema,
-  //   items: changeItems(designInstance.schema.items)
-  // })
   editor.repair()
 }
 </script>

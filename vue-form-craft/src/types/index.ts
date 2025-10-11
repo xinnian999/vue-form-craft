@@ -185,12 +185,17 @@ export interface DesignInstance extends Required<ToRefs<FormDesignProps>> {
   currentKey: Ref<string>
   hoverKey: string
   schema: Ref<FormSchema>
-  list: Ref<FormItemType[]>
   current: Ref<FormItemType | null>
   rightTab: 'attr' | 'form'
-  updateCurrent: (current: FormItemType) => void
+  fullScreen: Ref<boolean>
+  history: Ref<FormSchema[]>
+  historyIndex: Ref<number>
+  updateCurrentKey: (key: string) => void
   updateHoverKey: (key: string) => void
   updateSchema: (schema: FormSchema) => void
-  updateList: (newList: FormItemType[]) => void
+  handleResetSchema: () => void
   handleEmit: (event: any, ...args: any[]) => void
+  handleHistoryBack: () => void
+  handleHistoryForward: () => void
+  handleToggleFullScreen: () => void
 }

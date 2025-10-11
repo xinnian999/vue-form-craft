@@ -4,8 +4,14 @@ import type { FormSchema } from '@/types'
 export default {
   size: 'small',
   labelAlign: 'top',
+  initialValues: {
+    label: '单行文本',
+    props: {
+      placeholder: '请输入文本'
+    }
+  },
   items: [
-    { label: '标签', component: 'Input', name: 'label', initialValue: '单行文本' },
+    { label: '标签', component: 'Input', name: 'label' },
     {
       label: '唯一标识',
       component: 'Input',
@@ -17,8 +23,7 @@ export default {
       label: '占位提示',
       component: 'Input',
       name: 'props.placeholder',
-      designKey: 'form-ekRL',
-      initialValue: '请输入文本'
+      designKey: 'form-ekRL'
     },
     { label: '初始值', component: 'Input', name: 'initialValue' },
     {

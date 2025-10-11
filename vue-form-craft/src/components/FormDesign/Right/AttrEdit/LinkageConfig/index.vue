@@ -24,7 +24,7 @@ import { ref } from 'vue'
 import { useLocale } from '@/hooks'
 import { ns } from '@/utils'
 import Change from './Change.vue'
-import Config from './Config.vue'
+import Config from './JsExpr.vue'
 
 const locale = useLocale()
 

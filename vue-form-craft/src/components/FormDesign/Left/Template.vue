@@ -24,9 +24,9 @@
 </template>
 
 <script setup lang="ts">
-import { templates } from '@/config'
 import { useDesignInstance } from '@/hooks'
 import Icon from '@/Icon/index.vue'
+import templates from '@/templates'
 
 const designInstance = useDesignInstance()
 

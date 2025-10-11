@@ -22,6 +22,7 @@
       handle=".canvas-move"
       force-fallback
       @add="onAdd"
+      @update="onUpdate"
     >
       <template #item="{ element: child }">
         <CanvasItem v-if="child.designKey" :data="child" />
@@ -35,7 +36,7 @@ import Draggable from 'vuedraggable-es-fix'
 import { useDesignInstance } from '@/hooks'
 import Icon from '@/Icon/index.vue'
 import type { FormItemType } from '@/types'
-import { getCurrentByKey, ns } from '@/utils'
+import { ns } from '@/utils'
 import CanvasItem from './CanvasItem.vue'
 
 const props = withDefaults(
@@ -54,16 +55,27 @@ const props = withDefaults(
 
 const designInstance = useDesignInstance()
 
+// 拖入后回调
 const onAdd = (e: Record<string, any>) => {
   const source = e.item._underlying_vm_
 
-  designInstance.updateCurrent(getCurrentByKey(designInstance.list, source.designKey)!)
+  // 更新schema并记录到历史中
+  designInstance.updateSchema(designInstance.schema)
+
+  // 将当前选中设置为新添加的表单项
+  designInstance.updateCurrentKey(source.designKey)
 
   designInstance.hoverKey = source.designKey
 
   designInstance.rightTab = 'attr'
 
   designInstance.handleEmit('add', source)
+}
+
+// 排序后回调
+const onUpdate = () => {
+  // 更新schema并记录到历史中
+  designInstance.updateSchema(designInstance.schema)
 }
 </script>
 

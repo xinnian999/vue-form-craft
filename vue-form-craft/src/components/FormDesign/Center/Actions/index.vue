@@ -1,25 +1,44 @@
 <template>
   <div :class="ns('form-design-center-actions')">
     <div class="left">
+      <el-button-group size="small">
+        <el-button
+          type="primary"
+          :disabled="designInstance.historyIndex === -1"
+          name="history-back"
+          @click="designInstance.handleHistoryBack"
+        >
+          <template #icon><Icon name="back" /></template>
+        </el-button>
+        <el-button
+          type="primary"
+          name="history-forward"
+          :disabled="
+            designInstance.historyIndex === designInstance.history.length - 1 ||
+            designInstance.history.length === 0
+          "
+          @click="designInstance.handleHistoryForward"
+        >
+          <template #icon><Icon name="forward" /></template>
+        </el-button>
+      </el-button-group>
       <el-button
-        v-for="{ label, btnType, icon, onClick } in leftActions"
-        :key="label"
-        :type="btnType"
+        @click="designInstance.handleToggleFullScreen"
         size="small"
-        @click="onClick"
+        style="margin-left: 12px"
       >
-        <template #icon v-if="icon">
-          <Icon :name="icon" />
+        <template #icon>
+          <Icon :name="designInstance.fullScreen ? 'cancelFullScreen' : 'fullScreen'" />
         </template>
-        {{ label }}</el-button
-      >
+      </el-button>
     </div>
 
     <div class="right">
       <el-button
-        v-for="{ label, btnType, icon, onClick } in rightActions"
+        v-for="{ label, btnType, icon, name, onClick } in rightActions"
         :key="label"
         :type="btnType"
+        :name="name"
         size="small"
         @click="onClick"
       >
@@ -45,6 +64,7 @@ type PreviewAction = {
   label: string
   btnType: 'default' | 'primary' | 'text' | 'success' | 'warning' | 'info' | 'danger'
   icon?: string
+  name?: string
   onClick: () => void
 }
 
@@ -55,24 +75,13 @@ const locale = useLocale()
 const JsonSchemaVisible = ref(false)
 const PreviewVisible = ref(false)
 
-const leftActions: PreviewAction[] = [
+const rightActions: PreviewAction[] = [
   {
     label: locale.value.actions.previewJson,
     btnType: 'primary',
     icon: 'script',
     onClick: () => {
       JsonSchemaVisible.value = true
-    }
-  }
-]
-
-const rightActions: PreviewAction[] = [
-  {
-    label: locale.value.actions.save,
-    icon: 'save',
-    btnType: 'primary',
-    onClick: () => {
-      designInstance.handleEmit('save')
     }
   },
   {
@@ -84,19 +93,21 @@ const rightActions: PreviewAction[] = [
     }
   },
   {
+    label: locale.value.actions.save,
+    icon: 'save',
+    btnType: 'primary',
+    onClick: () => {
+      designInstance.handleEmit('save')
+    }
+  },
+  {
     label: locale.value.actions.clear,
     btnType: 'danger',
     icon: 'trash',
+    name: 'clear-design',
     onClick: async () => {
       await ElMessageBox.confirm('确认清空当前设计吗？')
-      designInstance.updateSchema({
-        labelWidth: 150,
-        labelAlign: 'right',
-        scrollToError: true,
-        size: 'default',
-        submitBtn: true,
-        items: []
-      })
+      designInstance.handleResetSchema()
     }
   }
 ]

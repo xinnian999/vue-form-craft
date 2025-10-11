@@ -12,6 +12,7 @@ import { ElMessage } from 'element-plus'
 import { createHighlighterCore } from 'shiki/core'
 import javascript from 'shiki/langs/javascript.mjs'
 import json from 'shiki/langs/json.mjs'
+import markdown from 'shiki/langs/markdown.mjs'
 import typescript from 'shiki/langs/typescript.mjs'
 import vue from 'shiki/langs/vue-html.mjs'
 import githubLight from 'shiki/themes/github-light.mjs'
@@ -56,7 +57,7 @@ onMounted(async () => {
       // 传入导入的包，而不是字符串
       githubLight
     ],
-    langs: [javascript, typescript, vue, json],
+    langs: [javascript, typescript, vue, json, markdown],
     loadWasm: getWasm
   })
 

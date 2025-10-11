@@ -1,5 +1,5 @@
-import optionConfig from "@/config/optionConfig";
-import type { FormSchema } from "@/types";
+import optionConfig from '@/config/optionConfig'
+import type { FormSchema } from '@/types'
 
 export default {
   size: 'small',
@@ -42,7 +42,7 @@ export default {
       hidden: '{{ $values.props.mode==="remote" }}',
       props: {
         mode: 'static',
-        options: '{{$values.props.options}}',
+        options: '{{$values.props.options}}'
       }
     },
     {
@@ -59,12 +59,8 @@ export default {
         'column-gap': 20
       },
       designKey: 'form-R003',
-      name: 'cNmCuu',
-
+      name: 'cNmCuu'
     },
-
-    
-
     {
       label: '选项样式类型',
       component: 'Radio',
@@ -96,6 +92,6 @@ export default {
       name: 'props.space'
     },
 
-     ...optionConfig
+    ...optionConfig
   ]
 } satisfies FormSchema

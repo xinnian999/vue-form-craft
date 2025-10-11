@@ -37,7 +37,7 @@ export default {
     // en, es zh-CN, pt-BR, tr, ja, fr-FR, de, ru, ko
     language: {
       type: String,
-      default: 'en'
+      default: 'zh-CN'
     }
   },
   data() {

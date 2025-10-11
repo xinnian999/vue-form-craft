@@ -1,13 +1,25 @@
 <template>
-  <div :class="ns('form-design')" v-bind="$attrs">
+  <div :class="ns('form-design')" v-bind="$attrs" ref="formDesignWrapper">
     <Left />
     <Center />
     <Right />
   </div>
 </template>
 
+<script lang="ts">
+const initJsonSchema: FormSchema = {
+  labelWidth: 150,
+  labelAlign: 'right',
+  scrollToError: true,
+  size: 'default',
+  submitBtn: true,
+  items: []
+}
+</script>
+
 <script setup lang="ts">
-import { computed, provide, reactive, ref, toRefs } from 'vue'
+import { cloneDeep } from 'lodash'
+import { computed, provide, reactive, ref, toRefs, useTemplateRef, watch } from 'vue'
 import { $designInstance } from '@/symbol'
 import type {
   DesignInstance,
@@ -32,35 +44,76 @@ const emits = defineEmits<{
   add: [element: FormElement]
 }>()
 
+const formDesignWrapper = useTemplateRef<HTMLDivElement>('formDesignWrapper')
+
 const currentKey = ref('')
 
-const currentSchema = defineModel<FormSchema>({
-  default: reactive({
-    labelWidth: 150,
-    labelAlign: 'right',
-    scrollToError: true,
-    size: 'default',
-    submitBtn: true,
-    items: []
-  })
+const jsonSchema = defineModel<FormSchema>({
+  default: () => reactive(initJsonSchema)
 })
 
-const list = computed({
-  get() {
-    return currentSchema.value.items
-  },
-  set(value) {
-    currentSchema.value.items = value
+const fullScreen = ref(false)
+
+const history = ref<FormSchema[]>([])
+
+const historyIndex = ref(-1)
+
+const handleHistoryBack = () => {
+  if (historyIndex.value > -1) {
+    historyIndex.value--
+    jsonSchema.value = cloneDeep(
+      history.value[historyIndex.value] ? history.value[historyIndex.value] : initJsonSchema
+    )
   }
-})
+}
+
+const handleHistoryForward = () => {
+  if (historyIndex.value < history.value.length - 1) {
+    historyIndex.value++
+    jsonSchema.value = cloneDeep(history.value[historyIndex.value])
+  }
+}
+
+/**
+ * 更新表单schema
+ * @param newSchema 新的schema
+ * @param isUpdateHistory 是否记录到历史中，默认true
+ * 
+ * 注意：外部如果想要记录历史，应该通过ref调用此方法，而不是直接修改v-model
+ * 例如：formDesignRef.value.updateSchema(newSchema)
+ */
+const updateSchema = (newSchema: FormSchema, isUpdateHistory = true) => {
+  jsonSchema.value = newSchema
+
+  // 本次更新是否需要记录到历史中
+  if (isUpdateHistory) {
+    // 如果改动了回退的某次记录，将从此开始重新记录
+    if (historyIndex.value < history.value.length - 1) {
+      history.value = history.value.slice(0, historyIndex.value + 1)
+    }
+    history.value.push(cloneDeep(newSchema))
+    historyIndex.value = history.value.length - 1
+  }
+}
 
 const current = computed({
   get() {
-    return getCurrentByKey(list.value, currentKey.value)
+    return getCurrentByKey(jsonSchema.value.items, currentKey.value)
   },
   set(element: FormItemType) {
     currentKey.value = element.designKey!
-    list.value = setCurrentByKey(list.value, element)
+    updateSchema(
+      { ...jsonSchema.value, items: setCurrentByKey(jsonSchema.value.items, element) },
+      false
+    )
+  }
+})
+
+watch(fullScreen, (val) => {
+  if (val) {
+    formDesignWrapper.value?.requestFullscreen()
+  } else {
+    document.exitFullscreen()
   }
 })
 
@@ -68,27 +121,33 @@ const instance = reactive<DesignInstance>({
   ...toRefs(props),
   currentKey,
   hoverKey: '',
-  schema: currentSchema,
+  schema: jsonSchema,
   current,
-  list,
   rightTab: 'form',
-  updateCurrent(newCurrent) {
-    instance.current = newCurrent
+  fullScreen,
+  history,
+  historyIndex,
+  updateSchema,
+  updateCurrentKey(key) {
+    currentKey.value = key
   },
   updateHoverKey(key) {
     instance.hoverKey = key
   },
-  updateSchema: (schema) => {
-    // Object.assign(currentSchema.value, schema)
-    currentSchema.value = schema
-  },
-  updateList: (newList) => {
-    list.value = newList
-  },
   handleEmit: (name, params) => {
     emits(name, params)
+  },
+  handleResetSchema: () => {
+    updateSchema(initJsonSchema)
+  },
+  handleHistoryBack,
+  handleHistoryForward,
+  handleToggleFullScreen() {
+    fullScreen.value = !fullScreen.value
   }
 })
 
 provide($designInstance, instance)
+
+defineExpose(instance)
 </script>
