@@ -1,8 +1,8 @@
 import { h } from 'vue'
+import { JsonEdit } from '@/components'
 import Icon from '@/Icon/index.vue'
 import type { FormElement } from '@/types'
 import attrSchema from './attrSchema'
-import JsonEdit from './JsonEdit.vue'
 
 export default {
   title: 'JSON编辑',

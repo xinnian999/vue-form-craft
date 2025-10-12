@@ -20,9 +20,7 @@ defineOptions({
   inheritAttrs: false
 })
 
-defineProps({
-  disabled: Boolean
-})
+defineProps<{ disabled?: boolean }>()
 
 const json = defineModel<Record<string, any>>()
 </script>

@@ -3,8 +3,11 @@ import type { FormSchema } from '@/types'
 export default {
   size: 'small',
   labelAlign: 'top',
+  initialValues: {
+    label: 'JSON编辑器'
+  },
   items: [
-    { label: '标签', component: 'Input', name: 'label',initialValue:'JSON编辑器' },
+    { label: '标签', component: 'Input', name: 'label' },
     {
       label: '唯一标识',
       component: 'Input',
@@ -27,8 +30,7 @@ export default {
         'column-gap': 20
       },
       designKey: 'form-R003',
-      name: 'cNmCuu',
-
+      name: 'cNmCuu'
     },
     {
       label: '初始值',
