@@ -14,7 +14,12 @@
           <Icon name="script" style="margin-right: 5px" />
           <span>在线编辑</span>
         </template>
-        <JsonEditor v-model="json" style="height: 70vh" @blur="onBlur" />
+        <JsonEdit
+          v-model="json"
+          style="height: 70vh"
+          @init="setupAutoComplete"
+          @modeChange="onModeChange"
+        />
       </el-tab-pane>
       <el-tab-pane name="ts" lazy>
         <template #label>
@@ -62,20 +67,18 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { CodeHighLight, Markdown } from '@/components'
-import { useDesignInstance, useElements, useLocale } from '@/hooks'
+import { CodeHighLight, JsonEdit, Markdown } from '@/components'
+import { useDesignInstance, useLocale } from '@/hooks'
 import Icon from '@/Icon/index.vue'
 import { jsJsonSchema, jsVue, tsJsonSchema, tsVue } from './config'
 import help from './help.md?raw'
 import 'md-editor-v3/lib/style.css'
+import JsonEditor from 'jsoneditor'
+import setupAutoComplete from './setupAutoComplete'
 
 const designInstance = useDesignInstance()
 
 const locale = useLocale()
-
-const elements = useElements()
-
-const JsonEditor = elements.JsonEdit.render
 
 const json = computed({
   get() {
@@ -92,7 +95,9 @@ const formValues = ref({})
 
 const visible = defineModel<boolean>()
 
-const onBlur = (editor: any) => {
-  editor.repair()
+const onModeChange = (newMode: string, editor: JsonEditor) => {
+  if (newMode === 'code') {
+    setupAutoComplete(editor)
+  }
 }
 </script>

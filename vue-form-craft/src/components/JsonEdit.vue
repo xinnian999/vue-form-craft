@@ -15,7 +15,14 @@ defineOptions({
   inheritAttrs: false
 })
 
-defineProps<{ disabled?: boolean }>()
+defineProps<{
+  disabled?: boolean
+}>()
+
+const emits = defineEmits<{
+  init: [editor: JsonEditor]
+  modeChange: [newMode: string, editor: JsonEditor]
+}>()
 
 const modelValue = defineModel<Record<string, any>>()
 
@@ -65,70 +72,13 @@ const init = () => {
       }
     },
     onModeChange(newMode) {
-      if (newMode === 'code') {
-        nextTick(() => setupAutoComplete())
-      }
+      emits('modeChange', newMode, editor!)
     }
   }
 
   if (jsonEditorEl.value) {
     editor = new JsonEditor(jsonEditorEl.value, options, modelValue.value || {})
-    nextTick(() => setupAutoComplete())
-  }
-}
-
-// 设置 Ace 编辑器自动完成
-const setupAutoComplete = () => {
-  const aceEditor = (editor as any)?.aceEditor
-  if (!aceEditor) return
-
-  try {
-    aceEditor.setOptions({
-      enableBasicAutocompletion: true,
-      enableLiveAutocompletion: false,
-      enableSnippets: true
-    })
-
-    const langTools = (window as any).ace?.require('ace/ext/language_tools')
-    if (!langTools) return
-
-    // 自定义补全器
-    const completer: any = {
-      id: 'formExprCompleter',
-      getCompletions: (editor: any, session: any, pos: any, prefix: string, callback: Function) => {
-        const line = session.getLine(pos.row)
-        const beforeCursor = line.substring(0, pos.column)
-
-        if (beforeCursor.endsWith('{{')) {
-          callback(null, [
-            { caption: '$values', value: '$values', meta: '表单数据对象', score: 1000 },
-            { caption: '$values.', value: '$values.', meta: '访问表单字段', score: 999 }
-          ])
-        } else {
-          callback(null, [])
-        }
-      }
-    }
-
-    // 添加补全器
-    aceEditor.completers = (aceEditor.completers || []).filter((c: any) => c.id !== 'formExprCompleter')
-    aceEditor.completers.push(completer)
-
-    // 监听 { 键触发补全
-    aceEditor.commands.addCommand({
-      name: 'triggerAutoComplete',
-      bindKey: { win: '{', mac: '{' },
-      exec: (editor: any) => {
-        editor.insert('{')
-        const pos = editor.getCursorPosition()
-        const line = editor.session.getLine(pos.row)
-        if (line.substring(0, pos.column).endsWith('{{')) {
-          setTimeout(() => editor.execCommand('startAutocomplete'), 50)
-        }
-      }
-    })
-  } catch (error) {
-    console.debug('Setup autocomplete error:', error)
+    emits('init', editor)
   }
 }
 
