@@ -31,33 +31,12 @@ const jsonEditorEl = useTemplateRef<HTMLElement>('jsonEditorEl')
 let editor: JsonEditor | null = null
 let internalChange = false // 标记是否为内部变化，避免循环更新
 
-const fixJson = () => {
-  if (!editor) return
-
-  try {
-    // 获取当前文本内容
-    const text = editor.getText()
-    if (!text || text.trim() === '') return
-
-    // 尝试解析并格式化JSON
-    const jsonData = editor.get()
-    // 重新设置，会自动格式化
-    editor.set(jsonData)
-  } catch (error) {
-    // JSON格式错误时，不做处理，保持用户输入
-    console.debug('JSON format error on blur:', error)
-  }
-}
-
 // 1. 初始化 JsonEditor 实例
 const init = () => {
   const options: JSONEditorOptions = {
     mode: 'code',
     modes: ['tree', 'code', 'form', 'text', 'view'],
     indentation: 2,
-    onBlur() {
-      fixJson()
-    },
     onChange() {
       try {
         const jsonData = editor?.get()
@@ -69,6 +48,23 @@ const init = () => {
         })
       } catch (error) {
         console.debug('JSON parse error:', error)
+      }
+    },
+    onBlur() {
+      if (!editor) return
+
+      try {
+        // 获取当前文本内容
+        const text = editor.getText()
+        if (!text || text.trim() === '') return
+
+        // 尝试解析并格式化JSON
+        const jsonData = editor.get()
+        // 重新设置，会自动格式化
+        editor.set(jsonData)
+      } catch (error) {
+        // JSON格式错误时，不做处理，保持用户输入
+        console.debug('JSON format error on blur:', error)
       }
     },
     onModeChange(newMode) {
