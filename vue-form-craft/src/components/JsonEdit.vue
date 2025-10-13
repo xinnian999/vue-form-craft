@@ -1,7 +1,5 @@
 <template>
-  <Disabled :disabled="disabled" class="jsonEdit-disabled">
-    <div ref="jsonEditorEl" style="height: 550px"></div>
-  </Disabled>
+  <div ref="jsonEditorEl" :class="[ns('json-editor'), disabled && 'disabled']"></div>
 </template>
 
 <script setup lang="ts">
@@ -9,7 +7,7 @@ import JsonEditor from 'jsoneditor'
 import type { JSONEditorOptions } from 'jsoneditor'
 import { nextTick, onMounted, onUnmounted, useTemplateRef, watch } from 'vue'
 import 'jsoneditor/dist/jsoneditor.min.css'
-import { Disabled } from '@/components'
+import { ns } from '@/utils'
 
 defineOptions({
   inheritAttrs: false
@@ -106,9 +104,16 @@ onUnmounted(() => {
 })
 </script>
 
-<style>
-.jsonEdit-disabled {
+<style lang="scss">
+@import '@/style.scss';
+
+@include ns('json-editor') {
   width: 100%;
-  opacity: 0.7;
+  height: 550px;
+
+  &.disabled {
+    opacity: 0.7;
+    pointer-events: none;
+  }
 }
 </style>
