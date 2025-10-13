@@ -74,7 +74,7 @@ import { jsJsonSchema, jsVue, tsJsonSchema, tsVue } from './config'
 import help from './help.md?raw'
 import 'md-editor-v3/lib/style.css'
 import JsonEditor from 'jsoneditor'
-import setupAutoComplete from './setupAutoComplete'
+import { setupAutoComplete } from './autoComplete'
 
 const designInstance = useDesignInstance()
 
