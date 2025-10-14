@@ -14,12 +14,7 @@
           <Icon name="script" style="margin-right: 5px" />
           <span>在线编辑</span>
         </template>
-        <JsonEdit
-          v-model="json"
-          style="height: 70vh"
-          @init="setupAutoComplete"
-          @modeChange="onModeChange"
-        />
+        <JsonEdit v-model="json" />
       </el-tab-pane>
       <el-tab-pane name="ts" lazy>
         <template #label>
@@ -73,8 +68,6 @@ import Icon from '@/Icon/index.vue'
 import { jsJsonSchema, jsVue, tsJsonSchema, tsVue } from './config'
 import help from './help.md?raw'
 import 'md-editor-v3/lib/style.css'
-import JsonEditor from 'jsoneditor'
-import { setupAutoComplete } from './autoComplete'
 
 const designInstance = useDesignInstance()
 
@@ -94,10 +87,4 @@ const json = computed({
 const formValues = ref({})
 
 const visible = defineModel<boolean>()
-
-const onModeChange = (newMode: string, editor: JsonEditor) => {
-  if (newMode === 'code') {
-    setupAutoComplete(editor)
-  }
-}
 </script>

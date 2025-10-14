@@ -5,7 +5,8 @@
  */
 
 import JsonEditor from 'jsoneditor'
-import { getCompletionItems, filterCompletionItems } from './completionProvider'
+import { filterCompletionItems, getCompletionItems } from './completionProvider'
+
 // import { setupTooltip } from './tooltip'
 
 /**
@@ -38,12 +39,12 @@ export const setupAutoComplete = (editor: JsonEditor) => {
     }
 
     // 配置 Ace 编辑器
-    aceEditor.completers = [formSchemaCompleter]  // 只使用自定义补全器
+    aceEditor.completers = [formSchemaCompleter] // 只使用自定义补全器
 
     aceEditor.setOptions({
-      enableBasicAutocompletion: true,   // 启用基础自动补全
-      enableLiveAutocompletion: true,    // 启用实时补全
-      enableSnippets: false              // 禁用代码片段
+      enableBasicAutocompletion: true, // 启用基础自动补全
+      enableLiveAutocompletion: true, // 启用实时补全
+      enableSnippets: false // 禁用代码片段
     })
 
     // 添加手动触发补全的快捷键
@@ -79,7 +80,6 @@ export const setupAutoComplete = (editor: JsonEditor) => {
 
     // 设置字段悬停提示
     // setupTooltip(aceEditor)
-
   } catch (error) {
     console.debug('自动补全设置失败:', error)
   }
