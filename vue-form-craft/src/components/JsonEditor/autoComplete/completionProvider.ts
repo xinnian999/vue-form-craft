@@ -5,19 +5,28 @@
  * ========================================
  */
 
+import {
+  getCurrentFieldName,
+  isAtRootLevel,
+  isInExpression,
+  isInItemsFirstLevel,
+  isInKeyPosition
+} from './contextAnalyzer'
 import type { CompletionItem } from './items'
-import { FORM_CONFIG_ITEMS, FORM_ITEM_CONFIG_ITEMS, EXPRESSION_ITEMS, COMPONENT_ITEMS } from './items'
-import { isInExpression, isInKeyPosition, isAtRootLevel, isInItemsFirstLevel, getCurrentFieldName } from './contextAnalyzer'
+import { EXPRESSION_ITEMS, FORM_CONFIG_ITEMS, FORM_ITEM_CONFIG_ITEMS } from './items'
 
 /**
  * 根据字段名查找对应的枚举值
  * @param fieldName 字段名
  * @param configItems 配置项数组
  */
-function getEnumValues(fieldName: string | null, configItems: CompletionItem[]): CompletionItem[] | null {
+function getEnumValues(
+  fieldName: string | null,
+  configItems: CompletionItem[]
+): CompletionItem[] | null {
   if (!fieldName) return null
 
-  const item = configItems.find(item => item.name === fieldName)
+  const item = configItems.find((item) => item.name === fieldName)
   return item?.enum || null
 }
 
@@ -66,8 +75,8 @@ export function getCompletionItems(session: any, pos: any, beforeCursor: string)
     return enumValues
   }
 
-  // 3. 否则返回组件选项
-  return COMPONENT_ITEMS
+  // 3. 否则无补全
+  return []
 }
 
 /**
@@ -79,10 +88,10 @@ export function filterCompletionItems(items: CompletionItem[], prefix: string) {
   const cleanPrefix = prefix.replace(/['"]]/g, '').toLowerCase()
 
   return items
-    .filter(item => item.name.toLowerCase().includes(cleanPrefix))
-    .map(item => ({
+    .filter((item) => item.name.toLowerCase().includes(cleanPrefix))
+    .map((item) => ({
       caption: item.name,
-      value: item.name,  // 使用 name 作为插入值
+      value: item.name, // 使用 name 作为插入值
       meta: item.meta,
       score: item.score
     }))
