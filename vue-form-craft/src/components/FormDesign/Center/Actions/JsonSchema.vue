@@ -14,7 +14,7 @@
           <Icon name="script" style="margin-right: 5px" />
           <span>在线编辑</span>
         </template>
-        <JsonEdit v-model="json" :customGetCompletionItems="customGetCompletionItems" />
+        <JsonSchemaEdit v-model="json" :customGetCompletionItems="customGetCompletionItems" />
       </el-tab-pane>
       <el-tab-pane name="ts" lazy>
         <template #label>
@@ -62,7 +62,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { CodeHighLight, JsonEdit, Markdown } from '@/components'
+import { CodeHighLight, JsonSchemaEdit, Markdown } from '@/components'
 import { useDesignInstance, useLocale } from '@/hooks'
 import Icon from '@/Icon/index.vue'
 import { jsJsonSchema, jsVue, tsJsonSchema, tsVue } from './config'

@@ -16,8 +16,7 @@
           >VueFormCraft表单联动</el-link
         >
       </p>
-      <!-- <FormRender v-model="designInstance.current!" :schema="editSchema" class="edit" /> -->
-      <JsonEdit
+      <JsonSchemaEdit
         v-model="designInstance.current!"
         :customGetCompletionItems="customGetCompletionItems"
       />
@@ -26,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { JsonEdit } from '@/components'
+import { JsonSchemaEdit } from '@/components'
 import { FORM_ITEM_CONFIG_ITEMS } from '@/config'
 import { useDesignInstance } from '@/hooks'
 import type { GetCompletionItems } from '@/types/complete'

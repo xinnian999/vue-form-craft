@@ -1,6 +1,6 @@
+import { cloneDeep } from 'lodash'
 import type { FormItemType } from '@/types'
 import getRandomId from './getRandomId'
-import { cloneDeep } from 'lodash'
 
 export const getCurrentByKey = (items: FormItemType[], key: string): FormItemType | null => {
   return items.reduce<FormItemType | null>((all, item) => {
@@ -67,21 +67,16 @@ export const copyItems = (list: FormItemType[], id: string): FormItemType[] => {
   }, [])
 }
 
-export const changeItems = (items: FormItemType[]) => {
+export const repirItems = (items: FormItemType[]) => {
   return items.map((item: any) => {
-    
-    if (!item.render) {
-      return item
-    }
-
     const data: FormItemType = {
-      component: item.component,
+      ...item,
       designKey: item.designKey || `design-${getRandomId(4)}`,
       name: item.name || `form-${getRandomId(4)}`
     }
 
-    if (item.children) {
-      data.children = changeItems(item.children)
+    if (data.children) {
+      data.children = repirItems(data.children)
     }
 
     return data
