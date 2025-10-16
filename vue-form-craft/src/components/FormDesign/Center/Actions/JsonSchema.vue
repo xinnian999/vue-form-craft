@@ -14,7 +14,12 @@
           <Icon name="script" style="margin-right: 5px" />
           <span>在线编辑</span>
         </template>
-        <JsonSchemaEdit v-model="json" :customGetCompletionItems="customGetCompletionItems" />
+        <!-- @vue-generic {import('@/types').FormSchema} -->
+        <JsonSchemaEdit
+          :json="json"
+          @save="onSave"
+          :customGetCompletionItems="customGetCompletionItems"
+        />
       </el-tab-pane>
       <el-tab-pane name="ts" lazy>
         <template #label>
@@ -69,6 +74,7 @@ import { jsJsonSchema, jsVue, tsJsonSchema, tsVue } from './config'
 import help from './help.md?raw'
 import 'md-editor-v3/lib/style.css'
 import { FORM_CONFIG_ITEMS, FORM_ITEM_CONFIG_ITEMS } from '@/config'
+import type { FormSchema } from '@/types'
 import type { GetCompletionItems } from '@/types/complete'
 import {
   getCurrentFieldName,
@@ -96,6 +102,10 @@ const json = computed({
 const formValues = ref({})
 
 const visible = defineModel<boolean>()
+
+const onSave = (json: FormSchema) => {
+  designInstance.updateSchema(json)
+}
 
 const customGetCompletionItems: GetCompletionItems = ({ session, pos, beforeCursor }) => {
   // 在 key 位置

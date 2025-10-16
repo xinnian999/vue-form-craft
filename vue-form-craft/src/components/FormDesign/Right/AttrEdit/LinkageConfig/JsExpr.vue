@@ -16,9 +16,11 @@
           >VueFormCraft表单联动</el-link
         >
       </p>
+      <!-- @vue-generic {import('@/types').FormItemType} -->
       <JsonSchemaEdit
-        v-model="designInstance.current!"
+        :json="designInstance.current!"
         :customGetCompletionItems="customGetCompletionItems"
+        @save="onSave"
       />
     </div>
   </el-dialog>
@@ -28,6 +30,7 @@
 import { JsonSchemaEdit } from '@/components'
 import { FORM_ITEM_CONFIG_ITEMS } from '@/config'
 import { useDesignInstance } from '@/hooks'
+import type { FormItemType } from '@/types'
 import type { GetCompletionItems } from '@/types/complete'
 import { isAtRootLevel, isInKeyPosition } from '@/utils'
 
@@ -47,6 +50,10 @@ const customGetCompletionItems: GetCompletionItems = ({ session, pos, beforeCurs
     return []
   }
   return []
+}
+
+const onSave = (json: FormItemType) => {
+  designInstance.updateCurrentKey(json.designKey!)
 }
 </script>
 
