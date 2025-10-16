@@ -1,13 +1,13 @@
 <template>
   <div :class="ns('save-json-edit')">
-    <JsonEditor v-model="data" v-bind="$attrs" />
+    <JsonEditor v-model="data as Record<string, any>" v-bind="$attrs" />
     <div class="footer">
       <el-button @click="save" type="primary">保存更改</el-button>
     </div>
   </div>
 </template>
 
-<script setup lang="ts" generic="T = FormSchema">
+<script setup lang="ts" generic="T extends Record<string, any> = FormSchema">
 import { ref } from 'vue'
 import type { FormSchema } from '@/types'
 import { ns } from '@/utils'
