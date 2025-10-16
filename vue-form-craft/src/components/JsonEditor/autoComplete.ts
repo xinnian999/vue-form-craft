@@ -5,15 +5,52 @@
  */
 
 import JsonEditor from 'jsoneditor'
-import { filterCompletionItems, getCompletionItems } from './completionProvider'
+import { EXPRESSION_ITEMS } from '@/config'
+import type { CompletionItem, GetCompletionItems } from '@/types/complete'
+import { isInExpression } from '@/utils'
 
-// import { setupTooltip } from './tooltip'
+/**
+ * 根据上下文获取合适的补全项
+ * @param session Ace编辑器会话对象
+ * @param pos 当前光标位置
+ * @param beforeCursor 光标前的文本
+ */
+const getCompletionItems: GetCompletionItems = ({ session, pos, beforeCursor }) => {
+  // 在表达式内部（{{ }} 之间），提供表达式变量
+  if (isInExpression(beforeCursor)) {
+    return EXPRESSION_ITEMS
+  }
+
+  // 3. 否则无补全
+  return []
+}
+
+/**
+ * 过滤和格式化补全项
+ * @param items 原始补全项
+ * @param prefix 输入前缀
+ */
+function filterCompletionItems(items: CompletionItem[], prefix: string) {
+  const cleanPrefix = prefix.replace(/['"]]/g, '').toLowerCase()
+
+  return items
+    .filter((item) => item.name.toLowerCase().includes(cleanPrefix))
+    .map((item) => ({
+      caption: item.name,
+      value: item.name, // 使用 name 作为插入值
+      meta: item.meta,
+      score: item.score
+    }))
+}
 
 /**
  * 为 JsonEditor 设置自动补全功能
  * @param editor JsonEditor 实例
  */
-export const setupAutoComplete = (editor: JsonEditor) => {
+export const setupAutoComplete = (
+  editor: JsonEditor,
+  customGetCompletionItems?: GetCompletionItems
+) => {
   const aceEditor = (editor as any)?.aceEditor
   if (!aceEditor) return
 
@@ -29,7 +66,11 @@ export const setupAutoComplete = (editor: JsonEditor) => {
         const beforeCursor = line.substring(0, pos.column)
 
         // 获取适合当前上下文的补全项
-        const completionItems = getCompletionItems(session, pos, beforeCursor)
+        const completionItems = getCompletionItems({ session, pos, beforeCursor })
+
+        if (customGetCompletionItems) {
+          completionItems.push(...customGetCompletionItems({ session, pos, beforeCursor }))
+        }
 
         // 过滤并格式化补全项
         const filteredItems = filterCompletionItems(completionItems, prefix)

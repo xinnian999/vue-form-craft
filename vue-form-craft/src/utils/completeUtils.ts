@@ -1,11 +1,12 @@
+import type { CompletionItem } from '@/types/complete'
+
 /**
  * ========================================
- * 上下文分析工具函数
- * 用于分析光标所在位置的上下文环境
+ * ace补全工具函数
  * ========================================
  */
 
-/** 
+/**
  * 检查是否在表达式内部 ({{ }} 之间)
  * @param beforeCursor 光标前的文本
  */
@@ -40,10 +41,7 @@ export function isInKeyPosition(beforeCursor: string): boolean {
 
   // 检查冒号和引号的位置关系
   const colonIndex = beforeCursor.lastIndexOf(':')
-  const lastQuoteIndex = Math.max(
-    beforeCursor.lastIndexOf('"'),
-    beforeCursor.lastIndexOf("'")
-  )
+  const lastQuoteIndex = Math.max(beforeCursor.lastIndexOf('"'), beforeCursor.lastIndexOf("'"))
 
   // 如果最后一个引号在冒号之前，可能在 key 位置
   if (colonIndex === -1 || lastQuoteIndex > colonIndex) {
@@ -70,10 +68,10 @@ export function isAtRootLevel(session: any, pos: any, beforeCursor: string): boo
     // 获取从文档开始到当前位置的所有文本
     const textBeforeCursor = session.getLines(0, pos.row).join('\n') + beforeCursor
 
-    let braceDepth = 0      // 大括号深度 {}
-    let bracketDepth = 0    // 方括号深度 []
-    let inString = false    // 是否在字符串内
-    let stringChar = ''     // 字符串引号类型
+    let braceDepth = 0 // 大括号深度 {}
+    let bracketDepth = 0 // 方括号深度 []
+    let inString = false // 是否在字符串内
+    let stringChar = '' // 字符串引号类型
 
     // 遍历所有字符，统计嵌套深度
     for (let i = 0; i < textBeforeCursor.length; i++) {
@@ -118,10 +116,10 @@ export function isInItemsFirstLevel(session: any, pos: any, beforeCursor: string
     // 获取从文档开始到当前位置的所有文本
     const textBeforeCursor = session.getLines(0, pos.row).join('\n') + beforeCursor
 
-    let braceDepth = 0      // 大括号深度 {}
-    let bracketDepth = 0    // 方括号深度 []
-    let inString = false    // 是否在字符串内
-    let stringChar = ''     // 字符串引号类型
+    let braceDepth = 0 // 大括号深度 {}
+    let bracketDepth = 0 // 方括号深度 []
+    let inString = false // 是否在字符串内
+    let stringChar = '' // 字符串引号类型
     let inItemsArray = false // 是否进入了 items 数组
     let itemsArrayBracketDepth = 0 // items 数组的方括号深度
 
@@ -154,8 +152,7 @@ export function isInItemsFirstLevel(session: any, pos: any, beforeCursor: string
             inItemsArray = true
             itemsArrayBracketDepth = bracketDepth
           }
-        }
-        else if (char === ']') {
+        } else if (char === ']') {
           // 如果退出了 items 数组
           if (inItemsArray && bracketDepth === itemsArrayBracketDepth) {
             inItemsArray = false
@@ -170,4 +167,19 @@ export function isInItemsFirstLevel(session: any, pos: any, beforeCursor: string
   } catch (error) {
     return false
   }
+}
+
+/**
+ * 根据字段名查找对应的枚举值
+ * @param fieldName 字段名
+ * @param configItems 配置项数组
+ */
+export function getEnumValues(
+  fieldName: string | null,
+  configItems: CompletionItem[]
+): CompletionItem[] | null {
+  if (!fieldName) return null
+
+  const item = configItems.find((item) => item.name === fieldName)
+  return item?.enum || null
 }

@@ -16,38 +16,39 @@
           >VueFormCraft表单联动</el-link
         >
       </p>
-      <FormRender v-model="designInstance.current!" :schema="editSchema" class="edit" />
+      <!-- <FormRender v-model="designInstance.current!" :schema="editSchema" class="edit" /> -->
+      <JsonEdit
+        v-model="designInstance.current!"
+        :customGetCompletionItems="customGetCompletionItems"
+      />
     </div>
   </el-dialog>
 </template>
 
 <script setup lang="ts">
-import { FormRender } from '@/components'
+import { JsonEdit } from '@/components'
+import { FORM_ITEM_CONFIG_ITEMS } from '@/config'
 import { useDesignInstance } from '@/hooks'
-import type { FormSchema } from '@/types'
+import type { GetCompletionItems } from '@/types/complete'
+import { isAtRootLevel, isInKeyPosition } from '@/utils'
 
 const designInstance = useDesignInstance()
 
 const visible = defineModel<boolean>()
 
-const editSchema = {
-  labelWidth: 100,
-  labelAlign: 'top',
-  items: [
-    {
-      label: '',
-      component: 'JsonEdit',
-      designKey: 'design-A2bj',
-      name: '.',
-      hideLabel: true,
-      props: {
-        style: {
-          height: '70vh'
-        }
-      }
+const customGetCompletionItems: GetCompletionItems = ({ session, pos, beforeCursor }) => {
+  // 在 key 位置
+  if (isInKeyPosition(beforeCursor)) {
+    // 优先判断是否在根层级（表单全局配置）
+    if (isAtRootLevel(session, pos, beforeCursor)) {
+      return FORM_ITEM_CONFIG_ITEMS
     }
-  ]
-} satisfies FormSchema
+
+    // 其他层级（items 内部的深层嵌套）：不提供配置项补全
+    return []
+  }
+  return []
+}
 </script>
 
 <style lang="scss" scoped>

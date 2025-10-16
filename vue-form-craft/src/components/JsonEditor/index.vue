@@ -7,6 +7,7 @@ import JsonEditor from 'jsoneditor'
 import type { JSONEditorOptions } from 'jsoneditor'
 import { nextTick, onMounted, onUnmounted, useTemplateRef, watch } from 'vue'
 import 'jsoneditor/dist/jsoneditor.min.css'
+import type { GetCompletionItems } from '@/types/complete'
 import { ns } from '@/utils'
 import { setupAutoComplete } from './autoComplete'
 
@@ -14,8 +15,9 @@ defineOptions({
   inheritAttrs: false
 })
 
-defineProps<{
+const props = defineProps<{
   disabled?: boolean
+  customGetCompletionItems?: GetCompletionItems
 }>()
 
 const emits = defineEmits<{
@@ -28,10 +30,13 @@ const modelValue = defineModel<Record<string, any>>()
 const jsonEditorEl = useTemplateRef<HTMLElement>('jsonEditorEl')
 
 let editor: JsonEditor | null = null
+
 let internalChange = false // 标记是否为内部变化，避免循环更新
 
 // 1. 初始化 JsonEditor 实例
 const init = () => {
+  const { customGetCompletionItems } = props
+
   const options: JSONEditorOptions = {
     mode: 'code',
     modes: ['tree', 'code', 'form', 'text', 'view'],
@@ -69,14 +74,14 @@ const init = () => {
     onModeChange(newMode) {
       emits('modeChange', newMode, editor!)
       if (newMode === 'code') {
-        setupAutoComplete(editor!)
+        setupAutoComplete(editor!, customGetCompletionItems)
       }
     }
   }
 
   if (jsonEditorEl.value) {
     editor = new JsonEditor(jsonEditorEl.value, options, modelValue.value || {})
-    setupAutoComplete(editor)
+    setupAutoComplete(editor!, customGetCompletionItems)
     emits('init', editor)
   }
 }
