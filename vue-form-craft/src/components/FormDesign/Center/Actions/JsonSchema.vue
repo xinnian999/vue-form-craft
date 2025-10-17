@@ -40,14 +40,14 @@
           <Icon name="vue" style="margin-right: 5px" />
           <span>生成TS组件</span>
         </template>
-        <CodeHighLight style="height: 70vh" :code="tsVue(designInstance.schema)" language="vue" />
+        <CodeHighLight style="height: 70vh" :code="tsVue(json)" language="vue" />
       </el-tab-pane>
       <el-tab-pane name="jsVue" lazy>
         <template #label>
           <Icon name="vue" style="margin-right: 5px" />
           <span>生成JS组件</span>
         </template>
-        <CodeHighLight style="height: 70vh" :code="jsVue(designInstance.schema)" language="vue" />
+        <CodeHighLight style="height: 70vh" :code="jsVue(json)" language="vue" />
       </el-tab-pane>
       <el-tab-pane name="help" lazy>
         <template #label>
@@ -82,6 +82,7 @@ import {
   isAtRootLevel,
   isInItemsFirstLevel,
   isInKeyPosition,
+  removeDesignKeys,
   repirItems
 } from '@/utils'
 
@@ -89,16 +90,7 @@ const designInstance = useDesignInstance()
 
 const locale = useLocale()
 
-const json = computed({
-  get() {
-    return designInstance.schema
-  },
-  set(value) {
-    if (value.items) {
-      designInstance.updateSchema(value)
-    }
-  }
-})
+const json = computed(() => removeDesignKeys(designInstance.schema) as FormSchema)
 
 const formValues = ref({})
 

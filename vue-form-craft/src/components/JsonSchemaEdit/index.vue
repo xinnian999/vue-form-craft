@@ -17,7 +17,7 @@ import JsonEditorType from 'jsoneditor'
 import { ref } from 'vue'
 import type { FormSchema } from '@/types'
 import type { GetCompletionItems } from '@/types/complete'
-import { ns } from '@/utils'
+import { ns, removeDesignKeys, restoreDesignKeys } from '@/utils'
 import JsonEditor from '../JsonEditor.vue'
 import autoComplete from './autoComplete'
 
@@ -30,11 +30,13 @@ const emits = defineEmits<{
   save: [json: T]
 }>()
 
-const data = ref<T>(props.json)
+// 初始化时移除 designKey 显示
+const data = ref<T>(removeDesignKeys(props.json) as T)
 
 const save = () => {
-  emits('save', data.value)
-  // data.value = props.json
+  // 保存时恢复 designKey 字段
+  const restoredData = restoreDesignKeys(data.value, props.json)
+  emits('save', restoredData as T)
 }
 
 const onInit = (editor: JsonEditorType) => {
