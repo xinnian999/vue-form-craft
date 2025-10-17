@@ -25,6 +25,7 @@ const data = ref<T>(props.json)
 
 const save = () => {
   emits('save', data.value)
+  // data.value = props.json
 }
 </script>
 

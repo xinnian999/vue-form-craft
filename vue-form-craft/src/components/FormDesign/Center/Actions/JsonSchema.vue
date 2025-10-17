@@ -81,7 +81,8 @@ import {
   getEnumValues,
   isAtRootLevel,
   isInItemsFirstLevel,
-  isInKeyPosition
+  isInKeyPosition,
+  repirItems
 } from '@/utils'
 
 const designInstance = useDesignInstance()
@@ -104,7 +105,8 @@ const formValues = ref({})
 const visible = defineModel<boolean>()
 
 const onSave = (json: FormSchema) => {
-  designInstance.updateSchema(json)
+  const repirJson = repirItems(json.items)
+  designInstance.updateSchema({ ...json, items: repirJson })
 }
 
 const customGetCompletionItems: GetCompletionItems = ({ session, pos, beforeCursor }) => {

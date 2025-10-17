@@ -190,6 +190,7 @@ export interface DesignInstance extends Required<ToRefs<FormDesignProps>> {
   fullScreen: Ref<boolean>
   history: Ref<FormSchema[]>
   historyIndex: Ref<number>
+  updateCurrent: (element: FormItemType) => void
   updateCurrentKey: (key: string) => void
   updateHoverKey: (key: string) => void
   updateSchema: (schema: FormSchema) => void

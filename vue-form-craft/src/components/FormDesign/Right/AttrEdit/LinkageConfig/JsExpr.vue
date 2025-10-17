@@ -32,7 +32,7 @@ import { FORM_ITEM_CONFIG_ITEMS } from '@/config'
 import { useDesignInstance } from '@/hooks'
 import type { FormItemType } from '@/types'
 import type { GetCompletionItems } from '@/types/complete'
-import { isAtRootLevel, isInKeyPosition } from '@/utils'
+import { isAtRootLevel, isInKeyPosition, repirItems } from '@/utils'
 
 const designInstance = useDesignInstance()
 
@@ -53,7 +53,8 @@ const customGetCompletionItems: GetCompletionItems = ({ session, pos, beforeCurs
 }
 
 const onSave = (json: FormItemType) => {
-  designInstance.updateCurrentKey(json.designKey!)
+  const [repirJson] = repirItems([json])
+  designInstance.updateCurrent(repirJson)
 }
 </script>
 

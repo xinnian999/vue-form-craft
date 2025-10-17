@@ -78,7 +78,7 @@ const handleHistoryForward = () => {
  * 更新表单schema
  * @param newSchema 新的schema
  * @param isUpdateHistory 是否记录到历史中，默认true
- * 
+ *
  * 注意：外部如果想要记录历史，应该通过ref调用此方法，而不是直接修改v-model
  * 例如：formDesignRef.value.updateSchema(newSchema)
  */
@@ -128,6 +128,9 @@ const instance = reactive<DesignInstance>({
   history,
   historyIndex,
   updateSchema,
+  updateCurrent(element) {
+    current.value = element
+  },
   updateCurrentKey(key) {
     currentKey.value = key
   },
