@@ -7,17 +7,14 @@ import JsonEditor from 'jsoneditor'
 import type { JSONEditorOptions } from 'jsoneditor'
 import { nextTick, onMounted, onUnmounted, useTemplateRef, watch } from 'vue'
 import 'jsoneditor/dist/jsoneditor.min.css'
-import type { GetCompletionItems } from '@/types/complete'
 import { ns } from '@/utils'
-import { setupAutoComplete } from './autoComplete'
 
 defineOptions({
   inheritAttrs: false
 })
 
-const props = defineProps<{
+defineProps<{
   disabled?: boolean
-  customGetCompletionItems?: GetCompletionItems
 }>()
 
 const emits = defineEmits<{
@@ -33,10 +30,24 @@ let editor: JsonEditor | null = null
 
 let internalChange = false // 标记是否为内部变化，避免循环更新
 
-// 1. 初始化 JsonEditor 实例
-const init = () => {
-  const { customGetCompletionItems } = props
+// 数据双向绑定
+watch(
+  modelValue,
+  (newValue) => {
+    // 如果是内部变化触发的，不需要再次设置
+    if (internalChange || !editor) return
 
+    try {
+      editor.set(newValue || {})
+    } catch (error) {
+      console.debug('Set editor value error:', error)
+    }
+  },
+  { deep: true }
+)
+
+// 生命周期：挂载时初始化
+onMounted(() => {
   const options: JSONEditorOptions = {
     mode: 'code',
     modes: ['tree', 'code', 'form', 'text', 'view'],
@@ -73,38 +84,13 @@ const init = () => {
     },
     onModeChange(newMode) {
       emits('modeChange', newMode, editor!)
-      if (newMode === 'code') {
-        setupAutoComplete(editor!, customGetCompletionItems)
-      }
     }
   }
 
   if (jsonEditorEl.value) {
     editor = new JsonEditor(jsonEditorEl.value, options, modelValue.value || {})
-    setupAutoComplete(editor!, customGetCompletionItems)
     emits('init', editor)
   }
-}
-
-// 2. 监听 modelValue 变化，实现数据双向绑定
-watch(
-  modelValue,
-  (newValue) => {
-    // 如果是内部变化触发的，不需要再次设置
-    if (internalChange || !editor) return
-
-    try {
-      editor.set(newValue || {})
-    } catch (error) {
-      console.debug('Set editor value error:', error)
-    }
-  },
-  { deep: true }
-)
-
-// 生命周期：挂载时初始化
-onMounted(() => {
-  init()
 })
 
 // 生命周期：卸载时销毁编辑器
