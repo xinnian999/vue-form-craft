@@ -2,16 +2,26 @@
   <div :class="ns('form-design-center')">
     <Actions />
     <div :class="ns('form-design-center-canvas')">
-      <FormRender v-model:schema="designInstance.schema" design />
+      <FormRender v-model:schema="schema" design />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { FormRender } from '@/components'
 import { useDesignInstance } from '@/hooks'
 import { ns } from '@/utils'
 import Actions from './Actions/index.vue'
 
 const designInstance = useDesignInstance()
+
+const schema = computed({
+  get() {
+    return designInstance.schema
+  },
+  set(value) {
+    designInstance.updateSchema(value)
+  }
+})
 </script>

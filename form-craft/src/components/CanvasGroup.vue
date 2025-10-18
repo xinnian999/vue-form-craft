@@ -1,7 +1,7 @@
 <template>
-  <div :class="ns('canvas-group')" :style="{ overflowY: list.length ? 'auto' : 'hidden' }">
+  <div :class="ns('canvas-group')" :style="{ overflowY: modelValue.length ? 'auto' : 'hidden' }">
     <div
-      v-if="!list.length"
+      v-if="!modelValue.length"
       :class="ns('canvas-group-empty')"
       :style="{ fontSize: emptySize + 'px' }"
     >
@@ -12,7 +12,7 @@
     </div>
 
     <draggable
-      :list="list"
+      v-model="modelValue"
       group="formDesign"
       itemKey="name"
       :ghost-class="ns('canvas-group-ghost')"
@@ -22,7 +22,6 @@
       handle=".canvas-move"
       force-fallback
       @add="onAdd"
-      @update="onUpdate"
     >
       <template #item="{ element: child }">
         <CanvasItem v-if="child.designKey" :data="child" />
@@ -41,7 +40,6 @@ import CanvasItem from './CanvasItem.vue'
 
 const props = withDefaults(
   defineProps<{
-    list: FormItemType[]
     style?: any
     class?: string
     emptyText?: string
@@ -53,14 +51,15 @@ const props = withDefaults(
   }
 )
 
+const modelValue = defineModel<FormItemType[]>({
+  default: () => []
+})
+
 const designInstance = useDesignInstance()
 
 // 拖入后回调
 const onAdd = (e: Record<string, any>) => {
   const source = e.item._underlying_vm_
-
-  // 更新schema并记录到历史中
-  designInstance.updateSchema(designInstance.schema)
 
   // 将当前选中设置为新添加的表单项
   designInstance.updateCurrentKey(source.designKey)
@@ -70,12 +69,6 @@ const onAdd = (e: Record<string, any>) => {
   designInstance.rightTab = 'attr'
 
   designInstance.handleEmit('add', source)
-}
-
-// 排序后回调
-const onUpdate = () => {
-  // 更新schema并记录到历史中
-  designInstance.updateSchema(designInstance.schema)
 }
 </script>
 

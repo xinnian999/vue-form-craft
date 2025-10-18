@@ -31,10 +31,10 @@ const onAdd = (element: FormElement) => {
   // console.log('onAdd===>', element)
 }
 
-// onMounted(() => {
-//   const localSchema = localStorage.getItem('schema')
-//   if (localSchema) {
-//     schema.value = JSON.parse(localSchema)
-//   }
-// })
+onMounted(() => {
+  const localSchema = localStorage.getItem('schema')
+  if (localSchema) {
+    schema.value = JSON.parse(localSchema)
+  }
+})
 </script>

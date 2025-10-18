@@ -8,7 +8,7 @@
   >
     <slot />
 
-    <FormItemGroup :list="formItems" :empty-text="locale.canvas.emptyTip" :empty-size="18" />
+    <FormItemGroup v-model="formItems" :empty-text="locale.canvas.emptyTip" :empty-size="18" />
 
     <el-form-item v-if="!design && !read">
       <el-button v-if="schema.submitBtn" type="primary" @click="instance.submit" name="submit-btn">

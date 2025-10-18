@@ -1,8 +1,8 @@
 <template>
-  <CanvasGroup v-if="formInstance.design" :list="list" />
+  <CanvasGroup v-if="formInstance.design" v-model="modelValue" />
 
   <div v-else>
-    <FormItem v-for="item in list" :key="item.name" v-bind="item" />
+    <FormItem v-for="item in modelValue" :key="item.name" v-bind="item" />
   </div>
 </template>
 
@@ -11,9 +11,9 @@ import { CanvasGroup, FormItem } from '@/components'
 import { useFormInstance } from '@/hooks'
 import type { FormItemType } from '@/types'
 
-defineProps<{
-  list: FormItemType[]
-}>()
-
 const formInstance = useFormInstance()
+
+const modelValue = defineModel<FormItemType[]>({
+  default: () => []
+})
 </script>
