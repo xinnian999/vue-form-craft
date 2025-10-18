@@ -19,32 +19,7 @@ const schema = ref<FormSchema>({
   scrollToError: true,
   size: 'default',
   submitBtn: true,
-  items: [
-    {
-      label: '单行文本4444',
-      props: {
-        placeholder: '请输入文本',
-        style: {
-          transform: 'scale(NaN)'
-        }
-      },
-      component: 'Input',
-      name: 'input86026434',
-      required: false
-    },
-    {
-      label: '多行文本',
-      props: {
-        placeholder: '请输入...',
-        autosize: {
-          minRows: 4,
-          maxRows: 999
-        }
-      },
-      component: 'TextArea',
-      name: 'textarea62305061'
-    }
-  ]
+  items: []
 })
 
 const onSave = () => {
