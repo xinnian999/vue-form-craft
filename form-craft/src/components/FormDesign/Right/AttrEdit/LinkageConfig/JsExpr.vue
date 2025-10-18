@@ -11,7 +11,7 @@
       <p>
         《JS表达式》使用方法请参考：<el-link
           type="primary"
-          href="https://xinnian999.github.io/vue-form-craft/zh/linkage.html#js表达式"
+          href="https://xinnian999.github.io/form-craft/zh/linkage.html#js表达式"
           target="_blank"
           >VueFormCraft表单联动</el-link
         >

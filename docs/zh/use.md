@@ -3,7 +3,7 @@
 ## 安装
 
 ```sh
-$ npm i vue-form-craft
+$ npm i form-craft
 ```
 
 ## 全局注册
@@ -15,7 +15,7 @@ $ npm i vue-form-craft
 ```ts
 import ElementPlus from 'element-plus'
 import { createApp } from 'vue'
-import VueFormCraft from 'vue-form-craft'
+import VueFormCraft from 'form-craft'
 import 'element-plus/dist/index.css'
 import App from './App.vue'
 
@@ -35,7 +35,7 @@ app.mount('#app')
 {
   "compilerOptions": {
     // ...
-    "types": ["vue-form-craft/global"]
+    "types": ["form-craft/global"]
   }
 }
 ```
@@ -67,7 +67,7 @@ app.mount('#app')
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { FormSchema } from 'vue-form-craft'
+import type { FormSchema } from 'form-craft'
 
 const formValues = ref({})
 

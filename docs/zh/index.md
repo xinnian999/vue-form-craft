@@ -3,12 +3,12 @@
 layout: home
 
 hero:
-  name: "Vue Form Craft"
-  text: "VUE表单快速生成工具"
+  name: 'Form Craft'
+  text: 'VUE表单快速生成工具'
   tagline: 让你免去vue项目中表单的烦恼
   image:
     src: /favicon.svg
-    alt: Vue Form Craft
+    alt: Form Craft
   actions:
     - theme: brand
       text: 快速开始
@@ -25,4 +25,3 @@ features:
   - title: 丰富的组件库
     details: 内置20多种表单组件和丰富的容器组件，支持添加自定义组件。
 ---
-

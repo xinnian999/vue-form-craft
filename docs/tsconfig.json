@@ -6,7 +6,7 @@
       "./**/*.vue"
     ],
     "compilerOptions": {
-      "types": ["vite/client", "element-plus/global", "vue-form-craft/global"],
+      "types": ["vite/client", "element-plus/global", "form-craft/global"],
       "baseUrl": ".",
       "paths": {},
       "allowJs": false,

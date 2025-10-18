@@ -1,15 +1,15 @@
 # Internationalization
 
-Since `vue-form-craft` is developed based on `element-plus`, please follow the official documentation of `element-plus` to internationalize its components.
+Since `form-craft` is developed based on `element-plus`, please follow the official documentation of `element-plus` to internationalize its components.
 
 [How to internationalize element-plus?](https://element-plus.org/guide/i18n.html)
 
-Then, we also need to internationalize the designer components of `vue-form-craft`, which is also simple, just pass a configuration!
+Then, we also need to internationalize the designer components of `form-craft`, which is also simple, just pass a configuration!
 
 ```ts
 import ElementPlus from 'element-plus'
 import { createApp } from 'vue'
-import VueFormCraft from 'vue-form-craft'
+import VueFormCraft from 'form-craft'
 import 'element-plus/dist/index.css'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import App from './App.vue'

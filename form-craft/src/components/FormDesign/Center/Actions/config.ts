@@ -8,7 +8,7 @@ export const tsVue = (schema: FormSchema) => {
 </template>
 
 <script setup lang="ts">
-import type { FormSchema } from 'vue-form-craft'
+import type { FormSchema } from 'form-craft'
 
 const schema = ${str} satisfies FormSchema
 
@@ -39,7 +39,7 @@ const onFinish = (values) => {
 export const tsJsonSchema = (schema: FormSchema) => {
   const str = JSON.stringify(schema, null, 2)
 
-  return `import type { FormSchema } from "vue-form-craft";
+  return `import type { FormSchema } from "form-craft";
 
 export default ${str} satisfies FormSchema`
 }

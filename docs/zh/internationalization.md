@@ -1,15 +1,15 @@
 # 国际化
 
-由于 `vue-form-craft` 是基于`element-plus`开发的，所以请先按照 `element-plus` 官网的方式对它的组件进行国际化。
+由于 `form-craft` 是基于`element-plus`开发的，所以请先按照 `element-plus` 官网的方式对它的组件进行国际化。
 
 [如何将element-plus国际化？](https://element-plus.org/zh-CN/guide/i18n.html)
 
-然后我们还需要对`vue-form-craft`的设计器组件进行国际化，也很简单，只需要传递一个配置！
+然后我们还需要对`form-craft`的设计器组件进行国际化，也很简单，只需要传递一个配置！
 
 ```ts
 import ElementPlus from 'element-plus'
 import { createApp } from 'vue'
-import VueFormCraft from 'vue-form-craft'
+import VueFormCraft from 'form-craft'
 import 'element-plus/dist/index.css'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import App from './App.vue'

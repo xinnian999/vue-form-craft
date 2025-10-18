@@ -20,7 +20,7 @@
 
 <script setup lang="ts">
 import type { TransferDataItem, TransferKey } from 'element-plus'
-import { useFormInstance } from 'vue-form-craft'
+import { useFormInstance } from 'form-craft'
 
 const props = defineProps<{ name: string; data: TransferDataItem[] }>()
 

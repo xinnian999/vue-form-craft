@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import type { FormSchema } from 'vue-form-craft'
+import type { FormSchema } from 'form-craft'
 
 const schema = {
   labelWidth: 150,

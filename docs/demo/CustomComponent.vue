@@ -5,7 +5,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { FormInstance, FormSchema } from 'vue-form-craft'
+import type { FormInstance, FormSchema } from 'form-craft'
 
 const formRef = ref<FormInstance>()
 

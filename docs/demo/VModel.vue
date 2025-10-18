@@ -23,7 +23,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import type { FormSchema } from 'vue-form-craft'
+import type { FormSchema } from 'form-craft'
 
 // v-model 绑定对象：演示回显（初始给部分值）
 const formValues = ref({

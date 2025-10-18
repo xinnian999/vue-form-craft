@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('../vue-form-craft/src', import.meta.url))
+      '@': fileURLToPath(new URL('../form-craft/src', import.meta.url))
     }
   },
   server: {
