@@ -35,7 +35,6 @@ const schema = {
         labelKey: 'name',
         valueKey: 'id'
       },
-      designKey: 'form-2Rtu',
       name: 'commodity',
       change: [
         {
@@ -47,7 +46,6 @@ const schema = {
     {
       label: '价格',
       component: 'InputNumber',
-      designKey: 'form-rS3W',
       name: 'price',
       props: {
         min: 1,

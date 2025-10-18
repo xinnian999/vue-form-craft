@@ -23,7 +23,6 @@ export default {
       label: '占位提示',
       component: 'Input',
       name: 'props.placeholder',
-      designKey: 'form-ekRL'
     },
     { label: '初始值', component: 'Input', name: 'initialValue' },
     {
@@ -40,7 +39,6 @@ export default {
         'row-gap': 20,
         'column-gap': 20
       },
-      designKey: 'form-R003',
       name: 'cNmCuu'
     },
     { label: '显示清除按钮', component: 'Switch', name: 'props.clearable' },

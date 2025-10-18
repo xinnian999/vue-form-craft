@@ -23,7 +23,6 @@ export default {
         clearable: true
       },
       required: true,
-      designKey: 'design-ac-province'
     },
     {
       label: '城市',
@@ -47,7 +46,6 @@ export default {
       },
       hidden: "{{ !$values.province }}",
       required: true,
-      designKey: 'design-ac-city'
     },
     {
       label: '详细地址',
@@ -55,7 +53,6 @@ export default {
       component: 'Input',
       props: { placeholder: '{{ $values.city ? "请输入\u8BE6\u7EC6\u5730\u5740" : "请先选择省份/城市" }}' },
       required: true,
-      designKey: 'design-ac-address'
     },
     {
       label: '联系人',
@@ -63,7 +60,6 @@ export default {
       component: 'Input',
       props: { placeholder: '请输入联系人姓名' },
       required: true,
-      designKey: 'design-ac-contact'
     },
     {
       label: '联系电话',
@@ -74,7 +70,6 @@ export default {
         { expr: '/^1[3-9]\\d{9}$/', message: '请输入有效的手机号', trigger: 'blur' }
       ],
       required: true,
-      designKey: 'design-ac-phone'
     }
   ]
 } satisfies FormSchema

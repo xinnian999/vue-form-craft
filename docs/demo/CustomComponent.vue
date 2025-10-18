@@ -4,8 +4,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import type { FormInstance, FormSchema } from 'form-craft'
+import { ref } from 'vue'
 
 const formRef = ref<FormInstance>()
 
@@ -22,8 +22,7 @@ const schema: FormSchema = {
       name: 'form-oEBQ',
       props: {
         componentName: 'vfc-code'
-      },
-      designKey: 'design-tDWe'
+      }
     }
   ]
 }

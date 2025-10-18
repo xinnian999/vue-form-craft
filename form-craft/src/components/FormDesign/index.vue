@@ -19,7 +19,17 @@ const initJsonSchema: FormSchema = {
 
 <script setup lang="ts">
 import { cloneDeep } from 'lodash'
-import { computed, provide, reactive, ref, toRefs, useTemplateRef, watch } from 'vue'
+import {
+  computed,
+  onBeforeMount,
+  onMounted,
+  provide,
+  reactive,
+  ref,
+  toRefs,
+  useTemplateRef,
+  watch
+} from 'vue'
 import { $designInstance } from '@/symbol'
 import type {
   DesignInstance,
@@ -28,7 +38,7 @@ import type {
   FormItemType,
   FormSchema
 } from '@/types'
-import { getCurrentByKey, ns, setCurrentByKey } from '@/utils'
+import { getCurrentByKey, ns, repirItems, setCurrentByKey } from '@/utils'
 import Center from './Center/index.vue'
 import Left from './Left/index.vue'
 import Right from './Right/index.vue'
@@ -75,25 +85,22 @@ const handleHistoryForward = () => {
 }
 
 /**
- * 更新表单schema
- * @param newSchema 新的schema
- * @param isUpdateHistory 是否记录到历史中，默认true
+ * 更新表单schema唯一方法
  *
  * 注意：外部如果想要记录历史，应该通过ref调用此方法，而不是直接修改v-model
  * 例如：formDesignRef.value.updateSchema(newSchema)
  */
-const updateSchema = (newSchema: FormSchema, isUpdateHistory = true) => {
-  jsonSchema.value = newSchema
+const updateSchema = (newSchema: FormSchema) => {
+  const parseNewSchema = { ...newSchema, items: repirItems(newSchema.items) }
+  jsonSchema.value = parseNewSchema
 
-  // 本次更新是否需要记录到历史中
-  if (isUpdateHistory) {
-    // 如果改动了回退的某次记录，将从此开始重新记录
-    if (historyIndex.value < history.value.length - 1) {
-      history.value = history.value.slice(0, historyIndex.value + 1)
-    }
-    history.value.push(cloneDeep(newSchema))
-    historyIndex.value = history.value.length - 1
+  // 历史记录处理
+  if (historyIndex.value < history.value.length - 1) {
+    // 如果改动的是历史，将截断之后的记录
+    history.value = history.value.slice(0, historyIndex.value + 1)
   }
+  history.value.push(cloneDeep(parseNewSchema))
+  historyIndex.value = history.value.length - 1
 }
 
 const current = computed({
@@ -102,10 +109,10 @@ const current = computed({
   },
   set(element: FormItemType) {
     currentKey.value = element.designKey!
-    updateSchema(
-      { ...jsonSchema.value, items: setCurrentByKey(jsonSchema.value.items, element) },
-      false
-    )
+    jsonSchema.value = {
+      ...jsonSchema.value,
+      items: setCurrentByKey(jsonSchema.value.items, element)
+    }
   }
 })
 
@@ -115,6 +122,10 @@ watch(fullScreen, (val) => {
   } else {
     document.exitFullscreen()
   }
+})
+
+onBeforeMount(() => {
+  jsonSchema.value = { ...jsonSchema.value, items: repirItems(jsonSchema.value.items) }
 })
 
 const instance = reactive<DesignInstance>({

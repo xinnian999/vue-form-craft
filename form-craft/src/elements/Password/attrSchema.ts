@@ -22,7 +22,6 @@ export default {
       label: '占位提示',
       component: 'Input',
       name: 'props.placeholder',
-      designKey: 'form-ekRL'
     },
     {
       component: 'Grid',
@@ -38,7 +37,6 @@ export default {
         'row-gap': 20,
         'column-gap': 20
       },
-      designKey: 'form-R003',
       name: 'cNmCuu'
     },
     { label: '显示清除按钮', component: 'Switch', name: 'props.clearable' },
@@ -67,7 +65,6 @@ export default {
             ]
           },
           help: '<pre>可设置为【正则表达式】或【】。\n【正则表达式】应该将\\转义成\\\\。\n【】最终应返回一个布尔值。</pre>',
-          designKey: 'form-3L0P',
           name: 'expr'
         },
         {
@@ -76,7 +73,6 @@ export default {
           props: {
             placeholder: '请输入...'
           },
-          designKey: 'form-Wdb2',
           name: 'message'
         },
         {
@@ -98,11 +94,9 @@ export default {
             labelKey: 'label',
             valueKey: 'value'
           },
-          designKey: 'form-3L0P6666',
           name: 'trigger'
         }
       ],
-      designKey: 'form-89tI',
       props: {
         mode: 'card',
         title: '校验规则'

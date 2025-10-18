@@ -19,8 +19,7 @@ const schema: FormSchema = {
         type: 'date',
         placeholder: '请选择日期',
         disabledDate: '{{ (time) => time.getTime() < new Date().setHours(0, 0, 0, 0) }}'
-      },
-      designKey: 'design-dp01'
+      }
     }
   ]
 }

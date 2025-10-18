@@ -11,7 +11,6 @@ const schema: FormSchema = {
       props: {
         placeholder: ''
       },
-      designKey: 'design-KUlI',
       name: 'class'
     },
     {
@@ -42,7 +41,6 @@ const schema: FormSchema = {
         ],
         clearable: true
       },
-      designKey: 'design-Bvi4',
       name: 'style.width'
     },
     {
@@ -73,7 +71,6 @@ const schema: FormSchema = {
         ],
         clearable: true
       },
-      designKey: 'design-Bvi44',
       name: 'style.height'
     }
   ]

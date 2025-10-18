@@ -57,7 +57,6 @@ describe('FormRender Schema Test', () => {
             placeholder: '请输入用户名',
             clearable: true
           },
-          designKey: 'form-eNR0',
           name: 'username',
           required: true
         },
@@ -67,7 +66,6 @@ describe('FormRender Schema Test', () => {
           props: {
             placeholder: '请输入密码'
           },
-          designKey: 'form-D1x7',
           name: 'password',
           required: true
         }
@@ -97,7 +95,6 @@ describe('FormRender Schema Test', () => {
             placeholder: '请输入用户名',
             clearable: true
           },
-          designKey: 'form-eNR0',
           name: 'username',
           required: true,
           initialValue: 'huyilin'
@@ -108,7 +105,6 @@ describe('FormRender Schema Test', () => {
           props: {
             placeholder: '请输入密码'
           },
-          designKey: 'form-D1x7',
           name: 'password',
           required: true,
           initialValue: 'qs666666'

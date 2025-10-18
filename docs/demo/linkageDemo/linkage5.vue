@@ -17,7 +17,6 @@ const schema: FormSchema = {
       props: {
         placeholder: '请输入姓名'
       },
-      designKey: 'design-Oqsp',
       name: 'name',
       required: true
     },
@@ -42,7 +41,6 @@ const schema: FormSchema = {
         direction: 'horizontal',
         space: 20
       },
-      designKey: 'design-47M1',
       name: 'gneder',
       required: true,
       initialValue: 'man',
@@ -61,7 +59,6 @@ const schema: FormSchema = {
       props: {
         'inline-prompt': false
       },
-      designKey: 'design-cGIx',
       name: 'isHy',
       required: true,
       hidden: " {{ $values.gneder === 'man' }} "
@@ -75,7 +72,6 @@ const schema: FormSchema = {
         step: 1,
         controlsPosition: 'right'
       },
-      designKey: 'design-0q9f',
       name: 'hyWeek',
       hidden: '{{ !$values.isHy }}'
     }

@@ -34,7 +34,6 @@ export default {
         ]
       },
       initialValue: 'center',
-      designKey: 'form-PLpj'
     }
   ]
 } satisfies FormSchema

@@ -19,14 +19,12 @@ export default {
       },
       required: true,
       help: '支持 png/jpg/jpeg/pdf，最多3个',
-      designKey: 'design-fu-files'
     },
     {
       label: '说明',
       name: 'desc',
       component: 'TextArea',
       props: { placeholder: '请填写上传说明（可选）' },
-      designKey: 'design-fu-desc'
     }
   ]
 } satisfies FormSchema

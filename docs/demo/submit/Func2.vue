@@ -39,8 +39,7 @@ const schema: FormSchema = {
           { text: '明天', value: '{{ getTomorrow }}' },
           { text: '下周一', value: '{{ getNextMonday }}' }
         ]
-      },
-      designKey: 'design-dp01'
+      }
     }
   ]
 }

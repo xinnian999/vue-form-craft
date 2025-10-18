@@ -42,7 +42,6 @@ const schema = {
         direction: 'horizontal',
         space: 0
       },
-      designKey: 'design-oGXW',
       name: 'category',
       required: true
     },
@@ -71,7 +70,6 @@ const schema = {
         direction: 'vertical',
         space: 0
       },
-      designKey: 'design-ojMx',
       name: 'article',
       required: true,
       hidden: '{{!$values.category}}'

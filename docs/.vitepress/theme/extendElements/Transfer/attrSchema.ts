@@ -26,7 +26,6 @@ export default {
       label: '占位提示',
       component: 'Input',
       name: 'props.placeholder',
-      designKey: 'form-ekRL'
     },
     { label: '初始值', component: 'Input', name: 'initialValue' },
     {
@@ -42,7 +41,6 @@ export default {
         'row-gap': 20,
         'column-gap': 20
       },
-      designKey: 'form-R003',
       name: 'cNmCuu',
 
     },
@@ -53,7 +51,6 @@ export default {
         title: '选项设置',
         contentPosition: 'center'
       },
-      designKey: 'design-gSnX',
       name: 'form-xDEe',
       style: {
         marginTop: '40px'
@@ -71,18 +68,15 @@ export default {
           props: {
             placeholder: '请输入...'
           },
-          designKey: 'form-LnGh',
           initialValue: '{{ "选项" + ($index + 1) }}'
         },
         {
           label: '选项值',
           name: 'key',
           component: 'Input',
-          designKey: 'form-HYtW',
           initialValue: '{{ "value" + ($index + 1) }}'
         }
       ],
-      designKey: 'form-Iwpd',
       props: {
         mode: 'table'
       }

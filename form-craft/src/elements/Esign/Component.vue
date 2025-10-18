@@ -34,9 +34,9 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted, ref } from 'vue'
 import { FormRender } from '@/components'
 import { useFormInstance } from '@/hooks'
-import { onMounted, ref } from 'vue'
 import type { FormSchema } from '@/types'
 import VueEsign from './VueEsign.vue'
 
@@ -90,7 +90,6 @@ const actionSchema: FormSchema = {
         align: 'left',
         gap: 20
       },
-      designKey: 'design-ZuIT',
       name: 'form-OqAi',
       style: {
         marginBottom: '10px'

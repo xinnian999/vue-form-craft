@@ -7,7 +7,6 @@ export default [
       title: '选项设置',
       contentPosition: 'center'
     },
-    designKey: 'design-gSnX',
     name: 'form-xDEe'
   },
   {
@@ -29,7 +28,6 @@ export default [
       optionType: 'button',
       space: 0
     },
-    designKey: 'form-PLpj'
   },
   {
     label: '静态选项',
@@ -44,24 +42,20 @@ export default [
         props: {
           placeholder: '请输入...'
         },
-        designKey: 'form-LnGh',
         initialValue: '{{ "选项" + ($index + 1) }}'
       },
       {
         label: '选项值',
         name: 'value',
         component: 'Input',
-        designKey: 'form-HYtW',
         initialValue: '{{ "value" + ($index + 1) }}'
       },
       {
         label: '是否禁用',
         name: 'disabled',
         component: 'Switch',
-        designKey: 'form-HYtW2'
       }
     ],
-    designKey: 'form-Iwpd',
     props: {
       mode: 'table',
       title: '选项'
@@ -70,7 +64,6 @@ export default [
   {
     component: 'Card',
     props: {},
-    designKey: 'id-pGeN',
     name: 'form-6vzT',
     hidden: '{{$values.props.mode==="static"}}',
     children: [
@@ -81,7 +74,6 @@ export default [
           type: 'h4'
         },
         hideLabel: true,
-        designKey: 'design-49fr',
         name: 'form-Vf2D'
       },
       {
@@ -89,7 +81,6 @@ export default [
         component: 'Input',
         name: 'props.api.url',
         initialValue: 'https://apifoxmock.com/m1/5213940-4880280-default/options/test',
-        designKey: 'form-UrE8'
       },
       {
         label: '请求方式',
@@ -117,7 +108,6 @@ export default [
             }
           ]
         },
-        designKey: 'form-nOpD'
       },
       {
         label: '请求参数',
@@ -133,7 +123,6 @@ export default [
           type: 'h4'
         },
         hideLabel: true,
-        designKey: 'design-49fr',
         name: 'form-Vf2D'
       },
       {
@@ -141,28 +130,24 @@ export default [
         component: 'Input',
         name: 'props.api.dataPath',
         initialValue: 'data',
-        designKey: 'form-UrE8'
       },
       {
         label: '标签key',
         component: 'Input',
         name: 'props.labelKey',
         initialValue: 'label',
-        designKey: 'form-X6hs'
       },
       {
         label: '值Key',
         component: 'Input',
         name: 'props.valueKey',
         initialValue: 'value',
-        designKey: 'form-STkl'
       },
       {
         label: '禁用Key',
         component: 'Input',
         name: 'props.disabledKey',
         initialValue: 'disabled',
-        designKey: 'form-STkl2'
       }
     ]
   }

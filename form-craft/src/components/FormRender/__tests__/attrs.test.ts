@@ -16,7 +16,6 @@ const schema = {
         placeholder: '请输入用户名',
         clearable: true
       },
-      designKey: 'form-eNR0',
       name: 'username',
       required: true
     },
@@ -26,7 +25,6 @@ const schema = {
       props: {
         placeholder: '请输入密码'
       },
-      designKey: 'form-D1x7',
       name: 'password',
       required: true
     }

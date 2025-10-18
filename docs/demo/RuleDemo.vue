@@ -3,8 +3,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import type { FormSchema } from 'form-craft'
+import { ref } from 'vue'
 
 const formValues = ref({})
 
@@ -21,8 +21,7 @@ const schema: FormSchema = {
       props: {
         placeholder: '请输入用户名'
       },
-      required: true,
-      designKey: 'design-usrn'
+      required: true
     },
     {
       label: '密码',
@@ -43,8 +42,7 @@ const schema: FormSchema = {
           message: '密码长度必须为8-20位',
           trigger: 'blur'
         }
-      ],
-      designKey: 'design-pssw'
+      ]
     },
     {
       label: '确认密码',
@@ -60,8 +58,7 @@ const schema: FormSchema = {
           message: '两次输入的密码不一致',
           trigger: 'blur'
         }
-      ],
-      designKey: 'design-cnfp'
+      ]
     },
     {
       label: '手机号',
@@ -78,7 +75,6 @@ const schema: FormSchema = {
           trigger: 'blur'
         }
       ],
-      designKey: 'design-phne',
       required: true
     },
     {
@@ -94,8 +90,7 @@ const schema: FormSchema = {
           message: '请输入有效的邮箱',
           trigger: 'blur'
         }
-      ],
-      designKey: 'design-emal'
+      ]
     }
   ]
 }

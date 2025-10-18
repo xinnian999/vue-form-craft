@@ -15,7 +15,6 @@ export default {
         placeholder: '请输入用户名'
       },
       required: true,
-      designKey: 'design-lg-usrn'
     },
     {
       label: '密码',
@@ -32,7 +31,6 @@ export default {
           trigger: 'blur'
         }
       ],
-      designKey: 'design-lg-pswd'
     },
     {
       label: '记住我',
@@ -42,7 +40,6 @@ export default {
         'inline-prompt': false
       },
       initialValue: false,
-      designKey: 'design-lg-rmb'
     }
   ]
 } satisfies FormSchema

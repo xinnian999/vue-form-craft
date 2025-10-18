@@ -17,16 +17,15 @@ src
     └── Component.vue
     └── Icon.vue
     └── index.ts
-  └── Transfer 
+  └── Transfer
     └── attrSchema.ts
     └── Icon.vue
     └── index.ts
-+ └── AInput 
++ └── AInput
   + └── attrSchema.ts
   + └── Icon.vue
   + └── index.ts
 ```
-
 
 ## 封装Icon
 
@@ -57,7 +56,6 @@ src
     ></path>
   </svg>
 </template>
-
 ```
 
 ## 配置项表单
@@ -83,8 +81,7 @@ export default {
     {
       label: '占位提示',
       component: 'Input',
-      name: 'props.placeholder',
-      designKey: 'form-ekRL'
+      name: 'props.placeholder'
     },
     { label: '初始值', component: 'Input', name: 'initialValue' },
     {
@@ -101,9 +98,7 @@ export default {
         'row-gap': 20,
         'column-gap': 20
       },
-      designKey: 'form-R003',
-      name: 'cNmCuu',
-
+      name: 'cNmCuu'
     },
     {
       label: '文本校验规则',
@@ -142,7 +137,6 @@ export default {
             labelKey: 'label',
             valueKey: 'value'
           },
-          designKey: 'form-3L0P',
           name: 'type'
         },
         {
@@ -151,7 +145,6 @@ export default {
           props: {
             placeholder: '请输入正则表达式'
           },
-          designKey: 'form-Wdb2Reg',
           name: 'customReg',
           hidden: '{{$item.type!=="custom"}}'
         },
@@ -161,7 +154,6 @@ export default {
           props: {
             placeholder: '请输入...'
           },
-          designKey: 'form-Wdb2',
           name: 'message'
         },
         {
@@ -183,11 +175,9 @@ export default {
             labelKey: 'label',
             valueKey: 'value'
           },
-          designKey: 'form-3L0P6666',
           name: 'trigger'
         }
       ],
-      designKey: 'form-89tI',
       props: {
         mode: 'card',
         title: '校验规则'
@@ -198,9 +188,7 @@ export default {
       label: '最长字数',
       component: 'InputNumber',
       name: 'props.maxlength'
-    },
-    
-
+    }
   ]
 } satisfies FormSchema
 ```
@@ -211,13 +199,12 @@ export default {
 
 > 这里可以直接使用`Arco`的`Input` 作为渲染组件，无需二次封装
 
-
 ```ts
 // src/extendElements/Transfer/index.ts
+import { Input } from '@arco-design/web-vue'
 import type { FormElement } from 'form-craft'
-import icon from './Icon.vue'
 import attrSchema from './attrSchema'
-import { Input } from "@arco-design/web-vue";
+import icon from './Icon.vue'
 
 export default {
   name: '单行文本',
@@ -240,25 +227,25 @@ export default {
 
 ```ts
 // src/extendElements/index.ts
+import AInput from './AInput'
 import Markdown from './Markdown'
 import Transfer from './Transfer'
-import AInput from './AInput'
 
 export default {
-    Markdown,
-    Transfer,
-    AInput
+  Markdown,
+  Transfer,
+  AInput
 }
 ```
 
 ```ts
 // main.ts
+import ElementPlus from 'element-plus'
 import { createApp } from 'vue'
 import App from './App.vue'
-import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
-import ArcoVue from '@arco-design/web-vue';
-import '@arco-design/web-vue/dist/arco.css';
+import ArcoVue from '@arco-design/web-vue'
+import '@arco-design/web-vue/dist/arco.css'
 import VueFormCraft from 'form-craft'
 import extendElements from './extendElements'
 
@@ -268,9 +255,7 @@ app.use(ElementPlus)
 app.use(ArcoVue)
 app.use(VueFormCraft, { extendElements })
 app.mount('#app')
-
 ```
-
 
 最后，将`element-plus`的`Input`隐藏掉
 
@@ -281,6 +266,5 @@ app.mount('#app')
   </div>
 </template>
 ```
-
 
 ![md](../assets/ArcoIuput.png)

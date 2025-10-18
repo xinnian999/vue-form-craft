@@ -24,7 +24,6 @@ export default {
       label: '占位提示',
       component: 'Input',
       name: 'props.placeholder',
-      designKey: 'form-ekRL'
     },
     { label: '初始值', component: 'Input', name: 'initialValue' },
     {
@@ -41,7 +40,6 @@ export default {
         'row-gap': 20,
         'column-gap': 20
       },
-      designKey: 'form-R003',
       name: 'cNmCuu',
 
     },
@@ -82,7 +80,6 @@ export default {
             labelKey: 'label',
             valueKey: 'value'
           },
-          designKey: 'form-3L0P',
           name: 'type'
         },
         {
@@ -91,7 +88,6 @@ export default {
           props: {
             placeholder: '请输入正则表达式'
           },
-          designKey: 'form-Wdb2Reg',
           name: 'customReg',
           hidden: '{{$item.type!=="custom"}}'
         },
@@ -101,7 +97,6 @@ export default {
           props: {
             placeholder: '请输入...'
           },
-          designKey: 'form-Wdb2',
           name: 'message'
         },
         {
@@ -123,11 +118,9 @@ export default {
             labelKey: 'label',
             valueKey: 'value'
           },
-          designKey: 'form-3L0P6666',
           name: 'trigger'
         }
       ],
-      designKey: 'form-89tI',
       props: {
         mode: 'card',
         title: '校验规则'
@@ -174,24 +167,20 @@ export default {
           props: {
             placeholder: '请输入...'
           },
-          designKey: 'form-LnGh'
         },
         {
           label: '选项值',
           name: 'value',
           component: 'Input',
           props: {},
-          designKey: 'form-HYtW'
         },
         {
           label: '是否禁用',
           name: 'disabled',
           component: 'Switch',
           props: {},
-          designKey: 'form-HYtW2'
         }
       ],
-      designKey: 'form-Iwpd',
       props: {
         mode: 'table'
       }

@@ -35,7 +35,6 @@ export default {
           'row-gap': 20,
           'column-gap': 20
         },
-        designKey: 'form-R003',
         name: 'cNmCuu',
         style: {
           marginBottom: 0

@@ -11,7 +11,6 @@ export default {
       name: 'keyword',
       component: 'Input',
       props: { placeholder: '请输入关键词' },
-      designKey: 'design-sf-keyword'
     },
     {
       label: '分类',
@@ -30,7 +29,6 @@ export default {
         mode: 'static',
         clearable: true
       },
-      designKey: 'design-sf-category'
     },
     {
       label: '时间范围',
@@ -42,7 +40,6 @@ export default {
         'end-placeholder': '结束日期',
         clearable: true
       },
-      designKey: 'design-sf-daterange'
     },
     {
       label: '状态',
@@ -60,7 +57,6 @@ export default {
         mode: 'static',
         clearable: true
       },
-      designKey: 'design-sf-status'
     }
   ]
 } satisfies FormSchema

@@ -27,7 +27,6 @@ export default {
             props: {
               placeholder: '请输入标题'
             },
-            designKey: 'id-l8cI',
             name: 'title',
             initialValue: '{{ "面板" + ($index + 1) }}'
           },
@@ -37,14 +36,12 @@ export default {
             props: {
               placeholder: '请输入唯一标识'
             },
-            designKey: 'form-YE6U',
             name: 'name',
             initialValue: '{{ "name" + ($index + 1) }}'
           },
           {
             label: '默认展开',
             component: 'Switch',
-            designKey: 'form-YE6U',
             name: 'checked'
           }
         ],
@@ -52,7 +49,6 @@ export default {
           mode: 'card',
           title: '面板'
         },
-        designKey: 'id-RQ1a',
         name: 'children'
       }
     ]

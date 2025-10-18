@@ -11,7 +11,6 @@ export default {
       name: 'vip',
       component: 'Switch',
       props: { 'inline-prompt': false },
-      designKey: 'design-kVO2111',
       change: [
         { target: 'users.*.vip', condition: '{{ $values.vip }}', value: 1 }
       ]
@@ -26,7 +25,6 @@ export default {
           props: {
             placeholder: '请输入文本'
           },
-          designKey: 'design-M91n',
           name: 'username',
           change: [
             {
@@ -42,13 +40,11 @@ export default {
           props: {
             placeholder: '请输入密码'
           },
-          designKey: 'design-kVO2',
           name: 'password'
         },
         {
           label: '设为管理员',
           component: 'Switch',
-          designKey: 'design-jC1O',
           name: 'vip',
           props: {
             'inline-prompt': false,
@@ -60,7 +56,6 @@ export default {
       props: {
         mode: 'table'
       },
-      designKey: 'design-pMUa',
       name: 'users'
     }
   ]

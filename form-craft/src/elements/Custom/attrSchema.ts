@@ -17,7 +17,7 @@ export default {
       label: 'props',
       component: 'JsonEdit',
       name: 'props',
-      dialog:true
+      dialog: true
     },
     { label: '标签', component: 'Input', name: 'label' },
     {
@@ -41,11 +41,10 @@ export default {
         'row-gap': 20,
         'column-gap': 20
       },
-      designKey: 'form-R003',
       name: 'cNmCuu',
 
     },
-    
+
 
   ]
 } satisfies FormSchema

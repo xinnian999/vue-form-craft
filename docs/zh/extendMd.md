@@ -46,7 +46,6 @@ import 'md-editor-v3/lib/style.css'
 
 const value = defineModel<string>()
 </script>
-
 ```
 
 ## 封装Icon
@@ -79,7 +78,6 @@ const value = defineModel<string>()
     ></path>
   </svg>
 </template>
-
 ```
 
 ## 配置项表单
@@ -106,8 +104,7 @@ export default {
     {
       label: '占位提示',
       component: 'Input',
-      name: 'props.placeholder',
-      designKey: 'form-ekRL'
+      name: 'props.placeholder'
     },
     { label: '初始值', component: 'Input', name: 'initialValue' },
     {
@@ -124,11 +121,8 @@ export default {
         'row-gap': 20,
         'column-gap': 20
       },
-      designKey: 'form-R003',
-      name: 'cNmCuu',
-    },
-    
-
+      name: 'cNmCuu'
+    }
   ]
 } as FormSchema
 ```
@@ -140,9 +134,9 @@ export default {
 ```ts
 // src/extendElements/Markdown/index.ts
 import type { FormElement } from 'form-craft'
-import render from './Render.vue'
-import icon from './Icon.vue'
 import attrSchema from './attrSchema'
+import icon from './Icon.vue'
+import render from './Render.vue'
 
 export default {
   title: 'markdown',
@@ -162,15 +156,15 @@ export default {
 import Markdown from './Markdown'
 
 export default {
-    Markdown
+  Markdown
 }
 ```
 
 ```ts
 // main.ts
+import ElementPlus from 'element-plus'
 import { createApp } from 'vue'
 import App from './App.vue'
-import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import VueFormCraft from 'form-craft'
 import extendElements from './extendElements'
@@ -180,7 +174,6 @@ const app = createApp(App)
 app.use(ElementPlus)
 app.use(VueFormCraft, { extendElements })
 app.mount('#app')
-
 ```
 
 ![md](../assets/extendMd-use.png)

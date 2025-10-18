@@ -15,7 +15,6 @@ export default {
         placeholder: '请输入用户名'
       },
       required: true,
-      designKey: 'design-usrn'
     },
     {
       label: '密码',
@@ -37,7 +36,6 @@ export default {
           trigger: 'blur'
         }
       ],
-      designKey: 'design-pssw'
     },
     {
       label: '确认密码',
@@ -54,7 +52,6 @@ export default {
           trigger: 'blur'
         }
       ],
-      designKey: 'design-cnfp'
     },
     {
       label: '手机号',
@@ -71,7 +68,6 @@ export default {
           trigger: 'blur'
         }
       ],
-      designKey: 'design-phne',
       required: true
     },
     {
@@ -88,7 +84,6 @@ export default {
           trigger: 'blur'
         }
       ],
-      designKey: 'design-emal'
     }
   ]
 } satisfies FormSchema

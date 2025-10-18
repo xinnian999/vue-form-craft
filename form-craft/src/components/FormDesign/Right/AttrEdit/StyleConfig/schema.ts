@@ -11,7 +11,6 @@ const schema: FormSchema = {
       props: {
         placeholder: ''
       },
-      designKey: 'form-0vQJ',
       name: 'id'
     },
     {
@@ -20,7 +19,6 @@ const schema: FormSchema = {
       props: {
         placeholder: ''
       },
-      designKey: 'design-KUlI',
       name: 'class'
     },
     {
@@ -51,7 +49,6 @@ const schema: FormSchema = {
         ],
         clearable: true
       },
-      designKey: 'design-Bvi4',
       name: 'style.width'
     },
     {
@@ -82,25 +79,21 @@ const schema: FormSchema = {
         ],
         clearable: true
       },
-      designKey: 'design-Bvi44',
       name: 'style.height'
     },
     {
       label: '背景色',
       component: 'ColorInput',
-      designKey: 'form-YicU',
       name: 'style.backgroundColor'
     },
     {
       label: '文字颜色',
       component: 'ColorInput',
-      designKey: 'design-A2bj',
       name: 'style.color'
     },
     {
       label: '缩放',
       component: 'Slider',
-      designKey: 'design-A2sf',
       name: 'style.transform',
       props: {
         min: 50,
@@ -128,7 +121,6 @@ const schema: FormSchema = {
                 rowGap: 20
               },
               component: 'Grid',
-              designKey: 'design-QqeY',
               name: 'form-3eBs',
               children: [
                 {
@@ -166,7 +158,6 @@ const schema: FormSchema = {
                     ]
                   },
                   component: 'SelectInput',
-                  designKey: 'design-F9CI',
                   name: 'style.marginTop'
                 },
                 {
@@ -204,7 +195,6 @@ const schema: FormSchema = {
                     ]
                   },
                   component: 'SelectInput',
-                  designKey: 'form-XHJ7',
                   name: 'style.marginBottom'
                 },
                 {
@@ -242,7 +232,6 @@ const schema: FormSchema = {
                     ]
                   },
                   component: 'SelectInput',
-                  designKey: 'form-Aeb5',
                   name: 'style.marginLeft'
                 },
                 {
@@ -280,7 +269,6 @@ const schema: FormSchema = {
                     ]
                   },
                   component: 'SelectInput',
-                  designKey: 'form-g0Ss',
                   name: 'style.marginRight'
                 }
               ]
@@ -299,7 +287,6 @@ const schema: FormSchema = {
                 rowGap: 20
               },
               component: 'Grid',
-              designKey: 'design-QqeY',
               name: 'form-3eBs',
               children: [
                 {
@@ -337,7 +324,6 @@ const schema: FormSchema = {
                     ]
                   },
                   component: 'SelectInput',
-                  designKey: 'design-F9CI',
                   name: 'style.paddingTop'
                 },
                 {
@@ -375,7 +361,6 @@ const schema: FormSchema = {
                     ]
                   },
                   component: 'SelectInput',
-                  designKey: 'form-XHJ7',
                   name: 'style.paddingBottom'
                 },
                 {
@@ -413,7 +398,6 @@ const schema: FormSchema = {
                     ]
                   },
                   component: 'SelectInput',
-                  designKey: 'form-Aeb5',
                   name: 'style.paddingLeft'
                 },
                 {
@@ -451,7 +435,6 @@ const schema: FormSchema = {
                     ]
                   },
                   component: 'SelectInput',
-                  designKey: 'form-g0Ss',
                   name: 'style.paddingRight'
                 }
               ]
@@ -464,13 +447,11 @@ const schema: FormSchema = {
         tabPosition: 'top'
       },
       component: 'Tabs',
-      designKey: 'design-WK8O',
       name: 'form-e9YD'
     },
     {
       label: '自定义',
       component: 'JsonEdit',
-      designKey: 'design-A2bj',
       name: 'style'
     }
   ]

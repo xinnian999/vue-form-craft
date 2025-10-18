@@ -1,4 +1,5 @@
 # Extend a Markdown Input Box
+
 Here is the translated markdown content:
 
 ## Creating Directories
@@ -44,7 +45,6 @@ import 'md-editor-v3/lib/style.css'
 
 const value = defineModel<string>()
 </script>
-
 ```
 
 ## Wrapping the Icon
@@ -103,8 +103,7 @@ export default {
     {
       label: '占位提示',
       component: 'Input',
-      name: 'props.placeholder',
-      designKey: 'form-ekRL'
+      name: 'props.placeholder'
     },
     { label: '初始值', component: 'Input', name: 'initialValue' },
     {
@@ -121,16 +120,11 @@ export default {
         'row-gap': 20,
         'column-gap': 20
       },
-      designKey: 'form-R003',
-      name: 'cNmCuu',
-
-    },
-    
-
+      name: 'cNmCuu'
+    }
   ]
 } as FormSchema
 ```
-
 
 ## Overall configuration
 
@@ -139,9 +133,9 @@ Merge the above files into a 'FormElement' object, which is a complete extension
 ```ts
 // src/extendElements/Markdown/index.ts
 import type { FormElement } from 'form-craft'
+import attrSchema from './attrSchema'
 import component from './Component.vue'
 import icon from './Icon.vue'
-import attrSchema from './attrSchema'
 
 export default {
   name: 'markdown',
@@ -161,15 +155,15 @@ export default {
 import Markdown from './Markdown'
 
 export default {
-    Markdown
+  Markdown
 }
 ```
 
 ```ts
 // main.ts
+import ElementPlus from 'element-plus'
 import { createApp } from 'vue'
 import App from './App.vue'
-import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import VueFormCraft from 'form-craft'
 import extendElements from './extendElements'
@@ -179,7 +173,6 @@ const app = createApp(App)
 app.use(ElementPlus)
 app.use(VueFormCraft, { extendElements })
 app.mount('#app')
-
 ```
 
 ![md](../assets/extendMd-use.png)

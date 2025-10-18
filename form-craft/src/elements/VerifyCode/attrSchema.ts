@@ -31,7 +31,6 @@ export default {
       label: '占位提示',
       component: 'Input',
       name: 'props.placeholder',
-      designKey: 'form-ekRL'
     },
     { label: '隐藏字段', component: 'Switch', name: 'hidden' },
     { label: '隐藏标签', component: 'Switch', name: 'hideLabel' }

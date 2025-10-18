@@ -15,7 +15,6 @@ const schema = {
       props: {
         placeholder: '请输入...'
       },
-      designKey: 'form-NASi',
       name: 'item1',
       change: [
         {
@@ -34,7 +33,6 @@ const schema = {
       props: {
         placeholder: '请输入...'
       },
-      designKey: 'form-Nasd',
       name: 'item2'
     },
     {
@@ -43,7 +41,6 @@ const schema = {
       props: {
         placeholder: '请输入...'
       },
-      designKey: 'form-KI1N',
       name: 'item3'
     }
   ]

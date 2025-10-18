@@ -10,15 +10,41 @@
 
 <script setup lang="ts">
 import { ElMessage } from 'element-plus'
-import { onMounted, ref } from 'vue'
 import type { FormElement, FormSchema } from 'form-craft'
+import { onMounted, ref } from 'vue'
 
 const schema = ref<FormSchema>({
   labelWidth: 150,
   labelAlign: 'right',
-  size: 'default',
   scrollToError: true,
-  items: []
+  size: 'default',
+  submitBtn: true,
+  items: [
+    {
+      label: '单行文本4444',
+      props: {
+        placeholder: '请输入文本',
+        style: {
+          transform: 'scale(NaN)'
+        }
+      },
+      component: 'Input',
+      name: 'input86026434',
+      required: false
+    },
+    {
+      label: '多行文本',
+      props: {
+        placeholder: '请输入...',
+        autosize: {
+          minRows: 4,
+          maxRows: 999
+        }
+      },
+      component: 'TextArea',
+      name: 'textarea62305061'
+    }
+  ]
 })
 
 const onSave = () => {

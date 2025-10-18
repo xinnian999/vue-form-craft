@@ -67,7 +67,6 @@ export default {
       label: '占位提示',
       component: 'Input',
       name: 'props.placeholder',
-      designKey: 'form-ekRL'
     },
     {
       component: 'Grid',
@@ -82,7 +81,6 @@ export default {
         'row-gap': 20,
         'column-gap': 20
       },
-      designKey: 'form-R003',
       name: 'cNmCuu'
     },
     {
@@ -93,7 +91,6 @@ export default {
         'active-text': '多选',
         'inactive-text': '单选'
       },
-      designKey: 'form-eTxc'
     },
 
     {
@@ -109,7 +106,6 @@ export default {
         title: '选项设置',
         contentPosition: 'center'
       },
-      designKey: 'design-gSnX',
       name: 'form-xDEe',
       style: {
         marginTop: '40px'
@@ -119,13 +115,11 @@ export default {
       label: '标签key',
       component: 'Input',
       name: 'props.labelKey',
-      designKey: 'form-X6hs'
     },
     {
       label: '值Key',
       component: 'Input',
       name: 'props.valueKey',
-      designKey: 'form-STkl'
     },
     {
       label: '数据模式',
@@ -147,7 +141,6 @@ export default {
         space: 0
       },
       initialValue: 'static',
-      designKey: 'form-PLpj'
     },
     {
       label: '静态选项',
@@ -160,7 +153,6 @@ export default {
       props: {
         // header: '远程数据'
       },
-      designKey: 'id-pGeN',
       name: 'form-6vzT',
       hidden: '{{$values.props.mode==="static"}}',
       children: [
@@ -169,7 +161,6 @@ export default {
           component: 'Input',
           name: 'props.api.url',
           initialValue: '/current/query/article',
-          designKey: 'form-UrE8'
         },
         {
           label: '请求方式',
@@ -196,7 +187,6 @@ export default {
               }
             ]
           },
-          designKey: 'form-nOpD'
         },
         {
           label: '请求参数',
@@ -210,7 +200,6 @@ export default {
           component: 'Input',
           name: 'props.api.dataPath',
           initialValue: 'data',
-          designKey: 'form-UrE8'
         }
       ]
     }

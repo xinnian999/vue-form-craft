@@ -12,7 +12,6 @@ export default {
       component: 'Input',
       props: { placeholder: '请输入姓名' },
       required: true,
-      designKey: 'design-up-name'
     },
     {
       label: '性别',
@@ -28,7 +27,6 @@ export default {
         mode: 'static'
       },
       required: true,
-      designKey: 'design-up-gender'
     },
     {
       label: '生日',
@@ -38,7 +36,6 @@ export default {
         type: 'date',
         placeholder: '请选择生日'
       },
-      designKey: 'design-up-birthday'
     },
     {
       label: '邮箱',
@@ -52,7 +49,6 @@ export default {
           trigger: 'blur'
         }
       ],
-      designKey: 'design-up-email'
     },
     {
       label: '手机号',
@@ -62,7 +58,6 @@ export default {
       rules: [
         { expr: '/^1[3-9]\\d{9}$/', message: '请输入有效的手机号', trigger: 'blur' }
       ],
-      designKey: 'design-up-phone'
     }
   ]
 } satisfies FormSchema

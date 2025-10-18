@@ -16,7 +16,6 @@ const schema = {
         max: 5,
         'allow-half': true
       },
-      designKey: 'form-Lx4g',
       name: 'rate',
       required: true
     },
@@ -33,7 +32,6 @@ const schema = {
         },
         placeholder: '请输入...'
       },
-      designKey: 'form-XyJs',
       name: 'reason',
       hidden: '{{ $values.rate>=3 || !$values.rate }}' // 评分未选中 或 评分<3时隐藏差评原因
     }

@@ -12,7 +12,6 @@ export default {
       component: 'Input',
       props: { placeholder: '请输入预约人姓名' },
       required: true,
-      designKey: 'design-drb-guest'
     },
     {
       label: '预约时间',
@@ -25,7 +24,6 @@ export default {
         clearable: true
       },
       required: true,
-      designKey: 'design-drb-range'
     },
     {
       label: '人数',
@@ -33,7 +31,6 @@ export default {
       component: 'InputNumber',
       props: { min: 1, 'controls-position': 'right' },
       initialValue: 1,
-      designKey: 'design-drb-people'
     },
     {
       label: '备注',
@@ -42,7 +39,6 @@ export default {
       props: {
         placeholder: "{{ $values.guestName ? '填写给 ' + $values.guestName + ' 的备注' : '填写备注信息' }}"
       },
-      designKey: 'design-drb-note'
     }
   ]
 } satisfies FormSchema

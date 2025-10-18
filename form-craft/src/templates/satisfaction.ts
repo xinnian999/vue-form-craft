@@ -13,7 +13,6 @@ export default {
       props: {
         placeholder: '请输入您的姓名'
       },
-      designKey: 'form-name',
       name: 'name',
       required: true
     },
@@ -35,7 +34,6 @@ export default {
         valueKey: 'value',
         mode: 'static'
       },
-      designKey: 'form-gender',
       name: 'gender',
       required: true
     },
@@ -48,7 +46,6 @@ export default {
         max: 120,
         controlsPosition: 'right'
       },
-      designKey: 'form-age',
       name: 'age',
       required: true
     },
@@ -89,7 +86,6 @@ export default {
         disabledKey: 'disabled',
         mode: 'static'
       },
-      designKey: 'form-satisfaction',
       name: 'satisfaction',
       required: true
     },
@@ -99,7 +95,6 @@ export default {
       props: {
         placeholder: '请留下您的建议'
       },
-      designKey: 'form-improvementSuggestions',
       name: 'improvementSuggestions',
       hidden: '{{ !$values.satisfaction || $values.satisfaction > 3 }}'
     },
@@ -109,7 +104,6 @@ export default {
       props: {
         placeholder: '请输入您的邮箱或电话'
       },
-      designKey: 'form-contact',
       name: 'contact',
       required: true
     }

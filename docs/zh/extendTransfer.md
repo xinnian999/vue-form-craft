@@ -66,6 +66,7 @@ const onChange = (value: TransferKey[]) => {
 **当然如果你项目里，有封装好的Icon渲染组件，可以直接用，跳过这一步！**
 
 `src/extendElements/Transfer/Icon.vue`
+
 ```vue
 <template>
   <svg
@@ -123,8 +124,7 @@ export default {
     {
       label: '占位提示',
       component: 'Input',
-      name: 'props.placeholder',
-      designKey: 'form-ekRL'
+      name: 'props.placeholder'
     },
     { label: '初始值', component: 'Input', name: 'initialValue' },
     {
@@ -140,7 +140,6 @@ export default {
         'row-gap': 20,
         'column-gap': 20
       },
-      designKey: 'form-R003',
       name: 'cNmCuu'
     },
 
@@ -150,7 +149,6 @@ export default {
         title: '选项设置',
         contentPosition: 'center'
       },
-      designKey: 'design-gSnX',
       name: 'form-xDEe',
       style: {
         marginTop: '40px'
@@ -168,18 +166,15 @@ export default {
           props: {
             placeholder: '请输入...'
           },
-          designKey: 'form-LnGh',
           initialValue: '{{ "选项" + ($index + 1) }}'
         },
         {
           label: '选项值',
           name: 'key',
           component: 'Input',
-          designKey: 'form-HYtW',
           initialValue: '{{ "value" + ($index + 1) }}'
         }
       ],
-      designKey: 'form-Iwpd',
       props: {
         mode: 'table'
       }
@@ -196,8 +191,8 @@ export default {
 
 ```ts
 import type { FormElement } from 'form-craft'
-import icon from './Icon.vue'
 import attrSchema from './attrSchema'
+import icon from './Icon.vue'
 import render from './Render.vue'
 
 export default {
@@ -209,7 +204,6 @@ export default {
   order: 12,
   attrSchema
 } satisfies FormElement
-
 ```
 
 ## 导出，使用
@@ -227,9 +221,9 @@ export default {
 
 ```ts
 // main.ts
+import ElementPlus from 'element-plus'
 import { createApp } from 'vue'
 import App from './App.vue'
-import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import VueFormCraft from 'form-craft'
 import extendElements from './extendElements'

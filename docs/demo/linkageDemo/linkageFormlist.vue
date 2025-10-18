@@ -18,7 +18,6 @@ const schema: FormSchema = {
       props: {
         'show-password': true
       },
-      designKey: 'design-kVO2111',
       change: [
         {
           target: 'users.*.password',
@@ -37,7 +36,6 @@ const schema: FormSchema = {
             placeholder: '请输入文本',
             clearable: true
           },
-          designKey: 'design-M91n',
           name: 'username',
           change: [
             {
@@ -54,7 +52,6 @@ const schema: FormSchema = {
             placeholder: '请输入密码',
             'show-password': true
           },
-          designKey: 'design-kVO2',
           name: 'password'
         }
       ],
@@ -62,7 +59,6 @@ const schema: FormSchema = {
         mode: 'table'
       },
       initialValue: [{}, {}],
-      designKey: 'design-pMUa',
       name: 'users'
     }
   ]

@@ -22,8 +22,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
 import type { FormSchema } from 'form-craft'
+import { computed, ref } from 'vue'
 
 // v-model 绑定对象：演示回显（初始给部分值）
 const formValues = ref({
@@ -48,8 +48,7 @@ const schema: FormSchema = {
       required: true,
       props: {
         placeholder: '请输入用户名'
-      },
-      designKey: 'design-usrn'
+      }
     },
     {
       label: '性别',
@@ -62,8 +61,7 @@ const schema: FormSchema = {
           { label: '男', value: 'male' },
           { label: '女', value: 'female' }
         ]
-      },
-      designKey: 'design-gndr'
+      }
     },
     {
       label: '会员等级',
@@ -77,8 +75,7 @@ const schema: FormSchema = {
           { label: '专业', value: 'pro' },
           { label: '旗舰', value: 'enterprise' }
         ]
-      },
-      designKey: 'design-lvvl'
+      }
     },
     {
       label: '是否订阅',
@@ -87,8 +84,7 @@ const schema: FormSchema = {
       props: {
         activeText: '订阅',
         inactiveText: '未订阅'
-      },
-      designKey: 'design-subs'
+      }
     },
     {
       label: '年龄',
@@ -98,8 +94,7 @@ const schema: FormSchema = {
         min: 0,
         max: 120,
         placeholder: '请输入年龄'
-      },
-      designKey: 'design-agee'
+      }
     },
     {
       label: '个人简介',
@@ -109,8 +104,7 @@ const schema: FormSchema = {
         rows: 3,
         placeholder:
           "{{  $values.username ? $values.username + ' 的简介（根据用户名动态变化）' : '请输入简介'  }}"
-      },
-      designKey: 'design-desc'
+      }
     }
   ]
 }

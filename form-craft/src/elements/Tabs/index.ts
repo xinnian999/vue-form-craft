@@ -74,7 +74,6 @@ export default {
             props: {
               placeholder: '请输入标题'
             },
-            designKey: 'id-l8cI',
             name: 'label',
             initialValue: '{{ "选项卡" + ($index + 1) }}'
           },
@@ -84,7 +83,6 @@ export default {
             props: {
               placeholder: '请输入唯一标识'
             },
-            designKey: 'form-YE6U',
             name: 'name',
             initialValue: '{{ "name" + ($index + 1) }}'
           },
@@ -94,7 +92,6 @@ export default {
             props: {
               'inline-prompt': false
             },
-            designKey: 'design-fPOI1',
             name: 'disabled'
           },
           {
@@ -103,7 +100,6 @@ export default {
             props: {
               'inline-prompt': false
             },
-            designKey: 'design-fPOI11',
             name: 'lazy'
           }
         ],
@@ -111,7 +107,6 @@ export default {
           mode: 'card',
           title: '选项卡'
         },
-        designKey: 'id-RQ1a',
         name: 'children'
       }
     ]
