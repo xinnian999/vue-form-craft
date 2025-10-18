@@ -18,7 +18,7 @@ const initJsonSchema: FormSchema = {
 </script>
 
 <script setup lang="ts">
-import { cloneDeep } from 'lodash'
+import { cloneDeep, isEqual } from 'lodash'
 import {
   computed,
   onBeforeMount,
@@ -38,7 +38,7 @@ import type {
   FormItemType,
   FormSchema
 } from '@/types'
-import { getCurrentByKey, ns, repirItems, setCurrentByKey } from '@/utils'
+import { getCurrentByKey, ns, repirItems, repirJsonSchema, setCurrentByKey } from '@/utils'
 import Center from './Center/index.vue'
 import Left from './Left/index.vue'
 import Right from './Right/index.vue'
@@ -91,7 +91,7 @@ const handleHistoryForward = () => {
  * 例如：formDesignRef.value.updateSchema(newSchema)
  */
 const updateSchema = (newSchema: FormSchema) => {
-  const parseNewSchema = { ...newSchema, items: repirItems(newSchema.items) }
+  const parseNewSchema = repirJsonSchema(newSchema)
   jsonSchema.value = parseNewSchema
 
   // 历史记录处理
@@ -125,7 +125,10 @@ watch(fullScreen, (val) => {
 })
 
 onBeforeMount(() => {
-  jsonSchema.value = { ...jsonSchema.value, items: repirItems(jsonSchema.value.items) }
+  // 如果jsonSchema和initJsonSchema不相等,说明传入了v-model,需要序列化
+  if (!isEqual(jsonSchema.value, initJsonSchema)) {
+    updateSchema(jsonSchema.value)
+  }
 })
 
 const instance = reactive<DesignInstance>({

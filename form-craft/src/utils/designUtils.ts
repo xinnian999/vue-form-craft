@@ -1,5 +1,5 @@
 import { cloneDeep } from 'lodash'
-import type { FormItemType } from '@/types'
+import type { FormItemType, FormSchema } from '@/types'
 import getRandomId from './getRandomId'
 
 export const getCurrentByKey = (items: FormItemType[], key: string): FormItemType | null => {
@@ -81,6 +81,13 @@ export const repirItems = (items: FormItemType[]) => {
 
     return data
   })
+}
+
+export const repirJsonSchema = (schema: FormSchema) => {
+  return {
+    ...schema,
+    items: repirItems(schema.items)
+  }
 }
 
 // 递归移除 designKey 字段用于显示
