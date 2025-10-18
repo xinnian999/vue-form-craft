@@ -60,22 +60,6 @@ const history = ref<FormSchema[]>([])
 
 const historyIndex = ref(-1)
 
-const handleHistoryBack = () => {
-  if (historyIndex.value > -1) {
-    historyIndex.value--
-    jsonSchema.value = cloneDeep(
-      history.value[historyIndex.value] ? history.value[historyIndex.value] : initJsonSchema
-    )
-  }
-}
-
-const handleHistoryForward = () => {
-  if (historyIndex.value < history.value.length - 1) {
-    historyIndex.value++
-    jsonSchema.value = cloneDeep(history.value[historyIndex.value])
-  }
-}
-
 /**
  * 更新表单schema唯一方法
  *
@@ -106,16 +90,39 @@ const updateSchema: DesignInstance['updateSchema'] = (
   jsonSchema.value = newSchema
 }
 
+const handleHistoryBack = () => {
+  if (historyIndex.value > -1) {
+    historyIndex.value--
+    const newSchema = history.value[historyIndex.value]
+      ? history.value[historyIndex.value]
+      : initJsonSchema
+    updateSchema(newSchema, { saveHistory: false, repir: false })
+  }
+}
+
+const handleHistoryForward = () => {
+  if (historyIndex.value < history.value.length - 1) {
+    historyIndex.value++
+    updateSchema(history.value[historyIndex.value], { saveHistory: false, repir: false })
+  }
+}
+
 const current = computed({
   get() {
     return getCurrentByKey(jsonSchema.value.items, currentKey.value)
   },
   set(element: FormItemType) {
-    currentKey.value = element.designKey!
-    jsonSchema.value = {
-      ...jsonSchema.value,
-      items: setCurrentByKey(jsonSchema.value.items, element)
-    }
+    // currentKey.value = element.designKey!
+    updateSchema(
+      {
+        ...jsonSchema.value,
+        items: setCurrentByKey(jsonSchema.value.items, element)
+      },
+      {
+        saveHistory: false,
+        repir: false
+      }
+    )
   }
 })
 
