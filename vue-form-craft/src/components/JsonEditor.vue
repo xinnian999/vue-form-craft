@@ -105,7 +105,7 @@ onUnmounted(() => {
 
 @include ns('json-editor') {
   width: 100%;
-  height: 550px;
+  height: 70vh;
 
   &.disabled {
     opacity: 0.7;

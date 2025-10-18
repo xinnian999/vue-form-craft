@@ -5,7 +5,7 @@
     width="75%"
     center
     destroy-on-close
-    top="10vh"
+    top="5vh"
     @close="formValues = {}"
   >
     <el-tabs model-value="edit" class="demo-tabs">

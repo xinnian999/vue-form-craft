@@ -7,7 +7,8 @@
       @modeChange="onModeChange"
     />
     <div class="footer">
-      <el-button @click="save" type="primary">保存更改</el-button>
+      <el-button @click="handleSave" type="primary">保存更改</el-button>
+      <el-button @click="handleReset">重置</el-button>
     </div>
   </div>
 </template>
@@ -33,12 +34,6 @@ const emits = defineEmits<{
 // 初始化时移除 designKey 显示
 const data = ref<T>(removeDesignKeys(props.json) as T)
 
-const save = () => {
-  // 保存时恢复 designKey 字段
-  const restoredData = restoreDesignKeys(data.value, props.json)
-  emits('save', restoredData as T)
-}
-
 const onInit = (editor: JsonEditorType) => {
   autoComplete(editor, props.customGetCompletionItems)
 }
@@ -47,6 +42,16 @@ const onModeChange = (newMode: string, editor: JsonEditorType) => {
   if (newMode === 'code') {
     autoComplete(editor, props.customGetCompletionItems)
   }
+}
+
+const handleSave = () => {
+  // 保存时恢复 designKey 字段
+  const restoredData = restoreDesignKeys(data.value, props.json)
+  emits('save', restoredData as T)
+}
+
+const handleReset = () => {
+  data.value = removeDesignKeys(props.json)
 }
 </script>
 
