@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts">
-const initJsonSchema: FormSchema = {
+let initJsonSchema: FormSchema = {
   labelWidth: 150,
   labelAlign: 'right',
   scrollToError: true,
@@ -15,21 +15,13 @@ const initJsonSchema: FormSchema = {
   submitBtn: true,
   items: []
 }
+
+const emptyJsonSchema: FormSchema = cloneDeep(initJsonSchema)
 </script>
 
 <script setup lang="ts">
 import { cloneDeep, isEqual } from 'lodash'
-import {
-  computed,
-  onBeforeMount,
-  onMounted,
-  provide,
-  reactive,
-  ref,
-  toRefs,
-  useTemplateRef,
-  watch
-} from 'vue'
+import { computed, onBeforeMount, provide, reactive, ref, toRefs, useTemplateRef, watch } from 'vue'
 import { $designInstance } from '@/symbol'
 import type {
   DesignInstance,
@@ -38,7 +30,7 @@ import type {
   FormItemType,
   FormSchema
 } from '@/types'
-import { getCurrentByKey, ns, repirItems, repirJsonSchema, setCurrentByKey } from '@/utils'
+import { getCurrentByKey, ns, repirJsonSchema, setCurrentByKey } from '@/utils'
 import Center from './Center/index.vue'
 import Left from './Left/index.vue'
 import Right from './Right/index.vue'
@@ -56,11 +48,11 @@ const emits = defineEmits<{
 
 const formDesignWrapper = useTemplateRef<HTMLDivElement>('formDesignWrapper')
 
-const currentKey = ref('')
-
 const jsonSchema = defineModel<FormSchema>({
   default: () => reactive(initJsonSchema)
 })
+
+const currentKey = ref('')
 
 const fullScreen = ref(false)
 
@@ -90,17 +82,28 @@ const handleHistoryForward = () => {
  * 注意：外部如果想要记录历史，应该通过ref调用此方法，而不是直接修改v-model
  * 例如：formDesignRef.value.updateSchema(newSchema)
  */
-const updateSchema = (newSchema: FormSchema) => {
-  const parseNewSchema = repirJsonSchema(newSchema)
-  jsonSchema.value = parseNewSchema
+const updateSchema: DesignInstance['updateSchema'] = (
+  schema = jsonSchema.value,
+  { saveHistory = true, repir = true } = {}
+) => {
+  let newSchema = cloneDeep(schema)
 
-  // 历史记录处理
-  if (historyIndex.value < history.value.length - 1) {
-    // 如果改动的是历史，将截断之后的记录
-    history.value = history.value.slice(0, historyIndex.value + 1)
+  // 是否序列化schema
+  if (repir) {
+    newSchema = repirJsonSchema(schema)
   }
-  history.value.push(cloneDeep(parseNewSchema))
-  historyIndex.value = history.value.length - 1
+
+  // 本次更新是否记录历史
+  if (saveHistory) {
+    if (historyIndex.value < history.value.length - 1) {
+      // 如果改动的是历史，将截断之后的记录
+      history.value = history.value.slice(0, historyIndex.value + 1)
+    }
+    history.value.push(newSchema)
+    historyIndex.value = history.value.length - 1
+  }
+
+  jsonSchema.value = newSchema
 }
 
 const current = computed({
@@ -125,9 +128,11 @@ watch(fullScreen, (val) => {
 })
 
 onBeforeMount(() => {
-  // 如果jsonSchema和initJsonSchema不相等,说明传入了v-model,需要序列化
+  // 如果jsonSchema和initJsonSchema不相等,说明传入了v-model,需要序列化，并设置为initJsonSchema
   if (!isEqual(jsonSchema.value, initJsonSchema)) {
-    updateSchema(jsonSchema.value)
+    const schema = repirJsonSchema(jsonSchema.value)
+    initJsonSchema = cloneDeep(schema)
+    jsonSchema.value = schema
   }
 })
 
@@ -155,7 +160,7 @@ const instance = reactive<DesignInstance>({
     emits(name, params)
   },
   handleResetSchema: () => {
-    updateSchema(initJsonSchema)
+    updateSchema(emptyJsonSchema)
   },
   handleHistoryBack,
   handleHistoryForward,
