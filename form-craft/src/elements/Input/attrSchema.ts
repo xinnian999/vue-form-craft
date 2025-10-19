@@ -7,7 +7,8 @@ export default {
   initialValues: {
     label: '单行文本',
     props: {
-      placeholder: '请输入文本'
+      placeholder: '请输入文本',
+      autocomplete: 'new-password'
     }
   },
   items: [
@@ -42,6 +43,12 @@ export default {
       name: 'cNmCuu'
     },
     { label: '显示清除按钮', component: 'Switch', name: 'props.clearable' },
+    {
+      label: '浏览器自动填充', component: 'Switch', name: 'props.autocomplete', props: {
+        activeValue: 'on',
+        inactiveValue: 'new-password'
+      }
+    },
     {
       label: '最长字数',
       component: 'InputNumber',

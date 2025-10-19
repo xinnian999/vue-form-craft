@@ -137,8 +137,7 @@ export const FORM_ITEM_CONFIG_ITEMS: CompletionItem[] = [
 
 /** 表达式变量补全项 */
 export const EXPRESSION_ITEMS: CompletionItem[] = [
-  { name: '$values', meta: '表单数据对象', score: 1000 },
-  { name: '$values.', meta: '访问表单字段', score: 999 }
+  { name: '$values.', meta: '表单数据对象', score: 1000 },
 ]
 
 /** 组件类型补全项 */

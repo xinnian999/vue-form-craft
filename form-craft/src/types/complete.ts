@@ -8,9 +8,11 @@ export interface CompletionItem {
 export type GetCompletionItems = ({
   session,
   pos,
-  beforeCursor
+  beforeCursor,
+  schema
 }: {
   session: any
   pos: any
   beforeCursor: string
+  schema?: any
 }) => CompletionItem[]

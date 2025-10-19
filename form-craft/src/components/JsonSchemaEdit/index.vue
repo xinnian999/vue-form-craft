@@ -16,6 +16,7 @@
 <script setup lang="ts" generic="T extends Record<string, any> = FormSchema">
 import JsonEditorType from 'jsoneditor'
 import { ref } from 'vue'
+import { useDesignInstance } from '@/hooks'
 import type { FormSchema } from '@/types'
 import type { GetCompletionItems } from '@/types/complete'
 import { ns, removeDesignKeys, restoreDesignKeys } from '@/utils'
@@ -34,13 +35,15 @@ const emits = defineEmits<{
 // 初始化时移除 designKey 显示
 const data = ref<T>(removeDesignKeys(props.json) as T)
 
+const designInstance = useDesignInstance()
+
 const onInit = (editor: JsonEditorType) => {
-  autoComplete(editor, props.customGetCompletionItems)
+  autoComplete(editor, props.customGetCompletionItems, designInstance.schema)
 }
 
 const onModeChange = (newMode: string, editor: JsonEditorType) => {
   if (newMode === 'code') {
-    autoComplete(editor, props.customGetCompletionItems)
+    autoComplete(editor, props.customGetCompletionItems, designInstance.schema)
   }
 }
 

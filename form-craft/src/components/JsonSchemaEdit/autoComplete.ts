@@ -8,6 +8,28 @@ import JsonEditor from 'jsoneditor'
 import { EXPRESSION_ITEMS } from '@/config'
 import type { CompletionItem, GetCompletionItems } from '@/types/complete'
 import { isInExpression } from '@/utils'
+import type { FormSchema, FormItemType } from '@/types'
+
+/**
+ * 递归提取 schema 中所有字段的 name 和 label
+ * @param items 表单项数组
+ * @param result 结果数组
+ */
+function extractFieldNames(items: FormItemType[] = [], result: Array<{ name: string; label: string }> = []): Array<{ name: string; label: string }> {
+  for (const item of items) {
+    if (item.name) {
+      result.push({
+        name: item.name,
+        label: item.label || item.name
+      })
+    }
+    // 递归处理子项
+    if (item.children && item.children.length > 0) {
+      extractFieldNames(item.children, result)
+    }
+  }
+  return result
+}
 
 /**
  * 根据上下文获取合适的补全项
@@ -15,9 +37,26 @@ import { isInExpression } from '@/utils'
  * @param pos 当前光标位置
  * @param beforeCursor 光标前的文本
  */
-const getCompletionItems: GetCompletionItems = ({ session, pos, beforeCursor }) => {
+const getCompletionItems: GetCompletionItems = ({ session, pos, beforeCursor, schema }) => {
   // 在表达式内部（{{ }} 之间），提供表达式变量
   if (isInExpression(beforeCursor)) {
+    // 检查是否输入了 $values.
+    const valuesMatch = beforeCursor.match(/\$values\.([\w]*)$/)
+    
+    if (valuesMatch) {
+      // 如果输入了 $values.，提供字段名补全
+      if (schema && schema.items) {
+        const fields = extractFieldNames(schema.items)
+        return fields.map((field, index) => ({
+          name: field.name,
+          meta: field.label,
+          score: 1000 - index
+        }))
+      }
+      return []
+    }
+    
+    // 否则提供基础表达式变量
     return EXPRESSION_ITEMS
   }
 
@@ -49,7 +88,8 @@ function filterCompletionItems(items: CompletionItem[], prefix: string) {
  */
 export const setupAutoComplete = (
   editor: JsonEditor,
-  customGetCompletionItems?: GetCompletionItems
+  customGetCompletionItems?: GetCompletionItems,
+  schema?: FormSchema
 ) => {
   const aceEditor = (editor as any)?.aceEditor
   if (!aceEditor) return
@@ -66,10 +106,10 @@ export const setupAutoComplete = (
         const beforeCursor = line.substring(0, pos.column)
 
         // 获取适合当前上下文的补全项
-        const completionItems = getCompletionItems({ session, pos, beforeCursor })
+        const completionItems = getCompletionItems({ session, pos, beforeCursor, schema })
 
         if (customGetCompletionItems) {
-          completionItems.push(...customGetCompletionItems({ session, pos, beforeCursor }))
+          completionItems.push(...customGetCompletionItems({ session, pos, beforeCursor, schema }))
         }
 
         // 过滤并格式化补全项
@@ -116,6 +156,56 @@ export const setupAutoComplete = (
         }
 
         return true
+      }
+    })
+
+    // 输入 . 时自动触发补全（用于 $values. 后的字段补全）
+    aceEditor.commands.addCommand({
+      name: 'autoCompleteDot',
+      bindKey: { win: '.', mac: '.' },
+      exec: (editor: any) => {
+        const session = editor.session
+        const pos = editor.getCursorPosition()
+        
+        // 插入 .
+        session.insert(pos, '.')
+        
+        // 获取光标前的文本
+        const line = session.getLine(pos.row)
+        const beforeCursor = line.substring(0, pos.column + 1)
+        
+        // 如果在表达式内且刚输入了 $values.，自动触发补全
+        if (isInExpression(beforeCursor) && beforeCursor.endsWith('$values.')) {
+          // 延迟触发补全，确保 . 已经插入
+          setTimeout(() => {
+            editor.execCommand('startAutocomplete')
+          }, 10)
+        }
+        
+        return true
+      }
+    })
+
+    // 监听补全选择事件，当选择 $values. 后自动触发字段补全
+    aceEditor.on('changeSelection', () => {
+      const pos = aceEditor.getCursorPosition()
+      const session = aceEditor.session
+      const line = session.getLine(pos.row)
+      const beforeCursor = line.substring(0, pos.column)
+      
+      // 如果光标前是 $values. 且在表达式内，自动触发补全
+      if (isInExpression(beforeCursor) && beforeCursor.endsWith('$values.')) {
+        // 延迟触发，避免与当前补全冲突
+        setTimeout(() => {
+          // 再次检查，确保用户没有继续输入
+          const currentPos = aceEditor.getCursorPosition()
+          const currentLine = session.getLine(currentPos.row)
+          const currentBeforeCursor = currentLine.substring(0, currentPos.column)
+          
+          if (currentBeforeCursor.endsWith('$values.')) {
+            aceEditor.execCommand('startAutocomplete')
+          }
+        }, 50)
       }
     })
 
