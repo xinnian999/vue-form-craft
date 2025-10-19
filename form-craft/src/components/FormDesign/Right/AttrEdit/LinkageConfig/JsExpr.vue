@@ -17,40 +17,20 @@
         >
       </p>
       <!-- @vue-generic {import('@/types').FormItemType} -->
-      <JsonSchemaEdit
-        :json="designInstance.current!"
-        :customGetCompletionItems="customGetCompletionItems"
-        @save="onSave"
-      />
+      <JsonSchemaEdit :json="designInstance.current!" @save="onSave" />
     </div>
   </el-dialog>
 </template>
 
 <script setup lang="ts">
 import { JsonSchemaEdit } from '@/components'
-import { FORM_ITEM_CONFIG_ITEMS } from '@/config'
 import { useDesignInstance } from '@/hooks'
 import type { FormItemType } from '@/types'
-import type { GetCompletionItems } from '@/types/complete'
-import { isAtRootLevel, isInKeyPosition, repirItems } from '@/utils'
+import { repirItems } from '@/utils'
 
 const designInstance = useDesignInstance()
 
 const visible = defineModel<boolean>()
-
-const customGetCompletionItems: GetCompletionItems = ({ session, pos, beforeCursor }) => {
-  // 在 key 位置
-  if (isInKeyPosition(beforeCursor)) {
-    // 优先判断是否在根层级（表单全局配置）
-    if (isAtRootLevel(session, pos, beforeCursor)) {
-      return FORM_ITEM_CONFIG_ITEMS
-    }
-
-    // 其他层级（items 内部的深层嵌套）：不提供配置项补全
-    return []
-  }
-  return []
-}
 
 const onSave = (json: FormItemType) => {
   const [repirJson] = repirItems([json])

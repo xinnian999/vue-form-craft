@@ -15,11 +15,7 @@
           <span>在线编辑</span>
         </template>
         <!-- @vue-generic {import('@/types').FormSchema} -->
-        <JsonSchemaEdit
-          :json="json"
-          @save="onSave"
-          :customGetCompletionItems="customGetCompletionItems"
-        />
+        <JsonSchemaEdit :json="json" @save="onSave" />
       </el-tab-pane>
       <el-tab-pane name="ts" lazy>
         <template #label>
@@ -73,18 +69,8 @@ import Icon from '@/Icon/index.vue'
 import { jsJsonSchema, jsVue, tsJsonSchema, tsVue } from './config'
 import help from './help.md?raw'
 import 'md-editor-v3/lib/style.css'
-import { FORM_CONFIG_ITEMS, FORM_ITEM_CONFIG_ITEMS } from '@/config'
 import type { FormSchema } from '@/types'
-import type { GetCompletionItems } from '@/types/complete'
-import {
-  getCurrentFieldName,
-  getEnumValues,
-  isAtRootLevel,
-  isInItemsFirstLevel,
-  isInKeyPosition,
-  removeDesignKeys,
-  repirItems
-} from '@/utils'
+import { removeDesignKeys, repirItems } from '@/utils'
 
 const designInstance = useDesignInstance()
 
@@ -99,43 +85,5 @@ const visible = defineModel<boolean>()
 const onSave = (json: FormSchema) => {
   const repirJson = repirItems(json.items)
   designInstance.updateSchema({ ...json, items: repirJson })
-}
-
-const customGetCompletionItems: GetCompletionItems = ({ session, pos, beforeCursor }) => {
-  // 在 key 位置
-  if (isInKeyPosition(beforeCursor)) {
-    // 优先判断是否在根层级（表单全局配置）
-    if (isAtRootLevel(session, pos, beforeCursor)) {
-      return FORM_CONFIG_ITEMS
-    }
-
-    // 判断是否在 items 数组的第一层（表单项配置）
-    if (isInItemsFirstLevel(session, pos, beforeCursor)) {
-      return FORM_ITEM_CONFIG_ITEMS
-    }
-
-    // 其他层级（items 内部的深层嵌套）：不提供配置项补全
-    return []
-  }
-
-  // 在 value 位置
-  // 1. 先检查是否有枚举值
-  const fieldName = getCurrentFieldName(beforeCursor)
-
-  // 优先在根层级配置中查找枚举值
-  let enumValues = getEnumValues(fieldName, FORM_CONFIG_ITEMS)
-
-  // 如果没找到，在表单项配置中查找
-  if (!enumValues) {
-    enumValues = getEnumValues(fieldName, FORM_ITEM_CONFIG_ITEMS)
-  }
-
-  // 2. 如果找到枚举值，直接返回（枚举值已经是 CompletionItem[] 格式）
-  if (enumValues) {
-    return enumValues
-  }
-
-  // 3. 否则无补全
-  return []
 }
 </script>
