@@ -30,7 +30,7 @@ import type {
   FormItemType,
   FormSchema
 } from '@/types'
-import { getCurrentByKey, ns, repirJsonSchema, setCurrentByKey } from '@/utils'
+import { getCurrentByKey, ns, repirJsonSchema, setCurrentByElement } from '@/utils'
 import Center from './Center/index.vue'
 import Left from './Left/index.vue'
 import Right from './Right/index.vue'
@@ -112,11 +112,10 @@ const current = computed({
     return getCurrentByKey(jsonSchema.value.items, currentKey.value)
   },
   set(element: FormItemType) {
-    // currentKey.value = element.designKey!
     updateSchema(
       {
         ...jsonSchema.value,
-        items: setCurrentByKey(jsonSchema.value.items, element)
+        items: setCurrentByElement(jsonSchema.value.items, element)
       },
       {
         saveHistory: false,
@@ -135,10 +134,10 @@ watch(fullScreen, (val) => {
 })
 
 onBeforeMount(() => {
-  // 如果jsonSchema和initJsonSchema不相等,说明传入了v-model,需要序列化，并设置为initJsonSchema
+  // 如果jsonSchema和initJsonSchema不相等,说明传入了v-model
   if (!isEqual(jsonSchema.value, initJsonSchema)) {
-    const schema = repirJsonSchema(jsonSchema.value)
-    initJsonSchema = cloneDeep(schema)
+    const schema = repirJsonSchema(jsonSchema.value) // 序列化
+    initJsonSchema = cloneDeep(schema) // 重新设置initJsonSchema
     jsonSchema.value = schema
   }
 })

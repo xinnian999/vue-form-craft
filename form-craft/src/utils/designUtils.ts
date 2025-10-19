@@ -2,13 +2,13 @@ import { cloneDeep } from 'lodash'
 import type { FormItemType, FormSchema } from '@/types'
 import getRandomId from './getRandomId'
 
-export const getCurrentByKey = (items: FormItemType[], key: string): FormItemType | null => {
+export const getCurrentByKey = (items: FormItemType[], designKey: string): FormItemType | null => {
   return items.reduce<FormItemType | null>((all, item) => {
-    if (item.designKey === key) {
+    if (item.designKey === designKey) {
       return item
     }
     if (item.children) {
-      const res = getCurrentByKey(item.children, key)
+      const res = getCurrentByKey(item.children, designKey)
       if (res) return res
     }
 
@@ -16,13 +16,13 @@ export const getCurrentByKey = (items: FormItemType[], key: string): FormItemTyp
   }, null)
 }
 
-export const setCurrentByKey = (items: FormItemType[], element: FormItemType): FormItemType[] => {
+export const setCurrentByElement = (items: FormItemType[], element: FormItemType): FormItemType[] => {
   return items.map((item) => {
     if (item.designKey === element.designKey) {
       return element
     }
     if (item.children) {
-      return { ...item, children: setCurrentByKey(item.children, element) }
+      return { ...item, children: setCurrentByElement(item.children, element) }
     }
     return item
   })
