@@ -30,6 +30,7 @@ const props = defineProps<{
 
 const emits = defineEmits<{
   save: [json: T]
+  init: [editor: JsonEditorType]
 }>()
 
 // 初始化时移除 designKey 显示
@@ -39,6 +40,7 @@ const designInstance = useDesignInstance()
 
 const onInit = (editor: JsonEditorType) => {
   autoComplete(editor, props.customGetCompletionItems, designInstance.schema)
+  emits('init', editor)
 }
 
 const onModeChange = (newMode: string, editor: JsonEditorType) => {
