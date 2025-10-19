@@ -1,4 +1,5 @@
 # JsonSchema in Detail
+
 Low-code form development is all about JSON Schema. Understanding this protocol allows us to develop forms more efficiently and quickly.
 
 ## Structure
@@ -45,30 +46,28 @@ After understanding the simple example above, here are all the optional configur
 
 ### Overall Form Configuration
 
-| Parameter             | Type                                | Default     | Description           |
-| --------------------- | ----------------------------------- | ----------- | --------------------- |
-| labelWidth             | `number`                            | `150`       | Width of the form label |
-| labelAlign             | `'left' \| 'top' \| 'right' `       | `'right'`   | Alignment of the form label |
-| size                   | `'small' \| 'default' \| 'large'`   | `'default'` | Size of the form items |
-| hideRequiredAsterisk   | `boolean`                           | `false`     | Hide the required asterisk in the form |
-| labelBold              | `boolean`                           | `false`     | Make the form label bold |
-| disabled               | `boolean`                           | `false`     | Disable all form items |
+| Parameter            | Type                              | Default     | Description                            |
+| -------------------- | --------------------------------- | ----------- | -------------------------------------- |
+| labelWidth           | `number`                          | `150`       | Width of the form label                |
+| labelAlign           | `'left' \| 'top' \| 'right' `     | `'right'`   | Alignment of the form label            |
+| size                 | `'small' \| 'default' \| 'large'` | `'default'` | Size of the form items                 |
+| hideRequiredAsterisk | `boolean`                         | `false`     | Hide the required asterisk in the form |
+| labelBold            | `boolean`                         | `false`     | Make the form label bold               |
+| disabled             | `boolean`                         | `false`     | Disable all form items                 |
 
 ### Form Item Configuration
 
-| Parameter       | Type               | Default | Description                                      |
-| --------------- | ------------------ | ------- | ------------------------------------------------ |
-| label           | `string`           | -       | Label                                            |
-| name            | `string`           | -       | Unique identifier, i.e., the value key            |
-| component       | `string`           | -       | Component to be used                             |
-| props           | object             | {}      | Props passed to the component, refer to the element-plus documentation for details |
-| required        | `boolean`          | false   | Whether the form item is required                 |
-| initialValue   | any                | -       | Initial value of the form item                    |
-| help            | `string`           | -       | Help information for the form item                |
-| hidden          | `boolean`          | false   | Whether to hide the form item                     |
-| hideLabel       | `boolean`          | false   | Whether to hide the label of the form item        |
-| rules           | `FormRule[]`       | -       | Validation rules for the form item, specific to the Input component |
-| children        | `FormItemType[]`   | -       | Data for nested form items, used for containers, cards, grids, etc. |
-| change          | `FormChange[]`     | -       | Configuration for triggering actions when the value of the form item changes |
-| designKey       | `string`           | -       | Key used by the form designer, automatically generated |
-
+| Parameter    | Type             | Default | Description                                                                        |
+| ------------ | ---------------- | ------- | ---------------------------------------------------------------------------------- |
+| label        | `string`         | -       | Label                                                                              |
+| name         | `string`         | -       | Unique identifier, i.e., the value key                                             |
+| component    | `string`         | -       | Component to be used                                                               |
+| props        | object           | {}      | Props passed to the component, refer to the element-plus documentation for details |
+| required     | `boolean`        | false   | Whether the form item is required                                                  |
+| initialValue | any              | -       | Initial value of the form item                                                     |
+| help         | `string`         | -       | Help information for the form item                                                 |
+| hidden       | `boolean`        | false   | Whether to hide the form item                                                      |
+| hideLabel    | `boolean`        | false   | Whether to hide the label of the form item                                         |
+| rules        | `FormRule[]`     | -       | Validation rules for the form item, specific to the Input component                |
+| children     | `FormItemType[]` | -       | Data for nested form items, used for containers, cards, grids, etc.                |
+| change       | `FormChange[]`   | -       | Configuration for triggering actions when the value of the form item changes       |

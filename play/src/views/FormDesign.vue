@@ -5,6 +5,7 @@
     style="height: 100vh"
     @save="onSave"
     @add="onAdd"
+    ref="formDesignRef"
   />
 </template>
 
@@ -12,6 +13,8 @@
 import { ElMessage } from 'element-plus'
 import type { FormElement, FormSchema } from 'form-craft'
 import { onMounted, ref } from 'vue'
+
+const formDesignRef = ref()
 
 const schema = ref<FormSchema>({
   labelWidth: 150,
@@ -34,7 +37,7 @@ const onAdd = (element: FormElement) => {
 onMounted(() => {
   const localSchema = localStorage.getItem('schema')
   if (localSchema) {
-    schema.value = JSON.parse(localSchema)
+    formDesignRef.value?.updateSchema(JSON.parse(localSchema))
   }
 })
 </script>
