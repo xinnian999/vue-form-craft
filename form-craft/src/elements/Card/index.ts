@@ -12,9 +12,14 @@ export default {
   attrSchema: {
     size: 'small',
     labelAlign: 'top',
+    initialValues: {
+      props: {
+        header: '卡片'
+      }
+    },
     items: [
       { label: '唯一标识', component: 'Input', name: 'name' },
-      { label: '卡片标题', component: 'Input', name: 'props.header', initialValue: '卡片' }
+      { label: '卡片标题', component: 'Input', name: 'props.header' }
     ]
   }
 } satisfies FormElement
