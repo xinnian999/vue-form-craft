@@ -1,6 +1,6 @@
 <template>
   <div class="vfc-formList">
-    <CanvasGroup v-if="formInstance.design" :list="children" class="layoutRender" />
+    <CanvasGroup v-if="formInstance.design" v-model="fields" class="layoutRender" />
 
     <div v-else>
       <template v-if="mode === 'inline'">
@@ -64,7 +64,7 @@
           :prop="item.name"
           :label="item.label"
           :key="item.name"
-          v-for="item in children"
+          v-for="item in fields"
           v-bind="pickBy(item, Boolean)"
           :formatter="formatter"
         />
@@ -106,13 +106,13 @@
 
 <script setup lang="ts">
 import type { TableColumnCtx } from 'element-plus'
-import { isEqual, isString, pickBy } from 'lodash'
-import { computed, h, onMounted, provide, ref, watch } from 'vue'
+import { cloneDeep, isEqual, isString, pickBy } from 'lodash'
+import { computed, h, onMounted, provide, ref, watch, watchEffect } from 'vue'
 import { CanvasGroup, FormItem } from '@/components'
 import { useFormInstance } from '@/hooks'
 import Icon from '@/Icon/index.vue'
 import type { FormItemType } from '@/types'
-import { deepParse } from '@/utils'
+import { deepParse, getCurrentByKey, setCurrentByElement } from '@/utils'
 
 interface Props {
   children: FormItemType[]
@@ -124,6 +124,7 @@ interface Props {
   title?: string
   name?: string
   disabled?: boolean
+  designKey?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -143,8 +144,32 @@ const cIndex = ref(0)
 
 const formInstance = useFormInstance()
 
+const fields = computed({
+  get() {
+    return props.children.value
+  },
+  set(val) {
+    const schema = cloneDeep(formInstance.schema)
+    const current = getCurrentByKey(schema.items, props.designKey)
+
+    const newItems = setCurrentByElement(schema.items, {
+      ...current,
+      children: val
+    })
+
+    formInstance.updateFormSchema({
+      ...formInstance.schema,
+      items: newItems
+    })
+  }
+})
+
+// watchEffect(() => {
+//   console.log(fields.value)
+// })
+
 const parseFields = (index: number) =>
-  deepParse(props.children, { $item: list.value[index], $index: index })
+  deepParse(fields.value, { $item: list.value[index], $index: index })
 
 const isMax = computed(() => {
   return list.value.length >= props.maxLines
@@ -190,14 +215,14 @@ watch(list, (newVal, oldVal) => {
 
   cIndex.value = changeIndex
 
-  if (!props.children.some((item) => item.change)) return
+  if (!fields.value.some((item) => item.change)) return
 
-  const fields = parseFields(changeIndex)
+  const parseFieldsData = parseFields(changeIndex)
 
   const newChangeData = newVal[changeIndex] || {}
   const oldChangeData = oldVal[changeIndex] || {}
 
-  fields.forEach((item: FormItemType) => {
+  parseFieldsData.forEach((item: FormItemType) => {
     if (
       item.change &&
       oldChangeData &&

@@ -153,6 +153,7 @@ const config = computed(() => {
 const formItemProps = computed(() => {
   const newProps: Record<string, any> = {
     name: props.name,
+    designKey: props.designKey,
     ...props.props
   }
 
