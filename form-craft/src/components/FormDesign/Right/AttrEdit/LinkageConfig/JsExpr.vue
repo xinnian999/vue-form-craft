@@ -40,18 +40,15 @@ const onSave = (json: FormSchema) => {
 const onInit = (editor: JsonEditorType) => {
   const currentName = designInstance.current!.name
 
+  // const currentPlaceholder = '请输入'
+
   setTimeout(() => {
     // 跳转到当前字段位置
     if (currentName) {
-      const aceEditor = (editor as any)?.aceEditor
+      const aceEditor = editor.aceEditor
       if (aceEditor) {
-        const session = aceEditor.session
-
-        // 1. 先折叠所有节点
-        session.foldAll()
-
-        // 2. 搜索目标字段
-        aceEditor.find(`"name": "${currentName}"`, {
+        // 先找到唯一的 currentName
+        aceEditor.find(currentName, {
           backwards: false,
           wrap: true,
           caseSensitive: true,
@@ -59,12 +56,14 @@ const onInit = (editor: JsonEditorType) => {
           regExp: false
         })
 
-        // 3. 展开包含目标字段的节点
-        const cursorPosition = aceEditor.getCursorPosition()
-        if (cursorPosition) {
-          // 展开当前行及其父级
-          session.unfold(cursorPosition.row, true)
-        }
+        // 然后从当前位置继续查找 currentPlaceholder
+        // aceEditor.find(currentPlaceholder, {
+        //   backwards: true,
+        //   wrap: true,
+        //   caseSensitive: true,
+        //   wholeWord: false,
+        //   regExp: false
+        // })
       }
     }
   }, 100)
