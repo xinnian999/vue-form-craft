@@ -5,15 +5,15 @@
         <Title.render :title="item.title" italic type="h4" />
       </template>
 
-      <FormItemGroup :list="item.children!" />
+      <FormItemGroup v-model="item.children!" />
     </ElCollapseItem>
   </ElCollapse>
 </template>
 
 <script setup lang="ts">
+import { onMounted, ref, watch } from 'vue'
 import { FormItemGroup } from '@/components'
 import { Title } from '@/elements'
-import { onMounted, ref, watch } from 'vue'
 import type { FormItemType } from '@/types'
 
 type CollapseItem = {
@@ -23,21 +23,21 @@ type CollapseItem = {
   children?: FormItemType[]
 }
 
-const props = defineProps<{
-  children: CollapseItem[]
-}>()
+const children = defineModel<CollapseItem[]>({
+  default: () => []
+})
 
 const activeKey = ref<string[]>([])
 
 onMounted(() => {
-  activeKey.value = props.children.filter((item) => item.checked).map((item) => item.name)
+  activeKey.value = children.value.filter((item) => item.checked).map((item) => item.name)
 })
 
 // 补children
 watch(
-  () => props.children,
+  () => children.value,
   () => {
-    props.children.forEach((item) => {
+    children.value.forEach((item) => {
       if (!item.children) {
         item.children = []
       }

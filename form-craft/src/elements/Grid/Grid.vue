@@ -1,14 +1,13 @@
 <template>
-  <FormItemGroup class="form-item-grid" :style="gridStyle" :list="children" />
+  <FormItemGroup class="form-item-grid" :style="gridStyle" v-model="children" />
 </template>
 
 <script setup lang="ts">
-import { FormItemGroup } from '@/components'
 import { computed } from 'vue'
+import { FormItemGroup } from '@/components'
 import type { FormItemType } from '@/types'
 
 const props = defineProps<{
-  children: FormItemType[]
   columns: number
   rowGap: number
   columnGap: number
@@ -20,6 +19,10 @@ const gridStyle = computed(() => ({
   'row-gap': props.rowGap + 'px',
   'column-gap': props.columnGap + 'px'
 }))
+
+const children = defineModel<FormItemType[]>({
+  default: () => []
+})
 </script>
 
 <style lang="scss">

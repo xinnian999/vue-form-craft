@@ -1,6 +1,6 @@
 <template>
   <ElCard v-bind="$attrs">
-    <FormItemGroup :list="children" />
+    <FormItemGroup v-model="children" />
   </ElCard>
 </template>
 
@@ -8,7 +8,7 @@
 import { FormItemGroup } from '@/components'
 import type { FormItemType } from '@/types'
 
-defineProps<{
-  children: FormItemType[]
-}>()
+const children = defineModel<FormItemType[]>({
+  default: () => []
+})
 </script>

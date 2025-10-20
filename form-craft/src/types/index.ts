@@ -168,6 +168,7 @@ export interface FormInstance extends FormRenderProps {
   initialValues: Record<string, Record<string, any>>
   context: Record<string, any>
   updateFormValues: (values: Record<string, any>) => void
+  updateFormSchema: (newSchema: FormSchema) => void
   updateSelectData: (key: string, value: Record<string, any>) => void
   updateInitialValues: (values: Record<string, any>) => void
   validate: () => FormValidationResult | undefined

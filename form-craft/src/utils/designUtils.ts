@@ -16,7 +16,10 @@ export const getCurrentByKey = (items: FormItemType[], designKey: string): FormI
   }, null)
 }
 
-export const setCurrentByElement = (items: FormItemType[], element: FormItemType): FormItemType[] => {
+export const setCurrentByElement = (
+  items: FormItemType[],
+  element: FormItemType
+): FormItemType[] => {
   return items.map((item) => {
     if (item.designKey === element.designKey) {
       return element

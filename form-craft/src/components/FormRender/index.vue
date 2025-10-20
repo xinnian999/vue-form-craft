@@ -131,6 +131,10 @@ const updateInitialValues: FormInstance['updateInitialValues'] = (values) => {
   Object.assign(initialValues, values)
 }
 
+const updateFormSchema: FormInstance['updateFormSchema'] = (newSchema) => {
+  schema.value = newSchema
+}
+
 const instance = readonly({
   ...toRefs(props),
   formValues,
@@ -138,6 +142,7 @@ const instance = readonly({
   initialValues,
   context,
   updateFormValues,
+  updateFormSchema,
   updateSelectData,
   updateInitialValues,
   validate,
