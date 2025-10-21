@@ -10,8 +10,10 @@
 import { computed } from 'vue'
 import { CanvasGroup, FormItem } from '@/components'
 import { useDesignInstance, useFormInstance } from '@/hooks'
+import type { FormItemType } from '@/types'
 
 const props = defineProps<{
+  rootList?: FormItemType[]
   designKey: string
 }>()
 
@@ -21,11 +23,7 @@ const designInstance = useDesignInstance()
 
 const children = computed({
   get() {
-    const schema = formInstance.getSchema()
-
-    return props.designKey === 'root'
-      ? schema.items
-      : designInstance.getNodeByKey(props.designKey)?.children
+    return props.rootList || designInstance.getNodeByKey(props.designKey)?.children
   },
   set(value) {
     if (formInstance.design) {
