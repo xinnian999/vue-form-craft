@@ -1,21 +1,17 @@
 <template>
-  <FormItemGroup class="form-item-inline" :style="InlineStyle" v-model="children" />
+  <FormItemGroup class="form-item-inline" :style="InlineStyle" :designKey="designKey" />
 </template>
 
 <script setup lang="ts">
 import { computed, type StyleValue } from 'vue'
 import { FormItemGroup } from '@/components'
-import type { FormItemType } from '@/types'
 
 const props = defineProps<{
   align: 'center' | 'flex-start' | 'flex-end' | 'space-between' | 'space-around' | 'space-evenly'
   autoWrap: boolean
   gap: number
+  designKey: string
 }>()
-
-const children = defineModel<FormItemType[]>({
-  default: () => []
-})
 
 const InlineStyle = computed<StyleValue>(() => ({
   width: '100%',
