@@ -21,7 +21,17 @@ const emptyJsonSchema: FormSchema = cloneDeep(initJsonSchema)
 
 <script setup lang="ts">
 import { cloneDeep, isEqual } from 'lodash'
-import { computed, onBeforeMount, onBeforeUnmount, provide, reactive, ref, toRefs, useTemplateRef, watch } from 'vue'
+import {
+  computed,
+  onBeforeMount,
+  onBeforeUnmount,
+  provide,
+  reactive,
+  ref,
+  toRefs,
+  useTemplateRef,
+  watch
+} from 'vue'
 import { $designInstance } from '@/symbol'
 import type {
   DesignInstance,
@@ -107,6 +117,11 @@ const handleHistoryForward = () => {
   }
 }
 
+// 监听全屏状态变化，同步fullScreen状态
+const handleFullscreenChange = () => {
+  fullScreen.value = !!document.fullscreenElement
+}
+
 const current = computed({
   get() {
     return getCurrentByKey(jsonSchema.value.items, currentKey.value)
@@ -132,11 +147,6 @@ watch(fullScreen, (val) => {
     document.exitFullscreen()
   }
 })
-
-// 监听全屏状态变化，同步fullScreen状态
-const handleFullscreenChange = () => {
-  fullScreen.value = !!document.fullscreenElement
-}
 
 onBeforeMount(() => {
   // 如果jsonSchema和initJsonSchema不相等,说明传入了v-model

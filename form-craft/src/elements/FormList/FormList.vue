@@ -146,7 +146,8 @@ const formInstance = useFormInstance()
 
 const fields = computed({
   get() {
-    return props.children.value
+    const current = getCurrentByKey(formInstance.schema.items, props.designKey)
+    return current?.children || []
   },
   set(val) {
     const schema = cloneDeep(formInstance.schema)
