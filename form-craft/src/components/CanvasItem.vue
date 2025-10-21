@@ -80,7 +80,7 @@ const rightBottomActions = [
     name: 'copy-btn',
     handle: (element: FormItemType) => {
       const newList = copyItems(designInstance.schema.items, element.designKey!)
-      designInstance.updateSchema({ ...designInstance.schema, items: newList })
+      designInstance.setSchema({ ...designInstance.schema, items: newList })
     }
   },
   {
@@ -92,7 +92,7 @@ const rightBottomActions = [
         designInstance.schema.items,
         (item) => item.designKey !== element.designKey
       )
-      designInstance.updateSchema({ ...designInstance.schema, items: newList })
+      designInstance.setSchema({ ...designInstance.schema, items: newList })
     }
   }
 ]

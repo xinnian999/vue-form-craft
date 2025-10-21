@@ -37,7 +37,7 @@ const onAdd = (element: FormElement) => {
 onMounted(() => {
   const localSchema = localStorage.getItem('schema')
   if (localSchema) {
-    formDesignRef.value?.updateSchema(JSON.parse(localSchema))
+    formDesignRef.value?.setSchema(JSON.parse(localSchema))
   }
 })
 </script>

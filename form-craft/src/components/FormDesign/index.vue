@@ -74,9 +74,9 @@ const historyIndex = ref(-1)
  * 更新表单schema唯一方法
  *
  * 注意：外部如果想要记录历史，应该通过ref调用此方法，而不是直接修改v-model
- * 例如：formDesignRef.value.updateSchema(newSchema)
+ * 例如：formDesignRef.value.setSchema(newSchema)
  */
-const updateSchema: DesignInstance['updateSchema'] = (
+const setSchema: DesignInstance['setSchema'] = (
   schema = jsonSchema.value,
   { saveHistory = true, repir = true } = {}
 ) => {
@@ -106,14 +106,14 @@ const handleHistoryBack = () => {
     const newSchema = history.value[historyIndex.value]
       ? history.value[historyIndex.value]
       : initJsonSchema
-    updateSchema(newSchema, { saveHistory: false, repir: false })
+    setSchema(newSchema, { saveHistory: false, repir: false })
   }
 }
 
 const handleHistoryForward = () => {
   if (historyIndex.value < history.value.length - 1) {
     historyIndex.value++
-    updateSchema(history.value[historyIndex.value], { saveHistory: false, repir: false })
+    setSchema(history.value[historyIndex.value], { saveHistory: false, repir: false })
   }
 }
 
@@ -127,7 +127,7 @@ const current = computed({
     return getCurrentByKey(jsonSchema.value.items, currentKey.value)
   },
   set(element: FormItemType) {
-    updateSchema(
+    setSchema(
       {
         ...jsonSchema.value,
         items: setCurrentByElement(jsonSchema.value.items, element)
@@ -175,7 +175,7 @@ const instance = reactive<DesignInstance>({
   fullScreen,
   history,
   historyIndex,
-  updateSchema,
+  setSchema,
   updateCurrent(element) {
     current.value = element
   },
@@ -189,7 +189,7 @@ const instance = reactive<DesignInstance>({
     emits(name, params)
   },
   handleResetSchema: () => {
-    updateSchema(emptyJsonSchema)
+    setSchema(emptyJsonSchema)
   },
   handleHistoryBack,
   handleHistoryForward,

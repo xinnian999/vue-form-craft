@@ -21,7 +21,7 @@ const schema = computed({
     return designInstance.schema
   },
   set(value) {
-    designInstance.updateSchema(value)
+    designInstance.setSchema(value)
   }
 })
 </script>
