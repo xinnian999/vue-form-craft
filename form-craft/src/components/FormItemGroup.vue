@@ -23,7 +23,7 @@ const designInstance = useDesignInstance()
 
 const children = computed({
   get() {
-    return props.rootList || designInstance.getNodeByKey(props.designKey)?.children
+    return props.rootList || formInstance.getNodeByKey(props.designKey)?.children
   },
   set(value) {
     if (formInstance.design) {

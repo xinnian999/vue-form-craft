@@ -115,7 +115,6 @@ import type { FormItemType } from '@/types'
 import { deepParse } from '@/utils'
 
 interface Props {
-  children: FormItemType[]
   allowAdd?: boolean
   allowReduce?: boolean
   minLines?: number
@@ -128,7 +127,6 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  children: () => [],
   allowAdd: true,
   allowReduce: true,
   minLines: 0,
