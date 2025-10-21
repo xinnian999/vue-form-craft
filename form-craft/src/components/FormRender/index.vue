@@ -36,7 +36,9 @@ import { $formInstance } from '@/symbol'
 import type { FormInstance, FormRenderEmits, FormRenderProps, FormSchema } from '@/types'
 import { deepParse, getDataByPath, ns, schemaUtils, setDataByPath } from '@/utils'
 
-const props = defineProps<FormRenderProps>()
+const props = withDefaults(defineProps<FormRenderProps>(), {
+  schema: () => ({ items: [] })
+})
 
 const emits = defineEmits<FormRenderEmits>()
 
