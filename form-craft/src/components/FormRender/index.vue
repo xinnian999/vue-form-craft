@@ -8,7 +8,12 @@
   >
     <slot />
 
-    <FormItemGroup v-model="formItems" :empty-text="locale.canvas.emptyTip" :empty-size="18" />
+    <FormItemGroup
+      :list="formItems"
+      designKey="root"
+      :empty-text="locale.canvas.emptyTip"
+      :empty-size="18"
+    />
 
     <el-form-item v-if="!design && !read">
       <el-button v-if="schema.submitBtn" type="primary" @click="instance.submit" name="submit-btn">
@@ -38,35 +43,16 @@ const emits = defineEmits<FormRenderEmits>()
 // 注意：默认值必须使用工厂函数返回新对象，避免跨实例共享
 const formValues = defineModel<Record<string, any>>({ default: () => reactive({}) })
 
-const schema = defineModel<FormSchema>('schema', {
-  default: () =>
-    reactive({
-      labelWidth: 150,
-      labelAlign: 'right',
-      scrollToError: true,
-      size: 'default',
-      items: []
-    })
-})
-
 const locale = useLocale()
 
 const form = useTemplateRef<ElFormInstance>('form')
 
-const formItems = computed({
-  get() {
-    if (props.design) {
-      return schema.value.items
-    }
-
-    return deepParse(props.schema.items || [], context.value)
-  },
-  set(values) {
-    schema.value = {
-      ...schema.value,
-      items: values
-    }
+const formItems = computed(() => {
+  if (props.design) {
+    return props.schema.items
   }
+
+  return deepParse(props.schema.items || [], context.value)
 })
 
 const selectData = reactive<Record<string, Record<string, any>>>({})
@@ -131,11 +117,7 @@ const updateInitialValues: FormInstance['updateInitialValues'] = (values) => {
   Object.assign(initialValues, values)
 }
 
-const updateFormSchema: FormInstance['updateFormSchema'] = (newSchema) => {
-  schema.value = newSchema
-}
-
-const getSchema = () => schema.value
+const getSchema = () => props.schema
 
 const { getNodeByKey } = schemaUtils(getSchema)
 
@@ -146,12 +128,12 @@ const instance = readonly({
   initialValues,
   context,
   updateFormValues,
-  updateFormSchema,
   updateSelectData,
   updateInitialValues,
   validate,
   resetFields,
   submit,
+  getSchema,
   getNodeByKey
 })
 

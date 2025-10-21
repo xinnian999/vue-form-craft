@@ -2,7 +2,7 @@
   <div :class="ns('form-design-center')">
     <Actions />
     <div :class="ns('form-design-center-canvas')">
-      <FormRender v-model:schema="schema" design />
+      <FormRender :schema="schema" design />
     </div>
   </div>
 </template>

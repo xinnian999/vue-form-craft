@@ -1,11 +1,7 @@
 <template>
   <template v-if="formInstance.design || !hidden">
     <div v-if="config.type === 'layout'" :class="[ns('form-item'), props.class]" :style="style">
-      <component
-        :is="config.render"
-        v-bind="formItemProps"
-        v-model="formItemProps.children.value"
-      />
+      <component :is="config.render" v-bind="formItemProps" />
     </div>
 
     <el-form-item
@@ -157,25 +153,25 @@ const formItemProps = computed(() => {
     ...props.props
   }
 
-  if (props.children) {
-    newProps.children = computed({
-      get() {
-        return props.children
-      },
-      set(val) {
-        const schema = cloneDeep(formInstance.schema)
-        const newItems = setCurrentByElement(schema.items, {
-          ...props,
-          children: val
-        })
+  // if (props.children) {
+  //   newProps.children = computed({
+  //     get() {
+  //       return props.children
+  //     },
+  //     set(val) {
+  //       const schema = cloneDeep(formInstance.schema)
+  //       const newItems = setCurrentByElement(schema.items, {
+  //         ...props,
+  //         children: val
+  //       })
 
-        formInstance.updateFormSchema({
-          ...formInstance.schema,
-          items: newItems
-        })
-      }
-    })
-  }
+  //       formInstance.updateFormSchema({
+  //         ...formInstance.schema,
+  //         items: newItems
+  //       })
+  //     }
+  //   })
+  // }
 
   return newProps
 })

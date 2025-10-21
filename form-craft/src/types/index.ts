@@ -168,12 +168,12 @@ export interface FormInstance extends FormRenderProps {
   initialValues: Record<string, Record<string, any>>
   context: Record<string, any>
   updateFormValues: (values: Record<string, any>) => void
-  updateFormSchema: (newSchema: FormSchema) => void
   updateSelectData: (key: string, value: Record<string, any>) => void
   updateInitialValues: (values: Record<string, any>) => void
   validate: () => FormValidationResult | undefined
   resetFields: (names?: string[]) => void
   submit: () => void
+  getSchema: () => FormSchema
   getNodeByKey: (key: string) => FormItemType | null
 }
 
@@ -202,5 +202,5 @@ export interface DesignInstance extends Required<ToRefs<FormDesignProps>> {
   handleHistoryForward: () => void
   handleToggleFullScreen: () => void
   getNodeByKey: (key: string) => FormItemType | null
-  updateNodeByKey: (key: string, node: Partial<FormItemType>) => void
+  updateNodeByKey: (key: string, node: Record<string, any>) => void
 }

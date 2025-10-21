@@ -21,9 +21,9 @@ const schemaUtils = (get: () => FormSchema, set: DesignInstance['setSchema'] = (
     return getNode(schema.items, designKey)
   }
 
-  const updateNodeByKey = (designKey: string, newNodeData: Partial<FormItemType>) => {
+  const updateNodeByKey = (designKey: string, newNodeData: Record<string, any>) => {
     const schema = get()
-    const oldNode = getNode(schema.items, designKey)
+    const oldNode = designKey === 'root' ? schema : getNode(schema.items, designKey)
     if (oldNode) {
       Object.assign(oldNode, newNodeData)
       set(schema, { saveHistory: false, repir: false })
