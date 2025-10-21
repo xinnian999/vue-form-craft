@@ -174,6 +174,7 @@ export interface FormInstance extends FormRenderProps {
   validate: () => FormValidationResult | undefined
   resetFields: (names?: string[]) => void
   submit: () => void
+  getNodeByKey: (key: string) => FormItemType | null
 }
 
 export interface FormDesignProps {
@@ -200,4 +201,6 @@ export interface DesignInstance extends Required<ToRefs<FormDesignProps>> {
   handleHistoryBack: () => void
   handleHistoryForward: () => void
   handleToggleFullScreen: () => void
+  getNodeByKey: (key: string) => FormItemType | null
+  updateNodeByKey: (key: string, node: Partial<FormItemType>) => void
 }

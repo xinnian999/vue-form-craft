@@ -1,6 +1,6 @@
-import type { FormItemType, FormSchema } from '@/types'
+import type { DesignInstance, FormItemType, FormSchema } from '@/types'
 
-const schemaUtils = (get: () => FormSchema, set?: (schema: FormSchema) => void) => {
+const schemaUtils = (get: () => FormSchema, set: DesignInstance['setSchema'] = () => { }) => {
   const getNode = (items: FormItemType[], designKey: string): FormItemType | null => {
     return items.reduce<FormItemType | null>((acc, cur) => {
       if (cur.designKey === designKey) {
@@ -21,8 +21,18 @@ const schemaUtils = (get: () => FormSchema, set?: (schema: FormSchema) => void) 
     return getNode(schema.items, designKey)
   }
 
+  const updateNodeByKey = (designKey: string, newNodeData: Partial<FormItemType>) => {
+    const schema = get()
+    const oldNode = getNode(schema.items, designKey)
+    if (oldNode) {
+      Object.assign(oldNode, newNodeData)
+      set(schema, { saveHistory: false, repir: false })
+    }
+  }
+
   return {
-    getNodeByKey
+    getNodeByKey,
+    updateNodeByKey
   }
 }
 

@@ -106,13 +106,13 @@
 
 <script setup lang="ts">
 import type { TableColumnCtx } from 'element-plus'
-import { cloneDeep, isEqual, isString, pickBy } from 'lodash'
-import { computed, h, onMounted, provide, ref, watch, watchEffect } from 'vue'
+import { isEqual, isString, pickBy } from 'lodash'
+import { computed, h, onMounted, provide, ref, watch } from 'vue'
 import { CanvasGroup, FormItem } from '@/components'
-import { useFormInstance } from '@/hooks'
+import { useDesignInstance, useFormInstance } from '@/hooks'
 import Icon from '@/Icon/index.vue'
 import type { FormItemType } from '@/types'
-import { deepParse, getCurrentByKey, setCurrentByElement } from '@/utils'
+import { deepParse } from '@/utils'
 
 interface Props {
   children: FormItemType[]
@@ -142,32 +142,23 @@ const list = defineModel<Record<string, any>[]>({ default: [] })
 
 const cIndex = ref(0)
 
+const designInstance = useDesignInstance()
+
 const formInstance = useFormInstance()
 
 const fields = computed({
   get() {
-    const current = getCurrentByKey(formInstance.schema.items, props.designKey)
-    return current?.children || []
+    const node = formInstance.getNodeByKey(props.designKey!)
+    return node?.children || []
   },
   set(val) {
-    const schema = cloneDeep(formInstance.schema)
-    const current = getCurrentByKey(schema.items, props.designKey)
-
-    const newItems = setCurrentByElement(schema.items, {
-      ...current,
-      children: val
-    })
-
-    formInstance.updateFormSchema({
-      ...formInstance.schema,
-      items: newItems
-    })
+    if (formInstance.design) {
+      designInstance.updateNodeByKey(props.designKey!, {
+        children: val
+      })
+    }
   }
 })
-
-// watchEffect(() => {
-//   console.log(fields.value)
-// })
 
 const parseFields = (index: number) =>
   deepParse(fields.value, { $item: list.value[index], $index: index })

@@ -125,23 +125,14 @@ const handleFullscreenChange = () => {
   fullScreen.value = !!document.fullscreenElement
 }
 
-const { getNodeByKey } = schemaUtils(getSchema, setSchema)
+const { getNodeByKey, updateNodeByKey } = schemaUtils(getSchema, setSchema)
 
 const current = computed({
   get() {
     return getNodeByKey(currentKey.value)
   },
   set(element: FormItemType) {
-    setSchema(
-      {
-        ...jsonSchema.value,
-        items: setCurrentByElement(jsonSchema.value.items, element)
-      },
-      {
-        saveHistory: false,
-        repir: false
-      }
-    )
+    updateNodeByKey(currentKey.value, element)
   }
 })
 
@@ -200,7 +191,9 @@ const instance = reactive<DesignInstance>({
   handleHistoryForward,
   handleToggleFullScreen() {
     fullScreen.value = !fullScreen.value
-  }
+  },
+  getNodeByKey,
+  updateNodeByKey
 })
 
 provide($designInstance, instance)

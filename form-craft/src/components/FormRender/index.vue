@@ -29,7 +29,7 @@ import { FormItemGroup } from '@/components'
 import { useLocale } from '@/hooks'
 import { $formInstance } from '@/symbol'
 import type { FormInstance, FormRenderEmits, FormRenderProps, FormSchema } from '@/types'
-import { deepParse, getDataByPath, ns, setDataByPath } from '@/utils'
+import { deepParse, getDataByPath, ns, schemaUtils, setDataByPath } from '@/utils'
 
 const props = defineProps<FormRenderProps>()
 
@@ -135,6 +135,10 @@ const updateFormSchema: FormInstance['updateFormSchema'] = (newSchema) => {
   schema.value = newSchema
 }
 
+const getSchema = () => schema.value
+
+const { getNodeByKey } = schemaUtils(getSchema)
+
 const instance = readonly({
   ...toRefs(props),
   formValues,
@@ -147,7 +151,8 @@ const instance = readonly({
   updateInitialValues,
   validate,
   resetFields,
-  submit
+  submit,
+  getNodeByKey
 })
 
 provide($formInstance, instance)
