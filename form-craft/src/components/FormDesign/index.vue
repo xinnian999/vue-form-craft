@@ -27,6 +27,7 @@ import {
   onBeforeUnmount,
   provide,
   reactive,
+  readonly,
   ref,
   toRefs,
   useTemplateRef,
@@ -40,7 +41,7 @@ import type {
   FormItemType,
   FormSchema
 } from '@/types'
-import { getCurrentByKey, ns, repirJsonSchema, setCurrentByElement } from '@/utils'
+import { getCurrentByKey, ns, repirJsonSchema, schemaUtils, setCurrentByElement } from '@/utils'
 import Center from './Center/index.vue'
 import Left from './Left/index.vue'
 import Right from './Right/index.vue'
@@ -69,6 +70,8 @@ const fullScreen = ref(false)
 const history = ref<FormSchema[]>([])
 
 const historyIndex = ref(-1)
+
+const getSchema = () => jsonSchema.value
 
 /**
  * 更新表单schema唯一方法
@@ -122,9 +125,11 @@ const handleFullscreenChange = () => {
   fullScreen.value = !!document.fullscreenElement
 }
 
+const { getNodeByKey } = schemaUtils(getSchema, setSchema)
+
 const current = computed({
   get() {
-    return getCurrentByKey(jsonSchema.value.items, currentKey.value)
+    return getNodeByKey(currentKey.value)
   },
   set(element: FormItemType) {
     setSchema(
