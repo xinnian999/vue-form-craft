@@ -13,7 +13,7 @@ import { useDesignInstance, useFormInstance } from '@/hooks'
 import type { FormItemType } from '@/types'
 
 const props = defineProps<{
-  rootList?: FormItemType[]
+  list?: FormItemType[]
   designKey: string
 }>()
 
@@ -23,7 +23,7 @@ const designInstance = useDesignInstance()
 
 const children = computed({
   get() {
-    return props.rootList || formInstance.getNodeByKey(props.designKey)?.children
+    return props.list || formInstance.getNodeByKey(props.designKey)?.children
   },
   set(value) {
     if (formInstance.design) {

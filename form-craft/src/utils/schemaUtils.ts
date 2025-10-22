@@ -1,6 +1,6 @@
 import type { DesignInstance, FormItemType, FormSchema } from '@/types'
 
-const schemaUtils = (get: () => FormSchema, set: DesignInstance['setSchema'] = () => { }) => {
+const schemaUtils = (get: () => FormSchema, set: DesignInstance['setSchema'] = () => {}) => {
   const getNode = (items: FormItemType[], designKey: string): FormItemType | null => {
     return items.reduce<FormItemType | null>((acc, cur) => {
       if (cur.designKey === designKey) {

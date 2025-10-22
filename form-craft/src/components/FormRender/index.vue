@@ -9,7 +9,7 @@
     <slot />
 
     <FormItemGroup
-      :rootList="formItems"
+      :list="formItems"
       designKey="root"
       :empty-text="locale.canvas.emptyTip"
       :empty-size="18"
