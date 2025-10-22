@@ -119,10 +119,6 @@ const updateInitialValues: FormInstance['updateInitialValues'] = (values) => {
   Object.assign(initialValues, values)
 }
 
-const getSchema = () => props.schema
-
-const { getNodeByKey } = schemaUtils(getSchema)
-
 const instance = readonly({
   ...toRefs(props),
   formValues,
@@ -134,9 +130,7 @@ const instance = readonly({
   updateInitialValues,
   validate,
   resetFields,
-  submit,
-  getSchema,
-  getNodeByKey
+  submit
 })
 
 provide($formInstance, instance)

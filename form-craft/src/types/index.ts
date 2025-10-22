@@ -173,8 +173,6 @@ export interface FormInstance extends FormRenderProps {
   validate: () => FormValidationResult | undefined
   resetFields: (names?: string[]) => void
   submit: () => void
-  getSchema: () => FormSchema
-  getNodeByKey: (key: string) => FormItemType | null
 }
 
 export interface FormDesignProps {

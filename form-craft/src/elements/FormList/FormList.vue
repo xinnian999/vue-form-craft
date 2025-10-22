@@ -124,6 +124,7 @@ interface Props {
   name?: string
   disabled?: boolean
   designKey?: string
+  children?: FormItemType[]
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -146,8 +147,7 @@ const formInstance = useFormInstance()
 
 const fields = computed({
   get() {
-    const node = formInstance.getNodeByKey(props.designKey!)
-    return node?.children || []
+    return props.children || []
   },
   set(val) {
     if (formInstance.design) {

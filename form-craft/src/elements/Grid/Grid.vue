@@ -1,16 +1,23 @@
 <template>
-  <FormItemGroup class="form-item-grid" :style="gridStyle" :designKey="designKey" />
+  <FormItemGroup
+    class="form-item-grid"
+    :style="gridStyle"
+    :list="children"
+    :designKey="designKey"
+  />
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
 import { FormItemGroup } from '@/components'
+import type { FormItemType } from '@/types'
 
 const props = defineProps<{
   columns: number
   rowGap: number
   columnGap: number
   designKey: string
+  children?: FormItemType[]
 }>()
 
 const gridStyle = computed(() => ({

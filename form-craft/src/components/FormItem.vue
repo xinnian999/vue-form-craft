@@ -1,7 +1,7 @@
 <template>
   <template v-if="formInstance.design || !hidden">
     <div v-if="config.type === 'layout'" :class="[ns('form-item'), props.class]" :style="style">
-      <component :is="config.render" v-bind="formItemProps" />
+      <component :is="config.render" v-bind="formItemProps" :children="props.children" />
     </div>
 
     <el-form-item
@@ -65,14 +65,7 @@ import { computed, onBeforeMount, reactive, watch } from 'vue'
 import { useElements, useFormInstance } from '@/hooks'
 import Icon from '@/Icon/index.vue'
 import type { FormItemType } from '@/types'
-import {
-  getDataByPath,
-  isRegexString,
-  ns,
-  parseRegexString,
-  setCurrentByElement,
-  setDataByPath
-} from '@/utils'
+import { getDataByPath, isRegexString, ns, parseRegexString, setDataByPath } from '@/utils'
 
 const props = defineProps<FormItemType>()
 
@@ -151,6 +144,10 @@ const formItemProps = computed(() => {
     name: props.name,
     designKey: props.designKey,
     ...props.props
+  }
+
+  if (config.value.component === 'FormList') {
+    newProps.children = props.children
   }
 
   // if (props.children) {
