@@ -10,11 +10,12 @@
 
 <script setup lang="ts">
 import JsonEditorType from 'jsoneditor'
+import { cloneDeep } from 'lodash'
 import { onMounted, ref } from 'vue'
 import { useDesignInstance } from '@/hooks'
 import type { FormSchema } from '@/types'
 import type { GetCompletionItems } from '@/types/complete'
-import { ns, removeDesignKeys, restoreDesignKeys } from '@/utils'
+import { ns } from '@/utils'
 import JsonEditor from '../JsonEditor.vue'
 import autoComplete from './autoComplete'
 
@@ -45,18 +46,11 @@ const onModeChange = (newMode: string, editor: JsonEditorType) => {
 }
 
 const handleSave = () => {
-  // 保存时恢复 designKey 字段
-  const restoredData = restoreDesignKeys(data.value, props.json) as FormSchema
-  emits('save', restoredData)
+  emits('save', cloneDeep(data.value))
 }
 
 const handleReset = () => {
-  if (location.href.includes('designKey=true')) {
-    data.value = props.json
-    return
-  }
-
-  data.value = removeDesignKeys(props.json) as FormSchema
+  data.value = cloneDeep(props.json)
 }
 
 onMounted(() => {
