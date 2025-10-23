@@ -1,11 +1,6 @@
 <template>
   <div :class="ns('save-json-edit')">
-    <JsonEditor
-      v-model="data as Record<string, any>"
-      v-bind="$attrs"
-      @init="onInit"
-      @modeChange="onModeChange"
-    />
+    <JsonEditor v-model="data" v-bind="$attrs" @init="onInit" @modeChange="onModeChange" />
     <div class="footer">
       <el-button @click="handleSave" type="primary">保存更改</el-button>
       <el-button @click="handleReset">重置</el-button>
@@ -13,9 +8,9 @@
   </div>
 </template>
 
-<script setup lang="ts" generic="T extends Record<string, any> = FormSchema">
+<script setup lang="ts">
 import JsonEditorType from 'jsoneditor'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useDesignInstance } from '@/hooks'
 import type { FormSchema } from '@/types'
 import type { GetCompletionItems } from '@/types/complete'
@@ -24,17 +19,17 @@ import JsonEditor from '../JsonEditor.vue'
 import autoComplete from './autoComplete'
 
 const props = defineProps<{
-  json: T
+  json: FormSchema
   customGetCompletionItems?: GetCompletionItems
 }>()
 
 const emits = defineEmits<{
-  save: [json: T]
+  save: [json: FormSchema]
   init: [editor: JsonEditorType]
 }>()
 
 // 初始化时移除 designKey 显示
-const data = ref<T>(removeDesignKeys(props.json) as T)
+const data = ref<FormSchema>({ items: [] })
 
 const designInstance = useDesignInstance()
 
@@ -51,13 +46,22 @@ const onModeChange = (newMode: string, editor: JsonEditorType) => {
 
 const handleSave = () => {
   // 保存时恢复 designKey 字段
-  const restoredData = restoreDesignKeys(data.value, props.json)
-  emits('save', restoredData as T)
+  const restoredData = restoreDesignKeys(data.value, props.json) as FormSchema
+  emits('save', restoredData)
 }
 
 const handleReset = () => {
-  data.value = removeDesignKeys(props.json)
+  if (location.href.includes('designKey=true')) {
+    data.value = props.json
+    return
+  }
+
+  data.value = removeDesignKeys(props.json) as FormSchema
 }
+
+onMounted(() => {
+  handleReset()
+})
 </script>
 
 <style scoped lang="scss">

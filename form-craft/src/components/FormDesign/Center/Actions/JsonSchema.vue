@@ -14,7 +14,6 @@
           <Icon name="script" style="margin-right: 5px" />
           <span>在线编辑</span>
         </template>
-        <!-- @vue-generic {import('@/types').FormSchema} -->
         <JsonSchemaEdit :json="json" @save="onSave" />
       </el-tab-pane>
       <el-tab-pane name="ts" lazy>
@@ -70,13 +69,13 @@ import { jsJsonSchema, jsVue, tsJsonSchema, tsVue } from './config'
 import help from './help.md?raw'
 import 'md-editor-v3/lib/style.css'
 import type { FormSchema } from '@/types'
-import { removeDesignKeys, repirItems } from '@/utils'
+import { repirItems } from '@/utils'
 
 const designInstance = useDesignInstance()
 
 const locale = useLocale()
 
-const json = computed(() => removeDesignKeys(designInstance.schema) as FormSchema)
+const json = computed(() => designInstance.schema)
 
 const formValues = ref({})
 

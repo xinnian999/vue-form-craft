@@ -1,38 +1,41 @@
 <template>
   <el-tabs v-bind="$attrs" v-model="activeKey">
-    <el-tab-pane v-for="item in children" :key="item.name" v-bind="item">
-      <FormItemGroup :list="item.children" />
+    <el-tab-pane v-for="item in children" :key="item.name" :label="item.label" :name="item.name">
+      <FormItemGroup :list="item.children" :designKey="item.designKey!" />
     </el-tab-pane>
   </el-tabs>
 </template>
 
 <script setup lang="ts">
-import { FormItemGroup } from '@/components'
 import { onMounted, ref, watch } from 'vue'
+import { FormItemGroup } from '@/components'
+import { useDesignInstance } from '@/hooks'
 import type { FormItemType } from '@/types'
-
-type tabItem = {
-  label: string
-  name: string
-  disabled?: boolean
-  children: FormItemType[]
-}
+import { generateDesignKey } from '@/utils'
 
 const props = defineProps<{
-  children: tabItem[]
+  children: FormItemType[]
   defaultKey: string
 }>()
 
 const activeKey = ref<string>('')
 
+const designInstance = useDesignInstance()
+
 // 补children
 watch(
   () => props.children,
   () => {
-    props.children.forEach((item) => {
-      if (!item.children) {
-        item.children = []
-      }
+    designInstance.updateNodeByKey(props.defaultKey, {
+      children: props.children.map((item) => {
+        if (!item.children) {
+          item.children = []
+        }
+        if (!item.designKey) {
+          item.designKey = generateDesignKey()
+        }
+        return item
+      })
     })
   }
 )

@@ -5,7 +5,7 @@
         <Title.render :title="item.title" italic type="h4" />
       </template>
 
-      <FormItemGroup v-model="item.children!" />
+      <FormItemGroup :list="item.children!" :designKey="item.designKey!" />
     </ElCollapseItem>
   </ElCollapse>
 </template>
@@ -16,28 +16,22 @@ import { FormItemGroup } from '@/components'
 import { Title } from '@/elements'
 import type { FormItemType } from '@/types'
 
-type CollapseItem = {
-  title: string
-  name: string
-  checked?: boolean
-  children?: FormItemType[]
-}
-
-const children = defineModel<CollapseItem[]>({
-  default: () => []
-})
+const props = defineProps<{
+  children: FormItemType[]
+  defaultKey: string
+}>()
 
 const activeKey = ref<string[]>([])
 
 onMounted(() => {
-  activeKey.value = children.value.filter((item) => item.checked).map((item) => item.name)
+  activeKey.value = props.children.filter((item) => item.checked).map((item) => item.name)
 })
 
 // 补children
 watch(
-  () => children.value,
+  () => props.children,
   () => {
-    children.value.forEach((item) => {
+    props.children.forEach((item) => {
       if (!item.children) {
         item.children = []
       }

@@ -2,6 +2,10 @@ import { cloneDeep } from 'lodash'
 import type { FormItemType, FormSchema } from '@/types'
 import getRandomId from './getRandomId'
 
+export const generateDesignKey = () => {
+  return `design-${getRandomId(4)}`
+}
+
 export const getCurrentByKey = (items: FormItemType[], designKey: string): FormItemType | null => {
   return items.reduce<FormItemType | null>((all, item) => {
     if (item.designKey === designKey) {
@@ -74,7 +78,7 @@ export const repirItems = (items: FormItemType[]) => {
   return items.map((item: any) => {
     const data: FormItemType = {
       ...item,
-      designKey: item.designKey || `design-${getRandomId(4)}`,
+      designKey: item.designKey || generateDesignKey(),
       name: item.name || `form-${getRandomId(4)}`
     }
 
