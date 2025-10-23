@@ -6,6 +6,10 @@ export const generateDesignKey = () => {
   return `design-${getRandomId(4)}`
 }
 
+export const generateName = () => {
+  return `form-${getRandomId(4)}`
+}
+
 export const getCurrentByKey = (items: FormItemType[], designKey: string): FormItemType | null => {
   return items.reduce<FormItemType | null>((all, item) => {
     if (item.designKey === designKey) {
@@ -58,8 +62,8 @@ export const copyItems = (list: FormItemType[], id: string): FormItemType[] => {
     if (current.designKey === id) {
       const newItem = {
         ...cloneDeep(current),
-        designKey: `form-${getRandomId(4)}`,
-        name: `${current.name}-${getRandomId(2)}`
+        designKey: generateDesignKey(),
+        name: generateName()
       }
       if (current.children) {
         newItem.children = copyChildren(current.children)
@@ -79,7 +83,7 @@ export const repirItems = (items: FormItemType[]) => {
     const data: FormItemType = {
       ...item,
       designKey: item.designKey || generateDesignKey(),
-      name: item.name || `form-${getRandomId(4)}`
+      name: item.name || generateName()
     }
 
     if (data.children) {

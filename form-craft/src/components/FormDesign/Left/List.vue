@@ -43,7 +43,7 @@ import { computed, ref } from 'vue'
 import draggable from 'vuedraggable-es-fix'
 import { useDesignInstance, useElements, useLang } from '@/hooks'
 import type { FormElement, FormItemType } from '@/types'
-import { getRandomId, ns } from '@/utils'
+import { generateDesignKey, generateName, getRandomId, ns } from '@/utils'
 import parseMenus from './menus'
 
 const designInstance = useDesignInstance()
@@ -61,8 +61,8 @@ const menus = computed(() =>
 const onClone = (source: FormElement) => {
   const parse: FormItemType = {
     component: source.component,
-    designKey: `design${getRandomId(8)}`,
-    name: `${source.component.toLowerCase()}${getRandomId(8)}`
+    designKey: generateDesignKey(),
+    name: generateName()
   }
 
   if (source.type === 'layout') {
