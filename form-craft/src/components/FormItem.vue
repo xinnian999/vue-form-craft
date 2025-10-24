@@ -146,29 +146,9 @@ const formItemProps = computed(() => {
     ...props.props
   }
 
-  if (config.value.component === 'FormList') {
+  if (['ObjGroup', 'FormList'].includes(config.value.component)) {
     newProps.children = props.children
   }
-
-  // if (props.children) {
-  //   newProps.children = computed({
-  //     get() {
-  //       return props.children
-  //     },
-  //     set(val) {
-  //       const schema = cloneDeep(formInstance.schema)
-  //       const newItems = setCurrentByElement(schema.items, {
-  //         ...props,
-  //         children: val
-  //       })
-
-  //       formInstance.updateFormSchema({
-  //         ...formInstance.schema,
-  //         items: newItems
-  //       })
-  //     }
-  //   })
-  // }
 
   return newProps
 })

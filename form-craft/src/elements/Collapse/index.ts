@@ -13,7 +13,10 @@ export default {
     size: 'small',
     labelAlign: 'top',
     initialValues: {
-      children: [{ title: '面板1', name: 'name1', children: [] }] as any
+      children: [
+        { label: '面板1', name: 'name1', props: { checked: true }, children: [] },
+        { label: '面板2', name: 'name2', children: [] }
+      ]
     },
     items: [
       { label: '唯一标识', component: 'Input', name: 'name' },
@@ -42,7 +45,7 @@ export default {
           {
             label: '默认展开',
             component: 'Switch',
-            name: 'checked'
+            name: 'props.checked'
           }
         ],
         props: {

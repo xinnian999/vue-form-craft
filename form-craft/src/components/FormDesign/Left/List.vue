@@ -43,7 +43,7 @@ import { computed, ref } from 'vue'
 import draggable from 'vuedraggable-es-fix'
 import { useDesignInstance, useElements, useLang } from '@/hooks'
 import type { FormElement, FormItemType } from '@/types'
-import { generateDesignKey, generateName, getRandomId, ns, repirNode } from '@/utils'
+import { generateDesignKey, generateName, ns, repirNode } from '@/utils'
 import parseMenus from './menus'
 
 const designInstance = useDesignInstance()
