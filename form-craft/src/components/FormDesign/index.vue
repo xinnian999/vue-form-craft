@@ -40,7 +40,7 @@ import type {
   FormItemType,
   FormSchema
 } from '@/types'
-import { ns, repirJsonSchema, schemaUtils } from '@/utils'
+import { ns, repirJsonSchema } from '@/utils'
 import Center from './Center/index.vue'
 import Left from './Left/index.vue'
 import Right from './Right/index.vue'
@@ -71,6 +71,10 @@ const history = ref<FormSchema[]>([])
 const historyIndex = ref(-1)
 
 const getSchema = () => jsonSchema.value
+
+// const setSchemaOnly = (schema: FormSchema) => {
+//   jsonSchema.value = schema
+// }
 
 /**
  * 更新表单schema唯一方法
@@ -124,7 +128,34 @@ const handleFullscreenChange = () => {
   fullScreen.value = !!document.fullscreenElement
 }
 
-const { getNodeByKey, updateNodeByKey } = schemaUtils(getSchema, setSchema)
+const getNodeByKey = (designKey: string): FormItemType | null => {
+  const schema = getSchema()
+
+  const getNode = (items: FormItemType[], designKey: string): FormItemType | null => {
+    return items.reduce<FormItemType | null>((acc, cur) => {
+      if (cur.designKey === designKey) {
+        return cur
+      }
+      if (cur.children) {
+        const res = getNode(cur.children, designKey)
+        if (res) return res
+      }
+
+      return acc
+    }, null)
+  }
+
+  return getNode(schema.items, designKey)
+}
+
+const updateNodeByKey = (designKey: string, newNodeData: Record<string, any>) => {
+  const schema = getSchema()
+  const oldNode = designKey === 'root' ? schema : getNodeByKey(designKey)
+  if (oldNode) {
+    Object.assign(oldNode, newNodeData)
+    setSchema(schema, { saveHistory: false, repir: false })
+  }
+}
 
 const current = computed({
   get() {
@@ -198,4 +229,12 @@ const instance = reactive<DesignInstance>({
 provide($designInstance, instance)
 
 defineExpose(instance)
+
+// watch(
+//   () => history.value,
+//   () => {
+//     console.log(history.value)
+//   },
+//   { deep: true }
+// )
 </script>

@@ -33,8 +33,8 @@ import { computed, onMounted, provide, reactive, readonly, toRefs, useTemplateRe
 import { FormItemGroup } from '@/components'
 import { useLocale } from '@/hooks'
 import { $formInstance } from '@/symbol'
-import type { FormInstance, FormRenderEmits, FormRenderProps, FormSchema } from '@/types'
-import { deepParse, getDataByPath, ns, schemaUtils, setDataByPath } from '@/utils'
+import type { FormInstance, FormRenderEmits, FormRenderProps } from '@/types'
+import { deepParse, getDataByPath, ns, setDataByPath } from '@/utils'
 
 const props = withDefaults(defineProps<FormRenderProps>(), {
   schema: () => ({ items: [] })
