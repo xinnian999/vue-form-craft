@@ -9,9 +9,10 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
 import { FormItemGroup } from '@/components'
-import { useDesignInstance } from '@/hooks'
+// import { useDesignInstance } from '@/hooks'
 import type { FormItemType } from '@/types'
-import { generateDesignKey } from '@/utils'
+
+// import { generateDesignKey } from '@/utils'
 
 const props = defineProps<{
   children: FormItemType[]
@@ -20,25 +21,25 @@ const props = defineProps<{
 
 const activeKey = ref<string>('')
 
-const designInstance = useDesignInstance()
+// const designInstance = useDesignInstance()
 
 // 补children
-watch(
-  () => props.children,
-  () => {
-    designInstance.updateNodeByKey(props.defaultKey, {
-      children: props.children.map((item) => {
-        if (!item.children) {
-          item.children = []
-        }
-        if (!item.designKey) {
-          item.designKey = generateDesignKey()
-        }
-        return item
-      })
-    })
-  }
-)
+// watch(
+//   () => props.children,
+//   () => {
+//     designInstance.updateNodeByKey(props.defaultKey, {
+//       children: props.children.map((item) => {
+//         if (!item.children) {
+//           item.children = []
+//         }
+//         if (!item.designKey) {
+//           item.designKey = generateDesignKey()
+//         }
+//         return item
+//       })
+//     })
+//   }
+// )
 
 onMounted(() => {
   if (props.defaultKey) {
