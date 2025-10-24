@@ -27,7 +27,6 @@ import {
   onBeforeUnmount,
   provide,
   reactive,
-  readonly,
   ref,
   toRefs,
   useTemplateRef,
@@ -41,7 +40,7 @@ import type {
   FormItemType,
   FormSchema
 } from '@/types'
-import { getCurrentByKey, ns, repirJsonSchema, schemaUtils, setCurrentByElement } from '@/utils'
+import { ns, repirJsonSchema, schemaUtils } from '@/utils'
 import Center from './Center/index.vue'
 import Left from './Left/index.vue'
 import Right from './Right/index.vue'

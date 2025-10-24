@@ -10,35 +10,6 @@ export const generateName = () => {
   return `form-${getRandomId(4)}`
 }
 
-export const getCurrentByKey = (items: FormItemType[], designKey: string): FormItemType | null => {
-  return items.reduce<FormItemType | null>((all, item) => {
-    if (item.designKey === designKey) {
-      return item
-    }
-    if (item.children) {
-      const res = getCurrentByKey(item.children, designKey)
-      if (res) return res
-    }
-
-    return all
-  }, null)
-}
-
-export const setCurrentByElement = (
-  items: FormItemType[],
-  element: FormItemType
-): FormItemType[] => {
-  return items.map((item) => {
-    if (item.designKey === element.designKey) {
-      return element
-    }
-    if (item.children) {
-      return { ...item, children: setCurrentByElement(item.children, element) }
-    }
-    return item
-  })
-}
-
 const copyChildren = (children: FormItemType[]) => {
   return children.map((child) => {
     const data = { ...cloneDeep(child), designKey: `form-${getRandomId(4)}`, name: getRandomId(8) }
