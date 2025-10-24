@@ -1,4 +1,5 @@
 import type { DesignInstance, FormItemType, FormSchema } from '@/types'
+import { repirJsonSchema } from './designUtils'
 
 const schemaUtils = (get: () => FormSchema, set: DesignInstance['setSchema'] = () => {}) => {
   const getNode = (items: FormItemType[], designKey: string): FormItemType | null => {
@@ -30,9 +31,18 @@ const schemaUtils = (get: () => FormSchema, set: DesignInstance['setSchema'] = (
     }
   }
 
+  const repirSchema = () => {
+    const schema = get()
+
+    const repirSchema = repirJsonSchema(schema)
+
+    set(repirSchema, { saveHistory: false, repir: false })
+  }
+
   return {
     getNodeByKey,
-    updateNodeByKey
+    updateNodeByKey,
+    repirSchema
   }
 }
 
