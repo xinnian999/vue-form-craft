@@ -26,15 +26,15 @@ import JsonEditorType from 'jsoneditor'
 import { JsonSchemaEdit } from '@/components'
 import { useDesignInstance } from '@/hooks'
 import type { FormSchema } from '@/types'
-import { repirItems } from '@/utils'
+import { repirJsonSchema } from '@/utils'
 
 const designInstance = useDesignInstance()
 
 const visible = defineModel<boolean>()
 
 const onSave = (json: FormSchema) => {
-  const items = repirItems(json.items)
-  designInstance.setSchema({ ...json, items })
+  const jsonSchema = repirJsonSchema(json)
+  designInstance.setSchema(jsonSchema)
 }
 
 const onInit = (editor: JsonEditorType) => {

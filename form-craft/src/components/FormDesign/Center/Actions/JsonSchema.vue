@@ -69,7 +69,7 @@ import { jsJsonSchema, jsVue, tsJsonSchema, tsVue } from './config'
 import help from './help.md?raw'
 import 'md-editor-v3/lib/style.css'
 import type { FormSchema } from '@/types'
-import { repirItems } from '@/utils'
+import { repirJsonSchema } from '@/utils'
 
 const designInstance = useDesignInstance()
 
@@ -82,7 +82,7 @@ const formValues = ref({})
 const visible = defineModel<boolean>()
 
 const onSave = (json: FormSchema) => {
-  const repirJson = repirItems(json.items)
-  designInstance.setSchema({ ...json, items: repirJson })
+  const repirJson = repirJsonSchema(json)
+  designInstance.setSchema(repirJson)
 }
 </script>

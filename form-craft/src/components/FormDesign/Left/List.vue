@@ -43,7 +43,7 @@ import { computed, ref } from 'vue'
 import draggable from 'vuedraggable-es-fix'
 import { useDesignInstance, useElements, useLang } from '@/hooks'
 import type { FormElement, FormItemType } from '@/types'
-import { generateDesignKey, generateName, getRandomId, ns } from '@/utils'
+import { generateDesignKey, generateName, getRandomId, ns, repirNode } from '@/utils'
 import parseMenus from './menus'
 
 const designInstance = useDesignInstance()
@@ -73,7 +73,7 @@ const onClone = (source: FormElement) => {
     Object.assign(parse, source.attrSchema.initialValues)
   }
 
-  return parse
+  return repirNode(parse)
 }
 
 const handleDbClick = (element: FormElement) => {

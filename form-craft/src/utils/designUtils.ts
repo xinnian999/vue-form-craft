@@ -78,23 +78,41 @@ export const copyItems = (list: FormItemType[], id: string): FormItemType[] => {
   }, [])
 }
 
-export const repirItems = (items: FormItemType[]) => {
-  return items.map((item: any) => {
-    const data: FormItemType = {
-      ...item,
-      designKey: item.designKey || generateDesignKey(),
-      name: item.name || generateName()
-    }
+export const repirNode = ({
+  label,
+  name,
+  component,
+  props,
+  designKey,
+  ...rest
+}: FormItemType) => {
+  const newNode: FormItemType = {
+    label,
+    name: name || generateName(),
+    component,
+    props,
+    designKey: designKey || generateDesignKey(),
+    ...rest
+  }
 
-    if (data.children) {
-      data.children = repirItems(data.children)
-    }
+  console.log(JSON.stringify(newNode))
 
-    return data
-  })
+  return newNode
 }
 
 export const repirJsonSchema = (schema: FormSchema) => {
+  const repirItems = (items: FormItemType[]) => {
+    return items.map((item) => {
+      const node: FormItemType = repirNode(item)
+
+      if (node.children) {
+        node.children = repirItems(node.children)
+      }
+
+      return node
+    })
+  }
+
   return {
     ...schema,
     items: repirItems(schema.items)
