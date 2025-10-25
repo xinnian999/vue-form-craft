@@ -59,7 +59,7 @@ const emits = defineEmits<{
 
 const formDesignWrapper = useTemplateRef<HTMLDivElement>('formDesignWrapper')
 
-const jsonSchema = defineModel<FormSchema>({
+const modelValue = defineModel<FormSchema>({
   default: () => reactive(initJsonSchema)
 })
 
@@ -71,12 +71,12 @@ const history = ref<FormSchema[]>([])
 
 const historyIndex = ref(-1)
 
-const getSchema = () => jsonSchema.value
+const getSchema = () => modelValue.value
 
-const getSchemaClone = () => cloneDeep(jsonSchema.value)
+const getSchemaClone = () => cloneDeep(modelValue.value)
 
 const setSchema = (schema: FormSchema) => {
-  jsonSchema.value = schema
+  modelValue.value = schema
 }
 
 // 序列化schema
@@ -181,7 +181,7 @@ watch(fullScreen, (val) => {
 
 onBeforeMount(() => {
   // 如果jsonSchema和initJsonSchema不相等,说明传入了v-model
-  if (!isEqual(jsonSchema.value, initJsonSchema)) {
+  if (!isEqual(getSchema(), initJsonSchema)) {
     initJsonSchema = getSchemaClone() // 重新设置initJsonSchema
   }
 
@@ -198,7 +198,7 @@ const instance = reactive<DesignInstance>({
   ...toRefs(props),
   currentKey,
   hoverKey: '',
-  schema: jsonSchema,
+  schema: modelValue,
   current,
   rightTab: 'form',
   fullScreen,
