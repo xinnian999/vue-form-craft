@@ -23,6 +23,7 @@ const emptyJsonSchema: FormSchema = cloneDeep(initJsonSchema)
 import { cloneDeep, isEqual } from 'lodash'
 import {
   computed,
+  nextTick,
   onBeforeMount,
   onBeforeUnmount,
   provide,
@@ -72,38 +73,29 @@ const historyIndex = ref(-1)
 
 const getSchema = () => jsonSchema.value
 
-// const setSchemaOnly = (schema: FormSchema) => {
-//   jsonSchema.value = schema
-// }
+const getSchemaClone = () => cloneDeep(jsonSchema.value)
 
-/**
- * 更新表单schema唯一方法
- *
- * 注意：外部如果想要记录历史，应该通过ref调用此方法，而不是直接修改v-model
- * 例如：formDesignRef.value.setSchema(newSchema)
- */
-const setSchema: DesignInstance['setSchema'] = (
-  schema = jsonSchema.value,
-  { saveHistory = true, repir = true } = {}
-) => {
-  let newSchema = cloneDeep(schema)
+const setSchema = (schema: FormSchema) => {
+  jsonSchema.value = schema
+}
 
-  // 是否序列化schema
-  if (repir) {
-    newSchema = repirJsonSchema(schema)
+// 序列化schema
+const repirSchema = () => {
+  const schema = getSchema()
+  const newSchema = repirJsonSchema(schema)
+  setSchema(newSchema)
+}
+
+// 记录历史
+const recordHistory = async () => {
+  await nextTick()
+  const newSchema = getSchemaClone()
+  if (historyIndex.value < history.value.length - 1) {
+    // 如果改动的是历史，将截断之后的记录
+    history.value = history.value.slice(0, historyIndex.value + 1)
   }
-
-  // 本次更新是否记录历史
-  if (saveHistory) {
-    if (historyIndex.value < history.value.length - 1) {
-      // 如果改动的是历史，将截断之后的记录
-      history.value = history.value.slice(0, historyIndex.value + 1)
-    }
-    history.value.push(newSchema)
-    historyIndex.value = history.value.length - 1
-  }
-
-  jsonSchema.value = newSchema
+  history.value.push(newSchema)
+  historyIndex.value = history.value.length - 1
 }
 
 const handleHistoryBack = () => {
@@ -112,20 +104,29 @@ const handleHistoryBack = () => {
     const newSchema = history.value[historyIndex.value]
       ? history.value[historyIndex.value]
       : initJsonSchema
-    setSchema(newSchema, { saveHistory: false, repir: false })
+    setSchema(newSchema)
   }
 }
 
 const handleHistoryForward = () => {
   if (historyIndex.value < history.value.length - 1) {
     historyIndex.value++
-    setSchema(history.value[historyIndex.value], { saveHistory: false, repir: false })
+    setSchema(history.value[historyIndex.value])
   }
 }
 
 // 监听全屏状态变化，同步fullScreen状态
 const handleFullscreenChange = () => {
   fullScreen.value = !!document.fullscreenElement
+}
+
+// 提交一次修改schema。会序列化schema并记录历史。适合不频繁更新的场景
+const applySchema: DesignInstance['applySchema'] = (schema = getSchema()) => {
+  repirSchema()
+
+  setSchema(schema)
+
+  recordHistory()
 }
 
 const getNodeByKey = (designKey: string): FormItemType | null => {
@@ -149,11 +150,11 @@ const getNodeByKey = (designKey: string): FormItemType | null => {
 }
 
 const updateNodeByKey = (designKey: string, newNodeData: Record<string, any>) => {
-  const schema = getSchema()
+  const schema = getSchemaClone()
   const oldNode = designKey === 'root' ? schema : getNodeByKey(designKey)
   if (oldNode) {
     Object.assign(oldNode, newNodeData)
-    setSchema(schema, { saveHistory: false, repir: false })
+    applySchema(schema)
   }
 }
 
@@ -162,7 +163,11 @@ const current = computed({
     return getNodeByKey(currentKey.value)
   },
   set(element: FormItemType) {
-    updateNodeByKey(currentKey.value, element)
+    const oldNode = getNodeByKey(currentKey.value)
+    if (oldNode) {
+      Object.assign(oldNode, element)
+      setSchema(getSchema())
+    }
   }
 })
 
@@ -177,9 +182,7 @@ watch(fullScreen, (val) => {
 onBeforeMount(() => {
   // 如果jsonSchema和initJsonSchema不相等,说明传入了v-model
   if (!isEqual(jsonSchema.value, initJsonSchema)) {
-    const schema = repirJsonSchema(jsonSchema.value) // 序列化
-    initJsonSchema = cloneDeep(schema) // 重新设置initJsonSchema
-    jsonSchema.value = schema
+    initJsonSchema = getSchemaClone() // 重新设置initJsonSchema
   }
 
   // 监听全屏变化事件
@@ -201,7 +204,7 @@ const instance = reactive<DesignInstance>({
   fullScreen,
   history,
   historyIndex,
-  setSchema,
+  applySchema,
   updateCurrent(element) {
     current.value = element
   },
@@ -215,7 +218,7 @@ const instance = reactive<DesignInstance>({
     emits(name, params)
   },
   handleResetSchema: () => {
-    setSchema(emptyJsonSchema)
+    applySchema(emptyJsonSchema)
   },
   handleHistoryBack,
   handleHistoryForward,
@@ -223,18 +226,19 @@ const instance = reactive<DesignInstance>({
     fullScreen.value = !fullScreen.value
   },
   getNodeByKey,
-  updateNodeByKey
+  updateNodeByKey,
+  recordHistory
 })
 
 provide($designInstance, instance)
 
 defineExpose(instance)
 
-// watch(
-//   () => history.value,
-//   () => {
-//     console.log(history.value)
-//   },
-//   { deep: true }
-// )
+watch(
+  () => history.value,
+  () => {
+    console.log(history.value)
+  },
+  { deep: true }
+)
 </script>

@@ -31,6 +31,6 @@ import templates from '@/templates'
 const designInstance = useDesignInstance()
 
 const useTemplate = (schema: any) => {
-  designInstance.setSchema(schema)
+  designInstance.applySchema(schema)
 }
 </script>

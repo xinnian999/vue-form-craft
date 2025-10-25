@@ -83,6 +83,6 @@ const visible = defineModel<boolean>()
 
 const onSave = (json: FormSchema) => {
   const repirJson = repirJsonSchema(json)
-  designInstance.setSchema(repirJson)
+  designInstance.applySchema(repirJson)
 }
 </script>

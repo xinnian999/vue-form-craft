@@ -193,7 +193,7 @@ export interface DesignInstance extends Required<ToRefs<FormDesignProps>> {
   updateCurrent: (element: FormItemType) => void
   updateCurrentKey: (key: string) => void
   updateHoverKey: (key: string) => void
-  setSchema: (schema: FormSchema, options?: { saveHistory?: boolean; repir?: boolean }) => void
+  applySchema: (schema: FormSchema, options?: { recordHistory?: boolean; repir?: boolean }) => void
   handleResetSchema: () => void
   handleEmit: (event: any, ...args: any[]) => void
   handleHistoryBack: () => void
@@ -201,4 +201,5 @@ export interface DesignInstance extends Required<ToRefs<FormDesignProps>> {
   handleToggleFullScreen: () => void
   getNodeByKey: (key: string) => FormItemType | null
   updateNodeByKey: (key: string, node: Record<string, any>) => void
+  recordHistory: () => void
 }

@@ -118,7 +118,7 @@ const startSSE = async () => {
     })
 
     current.content = '✓ 已为您修改表单'
-    designInstance.setSchema(json)
+    designInstance.applySchema(json)
   } catch (err: any) {
     current.content = err
   } finally {
