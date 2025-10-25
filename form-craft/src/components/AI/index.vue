@@ -103,7 +103,7 @@ const startSSE = async () => {
         additional_messages: [
           {
             role: 'user',
-            content: JSON.stringify(designInstance.schema),
+            content: JSON.stringify(designInstance.getSchema()),
             content_type: 'text'
           },
           {

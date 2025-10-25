@@ -16,6 +16,7 @@ const form = computed({
     return designInstance.schema
   },
   set(value) {
+    console.log(value)
     designInstance.applySchema(value)
   }
 })

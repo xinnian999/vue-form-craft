@@ -13,7 +13,7 @@
         <div :style="previewStyle">
           <FormRender
             v-model="formValues"
-            :schema="designInstance.schema"
+            :schema="designInstance.getSchema()"
             :schemaContext="designInstance.schemaContext"
             ref="formRef"
             @finish="handleFinish"
@@ -25,7 +25,7 @@
         <div :style="previewStyle">
           <FormRender
             v-model="formValues"
-            :schema="{ ...designInstance.schema, labelSuffix: ':' }"
+            :schema="{ ...designInstance.getSchema(), labelSuffix: ':' }"
             :schemaContext="designInstance.schemaContext"
             read
           />
@@ -41,9 +41,9 @@
 </template>
 
 <script setup lang="ts">
+import { computed, ref } from 'vue'
 import { FormRender } from '@/components'
 import { useDesignInstance, useElements, useLocale } from '@/hooks'
-import { computed, ref } from 'vue'
 import type { FormInstance } from '@/types'
 
 const designInstance = useDesignInstance()

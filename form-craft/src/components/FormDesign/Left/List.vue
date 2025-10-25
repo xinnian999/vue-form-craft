@@ -78,9 +78,12 @@ const onClone = (source: FormElement) => {
 
 const handleDbClick = (element: FormElement) => {
   const item = onClone(element)
+
+  const schema = designInstance.getSchema()
+
   designInstance.applySchema({
-    ...designInstance.schema,
-    items: [...designInstance.schema.items, item]
+    ...schema,
+    items: [...schema.items, item]
   })
 }
 </script>

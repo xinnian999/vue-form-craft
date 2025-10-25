@@ -79,8 +79,9 @@ const rightBottomActions = [
     icon: 'copy',
     name: 'copy-btn',
     handle: (element: FormItemType) => {
-      const newList = copyItems(designInstance.schema.items, element.designKey!)
-      designInstance.applySchema({ ...designInstance.schema, items: newList })
+      const schema = designInstance.getSchema()
+      const newList = copyItems(schema.items, element.designKey!)
+      designInstance.applySchema({ ...schema, items: newList })
     }
   },
   {
@@ -88,11 +89,9 @@ const rightBottomActions = [
     name: 'delete-btn',
     bg: `var(--${ns('danger-color')})`,
     handle: (element: FormItemType) => {
-      const newList = recursionDelete(
-        designInstance.schema.items,
-        (item) => item.designKey !== element.designKey
-      )
-      designInstance.applySchema({ ...designInstance.schema, items: newList })
+      const schema = designInstance.getSchema()
+      const newList = recursionDelete(schema.items, (item) => item.designKey !== element.designKey)
+      designInstance.applySchema({ ...schema, items: newList })
     }
   }
 ]

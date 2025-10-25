@@ -75,7 +75,7 @@ const designInstance = useDesignInstance()
 
 const locale = useLocale()
 
-const json = computed(() => designInstance.schema)
+const json = computed(() => designInstance.getSchema())
 
 const formValues = ref({})
 

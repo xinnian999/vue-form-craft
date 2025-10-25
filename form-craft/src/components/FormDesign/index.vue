@@ -73,6 +73,7 @@ const historyIndex = ref(-1)
 
 const getSchema = () => modelValue.value
 
+// 获取一份不具有响应式的schema
 const getSchemaClone = () => cloneDeep(modelValue.value)
 
 const setSchema = (schema: FormSchema) => {
@@ -80,11 +81,11 @@ const setSchema = (schema: FormSchema) => {
 }
 
 // 序列化schema
-const repirSchema = () => {
-  const schema = getSchema()
-  const newSchema = repirJsonSchema(schema)
-  setSchema(newSchema)
-}
+// const repirSchema = () => {
+//   const schema = getSchema()
+//   const newSchema = repirJsonSchema(schema)
+//   setSchema(newSchema)
+// }
 
 // 记录历史
 const recordHistory = async () => {
@@ -122,36 +123,42 @@ const handleFullscreenChange = () => {
 
 // 提交一次修改schema。会序列化schema并记录历史。适合不频繁更新的场景
 const applySchema: DesignInstance['applySchema'] = (schema = getSchema()) => {
-  repirSchema()
-
-  setSchema(schema)
+  setSchema(repirJsonSchema(schema))
 
   recordHistory()
 }
 
+const getNode = (items: FormItemType[], designKey: string): FormItemType | null => {
+  return items.reduce<FormItemType | null>((acc, cur) => {
+    if (cur.designKey === designKey) {
+      return cur
+    }
+    if (cur.children) {
+      const res = getNode(cur.children, designKey)
+      if (res) return res
+    }
+
+    return acc
+  }, null)
+}
+
 const getNodeByKey = (designKey: string): FormItemType | null => {
   const schema = getSchema()
-
-  const getNode = (items: FormItemType[], designKey: string): FormItemType | null => {
-    return items.reduce<FormItemType | null>((acc, cur) => {
-      if (cur.designKey === designKey) {
-        return cur
-      }
-      if (cur.children) {
-        const res = getNode(cur.children, designKey)
-        if (res) return res
-      }
-
-      return acc
-    }, null)
-  }
 
   return getNode(schema.items, designKey)
 }
 
 const updateNodeByKey = (designKey: string, newNodeData: Record<string, any>) => {
   const schema = getSchemaClone()
-  const oldNode = designKey === 'root' ? schema : getNodeByKey(designKey)
+
+  let oldNode: FormSchema | FormItemType | null = null
+
+  if (designKey === 'root') {
+    oldNode = schema
+  } else {
+    oldNode = getNode(schema.items, designKey)
+  }
+
   if (oldNode) {
     Object.assign(oldNode, newNodeData)
     applySchema(schema)
@@ -204,6 +211,9 @@ const instance = reactive<DesignInstance>({
   fullScreen,
   history,
   historyIndex,
+  getSchema,
+  getSchemaClone,
+  setSchema,
   applySchema,
   updateCurrent(element) {
     current.value = element
