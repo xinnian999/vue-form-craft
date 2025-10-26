@@ -28,6 +28,7 @@ import {
   onBeforeUnmount,
   provide,
   reactive,
+  readonly,
   ref,
   toRefs,
   useTemplateRef,
@@ -71,10 +72,10 @@ const history = ref<FormSchema[]>([])
 
 const historyIndex = ref(-1)
 
-const getSchema = () => modelValue.value
+const getSchema = () => readonly(modelValue.value) as FormSchema
 
 // 获取一份不具有响应式的schema
-const getSchemaClone = () => cloneDeep(modelValue.value)
+const getSchemaClone = () => readonly(cloneDeep(modelValue.value)) as FormSchema
 
 const setSchema = (schema: FormSchema) => {
   modelValue.value = schema
