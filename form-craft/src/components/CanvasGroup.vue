@@ -55,7 +55,7 @@ const modelValue = defineModel<FormItemType[]>({
   default: () => []
 })
 
-const designInstance = useDesignInstance()
+const designInstance = useDesignInstance()!
 
 // 拖入后回调
 const onAdd = (e: Record<string, any>) => {

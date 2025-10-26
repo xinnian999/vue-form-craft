@@ -20,7 +20,7 @@ import FormEdit from './FormEdit.vue'
 
 const locale = useLocale()
 
-const designInstance = useDesignInstance()
+const designInstance = useDesignInstance()!
 
 watch(
   () => designInstance.current,

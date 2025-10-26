@@ -9,7 +9,7 @@ import { FormRender } from '@/components'
 import { useDesignInstance } from '@/hooks'
 import type { FormSchema } from '@/types'
 
-const designInstance = useDesignInstance()
+const designInstance = useDesignInstance()!
 
 const visible = defineModel<boolean>()
 

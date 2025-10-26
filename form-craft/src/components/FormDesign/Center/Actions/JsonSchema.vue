@@ -71,7 +71,7 @@ import 'md-editor-v3/lib/style.css'
 import type { FormSchema } from '@/types'
 import { repirJsonSchema } from '@/utils'
 
-const designInstance = useDesignInstance()
+const designInstance = useDesignInstance()!
 
 const locale = useLocale()
 

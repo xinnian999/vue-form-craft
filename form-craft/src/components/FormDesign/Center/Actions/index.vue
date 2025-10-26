@@ -68,7 +68,7 @@ type PreviewAction = {
   onClick: () => void
 }
 
-const designInstance = useDesignInstance()
+const designInstance = useDesignInstance()!
 
 const locale = useLocale()
 

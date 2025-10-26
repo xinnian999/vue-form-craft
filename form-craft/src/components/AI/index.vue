@@ -55,7 +55,7 @@ const inputLoading = ref(false)
 
 const list: Ref<BubbleItem[]> = ref([])
 
-const designInstance = useDesignInstance()
+const designInstance = useDesignInstance()!
 
 const { ai } = useGlobals()
 

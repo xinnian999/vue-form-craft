@@ -28,7 +28,7 @@ import { useDesignInstance } from '@/hooks'
 import type { FormSchema } from '@/types'
 import { repirJsonSchema } from '@/utils'
 
-const designInstance = useDesignInstance()
+const designInstance = useDesignInstance()!
 
 const visible = defineModel<boolean>()
 

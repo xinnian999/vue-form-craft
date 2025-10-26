@@ -32,7 +32,7 @@ const emits = defineEmits<{
 // 初始化时移除 designKey 显示
 const data = ref<FormSchema>({ items: [] })
 
-const designInstance = useDesignInstance()
+const designInstance = useDesignInstance()!
 
 const onInit = (editor: JsonEditorType) => {
   autoComplete(editor, props.customGetCompletionItems, designInstance.getSchema())

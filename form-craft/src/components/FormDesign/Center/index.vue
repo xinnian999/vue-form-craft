@@ -13,5 +13,5 @@ import { useDesignInstance } from '@/hooks'
 import { ns } from '@/utils'
 import Actions from './Actions/index.vue'
 
-const designInstance = useDesignInstance()
+const designInstance = useDesignInstance()!
 </script>

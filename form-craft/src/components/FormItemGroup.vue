@@ -28,11 +28,11 @@ const children = computed({
   set(value) {
     if (formInstance.design) {
       if (props.designKey === 'root') {
-        designInstance.updateNodeByKey('root', {
+        designInstance!.updateNodeByKey('root', {
           items: value
         })
       } else {
-        designInstance.updateNodeByKey(props.designKey, {
+        designInstance!.updateNodeByKey(props.designKey, {
           children: value
         })
       }

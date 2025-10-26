@@ -39,7 +39,7 @@ const children = computed({
   },
   set(val) {
     if (formInstance.design) {
-      designInstance.updateNodeByKey(props.designKey, {
+      designInstance!.updateNodeByKey(props.designKey, {
         children: val
       })
     }

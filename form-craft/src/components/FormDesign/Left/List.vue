@@ -46,7 +46,7 @@ import type { FormElement, FormItemType } from '@/types'
 import { generateDesignKey, generateName, ns, repirNode } from '@/utils'
 import parseMenus from './menus'
 
-const designInstance = useDesignInstance()
+const designInstance = useDesignInstance()!
 
 const elements = useElements()
 

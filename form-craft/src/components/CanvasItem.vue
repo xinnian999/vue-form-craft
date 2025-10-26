@@ -44,7 +44,7 @@ import FormItem from './FormItem.vue'
 
 const props = defineProps<{ data: FormItemType }>()
 
-const designInstance = useDesignInstance()
+const designInstance = useDesignInstance()!
 
 const elements = useElements()
 

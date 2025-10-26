@@ -18,7 +18,7 @@ describe('template valueLinkage', async () => {
 
     await satisfactionEl.setValue('111')
 
-    expect(wrapper.vm.formValues).toStrictEqual({
+    expect(wrapper.vm.getValues()).toStrictEqual({
       item1: '111',
       item2: '222',
       item3: '111元'

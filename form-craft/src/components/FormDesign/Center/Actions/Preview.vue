@@ -46,7 +46,7 @@ import { FormRender } from '@/components'
 import { useDesignInstance, useElements, useLocale } from '@/hooks'
 import type { FormInstance } from '@/types'
 
-const designInstance = useDesignInstance()
+const designInstance = useDesignInstance()!
 
 const { JsonEdit } = useElements()
 

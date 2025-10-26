@@ -28,7 +28,7 @@ import { useDesignInstance } from '@/hooks'
 import Icon from '@/Icon/index.vue'
 import templates from '@/templates'
 
-const designInstance = useDesignInstance()
+const designInstance = useDesignInstance()!
 
 const useTemplate = (schema: any) => {
   designInstance.applySchema(schema)

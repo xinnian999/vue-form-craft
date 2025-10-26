@@ -20,7 +20,7 @@ describe('template satisfaction', async () => {
 
     await wait()
 
-    expect(wrapper.vm.formValues).toStrictEqual({ satisfaction: 5 })
+    expect(wrapper.vm.getValues()).toStrictEqual({ satisfaction: 5 })
 
     expect(wrapper.find('.TextArea-improvementSuggestions').exists()).toBe(false)
   })
@@ -38,7 +38,7 @@ describe('template satisfaction', async () => {
 
     await satisfactionEl[satisfactionEl.length - 1].setValue(true)
 
-    expect(wrapper.vm.formValues).toStrictEqual({ satisfaction: 1 })
+    expect(wrapper.vm.getValues()).toStrictEqual({ satisfaction: 1 })
 
     expect(wrapper.find('.TextArea-improvementSuggestions').exists()).toBe(true)
   })

@@ -8,7 +8,7 @@ import { FormRender } from '@/components'
 import { useDesignInstance } from '@/hooks'
 import formOptions from './formOptions'
 
-const designInstance = useDesignInstance()
+const designInstance = useDesignInstance()!
 
 //修改schema除了items的其他属性
 const form = computed({
