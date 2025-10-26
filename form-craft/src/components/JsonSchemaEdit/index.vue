@@ -35,13 +35,13 @@ const data = ref<FormSchema>({ items: [] })
 const designInstance = useDesignInstance()
 
 const onInit = (editor: JsonEditorType) => {
-  autoComplete(editor, props.customGetCompletionItems, designInstance.schema)
+  autoComplete(editor, props.customGetCompletionItems, designInstance.getSchema())
   emits('init', editor)
 }
 
 const onModeChange = (newMode: string, editor: JsonEditorType) => {
   if (newMode === 'code') {
-    autoComplete(editor, props.customGetCompletionItems, designInstance.schema)
+    autoComplete(editor, props.customGetCompletionItems, designInstance.getSchema())
   }
 }
 

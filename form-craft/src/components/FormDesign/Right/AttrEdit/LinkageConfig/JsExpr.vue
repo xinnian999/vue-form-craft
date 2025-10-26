@@ -16,7 +16,7 @@
           >VueFormCraft表单联动</el-link
         >
       </p>
-      <JsonSchemaEdit :json="designInstance.schema" @save="onSave" @init="onInit" />
+      <JsonSchemaEdit :json="designInstance.getSchema()" @save="onSave" @init="onInit" />
     </div>
   </el-dialog>
 </template>

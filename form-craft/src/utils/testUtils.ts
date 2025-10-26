@@ -12,8 +12,8 @@ export function FormDesignTest() {
   const forwardBtn = wrapper.find(`.el-button[name="history-forward"]`)
   const clearBtn = wrapper.find(`.el-button[name="clear-design"]`)
 
-  const schema = computed(() => wrapper.vm.schema)
-  const itemsLength = computed(() => wrapper.vm.schema.items.length)
+  const schema = computed(() => wrapper.vm.getSchema())
+  const itemsLength = computed(() => wrapper.vm.getSchema().items.length)
 
   // 双击添加元素
   const dblclickAdd = async (menuName: string) => {

@@ -198,7 +198,6 @@ const instance = reactive<DesignInstance>({
   ...toRefs(props),
   currentKey,
   hoverKey: '',
-  schema: modelValue,
   current,
   rightTab: 'form',
   fullScreen,

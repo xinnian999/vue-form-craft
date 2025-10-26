@@ -186,7 +186,6 @@ export interface FormDesignProps {
 export interface DesignInstance extends Required<ToRefs<FormDesignProps>> {
   currentKey: Ref<string>
   hoverKey: string
-  schema: Ref<FormSchema>
   current: Ref<FormItemType | null>
   rightTab: 'attr' | 'form'
   fullScreen: Ref<boolean>
