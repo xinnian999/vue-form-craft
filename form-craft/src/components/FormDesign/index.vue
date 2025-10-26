@@ -237,11 +237,11 @@ provide($designInstance, instance)
 
 defineExpose(instance)
 
-watch(
-  () => history.value,
-  () => {
-    console.log(history.value)
-  },
-  { deep: true }
-)
+// watch(
+//   () => history.value,
+//   () => {
+//     console.log(history.value)
+//   },
+//   { deep: true }
+// )
 </script>

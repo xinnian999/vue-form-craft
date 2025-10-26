@@ -34,6 +34,11 @@ const schema = {
 describe('FormRender Attrs', () => {
   it('slot.default', () => {
     const wrapper = mount(FormRender, {
+      props: {
+        schema: {
+          items: []
+        }
+      },
       slots: {
         default: () => 'Hello, world!'
       }
