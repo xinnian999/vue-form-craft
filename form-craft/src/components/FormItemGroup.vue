@@ -7,36 +7,15 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import { CanvasGroup, FormItem } from '@/components'
-import { useDesignInstance, useFormInstance } from '@/hooks'
+import { useChildrenModel, useFormInstance } from '@/hooks'
 import type { FormItemType } from '@/types'
 
 const props = defineProps<{
-  list?: FormItemType[]
+  children?: FormItemType[]
   designKey: string
 }>()
 
 const formInstance = useFormInstance()
-
-const designInstance = useDesignInstance()
-
-const children = computed({
-  get() {
-    return props.list
-  },
-  set(value) {
-    if (formInstance.design) {
-      if (props.designKey === 'root') {
-        designInstance!.updateNodeByKey('root', {
-          items: value
-        })
-      } else {
-        designInstance!.updateNodeByKey(props.designKey, {
-          children: value
-        })
-      }
-    }
-  }
-})
+const children = useChildrenModel(props)
 </script>

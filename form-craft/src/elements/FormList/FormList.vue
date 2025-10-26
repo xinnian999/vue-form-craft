@@ -109,7 +109,7 @@ import type { TableColumnCtx } from 'element-plus'
 import { isEqual, isString, pickBy } from 'lodash'
 import { computed, h, onMounted, provide, ref, watch } from 'vue'
 import { CanvasGroup, FormItem } from '@/components'
-import { useDesignInstance, useFormInstance } from '@/hooks'
+import { useChildrenModel, useFormInstance } from '@/hooks'
 import Icon from '@/Icon/index.vue'
 import type { FormItemType } from '@/types'
 import { deepParse } from '@/utils'
@@ -123,7 +123,7 @@ interface Props {
   title?: string
   name?: string
   disabled?: boolean
-  designKey?: string
+  designKey: string
   children?: FormItemType[]
 }
 
@@ -141,22 +141,9 @@ const list = defineModel<Record<string, any>[]>({ default: [] })
 
 const cIndex = ref(0)
 
-const designInstance = useDesignInstance()
-
 const formInstance = useFormInstance()
 
-const fields = computed({
-  get() {
-    return props.children || []
-  },
-  set(val) {
-    if (formInstance.design) {
-      designInstance!.updateNodeByKey(props.designKey!, {
-        children: val
-      })
-    }
-  }
-})
+const fields = useChildrenModel(props)
 
 const parseFields = (index: number) =>
   deepParse(fields.value, { $item: list.value[index], $index: index })

@@ -2,7 +2,7 @@
   <FormItemGroup
     class="form-item-grid"
     :style="gridStyle"
-    :list="children"
+    :children="children"
     :designKey="designKey"
   />
 </template>

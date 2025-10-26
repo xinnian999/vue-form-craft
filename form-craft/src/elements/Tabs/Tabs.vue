@@ -1,7 +1,7 @@
 <template>
   <el-tabs v-bind="$attrs" v-model="activeKey">
     <el-tab-pane v-for="item in children" :key="item.name" :label="item.label" :name="item.name">
-      <FormItemGroup :list="item.children" :designKey="item.designKey!" />
+      <FormItemGroup :children="item.children" :designKey="item.designKey!" />
     </el-tab-pane>
   </el-tabs>
 </template>

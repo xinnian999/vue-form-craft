@@ -1,6 +1,6 @@
 <template>
   <ElCard v-bind="$attrs">
-    <FormItemGroup :list="children" :designKey="designKey" />
+    <FormItemGroup :children="children" :designKey="designKey" />
   </ElCard>
 </template>
 
