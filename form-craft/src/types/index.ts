@@ -163,7 +163,6 @@ export interface FormRenderEmits {
 }
 
 export interface FormInstance extends FormRenderProps {
-  formValues: Record<string, any>
   selectData: Record<string, Record<string, any>>
   initialValues: Record<string, Record<string, any>>
   context: Record<string, any>

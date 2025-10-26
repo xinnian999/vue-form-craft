@@ -49,14 +49,6 @@ const locale = useLocale()
 
 const form = useTemplateRef<ElFormInstance>('form')
 
-const formItems = computed(() => {
-  if (props.design) {
-    return props.schema.items
-  }
-
-  return deepParse(props.schema.items || [], context.value)
-})
-
 const selectData = reactive<Record<string, Record<string, any>>>({})
 
 const initialValues = reactive<Record<string, any>>({})
@@ -67,6 +59,14 @@ const context = computed(() => ({
   $selectData: selectData,
   $locale: locale.value
 }))
+
+const formItems = computed(() => {
+  if (props.design) {
+    return props.schema.items
+  }
+
+  return deepParse(props.schema.items || [], context.value)
+})
 
 // 支持从schema初始化默认值对象
 onMounted(() => {
@@ -130,7 +130,6 @@ const updateInitialValues: FormInstance['updateInitialValues'] = (values) => {
 
 const instance = readonly({
   ...toRefs(props),
-  formValues,
   selectData,
   initialValues,
   context,

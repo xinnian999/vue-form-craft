@@ -174,7 +174,9 @@ watch(
 
     if (!change || diff) return
 
-    let temp = cloneDeep(formInstance.formValues)
+    const formValues = formInstance.getValues()
+
+    let temp = cloneDeep(formValues)
 
     change.forEach(({ target, value, condition }) => {
       if (condition === false) return
@@ -184,7 +186,7 @@ watch(
         const targetArr = target.split('.*.')
         const listTarget = targetArr.pop()!
         const targetParse = targetArr.join('.')
-        const list = getDataByPath(formInstance.formValues, targetParse)
+        const list = getDataByPath(formValues, targetParse)
         if (Array.isArray(list)) {
           temp = setDataByPath(
             temp,

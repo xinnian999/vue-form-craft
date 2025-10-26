@@ -80,13 +80,6 @@ const setSchema = (schema: FormSchema) => {
   modelValue.value = schema
 }
 
-// 序列化schema
-// const repirSchema = () => {
-//   const schema = getSchema()
-//   const newSchema = repirJsonSchema(schema)
-//   setSchema(newSchema)
-// }
-
 // 记录历史
 const recordHistory = async () => {
   await nextTick()

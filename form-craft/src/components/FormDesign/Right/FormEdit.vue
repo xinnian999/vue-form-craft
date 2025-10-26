@@ -13,11 +13,10 @@ const designInstance = useDesignInstance()
 //修改schema除了items的其他属性
 const form = computed({
   get() {
-    return designInstance.schema
+    return designInstance.getSchema()
   },
   set(value) {
-    console.log(value)
-    designInstance.applySchema(value)
+    designInstance.setSchema(value)
   }
 })
 </script>
