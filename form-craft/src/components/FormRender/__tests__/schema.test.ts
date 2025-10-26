@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { ref } from 'vue'
 import { FormRender } from '@/components'
 import type { FormSchema } from '@/types'
+import { wait } from '@/utils'
 
 describe('FormRender Schema Test', () => {
   it('label', async () => {
@@ -111,14 +112,14 @@ describe('FormRender Schema Test', () => {
         }
       ]
     } satisfies FormSchema
+
     const wrapper = mount(FormRender, {
       props: {
-        modelValue: {},
-        'onUpdate:modelValue': (e: any) => wrapper.setProps({ modelValue: e }),
-        schema: schema
+        schema
       }
     })
-    await flushPromises()
-    expect(wrapper.props('modelValue')).toStrictEqual({ username: 'huyilin', password: 'qs666666' })
+    await wait(100)
+
+    expect(wrapper.vm.getValues()).toStrictEqual({ username: 'huyilin', password: 'qs666666' })
   })
 })

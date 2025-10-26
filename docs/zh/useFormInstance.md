@@ -50,7 +50,6 @@ const onChange = (value: TransferKey[]) => {
 | selectData          | `object`                                            | 选择类组件的数据源                                                                |
 | initialValues       | `object`                                            | 表单初始值                                                                        |
 | context             | `object`                                            | 表单联动变量                                                                      |
-| updateFormValues    | `(values: Record<string, any>) => void`             | 更新**表单值**的方法                                                              |
 | updateSelectData    | `(key: string, value: Record<string, any>) => void` | 更新**选择类组件的数据源**的方法                                                  |
 | updateInitialValues | ` (values: Record<string, any>) => void`            | 更新**表单初始值**的方法                                                          |
 | validate            | ` () => Promise<boolean>`                           | 校验表单                                                                          |

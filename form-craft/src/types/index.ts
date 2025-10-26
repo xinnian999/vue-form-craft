@@ -167,7 +167,10 @@ export interface FormInstance extends FormRenderProps {
   selectData: Record<string, Record<string, any>>
   initialValues: Record<string, Record<string, any>>
   context: Record<string, any>
-  updateFormValues: (values: Record<string, any>) => void
+  getValues: () => Record<string, any>
+  setValues: (values: Record<string, any>) => void
+  getFieldValue: (path: string) => any
+  setFieldValue: (path: string, value: any) => void
   updateSelectData: (key: string, value: Record<string, any>) => void
   updateInitialValues: (values: Record<string, any>) => void
   validate: () => FormValidationResult | undefined

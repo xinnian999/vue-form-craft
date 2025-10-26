@@ -81,6 +81,19 @@ onMounted(() => {
   }
 })
 
+const getValues: FormInstance['getValues'] = () => formValues.value
+
+const setValues: FormInstance['setValues'] = (values) => {
+  formValues.value = values
+}
+
+const getFieldValue: FormInstance['getFieldValue'] = (path) => getDataByPath(getValues(), path)
+
+const setFieldValue: FormInstance['setFieldValue'] = (path, value) => {
+  const newValues = setDataByPath(getValues(), path, value)
+  setValues(newValues)
+}
+
 const validate: FormInstance['validate'] = () => form.value!.validate()
 
 const submit: FormInstance['submit'] = () => {
@@ -107,10 +120,6 @@ const resetFields: FormInstance['resetFields'] = (names) => {
   }
 }
 
-const updateFormValues: FormInstance['updateFormValues'] = (values) => {
-  Object.assign(formValues.value, values)
-}
-
 const updateSelectData: FormInstance['updateSelectData'] = (key, value) => {
   selectData[key] = value
 }
@@ -125,7 +134,10 @@ const instance = readonly({
   selectData,
   initialValues,
   context,
-  updateFormValues,
+  getValues,
+  setValues,
+  getFieldValue,
+  setFieldValue,
   updateSelectData,
   updateInitialValues,
   validate,

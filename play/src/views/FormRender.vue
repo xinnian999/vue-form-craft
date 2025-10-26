@@ -1,9 +1,12 @@
 <template>
-  <FormRender :schema="schema" @finish="onFinish" />
+  <FormRender v-model="formValues" :schema="schema" @finish="onFinish" />
 </template>
 
 <script setup lang="ts">
 import type { FormSchema } from 'form-craft'
+import { ref } from 'vue'
+
+const formValues = ref({})
 
 const schema = {
   labelWidth: 150,
@@ -11,21 +14,25 @@ const schema = {
   size: 'default',
   scrollToError: true,
   submitBtn: true,
+  resetBtn: true,
   items: [
     {
       label: '用户名',
       component: 'Input',
       props: {
         placeholder: '请输入用户名',
-        clearable: true
+        clearable: true,
+        autocomplete: 'new-password'
       },
-      name: 'username'
+      name: 'username',
+      initialValue: 'huyilin'
     },
     {
       label: '密码',
       component: 'Password',
       props: {
-        placeholder: '请输入密码'
+        placeholder: '请输入密码',
+        autocomplete: 'new-password'
       },
       name: 'password'
     }
@@ -33,6 +40,6 @@ const schema = {
 } satisfies FormSchema
 
 const onFinish = (values: Record<string, any>) => {
-  alert(JSON.stringify(values, null, 2))
+  alert(JSON.stringify(formValues.value, null, 2))
 }
 </script>

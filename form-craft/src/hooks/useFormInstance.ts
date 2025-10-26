@@ -12,12 +12,11 @@ const useFormInstance = () => {
     selectData: {},
     initialValues: {},
     context: {},
-    updateFormValues: () => {},
-    updateSelectData: () => {},
-    updateInitialValues: () => {},
+    updateSelectData: () => { },
+    updateInitialValues: () => { },
     validate: () => Promise.reject(),
-    resetFields: () => {},
-    submit: () => {}
+    resetFields: () => { },
+    submit: () => { }
   })
 
   const instance = inject($formInstance, mockInstance)

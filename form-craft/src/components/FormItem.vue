@@ -85,11 +85,10 @@ const handleDialog = () => {
 
 const value = computed({
   get() {
-    return getDataByPath(formInstance.formValues, props.name)
+    return formInstance.getFieldValue(props.name)
   },
   set(val) {
-    const newValues = setDataByPath(formInstance.formValues, props.name, val)
-    formInstance.updateFormValues(newValues)
+    formInstance.setFieldValue(props.name, val)
   }
 })
 
@@ -163,7 +162,7 @@ onBeforeMount(() => {
 
     formInstance.updateInitialValues(newInitialValues)
 
-    value.value = props.initialValue
+    formInstance.setFieldValue(props.name, props.initialValue)
   }
 })
 
@@ -204,7 +203,7 @@ watch(
       temp = setDataByPath(temp, target, value)
     })
 
-    formInstance.updateFormValues(temp)
+    formInstance.setValues(temp)
   },
   { immediate: true }
 )
