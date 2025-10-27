@@ -29,7 +29,16 @@
 <script setup lang="ts">
 import type { FormInstance as ElFormInstance } from 'element-plus'
 import { cloneDeep, mergeWith } from 'lodash'
-import { computed, onMounted, provide, reactive, readonly, toRefs, useTemplateRef } from 'vue'
+import {
+  computed,
+  onMounted,
+  provide,
+  reactive,
+  readonly,
+  toRefs,
+  useSlots,
+  useTemplateRef
+} from 'vue'
 import { FormItemGroup } from '@/components'
 import { useLocale } from '@/hooks'
 import { $formInstance } from '@/symbol'
@@ -128,6 +137,10 @@ const updateInitialValues: FormInstance['updateInitialValues'] = (values) => {
   Object.assign(initialValues, values)
 }
 
+const slots = useSlots()
+
+console.log(slots)
+
 const instance = readonly({
   ...toRefs(props),
   selectData,
@@ -141,7 +154,8 @@ const instance = readonly({
   updateInitialValues,
   validate,
   resetFields,
-  submit
+  submit,
+  slots
 })
 
 provide($formInstance, instance)

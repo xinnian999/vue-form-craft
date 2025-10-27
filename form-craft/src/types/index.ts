@@ -1,5 +1,5 @@
 import type { FormValidationResult } from 'element-plus'
-import type { Component, Ref, ToRefs, VNode } from 'vue'
+import type { Component, Ref, Slots, ToRefs, VNode } from 'vue'
 
 export type TriggerType = 'blur' | 'change'
 
@@ -166,6 +166,7 @@ export interface FormInstance extends FormRenderProps {
   selectData: Record<string, Record<string, any>>
   initialValues: Record<string, Record<string, any>>
   context: Record<string, any>
+  slots: Slots
   getValues: () => Record<string, any>
   setValues: (values: Record<string, any>) => void
   getFieldValue: (path: string) => any

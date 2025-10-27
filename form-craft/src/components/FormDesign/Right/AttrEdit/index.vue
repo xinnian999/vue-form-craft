@@ -1,6 +1,8 @@
 <template>
   <div :class="ns('attr')">
-    <FormRender :key="current.designKey" v-model="current" :schema="attrSchema" />
+    <FormRender :key="current.designKey" v-model="current" :schema="attrSchema">
+      <template #label="{ text }"> {{ text }}111 </template>
+    </FormRender>
 
     <StyleConfig :key="current.designKey" v-model="currentProps" />
 

@@ -14,8 +14,13 @@
       :rules="computeRules"
     >
       <template #label v-if="!hideLabel">
-        <div :class="[ns('form-item-label'), label && `${name}-label`]">
-          <div :style="formInstance.schema.labelBold && 'font-weight: bold'">{{ label }}</div>
+        <!-- 优先使用自定义插槽 -->
+        <component v-if="formInstance.slots?.label" :is="formInstance.slots.label" :text="label" />
+        <!-- 默认 label 渲染 -->
+        <div v-else :class="[ns('form-item-label'), label && `${name}-label`]">
+          <div :style="formInstance.schema.labelBold && 'font-weight: bold'">
+            {{ label }}
+          </div>
           <el-tooltip effect="dark" :content="help" raw-content v-if="help">
             <Icon name="help" />
           </el-tooltip>
@@ -223,6 +228,7 @@ watch(
     white-space: nowrap;
     gap: 3px;
     align-items: center;
+    cursor: pointer;
 
     &-suffix {
       margin-left: 3px;
