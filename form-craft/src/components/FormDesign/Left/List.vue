@@ -65,9 +65,9 @@ const onClone = (source: FormElement) => {
     name: generateName()
   }
 
-  if (source.type === 'layout') {
-    parse.children = []
-  }
+  // if (source.type === 'layout') {
+  //   parse.children = []
+  // }
 
   if (source.attrSchema.initialValues) {
     Object.assign(parse, source.attrSchema.initialValues)

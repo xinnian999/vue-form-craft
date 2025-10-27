@@ -1,8 +1,8 @@
 <template>
-  <CanvasGroup v-if="formInstance.design" v-model="children" />
+  <CanvasGroup v-if="formInstance.design" v-model="childrenModel" />
 
   <div v-else>
-    <FormItem v-for="item in children" :key="item.name" v-bind="item" />
+    <FormItem v-for="item in childrenModel" :key="item.name" v-bind="item" />
   </div>
 </template>
 
@@ -17,5 +17,6 @@ const props = defineProps<{
 }>()
 
 const formInstance = useFormInstance()
-const children = useChildrenModel(props)
+
+const childrenModel = useChildrenModel(props)
 </script>
