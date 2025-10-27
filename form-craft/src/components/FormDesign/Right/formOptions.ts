@@ -3,6 +3,11 @@ import type { FormSchema } from '@/types'
 export default {
   size: 'small',
   labelAlign: 'top',
+  initialValues: {
+    labelWidth: 150,
+    size: 'small',
+    labelAlign: 'top'
+  },
   items: [
     {
       label: '表单宽度',
@@ -20,8 +25,7 @@ export default {
         min: 60,
         unit: 'px',
         step: 10
-      },
-      initialValue: 150
+      }
     },
     {
       label: 'label对齐方式',
@@ -34,8 +38,7 @@ export default {
           { label: '居上', value: 'top' },
           { label: '右对齐', value: 'right' }
         ]
-      },
-      initialValue: 'right'
+      }
     },
     {
       label: 'label后缀',
@@ -54,8 +57,7 @@ export default {
           { label: '较小', value: 'small' },
           { label: '较大', value: 'large' }
         ]
-      },
-      initialValue: 'default'
+      }
     },
     {
       label: '禁用整个表单',

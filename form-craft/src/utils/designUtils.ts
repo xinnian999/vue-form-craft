@@ -1,4 +1,5 @@
 import { cloneDeep } from 'lodash'
+import { initSchema } from '@/config'
 import type { FormItemType, FormSchema } from '@/types'
 import getRandomId from './getRandomId'
 
@@ -63,6 +64,8 @@ export const repirNode = ({ label, name, component, props, designKey, ...rest }:
 }
 
 export const repirJsonSchema = (schema: FormSchema) => {
+  const newSchema: FormSchema = { ...initSchema, ...schema }
+
   const repirItems = (items: FormItemType[]) => {
     return items.map((item) => {
       const node: FormItemType = repirNode(item)
@@ -75,10 +78,9 @@ export const repirJsonSchema = (schema: FormSchema) => {
     })
   }
 
-  return {
-    ...schema,
-    items: repirItems(schema.items)
-  }
+  newSchema.items = repirItems(newSchema.items)
+
+  return newSchema
 }
 
 // 递归移除 designKey 字段用于显示

@@ -1,7 +1,7 @@
-import type { FormElement } from 'form-craft'
-import icon from './Icon.vue'
-import attrSchema from './attrSchema'
 import { Markdown } from '@/components'
+import type { FormElement } from '@/types'
+import attrSchema from './attrSchema'
+import icon from './Icon.vue'
 
 export default {
   title: 'Markdown',

@@ -198,7 +198,7 @@ export interface DesignInstance extends Required<ToRefs<FormDesignProps>> {
   updateCurrentKey: (key: string) => void
   updateHoverKey: (key: string) => void
   applySchema: (schema: FormSchema, options?: { recordHistory?: boolean; repir?: boolean }) => void
-  handleResetSchema: () => void
+  handleClear: () => void
   handleEmit: (event: any, ...args: any[]) => void
   handleHistoryBack: () => void
   handleHistoryForward: () => void

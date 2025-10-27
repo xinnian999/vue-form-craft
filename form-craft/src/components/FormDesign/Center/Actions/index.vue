@@ -107,7 +107,7 @@ const rightActions: PreviewAction[] = [
     name: 'clear-design',
     onClick: async () => {
       await ElMessageBox.confirm('确认清空当前设计吗？')
-      designInstance.handleResetSchema()
+      designInstance.handleClear()
     }
   }
 ]

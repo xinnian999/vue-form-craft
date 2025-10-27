@@ -31,7 +31,7 @@ const onSave = () => {
 }
 
 const onAdd = (element: FormElement) => {
-  // console.log('onAdd===>', element)
+  console.log('onAdd===>', element)
 }
 
 onMounted(() => {

@@ -7,23 +7,15 @@
 </template>
 
 <script lang="ts">
-let initJsonSchema: FormSchema = {
-  labelWidth: 150,
-  labelAlign: 'right',
-  scrollToError: true,
-  size: 'default',
-  submitBtn: true,
-  items: []
-}
+import { initSchema } from '@/config'
 
-const emptyJsonSchema: FormSchema = cloneDeep(initJsonSchema)
+let initJsonSchema: FormSchema = initSchema
 </script>
 
 <script setup lang="ts">
 import { cloneDeep, debounce, isEqual } from 'lodash'
 import {
   computed,
-  nextTick,
   onBeforeMount,
   onBeforeUnmount,
   provide,
@@ -137,6 +129,8 @@ const getNode = (items: FormItemType[], designKey: string): FormItemType | null 
 const getNodeByKey = (designKey: string): FormItemType | null => {
   const schema = getSchema()
 
+  if (!schema.items) return null
+
   return getNode(schema.items, designKey)
 }
 
@@ -179,9 +173,13 @@ watch(fullScreen, (val) => {
 })
 
 onBeforeMount(() => {
+  // 修复初始schema
+  let schema = repirJsonSchema(getSchema())
+  setSchema(schema)
+
   // 如果jsonSchema和initJsonSchema不相等,说明传入了v-model
-  if (!isEqual(getSchema(), initJsonSchema)) {
-    initJsonSchema = getSchemaClone() // 重新设置initJsonSchema
+  if (!isEqual(schema, initJsonSchema)) {
+    initJsonSchema = cloneDeep(schema) // 重新设置initJsonSchema
   }
 
   // 监听全屏变化事件
@@ -218,8 +216,8 @@ const instance = reactive<DesignInstance>({
   handleEmit: (name, params) => {
     emits(name, params)
   },
-  handleResetSchema: () => {
-    applySchema(emptyJsonSchema)
+  handleClear: () => {
+    applySchema({ ...getSchema(), items: [] })
   },
   handleHistoryBack,
   handleHistoryForward,

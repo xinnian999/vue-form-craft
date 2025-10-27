@@ -1,4 +1,4 @@
-import type { FormSchema } from 'form-craft'
+import type { FormSchema } from '@/types'
 
 export default {
   size: 'small',
@@ -16,7 +16,7 @@ export default {
     {
       label: '占位提示',
       component: 'Input',
-      name: 'props.placeholder',
+      name: 'props.placeholder'
     },
     { label: '初始值', component: 'Input', name: 'initialValue' },
     {
@@ -33,10 +33,7 @@ export default {
         'row-gap': 20,
         'column-gap': 20
       },
-      name: 'cNmCuu',
-
-    },
-
-
+      name: 'cNmCuu'
+    }
   ]
 } as FormSchema
