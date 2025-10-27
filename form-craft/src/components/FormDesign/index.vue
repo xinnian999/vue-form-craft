@@ -65,6 +65,7 @@ const historyIndex = ref(-1)
 
 const getSchema = () => modelValue.value
 
+// schema的唯一修改入口
 const setSchema = (schema: FormSchema) => {
   modelValue.value = schema
 }
@@ -143,8 +144,9 @@ const updateNodeByKey = (designKey: string, newNodeData: Record<string, any>) =>
   }
 
   if (oldNode) {
+    // TODO: 这里直接修改了getSchema，违反了setSchema唯一修改的原则。待优化
     Object.assign(oldNode, newNodeData)
-    applySchema(schema)
+    recordHistory(schema)
   }
 }
 
