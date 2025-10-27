@@ -1,6 +1,6 @@
 <template>
   <div :class="ns('attr')">
-    <FormRender :key="current.designKey" v-model="current" :schema="repirJsonSchema(attrSchema)" />
+    <FormRender :key="current.designKey" v-model="current" :schema="attrSchema" />
 
     <StyleConfig :key="current.designKey" v-model="currentProps" />
 
@@ -14,7 +14,7 @@ import { computed } from 'vue'
 import { FormRender } from '@/components'
 import { useElements, useLang } from '@/hooks'
 import type { FormItemType, FormSchema } from '@/types'
-import { getDataByPath, ns, repirJsonSchema, setDataByPath } from '@/utils'
+import { getDataByPath, ns, setDataByPath } from '@/utils'
 import LinkageConfig from './LinkageConfig/index.vue'
 import StyleConfig from './StyleConfig/index.vue'
 
