@@ -1,5 +1,7 @@
 <template>
-  <FormRender v-model="formValues" :schema="schema" @finish="onFinish" />
+  <el-card header="表单渲染">
+    <FormRender v-model="formValues" :schema="schema" @finish="onFinish" />
+  </el-card>
 </template>
 
 <script setup lang="ts">
@@ -15,6 +17,9 @@ const schema = {
   scrollToError: true,
   submitBtn: true,
   resetBtn: true,
+  style: {
+    width: '500px'
+  },
   items: [
     {
       label: '用户名',
