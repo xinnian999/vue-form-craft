@@ -192,7 +192,6 @@ export interface DesignInstance extends Required<ToRefs<FormDesignProps>> {
   history: Ref<FormSchema[]>
   historyIndex: Ref<number>
   getSchema: () => FormSchema
-  getSchemaClone: () => FormSchema
   setSchema: (schema: FormSchema) => void
   updateCurrent: (element: FormItemType) => void
   updateCurrentKey: (key: string) => void

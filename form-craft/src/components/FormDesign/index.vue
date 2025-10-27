@@ -65,9 +65,6 @@ const historyIndex = ref(-1)
 
 const getSchema = () => modelValue.value
 
-// 获取一份不具有响应式的schema
-const getSchemaClone = () => cloneDeep(getSchema())
-
 const setSchema = (schema: FormSchema) => {
   modelValue.value = schema
 }
@@ -201,7 +198,6 @@ const instance = reactive<DesignInstance>({
   history,
   historyIndex,
   getSchema,
-  getSchemaClone,
   setSchema,
   applySchema,
   updateCurrent(element) {
