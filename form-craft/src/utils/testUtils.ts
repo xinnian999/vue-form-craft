@@ -18,6 +18,7 @@ export function FormDesignTest() {
   // 双击添加元素
   const dblclickAdd = async (menuName: string) => {
     await leftWrapper.find(`.menu-${menuName}`).trigger('dblclick')
+    await wait(100)
   }
 
   // 点击清除按钮 + 确认

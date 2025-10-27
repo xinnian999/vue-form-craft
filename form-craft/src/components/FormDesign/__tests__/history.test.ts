@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { FormDesignTest } from '@/utils'
+import { FormDesignTest, wait } from '@/utils'
 
 describe('《表单设计器》历史记录测试', async () => {
   it('（后退/前进）按钮初始化 - 全部禁用', async () => {
@@ -62,7 +62,11 @@ describe('《表单设计器》历史记录测试', async () => {
 
     await activeItem.copyBtn.trigger('click') // 1 + 1
 
+    await wait(100)
+
     await activeItem.copyBtn.trigger('click') // 2 + 1
+
+    await wait(100)
 
     expect(itemsLength.value).toBe(3)
 
@@ -94,13 +98,19 @@ describe('《表单设计器》历史记录测试', async () => {
 
     await activeItem.deleteBtn.trigger('click') // 1 - 1
 
+    await wait(100)
+
     expect(itemsLength.value).toBe(0)
 
     await backBtn.trigger('click')
 
+    await wait(100)
+
     expect(itemsLength.value).toBe(1)
 
     await forwardBtn.trigger('click')
+
+    await wait(100)
 
     expect(itemsLength.value).toBe(0)
   })

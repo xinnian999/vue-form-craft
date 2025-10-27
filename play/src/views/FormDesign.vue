@@ -37,8 +37,7 @@ const onAdd = (element: FormElement) => {
 onMounted(() => {
   const localSchema = localStorage.getItem('schema')
   if (localSchema) {
-    schema.value = JSON.parse(localSchema)
-    formDesignRef.value?.recordHistory() // 直接修改v-model不会记录历史，需要调用recordHistory
+    formDesignRef.value?.applySchema(JSON.parse(localSchema)) // 直接修改v-model不会记录历史，需要调用applySchema
   }
 })
 </script>

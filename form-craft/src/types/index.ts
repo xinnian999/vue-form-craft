@@ -205,5 +205,4 @@ export interface DesignInstance extends Required<ToRefs<FormDesignProps>> {
   handleToggleFullScreen: () => void
   getNodeByKey: (key: string) => FormItemType | null
   updateNodeByKey: (key: string, node: Record<string, any>) => void
-  recordHistory: () => void
 }

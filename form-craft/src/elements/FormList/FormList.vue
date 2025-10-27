@@ -123,7 +123,7 @@ interface Props {
   title?: string
   name?: string
   disabled?: boolean
-  designKey: string
+  designKey?: string
   children?: FormItemType[]
 }
 

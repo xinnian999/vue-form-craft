@@ -20,7 +20,7 @@ const emptyJsonSchema: FormSchema = cloneDeep(initJsonSchema)
 </script>
 
 <script setup lang="ts">
-import { cloneDeep, isEqual } from 'lodash'
+import { cloneDeep, debounce, isEqual } from 'lodash'
 import {
   computed,
   nextTick,
@@ -80,17 +80,15 @@ const setSchema = (schema: FormSchema) => {
   modelValue.value = schema
 }
 
-// 记录历史
-const recordHistory = async () => {
-  await nextTick()
-  const newSchema = getSchemaClone()
+// 记录历史。由于容器间相互拖拽会同时触发多次，所以使用防抖
+const recordHistory = debounce(async (schema: FormSchema) => {
   if (historyIndex.value < history.value.length - 1) {
     // 如果改动的是历史，将截断之后的记录
     history.value = history.value.slice(0, historyIndex.value + 1)
   }
-  history.value.push(newSchema)
+  history.value.push(cloneDeep(schema))
   historyIndex.value = history.value.length - 1
-}
+}, 100)
 
 const handleHistoryBack = () => {
   if (historyIndex.value > -1) {
@@ -98,14 +96,14 @@ const handleHistoryBack = () => {
     const newSchema = history.value[historyIndex.value]
       ? history.value[historyIndex.value]
       : initJsonSchema
-    setSchema(newSchema)
+    setSchema(cloneDeep(newSchema))
   }
 }
 
 const handleHistoryForward = () => {
   if (historyIndex.value < history.value.length - 1) {
     historyIndex.value++
-    setSchema(history.value[historyIndex.value])
+    setSchema(cloneDeep(history.value[historyIndex.value]))
   }
 }
 
@@ -116,9 +114,10 @@ const handleFullscreenChange = () => {
 
 // 提交一次修改schema。会序列化schema并记录历史。适合不频繁更新的场景
 const applySchema: DesignInstance['applySchema'] = (schema = getSchema()) => {
-  setSchema(repirJsonSchema(schema))
+  const newSchema = repirJsonSchema(schema)
+  setSchema(newSchema)
 
-  recordHistory()
+  recordHistory(newSchema)
 }
 
 const getNode = (items: FormItemType[], designKey: string): FormItemType | null => {
@@ -142,7 +141,7 @@ const getNodeByKey = (designKey: string): FormItemType | null => {
 }
 
 const updateNodeByKey = (designKey: string, newNodeData: Record<string, any>) => {
-  const schema = getSchemaClone()
+  const schema = getSchema()
 
   let oldNode: FormSchema | FormItemType | null = null
 
@@ -228,8 +227,7 @@ const instance = reactive<DesignInstance>({
     fullScreen.value = !fullScreen.value
   },
   getNodeByKey,
-  updateNodeByKey,
-  recordHistory
+  updateNodeByKey
 })
 
 provide($designInstance, instance)

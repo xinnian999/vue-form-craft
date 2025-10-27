@@ -4,7 +4,7 @@ import type { FormItemType } from '@/types'
 
 // 容器组件专用，提供双向绑定的children。
 // 在设计器模式下，允许通过designKey修改children。
-const useChildrenModel = (props: { children?: FormItemType[]; designKey: string }) => {
+const useChildrenModel = (props: { children?: FormItemType[]; designKey?: string }) => {
   const formInstance = useFormInstance()
 
   const designInstance = useDesignInstance()
@@ -14,7 +14,7 @@ const useChildrenModel = (props: { children?: FormItemType[]; designKey: string 
       return props.children || []
     },
     set(value) {
-      if (formInstance.design) {
+      if (formInstance.design && props.designKey) {
         if (props.designKey === 'root') {
           designInstance!.updateNodeByKey('root', {
             items: value
