@@ -120,6 +120,9 @@ const onInit = (editor: JsonEditorType) => {
             regExp: false
           })
         }
+
+        // 清除选中状态
+        aceEditor.clearSelection()
       }
     }
   }, 100)
