@@ -1,7 +1,11 @@
 <template>
   <div :class="ns('attr')">
     <FormRender :key="current.designKey" v-model="current" :schema="attrSchema">
-      <template #label="{ text }"> {{ text }}111 </template>
+      <template #label="{ label, name }">
+        <span class="label" @click="handleEditAttr(name)">
+          {{ label }}
+        </span>
+      </template>
     </FormRender>
 
     <StyleConfig :key="current.designKey" v-model="currentProps" />
@@ -14,11 +18,13 @@
 import { isString } from 'lodash'
 import { computed } from 'vue'
 import { FormRender } from '@/components'
-import { useElements, useLang } from '@/hooks'
+import { useDesignInstance, useElements, useLang } from '@/hooks'
 import type { FormItemType, FormSchema } from '@/types'
 import { getDataByPath, ns, setDataByPath } from '@/utils'
 import LinkageConfig from './LinkageConfig/index.vue'
 import StyleConfig from './StyleConfig/index.vue'
+
+const designInstance = useDesignInstance()!
 
 const elements = useElements()
 
@@ -74,4 +80,21 @@ const currentProps = computed({
     current.value = setDataByPath(current.value!, 'props', value) as FormItemType
   }
 })
+
+const handleEditAttr = (name: string) => {
+  designInstance.handleJson(name)
+}
 </script>
+
+<style lang="scss" scoped>
+@import '@/style';
+
+@include ns('attr') {
+  .label {
+    cursor: pointer;
+    &:hover {
+      color: var(--el-color-primary);
+    }
+  }
+}
+</style>

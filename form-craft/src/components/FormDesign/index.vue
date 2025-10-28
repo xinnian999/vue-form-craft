@@ -3,6 +3,7 @@
     <Left />
     <Center />
     <Right />
+    <Json v-model="jsonState.visible" :target="jsonState.target" />
   </div>
 </template>
 
@@ -35,6 +36,7 @@ import type {
 } from '@/types'
 import { ns, repirJsonSchema } from '@/utils'
 import Center from './Center/index.vue'
+import Json from './Json/index.vue'
 import Left from './Left/index.vue'
 import Right from './Right/index.vue'
 import './styles/index.scss'
@@ -64,6 +66,11 @@ const history = ref<FormSchema[]>([])
 const historyIndex = ref(-1)
 
 const getSchema = () => modelValue.value
+
+const jsonState = reactive({
+  visible: false,
+  target: ''
+})
 
 // schema的唯一修改入口
 const setSchema = (schema: FormSchema) => {
@@ -223,7 +230,13 @@ const instance = reactive<DesignInstance>({
     fullScreen.value = !fullScreen.value
   },
   getNodeByKey,
-  updateNodeByKey
+  updateNodeByKey,
+  handleJson(target: string) {
+    setTimeout(() => {
+      jsonState.visible = true
+      jsonState.target = target
+    }, 100)
+  }
 })
 
 provide($designInstance, instance)
