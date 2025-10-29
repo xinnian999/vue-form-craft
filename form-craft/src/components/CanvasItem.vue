@@ -5,29 +5,21 @@
     @mousemove.stop="handleHoverEnter"
     @mouseleave.stop="handleHoverLeave"
   >
-    <div class="actions-lt" v-if="data.designKey === designInstance.current?.designKey">
-      <div class="canvas-move" size="small" type="primary">
-        <Icon name="move" />
-      </div>
-    </div>
-
     <div class="hidden-ico" v-if="data.hidden"><Icon name="hidden" /></div>
 
-    <div class="actions-rb" v-if="data.designKey === designInstance.current?.designKey">
+    <div :class="['actions', { 'actions-first': index === 0 }]">
+      <div class="componentName">
+        <component :is="config.icon" />
+        {{ config.title }}
+      </div>
       <div
-        class="actions-rb-item"
-        v-for="{ icon, handle, bg, name } in rightBottomActions"
-        @click.stop="handle(data)"
+        :class="['actions-item', name]"
+        v-for="{ icon, handle, name } in rightBottomActions"
+        @click.stop="handle && handle(data)"
         :key="icon"
-        :style="{ backgroundColor: bg }"
-        :name="name"
       >
         <Icon :name="icon" />
       </div>
-    </div>
-
-    <div class="layout-title" v-if="config?.lbTitle">
-      {{ config.title }}
     </div>
 
     <FormItem v-bind="data" :props="data.props" />
@@ -42,7 +34,7 @@ import type { FormItemType } from '@/types'
 import { copyItems, ns, recursionDelete } from '@/utils'
 import FormItem from './FormItem.vue'
 
-const props = defineProps<{ data: FormItemType }>()
+const props = defineProps<{ data: FormItemType; index: number }>()
 
 const designInstance = useDesignInstance()!
 
@@ -76,6 +68,10 @@ const handleSelect = (element: FormItemType) => {
 
 const rightBottomActions = [
   {
+    icon: 'move',
+    name: 'move-btn'
+  },
+  {
     icon: 'copy',
     name: 'copy-btn',
     handle: (element: FormItemType) => {
@@ -87,7 +83,6 @@ const rightBottomActions = [
   {
     icon: 'delete',
     name: 'delete-btn',
-    bg: `var(--${ns('danger-color')})`,
     handle: (element: FormItemType) => {
       const schema = designInstance.getSchema()
       const newList = recursionDelete(schema.items, (item) => item.designKey !== element.designKey)
@@ -101,32 +96,13 @@ const rightBottomActions = [
 @import '@/style';
 @include ns('canvas-item') {
   border: 2px solid transparent;
-  margin-bottom: 18px;
+  padding-bottom: 1px;
   position: relative;
   z-index: 2;
 
-  @include ns('form-item') {
-    margin-bottom: 0;
-  }
-
-  .actions-lt {
-    position: absolute;
-    left: -1px;
-    top: -1px;
-    z-index: 20;
-    background-color: $themeColor;
-    .canvas-move {
-      font-size: 14px;
-      box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
-      color: #fff;
-      padding: 3px 11px;
-      display: flex;
-      cursor: pointer;
-      &:hover {
-        opacity: 0.7;
-      }
-    }
-  }
+  // @include ns('form-item') {
+  //   margin-bottom: 0;
+  // }
 
   .hidden-ico {
     position: absolute;
@@ -139,47 +115,56 @@ const rightBottomActions = [
     color: #fff;
   }
 
-  .actions-rb {
+  .actions {
     position: absolute;
     right: 0;
-    bottom: -1px;
+    bottom: 0;
     z-index: 20;
     color: #fff;
     list-style: none;
     padding: 1px;
     display: flex;
+    font-size: 12px;
+    gap: 3px;
+    display: none;
+
+    .componentName {
+      display: flex;
+      align-items: center;
+      background-color: $themeColor;
+      box-sizing: border-box;
+      gap: 3px;
+      font-size: 10px;
+      border-radius: 3px;
+      padding: 0 3px;
+    }
 
     &-item {
-      padding: 4px;
+      padding: 3px;
       background-color: $themeColor;
       border-radius: 3px;
       cursor: pointer;
-      font-size: 12px;
-      margin-left: 3px;
-      box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
       display: flex;
       &:hover {
         opacity: 0.7;
       }
     }
   }
-
-  .layout-title {
-    position: absolute;
-    right: -1px;
-    top: -1px;
-    padding: 1px 5px;
-    background-color: $themeColor;
-    font-size: 12px;
-    color: #fff;
-    z-index: 10;
-    line-height: 16px;
-  }
 }
 
 @include ns('canvas-item.hover') {
-  border: 1px dashed $themeColor;
-  padding: 1px;
+  border: 2px dashed $themeColor;
+  // &::before {
+  //   content: '';
+  //   position: absolute;
+  //   height: 100%;
+  //   width: 100%;
+  //   left: 0;
+  //   top: 0;
+  //   z-index: 15;
+  //   border: 1px dashed $themeColor;
+  //   box-sizing: border-box;
+  // }
 }
 
 @include ns('canvas-item.mask') {
@@ -197,6 +182,21 @@ const rightBottomActions = [
 
 @include ns('canvas-item.active') {
   border: 2px solid $themeColor !important;
-  padding: 0;
+
+  // &::before {
+  //   content: '';
+  //   position: absolute;
+  //   height: 100%;
+  //   width: 100%;
+  //   left: 0;
+  //   top: 0;
+  //   z-index: 15;
+  //   box-sizing: border-box;
+  //   border: 1px solid $themeColor;
+  // }
+
+  & > .actions {
+    display: flex;
+  }
 }
 </style>

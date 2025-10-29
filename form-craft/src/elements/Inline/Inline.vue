@@ -30,9 +30,10 @@ const InlineStyle = computed<StyleValue>(() => ({
 }))
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .form-item-inline {
   width: 100%;
+  background-color: #f4f3f3;
   .el-form-item {
     margin-bottom: 0;
   }

@@ -19,12 +19,12 @@
       :class="[ns('canvas-group-draggable'), props.class]"
       :style="style"
       :animation="300"
-      handle=".canvas-move"
+      handle=".move-btn"
       force-fallback
       @add="onAdd"
     >
-      <template #item="{ element: child }">
-        <CanvasItem v-if="child.designKey" :data="child" />
+      <template #item="{ element: child, index }">
+        <CanvasItem v-if="child.designKey" :data="child" :index="index" />
       </template>
     </draggable>
   </div>
@@ -95,22 +95,22 @@ const onAdd = (e: Record<string, any>) => {
   }
 
   &-draggable {
-    min-height: 150px;
+    // min-height: 150px;
     height: 100%;
   }
 
   &-ghost {
     list-style: none;
-    // text-align: center;
+    text-align: center;
     border: 1px dashed #c0bdbd;
     background-color: $lightThemeColor;
     border-radius: 7px;
     // min-width: 150px;
     margin-bottom: 18px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    // gap: 5px;
     padding: 5px 0;
   }
 

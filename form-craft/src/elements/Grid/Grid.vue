@@ -30,12 +30,6 @@ const gridStyle = computed(() => ({
 
 <style lang="scss">
 .form-item-grid {
-  .el-form-item,
-  .vfc-canvas-item {
-    margin-bottom: 0;
-  }
-  .el-form-item__content {
-    align-items: start;
-  }
+  background-color: #f4f3f3;
 }
 </style>

@@ -224,7 +224,7 @@ watch(
 @import '@/style';
 
 @include ns('form-item') {
-  margin-bottom: 18px;
+  // margin-bottom: 18px;
 
   &-label {
     display: inline-flex;
