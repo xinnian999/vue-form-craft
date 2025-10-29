@@ -102,11 +102,9 @@ const onAdd = (e: Record<string, any>) => {
   &-ghost {
     list-style: none;
     text-align: center;
-    margin: 5px 0;
     border: 1px dashed #c0bdbd;
     background-color: $lightThemeColor;
     border-radius: 7px;
-    padding: 10px 0;
     min-width: 150px;
   }
 

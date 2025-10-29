@@ -101,20 +101,9 @@ const rightBottomActions = [
 @import '@/style';
 @include ns('canvas-item') {
   border: 2px solid transparent;
-  margin-bottom: 5px;
-  padding: 10px;
+  margin-bottom: 18px;
   position: relative;
   z-index: 2;
-  &::before {
-    content: '';
-    z-index: -1;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    left: -1px;
-    top: 0;
-    border: 1px dashed #c0bdbd;
-  }
 
   @include ns('form-item') {
     margin-bottom: 0;
@@ -127,7 +116,7 @@ const rightBottomActions = [
     z-index: 20;
     background-color: $themeColor;
     .canvas-move {
-      font-size: 16px;
+      font-size: 14px;
       box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
       color: #fff;
       padding: 3px 11px;
@@ -189,12 +178,7 @@ const rightBottomActions = [
 }
 
 @include ns('canvas-item.hover') {
-  border: 2px solid $themeColor;
-  background-color: $lightThemeColor;
-
-  &::before {
-    border: none;
-  }
+  border: 2px dashed $themeColor;
 }
 
 @include ns('canvas-item.mask') {

@@ -258,8 +258,9 @@ provide(
   }
 
   .layoutRender {
-    border: 2px dashed var(--el-color-primary);
     padding: 5px;
+    background-color: #f4f3f3;
+    border-radius: 5px;
   }
 }
 </style>
