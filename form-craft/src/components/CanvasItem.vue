@@ -96,8 +96,9 @@ const rightBottomActions = [
 @import '@/style';
 @include ns('canvas-item') {
   border: 2px solid transparent;
-  padding-bottom: 1px;
+  padding-bottom: 0.1px;
   position: relative;
+  box-sizing: border-box;
   z-index: 2;
 
   // @include ns('form-item') {
