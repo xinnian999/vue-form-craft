@@ -178,7 +178,8 @@ const rightBottomActions = [
 }
 
 @include ns('canvas-item.hover') {
-  border: 2px dashed $themeColor;
+  border: 1px dashed $themeColor;
+  padding: 1px;
 }
 
 @include ns('canvas-item.mask') {
@@ -196,13 +197,6 @@ const rightBottomActions = [
 
 @include ns('canvas-item.active') {
   border: 2px solid $themeColor !important;
-
-  &::before {
-    border: none;
-  }
-
-  &:hover {
-    border: 2px solid $themeColor !important;
-  }
+  padding: 0;
 }
 </style>
