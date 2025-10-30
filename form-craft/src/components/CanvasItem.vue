@@ -155,17 +155,6 @@ const rightBottomActions = [
 
 @include ns('canvas-item.hover') {
   border: 2px dashed $themeColor;
-  // &::before {
-  //   content: '';
-  //   position: absolute;
-  //   height: 100%;
-  //   width: 100%;
-  //   left: 0;
-  //   top: 0;
-  //   z-index: 15;
-  //   border: 1px dashed $themeColor;
-  //   box-sizing: border-box;
-  // }
 }
 
 @include ns('canvas-item.mask') {
@@ -183,18 +172,6 @@ const rightBottomActions = [
 
 @include ns('canvas-item.active') {
   border: 2px solid $themeColor !important;
-
-  // &::before {
-  //   content: '';
-  //   position: absolute;
-  //   height: 100%;
-  //   width: 100%;
-  //   left: 0;
-  //   top: 0;
-  //   z-index: 15;
-  //   box-sizing: border-box;
-  //   border: 1px solid $themeColor;
-  // }
 
   & > .actions {
     display: flex;

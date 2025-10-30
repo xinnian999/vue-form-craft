@@ -38,8 +38,8 @@ export function FormDesignTest() {
     await wait(500)
 
     const el = centerWrapper.find(`.${ns('canvas-item')}.active`)
-    const copyBtn = el.find(`.actions-rb-item[name="copy-btn"]`)
-    const deleteBtn = el.find(`.actions-rb-item[name="delete-btn"]`)
+    const copyBtn = el.find(`.actions-item.copy-btn`)
+    const deleteBtn = el.find(`.actions-item.delete-btn`)
 
     return {
       el,

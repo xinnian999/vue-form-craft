@@ -161,20 +161,6 @@ const formItemProps = computed(() => {
   return newProps
 })
 
-onBeforeMount(() => {
-  if (value.value === undefined && props.initialValue !== undefined && !formInstance.design) {
-    const newInitialValues = setDataByPath(
-      formInstance.initialValues,
-      props.name,
-      props.initialValue
-    )
-
-    formInstance.updateInitialValues(newInitialValues)
-
-    formInstance.setFieldValue(props.name, props.initialValue)
-  }
-})
-
 watch(
   value,
   (newVal, oldVal) => {

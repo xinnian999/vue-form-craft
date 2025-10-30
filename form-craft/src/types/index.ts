@@ -47,7 +47,7 @@ export type FormSchema = {
   labelBold?: boolean
   scrollToError?: boolean
   initialValues?: Record<string, any>
-  items: FormItemType[]
+  items?: FormItemType[]
   style?: any
   submitBtn?: boolean
   resetBtn?: boolean
@@ -164,7 +164,6 @@ export interface FormRenderEmits {
 
 export interface FormInstance extends FormRenderProps {
   selectData: Record<string, Record<string, any>>
-  initialValues: Record<string, Record<string, any>>
   context: Record<string, any>
   slots: Slots
   getValues: () => Record<string, any>
@@ -172,7 +171,6 @@ export interface FormInstance extends FormRenderProps {
   getFieldValue: (path: string) => any
   setFieldValue: (path: string, value: any) => void
   updateSelectData: (key: string, value: Record<string, any>) => void
-  updateInitialValues: (values: Record<string, any>) => void
   validate: () => FormValidationResult | undefined
   resetFields: (names?: string[]) => void
   submit: () => void

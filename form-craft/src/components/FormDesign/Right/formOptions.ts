@@ -60,6 +60,14 @@ export default {
       }
     },
     {
+      label: '表单初始值',
+      component: 'Custom',
+      name: 'initialValues',
+      props: {
+        componentName: 'FormDesign-InitialValues'
+      }
+    },
+    {
       label: '禁用整个表单',
       component: 'Switch',
       name: 'disabled'

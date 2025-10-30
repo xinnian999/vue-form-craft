@@ -1,11 +1,5 @@
 <template>
-  <el-form
-    :class="ns('form')"
-    :model="formValues"
-    :label-position="schema.labelAlign"
-    ref="form"
-    v-bind="{ ...$attrs, ...schema }"
-  >
+  <el-form :class="ns('form')" :model="formValues" ref="form" v-bind="formAttrs">
     <slot />
 
     <FormItemGroup
@@ -28,10 +22,10 @@
 
 <script setup lang="ts">
 import type { FormInstance as ElFormInstance } from 'element-plus'
-import { cloneDeep, mergeWith } from 'lodash'
+import { cloneDeep, omit } from 'lodash'
 import {
   computed,
-  onMounted,
+  onBeforeMount,
   provide,
   reactive,
   readonly,
@@ -46,7 +40,7 @@ import type { FormInstance, FormRenderEmits, FormRenderProps } from '@/types'
 import { deepParse, getDataByPath, ns, setDataByPath } from '@/utils'
 
 const props = withDefaults(defineProps<FormRenderProps>(), {
-  schema: () => ({ items: [] })
+  schema: () => ({})
 })
 
 const emits = defineEmits<FormRenderEmits>()
@@ -59,8 +53,6 @@ const locale = useLocale()
 const form = useTemplateRef<ElFormInstance>('form')
 
 const selectData = reactive<Record<string, Record<string, any>>>({})
-
-const initialValues = reactive<Record<string, any>>({})
 
 const context = computed(() => ({
   ...props.schemaContext,
@@ -77,16 +69,29 @@ const formItems = computed(() => {
   return deepParse(props.schema.items || [], context.value)
 })
 
-// 支持从schema初始化默认值对象
-onMounted(() => {
-  if (props.schema?.initialValues) {
-    const initialValues = cloneDeep(props.schema?.initialValues)
+const formAttrs = computed(() => {
+  const attrs = omit(props.schema, [
+    'model',
+    'items',
+    'submitBtn',
+    'resetBtn',
+    'initialValues',
+    'labelAlign',
+    'labelBold',
+    'labelSuffix'
+  ])
 
-    formValues.value = mergeWith(initialValues, formValues.value, (objValue, srcValue) => {
-      if (Array.isArray(objValue)) {
-        return srcValue // 不深度合并数组
-      }
-    })
+  return {
+    ...attrs,
+    labelPosition: props.schema.labelAlign
+  }
+})
+
+onBeforeMount(() => {
+  if (props.schema.initialValues) {
+    const values = cloneDeep(props.schema.initialValues)
+
+    formValues.value = { ...values, ...formValues.value }
   }
 })
 
@@ -118,40 +123,24 @@ const submit: FormInstance['submit'] = () => {
 const resetFields: FormInstance['resetFields'] = (names) => {
   emits('reset')
 
-  if (names) {
-    let temp = cloneDeep(formValues.value)
-    names.forEach((name) => {
-      temp = setDataByPath(temp, name, getDataByPath(initialValues, name))
-    })
-    formValues.value = temp
-  } else {
-    formValues.value = initialValues
-  }
+  form.value?.resetFields(names)
 }
 
 const updateSelectData: FormInstance['updateSelectData'] = (key, value) => {
   selectData[key] = value
 }
 
-const updateInitialValues: FormInstance['updateInitialValues'] = (values) => {
-  Object.assign(initialValues, values)
-}
-
 const slots = useSlots()
-
-console.log(slots)
 
 const instance = readonly({
   ...toRefs(props),
   selectData,
-  initialValues,
   context,
   getValues,
   setValues,
   getFieldValue,
   setFieldValue,
   updateSelectData,
-  updateInitialValues,
   validate,
   resetFields,
   submit,

@@ -88,6 +88,10 @@ describe('FormRender Schema Test', () => {
       labelAlign: 'right',
       size: 'default',
       scrollToError: true,
+      initialValues: {
+        username: 'huyilin',
+        password: 'qs666666'
+      },
       items: [
         {
           label: '用户名',
@@ -97,8 +101,7 @@ describe('FormRender Schema Test', () => {
             clearable: true
           },
           name: 'username',
-          required: true,
-          initialValue: 'huyilin'
+          required: true
         },
         {
           label: '密码',
@@ -107,8 +110,7 @@ describe('FormRender Schema Test', () => {
             placeholder: '请输入密码'
           },
           name: 'password',
-          required: true,
-          initialValue: 'qs666666'
+          required: true
         }
       ]
     } satisfies FormSchema
