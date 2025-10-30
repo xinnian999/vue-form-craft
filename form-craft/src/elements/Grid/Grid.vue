@@ -17,7 +17,7 @@ const props = defineProps<{
   columns: number
   rowGap: number
   columnGap: number
-  designKey: string
+  designKey?: string
   children?: FormItemType[]
 }>()
 

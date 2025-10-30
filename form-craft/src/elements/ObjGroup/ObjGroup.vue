@@ -19,9 +19,9 @@ import { useChildrenModel, useFormInstance } from '@/hooks'
 import type { FormItemType } from '@/types'
 
 const props = defineProps<{
-  children: FormItemType[]
+  children?: FormItemType[]
   name: string
-  designKey: string
+  designKey?: string
 }>()
 
 const formInstance = useFormInstance()

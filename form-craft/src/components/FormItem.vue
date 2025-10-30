@@ -1,7 +1,7 @@
 <template>
   <template v-if="formInstance.design || !hidden">
     <div v-if="config.type === 'layout'" :class="[ns('form-item'), props.class]" :style="style">
-      <component :is="config.render" v-bind="formItemProps" :children="props.children" />
+      <component :is="config.render" v-bind="componentProps" :children="props.children" />
     </div>
 
     <el-form-item
@@ -47,7 +47,7 @@
             :is="config.render"
             :disabled="formInstance.schema.disabled"
             :size="formInstance.schema.size"
-            v-bind="formItemProps"
+            v-bind="componentProps"
             v-model:[config.modelName!]="value"
           />
         </el-dialog>
@@ -60,7 +60,7 @@
         :is="config.render"
         :disabled="formInstance.schema.disabled"
         :size="formInstance.schema.size"
-        v-bind="formItemProps"
+        v-bind="componentProps"
         v-model:[config.modelName!]="value"
       />
     </el-form-item>
@@ -147,18 +147,24 @@ const config = computed(() => {
   return data
 })
 
-const formItemProps = computed(() => {
+const componentProps = computed(() => {
   const newProps: Record<string, any> = {
     name: props.name,
     designKey: props.designKey,
     ...props.props
   }
 
-  if (['ObjGroup', 'FormList'].includes(config.value.component)) {
+  if (props.children) {
     newProps.children = props.children
   }
 
   return newProps
+})
+
+onBeforeMount(() => {
+  if (value.value === undefined && props.initialValue !== undefined && !formInstance.design) {
+    formInstance.setFieldValue(props.name, props.initialValue)
+  }
 })
 
 watch(

@@ -13,7 +13,7 @@ import type { FormItemType } from '@/types'
 
 const props = defineProps<{
   children?: FormItemType[]
-  designKey: string
+  designKey?: string
 }>()
 
 const formInstance = useFormInstance()
