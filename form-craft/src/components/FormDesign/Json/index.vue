@@ -62,7 +62,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { CodeHighLight, JsonSchemaEdit, Markdown } from '@/components'
+import { CodeHighLight, Markdown } from '@/components'
 import { useDesignInstance } from '@/hooks'
 import Icon from '@/Icon/index.vue'
 import { jsJsonSchema, jsVue, tsJsonSchema, tsVue } from './config'
@@ -71,6 +71,7 @@ import 'md-editor-v3/lib/style.css'
 import JsonEditorType from 'jsoneditor'
 import type { FormSchema } from '@/types'
 import { repirJsonSchema } from '@/utils'
+import JsonSchemaEdit from './JsonSchemaEdit/index.vue'
 
 const props = defineProps<{ target: 'string' }>()
 
@@ -88,11 +89,11 @@ const onSave = (json: FormSchema) => {
 }
 
 const onInit = (editor: JsonEditorType) => {
-  const currentName = designInstance.current!.name
-
   if (!props.target) {
     return
   }
+
+  const currentName = designInstance.current!.name
 
   setTimeout(() => {
     // 跳转到当前字段位置

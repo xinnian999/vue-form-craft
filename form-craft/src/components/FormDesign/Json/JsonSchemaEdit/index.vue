@@ -12,11 +12,11 @@
 import JsonEditorType from 'jsoneditor'
 import { cloneDeep } from 'lodash'
 import { onMounted, ref } from 'vue'
+import { JsonEditor } from '@/components'
 import { useDesignInstance } from '@/hooks'
 import type { FormSchema } from '@/types'
 import type { GetCompletionItems } from '@/types/complete'
 import { ns } from '@/utils'
-import JsonEditor from '../JsonEditor.vue'
 import autoComplete from './autoComplete'
 
 const props = defineProps<{

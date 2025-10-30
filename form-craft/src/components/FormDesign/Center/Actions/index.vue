@@ -46,7 +46,6 @@
       >
     </div>
 
-    <JsonSchema v-model="JsonSchemaVisible" />
     <Preview v-model="PreviewVisible" :schema-context="designInstance.schemaContext" />
   </div>
 </template>
@@ -57,7 +56,6 @@ import { ref } from 'vue'
 import { useDesignInstance, useLocale } from '@/hooks'
 import Icon from '@/Icon/index.vue'
 import { ns } from '@/utils'
-import JsonSchema from './JsonSchema.vue'
 import Preview from './Preview.vue'
 
 type PreviewAction = {
@@ -72,7 +70,6 @@ const designInstance = useDesignInstance()!
 
 const locale = useLocale()
 
-const JsonSchemaVisible = ref(false)
 const PreviewVisible = ref(false)
 
 const rightActions: PreviewAction[] = [
@@ -81,7 +78,7 @@ const rightActions: PreviewAction[] = [
     btnType: 'primary',
     icon: 'script',
     onClick: () => {
-      JsonSchemaVisible.value = true
+      designInstance.handleJson()
     }
   },
   {

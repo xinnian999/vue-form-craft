@@ -14,7 +14,6 @@
       >
     </div>
 
-    <Config v-model="configVisible" />
     <Change v-model="changeVisible" />
   </div>
 </template>
@@ -24,21 +23,12 @@ import { ref } from 'vue'
 import { useLocale } from '@/hooks'
 import { ns } from '@/utils'
 import Change from './Change.vue'
-import Config from './JsExpr.vue'
 
 const locale = useLocale()
-
-const configVisible = ref(false)
 
 const changeVisible = ref(false)
 
 const linkageBtns = [
-  {
-    title: locale.value.attr.tab1.linkage.action1,
-    onClick: () => {
-      configVisible.value = true
-    }
-  },
   {
     title: locale.value.attr.tab1.linkage.action2,
     onClick: () => {

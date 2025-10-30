@@ -231,10 +231,10 @@ const instance = reactive<DesignInstance>({
   },
   getNodeByKey,
   updateNodeByKey,
-  handleJson(target: string) {
+  handleJson(target?: string) {
     setTimeout(() => {
       jsonState.visible = true
-      jsonState.target = target
+      jsonState.target = target || ''
     }, 100)
   }
 })

@@ -23,7 +23,6 @@
 
 <script setup lang="ts">
 import JsonEditorType from 'jsoneditor'
-import { JsonSchemaEdit } from '@/components'
 import { useDesignInstance } from '@/hooks'
 import type { FormSchema } from '@/types'
 import { repirJsonSchema } from '@/utils'
