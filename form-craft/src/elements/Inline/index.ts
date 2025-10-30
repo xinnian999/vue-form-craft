@@ -9,7 +9,6 @@ export default {
   component: 'Inline',
   render: defineAsyncComponent(() => import('./Inline.vue')),
   order: 2,
-  lbTitle: true,
   attrSchema: {
     size: 'small',
     labelAlign: 'top',

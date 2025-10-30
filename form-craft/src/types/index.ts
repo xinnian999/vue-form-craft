@@ -62,7 +62,6 @@ export type FormElement = {
   order: number
   modelName?: string
   attrSchema: FormSchema
-  lbTitle?: boolean
 }
 
 export type TemplateData = { name: string; schema: FormSchema; id?: string }[]

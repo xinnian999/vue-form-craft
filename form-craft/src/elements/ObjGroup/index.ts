@@ -9,7 +9,6 @@ export default {
   component: 'ObjGroup',
   render: defineAsyncComponent(() => import('./ObjGroup.vue')),
   order: 2,
-  lbTitle: true,
   attrSchema: {
     size: 'small',
     labelAlign: 'top',
