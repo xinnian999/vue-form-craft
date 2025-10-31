@@ -1,5 +1,5 @@
 <template>
-  <div :class="ns('form-design-center-actions')">
+  <div :class="ns('form-design-header')">
     <div class="left">
       <el-button-group size="small">
         <el-button
@@ -109,3 +109,17 @@ const rightActions: PreviewAction[] = [
   }
 ]
 </script>
+
+<style lang="scss">
+@import '@/style';
+
+@include ns('form-design-header') {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+</style>

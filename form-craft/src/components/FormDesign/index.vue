@@ -1,8 +1,7 @@
 <template>
   <div :class="ns('form-design')" v-bind="$attrs" ref="formDesignWrapper">
-    <Left />
-    <Center />
-    <Right />
+    <Header />
+    <Main />
     <Json v-model="jsonState.visible" :target="jsonState.target" />
   </div>
 </template>
@@ -35,11 +34,9 @@ import type {
   FormSchema
 } from '@/types'
 import { ns, repirJsonSchema } from '@/utils'
-import Center from './Center/index.vue'
+import Header from './Header/index.vue'
 import Json from './Json/index.vue'
-import Left from './Left/index.vue'
-import Right from './Right/index.vue'
-import './styles/index.scss'
+import Main from './Main/index.vue'
 
 const props = withDefaults(defineProps<FormDesignProps>(), {
   omitMenus: () => [],
@@ -259,3 +256,53 @@ defineExpose(instance)
 //   { deep: true }
 // )
 </script>
+
+<style lang="scss">
+@import '@/style';
+
+@include ns('form-design') {
+  display: flex;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: $bgColor;
+  position: relative;
+  flex-direction: column;
+
+  ::-webkit-scrollbar {
+    /*滚动条整体样式*/
+    width: 5px;
+    /*高宽分别对应横竖滚动条的尺寸*/
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-track {
+    /*滚动条里面轨道*/
+    box-shadow: none;
+    background: transparent;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    /*滚动条里面小方块*/
+    border-radius: 10px;
+    background-color: #ccc;
+  }
+
+  &-tabs {
+    border: none;
+    height: 100%;
+    box-sizing: border-box;
+    .el-tabs__content {
+      padding: 0 !important;
+    }
+    .el-tab-pane {
+      height: 100%;
+      overflow-y: auto;
+      overflow-x: visible;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+  }
+}
+</style>
