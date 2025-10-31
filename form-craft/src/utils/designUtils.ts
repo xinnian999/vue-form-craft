@@ -78,7 +78,7 @@ export const repirJsonSchema = (schema: FormSchema) => {
     })
   }
 
-  newSchema.items = repirItems(newSchema.items)
+  newSchema.items = repirItems(newSchema.items || [])
 
   return newSchema
 }

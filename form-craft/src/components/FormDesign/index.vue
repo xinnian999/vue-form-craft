@@ -147,7 +147,7 @@ const updateNodeByKey = (designKey: string, newNodeData: Record<string, any>) =>
   if (designKey === 'root') {
     oldNode = schema
   } else {
-    oldNode = getNode(schema.items, designKey)
+    oldNode = getNode(schema.items!, designKey)
   }
 
   if (oldNode) {
@@ -236,6 +236,14 @@ const instance = reactive<DesignInstance>({
       jsonState.visible = true
       jsonState.target = target || ''
     }, 100)
+  },
+  addItem(item: FormItemType) {
+    const schema = getSchema()
+
+    setSchema({
+      ...schema,
+      items: schema.items ? [...schema.items, item] : [item]
+    })
   }
 })
 

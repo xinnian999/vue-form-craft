@@ -13,7 +13,7 @@ export function FormDesignTest() {
   const clearBtn = wrapper.find(`.el-button[name="clear-design"]`)
 
   const schema = computed(() => wrapper.vm.getSchema())
-  const itemsLength = computed(() => wrapper.vm.getSchema().items.length)
+  const itemsLength = computed(() => wrapper.vm.getSchema().items?.length || 0)
 
   // 双击添加元素
   const dblclickAdd = async (menuName: string) => {

@@ -73,7 +73,7 @@ import type { FormSchema } from '@/types'
 import { repirJsonSchema } from '@/utils'
 import JsonSchemaEdit from './JsonSchemaEdit/index.vue'
 
-const props = defineProps<{ target: 'string' }>()
+const props = defineProps<{ target: string }>()
 
 const visible = defineModel<boolean>()
 

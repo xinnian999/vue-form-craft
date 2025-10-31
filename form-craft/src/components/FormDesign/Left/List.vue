@@ -65,10 +65,6 @@ const onClone = (source: FormElement) => {
     name: generateName()
   }
 
-  // if (source.type === 'layout') {
-  //   parse.children = []
-  // }
-
   if (source.attrSchema.initialValues) {
     Object.assign(parse, source.attrSchema.initialValues)
   }
@@ -79,11 +75,6 @@ const onClone = (source: FormElement) => {
 const handleDbClick = (element: FormElement) => {
   const item = onClone(element)
 
-  const schema = designInstance.getSchema()
-
-  designInstance.applySchema({
-    ...schema,
-    items: [...schema.items, item]
-  })
+  designInstance.addItem(item)
 }
 </script>

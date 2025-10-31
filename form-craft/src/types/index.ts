@@ -203,4 +203,5 @@ export interface DesignInstance extends Required<ToRefs<FormDesignProps>> {
   getNodeByKey: (key: string) => FormItemType | null
   updateNodeByKey: (key: string, node: Record<string, any>) => void
   handleJson: (target?: string) => void
+  addItem: (item: FormItemType) => void
 }
