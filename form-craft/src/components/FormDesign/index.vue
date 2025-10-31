@@ -240,7 +240,7 @@ const instance = reactive<DesignInstance>({
   addItem(item: FormItemType) {
     const schema = getSchema()
 
-    setSchema({
+    applySchema({
       ...schema,
       items: schema.items ? [...schema.items, item] : [item]
     })
