@@ -39,7 +39,6 @@
         :key="label"
         :type="btnType"
         :name="name"
-        size="small"
         @click="onClick"
       >
         <template #icon v-if="icon"> <Icon :name="icon" /> </template>{{ label }}</el-button
@@ -74,14 +73,6 @@ const PreviewVisible = ref(false)
 
 const rightActions: PreviewAction[] = [
   {
-    label: locale.value.actions.previewJson,
-    btnType: 'primary',
-    icon: 'script',
-    onClick: () => {
-      designInstance.handleJson()
-    }
-  },
-  {
     label: locale.value.actions.previewForm,
     btnType: 'default',
     icon: 'eye',
@@ -90,11 +81,11 @@ const rightActions: PreviewAction[] = [
     }
   },
   {
-    label: locale.value.actions.save,
-    icon: 'save',
+    label: '导入 / 导出',
     btnType: 'primary',
+    icon: 'script',
     onClick: () => {
-      designInstance.handleEmit('save')
+      designInstance.handleJson()
     }
   },
   {
@@ -105,6 +96,14 @@ const rightActions: PreviewAction[] = [
     onClick: async () => {
       await ElMessageBox.confirm('确认清空当前设计吗？')
       designInstance.handleClear()
+    }
+  },
+  {
+    label: locale.value.actions.save,
+    icon: 'save',
+    btnType: 'primary',
+    onClick: () => {
+      designInstance.handleEmit('save')
     }
   }
 ]
