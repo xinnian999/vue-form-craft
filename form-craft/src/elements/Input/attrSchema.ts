@@ -3,7 +3,8 @@ import type { FormSchema } from '@/types'
 
 export default {
   size: 'small',
-  labelAlign: 'top',
+  labelAlign: 'left',
+  labelWidth: 100,
   initialValues: {
     label: '单行文本',
     props: {
@@ -23,28 +24,20 @@ export default {
     {
       label: '占位提示',
       component: 'Input',
-      name: 'props.placeholder',
+      name: 'props.placeholder'
     },
     { label: '初始值', component: 'Input', name: 'initialValue' },
-    {
-      component: 'Grid',
-      children: [
-        { label: '是否必填', component: 'Switch', name: 'required' },
-        { label: '是否只读', component: 'Switch', name: 'props.readonly' },
-        { label: '是否禁用', component: 'Switch', name: 'props.disabled' },
-        { label: '隐藏字段', component: 'Switch', name: 'hidden' },
-        { label: '隐藏标签', component: 'Switch', name: 'hideLabel' }
-      ],
-      props: {
-        columns: 3,
-        'row-gap': 20,
-        'column-gap': 20
-      },
-      name: 'cNmCuu'
-    },
+    { label: '是否必填', component: 'Switch', name: 'required' },
+    { label: '是否只读', component: 'Switch', name: 'props.readonly' },
+    { label: '是否禁用', component: 'Switch', name: 'props.disabled' },
+    { label: '隐藏字段', component: 'Switch', name: 'hidden' },
+    { label: '隐藏标签', component: 'Switch', name: 'hideLabel' },
     { label: '显示清除按钮', component: 'Switch', name: 'props.clearable' },
     {
-      label: '浏览器自动填充', component: 'Switch', name: 'props.autocomplete', props: {
+      label: '浏览器自动填充',
+      component: 'Switch',
+      name: 'props.autocomplete',
+      props: {
         activeValue: 'on',
         inactiveValue: 'new-password'
       }
