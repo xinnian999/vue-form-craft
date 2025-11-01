@@ -78,3 +78,63 @@ const handleDbClick = (element: FormElement) => {
   designInstance.addItem(item)
 }
 </script>
+
+<style lang="scss">
+@import '@/style';
+
+@include ns('menu') {
+  &-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+
+    &-ghost,
+    &-fallback,
+    &-drag {
+      list-style: none;
+    }
+
+    @media screen and (max-width: 1300px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media screen and (max-width: 800px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+
+    &-item {
+      list-style: none;
+      padding: 5px 0px;
+      cursor: move;
+      border: 1px dashed transparent;
+      transition: 0.3s all;
+      &:hover {
+        box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+        color: $themeColor;
+      }
+      background-color: $lightThemeColor;
+      text-align: center;
+      &-ico {
+        // height: 40px;
+        // display: flex;
+        // align-items: center;
+        font-size: 20px;
+        // justify-content: center;
+        .ico-content {
+          display: inline-block;
+          width: 1em;
+          height: 1em;
+          overflow: hidden;
+          fill: currentColor;
+        }
+      }
+      &-name {
+        font-size: 13px;
+      }
+    }
+  }
+}
+</style>

@@ -45,7 +45,7 @@ const designInstance = useDesignInstance()!
     @include ns('form') {
       background-color: #fff;
       border-radius: 5px;
-      padding: 5px;
+      padding: 20px;
       box-sizing: border-box;
       height: 100%;
       margin: 0 auto;

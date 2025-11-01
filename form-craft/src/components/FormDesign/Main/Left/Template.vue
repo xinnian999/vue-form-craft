@@ -1,5 +1,5 @@
 <template>
-  <div class="template-list">
+  <div :class="ns('template-list')">
     <div class="title">表单模板</div>
     <div class="description">用于管理和切换表单模板，方便在不同业务场景中快速切换和配置表单。</div>
     <el-tree style="max-width: 600px" :data="templates">
@@ -27,6 +27,7 @@
 import { useDesignInstance } from '@/hooks'
 import Icon from '@/Icon/index.vue'
 import templates from '@/templates'
+import { ns } from '@/utils'
 
 const designInstance = useDesignInstance()!
 
@@ -34,3 +35,55 @@ const useTemplate = (schema: any) => {
   designInstance.applySchema(schema)
 }
 </script>
+
+<style lang="scss">
+@import '@/style';
+
+@include ns('template-list') {
+  .title {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 5px 0px;
+  }
+  .description {
+    font-size: 12px;
+    color: #999;
+    margin: 5px 0px;
+    margin-bottom: 20px;
+  }
+
+  .el-tree-node__content {
+    height: auto;
+    padding: 5px;
+    margin-bottom: 5px;
+    overflow: hidden;
+  }
+
+  .catalog {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .form {
+    padding: 5px 0;
+    width: 100%;
+    .form-header {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      .edit {
+        cursor: pointer;
+        margin-left: auto;
+        font-size: 18px;
+      }
+    }
+    .form-description {
+      font-size: 12px;
+      color: #999;
+      // padding-right: 20px;
+      margin-top: 5px;
+      white-space: wrap;
+    }
+  }
+}
+</style>

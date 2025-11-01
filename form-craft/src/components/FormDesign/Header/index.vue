@@ -1,9 +1,9 @@
 <template>
   <div :class="ns('form-design-header')">
+    <div class="logo"><Logo />FormCraft</div>
     <div class="left">
-      <el-button-group size="small">
+      <el-button-group>
         <el-button
-          type="primary"
           :disabled="designInstance.historyIndex === -1"
           name="history-back"
           @click="designInstance.handleHistoryBack"
@@ -11,7 +11,6 @@
           <template #icon><Icon name="back" /></template>
         </el-button>
         <el-button
-          type="primary"
           name="history-forward"
           :disabled="
             designInstance.historyIndex === designInstance.history.length - 1 ||
@@ -22,11 +21,7 @@
           <template #icon><Icon name="forward" /></template>
         </el-button>
       </el-button-group>
-      <el-button
-        @click="designInstance.handleToggleFullScreen"
-        size="small"
-        style="margin-left: 12px"
-      >
+      <el-button @click="designInstance.handleToggleFullScreen" style="margin-left: 12px">
         <template #icon>
           <Icon :name="designInstance.fullScreen ? 'cancelFullScreen' : 'fullScreen'" />
         </template>
@@ -55,6 +50,7 @@ import { ref } from 'vue'
 import { useDesignInstance, useLocale } from '@/hooks'
 import Icon from '@/Icon/index.vue'
 import { ns } from '@/utils'
+import Logo from './logo.vue'
 import Preview from './Preview.vue'
 
 type PreviewAction = {
@@ -114,11 +110,23 @@ const rightActions: PreviewAction[] = [
 
 @include ns('form-design-header') {
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
   align-items: center;
   background-color: #fff;
   padding: 10px;
   border-bottom: 1px solid #eee;
+
+  .logo {
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    width: 350px;
+  }
+
+  .right {
+    margin-left: auto;
+  }
 }
 </style>

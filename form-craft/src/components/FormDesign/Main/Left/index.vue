@@ -1,156 +1,149 @@
 <template>
   <div :class="ns('form-design-left')">
-    <el-tabs v-model="tabKey" type="border-card" :class="ns('form-design-tabs')">
-      <el-tab-pane v-for="{ title, key, render } in tabs" :key="key" :label="title" :name="key">
-        <component :is="render" />
-      </el-tab-pane>
-    </el-tabs>
+    <div class="sidebar">
+      <el-tooltip v-for="menu in menus" :key="menu.key" :content="menu.title" placement="right">
+        <div
+          :class="['item', { active: activeKey === menu.key }]"
+          :key="menu.key"
+          @click="handleClick(menu.key)"
+        >
+          <Icon :name="menu.icon" />
+        </div>
+      </el-tooltip>
+    </div>
+    <div class="content" v-if="visible">
+      <div class="topbar">
+        <div>{{ activeData.title }}</div>
+        <div class="close" @click="handleClose">
+          <Icon name="close" />
+        </div>
+      </div>
+      <div class="render">
+        <component :is="activeData.render" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { AI } from '@/components'
 import { useGlobals } from '@/hooks'
+import Icon from '@/Icon/index.vue'
 import { ns } from '@/utils'
 import List from './List.vue'
 import Template from './Template.vue'
 
-const tabKey = ref('elements')
+const activeKey = ref('component')
+
+const visible = ref(true)
+
+const activeData = computed(() => {
+  return menus.find((menu) => menu.key === activeKey.value)!
+})
 
 const { ai } = useGlobals()
 
-const tabs = [
+const menus = [
   {
     title: '元素',
-    key: 'elements',
+    key: 'component',
+    icon: 'component',
     render: List
   },
   {
     title: '模板',
     key: 'templates',
+    icon: 'template',
     render: Template
   }
 ]
 
 if (ai) {
-  tabs.push({
-    title: 'AI',
+  menus.push({
+    title: 'AI表单助手',
     key: 'ai',
+    icon: 'ai',
     render: AI
   })
 }
+
+const handleClick = (key: string) => {
+  activeKey.value = key
+  visible.value = true
+}
+
+const handleClose = () => {
+  visible.value = false
+}
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 @import '@/style';
 
 @include ns('form-design-left') {
-  width: 300px;
   position: relative;
-  overflow: auto;
+  overflow: hidden;
+  display: flex;
 
-  @include ns('menu') {
-    &-list {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      width: 100%;
-      padding: 5px;
-      box-sizing: border-box;
+  .sidebar {
+    height: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    border-right: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 
-      &-ghost,
-      &-fallback,
-      &-drag {
-        list-style: none;
+    .item {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 20px;
+      &:hover {
+        background-color: #eee;
       }
+    }
 
-      @media screen and (max-width: 1300px) {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      @media screen and (max-width: 800px) {
-        grid-template-columns: repeat(1, 1fr);
-      }
-
-      &-item {
-        list-style: none;
-        padding: 5px 0px;
-        cursor: move;
-        border: 1px dashed transparent;
-        transition: 0.3s all;
-        &:hover {
-          box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
-          color: $themeColor;
-        }
-        background-color: $lightThemeColor;
-        text-align: center;
-        &-ico {
-          // height: 40px;
-          // display: flex;
-          // align-items: center;
-          font-size: 20px;
-          // justify-content: center;
-          .ico-content {
-            display: inline-block;
-            width: 1em;
-            height: 1em;
-            overflow: hidden;
-            fill: currentColor;
-          }
-        }
-        &-name {
-          font-size: 13px;
-        }
-      }
+    .item.active {
+      color: $themeColor;
+      background-color: #eee;
     }
   }
 
-  .template-list {
-    .title {
-      font-size: 14px;
-      font-weight: bold;
-      margin: 5px 0px;
-    }
-    .description {
-      font-size: 12px;
-      color: #999;
-      margin: 5px 0px;
-      margin-bottom: 20px;
-    }
+  .content {
+    width: 300px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 
-    .el-tree-node__content {
-      height: auto;
-      padding: 5px;
-      margin-bottom: 5px;
-      overflow: hidden;
-    }
-
-    .catalog {
+    .topbar {
+      padding: 12px;
       display: flex;
       align-items: center;
-      gap: 5px;
-    }
-    .form {
-      padding: 5px 0;
-      width: 100%;
-      .form-header {
+      justify-content: space-between;
+      border-bottom: 1px solid #eee;
+      .close {
         display: flex;
         align-items: center;
-        gap: 5px;
-        .edit {
-          cursor: pointer;
-          margin-left: auto;
-          font-size: 18px;
+        justify-content: center;
+        cursor: pointer;
+        &:hover {
+          color: $themeColor;
         }
       }
-      .form-description {
-        font-size: 12px;
-        color: #999;
-        // padding-right: 20px;
-        margin-top: 5px;
-        white-space: wrap;
-      }
+    }
+
+    .render {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      overflow-x: hidden;
     }
   }
 }
