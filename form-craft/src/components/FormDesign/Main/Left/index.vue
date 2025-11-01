@@ -13,7 +13,9 @@
     </div>
     <div class="content" v-if="visible">
       <div class="topbar">
-        <div>{{ activeData.title }}</div>
+        <div>
+          {{ activeData.title }} <span class="desc">{{ activeData.desc }}</span>
+        </div>
         <div class="close" @click="handleClose">
           <Icon name="close" />
         </div>
@@ -49,12 +51,14 @@ const menus = [
     title: '元素',
     key: 'component',
     icon: 'component',
+    desc: '拖拽或双击组件',
     render: List
   },
   {
     title: '模板',
     key: 'templates',
     icon: 'template',
+    desc: '快速切换和配置表单。',
     render: Template
   }
 ]
@@ -64,6 +68,7 @@ if (ai) {
     title: 'AI表单助手',
     key: 'ai',
     icon: 'ai',
+    desc: '',
     render: AI
   })
 }
@@ -128,6 +133,11 @@ const handleClose = () => {
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid #eee;
+      .desc {
+        font-size: 12px;
+        color: #999;
+      }
+
       .close {
         display: flex;
         align-items: center;

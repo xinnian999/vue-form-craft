@@ -108,6 +108,7 @@ const handleDbClick = (element: FormElement) => {
     &-item {
       list-style: none;
       padding: 5px 0px;
+      border-radius: 5px;
       cursor: move;
       border: 1px dashed transparent;
       transition: 0.3s all;
