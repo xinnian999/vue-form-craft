@@ -6,6 +6,9 @@
       @mouseleave="handleCanvasMouseLeave"
       @click="handleCanvasClick"
     >
+      <div v-if="designInstance.currentKey === 'root'" class="fd-form-title">
+        <Icon name="form" /> 表单
+      </div>
       <FormRender
         :class="[
           'fd-form',
@@ -24,6 +27,7 @@
 <script setup lang="ts">
 import { FormRender } from '@/components'
 import { useDesignInstance } from '@/hooks'
+import Icon from '@/Icon/index.vue'
 import { ns } from '@/utils'
 
 const designInstance = useDesignInstance()!
@@ -59,6 +63,21 @@ const handleCanvasClick = () => {
     position: relative;
     overflow-y: hidden;
     overflow-x: auto;
+    .fd-form-title {
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      background-color: $themeColor;
+      box-sizing: border-box;
+      gap: 3px;
+      font-size: 12px;
+      border-radius: 3px;
+      padding: 2px 5px;
+      color: #fff;
+    }
+
     .fd-form {
       background-color: #fff;
       border-radius: 5px;
