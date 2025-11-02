@@ -155,6 +155,7 @@ const rightBottomActions = [
 
 @include ns('canvas-item.hover') {
   border: 2px dashed $themeColor;
+  background-color: $lightThemeColor;
 }
 
 @include ns('canvas-item.mask') {

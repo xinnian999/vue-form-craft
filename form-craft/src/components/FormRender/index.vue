@@ -1,5 +1,5 @@
 <template>
-  <el-form :class="ns('form')" :model="formValues" ref="form" v-bind="formAttrs">
+  <el-form :model="formValues" ref="form" v-bind="formAttrs">
     <slot />
 
     <FormItemGroup

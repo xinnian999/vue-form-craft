@@ -21,6 +21,7 @@ import { FormRender } from '@/components'
 import { useDesignInstance, useElements, useLang } from '@/hooks'
 import type { FormItemType, FormSchema } from '@/types'
 import { getDataByPath, ns, setDataByPath } from '@/utils'
+import formAttrSchema from '../formOptions'
 import LinkageConfig from './LinkageConfig/index.vue'
 import StyleConfig from './StyleConfig/index.vue'
 
@@ -33,6 +34,10 @@ const lang = useLang()
 const current = defineModel<FormItemType>({ required: true })
 
 const attrSchema = computed<FormSchema>(() => {
+  if (designInstance.currentKey === 'root') {
+    return formAttrSchema
+  }
+
   const config = elements[current.value.component]
 
   if (config?.attrSchema) {

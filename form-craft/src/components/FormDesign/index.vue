@@ -54,7 +54,7 @@ const modelValue = defineModel<FormSchema>({
   default: () => reactive(initJsonSchema)
 })
 
-const currentKey = ref('')
+const currentKey = ref('root')
 
 const fullScreen = ref(false)
 
@@ -156,9 +156,18 @@ const updateNodeByKey = (designKey: string, newNodeData: Record<string, any>) =>
 
 const current = computed({
   get() {
+    if (currentKey.value === 'root') {
+      return getSchema()
+    }
+
     return getNodeByKey(currentKey.value)
   },
   set(element: FormItemType) {
+    if (currentKey.value === 'root') {
+      setSchema(element)
+      return
+    }
+
     const oldNode = getNodeByKey(currentKey.value)
     if (oldNode) {
       Object.assign(oldNode, element)
