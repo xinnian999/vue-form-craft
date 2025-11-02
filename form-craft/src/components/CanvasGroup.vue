@@ -1,5 +1,9 @@
 <template>
-  <div :class="ns('canvas-group')" :style="{ overflowY: modelValue.length ? 'auto' : 'hidden' }">
+  <div
+    ref="scrollContainer"
+    :class="ns('canvas-group')"
+    :style="{ overflowY: modelValue.length ? 'auto' : 'hidden' }"
+  >
     <div
       v-if="!modelValue.length"
       :class="ns('canvas-group-empty')"
@@ -21,6 +25,10 @@
       :animation="300"
       handle=".move-btn"
       force-fallback
+      :scroll="scrollContainer"
+      :scroll-sensitivity="100"
+      :scroll-speed="20"
+      :bubble-scroll="true"
       @add="onAdd"
     >
       <template #item="{ element: child, index }">
@@ -31,6 +39,7 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import Draggable from 'vuedraggable-es-fix'
 import { useDesignInstance } from '@/hooks'
 import Icon from '@/Icon/index.vue'
@@ -54,6 +63,8 @@ const props = withDefaults(
 const modelValue = defineModel<FormItemType[]>({
   default: () => []
 })
+
+const scrollContainer = ref<HTMLElement>()
 
 const designInstance = useDesignInstance()!
 
@@ -79,6 +90,29 @@ const onAdd = (e: Record<string, any>) => {
   position: relative;
   height: 100%;
   width: 100%;
+
+  // 滚动条悬浮样式
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  // Firefox 滚动条样式
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+
   &-empty {
     color: #999;
     width: 100%;
