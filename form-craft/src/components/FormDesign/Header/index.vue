@@ -77,7 +77,7 @@ const rightActions: PreviewAction[] = [
     }
   },
   {
-    label: '导入 / 导出',
+    label: 'JSON',
     btnType: 'primary',
     icon: 'script',
     onClick: () => {
