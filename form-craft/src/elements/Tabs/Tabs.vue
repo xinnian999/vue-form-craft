@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, ref } from 'vue'
 import { FormItemGroup } from '@/components'
 // import { useDesignInstance } from '@/hooks'
 import type { FormItemType } from '@/types'
