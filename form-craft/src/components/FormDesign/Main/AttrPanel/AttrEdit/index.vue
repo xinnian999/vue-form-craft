@@ -21,7 +21,7 @@ import { FormRender } from '@/components'
 import { useDesignInstance, useElements, useLang } from '@/hooks'
 import type { FormItemType, FormSchema } from '@/types'
 import { getDataByPath, ns, setDataByPath } from '@/utils'
-import formAttrSchema from '../formOptions'
+import formAttrSchema from './formOptions'
 import LinkageConfig from './LinkageConfig/index.vue'
 import StyleConfig from './StyleConfig/index.vue'
 
