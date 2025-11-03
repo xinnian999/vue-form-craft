@@ -34,6 +34,7 @@ import { useGlobals } from '@/hooks'
 import Icon from '@/Icon/index.vue'
 import { ns } from '@/utils'
 import List from './List.vue'
+import Outline from './Outline.vue'
 import Template from './Template.vue'
 
 const activeKey = ref('component')
@@ -53,6 +54,13 @@ const menus = [
     icon: 'component',
     desc: '拖拽或双击组件',
     render: List
+  },
+  {
+    title: '大纲',
+    key: 'outline',
+    icon: 'outline',
+    desc: '',
+    render: Outline
   },
   {
     title: '模板',
