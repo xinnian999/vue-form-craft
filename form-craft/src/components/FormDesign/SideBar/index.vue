@@ -90,6 +90,7 @@ const handleClose = () => {
   position: relative;
   overflow: hidden;
   display: flex;
+  background-color: #fff;
 
   .sidebar {
     height: 100%;
@@ -99,6 +100,7 @@ const handleClose = () => {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    background-color: #fff;
 
     .item {
       width: 50px;
@@ -126,6 +128,7 @@ const handleClose = () => {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    border-right: 1px solid #eee;
 
     .topbar {
       padding: 12px;

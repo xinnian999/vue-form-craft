@@ -51,7 +51,6 @@ const handleCanvasClick = () => {
 @include ns('form-design-center') {
   flex: 1;
   overflow: hidden;
-  border-left: 1px solid #eee;
   border-right: 1px solid #eee;
   display: flex;
   flex-direction: column;

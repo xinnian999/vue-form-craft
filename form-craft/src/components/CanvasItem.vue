@@ -5,8 +5,6 @@
     @mousemove.stop="handleHoverEnter"
     @mouseleave.stop="handleHoverLeave"
   >
-    <div class="hidden-ico" v-if="data.hidden"><Icon name="hidden" /></div>
-
     <div :class="['actions', { 'actions-first': index === 0 }]">
       <div class="componentName">
         <component :is="config.icon" />

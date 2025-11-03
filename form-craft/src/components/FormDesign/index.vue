@@ -1,6 +1,6 @@
 <template>
   <div :class="ns('form-design')" v-bind="$attrs" ref="formDesignWrapper">
-    <Header />
+    <SideBar />
     <Main />
     <Json v-model="jsonState.visible" :target="jsonState.target" />
   </div>
@@ -34,9 +34,9 @@ import type {
   FormSchema
 } from '@/types'
 import { ns, repirJsonSchema } from '@/utils'
-import Header from './Header/index.vue'
 import Json from './Json/index.vue'
 import Main from './Main/index.vue'
+import SideBar from './SideBar/index.vue'
 
 const props = withDefaults(defineProps<FormDesignProps>(), {
   omitMenus: () => [],
@@ -276,7 +276,7 @@ defineExpose(instance)
   overflow: hidden;
   background-color: $bgColor;
   position: relative;
-  flex-direction: column;
+  flex-direction: row;
 
   ::-webkit-scrollbar {
     /*滚动条整体样式*/

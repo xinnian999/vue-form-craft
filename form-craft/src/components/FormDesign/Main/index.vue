@@ -1,16 +1,19 @@
 <template>
   <div :class="ns('form-design-main')">
-    <Left />
-    <Center />
-    <Right />
+    <Header />
+
+    <div :class="ns('form-design-main-content')">
+      <Canvas />
+      <AttrPanel />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ns } from '@/utils'
-import Center from './Center/index.vue'
-import Left from './Left/index.vue'
-import Right from './Right/index.vue'
+import AttrPanel from './AttrPanel/index.vue'
+import Canvas from './Canvas/index.vue'
+import Header from './Header/index.vue'
 </script>
 
 <style lang="scss">
@@ -21,5 +24,12 @@ import Right from './Right/index.vue'
   overflow: hidden;
   width: 100%;
   display: flex;
+  flex-direction: column;
+
+  &-content {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+  }
 }
 </style>

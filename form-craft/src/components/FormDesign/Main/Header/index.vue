@@ -1,11 +1,11 @@
 <template>
   <div :class="ns('form-design-header')">
-    <div class="logo"><Logo />FormCraft</div>
     <div class="left">
       <el-button-group>
         <el-button
           :disabled="designInstance.historyIndex === -1"
           name="history-back"
+          :size="btnSize"
           @click="designInstance.handleHistoryBack"
         >
           <template #icon><Icon name="back" /></template>
@@ -16,12 +16,17 @@
             designInstance.historyIndex === designInstance.history.length - 1 ||
             designInstance.history.length === 0
           "
+          :size="btnSize"
           @click="designInstance.handleHistoryForward"
         >
           <template #icon><Icon name="forward" /></template>
         </el-button>
       </el-button-group>
-      <el-button @click="designInstance.handleToggleFullScreen" style="margin-left: 12px">
+      <el-button
+        :size="btnSize"
+        @click="designInstance.handleToggleFullScreen"
+        style="margin-left: 12px"
+      >
         <template #icon>
           <Icon :name="designInstance.fullScreen ? 'cancelFullScreen' : 'fullScreen'" />
         </template>
@@ -34,6 +39,7 @@
         :key="label"
         :type="btnType"
         :name="name"
+        :size="btnSize"
         @click="onClick"
       >
         <template #icon v-if="icon"> <Icon :name="icon" /> </template>{{ label }}</el-button
@@ -50,7 +56,6 @@ import { ref } from 'vue'
 import { useDesignInstance, useLocale } from '@/hooks'
 import Icon from '@/Icon/index.vue'
 import { ns } from '@/utils'
-import Logo from './logo.vue'
 import Preview from './Preview.vue'
 
 type PreviewAction = {
@@ -66,6 +71,8 @@ const designInstance = useDesignInstance()!
 const locale = useLocale()
 
 const PreviewVisible = ref(false)
+
+const btnSize = 'small'
 
 const rightActions: PreviewAction[] = [
   {
@@ -113,8 +120,9 @@ const rightActions: PreviewAction[] = [
   flex-wrap: wrap;
   align-items: center;
   background-color: #fff;
-  padding: 10px;
+  padding: 10px 15px;
   border-bottom: 1px solid #eee;
+  gap: 12px;
 
   .logo {
     font-size: 16px;
@@ -125,8 +133,14 @@ const rightActions: PreviewAction[] = [
     width: 350px;
   }
 
+  .left {
+    display: flex;
+    align-items: center;
+  }
+
   .right {
     margin-left: auto;
+    display: flex;
   }
 }
 </style>
