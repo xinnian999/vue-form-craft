@@ -1,14 +1,12 @@
 <template>
   <el-tabs v-bind="$attrs" v-model="activeKey">
-    <template v-for="(item, index) in children" :key="index">
-      <CanvasItem v-show="activeKey === item.name" :data="item" :index="index" />
-    </template>
+    <FormItemGroup :children="children" :designKey="designKey" />
   </el-tabs>
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { CanvasItem } from '@/components'
+import { FormItemGroup } from '@/components'
 import type { FormItemType } from '@/types'
 
 const props = defineProps<{
