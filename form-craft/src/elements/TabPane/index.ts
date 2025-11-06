@@ -12,12 +12,10 @@ export default {
   attrSchema: {
     size: 'small',
     labelAlign: 'top',
-    initialValues: {
-    },
+    initialValues: {},
     items: [
       { label: '标题', component: 'Input', name: 'label' },
-      { label: '唯一标识', component: 'Input', name: 'name' },
-      { label: '禁用', component: 'Switch', name: 'disabled' },
+      { label: '唯一标识', component: 'Input', name: 'name' }
     ]
   }
 } satisfies FormElement
