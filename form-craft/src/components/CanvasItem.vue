@@ -93,15 +93,18 @@ const rightBottomActions = [
 <style lang="scss">
 @import '@/style';
 @include ns('canvas-item') {
-  border: 2px solid transparent;
   padding-bottom: 0.1px;
   position: relative;
   box-sizing: border-box;
   z-index: 2;
 
-  // @include ns('form-item') {
-  //   margin-bottom: 0;
-  // }
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+  }
 
   .hidden-ico {
     position: absolute;
@@ -152,8 +155,14 @@ const rightBottomActions = [
 }
 
 @include ns('canvas-item.hover') {
-  border: 2px dashed $themeColor;
   background-color: $lightThemeColor;
+
+  &::after {
+    border-color: $themeColor;
+    border-style: dashed;
+    border-width: 1px;
+    z-index: 10;
+  }
 }
 
 @include ns('canvas-item.mask') {
@@ -170,7 +179,12 @@ const rightBottomActions = [
 }
 
 @include ns('canvas-item.active') {
-  border: 2px solid $themeColor !important;
+  &::after {
+    border-color: $themeColor;
+    border-style: solid;
+    border-width: 2px;
+    z-index: 15;
+  }
 
   & > .actions {
     display: flex;
