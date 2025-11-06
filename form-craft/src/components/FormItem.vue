@@ -1,6 +1,10 @@
 <template>
   <template v-if="formInstance.design || !hidden">
-    <div v-if="config.type === 'layout'" :class="[ns('form-item'), props.class]" :style="style">
+    <div
+      v-if="config.type === 'layout' || config.type === 'assist'"
+      :class="[ns('form-item'), props.class]"
+      :style="style"
+    >
       <component
         :is="config.render"
         v-bind="componentProps"

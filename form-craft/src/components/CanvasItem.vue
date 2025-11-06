@@ -105,6 +105,7 @@ const rightBottomActions = computed(() => {
 @import '@/style';
 @include ns('canvas-item') {
   padding-bottom: 0.1px;
+  padding-top: 0.1px;
   position: relative;
   box-sizing: border-box;
   z-index: 2;

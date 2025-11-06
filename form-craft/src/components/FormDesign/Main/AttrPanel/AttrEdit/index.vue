@@ -60,17 +60,7 @@ const attrSchema = computed<FormSchema>(() => {
 
     return {
       ...config.attrSchema,
-      items: [
-        {
-          label: '组件类型',
-          component: 'Tag',
-          name: 'componentType',
-          props: {
-            text: config.title
-          }
-        },
-        ...items
-      ]
+      items
     }
   }
 
