@@ -12,7 +12,7 @@
 
     <div
       v-else-if="config.type === 'assist'"
-      :class="[ns('form-item'), props.class]"
+      :class="[ns('form-item'), props.class, `${component}-${name}`]"
       :style="style"
     >
       <component :is="config.render" v-bind="componentProps" />
