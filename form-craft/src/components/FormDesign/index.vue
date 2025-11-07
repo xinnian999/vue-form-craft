@@ -154,6 +154,24 @@ const updateNodeByKey = (designKey: string, newNodeData: Record<string, any>) =>
   }
 }
 
+const addItem = (item: FormItemType) => {
+  if (currentKey.value === 'root') {
+    const schema = getSchema()
+
+    applySchema({
+      ...schema,
+      items: schema.items ? [...schema.items, item] : [item]
+    })
+  } else {
+    const node = getNodeByKey(currentKey.value)!
+
+    updateNodeByKey(currentKey.value, {
+      ...node,
+      children: node.children ? [...node.children, item] : [item]
+    })
+  }
+}
+
 const current = computed({
   get() {
     if (currentKey.value === 'root') {
@@ -243,14 +261,7 @@ const instance = reactive<DesignInstance>({
       jsonState.target = target || ''
     }, 100)
   },
-  addItem(item: FormItemType) {
-    const schema = getSchema()
-
-    applySchema({
-      ...schema,
-      items: schema.items ? [...schema.items, item] : [item]
-    })
-  }
+  addItem
 })
 
 provide($designInstance, instance)
