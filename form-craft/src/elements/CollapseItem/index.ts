@@ -15,7 +15,8 @@ export default {
     initialValues: {},
     items: [
       { label: '标题', component: 'Input', name: 'label' },
-      { label: '唯一标识', component: 'Input', name: 'name' }
+      { label: '唯一标识', component: 'Input', name: 'name' },
+      { label: '默认展开', component: 'Switch', name: 'props.checked' }
     ]
   }
 } satisfies FormElement

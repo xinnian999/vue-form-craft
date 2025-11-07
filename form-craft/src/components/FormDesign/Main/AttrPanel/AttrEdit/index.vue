@@ -8,9 +8,9 @@
       </template>
     </FormRender>
 
-    <StyleConfig :key="current.designKey" v-model="currentProps" />
+    <!-- <StyleConfig :key="current.designKey" v-model="currentProps" />
 
-    <LinkageConfig v-model="current" />
+    <LinkageConfig v-model="current" /> -->
   </div>
 </template>
 

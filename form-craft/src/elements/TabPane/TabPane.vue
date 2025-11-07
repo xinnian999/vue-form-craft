@@ -22,7 +22,7 @@ const formInstance = useFormInstance()
 const designStyles = computed(() => {
   return {
     background: formInstance.design && '#f4f3f3',
-    paddingBottom: formInstance.design && '20px'
+    padding: formInstance.design && '20px'
   }
 })
 </script>

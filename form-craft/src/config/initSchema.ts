@@ -6,5 +6,6 @@ export default {
   scrollToError: true,
   size: 'default',
   submitBtn: true,
+  initialValues: {},
   items: []
 } satisfies FormSchema

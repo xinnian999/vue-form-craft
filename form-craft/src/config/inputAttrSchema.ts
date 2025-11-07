@@ -1,11 +1,14 @@
 import type { FormSchema } from 'form-craft'
 
 export default {
-  labelWidth: 100,
-  size: 'small',
+  labelWidth: 110,
+  size: 'default',
   labelAlign: 'left',
   scrollToError: true,
   submitBtn: false,
+  initialValues: {
+    label: '单行文本'
+  },
   items: [
     {
       name: 'form-2DaW',
@@ -24,15 +27,6 @@ export default {
           designKey: 'tab-1',
           children: [
             {
-              name: 'form-ITGD',
-              component: 'Divider',
-              props: {
-                title: '字段属性',
-                contentPosition: 'center'
-              },
-              designKey: 'design-NXEJ'
-            },
-            {
               label: '标签',
               name: 'label',
               component: 'Input',
@@ -42,7 +36,7 @@ export default {
                 clearable: true
               },
               designKey: 'design-gfim',
-              size: 'small'
+              size: 'default'
             },
             {
               label: '字段标识',
@@ -70,6 +64,12 @@ export default {
               designKey: 'design-Qh45'
             },
             {
+              label: '占位提示',
+              name: 'props.placeholder',
+              component: 'Input',
+              designKey: 'design-JTMu'
+            },
+            {
               label: '隐藏',
               name: 'hidden',
               component: 'Switch',
@@ -78,6 +78,55 @@ export default {
               },
               designKey: 'design-C5Qj'
             },
+            {
+              label: '禁用',
+              name: 'props.disabled',
+              component: 'Switch',
+              props: {
+                'inline-prompt': false
+              },
+              designKey: 'design-VnLN'
+            },
+            {
+              label: '只读',
+              name: 'props.readonly',
+              component: 'Switch',
+              props: {
+                'inline-prompt': false
+              },
+              designKey: 'design-XgeW'
+            },
+            {
+              label: '清除按钮',
+              name: 'props.clearable',
+              component: 'Switch',
+              designKey: 'design-8sk2'
+            },
+            {
+              label: '浏览器自动填充',
+              name: 'props.autocomplete',
+              component: 'Switch',
+              props: {
+                activeValue: 'on',
+                inactiveValue: 'new-password'
+              },
+              designKey: 'design-BU53'
+            }
+          ]
+        },
+        {
+          label: '校验',
+          name: 'name2',
+          component: 'TabPane',
+          designKey: 'tab-2',
+          children: []
+        },
+        {
+          label: '布局',
+          name: 'name4',
+          component: 'TabPane',
+          designKey: 'tab-4',
+          children: [
             {
               label: '标签宽度',
               name: 'labelWidth',
@@ -134,53 +183,10 @@ export default {
                 ]
               },
               designKey: 'design-yaZ4'
-            },
-            {
-              name: 'form-IH6q',
-              component: 'Divider',
-              props: {
-                title: '组件属性',
-                contentPosition: 'center'
-              },
-              designKey: 'design-R9lS'
-            },
-            {
-              label: '禁用',
-              name: 'props.disabled',
-              component: 'Switch',
-              props: {
-                'inline-prompt': false
-              },
-              designKey: 'design-VnLN'
-            },
-            {
-              label: '只读',
-              name: 'props.readonly',
-              component: 'Switch',
-              props: {
-                'inline-prompt': false
-              },
-              designKey: 'design-XgeW'
-            },
-            {
-              label: '占位提示',
-              name: 'props.placeholder',
-              component: 'Input',
-              designKey: 'design-JTMu'
             }
           ]
-        },
-        {
-          label: '校验',
-          name: 'name2',
-          component: 'TabPane',
-          designKey: 'tab-2',
-          children: []
         }
       ]
     }
-  ],
-  initialValues: {
-    label: '单行文本'
-  }
+  ]
 } satisfies FormSchema
