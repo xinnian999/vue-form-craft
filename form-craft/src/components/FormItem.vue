@@ -20,8 +20,8 @@
       :style="style"
       :key="name"
       :prop="name"
-      :label-width="hideLabel ? '0' : formInstance.schema.labelWidth"
       :rules="computeRules"
+      :label-width="labelWidth"
     >
       <template #label v-if="!hideLabel">
         <div :class="[ns('form-item-label'), label && `${name}-label`]">
@@ -87,6 +87,10 @@ import type { FormItemType } from '@/types'
 import { getDataByPath, isRegexString, ns, parseRegexString, setDataByPath } from '@/utils'
 
 const props = defineProps<FormItemType>()
+
+if (props.label === '标签') {
+  console.log('标签', props)
+}
 
 const formInstance = useFormInstance()
 

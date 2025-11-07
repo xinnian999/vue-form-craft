@@ -19,6 +19,7 @@ export type FormChange = {
 
 export interface FormItemType {
   label?: string
+  labelWidth?: number
   name: string
   component: string
   required?: boolean
