@@ -17,7 +17,7 @@
 
     <draggable
       v-model="modelValue"
-      group="formDesign"
+      :group="group"
       itemKey="name"
       :ghost-class="ns('canvas-group-ghost')"
       :class="[ns('canvas-group-draggable'), props.class]"
@@ -51,12 +51,14 @@ const props = withDefaults(
   defineProps<{
     style?: any
     class?: string
+    group?: string
     emptyText?: string
     emptySize?: number
   }>(),
   {
     emptyText: '请拖入子字段',
-    emptySize: 12
+    emptySize: 12,
+    group: 'formDesign'
   }
 )
 

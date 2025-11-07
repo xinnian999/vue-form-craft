@@ -1,5 +1,5 @@
 <template>
-  <CanvasGroup v-if="formInstance.design" v-model="childrenModel" />
+  <CanvasGroup v-if="formInstance.design" v-model="childrenModel" :group="group" />
 
   <div v-else>
     <FormItem v-for="item in childrenModel" :key="item.name" v-bind="item" />
@@ -14,6 +14,7 @@ import type { FormItemType } from '@/types'
 const props = defineProps<{
   children?: FormItemType[]
   designKey?: string
+  group?: string
 }>()
 
 const formInstance = useFormInstance()

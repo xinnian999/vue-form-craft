@@ -64,41 +64,30 @@ const handleSelect = (element: FormItemType) => {
   designInstance.rightTab = 'attr'
 }
 
-const rightBottomActions = computed(() => {
-  const actions = [
-    {
-      icon: 'move',
-      name: 'move-btn'
-    },
-    {
-      icon: 'copy',
-      name: 'copy-btn',
-      handle: (element: FormItemType) => {
-        const schema = designInstance.getSchema()
-        const newList = copyItems(schema.items!, element.designKey!)
-        designInstance.applySchema({ ...schema, items: newList })
-      }
-    },
-    {
-      icon: 'delete',
-      name: 'delete-btn',
-      handle: (element: FormItemType) => {
-        const schema = designInstance.getSchema()
-        const newList = recursionDelete(
-          schema.items!,
-          (item) => item.designKey !== element.designKey
-        )
-        designInstance.applySchema({ ...schema, items: newList })
-      }
+const rightBottomActions = [
+  {
+    icon: 'move',
+    name: 'move-btn'
+  },
+  {
+    icon: 'copy',
+    name: 'copy-btn',
+    handle: (element: FormItemType) => {
+      const schema = designInstance.getSchema()
+      const newList = copyItems(schema.items!, element.designKey!)
+      designInstance.applySchema({ ...schema, items: newList })
     }
-  ]
-
-  if (config.component === 'TabPane') {
-    actions.splice(0, 1)
+  },
+  {
+    icon: 'delete',
+    name: 'delete-btn',
+    handle: (element: FormItemType) => {
+      const schema = designInstance.getSchema()
+      const newList = recursionDelete(schema.items!, (item) => item.designKey !== element.designKey)
+      designInstance.applySchema({ ...schema, items: newList })
+    }
   }
-
-  return actions
-})
+]
 </script>
 
 <style lang="scss">

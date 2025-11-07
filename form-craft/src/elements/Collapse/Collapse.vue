@@ -1,6 +1,6 @@
 <template>
   <ElCollapse v-bind="$attrs" v-model="activeKey">
-    <FormItemGroup :children="children" :designKey="designKey!" />
+    <FormItemGroup :children="children" :designKey="designKey!" group="CollapseItem" />
   </ElCollapse>
 </template>
 

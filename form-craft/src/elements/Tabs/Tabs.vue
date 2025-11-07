@@ -1,6 +1,6 @@
 <template>
   <el-tabs v-bind="$attrs" v-model="activeKey">
-    <FormItemGroup :children="children" :designKey="designKey" />
+    <FormItemGroup :children="children" :designKey="designKey" group="TabItem" />
   </el-tabs>
 </template>
 
