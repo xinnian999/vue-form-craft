@@ -1,15 +1,17 @@
 <template>
-  <el-button type="primary" plain size="small" @click="visible = true">编辑</el-button>
-  <el-dialog v-model="visible" title="表单初始值" append-to-body>
-    <FormRender
-      v-model="initialValues"
-      :schema="{ ...designInstance.getSchema(), submitBtn: false, resetBtn: false }"
-    ></FormRender>
-    <template #footer>
-      <el-button @click="visible = false">取消</el-button>
-      <el-button type="primary" @click="handleSave">保存</el-button>
-    </template>
-  </el-dialog>
+  <div>
+    <el-button type="primary" plain size="small" @click="visible = true">编辑</el-button>
+    <el-dialog v-model="visible" title="表单初始值" append-to-body>
+      <FormRender
+        v-model="initialValues"
+        :schema="{ ...designInstance.getSchema(), submitBtn: false, resetBtn: false }"
+      ></FormRender>
+      <template #footer>
+        <el-button @click="visible = false">取消</el-button>
+        <el-button type="primary" @click="handleSave">保存</el-button>
+      </template>
+    </el-dialog>
+  </div>
 </template>
 
 <script setup lang="ts">

@@ -1,10 +1,6 @@
 <template>
   <template v-if="formInstance.design || !hidden">
-    <div
-      v-if="config.type === 'layout' || config.type === 'assist'"
-      :class="[ns('form-item'), props.class]"
-      :style="style"
-    >
+    <div v-if="config.type === 'layout'" :class="[ns('form-item'), props.class]" :style="style">
       <component
         :is="config.render"
         v-bind="componentProps"
@@ -12,6 +8,14 @@
         :label="props.label"
         :name="props.name"
       />
+    </div>
+
+    <div
+      v-else-if="config.type === 'assist'"
+      :class="[ns('form-item'), props.class]"
+      :style="style"
+    >
+      <component :is="config.render" v-bind="componentProps" />
     </div>
 
     <el-form-item
@@ -88,10 +92,6 @@ import type { FormItemType } from '@/types'
 import { getDataByPath, isRegexString, ns, parseRegexString, setDataByPath } from '@/utils'
 
 const props = defineProps<FormItemType>()
-
-if (props.label === '标签') {
-  console.log('标签', props)
-}
 
 const formInstance = useFormInstance()
 
