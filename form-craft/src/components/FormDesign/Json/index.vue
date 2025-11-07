@@ -16,6 +16,13 @@
         </template>
         <JsonSchemaEdit :json="json" @save="onSave" @init="onInit" />
       </el-tab-pane>
+      <el-tab-pane name="import" lazy>
+        <template #label>
+          <Icon name="import" style="margin-right: 5px" />
+          <span>导入</span>
+        </template>
+        <ImportJsonSchema />
+      </el-tab-pane>
       <el-tab-pane name="ts" lazy>
         <template #label>
           <Icon name="ts" style="margin-right: 5px" />
@@ -71,6 +78,7 @@ import 'md-editor-v3/lib/style.css'
 import JsonEditorType from 'jsoneditor'
 import type { FormSchema } from '@/types'
 import { repirJsonSchema } from '@/utils'
+import ImportJsonSchema from './Import.vue'
 import JsonSchemaEdit from './JsonSchemaEdit/index.vue'
 
 const props = defineProps<{ target: string }>()

@@ -2,7 +2,7 @@ import type { FormSchema } from 'form-craft'
 
 export default {
   labelWidth: 110,
-  size: 'default',
+  size: 'small',
   labelAlign: 'left',
   scrollToError: true,
   submitBtn: false,
@@ -35,8 +35,7 @@ export default {
                 autocomplete: 'new-password',
                 clearable: true
               },
-              designKey: 'design-gfim',
-              size: 'default'
+              designKey: 'design-gfim'
             },
             {
               label: '字段标识',

@@ -1,12 +1,5 @@
 <template>
-  <el-dialog
-    v-model="visible"
-    title="导入 JsonSchema"
-    width="70%"
-    center
-    destroy-on-close
-    top="5vh"
-  >
+  <div>
     <el-input
       type="textarea"
       v-model="value"
@@ -14,12 +7,12 @@
       placeholder="请粘贴 JsonSchema 或包含 JsonSchema 的代码片段"
     />
 
-    <template #footer>
+    <div>
       <el-button type="primary" @click="handleConfirm" :disabled="!isValidSchema">
         确定导入
       </el-button>
-    </template>
-  </el-dialog>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -31,20 +24,18 @@ import { repirJsonSchema } from '@/utils'
 
 const designInstance = useDesignInstance()!
 
-const visible = defineModel<boolean>()
-
 const value = ref<string>('')
 
 const isValidSchema = ref(true)
 
-// 监听弹窗打开，重置数据
-watch(visible, (val) => {
-  if (!val) {
-    // 弹窗关闭时，重置
-    value.value = ''
-    isValidSchema.value = true
-  }
-})
+// // 监听弹窗打开，重置数据
+// watch(visible, (val) => {
+//   if (!val) {
+//     // 弹窗关闭时，重置
+//     value.value = ''
+//     isValidSchema.value = true
+//   }
+// })
 
 // 安全检查：检测潜在的危险代码
 const containsDangerousCode = (code: string): boolean => {
@@ -149,7 +140,6 @@ const handleConfirm = async () => {
     designInstance.applySchema(repairedSchema)
 
     ElMessage.success('导入成功')
-    visible.value = false
   } catch (error) {
     if (error !== 'cancel') {
       console.error('导入失败:', error)
