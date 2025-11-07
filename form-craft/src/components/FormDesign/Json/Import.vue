@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="ns('import')">
     <el-input
       type="textarea"
       v-model="value"
@@ -7,26 +7,29 @@
       placeholder="请粘贴 JsonSchema 或包含 JsonSchema 的代码片段"
     />
 
-    <div>
-      <el-button type="primary" @click="handleConfirm" :disabled="!isValidSchema">
-        确定导入
-      </el-button>
+    <div class="footer">
+      <el-button @click="handleClear"> 清空 </el-button>
+      <el-button type="primary" @click="handleConfirm" :disabled="!isValidSchema"> 导入 </el-button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import { useDesignInstance } from '@/hooks'
 import type { FormSchema } from '@/types'
-import { repirJsonSchema } from '@/utils'
+import { ns, repirJsonSchema } from '@/utils'
 
 const designInstance = useDesignInstance()!
 
 const value = ref<string>('')
 
 const isValidSchema = ref(true)
+
+const handleClear = () => {
+  value.value = ''
+}
 
 // // 监听弹窗打开，重置数据
 // watch(visible, (val) => {
@@ -148,3 +151,14 @@ const handleConfirm = async () => {
   }
 }
 </script>
+
+<style scoped lang="scss">
+@import '@/style.scss';
+
+@include ns('import') {
+  .footer {
+    padding: 15px;
+    text-align: center;
+  }
+}
+</style>

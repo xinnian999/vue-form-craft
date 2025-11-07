@@ -9,7 +9,7 @@
     @close="formValues = {}"
   >
     <el-tabs model-value="edit" class="demo-tabs">
-      <el-tab-pane name="edit" lazy>
+      <el-tab-pane name="edit">
         <template #label>
           <Icon name="script" style="margin-right: 5px" />
           <span>在线编辑</span>
