@@ -5,6 +5,7 @@ export default {
   size: 'small',
   labelAlign: 'left',
   scrollToError: true,
+  submitBtn: false,
   items: [
     {
       name: 'form-2DaW',
@@ -68,27 +69,39 @@ export default {
               designKey: 'design-Qh45'
             },
             {
-              label: 'label宽度',
-              component: 'InputNumber',
+              label: '标签宽度',
               name: 'labelWidth',
+              component: 'InputNumber',
               props: {
                 min: 60,
                 unit: 'px',
-                step: 10
-              }
+                step: 10,
+                controlsPosition: ''
+              },
+              designKey: 'design-UcmF'
             },
             {
-              label: 'label对齐方式',
-              component: 'Radio',
+              label: '标签位置',
               name: 'labelAlign',
+              component: 'Radio',
               props: {
                 mode: 'static',
                 options: [
-                  { label: '左对齐', value: 'left' },
-                  { label: '居上', value: 'top' },
-                  { label: '右对齐', value: 'right' }
+                  {
+                    label: '居左',
+                    value: 'left'
+                  },
+                  {
+                    label: '居上',
+                    value: 'top'
+                  },
+                  {
+                    label: '居右',
+                    value: 'right'
+                  }
                 ]
-              }
+              },
+              designKey: 'design-EiOs'
             },
             {
               label: '隐藏',

@@ -47,6 +47,7 @@
     </div>
 
     <Preview v-model="PreviewVisible" :schema-context="designInstance.schemaContext" />
+    <Import v-model="ImportVisible" />
   </div>
 </template>
 
@@ -57,6 +58,7 @@ import { useDesignInstance, useLocale } from '@/hooks'
 import Icon from '@/Icon/index.vue'
 import { ns } from '@/utils'
 import Preview from './Preview.vue'
+import Import from './Import.vue'
 
 type PreviewAction = {
   label: string
@@ -71,6 +73,8 @@ const designInstance = useDesignInstance()!
 const locale = useLocale()
 
 const PreviewVisible = ref(false)
+
+const ImportVisible = ref(false)
 
 const btnSize = 'small'
 
@@ -89,6 +93,14 @@ const rightActions: PreviewAction[] = [
     icon: 'script',
     onClick: () => {
       designInstance.handleJson()
+    }
+  },
+  {
+    label: '导入',
+    btnType: 'default',
+    icon: 'upload',
+    onClick: () => {
+      ImportVisible.value = true
     }
   },
   {
