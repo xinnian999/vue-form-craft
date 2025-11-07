@@ -1,7 +1,7 @@
 import type { FormSchema } from 'form-craft'
 
 export default {
-  labelWidth: 150,
+  labelWidth: 100,
   size: 'small',
   labelAlign: 'left',
   scrollToError: true,
@@ -27,7 +27,7 @@ export default {
               name: 'form-ITGD',
               component: 'Divider',
               props: {
-                title: '字段配置',
+                title: '字段属性',
                 contentPosition: 'center'
               },
               designKey: 'design-NXEJ'
@@ -41,7 +41,8 @@ export default {
                 autocomplete: 'new-password',
                 clearable: true
               },
-              designKey: 'design-gfim'
+              designKey: 'design-gfim',
+              size: 'small'
             },
             {
               label: '字段标识',
@@ -69,11 +70,19 @@ export default {
               designKey: 'design-Qh45'
             },
             {
+              label: '隐藏',
+              name: 'hidden',
+              component: 'Switch',
+              props: {
+                'inline-prompt': false
+              },
+              designKey: 'design-C5Qj'
+            },
+            {
               label: '标签宽度',
               name: 'labelWidth',
               component: 'InputNumber',
               props: {
-                min: 60,
                 unit: 'px',
                 step: 10,
                 controlsPosition: ''
@@ -104,19 +113,33 @@ export default {
               designKey: 'design-EiOs'
             },
             {
-              label: '隐藏',
-              name: 'hidden',
-              component: 'Switch',
+              label: '尺寸',
+              name: 'size',
+              component: 'Radio',
               props: {
-                'inline-prompt': false
+                mode: 'static',
+                options: [
+                  {
+                    label: '默认',
+                    value: 'default'
+                  },
+                  {
+                    label: '较小',
+                    value: 'small'
+                  },
+                  {
+                    label: '较大',
+                    value: 'large'
+                  }
+                ]
               },
-              designKey: 'design-C5Qj'
+              designKey: 'design-yaZ4'
             },
             {
               name: 'form-IH6q',
               component: 'Divider',
               props: {
-                title: '组件配置',
+                title: '组件属性',
                 contentPosition: 'center'
               },
               designKey: 'design-R9lS'
@@ -138,6 +161,12 @@ export default {
                 'inline-prompt': false
               },
               designKey: 'design-XgeW'
+            },
+            {
+              label: '占位提示',
+              name: 'props.placeholder',
+              component: 'Input',
+              designKey: 'design-JTMu'
             }
           ]
         },
@@ -150,5 +179,8 @@ export default {
         }
       ]
     }
-  ]
+  ],
+  initialValues: {
+    label: '单行文本'
+  }
 } satisfies FormSchema

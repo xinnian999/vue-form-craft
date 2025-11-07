@@ -21,11 +21,13 @@
       :key="name"
       :prop="name"
       :rules="computeRules"
-      :label-width="labelWidth"
+      :labelWidth="labelWidth"
+      :labelPosition="labelAlign"
+      :size="size"
     >
-      <template #label v-if="!hideLabel">
+      <template #label>
         <div :class="[ns('form-item-label'), label && `${name}-label`]">
-          <div :style="formInstance.schema.labelBold && 'font-weight: bold'">
+          <div>
             <component
               v-if="formInstance.slots?.label"
               :is="formInstance.slots.label"
@@ -69,7 +71,6 @@
         v-else
         :is="config.render"
         :disabled="formInstance.schema.disabled"
-        :size="formInstance.schema.size"
         v-bind="componentProps"
         v-model:[config.modelName!]="value"
       />
