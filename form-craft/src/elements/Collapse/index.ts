@@ -14,46 +14,23 @@ export default {
     labelAlign: 'top',
     initialValues: {
       children: [
-        { label: '面板1', name: 'name1', props: { checked: true }, children: [] },
-        { label: '面板2', name: 'name2', children: [] }
+        {
+          label: '面板1',
+          name: 'name1',
+          component: 'CollapseItem',
+          props: { checked: true },
+          children: [],
+          designKey: 'name1'
+        },
+        {
+          label: '面板2',
+          name: 'name2',
+          component: 'CollapseItem',
+          children: [],
+          designKey: 'name2'
+        }
       ]
     },
-    items: [
-      { label: '唯一标识', component: 'Input', name: 'name' },
-      {
-        label: '子面板设置',
-        component: 'FormList',
-        children: [
-          {
-            label: '标题',
-            component: 'Input',
-            props: {
-              placeholder: '请输入标题'
-            },
-            name: 'title',
-            initialValue: '{{ "面板" + ($index + 1) }}'
-          },
-          {
-            label: '唯一标识',
-            component: 'Input',
-            props: {
-              placeholder: '请输入唯一标识'
-            },
-            name: 'name',
-            initialValue: '{{ "name" + ($index + 1) }}'
-          },
-          {
-            label: '默认展开',
-            component: 'Switch',
-            name: 'props.checked'
-          }
-        ],
-        props: {
-          mode: 'card',
-          title: '面板'
-        },
-        name: 'children'
-      }
-    ]
+    items: [{ label: '唯一标识', component: 'Input', name: 'name' }]
   }
 } satisfies FormElement

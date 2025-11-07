@@ -1,29 +1,24 @@
 <template>
   <ElCollapse v-bind="$attrs" v-model="activeKey">
-    <ElCollapseItem v-for="item in children" :key="item.name" :name="item.name">
-      <template #title>
-        <Title.render :title="item.label!" italic type="h4" />
-      </template>
-
-      <FormItemGroup :children="item.children!" :designKey="item.designKey!" />
-    </ElCollapseItem>
+    <FormItemGroup :children="children" :designKey="designKey!" />
   </ElCollapse>
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { FormItemGroup } from '@/components'
-import { Title } from '@/elements'
 import type { FormItemType } from '@/types'
 
 const props = defineProps<{
-  children: FormItemType[]
+  children?: FormItemType[]
+  designKey?: string
 }>()
 
 const activeKey = ref<string[]>([])
 
 onMounted(() => {
-  activeKey.value = props.children.filter((item) => item.props?.checked).map((item) => item.name)
+  activeKey.value =
+    props.children?.filter((item) => item.props?.checked).map((item) => item.name) || []
 })
 </script>
 
