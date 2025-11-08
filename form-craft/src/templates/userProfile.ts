@@ -44,7 +44,8 @@ export default {
       props: { placeholder: '请输入邮箱' },
       rules: [
         {
-          expr: '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$/',
+          type: 'pattern',
+          value: '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$',
           message: '请输入有效的邮箱',
           trigger: 'blur'
         }
@@ -56,7 +57,7 @@ export default {
       component: 'Input',
       props: { placeholder: '请输入手机号', maxlength: 11 },
       rules: [
-        { expr: '/^1[3-9]\\d{9}$/', message: '请输入有效的手机号', trigger: 'blur' }
+        { type: 'pattern', value: '^1[3-9]\\d{9}$', message: '请输入有效的手机号', trigger: 'blur' }
       ],
     }
   ]

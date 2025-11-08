@@ -10,8 +10,6 @@ export type RuleItem = {
   value?: any
   message?: string
   trigger?: TriggerType | TriggerType[]
-  // 兼容旧格式
-  expr?: string
 }
 
 export type FormRules = RuleItem[]

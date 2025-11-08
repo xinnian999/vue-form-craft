@@ -2,26 +2,7 @@ import type { FormItemRule } from 'element-plus'
 import type { RuleItem } from '@/types'
 
 /**
- * 判断字符串是否为正则表达式格式
- */
-function isRegexString(str: string): boolean {
-  return /^\/.*\/$/.test(str)
-}
-
-/**
- * 解析正则表达式字符串
- */
-function parseRegexString(str: string): RegExp {
-  const match = str.match(/^\/(.*)\/([gimuy]*)$/)
-  if (match) {
-    return new RegExp(match[1], match[2])
-  }
-  return new RegExp(str)
-}
-
-/**
  * 解析表单规则为 Element Plus / async-validator 兼容的规则数组
- * 支持新格式 { type, value, message, trigger } 和旧格式 { expr, message, trigger }
  * @param rules 规则配置数组
  * @returns Element Plus 兼容的规则数组
  */
@@ -40,30 +21,7 @@ export function parseRules(rules?: RuleItem[]): FormItemRule[] {
       trigger
     }
 
-    // 兼容旧格式：如果没有 type 但有 expr，自动识别类型
-    if (!type && 'expr' in rule) {
-      const expr = (rule as any).expr as string
-
-      // 正则表达式
-      if (isRegexString(expr)) {
-        return {
-          ...baseRule,
-          pattern: parseRegexString(expr)
-        }
-      }
-
-      // JS 表达式（布尔值）
-      return {
-        ...baseRule,
-        validator: async () => {
-          if (!expr) {
-            throw new Error(message)
-          }
-        }
-      }
-    }
-
-    // 新格式：根据 type 解析
+    // 根据 type 解析
     switch (type) {
       case 'required':
         return {

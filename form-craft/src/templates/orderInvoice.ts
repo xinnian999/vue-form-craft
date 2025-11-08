@@ -50,7 +50,7 @@ export default {
       props: { placeholder: '请输入纳税人识别号' },
       hidden: "{{ $values.invoiceType !== 'company' }}",
       rules: [
-        { expr: '/^[0-9A-Z]{15,20}$/', message: '请输入15-20位有效识别号', trigger: 'blur' }
+        { type: 'pattern', value: '^[0-9A-Z]{15,20}$', message: '请输入15-20位有效识别号', trigger: 'blur' }
       ],
     },
     {

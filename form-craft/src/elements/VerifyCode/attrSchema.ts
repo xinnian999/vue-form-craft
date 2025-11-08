@@ -12,7 +12,8 @@ export default {
     name: 'isVerify',
     rules: [
       {
-        expr: '{{$values.isVerify}}',
+        type: 'jsExpr',
+        value: '{{ $values.isVerify }}',
         message: '验证码有误',
         trigger: 'blur'
       }

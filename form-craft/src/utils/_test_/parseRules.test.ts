@@ -39,7 +39,7 @@ describe('parseRules', () => {
     const rules = [{ type: 'pattern' as const, value: '^[0-9]+$', message: '只能输入数字' }]
     const result = parseRules(rules)
     expect(result[0].pattern).toBeInstanceOf(RegExp)
-    expect(result[0].pattern?.source).toBe('^[0-9]+$')
+    expect((result[0].pattern as RegExp).source).toBe('^[0-9]+$')
   })
 
   it('应该解析 enum 类型', () => {
@@ -56,24 +56,6 @@ describe('parseRules', () => {
     const result = parseRules(rules)
     expect(result[0].validator).toBeDefined()
     expect(typeof result[0].validator).toBe('function')
-  })
-
-  // 兼容性测试：旧格式
-  it('应该兼容旧格式的正则表达式 (expr)', () => {
-    const rules = [
-      { expr: '/^1[3-9]\\d{9}$/', message: '请输入有效的手机号', trigger: 'blur' as const }
-    ]
-    const result = parseRules(rules as any)
-    expect(result[0].pattern).toBeInstanceOf(RegExp)
-    expect(result[0].message).toBe('请输入有效的手机号')
-  })
-
-  it('应该兼容旧格式的 JS 表达式 (expr)', () => {
-    const rules = [
-      { expr: '{{ $values.password === $values.confirmPassword }}', message: '密码不一致' }
-    ]
-    const result = parseRules(rules as any)
-    expect(result[0].validator).toBeDefined()
   })
 
   it('应该使用自定义 trigger', () => {
