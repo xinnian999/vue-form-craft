@@ -1,4 +1,5 @@
-import type { FormSchema } from 'form-craft'
+import type { FormSchema } from '@/types'
+import { validationRulesSchema } from './validationRulesSchema'
 
 export default {
   labelWidth: 110,
@@ -118,7 +119,7 @@ export default {
           name: 'name2',
           component: 'TabPane',
           designKey: 'tab-2',
-          children: []
+          children: validationRulesSchema
         },
         {
           label: '布局',

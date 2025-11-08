@@ -3,13 +3,18 @@ import type { Component, Ref, Slots, ToRefs, VNode } from 'vue'
 
 export type TriggerType = 'blur' | 'change'
 
-export type FormRule = {
-  expr: string
+export type RuleType = 'required' | 'min' | 'max' | 'pattern' | 'builtin' | 'enum' | 'custom' | 'jsExpr'
+
+export type RuleItem = {
+  type?: RuleType
+  value?: any
   message?: string
   trigger?: TriggerType | TriggerType[]
+  // 兼容旧格式
+  expr?: string
 }
 
-export type FormRules = FormRule[]
+export type FormRules = RuleItem[]
 
 export type FormChange = {
   target: string
