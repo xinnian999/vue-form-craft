@@ -1,17 +1,28 @@
 import { isArray, isPlainObject, isString } from 'lodash'
 
-//模板转换函数，将一个由双大括号包裹的字符串，转化为并返回结果（context限制变量范围）
+// 模板转换函数，将一个由双大括号包裹的字符串，转化为并返回结果（context限制变量范围）
+// 如果返回值是函数，会自动包装并传入 context + args
 const templateParse = (str: string, context: Record<string, any>) => {
-  // console.log(JSON.stringify(context.$selectData) );
   if (!str) return str
   if (typeof str !== 'string') return str
 
-  const template = str.match(/{{(.+?)}}/)
+  // 使用 [\s\S] 来匹配包括换行符在内的所有字符
+  const template = str.match(/\{\{([\s\S]+?)\}\}/)
   if (template) {
     try {
+      // console.log('匹配到{{ }}模板:', str)
       const parse = new Function(Object.keys(context).join(','), 'return ' + template[1])
+      const result = parse(...Object.values(context))
 
-      return parse(...Object.values(context))
+      // 如果解析结果是函数，包装它，将 context 和原始参数合并后传入
+      if (typeof result === 'function') {
+        return (...args: any[]) => {
+          const mergedParams = { ...context, args }
+          return result(mergedParams)
+        }
+      }
+
+      return result
     } catch (e) {
       // console.log({
       //   message: `模板转换错误：${str}`,
@@ -26,26 +37,6 @@ const templateParse = (str: string, context: Record<string, any>) => {
   }
 }
 
-// 解析函数字符串为真实函数（用于事件处理器）
-const parseFunctionString = (str: string, context: Record<string, any>) => {
-  if (!str) return str
-  if (typeof str !== 'string') return str
-
-  try {
-    // 直接解析函数表达式（不需要双大括号包裹）
-    const func = new Function('return ' + str.trim())()
-
-    // 返回一个包装函数，将原始事件参数和 context 合并成一个对象传递给函数
-    return (...args: any[]) => {
-      const mergedParams = { ...context, args }
-      return func(mergedParams)
-    }
-  } catch (e) {
-    console.warn('函数解析错误：', str, e)
-    return str
-  }
-}
-
 const deepParse = (prop: any, context: Record<string, any>): any => {
   if (isString(prop)) {
     return templateParse(prop, context)
@@ -53,10 +44,6 @@ const deepParse = (prop: any, context: Record<string, any>): any => {
 
   if (isPlainObject(prop)) {
     return Object.keys(prop).reduce((all, key) => {
-      // 如果当前 key 是事件处理器（以 on 开头），则解析为函数
-      if (key.startsWith('on') && isString(prop[key])) {
-        return { ...all, [key]: parseFunctionString(prop[key], context) }
-      }
       return { ...all, [key]: deepParse(prop[key], context) }
     }, {})
   }

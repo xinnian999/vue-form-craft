@@ -18,10 +18,10 @@
               <div style="font-size: 13px; line-height: 1.6">
                 <strong>📌 请输入完整的函数表达式</strong><br />
                 <span style="color: #909399">示例：</span>
-                <code>(params) => params.$values.age > 18</code> 或 
-                <code>function(params) { return params.$values.name }</code><br />
-                <span style="color: #909399">参数对象包含：</span>
-                <code>$values</code>、<code>$selectData</code>、<code>$instance</code>、<code>$item</code>、<code>$index</code>、<code>args</code>
+                <code>/**@param {Params} params*/ (params) => params.$values.age > 18</code><br />
+                <span style="color: #909399">params 对象包含：</span>
+                <code>$values</code>、<code>$selectData</code>、<code>$instance</code>、<code>$item</code>、<code>$index</code>、<code>args</code><br />
+                <span style="color: #909399; font-size: 12px">💡 添加 JSDoc 注释可获得智能提示</span>
               </div>
             </template>
           </el-alert>
@@ -83,12 +83,15 @@ const handleEditorMount = (editor: any) => {
   // 添加自定义的智能提示
   const monaco = (window as any).monaco
   if (monaco) {
+    // 清除之前的类型定义
+    monaco.languages.typescript.javascriptDefaults.setExtraLibs([])
+    
     // 启用语法检查，但关闭语义检查
     monaco.languages.typescript.javascriptDefaults.setDiagnosticsOptions({
-      noSemanticValidation: true, // 关闭语义检查（变量未定义等）
+      noSemanticValidation: false, // 开启语义检查以支持类型推断
       noSyntaxValidation: false, // 保留语法检查
       diagnosticCodesToIgnore: [
-        2304, // Cannot find name (忽略未定义变量的错误，因为 $values 等是运行时注入的)
+        2304, // Cannot find name
         2552, // Cannot find name. Did you mean...
         2792, // Cannot find module
         7027 // Unreachable code detected
@@ -100,7 +103,7 @@ const handleEditorMount = (editor: any) => {
       allowNonTsExtensions: true,
       noLib: false,
       allowJs: true,
-      checkJs: false,
+      checkJs: true, // 开启 JS 检查以支持 JSDoc
       strict: false,
       noImplicitAny: false,
       strictNullChecks: false,
@@ -112,34 +115,99 @@ const handleEditorMount = (editor: any) => {
     // 配置 JavaScript 格式化选项（自动添加分号）
     monaco.languages.typescript.javascriptDefaults.setEagerModelSync(true)
 
-    // 添加全局变量的类型定义（用于智能提示和避免报错）
+    // 添加类型定义（用于智能提示）
+    const libSource = `
+declare const console: Console;
+
+/**
+ * 函数参数对象，包含所有上下文变量和事件参数
+ */
+interface Params {
+  /** 表单数据对象 */
+  $values: Record<string, any>;
+  /** 选择数据对象 */
+  $selectData: Record<string, any>;
+  /** 表单实例，提供各种操作方法 */
+  $instance: {
+    /** 获取所有表单值 */
+    getValues(): Record<string, any>;
+    /** 设置所有表单值 */
+    setValues(values: Record<string, any>): void;
+    /** 获取指定字段的值 */
+    getFieldValue(path: string): any;
+    /** 设置指定字段的值 */
+    setFieldValue(path: string, value: any): void;
+    /** 验证表单 */
+    validate(): Promise<any>;
+    /** 重置表单 */
+    resetFields(): void;
+    /** 提交表单 */
+    submit(): void;
+    /** 更新选择数据 */
+    updateSelectData(key: string, value: any): void;
+  };
+  /** 当前项数据（在列表/自增容器中使用） */
+  $item?: any;
+  /** 当前项索引（在列表/自增容器中使用） */
+  $index?: number;
+  /** 原始事件参数数组，如 [event] */
+  args: any[];
+}
+`
+    
     monaco.languages.typescript.javascriptDefaults.addExtraLib(
-      `
-      declare const console: Console;
-      declare const $values: Record<string, any>;
-      declare const $selectData: Record<string, any>;
-      declare const $instance: {
-        getValues(): Record<string, any>;
-        setValues(values: Record<string, any>): void;
-        getFieldValue(path: string): any;
-        setFieldValue(path: string, value: any): void;
-        validate(): Promise<any>;
-        resetFields(): void;
-        submit(): void;
-        updateSelectData(key: string, value: any): void;
-      };
-      declare const $item: any;
-      declare const $index: number;
-    `,
-      'ts:filename/context.d.ts'
+      libSource,
+      'ts:filename/params.d.ts'
     )
 
-    // 配置格式化选项 - 强制使用分号
-    monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({
-      noSemanticValidation: true,
-      noSyntaxValidation: false
-    })
+    // 同时为 TypeScript 添加
+    monaco.languages.typescript.typescriptDefaults.addExtraLib(
+      libSource,
+      'ts:filename/params.d.ts'
+    )
   }
+}
+
+// 去除双大括号（用于编辑）
+const removeBraces = (code: string): string => {
+  if (!code) return ''
+  const match = code.match(/^\{\{\s*([\s\S]*?)\s*\}\}$/)
+  return match ? match[1].trim() : code
+}
+
+// 添加 JSDoc 类型注释（如果没有的话）
+const addJSDocIfNeeded = (code: string): string => {
+  if (!code) return `/**@param {Params} params*/\n(params) => {\n  \n}`
+  
+  // 检查是否已经有 JSDoc 注释
+  if (code.includes('@param') || code.includes(': Params')) {
+    return code
+  }
+  
+  // 在函数前添加 JSDoc 注释
+  return `/**@param {Params} params*/\n${code}`
+}
+
+// 移除 JSDoc 类型注释（保存时）
+const removeJSDoc = (code: string): string => {
+  if (!code) return ''
+  
+  // 移除 /**@param {Params} params*/ 这样的注释
+  return code
+    .replace(/\/\*\*\s*@param\s*\{Params\}\s*params\s*\*\/\s*/g, '')
+    .trim()
+}
+
+// 添加双大括号（用于保存）
+const addBraces = (code: string): string => {
+  if (!code) return ''
+  // 保留换行符，但清理多余的空行和首尾空白
+  const cleanCode = code
+    .split('\n')
+    .map(line => line.trimEnd()) // 移除每行末尾空白
+    .join('\n')
+    .trim() // 移除首尾空白
+  return `{{ ${cleanCode} }}`
 }
 
 // 验证是否为完整的函数表达式
@@ -174,7 +242,11 @@ const validateFunction = (code: string): { valid: boolean; error?: string } => {
 }
 
 const openDialog = async () => {
-  editingCode.value = modelValue.value || ''
+  // 回显时移除 {{ }} 并添加 JSDoc 注释
+  const code = removeBraces(modelValue.value || '')
+  editingCode.value = addJSDocIfNeeded(code)
+  
+  const isNewTemplate = !code
   dialogVisible.value = true
 
   // 等待编辑器挂载后再格式化
@@ -184,6 +256,16 @@ const openDialog = async () => {
     try {
       // 使用 Monaco Editor 的格式化功能美化代码
       await editorRef.value.getAction('editor.action.formatDocument')?.run()
+      
+      // 如果是新建的模板，将光标定位到函数体内
+      if (isNewTemplate) {
+        const model = editorRef.value.getModel()
+        if (model) {
+          // 定位到第3行第3列（函数体内）
+          editorRef.value.setPosition({ lineNumber: 3, column: 3 })
+          editorRef.value.focus()
+        }
+      }
     } catch (e) {
       console.warn('格式化失败', e)
     }
@@ -198,6 +280,9 @@ const handleSave = async () => {
     code = editorRef.value.getValue().trim()
   }
 
+  // 移除 JSDoc 注释
+  code = removeJSDoc(code)
+
   // 验证函数
   if (code) {
     const validation = validateFunction(code)
@@ -210,7 +295,8 @@ const handleSave = async () => {
     }
   }
 
-  modelValue.value = code
+  // 保存时添加 {{ }}
+  modelValue.value = code ? addBraces(code) : ''
   dialogVisible.value = false
 }
 
@@ -221,7 +307,7 @@ const handleCancel = () => {
 // 监听外部值变化
 watch(modelValue, (newVal) => {
   if (!dialogVisible.value) {
-    editingCode.value = newVal || ''
+    editingCode.value = removeBraces(newVal || '')
   }
 })
 </script>
