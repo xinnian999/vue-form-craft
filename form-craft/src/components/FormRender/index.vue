@@ -71,8 +71,7 @@ watch(
 const context = computed(() => ({
   ...props.schemaContext,
   $values: formValues.value,
-  $selectData: selectData,
-  $locale: locale.value
+  $selectData: selectData
 }))
 
 const formItems = computed(() => {
@@ -187,12 +186,4 @@ const instance = readonly({
 provide($formInstance, instance)
 
 defineExpose(instance)
-
-watch(
-  () => internalSchema.value,
-  (newVal) => {
-    console.log(newVal)
-  },
-  { deep: true }
-)
 </script>
