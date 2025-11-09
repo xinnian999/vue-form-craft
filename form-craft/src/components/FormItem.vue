@@ -173,8 +173,8 @@ watch(
       if (condition === false) return
 
       // 根据 type 判断联动方式
-      if (type === 'config') {
-        // 修改 schema 配置
+      if (type === 'attr') {
+        // 修改 schema 属性
         // 当 path 为 'custom' 时使用 customPath，否则使用 path
         const actualPath = path === 'custom' ? customPath : path
         if (actualPath !== undefined) {

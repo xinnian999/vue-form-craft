@@ -98,14 +98,14 @@
 - 支持条件触发
 - 规则字段：
   - **target**: 目标字段的 name（必填）
-  - **type**: `'config' | 'data'`，联动类型（必填）
-    - `'config'`：修改目标字段的配置（如 hidden、disabled、label 等）
+  - **type**: `'attr' | 'data'`，联动类型（必填）
+    - `'attr'`：修改目标字段的属性（如 hidden、disabled、label 等）
     - `'data'`：修改目标字段的数据值
-  - **path**: 配置路径（type 为 'config' 时必填），如 `'hidden'`、`'props.disabled'`
+  - **path**: 属性路径（type 为 'attr' 时必填），如 `'hidden'`、`'props.disabled'`
   - **value**: 要设置的值，支持 JS 表达式
   - **condition**: 触发条件（可选），支持 JS 表达式
 
-示例 1（修改配置）：
+示例 1（修改属性）：
 
 ```json
 {
@@ -116,13 +116,13 @@
   "linkages": [
     {
       "target": "productName",
-      "type": "config",
+      "type": "attr",
       "path": "label",
       "value": "{{ $values.productType === 'electronics' ? '电子产品名称' : '服装名称' }}"
     },
     {
       "target": "warranty",
-      "type": "config",
+      "type": "attr",
       "path": "hidden",
       "value": "{{ $values.productType !== 'electronics' }}"
     }

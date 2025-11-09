@@ -168,19 +168,19 @@ export default {
                   label: '修改类型',
                   name: 'type',
                   component: 'Radio',
-                  initialValue: 'config',
+                  initialValue: 'attr',
                   props: {
                     mode: 'static',
                     optionType: 'button',
                     options: [
-                      { label: '修改配置', value: 'config' },
+                      { label: '修改属性', value: 'attr' },
                       { label: '修改数据', value: 'data' }
                     ]
                   },
                   designKey: 'design-link-type'
                 },
                 {
-                  label: '配置',
+                  label: '属性',
                   name: 'path',
                   component: 'Select',
                   props: {
@@ -189,25 +189,16 @@ export default {
                     mode: 'static',
                     options: [
                       { label: '禁用状态', value: 'props.disabled' },
-                      { label: '占位提示', value: 'props.placeholder' },
-                      { label: '只读状态', value: 'props.readonly' },
-                      { label: '是否可清空', value: 'props.clearable' },
-                      { label: '最大长度', value: 'props.maxlength' },
-                      { label: '最小值', value: 'props.min' },
-                      { label: '最大值', value: 'props.max' },
-                      { label: '隐藏字段', value: 'hidden' },
-                      { label: '字段标签', value: 'label' },
-                      { label: '提示信息', value: 'help' },
-                      { label: '隐藏标签', value: 'hideLabel' },
-                      { label: '必填', value: 'required' },
+                      { label: '隐藏状态', value: 'hidden' },
+                      { label: '必填状态', value: 'required' },
                       { label: '自定义', value: 'custom' }
                     ]
                   },
-                  hidden: "{{ $item.type !== 'config' }}",
+                  hidden: "{{ $item.type !== 'attr' }}",
                   designKey: 'design-link-config-attr'
                 },
                 {
-                  label: '自定义路径',
+                  label: '自定义属性',
                   name: 'customPath',
                   component: 'Input',
                   props: {

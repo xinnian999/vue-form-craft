@@ -23,7 +23,7 @@ export type FormRules = RuleItem[]
 export type FormLinkage = {
   target: string
   condition?: any
-  type: 'config' | 'data'
+  type: 'attr' | 'data'
   value?: any
   path?: string
   customPath?: string
