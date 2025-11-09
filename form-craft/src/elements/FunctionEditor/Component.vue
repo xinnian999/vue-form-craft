@@ -1,7 +1,10 @@
 <template>
   <div class="function-editor">
     <el-button type="primary" @click="openDialog" size="small">
-      <span>📝 编辑函数</span>
+      <template #icon>
+        <Icon name="code" />
+      </template>
+      <span> 编辑函数</span>
     </el-button>
 
     <el-dialog
@@ -20,8 +23,13 @@
                 <span style="color: #909399">示例：</span>
                 <code>/**@param {Params} params*/ (params) => params.$values.age > 18</code><br />
                 <span style="color: #909399">params 对象包含：</span>
-                <code>$values</code>、<code>$selectData</code>、<code>$instance</code>、<code>$item</code>、<code>$index</code>、<code>args</code><br />
-                <span style="color: #909399; font-size: 12px">💡 添加 JSDoc 注释可获得智能提示</span>
+                <code>$values</code
+                >、<code>$selectData</code>、<code>$instance</code>、<code>$item</code>、<code>$index</code>、<code
+                  >args</code
+                ><br />
+                <span style="color: #909399; font-size: 12px"
+                  >💡 添加 JSDoc 注释可获得智能提示</span
+                >
               </div>
             </template>
           </el-alert>
@@ -48,8 +56,9 @@
 
 <script setup lang="ts">
 import { VueMonacoEditor } from '@guolao/vue-monaco-editor'
-import { ref, shallowRef, watch } from 'vue'
 import { ElMessage } from 'element-plus'
+import { ref, shallowRef, watch } from 'vue'
+import Icon from '@/Icon/index.vue'
 
 const modelValue = defineModel<string>()
 
@@ -85,7 +94,7 @@ const handleEditorMount = (editor: any) => {
   if (monaco) {
     // 清除之前的类型定义
     monaco.languages.typescript.javascriptDefaults.setExtraLibs([])
-    
+
     // 启用语法检查，但关闭语义检查
     monaco.languages.typescript.javascriptDefaults.setDiagnosticsOptions({
       noSemanticValidation: false, // 开启语义检查以支持类型推断
@@ -154,17 +163,11 @@ interface Params {
   args: any[];
 }
 `
-    
-    monaco.languages.typescript.javascriptDefaults.addExtraLib(
-      libSource,
-      'ts:filename/params.d.ts'
-    )
+
+    monaco.languages.typescript.javascriptDefaults.addExtraLib(libSource, 'ts:filename/params.d.ts')
 
     // 同时为 TypeScript 添加
-    monaco.languages.typescript.typescriptDefaults.addExtraLib(
-      libSource,
-      'ts:filename/params.d.ts'
-    )
+    monaco.languages.typescript.typescriptDefaults.addExtraLib(libSource, 'ts:filename/params.d.ts')
   }
 }
 
@@ -178,12 +181,12 @@ const removeBraces = (code: string): string => {
 // 添加 JSDoc 类型注释（如果没有的话）
 const addJSDocIfNeeded = (code: string): string => {
   if (!code) return `/**@param {Params} params*/\n(params) => {\n  \n}`
-  
+
   // 检查是否已经有 JSDoc 注释
   if (code.includes('@param') || code.includes(': Params')) {
     return code
   }
-  
+
   // 在函数前添加 JSDoc 注释
   return `/**@param {Params} params*/\n${code}`
 }
@@ -191,11 +194,9 @@ const addJSDocIfNeeded = (code: string): string => {
 // 移除 JSDoc 类型注释（保存时）
 const removeJSDoc = (code: string): string => {
   if (!code) return ''
-  
+
   // 移除 /**@param {Params} params*/ 这样的注释
-  return code
-    .replace(/\/\*\*\s*@param\s*\{Params\}\s*params\s*\*\/\s*/g, '')
-    .trim()
+  return code.replace(/\/\*\*\s*@param\s*\{Params\}\s*params\s*\*\/\s*/g, '').trim()
 }
 
 // 添加双大括号（用于保存）
@@ -204,7 +205,7 @@ const addBraces = (code: string): string => {
   // 保留换行符，但清理多余的空行和首尾空白
   const cleanCode = code
     .split('\n')
-    .map(line => line.trimEnd()) // 移除每行末尾空白
+    .map((line) => line.trimEnd()) // 移除每行末尾空白
     .join('\n')
     .trim() // 移除首尾空白
   return `{{ ${cleanCode} }}`
@@ -217,11 +218,11 @@ const validateFunction = (code: string): { valid: boolean; error?: string } => {
   }
 
   const trimmedCode = code.trim()
-  
+
   // 检查是否为箭头函数或普通函数
   const isArrowFunction = /^\(.*?\)\s*=>/.test(trimmedCode) || /^\w+\s*=>/.test(trimmedCode)
   const isNormalFunction = /^function\s*\(/.test(trimmedCode)
-  
+
   if (!isArrowFunction && !isNormalFunction) {
     return {
       valid: false,
@@ -245,7 +246,7 @@ const openDialog = async () => {
   // 回显时移除 {{ }} 并添加 JSDoc 注释
   const code = removeBraces(modelValue.value || '')
   editingCode.value = addJSDocIfNeeded(code)
-  
+
   const isNewTemplate = !code
   dialogVisible.value = true
 
@@ -256,7 +257,7 @@ const openDialog = async () => {
     try {
       // 使用 Monaco Editor 的格式化功能美化代码
       await editorRef.value.getAction('editor.action.formatDocument')?.run()
-      
+
       // 如果是新建的模板，将光标定位到函数体内
       if (isNewTemplate) {
         const model = editorRef.value.getModel()

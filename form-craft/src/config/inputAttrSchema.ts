@@ -317,38 +317,33 @@ export default {
           },
           children: [
             {
-              label: 'onChange',
+              label: '数据改变时',
               name: 'props.onChange',
               component: 'FunctionEditor',
-              help: '值改变时触发。<br/>可使用 $values、$selectData、$instance 等上下文变量。<br/>示例：(e) => { $instance.setFieldValue("other", e.target.value) }',
               designKey: 'design-event-change'
             },
             {
-              label: 'onBlur',
+              label: '失去焦点时',
               name: 'props.onBlur',
               component: 'FunctionEditor',
-              help: '失去焦点时触发。<br/>可使用 $values、$selectData、$instance 等上下文变量。',
               designKey: 'design-event-blur'
             },
             {
-              label: 'onFocus',
+              label: '获得焦点时',
               name: 'props.onFocus',
               component: 'FunctionEditor',
-              help: '获得焦点时触发。<br/>可使用 $values、$selectData、$instance 等上下文变量。',
               designKey: 'design-event-focus'
             },
             {
-              label: 'onInput',
+              label: '输入时',
               name: 'props.onInput',
               component: 'FunctionEditor',
-              help: '输入时触发。<br/>可使用 $values、$selectData、$instance 等上下文变量。',
               designKey: 'design-event-input'
             },
             {
-              label: 'onClear',
+              label: '清空时',
               name: 'props.onClear',
               component: 'FunctionEditor',
-              help: '点击清空按钮时触发。<br/>可使用 $values、$selectData、$instance 等上下文变量。',
               designKey: 'design-event-clear'
             }
           ]
