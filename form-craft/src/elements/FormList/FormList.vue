@@ -181,51 +181,56 @@ const formatter = (row: any, column: TableColumnCtx<any>, cellValue: any, index:
 }
 
 // FormList 数据联动
-watch(list, (newVal, oldVal) => {
-  const changeIndex = newVal.reduce((acc, cur, index) => {
-    if (!isEqual(cur, oldVal[index])) {
-      acc = index
-    }
-
-    return acc
-  }, 0)
-
-  cIndex.value = changeIndex
-
-  // 处理 linkages 联动
-  if (!fields.value.some((item) => item.linkages)) return
-
-  const parseFieldsData = parseFields(changeIndex)
-  const newChangeData = newVal[changeIndex] || {}
-  const oldChangeData = oldVal[changeIndex] || {}
-
-  parseFieldsData.forEach((item: FormItemType) => {
-    if (
-      item.linkages &&
-      oldChangeData &&
-      !isEqual(newChangeData[item.name], oldChangeData[item.name])
-    ) {
-      // 批量收集数据修改
-      let tempRow = { ...newChangeData }
-
-      item.linkages.forEach((linkage) => {
-        if (linkage.condition === false) return
-        if (linkage.type !== 'data') return // FormList 内部只处理数据联动
-
-        // 解析目标路径
-        const targetName = linkage.target.split('.').pop()!
-        if (targetName && linkage.value !== undefined) {
-          tempRow[targetName] = linkage.value
-        }
-      })
-
-      // 批量更新当前行数据
-      if (!isEqual(tempRow, newChangeData)) {
-        list.value[changeIndex] = tempRow
+watch(
+  list,
+  (newVal, oldVal) => {
+    const changeIndex = newVal.reduce((acc, cur, index) => {
+      if (!isEqual(cur, oldVal[index])) {
+        acc = index
       }
-    }
-  })
-}, { deep: true })
+
+      return acc
+    }, 0)
+
+    cIndex.value = changeIndex
+
+    // 处理 linkages 联动
+    if (!fields.value.some((item) => item.linkages)) return
+
+    const parseFieldsData = parseFields(changeIndex)
+    const newChangeData = newVal[changeIndex] || {}
+    const oldChangeData = oldVal[changeIndex] || {}
+
+    parseFieldsData.forEach((item: FormItemType) => {
+      if (
+        item.linkages &&
+        oldChangeData &&
+        !isEqual(newChangeData[item.name], oldChangeData[item.name])
+      ) {
+        let hasChange = false
+        const updatedRow = { ...list.value[changeIndex] }
+
+        item.linkages.forEach((linkage) => {
+          if (linkage.condition === false) return
+          if (linkage.type !== 'data') return // FormList 内部只处理数据联动
+
+          // 解析目标路径
+          const targetName = linkage.target.split('.').pop()!
+          if (targetName && linkage.value !== undefined) {
+            updatedRow[targetName] = linkage.value
+            hasChange = true
+          }
+        })
+
+        // 如果有变化，替换整个行对象以触发响应式更新
+        if (hasChange) {
+          list.value[changeIndex] = updatedRow
+        }
+      }
+    })
+  },
+  { deep: true }
+)
 
 onMounted(() => {
   if (props.minLines && !list.value?.length) {

@@ -8,16 +8,17 @@ function parsePath(path: string): string[] {
   return path
     .replace(/\[(\d+)\]/g, '.$1') // 将 [0] 转换为 .0
     .split('.')
-    .filter(key => key !== '') // 过滤空字符串
+    .filter((key) => key !== '') // 过滤空字符串
 }
 
 const setDataByPath = (object: Record<string, any>, path: string, value: any) => {
   if (path === '.') {
     return value
   }
-  
-  // 深拷贝对象，避免直接修改原对象
-  const cloneObj = cloneDeep(object)
+
+  // 直接修改原对象，不进行深拷贝
+  // 这样可以确保连续多次调用时数据同步，避免响应式对象更新延迟问题
+  const cloneObj = object
 
   // 将路径字符串分割成路径数组，支持数组索引
   const pathArray = parsePath(path)
@@ -40,7 +41,7 @@ const setDataByPath = (object: Record<string, any>, path: string, value: any) =>
     // 获取当前路径的第一个部分
     const currentKey = pathArray[0]
     const currentIndex = Number(currentKey)
-    
+
     // 下一级路径
     const nextKey = pathArray[1]
     const nextIndex = Number(nextKey)

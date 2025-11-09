@@ -43,7 +43,8 @@ describe('getDataByPath 和 setDataByPath 数组索引支持', () => {
       const obj = { user: { name: 'John' } }
       const result = setDataByPath(obj, 'user.name', 'Jane')
       expect(result.user.name).toBe('Jane')
-      expect(obj.user.name).toBe('John') // 原对象不变
+      expect(obj.user.name).toBe('Jane') // 直接修改原对象
+      expect(result).toBe(obj) // 返回的是同一个对象引用
     })
 
     it('应该支持数组索引语法 [0]', () => {
@@ -51,7 +52,8 @@ describe('getDataByPath 和 setDataByPath 数组索引支持', () => {
       const result = setDataByPath(obj, 'rules[0].required', true)
       expect(result.rules[0].required).toBe(true)
       expect(result.rules[1].min).toBe(6)
-      expect(obj.rules[0].required).toBe(false) // 原对象不变
+      expect(obj.rules[0].required).toBe(true) // 直接修改原对象
+      expect(result).toBe(obj) // 返回的是同一个对象引用
     })
 
     it('应该支持设置数组中的新对象', () => {

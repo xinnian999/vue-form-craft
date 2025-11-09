@@ -83,12 +83,12 @@
 </template>
 
 <script setup lang="ts">
-import { cloneDeep, isEqual } from 'lodash'
-import { computed, onBeforeMount, onMounted, reactive, useAttrs, watch } from 'vue'
+import { isEqual } from 'lodash'
+import { computed, onBeforeMount, onMounted, reactive, watch } from 'vue'
 import { useElements, useFormInstance } from '@/hooks'
 import Icon from '@/Icon/index.vue'
 import type { FormItemType } from '@/types'
-import { getDataByPath, ns, parseRules, setDataByPath } from '@/utils'
+import { getDataByPath, ns, parseRules } from '@/utils'
 
 const props = defineProps<FormItemType>()
 
@@ -168,11 +168,6 @@ watch(
 
     if (!linkages || diff || formInstance.design) return
 
-    const formValues = formInstance.getValues()
-
-    // 用于批量收集数据修改
-    let temp = cloneDeep(formValues)
-
     linkages.forEach(({ target, value, path, customPath, condition, type }) => {
       if (condition === false) return
 
@@ -185,16 +180,15 @@ watch(
           formInstance.updateItemSchemaByPath(target, actualPath, value)
         }
       } else if (type === 'data') {
-        // 修改数据 - 批量处理
+        // 修改数据
         if (target.includes('.*.')) {
-          //自增组件特殊处理
+          // 自增组件特殊处理
           const targetArr = target.split('.*.')
           const listTarget = targetArr.pop()!
           const targetParse = targetArr.join('.')
-          const list = getDataByPath(formValues, targetParse)
+          const list = getDataByPath(formInstance.getValues(), targetParse)
           if (Array.isArray(list)) {
-            temp = setDataByPath(
-              temp,
+            formInstance.setFieldValue(
               targetParse,
               list.map((item) => ({
                 ...item,
@@ -203,15 +197,10 @@ watch(
             )
           }
         } else {
-          temp = setDataByPath(temp, target, value)
+          formInstance.setFieldValue(target, value)
         }
       }
     })
-
-    // 批量更新数据（只有当有数据修改时才更新）
-    if (!isEqual(temp, formValues)) {
-      formInstance.setValues(temp)
-    }
   },
   { immediate: true }
 )
