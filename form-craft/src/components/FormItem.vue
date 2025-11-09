@@ -211,6 +211,9 @@ watch(
 
     const formValues = formInstance.getValues()
 
+    // 用于批量收集数据修改
+    let temp = cloneDeep(formValues)
+
     linkages.forEach(({ target, value, path, customPath, condition, type }) => {
       if (condition === false) return
 
@@ -223,7 +226,7 @@ watch(
           formInstance.updateItemSchemaByPath(target, actualPath, value)
         }
       } else if (type === 'data') {
-        // 修改数据
+        // 修改数据 - 批量处理
         if (target.includes('.*.')) {
           //自增组件特殊处理
           const targetArr = target.split('.*.')
@@ -231,17 +234,25 @@ watch(
           const targetParse = targetArr.join('.')
           const list = getDataByPath(formValues, targetParse)
           if (Array.isArray(list)) {
-            const newList = list.map((item) => ({
-              ...item,
-              [listTarget]: value
-            }))
-            formInstance.setFieldValue(targetParse, newList)
+            temp = setDataByPath(
+              temp,
+              targetParse,
+              list.map((item) => ({
+                ...item,
+                [listTarget]: value
+              }))
+            )
           }
         } else {
-          formInstance.setFieldValue(target, value)
+          temp = setDataByPath(temp, target, value)
         }
       }
     })
+
+    // 批量更新数据（只有当有数据修改时才更新）
+    if (!isEqual(temp, formValues)) {
+      formInstance.setValues(temp)
+    }
   },
   { immediate: true }
 )

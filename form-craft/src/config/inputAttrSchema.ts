@@ -161,7 +161,7 @@ export default {
                     autosize: { minRows: 2, maxRows: 4 },
                     clearable: true
                   },
-                  help: '请输入 JS 表达式，当结果为 true 时才触发联动',
+                  help: '请输入 JS 表达式，当结果为 true 时才触发联动。<br/> 不设置会一直触发',
                   designKey: 'design-link-condition'
                 },
                 {
@@ -224,7 +224,6 @@ export default {
                     autosize: { minRows: 2, maxRows: 4 },
                     clearable: true
                   },
-                  hidden: "{{ $item.type !== 'config' }}",
                   designKey: 'design-link-config-value'
                 }
               ],
