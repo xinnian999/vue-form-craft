@@ -68,46 +68,7 @@ watch(
   { deep: true }
 )
 
-const context = computed(() => ({
-  ...props.schemaContext,
-  $values: formValues.value,
-  $selectData: selectData
-}))
-
-const formItems = computed(() => {
-  if (props.design) {
-    return internalSchema.value.items
-  }
-
-  return deepParse(internalSchema.value.items || [], context.value)
-})
-
-const formAttrs = computed(() => {
-  const attrs = omit(props.schema, [
-    'model',
-    'items',
-    'submitBtn',
-    'resetBtn',
-    'initialValues',
-    'labelAlign',
-    'labelBold',
-    'labelSuffix'
-  ])
-
-  return {
-    ...attrs,
-    labelPosition: props.schema.labelAlign
-  }
-})
-
-onBeforeMount(() => {
-  if (props.schema.initialValues) {
-    const values = cloneDeep(props.schema.initialValues)
-
-    formValues.value = { ...values, ...formValues.value }
-  }
-})
-
+// ========== API 方法定义（需要在 context 之前定义） ==========
 const getValues: FormInstance['getValues'] = () => formValues.value
 
 const setValues: FormInstance['setValues'] = (values) => {
@@ -166,6 +127,61 @@ const updateItemSchemaByPath: FormInstance['updateItemSchemaByPath'] = (name, pa
 }
 
 const slots = useSlots()
+
+// 创建 instanceAPI 对象，供 context 中的 $instance 使用
+const instanceAPI = {
+  getValues,
+  setValues,
+  getFieldValue,
+  setFieldValue,
+  updateSelectData,
+  updateItemSchemaByPath,
+  validate,
+  resetFields,
+  submit
+}
+
+// ========== Context 定义（包含 $instance） ==========
+const context = computed(() => ({
+  ...props.schemaContext,
+  $values: formValues.value,
+  $selectData: selectData,
+  $instance: instanceAPI
+}))
+
+const formItems = computed(() => {
+  if (props.design) {
+    return internalSchema.value.items
+  }
+
+  return deepParse(internalSchema.value.items || [], context.value)
+})
+
+const formAttrs = computed(() => {
+  const attrs = omit(props.schema, [
+    'model',
+    'items',
+    'submitBtn',
+    'resetBtn',
+    'initialValues',
+    'labelAlign',
+    'labelBold',
+    'labelSuffix'
+  ])
+
+  return {
+    ...attrs,
+    labelPosition: props.schema.labelAlign
+  }
+})
+
+onBeforeMount(() => {
+  if (props.schema.initialValues) {
+    const values = cloneDeep(props.schema.initialValues)
+
+    formValues.value = { ...values, ...formValues.value }
+  }
+})
 
 const instance = readonly({
   ...toRefs(props),

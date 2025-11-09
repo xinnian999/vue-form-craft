@@ -41,27 +41,28 @@ const attrSchema = computed<FormSchema>(() => {
   const config = elements[current.value.component]
 
   if (config?.attrSchema) {
-    const parseItems = (nodes: FormItemType[] = []): FormItemType[] => {
-      return nodes.map((item) => {
-        const value = getDataByPath(current.value!, item.name)
-        const isTemplate = isString(value) && /^{{\s*(.*?)\s*}}$/.test(value)
+    return config.attrSchema
+    // const parseItems = (nodes: FormItemType[] = []): FormItemType[] => {
+    //   return nodes.map((item) => {
+    //     const value = getDataByPath(current.value!, item.name)
+    //     const isTemplate = isString(value) && /^{{\s*(.*?)\s*}}$/.test(value)
 
-        return {
-          ...item,
-          label: lang.value === 'zh' ? item.label : item.name.split('.').pop(), //国际化翻译
-          component: isTemplate ? 'Input' : item.component, // 将联动组件改用弹窗展示
-          dialog: isTemplate || item.dialog, // 将联动组件改用弹窗展示,
-          children: item.children && parseItems(item.children)
-        }
-      })
-    }
+    //     return {
+    //       ...item,
+    //       label: lang.value === 'zh' ? item.label : item.name.split('.').pop(), //国际化翻译
+    //       component: isTemplate ? 'Input' : item.component, // 将联动组件改用弹窗展示
+    //       dialog: isTemplate || item.dialog, // 将联动组件改用弹窗展示,
+    //       children: item.children && parseItems(item.children)
+    //     }
+    //   })
+    // }
 
-    const items = parseItems(config.attrSchema.items)
+    // const items = parseItems(config.attrSchema.items)
 
-    return {
-      ...config.attrSchema,
-      items
-    }
+    // return {
+    //   ...config.attrSchema,
+    //   // items
+    // }
   }
 
   return { size: 'small', labelAlign: 'top', items: [] } satisfies FormSchema

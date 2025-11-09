@@ -306,6 +306,52 @@ export default {
               designKey: 'design-yaZ4'
             }
           ]
+        },
+        {
+          label: '事件',
+          name: 'events',
+          component: 'TabPane',
+          designKey: 'tab-5',
+          props: {
+            lazy: true
+          },
+          children: [
+            {
+              label: 'onChange',
+              name: 'props.onChange',
+              component: 'FunctionEditor',
+              help: '值改变时触发。<br/>可使用 $values、$selectData、$instance 等上下文变量。<br/>示例：(e) => { $instance.setFieldValue("other", e.target.value) }',
+              designKey: 'design-event-change'
+            },
+            {
+              label: 'onBlur',
+              name: 'props.onBlur',
+              component: 'FunctionEditor',
+              help: '失去焦点时触发。<br/>可使用 $values、$selectData、$instance 等上下文变量。',
+              designKey: 'design-event-blur'
+            },
+            {
+              label: 'onFocus',
+              name: 'props.onFocus',
+              component: 'FunctionEditor',
+              help: '获得焦点时触发。<br/>可使用 $values、$selectData、$instance 等上下文变量。',
+              designKey: 'design-event-focus'
+            },
+            {
+              label: 'onInput',
+              name: 'props.onInput',
+              component: 'FunctionEditor',
+              help: '输入时触发。<br/>可使用 $values、$selectData、$instance 等上下文变量。',
+              designKey: 'design-event-input'
+            },
+            {
+              label: 'onClear',
+              name: 'props.onClear',
+              component: 'FunctionEditor',
+              help: '点击清空按钮时触发。<br/>可使用 $values、$selectData、$instance 等上下文变量。',
+              designKey: 'design-event-clear'
+            }
+          ]
         }
       ]
     }

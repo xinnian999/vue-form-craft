@@ -84,13 +84,17 @@
 
 <script setup lang="ts">
 import { cloneDeep, isEqual } from 'lodash'
-import { computed, onBeforeMount, reactive, watch } from 'vue'
+import { computed, onBeforeMount, onMounted, reactive, useAttrs, watch } from 'vue'
 import { useElements, useFormInstance } from '@/hooks'
 import Icon from '@/Icon/index.vue'
 import type { FormItemType } from '@/types'
 import { getDataByPath, ns, parseRules, setDataByPath } from '@/utils'
 
 const props = defineProps<FormItemType>()
+
+onMounted(() => {
+  // console.log(props)
+})
 
 const formInstance = useFormInstance()
 

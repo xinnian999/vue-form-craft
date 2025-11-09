@@ -13,15 +13,17 @@
     "clear": "find . -type d -name 'node_modules' -exec rm -rf {} \\;"
   },
   "dependencies": {
+    "@guolao/vue-monaco-editor": "^1.6.0",
     "axios": "^1.6.2",
     "element-plus": "^2.11.4",
+    "form-craft": "workspace:*",
     "jsoneditor": "^10.3.0",
     "lodash": "^4.17.21",
     "md-editor-v3": "^6.0.1",
+    "monaco-editor": "^0.54.0",
     "shiki": "^1.21.0",
     "vue": "^3.5.8",
     "vue-element-plus-x": "^1.3.7",
-    "form-craft": "workspace:*",
     "vuedraggable-es-fix": "^1.0.1"
   },
   "devDependencies": {
