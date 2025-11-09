@@ -177,6 +177,20 @@ export default {
                       { label: '修改数据', value: 'data' }
                     ]
                   },
+                  linkages: [
+                    {
+                      target: 'path',
+                      type: 'data',
+                      condition: "{{ $item.type === 'data' }}",
+                      value: ''
+                    },
+                    {
+                      target: 'customPath',
+                      type: 'data',
+                      condition: "{{ $item.type === 'data' }}",
+                      value: ''
+                    }
+                  ],
                   designKey: 'design-link-type'
                 },
                 {
