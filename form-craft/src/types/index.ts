@@ -20,12 +20,6 @@ export type RuleItem = {
 
 export type FormRules = RuleItem[]
 
-export type FormChange = {
-  target: string
-  value?: any
-  condition?: any
-}
-
 export type FormLinkage = {
   target: string
   condition?: any
@@ -53,7 +47,6 @@ export interface FormItemType {
   rules?: FormRules
   class?: any
   style?: any
-  change?: FormChange[]
   linkages?: FormLinkage[]
   dialog?: boolean
   width?: number

@@ -155,51 +155,6 @@ onBeforeMount(() => {
   }
 })
 
-// change 联动：只修改数据
-watch(
-  value,
-  (newVal, oldVal) => {
-    const change = props.change
-    const diff = isEqual(newVal, oldVal)
-
-    if (!change || diff) return
-
-    const formValues = formInstance.getValues()
-
-    let temp = cloneDeep(formValues)
-
-    change.forEach(({ target, value, condition }) => {
-      if (condition === false) return
-
-      if (target.includes('.*.')) {
-        //自增组件特殊处理
-        const targetArr = target.split('.*.')
-        const listTarget = targetArr.pop()!
-        const targetParse = targetArr.join('.')
-        const list = getDataByPath(formValues, targetParse)
-        if (Array.isArray(list)) {
-          temp = setDataByPath(
-            temp,
-            targetParse,
-            list.map((item) => {
-              return {
-                ...item,
-                [listTarget]: value
-              }
-            })
-          )
-        }
-        return
-      }
-
-      temp = setDataByPath(temp, target, value)
-    })
-
-    formInstance.setValues(temp)
-  },
-  { immediate: true }
-)
-
 // linkages 联动：可修改数据和 schema
 watch(
   value,

@@ -18,9 +18,11 @@ const schema: FormSchema = {
       props: {
         'show-password': true
       },
-      change: [
+      designKey: 'design-batchPassword',
+      linkages: [
         {
           target: 'users.*.password',
+          type: 'data',
           value: '{{ $values.batchPassword }}'
         }
       ]
@@ -37,9 +39,11 @@ const schema: FormSchema = {
             clearable: true
           },
           name: 'username',
-          change: [
+          designKey: 'design-username',
+          linkages: [
             {
               target: 'password',
+              type: 'data',
               condition: '{{ !$item.username }}',
               value: ''
             }

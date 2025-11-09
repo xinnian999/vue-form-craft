@@ -16,13 +16,16 @@ const schema = {
         placeholder: '请输入...'
       },
       name: 'item1',
-      change: [
+      designKey: 'design-item1',
+      linkages: [
         {
           target: 'item2',
+          type: 'data',
           value: '{{$values.item1 * 2}}'
         },
         {
           target: 'item3',
+          type: 'data',
           value: "{{$values.item1 + '元'}}"
         }
       ]

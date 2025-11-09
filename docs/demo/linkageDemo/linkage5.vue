@@ -44,12 +44,17 @@ const schema: FormSchema = {
       name: 'gneder',
       required: true,
       initialValue: 'man',
-      change: [
+      designKey: 'design-gneder',
+      linkages: [
         {
-          target: 'isHy'
+          target: 'isHy',
+          type: 'data',
+          value: undefined
         },
         {
-          target: 'hyWeek'
+          target: 'hyWeek',
+          type: 'data',
+          value: undefined
         }
       ]
     },

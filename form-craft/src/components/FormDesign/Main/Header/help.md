@@ -62,18 +62,18 @@
 - **hideLabel**: `boolean`，默认 `false`，是否隐藏标签
 - **rules**: `FormRule[]`，自定义校验规则
 - **children**: `FormItemType[]`，子表单项，用于嵌套组件（如卡片、栅格、自增容器）
-- **change**: `FormChange[]`，数据变化时的联动配置
+- **linkages**: `FormLinkage[]`，联动配置
 - **designKey**: `string`，表单设计器的标识 key，自动生成
 
 ## 联动规范
 
-联动分为两种方式，必须严格区分使用场景：
+联动分为两种方式，根据使用场景选择：
 
-### 方式一：JS表达式
+### 方式一：JS 表达式（简单联动）
 
-- 使用 `{{ }}` 包裹 JS 表达式。
-- 仅能用于 **配置属性的动态计算**，例如：hidden、disabled、placeholder、help 等。
-- 表达式内可以访问 `$values`（表单数据对象）。
+- 使用 `{{ }}` 包裹 JS 表达式
+- 适用于**简单的配置属性动态计算**，例如：hidden、disabled、placeholder、help 等
+- 表达式内可以访问 `$values`（表单数据对象）
 
 示例：
 
@@ -83,48 +83,81 @@
   "component": "TextArea",
   "name": "desc",
   "props": {
-    "placeholder": "{{  $values.name ? $values.name + '的简介' : '请输入简介' }}",
+    "placeholder": "{{ $values.name ? $values.name + '的简介' : '请输入简介' }}",
     "disabled": "{{ !$values.name }}"
   },
+  "hidden": "{{ !$values.showDesc }}",
   "designKey": "design-1001"
 }
 ```
 
-### 方式二：数据联动
+### 方式二：linkages 配置（复杂联动）
 
-- 当需要监听某个表单项数据变化时，触发联动，可以配置`change`来实现。
-- 用于修改表单值，必须使用 change 数组。
-- 当字段值变化时，依次执行 change 规则。
+- 适用于**复杂的、多目标的联动逻辑**
+- 可以同时修改配置和数据
+- 支持条件触发
 - 规则字段：
-  - target: 目标字段的 name（必填）。
-  - condition: 触发条件（可选，不填则总是触发）。
-  - value: 修改的值（可选，不填则清空）。
+  - **target**: 目标字段的 name（必填）
+  - **type**: `'config' | 'data'`，联动类型（必填）
+    - `'config'`：修改目标字段的配置（如 hidden、disabled、label 等）
+    - `'data'`：修改目标字段的数据值
+  - **path**: 配置路径（type 为 'config' 时必填），如 `'hidden'`、`'props.disabled'`
+  - **value**: 要设置的值，支持 JS 表达式
+  - **condition**: 触发条件（可选），支持 JS 表达式
 
-示例（字段1改变时，自动修改字段2和字段3的值）：
+示例 1（修改配置）：
+
+```json
+{
+  "label": "商品类型",
+  "name": "productType",
+  "component": "Select",
+  "designKey": "design-type",
+  "linkages": [
+    {
+      "target": "productName",
+      "type": "config",
+      "path": "label",
+      "value": "{{ $values.productType === 'electronics' ? '电子产品名称' : '服装名称' }}"
+    },
+    {
+      "target": "warranty",
+      "type": "config",
+      "path": "hidden",
+      "value": "{{ $values.productType !== 'electronics' }}"
+    }
+  ]
+}
+```
+
+示例 2（修改数据）：
 
 ```json
 {
   "label": "字段1",
   "component": "Input",
   "name": "item1",
-  "designKey": "design-NASi",
-  "props": {
-    "placeholder": "请输入..."
-  },
-  "change": [
+  "designKey": "design-item1",
+  "linkages": [
     {
       "target": "item2",
+      "type": "data",
       "value": "{{ $values.item1 * 2 + '' }}"
     },
     {
       "target": "item3",
+      "type": "data",
       "value": "{{ $values.item1 + '元' }}"
     }
   ]
 }
 ```
 
-如果用户需求涉及交互或联动，必须遵循以上联动规则
+### ⚠️ 重要提示
+
+**不要在同一个属性上同时使用 JS 表达式和 linkages**，否则会导致逻辑混乱。请选择其中一种方式：
+- 简单联动：直接在属性上使用 JS 表达式
+- 复杂联动：使用 linkages 配置
 
 ## 校验规范
 
