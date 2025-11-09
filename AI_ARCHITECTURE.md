@@ -12,10 +12,11 @@
 
 - 🎨 **可视化设计器**：拖拽式设计，实时预览，支持历史记录（撤销/重做）
 - 📋 **JsonSchema 驱动**：配置即代码，所见即所得
-- 🔗 **强大联动系统**：支持 JS 表达式联动和数据联动两种方式
+- 🔗 **强大联动系统**：支持 JS 表达式联动、数据联动（linkages）、函数联动（事件系统）三种方式
 - ✅ **完善校验系统**：8 种校验类型（required、min/max、pattern、builtin、enum、custom、jsExpr）
 - 🧩 **高扩展性**：37+ 内置组件，支持自定义组件扩展
 - 🌐 **国际化**：中英文支持
+- 💡 **智能编辑器**：FunctionEditor 提供 Monaco Editor 智能提示，支持多行函数编辑
 
 ### 1.2 技术栈
 
@@ -573,11 +574,27 @@ interface FormLinkage {
 }
 ```
 
-### 5.4 事件系统
+### 5.3 函数联动（事件系统）
 
-**适用场景**：字段触发事件时执行自定义逻辑
+**适用场景**：通过事件处理器实现复杂的表单联动逻辑
 
-**实现原理**：Vue 3 原生支持通过 props 传递事件函数（如 `onChange`、`onBlur`），deepParse 会将事件函数字符串解析为真实函数，并注入完整的上下文变量。
+**实现原理**：
+1. 所有 `{{ }}` 包裹的内容都会被 `deepParse` 解析
+2. 如果解析结果是函数，会自动包装并传入 `params` 对象
+3. `params` 对象包含所有上下文变量和事件参数
+
+**函数参数说明**：
+
+```typescript
+interface Params {
+  $values: Record<string, any>      // 表单数据对象
+  $selectData: Record<string, any>  // 选择数据对象
+  $instance: FormInstance           // 表单实例 API
+  $item?: any                       // 当前项数据（在列表/自增容器中）
+  $index?: number                   // 当前项索引（在列表/自增容器中）
+  args: any[]                       // 原始事件参数数组，如 [event]
+}
+```
 
 **支持的事件**：
 - `onChange`：值改变时触发
@@ -587,7 +604,7 @@ interface FormLinkage {
 - `onClear`：点击清空按钮时触发
 - 以及其他 Element Plus 组件支持的事件
 
-**示例 1：基础事件**
+**示例 1：基础事件处理**
 
 ```json
 {
@@ -596,12 +613,12 @@ interface FormLinkage {
   "component": "Input",
   "props": {
     "placeholder": "请输入用户名",
-    "onBlur": "{{ (e) => { console.log('失去焦点，当前值:', $values.username) } }}"
+    "onBlur": "{{ (params) => { console.log('失去焦点，当前值:', params.$values.username) } }}"
   }
 }
 ```
 
-**示例 2：使用 $instance 调用表单方法**
+**示例 2：访问事件对象**
 
 ```json
 {
@@ -611,12 +628,17 @@ interface FormLinkage {
   "props": {
     "placeholder": "请输入手机号",
     "maxlength": 11,
-    "onBlur": "{{ (e) => { if ($values.phone?.length === 11) { $instance.setFieldValue('verified', true) } } }}"
+    "onBlur": "{{ (params) => { 
+      const event = params.args[0]
+      if (params.$values.phone?.length === 11) { 
+        params.$instance.setFieldValue('verified', true) 
+      } 
+    } }}"
   }
 }
 ```
 
-**示例 3：联动其他字段**
+**示例 3：函数联动 - 省市区联动**
 
 ```json
 {
@@ -625,20 +647,42 @@ interface FormLinkage {
   "component": "Select",
   "props": {
     "options": [],
-    "onChange": "{{ (value) => { $instance.setFieldValue('city', ''); $instance.setFieldValue('district', '') } }}"
+    "onChange": "{{ (params) => { 
+      const value = params.args[0]
+      // 根据省份设置城市
+      if (value === '广东') {
+        params.$instance.setFieldValue('city', '广州')
+      } else if (value === '北京') {
+        params.$instance.setFieldValue('city', '北京')
+      }
+      // 清空区县
+      params.$instance.setFieldValue('district', '')
+      // 触发验证
+      params.$instance.validate()
+    } }}"
   }
 }
 ```
 
-**示例 4：触发校验**
+**示例 4：复杂的多行函数**
 
 ```json
 {
-  "label": "密码",
-  "name": "password",
-  "component": "Password",
+  "label": "类型",
+  "name": "type",
+  "component": "Select",
   "props": {
-    "onChange": "{{ () => { if ($values.confirmPassword) { $instance.validate() } } }}"
+    "options": [{"label": "个人", "value": "personal"}, {"label": "企业", "value": "company"}],
+    "onChange": "{{ (params) => {
+      const type = params.args[0]
+      if (type === 'company') {
+        params.$instance.setFieldValue('companyName', '')
+        params.$instance.setFieldValue('taxNumber', '')
+      } else {
+        params.$instance.setFieldValue('idCard', '')
+      }
+      params.$instance.validate()
+    } }}"
   }
 }
 ```
@@ -653,6 +697,105 @@ interface FormLinkage {
 - `submit()`：提交表单
 - `updateSelectData(key, value)`：更新下拉框数据
 - `updateItemSchemaByPath(name, path, value)`：动态修改字段配置
+
+### 5.4 deepParse 实现原理
+
+**核心功能**：将 `{{ }}` 包裹的 JS 表达式或函数解析为实际值或可执行函数
+
+**关键代码**：
+
+```typescript
+// utils/deepParse.ts
+const templateParse = (str: string, context: Record<string, any>) => {
+  // 使用 [\s\S] 匹配包括换行符在内的所有字符
+  const template = str.match(/\{\{([\s\S]+?)\}\}/)
+  if (template) {
+    try {
+      const parse = new Function(Object.keys(context).join(','), 'return ' + template[1])
+      const result = parse(...Object.values(context))
+      
+      // 如果解析结果是函数，包装它，将 context 和原始参数合并后传入
+      if (typeof result === 'function') {
+        return (...args: any[]) => {
+          const mergedParams = { ...context, args }
+          return result(mergedParams)
+        }
+      }
+      
+      return result
+    } catch (e) {
+      return str
+    }
+  }
+  return str
+}
+
+// 递归解析整个 schema
+const deepParse = (prop: any, context: Record<string, any>): any => {
+  if (isString(prop)) return templateParse(prop, context)
+  if (isPlainObject(prop)) {
+    return Object.keys(prop).reduce((all, key) => ({
+      ...all,
+      [key]: deepParse(prop[key], context)
+    }), {})
+  }
+  if (isArray(prop)) return prop.map(item => deepParse(item, context))
+  return prop
+}
+```
+
+**工作流程**：
+
+1. **表达式解析**：`{{ $values.age > 18 }}` → `true/false`
+2. **函数解析**：`{{ (params) => params.$values.name }}` → 包装后的函数
+3. **函数调用**：事件触发时，自动传入 `{ ...context, args: [event] }`
+
+### 5.5 FunctionEditor 组件
+
+**位置**：`form-craft/src/elements/FunctionEditor/Component.vue`
+
+**功能**：可视化编辑事件处理器函数，提供 Monaco Editor 智能提示
+
+**特性**：
+- ✅ 自动添加/移除 JSDoc 类型注释
+- ✅ 完整的 TypeScript 智能提示
+- ✅ 支持多行函数编辑
+- ✅ 自动格式化代码
+
+**使用流程**：
+
+1. **打开编辑器**：自动添加 JSDoc 注释
+   ```javascript
+   /**@param {Params} params*/
+   (params) => {
+     
+   }
+   ```
+
+2. **编辑时**：输入 `params.` 获得智能提示（$values、$instance 等）
+
+3. **保存时**：自动移除 JSDoc 注释，保存为
+   ```json
+   "{{ (params) => { ... } }}"
+   ```
+
+**类型定义**：
+
+```typescript
+interface Params {
+  $values: Record<string, any>
+  $selectData: Record<string, any>
+  $instance: {
+    getValues(): Record<string, any>
+    setFieldValue(path: string, value: any): void
+    validate(): Promise<any>
+    // ... 更多方法
+  }
+  $item?: any
+  $index?: number
+  args: any[]
+}
+```
 
 ---
 
