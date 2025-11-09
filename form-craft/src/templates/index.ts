@@ -1,4 +1,5 @@
 import addressContact from './addressContact'
+import advancedLinkage from './advancedLinkage'
 import bugGood from './bugGood'
 import dateRangeBooking from './dateRangeBooking'
 import fileUpload from './fileUpload'
@@ -13,6 +14,7 @@ import valueLinkage from './valueLinkage'
 
 export {
   addressContact,
+  advancedLinkage,
   bugGood,
   dateRangeBooking,
   fileUpload,
@@ -91,6 +93,11 @@ export default [
         label: '数据联动',
         schema: valueLinkage,
         description: '数据联动：当字段A输入时，字段B和C的数据会随之改变'
+      },
+      {
+        label: '高级联动',
+        schema: advancedLinkage,
+        description: '高级联动：不仅可以修改数据，还可以动态修改字段的 schema 配置（如 label、props、hidden、required 等）'
       }
     ]
   }

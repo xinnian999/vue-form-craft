@@ -1,15 +1,21 @@
 import type { FormValidationResult } from 'element-plus'
 import type { Component, Ref, Slots, ToRefs, VNode } from 'vue'
 
-export type TriggerType = 'blur' | 'change'
-
-export type RuleType = 'required' | 'min' | 'max' | 'pattern' | 'builtin' | 'enum' | 'custom' | 'jsExpr'
+export type RuleType =
+  | 'required'
+  | 'min'
+  | 'max'
+  | 'pattern'
+  | 'builtin'
+  | 'enum'
+  | 'custom'
+  | 'jsExpr'
 
 export type RuleItem = {
   type?: RuleType
   value?: any
   message?: string
-  trigger?: TriggerType | TriggerType[]
+  trigger?: 'blur' | 'change'
 }
 
 export type FormRules = RuleItem[]
@@ -18,6 +24,15 @@ export type FormChange = {
   target: string
   value?: any
   condition?: any
+}
+
+export type FormLinkage = {
+  target: string
+  condition?: any
+  type: 'config' | 'data'
+  value?: any
+  path?: string
+  customPath?: string
 }
 
 export interface FormItemType {
@@ -39,6 +54,7 @@ export interface FormItemType {
   class?: any
   style?: any
   change?: FormChange[]
+  linkages?: FormLinkage[]
   dialog?: boolean
   width?: number
 }
@@ -176,6 +192,7 @@ export interface FormInstance extends FormRenderProps {
   getFieldValue: (path: string) => any
   setFieldValue: (path: string, value: any) => void
   updateSelectData: (key: string, value: Record<string, any>) => void
+  updateItemSchemaByPath: (name: string, path: string, value: any) => void
   validate: () => FormValidationResult | undefined
   resetFields: (names?: string[]) => void
   submit: () => void

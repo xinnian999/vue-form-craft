@@ -11,10 +11,8 @@ export function parseRules(rules?: RuleItem[]): FormItemRule[] {
     return []
   }
 
-  const defaultTrigger: ('blur' | 'change')[] = ['blur', 'change']
-
   return rules.map((rule) => {
-    const { type, value, message = '校验不通过', trigger = defaultTrigger } = rule
+    const { type, value, message = '校验不通过', trigger = 'blur' } = rule
 
     const baseRule: FormItemRule = {
       message,
@@ -55,9 +53,13 @@ export function parseRules(rules?: RuleItem[]): FormItemRule[] {
 
       case 'enum': {
         // 如果 value 是字符串（多行文本），需要转换为数组
-        const enumValues = typeof value === 'string' 
-          ? value.split('\n').map(v => v.trim()).filter(v => v)
-          : value
+        const enumValues =
+          typeof value === 'string'
+            ? value
+                .split('\n')
+                .map((v) => v.trim())
+                .filter((v) => v)
+            : value
         return {
           ...baseRule,
           enum: enumValues as any[]

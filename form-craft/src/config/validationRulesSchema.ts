@@ -181,7 +181,7 @@ export const validationRulesSchema: FormItemType[] = [
       {
         label: '触发时机',
         name: 'trigger',
-        component: 'Checkbox',
+        component: 'Radio',
         props: {
           mode: 'static',
           options: [

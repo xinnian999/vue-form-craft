@@ -13,7 +13,7 @@ describe('parseRules', () => {
     expect(result[0]).toMatchObject({
       required: true,
       message: '必填字段',
-      trigger: ['blur', 'change']
+      trigger: 'blur'
     })
   })
 
@@ -67,6 +67,6 @@ describe('parseRules', () => {
   it('应该使用默认 trigger', () => {
     const rules = [{ type: 'required' as const, message: '必填' }]
     const result = parseRules(rules)
-    expect(result[0].trigger).toEqual(['blur', 'change'])
+    expect(result[0].trigger).toEqual('blur')
   })
 })

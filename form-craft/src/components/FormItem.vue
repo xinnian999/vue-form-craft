@@ -155,6 +155,7 @@ onBeforeMount(() => {
   }
 })
 
+// change 联动：只修改数据
 watch(
   value,
   (newVal, oldVal) => {
@@ -195,6 +196,52 @@ watch(
     })
 
     formInstance.setValues(temp)
+  },
+  { immediate: true }
+)
+
+// linkages 联动：可修改数据和 schema
+watch(
+  value,
+  (newVal, oldVal) => {
+    const linkages = props.linkages
+    const diff = isEqual(newVal, oldVal)
+
+    if (!linkages || diff || formInstance.design) return
+
+    const formValues = formInstance.getValues()
+
+    linkages.forEach(({ target, value, path, customPath, condition, type }) => {
+      if (condition === false) return
+
+      // 根据 type 判断联动方式
+      if (type === 'config') {
+        // 修改 schema 配置
+        // 当 path 为 'custom' 时使用 customPath，否则使用 path
+        const actualPath = path === 'custom' ? customPath : path
+        if (actualPath !== undefined) {
+          formInstance.updateItemSchemaByPath(target, actualPath, value)
+        }
+      } else if (type === 'data') {
+        // 修改数据
+        if (target.includes('.*.')) {
+          //自增组件特殊处理
+          const targetArr = target.split('.*.')
+          const listTarget = targetArr.pop()!
+          const targetParse = targetArr.join('.')
+          const list = getDataByPath(formValues, targetParse)
+          if (Array.isArray(list)) {
+            const newList = list.map((item) => ({
+              ...item,
+              [listTarget]: value
+            }))
+            formInstance.setFieldValue(targetParse, newList)
+          }
+        } else {
+          formInstance.setFieldValue(target, value)
+        }
+      }
+    })
   },
   { immediate: true }
 )

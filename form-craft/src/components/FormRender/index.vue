@@ -29,15 +29,17 @@ import {
   provide,
   reactive,
   readonly,
+  ref,
   toRefs,
   useSlots,
-  useTemplateRef
+  useTemplateRef,
+  watch
 } from 'vue'
 import { FormItemGroup } from '@/components'
 import { useLocale } from '@/hooks'
 import { $formInstance } from '@/symbol'
-import type { FormInstance, FormRenderEmits, FormRenderProps } from '@/types'
-import { deepParse, getDataByPath, ns, setDataByPath } from '@/utils'
+import type { FormInstance, FormRenderEmits, FormRenderProps, FormSchema } from '@/types'
+import { deepParse, getDataByPath, setDataByPath } from '@/utils'
 
 const props = withDefaults(defineProps<FormRenderProps>(), {
   schema: () => ({})
@@ -54,6 +56,18 @@ const form = useTemplateRef<ElFormInstance>('form')
 
 const selectData = reactive<Record<string, Record<string, any>>>({})
 
+// 内部维护的 schema 副本，避免直接修改 props
+const internalSchema = ref<FormSchema>(cloneDeep(props.schema))
+
+// 监听 props.schema 变化，同步到内部 schema
+watch(
+  () => props.schema,
+  (newSchema) => {
+    internalSchema.value = cloneDeep(newSchema)
+  },
+  { deep: true }
+)
+
 const context = computed(() => ({
   ...props.schemaContext,
   $values: formValues.value,
@@ -63,10 +77,10 @@ const context = computed(() => ({
 
 const formItems = computed(() => {
   if (props.design) {
-    return props.schema.items
+    return internalSchema.value.items
   }
 
-  return deepParse(props.schema.items || [], context.value)
+  return deepParse(internalSchema.value.items || [], context.value)
 })
 
 const formAttrs = computed(() => {
@@ -130,6 +144,28 @@ const updateSelectData: FormInstance['updateSelectData'] = (key, value) => {
   selectData[key] = value
 }
 
+const updateItemSchemaByPath: FormInstance['updateItemSchemaByPath'] = (name, path, value) => {
+  // console.log('updateItemSchemaByPath', name, path, value)
+  const findAndUpdate = (items: any[]): boolean => {
+    for (const item of items) {
+      if (item.name === name) {
+        // 使用 setDataByPath 设置嵌套路径的值
+        const updated = setDataByPath(item, path, value)
+        Object.assign(item, updated)
+        return true
+      }
+      if (item.children && findAndUpdate(item.children)) {
+        return true
+      }
+    }
+    return false
+  }
+
+  if (internalSchema.value.items) {
+    findAndUpdate(internalSchema.value.items)
+  }
+}
+
 const slots = useSlots()
 
 const instance = readonly({
@@ -141,6 +177,7 @@ const instance = readonly({
   getFieldValue,
   setFieldValue,
   updateSelectData,
+  updateItemSchemaByPath,
   validate,
   resetFields,
   submit,
@@ -150,4 +187,12 @@ const instance = readonly({
 provide($formInstance, instance)
 
 defineExpose(instance)
+
+watch(
+  () => internalSchema.value,
+  (newVal) => {
+    console.log(newVal)
+  },
+  { deep: true }
+)
 </script>
