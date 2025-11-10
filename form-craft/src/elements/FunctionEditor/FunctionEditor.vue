@@ -1,11 +1,14 @@
 <template>
-  <div class="function-editor">
-    <el-button type="primary" @click="openDialog" size="small">
-      <template #icon>
-        <Icon name="code" />
-      </template>
-      <span> 编辑函数</span>
-    </el-button>
+  <div :class="ns('function-editor')">
+    <div class="button-wrapper">
+      <el-button type="primary" @click="openDialog" size="small">
+        <template #icon>
+          <Icon name="code" />
+        </template>
+        <span> 编辑函数</span>
+      </el-button>
+      <span v-if="hasValue" class="status-dot"></span>
+    </div>
 
     <el-dialog
       v-model="dialogVisible"
@@ -57,10 +60,20 @@
 <script setup lang="ts">
 import { VueMonacoEditor } from '@guolao/vue-monaco-editor'
 import { ElMessage } from 'element-plus'
-import { ref, shallowRef, watch } from 'vue'
+import { computed, ref, shallowRef, watch } from 'vue'
 import Icon from '@/Icon/index.vue'
+import { ns } from '@/utils'
 
 const modelValue = defineModel<string>()
+
+// 计算是否有值
+const hasValue = computed(() => {
+  const value = modelValue.value
+  if (!value) return false
+  // 移除 {{ }} 后检查是否有实际内容
+  const code = value.replace(/^\{\{\s*|\s*\}\}$/g, '').trim()
+  return code.length > 0
+})
 
 const dialogVisible = ref(false)
 const editingCode = ref('')
@@ -313,34 +326,55 @@ watch(modelValue, (newVal) => {
 })
 </script>
 
-<style scoped>
-.function-editor {
+<style scoped lang="scss">
+@import '@/style.scss';
+
+@include ns('function-editor') {
   display: inline-block;
-}
 
-.function-editor-content {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
+  .button-wrapper {
+    position: relative;
+    display: inline-block;
+  }
 
-.editor-tips {
-  margin-bottom: 8px;
-}
+  .status-dot {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 8px;
+    height: 8px;
+    background-color: $warningColor;
+    border-radius: 50%;
+    border: 2px solid $bgColor;
+    box-shadow: 0 0 4px rgba(230, 162, 60, 0.5);
+    pointer-events: none;
+    z-index: 1;
+  }
 
-.editor-tips code {
-  background: #f5f7fa;
-  padding: 2px 6px;
-  border-radius: 3px;
-  font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
-  font-size: 12px;
-  color: #e6a23c;
-}
+  .function-editor-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
 
-.monaco-editor-wrapper {
-  height: 400px;
-  border: 1px solid #dcdfe6;
-  border-radius: 4px;
-  overflow: hidden;
+  .editor-tips {
+    margin-bottom: 8px;
+
+    code {
+      background: $fillColorLight;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+      font-size: 12px;
+      color: $warningColor;
+    }
+  }
+
+  .monaco-editor-wrapper {
+    height: 400px;
+    border: 1px solid $borderColor;
+    border-radius: 4px;
+    overflow: hidden;
+  }
 }
 </style>

@@ -5,6 +5,10 @@ $dangerColor: var(--el-color-danger, #f56c6c) !default;
 $bgColor: var(--el-bg-color, #fff) !default;
 $successColor: var(--el-color-success, #67c23a) !default;
 $lightSuccessColor: var(--el-color-success-light-9, rgb(240, 249, 235)) !default;
+$warningColor: var(--el-color-warning, #e6a23c) !default;
+$borderColor: var(--el-border-color, #dcdfe6) !default;
+$fillColorLight: var(--el-fill-color-light, #f5f7fa) !default;
+$textColorSecondary: var(--el-text-color-secondary, #909399) !default;
 
 @mixin ns($cls) {
   $NS: $namespace + '-' + $cls;
