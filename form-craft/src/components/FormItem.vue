@@ -136,9 +136,18 @@ const computeRules = computed(() => {
 })
 
 const config = computed(() => {
-  const data = elements[props.component] || {}
+  const data = elements[props.component]
+  if (!data) {
+    return { 
+      modelName: 'modelValue',
+      type: undefined,
+      render: undefined
+    } as any
+  }
+  
+  // 避免修改原对象，使用只读方式
   if (!data.modelName) {
-    data.modelName = 'modelValue'
+    return { ...data, modelName: 'modelValue' }
   }
 
   return data
@@ -165,13 +174,18 @@ onBeforeMount(() => {
 })
 
 // linkages 联动：可修改数据和 schema
+// 性能优化：缓存formValues引用，避免重复调用getValues()
 watch(
   value,
   (newVal, oldVal) => {
     const linkages = props.linkages
-    const diff = isEqual(newVal, oldVal)
+    
+    // 提前返回，避免不必要的计算
+    if (!linkages || linkages.length === 0 || formInstance.design) return
+    if (isEqual(newVal, oldVal)) return
 
-    if (!linkages || diff || formInstance.design) return
+    // 缓存formValues，避免多次调用getValues()
+    const formValues = formInstance.getValues()
 
     linkages.forEach(({ target, value, path, customPath, condition, type }) => {
       if (condition === false) return
@@ -188,7 +202,7 @@ watch(
             const targetArr = target.split('.*.')
             const fieldName = targetArr.pop()!
             const listPath = targetArr.join('.')
-            const list = getDataByPath(formInstance.getValues(), listPath)
+            const list = getDataByPath(formValues, listPath)
 
             if (Array.isArray(list)) {
               // FormList 的字段在 schema 中的 name 不包含索引,直接使用字段名
@@ -209,7 +223,7 @@ watch(
           const targetArr = target.split('.*.')
           const listTarget = targetArr.pop()!
           const targetParse = targetArr.join('.')
-          const list = getDataByPath(formInstance.getValues(), targetParse)
+          const list = getDataByPath(formValues, targetParse)
           if (Array.isArray(list)) {
             formInstance.setFieldValue(
               targetParse,
@@ -231,7 +245,7 @@ watch(
             // 解析目标字段名
             const targetFieldName = actualTarget.split('.').pop()!
             const currentRowPath = `${listPath}.${rowIndex}`
-            const currentRow = getDataByPath(formInstance.getValues(), currentRowPath)
+            const currentRow = getDataByPath(formValues, currentRowPath)
 
             // 只有当目标字段的值与联动值不同时才更新,避免无限循环
             if (currentRow && currentRow[targetFieldName] !== value) {

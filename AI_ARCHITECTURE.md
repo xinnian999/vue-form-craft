@@ -860,9 +860,39 @@ FormDesign → provide $designInstance（设计器实例）
 ## 十、最佳实践
 
 ### 10.1 性能优化
+
+#### 已实施的性能优化（2025-11-10）
+
+**1. FormItem 联动优化**
+- 缓存 `formValues` 引用，避免在联动中重复调用 `getValues()`
+- 提前判断 `linkages.length === 0`，减少不必要的计算
+- 优化 `isEqual` 判断位置，先判断再执行
+
+**2. deepParse 缓存机制**
+- 使用 `Map` 缓存 Function 实例（最多500个），避免重复创建
+- 使用 `for...in` 替代 `reduce`，减少对象创建开销
+- 使用传统 `for` 循环替代 `map`，提升数组遍历性能
+
+**3. FormRender computed 优化**
+- 移除 schema watch 的 `deep: true`，只监听引用变化
+- 添加注释说明 deepParse 已有缓存机制
+
+**4. 路径解析缓存**
+- 抽离 `parsePath` 为独立工具函数（`utils/parsePath.ts`）
+- `getDataByPath` 和 `setDataByPath` 共享同一个路径解析缓存（最多200个）
+- 使用 LRU 策略清除最早的缓存项
+- 避免了重复代码，提高了缓存命中率
+
+**5. FormItem config computed 优化**
+- 避免直接修改 elements 对象，使用只读方式返回
+
+#### 性能优化建议
+
 1. 避免深层嵌套（控制在 3 层以内）
 2. 大数据量时使用 table 模式
 3. 避免表达式中的复杂计算
+4. 合理使用 `immediate: true`，避免不必要的初始触发
+5. 大型表单建议分页或分步骤展示
 
 ### 10.2 联动设计
 1. **JS 表达式**：用于属性计算
