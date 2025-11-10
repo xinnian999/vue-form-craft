@@ -20,7 +20,12 @@
 
     <el-form-item
       v-else
-      :class="[ns('form-item'), props.class, `${component}-${name}`]"
+      :class="[
+        ns('form-item'),
+        props.class,
+        `${component}-${name}`,
+        { 'hide-label': labelWidth === 0 }
+      ]"
       :style="style"
       :key="name"
       :prop="name"
@@ -206,12 +211,10 @@ watch(
 )
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '@/style';
 
 @include ns('form-item') {
-  // margin-bottom: 18px;
-
   &-label {
     display: inline-flex;
     position: relative;
@@ -221,6 +224,12 @@ watch(
 
     &-suffix {
       margin-left: 3px;
+    }
+  }
+
+  &.hide-label {
+    .el-form-item__label {
+      display: none;
     }
   }
 }

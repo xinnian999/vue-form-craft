@@ -140,6 +140,7 @@ const props = withDefaults(defineProps<Props>(), {
 const list = defineModel<Record<string, any>[]>({ default: [] })
 
 const cIndex = ref(0)
+const listSnapshot = ref<Record<string, any>[]>([])
 
 const formInstance = useFormInstance()
 
@@ -175,6 +176,8 @@ const formatter = (row: any, column: TableColumnCtx<any>, cellValue: any, index:
   return h(FormItem, {
     ...field,
     hideLabel: true,
+    labelWidth: 0,
+    label: '',
     style: { marginBottom: 0 },
     name: `${props.name}.${index}.${field.name}`
   })
@@ -183,12 +186,13 @@ const formatter = (row: any, column: TableColumnCtx<any>, cellValue: any, index:
 // FormList 数据联动
 watch(
   list,
-  (newVal, oldVal) => {
+  (newVal) => {
+    // 通过对比快照来找到真正变化的索引
     const changeIndex = newVal.reduce((acc, cur, index) => {
-      if (!isEqual(cur, oldVal[index])) {
+      const oldItem = listSnapshot.value[index]
+      if (!isEqual(cur, oldItem)) {
         acc = index
       }
-
       return acc
     }, 0)
 
@@ -199,14 +203,10 @@ watch(
 
     const parseFieldsData = parseFields(changeIndex)
     const newChangeData = newVal[changeIndex] || {}
-    const oldChangeData = oldVal[changeIndex] || {}
 
     parseFieldsData.forEach((item: FormItemType) => {
-      if (
-        item.linkages &&
-        oldChangeData &&
-        !isEqual(newChangeData[item.name], oldChangeData[item.name])
-      ) {
+      // 检查字段是否有linkages且当前字段有值
+      if (item.linkages && newChangeData[item.name] !== undefined) {
         let hasChange = false
         const updatedRow = { ...list.value[changeIndex] }
 
@@ -216,18 +216,26 @@ watch(
 
           // 解析目标路径
           const targetName = linkage.target.split('.').pop()!
-          if (targetName && linkage.value !== undefined) {
+          // 只有当目标字段的值与联动值不同时才更新
+          if (
+            targetName &&
+            linkage.value !== undefined &&
+            updatedRow[targetName] !== linkage.value
+          ) {
             updatedRow[targetName] = linkage.value
             hasChange = true
           }
         })
 
-        // 如果有变化，替换整个行对象以触发响应式更新
+        // 如果有变化,使用 splice 触发响应式更新
         if (hasChange) {
-          list.value[changeIndex] = updatedRow
+          list.value.splice(changeIndex, 1, updatedRow)
         }
       }
     })
+
+    // 更新快照(深拷贝)
+    listSnapshot.value = JSON.parse(JSON.stringify(newVal))
   },
   { deep: true }
 )
