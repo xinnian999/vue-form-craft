@@ -26,7 +26,8 @@ export default {
       required: true,
       rules: [
         {
-          expr: '/^.{6,20}$/',
+          type: 'pattern',
+          value: '^.{6,20}$',
           message: '密码长度必须为6-20位',
           trigger: 'blur'
         }

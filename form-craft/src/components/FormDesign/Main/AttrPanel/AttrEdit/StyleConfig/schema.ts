@@ -100,9 +100,11 @@ const schema: FormSchema = {
         max: 150
       },
       initialValue: 100,
-      change: [
+      designKey: 'design-transform',
+      linkages: [
         {
           target: 'style.transform',
+          type: 'data',
           value: '{{ `scale(${$values.style.transform / 100 })`  }}'
         }
       ]

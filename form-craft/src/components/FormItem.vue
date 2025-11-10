@@ -83,15 +83,18 @@
 </template>
 
 <script setup lang="ts">
-import type { FormItemRule } from 'element-plus'
-import { cloneDeep, isEqual } from 'lodash'
-import { computed, onBeforeMount, reactive, watch } from 'vue'
+import { isEqual } from 'lodash'
+import { computed, onBeforeMount, onMounted, reactive, watch } from 'vue'
 import { useElements, useFormInstance } from '@/hooks'
 import Icon from '@/Icon/index.vue'
 import type { FormItemType } from '@/types'
-import { getDataByPath, isRegexString, ns, parseRegexString, setDataByPath } from '@/utils'
+import { getDataByPath, ns, parseRules } from '@/utils'
 
 const props = defineProps<FormItemType>()
+
+onMounted(() => {
+  // console.log(props)
+})
 
 const formInstance = useFormInstance()
 
@@ -119,38 +122,12 @@ const value = computed({
 const computeRules = computed(() => {
   const { rules, required } = props
 
-  const ruleData: FormItemRule[] = []
+  // 如果有 required 标记，添加必填规则
+  const allRules = required
+    ? [{ type: 'required' as const, message: '该字段是必填字段' }, ...(rules || [])]
+    : rules || []
 
-  if (required) {
-    ruleData.push({ required: true, message: '该字段是必填字段', trigger: 'blur' })
-  }
-
-  if (rules) {
-    rules.forEach((rule) => {
-      const { expr, message = '校验不通过', trigger = 'blur' } = rule
-
-      const ruleDef = {
-        message,
-        trigger
-      }
-
-      // 解析字符串的正则
-      if (isRegexString(expr)) {
-        ruleData.push({
-          ...ruleDef,
-          pattern: parseRegexString(expr)
-        })
-        return
-      }
-
-      ruleData.push({
-        ...ruleDef,
-        validator: () => !!expr
-      })
-    })
-  }
-
-  return ruleData
+  return parseRules(allRules)
 })
 
 const config = computed(() => {
@@ -182,46 +159,48 @@ onBeforeMount(() => {
   }
 })
 
+// linkages 联动：可修改数据和 schema
 watch(
   value,
   (newVal, oldVal) => {
-    const change = props.change
+    const linkages = props.linkages
     const diff = isEqual(newVal, oldVal)
 
-    if (!change || diff) return
+    if (!linkages || diff || formInstance.design) return
 
-    const formValues = formInstance.getValues()
-
-    let temp = cloneDeep(formValues)
-
-    change.forEach(({ target, value, condition }) => {
+    linkages.forEach(({ target, value, path, customPath, condition, type }) => {
       if (condition === false) return
 
-      if (target.includes('.*.')) {
-        //自增组件特殊处理
-        const targetArr = target.split('.*.')
-        const listTarget = targetArr.pop()!
-        const targetParse = targetArr.join('.')
-        const list = getDataByPath(formValues, targetParse)
-        if (Array.isArray(list)) {
-          temp = setDataByPath(
-            temp,
-            targetParse,
-            list.map((item) => {
-              return {
+      // 根据 type 判断联动方式
+      if (type === 'attr') {
+        // 修改 schema 属性
+        // 当 path 为 'custom' 时使用 customPath，否则使用 path
+        const actualPath = path === 'custom' ? customPath : path
+        if (actualPath !== undefined) {
+          formInstance.updateItemSchemaByPath(target, actualPath, value)
+        }
+      } else if (type === 'data') {
+        // 修改数据
+        if (target.includes('.*.')) {
+          // 自增组件特殊处理
+          const targetArr = target.split('.*.')
+          const listTarget = targetArr.pop()!
+          const targetParse = targetArr.join('.')
+          const list = getDataByPath(formInstance.getValues(), targetParse)
+          if (Array.isArray(list)) {
+            formInstance.setFieldValue(
+              targetParse,
+              list.map((item) => ({
                 ...item,
                 [listTarget]: value
-              }
-            })
-          )
+              }))
+            )
+          }
+        } else {
+          formInstance.setFieldValue(target, value)
         }
-        return
       }
-
-      temp = setDataByPath(temp, target, value)
     })
-
-    formInstance.setValues(temp)
   },
   { immediate: true }
 )

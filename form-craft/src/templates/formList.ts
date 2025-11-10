@@ -11,8 +11,9 @@ export default {
       name: 'vip',
       component: 'Switch',
       props: { 'inline-prompt': false },
-      change: [
-        { target: 'users.*.vip', condition: '{{ $values.vip }}', value: 1 }
+      designKey: 'design-vip',
+      linkages: [
+        { target: 'users.*.vip', type: 'data', condition: '{{ $values.vip }}', value: 1 }
       ]
     },
     {
@@ -26,9 +27,11 @@ export default {
             placeholder: '请输入文本'
           },
           name: 'username',
-          change: [
+          designKey: 'design-username',
+          linkages: [
             {
               target: 'users.[].vip',
+              type: 'data',
               condition: '{{ $item.username.includes("admin") }}',
               value: 1
             }

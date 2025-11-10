@@ -36,9 +36,11 @@ const schema = {
         valueKey: 'id'
       },
       name: 'commodity',
-      change: [
+      designKey: 'design-commodity',
+      linkages: [
         {
           target: 'price',
+          type: 'data',
           value: '{{ $selectData.commodity.price }}'
         }
       ]

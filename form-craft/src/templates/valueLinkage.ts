@@ -13,14 +13,17 @@ export default {
         placeholder: '请输入...'
       },
       name: 'item1',
-      change: [
+      designKey: 'design-item1',
+      linkages: [
         {
           target: 'item2',
+          type: 'data',
           value: '{{ $values.item1 * 2 + "" }}'
         },
         {
           target: 'item3',
-          value: "{{$values.item1 + '元'}}"
+          type: 'data',
+          value: "{{ $values.item1 + '元' }}"
         }
       ]
     },
@@ -30,7 +33,8 @@ export default {
       props: {
         placeholder: '请输入...'
       },
-      name: 'item2'
+      name: 'item2',
+      designKey: 'design-item2'
     },
     {
       label: '字段3',
@@ -38,7 +42,8 @@ export default {
       props: {
         placeholder: '请输入...'
       },
-      name: 'item3'
+      name: 'item3',
+      designKey: 'design-item3'
     }
   ]
 } satisfies FormSchema

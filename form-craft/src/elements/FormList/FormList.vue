@@ -106,7 +106,7 @@
 
 <script setup lang="ts">
 import type { TableColumnCtx } from 'element-plus'
-import { isEqual, isString, pickBy } from 'lodash'
+import { isEqual, pickBy } from 'lodash'
 import { computed, h, onMounted, provide, ref, watch } from 'vue'
 import { CanvasGroup, FormItem } from '@/components'
 import { useChildrenModel, useFormInstance } from '@/hooks'
@@ -180,42 +180,57 @@ const formatter = (row: any, column: TableColumnCtx<any>, cellValue: any, index:
   })
 }
 
-// formList 数据联动
-watch(list, (newVal, oldVal) => {
-  const changeIndex = newVal.reduce((acc, cur, index) => {
-    if (!isEqual(cur, oldVal[index])) {
-      acc = index
-    }
+// FormList 数据联动
+watch(
+  list,
+  (newVal, oldVal) => {
+    const changeIndex = newVal.reduce((acc, cur, index) => {
+      if (!isEqual(cur, oldVal[index])) {
+        acc = index
+      }
 
-    return acc
-  }, 0)
+      return acc
+    }, 0)
 
-  cIndex.value = changeIndex
+    cIndex.value = changeIndex
 
-  if (!fields.value.some((item) => item.change)) return
+    // 处理 linkages 联动
+    if (!fields.value.some((item) => item.linkages)) return
 
-  const parseFieldsData = parseFields(changeIndex)
+    const parseFieldsData = parseFields(changeIndex)
+    const newChangeData = newVal[changeIndex] || {}
+    const oldChangeData = oldVal[changeIndex] || {}
 
-  const newChangeData = newVal[changeIndex] || {}
-  const oldChangeData = oldVal[changeIndex] || {}
+    parseFieldsData.forEach((item: FormItemType) => {
+      if (
+        item.linkages &&
+        oldChangeData &&
+        !isEqual(newChangeData[item.name], oldChangeData[item.name])
+      ) {
+        let hasChange = false
+        const updatedRow = { ...list.value[changeIndex] }
 
-  parseFieldsData.forEach((item: FormItemType) => {
-    if (
-      item.change &&
-      oldChangeData &&
-      !isEqual(newChangeData[item.name], oldChangeData[item.name])
-    ) {
-      item.change.forEach((v) => {
-        if (v.condition !== false) {
-          if (isString(v.condition) && /^{{\s*(.*?)\s*}}$/.test(v.condition)) return
+        item.linkages.forEach((linkage) => {
+          if (linkage.condition === false) return
+          if (linkage.type !== 'data') return // FormList 内部只处理数据联动
 
-          const name = v.target.split('.').pop()!
-          list.value[changeIndex][name] = v.value
+          // 解析目标路径
+          const targetName = linkage.target.split('.').pop()!
+          if (targetName && linkage.value !== undefined) {
+            updatedRow[targetName] = linkage.value
+            hasChange = true
+          }
+        })
+
+        // 如果有变化，替换整个行对象以触发响应式更新
+        if (hasChange) {
+          list.value[changeIndex] = updatedRow
         }
-      })
-    }
-  })
-})
+      }
+    })
+  },
+  { deep: true }
+)
 
 onMounted(() => {
   if (props.minLines && !list.value?.length) {

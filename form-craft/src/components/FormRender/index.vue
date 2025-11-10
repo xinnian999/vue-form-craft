@@ -29,15 +29,17 @@ import {
   provide,
   reactive,
   readonly,
+  ref,
   toRefs,
   useSlots,
-  useTemplateRef
+  useTemplateRef,
+  watch
 } from 'vue'
 import { FormItemGroup } from '@/components'
 import { useLocale } from '@/hooks'
 import { $formInstance } from '@/symbol'
-import type { FormInstance, FormRenderEmits, FormRenderProps } from '@/types'
-import { deepParse, getDataByPath, ns, setDataByPath } from '@/utils'
+import type { FormInstance, FormRenderEmits, FormRenderProps, FormSchema } from '@/types'
+import { deepParse, getDataByPath, setDataByPath } from '@/utils'
 
 const props = withDefaults(defineProps<FormRenderProps>(), {
   schema: () => ({})
@@ -54,47 +56,19 @@ const form = useTemplateRef<ElFormInstance>('form')
 
 const selectData = reactive<Record<string, Record<string, any>>>({})
 
-const context = computed(() => ({
-  ...props.schemaContext,
-  $values: formValues.value,
-  $selectData: selectData,
-  $locale: locale.value
-}))
+// 内部维护的 schema 副本，避免直接修改 props
+const internalSchema = ref<FormSchema>(cloneDeep(props.schema))
 
-const formItems = computed(() => {
-  if (props.design) {
-    return props.schema.items
-  }
+// 监听 props.schema 变化，同步到内部 schema
+watch(
+  () => props.schema,
+  (newSchema) => {
+    internalSchema.value = cloneDeep(newSchema)
+  },
+  { deep: true }
+)
 
-  return deepParse(props.schema.items || [], context.value)
-})
-
-const formAttrs = computed(() => {
-  const attrs = omit(props.schema, [
-    'model',
-    'items',
-    'submitBtn',
-    'resetBtn',
-    'initialValues',
-    'labelAlign',
-    'labelBold',
-    'labelSuffix'
-  ])
-
-  return {
-    ...attrs,
-    labelPosition: props.schema.labelAlign
-  }
-})
-
-onBeforeMount(() => {
-  if (props.schema.initialValues) {
-    const values = cloneDeep(props.schema.initialValues)
-
-    formValues.value = { ...values, ...formValues.value }
-  }
-})
-
+// ========== API 方法定义（需要在 context 之前定义） ==========
 const getValues: FormInstance['getValues'] = () => formValues.value
 
 const setValues: FormInstance['setValues'] = (values) => {
@@ -130,7 +104,84 @@ const updateSelectData: FormInstance['updateSelectData'] = (key, value) => {
   selectData[key] = value
 }
 
+const updateItemSchemaByPath: FormInstance['updateItemSchemaByPath'] = (name, path, value) => {
+  // console.log('updateItemSchemaByPath', name, path, value)
+  const findAndUpdate = (items: any[]): boolean => {
+    for (const item of items) {
+      if (item.name === name) {
+        // 使用 setDataByPath 设置嵌套路径的值
+        const updated = setDataByPath(item, path, value)
+        Object.assign(item, updated)
+        return true
+      }
+      if (item.children && findAndUpdate(item.children)) {
+        return true
+      }
+    }
+    return false
+  }
+
+  if (internalSchema.value.items) {
+    findAndUpdate(internalSchema.value.items)
+  }
+}
+
 const slots = useSlots()
+
+// 创建 instanceAPI 对象，供 context 中的 $instance 使用
+const instanceAPI = {
+  getValues,
+  setValues,
+  getFieldValue,
+  setFieldValue,
+  updateSelectData,
+  updateItemSchemaByPath,
+  validate,
+  resetFields,
+  submit
+}
+
+// ========== Context 定义（包含 $instance） ==========
+const context = computed(() => ({
+  ...props.schemaContext,
+  $values: formValues.value,
+  $selectData: selectData,
+  $instance: instanceAPI
+}))
+
+const formItems = computed(() => {
+  if (props.design) {
+    return internalSchema.value.items
+  }
+
+  return deepParse(internalSchema.value.items || [], context.value)
+})
+
+const formAttrs = computed(() => {
+  const attrs = omit(props.schema, [
+    'model',
+    'items',
+    'submitBtn',
+    'resetBtn',
+    'initialValues',
+    'labelAlign',
+    'labelBold',
+    'labelSuffix'
+  ])
+
+  return {
+    ...attrs,
+    labelPosition: props.schema.labelAlign
+  }
+})
+
+onBeforeMount(() => {
+  if (props.schema.initialValues) {
+    const values = cloneDeep(props.schema.initialValues)
+
+    formValues.value = { ...values, ...formValues.value }
+  }
+})
 
 const instance = readonly({
   ...toRefs(props),
@@ -141,6 +192,7 @@ const instance = readonly({
   getFieldValue,
   setFieldValue,
   updateSelectData,
+  updateItemSchemaByPath,
   validate,
   resetFields,
   submit,

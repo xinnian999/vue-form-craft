@@ -1,39 +1,19 @@
 <template>
   <div :class="ns('linkageConfig')">
     <el-divider>{{ locale.attr.tab1.linkage.text }}</el-divider>
-
-    <div :class="ns('linkageConfig-btns')">
-      <el-button
-        v-for="{ title, onClick } in linkageBtns"
-        :key="title"
-        type="primary"
-        plain
-        size="small"
-        @click="onClick"
-        >{{ title }}</el-button
-      >
+    <div style="font-size: 12px; color: #999; padding: 10px 0;">
+      联动配置已统一使用 linkages，请在"联动"标签页中配置
     </div>
-
-    <Change v-model="changeVisible" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import { useLocale } from '@/hooks'
 import { ns } from '@/utils'
-import Change from './Change.vue'
+
+defineOptions({
+  name: 'LinkageConfig'
+})
 
 const locale = useLocale()
-
-const changeVisible = ref(false)
-
-const linkageBtns = [
-  {
-    title: locale.value.attr.tab1.linkage.action2,
-    onClick: () => {
-      changeVisible.value = true
-    }
-  }
-]
 </script>

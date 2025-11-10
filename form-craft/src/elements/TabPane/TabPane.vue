@@ -1,5 +1,5 @@
 <template>
-  <el-tab-pane :label="label" :name="name">
+  <el-tab-pane :label="label" :name="name" :lazy="props?.lazy">
     <FormItemGroup :children="children" :designKey="designKey!" :style="designStyles" />
   </el-tab-pane>
 </template>
@@ -14,6 +14,7 @@ defineProps<{
   label: string
   name: string
   children?: FormItemType[]
+  props?: Record<string, any>
   designKey?: string
 }>()
 

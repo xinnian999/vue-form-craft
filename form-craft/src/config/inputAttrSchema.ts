@@ -1,4 +1,5 @@
-import type { FormSchema } from 'form-craft'
+import type { FormSchema } from '@/types'
+import { validationRulesSchema } from './validationRulesSchema'
 
 export default {
   labelWidth: 110,
@@ -25,6 +26,9 @@ export default {
           name: 'attrs',
           component: 'TabPane',
           designKey: 'tab-1',
+          props: {
+            lazy: true
+          },
           children: [
             {
               label: '标签',
@@ -115,16 +119,134 @@ export default {
         },
         {
           label: '校验',
-          name: 'name2',
+          name: 'rules',
           component: 'TabPane',
           designKey: 'tab-2',
-          children: []
+          props: {
+            lazy: true
+          },
+          children: validationRulesSchema
+        },
+        {
+          label: '联动',
+          name: 'linkages',
+          component: 'TabPane',
+          designKey: 'tab-3',
+          props: {
+            lazy: true
+          },
+          children: [
+            {
+              label: '联动规则',
+              name: 'linkages',
+              component: 'FormList',
+              designKey: 'design-linkages',
+              labelAlign: 'top',
+              children: [
+                {
+                  label: '目标字段',
+                  name: 'target',
+                  component: 'Input',
+                  props: {
+                    placeholder: '目标字段的 name',
+                    clearable: true
+                  },
+                  designKey: 'design-link-target'
+                },
+                {
+                  label: '触发条件',
+                  name: 'condition',
+                  component: 'TextArea',
+                  props: {
+                    autosize: { minRows: 2, maxRows: 4 },
+                    clearable: true
+                  },
+                  help: '请输入 JS 表达式，当结果为 true 时才触发联动。<br/> 不设置会一直触发',
+                  designKey: 'design-link-condition'
+                },
+                {
+                  label: '修改类型',
+                  name: 'type',
+                  component: 'Radio',
+                  initialValue: 'attr',
+                  props: {
+                    mode: 'static',
+                    optionType: 'button',
+                    options: [
+                      { label: '修改属性', value: 'attr' },
+                      { label: '修改数据', value: 'data' }
+                    ]
+                  },
+                  linkages: [
+                    {
+                      target: 'path',
+                      type: 'data',
+                      condition: "{{ $item.type === 'data' }}",
+                      value: ''
+                    },
+                    {
+                      target: 'customPath',
+                      type: 'data',
+                      condition: "{{ $item.type === 'data' }}",
+                      value: ''
+                    }
+                  ],
+                  designKey: 'design-link-type'
+                },
+                {
+                  label: '属性',
+                  name: 'path',
+                  component: 'Select',
+                  props: {
+                    placeholder: '请选择要修改的配置属性',
+                    clearable: true,
+                    mode: 'static',
+                    options: [
+                      { label: '禁用状态', value: 'props.disabled' },
+                      { label: '隐藏状态', value: 'hidden' },
+                      { label: '必填状态', value: 'required' },
+                      { label: '自定义', value: 'custom' }
+                    ]
+                  },
+                  hidden: "{{ $item.type !== 'attr' }}",
+                  designKey: 'design-link-config-attr'
+                },
+                {
+                  label: '自定义属性',
+                  name: 'customPath',
+                  component: 'Input',
+                  props: {
+                    clearable: true
+                  },
+                  hidden: "{{  $item.path !== 'custom' }}",
+                  designKey: 'design-link-custom-path'
+                },
+                {
+                  label: '值',
+                  name: 'value',
+                  component: 'TextArea',
+                  props: {
+                    autosize: { minRows: 2, maxRows: 4 },
+                    clearable: true
+                  },
+                  designKey: 'design-link-config-value'
+                }
+              ],
+              props: {
+                mode: 'card',
+                title: '联动规则'
+              }
+            }
+          ]
         },
         {
           label: '布局',
           name: 'name4',
           component: 'TabPane',
           designKey: 'tab-4',
+          props: {
+            lazy: true
+          },
           children: [
             {
               label: '标签宽度',
@@ -182,6 +304,47 @@ export default {
                 ]
               },
               designKey: 'design-yaZ4'
+            }
+          ]
+        },
+        {
+          label: '事件',
+          name: 'events',
+          component: 'TabPane',
+          designKey: 'tab-5',
+          props: {
+            lazy: true
+          },
+          children: [
+            {
+              label: '数据改变时',
+              name: 'props.onChange',
+              component: 'FunctionEditor',
+              designKey: 'design-event-change'
+            },
+            {
+              label: '失去焦点时',
+              name: 'props.onBlur',
+              component: 'FunctionEditor',
+              designKey: 'design-event-blur'
+            },
+            {
+              label: '获得焦点时',
+              name: 'props.onFocus',
+              component: 'FunctionEditor',
+              designKey: 'design-event-focus'
+            },
+            {
+              label: '输入时',
+              name: 'props.onInput',
+              component: 'FunctionEditor',
+              designKey: 'design-event-input'
+            },
+            {
+              label: '清空时',
+              name: 'props.onClear',
+              component: 'FunctionEditor',
+              designKey: 'design-event-clear'
             }
           ]
         }

@@ -1,6 +1,8 @@
 import addressContact from './addressContact'
+import advancedLinkage from './advancedLinkage'
 import bugGood from './bugGood'
 import dateRangeBooking from './dateRangeBooking'
+import eventLinkage from './eventLinkage'
 import fileUpload from './fileUpload'
 import formList from './formList'
 import login from './login'
@@ -13,8 +15,10 @@ import valueLinkage from './valueLinkage'
 
 export {
   addressContact,
+  advancedLinkage,
   bugGood,
   dateRangeBooking,
+  eventLinkage,
   fileUpload,
   formList,
   login,
@@ -91,6 +95,16 @@ export default [
         label: '数据联动',
         schema: valueLinkage,
         description: '数据联动：当字段A输入时，字段B和C的数据会随之改变'
+      },
+      {
+        label: '高级联动',
+        schema: advancedLinkage,
+        description: '高级联动：不仅可以修改数据,还可以动态修改字段的 schema 配置（如 label、props、hidden、required 等）'
+      },
+      {
+        label: '事件函数联动',
+        schema: eventLinkage,
+        description: '事件函数联动：通过 onChange、onBlur、onInput 等事件处理器实现复杂的联动逻辑，可调用 $instance 的所有方法'
       }
     ]
   }

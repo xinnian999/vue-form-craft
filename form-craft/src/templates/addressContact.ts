@@ -67,7 +67,7 @@ export default {
       component: 'Input',
       props: { placeholder: '请输入联系方式', maxlength: 11 },
       rules: [
-        { expr: '/^1[3-9]\\d{9}$/', message: '请输入有效的手机号', trigger: 'blur' }
+        { type: 'pattern', value: '^1[3-9]\\d{9}$', message: '请输入有效的手机号', trigger: 'blur' }
       ],
       required: true,
     }

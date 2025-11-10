@@ -1,4 +1,5 @@
 import type { FormSchema } from '@/types'
+import { validationRulesSchema } from '@/config/validationRulesSchema'
 
 export default {
   size: 'small',
@@ -47,67 +48,6 @@ export default {
         inactiveValue: 'new-password'
       }
     },
-    {
-      label: '密码校验规则',
-      component: 'FormList',
-      name: 'rules',
-      children: [
-        {
-          label: '表达式',
-          component: 'Autocomplete',
-          props: {
-            options: [
-              {
-                label: '不少于8位，由字母+数字组成',
-                value: '/^(?=.*[a-zA-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$/'
-              },
-              {
-                label: '不少于8位，且同时包含大小写字母、数字',
-                value: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$/'
-              },
-              {
-                label: '不少于8位，至少包含大小写字母、数字、特殊符号其中的三种',
-                value: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*])[a-zA-Z\\d!@#$%^&*]{8,}$/'
-              }
-            ]
-          },
-          help: '<pre>可设置为【正则表达式】或【JS表达式】。\n【正则表达式】应该将\\转义成\\\\。\n【JS表达式】最终应返回一个布尔值。</pre>',
-          name: 'expr'
-        },
-        {
-          label: '校验失败提示语',
-          component: 'Input',
-          props: {
-            placeholder: '请输入...'
-          },
-          name: 'message'
-        },
-        {
-          label: '校验时机',
-          component: 'Checkbox',
-          props: {
-            mode: 'static',
-            options: [
-              {
-                label: '失去焦点时',
-                value: 'blur'
-              },
-              {
-                label: '输入时',
-                value: 'change'
-              }
-            ],
-            placeholder: '请选择...',
-            labelKey: 'label',
-            valueKey: 'value'
-          },
-          name: 'trigger'
-        }
-      ],
-      props: {
-        mode: 'card',
-        title: '校验规则'
-      }
-    }
+    ...validationRulesSchema
   ]
 } satisfies FormSchema
