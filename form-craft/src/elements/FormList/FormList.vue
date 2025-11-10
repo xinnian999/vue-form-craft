@@ -106,7 +106,7 @@
 
 <script setup lang="ts">
 import type { TableColumnCtx } from 'element-plus'
-import { isEqual, pickBy } from 'lodash'
+import { cloneDeep, isEqual, pickBy, set } from 'lodash'
 import { computed, h, onMounted, provide, ref, watch } from 'vue'
 import { CanvasGroup, FormItem } from '@/components'
 import { useChildrenModel, useFormInstance } from '@/hooks'
@@ -146,8 +146,52 @@ const formInstance = useFormInstance()
 
 const fields = useChildrenModel(props)
 
-const parseFields = (index: number) =>
-  deepParse(fields.value, { $item: list.value[index], $index: index })
+const parseFields = (index: number) => {
+  const currentItem = list.value[index]
+  const context = { $item: currentItem, $index: index }
+  
+  // 先深度解析字段
+  let parsedFields = deepParse(fields.value, context)
+  
+  // 处理单行 attr 联动
+  parsedFields = parsedFields.map((field: FormItemType) => {
+    const fieldCopy = cloneDeep(field)
+    
+    // 遍历所有字段的 linkages,找到目标为当前字段的单行 attr 联动
+    fields.value.forEach((sourceField: FormItemType) => {
+      if (!sourceField.linkages) return
+      
+      sourceField.linkages.forEach((linkage) => {
+        // 只处理单行 attr 联动 (target 包含 .[])
+        if (linkage.type === 'attr' && linkage.target.includes('.[]')) {
+          const targetFieldName = linkage.target.split('.[].').pop()
+          
+          // 如果当前字段是联动目标
+          if (targetFieldName === field.name) {
+            // 解析 condition
+            let conditionResult = true
+            if (linkage.condition !== undefined) {
+              conditionResult = deepParse(linkage.condition, context)
+            }
+            
+            // 如果 condition 为 true,应用联动
+            if (conditionResult) {
+              const actualPath = linkage.path === 'custom' ? linkage.customPath : linkage.path
+              if (actualPath) {
+                const linkageValue = deepParse(linkage.value, context)
+                set(fieldCopy, actualPath, linkageValue)
+              }
+            }
+          }
+        }
+      })
+    })
+    
+    return fieldCopy
+  })
+  
+  return parsedFields
+}
 
 const isMax = computed(() => {
   return list.value.length >= props.maxLines

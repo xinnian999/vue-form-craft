@@ -182,7 +182,25 @@ watch(
         // 当 path 为 'custom' 时使用 customPath，否则使用 path
         const actualPath = path === 'custom' ? customPath : path
         if (actualPath !== undefined) {
-          formInstance.updateItemSchemaByPath(target, actualPath, value)
+          if (target.includes('.*.')) {
+            // FormList 批量 attr 联动 - 修改所有行的属性
+            // 例如: target = 'users.*.password'
+            const targetArr = target.split('.*.')
+            const fieldName = targetArr.pop()!
+            const listPath = targetArr.join('.')
+            const list = getDataByPath(formInstance.getValues(), listPath)
+
+            if (Array.isArray(list)) {
+              // FormList 的字段在 schema 中的 name 不包含索引,直接使用字段名
+              formInstance.updateItemSchemaByPath(fieldName, actualPath, value)
+            }
+          } else if (target.includes('.[]')) {
+            // FormList 行内 attr 联动 - 在 parseFields 中处理,这里跳过
+            // 例如: target = 'users.[].password'
+          } else {
+            // 普通 attr 联动
+            formInstance.updateItemSchemaByPath(target, actualPath, value)
+          }
         }
       } else if (type === 'data') {
         // 修改数据
@@ -207,14 +225,14 @@ watch(
           // 提取当前字段的行索引
           const nameMatch = props.name.match(/^(.+?)\.(\d+)\.(.+)$/)
           if (nameMatch) {
-            const [, listPath, rowIndex, ] = nameMatch
+            const [, listPath, rowIndex] = nameMatch
             // 替换 [] 为实际的行索引
             const actualTarget = target.replace('.[]', `.${rowIndex}`)
             // 解析目标字段名
             const targetFieldName = actualTarget.split('.').pop()!
             const currentRowPath = `${listPath}.${rowIndex}`
             const currentRow = getDataByPath(formInstance.getValues(), currentRowPath)
-            
+
             // 只有当目标字段的值与联动值不同时才更新,避免无限循环
             if (currentRow && currentRow[targetFieldName] !== value) {
               formInstance.setFieldValue(actualTarget, value)
