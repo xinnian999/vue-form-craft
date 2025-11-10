@@ -5,7 +5,7 @@ import type { FormElement } from '@/types'
 export default {
   title: '函数编辑器',
   component: 'FunctionEditor',
-  render: defineAsyncComponent(() => import('./Component.vue')),
+  render: defineAsyncComponent(() => import('./FunctionEditor.vue')),
   icon: h(Icon, { name: 'code' }),
   type: 'basic',
   order: 100,
