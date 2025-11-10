@@ -187,7 +187,7 @@ watch(
       } else if (type === 'data') {
         // 修改数据
         if (target.includes('.*.')) {
-          // 自增组件特殊处理
+          // 自增组件特殊处理 - 批量修改所有行
           const targetArr = target.split('.*.')
           const listTarget = targetArr.pop()!
           const targetParse = targetArr.join('.')
@@ -200,6 +200,25 @@ watch(
                 [listTarget]: value
               }))
             )
+          }
+        } else if (target.includes('.[]')) {
+          // FormList 行内联动 - 只修改当前行
+          // 例如: target = 'users.[].vip', props.name = 'users.0.username'
+          // 提取当前字段的行索引
+          const nameMatch = props.name.match(/^(.+?)\.(\d+)\.(.+)$/)
+          if (nameMatch) {
+            const [, listPath, rowIndex, ] = nameMatch
+            // 替换 [] 为实际的行索引
+            const actualTarget = target.replace('.[]', `.${rowIndex}`)
+            // 解析目标字段名
+            const targetFieldName = actualTarget.split('.').pop()!
+            const currentRowPath = `${listPath}.${rowIndex}`
+            const currentRow = getDataByPath(formInstance.getValues(), currentRowPath)
+            
+            // 只有当目标字段的值与联动值不同时才更新,避免无限循环
+            if (currentRow && currentRow[targetFieldName] !== value) {
+              formInstance.setFieldValue(actualTarget, value)
+            }
           }
         } else {
           formInstance.setFieldValue(target, value)

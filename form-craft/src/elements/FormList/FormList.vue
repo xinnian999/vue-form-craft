@@ -183,7 +183,7 @@ const formatter = (row: any, column: TableColumnCtx<any>, cellValue: any, index:
   })
 }
 
-// FormList 数据联动
+// 追踪当前操作的行索引
 watch(
   list,
   (newVal) => {
@@ -197,42 +197,6 @@ watch(
     }, 0)
 
     cIndex.value = changeIndex
-
-    // 处理 linkages 联动
-    if (!fields.value.some((item) => item.linkages)) return
-
-    const parseFieldsData = parseFields(changeIndex)
-    const newChangeData = newVal[changeIndex] || {}
-
-    parseFieldsData.forEach((item: FormItemType) => {
-      // 检查字段是否有linkages且当前字段有值
-      if (item.linkages && newChangeData[item.name] !== undefined) {
-        let hasChange = false
-        const updatedRow = { ...list.value[changeIndex] }
-
-        item.linkages.forEach((linkage) => {
-          if (linkage.condition === false) return
-          if (linkage.type !== 'data') return // FormList 内部只处理数据联动
-
-          // 解析目标路径
-          const targetName = linkage.target.split('.').pop()!
-          // 只有当目标字段的值与联动值不同时才更新
-          if (
-            targetName &&
-            linkage.value !== undefined &&
-            updatedRow[targetName] !== linkage.value
-          ) {
-            updatedRow[targetName] = linkage.value
-            hasChange = true
-          }
-        })
-
-        // 如果有变化,使用 splice 触发响应式更新
-        if (hasChange) {
-          list.value.splice(changeIndex, 1, updatedRow)
-        }
-      }
-    })
 
     // 更新快照(深拷贝)
     listSnapshot.value = JSON.parse(JSON.stringify(newVal))
