@@ -1,9 +1,8 @@
 import { h } from 'vue'
+import attrSchema from '@/config/inputAttrSchema'
 import Icon from '@/Icon/index.vue'
 import type { FormElement } from '@/types'
-// import attrSchema from './attrSchema'
 import Input from './Input.vue'
-import attrSchema from '@/config/inputAttrSchema'
 
 export default {
   title: '单行文本',
