@@ -60,12 +60,12 @@ const selectData = reactive<Record<string, Record<string, any>>>({})
 const internalSchema = ref<FormSchema>(cloneDeep(props.schema))
 
 // 监听 props.schema 变化，同步到内部 schema
-// 性能优化：只监听引用变化，减少深层比较开销
 watch(
   () => props.schema,
   (newSchema) => {
     internalSchema.value = cloneDeep(newSchema)
-  }
+  },
+  { deep: true }
 )
 
 // ========== API 方法定义（需要在 context 之前定义） ==========
