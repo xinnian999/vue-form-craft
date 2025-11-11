@@ -1,3 +1,5 @@
+import * as elements from '@/elements'
+import type { FormElement } from '@/types'
 import addressContact from './addressContact'
 import advancedLinkage from './advancedLinkage'
 import bugGood from './bugGood'
@@ -99,13 +101,40 @@ export default [
       {
         label: '高级联动',
         schema: advancedLinkage,
-        description: '高级联动：不仅可以修改数据,还可以动态修改字段的 schema 配置（如 label、props、hidden、required 等）'
+        description:
+          '高级联动：不仅可以修改数据,还可以动态修改字段的 schema 配置（如 label、props、hidden、required 等）'
       },
       {
         label: '事件函数联动',
         schema: eventLinkage,
-        description: '事件函数联动：通过 onChange、onBlur、onInput 等事件处理器实现复杂的联动逻辑，可调用 $instance 的所有方法'
+        description:
+          '事件函数联动：通过 onChange、onBlur、onInput 等事件处理器实现复杂的联动逻辑，可调用 $instance 的所有方法'
       }
     ]
+  },
+  {
+    label: '组件配置表单',
+    children: Object.keys(elements)
+      .map((key) => {
+        const element = (elements as Record<string, FormElement>)[key]
+        let order = element.order
+        if (element.type === 'layout') {
+          order += 100
+        }
+        if (element.type === 'assist') {
+          order += 200
+        }
+        if (element.type === 'high') {
+          order += 300
+        }
+        return {
+          label: element.title,
+          schema: element.attrSchema,
+          description: '',
+          order,
+          type: element.type
+        }
+      })
+      .sort((a, b) => a.order - b.order)
   }
 ]
