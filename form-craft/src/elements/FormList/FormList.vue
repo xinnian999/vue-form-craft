@@ -149,23 +149,23 @@ const fields = useChildrenModel(props)
 const parseFields = (index: number) => {
   const currentItem = list.value[index]
   const context = { $item: currentItem, $index: index }
-  
+
   // 先深度解析字段
   let parsedFields = deepParse(fields.value, context)
-  
+
   // 处理单行 attr 联动
   parsedFields = parsedFields.map((field: FormItemType) => {
     const fieldCopy = cloneDeep(field)
-    
+
     // 遍历所有字段的 linkages,找到目标为当前字段的单行 attr 联动
     fields.value.forEach((sourceField: FormItemType) => {
       if (!sourceField.linkages) return
-      
+
       sourceField.linkages.forEach((linkage) => {
         // 只处理单行 attr 联动 (target 包含 .[])
         if (linkage.type === 'attr' && linkage.target.includes('.[]')) {
           const targetFieldName = linkage.target.split('.[].').pop()
-          
+
           // 如果当前字段是联动目标
           if (targetFieldName === field.name) {
             // 解析 condition
@@ -173,7 +173,7 @@ const parseFields = (index: number) => {
             if (linkage.condition !== undefined) {
               conditionResult = deepParse(linkage.condition, context)
             }
-            
+
             // 如果 condition 为 true,应用联动
             if (conditionResult) {
               const actualPath = linkage.path === 'custom' ? linkage.customPath : linkage.path
@@ -186,10 +186,10 @@ const parseFields = (index: number) => {
         }
       })
     })
-    
+
     return fieldCopy
   })
-  
+
   return parsedFields
 }
 
@@ -261,6 +261,8 @@ provide(
 </script>
 
 <style lang="scss">
+@import '@/style';
+
 .vfc-formList {
   position: relative;
   width: 100%;
@@ -289,9 +291,12 @@ provide(
   }
 
   .layoutRender {
-    padding: 5px;
+    padding: 10px;
     background-color: #f4f3f3;
     border-radius: 5px;
+    @include ns('form-item') {
+      margin-bottom: 18px;
+    }
   }
 }
 </style>
