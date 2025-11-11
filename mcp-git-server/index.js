@@ -63,6 +63,28 @@ class GitMCPServer {
             properties: {},
           },
         },
+        {
+          name: 'git_diff',
+          description: '查看当前的改动内容（git diff 和 git diff --cached），用于生成 commit 信息',
+          inputSchema: {
+            type: 'object',
+            properties: {},
+          },
+        },
+        {
+          name: 'git_smart_commit',
+          description: '智能提交：先读取改动内容，AI 生成合适的 commit 信息后再提交并推送',
+          inputSchema: {
+            type: 'object',
+            properties: {
+              message: {
+                type: 'string',
+                description: 'AI 生成的 commit 信息',
+              },
+            },
+            required: ['message'],
+          },
+        },
       ],
     }));
 
@@ -131,6 +153,129 @@ class GitMCPServer {
               {
                 type: 'text',
                 text: `❌ 获取 git 状态失败：\n${error.message}`,
+              },
+            ],
+            isError: true,
+          };
+        }
+      }
+
+      if (request.params.name === 'git_diff') {
+        try {
+          // 获取未暂存的改动
+          let unstagedDiff = '';
+          try {
+            unstagedDiff = execSync('git diff', {
+              cwd: PROJECT_ROOT,
+              encoding: 'utf-8',
+            });
+          } catch (e) {
+            // 可能没有未暂存的改动
+          }
+
+          // 获取已暂存的改动
+          let stagedDiff = '';
+          try {
+            stagedDiff = execSync('git diff --cached', {
+              cwd: PROJECT_ROOT,
+              encoding: 'utf-8',
+            });
+          } catch (e) {
+            // 可能没有已暂存的改动
+          }
+
+          // 获取状态信息
+          const statusResult = execSync('git status --short', {
+            cwd: PROJECT_ROOT,
+            encoding: 'utf-8',
+          });
+
+          let result = '📊 Git 改动概览：\n\n';
+          result += `${statusResult}\n`;
+          
+          if (stagedDiff) {
+            result += '\n📝 已暂存的改动 (git diff --cached)：\n';
+            result += '```diff\n' + stagedDiff + '\n```\n';
+          }
+          
+          if (unstagedDiff) {
+            result += '\n📝 未暂存的改动 (git diff)：\n';
+            result += '```diff\n' + unstagedDiff + '\n```\n';
+          }
+
+          if (!stagedDiff && !unstagedDiff) {
+            result += '\n✅ 没有检测到改动';
+          }
+
+          return {
+            content: [
+              {
+                type: 'text',
+                text: result,
+              },
+            ],
+          };
+        } catch (error) {
+          return {
+            content: [
+              {
+                type: 'text',
+                text: `❌ 获取 git diff 失败：\n${error.message}`,
+              },
+            ],
+            isError: true,
+          };
+        }
+      }
+
+      if (request.params.name === 'git_smart_commit') {
+        const message = request.params.arguments?.message;
+        
+        if (!message) {
+          return {
+            content: [
+              {
+                type: 'text',
+                text: '❌ 请提供 commit 信息',
+              },
+            ],
+            isError: true,
+          };
+        }
+
+        try {
+          // 执行 git add .
+          execSync('git add .', {
+            cwd: PROJECT_ROOT,
+            encoding: 'utf-8',
+          });
+
+          // 执行 git commit
+          const commitResult = execSync(`git commit -m "${message}"`, {
+            cwd: PROJECT_ROOT,
+            encoding: 'utf-8',
+          });
+
+          // 执行 git push
+          const pushResult = execSync('git push', {
+            cwd: PROJECT_ROOT,
+            encoding: 'utf-8',
+          });
+
+          return {
+            content: [
+              {
+                type: 'text',
+                text: `✅ 智能提交成功！\n\n📝 Commit: ${message}\n\n${commitResult}\n${pushResult}`,
+              },
+            ],
+          };
+        } catch (error) {
+          return {
+            content: [
+              {
+                type: 'text',
+                text: `❌ 智能提交失败：\n${error.message}\n${error.stderr || ''}`,
               },
             ],
             isError: true,

@@ -46,9 +46,39 @@ npm install
 使用 git_status 工具查看当前状态
 ```
 
+### 3. git_diff
+查看当前的改动内容（包括已暂存和未暂存的改动）
+
+```
+使用 git_diff 工具查看当前改动
+```
+
+### 4. git_smart_commit（智能提交）
+AI 先读取改动内容，生成合适的 commit 信息后再提交并推送
+
+```
+帮我智能提交代码（AI 会自动调用 git_diff 分析改动，生成 commit 信息后提交）
+```
+
 ## 工具说明
 
 - **git_auto_push**: 一键完成 add、commit、push 操作
   - 参数：message (可选，默认为 "chore: 自动提交")
   
 - **git_status**: 查看当前 git 仓库状态
+
+- **git_diff**: 查看当前的改动内容
+  - 显示已暂存的改动（git diff --cached）
+  - 显示未暂存的改动（git diff）
+  - 显示文件状态概览
+
+- **git_smart_commit**: 智能提交代码
+  - 参数：message (必填，AI 生成的 commit 信息)
+  - 自动执行 add、commit、push 操作
+
+## 智能提交工作流
+
+1. 你对 AI 说："帮我智能提交代码"
+2. AI 自动调用 `git_diff` 查看你的改动
+3. AI 分析改动内容，生成符合规范的 commit 信息
+4. AI 调用 `git_smart_commit` 提交并推送代码
