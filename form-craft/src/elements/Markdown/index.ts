@@ -1,4 +1,4 @@
-import { Markdown } from '@/components'
+import Markdown from '@/components/Markdown.vue'
 import type { FormElement } from '@/types'
 import attrSchema from './attrSchema'
 import icon from './Icon.vue'

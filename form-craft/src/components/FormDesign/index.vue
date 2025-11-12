@@ -155,21 +155,12 @@ const updateNodeByKey = (designKey: string, newNodeData: Record<string, any>) =>
 }
 
 const addItem = (item: FormItemType) => {
-  if (currentKey.value === 'root') {
-    const schema = getSchema()
+  const schema = getSchema()
 
-    applySchema({
-      ...schema,
-      items: schema.items ? [...schema.items, item] : [item]
-    })
-  } else {
-    const node = getNodeByKey(currentKey.value)!
-
-    updateNodeByKey(currentKey.value, {
-      ...node,
-      children: node.children ? [...node.children, item] : [item]
-    })
-  }
+  applySchema({
+    ...schema,
+    items: schema.items ? [...schema.items, item] : [item]
+  })
 }
 
 const current = computed({

@@ -130,6 +130,7 @@ const rightBottomActions = [
     font-size: 12px;
     gap: 3px;
     display: none;
+    max-height: 20px;
 
     .componentName {
       display: flex;
