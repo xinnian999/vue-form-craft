@@ -69,7 +69,30 @@ export default {
               label: '占位提示',
               name: 'props.placeholder',
               component: 'Input',
+              props: {
+                autocomplete: 'new-password'
+              },
               designKey: 'design-JTMu'
+            },
+            {
+              label: 'ID',
+              name: 'id',
+              component: 'Input',
+              props: {
+                placeholder: '',
+                autocomplete: 'new-password'
+              },
+              designKey: 'design-kC5y'
+            },
+            {
+              label: 'class',
+              name: 'class',
+              component: 'Input',
+              props: {
+                placeholder: '',
+                autocomplete: 'new-password'
+              },
+              designKey: 'design-BmcU'
             },
             {
               label: '隐藏',
@@ -646,6 +669,32 @@ export default {
                 ]
               },
               designKey: 'design-yaZ4'
+            }
+          ]
+        },
+        {
+          label: '样式',
+          name: 'style',
+          component: 'TabPane',
+          designKey: 'tab-6',
+          children: [
+            {
+              label: '宽度',
+              name: 'width',
+              component: 'Input',
+              props: {
+                autocomplete: 'new-password'
+              },
+              designKey: 'design-JQuX'
+            },
+            {
+              label: '高度',
+              name: 'height',
+              component: 'Input',
+              props: {
+                autocomplete: 'new-password'
+              },
+              designKey: 'design-jDiN'
             }
           ]
         }
