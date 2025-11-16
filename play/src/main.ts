@@ -1,19 +1,21 @@
 import ElementPlus from 'element-plus'
-import { createApp } from 'vue'
 import VueFormCraft from 'form-craft/dev'
+import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import { cozeAiFunction } from './utils/aiExamples'
 import 'element-plus/dist/index.css'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 
 const app = createApp(App)
 
 app.use(router)
+
+// 使用 Coze AI 函数接入示例
 app.use(VueFormCraft, {
-  ai: {
-    token: import.meta.env.VITE_COZE_TOKEN
-  }
+  ai: cozeAiFunction
 })
+
 app.use(ElementPlus, {
   locale: zhCn
 })

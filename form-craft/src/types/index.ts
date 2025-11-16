@@ -143,14 +143,21 @@ export type Locale = {
   }
 }
 
+// AI生成参数
+export type AiGenerateParams = {
+  prompt: string // 提示词
+  context?: Record<string, any> // 上下文数据
+  signal?: AbortSignal // 取消信号
+}
+
+// AI接口函数类型
+export type AiGenerateFunction = (params: AiGenerateParams) => Promise<any>
+
 export type Options = {
   request?: (options: Record<string, any>) => Promise<Record<string, any>>
   extendElements?: Record<string, FormElement>
   lang?: 'zh' | 'en'
-  ai?: {
-    token?: string
-    baseURL?: string
-  }
+  ai?: AiGenerateFunction // 改为函数类型
 }
 
 export interface Globals extends Options {
