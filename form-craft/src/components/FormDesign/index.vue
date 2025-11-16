@@ -136,24 +136,6 @@ const getNodeByKey = (designKey: string): FormItemType | null => {
   return getNode(schema.items, designKey)
 }
 
-const updateNodeByKey = (designKey: string, newNodeData: Record<string, any>) => {
-  const schema = getSchema()
-
-  let oldNode: FormSchema | FormItemType | null = null
-
-  if (designKey === 'root') {
-    oldNode = schema
-  } else {
-    oldNode = getNode(schema.items!, designKey)
-  }
-
-  if (oldNode) {
-    // TODO: 这里直接修改了getSchema，违反了setSchema唯一修改的原则。待优化
-    Object.assign(oldNode, newNodeData)
-    recordHistory(schema)
-  }
-}
-
 const addItem = (item: FormItemType) => {
   const schema = getSchema()
 

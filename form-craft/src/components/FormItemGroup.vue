@@ -1,23 +1,20 @@
 <template>
-  <CanvasGroup v-if="formInstance.design" v-model="childrenModel" :group="group" />
+  <CanvasGroup v-if="formInstance.design" :list="list" :group="group" />
 
   <div v-else>
-    <FormItem v-for="item in childrenModel" :key="item.name" v-bind="item" />
+    <FormItem v-for="item in list" :key="item.name" v-bind="item" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { CanvasGroup, FormItem } from '@/components'
-import { useChildrenModel, useFormInstance } from '@/hooks'
+import { useFormInstance } from '@/hooks'
 import type { FormItemType } from '@/types'
 
-const props = defineProps<{
-  children?: FormItemType[]
-  designKey?: string
+defineProps<{
   group?: string
+  list: FormItemType[]
 }>()
 
 const formInstance = useFormInstance()
-
-const childrenModel = useChildrenModel(props)
 </script>

@@ -2,10 +2,10 @@
   <div
     ref="scrollContainer"
     :class="ns('canvas-group')"
-    :style="{ overflowY: modelValue.length ? 'auto' : 'hidden' }"
+    :style="{ overflowY: list.length ? 'auto' : 'hidden' }"
   >
     <div
-      v-if="!modelValue.length"
+      v-if="!list.length"
       :class="ns('canvas-group-empty')"
       :style="{ fontSize: emptySize + 'px' }"
     >
@@ -16,7 +16,7 @@
     </div>
 
     <draggable
-      v-model="modelValue"
+      :list="list"
       :group="group"
       itemKey="name"
       :ghost-class="ns('canvas-group-ghost')"
@@ -54,17 +54,15 @@ const props = withDefaults(
     group?: string
     emptyText?: string
     emptySize?: number
+    list: FormItemType[]
   }>(),
   {
     emptyText: '请拖入子字段',
     emptySize: 12,
-    group: 'formDesign'
+    group: 'formDesign',
+    list: () => []
   }
 )
-
-const modelValue = defineModel<FormItemType[]>({
-  default: () => []
-})
 
 const scrollContainer = ref<HTMLElement>()
 
