@@ -6,7 +6,11 @@
       @mouseleave="handleCanvasMouseLeave"
       @click="handleCanvasClick"
     >
-      <div v-if="designInstance.currentKey === 'root'" class="fd-form-title">
+      <div
+        v-if="designInstance.currentKey === 'root' || designInstance.hoverKey === 'root'"
+        class="fd-form-title"
+        :style="{ opacity: designInstance.currentKey === 'root' ? 1 : 0.5 }"
+      >
         <Icon name="form" /> 表单
       </div>
       <FormRender
@@ -84,15 +88,33 @@ const handleCanvasClick = () => {
       box-sizing: border-box;
       height: 100%;
       margin: 0 auto;
-      border: 2px solid transparent;
+
+      &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        pointer-events: none;
+      }
 
       &.hover {
-        border: 2px dashed $themeColor;
         background-color: $lightThemeColor;
+
+        &::after {
+          border-color: $themeColor;
+          border-style: dashed;
+          border-width: 1px;
+          z-index: 10;
+        }
       }
 
       &.active {
-        border: 2px solid $themeColor;
+        &::after {
+          border-color: $themeColor;
+          border-style: solid;
+          border-width: 2px;
+          z-index: 15;
+        }
       }
     }
   }

@@ -5,7 +5,7 @@
     @mousemove.stop="handleHoverEnter"
     @mouseleave.stop="handleHoverLeave"
   >
-    <div :class="['actions', { 'actions-first': index === 0 }]">
+    <div class="actions">
       <div class="componentName">
         <component :is="config.icon" />
         {{ config.title }}
@@ -38,7 +38,10 @@ const designInstance = useDesignInstance()!
 
 const elements = useElements()
 
-const config = elements[props.data.component]
+const config = computed(() => {
+  // if (!props.data.component) return {}
+  return elements[props.data.component]
+})
 
 const canvasItemClass = computed(() => {
   return {
@@ -129,7 +132,7 @@ const rightBottomActions = [
     display: flex;
     font-size: 12px;
     gap: 3px;
-    display: none;
+    visibility: hidden;
     max-height: 20px;
 
     .componentName {
@@ -140,7 +143,7 @@ const rightBottomActions = [
       gap: 3px;
       font-size: 10px;
       border-radius: 3px;
-      padding: 0 3px;
+      padding: 2px 5px;
     }
 
     &-item {
@@ -153,17 +156,6 @@ const rightBottomActions = [
         opacity: 0.7;
       }
     }
-  }
-}
-
-@include ns('canvas-item.hover') {
-  background-color: $lightThemeColor;
-
-  &::after {
-    border-color: $themeColor;
-    border-style: dashed;
-    border-width: 1px;
-    z-index: 10;
   }
 }
 
@@ -180,6 +172,27 @@ const rightBottomActions = [
   }
 }
 
+@include ns('canvas-item.hover') {
+  background-color: $lightThemeColor;
+
+  &::after {
+    border-color: $themeColor;
+    border-style: dashed;
+    border-width: 1px;
+    z-index: 10;
+  }
+
+  & > .actions {
+    visibility: visible;
+    .componentName {
+      opacity: 0.5;
+    }
+    .actions-item {
+      display: none;
+    }
+  }
+}
+
 @include ns('canvas-item.active') {
   &::after {
     border-color: $themeColor;
@@ -189,7 +202,13 @@ const rightBottomActions = [
   }
 
   & > .actions {
-    display: flex;
+    visibility: visible;
+    .actions-item {
+      display: flex;
+    }
+    .componentName {
+      opacity: 1;
+    }
   }
 }
 </style>
