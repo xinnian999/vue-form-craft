@@ -80,6 +80,8 @@ const onAdd = (e: Record<string, any>) => {
   designInstance.rightTab = 'attr'
 
   designInstance.handleEmit('add', source)
+
+  designInstance.recordHistory()
 }
 </script>
 

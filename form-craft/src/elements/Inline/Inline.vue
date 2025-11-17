@@ -1,10 +1,5 @@
 <template>
-  <FormItemGroup
-    class="form-item-inline"
-    :style="InlineStyle"
-    :children="children"
-    :designKey="designKey"
-  />
+  <FormItemGroup class="form-item-inline" :style="InlineStyle" :list="children || []" />
 </template>
 
 <script setup lang="ts">
@@ -16,7 +11,6 @@ const props = defineProps<{
   align: 'center' | 'flex-start' | 'flex-end' | 'space-between' | 'space-around' | 'space-evenly'
   autoWrap: boolean
   gap: number
-  designKey: string
   children?: FormItemType[]
 }>()
 

@@ -33,7 +33,8 @@ const visible = defineModel<boolean>()
 
 const onSave = (json: FormSchema) => {
   const jsonSchema = repirJsonSchema(json)
-  designInstance.applySchema(jsonSchema)
+  designInstance.setSchema(jsonSchema)
+  designInstance.recordHistory()
 }
 
 const onInit = (editor: JsonEditorType) => {

@@ -30,7 +30,8 @@ import { ns } from '@/utils'
 const designInstance = useDesignInstance()!
 
 const useTemplate = (schema: any) => {
-  designInstance.applySchema(schema)
+  designInstance.setSchema(schema)
+  designInstance.recordHistory()
 }
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <ElCollapseItem :title="label" :name="name">
-    <FormItemGroup :children="children" :designKey="designKey!" :style="designStyles" />
+    <FormItemGroup :list="children" :style="designStyles" />
   </ElCollapseItem>
 </template>
 
@@ -13,8 +13,7 @@ import type { FormItemType } from '@/types'
 defineProps<{
   label: string
   name: string
-  children?: FormItemType[]
-  designKey?: string
+  children: FormItemType[]
 }>()
 
 const formInstance = useFormInstance()

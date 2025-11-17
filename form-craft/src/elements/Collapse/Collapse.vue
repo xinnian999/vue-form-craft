@@ -1,6 +1,6 @@
 <template>
   <ElCollapse v-bind="$attrs" v-model="activeKey">
-    <FormItemGroup :children="children" :designKey="designKey!" group="CollapseItem" />
+    <FormItemGroup :list="children" group="CollapseItem" />
   </ElCollapse>
 </template>
 
@@ -10,8 +10,7 @@ import { FormItemGroup } from '@/components'
 import type { FormItemType } from '@/types'
 
 const props = defineProps<{
-  children?: FormItemType[]
-  designKey?: string
+  children: FormItemType[]
 }>()
 
 const activeKey = ref<string[]>([])

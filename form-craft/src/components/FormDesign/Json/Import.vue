@@ -140,7 +140,8 @@ const handleConfirm = async () => {
 
     // 修复并应用 schema
     const repairedSchema = repirJsonSchema(importSchema)
-    designInstance.applySchema(repairedSchema)
+    designInstance.setSchema(repairedSchema)
+    designInstance.recordHistory()
 
     ElMessage.success('导入成功')
   } catch (error) {

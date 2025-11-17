@@ -2,7 +2,7 @@
   <el-form :model="formValues" ref="form" v-bind="formAttrs">
     <slot />
 
-    <FormItemGroup :list="formItems" :empty-text="locale.canvas.emptyTip" :empty-size="18" />
+    <FormItemGroup :list="formItems" />
 
     <el-form-item v-if="!design && !read">
       <el-button v-if="schema.submitBtn" type="primary" @click="instance.submit" name="submit-btn">
@@ -24,16 +24,14 @@ import {
   provide,
   reactive,
   readonly,
-  ref,
   toRefs,
   useSlots,
-  useTemplateRef,
-  watch
+  useTemplateRef
 } from 'vue'
 import { FormItemGroup } from '@/components'
 import { useLocale } from '@/hooks'
 import { $formInstance } from '@/symbol'
-import type { FormInstance, FormRenderEmits, FormRenderProps, FormSchema } from '@/types'
+import type { FormInstance, FormRenderEmits, FormRenderProps } from '@/types'
 import { deepParse, getDataByPath, setDataByPath } from '@/utils'
 
 const props = withDefaults(defineProps<FormRenderProps>(), {
@@ -50,18 +48,6 @@ const locale = useLocale()
 const form = useTemplateRef<ElFormInstance>('form')
 
 const selectData = reactive<Record<string, Record<string, any>>>({})
-
-// 内部维护的 schema 副本，避免直接修改 props
-const internalSchema = ref<FormSchema>(cloneDeep(props.schema))
-
-// 监听 props.schema 变化，同步到内部 schema
-watch(
-  () => props.schema,
-  (newSchema) => {
-    internalSchema.value = cloneDeep(newSchema)
-  },
-  { deep: true }
-)
 
 // ========== API 方法定义（需要在 context 之前定义） ==========
 const getValues: FormInstance['getValues'] = () => formValues.value
@@ -116,8 +102,8 @@ const updateItemSchemaByPath: FormInstance['updateItemSchemaByPath'] = (name, pa
     return false
   }
 
-  if (internalSchema.value.items) {
-    findAndUpdate(internalSchema.value.items)
+  if (props.schema.items) {
+    findAndUpdate(props.schema.items)
   }
 }
 
@@ -148,11 +134,11 @@ const context = computed(() => ({
 // 性能优化：缓存解析结果，只在schema或context变化时重新解析
 const formItems = computed(() => {
   if (props.design) {
-    return internalSchema.value.items
+    return props.schema.items
   }
 
   // deepParse已经有缓存机制，这里直接调用
-  return deepParse(internalSchema.value.items || [], context.value)
+  return deepParse(props.schema.items || [], context.value)
 })
 
 const formAttrs = computed(() => {

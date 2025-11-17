@@ -1,10 +1,5 @@
 <template>
-  <FormItemGroup
-    class="form-item-grid"
-    :style="gridStyle"
-    :children="children"
-    :designKey="designKey"
-  />
+  <FormItemGroup class="form-item-grid" :style="gridStyle" :list="children" />
 </template>
 
 <script setup lang="ts">
@@ -17,8 +12,7 @@ const props = defineProps<{
   columns: number
   rowGap: number
   columnGap: number
-  designKey?: string
-  children?: FormItemType[]
+  children: FormItemType[]
 }>()
 
 const formInstance = useFormInstance()

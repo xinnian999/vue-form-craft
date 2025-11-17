@@ -1,11 +1,11 @@
 <template>
   <el-tabs v-bind="$attrs" v-model="activeKey" :key="tabsKey">
-    <FormItemGroup :children="children" :designKey="designKey" group="TabItem" />
+    <FormItemGroup :list="children" group="TabItem" />
   </el-tabs>
 
   <div class="action" v-if="formInstance.design">
     <el-button type="primary" @click="handleAddTab">添加标签页</el-button>
-    
+
     <!-- 拖拽排序胶囊 -->
     <div class="drag-sort-capsule" v-if="childrenModel.length > 0">
       <div class="capsule-title">拖拽排序</div>
@@ -29,15 +29,14 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
+import Draggable from 'vuedraggable-es-fix'
 import { FormItemGroup } from '@/components'
 import { useChildrenModel, useFormInstance } from '@/hooks'
-import Draggable from 'vuedraggable-es-fix'
 import type { FormItemType } from '@/types'
 
 const props = defineProps<{
   children: FormItemType[]
   defaultKey: string
-  designKey?: string
 }>()
 
 const activeKey = ref<string>(props.defaultKey)

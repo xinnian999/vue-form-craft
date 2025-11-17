@@ -1,6 +1,6 @@
 <template>
   <el-tab-pane :label="label" :name="name" :lazy="props?.lazy">
-    <FormItemGroup :children="children" :designKey="designKey!" :style="designStyles" />
+    <FormItemGroup :list="children" :style="designStyles" />
   </el-tab-pane>
 </template>
 
@@ -13,9 +13,8 @@ import type { FormItemType } from '@/types'
 defineProps<{
   label: string
   name: string
-  children?: FormItemType[]
+  children: FormItemType[]
   props?: Record<string, any>
-  designKey?: string
 }>()
 
 const formInstance = useFormInstance()

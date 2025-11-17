@@ -1,6 +1,6 @@
 <template>
   <ElCard v-bind="$attrs">
-    <FormItemGroup style="min-height: 150px" :list="children" :designKey="designKey" />
+    <FormItemGroup style="min-height: 150px" :list="children" />
   </ElCard>
 </template>
 
@@ -9,7 +9,6 @@ import { FormItemGroup } from '@/components'
 import type { FormItemType } from '@/types'
 
 defineProps<{
-  designKey: string
   children: FormItemType[]
 }>()
 </script>

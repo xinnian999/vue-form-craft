@@ -74,17 +74,17 @@ const setSchema = (schema: FormSchema) => {
   modelValue.value = schema
 }
 
-// 记录历史。由于容器间相互拖拽会同时触发多次，所以使用防抖
-const recordHistory = debounce(async (schema: FormSchema) => {
+// 记录历史。
+const recordHistory = debounce(async () => {
   if (historyIndex.value < history.value.length - 1) {
     // 如果改动的是历史，将截断之后的记录
     history.value = history.value.slice(0, historyIndex.value + 1)
   }
-  history.value.push(cloneDeep(schema))
+  history.value.push(cloneDeep(getSchema()))
   historyIndex.value = history.value.length - 1
 }, 100)
 
-const handleHistoryBack = () => {
+const handleHistoryBack = async () => {
   if (historyIndex.value > -1) {
     historyIndex.value--
     const newSchema = history.value[historyIndex.value]
@@ -111,7 +111,7 @@ const applySchema: DesignInstance['applySchema'] = (schema = getSchema()) => {
   const newSchema = repirJsonSchema(schema)
   setSchema(newSchema)
 
-  recordHistory(newSchema)
+  recordHistory()
 }
 
 const getNode = (items: FormItemType[], designKey: string): FormItemType | null => {
@@ -139,10 +139,11 @@ const getNodeByKey = (designKey: string): FormItemType | null => {
 const addItem = (item: FormItemType) => {
   const schema = getSchema()
 
-  applySchema({
+  setSchema({
     ...schema,
     items: schema.items ? [...schema.items, item] : [item]
   })
+  recordHistory()
 }
 
 const current = computed({
@@ -199,6 +200,7 @@ const instance = reactive<DesignInstance>({
   currentKey,
   hoverKey: '',
   current,
+  recordHistory,
   rightTab: 'form',
   fullScreen,
   history,
@@ -219,7 +221,8 @@ const instance = reactive<DesignInstance>({
     emits(name, params)
   },
   handleClear: () => {
-    applySchema({ ...getSchema(), items: [] })
+    setSchema({ ...getSchema(), items: [] })
+    recordHistory()
   },
   handleHistoryBack,
   handleHistoryForward,
@@ -227,7 +230,6 @@ const instance = reactive<DesignInstance>({
     fullScreen.value = !fullScreen.value
   },
   getNodeByKey,
-  updateNodeByKey,
   handleJson(target?: string) {
     setTimeout(() => {
       jsonState.visible = true
@@ -240,14 +242,6 @@ const instance = reactive<DesignInstance>({
 provide($designInstance, instance)
 
 defineExpose(instance)
-
-// watch(
-//   () => history.value,
-//   () => {
-//     console.log(history.value)
-//   },
-//   { deep: true }
-// )
 </script>
 
 <style lang="scss">
