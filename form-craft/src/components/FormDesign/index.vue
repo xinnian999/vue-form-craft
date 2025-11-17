@@ -31,7 +31,8 @@ import type {
   FormDesignProps,
   FormElement,
   FormItemType,
-  FormSchema
+  FormSchema,
+  HistoryRecord
 } from '@/types'
 import { ns, repirJsonSchema } from '@/utils'
 import Json from './Json/index.vue'
@@ -58,7 +59,7 @@ const currentKey = ref('root')
 
 const fullScreen = ref(false)
 
-const history = ref<FormSchema[]>([])
+const history = ref<HistoryRecord[]>([])
 
 const historyIndex = ref(-1)
 
@@ -75,21 +76,24 @@ const setSchema = (schema: FormSchema) => {
 }
 
 // 记录历史。
-const recordHistory = debounce(async () => {
+const recordHistory = debounce(async (description: string = '修改') => {
   if (historyIndex.value < history.value.length - 1) {
     // 如果改动的是历史，将截断之后的记录
     history.value = history.value.slice(0, historyIndex.value + 1)
   }
-  history.value.push(cloneDeep(getSchema()))
+  history.value.push({
+    schema: cloneDeep(getSchema()),
+    description,
+    timestamp: Date.now()
+  })
   historyIndex.value = history.value.length - 1
 }, 100)
 
 const handleHistoryBack = async () => {
   if (historyIndex.value > -1) {
     historyIndex.value--
-    const newSchema = history.value[historyIndex.value]
-      ? history.value[historyIndex.value]
-      : initJsonSchema
+    const record = history.value[historyIndex.value]
+    const newSchema = record ? record.schema : initJsonSchema
     setSchema(cloneDeep(newSchema))
   }
 }
@@ -97,7 +101,7 @@ const handleHistoryBack = async () => {
 const handleHistoryForward = () => {
   if (historyIndex.value < history.value.length - 1) {
     historyIndex.value++
-    setSchema(cloneDeep(history.value[historyIndex.value]))
+    setSchema(cloneDeep(history.value[historyIndex.value].schema))
   }
 }
 
@@ -111,7 +115,7 @@ const applySchema: DesignInstance['applySchema'] = (schema = getSchema()) => {
   const newSchema = repirJsonSchema(schema)
   setSchema(newSchema)
 
-  recordHistory()
+  recordHistory('修改属性')
 }
 
 const getNode = (items: FormItemType[], designKey: string): FormItemType | null => {
@@ -143,7 +147,7 @@ const addItem = (item: FormItemType) => {
     ...schema,
     items: schema.items ? [...schema.items, item] : [item]
   })
-  recordHistory()
+  recordHistory('添加节点')
 }
 
 const current = computed({
@@ -222,7 +226,7 @@ const instance = reactive<DesignInstance>({
   },
   handleClear: () => {
     setSchema({ ...getSchema(), items: [] })
-    recordHistory()
+    recordHistory('清空表单')
   },
   handleHistoryBack,
   handleHistoryForward,

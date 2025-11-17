@@ -106,6 +106,12 @@ export interface SelectProps {
 
 export type SelectValue = string | number | boolean
 
+export type HistoryRecord = {
+  schema: FormSchema
+  description: string
+  timestamp: number
+}
+
 export type Lang = Ref<'en' | 'zh'>
 
 export type Locale = {
@@ -210,7 +216,7 @@ export interface DesignInstance extends Required<ToRefs<FormDesignProps>> {
   current: Ref<FormItemType | null>
   rightTab: 'attr' | 'form'
   fullScreen: Ref<boolean>
-  history: Ref<FormSchema[]>
+  history: Ref<HistoryRecord[]>
   historyIndex: Ref<number>
   getSchema: () => FormSchema
   setSchema: (schema: FormSchema) => void
@@ -227,5 +233,5 @@ export interface DesignInstance extends Required<ToRefs<FormDesignProps>> {
   updateNodeByKey: (key: string, node: Record<string, any>) => void
   handleJson: (target?: string) => void
   addItem: (item: FormItemType) => void
-  recordHistory: () => void
+  recordHistory: (description?: string) => void
 }

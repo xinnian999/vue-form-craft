@@ -38,7 +38,7 @@ onMounted(() => {
   const localSchema = localStorage.getItem('schema')
   if (localSchema) {
     schema.value = JSON.parse(localSchema)
-    formDesignRef.value?.recordHistory()
+    formDesignRef.value?.recordHistory('回显保存的表单')
   }
 })
 </script>

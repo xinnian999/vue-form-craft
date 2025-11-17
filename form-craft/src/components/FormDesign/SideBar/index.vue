@@ -33,6 +33,7 @@ import { AI } from '@/components'
 import { useGlobals } from '@/hooks'
 import Icon from '@/Icon/index.vue'
 import { ns } from '@/utils'
+import History from './History.vue'
 import List from './List.vue'
 import Outline from './Outline.vue'
 import Template from './Template.vue'
@@ -61,6 +62,13 @@ const menus = [
     icon: 'outline',
     desc: '',
     render: Outline
+  },
+  {
+    title: '历史记录',
+    key: 'history',
+    icon: 'history',
+    desc: '',
+    render: History
   },
   {
     title: '模板',

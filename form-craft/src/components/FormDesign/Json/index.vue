@@ -94,7 +94,7 @@ const formValues = ref({})
 const onSave = (json: FormSchema) => {
   const repirJson = repirJsonSchema(json)
   designInstance.setSchema(repirJson)
-  designInstance.recordHistory()
+  designInstance.recordHistory('编辑JSON')
 }
 
 const onInit = (editor: JsonEditorType) => {

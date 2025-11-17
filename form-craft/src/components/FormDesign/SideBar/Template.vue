@@ -10,7 +10,7 @@
           <div class="form-header">
             <Icon name="form" />
             <span>{{ data.label }}</span>
-            <Icon name="edit" class="edit" @click="useTemplate(data.schema)" />
+            <Icon name="edit" class="edit" @click="useTemplate(data)" />
           </div>
           <div class="form-description" v-if="data.description">
             {{ data.description }}
@@ -29,9 +29,9 @@ import { ns } from '@/utils'
 
 const designInstance = useDesignInstance()!
 
-const useTemplate = (schema: any) => {
-  designInstance.setSchema(schema)
-  designInstance.recordHistory()
+const useTemplate = (template: any) => {
+  designInstance.setSchema(template.schema)
+  designInstance.recordHistory(`使用模板-${template.label}`)
 }
 </script>
 

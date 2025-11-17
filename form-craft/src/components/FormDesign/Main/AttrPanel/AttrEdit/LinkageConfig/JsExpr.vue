@@ -34,7 +34,7 @@ const visible = defineModel<boolean>()
 const onSave = (json: FormSchema) => {
   const jsonSchema = repirJsonSchema(json)
   designInstance.setSchema(jsonSchema)
-  designInstance.recordHistory()
+  designInstance.recordHistory('修改联动')
 }
 
 const onInit = (editor: JsonEditorType) => {
