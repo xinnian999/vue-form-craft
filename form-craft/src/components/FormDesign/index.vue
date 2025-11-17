@@ -149,7 +149,11 @@ const updateNodeByKey = (designKey: string, newNodeData: Record<string, any>) =>
 
   if (oldNode) {
     // TODO: 这里直接修改了getSchema，违反了setSchema唯一修改的原则。待优化
-    Object.assign(oldNode, newNodeData)
+    if (designKey === 'root') {
+      Object.assign(schema, { items: newNodeData.children })
+    } else {
+      Object.assign(oldNode, newNodeData)
+    }
     recordHistory(schema)
   }
 }
