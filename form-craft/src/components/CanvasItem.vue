@@ -46,7 +46,7 @@ const config = computed(() => {
 const canvasItemClass = computed(() => {
   return {
     [ns('canvas-item')]: true,
-    active: props.data.designKey === designInstance.current?.designKey,
+    active: props.data.designKey === designInstance.currentKey,
     hover: props.data.designKey === designInstance.hoverKey,
     mask: props.data.designKey === designInstance.hoverKey && !props.data.children
   }

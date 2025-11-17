@@ -30,6 +30,7 @@
       :scroll-speed="20"
       :bubble-scroll="true"
       @add="onAdd"
+      @update="onUpdate"
     >
       <template #item="{ element: child, index }">
         <CanvasItem v-if="child.designKey" :data="child" :index="index" />
@@ -81,7 +82,11 @@ const onAdd = (e: Record<string, any>) => {
 
   designInstance.handleEmit('add', source)
 
-  designInstance.recordHistory()
+  designInstance.recordHistory('拖拽组件')
+}
+
+const onUpdate = () => {
+  designInstance.recordHistory('调整组件顺序')
 }
 </script>
 

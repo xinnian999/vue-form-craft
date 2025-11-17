@@ -29,7 +29,6 @@ import {
   useTemplateRef
 } from 'vue'
 import { FormItemGroup } from '@/components'
-import { useLocale } from '@/hooks'
 import { $formInstance } from '@/symbol'
 import type { FormInstance, FormRenderEmits, FormRenderProps } from '@/types'
 import { deepParse, getDataByPath, setDataByPath } from '@/utils'
@@ -43,7 +42,7 @@ const emits = defineEmits<FormRenderEmits>()
 // 注意：默认值必须使用工厂函数返回新对象，避免跨实例共享
 const formValues = defineModel<Record<string, any>>({ default: () => reactive({}) })
 
-const locale = useLocale()
+// const locale = useLocale()
 
 const form = useTemplateRef<ElFormInstance>('form')
 
@@ -164,6 +163,7 @@ onBeforeMount(() => {
     const values = cloneDeep(props.schema.initialValues)
 
     formValues.value = { ...values, ...formValues.value }
+    // Object.assign(formValues.value, values)
   }
 })
 

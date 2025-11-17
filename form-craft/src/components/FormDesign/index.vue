@@ -212,9 +212,6 @@ const instance = reactive<DesignInstance>({
   getSchema,
   setSchema,
   applySchema,
-  updateCurrent(element) {
-    current.value = element
-  },
   updateCurrentKey(key) {
     currentKey.value = key
   },
