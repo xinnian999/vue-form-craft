@@ -33,8 +33,6 @@ const emits = defineEmits<FormRenderEmits>()
 // 注意：默认值必须使用工厂函数返回新对象，避免跨实例共享
 const formValues = defineModel<Record<string, any>>({ default: () => reactive({}) })
 
-// const locale = useLocale()
-
 const form = useTemplateRef<ElFormInstance>('form')
 
 const selectData = reactive<Record<string, Record<string, any>>>({})
@@ -49,7 +47,8 @@ const setValues: FormInstance['setValues'] = (values) => {
 const getFieldValue: FormInstance['getFieldValue'] = (path) => getDataByPath(getValues(), path)
 
 const setFieldValue: FormInstance['setFieldValue'] = (path, value) => {
-  setDataByPath(getValues(), path, value)
+  const newValues = setDataByPath(cloneDeep(getValues()), path, value)
+  setValues(newValues)
   emits('fieldChange', path, value)
 }
 
