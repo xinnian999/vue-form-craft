@@ -91,7 +91,7 @@ const recordHistory = async (description: string = '修改') => {
 // 防抖记录历史
 const debounceRecordHistory = debounce(recordHistory, 700)
 
-const handleHistoryBack = async () => {
+const handleHistoryBack = () => {
   if (historyIndex.value > -1) {
     historyIndex.value--
     const record = history.value[historyIndex.value]
@@ -177,16 +177,15 @@ const instance = reactive<DesignInstance>({
   hoverKey: '',
   recordHistory,
   debounceRecordHistory,
-  rightTab: 'form',
   fullScreen,
   history,
   historyIndex,
   getSchema,
   setSchema,
-  updateCurrentKey(key) {
+  setCurrentKey(key) {
     currentKey.value = key
   },
-  updateHoverKey(key) {
+  setHoverKey(key) {
     instance.hoverKey = key
   },
   handleEmit: (name, params) => {

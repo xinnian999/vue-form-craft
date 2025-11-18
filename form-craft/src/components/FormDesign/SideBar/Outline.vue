@@ -77,7 +77,7 @@ const currentNodeKey = computed(() => {
 
 const handleNodeClick = (data: any) => {
   if (designInstance) {
-    designInstance.updateCurrentKey(data.designKey)
+    designInstance.setCurrentKey(data.designKey)
   }
 }
 </script>

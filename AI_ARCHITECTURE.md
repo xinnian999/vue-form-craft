@@ -967,7 +967,7 @@ formDesignRef.value.updateSchema(newSchema)
 ### FormDesign Methods
 
 - `getSchema()` / `setSchema()` / `applySchema()`
-- `updateCurrentKey()` / `getNodeByKey()` / `updateNodeByKey()`
+- `setCurrentKey()` / `getNodeByKey()` / `updateNodeByKey()`
 - `handleHistoryBack()` / `handleHistoryForward()` / `handleClear()`
 
 ---

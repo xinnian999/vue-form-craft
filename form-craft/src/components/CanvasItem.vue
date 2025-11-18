@@ -54,17 +54,16 @@ const canvasItemClass = computed(() => {
 
 const handleHoverEnter = () => {
   if (props.data.designKey) {
-    designInstance.updateHoverKey(props.data.designKey)
+    designInstance.setHoverKey(props.data.designKey)
   }
 }
 
 const handleHoverLeave = () => {
-  designInstance.updateHoverKey('')
+  designInstance.setHoverKey('')
 }
 
 const handleSelect = (element: FormItemType) => {
-  designInstance.updateCurrentKey(element.designKey!)
-  designInstance.rightTab = 'attr'
+  designInstance.setCurrentKey(element.designKey!)
 }
 
 const rightBottomActions = [
@@ -89,7 +88,7 @@ const rightBottomActions = [
       const schema = designInstance.getSchema()
       const newList = recursionDelete(schema.items!, (item) => item.designKey !== element.designKey)
       designInstance.setSchema({ ...schema, items: newList })
-      designInstance.updateCurrentKey('root')
+      designInstance.setCurrentKey('root')
       designInstance.recordHistory(`删除表单项-${element.label || element.name}`)
     }
   }

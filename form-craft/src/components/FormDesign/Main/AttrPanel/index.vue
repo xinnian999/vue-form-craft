@@ -4,8 +4,8 @@
       <el-breadcrumb separator=">" style="line-height: 25px">
         <el-breadcrumb-item
           class="breadcrumb-item"
-          @click="designInstance.updateCurrentKey('root')"
-          @mousemove="designInstance.updateHoverKey('root')"
+          @click="designInstance.setCurrentKey('root')"
+          @mousemove="designInstance.setHoverKey('root')"
         >
           表单
         </el-breadcrumb-item>
@@ -13,8 +13,8 @@
           v-for="node in breadcrumbPath"
           :key="node.designKey"
           class="breadcrumb-item"
-          @click="designInstance.updateCurrentKey(node.designKey!)"
-          @mousemove="designInstance.updateHoverKey(node.designKey!)"
+          @click="designInstance.setCurrentKey(node.designKey!)"
+          @mousemove="designInstance.setHoverKey(node.designKey!)"
         >
           {{ node.label || node.name }}
         </el-breadcrumb-item>

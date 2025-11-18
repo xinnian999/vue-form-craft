@@ -37,15 +37,15 @@ import { ns } from '@/utils'
 const designInstance = useDesignInstance()!
 
 const handleCanvasMouseMove = () => {
-  designInstance.updateHoverKey('root')
+  designInstance.setHoverKey('root')
 }
 
 const handleCanvasMouseLeave = () => {
-  designInstance.updateHoverKey('')
+  designInstance.setHoverKey('')
 }
 
 const handleCanvasClick = () => {
-  designInstance.updateCurrentKey('root')
+  designInstance.setCurrentKey('root')
 }
 </script>
 

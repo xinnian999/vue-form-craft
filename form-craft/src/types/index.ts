@@ -213,14 +213,13 @@ export interface FormDesignProps {
 export interface DesignInstance extends Required<ToRefs<FormDesignProps>> {
   currentKey: Ref<string>
   hoverKey: string
-  rightTab: 'attr' | 'form'
   fullScreen: Ref<boolean>
   history: Ref<HistoryRecord[]>
   historyIndex: Ref<number>
   getSchema: () => FormSchema
   setSchema: (schema: FormSchema) => void
-  updateCurrentKey: (key: string) => void
-  updateHoverKey: (key: string) => void
+  setCurrentKey: (key: string) => void
+  setHoverKey: (key: string) => void
   handleClear: () => void
   handleEmit: (event: any, ...args: any[]) => void
   handleHistoryBack: () => void

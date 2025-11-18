@@ -74,11 +74,9 @@ const onAdd = (e: Record<string, any>) => {
   const source = e.item._underlying_vm_
 
   // 将当前选中设置为新添加的表单项
-  designInstance.updateCurrentKey(source.designKey)
+  designInstance.setCurrentKey(source.designKey)
 
   designInstance.hoverKey = source.designKey
-
-  designInstance.rightTab = 'attr'
 
   designInstance.handleEmit('add', source)
 
