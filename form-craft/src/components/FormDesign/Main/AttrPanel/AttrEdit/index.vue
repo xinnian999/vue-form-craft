@@ -50,6 +50,9 @@ const nodeModel = computed({
 })
 
 const attrSchema = computed<FormSchema>(() => {
+  if (!nodeModel.value) {
+    return { size: 'small', labelAlign: 'top', items: [] } satisfies FormSchema
+  }
   const config = elements[nodeModel.value!.component]
 
   if (config?.attrSchema) {
@@ -60,11 +63,11 @@ const attrSchema = computed<FormSchema>(() => {
 })
 
 const onRootFieldChange = () => {
-  designInstance.recordHistory(`修改表单属性`)
+  designInstance.debounceRecordHistory(`修改表单属性`)
 }
 
 const onNodeFieldChange = () => {
-  designInstance.recordHistory(`修改节点属性`)
+  designInstance.debounceRecordHistory(`修改节点属性`)
 }
 </script>
 

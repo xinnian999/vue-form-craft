@@ -15,7 +15,6 @@ let initJsonSchema: FormSchema = initSchema
 <script setup lang="ts">
 import { cloneDeep, debounce, isEqual } from 'lodash'
 import {
-  computed,
   onBeforeMount,
   onBeforeUnmount,
   provide,
@@ -76,7 +75,7 @@ const setSchema = (schema: FormSchema) => {
 }
 
 // 记录历史。
-const recordHistory = debounce(async (description: string = '修改') => {
+const recordHistory = async (description: string = '修改') => {
   if (historyIndex.value < history.value.length - 1) {
     // 如果改动的是历史，将截断之后的记录
     history.value = history.value.slice(0, historyIndex.value + 1)
@@ -87,7 +86,10 @@ const recordHistory = debounce(async (description: string = '修改') => {
     timestamp: Date.now()
   })
   historyIndex.value = history.value.length - 1
-}, 700)
+}
+
+// 防抖记录历史
+const debounceRecordHistory = debounce(recordHistory, 700)
 
 const handleHistoryBack = async () => {
   if (historyIndex.value > -1) {
@@ -174,6 +176,7 @@ const instance = reactive<DesignInstance>({
   currentKey,
   hoverKey: '',
   recordHistory,
+  debounceRecordHistory,
   rightTab: 'form',
   fullScreen,
   history,
