@@ -4,14 +4,9 @@
       v-if="designInstance.currentKey == 'root'"
       v-model="schemaModel"
       :schema="formAttrSchema"
-      @field-change="onRootFieldChange"
+      @fieldChange="onRootFieldChange"
     />
-    <FormRender
-      v-else
-      v-model="nodeModel!"
-      :schema="attrSchema"
-      @field-change="onNodeFieldChange"
-    />
+    <FormRender v-else v-model="nodeModel!" :schema="attrSchema" @fieldChange="onNodeFieldChange" />
   </div>
 </template>
 

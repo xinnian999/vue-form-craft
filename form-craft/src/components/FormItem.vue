@@ -37,14 +37,7 @@
       <template #label>
         <div :class="[ns('form-item-label'), label && `${name}-label`]">
           <div>
-            <component
-              v-if="formInstance.slots?.label"
-              :is="formInstance.slots.label"
-              v-bind="props"
-            />
-            <template v-else>
-              {{ label }}
-            </template>
+            {{ label }}
           </div>
           <el-tooltip effect="dark" :content="help" raw-content v-if="help">
             <Icon name="help" />
@@ -138,13 +131,13 @@ const computeRules = computed(() => {
 const config = computed(() => {
   const data = elements[props.component]
   if (!data) {
-    return { 
+    return {
       modelName: 'modelValue',
       type: undefined,
       render: undefined
     } as any
   }
-  
+
   // 避免修改原对象，使用只读方式
   if (!data.modelName) {
     return { ...data, modelName: 'modelValue' }
@@ -179,7 +172,7 @@ watch(
   value,
   (newVal, oldVal) => {
     const linkages = props.linkages
-    
+
     // 提前返回，避免不必要的计算
     if (!linkages || linkages.length === 0 || formInstance.design) return
     if (isEqual(newVal, oldVal)) return

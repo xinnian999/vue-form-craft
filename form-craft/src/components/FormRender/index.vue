@@ -18,16 +18,7 @@
 <script setup lang="ts">
 import type { FormInstance as ElFormInstance } from 'element-plus'
 import { cloneDeep, omit } from 'lodash'
-import {
-  computed,
-  onBeforeMount,
-  provide,
-  reactive,
-  readonly,
-  toRefs,
-  useSlots,
-  useTemplateRef
-} from 'vue'
+import { computed, onBeforeMount, provide, reactive, readonly, toRefs, useTemplateRef } from 'vue'
 import { FormItemGroup } from '@/components'
 import { $formInstance } from '@/symbol'
 import type { FormInstance, FormRenderEmits, FormRenderProps } from '@/types'
@@ -106,8 +97,6 @@ const updateItemSchemaByPath: FormInstance['updateItemSchemaByPath'] = (name, pa
   }
 }
 
-const slots = useSlots()
-
 // 创建 instanceAPI 对象，供 context 中的 $instance 使用
 const instanceAPI = {
   getValues,
@@ -179,8 +168,7 @@ const instance = readonly({
   updateItemSchemaByPath,
   validate,
   resetFields,
-  submit,
-  slots
+  submit
 })
 
 provide($formInstance, instance)

@@ -193,7 +193,6 @@ export interface FormRenderEmits {
 export interface FormInstance extends FormRenderProps {
   selectData: Record<string, Record<string, any>>
   context: Record<string, any>
-  slots: Slots
   getValues: () => Record<string, any>
   setValues: (values: Record<string, any>) => void
   getFieldValue: (path: string) => any
