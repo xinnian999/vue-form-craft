@@ -76,7 +76,7 @@ const onAdd = (e: Record<string, any>) => {
   // 将当前选中设置为新添加的表单项
   designInstance.setCurrentKey(source.designKey)
 
-  designInstance.hoverKey = source.designKey
+  designInstance.setHoverKey(source.designKey)
 
   designInstance.handleEmit('add', source)
 
