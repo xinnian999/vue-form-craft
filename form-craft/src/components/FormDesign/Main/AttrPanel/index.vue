@@ -20,7 +20,7 @@
         </el-breadcrumb-item>
       </el-breadcrumb>
     </div>
-    <AttrEdit v-if="designInstance.current" v-model="designInstance.current" />
+    <AttrEdit />
   </div>
 </template>
 

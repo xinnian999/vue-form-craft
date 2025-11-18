@@ -1,84 +1,70 @@
 <template>
   <div :class="ns('attr')">
-    <FormRender :key="current.designKey" v-model="current" :schema="attrSchema">
-      <template #label="{ label, name }">
-        <span class="label" @click="handleEditAttr(name)">
-          {{ label }}
-        </span>
-      </template>
-    </FormRender>
-
-    <!-- <StyleConfig :key="current.designKey" v-model="currentProps" />
-
-    <LinkageConfig v-model="current" /> -->
+    <FormRender
+      v-if="designInstance.currentKey == 'root'"
+      v-model="schemaModel"
+      :schema="formAttrSchema"
+      @field-change="onRootFieldChange"
+    />
+    <FormRender
+      v-else
+      v-model="nodeModel!"
+      :schema="attrSchema"
+      @field-change="onNodeFieldChange"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import { isString } from 'lodash'
 import { computed } from 'vue'
 import { FormRender } from '@/components'
-import { useDesignInstance, useElements, useLang } from '@/hooks'
-import type { FormItemType, FormSchema } from '@/types'
-import { getDataByPath, ns, setDataByPath } from '@/utils'
+import { useDesignInstance, useElements } from '@/hooks'
+import type { FormSchema } from '@/types'
+import { ns } from '@/utils'
 import formAttrSchema from './formOptions'
-import LinkageConfig from './LinkageConfig/index.vue'
-import StyleConfig from './StyleConfig/index.vue'
 
 const designInstance = useDesignInstance()!
 
 const elements = useElements()
 
-const lang = useLang()
+const schemaModel = computed({
+  get() {
+    return designInstance.getSchema()
+  },
+  set(schema) {
+    designInstance.setSchema(schema)
+  }
+})
 
-const current = defineModel<FormItemType>({ required: true })
+const nodeModel = computed({
+  get() {
+    return designInstance.getNodeByKey(designInstance.currentKey)
+  },
+  set(node) {
+    const oldNode = designInstance.getNodeByKey(designInstance.currentKey)
+    if (oldNode) {
+      Object.assign(oldNode, node)
+      designInstance.setSchema(designInstance.getSchema())
+    }
+  }
+})
 
 const attrSchema = computed<FormSchema>(() => {
-  if (designInstance.currentKey === 'root') {
-    return formAttrSchema
-  }
-
-  const config = elements[current.value.component]
+  const config = elements[nodeModel.value!.component]
 
   if (config?.attrSchema) {
     return config.attrSchema
-    // const parseItems = (nodes: FormItemType[] = []): FormItemType[] => {
-    //   return nodes.map((item) => {
-    //     const value = getDataByPath(current.value!, item.name)
-    //     const isTemplate = isString(value) && /^{{\s*(.*?)\s*}}$/.test(value)
-
-    //     return {
-    //       ...item,
-    //       label: lang.value === 'zh' ? item.label : item.name.split('.').pop(), //国际化翻译
-    //       component: isTemplate ? 'Input' : item.component, // 将联动组件改用弹窗展示
-    //       dialog: isTemplate || item.dialog, // 将联动组件改用弹窗展示,
-    //       children: item.children && parseItems(item.children)
-    //     }
-    //   })
-    // }
-
-    // const items = parseItems(config.attrSchema.items)
-
-    // return {
-    //   ...config.attrSchema,
-    //   // items
-    // }
   }
 
   return { size: 'small', labelAlign: 'top', items: [] } satisfies FormSchema
 })
 
-const currentProps = computed({
-  get() {
-    return current.value?.props || {}
-  },
-  set(value) {
-    current.value = setDataByPath(current.value!, 'props', value) as FormItemType
-  }
-})
+const onRootFieldChange = () => {
+  designInstance.recordHistory(`修改表单属性`)
+}
 
-const handleEditAttr = (name: string) => {
-  designInstance.handleJson(name)
+const onNodeFieldChange = () => {
+  designInstance.recordHistory(`修改节点属性`)
 }
 </script>
 

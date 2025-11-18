@@ -5,8 +5,8 @@ export default {
   labelAlign: 'top',
   initialValues: {
     labelWidth: 150,
-    size: 'small',
-    labelAlign: 'top'
+    size: 'default',
+    labelAlign: 'right'
   },
   items: [
     {

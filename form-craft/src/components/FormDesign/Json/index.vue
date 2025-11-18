@@ -14,7 +14,7 @@
           <Icon name="script" style="margin-right: 5px" />
           <span>在线编辑</span>
         </template>
-        <JsonSchemaEdit :json="json" @save="onSave" @init="onInit" />
+        <JsonSchemaEdit :json="json" @save="onSave" />
       </el-tab-pane>
       <el-tab-pane name="import" lazy>
         <template #label>
@@ -75,13 +75,10 @@ import Icon from '@/Icon/index.vue'
 import { jsJsonSchema, jsVue, tsJsonSchema, tsVue } from './config'
 import help from './help.md?raw'
 import 'md-editor-v3/lib/style.css'
-import JsonEditorType from 'jsoneditor'
 import type { FormSchema } from '@/types'
 import { repirJsonSchema } from '@/utils'
 import ImportJsonSchema from './Import.vue'
 import JsonSchemaEdit from './JsonSchemaEdit/index.vue'
-
-const props = defineProps<{ target: string }>()
 
 const visible = defineModel<boolean>()
 
@@ -95,46 +92,5 @@ const onSave = (json: FormSchema) => {
   const repirJson = repirJsonSchema(json)
   designInstance.setSchema(repirJson)
   designInstance.recordHistory('编辑JSON')
-}
-
-const onInit = (editor: JsonEditorType) => {
-  if (!props.target) {
-    return
-  }
-
-  const currentName = designInstance.current!.name
-
-  setTimeout(() => {
-    // 跳转到当前字段位置
-    if (currentName) {
-      const aceEditor = editor.aceEditor
-      if (aceEditor) {
-        // 先找到唯一的 currentName
-        aceEditor.find(currentName, {
-          backwards: false,
-          wrap: true,
-          caseSensitive: true,
-          wholeWord: false,
-          regExp: false
-        })
-
-        // 处理路径形式的 target（如 props.disabled）
-        // 将路径拆分，逐级查找
-        const targetParts = props.target.split('.')
-        for (const part of targetParts) {
-          aceEditor.find(part, {
-            backwards: false,
-            wrap: false,
-            caseSensitive: true,
-            wholeWord: false,
-            regExp: false
-          })
-        }
-
-        // 清除选中状态
-        aceEditor.clearSelection()
-      }
-    }
-  }, 100)
 }
 </script>

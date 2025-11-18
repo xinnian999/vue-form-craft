@@ -87,7 +87,7 @@ const recordHistory = debounce(async (description: string = '修改') => {
     timestamp: Date.now()
   })
   historyIndex.value = history.value.length - 1
-}, 100)
+}, 700)
 
 const handleHistoryBack = async () => {
   if (historyIndex.value > -1) {
@@ -108,14 +108,6 @@ const handleHistoryForward = () => {
 // 监听全屏状态变化，同步fullScreen状态
 const handleFullscreenChange = () => {
   fullScreen.value = !!document.fullscreenElement
-}
-
-// 提交一次修改schema。会序列化schema并记录历史。适合不频繁更新的场景
-const applySchema: DesignInstance['applySchema'] = (schema = getSchema()) => {
-  const newSchema = repirJsonSchema(schema)
-  setSchema(newSchema)
-
-  recordHistory('修改属性')
 }
 
 const getNode = (items: FormItemType[], designKey: string): FormItemType | null => {
@@ -150,28 +142,6 @@ const addItem = (item: FormItemType) => {
   recordHistory('添加节点')
 }
 
-const current = computed({
-  get() {
-    if (currentKey.value === 'root') {
-      return getSchema()
-    }
-
-    return getNodeByKey(currentKey.value)
-  },
-  set(element: FormItemType) {
-    if (currentKey.value === 'root') {
-      setSchema(element)
-      return
-    }
-
-    const oldNode = getNodeByKey(currentKey.value)
-    if (oldNode) {
-      Object.assign(oldNode, element)
-      setSchema(getSchema())
-    }
-  }
-})
-
 watch(fullScreen, (val) => {
   if (val) {
     formDesignWrapper.value?.requestFullscreen()
@@ -203,7 +173,6 @@ const instance = reactive<DesignInstance>({
   ...toRefs(props),
   currentKey,
   hoverKey: '',
-  current,
   recordHistory,
   rightTab: 'form',
   fullScreen,
@@ -211,7 +180,6 @@ const instance = reactive<DesignInstance>({
   historyIndex,
   getSchema,
   setSchema,
-  applySchema,
   updateCurrentKey(key) {
     currentKey.value = key
   },

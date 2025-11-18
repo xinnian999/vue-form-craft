@@ -52,14 +52,14 @@ const selectData = reactive<Record<string, Record<string, any>>>({})
 const getValues: FormInstance['getValues'] = () => formValues.value
 
 const setValues: FormInstance['setValues'] = (values) => {
-  formValues.value = values
+  formValues.value = cloneDeep(values)
 }
 
 const getFieldValue: FormInstance['getFieldValue'] = (path) => getDataByPath(getValues(), path)
 
 const setFieldValue: FormInstance['setFieldValue'] = (path, value) => {
-  const newValues = setDataByPath(getValues(), path, value)
-  setValues(newValues)
+  setDataByPath(getValues(), path, value)
+  emits('fieldChange', path, value)
 }
 
 const validate: FormInstance['validate'] = () => form.value!.validate()

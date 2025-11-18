@@ -187,6 +187,7 @@ export interface FormRenderEmits {
     }[]
   ]
   reset: []
+  fieldChange: [path: string, value: any]
 }
 
 export interface FormInstance extends FormRenderProps {
@@ -213,7 +214,6 @@ export interface FormDesignProps {
 export interface DesignInstance extends Required<ToRefs<FormDesignProps>> {
   currentKey: Ref<string>
   hoverKey: string
-  current: Ref<FormItemType | null>
   rightTab: 'attr' | 'form'
   fullScreen: Ref<boolean>
   history: Ref<HistoryRecord[]>
@@ -222,14 +222,12 @@ export interface DesignInstance extends Required<ToRefs<FormDesignProps>> {
   setSchema: (schema: FormSchema) => void
   updateCurrentKey: (key: string) => void
   updateHoverKey: (key: string) => void
-  applySchema: (schema: FormSchema, options?: { recordHistory?: boolean; repir?: boolean }) => void
   handleClear: () => void
   handleEmit: (event: any, ...args: any[]) => void
   handleHistoryBack: () => void
   handleHistoryForward: () => void
   handleToggleFullScreen: () => void
   getNodeByKey: (key: string) => FormItemType | null
-  updateNodeByKey: (key: string, node: Record<string, any>) => void
   handleJson: (target?: string) => void
   addItem: (item: FormItemType) => void
   recordHistory: (description?: string) => void
