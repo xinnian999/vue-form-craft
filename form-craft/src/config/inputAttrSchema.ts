@@ -126,16 +126,6 @@ export default {
               name: 'props.clearable',
               component: 'Switch',
               designKey: 'design-8sk2'
-            },
-            {
-              label: '浏览器自动填充',
-              name: 'props.autocomplete',
-              component: 'Switch',
-              props: {
-                activeValue: 'on',
-                inactiveValue: 'new-password'
-              },
-              designKey: 'design-BU53'
             }
           ]
         },
