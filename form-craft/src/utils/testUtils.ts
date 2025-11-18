@@ -13,12 +13,13 @@ export function FormDesignTest() {
   const clearBtn = wrapper.find(`.el-button[name="clear-design"]`)
 
   const schema = computed(() => wrapper.vm.getSchema())
+  const items = computed(() => wrapper.vm.getSchema().items)
   const itemsLength = computed(() => wrapper.vm.getSchema().items?.length || 0)
 
   // 双击添加元素
   const dblclickAdd = async (menuName: string) => {
     await leftWrapper.find(`.menu-${menuName}`).trigger('dblclick')
-    await wait(100)
+    await wait(1000)
   }
 
   // 点击清除按钮 + 确认
@@ -28,7 +29,7 @@ export function FormDesignTest() {
       '.el-message-box__btns .el-button--primary'
     ) as HTMLButtonElement
     confirmBtn.click()
-    await wait(500)
+    await wait(1000)
   }
 
   // 选中元素并返回
@@ -59,6 +60,7 @@ export function FormDesignTest() {
     itemsLength,
     dblclickAdd,
     clearDesign,
-    clickItem
+    clickItem,
+    items
   }
 }

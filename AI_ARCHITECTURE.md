@@ -16,7 +16,6 @@
 - ✅ **完善校验系统**：8 种校验类型（required、min/max、pattern、builtin、enum、custom、jsExpr）
 - 🧩 **高扩展性**：37+ 内置组件，支持自定义组件扩展
 - 🌐 **国际化**：中英文支持
-- 💡 **智能编辑器**：FunctionEditor 提供 Monaco Editor 智能提示，支持多行函数编辑
 
 ### 1.2 技术栈
 

@@ -229,5 +229,4 @@ export interface DesignInstance extends Required<ToRefs<FormDesignProps>> {
   handleJson: (target?: string) => void
   addItem: (item: FormItemType) => void
   recordHistory: (description?: string) => void
-  debounceRecordHistory: (description?: string) => void
 }

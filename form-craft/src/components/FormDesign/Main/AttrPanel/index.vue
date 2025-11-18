@@ -93,22 +93,6 @@ const breadcrumbPath = computed(() => {
 
   @include ns('attr') {
     padding: 10px;
-    padding-bottom: 20px;
-
-    @include ns('linkageConfig') {
-      padding-top: 30px;
-      &-btns {
-        text-align: center;
-      }
-    }
-
-    @include ns('style-config') {
-      padding-top: 20px;
-
-      .more {
-        text-align: center;
-      }
-    }
   }
 }
 </style>

@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { FormDesignTest, wait } from '@/utils'
 
+// 历史记录会延迟0.7s触发
 describe('《表单设计器》历史记录测试', async () => {
   it('（后退/前进）按钮初始化 - 全部禁用', async () => {
     const { backBtn, forwardBtn } = FormDesignTest()
@@ -62,11 +63,11 @@ describe('《表单设计器》历史记录测试', async () => {
 
     await activeItem.copyBtn.trigger('click') // 1 + 1
 
-    await wait(100)
+    await wait(1000)
 
     await activeItem.copyBtn.trigger('click') // 2 + 1
 
-    await wait(100)
+    await wait(1000)
 
     expect(itemsLength.value).toBe(3)
 
@@ -98,19 +99,15 @@ describe('《表单设计器》历史记录测试', async () => {
 
     await activeItem.deleteBtn.trigger('click') // 1 - 1
 
-    await wait(100)
+    await wait(1000)
 
     expect(itemsLength.value).toBe(0)
 
     await backBtn.trigger('click')
 
-    await wait(100)
-
     expect(itemsLength.value).toBe(1)
 
     await forwardBtn.trigger('click')
-
-    await wait(100)
 
     expect(itemsLength.value).toBe(0)
   })

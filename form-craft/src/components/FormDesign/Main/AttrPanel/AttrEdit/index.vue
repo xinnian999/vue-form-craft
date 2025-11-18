@@ -58,11 +58,11 @@ const attrSchema = computed<FormSchema>(() => {
 })
 
 const onRootFieldChange = () => {
-  designInstance.debounceRecordHistory(`修改表单属性`)
+  designInstance.recordHistory(`修改表单属性`)
 }
 
 const onNodeFieldChange = () => {
-  designInstance.debounceRecordHistory(`修改节点属性`)
+  designInstance.recordHistory(`修改节点属性`)
 }
 </script>
 

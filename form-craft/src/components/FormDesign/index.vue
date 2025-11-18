@@ -75,7 +75,7 @@ const setSchema = (schema: FormSchema) => {
 }
 
 // 记录历史。
-const recordHistory = async (description: string = '修改') => {
+const recordHistory = debounce((description: string = '修改') => {
   if (historyIndex.value < history.value.length - 1) {
     // 如果改动的是历史，将截断之后的记录
     history.value = history.value.slice(0, historyIndex.value + 1)
@@ -86,10 +86,9 @@ const recordHistory = async (description: string = '修改') => {
     timestamp: Date.now()
   })
   historyIndex.value = history.value.length - 1
-}
+}, 700)
 
 // 防抖记录历史
-const debounceRecordHistory = debounce(recordHistory, 700)
 
 const handleHistoryBack = () => {
   if (historyIndex.value > -1) {
@@ -176,7 +175,6 @@ const instance = reactive<DesignInstance>({
   currentKey,
   hoverKey: '',
   recordHistory,
-  debounceRecordHistory,
   fullScreen,
   history,
   historyIndex,

@@ -1,3 +1,4 @@
+import formOptions from '@/components/FormDesign/Main/AttrPanel/AttrEdit/formOptions'
 import * as elements from '@/elements'
 import type { FormElement } from '@/types'
 import addressContact from './addressContact'
@@ -14,6 +15,29 @@ import satisfaction from './satisfaction'
 import searchFilter from './searchFilter'
 import userProfile from './userProfile'
 import valueLinkage from './valueLinkage'
+
+const elementConfigs = Object.keys(elements)
+  .map((key) => {
+    const element = (elements as Record<string, FormElement>)[key]
+    let order = element.order
+    if (element.type === 'layout') {
+      order += 100
+    }
+    if (element.type === 'assist') {
+      order += 200
+    }
+    if (element.type === 'high') {
+      order += 300
+    }
+    return {
+      label: element.title,
+      schema: element.attrSchema,
+      description: '',
+      order,
+      type: element.type
+    }
+  })
+  .sort((a, b) => a.order - b.order)
 
 export {
   addressContact,
@@ -114,27 +138,15 @@ export default [
   },
   {
     label: '组件配置表单',
-    children: Object.keys(elements)
-      .map((key) => {
-        const element = (elements as Record<string, FormElement>)[key]
-        let order = element.order
-        if (element.type === 'layout') {
-          order += 100
-        }
-        if (element.type === 'assist') {
-          order += 200
-        }
-        if (element.type === 'high') {
-          order += 300
-        }
-        return {
-          label: element.title,
-          schema: element.attrSchema,
-          description: '',
-          order,
-          type: element.type
-        }
-      })
-      .sort((a, b) => a.order - b.order)
+    children: [
+      {
+        label: '表单配置',
+        schema: formOptions,
+        description: '',
+        order: 0,
+        type: 'form'
+      },
+      ...elementConfigs
+    ]
   }
 ]

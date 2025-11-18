@@ -1,10 +1,8 @@
-import type { FormSchema } from 'form-craft'
-
 export default {
   labelWidth: 110,
+  size: 'small',
   labelAlign: 'left',
   scrollToError: true,
-  size: 'small',
   submitBtn: false,
   initialValues: {
     label: '单行文本'
@@ -670,7 +668,7 @@ export default {
           children: [
             {
               label: '宽度',
-              name: 'width',
+              name: 'props.style.width',
               component: 'Input',
               props: {
                 autocomplete: 'new-password'
@@ -679,7 +677,7 @@ export default {
             },
             {
               label: '高度',
-              name: 'height',
+              name: 'props.style.height',
               component: 'Input',
               props: {
                 autocomplete: 'new-password'
@@ -691,4 +689,4 @@ export default {
       ]
     }
   ]
-} satisfies FormSchema
+}

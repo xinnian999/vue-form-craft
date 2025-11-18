@@ -25,12 +25,13 @@
 import { useDesignInstance } from '@/hooks'
 import Icon from '@/Icon/index.vue'
 import templates from '@/templates'
-import { ns } from '@/utils'
+import { ns, repirJsonSchema } from '@/utils'
 
 const designInstance = useDesignInstance()!
 
 const useTemplate = (template: any) => {
-  designInstance.setSchema(template.schema)
+  const schema = repirJsonSchema(template.schema)
+  designInstance.setSchema(schema)
   designInstance.recordHistory(`使用模板-${template.label}`)
 }
 </script>
