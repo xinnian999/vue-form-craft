@@ -45,7 +45,7 @@
         <template #icon v-if="icon"> <Icon :name="icon" /> </template>{{ label }}</el-button
       >
     </div>
-
+    <Json v-model="JsonVisible" />
     <Preview v-model="PreviewVisible" :schema-context="designInstance.schemaContext" />
   </div>
 </template>
@@ -56,6 +56,7 @@ import { ref } from 'vue'
 import { useDesignInstance, useLocale } from '@/hooks'
 import Icon from '@/Icon/index.vue'
 import { ns } from '@/utils'
+import Json from './Json/index.vue'
 import Preview from './Preview.vue'
 
 type PreviewAction = {
@@ -70,9 +71,9 @@ const designInstance = useDesignInstance()!
 
 const locale = useLocale()
 
-const PreviewVisible = ref(false)
+const JsonVisible = ref(false)
 
-const ImportVisible = ref(false)
+const PreviewVisible = ref(false)
 
 const btnSize = 'small'
 
@@ -90,7 +91,7 @@ const rightActions: PreviewAction[] = [
     btnType: 'primary',
     icon: 'script',
     onClick: () => {
-      designInstance.handleJson()
+      JsonVisible.value = true
     }
   },
   {
