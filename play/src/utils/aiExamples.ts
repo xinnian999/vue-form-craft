@@ -1,31 +1,24 @@
 import axios from 'axios'
 import type { AiGenerateFunction } from 'form-craft/dev'
 
+const token = import.meta.env.VITE_COZE_TOKEN
+
+const botId = '7574355537379885056'
+
+// 创建请求实例
+const request = axios.create({
+  baseURL: 'https://api.coze.cn',
+  headers: { Authorization: `Bearer ${token}` }
+})
+
 /**
  * 使用Coze AI的实现
  * 配置参数直接在函数内部定义
  */
 export const cozeAiFunction: AiGenerateFunction = async ({ prompt, context, signal }) => {
-  // 配置参数（根据实际情况修改）
-  const config = {
-    token: import.meta.env.VITE_COZE_TOKEN,
-    baseURL: '/coze-api',
-    botId: '7546913648569729039'
-  }
-
-  // 创建请求实例
-  let request = axios.create({ baseURL: config.baseURL })
-
-  // 如果传入了token,直接请求coze官方
-  if (config.token) {
-    request = axios.create({
-      baseURL: 'https://api.coze.cn',
-      headers: { Authorization: `Bearer ${config.token}` }
-    })
-  }
-
   // 构建消息
   const messages = []
+
   if (context) {
     messages.push({
       role: 'user',
@@ -33,6 +26,7 @@ export const cozeAiFunction: AiGenerateFunction = async ({ prompt, context, sign
       content_type: 'text'
     })
   }
+
   messages.push({
     role: 'user',
     content: prompt,
@@ -43,7 +37,7 @@ export const cozeAiFunction: AiGenerateFunction = async ({ prompt, context, sign
   const res = await request.post(
     '/v3/chat',
     {
-      bot_id: config.botId,
+      bot_id: botId,
       user_id: '123456',
       additional_messages: messages
     },
@@ -95,89 +89,10 @@ export const cozeAiFunction: AiGenerateFunction = async ({ prompt, context, sign
     throw new Error('No answer found')
   }
 
-  // 尝试解析 JSON
-  const jsonStr = content
-    .replace(/^```json\s*/, '')
-    .replace(/```$/, '')
-    .replace(/\\{\\{([^}]*)\\}\\}/g, '{{$1}}')
-
   try {
-    return JSON.parse(jsonStr)
+    return JSON.parse(content)
   } catch (e) {
+    console.error('AI生成错误:', { error: e, rawContent: content })
     throw new Error('AI生成错误')
-  }
-}
-
-/**
- * 示例2: 使用OpenAI的实现
- */
-export const createOpenAiFunction = (config: {
-  apiKey: string
-  baseURL?: string
-  model?: string
-}): AiGenerateFunction => {
-  return async ({ prompt, context, signal }) => {
-    const request = axios.create({
-      baseURL: config.baseURL ?? 'https://api.openai.com',
-      headers: {
-        Authorization: `Bearer ${config.apiKey}`,
-        'Content-Type': 'application/json'
-      }
-    })
-
-    const messages: any[] = []
-
-    if (context) {
-      messages.push({
-        role: 'system',
-        content: `当前表单配置: ${JSON.stringify(context)}`
-      })
-    }
-
-    messages.push({
-      role: 'user',
-      content: prompt
-    })
-
-    const response = await request.post(
-      '/v1/chat/completions',
-      {
-        model: config.model ?? 'gpt-3.5-turbo',
-        messages
-      },
-      { signal }
-    )
-
-    const content = response.data.choices[0]?.message?.content
-
-    if (!content) {
-      throw new Error('No response from AI')
-    }
-
-    // 尝试解析JSON
-    try {
-      const jsonMatch = content.match(/```json\s*([\s\S]*?)\s*```/)
-      const jsonStr = jsonMatch ? jsonMatch[1] : content
-      return JSON.parse(jsonStr)
-    } catch (e) {
-      // 如果不是JSON,直接返回文本
-      return content
-    }
-  }
-}
-
-/**
- * 示例3: 自定义简单实现
- */
-export const createCustomAiFunction = (
-  customHandler: (prompt: string, context?: any) => Promise<any>
-): AiGenerateFunction => {
-  return async ({ prompt, context, signal }) => {
-    // 可以在这里添加取消逻辑
-    if (signal?.aborted) {
-      throw new Error('已取消生成')
-    }
-
-    return customHandler(prompt, context)
   }
 }

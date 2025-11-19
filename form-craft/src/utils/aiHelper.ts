@@ -1,3 +1,4 @@
+import generateSchemaPrompt from '@/config/generateSchemaPrompt.md?raw'
 import type { AiGenerateFunction, AiGenerateParams } from '@/types'
 
 /**
@@ -53,8 +54,7 @@ export class AiHelper {
     signal?: AbortSignal
   ): Promise<any> {
     return this.generate({
-      prompt: `请基于当前表单,${prompt}`,
-      context: currentSchema,
+      prompt: `${generateSchemaPrompt}\n\n请基于当前表单Schema:${JSON.stringify(currentSchema)},生成新的表单Schema。\n\n要求:${prompt}`,
       signal
     })
   }
