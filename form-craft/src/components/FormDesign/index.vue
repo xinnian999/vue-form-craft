@@ -2,7 +2,6 @@
   <div :class="ns('form-design')" v-bind="$attrs" ref="formDesignWrapper">
     <SideBar />
     <Main />
-    <Json v-model="jsonState.visible" :target="jsonState.target" />
   </div>
 </template>
 
@@ -34,7 +33,6 @@ import type {
   HistoryRecord
 } from '@/types'
 import { ns, repirJsonSchema } from '@/utils'
-import Json from './Json/index.vue'
 import Main from './Main/index.vue'
 import SideBar from './SideBar/index.vue'
 

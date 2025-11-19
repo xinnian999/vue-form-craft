@@ -1,1204 +1,956 @@
-# Vue Form Craft AI 架构文档
+# Vue Form Craft 架构文档
 
-> 本文档专为 AI 快速理解项目架构而设计，涵盖核心概念、数据流、组件系统和最佳实践。
+## 一、项目概述
 
----
+### 1.1 项目定位
 
-## 一、项目概览
-
-**Vue Form Craft** 是基于 Vue 3 + TypeScript + Element Plus 的低代码表单解决方案，通过 JsonSchema 驱动表单的设计和渲染。
-
-### 1.1 核心特性
-
-- 🎨 **可视化设计器**：拖拽式设计，实时预览，支持历史记录（撤销/重做）
-- 📋 **JsonSchema 驱动**：配置即代码，所见即所得
-- 🔗 **强大联动系统**：支持 JS 表达式联动、数据联动（linkages）、函数联动（事件系统）三种方式
-- ✅ **完善校验系统**：8 种校验类型（required、min/max、pattern、builtin、enum、custom、jsExpr）
-- 🧩 **高扩展性**：37+ 内置组件，支持自定义组件扩展
-- 🌐 **国际化**：中英文支持
+Vue Form Craft 是一个基于 Vue 3 和 Element Plus 的开源低代码表单组件库，包含**表单设计器（FormDesign）**和**表单渲染器（FormRender）**两大核心组件。
 
 ### 1.2 技术栈
 
-- **核心框架**：Vue 3.5.8 + TypeScript 5.3
-- **UI 组件库**：Element Plus 2.11.4
-- **构建工具**：Vite 5.0
-- **测试框架**：Vitest 2.1
-- **工具库**：lodash、vuedraggable-es-fix
-- **AI 能力**：支持用户自定义注入 AI 接口（可对接任意 AI 服务）
+- **框架**: Vue 3 (Composition API)
+- **UI库**: Element Plus 2.6+
+- **工具库**: lodash
+- **构建工具**: Vite
+- **类型系统**: TypeScript
+- **拖拽**: vuedraggable
 
-### 1.3 目录结构
+### 1.3 核心特性
+
+- 可视化设计表单
+- 支持30+表单组件（Element Plus所有表单组件 + 内置组件）
+- 支持数组数据收集（自增组件FormList）
+- 灵活高效的表单联动系统
+- JSON配置预览和Vue组件代码预览
+- 高扩展性，支持自定义组件和多UI库适配
+- 完善的表单校验系统
+- 组件无限深层嵌套和深层校验
+- AI辅助生成表单（可选）
+
+---
+
+## 二、目录结构
 
 ```
-vue-form-craft/
-├── form-craft/              # 核心库（npm 包）
-│   ├── src/
-│   │   ├── components/      # FormRender、FormDesign 核心组件
-│   │   ├── elements/        # 37 个表单元素
-│   │   ├── config/          # 配置文件（初始 schema、选项配置等）
-│   │   ├── hooks/           # 组合式函数（useFormInstance、useElements 等）
-│   │   ├── types/           # TypeScript 类型定义
-│   │   ├── utils/           # 工具函数（deepParse、dataPath 操作等）
-│   │   ├── templates/       # 表单模板（登录、注册等 14 个模板）
-│   │   ├── locales/         # 国际化文件
-│   │   └── Icon/            # 图标组件
-│   └── dist/                # 构建产物
-├── play/                    # 开发环境
-└── docs/                    # 文档站点（VitePress）
+form-craft/
+├── src/
+│   ├── components/          # 核心组件
+│   │   ├── FormRender/      # 表单渲染器
+│   │   ├── FormDesign/      # 表单设计器
+│   │   ├── FormItem.vue     # 表单项组件
+│   │   ├── FormItemGroup.vue # 表单项组
+│   │   ├── CanvasItem.vue   # 画布项（设计器用）
+│   │   ├── CanvasGroup.vue  # 画布组（设计器用）
+│   │   ├── AI/              # AI对话组件
+│   │   └── customComponents/ # 自定义组件注册
+│   ├── elements/            # 表单元素定义（30+组件）
+│   │   ├── Input/           # 单行文本
+│   │   ├── FormList/        # 自增容器
+│   │   ├── Grid/            # 栅格布局
+│   │   └── ...              # 其他组件
+│   ├── config/              # 配置文件
+│   │   ├── formAttrSchema.ts      # 表单属性配置
+│   │   ├── initSchema.ts          # 初始Schema
+│   │   └── optionConfig.ts        # 选项配置
+│   ├── hooks/               # 组合式函数
+│   │   ├── useFormInstance.ts     # 表单实例Hook
+│   │   ├── useDesignInstance.ts   # 设计器实例Hook
+│   │   ├── useElements.ts         # 元素配置Hook
+│   │   ├── useSelect.ts           # 选择器Hook
+│   │   └── ...
+│   ├── utils/               # 工具函数
+│   │   ├── deepParse.ts           # 深度解析（模板引擎）
+│   │   ├── parseRules.ts          # 规则解析
+│   │   ├── getDataByPath.ts       # 路径取值
+│   │   ├── setDataByPath.ts       # 路径赋值
+│   │   ├── ns.ts                  # 命名空间
+│   │   └── aiHelper.ts            # AI辅助工具
+│   ├── types/               # TypeScript类型定义
+│   ├── locales/             # 国际化
+│   ├── templates/           # 模板
+│   ├── Icon/                # 图标组件
+│   ├── style.scss           # 全局样式
+│   ├── symbol.ts            # 依赖注入Key
+│   ├── index.ts             # 入口文件
+│   └── install.ts           # 插件安装
+├── package.json
+└── global.d.ts
 ```
 
 ---
 
-## 二、核心架构
+## 三、核心架构
 
-### 2.1 两大核心组件
+### 3.1 双核心组件设计
 
-#### FormRender（表单渲染器）
+#### 3.1.1 FormRender（表单渲染器）
 
-**位置**：`form-craft/src/components/FormRender/index.vue`
+**职责**: 根据JSON Schema渲染表单，处理数据绑定、校验、提交等逻辑。
 
-**职责**：
+**核心特性**:
 
-1. 根据 JsonSchema 动态渲染表单
-2. 管理表单数据（通过 v-model 双向绑定）
-3. 提供表单操作 API（校验、提交、重置、字段操作）
-4. 支持设计模式（design）和只读模式（read）
+- 使用 `v-model` 双向绑定表单数据
+- 支持设计模式（design）和只读模式（read）
+- 提供完整的表单实例API
+- 支持深层嵌套和动态解析
 
-**核心实现**：
+**关键代码位置**: `/src/components/FormRender/index.vue`
 
-```typescript
-// 数据模型（双向绑定）
-const formValues = defineModel<Record<string, any>>({ default: () => reactive({}) })
-
-// 上下文对象（供 JS 表达式使用）
-const context = computed(() => ({
-  $values: formValues.value, // 表单数据
-  $selectData: selectData, // 下拉框选中的完整数据
-  ...props.schemaContext // 外部传入的自定义上下文
-}))
-
-// 解析表达式（非设计模式下）
-const formItems = computed(() => {
-  if (props.design) return internalSchema.value.items
-  return deepParse(internalSchema.value.items || [], context.value)
-})
-
-// 对外暴露的 API
-const instance = readonly({
-  getValues: () => formValues.value,
-  setValues: (values) => {
-    formValues.value = values
-  },
-  getFieldValue: (path) => getDataByPath(formValues.value, path),
-  setFieldValue: (path, value) => {
-    formValues.value = setDataByPath(formValues.value, path, value)
-  },
-  validate: () => form.value!.validate(),
-  resetFields: (names) => form.value?.resetFields(names),
-  submit: () => {
-    /* 校验后触发 finish/failed 事件 */
-  },
-  updateSelectData: (key, value) => {
-    selectData[key] = value
-  },
-  updateItemSchemaByPath: (name, path, value) => {
-    /* 动态修改 schema */
-  }
-})
-
-// 通过依赖注入提供给子组件
-provide($formInstance, instance)
-```
-
-#### FormDesign（表单设计器）
-
-**位置**：`form-craft/src/components/FormDesign/index.vue`
-
-**职责**：
-
-1. 可视化设计表单（拖拽、配置）
-2. 管理历史记录（撤销/重做）
-3. 导出 JsonSchema 和 Vue 代码
-4. 提供模板功能
-
-**三大区域**：
-
-- **SideBar**：组件菜单（基础、高级、布局、辅助四类）
-- **Main**：画布区 + 属性面板
-- **Json**：代码预览（JsonSchema、Vue 代码）
-
-**历史记录机制**：
+**核心API**:
 
 ```typescript
-// 防抖避免拖拽时多次触发
-const recordHistory = debounce(async (schema: FormSchema) => {
-  if (historyIndex.value < history.value.length - 1) {
-    // 截断后续历史
-    history.value = history.value.slice(0, historyIndex.value + 1)
-  }
-  history.value.push(cloneDeep(schema))
-  historyIndex.value = history.value.length - 1
-}, 100)
-
-// 撤销
-const handleHistoryBack = () => {
-  if (historyIndex.value > -1) {
-    historyIndex.value--
-    const newSchema = history.value[historyIndex.value] || initJsonSchema
-    setSchema(cloneDeep(newSchema))
-  }
+interface FormInstance {
+  getValues: () => Record<string, any>
+  setValues: (values: Record<string, any>) => void
+  getFieldValue: (path: string) => any
+  setFieldValue: (path: string, value: any) => void
+  validate: () => FormValidationResult
+  resetFields: (names?: string[]) => void
+  submit: () => void
+  updateSelectData: (key: string, value: Record<string, any>) => void
+  updateItemSchemaByPath: (name: string, path: string, value: any) => void
 }
 ```
 
-**重要约定**：外部修改 schema 应通过 `ref.updateSchema()` 而非直接修改 v-model，以确保历史记录正确。
+#### 3.1.2 FormDesign（表单设计器）
 
-### 2.2 FormItem（表单项组件）
+**职责**: 提供可视化表单设计界面，支持拖拽、配置、预览等功能。
 
-**位置**：`form-craft/src/components/FormItem.vue`
+**核心特性**:
 
-**职责**：
+- 左侧组件菜单（SideBar）
+- 中间画布区域（Main）
+- 右侧属性配置（Attr）
+- 历史记录管理（撤销/重做）
+- JSON/Vue代码预览
+- 全屏模式
 
-1. 渲染单个表单项
-2. 处理联动逻辑（linkages）
-3. 解析校验规则（rules）
-4. 支持弹窗展示复杂组件
+**关键代码位置**: `/src/components/FormDesign/index.vue`
 
-**核心逻辑**：
+**核心API**:
 
 ```typescript
-// 双向绑定字段值
-const value = computed({
-  get() {
-    return formInstance.getFieldValue(props.name)
-  },
-  set(val) {
-    formInstance.setFieldValue(props.name, val)
-  }
-})
-
-// 解析校验规则
-const computeRules = computed(() => {
-  const { rules, required } = props
-  const allRules = required
-    ? [{ type: 'required', message: '该字段是必填字段' }, ...(rules || [])]
-    : rules || []
-  return parseRules(allRules)
-})
-
-// 联动监听
-watch(value, (newVal, oldVal) => {
-  const linkages = props.linkages
-  if (!linkages || isEqual(newVal, oldVal) || formInstance.design) return
-
-  let temp = cloneDeep(formInstance.getValues())
-
-  linkages.forEach(({ target, value, path, customPath, condition, type }) => {
-    if (condition === false) return
-
-    if (type === 'attr') {
-      // 修改 schema 属性
-      const actualPath = path === 'custom' ? customPath : path
-      formInstance.updateItemSchemaByPath(target, actualPath, value)
-    } else if (type === 'data') {
-      // 修改数据
-      if (target.includes('.*.')) {
-        // FormList 批量处理
-        const [targetParse, listTarget] = target.split('.*.')
-        const list = getDataByPath(temp, targetParse)
-        if (Array.isArray(list)) {
-          temp = setDataByPath(
-            temp,
-            targetParse,
-            list.map((item) => ({ ...item, [listTarget]: value }))
-          )
-        }
-      } else {
-        temp = setDataByPath(temp, target, value)
-      }
-    }
-  })
-
-  if (!isEqual(temp, formInstance.getValues())) {
-    formInstance.setValues(temp)
-  }
-})
+interface DesignInstance {
+  getSchema: () => FormSchema
+  setSchema: (schema: FormSchema) => void
+  setCurrentKey: (key: string) => void
+  handleClear: () => void
+  handleHistoryBack: () => void
+  handleHistoryForward: () => void
+  addItem: (item: FormItemType) => void
+  recordHistory: (description?: string) => void
+}
 ```
+
+### 3.2 数据流架构
+
+```
+用户操作
+   ↓
+FormDesign (设计器)
+   ↓
+Schema (JSON配置)
+   ↓
+FormRender (渲染器)
+   ↓
+FormItem (表单项)
+   ↓
+Element Component (具体组件)
+```
+
+### 3.3 依赖注入系统
+
+使用 Vue 3 的 `provide/inject` 实现跨组件通信：
+
+```typescript
+// symbol.ts
+export const $globals = Symbol() // 全局配置
+export const $formInstance = Symbol() // 表单实例
+export const $designInstance = Symbol() // 设计器实例
+```
+
+**注入层级**:
+
+1. **App层**: 通过 `app.use()` 注入全局配置（elements、request、ai等）
+2. **FormRender层**: 注入表单实例，供所有子组件使用
+3. **FormDesign层**: 注入设计器实例，供设计器子组件使用
 
 ---
 
-## 三、JsonSchema 协议
+## 四、核心类型系统
 
-### 3.1 表单全局配置
+### 4.1 FormSchema（表单配置）
 
 ```typescript
-interface FormSchema {
-  labelWidth?: number // label 宽度，默认 150
-  labelAlign?: 'left' | 'top' | 'right' // 对齐方式，默认 'right'
-  labelSuffix?: string // label 后缀，默认 '-'
-  labelBold?: boolean // 是否加粗 label
-  size?: 'small' | 'default' | 'large' // 表单项大小
-  disabled?: boolean // 全局禁用
+type FormSchema = {
+  labelWidth?: number // label宽度
+  labelAlign?: 'top' | 'left' | 'right' // label对齐
+  labelSuffix?: string // label后缀
+  size?: 'default' | 'small' | 'large' // 组件尺寸
+  disabled?: boolean // 禁用整个表单
   hideRequiredAsterisk?: boolean // 隐藏必填星号
-  scrollToError?: boolean // 滚动到错误字段
-  submitBtn?: boolean // 显示提交按钮
-  resetBtn?: boolean // 显示重置按钮
+  labelBold?: boolean // label加粗
+  scrollToError?: boolean // 滚动到错误项
   initialValues?: Record<string, any> // 初始值
-  items?: FormItemType[] // 表单项数组
+  items?: FormItemType[] // 表单项列表
+  submitBtn?: boolean // 提交按钮
+  resetBtn?: boolean // 重置按钮
 }
 ```
 
-### 3.2 表单项配置
+### 4.2 FormItemType（表单项配置）
 
 ```typescript
 interface FormItemType {
-  label?: string // 标签文本
-  name: string // 字段名（必填，唯一标识）
-  component: string // 组件类型（如 'Input'、'Select'）
-  props?: Record<string, any> // 组件 props（透传给 Element Plus）
+  label?: string // 标签
+  labelWidth?: number // 标签宽度
+  labelAlign?: 'top' | 'left' | 'right'
+  size?: 'default' | 'small' | 'large'
+  name: string // 字段标识（必填）
+  component: string // 组件类型（必填）
   required?: boolean // 是否必填
+  props?: Record<string, any> // 组件属性
   initialValue?: any // 初始值
-  help?: string // 提示信息
-  hidden?: boolean | string // 是否隐藏（支持表达式）
-  hideLabel?: boolean // 是否隐藏标签
+  help?: string // 气泡提示
+  children?: FormItemType[] // 子项（布局组件用）
+  hidden?: boolean | string // 隐藏（支持表达式）
+  hideLabel?: boolean // 隐藏标签
+  designKey?: string // 设计器唯一标识
   rules?: FormRules // 校验规则
-  children?: FormItemType[] // 子表单项（用于布局组件）
-  linkages?: FormLinkage[] // 联动配置
-  designKey?: string // 设计器标识（自动生成）
-  dialog?: boolean // 是否弹窗展示
-  labelWidth?: number // 单独设置 label 宽度
-  labelAlign?: 'top' | 'left' | 'right' // 单独设置对齐方式
-  class?: any // 自定义类名
-  style?: any // 自定义样式
+  linkages?: FormLinkage[] // 联动规则
+  dialog?: boolean // 弹窗展示
+  width?: number // 宽度
+  class?: any // CSS类名
+  style?: any // 内联样式
 }
 ```
 
-### 3.3 示例
+### 4.3 FormElement（组件元素定义）
 
-```json
+```typescript
+type FormElement = {
+  title: string // 组件标题
+  component: string // 组件名称
+  render: Component // 渲染组件
+  icon: VNode | Component // 图标
+  type: 'assist' | 'layout' | 'basic' | 'high' // 组件类型
+  order: number // 排序
+  modelName?: string // v-model绑定名（默认modelValue）
+  attrSchema: FormSchema // 属性配置表单
+}
+```
+
+**组件类型说明**:
+
+- **basic**: 基础组件（Input、Select等）
+- **high**: 高级组件（FormList、Upload等）
+- **layout**: 布局组件（Grid、Tabs等）
+- **assist**: 辅助组件（Title、Divider等）
+
+---
+
+## 五、核心功能实现
+
+### 5.1 模板解析引擎（deepParse）
+
+**位置**: `/src/utils/deepParse.ts`
+
+**功能**: 将 `{{ }}` 包裹的JS表达式转换为实际值，支持访问上下文变量。
+
+**核心机制**:
+
+```typescript
+// 模板语法
+'{{ $values.username }}' // 访问表单值
+"{{ $item.type === 'min' }}" // 条件判断
+'{{ $selectData.city }}' // 访问选择器数据
+"{{ $instance.getFieldValue('age') }}" // 调用实例方法
+```
+
+**上下文变量**:
+
+- `$values`: 表单所有值
+- `$selectData`: 选择器组件的源数据
+- `$instance`: 表单实例API
+- `$item`: FormList中当前行数据
+- `$index`: FormList中当前行索引
+- 用户自定义的 `schemaContext`
+
+**性能优化**:
+
+- Function实例缓存（避免重复创建）
+- 缓存大小限制（最多500个）
+- 支持函数返回值自动包装
+
+### 5.2 表单校验系统
+
+**位置**: `/src/utils/parseRules.ts`
+
+**支持的校验类型**:
+
+1. **required**: 必填校验
+2. **min/max**: 最小/最大长度
+3. **pattern**: 正则表达式
+4. **builtin**: async-validator内置类型（email、url等）
+5. **enum**: 枚举值校验
+6. **custom**: 自定义函数校验
+7. **jsExpr**: JS表达式校验（支持模板语法）
+
+**校验规则配置**:
+
+```typescript
+type RuleItem = {
+  type: RuleType
+  value?: any // 校验值
+  message?: string // 错误提示
+  trigger?: 'blur' | 'change' // 触发时机
+}
+```
+
+**示例**:
+
+```javascript
 {
-  "labelWidth": 150,
-  "labelAlign": "right",
-  "size": "default",
-  "items": [
-    {
-      "label": "用户名",
-      "component": "Input",
-      "name": "username",
-      "required": true,
-      "props": {
-        "placeholder": "请输入用户名",
-        "maxlength": 20
-      },
-      "designKey": "design-a29l"
-    },
-    {
-      "label": "密码",
-      "component": "Password",
-      "name": "password",
-      "required": true,
-      "props": {
-        "placeholder": "请输入密码",
-        "showPassword": true
-      },
-      "rules": [
-        {
-          "type": "min",
-          "value": 8,
-          "message": "密码至少8位"
-        }
-      ],
-      "designKey": "design-t10l"
-    }
+  rules: [
+    { type: 'required', message: '该字段是必填字段' },
+    { type: 'min', value: 6, message: '最少6个字符' },
+    { type: 'pattern', value: '^[0-9]+$', message: '只能输入数字' }
   ]
 }
 ```
 
----
+### 5.3 表单联动系统
 
-## 四、表单元素系统
+**位置**: `/src/components/FormItem.vue` (watch linkages)
 
-### 4.1 元素定义规范
+**联动类型**:
 
-每个表单元素都遵循统一的定义格式：
+1. **attr联动**: 修改目标字段的Schema属性
+2. **data联动**: 修改目标字段的值
 
-```typescript
-// elements/Input/index.ts
-export default {
-  title: '单行文本',              // 显示名称
-  component: 'Input',             // 组件标识
-  icon: h(Icon, { name: 'input' }), // 图标
-  type: 'basic',                  // 类型：basic/high/layout/assist
-  order: 1,                       // 排序
-  render: Input,                  // 渲染组件
-  modelName: 'modelValue',        // v-model 绑定的 prop 名
-  attrSchema: {...}               // 属性配置 schema
-} satisfies FormElement
-```
-
-### 4.2 37 个内置元素分类
-
-#### 基础组件（basic）- 16 个
-
-- **Input**：单行文本
-- **TextArea**：多行文本
-- **Password**：密码输入
-- **InputNumber**：数字输入
-- **Select**：下拉选择
-- **Radio**：单选框
-- **Checkbox**：多选框
-- **Switch**：开关
-- **Rate**：评分
-- **Slider**：滑块
-- **DatePicker**：日期选择
-- **ColorPicker**：颜色选择
-- **Cascader**：级联选择
-- **Autocomplete**：自动补全
-- **SelectInput**：可输入下拉框
-- **VerifyCode**：验证码输入
-
-#### 高级组件（high）- 4 个
-
-- **FormList**：自增列表（支持 table/card/inline 三种模式）
-- **Upload**：文件上传
-- **Esign**：电子签名
-- **Markdown**：Markdown 编辑器
-
-#### 布局组件（layout）- 8 个
-
-- **Grid**：栅格布局
-- **Inline**：行内布局
-- **Card**：卡片容器
-- **Tabs**：标签页容器
-- **TabPane**：标签页项
-- **Collapse**：折叠面板
-- **CollapseItem**：折叠面板项
-- **ObjGroup**：对象分组
-
-#### 辅助组件（assist）- 9 个
-
-- **Divider**：分割线
-- **Title**：标题
-- **Text**：文本
-- **Alert**：提示框
-- **Tag**：标签
-- **Custom**：自定义组件
-- **JsonEdit**：JSON 编辑器
-- **ColorInput**：颜色输入（带透明度）
-
-### 4.3 元素注册流程
+**联动配置**:
 
 ```typescript
-// 1. 定义元素（elements/Input/index.ts）
-export default {
-  title: '单行文本',
-  component: 'Input',
-  render: Input,
-  attrSchema: {...}
-} satisfies FormElement
-
-// 2. 导出（elements/index.ts）
-export { default as Input } from './Input'
-
-// 3. 安装时注册（install.ts）
-app.provide($globals, {
-  elements: {
-    ...elements,
-    ...options.extendElements  // 支持扩展自定义元素
-  }
-})
-
-// 4. 使用（FormItem.vue）
-const elements = useElements()
-const config = computed(() => elements[props.component])
-```
-
-### 4.4 自定义元素扩展
-
-```typescript
-// 定义自定义元素
-const MyCustomElement: FormElement = {
-  title: '我的组件',
-  component: 'MyCustom',
-  icon: h(Icon, { name: 'custom' }),
-  type: 'basic',
-  order: 100,
-  render: MyCustomComponent,
-  modelName: 'modelValue',
-  attrSchema: {
-    labelWidth: 150,
-    items: [
-      {
-        label: '配置项',
-        name: 'props.someConfig',
-        component: 'Input'
-      }
-    ]
-  }
-}
-
-// 注册时扩展
-app.use(VueFormCraft, {
-  extendElements: {
-    MyCustom: MyCustomElement
-  }
-})
-```
-
----
-
-## 五、联动系统
-
-### 5.1 JS 表达式联动
-
-**语法**：`{{ JS表达式 }}`
-
-**适用场景**：动态计算属性值（hidden、disabled、placeholder、help 等）
-
-**上下文变量**：
-
-- `$values`：表单数据对象
-- `$selectData`：下拉框选中的完整数据对象
-- `$instance`：表单实例 API（可调用 getValues、setFieldValue、validate 等方法）
-- `$locale`：国际化语言
-- `$item`：FormList 当前项数据
-- `$index`：FormList 当前索引
-
-**示例 1：动态显示/隐藏**
-
-```json
-{
-  "label": "简介",
-  "component": "TextArea",
-  "name": "desc",
-  "hidden": "{{ $values.type !== 'person' }}",
-  "props": {
-    "placeholder": "{{ $values.name ? $values.name + '的简介' : '请输入简介' }}"
-  }
-}
-```
-
-**示例 2：动态禁用**
-
-```json
-{
-  "label": "确认按钮",
-  "component": "Switch",
-  "name": "confirm",
-  "props": {
-    "disabled": "{{ !$values.agree }}"
-  }
-}
-```
-
-**实现原理**：
-
-```typescript
-// utils/deepParse.ts
-const templateParse = (str: string, context: Record<string, any>) => {
-  const template = str.match(/{{(.+?)}}/)
-  if (template) {
-    try {
-      // 使用 Function 构造器动态执行表达式
-      const parse = new Function(Object.keys(context).join(','), 'return ' + template[1])
-      return parse(...Object.values(context))
-    } catch (e) {
-      return str
-    }
-  }
-  return str
-}
-
-// 递归解析整个 schema
-const deepParse = (prop: any, context: Record<string, any>): any => {
-  if (isString(prop)) return templateParse(prop, context)
-  if (isPlainObject(prop)) {
-    return Object.keys(prop).reduce(
-      (all, key) => ({
-        ...all,
-        [key]: deepParse(prop[key], context)
-      }),
-      {}
-    )
-  }
-  if (isArray(prop)) return prop.map((item) => deepParse(item, context))
-  return prop
-}
-```
-
-### 5.2 数据联动（linkages）
-
-**适用场景**：字段值变化时修改其他字段的值或属性
-
-**格式**：
-
-```typescript
-interface FormLinkage {
-  target: string // 目标字段的 name
+type FormLinkage = {
+  target: string // 目标字段name
   condition?: any // 触发条件（支持表达式）
-  type: 'attr' | 'data' // 联动类型
-  value?: any // 修改的值（支持表达式）
-  path?: string // 属性路径（type='attr' 时使用）
+  type: 'attr' | 'data'
+  value?: any // 联动值（支持表达式）
+  path?: string // 属性路径（attr联动用）
   customPath?: string // 自定义路径
 }
 ```
 
-**示例 1：数据联动（基础）**
+**特殊语法**:
 
-```json
+- `users.*.password`: FormList批量联动（所有行）
+- `users.[].password`: FormList行内联动（当前行）
+
+**示例**:
+
+```javascript
+linkages: [
+  {
+    target: 'password',
+    type: 'attr',
+    path: 'hidden',
+    value: '{{ $values.userType !== "admin" }}',
+    condition: true
+  }
+]
+```
+
+### 5.4 路径操作系统
+
+**核心工具**:
+
+- `getDataByPath(data, path)`: 根据路径获取值
+- `setDataByPath(data, path, value)`: 根据路径设置值
+
+**支持的路径格式**:
+
+```javascript
+'username' // 简单属性
+'user.name' // 嵌套对象
+'users.0.name' // 数组索引
+'company.address.city' // 深层嵌套
+```
+
+**位置**: `/src/utils/getDataByPath.ts`, `/src/utils/setDataByPath.ts`
+
+### 5.5 自增组件（FormList）
+
+**位置**: `/src/elements/FormList/FormList.vue`
+
+**功能**: 收集数组类型数据，支持动态增删行。
+
+**三种展示模式**:
+
+1. **table**: 表格模式
+2. **card**: 卡片模式
+3. **inline**: 行内模式
+
+**核心特性**:
+
+- 支持最小/最大行数限制
+- 支持行内联动（`.[].`语法）
+- 支持批量联动（`.*.`语法）
+- 动态解析每行的字段配置（parseFields）
+- 提供 `$item` 和 `$index` 上下文
+
+**配置示例**:
+
+```javascript
 {
-  "label": "单价",
-  "name": "price",
-  "component": "InputNumber",
-  "linkages": [
-    {
-      "target": "total",
-      "type": "data",
-      "value": "{{ $values.price * $values.quantity }}"
-    }
+  component: 'FormList',
+  name: 'users',
+  props: {
+    mode: 'card',
+    title: '用户',
+    minLines: 1,
+    maxLines: 10,
+    allowAdd: true,
+    allowReduce: true
+  },
+  children: [
+    { label: '姓名', component: 'Input', name: 'name' },
+    { label: '年龄', component: 'InputNumber', name: 'age' }
   ]
 }
 ```
 
-**示例 2：属性联动**
+---
 
-```json
-{
-  "label": "是否启用",
-  "name": "enabled",
-  "component": "Switch",
-  "linkages": [
-    {
-      "target": "config",
-      "type": "attr",
-      "path": "hidden",
-      "value": "{{ !$values.enabled }}"
-    }
-  ]
-}
-```
+## 六、组件开发规范
 
-**示例 3：FormList 批量联动**
+### 6.1 组件注册规范
 
-```json
-{
-  "label": "全选",
-  "name": "selectAll",
-  "component": "Switch",
-  "linkages": [
-    {
-      "target": "list.*.checked",
-      "type": "data",
-      "value": "{{ $values.selectAll }}"
-    }
-  ]
-}
-```
-
-### 5.3 函数联动（事件系统）
-
-**适用场景**：通过事件处理器实现复杂的表单联动逻辑
-
-**实现原理**：
-
-1. 所有 `{{ }}` 包裹的内容都会被 `deepParse` 解析
-2. 如果解析结果是函数，会自动包装并传入 `params` 对象
-3. `params` 对象包含所有上下文变量和事件参数
-
-**函数参数说明**：
+每个表单组件需要导出一个 `FormElement` 对象：
 
 ```typescript
-interface Params {
-  $values: Record<string, any> // 表单数据对象
-  $selectData: Record<string, any> // 选择数据对象
-  $instance: FormInstance // 表单实例 API
-  $item?: any // 当前项数据（在列表/自增容器中）
-  $index?: number // 当前项索引（在列表/自增容器中）
-  args: any[] // 原始事件参数数组，如 [event]
-}
+// /src/elements/Input/index.ts
+export default {
+  title: '单行文本',
+  component: 'Input',
+  icon: h(Icon, { name: 'input' }),
+  type: 'basic',
+  order: 1,
+  attrSchema, // 属性配置表单
+  render: Input // 渲染组件
+} satisfies FormElement
 ```
 
-**支持的事件**：
+### 6.2 v-model封装规范
 
-- `onChange`：值改变时触发
-- `onBlur`：失去焦点时触发
-- `onFocus`：获得焦点时触发
-- `onInput`：输入时触发
-- `onClear`：点击清空按钮时触发
-- 以及其他 Element Plus 组件支持的事件
+**必须使用 Vue 3.4+ 的 `defineModel` API**:
 
-**示例 1：基础事件处理**
+#### 6.2.1 基本类型数据
 
-```json
-{
-  "label": "用户名",
-  "name": "username",
-  "component": "Input",
-  "props": {
-    "placeholder": "请输入用户名",
-    "onBlur": "{{ (params) => { console.log('失去焦点，当前值:', params.$values.username) } }}"
+对于基本类型（string、number、boolean等），可以直接使用：
+
+```vue
+<script setup>
+const modelValue = defineModel()
+</script>
+
+<template>
+  <el-input v-model="modelValue" />
+</template>
+```
+
+#### 6.2.2 对象类型数据（重要）
+
+**对于对象类型的v-model，不能直接修改对象属性，必须内部维护响应式对象并深度监听**。
+
+原因：直接修改`modelValue.xxx`不会触发父组件的响应式更新。
+
+**正确做法**（参考`StyleEditor.vue`）：
+
+```vue
+<script setup>
+import { reactive, watch } from 'vue';
+
+
+const modelValue = defineModel()
+
+// 内部维护响应式对象
+const styleForm = reactive<Record<string, any>>({})
+
+// 初始化：modelValue -> styleForm
+watch(
+  () => modelValue.value,
+  (newVal) => {
+    if (newVal) {
+      Object.assign(styleForm, newVal)
+    }
+  },
+  { immediate: true, deep: true }
+)
+
+// 深度监听styleForm变化，实时同步到modelValue
+watch(
+  styleForm,
+  (newVal) => {
+    modelValue.value = { ...newVal }  // 创建新对象，触发父组件更新
+  },
+  { deep: true }
+)
+</script>
+
+<template>
+  <!-- 绑定内部响应式对象 -->
+  <el-form :model="styleForm">
+    <el-input v-model="styleForm.width" />
+    <el-input v-model="styleForm.height" />
+  </el-form>
+</template>
+```
+
+**关键点**：
+
+- 内部使用`reactive`维护对象
+- 双向watch同步数据
+- 修改时创建新对象`{ ...newVal }`，确保父组件能监听到变化
+
+**禁止使用旧的 props + emit 方式**。
+
+### 6.3 命名空间规范
+
+**HTML中使用ns函数生成class**:
+
+```vue
+<template>
+  <div :class="ns('my-component')">
+    <div class="header">...</div>
+  </div>
+</template>
+
+<script setup>
+import { ns } from '@/utils'
+</script>
+```
+
+**SCSS中使用ns mixin**:
+
+```scss
+@import '@/style';
+
+@include ns('my-component') {
+  background: $bgColor;
+
+  .header {
+    color: $textColor1;
   }
 }
 ```
 
-**示例 2：访问事件对象**
+**生成的class**: `.vfc-my-component`
 
-```json
-{
-  "label": "手机号",
-  "name": "phone",
-  "component": "Input",
-  "props": {
-    "placeholder": "请输入手机号",
-    "maxlength": 11,
-    "onBlur": "{{ (params) => {
-      const event = params.args[0]
-      if (params.$values.phone?.length === 11) {
-        params.$instance.setFieldValue('verified', true)
-      }
-    } }}"
-  }
-}
+### 6.4 样式变量规范
+
+**禁止直接读取Element Plus变量**（如 `var(--el-color-primary)`）。
+
+**必须在 `/src/style.scss` 中定义变量**:
+
+```scss
+$themeColor: var(--el-color-primary, #409eff) !default;
+$bgColor: var(--el-bg-color, #fff) !default;
 ```
 
-**示例 3：函数联动 - 省市区联动**
+**可用的颜色变量**:
 
-```json
-{
-  "label": "省份",
-  "name": "province",
-  "component": "Select",
-  "props": {
-    "options": [],
-    "onChange": "{{ (params) => {
-      const value = params.args[0]
-      // 根据省份设置城市
-      if (value === '广东') {
-        params.$instance.setFieldValue('city', '广州')
-      } else if (value === '北京') {
-        params.$instance.setFieldValue('city', '北京')
-      }
-      // 清空区县
-      params.$instance.setFieldValue('district', '')
-      // 触发验证
-      params.$instance.validate()
-    } }}"
-  }
-}
-```
+- `$themeColor`: 主题色
+- `$lightThemeColor`: 浅主题色
+- `$dangerColor`: 危险色
+- `$bgColor`: 背景色
+- `$bgColor2`: 背景色2
+- `$bgColor3`: 背景色3
+- `$successColor`: 成功色
+- `$warningColor`: 警告色
+- `$borderColor`: 边框色
+- `$textColor1`: 主文本色
+- `$textColor3`: 次文本色
+- `$textColorSecondary`: 辅助文本色
 
-**示例 4：复杂的多行函数**
+### 6.5 属性配置表单（attrSchema）
 
-```json
-{
-  "label": "类型",
-  "name": "type",
-  "component": "Select",
-  "props": {
-    "options": [{"label": "个人", "value": "personal"}, {"label": "企业", "value": "company"}],
-    "onChange": "{{ (params) => {
-      const type = params.args[0]
-      if (type === 'company') {
-        params.$instance.setFieldValue('companyName', '')
-        params.$instance.setFieldValue('taxNumber', '')
-      } else {
-        params.$instance.setFieldValue('idCard', '')
-      }
-      params.$instance.validate()
-    } }}"
-  }
-}
-```
-
-**可用的 $instance 方法**：
-
-- `getValues()`：获取所有表单数据
-- `setValues(values)`：设置所有表单数据
-- `getFieldValue(path)`：获取指定字段值
-- `setFieldValue(path, value)`：设置指定字段值
-- `validate()`：触发表单校验
-- `resetFields()`：重置表单
-- `submit()`：提交表单
-- `updateSelectData(key, value)`：更新下拉框数据
-- `updateItemSchemaByPath(name, path, value)`：动态修改字段配置
-
-### 5.4 deepParse 实现原理
-
-**核心功能**：将 `{{ }}` 包裹的 JS 表达式或函数解析为实际值或可执行函数
-
-**关键代码**：
+**统一结构**（参考 `/src/elements/Input/inputAttrSchema.ts`）:
 
 ```typescript
-// utils/deepParse.ts
-const templateParse = (str: string, context: Record<string, any>) => {
-  // 使用 [\s\S] 匹配包括换行符在内的所有字符
-  const template = str.match(/\{\{([\s\S]+?)\}\}/)
-  if (template) {
-    try {
-      const parse = new Function(Object.keys(context).join(','), 'return ' + template[1])
-      const result = parse(...Object.values(context))
-
-      // 如果解析结果是函数，包装它，将 context 和原始参数合并后传入
-      if (typeof result === 'function') {
-        return (...args: any[]) => {
-          const mergedParams = { ...context, args }
-          return result(mergedParams)
+export default {
+  labelWidth: 110,
+  size: 'small',
+  labelAlign: 'left',
+  items: [
+    {
+      name: 'form-tabs',
+      component: 'Tabs',
+      children: [
+        {
+          label: '属性',
+          name: 'attrs',
+          component: 'TabPane',
+          children: [
+            { label: '标签', name: 'label', component: 'Input' },
+            { label: '字段标识', name: 'name', component: 'Input' },
+            { label: '占位提示', name: 'props.placeholder', component: 'Input' }
+          ]
+        },
+        {
+          label: '校验',
+          name: 'rules',
+          component: 'TabPane',
+          children: [
+            /* 校验规则配置 */
+          ]
+        },
+        {
+          label: '联动',
+          name: 'linkages',
+          component: 'TabPane',
+          children: [
+            /* 联动规则配置 */
+          ]
+        },
+        {
+          label: '布局',
+          name: 'layout',
+          component: 'TabPane',
+          children: [
+            /* 布局配置 */
+          ]
+        },
+        {
+          label: '事件',
+          name: 'events',
+          component: 'TabPane',
+          children: [
+            /* 事件配置 */
+          ]
         }
-      }
-
-      return result
-    } catch (e) {
-      return str
+      ]
     }
-  }
-  return str
-}
-
-// 递归解析整个 schema
-const deepParse = (prop: any, context: Record<string, any>): any => {
-  if (isString(prop)) return templateParse(prop, context)
-  if (isPlainObject(prop)) {
-    return Object.keys(prop).reduce(
-      (all, key) => ({
-        ...all,
-        [key]: deepParse(prop[key], context)
-      }),
-      {}
-    )
-  }
-  if (isArray(prop)) return prop.map((item) => deepParse(item, context))
-  return prop
-}
+  ]
+} satisfies FormSchema
 ```
 
-**工作流程**：
+**标准Tab结构**: 属性 → 校验 → 联动 → 布局 → 事件 → 样式
 
-1. **表达式解析**：`{{ $values.age > 18 }}` → `true/false`
-2. **函数解析**：`{{ (params) => params.$values.name }}` → 包装后的函数
-3. **函数调用**：事件触发时，自动传入 `{ ...context, args: [event] }`
+---
 
-### 5.5 FunctionEditor 组件
+## 七、扩展机制
 
-**位置**：`form-craft/src/elements/FunctionEditor/Component.vue`
+### 7.1 扩展可拖拽组件
 
-**功能**：可视化编辑事件处理器函数，提供 Monaco Editor 智能提示
+可参考现有组件实现，如 `/src/elements/Input/`。
 
-**特性**：
+**步骤**:
 
-- ✅ 自动添加/移除 JSDoc 类型注释
-- ✅ 完整的 TypeScript 智能提示
-- ✅ 支持多行函数编辑
-- ✅ 自动格式化代码
+1. **定义组件**:
 
-**使用流程**：
+```vue
+<!-- MyCustom.vue -->
+<template>
+  <div>{{ modelValue }}</div>
+</template>
 
-1. **打开编辑器**：自动添加 JSDoc 注释
+<script setup lang="ts">
+const modelValue = defineModel()
+</script>
+```
 
-   ```javascript
-   /**@param {Params} params*/
-   ;(params) => {}
-   ```
-
-2. **编辑时**：输入 `params.` 获得智能提示（$values、$instance 等）
-
-3. **保存时**：自动移除 JSDoc 注释，保存为
-   ```json
-   "{{ (params) => { ... } }}"
-   ```
-
-**类型定义**：
+2. **定义FormElement**:
 
 ```typescript
-interface Params {
-  $values: Record<string, any>
-  $selectData: Record<string, any>
-  $instance: {
-    getValues(): Record<string, any>
-    setFieldValue(path: string, value: any): void
-    validate(): Promise<any>
-    // ... 更多方法
+import { h } from 'vue'
+import MyCustom from './MyCustom.vue'
+
+export default {
+  title: '自定义组件',
+  component: 'MyCustom',
+  icon: h(Icon, { name: 'component' }),
+  type: 'basic',
+  order: 100,
+  attrSchema: { items: [] },
+  render: MyCustom
+} satisfies FormElement
+```
+
+3. **导出**:
+
+```typescript
+// elements/index.ts
+export { default as MyCustom } from './MyCustom'
+```
+
+### 7.2 内置自定义组件
+
+项目内置了一些特殊的自定义组件，位于 `/src/components/customComponents/`：
+
+#### 7.2.1 InitialValues（表单初始值编辑器）
+
+用于在设计器中编辑表单的初始值。
+
+**使用方式**:
+
+```typescript
+{
+  label: '表单初始值',
+  component: 'Custom',
+  name: 'initialValues',
+  props: {
+    componentName: 'FormDesign-InitialValues'
   }
-  $item?: any
-  $index?: number
-  args: any[]
 }
 ```
 
----
+#### 7.2.2 StyleEditor（样式编辑器）
 
-## 六、校验系统
+以表单的形式编辑CSS样式，生成style对象。支持布局、边距、边框、背景、文字、Flex等常用样式属性。
 
-### 6.1 8 种校验类型
+**核心特性**:
 
-**1. required** - 必填校验  
-**2. min/max** - 长度校验  
-**3. pattern** - 正则校验  
-**4. builtin** - 内置类型（email、url、date 等）  
-**5. enum** - 枚举值  
-**6. custom** - 自定义函数  
-**7. jsExpr** - JS 表达式校验
+- 可视化编辑CSS样式
+- 支持60+常用样式属性
+- 自动过滤空值
+- 实时生成style对象
 
----
-
-## 七、核心工具函数
-
-### 7.1 数据路径操作
-
-**getDataByPath** - 支持 `'user.name'`、`'list[0].name'` 格式
-
-**setDataByPath** - 返回新对象，避免直接修改原对象
-
-### 7.2 设计器工具
-
-- `generateDesignKey()` - 生成唯一 designKey
-- `generateName()` - 生成字段名
-- `repirJsonSchema()` - 修复 schema
-- `copyItems()` - 复制表单项
-- `removeDesignKeys()` / `restoreDesignKeys()` - 导出/恢复 designKey
-
----
-
-## 八、依赖注入系统
-
-```
-App → provide $globals（全局配置、元素注册表）
-FormRender → provide $formInstance（表单实例 API）
-FormDesign → provide $designInstance（设计器实例）
-```
-
----
-
-## 九、FormList（自增组件）
-
-### 9.1 三种模式
-
-- **table**：表格模式（默认）
-- **card**：卡片模式
-- **inline**：行内模式
-
-### 9.2 上下文变量
-
-- `$item`：当前行数据
-- `$index`：当前行索引
-
-### 9.3 批量联动
-
-使用 `list.*.checked` 语法实现批量操作
-
----
-
-## 十、最佳实践
-
-### 10.1 性能优化
-
-#### 已实施的性能优化（2025-11-10）
-
-**1. FormItem 联动优化**
-
-- 缓存 `formValues` 引用，避免在联动中重复调用 `getValues()`
-- 提前判断 `linkages.length === 0`，减少不必要的计算
-- 优化 `isEqual` 判断位置，先判断再执行
-
-**2. deepParse 缓存机制**
-
-- 使用 `Map` 缓存 Function 实例（最多500个），避免重复创建
-- 使用 `for...in` 替代 `reduce`，减少对象创建开销
-- 使用传统 `for` 循环替代 `map`，提升数组遍历性能
-
-**3. FormRender computed 优化**
-
-- 移除 schema watch 的 `deep: true`，只监听引用变化
-- 添加注释说明 deepParse 已有缓存机制
-
-**4. 路径解析缓存**
-
-- 抽离 `parsePath` 为独立工具函数（`utils/parsePath.ts`）
-- `getDataByPath` 和 `setDataByPath` 共享同一个路径解析缓存（最多200个）
-- 使用 LRU 策略清除最早的缓存项
-- 避免了重复代码，提高了缓存命中率
-
-**5. FormItem config computed 优化**
-
-- 避免直接修改 elements 对象，使用只读方式返回
-
-#### 性能优化建议
-
-1. 避免深层嵌套（控制在 3 层以内）
-2. 大数据量时使用 table 模式
-3. 避免表达式中的复杂计算
-4. 合理使用 `immediate: true`，避免不必要的初始触发
-5. 大型表单建议分页或分步骤展示
-
-### 10.2 联动设计
-
-1. **JS 表达式**：用于属性计算
-2. **数据联动**：用于字段值修改
-3. **避免循环联动**
-
-### 10.3 历史记录管理
-
-**重要**：外部修改 schema 应使用 `updateSchema` 方法：
+**使用方式**:
 
 ```typescript
-// ❌ 错误：直接修改 v-model（不会记录历史）
-formSchema.value = newSchema
-
-// ✅ 正确：通过 ref 调用 updateSchema
-formDesignRef.value.updateSchema(newSchema)
-```
-
----
-
-## 十一、API 参考
-
-### FormRender Props
-
-- `schema: FormSchema` - 表单配置
-- `schemaContext?: Record` - 自定义上下文
-- `design?: boolean` - 设计模式
-- `read?: boolean` - 只读模式
-
-### FormRender Methods
-
-- `getValues()` / `setValues()`
-- `getFieldValue(path)` / `setFieldValue(path, value)`
-- `validate()` / `resetFields()` / `submit()`
-- `updateSelectData()` / `updateItemSchemaByPath()`
-
-### FormDesign Methods
-
-- `getSchema()` / `setSchema()` / `applySchema()`
-- `setCurrentKey()` / `getNodeByKey()` / `updateNodeByKey()`
-- `handleHistoryBack()` / `handleHistoryForward()` / `handleClear()`
-
----
-
-## 十二、常见问题
-
-### 12.1 表单数据不更新
-
-**解决**：使用 `setFieldValue` 而非直接修改
-
-### 12.2 联动不生效
-
-**检查**：表达式语法、字段 name、是否在设计模式、linkages type
-
-### 12.3 校验不触发
-
-**检查**：name 属性、规则格式、是否调用 validate()
-
----
-
-## 总结
-
-Vue Form Craft 通过 **JsonSchema 驱动** + **双向数据绑定** + **依赖注入** 实现高度灵活的低代码表单解决方案。
-
-**核心优势**：
-
-1. 配置即代码（可序列化、可版本控制）
-2. 强大联动（JS 表达式 + 数据联动 + 事件系统）
-3. 高扩展性（37+ 组件 + 自定义支持）
-4. 完善校验（8 种类型）
-5. 灵活事件（通过 $instance 可调用所有表单 API）
-6. 优秀开发体验（TypeScript + 完善 API）
-
-**适用场景**：后台管理系统、动态表单、问卷调查、数据采集、审批流程
-
----
-
-## 十三、AI 功能集成
-
-### 13.1 AI 功能概述
-
-Vue Form Craft 支持在多处注入 AI 能力，包括：
-
-1. **AI 对话生成表单**（已实现）：通过自然语言对话生成或修改表单
-2. **输入框 AI 生成文本**（规划中）：在文本输入框中使用 AI 辅助填写
-3. **AI 生成校验规则**（规划中）：根据字段描述自动生成校验规则
-
-### 13.2 AI 接口注入方式
-
-AI 功能采用**用户全局注入**的设计，组件内部不实现具体的 AI 接口调用，而是由用户在 `app.use` 时注入自定义的 AI 函数。
-
-#### 类型定义
-
-```typescript
-// AI 生成参数
-export type AiGenerateParams = {
-  prompt: string // 提示词
-  context?: Record<string, any> // 上下文数据（如当前表单 schema）
-  signal?: AbortSignal // 取消信号
-}
-
-// AI 接口函数类型
-export type AiGenerateFunction = (params: AiGenerateParams) => Promise<any>
-
-// 安装选项
-export type Options = {
-  ai?: AiGenerateFunction // AI 生成函数
-  // ... 其他配置
-}
-```
-
-#### 基本使用
-
-```typescript
-import { createApp } from 'vue'
-import VueFormCraft from 'vue-form-craft'
-import App from './App.vue'
-
-const app = createApp(App)
-
-// 注入自定义 AI 函数
-app.use(VueFormCraft, {
-  ai: async ({ prompt, context, signal }) => {
-    // 调用你的 AI 服务
-    const response = await fetch('https://your-ai-api.com/generate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ prompt, context }),
-      signal
-    })
-
-    const result = await response.json()
-    return result.data
+{
+  label: '自定义样式',
+  component: 'Custom',
+  name: 'style',
+  props: {
+    componentName: 'FormDesign-StyleEditor'
   }
+}
+```
+
+**支持的样式类别**:
+
+- 布局：width、height、min/max尺寸
+- 外边距：margin系列
+- 内边距：padding系列
+- 边框：border系列、borderRadius
+- 背景：background系列
+- 文字：font系列、color、textAlign等
+- 显示：display、position、opacity等
+- Flex：flexDirection、justifyContent、alignItems等
+- 其他：cursor、boxShadow、transition、transform
+
+**文件位置**: `/src/components/customComponents/StyleEditor.vue`
+
+#### 7.2.3 注册自定义组件
+
+在 `/src/components/customComponents/index.ts` 中注册：
+
+```typescript
+import InitialValues from './InitialValues.vue'
+import StyleEditor from './StyleEditor.vue'
+
+export default (app: any) => {
+  app.component('FormDesign-InitialValues', InitialValues)
+  app.component('FormDesign-StyleEditor', StyleEditor)
+}
+```
+
+## 八、性能优化策略
+
+### 8.1 模板解析缓存
+
+- Function实例缓存（deepParse）
+- 缓存大小限制500个
+- LRU淘汰策略
+
+### 8.2 响应式优化
+
+- 使用 `readonly()` 包装实例，避免不必要的响应式
+- 使用 `computed` 缓存计算结果
+- 避免深层响应式（必要时使用shallowRef）
+
+### 8.3 组件懒加载
+
+```typescript
+render: defineAsyncComponent(() => import('./FormList.vue'))
+```
+
+### 8.4 防抖节流
+
+- 历史记录防抖（700ms）
+- 远程搜索防抖（300ms）
+
+---
+
+## 九、开发注意事项
+
+### 9.1 修改范围
+
+**主要修改目录**: `/form-craft/src`
+
+**核心文件**:
+
+- `/src/components/FormRender/index.vue`: 渲染器核心
+- `/src/components/FormDesign/index.vue`: 设计器核心
+- `/src/components/FormItem.vue`: 表单项核心
+- `/src/elements/`: 组件定义
+- `/src/utils/`: 工具函数
+
+### 9.2 架构变更同步
+
+**重要**: 如果进行了组件架构或核心功能的改动，必须同步更新本文档（AI_ARCHITECTURE.md）。
+
+### 9.3 类型安全
+
+- 所有组件导出必须使用 `satisfies FormElement`
+- 所有Schema必须使用 `satisfies FormSchema`
+- 充分利用TypeScript类型推导
+
+### 9.4 测试规范
+
+- 工具函数必须有单元测试（`/src/utils/_test_/`）
+- 复杂逻辑必须有测试覆盖
+
+---
+
+## 十、常见开发场景
+
+### 10.1 新增表单组件
+
+1. 在 `/src/elements/` 创建组件目录
+2. 创建组件Vue文件
+3. 创建 `index.ts` 导出FormElement
+4. 创建 `attrSchema.ts` 定义属性配置
+5. 在 `/src/elements/index.ts` 导出
+
+### 10.2 修改联动逻辑
+
+**位置**: `/src/components/FormItem.vue` 的 watch(value) 部分
+
+**注意**:
+
+- 区分 `attr` 和 `data` 联动
+- 处理 `.*.` 和 `.[]` 特殊语法
+- 避免无限循环（使用isEqual判断）
+
+### 10.3 扩展校验规则
+
+**位置**: `/src/utils/parseRules.ts`
+
+在 switch 中添加新的 case 分支。
+
+### 10.4 修改模板解析
+
+**位置**: `/src/utils/deepParse.ts`
+
+**注意**: 修改缓存策略需要考虑内存泄漏问题。
+
+---
+
+## 十一、调试技巧
+
+### 11.1 查看表单实例
+
+```javascript
+// 在组件中
+const formInstance = useFormInstance()
+console.log(formInstance.getValues())
+```
+
+### 11.2 查看设计器实例
+
+```javascript
+const designInstance = useDesignInstance()
+console.log(designInstance.getSchema())
+```
+
+### 11.3 查看解析后的Schema
+
+```javascript
+// FormRender中
+const formItems = computed(() => {
+  return deepParse(props.schema.items || [], context.value)
 })
-
-app.mount('#app')
+console.log(formItems.value)
 ```
 
-### 13.3 AI 辅助工具类
+### 11.4 调试联动
 
-组件内部使用 `AiHelper` 工具类来调用注入的 AI 函数：
+在 `/src/components/FormItem.vue` 的 watch 中添加 console.log。
+
+---
+
+## 十二、未来规划
+
+### 12.1 进行中的任务
+
+1. **重构输入类组件配置表单**: 统一支持属性、校验、联动、布局、事件
+2. **自增组件联动教程文档**
+3. **可视化配置JS表达式联动**
+4. **AI能力增强**:
+   - AI生成文本
+   - AI生成校验规则
+   - AI接口改为用户全局注入
+
+### 12.2 技术债务
+
+- 多UI库适配（Arco Design等）
+- 事件系统完善
+- 性能监控和优化
+
+---
+
+## 十三、关键API速查
+
+### 13.1 FormRender Props
 
 ```typescript
-import { createAiHelper } from 'vue-form-craft'
-
-// 创建 AI 辅助实例
-const aiHelper = createAiHelper(aiFunction)
-
-// 检查 AI 功能是否可用
-if (aiHelper.isAvailable()) {
-  // 生成表单 Schema
-  const schema = await aiHelper.generateFormSchema(
-    '添加一个用户注册表单',
-    currentSchema,
-    abortSignal
-  )
-
-  // 生成文本内容
-  const text = await aiHelper.generateText('生成一段产品介绍')
-
-  // 生成校验规则
-  const rule = await aiHelper.generateValidationRule('email', 'Input', '必须是有效的邮箱地址')
+{
+  schema: FormSchema           // 表单配置（必填）
+  schemaContext?: Record       // 上下文数据
+  design?: boolean             // 设计模式
+  read?: boolean               // 只读模式
 }
 ```
 
-### 13.4 AI 实现示例
-
-项目提供了多个 AI 接口实现示例（位于 `utils/aiExamples.ts`）：
-
-#### 示例 1：使用 Coze AI
+### 13.2 FormDesign Props
 
 ```typescript
-import { createCozeAiFunction } from 'vue-form-craft/utils/aiExamples'
-
-app.use(VueFormCraft, {
-  ai: createCozeAiFunction({
-    token: 'your-coze-token',
-    botId: '7546913648569729039'
-  })
-})
+{
+  schemaContext?: Record       // 上下文数据
+  templates?: TemplateData     // 模板数据
+  omitMenus?: string[]         // 隐藏的菜单
+}
 ```
 
-#### 示例 2：使用 OpenAI
+### 13.3 Hooks
 
 ```typescript
-import { createOpenAiFunction } from 'vue-form-craft/utils/aiExamples'
-
-app.use(VueFormCraft, {
-  ai: createOpenAiFunction({
-    apiKey: 'your-openai-key',
-    model: 'gpt-4'
-  })
-})
+useFormInstance() // 获取表单实例
+useDesignInstance() // 获取设计器实例
+useElements() // 获取所有组件配置
+useGlobals() // 获取全局配置
+useSelect(props) // 选择器逻辑
+useChildrenModel(props) // 子组件模型
 ```
 
-#### 示例 3：自定义实现
+---
 
-```typescript
-app.use(VueFormCraft, {
-  ai: async ({ prompt, context, signal }) => {
-    // 调用你自己的后端 API
-    const response = await fetch('/api/ai/generate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ prompt, currentSchema: context }),
-      signal
-    })
+## 十四、总结
 
-    if (!response.ok) {
-      throw new Error('AI 生成失败')
-    }
+Vue Form Craft 是一个功能完善、架构清晰的低代码表单解决方案。核心设计理念：
 
-    const result = await response.json()
-    return result.schema
-  }
-})
-```
+1. **双核心**: FormDesign + FormRender 分离
+2. **配置驱动**: 一切皆配置（JSON Schema）
+3. **高扩展性**: 支持自定义组件、多UI库
+4. **类型安全**: 完善的TypeScript支持
+5. **性能优先**: 缓存、懒加载、防抖等优化
+6. **开发友好**: 清晰的规范和工具函数
 
-### 13.5 AI 功能在设计器中的使用
+**开发建议**:
 
-在 FormDesign 组件中，用户可以通过 AI 对话来生成或修改表单：
-
-1. **打开 AI 面板**：点击设计器右侧的 AI 图标
-2. **输入需求**：描述你想要的表单，例如：
-   - "添加一个用户注册表单，包含用户名、邮箱、密码"
-   - "给现有表单添加一个地址选择功能"
-   - "修改密码字段，要求至少 8 位，包含数字和字母"
-3. **AI 生成**：AI 会基于当前表单和你的需求生成新的表单配置
-4. **应用结果**：生成的表单会自动应用到设计器中
-
-### 13.6 错误处理
-
-```typescript
-app.use(VueFormCraft, {
-  ai: async ({ prompt, context, signal }) => {
-    try {
-      // 检查是否取消
-      if (signal?.aborted) {
-        throw new Error('已取消生成')
-      }
-
-      // 调用 AI 服务
-      const result = await yourAiService(prompt, context)
-
-      return result
-    } catch (error: any) {
-      // 处理取消操作
-      if (error.name === 'AbortError') {
-        throw new Error('已取消生成')
-      }
-
-      // 处理其他错误
-      console.error('AI 生成错误:', error)
-      throw new Error(`AI 生成失败: ${error.message}`)
-    }
-  }
-})
-```
-
-### 13.7 最佳实践
-
-1. **支持取消操作**：使用 `AbortSignal` 支持用户取消长时间的 AI 生成
-2. **错误提示友好**：捕获错误并返回用户友好的提示信息
-3. **上下文传递**：充分利用 `context` 参数传递当前表单状态，让 AI 生成更准确
-4. **结果校验**：对 AI 返回的结果进行校验，确保符合 FormSchema 格式
-5. **超时控制**：设置合理的超时时间，避免用户长时间等待
-6. **安全性**：不要在前端暴露 API Key，建议通过后端代理调用 AI 服务
-
-### 13.8 未来规划
-
-- **输入框 AI 辅助**：在文本输入框中集成 AI 补全功能
-- **校验规则生成**：根据字段描述自动生成合适的校验规则
-- **表单优化建议**：AI 分析表单结构并提供优化建议
-- **多语言支持**：AI 自动翻译表单标签和提示文本
+- 遵循现有的代码规范和命名约定
+- 充分利用类型系统避免错误
+- 修改核心逻辑前先理解整体架构
+- 保持文档同步更新

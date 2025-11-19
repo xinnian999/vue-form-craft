@@ -271,10 +271,8 @@ watch(
     }
   }
 
-  &.hide-label {
-    .el-form-item__label {
-      display: none;
-    }
+  &.hide-label > .el-form-item__label {
+    display: none;
   }
 }
 

@@ -1,6 +1,6 @@
 <template>
   <div class="vfc-formList">
-    <CanvasGroup v-if="formInstance.design" v-model="fields" class="layoutRender" />
+    <CanvasGroup v-if="formInstance.design" :list="fields" class="layoutRender" />
 
     <div v-else>
       <template v-if="mode === 'inline'">

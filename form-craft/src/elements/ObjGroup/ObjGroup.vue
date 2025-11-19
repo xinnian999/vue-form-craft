@@ -1,6 +1,6 @@
 <template>
   <div class="vfc-ObjGroup">
-    <CanvasGroup v-if="formInstance.design" v-model="childrenModel" />
+    <CanvasGroup v-if="formInstance.design" :list="children" />
     <div v-else class="vfc-ObjGroup-render">
       <FormItem
         v-for="item in children"
@@ -15,13 +15,12 @@
 <script setup lang="ts">
 import { inject, provide, ref, type Ref } from 'vue'
 import { CanvasGroup, FormItem } from '@/components'
-import { useChildrenModel, useFormInstance } from '@/hooks'
+import { useFormInstance } from '@/hooks'
 import type { FormItemType } from '@/types'
 
 const props = defineProps<{
-  children?: FormItemType[]
+  children: FormItemType[]
   name: string
-  designKey?: string
 }>()
 
 const formInstance = useFormInstance()
@@ -30,8 +29,6 @@ const objGroupBase = inject<Ref<string>>('$objGroupBase')
 
 // 只初始化一次
 const base = objGroupBase ? `${objGroupBase.value}.${props.name}` : props.name
-
-const childrenModel = useChildrenModel(props)
 
 provide('$objGroupBase', ref(base))
 </script>

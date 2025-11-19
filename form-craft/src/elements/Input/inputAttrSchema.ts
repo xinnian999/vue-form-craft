@@ -1,4 +1,4 @@
-import type { FormSchema } from '@/types'
+import type { FormSchema } from 'form-craft'
 
 export default {
   labelWidth: 110,
@@ -669,22 +669,14 @@ export default {
           designKey: 'tab-6',
           children: [
             {
-              label: '宽度',
-              name: 'props.style.width',
-              component: 'Input',
+              label: '',
+              name: 'props.style',
+              component: 'Custom',
               props: {
-                autocomplete: 'new-password'
+                componentName: 'FormDesign-StyleEditor'
               },
-              designKey: 'design-JQuX'
-            },
-            {
-              label: '高度',
-              name: 'props.style.height',
-              component: 'Input',
-              props: {
-                autocomplete: 'new-password'
-              },
-              designKey: 'design-jDiN'
+              designKey: 'design-KaWx',
+              labelWidth: 0
             }
           ]
         }

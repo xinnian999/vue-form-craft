@@ -47,9 +47,10 @@ const setValues: FormInstance['setValues'] = (values) => {
 const getFieldValue: FormInstance['getFieldValue'] = (path) => getDataByPath(getValues(), path)
 
 const setFieldValue: FormInstance['setFieldValue'] = (path, value) => {
+  emits('fieldChange', path, value)
   const newValues = setDataByPath(cloneDeep(getValues()), path, value)
   setValues(newValues)
-  emits('fieldChange', path, value)
+  // setDataByPath(getValues(), path, value)
 }
 
 const validate: FormInstance['validate'] = () => form.value!.validate()
