@@ -123,7 +123,7 @@ const startSSE = async () => {
 
     current.content = '✓ 已为您修改表单'
     designInstance.setSchema(json)
-    designInstance.recordHistory()
+    designInstance.recordHistory('AI生成表单')
   } catch (err: any) {
     current.content = err.message || '生成失败'
   } finally {
