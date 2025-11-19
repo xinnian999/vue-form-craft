@@ -39,7 +39,6 @@ const nodeModel = computed({
     const oldNode = designInstance.getNodeByKey(designInstance.currentKey)
     if (oldNode) {
       Object.assign(oldNode, node)
-      designInstance.setSchema(designInstance.getSchema())
     }
   }
 })
