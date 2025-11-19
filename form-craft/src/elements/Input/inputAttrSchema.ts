@@ -2,9 +2,9 @@ import type { FormSchema } from 'form-craft'
 
 export default {
   labelWidth: 110,
-  size: 'small',
   labelAlign: 'left',
   scrollToError: true,
+  size: 'small',
   submitBtn: false,
   initialValues: {
     label: '单行文本'
@@ -595,6 +595,24 @@ export default {
           ]
         },
         {
+          label: '样式',
+          name: 'style',
+          component: 'TabPane',
+          designKey: 'tab-6',
+          children: [
+            {
+              label: '',
+              name: 'props.style',
+              component: 'Custom',
+              props: {
+                componentName: 'FormDesign-StyleEditor'
+              },
+              designKey: 'design-KaWx',
+              labelWidth: 0
+            }
+          ]
+        },
+        {
           label: '布局',
           name: 'name4',
           component: 'TabPane',
@@ -659,24 +677,6 @@ export default {
                 ]
               },
               designKey: 'design-yaZ4'
-            }
-          ]
-        },
-        {
-          label: '样式',
-          name: 'style',
-          component: 'TabPane',
-          designKey: 'tab-6',
-          children: [
-            {
-              label: '',
-              name: 'props.style',
-              component: 'Custom',
-              props: {
-                componentName: 'FormDesign-StyleEditor'
-              },
-              designKey: 'design-KaWx',
-              labelWidth: 0
             }
           ]
         }

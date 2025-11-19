@@ -7,10 +7,10 @@
     <el-button type="primary" @click="handleAddTab">添加标签页</el-button>
 
     <!-- 拖拽排序胶囊 -->
-    <div class="drag-sort-capsule" v-if="childrenModel.length > 0">
+    <div class="drag-sort-capsule" v-if="children.length > 0">
       <div class="capsule-title">拖拽排序</div>
       <draggable
-        v-model="childrenModel"
+        :list="children"
         @end="handleDragEnd"
         item-key="designKey"
         class="drag-list"
@@ -31,7 +31,7 @@
 import { ref, watch } from 'vue'
 import Draggable from 'vuedraggable-es-fix'
 import { FormItemGroup } from '@/components'
-import { useChildrenModel, useFormInstance } from '@/hooks'
+import { useDesignInstance, useFormInstance } from '@/hooks'
 import type { FormItemType } from '@/types'
 
 const props = defineProps<{
@@ -41,31 +41,37 @@ const props = defineProps<{
 
 const activeKey = ref<string>(props.defaultKey)
 
-const childrenModel = useChildrenModel(props)
-
 const formInstance = useFormInstance()
+
+const designInstance = useDesignInstance()
 
 const tabsKey = ref(0)
 
 const handleAddTab = () => {
-  childrenModel.value = childrenModel.value.concat({
-    label: `选项卡${childrenModel.value.length + 1}`,
-    name: `name${childrenModel.value.length + 1}`,
+  const newTab = {
+    label: `选项卡${props.children.length + 1}`,
+    name: `name${props.children.length + 1}`,
     component: 'TabPane',
     children: [],
-    designKey: `tab-${childrenModel.value.length + 1}`
-  })
+    designKey: `tab-${props.children.length + 1}`
+  }
+
+  props.children.push(newTab)
+
+  designInstance?.recordHistory('添加标签页')
 }
 
 const handleDragEnd = () => {
   // 拖拽结束后更新key，强制重新渲染tabs
   tabsKey.value++
+
+  designInstance?.recordHistory('更新标签页排序')
 }
 
-// 仅在设计模式下监听childrenModel的变化，强制更新tabs
+// 仅在设计模式下监听children的变化，强制更新tabs
 if (formInstance.design) {
   watch(
-    () => childrenModel.value,
+    () => props.children,
     () => {
       tabsKey.value++
     },

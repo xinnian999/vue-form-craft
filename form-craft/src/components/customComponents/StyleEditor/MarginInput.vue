@@ -265,7 +265,7 @@ watch(
   }
 
   .vfc-margin-input__label {
-    min-width: 120px;
+    min-width: 84px;
     color: $textColor1;
     font-size: 12px;
   }
@@ -301,8 +301,8 @@ watch(
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 24px;
-    height: 24px;
+    width: 16px;
+    height: 16px;
     color: $textColor3;
     font-size: 12px;
     font-weight: bold;
