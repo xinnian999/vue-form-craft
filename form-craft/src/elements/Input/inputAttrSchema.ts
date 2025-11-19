@@ -599,6 +599,9 @@ export default {
           name: 'style',
           component: 'TabPane',
           designKey: 'tab-6',
+          props: {
+            lazy: true
+          },
           children: [
             {
               label: '',
