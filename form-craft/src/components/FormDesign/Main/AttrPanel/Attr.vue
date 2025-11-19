@@ -13,10 +13,10 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { FormRender } from '@/components'
+import { formAttrSchema } from '@/config'
 import { useDesignInstance, useElements } from '@/hooks'
 import type { FormSchema } from '@/types'
 import { ns } from '@/utils'
-import formAttrSchema from './formOptions'
 
 const designInstance = useDesignInstance()!
 

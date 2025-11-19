@@ -1,5 +1,5 @@
 import { h } from 'vue'
-import inputAttrSchema from '@/config/inputAttrSchema'
+import inputAttrSchema from '@/elements/Input/inputAttrSchema'
 import Icon from '@/Icon/index.vue'
 import type { FormElement } from '@/types'
 import Password from './Password.vue'

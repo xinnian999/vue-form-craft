@@ -1,3 +1,5 @@
+import type { FormSchema } from '@/types'
+
 export default {
   labelWidth: 110,
   size: 'small',
@@ -689,4 +691,4 @@ export default {
       ]
     }
   ]
-}
+} satisfies FormSchema

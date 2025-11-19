@@ -29,7 +29,7 @@ import { computed } from 'vue'
 import { useDesignInstance } from '@/hooks'
 import type { FormItemType } from '@/types'
 import { ns } from '@/utils'
-import AttrEdit from './AttrEdit/index.vue'
+import AttrEdit from './Attr.vue'
 
 const designInstance = useDesignInstance()!
 

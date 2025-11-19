@@ -1,4 +1,4 @@
-import formOptions from '@/components/FormDesign/Main/AttrPanel/AttrEdit/formOptions'
+import { formAttrSchema } from '@/config'
 import * as elements from '@/elements'
 import type { FormElement } from '@/types'
 import addressContact from './addressContact'
@@ -141,7 +141,7 @@ export default [
     children: [
       {
         label: '表单配置',
-        schema: formOptions,
+        schema: formAttrSchema,
         description: '',
         order: 0,
         type: 'form'
