@@ -1,61 +1,48 @@
 <template>
   <div :class="ns('style-editor')">
-    <el-form :model="styleForm" label-width="120px" size="small">
-      <!-- 布局相关 -->
-      <el-divider content-position="left">布局</el-divider>
+    <el-form :model="styleForm" label-width="120px" label-position="left" size="small">
       <el-form-item label="宽度">
-        <el-input v-model="styleForm.width" placeholder="auto" clearable />
+        <UnitInput
+          v-model="styleForm.width"
+          :presets="['auto', 'inherit', 'none']"
+          :units="['px', '%', 'vw', 'rem']"
+          default-mode="unit"
+          :default-value="100"
+          default-unit="%"
+        />
       </el-form-item>
       <el-form-item label="高度">
-        <el-input v-model="styleForm.height" placeholder="auto" clearable />
-      </el-form-item>
-      <el-form-item label="最小宽度">
-        <el-input v-model="styleForm.minWidth" placeholder="0" clearable />
-      </el-form-item>
-      <el-form-item label="最小高度">
-        <el-input v-model="styleForm.minHeight" placeholder="0" clearable />
-      </el-form-item>
-      <el-form-item label="最大宽度">
-        <el-input v-model="styleForm.maxWidth" placeholder="none" clearable />
-      </el-form-item>
-      <el-form-item label="最大高度">
-        <el-input v-model="styleForm.maxHeight" placeholder="none" clearable />
+        <UnitInput
+          v-model="styleForm.height"
+          :presets="['auto', 'inherit', 'none']"
+          :units="['px', '%', 'vh', 'rem']"
+        />
       </el-form-item>
 
-      <!-- 外边距 -->
-      <el-divider content-position="left">外边距</el-divider>
-      <el-form-item label="上">
-        <el-input v-model="styleForm.marginTop" placeholder="0" clearable />
-      </el-form-item>
-      <el-form-item label="右">
-        <el-input v-model="styleForm.marginRight" placeholder="0" clearable />
-      </el-form-item>
-      <el-form-item label="下">
-        <el-input v-model="styleForm.marginBottom" placeholder="0" clearable />
-      </el-form-item>
-      <el-form-item label="左">
-        <el-input v-model="styleForm.marginLeft" placeholder="0" clearable />
-      </el-form-item>
+      <MarginInput
+        v-model="styleForm.margin"
+        label="外边距"
+        :presets="['auto', '0']"
+        :units="['px', '%', 'em', 'rem']"
+        default-mode="unit"
+        :default-value="0"
+        default-unit="px"
+      />
 
-      <!-- 内边距 -->
-      <el-divider content-position="left">内边距</el-divider>
-      <el-form-item label="上">
-        <el-input v-model="styleForm.paddingTop" placeholder="0" clearable />
-      </el-form-item>
-      <el-form-item label="右">
-        <el-input v-model="styleForm.paddingRight" placeholder="0" clearable />
-      </el-form-item>
-      <el-form-item label="下">
-        <el-input v-model="styleForm.paddingBottom" placeholder="0" clearable />
-      </el-form-item>
-      <el-form-item label="左">
-        <el-input v-model="styleForm.paddingLeft" placeholder="0" clearable />
-      </el-form-item>
+      <MarginInput
+        v-model="styleForm.padding"
+        label="内边距"
+        :presets="['0']"
+        :units="['px', '%', 'em', 'rem']"
+        default-mode="unit"
+        :default-value="0"
+        default-unit="px"
+      />
 
       <!-- 边框 -->
       <el-divider content-position="left">边框</el-divider>
       <el-form-item label="边框宽度">
-        <el-input v-model="styleForm.borderWidth" placeholder="0" clearable />
+        <UnitInput v-model="styleForm.borderWidth" :presets="['0']" :units="['px', 'em', 'rem']" />
       </el-form-item>
       <el-form-item label="边框样式">
         <el-select v-model="styleForm.borderStyle" placeholder="请选择" clearable>
@@ -70,7 +57,11 @@
         <el-color-picker v-model="styleForm.borderColor" show-alpha />
       </el-form-item>
       <el-form-item label="圆角">
-        <el-input v-model="styleForm.borderRadius" placeholder="0" clearable />
+        <UnitInput
+          v-model="styleForm.borderRadius"
+          :presets="['0']"
+          :units="['px', '%', 'em', 'rem']"
+        />
       </el-form-item>
 
       <!-- 背景 -->
@@ -103,7 +94,11 @@
       <!-- 文字 -->
       <el-divider content-position="left">文字</el-divider>
       <el-form-item label="字体大小">
-        <el-input v-model="styleForm.fontSize" placeholder="14px" clearable />
+        <UnitInput
+          v-model="styleForm.fontSize"
+          :presets="['inherit']"
+          :units="['px', 'em', 'rem', '%']"
+        />
       </el-form-item>
       <el-form-item label="字体粗细">
         <el-select v-model="styleForm.fontWeight" placeholder="请选择" clearable>
@@ -124,7 +119,11 @@
         <el-color-picker v-model="styleForm.color" show-alpha />
       </el-form-item>
       <el-form-item label="行高">
-        <el-input v-model="styleForm.lineHeight" placeholder="normal" clearable />
+        <UnitInput
+          v-model="styleForm.lineHeight"
+          :presets="['normal', 'inherit']"
+          :units="['px', 'em', 'rem', '%']"
+        />
       </el-form-item>
       <el-form-item label="文字对齐">
         <el-select v-model="styleForm.textAlign" placeholder="请选择" clearable>
@@ -165,16 +164,32 @@
         </el-select>
       </el-form-item>
       <el-form-item label="上偏移">
-        <el-input v-model="styleForm.top" placeholder="auto" clearable />
+        <UnitInput
+          v-model="styleForm.top"
+          :presets="['auto', '0']"
+          :units="['px', '%', 'em', 'rem']"
+        />
       </el-form-item>
       <el-form-item label="右偏移">
-        <el-input v-model="styleForm.right" placeholder="auto" clearable />
+        <UnitInput
+          v-model="styleForm.right"
+          :presets="['auto', '0']"
+          :units="['px', '%', 'em', 'rem']"
+        />
       </el-form-item>
       <el-form-item label="下偏移">
-        <el-input v-model="styleForm.bottom" placeholder="auto" clearable />
+        <UnitInput
+          v-model="styleForm.bottom"
+          :presets="['auto', '0']"
+          :units="['px', '%', 'em', 'rem']"
+        />
       </el-form-item>
       <el-form-item label="左偏移">
-        <el-input v-model="styleForm.left" placeholder="auto" clearable />
+        <UnitInput
+          v-model="styleForm.left"
+          :presets="['auto', '0']"
+          :units="['px', '%', 'em', 'rem']"
+        />
       </el-form-item>
       <el-form-item label="层级">
         <el-input-number v-model="styleForm.zIndex" :controls="true" />
@@ -228,7 +243,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="间距">
-        <el-input v-model="styleForm.gap" placeholder="0" clearable />
+        <UnitInput v-model="styleForm.gap" :presets="['0']" :units="['px', 'em', 'rem', '%']" />
       </el-form-item>
 
       <!-- 其他 -->
@@ -259,6 +274,12 @@
 <script setup lang="ts">
 import { reactive, watch } from 'vue'
 import { ns } from '@/utils'
+import MarginInput from './MarginInput.vue'
+import UnitInput from './UnitInput.vue'
+
+defineOptions({
+  name: 'StyleEditor'
+})
 
 const modelValue = defineModel()
 
@@ -291,6 +312,7 @@ watch(
 
 @include ns('style-editor') {
   overflow-y: auto;
+  overflow-x: hidden;
   width: 100%;
 
   :deep(.el-divider__text) {
