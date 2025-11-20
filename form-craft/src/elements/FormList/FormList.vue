@@ -1,6 +1,12 @@
 <template>
   <div class="vfc-formList">
-    <CanvasGroup v-if="formInstance.design" :list="fields" class="layoutRender" />
+    <div v-if="formInstance.design">
+      <el-card v-if="mode === 'card'" header="自增卡片" class="card-list-container">
+        <CanvasGroup :list="fields" />
+      </el-card>
+
+      <CanvasGroup v-else-if="mode === 'table'" :list="fields" class="layoutRender" />
+    </div>
 
     <div v-else>
       <template v-if="mode === 'inline'">
@@ -107,7 +113,7 @@
 <script setup lang="ts">
 import type { TableColumnCtx } from 'element-plus'
 import { cloneDeep, isEqual, pickBy, set } from 'lodash'
-import { computed, h, onMounted, provide, ref, watch } from 'vue'
+import { computed, h, onMounted, provide, ref, toRef, watch } from 'vue'
 import { CanvasGroup, FormItem, Icon } from '@/components'
 import { useChildrenModel, useFormInstance } from '@/hooks'
 import type { FormItemType } from '@/types'
@@ -122,8 +128,7 @@ interface Props {
   title?: string
   name?: string
   disabled?: boolean
-  designKey?: string
-  children?: FormItemType[]
+  children: FormItemType[]
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -143,7 +148,7 @@ const listSnapshot = ref<Record<string, any>[]>([])
 
 const formInstance = useFormInstance()
 
-const fields = useChildrenModel(props)
+const fields = toRef(props, 'children')
 
 const parseFields = (index: number) => {
   const currentItem = list.value[index]
@@ -289,10 +294,16 @@ provide(
     margin-left: 0;
   }
 
+  .card-list-container {
+    @include ns('form-item') {
+      margin-bottom: 18px;
+    }
+  }
+
   .layoutRender {
     padding: 10px;
-    background-color: #f4f3f3;
     border-radius: 5px;
+    border: 1px solid $borderColor;
     @include ns('form-item') {
       margin-bottom: 18px;
     }
