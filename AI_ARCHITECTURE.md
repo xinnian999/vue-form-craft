@@ -189,7 +189,6 @@ type FormSchema = {
   size?: 'default' | 'small' | 'large' // 组件尺寸
   disabled?: boolean // 禁用整个表单
   hideRequiredAsterisk?: boolean // 隐藏必填星号
-  labelBold?: boolean // label加粗
   scrollToError?: boolean // 滚动到错误项
   initialValues?: Record<string, any> // 初始值
   items?: FormItemType[] // 表单项列表

@@ -48,29 +48,7 @@
         </div>
       </template>
 
-      <!-- 弹窗展示复杂组件 -->
-      <template v-if="dialog">
-        <el-dialog
-          v-model="dialogState.visible"
-          :title="dialogState.title"
-          width="70%"
-          center
-          destroy-on-close
-        >
-          <component
-            :is="config.render"
-            :disabled="formInstance.schema.disabled"
-            :size="formInstance.schema.size"
-            v-bind="componentProps"
-            v-model:[config.modelName!]="value"
-          />
-        </el-dialog>
-
-        <el-button type="primary" plain @click="handleDialog">配置</el-button>
-      </template>
-
       <component
-        v-else
         :is="config.render"
         :disabled="formInstance.schema.disabled"
         v-bind="componentProps"
@@ -82,7 +60,7 @@
 
 <script setup lang="ts">
 import { isEqual } from 'lodash'
-import { computed, onBeforeMount, onMounted, reactive, watch } from 'vue'
+import { computed, onBeforeMount, watch } from 'vue'
 import { useElements, useFormInstance } from '@/hooks'
 import Icon from '@/Icon/index.vue'
 import type { FormItemType } from '@/types'
@@ -90,23 +68,9 @@ import { filterExpressions, getDataByPath, ns, parseRules } from '@/utils'
 
 const props = defineProps<FormItemType>()
 
-onMounted(() => {
-  // console.log(props)
-})
-
 const formInstance = useFormInstance()
 
 const elements = useElements()
-
-const dialogState = reactive({
-  visible: false,
-  title: ''
-})
-
-const handleDialog = () => {
-  dialogState.visible = true
-  dialogState.title = props.label!
-}
 
 const value = computed({
   get() {

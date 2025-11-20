@@ -43,7 +43,6 @@
 - **labelWidth**: `number`，默认 `150`，表单 label 宽度
 - **labelAlign**: `'left' | 'top' | 'right'`，默认 `'right'`，表单 label 对齐方式
 - **labelSuffix**: `string`，默认 `-`，表单 label 后缀
-- **labelBold**: `boolean`，默认 `false`，是否加粗 label
 - **size**: `'small' | 'default' | 'large'`，默认 `'default'`，表单项大小
 - **hideRequiredAsterisk**: `boolean`，默认 `false`，是否隐藏必填星号
 - **disabled**: `boolean`，默认 `false`，是否禁用整个表单
@@ -156,6 +155,7 @@
 ### ⚠️ 重要提示
 
 **不要在同一个属性上同时使用 JS 表达式和 linkages**，否则会导致逻辑混乱。请选择其中一种方式：
+
 - 简单联动：直接在属性上使用 JS 表达式
 - 复杂联动：使用 linkages 配置
 

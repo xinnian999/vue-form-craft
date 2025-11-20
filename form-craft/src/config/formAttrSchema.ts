@@ -45,7 +45,6 @@ export default {
       component: 'Input',
       name: 'labelSuffix'
     },
-    { label: 'label加粗', component: 'Switch', name: 'labelBold' },
     {
       label: '表单组件尺寸',
       component: 'Radio',

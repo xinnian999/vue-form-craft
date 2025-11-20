@@ -108,6 +108,5 @@ export default {
       required: true
     }
   ],
-  labelBold: false,
   hideRequiredAsterisk: false
 } satisfies FormSchema

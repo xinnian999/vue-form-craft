@@ -1,4 +1,5 @@
 # Type Declarations
+
 ## FormRule
 
 Validation rules for the `input` field.
@@ -40,14 +41,14 @@ interface FormItemType {
   help?: string // Help information
   children?: FormItemType[] // Configuration for nested components
   hidden?: boolean | string // Whether it is hidden
-  hideLabel?: boolean   // Hide label
-  designKey?: string    // Key used by the designer, automatically generated
-  rules?: FormRule[]    // Validation rules, specific to the input component
-  class?: any   // Field class
-  style?: any   // Field inline style
-  design?: boolean  // Design mode, used for extending components
+  hideLabel?: boolean // Hide label
+  designKey?: string // Key used by the designer, automatically generated
+  rules?: FormRule[] // Validation rules, specific to the input component
+  class?: any // Field class
+  style?: any // Field inline style
+  design?: boolean // Design mode, used for extending components
   change?: FormChange[] // Value linkage configuration
-  dialog?: boolean  // Display component in a dialog
+  dialog?: boolean // Display component in a dialog
 }
 ```
 
@@ -62,7 +63,6 @@ type FormSchema = {
   size?: 'default' | 'small' | 'large' // Form component size
   disabled?: boolean // Disable all form items
   hideRequiredAsterisk?: boolean // Hide required asterisk
-  labelBold?: boolean // Whether labels are bold
   items: FormItemType[] // Form item configuration
 }
 ```
@@ -73,14 +73,14 @@ Component configuration for the form designer, used when extending the form desi
 
 ```ts
 type FormElement = {
-  name: string      // Component name
-  component: VNode | Component  // Vue SFC component that can accept v-model
-  icon:  VNode | Component      // Component icon, SFC component
-  type: 'assist' | 'layout' | 'basic'   // Component type
-  order: number     // The designer will sort all components based on the order
-  initialValues: Omit<FormItemType, 'name'>     // Default configuration when dragging and dropping components
-  modelName?: string    // v-model name of the component, default is modelValue
-  attrSchema: FormSchema    // Component configuration form, schema
+  name: string // Component name
+  component: VNode | Component // Vue SFC component that can accept v-model
+  icon: VNode | Component // Component icon, SFC component
+  type: 'assist' | 'layout' | 'basic' // Component type
+  order: number // The designer will sort all components based on the order
+  initialValues: Omit<FormItemType, 'name'> // Default configuration when dragging and dropping components
+  modelName?: string // v-model name of the component, default is modelValue
+  attrSchema: FormSchema // Component configuration form, schema
 }
 ```
 

@@ -106,7 +106,6 @@
 - **labelWidth**: `number`，默认 `150`，表单 label 宽度
 - **labelAlign**: `'left' | 'top' | 'right'`，默认 `'right'`，表单 label 对齐方式
 - **labelSuffix**: `string`，默认 `-`，表单 label 后缀
-- **labelBold**: `boolean`，默认 `false`，是否加粗 label
 - **size**: `'small' | 'default' | 'large'`，默认 `'default'`，表单项大小
 - **hideRequiredAsterisk**: `boolean`，默认 `false`，是否隐藏必填星号
 - **disabled**: `boolean`，默认 `false`，是否禁用整个表单

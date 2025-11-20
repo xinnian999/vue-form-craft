@@ -59,7 +59,6 @@ export type FormSchema = {
   size?: 'default' | 'small' | 'large'
   disabled?: boolean
   hideRequiredAsterisk?: boolean
-  labelBold?: boolean
   scrollToError?: boolean
   initialValues?: Record<string, any>
   items?: FormItemType[]

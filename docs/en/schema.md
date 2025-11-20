@@ -52,7 +52,6 @@ After understanding the simple example above, here are all the optional configur
 | labelAlign           | `'left' \| 'top' \| 'right' `     | `'right'`   | Alignment of the form label            |
 | size                 | `'small' \| 'default' \| 'large'` | `'default'` | Size of the form items                 |
 | hideRequiredAsterisk | `boolean`                         | `false`     | Hide the required asterisk in the form |
-| labelBold            | `boolean`                         | `false`     | Make the form label bold               |
 | disabled             | `boolean`                         | `false`     | Disable all form items                 |
 
 ### Form Item Configuration

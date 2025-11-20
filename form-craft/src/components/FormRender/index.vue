@@ -22,7 +22,7 @@ import { computed, onBeforeMount, provide, reactive, readonly, toRefs, useTempla
 import { FormItemGroup } from '@/components'
 import { $formInstance } from '@/symbol'
 import type { FormInstance, FormRenderEmits, FormRenderProps } from '@/types'
-import { deepParse, filterExpressions, getDataByPath, setDataByPath } from '@/utils'
+import { deepParse, getDataByPath, setDataByPath } from '@/utils'
 
 const props = withDefaults(defineProps<FormRenderProps>(), {
   schema: () => ({})
@@ -135,7 +135,6 @@ const formAttrs = computed(() => {
     'resetBtn',
     'initialValues',
     'labelAlign',
-    'labelBold',
     'labelSuffix'
   ])
 

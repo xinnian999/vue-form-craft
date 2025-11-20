@@ -15,15 +15,6 @@ export const FORM_CONFIG_ITEMS: CompletionItem[] = [
   },
   { name: 'labelSuffix', meta: '表单label后缀', score: 998 },
   {
-    name: 'labelBold',
-    meta: '是否加粗label',
-    score: 997,
-    enum: [
-      { name: 'true', meta: '加粗', score: 1000 },
-      { name: 'false', meta: '不加粗', score: 999 }
-    ]
-  },
-  {
     name: 'size',
     meta: '表单项大小',
     score: 996,
@@ -137,7 +128,7 @@ export const FORM_ITEM_CONFIG_ITEMS: CompletionItem[] = [
 
 /** 表达式变量补全项 */
 export const EXPRESSION_ITEMS: CompletionItem[] = [
-  { name: '$values.', meta: '表单数据对象', score: 1000 },
+  { name: '$values.', meta: '表单数据对象', score: 1000 }
 ]
 
 /** 组件类型补全项 */
