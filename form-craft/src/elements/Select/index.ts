@@ -1,14 +1,13 @@
-import { defineAsyncComponent, h } from 'vue'
-import Icon from '@/Icon/index.vue'
 import type { FormElement } from '@/types'
 import attrSchema from './attrSchema'
+import Select from './Select.vue'
 
 export default {
   title: '下拉选择框',
   type: 'basic',
-  icon: h(Icon, { name: 'select' }),
+  icon: 'select',
   component: 'Select',
-  render: defineAsyncComponent(() => import('./Select.vue')),
+  render: Select,
   order: 3,
   attrSchema
 } satisfies FormElement

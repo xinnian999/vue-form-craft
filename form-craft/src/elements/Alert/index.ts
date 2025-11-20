@@ -1,12 +1,10 @@
-import { h } from 'vue'
-import Icon from '@/Icon/index.vue'
 import type { FormElement } from '@/types'
 import attrSchema from './attrSchema'
 
 export default {
   title: '提示框',
   component: 'Alert',
-  icon: h(Icon, { name: 'alert' }),
+  icon: 'alert',
   type: 'assist',
   order: 2,
   attrSchema,

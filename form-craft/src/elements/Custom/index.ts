@@ -1,13 +1,12 @@
-import { defineAsyncComponent, h } from 'vue'
-import Icon from '@/Icon/index.vue'
 import type { FormElement } from '@/types'
 import attrSchema from './attrSchema'
+import Custom from './Custom.vue'
 
 export default {
   title: '自定义组件',
   component: 'Custom',
-  render: defineAsyncComponent(() => import('./Custom.vue')),
-  icon: h(Icon, { name: 'custom' }),
+  render: Custom,
+  icon: 'custom',
   type: 'basic',
   order: 99,
   attrSchema

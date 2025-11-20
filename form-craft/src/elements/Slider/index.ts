@@ -1,12 +1,10 @@
-import { h } from 'vue'
-import Icon from '@/Icon/index.vue'
 import type { FormElement } from '@/types'
 
 export default {
   title: '滑块',
   render: 'ElSlider',
   component: 'Slider',
-  icon: h(Icon, { name: 'slider' }),
+  icon: 'slider',
   type: 'basic',
   order: 12,
   attrSchema: {

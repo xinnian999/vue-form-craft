@@ -1,13 +1,12 @@
-import { defineAsyncComponent, h } from 'vue'
-import Icon from '@/Icon/index.vue'
 import type { FormElement } from '@/types'
+import ObjGroup from './ObjGroup.vue'
 
 export default {
   title: '对象容器',
-  icon: h(Icon, { name: 'itemGroup' }),
+  icon: 'itemGroup',
   type: 'basic',
   component: 'ObjGroup',
-  render: defineAsyncComponent(() => import('./ObjGroup.vue')),
+  render: ObjGroup,
   order: 25,
   attrSchema: {
     size: 'small',

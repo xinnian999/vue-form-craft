@@ -1,12 +1,11 @@
-import { defineAsyncComponent, h } from 'vue'
-import Icon from '@/Icon/index.vue'
 import type { FormElement } from '@/types'
+import Collapse from './Collapse.vue'
 
 export default {
   title: '折叠面板',
   component: 'Collapse',
-  render: defineAsyncComponent(() => import('./Collapse.vue')),
-  icon: h(Icon, { name: 'collapse' }),
+  render: Collapse,
+  icon: 'collapse',
   type: 'layout',
   order: 4,
   attrSchema: {

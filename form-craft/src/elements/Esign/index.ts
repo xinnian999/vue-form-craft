@@ -1,13 +1,12 @@
-import { defineAsyncComponent, h } from 'vue'
-import Icon from '@/Icon/index.vue'
 import type { FormElement } from '@/types'
 import attrSchema from './attrSchema'
+import Component from './Component.vue'
 
 export default {
   title: '电子签名',
   component: 'Esign',
-  render: defineAsyncComponent(() => import('./Component.vue')),
-  icon: h(Icon, { name: 'esign' }),
+  render: Component,
+  icon: 'esign',
   type: 'basic',
   order: 11,
   attrSchema

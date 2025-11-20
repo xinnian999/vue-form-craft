@@ -1,12 +1,11 @@
-import { defineAsyncComponent, h } from 'vue'
-import Icon from '@/Icon/index.vue'
 import type { FormElement } from '@/types'
+import Card from './Card.vue'
 
 export default {
   title: '卡片',
   component: 'Card',
-  render: defineAsyncComponent(() => import('./Card.vue')),
-  icon: h(Icon, { name: 'card' }),
+  render: Card,
+  icon: 'card',
   type: 'layout',
   order: 1,
   attrSchema: {

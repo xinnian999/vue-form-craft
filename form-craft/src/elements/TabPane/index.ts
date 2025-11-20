@@ -1,12 +1,11 @@
-import { defineAsyncComponent, h } from 'vue'
-import Icon from '@/Icon/index.vue'
 import type { FormElement } from '@/types'
+import TabPane from './TabPane.vue'
 
 export default {
   title: '选项卡面板',
   component: 'TabPane',
-  render: defineAsyncComponent(() => import('./TabPane.vue')),
-  icon: h(Icon, { name: 'tabs' }),
+  render: TabPane,
+  icon: 'tabs',
   type: 'layout',
   order: 10001,
   attrSchema: {

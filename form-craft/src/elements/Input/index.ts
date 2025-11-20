@@ -1,5 +1,3 @@
-import { h } from 'vue'
-import Icon from '@/Icon/index.vue'
 import type { FormElement } from '@/types'
 import Input from './Input.vue'
 import attrSchema from './inputAttrSchema'
@@ -7,7 +5,7 @@ import attrSchema from './inputAttrSchema'
 export default {
   title: '单行文本',
   component: 'Input',
-  icon: h(Icon, { name: 'input' }),
+  icon: 'input',
   type: 'basic',
   order: 1,
   attrSchema,

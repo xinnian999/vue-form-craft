@@ -1,13 +1,11 @@
-import { h } from 'vue'
 import JsonEditor from '@/components/JsonEditor.vue'
-import Icon from '@/Icon/index.vue'
 import type { FormElement } from '@/types'
 import attrSchema from './attrSchema'
 
 export default {
   title: 'JSON编辑',
   component: 'JsonEditor',
-  icon: h(Icon, { name: 'jsonEdit' }),
+  icon: 'jsonEdit',
   type: 'basic',
   order: 14,
   attrSchema,

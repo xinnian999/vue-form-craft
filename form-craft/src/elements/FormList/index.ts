@@ -1,13 +1,12 @@
-import { defineAsyncComponent, h } from 'vue'
-import Icon from '@/Icon/index.vue'
 import type { FormElement } from '@/types'
 import attrSchema from './attrSchema'
+import FormList from './FormList.vue'
 
 export default {
   title: '自增容器',
   component: 'FormList',
-  render: defineAsyncComponent(() => import('./FormList.vue')),
-  icon: h(Icon, { name: 'formList' }),
+  render: FormList,
+  icon: 'formList',
   type: 'basic',
   order: 20,
   attrSchema

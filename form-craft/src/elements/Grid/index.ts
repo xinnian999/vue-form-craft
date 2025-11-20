@@ -1,13 +1,12 @@
-import { defineAsyncComponent, h } from 'vue'
-import Icon from '@/Icon/index.vue'
 import type { FormElement } from '@/types'
+import Grid from './Grid.vue'
 
 export default {
   title: '栅格布局',
   type: 'layout',
-  icon: h(Icon, { name: 'grid' }),
+  icon: 'grid',
   component: 'Grid',
-  render: defineAsyncComponent(() => import('./Grid.vue')),
+  render: Grid,
   order: 3,
   attrSchema: {
     size: 'small',

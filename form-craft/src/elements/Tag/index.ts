@@ -1,12 +1,11 @@
-import { defineAsyncComponent, h } from 'vue'
-import Icon from '@/Icon/index.vue'
 import type { FormElement } from '@/types'
+import Tag from './Tag.vue'
 
 export default {
   title: '标签',
   component: 'Tag',
-  render: defineAsyncComponent(() => import('./Tag.vue')),
-  icon: h(Icon, { name: 'tag' }),
+  render: Tag,
+  icon: 'tag',
   type: 'assist',
   order: 4,
   attrSchema: {
@@ -16,7 +15,7 @@ export default {
       props: {
         text: 'Tag',
         type: 'primary'
-      },
+      }
     },
     items: [
       { label: '唯一标识', component: 'Input', name: 'name' },

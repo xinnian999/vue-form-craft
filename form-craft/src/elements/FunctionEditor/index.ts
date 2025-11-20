@@ -1,12 +1,11 @@
-import { defineAsyncComponent, h } from 'vue'
-import Icon from '@/Icon/index.vue'
 import type { FormElement } from '@/types'
+import FunctionEditor from './FunctionEditor.vue'
 
 export default {
   title: '函数编辑器',
   component: 'FunctionEditor',
-  render: defineAsyncComponent(() => import('./FunctionEditor.vue')),
-  icon: h(Icon, { name: 'code' }),
+  render: FunctionEditor,
+  icon: 'code',
   type: 'basic',
   order: 30,
   attrSchema: {

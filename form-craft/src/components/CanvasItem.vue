@@ -13,7 +13,7 @@
     <!-- 右下角的其他按钮 -->
     <div class="actions">
       <div class="componentName">
-        <component :is="config.icon" />
+        <ElementIcon :icon="config.icon" />
         {{ config.title }}
       </div>
       <div
@@ -36,6 +36,7 @@ import { useDesignInstance, useElements } from '@/hooks'
 import Icon from '@/Icon/index.vue'
 import type { FormItemType } from '@/types'
 import { copyItems, ns, recursionDelete } from '@/utils'
+import ElementIcon from './ElementIcon'
 import FormItem from './FormItem.vue'
 
 const props = defineProps<{ data: FormItemType; index: number }>()

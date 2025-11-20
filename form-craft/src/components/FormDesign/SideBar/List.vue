@@ -25,7 +25,7 @@
             @dblclick="handleDbClick(element)"
           >
             <div :class="ns('menu-list-item-ico')">
-              <component class="ico-content" :is="element.icon" />
+              <ElementIcon :icon="element.icon" />
             </div>
             <div :class="ns('menu-list-item-name')">
               {{ element.title }}
@@ -60,7 +60,7 @@
               @dblclick="handleDbClick(element)"
             >
               <div :class="ns('menu-list-item-ico')">
-                <component class="ico-content" :is="element.icon" />
+                <ElementIcon :icon="element.icon" />
               </div>
               <div :class="ns('menu-list-item-name')">
                 {{ element.title }}
@@ -76,6 +76,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import draggable from 'vuedraggable-es-fix'
+import { ElementIcon } from '@/components'
 import { useDesignInstance, useElements } from '@/hooks'
 import Icon from '@/Icon/index.vue'
 import type { FormElement, FormItemType } from '@/types'
@@ -189,13 +190,6 @@ const handleDbClick = (element: FormElement) => {
         // align-items: center;
         font-size: 20px;
         // justify-content: center;
-        .ico-content {
-          display: inline-block;
-          width: 1em;
-          height: 1em;
-          overflow: hidden;
-          fill: currentColor;
-        }
       }
       &-name {
         font-size: 13px;

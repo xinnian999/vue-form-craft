@@ -1,14 +1,13 @@
-import { defineAsyncComponent, h } from 'vue'
-import Icon from '@/Icon/index.vue'
 import type { FormElement } from '@/types'
 import attrSchema from './attrSchema'
+import TextArea from './TextArea.vue'
 
 export default {
   title: '多行文本',
   component: 'TextArea',
-  icon: h(Icon, { name: 'textarea' }),
+  icon: 'textarea',
   type: 'basic',
   order: 2,
   attrSchema,
-  render: defineAsyncComponent(() => import('./TextArea.vue'))
+  render: TextArea
 } satisfies FormElement

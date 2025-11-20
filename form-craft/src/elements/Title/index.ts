@@ -1,12 +1,11 @@
-import { defineAsyncComponent, h } from 'vue'
-import Icon from '@/Icon/index.vue'
 import type { FormElement } from '@/types'
+import Title from './Title.vue'
 
 export default {
   title: '标题',
   component: 'Title',
-  render: defineAsyncComponent(() => import('./Title.vue')),
-  icon: h(Icon, { name: 'title' }),
+  render: Title,
+  icon: 'title',
   type: 'assist',
   order: 3,
   attrSchema: {
@@ -16,7 +15,7 @@ export default {
       props: {
         title: '标题',
         type: 'h3'
-      },
+      }
     },
     items: [
       { label: '唯一标识', component: 'Input', name: 'name' },

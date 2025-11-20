@@ -1,13 +1,12 @@
-import { defineAsyncComponent, h } from 'vue'
-import Icon from '@/Icon/index.vue'
 import type { FormElement } from '@/types'
+import Inline from './Inline.vue'
 
 export default {
   title: '行内布局',
-  icon: h(Icon, { name: 'inline' }),
+  icon: 'inline',
   type: 'layout',
   component: 'Inline',
-  render: defineAsyncComponent(() => import('./Inline.vue')),
+  render: Inline,
   order: 2,
   attrSchema: {
     size: 'small',

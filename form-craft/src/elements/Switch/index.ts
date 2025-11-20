@@ -1,13 +1,12 @@
-import { defineAsyncComponent, h } from 'vue'
-import Icon from '@/Icon/index.vue'
 import type { FormElement } from '@/types'
 import attrSchema from './attrSchema'
+import Component from './Component.vue'
 
 export default {
   title: '开关',
-  render: defineAsyncComponent(() => import('./Component.vue')),
+  render: Component,
   component: 'Switch',
-  icon: h(Icon, { name: 'switch' }),
+  icon: 'switch',
   type: 'basic',
   order: 8,
   attrSchema

@@ -1,13 +1,12 @@
-import { defineAsyncComponent, h } from 'vue'
-import Icon from '@/Icon/index.vue'
 import type { FormElement } from '@/types'
 import attrSchema from './attrSchema'
+import Component from './Component.vue'
 
 export default {
   title: '图形验证码',
   component: 'VerifyCode',
-  render: defineAsyncComponent(() => import('./Component.vue')),
-  icon: h(Icon, { name: 'verifyCode' }),
+  render: Component,
+  icon: 'verifyCode',
   type: 'basic',
   order: 18,
   attrSchema
