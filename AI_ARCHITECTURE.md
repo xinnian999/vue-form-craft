@@ -809,10 +809,6 @@ render: defineAsyncComponent(() => import('./FormList.vue'))
 - `/src/elements/`: 组件定义
 - `/src/utils/`: 工具函数
 
-### 9.2 架构变更同步
-
-**重要**: 如果进行了组件架构或核心功能的改动，必须同步更新本文档（AI_ARCHITECTURE.md）。
-
 ### 9.3 类型安全
 
 - 所有组件导出必须使用 `satisfies FormElement`
@@ -823,6 +819,14 @@ render: defineAsyncComponent(() => import('./FormList.vue'))
 
 - 工具函数必须有单元测试（`/src/utils/_test_/`）
 - 复杂逻辑必须有测试覆盖
+
+### 9.5 schema规范
+
+- schema中所有属性都必须使用标准JSON格式定义
+
+### 9.6 函数传递规范
+
+- 为了符合标准JSON格式定义，函数必须使用js表达式语法，例如 `"{{ () => { /* code */ } }}"`
 
 ---
 

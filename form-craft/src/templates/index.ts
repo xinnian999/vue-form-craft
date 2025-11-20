@@ -8,6 +8,7 @@ import dateRangeBooking from './dateRangeBooking'
 import eventLinkage from './eventLinkage'
 import fileUpload from './fileUpload'
 import formList from './formList'
+import funcAttr from './funcAttr'
 import login from './login'
 import orderInvoice from './orderInvoice'
 import register from './register'
@@ -102,6 +103,10 @@ export default [
         description: '预约时间段选择、人数、备注等常见场景。'
       }
     ]
+  },
+  {
+    label: '功能案例',
+    children: [{ label: '函数传递', schema: funcAttr, description: '支持函数作为字段值传递' }]
   },
   {
     label: '表单联动案例',

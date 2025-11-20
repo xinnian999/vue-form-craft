@@ -16,7 +16,8 @@ export default {
       props: {
         align: 'left',
         gap: 20
-      }
+      },
+      children: []
     },
     items: [
       { label: '唯一标识', component: 'Input', name: 'name' },

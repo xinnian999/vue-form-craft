@@ -86,7 +86,7 @@ import { computed, onBeforeMount, onMounted, reactive, watch } from 'vue'
 import { useElements, useFormInstance } from '@/hooks'
 import Icon from '@/Icon/index.vue'
 import type { FormItemType } from '@/types'
-import { getDataByPath, ns, parseRules } from '@/utils'
+import { filterExpressions, getDataByPath, ns, parseRules } from '@/utils'
 
 const props = defineProps<FormItemType>()
 
@@ -150,7 +150,7 @@ const componentProps = computed(() => {
   const newProps: Record<string, any> = {
     name: props.name,
     designKey: props.designKey,
-    ...props.props
+    ...filterExpressions(props.props)
   }
 
   if (props.children) {

@@ -1,4 +1,5 @@
 export { default as deepParse } from './deepParse'
+export { default as filterExpressions } from './filterExpressions'
 export { default as getRandomId } from './getRandomId'
 export { default as getDataByPath } from './getDataByPath'
 export { default as setDataByPath } from './setDataByPath'

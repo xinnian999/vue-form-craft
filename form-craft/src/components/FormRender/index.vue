@@ -2,7 +2,7 @@
   <el-form :model="formValues" ref="form" v-bind="formAttrs">
     <slot />
 
-    <FormItemGroup :list="formItems" />
+    <FormItemGroup :list="parseSchema.items" />
 
     <el-form-item v-if="!design && !read">
       <el-button v-if="schema.submitBtn" type="primary" @click="instance.submit" name="submit-btn">
@@ -22,7 +22,7 @@ import { computed, onBeforeMount, provide, reactive, readonly, toRefs, useTempla
 import { FormItemGroup } from '@/components'
 import { $formInstance } from '@/symbol'
 import type { FormInstance, FormRenderEmits, FormRenderProps } from '@/types'
-import { deepParse, getDataByPath, setDataByPath } from '@/utils'
+import { deepParse, filterExpressions, getDataByPath, setDataByPath } from '@/utils'
 
 const props = withDefaults(defineProps<FormRenderProps>(), {
   schema: () => ({})
@@ -110,7 +110,6 @@ const instanceAPI = {
 }
 
 // ========== Context 定义（包含 $instance） ==========
-// 性能优化：使用shallowRef减少深层响应式开销
 const context = computed(() => ({
   ...props.schemaContext,
   $values: formValues.value,
@@ -118,14 +117,14 @@ const context = computed(() => ({
   $instance: instanceAPI
 }))
 
-// 性能优化：缓存解析结果，只在schema或context变化时重新解析
-const formItems = computed(() => {
+// 全局schema解析，使用模板引擎处理所有字段中的表达式
+const parseSchema = computed(() => {
+  // 设计模式下直接返回原始schema，不进行表达式解析
   if (props.design) {
-    return props.schema.items
+    return props.schema
   }
-
-  // deepParse已经有缓存机制，这里直接调用
-  return deepParse(props.schema.items || [], context.value)
+  // 运行模式下解析表达式
+  return deepParse(props.schema, context.value)
 })
 
 const formAttrs = computed(() => {

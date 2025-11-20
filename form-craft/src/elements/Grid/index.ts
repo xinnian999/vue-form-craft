@@ -17,7 +17,8 @@ export default {
         columns: 2,
         columnGap: 20,
         rowGap: 20
-      }
+      },
+      children: []
     },
     items: [
       { label: '唯一标识', component: 'Input', name: 'name' },
