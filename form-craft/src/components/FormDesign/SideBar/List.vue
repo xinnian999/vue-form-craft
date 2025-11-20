@@ -27,10 +27,7 @@
             <div :class="ns('menu-list-item-ico')">
               <component class="ico-content" :is="element.icon" />
             </div>
-            <div
-              :class="ns('menu-list-item-name')"
-              :style="{ fontSize: lang === 'zh' ? '12px' : '10px' }"
-            >
+            <div :class="ns('menu-list-item-name')">
               {{ element.title }}
             </div>
           </li>
@@ -65,10 +62,7 @@
               <div :class="ns('menu-list-item-ico')">
                 <component class="ico-content" :is="element.icon" />
               </div>
-              <div
-                :class="ns('menu-list-item-name')"
-                :style="{ fontSize: lang === 'zh' ? '12px' : '10px' }"
-              >
+              <div :class="ns('menu-list-item-name')">
                 {{ element.title }}
               </div>
             </li>
@@ -82,7 +76,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import draggable from 'vuedraggable-es-fix'
-import { useDesignInstance, useElements, useLang } from '@/hooks'
+import { useDesignInstance, useElements } from '@/hooks'
 import Icon from '@/Icon/index.vue'
 import type { FormElement, FormItemType } from '@/types'
 import { generateDesignKey, generateName, ns, repirNode } from '@/utils'
@@ -92,15 +86,11 @@ const designInstance = useDesignInstance()!
 
 const elements = useElements()
 
-const lang = useLang()
-
 const active = ref(['基础组件', '布局组件'])
 
 const q = ref('')
 
-const menus = computed(() =>
-  parseMenus({ elements, omits: designInstance.omitMenus || [], lang: lang.value })
-)
+const menus = computed(() => parseMenus({ elements, omits: designInstance.omitMenus || [] }))
 
 // 搜索过滤后的组件列表
 const filteredComponents = computed(() => {

@@ -53,7 +53,7 @@
 <script setup lang="ts">
 import { ElMessageBox } from 'element-plus'
 import { ref } from 'vue'
-import { useDesignInstance, useLocale } from '@/hooks'
+import { useDesignInstance } from '@/hooks'
 import Icon from '@/Icon/index.vue'
 import { ns } from '@/utils'
 import Json from './Json/index.vue'
@@ -69,8 +69,6 @@ type PreviewAction = {
 
 const designInstance = useDesignInstance()!
 
-const locale = useLocale()
-
 const JsonVisible = ref(false)
 
 const PreviewVisible = ref(false)
@@ -79,7 +77,7 @@ const btnSize = 'small'
 
 const rightActions: PreviewAction[] = [
   {
-    label: locale.value.actions.previewForm,
+    label: '预览',
     btnType: 'default',
     icon: 'eye',
     onClick: () => {
@@ -95,7 +93,7 @@ const rightActions: PreviewAction[] = [
     }
   },
   {
-    label: locale.value.actions.clear,
+    label: '清空',
     btnType: 'danger',
     icon: 'trash',
     name: 'clear-design',
@@ -105,7 +103,7 @@ const rightActions: PreviewAction[] = [
     }
   },
   {
-    label: locale.value.actions.save,
+    label: '保存',
     icon: 'save',
     btnType: 'primary',
     onClick: () => {

@@ -1,7 +1,7 @@
 <template>
   <el-dialog
     v-model="visible"
-    :title="locale.actions.previewForm"
+    title="预览"
     width="70%"
     center
     destroy-on-close
@@ -43,7 +43,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { FormRender } from '@/components'
-import { useDesignInstance, useElements, useLocale } from '@/hooks'
+import { useDesignInstance, useElements } from '@/hooks'
 import type { FormInstance } from '@/types'
 
 const designInstance = useDesignInstance()!
@@ -59,8 +59,6 @@ const formValues = ref({})
 const visible = defineModel<boolean>()
 
 const context = computed(() => formRef.value?.context)
-
-const locale = useLocale()
 
 const previewStyle = {
   minHeight: '200px',

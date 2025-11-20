@@ -111,43 +111,6 @@ export type HistoryRecord = {
   timestamp: number
 }
 
-export type Lang = Ref<'en' | 'zh'>
-
-export type Locale = {
-  menus: {
-    basicTitle: string
-    highTitle: string
-    layoutTitle: string
-    assistTitle: string
-    useTemplateBtn: string
-  }
-  actions: {
-    previewJson: string
-    previewVueCode: string
-    previewForm: string
-    clear: string
-    save: string
-  }
-  canvas: {
-    emptyTip: string
-    wrapperEmptyTip: string
-  }
-  attr: {
-    tab1: {
-      title: string
-      emptyTip: string
-      linkage: {
-        text: string
-        action1: string
-        action2: string
-      }
-    }
-    tab2: {
-      title: string
-    }
-  }
-}
-
 // AI生成参数
 export type AiGenerateParams = {
   prompt: string // 提示词
@@ -161,7 +124,6 @@ export type AiGenerateFunction = (params: AiGenerateParams) => Promise<any>
 export type Options = {
   request?: (options: Record<string, any>) => Promise<Record<string, any>>
   extendElements?: Record<string, FormElement>
-  lang?: 'zh' | 'en'
   ai?: AiGenerateFunction // 改为函数类型
 }
 

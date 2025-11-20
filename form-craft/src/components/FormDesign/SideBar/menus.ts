@@ -1,40 +1,30 @@
-import locales from '@/locales'
 import type { FormElement } from '@/types'
 
 type Params = {
   elements: Record<string, FormElement>
-  lang: 'zh' | 'en'
   omits: string[]
 }
 
-export default ({ elements, lang, omits }: Params) => {
+export default ({ elements, omits }: Params) => {
   const getChildren = (type: string) => {
     return Object.values(elements)
       .filter((item) => item.type === type && item.order < 10000 && !omits.includes(item.component))
       .sort((a, b) => {
         return a.order - b.order
       })
-      .map((item) => {
-        return {
-          ...item,
-          title: lang === 'zh' ? item.title : item.component
-        }
-      })
   }
-
-  const locale = locales[lang]
 
   const menus = [
     {
-      title: locale.menus.layoutTitle,
+      title: '布局组件',
       children: getChildren('layout')
     },
     {
-      title: locale.menus.basicTitle,
+      title: '基础组件',
       children: getChildren('basic')
     },
     {
-      title: locale.menus.assistTitle,
+      title: '辅助组件',
       children: getChildren('assist')
     }
   ]
