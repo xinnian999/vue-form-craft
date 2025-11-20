@@ -69,9 +69,8 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { CodeHighLight, Markdown } from '@/components'
+import { CodeHighLight, Icon, Markdown } from '@/components'
 import { useDesignInstance } from '@/hooks'
-import Icon from '@/Icon/index.vue'
 import { jsJsonSchema, jsVue, tsJsonSchema, tsVue } from './config'
 import help from './help.md?raw'
 import 'md-editor-v3/lib/style.css'

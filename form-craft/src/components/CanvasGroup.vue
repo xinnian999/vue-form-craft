@@ -42,8 +42,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import Draggable from 'vuedraggable-es-fix'
+import { Icon } from '@/components'
 import { useDesignInstance } from '@/hooks'
-import Icon from '@/Icon/index.vue'
 import type { FormItemType } from '@/types'
 import { ns } from '@/utils'
 import CanvasItem from './CanvasItem.vue'

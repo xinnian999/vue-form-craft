@@ -61,8 +61,8 @@
 <script setup lang="ts">
 import { isEqual } from 'lodash'
 import { computed, onBeforeMount, watch } from 'vue'
+import { Icon } from '@/components'
 import { useElements, useFormInstance } from '@/hooks'
-import Icon from '@/Icon/index.vue'
 import type { FormItemType } from '@/types'
 import { filterExpressions, getDataByPath, ns, parseRules } from '@/utils'
 

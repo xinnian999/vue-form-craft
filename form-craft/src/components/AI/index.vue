@@ -38,8 +38,8 @@
 import { ref, type Ref } from 'vue'
 import { BubbleList, Sender } from 'vue-element-plus-x'
 import type { BubbleListItemProps } from 'vue-element-plus-x/types/BubbleList'
+import { Icon } from '@/components'
 import { useDesignInstance, useGlobals } from '@/hooks'
-import Icon from '@/Icon/index.vue'
 import { createAiHelper, ns } from '@/utils'
 import Welcome from './Welcome.vue'
 

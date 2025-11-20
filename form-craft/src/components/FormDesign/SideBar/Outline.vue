@@ -22,8 +22,8 @@
 
 <script setup lang="ts">
 import { computed, h } from 'vue'
+import { Icon } from '@/components'
 import { useDesignInstance, useElements } from '@/hooks'
-import Icon from '@/Icon/index.vue'
 import type { FormItemType } from '@/types'
 import { ns } from '@/utils'
 

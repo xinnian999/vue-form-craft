@@ -61,7 +61,7 @@
 import { VueMonacoEditor } from '@guolao/vue-monaco-editor'
 import { ElMessage } from 'element-plus'
 import { computed, ref, shallowRef, watch } from 'vue'
-import Icon from '@/Icon/index.vue'
+import { Icon } from '@/components'
 import { ns } from '@/utils'
 
 const modelValue = defineModel<string>()

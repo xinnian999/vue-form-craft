@@ -18,7 +18,7 @@ import vue from 'shiki/langs/vue-html.mjs'
 import githubLight from 'shiki/themes/github-light.mjs'
 import getWasm from 'shiki/wasm'
 import { onMounted, ref } from 'vue'
-import Icon from '@/Icon/index.vue'
+import { Icon } from '@/components'
 
 const props = withDefaults(
   defineProps<{

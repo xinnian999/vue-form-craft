@@ -1,5 +1,5 @@
 import { h } from 'vue'
-import Icon from '@/Icon/index.vue'
+import { Icon } from '@/components'
 
 const iconStyle = {
   display: 'inline-block',

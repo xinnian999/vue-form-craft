@@ -29,9 +29,8 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { AI } from '@/components'
+import { AI, Icon } from '@/components'
 import { useGlobals } from '@/hooks'
-import Icon from '@/Icon/index.vue'
 import { ns } from '@/utils'
 import History from './History.vue'
 import List from './List.vue'

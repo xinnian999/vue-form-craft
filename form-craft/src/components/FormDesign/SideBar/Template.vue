@@ -22,8 +22,8 @@
 </template>
 
 <script setup lang="ts">
+import { Icon } from '@/components'
 import { useDesignInstance } from '@/hooks'
-import Icon from '@/Icon/index.vue'
 import templates from '@/templates'
 import { ns, repirJsonSchema } from '@/utils'
 

@@ -108,9 +108,8 @@
 import type { TableColumnCtx } from 'element-plus'
 import { cloneDeep, isEqual, pickBy, set } from 'lodash'
 import { computed, h, onMounted, provide, ref, watch } from 'vue'
-import { CanvasGroup, FormItem } from '@/components'
+import { CanvasGroup, FormItem, Icon } from '@/components'
 import { useChildrenModel, useFormInstance } from '@/hooks'
-import Icon from '@/Icon/index.vue'
 import type { FormItemType } from '@/types'
 import { deepParse } from '@/utils'
 

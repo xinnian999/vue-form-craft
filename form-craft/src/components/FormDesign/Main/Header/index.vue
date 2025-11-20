@@ -53,8 +53,8 @@
 <script setup lang="ts">
 import { ElMessageBox } from 'element-plus'
 import { ref } from 'vue'
+import { Icon } from '@/components'
 import { useDesignInstance } from '@/hooks'
-import Icon from '@/Icon/index.vue'
 import { ns } from '@/utils'
 import Json from './Json/index.vue'
 import Preview from './Preview.vue'

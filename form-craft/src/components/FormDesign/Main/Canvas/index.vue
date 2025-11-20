@@ -29,9 +29,8 @@
 </template>
 
 <script setup lang="ts">
-import { FormRender } from '@/components'
+import { FormRender, Icon } from '@/components'
 import { useDesignInstance } from '@/hooks'
-import Icon from '@/Icon/index.vue'
 import { ns } from '@/utils'
 
 const designInstance = useDesignInstance()!

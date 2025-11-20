@@ -76,9 +76,8 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import draggable from 'vuedraggable-es-fix'
-import { ElementIcon } from '@/components'
+import { ElementIcon, Icon } from '@/components'
 import { useDesignInstance, useElements } from '@/hooks'
-import Icon from '@/Icon/index.vue'
 import type { FormElement, FormItemType } from '@/types'
 import { generateDesignKey, generateName, ns, repirNode } from '@/utils'
 import parseMenus from './menus'
