@@ -16,7 +16,60 @@
 - items是表单项的合集。每个表单项可配置 label、name、component、props、designKey 等。
 - component 字段实际上是 element-plus 的组件映射（Input → ElInput，Select → ElSelect …）。每个表单项的 props 可以传入 对应 element-plus 组件支持的所有 props。但Radio/Checkbox比较特殊，是基于el的二次封装组件，可以直接传入options。
 - 每个表单项必须增添唯一的designKey，格式: design-xxxx。
-- 示例：
+
+### 支持的组件列表
+
+**重要**: 只能使用以下组件，禁止使用不在列表中的组件！
+
+**基础组件**:
+
+- `Input`: 单行文本输入
+- `TextArea`: 多行文本输入
+- `Password`: 密码输入
+- `InputNumber`: 数字输入
+- `Select`: 下拉选择
+- `Radio`: 单选框
+- `Checkbox`: 多选框
+- `Switch`: 开关
+- `Slider`: 滑块
+- `Rate`: 评分
+- `ColorPicker`: 颜色选择器
+- `DatePicker`: 日期选择器
+- `Cascader`: 级联选择器
+- `Autocomplete`: 自动补全输入
+
+**高级组件**:
+
+- `Upload`: 文件上传
+- `FormList`: 自增容器（数组数据收集）
+- `SelectInput`: 选择输入组合
+- `ColorInput`: 颜色输入
+- `VerifyCode`: 验证码输入
+- `Esign`: 电子签名
+- `Markdown`: Markdown编辑器
+- `JsonEdit`: JSON编辑器
+- `Custom`: 自定义组件
+
+**布局组件**:
+
+- `Grid`: 栅格布局
+- `Tabs`: 标签页
+- `TabPane`: 标签页面板
+- `Card`: 卡片
+- `Collapse`: 折叠面板
+- `CollapseItem`: 折叠面板项
+- `Inline`: 行内布局
+- `ObjGroup`: 对象分组
+
+**辅助组件**:
+
+- `Title`: 标题
+- `Text`: 文本
+- `Divider`: 分割线
+- `Alert`: 提示
+- `Tag`: 标签
+
+### 示例：
 
 ```json
 {
@@ -83,7 +136,15 @@
 
 - 使用 `{{ }}` 包裹 JS 表达式。
 - 仅能用于 **配置属性的动态计算**，例如：hidden、disabled、placeholder、help 等。
-- 表达式内可以访问 `$values`（表单数据对象）、`$selectData`（选择器数据）、`$instance`（表单实例）等上下文变量。
+- 表达式内可以访问 `$values`（表单数据对象）、`$selectData`（选择器数据）、`$instance`（表单实例）等全局变量。
+
+**全局变量说明**：
+
+- `$values`: 表单所有字段的值
+- `$selectData`: 选择器组件的源数据
+- `$instance`: 表单实例，提供 `setFieldValue`、`getFieldValue`、`validate` 等方法
+- `$item`: FormList中当前行的数据
+- `$index`: FormList中当前行的索引
 
 示例：
 
@@ -227,6 +288,87 @@
 ```
 
 如果用户需求涉及交互或联动，必须遵循以上联动规则
+
+### 方式三：事件处理函数
+
+当需要在事件中执行复杂逻辑时，可以在 `props` 中配置事件处理函数。
+
+**函数语法**：
+
+- 使用 `{{ }}` 包裹箭头函数或普通函数
+- 函数内可直接访问全局变量（`$values`、`$instance` 等）
+- 事件参数直接作为函数参数传入
+
+**常用事件**：
+
+- `onChange`: 值改变时触发
+- `onBlur`: 失去焦点时触发
+- `onInput`: 输入时触发
+- `onClick`: 点击时触发
+- `disabledDate`: 日期禁用判断（DatePicker组件）
+
+示例1（普通函数 - 日期选择限制）：
+
+```json
+{
+  "label": "预约日期",
+  "name": "appointmentDate",
+  "component": "DatePicker",
+  "props": {
+    "placeholder": "请选择日期",
+    "disabledDate": "{{ (time) => time.getTime() < Date.now() - 86400000 }}"
+  },
+  "designKey": "design-date"
+}
+```
+
+示例2（onChange事件 - 联动计算）：
+
+```json
+{
+  "label": "单价",
+  "name": "price",
+  "component": "InputNumber",
+  "props": {
+    "placeholder": "请输入单价",
+    "onChange": "{{ () => { const price = $values.price || 0; const quantity = $values.quantity || 0; $instance.setFieldValue('total', price * quantity) } }}"
+  },
+  "designKey": "design-price"
+}
+```
+
+示例2（onBlur事件 - 验证提示）：
+
+```json
+{
+  "label": "用户名",
+  "name": "username",
+  "component": "Input",
+  "props": {
+    "placeholder": "请输入用户名",
+    "onBlur": "{{ () => { const username = $values.username; if (username && username.length < 3) { $instance.setFieldValue('tip', '用户名至少3个字符') } else if (username) { $instance.setFieldValue('tip', '用户名可用') } } }}"
+  },
+  "designKey": "design-username"
+}
+```
+
+示例3（带参数的事件处理）：
+
+```json
+{
+  "label": "省份",
+  "name": "province",
+  "component": "Select",
+  "props": {
+    "options": [
+      { "label": "广东省", "value": "guangdong" },
+      { "label": "北京市", "value": "beijing" }
+    ],
+    "onChange": "{{ (value) => { if (value === 'guangdong') { $instance.setFieldValue('city', '广州') } else if (value === 'beijing') { $instance.setFieldValue('city', '北京') } } }}"
+  },
+  "designKey": "design-province"
+}
+```
 
 ## 校验规范
 

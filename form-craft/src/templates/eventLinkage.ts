@@ -13,14 +13,14 @@ export default {
       props: {
         placeholder: '请输入用户名',
         maxlength: 20,
-        onBlur: `{{ (params) => {
-  const username = params.$values.username
+        onBlur: `{{ () => {
+  const username = $values.username
   if (username && username.length < 3) {
-    params.$instance.setFieldValue('usernameValid', false)
-    params.$instance.setFieldValue('tip', '用户名至少3个字符')
+    $instance.setFieldValue('usernameValid', false)
+    $instance.setFieldValue('tip', '用户名至少3个字符')
   } else if (username) {
-    params.$instance.setFieldValue('usernameValid', true)
-    params.$instance.setFieldValue('tip', '用户名可用')
+    $instance.setFieldValue('usernameValid', true)
+    $instance.setFieldValue('tip', '用户名可用')
   }
 } }}`
       },
@@ -60,9 +60,7 @@ export default {
           { label: '北京市', value: 'beijing' },
           { label: '上海市', value: 'shanghai' }
         ],
-        onChange: `{{ (params) => {
-  const province = params.args[0]
-  
+        onChange: `{{ (province) => {
   // 根据省份动态设置城市选项
   let cityOptions = []
   if (province === 'guangdong') {
@@ -86,13 +84,13 @@ export default {
   }
   
   // 更新城市选项
-  params.$instance.updateItemSchemaByPath('city', 'props.options', cityOptions)
+  $instance.updateItemSchemaByPath('city', 'props.options', cityOptions)
   
   // 清空城市选择
-  params.$instance.setFieldValue('city', '')
+  $instance.setFieldValue('city', '')
   
   // 清空区县选择
-  params.$instance.setFieldValue('district', '')
+  $instance.setFieldValue('district', '')
 } }}`
       },
       required: true,
@@ -106,9 +104,7 @@ export default {
         placeholder: '请先选择省份',
         mode: 'static',
         options: [],
-        onChange: `{{ (params) => {
-  const city = params.args[0]
-  
+        onChange: `{{ (city) => {
   // 根据城市动态设置区县选项
   let districtOptions = []
   if (city === 'guangzhou') {
@@ -129,10 +125,10 @@ export default {
   }
   
   // 更新区县选项
-  params.$instance.updateItemSchemaByPath('district', 'props.options', districtOptions)
+  $instance.updateItemSchemaByPath('district', 'props.options', districtOptions)
   
   // 清空区县选择
-  params.$instance.setFieldValue('district', '')
+  $instance.setFieldValue('district', '')
 } }}`
       },
       designKey: 'design-city'
@@ -156,11 +152,11 @@ export default {
         min: 0,
         precision: 2,
         placeholder: '请输入单价',
-        onChange: `{{ (params) => {
-  const price = params.$values.price || 0
-  const quantity = params.$values.quantity || 0
+        onChange: `{{ () => {
+  const price = $values.price || 0
+  const quantity = $values.quantity || 0
   const total = (price * quantity).toFixed(2)
-  params.$instance.setFieldValue('total', total)
+  $instance.setFieldValue('total', total)
 } }}`
       },
       designKey: 'design-price'
@@ -172,11 +168,11 @@ export default {
       props: {
         min: 1,
         placeholder: '请输入数量',
-        onChange: `{{ (params) => {
-  const price = params.$values.price || 0
-  const quantity = params.$values.quantity || 0
+        onChange: `{{ () => {
+  const price = $values.price || 0
+  const quantity = $values.quantity || 0
   const total = (price * quantity).toFixed(2)
-  params.$instance.setFieldValue('total', total)
+  $instance.setFieldValue('total', total)
 } }}`
       },
       initialValue: 1,
@@ -201,18 +197,18 @@ export default {
         placeholder: '请输入备注',
         maxlength: 200,
         showWordLimit: true,
-        onInput: `{{ (params) => {
-  const remark = params.$values.remark || ''
+        onInput: `{{ () => {
+  const remark = $values.remark || ''
   const length = remark.length
   
   if (length > 150) {
-    params.$instance.setFieldValue('remarkTip', '备注内容较长，请精简')
+    $instance.setFieldValue('remarkTip', '备注内容较长，请精简')
   } else if (length > 100) {
-    params.$instance.setFieldValue('remarkTip', '备注内容适中')
+    $instance.setFieldValue('remarkTip', '备注内容适中')
   } else if (length > 0) {
-    params.$instance.setFieldValue('remarkTip', '备注内容较短')
+    $instance.setFieldValue('remarkTip', '备注内容较短')
   } else {
-    params.$instance.setFieldValue('remarkTip', '')
+    $instance.setFieldValue('remarkTip', '')
   }
 } }}`
       },

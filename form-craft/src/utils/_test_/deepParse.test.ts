@@ -7,7 +7,9 @@ describe('deepParse - 基础表达式解析', () => {
   })
 
   test('解析字符串拼接', () => {
-    expect(deepParse('{{ $values.name + "的简介" }}', { $values: { name: '张三' } })).toBe('张三的简介')
+    expect(deepParse('{{ $values.name + "的简介" }}', { $values: { name: '张三' } })).toBe(
+      '张三的简介'
+    )
   })
 
   test('解析布尔表达式', () => {
@@ -16,7 +18,9 @@ describe('deepParse - 基础表达式解析', () => {
   })
 
   test('解析三元表达式', () => {
-    expect(deepParse('{{ $values.age > 18 ? "成年" : "未成年" }}', { $values: { age: 20 } })).toBe('成年')
+    expect(deepParse('{{ $values.age > 18 ? "成年" : "未成年" }}', { $values: { age: 20 } })).toBe(
+      '成年'
+    )
   })
 
   test('不包含 {{ }} 的字符串原样返回', () => {
@@ -30,14 +34,14 @@ describe('deepParse - 基础表达式解析', () => {
 
 describe('deepParse - 函数解析', () => {
   test('解析箭头函数（单参数）', () => {
-    const result = deepParse('{{ (params) => params.$values.name }}', { $values: { name: '张三' } })
+    const result = deepParse('{{ () => $values.name }}', { $values: { name: '张三' } })
     expect(typeof result).toBe('function')
     expect(result()).toBe('张三')
   })
 
   test('解析箭头函数（多行）', () => {
-    const multilineFunc = `{{ (params) => {
-  const name = params.$values.name
+    const multilineFunc = `{{ () => {
+  const name = $values.name
   return name + '的简介'
 } }}`
     const result = deepParse(multilineFunc, { $values: { name: '李四' } })
@@ -46,34 +50,35 @@ describe('deepParse - 函数解析', () => {
   })
 
   test('解析普通函数', () => {
-    const result = deepParse('{{ function(params) { return params.$values.age > 18 } }}', { $values: { age: 20 } })
+    const result = deepParse('{{ function() { return $values.age > 18 } }}', {
+      $values: { age: 20 }
+    })
     expect(typeof result).toBe('function')
     expect(result()).toBe(true)
   })
 
-  test('函数接收 args 参数', () => {
-    const result = deepParse('{{ (params) => params.args[0] * 2 }}', { $values: {} })
+  test('函数接收原始参数', () => {
+    const result = deepParse('{{ (value) => value * 2 }}', { $values: {} })
     expect(typeof result).toBe('function')
     expect(result(5)).toBe(10)
   })
 
   test('函数可以访问多个上下文变量', () => {
-    const result = deepParse(
-      '{{ (params) => params.$values.name + params.$selectData.title }}',
-      { $values: { name: '张三' }, $selectData: { title: '工程师' } }
-    )
+    const result = deepParse('{{ () => $values.name + $selectData.title }}', {
+      $values: { name: '张三' },
+      $selectData: { title: '工程师' }
+    })
     expect(typeof result).toBe('function')
     expect(result()).toBe('张三工程师')
   })
 
   test('函数可以调用 $instance 方法', () => {
     const mockInstance = {
-      getFieldValue: (path: string) => path === 'name' ? '王五' : null
+      getFieldValue: (path: string) => (path === 'name' ? '王五' : null)
     }
-    const result = deepParse(
-      '{{ (params) => params.$instance.getFieldValue("name") }}',
-      { $instance: mockInstance }
-    )
+    const result = deepParse('{{ () => $instance.getFieldValue("name") }}', {
+      $instance: mockInstance
+    })
     expect(typeof result).toBe('function')
     expect(result()).toBe('王五')
   })
@@ -94,8 +99,8 @@ describe('deepParse - 对象解析', () => {
 
   test('解析对象中的函数', () => {
     const obj = {
-      onClick: '{{ (params) => console.log(params.$values.name) }}',
-      onChange: '{{ (params) => params.$instance.validate() }}'
+      onClick: '{{ () => console.log($values.name) }}',
+      onChange: '{{ () => $instance.validate() }}'
     }
     const result = deepParse(obj, { $values: { name: '张三' }, $instance: {} })
     expect(typeof result.onClick).toBe('function')
@@ -145,8 +150,8 @@ describe('deepParse - 错误处理', () => {
   })
 
   test('函数语法错误时返回原字符串', () => {
-    const result = deepParse('{{ (params) => { return }}', { $values: {} })
-    expect(result).toBe('{{ (params) => { return }}')
+    const result = deepParse('{{ () => { return }}', { $values: {} })
+    expect(result).toBe('{{ () => { return }}')
   })
 })
 
@@ -155,22 +160,21 @@ describe('deepParse - 复杂场景', () => {
     // 模拟 $instance 实例方法
     const mockInstance = {
       setFieldValue: (path: string, value: any) => ({ path, value }),
-      getFieldValue: (path: string) => path === 'city' ? '北京' : null,
+      getFieldValue: (path: string) => (path === 'city' ? '北京' : null),
       validate: () => 'validated'
     }
 
     // onChange 事件中调用 $instance 方法实现联动
     const onChangeHandler = deepParse(
-      `{{ (params) => {
-        const value = params.args[0]
+      `{{ (value) => {
         // 根据省份设置城市
         if (value === '广东') {
-          params.$instance.setFieldValue('city', '广州')
+          $instance.setFieldValue('city', '广州')
         } else if (value === '北京') {
-          params.$instance.setFieldValue('city', '北京')
+          $instance.setFieldValue('city', '北京')
         }
         // 触发验证并返回结果
-        return params.$instance.validate()
+        return $instance.validate()
       } }}`,
       { $instance: mockInstance }
     )
@@ -191,13 +195,13 @@ describe('deepParse - 复杂场景', () => {
 
     // 根据类型动态设置多个字段
     const handler = deepParse(
-      `{{ (params) => {
-        const type = params.$values.type
+      `{{ () => {
+        const type = $values.type
         if (type === 'company') {
-          params.$instance.setFieldValue('companyName', '必填')
-          params.$instance.setFieldValue('taxNumber', '必填')
+          $instance.setFieldValue('companyName', '必填')
+          $instance.setFieldValue('taxNumber', '必填')
         } else {
-          params.$instance.setFieldValue('idCard', '必填')
+          $instance.setFieldValue('idCard', '必填')
         }
       } }}`,
       { $values: { type: 'company' }, $instance: mockInstance }
@@ -208,10 +212,7 @@ describe('deepParse - 复杂场景', () => {
   })
 
   test('复杂的多行函数', () => {
-    const complexFunc = `{{ (params) => {
-  const { $values, $instance, args } = params
-  const event = args[0]
-  
+    const complexFunc = `{{ (event) => {
   if ($values.age > 18) {
     console.log('成年人')
     return true
@@ -237,7 +238,7 @@ describe('deepParse - 复杂场景', () => {
             placeholder: '{{ $values.type === "edit" ? "请修改姓名" : "请输入姓名" }}',
             disabled: '{{ $values.readonly }}'
           },
-          onChange: '{{ (params) => params.$instance.validate() }}'
+          onChange: '{{ () => $instance.validate() }}'
         }
       ]
     }
@@ -248,7 +249,7 @@ describe('deepParse - 复杂场景', () => {
     }
 
     const result = deepParse(formConfig, context)
-    
+
     expect(result.labelWidth).toBe(150)
     expect(result.items[0].props.placeholder).toBe('请修改姓名')
     expect(result.items[0].props.disabled).toBe(false)

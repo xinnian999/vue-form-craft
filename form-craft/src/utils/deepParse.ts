@@ -4,7 +4,6 @@ import { isArray, isPlainObject, isString } from 'lodash'
 const functionCache = new Map<string, Function>()
 
 // 模板转换函数，将一个由双大括号包裹的字符串，转化为并返回结果（context限制变量范围）
-// 如果返回值是函数，会自动包装并传入 context + args
 const templateParse = (str: string, context: Record<string, any>) => {
   if (!str) return str
   if (typeof str !== 'string') return str
@@ -16,7 +15,7 @@ const templateParse = (str: string, context: Record<string, any>) => {
       const expression = template[1]
       const contextKeys = Object.keys(context).join(',')
       const cacheKey = `${contextKeys}:${expression}`
-      
+
       // 尝试从缓存获取Function实例
       let parse = functionCache.get(cacheKey)
       if (!parse) {
@@ -31,16 +30,8 @@ const templateParse = (str: string, context: Record<string, any>) => {
         }
         functionCache.set(cacheKey, parse)
       }
-      
-      const result = parse(...Object.values(context))
 
-      // 如果解析结果是函数，包装它，将 context 和原始参数合并后传入
-      if (typeof result === 'function') {
-        return (...args: any[]) => {
-          const mergedParams = { ...context, args }
-          return result(mergedParams)
-        }
-      }
+      const result = parse(...Object.values(context))
 
       return result
     } catch (e) {

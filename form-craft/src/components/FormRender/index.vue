@@ -46,11 +46,11 @@ const setValues: FormInstance['setValues'] = (values) => {
 
 const getFieldValue: FormInstance['getFieldValue'] = (path) => getDataByPath(getValues(), path)
 
-const setFieldValue: FormInstance['setFieldValue'] = (path, value) => {
+const setFieldValue: FormInstance['setFieldValue'] = async (path, value) => {
   emits('fieldChange', path, value)
-  const newValues = setDataByPath(cloneDeep(getValues()), path, value)
-  setValues(newValues)
-  // setDataByPath(getValues(), path, value)
+  // const newValues = setDataByPath(cloneDeep(getValues()), path, value)
+  // setValues(newValues)
+  setDataByPath(getValues(), path, value)
 }
 
 const validate: FormInstance['validate'] = () => form.value!.validate()
@@ -121,9 +121,9 @@ const context = computed(() => ({
 
 // 性能优化：缓存解析结果，只在schema或context变化时重新解析
 const formItems = computed(() => {
-  if (props.design) {
-    return props.schema.items
-  }
+  // if (props.design) {
+  //   return props.schema.items
+  // }
 
   // deepParse已经有缓存机制，这里直接调用
   return deepParse(props.schema.items || [], context.value)

@@ -24,14 +24,14 @@
               <div style="font-size: 13px; line-height: 1.6">
                 <strong>📌 请输入完整的函数表达式</strong><br />
                 <span style="color: #909399">示例：</span>
-                <code>/**@param {Params} params*/ (params) => params.$values.age > 18</code><br />
-                <span style="color: #909399">params 对象包含：</span>
+                <code>(...args) => $values.age > 18</code><br />
+                <span style="color: #909399">可用的全局变量：</span>
                 <code>$values</code
-                >、<code>$selectData</code>、<code>$instance</code>、<code>$item</code>、<code>$index</code>、<code
-                  >args</code
+                >、<code>$selectData</code>、<code>$instance</code>、<code>$item</code>、<code
+                  >$index</code
                 ><br />
                 <span style="color: #909399; font-size: 12px"
-                  >💡 添加 JSDoc 注释可获得智能提示</span
+                  >💡 这些变量可直接使用，无需通过参数传入</span
                 >
               </div>
             </template>
@@ -142,39 +142,41 @@ const handleEditorMount = (editor: any) => {
 declare const console: Console;
 
 /**
- * 函数参数对象，包含所有上下文变量和事件参数
+ * 表单实例接口，提供各种操作方法
  */
-interface Params {
-  /** 表单数据对象 */
-  $values: Record<string, any>;
-  /** 选择数据对象 */
-  $selectData: Record<string, any>;
-  /** 表单实例，提供各种操作方法 */
-  $instance: {
-    /** 获取所有表单值 */
-    getValues(): Record<string, any>;
-    /** 设置所有表单值 */
-    setValues(values: Record<string, any>): void;
-    /** 获取指定字段的值 */
-    getFieldValue(path: string): any;
-    /** 设置指定字段的值 */
-    setFieldValue(path: string, value: any): void;
-    /** 验证表单 */
-    validate(): Promise<any>;
-    /** 重置表单 */
-    resetFields(): void;
-    /** 提交表单 */
-    submit(): void;
-    /** 更新选择数据 */
-    updateSelectData(key: string, value: any): void;
-  };
-  /** 当前项数据（在列表/自增容器中使用） */
-  $item?: any;
-  /** 当前项索引（在列表/自增容器中使用） */
-  $index?: number;
-  /** 原始事件参数数组，如 [event] */
-  args: any[];
+interface FormInstance {
+  /** 获取所有表单值 */
+  getValues(): Record<string, any>;
+  /** 设置所有表单值 */
+  setValues(values: Record<string, any>): void;
+  /** 获取指定字段的值 */
+  getFieldValue(path: string): any;
+  /** 设置指定字段的值 */
+  setFieldValue(path: string, value: any): void;
+  /** 验证表单 */
+  validate(): Promise<any>;
+  /** 重置表单 */
+  resetFields(): void;
+  /** 提交表单 */
+  submit(): void;
+  /** 更新选择数据 */
+  updateSelectData(key: string, value: any): void;
 }
+
+/** 表单数据对象 */
+declare const $values: Record<string, any>;
+
+/** 选择数据对象 */
+declare const $selectData: Record<string, any>;
+
+/** 表单实例，提供各种操作方法 */
+declare const $instance: FormInstance;
+
+/** 当前项数据（在列表/自增容器中使用） */
+declare const $item: any;
+
+/** 当前项索引（在列表/自增容器中使用） */
+declare const $index: number;
 `
 
     monaco.languages.typescript.javascriptDefaults.addExtraLib(libSource, 'ts:filename/params.d.ts')
@@ -191,25 +193,10 @@ const removeBraces = (code: string): string => {
   return match ? match[1].trim() : code
 }
 
-// 添加 JSDoc 类型注释（如果没有的话）
-const addJSDocIfNeeded = (code: string): string => {
-  if (!code) return `/**@param {Params} params*/\n(params) => {\n  \n}`
-
-  // 检查是否已经有 JSDoc 注释
-  if (code.includes('@param') || code.includes(': Params')) {
-    return code
-  }
-
-  // 在函数前添加 JSDoc 注释
-  return `/**@param {Params} params*/\n${code}`
-}
-
-// 移除 JSDoc 类型注释（保存时）
-const removeJSDoc = (code: string): string => {
-  if (!code) return ''
-
-  // 移除 /**@param {Params} params*/ 这样的注释
-  return code.replace(/\/\*\*\s*@param\s*\{Params\}\s*params\s*\*\/\s*/g, '').trim()
+// 添加默认函数模板（如果没有的话）
+const addDefaultTemplate = (code: string): string => {
+  if (!code) return `(...args) => {\n  \n}`
+  return code
 }
 
 // 添加双大括号（用于保存）
@@ -239,7 +226,7 @@ const validateFunction = (code: string): { valid: boolean; error?: string } => {
   if (!isArrowFunction && !isNormalFunction) {
     return {
       valid: false,
-      error: '请输入完整的函数表达式，如：(params) => ... 或 function(params) { ... }'
+      error: '请输入完整的函数表达式，如：(...args) => ... 或 function(...args) { ... }'
     }
   }
 
@@ -256,9 +243,9 @@ const validateFunction = (code: string): { valid: boolean; error?: string } => {
 }
 
 const openDialog = async () => {
-  // 回显时移除 {{ }} 并添加 JSDoc 注释
+  // 回显时移除 {{ }} 并添加默认模板
   const code = removeBraces(modelValue.value || '')
-  editingCode.value = addJSDocIfNeeded(code)
+  editingCode.value = addDefaultTemplate(code)
 
   const isNewTemplate = !code
   dialogVisible.value = true
@@ -293,9 +280,6 @@ const handleSave = async () => {
     // 获取当前编辑器的代码
     code = editorRef.value.getValue().trim()
   }
-
-  // 移除 JSDoc 注释
-  code = removeJSDoc(code)
 
   // 验证函数
   if (code) {

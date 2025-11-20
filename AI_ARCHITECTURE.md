@@ -257,17 +257,24 @@ type FormElement = {
 
 **功能**: 将 `{{ }}` 包裹的JS表达式转换为实际值，支持访问上下文变量。
 
+**核心特性**: 模板表达式会**实时解析**到 JSON Schema 中，当上下文变量（如 `$values`）变化时，相关的表达式会自动重新计算并更新到 Schema，实现响应式的动态配置。
+
 **核心机制**:
 
 ```typescript
-// 模板语法
+// 模板语法 - 表达式
 '{{ $values.username }}' // 访问表单值
 "{{ $item.type === 'min' }}" // 条件判断
 '{{ $selectData.city }}' // 访问选择器数据
 "{{ $instance.getFieldValue('age') }}" // 调用实例方法
+
+// 模板语法 - 函数（用于事件处理器）
+'{{ () => $values.age > 18 }}' // 无参函数，直接访问全局变量
+'{{ (value) => $instance.setFieldValue("city", value) }}' // 带参函数，参数直接传入
+'{{ (...args) => console.log($values, args) }}' // 多参数函数
 ```
 
-**上下文变量**:
+**全局变量**(函数中可直接访问):
 
 - `$values`: 表单所有值
 - `$selectData`: 选择器组件的源数据
@@ -276,11 +283,16 @@ type FormElement = {
 - `$index`: FormList中当前行索引
 - 用户自定义的 `schemaContext`
 
+**函数处理机制**:
+
+- 函数通过闭包直接访问全局变量（$values、$instance等）
+- 事件参数作为函数参数直接传入
+
 **性能优化**:
 
 - Function实例缓存（避免重复创建）
 - 缓存大小限制（最多500个）
-- 支持函数返回值自动包装
+- FIFO淘汰策略（先进先出）
 
 ### 5.2 表单校验系统
 
