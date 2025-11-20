@@ -1,5 +1,5 @@
 import type { FormElement } from '@/types'
-import attrSchema from './attrSchema'
+import attrSchema from './colorPickerAttrSchema'
 
 export default {
   title: '颜色选择器',

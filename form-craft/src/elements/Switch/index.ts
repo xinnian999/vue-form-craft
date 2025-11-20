@@ -1,6 +1,6 @@
 import type { FormElement } from '@/types'
-import attrSchema from './attrSchema'
 import Component from './Component.vue'
+import attrSchema from './switchAttrSchema'
 
 export default {
   title: '开关',

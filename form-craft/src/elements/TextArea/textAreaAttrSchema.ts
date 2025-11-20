@@ -7,18 +7,25 @@ export default {
   size: 'small',
   submitBtn: false,
   initialValues: {
-    label: '单行文本'
+    label: '多行文本',
+    props: {
+      placeholder: '请输入...',
+      autosize: {
+        minRows: 4,
+        maxRows: 999
+      }
+    }
   },
   items: [
     {
-      name: 'form-2DaW',
+      name: 'form-tabs',
       component: 'Tabs',
       props: {
         defaultKey: 'attrs',
         tabPosition: 'top',
         type: 'card'
       },
-      designKey: 'design-wUHG',
+      designKey: 'design-tabs',
       children: [
         {
           label: '属性',
@@ -27,7 +34,7 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-1',
+          designKey: 'tab-attrs',
           children: [
             {
               label: '标签',
@@ -38,7 +45,7 @@ export default {
                 autocomplete: 'new-password',
                 clearable: true
               },
-              designKey: 'design-gfim'
+              designKey: 'design-label'
             },
             {
               label: '字段标识',
@@ -49,7 +56,7 @@ export default {
                 autocomplete: 'new-password',
                 clearable: true
               },
-              designKey: 'design-njXF'
+              designKey: 'design-name'
             },
             {
               label: '气泡提示',
@@ -63,7 +70,7 @@ export default {
                 },
                 clearable: true
               },
-              designKey: 'design-Qh45'
+              designKey: 'design-help'
             },
             {
               label: '占位提示',
@@ -72,7 +79,7 @@ export default {
               props: {
                 autocomplete: 'new-password'
               },
-              designKey: 'design-JTMu'
+              designKey: 'design-placeholder'
             },
             {
               label: 'ID',
@@ -82,7 +89,7 @@ export default {
                 placeholder: '',
                 autocomplete: 'new-password'
               },
-              designKey: 'design-kC5y'
+              designKey: 'design-id'
             },
             {
               label: 'class',
@@ -92,7 +99,7 @@ export default {
                 placeholder: '',
                 autocomplete: 'new-password'
               },
-              designKey: 'design-BmcU'
+              designKey: 'design-class'
             },
             {
               label: '隐藏',
@@ -101,7 +108,7 @@ export default {
               props: {
                 'inline-prompt': false
               },
-              designKey: 'design-C5Qj'
+              designKey: 'design-hidden'
             },
             {
               label: '禁用',
@@ -110,7 +117,7 @@ export default {
               props: {
                 'inline-prompt': false
               },
-              designKey: 'design-VnLN'
+              designKey: 'design-disabled'
             },
             {
               label: '只读',
@@ -119,13 +126,43 @@ export default {
               props: {
                 'inline-prompt': false
               },
-              designKey: 'design-XgeW'
+              designKey: 'design-readonly'
             },
             {
               label: '清除按钮',
               name: 'props.clearable',
               component: 'Switch',
-              designKey: 'design-8sk2'
+              designKey: 'design-clearable'
+            },
+            {
+              label: '最长字数',
+              name: 'props.maxlength',
+              component: 'InputNumber',
+              props: {
+                min: 0,
+                controlsPosition: ''
+              },
+              designKey: 'design-maxlength'
+            },
+            {
+              label: '最小行数',
+              name: 'props.autosize.minRows',
+              component: 'InputNumber',
+              props: {
+                min: 1,
+                controlsPosition: ''
+              },
+              designKey: 'design-minRows'
+            },
+            {
+              label: '最大行数',
+              name: 'props.autosize.maxRows',
+              component: 'InputNumber',
+              props: {
+                min: 1,
+                controlsPosition: ''
+              },
+              designKey: 'design-maxRows'
             }
           ]
         },
@@ -136,7 +173,7 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-2',
+          designKey: 'tab-rules',
           children: [
             {
               label: '必填',
@@ -145,7 +182,7 @@ export default {
               props: {
                 'inline-prompt': false
               },
-              designKey: 'design-TA5Q'
+              designKey: 'design-required'
             },
             {
               label: '校验规则',
@@ -434,7 +471,7 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-3',
+          designKey: 'tab-linkages',
           children: [
             {
               label: '联动规则',
@@ -570,7 +607,7 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-5',
+          designKey: 'tab-events',
           children: [
             {
               label: '数据改变时 (change)',
@@ -616,7 +653,7 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-6',
+          designKey: 'tab-style',
           children: [
             {
               label: '',
@@ -625,19 +662,19 @@ export default {
               props: {
                 componentName: 'FormDesign-StyleEditor'
               },
-              designKey: 'design-KaWx',
+              designKey: 'design-style',
               labelWidth: 0
             }
           ]
         },
         {
           label: '布局',
-          name: 'name4',
+          name: 'layout',
           component: 'TabPane',
           props: {
             lazy: true
           },
-          designKey: 'tab-4',
+          designKey: 'tab-layout',
           children: [
             {
               label: '标签宽度',
@@ -648,7 +685,7 @@ export default {
                 step: 10,
                 controlsPosition: ''
               },
-              designKey: 'design-UcmF'
+              designKey: 'design-labelWidth'
             },
             {
               label: '标签位置',
@@ -671,7 +708,7 @@ export default {
                   }
                 ]
               },
-              designKey: 'design-EiOs'
+              designKey: 'design-labelAlign'
             },
             {
               label: '尺寸',
@@ -694,7 +731,7 @@ export default {
                   }
                 ]
               },
-              designKey: 'design-yaZ4'
+              designKey: 'design-size'
             }
           ]
         }

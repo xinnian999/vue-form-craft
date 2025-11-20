@@ -7,18 +7,24 @@ export default {
   size: 'small',
   submitBtn: false,
   initialValues: {
-    label: '单行文本'
+    label: '计数器',
+    props: {
+      min: 1,
+      max: 999,
+      step: 1,
+      controlsPosition: ''
+    }
   },
   items: [
     {
-      name: 'form-2DaW',
+      name: 'form-tabs',
       component: 'Tabs',
       props: {
         defaultKey: 'attrs',
         tabPosition: 'top',
         type: 'card'
       },
-      designKey: 'design-wUHG',
+      designKey: 'design-tabs',
       children: [
         {
           label: '属性',
@@ -27,7 +33,7 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-1',
+          designKey: 'tab-attrs',
           children: [
             {
               label: '标签',
@@ -38,7 +44,7 @@ export default {
                 autocomplete: 'new-password',
                 clearable: true
               },
-              designKey: 'design-gfim'
+              designKey: 'design-label'
             },
             {
               label: '字段标识',
@@ -49,7 +55,7 @@ export default {
                 autocomplete: 'new-password',
                 clearable: true
               },
-              designKey: 'design-njXF'
+              designKey: 'design-name'
             },
             {
               label: '气泡提示',
@@ -63,7 +69,7 @@ export default {
                 },
                 clearable: true
               },
-              designKey: 'design-Qh45'
+              designKey: 'design-help'
             },
             {
               label: '占位提示',
@@ -72,7 +78,7 @@ export default {
               props: {
                 autocomplete: 'new-password'
               },
-              designKey: 'design-JTMu'
+              designKey: 'design-placeholder'
             },
             {
               label: 'ID',
@@ -82,7 +88,7 @@ export default {
                 placeholder: '',
                 autocomplete: 'new-password'
               },
-              designKey: 'design-kC5y'
+              designKey: 'design-id'
             },
             {
               label: 'class',
@@ -92,7 +98,7 @@ export default {
                 placeholder: '',
                 autocomplete: 'new-password'
               },
-              designKey: 'design-BmcU'
+              designKey: 'design-class'
             },
             {
               label: '隐藏',
@@ -101,7 +107,7 @@ export default {
               props: {
                 'inline-prompt': false
               },
-              designKey: 'design-C5Qj'
+              designKey: 'design-hidden'
             },
             {
               label: '禁用',
@@ -110,7 +116,7 @@ export default {
               props: {
                 'inline-prompt': false
               },
-              designKey: 'design-VnLN'
+              designKey: 'design-disabled'
             },
             {
               label: '只读',
@@ -119,13 +125,60 @@ export default {
               props: {
                 'inline-prompt': false
               },
-              designKey: 'design-XgeW'
+              designKey: 'design-readonly'
             },
             {
-              label: '清除按钮',
-              name: 'props.clearable',
-              component: 'Switch',
-              designKey: 'design-8sk2'
+              label: '按钮位置',
+              name: 'props.controlsPosition',
+              component: 'Radio',
+              props: {
+                mode: 'static',
+                options: [
+                  { label: '两侧', value: '' },
+                  { label: '内部', value: 'right' }
+                ]
+              },
+              initialValue: '',
+              designKey: 'design-controlsPosition'
+            },
+            {
+              label: '最小值',
+              name: 'props.min',
+              component: 'InputNumber',
+              props: {
+                controlsPosition: ''
+              },
+              designKey: 'design-min'
+            },
+            {
+              label: '最大值',
+              name: 'props.max',
+              component: 'InputNumber',
+              props: {
+                controlsPosition: ''
+              },
+              designKey: 'design-max'
+            },
+            {
+              label: '步长',
+              name: 'props.step',
+              component: 'InputNumber',
+              props: {
+                min: 1,
+                controlsPosition: ''
+              },
+              designKey: 'design-step'
+            },
+            {
+              label: '精度',
+              name: 'props.precision',
+              component: 'InputNumber',
+              props: {
+                min: 0,
+                controlsPosition: ''
+              },
+              designKey: 'design-precision',
+              help: '数值精度，小数点后保留几位'
             }
           ]
         },
@@ -136,7 +189,7 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-2',
+          designKey: 'tab-rules',
           children: [
             {
               label: '必填',
@@ -145,7 +198,7 @@ export default {
               props: {
                 'inline-prompt': false
               },
-              designKey: 'design-TA5Q'
+              designKey: 'design-required'
             },
             {
               label: '校验规则',
@@ -171,24 +224,16 @@ export default {
                         value: 'required'
                       },
                       {
-                        label: '最小长度',
+                        label: '最小值',
                         value: 'min'
                       },
                       {
-                        label: '最大长度',
+                        label: '最大值',
                         value: 'max'
-                      },
-                      {
-                        label: '正则表达式',
-                        value: 'pattern'
                       },
                       {
                         label: '内置类型',
                         value: 'builtin'
-                      },
-                      {
-                        label: '枚举值',
-                        value: 'enum'
                       },
                       {
                         label: '自定义函数',
@@ -207,8 +252,7 @@ export default {
                   name: 'value',
                   component: 'InputNumber',
                   props: {
-                    placeholder: '请输入最小长度',
-                    min: 0,
+                    placeholder: '请输入最小值',
                     controlsPosition: ''
                   },
                   designKey: 'design-rule-min',
@@ -219,62 +263,11 @@ export default {
                   name: 'value',
                   component: 'InputNumber',
                   props: {
-                    placeholder: '请输入最大长度',
-                    min: 0
+                    placeholder: '请输入最大值',
+                    controlsPosition: ''
                   },
                   designKey: 'design-rule-max',
                   hidden: "{{ $item.type !== 'max' }}"
-                },
-                {
-                  label: '正则表达式',
-                  name: 'value',
-                  component: 'Autocomplete',
-                  props: {
-                    placeholder: '请输入正则表达式，如：^[0-9]+$',
-                    options: [
-                      {
-                        label: '邮箱',
-                        value: '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$'
-                      },
-                      {
-                        label: '手机号',
-                        value: '^1[3-9]\\d{9}$'
-                      },
-                      {
-                        label: 'QQ号',
-                        value: '^[1-9][0-9]{4,10}$'
-                      },
-                      {
-                        label: '身份证号',
-                        value:
-                          '^[1-9]\\d{5}(?:18|19|20)\\d{2}(?:0[1-9]|10|11|12)(?:0[1-9]|[1-2]\\d|30|31)\\d{3}[\\dxX]$'
-                      },
-                      {
-                        label: '中文',
-                        value: '^[一-龥]+$'
-                      },
-                      {
-                        label: '网址',
-                        value: '^http(s)?:\\/\\/(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,}(?:\\/[^\\s]*)?'
-                      },
-                      {
-                        label: 'IP地址',
-                        value:
-                          '^(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d?)$'
-                      },
-                      {
-                        label: '邮政编码',
-                        value: '^[1-9]\\d{5}$'
-                      },
-                      {
-                        label: '字母+数字',
-                        value: '^[a-zA-Z0-9]+$'
-                      }
-                    ]
-                  },
-                  designKey: 'design-rule-pattern',
-                  hidden: "{{ $item.type !== 'pattern' }}",
-                  help: '输入正则表达式字符串，不需要包含斜杠'
                 },
                 {
                   label: '内置类型',
@@ -285,24 +278,8 @@ export default {
                     mode: 'static',
                     options: [
                       {
-                        label: '字符串',
-                        value: 'string'
-                      },
-                      {
                         label: '数字',
                         value: 'number'
-                      },
-                      {
-                        label: '布尔值',
-                        value: 'boolean'
-                      },
-                      {
-                        label: '方法',
-                        value: 'method'
-                      },
-                      {
-                        label: '正则',
-                        value: 'regexp'
                       },
                       {
                         label: '整数',
@@ -311,34 +288,6 @@ export default {
                       {
                         label: '浮点数',
                         value: 'float'
-                      },
-                      {
-                        label: '数组',
-                        value: 'array'
-                      },
-                      {
-                        label: '对象',
-                        value: 'object'
-                      },
-                      {
-                        label: '枚举',
-                        value: 'enum'
-                      },
-                      {
-                        label: '日期',
-                        value: 'date'
-                      },
-                      {
-                        label: 'URL',
-                        value: 'url'
-                      },
-                      {
-                        label: '十六进制',
-                        value: 'hex'
-                      },
-                      {
-                        label: '邮箱',
-                        value: 'email'
                       },
                       {
                         label: '任意类型',
@@ -351,27 +300,12 @@ export default {
                   help: '使用 async-validator 内置类型校验'
                 },
                 {
-                  label: '枚举值',
-                  name: 'value',
-                  component: 'TextArea',
-                  props: {
-                    placeholder: '请输入枚举值，每行一个',
-                    autosize: {
-                      minRows: 3,
-                      maxRows: 6
-                    }
-                  },
-                  designKey: 'design-rule-enum',
-                  hidden: "{{ $item.type !== 'enum' }}",
-                  help: '每行输入一个可选值'
-                },
-                {
                   label: '自定义函数体',
                   name: 'value',
                   component: 'TextArea',
                   props: {
                     placeholder:
-                      'if (value.length < 6) {\n  callback(new Error("长度不足"));\n} else {\n  callback();\n}',
+                      'if (value < 0) {\n  callback(new Error("数值不能小于0"));\n} else {\n  callback();\n}',
                     autosize: {
                       minRows: 4,
                       maxRows: 10
@@ -416,7 +350,7 @@ export default {
                         value: 'blur'
                       },
                       {
-                        label: '输入时',
+                        label: '改变时',
                         value: 'change'
                       }
                     ]
@@ -434,7 +368,7 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-3',
+          designKey: 'tab-linkages',
           children: [
             {
               label: '联动规则',
@@ -570,7 +504,7 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-5',
+          designKey: 'tab-events',
           children: [
             {
               label: '数据改变时 (change)',
@@ -592,20 +526,6 @@ export default {
               name: 'props.onFocus',
               component: 'FunctionEditor',
               designKey: 'design-event-focus'
-            },
-            {
-              label: '输入时 (input)',
-              labelAlign: 'top',
-              name: 'props.onInput',
-              component: 'FunctionEditor',
-              designKey: 'design-event-input'
-            },
-            {
-              label: '清空时 (clear)',
-              labelAlign: 'top',
-              name: 'props.onClear',
-              component: 'FunctionEditor',
-              designKey: 'design-event-clear'
             }
           ]
         },
@@ -616,7 +536,7 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-6',
+          designKey: 'tab-style',
           children: [
             {
               label: '',
@@ -625,19 +545,19 @@ export default {
               props: {
                 componentName: 'FormDesign-StyleEditor'
               },
-              designKey: 'design-KaWx',
+              designKey: 'design-style',
               labelWidth: 0
             }
           ]
         },
         {
           label: '布局',
-          name: 'name4',
+          name: 'layout',
           component: 'TabPane',
           props: {
             lazy: true
           },
-          designKey: 'tab-4',
+          designKey: 'tab-layout',
           children: [
             {
               label: '标签宽度',
@@ -648,7 +568,7 @@ export default {
                 step: 10,
                 controlsPosition: ''
               },
-              designKey: 'design-UcmF'
+              designKey: 'design-labelWidth'
             },
             {
               label: '标签位置',
@@ -671,7 +591,7 @@ export default {
                   }
                 ]
               },
-              designKey: 'design-EiOs'
+              designKey: 'design-labelAlign'
             },
             {
               label: '尺寸',
@@ -694,7 +614,7 @@ export default {
                   }
                 ]
               },
-              designKey: 'design-yaZ4'
+              designKey: 'design-size'
             }
           ]
         }
