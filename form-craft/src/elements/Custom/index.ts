@@ -8,7 +8,7 @@ export default {
   component: 'Custom',
   render: defineAsyncComponent(() => import('./Custom.vue')),
   icon: h(Icon, { name: 'custom' }),
-  type: 'high',
+  type: 'basic',
   order: 99,
   attrSchema
 } satisfies FormElement

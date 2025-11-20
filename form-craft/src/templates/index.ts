@@ -27,9 +27,6 @@ const elementConfigs = Object.keys(elements)
     if (element.type === 'assist') {
       order += 200
     }
-    if (element.type === 'high') {
-      order += 300
-    }
     return {
       label: element.title,
       schema: element.attrSchema,

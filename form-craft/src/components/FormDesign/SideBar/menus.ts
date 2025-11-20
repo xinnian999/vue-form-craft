@@ -26,16 +26,12 @@ export default ({ elements, lang, omits }: Params) => {
 
   const menus = [
     {
-      title: locale.menus.basicTitle,
-      children: getChildren('basic')
-    },
-    {
-      title: locale.menus.highTitle,
-      children: getChildren('high')
-    },
-    {
       title: locale.menus.layoutTitle,
       children: getChildren('layout')
+    },
+    {
+      title: locale.menus.basicTitle,
+      children: getChildren('basic')
     },
     {
       title: locale.menus.assistTitle,

@@ -5,10 +5,10 @@ import type { FormElement } from '@/types'
 export default {
   title: '对象容器',
   icon: h(Icon, { name: 'itemGroup' }),
-  type: 'high',
+  type: 'basic',
   component: 'ObjGroup',
   render: defineAsyncComponent(() => import('./ObjGroup.vue')),
-  order: 2,
+  order: 25,
   attrSchema: {
     size: 'small',
     labelAlign: 'top',

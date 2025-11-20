@@ -94,7 +94,7 @@ const elements = useElements()
 
 const lang = useLang()
 
-const active = ref('基础组件')
+const active = ref(['基础组件', '布局组件'])
 
 const q = ref('')
 

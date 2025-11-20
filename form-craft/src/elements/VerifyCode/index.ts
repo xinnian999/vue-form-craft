@@ -8,7 +8,7 @@ export default {
   component: 'VerifyCode',
   render: defineAsyncComponent(() => import('./Component.vue')),
   icon: h(Icon, { name: 'verifyCode' }),
-  type: 'high',
+  type: 'basic',
   order: 18,
   attrSchema
 } satisfies FormElement

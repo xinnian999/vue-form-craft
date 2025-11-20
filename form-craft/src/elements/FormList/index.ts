@@ -8,7 +8,7 @@ export default {
   component: 'FormList',
   render: defineAsyncComponent(() => import('./FormList.vue')),
   icon: h(Icon, { name: 'formList' }),
-  type: 'high',
+  type: 'basic',
   order: 20,
   attrSchema
 } satisfies FormElement

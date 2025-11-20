@@ -8,7 +8,7 @@ export default {
   render: defineAsyncComponent(() => import('./FunctionEditor.vue')),
   icon: h(Icon, { name: 'code' }),
   type: 'basic',
-  order: 100,
+  order: 30,
   attrSchema: {
     labelWidth: 110,
     size: 'small',
