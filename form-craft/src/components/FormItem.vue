@@ -199,14 +199,14 @@ watch(
 
             if (Array.isArray(list)) {
               // FormList 的字段在 schema 中的 name 不包含索引,直接使用字段名
-              formInstance.updateItemSchemaByPath(fieldName, actualPath, value)
+              formInstance.setFieldAttr(fieldName, actualPath, value)
             }
           } else if (target.includes('.[]')) {
             // FormList 行内 attr 联动 - 在 parseFields 中处理,这里跳过
             // 例如: target = 'users.[].password'
           } else {
             // 普通 attr 联动
-            formInstance.updateItemSchemaByPath(target, actualPath, value)
+            formInstance.setFieldAttr(target, actualPath, value)
           }
         }
       } else if (type === 'data') {

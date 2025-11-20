@@ -1,13 +1,10 @@
 import { parsePath } from './parsePath'
 
+// 直接修改原对象，这样可以确保连续多次调用时数据同步，避免响应式对象更新延迟问题
 const setDataByPath = (object: Record<string, any>, path: string, value: any) => {
   if (path === '.') {
     return value
   }
-
-  // 性能优化：直接修改原对象，不进行深拷贝
-  // 这样可以确保连续多次调用时数据同步，避免响应式对象更新延迟问题
-  const cloneObj = object
 
   // 将路径字符串分割成路径数组，支持数组索引
   const pathArray = parsePath(path)
@@ -63,10 +60,9 @@ const setDataByPath = (object: Record<string, any>, path: string, value: any) =>
   }
 
   // 调用递归函数
-  update(cloneObj, pathArray, value)
+  update(object, pathArray, value)
 
-  // 返回更新后的对象
-  return cloneObj
+  return object
 }
 
 export default setDataByPath

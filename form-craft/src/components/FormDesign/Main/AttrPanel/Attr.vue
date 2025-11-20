@@ -27,6 +27,7 @@ const schemaModel = computed({
     return designInstance.getSchema()
   },
   set(schema) {
+    console.log('schema changed:', schema)
     designInstance.setSchema(schema)
   }
 })

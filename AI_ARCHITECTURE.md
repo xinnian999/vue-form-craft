@@ -108,7 +108,7 @@ interface FormInstance {
   resetFields: (names?: string[]) => void
   submit: () => void
   updateSelectData: (key: string, value: Record<string, any>) => void
-  updateItemSchemaByPath: (name: string, path: string, value: any) => void
+  setFieldAttr: (name: string, path: string, value: any) => void
 }
 ```
 

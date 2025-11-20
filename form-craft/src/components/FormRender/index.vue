@@ -41,16 +41,16 @@ const selectData = reactive<Record<string, Record<string, any>>>({})
 const getValues: FormInstance['getValues'] = () => formValues.value
 
 const setValues: FormInstance['setValues'] = (values) => {
-  formValues.value = cloneDeep(values)
+  formValues.value = values
 }
 
 const getFieldValue: FormInstance['getFieldValue'] = (path) => getDataByPath(getValues(), path)
 
 const setFieldValue: FormInstance['setFieldValue'] = async (path, value) => {
   emits('fieldChange', path, value)
-  // const newValues = setDataByPath(cloneDeep(getValues()), path, value)
-  // setValues(newValues)
   setDataByPath(getValues(), path, value)
+  // 再次赋值确保v-model响应式更新
+  setValues(cloneDeep(getValues()))
 }
 
 const validate: FormInstance['validate'] = () => form.value!.validate()
@@ -75,8 +75,7 @@ const updateSelectData: FormInstance['updateSelectData'] = (key, value) => {
   selectData[key] = value
 }
 
-const updateItemSchemaByPath: FormInstance['updateItemSchemaByPath'] = (name, path, value) => {
-  // console.log('updateItemSchemaByPath', name, path, value)
+const setFieldAttr: FormInstance['setFieldAttr'] = (name, path, value) => {
   const findAndUpdate = (items: any[]): boolean => {
     for (const item of items) {
       if (item.name === name) {
@@ -104,7 +103,7 @@ const instanceAPI = {
   getFieldValue,
   setFieldValue,
   updateSelectData,
-  updateItemSchemaByPath,
+  setFieldAttr,
   validate,
   resetFields,
   submit
@@ -121,9 +120,9 @@ const context = computed(() => ({
 
 // 性能优化：缓存解析结果，只在schema或context变化时重新解析
 const formItems = computed(() => {
-  // if (props.design) {
-  //   return props.schema.items
-  // }
+  if (props.design) {
+    return props.schema.items
+  }
 
   // deepParse已经有缓存机制，这里直接调用
   return deepParse(props.schema.items || [], context.value)
@@ -151,8 +150,7 @@ onBeforeMount(() => {
   if (props.schema.initialValues) {
     const values = cloneDeep(props.schema.initialValues)
 
-    formValues.value = { ...values, ...formValues.value }
-    // Object.assign(formValues.value, values)
+    setValues({ ...values, ...formValues.value })
   }
 })
 
@@ -165,7 +163,7 @@ const instance = readonly({
   getFieldValue,
   setFieldValue,
   updateSelectData,
-  updateItemSchemaByPath,
+  setFieldAttr,
   validate,
   resetFields,
   submit

@@ -84,7 +84,7 @@ export default {
   }
   
   // 更新城市选项
-  $instance.updateItemSchemaByPath('city', 'props.options', cityOptions)
+  $instance.setFieldAttr('city', 'props.options', cityOptions)
   
   // 清空城市选择
   $instance.setFieldValue('city', '')
@@ -125,7 +125,7 @@ export default {
   }
   
   // 更新区县选项
-  $instance.updateItemSchemaByPath('district', 'props.options', districtOptions)
+  $instance.setFieldAttr('district', 'props.options', districtOptions)
   
   // 清空区县选择
   $instance.setFieldValue('district', '')

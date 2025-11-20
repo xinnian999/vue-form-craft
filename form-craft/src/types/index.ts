@@ -198,7 +198,7 @@ export interface FormInstance extends FormRenderProps {
   getFieldValue: (path: string) => any
   setFieldValue: (path: string, value: any) => void
   updateSelectData: (key: string, value: Record<string, any>) => void
-  updateItemSchemaByPath: (name: string, path: string, value: any) => void
+  setFieldAttr: (name: string, path: string, value: any) => void
   validate: () => FormValidationResult | undefined
   resetFields: (names?: string[]) => void
   submit: () => void
