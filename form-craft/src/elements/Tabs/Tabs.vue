@@ -77,6 +77,50 @@ if (formInstance.design) {
     },
     { deep: true }
   )
+
+  watch(
+    () => designInstance?.currentKey,
+    (currentKey) => {
+      if (!currentKey) return
+
+      // 递归查找节点属于哪个tab
+      const findTabByDesignKey = (designKey: string): string | null => {
+        // 遍历每个tab
+        for (const tab of props.children) {
+          // 如果当前key就是tab本身
+          if (tab.designKey === designKey) {
+            return tab.name
+          }
+
+          // 递归查找tab的children
+          const findInChildren = (children: FormItemType[]): boolean => {
+            for (const child of children) {
+              if (child.designKey === designKey) {
+                return true
+              }
+              if (child.children && child.children.length > 0) {
+                if (findInChildren(child.children)) {
+                  return true
+                }
+              }
+            }
+            return false
+          }
+
+          // 如果在当前tab的children中找到了
+          if (tab.children && findInChildren(tab.children)) {
+            return tab.name
+          }
+        }
+        return null
+      }
+
+      const targetTabName = findTabByDesignKey(currentKey)
+      if (targetTabName && targetTabName !== activeKey.value) {
+        activeKey.value = targetTabName
+      }
+    }
+  )
 }
 </script>
 

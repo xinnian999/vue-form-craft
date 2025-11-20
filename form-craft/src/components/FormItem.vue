@@ -63,7 +63,7 @@ import { isEqual } from 'lodash'
 import { computed, onBeforeMount, watch } from 'vue'
 import { Icon } from '@/components'
 import { useElements, useFormInstance } from '@/hooks'
-import type { FormItemType } from '@/types'
+import type { FormItemType, RuleItem } from '@/types'
 import { filterExpressions, getDataByPath, ns, parseRules } from '@/utils'
 
 const props = defineProps<FormItemType>()
@@ -82,14 +82,25 @@ const value = computed({
 })
 
 const computeRules = computed(() => {
-  const { rules, required } = props
+  const { rules = [], required } = props
 
-  // 如果有 required 标记，添加必填规则
-  const allRules = required
-    ? [{ type: 'required' as const, message: '该字段是必填字段' }, ...(rules || [])]
-    : rules || []
+  // rules中的配置优先级更高，如果已配置必填规则，直接使用rules
+  const hasRequiredInRules = rules.some((rule) => rule.type === 'required')
+  if (hasRequiredInRules) {
+    return parseRules(rules)
+  }
 
-  return parseRules(allRules)
+  // rules中没有必填规则时，根据required属性决定是否添加默认必填规则
+  if (required) {
+    const defaultRequiredRule: RuleItem = {
+      type: 'required',
+      message: '该字段是必填字段',
+      trigger: 'blur'
+    }
+    return parseRules([defaultRequiredRule, ...rules])
+  }
+
+  return parseRules(rules)
 })
 
 const config = computed(() => {

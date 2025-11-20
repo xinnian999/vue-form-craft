@@ -12,7 +12,7 @@
     >
       <template #default="{ node, data }">
         <div class="tree-node">
-          <component :is="data.icon" class="node-icon" />
+          <ElementIcon :icon="data.icon" class="node-icon" />
           <span class="node-label">{{ node.label }}</span>
         </div>
       </template>
@@ -22,7 +22,7 @@
 
 <script setup lang="ts">
 import { computed, h } from 'vue'
-import { Icon } from '@/components'
+import { ElementIcon, Icon } from '@/components'
 import { useDesignInstance, useElements } from '@/hooks'
 import type { FormItemType } from '@/types'
 import { ns } from '@/utils'

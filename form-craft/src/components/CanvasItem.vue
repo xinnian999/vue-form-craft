@@ -6,9 +6,9 @@
     @mouseleave.stop="handleHoverLeave"
   >
     <!-- 左上角的move按钮 -->
-    <div class="move-btn">
+    <!-- <div class="move-btn">
       <Icon name="move" />
-    </div>
+    </div> -->
 
     <!-- 右下角的其他按钮 -->
     <div class="actions">
@@ -75,6 +75,10 @@ const handleSelect = (element: FormItemType) => {
 
 const rightBottomActions = [
   {
+    icon: 'move',
+    name: 'move-btn'
+  },
+  {
     icon: 'copy',
     name: 'copy-btn',
     handle: (element: FormItemType) => {
@@ -126,7 +130,7 @@ const rightBottomActions = [
     color: #fff;
   }
 
-  .move-btn {
+  /* .move-btn {
     position: absolute;
     left: 1px;
     top: 1px;
@@ -138,9 +142,9 @@ const rightBottomActions = [
     display: none;
     font-size: 12px;
     &:hover {
-      opacity: 0.7;
+      opacity: 0.8;
     }
-  }
+  } */
 
   .actions {
     position: absolute;

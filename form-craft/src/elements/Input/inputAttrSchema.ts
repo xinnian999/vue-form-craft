@@ -139,6 +139,15 @@ export default {
           designKey: 'tab-2',
           children: [
             {
+              label: '必填',
+              name: 'required',
+              component: 'Switch',
+              props: {
+                'inline-prompt': false
+              },
+              designKey: 'design-TA5Q'
+            },
+            {
               label: '校验规则',
               name: 'rules',
               component: 'FormList',
@@ -199,7 +208,8 @@ export default {
                   component: 'InputNumber',
                   props: {
                     placeholder: '请输入最小长度',
-                    min: 0
+                    min: 0,
+                    controlsPosition: ''
                   },
                   designKey: 'design-rule-min',
                   hidden: "{{ $item.type !== 'min' }}"
@@ -598,10 +608,10 @@ export default {
           label: '样式',
           name: 'style',
           component: 'TabPane',
-          designKey: 'tab-6',
           props: {
             lazy: true
           },
+          designKey: 'tab-6',
           children: [
             {
               label: '',
