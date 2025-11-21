@@ -37,20 +37,30 @@ const form = useTemplateRef<ElFormInstance>('form')
 
 const selectData = reactive<Record<string, Record<string, any>>>({})
 
+// 统一的事件触发器：同时触发 emits 和 schema 事件
+const trigger = (eventName: keyof FormRenderEmits, ...args: any[]) => {
+  ;(emits as any)(eventName, ...args)
+  const schemaEventName = `on${eventName[0].toUpperCase()}${eventName.slice(1)}`
+  const handler = (parseSchema.value as any)[schemaEventName]
+  handler?.(...args)
+}
+
 // ========== API 方法定义（需要在 context 之前定义） ==========
 const getValues: FormInstance['getValues'] = () => formValues.value
 
 const setValues: FormInstance['setValues'] = (values) => {
   formValues.value = values
+  trigger('change', values)
 }
 
 const getFieldValue: FormInstance['getFieldValue'] = (path) => getDataByPath(getValues(), path)
 
 const setFieldValue: FormInstance['setFieldValue'] = async (path, value) => {
-  emits('fieldChange', path, value)
   setDataByPath(getValues(), path, value)
   // 再次赋值确保v-model响应式更新
   setValues(cloneDeep(getValues()))
+
+  trigger('fieldChange', path, value)
 }
 
 const validate: FormInstance['validate'] = () => form.value!.validate()
@@ -58,15 +68,15 @@ const validate: FormInstance['validate'] = () => form.value!.validate()
 const submit: FormInstance['submit'] = () => {
   validate()
     ?.then(() => {
-      emits('finish', formValues.value)
+      trigger('finish', formValues.value)
     })
     .catch((e) => {
-      emits('failed', e)
+      trigger('failed', e)
     })
 }
 
 const resetFields: FormInstance['resetFields'] = (names) => {
-  emits('reset')
+  trigger('reset')
 
   form.value?.resetFields(names)
 }
@@ -128,14 +138,16 @@ const parseSchema = computed(() => {
 })
 
 const formAttrs = computed(() => {
-  const attrs = omit(props.schema, [
+  const attrs = omit(parseSchema.value, [
     'model',
     'items',
     'submitBtn',
     'resetBtn',
     'initialValues',
     'labelAlign',
-    'labelSuffix'
+    'labelSuffix',
+    'onFieldChange',
+    'onChange'
   ])
 
   return {

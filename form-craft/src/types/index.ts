@@ -139,6 +139,7 @@ export interface FormRenderProps {
 }
 
 export interface FormRenderEmits {
+  change: [values: Record<string, any>]
   finish: [values: Record<string, any>]
   failed: [
     errors: {

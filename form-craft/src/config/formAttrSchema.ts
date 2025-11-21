@@ -2,13 +2,11 @@ import type { FormSchema } from 'form-craft'
 
 export default {
   labelWidth: 110,
-  size: 'small',
   labelAlign: 'left',
   scrollToError: true,
+  size: 'small',
   submitBtn: false,
-  initialValues: {
-    label: '单行文本'
-  },
+  initialValues: {},
   items: [
     {
       name: 'form-2DaW',
@@ -118,7 +116,8 @@ export default {
               label: '自动滚动到校验失败的第一项',
               name: 'scrollToError',
               component: 'Switch',
-              designKey: 'design-6meZ'
+              designKey: 'design-6meZ',
+              labelAlign: 'top'
             },
             {
               label: '表单提交按钮',
@@ -144,34 +143,71 @@ export default {
           designKey: 'tab-5',
           children: [
             {
-              label: '数据改变时',
-              name: 'props.onChange',
+              label: '表单数据变化时（change）',
+              name: 'onChange',
               component: 'FunctionEditor',
+              labelAlign: 'top',
+              props: {
+                paramTips: [{ name: 'values', description: '当前表单数据' }]
+              },
               designKey: 'design-event-change'
             },
             {
-              label: '失去焦点时',
-              name: 'props.onBlur',
+              label: '表单提交成功时（finish）',
+              name: 'onFinish',
               component: 'FunctionEditor',
-              designKey: 'design-event-blur'
+              labelAlign: 'top',
+              props: {
+                paramTips: [{ name: 'values', description: '提交成功时的表单数据' }]
+              },
+              designKey: 'design-event-finish'
             },
             {
-              label: '获得焦点时',
-              name: 'props.onFocus',
+              label: '表单提交失败时（failed）',
+              name: 'onFailed',
               component: 'FunctionEditor',
-              designKey: 'design-event-focus'
+              labelAlign: 'top',
+              props: {
+                paramTips: [{ name: 'error', description: '校验失败的错误对象' }]
+              },
+              designKey: 'design-event-failed'
             },
             {
-              label: '输入时',
-              name: 'props.onInput',
+              label: '表单重置时（reset）',
+              name: 'onReset',
               component: 'FunctionEditor',
-              designKey: 'design-event-input'
+              labelAlign: 'top',
+              props: {
+                paramTips: []
+              },
+              designKey: 'design-event-reset'
             },
             {
-              label: '清空时',
-              name: 'props.onClear',
+              label: '字段数据改变时（fieldChange）',
+              name: 'onFieldChange',
               component: 'FunctionEditor',
-              designKey: 'design-event-clear'
+              labelAlign: 'top',
+              props: {
+                paramTips: [
+                  { name: 'path', description: '字段路径' },
+                  { name: 'value', description: '字段新值' }
+                ]
+              },
+              designKey: 'design-event-field-change'
+            },
+            {
+              label: '表单验证时（validate）',
+              name: 'onValidate',
+              component: 'FunctionEditor',
+              labelAlign: 'top',
+              props: {
+                paramTips: [
+                  { name: 'prop', description: '被校验的表单项字段名' },
+                  { name: 'isValid', description: '该项是否校验通过' },
+                  { name: 'message', description: '校验消息' }
+                ]
+              },
+              designKey: 'design-event-validate'
             }
           ]
         },

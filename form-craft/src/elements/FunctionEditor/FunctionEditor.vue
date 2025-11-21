@@ -19,23 +19,16 @@
     >
       <div class="function-editor-content">
         <div class="editor-tips">
-          <el-alert type="warning" :closable="false" show-icon>
-            <template #title>
-              <div style="font-size: 13px; line-height: 1.6">
-                <strong>📌 请输入完整的函数表达式</strong><br />
-                <span style="color: #909399">示例：</span>
-                <code>(...args) => $values.age > 18</code><br />
-                <span style="color: #909399">可用的全局变量：</span>
-                <code>$values</code
-                >、<code>$selectData</code>、<code>$instance</code>、<code>$item</code>、<code
-                  >$index</code
-                ><br />
-                <span style="color: #909399; font-size: 12px"
-                  >💡 这些变量可直接使用，无需通过参数传入</span
-                >
-              </div>
-            </template>
-          </el-alert>
+          <div
+            v-if="props.paramTips && props.paramTips.length"
+            style="margin-top: 8px; font-size: 12px; color: #909399"
+          >
+            <div style="margin-bottom: 2px">可用参数：</div>
+            <div v-for="item in props.paramTips" :key="item.name" style="margin-bottom: 2px">
+              <code>{{ item.name }}</code>
+              <span v-if="item.description"> - {{ item.description }}</span>
+            </div>
+          </div>
         </div>
 
         <div class="monaco-editor-wrapper">
@@ -65,6 +58,20 @@ import { Icon } from '@/components'
 import { ns } from '@/utils'
 
 const modelValue = defineModel<string>()
+
+// 参数提示类型，仅用于编辑器上方展示，不参与代码生成
+interface FunctionParamTip {
+  name: string
+  description?: string
+}
+
+// 定义 props
+const props = defineProps<{
+  /**
+   * 参数提示列表，仅用于在编辑器顶部展示可用参数说明
+   */
+  paramTips?: FunctionParamTip[]
+}>()
 
 // 计算是否有值
 const hasValue = computed(() => {
@@ -116,7 +123,8 @@ const handleEditorMount = (editor: any) => {
         2304, // Cannot find name
         2552, // Cannot find name. Did you mean...
         2792, // Cannot find module
-        7027 // Unreachable code detected
+        7027, // Unreachable code detected
+        7044 // Parameter implicitly has an 'any' type
       ]
     })
 
@@ -195,8 +203,15 @@ const removeBraces = (code: string): string => {
 
 // 添加默认函数模板（如果没有的话）
 const addDefaultTemplate = (code: string): string => {
-  if (!code) return `(...args) => {\n  \n}`
-  return code
+  if (code) return code
+
+  const tips = props.paramTips || []
+  if (!tips.length) {
+    return '(...args) => {\n  \n}'
+  }
+
+  const paramsCode = tips.map((item) => item.name).join(', ')
+  return `(${paramsCode}) => {\n  \n}`
 }
 
 // 添加双大括号（用于保存）
@@ -342,8 +357,6 @@ watch(modelValue, (newVal) => {
   }
 
   .editor-tips {
-    margin-bottom: 8px;
-
     code {
       background: $fillColorLight;
       padding: 2px 6px;
