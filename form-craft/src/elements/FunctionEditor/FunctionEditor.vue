@@ -12,8 +12,9 @@
 
     <el-dialog
       v-model="dialogVisible"
-      title="函数编辑器"
+      :title="formItemProps.label"
       width="800px"
+      center
       :close-on-click-modal="false"
       destroy-on-close
     >
@@ -55,23 +56,16 @@ import { VueMonacoEditor } from '@guolao/vue-monaco-editor'
 import { ElMessage } from 'element-plus'
 import { computed, ref, shallowRef, watch } from 'vue'
 import { Icon } from '@/components'
+import type { ComponentBaseProps } from '@/types'
 import { ns } from '@/utils'
 
 const modelValue = defineModel<string>()
 
-// 参数提示类型，仅用于编辑器上方展示，不参与代码生成
-interface FunctionParamTip {
-  name: string
-  description?: string
+interface Props extends ComponentBaseProps {
+  paramTips?: { name: string; description?: string }[]
 }
 
-// 定义 props
-const props = defineProps<{
-  /**
-   * 参数提示列表，仅用于在编辑器顶部展示可用参数说明
-   */
-  paramTips?: FunctionParamTip[]
-}>()
+const props = defineProps<Props>()
 
 // 计算是否有值
 const hasValue = computed(() => {

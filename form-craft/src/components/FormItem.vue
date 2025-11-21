@@ -125,6 +125,7 @@ const componentProps = computed(() => {
   const newProps: Record<string, any> = {
     name: props.name,
     designKey: props.designKey,
+    formItemProps: props,
     ...filterExpressions(props.props)
   }
 

@@ -192,3 +192,7 @@ export interface DesignInstance extends Required<ToRefs<FormDesignProps>> {
   addItem: (item: FormItemType) => void
   recordHistory: (description?: string) => void
 }
+
+export interface ComponentBaseProps {
+  formItemProps: FormItemType
+}
