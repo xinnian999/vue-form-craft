@@ -34,7 +34,7 @@
 
       <el-tab-pane label="联动变量" name="context">
         <p>实时预览的联动变量，在JsonSchema中可以通过双大括号模版语法使用，用于触发各种联动</p>
-        <JsonEdit.render v-model="context" style="height: 60vh" :key="tabKey" />
+        <JsonEditor v-model="context" readonly style="height: 60vh" :key="tabKey" />
       </el-tab-pane>
     </el-tabs>
   </el-dialog>
@@ -42,13 +42,11 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { FormRender } from '@/components'
-import { useDesignInstance, useElements } from '@/hooks'
+import { FormRender, JsonEditor } from '@/components'
+import { useDesignInstance } from '@/hooks'
 import type { FormInstance } from '@/types'
 
 const designInstance = useDesignInstance()!
-
-const { JsonEdit } = useElements()
 
 const tabKey = ref('edit')
 

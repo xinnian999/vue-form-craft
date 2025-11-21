@@ -1,5 +1,8 @@
 <template>
-  <div ref="jsonEditorEl" :class="[ns('json-editor'), disabled && 'disabled']"></div>
+  <div
+    ref="jsonEditorEl"
+    :class="[ns('json-editor'), disabled && 'disabled', toolBar ? '' : 'hideToolbar']"
+  ></div>
 </template>
 
 <script setup lang="ts">
@@ -9,13 +12,16 @@ import { nextTick, onMounted, onUnmounted, useTemplateRef, watch } from 'vue'
 import 'jsoneditor/dist/jsoneditor.min.css'
 import { ns } from '@/utils'
 
-defineOptions({
-  inheritAttrs: false
-})
-
-defineProps<{
-  disabled?: boolean
-}>()
+const props = withDefaults(
+  defineProps<{
+    disabled?: boolean
+    readonly?: boolean
+    toolBar?: boolean
+  }>(),
+  {
+    toolBar: true
+  }
+)
 
 const emits = defineEmits<{
   init: [editor: JsonEditor]
@@ -48,9 +54,10 @@ watch(
 
 // 生命周期：挂载时初始化
 onMounted(() => {
+  console.log('jsonEditor onMounted', modelValue.value)
   const options: JSONEditorOptions = {
-    mode: 'code',
-    modes: ['tree', 'code', 'form', 'text', 'view'],
+    mode: props.readonly ? 'view' : 'code',
+    modes: props.readonly ? ['view'] : ['tree', 'code', 'form', 'text', 'view'],
     indentation: 2,
     onChange() {
       try {
@@ -105,11 +112,25 @@ onUnmounted(() => {
 
 @include ns('json-editor') {
   width: 100%;
-  height: 70vh;
+  // height: 70vh;
 
   &.disabled {
     opacity: 0.7;
     pointer-events: none;
+  }
+
+  .jsoneditor-menu a.jsoneditor-poweredBy {
+    display: none;
+  }
+
+  .jsoneditor-statusbar {
+    display: none;
+  }
+
+  &.hideToolbar {
+    .jsoneditor-menu {
+      display: none;
+    }
   }
 }
 </style>

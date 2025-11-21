@@ -1,6 +1,12 @@
 <template>
   <div :class="ns('save-json-edit')">
-    <JsonEditor v-model="data" v-bind="$attrs" @init="onInit" @modeChange="onModeChange" />
+    <JsonEditor
+      v-model="data"
+      style="height: 70vh"
+      v-bind="$attrs"
+      @init="onInit"
+      @modeChange="onModeChange"
+    />
     <div class="footer">
       <el-button @click="handleSave" type="primary">保存更改</el-button>
       <el-button @click="handleReset">重置</el-button>

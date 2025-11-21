@@ -4,7 +4,10 @@ export default {
   size: 'small',
   labelAlign: 'top',
   initialValues: {
-    label: 'JSON编辑器'
+    label: 'JSON编辑器',
+    props: {
+      toolBar: true
+    }
   },
   items: [
     { label: '标签', component: 'Input', name: 'label' },
@@ -32,10 +35,9 @@ export default {
       name: 'cNmCuu'
     },
     {
-      label: '初始值',
-      component: 'JsonEdit',
-      name: 'initialValue',
-      dialog: true
+      label: '显示工具栏',
+      component: 'Switch',
+      name: 'props.toolBar'
     }
   ]
 } satisfies FormSchema

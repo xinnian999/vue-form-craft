@@ -27,7 +27,7 @@ export default [
       ],
       optionType: 'button',
       space: 0
-    },
+    }
   },
   {
     label: '静态选项',
@@ -53,7 +53,7 @@ export default [
       {
         label: '是否禁用',
         name: 'disabled',
-        component: 'Switch',
+        component: 'Switch'
       }
     ],
     props: {
@@ -68,23 +68,21 @@ export default [
     hidden: '{{$values.props.mode==="static"}}',
     children: [
       {
-        component: 'Title',
+        component: 'Divider',
         props: {
-          title: '请求',
-          type: 'h4'
+          title: '请求'
         },
-        hideLabel: true,
         name: 'form-Vf2D'
       },
       {
         label: 'url',
         component: 'Input',
         name: 'props.api.url',
-        initialValue: 'https://apifoxmock.com/m1/5213940-4880280-default/options/test',
+        initialValue: 'https://apifoxmock.com/m1/5213940-4880280-default/options/test'
       },
       {
         label: '请求方式',
-        component: 'Select',
+        component: 'Radio',
         name: 'props.api.method',
         initialValue: 'GET',
         props: {
@@ -106,48 +104,49 @@ export default [
               label: 'DELETE',
               value: 'DELETE'
             }
-          ]
-        },
+          ],
+          optionType: 'button',
+          space: 0
+        }
       },
       {
         label: '请求参数',
-        component: 'JsonEdit',
+        component: 'JsonEditor',
         name: 'props.api.params',
-        initialValue: {},
-        dialog: true
+        props: {
+          toolBar: false
+        }
       },
       {
-        component: 'Title',
+        component: 'Divider',
         props: {
-          title: '响应',
-          type: 'h4'
+          title: '响应'
         },
-        hideLabel: true,
-        name: 'form-Vf2D'
+        name: 'form-Vf2D111'
       },
       {
         label: '数据路径',
         component: 'Input',
         name: 'props.api.dataPath',
-        initialValue: 'data',
+        initialValue: 'data'
       },
       {
         label: '标签key',
         component: 'Input',
         name: 'props.labelKey',
-        initialValue: 'label',
+        initialValue: 'label'
       },
       {
         label: '值Key',
         component: 'Input',
         name: 'props.valueKey',
-        initialValue: 'value',
+        initialValue: 'value'
       },
       {
         label: '禁用Key',
         component: 'Input',
         name: 'props.disabledKey',
-        initialValue: 'disabled',
+        initialValue: 'disabled'
       }
     ]
   }
