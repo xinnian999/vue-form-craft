@@ -108,26 +108,6 @@ export default {
               designKey: 'design-help'
             },
             {
-              label: 'ID',
-              name: 'id',
-              component: 'Input',
-              props: {
-                placeholder: '',
-                autocomplete: 'new-password'
-              },
-              designKey: 'design-id'
-            },
-            {
-              label: 'class',
-              name: 'class',
-              component: 'Input',
-              props: {
-                placeholder: '',
-                autocomplete: 'new-password'
-              },
-              designKey: 'design-class'
-            },
-            {
               label: '隐藏',
               name: 'hidden',
               component: 'Switch',

@@ -88,7 +88,7 @@ export default {
               designKey: 'design-labelAlign'
             },
             {
-              label: '组件大小',
+              label: '尺寸',
               name: 'size',
               component: 'Radio',
               props: {

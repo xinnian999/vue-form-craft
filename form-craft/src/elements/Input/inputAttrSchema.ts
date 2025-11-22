@@ -30,6 +30,17 @@ export default {
           designKey: 'tab-1',
           children: [
             {
+              label: '字段标识',
+              name: 'name',
+              component: 'Input',
+              props: {
+                placeholder: '',
+                autocomplete: 'new-password',
+                clearable: true
+              },
+              designKey: 'design-njXF'
+            },
+            {
               label: '标签',
               name: 'label',
               component: 'Input',
@@ -41,15 +52,61 @@ export default {
               designKey: 'design-gfim'
             },
             {
-              label: '字段标识',
-              name: 'name',
-              component: 'Input',
+              label: '标签宽度',
+              name: 'labelWidth',
+              component: 'InputNumber',
               props: {
-                placeholder: '',
-                autocomplete: 'new-password',
-                clearable: true
+                unit: 'px',
+                step: 10,
+                controlsPosition: ''
               },
-              designKey: 'design-njXF'
+              designKey: 'design-UcmF'
+            },
+            {
+              label: '标签位置',
+              name: 'labelAlign',
+              component: 'Radio',
+              props: {
+                mode: 'static',
+                options: [
+                  {
+                    label: '居左',
+                    value: 'left'
+                  },
+                  {
+                    label: '居上',
+                    value: 'top'
+                  },
+                  {
+                    label: '居右',
+                    value: 'right'
+                  }
+                ]
+              },
+              designKey: 'design-EiOs'
+            },
+            {
+              label: '尺寸',
+              name: 'size',
+              component: 'Radio',
+              props: {
+                mode: 'static',
+                options: [
+                  {
+                    label: '默认',
+                    value: 'default'
+                  },
+                  {
+                    label: '较小',
+                    value: 'small'
+                  },
+                  {
+                    label: '较大',
+                    value: 'large'
+                  }
+                ]
+              },
+              designKey: 'design-yaZ4'
             },
             {
               label: '气泡提示',
@@ -73,26 +130,6 @@ export default {
                 autocomplete: 'new-password'
               },
               designKey: 'design-JTMu'
-            },
-            {
-              label: 'ID',
-              name: 'id',
-              component: 'Input',
-              props: {
-                placeholder: '',
-                autocomplete: 'new-password'
-              },
-              designKey: 'design-kC5y'
-            },
-            {
-              label: 'class',
-              name: 'class',
-              component: 'Input',
-              props: {
-                placeholder: '',
-                autocomplete: 'new-password'
-              },
-              designKey: 'design-BmcU'
             },
             {
               label: '隐藏',
@@ -574,38 +611,38 @@ export default {
           children: [
             {
               label: '数据改变时 (change)',
-              labelAlign: 'top',
               name: 'props.onChange',
               component: 'FunctionEditor',
-              designKey: 'design-event-change'
+              designKey: 'design-event-change',
+              labelAlign: 'top'
             },
             {
               label: '失去焦点时 (blur)',
-              labelAlign: 'top',
               name: 'props.onBlur',
               component: 'FunctionEditor',
-              designKey: 'design-event-blur'
+              designKey: 'design-event-blur',
+              labelAlign: 'top'
             },
             {
               label: '获得焦点时 (focus)',
-              labelAlign: 'top',
               name: 'props.onFocus',
               component: 'FunctionEditor',
-              designKey: 'design-event-focus'
+              designKey: 'design-event-focus',
+              labelAlign: 'top'
             },
             {
               label: '输入时 (input)',
-              labelAlign: 'top',
               name: 'props.onInput',
               component: 'FunctionEditor',
-              designKey: 'design-event-input'
+              designKey: 'design-event-input',
+              labelAlign: 'top'
             },
             {
               label: '清空时 (clear)',
-              labelAlign: 'top',
               name: 'props.onClear',
               component: 'FunctionEditor',
-              designKey: 'design-event-clear'
+              designKey: 'design-event-clear',
+              labelAlign: 'top'
             }
           ]
         },
@@ -627,74 +664,6 @@ export default {
               },
               designKey: 'design-KaWx',
               labelWidth: 0
-            }
-          ]
-        },
-        {
-          label: '布局',
-          name: 'name4',
-          component: 'TabPane',
-          props: {
-            lazy: true
-          },
-          designKey: 'tab-4',
-          children: [
-            {
-              label: '标签宽度',
-              name: 'labelWidth',
-              component: 'InputNumber',
-              props: {
-                unit: 'px',
-                step: 10,
-                controlsPosition: ''
-              },
-              designKey: 'design-UcmF'
-            },
-            {
-              label: '标签位置',
-              name: 'labelAlign',
-              component: 'Radio',
-              props: {
-                mode: 'static',
-                options: [
-                  {
-                    label: '居左',
-                    value: 'left'
-                  },
-                  {
-                    label: '居上',
-                    value: 'top'
-                  },
-                  {
-                    label: '居右',
-                    value: 'right'
-                  }
-                ]
-              },
-              designKey: 'design-EiOs'
-            },
-            {
-              label: '尺寸',
-              name: 'size',
-              component: 'Radio',
-              props: {
-                mode: 'static',
-                options: [
-                  {
-                    label: '默认',
-                    value: 'default'
-                  },
-                  {
-                    label: '较小',
-                    value: 'small'
-                  },
-                  {
-                    label: '较大',
-                    value: 'large'
-                  }
-                ]
-              },
-              designKey: 'design-yaZ4'
             }
           ]
         }

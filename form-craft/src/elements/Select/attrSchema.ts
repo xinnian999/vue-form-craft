@@ -39,6 +39,17 @@ export default {
           designKey: 'tab-1',
           children: [
             {
+              label: '字段标识',
+              name: 'name',
+              component: 'Input',
+              props: {
+                placeholder: '',
+                autocomplete: 'new-password',
+                clearable: true
+              },
+              designKey: 'design-njXF'
+            },
+            {
               label: '标签',
               name: 'label',
               component: 'Input',
@@ -50,15 +61,61 @@ export default {
               designKey: 'design-gfim'
             },
             {
-              label: '字段标识',
-              name: 'name',
-              component: 'Input',
+              label: '标签宽度',
+              name: 'labelWidth',
+              component: 'InputNumber',
               props: {
-                placeholder: '',
-                autocomplete: 'new-password',
-                clearable: true
+                unit: 'px',
+                step: 10,
+                controlsPosition: ''
               },
-              designKey: 'design-njXF'
+              designKey: 'design-UcmF'
+            },
+            {
+              label: '标签位置',
+              name: 'labelAlign',
+              component: 'Radio',
+              props: {
+                mode: 'static',
+                options: [
+                  {
+                    label: '居左',
+                    value: 'left'
+                  },
+                  {
+                    label: '居上',
+                    value: 'top'
+                  },
+                  {
+                    label: '居右',
+                    value: 'right'
+                  }
+                ]
+              },
+              designKey: 'design-EiOs'
+            },
+            {
+              label: '尺寸',
+              name: 'size',
+              component: 'Radio',
+              props: {
+                mode: 'static',
+                options: [
+                  {
+                    label: '默认',
+                    value: 'default'
+                  },
+                  {
+                    label: '较小',
+                    value: 'small'
+                  },
+                  {
+                    label: '较大',
+                    value: 'large'
+                  }
+                ]
+              },
+              designKey: 'design-yaZ4'
             },
             {
               label: '气泡提示',
@@ -785,74 +842,6 @@ export default {
               },
               designKey: 'design-KaWx',
               labelWidth: 0
-            }
-          ]
-        },
-        {
-          label: '布局',
-          name: 'name4',
-          component: 'TabPane',
-          props: {
-            lazy: true
-          },
-          designKey: 'tab-4',
-          children: [
-            {
-              label: '标签宽度',
-              name: 'labelWidth',
-              component: 'InputNumber',
-              props: {
-                unit: 'px',
-                step: 10,
-                controlsPosition: ''
-              },
-              designKey: 'design-UcmF'
-            },
-            {
-              label: '标签位置',
-              name: 'labelAlign',
-              component: 'Radio',
-              props: {
-                mode: 'static',
-                options: [
-                  {
-                    label: '居左',
-                    value: 'left'
-                  },
-                  {
-                    label: '居上',
-                    value: 'top'
-                  },
-                  {
-                    label: '居右',
-                    value: 'right'
-                  }
-                ]
-              },
-              designKey: 'design-EiOs'
-            },
-            {
-              label: '尺寸',
-              name: 'size',
-              component: 'Radio',
-              props: {
-                mode: 'static',
-                options: [
-                  {
-                    label: '默认',
-                    value: 'default'
-                  },
-                  {
-                    label: '较小',
-                    value: 'small'
-                  },
-                  {
-                    label: '较大',
-                    value: 'large'
-                  }
-                ]
-              },
-              designKey: 'design-yaZ4'
             }
           ]
         }
