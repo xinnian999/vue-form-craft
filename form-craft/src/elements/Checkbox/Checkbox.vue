@@ -1,8 +1,6 @@
 <template>
   <div v-if="formInstance.read">
-    {{
-      value?.map((item) => currentOptions.find((v) => v[valueKey] === item)?.[labelKey]).join('、')
-    }}
+    {{ value?.map((item) => currentOptions.find((v) => v.value === item)?.label).join('、') }}
   </div>
   <template v-else>
     <div v-if="!currentOptions.length && !loading" style="font-size: 12px">暂无选项</div>
@@ -11,9 +9,9 @@
       <template v-if="optionType === 'circle' || optionType === 'border'">
         <el-checkbox
           v-for="item in currentOptions"
-          :key="item[valueKey]"
-          :label="item[labelKey]"
-          :value="item[valueKey]"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
           :border="optionType === 'border'"
         />
       </template>
@@ -21,9 +19,9 @@
       <el-space v-if="optionType === 'button'" wrap :size="[space, space]">
         <el-checkbox-button
           v-for="item in currentOptions"
-          :key="item[valueKey]"
-          :label="item[labelKey]"
-          :value="item[valueKey]"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
           size="large"
         />
       </el-space>
@@ -32,9 +30,9 @@
 </template>
 
 <script setup lang="ts">
-import { useFormInstance, useSelect } from '@/hooks'
 import { type CheckboxGroupValueType } from 'element-plus'
 import { watch } from 'vue'
+import { useFormInstance, useSelect } from '@/hooks'
 import type { Direction, OptionType, SelectProps } from '@/types'
 
 type Props = Omit<SelectProps, 'multiple'> & {
@@ -46,8 +44,6 @@ type Props = Omit<SelectProps, 'multiple'> & {
 const props = withDefaults(defineProps<Props>(), {
   options: () => [],
   mode: 'static',
-  labelKey: 'label',
-  valueKey: 'value',
   name: '',
   optionType: 'circle',
   direction: 'horizontal',

@@ -1,5 +1,5 @@
 import ElementPlus from 'element-plus'
-import VueFormCraft from 'form-craft/dev'
+import VueFormCraft from 'form-craft'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
@@ -11,7 +11,6 @@ const app = createApp(App)
 
 app.use(router)
 
-// 使用 Coze AI 函数接入示例
 app.use(VueFormCraft, {
   ai: cozeAiFunction
 })

@@ -5,7 +5,7 @@ import { getDataByPath } from '@/utils'
 import useFormInstance from './useFormInstance'
 import useRequest from './useRequest'
 
-type Option = Record<string, any>
+type Option = { label: any; value: any; disabled?: boolean }
 
 const useSelect = (props: SelectProps) => {
   const formInstance = useFormInstance()
@@ -17,10 +17,11 @@ const useSelect = (props: SelectProps) => {
   const loading = ref(false)
 
   const fetchData = debounce(async () => {
+    if (formInstance.design) return
     if (!request) return
     if (!props.api) return
 
-    const { url, method, params, dataPath } = props.api
+    const { url, method, params, dataPath, labelKey, valueKey, disabledKey } = props.api
 
     loading.value = true
 
@@ -28,20 +29,27 @@ const useSelect = (props: SelectProps) => {
       const res = await request({
         url,
         method,
-        params: method === 'GET' ? params : {},
-        data: method === 'POST' ? params : {}
+        params
       })
-
       const resData = getDataByPath(res, dataPath) || []
 
-      const resDataParse = resData.map((item: any) => {
-        if (isPlainObject(item)) {
-          return item
+      const lKey = labelKey || 'label'
+      const vKey = valueKey || 'value'
+      const dKey = disabledKey || 'disabled'
+
+      const resDataParse: Option[] = resData.map((item: any) => {
+        if (!isPlainObject(item)) {
+          return { label: item, value: item, disabled: false }
         }
-        return { label: item, value: item }
+
+        return {
+          label: item[lKey],
+          value: item[vKey],
+          disabled: item[dKey]
+        }
       })
 
-      currentOptions.value = [...currentOptions.value, ...resDataParse]
+      currentOptions.value = resDataParse
     } finally {
       loading.value = false
     }
@@ -91,18 +99,18 @@ const useSelect = (props: SelectProps) => {
   )
 
   const selectChange = (val: any) => {
-    const { valueKey = 'value', multiple, name } = props
+    const { multiple, name } = props
 
     let valueData = {}
 
     if (multiple && Array.isArray(val)) {
       //多选就过滤出vals对应的源数据
       valueData = currentOptions.value.filter((item) => {
-        return val.includes(item[valueKey])
+        return val.includes(item.value)
       })
     } else {
       //单选找到单项对应的源数据
-      valueData = currentOptions.value.find((item) => item[valueKey] === val) || {}
+      valueData = currentOptions.value.find((item) => item.value === val) || {}
     }
 
     //如果接到了selectData，给顶级组件保存当前值对应得数据源

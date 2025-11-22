@@ -133,19 +133,19 @@ export default [
       {
         label: '标签key',
         component: 'Input',
-        name: 'props.labelKey',
+        name: 'props.api.labelKey',
         initialValue: 'label'
       },
       {
         label: '值Key',
         component: 'Input',
-        name: 'props.valueKey',
+        name: 'props.api.valueKey',
         initialValue: 'value'
       },
       {
         label: '禁用Key',
         component: 'Input',
-        name: 'props.disabledKey',
+        name: 'props.api.disabledKey',
         initialValue: 'disabled'
       }
     ]

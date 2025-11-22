@@ -1,5 +1,7 @@
 <template>
-  <div v-if="formInstance.read">{{ currentOptions.find((item) => item[valueKey] === value)?.[labelKey] }}</div>
+  <div v-if="formInstance.read">
+    {{ currentOptions.find((item) => item.value === value)?.label }}
+  </div>
   <template v-else>
     <div v-if="!currentOptions.length && !loading" style="font-size: 12px">暂无选项</div>
     <el-radio-group v-model="value" @change="selectChange" v-loading="loading" v-bind="$attrs">
@@ -7,10 +9,10 @@
         <template v-if="optionType === 'circle' || optionType === 'border'">
           <el-radio
             v-for="item in currentOptions"
-            :key="item[valueKey]"
-            :label="item[labelKey]"
-            :value="item[valueKey]"
-            :disabled="item[disabledKey]"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+            :disabled="item.disabled"
             :border="optionType === 'border'"
           />
         </template>
@@ -18,10 +20,10 @@
         <template v-else>
           <el-radio-button
             v-for="item in currentOptions"
-            :key="item[valueKey]"
-            :label="item[labelKey]"
-            :value="item[valueKey]"
-            :disabled="item[disabledKey]"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+            :disabled="item.disabled"
             v-bind="$attrs"
           />
         </template>
@@ -31,9 +33,9 @@
 </template>
 
 <script setup lang="ts">
-import type { Direction, OptionType, SelectProps, SelectValue } from '@/types'
+import { watch } from 'vue'
 import { useFormInstance, useSelect } from '@/hooks'
-import { watch } from 'vue';
+import type { Direction, OptionType, SelectProps, SelectValue } from '@/types'
 
 type Props = Omit<SelectProps, 'multiple'> & {
   optionType?: OptionType
@@ -44,9 +46,6 @@ type Props = Omit<SelectProps, 'multiple'> & {
 const props = withDefaults(defineProps<Props>(), {
   options: () => [],
   mode: 'static',
-  labelKey: 'label',
-  valueKey: 'value',
-  disabledKey: 'disabled',
   name: '',
   optionType: 'circle',
   direction: 'horizontal',

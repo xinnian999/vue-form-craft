@@ -54,7 +54,6 @@ watch(
 
 // 生命周期：挂载时初始化
 onMounted(() => {
-  console.log('jsonEditor onMounted', modelValue.value)
   const options: JSONEditorOptions = {
     mode: props.readonly ? 'view' : 'code',
     modes: props.readonly ? ['view'] : ['tree', 'code', 'form', 'text', 'view'],

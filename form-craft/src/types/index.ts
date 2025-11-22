@@ -1,5 +1,5 @@
 import type { FormValidationResult } from 'element-plus'
-import type { Component, Ref, Slots, ToRefs, VNode } from 'vue'
+import type { Component, Ref, ToRefs, VNode } from 'vue'
 
 export type RuleType =
   | 'required'
@@ -83,9 +83,11 @@ export type TemplateData = { name: string; schema: FormSchema; id?: string }[]
 export type SchemaApi = {
   url: string
   method: 'GET' | 'POST'
-  data?: Record<string, any>
   params?: Record<string, any>
   dataPath?: string
+  labelKey?: string
+  valueKey?: string
+  disabledKey?: string
 }
 
 export type OptionType = 'circle' | 'border' | 'button'
@@ -93,12 +95,9 @@ export type OptionType = 'circle' | 'border' | 'button'
 export type Direction = 'horizontal' | 'vertical'
 
 export interface SelectProps {
-  options?: Record<string, any>[]
+  options?: { label: any; value: any; disabled?: boolean }[]
   multiple?: boolean
-  mode?: string
-  labelKey?: string
-  valueKey?: string
-  disabledKey?: string
+  mode?: 'static' | 'remote'
   api?: SchemaApi
   name?: string
 }
@@ -122,7 +121,12 @@ export type AiGenerateParams = {
 export type AiGenerateFunction = (params: AiGenerateParams) => Promise<any>
 
 export type Options = {
-  request?: (options: Record<string, any>) => Promise<Record<string, any>>
+  request?: (config: {
+    url: string
+    method: 'GET' | 'POST' | 'PUT' | 'DELETE'
+    params?: Record<string, any>
+    headers?: Record<string, string>
+  }) => Promise<any>
   extendElements?: Record<string, FormElement>
   ai?: AiGenerateFunction // 改为函数类型
 }

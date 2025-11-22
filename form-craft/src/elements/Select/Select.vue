@@ -4,11 +4,11 @@
       {{
         value &&
         (value as SelectValue[])
-          .map((item) => currentOptions.find((v) => v[valueKey] === item)?.[labelKey])
+          .map((item) => currentOptions.find((v) => v.value === item)?.label)
           .join('、')
       }}
     </div>
-    <div v-else>{{ currentOptions.find((item) => item[valueKey] === value)?.[labelKey] }}</div>
+    <div v-else>{{ currentOptions.find((item) => item.value === value)?.label }}</div>
   </div>
 
   <el-select
@@ -23,28 +23,25 @@
   >
     <el-option
       v-for="item in currentOptions"
-      :key="item[valueKey]"
-      :label="item[labelKey]"
-      :value="item[valueKey]"
-      :disabled="item[disabledKey]"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value"
+      :disabled="item.disabled"
     >
-      {{ item[labelKey] }}
+      {{ item.label }}
     </el-option>
   </el-select>
 </template>
 
 <script setup lang="ts">
+import { watch } from 'vue'
 import { useFormInstance, useSelect } from '@/hooks'
 import type { SelectProps, SelectValue } from '@/types'
-import { watch } from 'vue'
 
 const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],
   multiple: false,
   mode: 'static',
-  labelKey: 'label',
-  valueKey: 'value',
-  disabledKey: 'disabled',
   name: ''
 })
 
