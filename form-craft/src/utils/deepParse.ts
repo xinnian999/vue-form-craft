@@ -3,47 +3,67 @@ import { isArray, isPlainObject, isString } from 'lodash'
 // 性能优化：缓存Function实例，避免重复创建
 const functionCache = new Map<string, Function>()
 
-// 模板转换函数，将一个由双大括号包裹的字符串，转化为并返回结果（context限制变量范围）
+// 模板转换函数：支持整段 {{}} 表达式和普通字符串中的内嵌 {{}} 表达式
 const templateParse = (str: string, context: Record<string, any>) => {
   if (!str) return str
   if (typeof str !== 'string') return str
 
-  // 使用 [\s\S] 来匹配包括换行符在内的所有字符
-  const template = str.match(/\{\{([\s\S]+?)\}\}/)
-  if (template) {
-    try {
-      const expression = template[1]
-      const contextKeys = Object.keys(context).join(',')
-      const cacheKey = `${contextKeys}:${expression}`
+  // 快速检测是否包含模板表达式
+  if (!str.includes('{{') || !str.includes('}}')) return str
 
-      // 尝试从缓存获取Function实例
-      let parse = functionCache.get(cacheKey)
-      if (!parse) {
-        parse = new Function(contextKeys, 'return ' + expression)
-        // 限制缓存大小，避免内存泄漏
-        if (functionCache.size > 500) {
-          // 清除最早的缓存项
-          const firstKey = functionCache.keys().next().value
-          if (firstKey !== undefined) {
-            functionCache.delete(firstKey)
-          }
+  const contextKeys = Object.keys(context).join(',')
+
+  const getOrCreateFn = (expression: string) => {
+    const cacheKey = `${contextKeys}:${expression}`
+
+    let parse = functionCache.get(cacheKey)
+    if (!parse) {
+      parse = new Function(contextKeys, 'return ' + expression)
+
+      // 限制缓存大小，避免内存泄漏
+      if (functionCache.size > 500) {
+        const firstKey = functionCache.keys().next().value
+        if (firstKey !== undefined) {
+          functionCache.delete(firstKey)
         }
-        functionCache.set(cacheKey, parse)
       }
 
-      const result = parse(...Object.values(context))
-
-      return result
-    } catch (e) {
-      // console.log({
-      //   message: `模板转换错误：${str}`,
-      //   context,
-      //   reason: e
-      // })
-
-      return str
+      functionCache.set(cacheKey, parse)
     }
-  } else {
+
+    return parse
+  }
+
+  try {
+    const contextValues = Object.values(context)
+
+    // 1. 如果整个字符串就是一个 {{ expr }}，保持原有行为：直接返回计算结果
+    const fullMatch = str.match(/^\s*\{\{([\s\S]+?)\}\}\s*$/)
+    if (fullMatch) {
+      const expression = fullMatch[1]
+      const parse = getOrCreateFn(expression)
+      return parse(...contextValues)
+    }
+
+    // 2. 否则，处理内嵌表达式：逐个替换 {{ expr }} 为其字符串结果
+    return str.replace(/\{\{([\s\S]+?)\}\}/g, (_, expr) => {
+      try {
+        const parse = getOrCreateFn(expr)
+        const value = parse(...contextValues)
+        // 将 undefined / null 安全转为空字符串，避免出现 "undefined" 字样
+        return value == null ? '' : String(value)
+      } catch {
+        // 单个表达式出错时，保留原文本，避免整串报错
+        return `{{${expr}}}`
+      }
+    })
+  } catch (e) {
+    // console.log({
+    //   message: `模板转换错误：${str}`,
+    //   context,
+    //   reason: e
+    // })
+
     return str
   }
 }

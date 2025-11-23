@@ -1,6 +1,6 @@
 import type { FormElement } from '@/types'
+import attrSchema from './attrSchema'
 import TextArea from './TextArea.vue'
-import attrSchema from './textAreaAttrSchema'
 
 export default {
   title: '多行文本',

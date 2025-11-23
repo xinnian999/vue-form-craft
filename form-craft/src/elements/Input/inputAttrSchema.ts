@@ -134,9 +134,10 @@ export default {
             {
               label: 'AI生成',
               name: 'props.aiPrompt',
-              component: 'Input',
+              component: 'TextArea',
               props: {
-                placeholder: '请输入AI生成提示词'
+                placeholder: '请输入AI生成提示词',
+                autosize: true
               },
               designKey: 'design-aiPrompt'
             },
@@ -246,6 +247,13 @@ export default {
                       }
                     ]
                   },
+                  linkages: [
+                    {
+                      target: 'rules.*.value',
+                      type: 'data',
+                      value: ''
+                    }
+                  ],
                   designKey: 'design-rule-type'
                 },
                 {
@@ -273,50 +281,13 @@ export default {
                 },
                 {
                   label: '正则表达式',
+                  labelAlign: 'top',
                   name: 'value',
-                  component: 'Autocomplete',
+                  component: 'Input',
                   props: {
-                    placeholder: '请输入正则表达式，如：^[0-9]+$',
-                    options: [
-                      {
-                        label: '邮箱',
-                        value: '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$'
-                      },
-                      {
-                        label: '手机号',
-                        value: '^1[3-9]\\d{9}$'
-                      },
-                      {
-                        label: 'QQ号',
-                        value: '^[1-9][0-9]{4,10}$'
-                      },
-                      {
-                        label: '身份证号',
-                        value:
-                          '^[1-9]\\d{5}(?:18|19|20)\\d{2}(?:0[1-9]|10|11|12)(?:0[1-9]|[1-2]\\d|30|31)\\d{3}[\\dxX]$'
-                      },
-                      {
-                        label: '中文',
-                        value: '^[一-龥]+$'
-                      },
-                      {
-                        label: '网址',
-                        value: '^http(s)?:\\/\\/(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,}(?:\\/[^\\s]*)?'
-                      },
-                      {
-                        label: 'IP地址',
-                        value:
-                          '^(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d?)$'
-                      },
-                      {
-                        label: '邮政编码',
-                        value: '^[1-9]\\d{5}$'
-                      },
-                      {
-                        label: '字母+数字',
-                        value: '^[a-zA-Z0-9]+$'
-                      }
-                    ]
+                    placeholder: '可根据【错误提示】ai生成',
+                    aiPrompt:
+                      '根据字段「{{$item.message || $values.label || "该字段"}}」的含义，生成一个合适的 JS 正则表达式字符串，不要加 / 包裹，只返回纯正则字符串。'
                   },
                   designKey: 'design-rule-pattern',
                   hidden: "{{ $item.type !== 'pattern' }}",
