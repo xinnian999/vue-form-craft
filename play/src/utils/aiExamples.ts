@@ -89,10 +89,6 @@ export const cozeAiFunction: AiGenerateFunction = async ({ prompt, context, sign
     throw new Error('No answer found')
   }
 
-  try {
-    return JSON.parse(content)
-  } catch (e) {
-    console.error('AI生成错误:', { error: e, rawContent: content })
-    throw new Error('AI生成错误')
-  }
+  // 直接返回原始文本内容，由调用方根据提示词约定自行解析
+  return content
 }

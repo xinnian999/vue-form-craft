@@ -39,8 +39,9 @@ import { ref, type Ref } from 'vue'
 import { BubbleList, Sender } from 'vue-element-plus-x'
 import type { BubbleListItemProps } from 'vue-element-plus-x/types/BubbleList'
 import { Icon } from '@/components'
-import { useDesignInstance, useGlobals } from '@/hooks'
-import { createAiHelper, ns } from '@/utils'
+import generateSchemaPrompt from '@/config/generateSchemaPrompt.md?raw'
+import { useAi, useDesignInstance } from '@/hooks'
+import { ns } from '@/utils'
 import Welcome from './Welcome.vue'
 
 type BubbleItem = BubbleListItemProps & {
@@ -56,11 +57,7 @@ const list: Ref<BubbleItem[]> = ref([])
 
 const designInstance = useDesignInstance()!
 
-const { ai } = useGlobals()
-
-const aiHelper = createAiHelper(ai)
-
-let controller: AbortController | null = null
+const { isAvailable, request, cancel } = useAi()
 
 // AI生成表单
 const startSSE = async () => {
@@ -69,7 +66,7 @@ const startSSE = async () => {
   }
 
   // 检查AI功能是否可用
-  if (!aiHelper.isAvailable()) {
+  if (!isAvailable) {
     list.value = [
       ...list.value,
       {
@@ -105,27 +102,32 @@ const startSSE = async () => {
     }
   ]
 
-  inputLoading.value = true
-
   const userInput = input.value
   input.value = ''
 
   const current = list.value.at(-1)!
 
   try {
-    controller = new AbortController()
+    const prompt = `${generateSchemaPrompt}\n\n请基于当前表单Schema:${JSON.stringify(
+      designInstance.getSchema()
+    )},生成新的表单Schema。\n\n要求:${userInput}`
 
-    const json = await aiHelper.generateFormSchema(
-      userInput,
-      designInstance.getSchema(),
-      controller.signal
-    )
+    const result = await request(prompt)
 
-    current.content = '✓ 已为您修改表单'
-    designInstance.setSchema(json)
-    designInstance.recordHistory('AI生成表单')
-  } catch (err: any) {
-    current.content = err.message || '生成失败'
+    if (!result) {
+      current.content = current.content || '生成失败'
+      return
+    }
+
+    try {
+      const json = typeof result === 'string' ? JSON.parse(result) : result
+      current.content = '✓ 已为您修改表单'
+      designInstance.setSchema(json)
+      designInstance.recordHistory('AI生成表单')
+    } catch (e) {
+      console.error('AI生成错误:', { error: e, rawContent: result })
+      current.content = 'AI生成错误'
+    }
   } finally {
     inputLoading.value = false
     current.loading = false
@@ -139,7 +141,7 @@ const handleItemClick = (item: string) => {
 
 const onCancel = () => {
   inputLoading.value = false
-  controller?.abort()
+  cancel()
 }
 
 const footerConfig = [

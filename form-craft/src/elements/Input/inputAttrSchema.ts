@@ -132,6 +132,15 @@ export default {
               designKey: 'design-JTMu'
             },
             {
+              label: 'AI生成',
+              name: 'props.aiPrompt',
+              component: 'Input',
+              props: {
+                placeholder: '请输入AI生成提示词'
+              },
+              designKey: 'design-aiPrompt'
+            },
+            {
               label: '隐藏',
               name: 'hidden',
               component: 'Switch',
