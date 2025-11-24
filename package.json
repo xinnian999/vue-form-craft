@@ -3,9 +3,9 @@
   "type": "module",
   "scripts": {
     "dev": "pnpm -C play dev",
-    "build": "pnpm -C formora build",
-    "test": "pnpm -C formora test",
-    "release": "pnpm -C formora release",
+    "build": "pnpm -C lib build",
+    "test": "pnpm -C lib test",
+    "release": "pnpm -C lib release",
     "docs:dev": "pnpm -C docs dev",
     "docs:build": "pnpm -C docs build",
     "docs:preview": "pnpm -C docs preview",

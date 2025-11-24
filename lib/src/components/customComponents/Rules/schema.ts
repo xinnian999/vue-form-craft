@@ -12,10 +12,7 @@ export default {
       name: 'required',
       component: 'Switch',
       props: {
-        'inline-prompt': false,
-        style: {
-          marginBottom: '18px'
-        }
+        'inline-prompt': false
       },
       designKey: 'design-TA5Q'
     },

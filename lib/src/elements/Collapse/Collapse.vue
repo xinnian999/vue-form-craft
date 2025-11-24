@@ -20,11 +20,3 @@ onMounted(() => {
     props.children?.filter((item) => item.props?.checked).map((item) => item.name) || []
 })
 </script>
-
-<style lang="scss">
-.form-item-grid {
-  .el-form-item {
-    margin-bottom: 0;
-  }
-}
-</style>

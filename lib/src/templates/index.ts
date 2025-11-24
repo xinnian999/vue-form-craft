@@ -1,3 +1,4 @@
+import rulesSchema from '@/components/customComponents/Rules/schema'
 import { formAttrSchema } from '@/config'
 import * as elements from '@/elements'
 import type { FormElement } from '@/types'
@@ -144,9 +145,12 @@ export default [
       {
         label: '表单配置',
         schema: formAttrSchema,
-        description: '',
-        order: 0,
-        type: 'form'
+        description: ''
+      },
+      {
+        label: '校验规则配置',
+        schema: rulesSchema,
+        description: ''
       },
       ...elementConfigs
     ]

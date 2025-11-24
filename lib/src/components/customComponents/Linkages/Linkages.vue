@@ -1,5 +1,5 @@
 <template>
-  <FormRender v-model="value" :schema="schema" :class="ns('design-rules-config')" />
+  <FormRender v-model="value" :schema="schema" :class="ns('design-linkages-config')" />
 </template>
 
 <script setup lang="ts">
@@ -12,7 +12,7 @@ const value = defineModel()
 <style lang="scss">
 @import '@/style';
 
-@include ns('design-rules-config') {
+@include ns('design-linkages-config') {
   @include ns('form-item') {
     margin-bottom: 18px !important;
   }
