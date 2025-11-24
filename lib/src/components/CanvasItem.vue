@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="canvasItemClass"
+    :class="[canvasItemClass, data.designKey]"
     @click.stop="handleSelect(data)"
     @mousemove.stop="handleHoverEnter"
     @mouseleave.stop="handleHoverLeave"

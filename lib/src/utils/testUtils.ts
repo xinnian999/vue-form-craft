@@ -49,10 +49,39 @@ export function FormDesignTest() {
     }
   }
 
+  // 获取画布容器实例（用于模拟拖拽）
+  // designKey: 可选，用于获取嵌套容器。不传则获取根容器
+  const getCanvasGroup = (designKey?: string) => {
+    if (!designKey) {
+      // 获取根容器（Main组件下的第一个CanvasGroup）
+      const canvasGroup = centerWrapper.findComponent({ name: 'CanvasGroup' })
+      if (!canvasGroup.exists()) {
+        throw new Error('未找到CanvasGroup组件')
+      }
+      return canvasGroup.vm as any
+    }
+
+    // 通过designKey获取嵌套容器
+    // 先找到对应的CanvasItem
+    const canvasItem = centerWrapper.find(`.${designKey}`)
+    if (!canvasItem.exists()) {
+      throw new Error(`未找到designKey为 ${designKey} 的组件`)
+    }
+
+    // 在该CanvasItem内部查找CanvasGroup
+    const canvasGroup = canvasItem.findComponent({ name: 'CanvasGroup' })
+    if (!canvasGroup.exists()) {
+      throw new Error(`designKey为 ${designKey} 的组件内部没有CanvasGroup容器`)
+    }
+
+    return canvasGroup.vm as any
+  }
+
   return {
     wrapper,
     leftWrapper,
     rightWrapper,
+    centerWrapper,
     backBtn,
     forwardBtn,
     schema,
@@ -61,6 +90,7 @@ export function FormDesignTest() {
     dblclickAdd,
     clearDesign,
     clickItem,
-    items
+    items,
+    getCanvasGroup
   }
 }
