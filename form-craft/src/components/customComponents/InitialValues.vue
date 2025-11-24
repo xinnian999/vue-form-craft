@@ -1,7 +1,13 @@
 <template>
   <div>
     <el-button type="primary" plain size="small" @click="visible = true">编辑</el-button>
-    <el-dialog v-model="visible" title="表单初始值" append-to-body>
+    <el-dialog
+      v-model="visible"
+      title="表单初始值"
+      append-to-body
+      destroy-on-close
+      @close="handleClose"
+    >
       <FormRender
         v-model="initialValues"
         :schema="{ ...designInstance.getSchema(), submitBtn: false, resetBtn: false }"
@@ -34,5 +40,9 @@ onMounted(() => {
 const handleSave = () => {
   modelValue.value = initialValues.value
   visible.value = false
+}
+
+const handleClose = () => {
+  initialValues.value = modelValue.value
 }
 </script>
