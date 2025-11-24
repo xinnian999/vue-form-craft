@@ -178,7 +178,7 @@ export interface FormDesignProps {
 
 export interface DesignInstance extends Required<ToRefs<FormDesignProps>> {
   currentKey: Ref<string>
-  hoverKey: string
+  hoverKey: Ref<string>
   fullScreen: Ref<boolean>
   history: Ref<HistoryRecord[]>
   historyIndex: Ref<number>

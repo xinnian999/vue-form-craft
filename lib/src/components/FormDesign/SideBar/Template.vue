@@ -32,6 +32,7 @@ const designInstance = useDesignInstance()!
 const useTemplate = (template: any) => {
   const schema = repirJsonSchema(template.schema)
   designInstance.setSchema(schema)
+  designInstance.setCurrentKey('root')
   designInstance.recordHistory(`使用模板-${template.label}`)
 }
 </script>

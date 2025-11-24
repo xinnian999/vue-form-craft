@@ -54,6 +54,8 @@ const modelValue = defineModel<FormSchema>({
 
 const currentKey = ref('root')
 
+const hoverKey = ref('')
+
 const fullScreen = ref(false)
 
 const history = ref<HistoryRecord[]>([])
@@ -70,6 +72,14 @@ const jsonState = reactive({
 // schema的唯一修改入口
 const setSchema = (schema: FormSchema) => {
   modelValue.value = schema
+}
+
+const setCurrentKey = (key: string) => {
+  currentKey.value = key
+}
+
+const setHoverKey = (key: string) => {
+  hoverKey.value = key
 }
 
 // 记录历史。
@@ -171,24 +181,21 @@ onBeforeUnmount(() => {
 const instance = reactive<DesignInstance>({
   ...toRefs(props),
   currentKey,
-  hoverKey: '',
+  hoverKey,
   recordHistory,
   fullScreen,
   history,
   historyIndex,
   getSchema,
   setSchema,
-  setCurrentKey(key) {
-    currentKey.value = key
-  },
-  setHoverKey(key) {
-    instance.hoverKey = key
-  },
+  setCurrentKey,
+  setHoverKey,
   handleEmit: (name, params) => {
     emits(name, params)
   },
   handleClear: () => {
     setSchema({ ...getSchema(), items: [] })
+    setCurrentKey('root')
     recordHistory('清空表单')
   },
   handleHistoryBack,
