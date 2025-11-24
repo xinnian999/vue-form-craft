@@ -15,7 +15,7 @@ import { computed } from 'vue'
 import { FormRender } from '@/components'
 import { formAttrSchema } from '@/config'
 import { useDesignInstance, useElements } from '@/hooks'
-import type { FormSchema } from '@/types'
+import type { FormItemType, FormSchema } from '@/types'
 import { ns } from '@/utils'
 
 const designInstance = useDesignInstance()!
@@ -51,7 +51,27 @@ const attrSchema = computed<FormSchema>(() => {
   const config = elements[nodeModel.value!.component]
 
   if (config?.attrSchema) {
-    return config.attrSchema
+    const parseItems = (nodes: FormItemType[] = []): FormItemType[] => {
+      return nodes.map((item) => {
+        const value = nodeModel.value?.[item.name as keyof typeof nodeModel.value]
+        const isTemplate = typeof value === 'string' && /^{{\s*(.*?)\s*}}$/.test(value)
+
+        return {
+          ...item,
+          component: isTemplate ? 'Custom' : item.component,
+          props: isTemplate
+            ? {
+                componentName: 'FormDesign-JsExpr'
+              }
+            : item.props,
+          children: item.children && parseItems(item.children)
+        }
+      })
+    }
+    return {
+      ...config.attrSchema,
+      items: parseItems(config.attrSchema.items)
+    }
   }
 
   return { size: 'small', labelAlign: 'top', items: [] } satisfies FormSchema
