@@ -1,6 +1,6 @@
 # Dark Mode
 
-Since `form-craft` is developed based on `element-plus`, most of the color variables are also using its variables.
+Since `formora` is developed based on `element-plus`, most of the color variables are also using its variables.
 
 You can directly switch `element-plus` to dark mode.
 

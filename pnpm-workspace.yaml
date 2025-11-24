@@ -1,4 +1,4 @@
 packages:
-  - 'form-craft'
+  - 'lib'
   - 'play'
   - 'docs'

@@ -18,7 +18,7 @@
 
 ```ts
 import ElementPlus from 'element-plus'
-import VueFormCraft from 'form-craft'
+import VueFormCraft from 'formora'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'

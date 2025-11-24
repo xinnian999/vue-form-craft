@@ -2,7 +2,7 @@
 
 ## Introduction
 
-FormRender is the rendering component of form-craft.
+FormRender is the rendering component of formora.
 
 ::: demo expand
 

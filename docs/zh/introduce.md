@@ -12,7 +12,7 @@ import StarAlert from '../demo/StarAlert.vue'
 
 ## 核心
 
-form-craft主要由 `FormDesign` 、 `FormRender`两个组件构成。
+formora主要由 `FormDesign` 、 `FormRender`两个组件构成。
 
 - `FormDesign`通过拖拽生成`JsonSchema`
 

@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import type { FormSchema } from 'form-craft'
+import type { FormSchema } from 'formora'
 import { ref } from 'vue'
 
 const formValues = ref({})

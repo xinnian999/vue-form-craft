@@ -1,5 +1,5 @@
 import ElementPlus from 'element-plus'
-import VueFormCraft from 'form-craft/dev'
+import VueFormCraft from 'formora/dev'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'

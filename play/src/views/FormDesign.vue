@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import { ElMessage } from 'element-plus'
-import type { FormElement, FormSchema } from 'form-craft'
+import type { FormElement, FormSchema } from 'formora'
 import { onMounted, ref } from 'vue'
 
 const formDesignRef = ref()
