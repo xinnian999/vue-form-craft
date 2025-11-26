@@ -1,3 +1,4 @@
+import Basic from './Basic/index.vue'
 import InitialValues from './InitialValues.vue'
 import JsExpr from './JsExpr.vue'
 import Linkages from './Linkages/Linkages.vue'
@@ -10,4 +11,5 @@ export default (app: any) => {
   app.component('FormDesign-JsExpr', JsExpr)
   app.component('FormDesign-Rules', Rules)
   app.component('FormDesign-Linkages', Linkages)
+  app.component('FormDesign-Basic', Basic)
 }

@@ -67,79 +67,13 @@ export default {
           designKey: 'tab-attrs',
           children: [
             {
-              label: '字段标识',
-              name: 'name',
-              component: 'Input',
+              name: '.',
+              component: 'Custom',
               props: {
-                placeholder: '',
-                autocomplete: 'new-password',
-                clearable: true
+                componentName: 'FormDesign-Basic'
               },
-              designKey: 'design-name'
-            },
-            {
-              label: '标签',
-              name: 'label',
-              component: 'Input',
-              props: {
-                placeholder: '',
-                autocomplete: 'new-password',
-                clearable: true
-              },
-              designKey: 'design-label'
-            },
-            {
-              label: '标签宽度',
-              name: 'labelWidth',
-              component: 'InputNumber',
-              props: {
-                unit: 'px',
-                step: 10,
-                controlsPosition: ''
-              },
-              designKey: 'design-labelWidth'
-            },
-            {
-              label: '标签位置',
-              name: 'labelAlign',
-              component: 'Radio',
-              props: {
-                mode: 'static',
-                options: [
-                  { label: '居左', value: 'left' },
-                  { label: '居上', value: 'top' },
-                  { label: '居右', value: 'right' }
-                ]
-              },
-              designKey: 'design-labelAlign'
-            },
-            {
-              label: '组件大小',
-              name: 'size',
-              component: 'Radio',
-              props: {
-                mode: 'static',
-                options: [
-                  { label: '默认', value: 'default' },
-                  { label: '较小', value: 'small' },
-                  { label: '较大', value: 'large' }
-                ]
-              },
-              designKey: 'design-size'
-            },
-            {
-              label: '气泡提示',
-              name: 'help',
-              component: 'TextArea',
-              props: {
-                placeholder: '',
-                autosize: {
-                  minRows: 2,
-                  maxRows: 999
-                },
-                clearable: true
-              },
-              designKey: 'design-help'
+              designKey: 'design-basic',
+              labelWidth: 0
             },
             {
               label: '占位提示',
