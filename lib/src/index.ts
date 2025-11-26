@@ -6,8 +6,6 @@ export { FormRender, FormDesign } from './components'
 
 export { useFormInstance } from '@/hooks'
 
-export { createAiHelper } from '@/utils/aiHelper'
-
 export type {
   FormElement,
   FormItemType,
