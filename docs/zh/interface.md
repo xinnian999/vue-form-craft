@@ -63,7 +63,6 @@ type FormSchema = {
   size?: 'default' | 'small' | 'large' // 表单的组件大小
   disabled?: boolean // 禁用所有表单项
   hideRequiredAsterisk?: boolean // 隐藏必填星号
-  labelBold?: boolean // 标签是否加粗
   items: FormItemType[] // 表单项配置
 }
 ```

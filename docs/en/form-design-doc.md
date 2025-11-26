@@ -2,7 +2,7 @@
 
 ## Introduction
 
-FormDesign is a visual form designer component for form-craft.
+FormDesign is a visual form designer component for formora.
 
 ```vue
 <template>

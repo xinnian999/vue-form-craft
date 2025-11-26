@@ -3,16 +3,16 @@ import { mdVueDemoPlugin } from 'vitepress-vue-demo'
 
 export default defineConfig({
   lang: 'zh',
-  title: 'Form Craft',
+  title: 'Formora',
   description: '基于vue3的一个开箱即用低代码表单方案',
-  base: '/form-craft/',
+  base: '/formora/',
   vite: {
     server: {
       port: 9999,
       host: true
     }
   },
-  head: [['link', { rel: 'icon', href: '/form-craft/favicon.svg' }]],
+  head: [['link', { rel: 'icon', href: '/formora/favicon.svg' }]],
   markdown: {
     config: (md) => {
       md.use(mdVueDemoPlugin, { root: './' })
@@ -22,7 +22,7 @@ export default defineConfig({
     search: {
       provider: 'local'
     },
-    socialLinks: [{ icon: 'github', link: 'https://github.com/xinnian999/form-craft' }]
+    socialLinks: [{ icon: 'github', link: 'https://github.com/xinnian999/formora' }]
   },
   locales: {
     root: {
@@ -46,7 +46,7 @@ export default defineConfig({
               items: [
                 { text: '简介', link: '/zh/introduce' },
                 { text: '快速开始', link: '/zh/use' },
-                { text: 'JsonSchema协议', link: '/zh/schema' },
+                { text: 'JsonSchema协议', link: '/zh/schema' }
               ]
             },
             {
@@ -56,7 +56,7 @@ export default defineConfig({
                 { text: '数据校验', link: '/zh/rules' },
                 { text: 'AI助手', link: '/zh/ai' },
                 { text: '深层数据绑定', link: '/zh/deepName' },
-                { text: '自定义组件', link: '/zh/custom-component' },
+                { text: '自定义组件', link: '/zh/custom-component' }
               ]
             },
             {
@@ -68,16 +68,13 @@ export default defineConfig({
             },
             {
               text: 'Hooks',
-              items: [
-                { text: 'useFormInstance', link: '/zh/useFormInstance' }
-              ]
+              items: [{ text: 'useFormInstance', link: '/zh/useFormInstance' }]
             },
             {
               text: '更多',
               items: [
                 { text: '类型声明', link: '/zh/interface' },
                 { text: '暗黑模式', link: '/zh/dark' },
-                { text: '国际化', link: '/zh/internationalization' },
                 { text: '二次开发指南', link: '/zh/dev' },
                 { text: '意见&建议&捐赠', link: '/zh/advice' }
               ]
@@ -90,7 +87,7 @@ export default defineConfig({
                 { text: '读写表单数据', link: '/zh/teach/vmodel' },
                 { text: '提交表单', link: '/zh/teach/submit' },
                 { text: '函数传递', link: '/zh/teach/func' },
-                { text: '事件传递', link: '/zh/teach/event' },
+                { text: '事件传递', link: '/zh/teach/event' }
               ]
             }
           ]
@@ -147,8 +144,7 @@ export default defineConfig({
               text: 'More',
               items: [
                 { text: 'Type Declarations', link: '/en/interface' },
-                { text: 'Dark Mode', link: '/en/dark' },
-                { text: 'Internationalization', link: '/en/internationalization' }
+                { text: 'Dark Mode', link: '/en/dark' }
               ]
             }
           ]

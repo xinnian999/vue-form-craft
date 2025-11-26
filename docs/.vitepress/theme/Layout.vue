@@ -12,7 +12,7 @@ provide('vfc-lang', lang)
 
 onMounted(() => {
   document.cookie = `nf_lang=${lang.value}; expires=Mon, 1 Jan 2030 00:00:00 UTC; path=/`
-  if (location.pathname === '/form-craft/') {
+  if (location.pathname === '/formora/') {
     location.href = location.href + `${lang.value}/`
   }
 })

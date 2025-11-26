@@ -3,9 +3,9 @@
   "type": "module",
   "scripts": {
     "dev": "pnpm -C play dev",
-    "build": "pnpm -C form-craft build",
-    "test": "pnpm -C form-craft test",
-    "release": "pnpm -C form-craft release",
+    "build": "pnpm -C lib build",
+    "test": "pnpm -C lib test",
+    "release": "pnpm -C lib release",
     "docs:dev": "pnpm -C docs dev",
     "docs:build": "pnpm -C docs build",
     "docs:preview": "pnpm -C docs preview",
@@ -13,10 +13,11 @@
     "clear": "find . -type d -name 'node_modules' -exec rm -rf {} \\;"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.3.2",
     "@guolao/vue-monaco-editor": "^1.6.0",
     "axios": "^1.6.2",
     "element-plus": "^2.11.4",
-    "form-craft": "workspace:*",
+    "formora": "workspace:*",
     "jsoneditor": "^10.3.0",
     "lodash": "^4.17.21",
     "md-editor-v3": "^6.0.1",

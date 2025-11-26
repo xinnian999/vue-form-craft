@@ -86,7 +86,7 @@ Drag and drop through the designer to create a form that exports JsonSchema
 
 ```ts
 // src/extendElements/Markdown/attrSchema.ts
-import type { FormSchema } from 'form-craft'
+import type { FormSchema } from 'formora'
 
 export default {
   size: 'small',
@@ -132,7 +132,7 @@ Merge the above files into a 'FormElement' object, which is a complete extension
 
 ```ts
 // src/extendElements/Markdown/index.ts
-import type { FormElement } from 'form-craft'
+import type { FormElement } from 'formora'
 import attrSchema from './attrSchema'
 import component from './Component.vue'
 import icon from './Icon.vue'
@@ -165,7 +165,7 @@ import ElementPlus from 'element-plus'
 import { createApp } from 'vue'
 import App from './App.vue'
 import 'element-plus/dist/index.css'
-import VueFormCraft from 'form-craft'
+import VueFormCraft from 'formora'
 import extendElements from './extendElements'
 
 const app = createApp(App)

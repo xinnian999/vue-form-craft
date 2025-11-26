@@ -1,4 +1,4 @@
-import type { FormSchema } from 'form-craft'
+import type { FormSchema } from 'formora'
 
 export default {
   size: 'small',

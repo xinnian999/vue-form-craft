@@ -1,0 +1,28 @@
+$namespace: 'vfc' !default;
+$themeColor: var(--el-color-primary, #409eff) !default;
+$lightThemeColor: var(--el-color-primary-light-9, rgb(235.9, 245.3, 255)) !default;
+$dangerColor: var(--el-color-danger, #f56c6c) !default;
+$bgColor: var(--el-bg-color, #fff) !default;
+$bgColor2: var(--el-fill-color-blank, #fff) !default;
+$bgColor3: var(--el-fill-color-light, #f5f7fa) !default;
+$successColor: var(--el-color-success, #67c23a) !default;
+$lightSuccessColor: var(--el-color-success-light-9, rgb(240, 249, 235)) !default;
+$warningColor: var(--el-color-warning, #e6a23c) !default;
+$borderColor: var(--el-border-color, #dcdfe6) !default;
+$fillColorLight: var(--el-fill-color-light, #f5f7fa) !default;
+$textColorSecondary: var(--el-text-color-secondary, #909399) !default;
+$textColor1: var(--el-text-color-primary, #303133) !default;
+$textColor3: var(--el-text-color-regular, #606266) !default;
+$primaryColor: var(--el-color-primary, #409eff) !default;
+
+@mixin ns($cls) {
+  $NS: $namespace + '-' + $cls;
+
+  .#{$NS} {
+    @content;
+  }
+}
+
+:root {
+  --#{$namespace}-danger-color: #{$dangerColor};
+}

@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import { ElMessage } from 'element-plus'
-import type { FormElement, FormSchema } from 'form-craft'
+import type { FormElement, FormSchema } from 'formora'
 import { onMounted, ref } from 'vue'
 
 const formDesignRef = ref()
@@ -37,7 +37,8 @@ const onAdd = (element: FormElement) => {
 onMounted(() => {
   const localSchema = localStorage.getItem('schema')
   if (localSchema) {
-    formDesignRef.value?.applySchema(JSON.parse(localSchema)) // 直接修改v-model不会记录历史，需要调用applySchema
+    schema.value = JSON.parse(localSchema)
+    formDesignRef.value?.recordHistory('回显保存的表单')
   }
 })
 </script>

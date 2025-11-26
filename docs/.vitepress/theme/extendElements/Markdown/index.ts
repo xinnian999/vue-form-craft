@@ -1,4 +1,4 @@
-import type { FormElement } from 'form-craft'
+import type { FormElement } from 'formora'
 import render from './Render.vue'
 import icon from './Icon.vue'
 import attrSchema from './attrSchema'

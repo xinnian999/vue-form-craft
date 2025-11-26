@@ -5,7 +5,7 @@
   "compilerOptions": {
     "composite": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
-    "types": ["form-craft/global", "element-plus/global"],
+    "types": ["formora/global", "element-plus/global"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]

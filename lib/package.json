@@ -1,0 +1,33 @@
+{
+  "name": "formora",
+  "version": "5.0.0",
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "test": "vitest",
+    "v": "npm version patch",
+    "release": "vite build && nrm use npm && npm publish"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.0",
+    "element-plus": "^2.11.0"
+  },
+  "files": [
+    "dist",
+    "global.d.ts"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./dev": "./src/index.ts"
+  },
+  "keywords": [
+    "component",
+    "vue",
+    "form",
+    "element-ui"
+  ]
+}
