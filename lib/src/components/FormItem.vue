@@ -54,6 +54,7 @@
         v-bind="componentProps"
         v-model:[config.modelName!]="value"
       />
+      <el-alert :title="alert" type="primary" show-icon :closable="false" v-if="alert" />
     </el-form-item>
   </template>
 </template>
@@ -249,6 +250,10 @@ watch(
 
   &.hide-label > .el-form-item__label {
     display: none;
+  }
+
+  .form-item-alert {
+    margin-top: 10px;
   }
 }
 

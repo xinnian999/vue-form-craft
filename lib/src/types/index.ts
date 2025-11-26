@@ -40,6 +40,7 @@ export interface FormItemType {
   props?: Record<string, any>
   initialValue?: any
   help?: string
+  alert?: string
   children?: FormItemType[]
   hidden?: boolean | string
   hideLabel?: boolean

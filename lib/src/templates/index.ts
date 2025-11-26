@@ -4,6 +4,7 @@ import * as elements from '@/elements'
 import type { FormElement } from '@/types'
 import addressContact from './addressContact'
 import advancedLinkage from './advancedLinkage'
+import aliEcs from './aliEcs'
 import bugGood from './bugGood'
 import dateRangeBooking from './dateRangeBooking'
 import eventLinkage from './eventLinkage'
@@ -59,6 +60,11 @@ export default [
   {
     label: '常见表单',
     children: [
+      {
+        label: '仿阿里云ECS申请',
+        schema: aliEcs,
+        description: '仿阿里云ECS申请表单。'
+      },
       {
         label: '注册账号',
         schema: register,
