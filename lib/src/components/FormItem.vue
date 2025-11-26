@@ -54,7 +54,14 @@
         v-bind="componentProps"
         v-model:[config.modelName!]="value"
       />
-      <el-alert :title="alert" type="primary" show-icon :closable="false" v-if="alert" />
+      <el-alert
+        :class="['form-item-alert']"
+        :title="alert"
+        type="primary"
+        show-icon
+        :closable="false"
+        v-if="alert"
+      />
     </el-form-item>
   </template>
 </template>
