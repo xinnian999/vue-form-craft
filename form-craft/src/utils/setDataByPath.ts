@@ -1,22 +1,11 @@
-import { cloneDeep } from 'lodash'
-
-/**
- * 解析路径字符串，支持数组索引语法
- * 例如：'rules[0].required' => ['rules', '0', 'required']
- */
-function parsePath(path: string): string[] {
-  return path
-    .replace(/\[(\d+)\]/g, '.$1') // 将 [0] 转换为 .0
-    .split('.')
-    .filter((key) => key !== '') // 过滤空字符串
-}
+import { parsePath } from './parsePath'
 
 const setDataByPath = (object: Record<string, any>, path: string, value: any) => {
   if (path === '.') {
     return value
   }
 
-  // 直接修改原对象，不进行深拷贝
+  // 性能优化：直接修改原对象，不进行深拷贝
   // 这样可以确保连续多次调用时数据同步，避免响应式对象更新延迟问题
   const cloneObj = object
 

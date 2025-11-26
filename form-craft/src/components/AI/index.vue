@@ -40,8 +40,7 @@ import { BubbleList, Sender } from 'vue-element-plus-x'
 import type { BubbleListItemProps } from 'vue-element-plus-x/types/BubbleList'
 import { useDesignInstance, useGlobals } from '@/hooks'
 import Icon from '@/Icon/index.vue'
-import { ns } from '@/utils'
-import generateJsonApi from './generateJsonApi'
+import { createAiHelper, ns } from '@/utils'
 import Welcome from './Welcome.vue'
 
 type BubbleItem = BubbleListItemProps & {
@@ -59,11 +58,32 @@ const designInstance = useDesignInstance()!
 
 const { ai } = useGlobals()
 
+const aiHelper = createAiHelper(ai)
+
 let controller: AbortController | null = null
 
-// 默认支持 SSE 协议
+// AI生成表单
 const startSSE = async () => {
   if (input.value === '') {
+    return
+  }
+
+  // 检查AI功能是否可用
+  if (!aiHelper.isAvailable()) {
+    list.value = [
+      ...list.value,
+      {
+        key: Date.now(),
+        role: 'user',
+        content: input.value,
+        placement: 'end'
+      },
+      {
+        key: Date.now(),
+        role: 'ai',
+        content: '❌ AI功能未配置,请在app.use时注入ai函数'
+      }
+    ]
     return
   }
 
@@ -85,10 +105,9 @@ const startSSE = async () => {
     }
   ]
 
-  const prompt = `请基于当前表单，${input.value}`
-
   inputLoading.value = true
 
+  const userInput = input.value
   input.value = ''
 
   const current = list.value.at(-1)!
@@ -96,31 +115,16 @@ const startSSE = async () => {
   try {
     controller = new AbortController()
 
-    const json = await generateJsonApi({
-      data: {
-        bot_id: '7546913648569729039',
-        user_id: '123456',
-        additional_messages: [
-          {
-            role: 'user',
-            content: JSON.stringify(designInstance.getSchema()),
-            content_type: 'text'
-          },
-          {
-            role: 'user',
-            content: prompt,
-            content_type: 'text'
-          }
-        ]
-      },
-      signal: controller.signal,
-      ai
-    })
+    const json = await aiHelper.generateFormSchema(
+      userInput,
+      designInstance.getSchema(),
+      controller.signal
+    )
 
     current.content = '✓ 已为您修改表单'
     designInstance.applySchema(json)
   } catch (err: any) {
-    current.content = err
+    current.content = err.message || '生成失败'
   } finally {
     inputLoading.value = false
     current.loading = false

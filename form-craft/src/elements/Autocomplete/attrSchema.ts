@@ -1,4 +1,4 @@
-import { optionConfig, ruleConfig } from '@/config'
+import { optionConfig } from '@/config'
 import type { FormSchema } from '@/types'
 
 export default {
@@ -28,7 +28,7 @@ export default {
     {
       label: '占位提示',
       component: 'Input',
-      name: 'props.placeholder',
+      name: 'props.placeholder'
     },
     { label: '初始值', component: 'Input', name: 'initialValue' },
     {
@@ -53,7 +53,6 @@ export default {
       component: 'InputNumber',
       name: 'props.maxlength'
     },
-    ...ruleConfig,
     ...optionConfig
   ]
 } satisfies FormSchema

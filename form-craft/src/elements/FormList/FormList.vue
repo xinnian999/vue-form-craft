@@ -106,7 +106,7 @@
 
 <script setup lang="ts">
 import type { TableColumnCtx } from 'element-plus'
-import { isEqual, pickBy } from 'lodash'
+import { cloneDeep, isEqual, pickBy, set } from 'lodash'
 import { computed, h, onMounted, provide, ref, watch } from 'vue'
 import { CanvasGroup, FormItem } from '@/components'
 import { useChildrenModel, useFormInstance } from '@/hooks'
@@ -140,13 +140,58 @@ const props = withDefaults(defineProps<Props>(), {
 const list = defineModel<Record<string, any>[]>({ default: [] })
 
 const cIndex = ref(0)
+const listSnapshot = ref<Record<string, any>[]>([])
 
 const formInstance = useFormInstance()
 
 const fields = useChildrenModel(props)
 
-const parseFields = (index: number) =>
-  deepParse(fields.value, { $item: list.value[index], $index: index })
+const parseFields = (index: number) => {
+  const currentItem = list.value[index]
+  const context = { $item: currentItem, $index: index }
+
+  // 先深度解析字段
+  let parsedFields = deepParse(fields.value, context)
+
+  // 处理单行 attr 联动
+  parsedFields = parsedFields.map((field: FormItemType) => {
+    const fieldCopy = cloneDeep(field)
+
+    // 遍历所有字段的 linkages,找到目标为当前字段的单行 attr 联动
+    fields.value.forEach((sourceField: FormItemType) => {
+      if (!sourceField.linkages) return
+
+      sourceField.linkages.forEach((linkage) => {
+        // 只处理单行 attr 联动 (target 包含 .[])
+        if (linkage.type === 'attr' && linkage.target.includes('.[]')) {
+          const targetFieldName = linkage.target.split('.[].').pop()
+
+          // 如果当前字段是联动目标
+          if (targetFieldName === field.name) {
+            // 解析 condition
+            let conditionResult = true
+            if (linkage.condition !== undefined) {
+              conditionResult = deepParse(linkage.condition, context)
+            }
+
+            // 如果 condition 为 true,应用联动
+            if (conditionResult) {
+              const actualPath = linkage.path === 'custom' ? linkage.customPath : linkage.path
+              if (actualPath) {
+                const linkageValue = deepParse(linkage.value, context)
+                set(fieldCopy, actualPath, linkageValue)
+              }
+            }
+          }
+        }
+      })
+    })
+
+    return fieldCopy
+  })
+
+  return parsedFields
+}
 
 const isMax = computed(() => {
   return list.value.length >= props.maxLines
@@ -175,59 +220,30 @@ const formatter = (row: any, column: TableColumnCtx<any>, cellValue: any, index:
   return h(FormItem, {
     ...field,
     hideLabel: true,
+    labelWidth: 0,
+    label: '',
     style: { marginBottom: 0 },
     name: `${props.name}.${index}.${field.name}`
   })
 }
 
-// FormList 数据联动
+// 追踪当前操作的行索引
 watch(
   list,
-  (newVal, oldVal) => {
+  (newVal) => {
+    // 通过对比快照来找到真正变化的索引
     const changeIndex = newVal.reduce((acc, cur, index) => {
-      if (!isEqual(cur, oldVal[index])) {
+      const oldItem = listSnapshot.value[index]
+      if (!isEqual(cur, oldItem)) {
         acc = index
       }
-
       return acc
     }, 0)
 
     cIndex.value = changeIndex
 
-    // 处理 linkages 联动
-    if (!fields.value.some((item) => item.linkages)) return
-
-    const parseFieldsData = parseFields(changeIndex)
-    const newChangeData = newVal[changeIndex] || {}
-    const oldChangeData = oldVal[changeIndex] || {}
-
-    parseFieldsData.forEach((item: FormItemType) => {
-      if (
-        item.linkages &&
-        oldChangeData &&
-        !isEqual(newChangeData[item.name], oldChangeData[item.name])
-      ) {
-        let hasChange = false
-        const updatedRow = { ...list.value[changeIndex] }
-
-        item.linkages.forEach((linkage) => {
-          if (linkage.condition === false) return
-          if (linkage.type !== 'data') return // FormList 内部只处理数据联动
-
-          // 解析目标路径
-          const targetName = linkage.target.split('.').pop()!
-          if (targetName && linkage.value !== undefined) {
-            updatedRow[targetName] = linkage.value
-            hasChange = true
-          }
-        })
-
-        // 如果有变化，替换整个行对象以触发响应式更新
-        if (hasChange) {
-          list.value[changeIndex] = updatedRow
-        }
-      }
-    })
+    // 更新快照(深拷贝)
+    listSnapshot.value = JSON.parse(JSON.stringify(newVal))
   },
   { deep: true }
 )
@@ -245,6 +261,8 @@ provide(
 </script>
 
 <style lang="scss">
+@import '@/style';
+
 .vfc-formList {
   position: relative;
   width: 100%;
@@ -273,9 +291,12 @@ provide(
   }
 
   .layoutRender {
-    padding: 5px;
+    padding: 10px;
     background-color: #f4f3f3;
     border-radius: 5px;
+    @include ns('form-item') {
+      margin-bottom: 18px;
+    }
   }
 }
 </style>

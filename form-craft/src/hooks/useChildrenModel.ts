@@ -15,15 +15,9 @@ const useChildrenModel = (props: { children?: FormItemType[]; designKey?: string
     },
     set(value) {
       if (formInstance.design && props.designKey) {
-        if (props.designKey === 'root') {
-          designInstance!.updateNodeByKey('root', {
-            items: value
-          })
-        } else {
-          designInstance!.updateNodeByKey(props.designKey, {
-            children: value
-          })
-        }
+        designInstance!.updateNodeByKey(props.designKey, {
+          children: value
+        })
       }
     }
   })

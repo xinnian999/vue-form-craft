@@ -1,5 +1,8 @@
 import { isArray, isPlainObject, isString } from 'lodash'
 
+// 性能优化：缓存Function实例，避免重复创建
+const functionCache = new Map<string, Function>()
+
 // 模板转换函数，将一个由双大括号包裹的字符串，转化为并返回结果（context限制变量范围）
 // 如果返回值是函数，会自动包装并传入 context + args
 const templateParse = (str: string, context: Record<string, any>) => {
@@ -10,8 +13,25 @@ const templateParse = (str: string, context: Record<string, any>) => {
   const template = str.match(/\{\{([\s\S]+?)\}\}/)
   if (template) {
     try {
-      // console.log('匹配到{{ }}模板:', str)
-      const parse = new Function(Object.keys(context).join(','), 'return ' + template[1])
+      const expression = template[1]
+      const contextKeys = Object.keys(context).join(',')
+      const cacheKey = `${contextKeys}:${expression}`
+      
+      // 尝试从缓存获取Function实例
+      let parse = functionCache.get(cacheKey)
+      if (!parse) {
+        parse = new Function(contextKeys, 'return ' + expression)
+        // 限制缓存大小，避免内存泄漏
+        if (functionCache.size > 500) {
+          // 清除最早的缓存项
+          const firstKey = functionCache.keys().next().value
+          if (firstKey !== undefined) {
+            functionCache.delete(firstKey)
+          }
+        }
+        functionCache.set(cacheKey, parse)
+      }
+      
       const result = parse(...Object.values(context))
 
       // 如果解析结果是函数，包装它，将 context 和原始参数合并后传入
@@ -43,15 +63,24 @@ const deepParse = (prop: any, context: Record<string, any>): any => {
   }
 
   if (isPlainObject(prop)) {
-    return Object.keys(prop).reduce((all, key) => {
-      return { ...all, [key]: deepParse(prop[key], context) }
-    }, {})
+    // 性能优化：使用for...in替代reduce，减少对象创建
+    const result: Record<string, any> = {}
+    for (const key in prop) {
+      if (Object.prototype.hasOwnProperty.call(prop, key)) {
+        result[key] = deepParse(prop[key], context)
+      }
+    }
+    return result
   }
 
   if (isArray(prop)) {
-    return prop.map((item) => {
-      return deepParse(item, context)
-    })
+    // 性能优化：使用传统for循环，比map稍快
+    const length = prop.length
+    const result = new Array(length)
+    for (let i = 0; i < length; i++) {
+      result[i] = deepParse(prop[i], context)
+    }
+    return result
   }
 
   return prop

@@ -1,5 +1,5 @@
 import { h } from 'vue'
-import { JsonEditor } from '@/components'
+import JsonEditor from '@/components/JsonEditor.vue'
 import Icon from '@/Icon/index.vue'
 import type { FormElement } from '@/types'
 import attrSchema from './attrSchema'

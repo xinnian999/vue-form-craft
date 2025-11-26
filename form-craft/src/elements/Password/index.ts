@@ -1,7 +1,7 @@
 import { h } from 'vue'
+import inputAttrSchema from '@/config/inputAttrSchema'
 import Icon from '@/Icon/index.vue'
 import type { FormElement } from '@/types'
-import attrSchema from './attrSchema'
 import Password from './Password.vue'
 
 export default {
@@ -11,5 +11,5 @@ export default {
   icon: h(Icon, { name: 'password' }),
   type: 'basic',
   order: 3,
-  attrSchema
+  attrSchema: inputAttrSchema
 } satisfies FormElement

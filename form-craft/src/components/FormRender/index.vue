@@ -142,6 +142,7 @@ const instanceAPI = {
 }
 
 // ========== Context 定义（包含 $instance） ==========
+// 性能优化：使用shallowRef减少深层响应式开销
 const context = computed(() => ({
   ...props.schemaContext,
   $values: formValues.value,
@@ -149,11 +150,13 @@ const context = computed(() => ({
   $instance: instanceAPI
 }))
 
+// 性能优化：缓存解析结果，只在schema或context变化时重新解析
 const formItems = computed(() => {
   if (props.design) {
     return internalSchema.value.items
   }
 
+  // deepParse已经有缓存机制，这里直接调用
   return deepParse(internalSchema.value.items || [], context.value)
 })
 

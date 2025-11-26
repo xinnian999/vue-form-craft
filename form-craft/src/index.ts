@@ -6,4 +6,14 @@ export { FormRender, FormDesign } from './components'
 
 export { useFormInstance } from '@/hooks'
 
-export type { FormElement, FormItemType, FormSchema, TemplateData, FormInstance } from '@/types'
+export { createAiHelper } from '@/utils/aiHelper'
+
+export type {
+  FormElement,
+  FormItemType,
+  FormSchema,
+  TemplateData,
+  FormInstance,
+  AiGenerateParams,
+  AiGenerateFunction
+} from '@/types'

@@ -1,13 +1,4 @@
-/**
- * 解析路径字符串，支持数组索引语法
- * 例如：'rules[0].required' => ['rules', '0', 'required']
- */
-function parsePath(path: string): string[] {
-  return path
-    .replace(/\[(\d+)\]/g, '.$1') // 将 [0] 转换为 .0
-    .split('.')
-    .filter(key => key !== '') // 过滤空字符串
-}
+import { parsePath } from './parsePath'
 
 const getDataByPath = (obj: Record<string, any>, path: string = 'data') => {
   if (path === '.') {

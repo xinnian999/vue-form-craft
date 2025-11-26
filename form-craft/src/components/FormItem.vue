@@ -20,7 +20,12 @@
 
     <el-form-item
       v-else
-      :class="[ns('form-item'), props.class, `${component}-${name}`]"
+      :class="[
+        ns('form-item'),
+        props.class,
+        `${component}-${name}`,
+        { 'hide-label': labelWidth === 0 }
+      ]"
       :style="style"
       :key="name"
       :prop="name"
@@ -131,9 +136,18 @@ const computeRules = computed(() => {
 })
 
 const config = computed(() => {
-  const data = elements[props.component] || {}
+  const data = elements[props.component]
+  if (!data) {
+    return { 
+      modelName: 'modelValue',
+      type: undefined,
+      render: undefined
+    } as any
+  }
+  
+  // 避免修改原对象，使用只读方式
   if (!data.modelName) {
-    data.modelName = 'modelValue'
+    return { ...data, modelName: 'modelValue' }
   }
 
   return data
@@ -160,13 +174,18 @@ onBeforeMount(() => {
 })
 
 // linkages 联动：可修改数据和 schema
+// 性能优化：缓存formValues引用，避免重复调用getValues()
 watch(
   value,
   (newVal, oldVal) => {
     const linkages = props.linkages
-    const diff = isEqual(newVal, oldVal)
+    
+    // 提前返回，避免不必要的计算
+    if (!linkages || linkages.length === 0 || formInstance.design) return
+    if (isEqual(newVal, oldVal)) return
 
-    if (!linkages || diff || formInstance.design) return
+    // 缓存formValues，避免多次调用getValues()
+    const formValues = formInstance.getValues()
 
     linkages.forEach(({ target, value, path, customPath, condition, type }) => {
       if (condition === false) return
@@ -177,16 +196,34 @@ watch(
         // 当 path 为 'custom' 时使用 customPath，否则使用 path
         const actualPath = path === 'custom' ? customPath : path
         if (actualPath !== undefined) {
-          formInstance.updateItemSchemaByPath(target, actualPath, value)
+          if (target.includes('.*.')) {
+            // FormList 批量 attr 联动 - 修改所有行的属性
+            // 例如: target = 'users.*.password'
+            const targetArr = target.split('.*.')
+            const fieldName = targetArr.pop()!
+            const listPath = targetArr.join('.')
+            const list = getDataByPath(formValues, listPath)
+
+            if (Array.isArray(list)) {
+              // FormList 的字段在 schema 中的 name 不包含索引,直接使用字段名
+              formInstance.updateItemSchemaByPath(fieldName, actualPath, value)
+            }
+          } else if (target.includes('.[]')) {
+            // FormList 行内 attr 联动 - 在 parseFields 中处理,这里跳过
+            // 例如: target = 'users.[].password'
+          } else {
+            // 普通 attr 联动
+            formInstance.updateItemSchemaByPath(target, actualPath, value)
+          }
         }
       } else if (type === 'data') {
         // 修改数据
         if (target.includes('.*.')) {
-          // 自增组件特殊处理
+          // 自增组件特殊处理 - 批量修改所有行
           const targetArr = target.split('.*.')
           const listTarget = targetArr.pop()!
           const targetParse = targetArr.join('.')
-          const list = getDataByPath(formInstance.getValues(), targetParse)
+          const list = getDataByPath(formValues, targetParse)
           if (Array.isArray(list)) {
             formInstance.setFieldValue(
               targetParse,
@@ -195,6 +232,25 @@ watch(
                 [listTarget]: value
               }))
             )
+          }
+        } else if (target.includes('.[]')) {
+          // FormList 行内联动 - 只修改当前行
+          // 例如: target = 'users.[].vip', props.name = 'users.0.username'
+          // 提取当前字段的行索引
+          const nameMatch = props.name.match(/^(.+?)\.(\d+)\.(.+)$/)
+          if (nameMatch) {
+            const [, listPath, rowIndex] = nameMatch
+            // 替换 [] 为实际的行索引
+            const actualTarget = target.replace('.[]', `.${rowIndex}`)
+            // 解析目标字段名
+            const targetFieldName = actualTarget.split('.').pop()!
+            const currentRowPath = `${listPath}.${rowIndex}`
+            const currentRow = getDataByPath(formValues, currentRowPath)
+
+            // 只有当目标字段的值与联动值不同时才更新,避免无限循环
+            if (currentRow && currentRow[targetFieldName] !== value) {
+              formInstance.setFieldValue(actualTarget, value)
+            }
           }
         } else {
           formInstance.setFieldValue(target, value)
@@ -206,12 +262,10 @@ watch(
 )
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '@/style';
 
 @include ns('form-item') {
-  // margin-bottom: 18px;
-
   &-label {
     display: inline-flex;
     position: relative;
@@ -221,6 +275,12 @@ watch(
 
     &-suffix {
       margin-left: 3px;
+    }
+  }
+
+  &.hide-label {
+    .el-form-item__label {
+      display: none;
     }
   }
 }
