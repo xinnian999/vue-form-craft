@@ -24,21 +24,27 @@ export default {
         {
           target: 'productName',
           path: 'label',
-          value: "{{ $values.productType === 'electronics' ? '电子产品名称' : $values.productType === 'clothing' ? '服装名称' : '食品名称' }}"
+          type: 'attr',
+          value:
+            "{{ $values.productType === 'electronics' ? '电子产品名称' : $values.productType === 'clothing' ? '服装名称' : '食品名称' }}"
         },
         {
           target: 'productName',
           path: 'props.placeholder',
-          value: "{{ $values.productType === 'electronics' ? '请输入电子产品名称' : $values.productType === 'clothing' ? '请输入服装名称' : '请输入食品名称' }}"
+          type: 'attr',
+          value:
+            "{{ $values.productType === 'electronics' ? '请输入电子产品名称' : $values.productType === 'clothing' ? '请输入服装名称' : '请输入食品名称' }}"
         },
         {
           target: 'specs',
           path: 'hidden',
-          value: "{{ !$values.productType }}"
+          type: 'attr',
+          value: '{{ !$values.productType }}'
         },
         {
           target: 'warranty',
           path: 'hidden',
+          type: 'attr',
           value: "{{ $values.productType !== 'electronics' }}"
         }
       ]
@@ -82,17 +88,20 @@ export default {
         {
           target: 'discount',
           path: 'hidden',
-          value: "{{ !$values.hasDiscount }}"
+          type: 'attr',
+          value: '{{ !$values.hasDiscount }}'
         },
         {
           target: 'discount',
-          condition: "{{ !$values.hasDiscount }}",
+          type: 'data',
+          condition: '{{ !$values.hasDiscount }}',
           value: undefined
         },
         {
           target: 'finalPrice',
           path: 'props.disabled',
-          value: "{{ $values.hasDiscount }}"
+          type: 'attr',
+          value: '{{ $values.hasDiscount }}'
         }
       ]
     },
@@ -120,8 +129,9 @@ export default {
       linkages: [
         {
           target: 'finalPrice',
-          condition: "{{ $values.hasDiscount && $values.discount && $values.originalPrice }}",
-          value: "{{ ($values.originalPrice * $values.discount / 100).toFixed(2) }}"
+          type: 'data',
+          condition: '{{ $values.hasDiscount && $values.discount && $values.originalPrice }}',
+          value: '{{ ($values.originalPrice * $values.discount / 100).toFixed(2) }}'
         }
       ]
     },

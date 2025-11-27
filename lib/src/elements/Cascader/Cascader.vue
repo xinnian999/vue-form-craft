@@ -4,9 +4,7 @@
     :options="currentOptions"
     :loading="loading"
     :props="{
-      multiple,
-      label: labelKey,
-      value: valueKey
+      multiple
     }"
     v-bind="$attrs"
     @change="selectChange"
@@ -14,16 +12,14 @@
 </template>
 
 <script setup lang="ts">
-import { useSelect } from '@/hooks'
 import { type CascaderValue } from 'element-plus'
+import { useSelect } from '@/hooks'
 import type { SelectProps } from '@/types'
 
 const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],
   multiple: false,
   mode: 'static',
-  labelKey: 'label',
-  valueKey: 'value',
   name: ''
 })
 
