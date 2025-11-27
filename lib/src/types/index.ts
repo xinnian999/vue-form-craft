@@ -64,6 +64,8 @@ export type FormSchema = {
   initialValues?: Record<string, any>
   items?: FormItemType[]
   style?: any
+  css?: string
+  formId?: string
   submitBtn?: boolean
   resetBtn?: boolean
 }

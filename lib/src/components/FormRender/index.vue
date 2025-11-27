@@ -1,5 +1,5 @@
 <template>
-  <el-form :model="formValues" ref="form" v-bind="formAttrs">
+  <el-form :model="formValues" ref="form" v-bind="formAttrs" :data-form-id="formId">
     <slot />
 
     <FormItemGroup :list="parseSchema.items" />
@@ -18,7 +18,18 @@
 <script setup lang="ts">
 import type { FormInstance as ElFormInstance } from 'element-plus'
 import { cloneDeep, omit } from 'lodash'
-import { computed, onBeforeMount, provide, reactive, readonly, toRefs, useTemplateRef } from 'vue'
+import {
+  computed,
+  onBeforeMount,
+  onBeforeUnmount,
+  provide,
+  reactive,
+  readonly,
+  ref,
+  toRefs,
+  useTemplateRef,
+  watch
+} from 'vue'
 import { FormItemGroup } from '@/components'
 import { $formInstance } from '@/symbol'
 import type { FormInstance, FormRenderEmits, FormRenderProps } from '@/types'
@@ -36,6 +47,15 @@ const formValues = defineModel<Record<string, any>>({ default: () => reactive({}
 const form = useTemplateRef<ElFormInstance>('form')
 
 const selectData = reactive<Record<string, Record<string, any>>>({})
+
+// 生成唯一的 formId（只在首次生成，后续保持不变）
+let autoFormId = `fm-form-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
+const formId = computed(() => {
+  return props.schema.formId || autoFormId
+})
+
+// 样式元素引用
+const styleElement = ref<HTMLStyleElement | null>(null)
 
 // 统一的事件触发器：同时触发 emits 和 schema 事件
 const trigger = (eventName: keyof FormRenderEmits, ...args: any[]) => {
@@ -156,11 +176,41 @@ const formAttrs = computed(() => {
   }
 })
 
+// 监听 css 变化，实时更新样式（设计模式下可实时预览）
+watch(
+  () => props.schema.css,
+  (newCss) => {
+    // 先清理旧的样式元素
+    if (styleElement.value && styleElement.value.parentNode) {
+      styleElement.value.parentNode.removeChild(styleElement.value)
+      styleElement.value = null
+    }
+
+    // 如果有新样式，注入
+    if (newCss) {
+      styleElement.value = document.createElement('style')
+      styleElement.value.setAttribute('data-form-style', formId.value)
+      // 自动包裹作用域选择器，用户不需要手动写 [data-form-id]
+      const cssText = `[data-form-id="${formId.value}"] {\n${newCss}\n}`
+      styleElement.value.textContent = cssText
+      document.head.appendChild(styleElement.value)
+    }
+  },
+  { immediate: true }
+)
+
 onBeforeMount(() => {
   if (props.schema.initialValues) {
     const values = cloneDeep(props.schema.initialValues)
 
     setValues({ ...values, ...formValues.value })
+  }
+})
+
+onBeforeUnmount(() => {
+  // 清理样式元素
+  if (styleElement.value && styleElement.value.parentNode) {
+    styleElement.value.parentNode.removeChild(styleElement.value)
   }
 })
 

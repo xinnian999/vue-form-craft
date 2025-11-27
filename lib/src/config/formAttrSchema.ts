@@ -101,6 +101,15 @@ export default {
               designKey: 'design-2Saj'
             },
             {
+              label: '全局样式',
+              name: 'css',
+              component: 'Custom',
+              props: {
+                componentName: 'FormDesign-GlobalStyle'
+              },
+              designKey: 'design-globalStyle'
+            },
+            {
               label: '禁用表单',
               name: 'disabled',
               component: 'Switch',
