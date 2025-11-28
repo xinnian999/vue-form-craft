@@ -13,7 +13,8 @@
         <div :style="previewStyle">
           <FormRender
             v-model="formValues"
-            :schema="designInstance.getSchema()"
+            class="preview-FormRender"
+            :schema="schema"
             :schemaContext="designInstance.schemaContext"
             ref="formRef"
             @finish="handleFinish"
@@ -25,7 +26,7 @@
         <div :style="previewStyle">
           <FormRender
             v-model="formValues"
-            :schema="{ ...designInstance.getSchema(), labelSuffix: ':' }"
+            :schema="{ ...schema, labelSuffix: ':' }"
             :schemaContext="designInstance.schemaContext"
             read
           />
@@ -45,6 +46,10 @@ import { computed, ref } from 'vue'
 import { FormRender, JsonEditor } from '@/components'
 import { useDesignInstance } from '@/hooks'
 import type { FormInstance } from '@/types'
+
+defineProps<{
+  schema: any
+}>()
 
 const designInstance = useDesignInstance()!
 

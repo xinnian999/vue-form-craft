@@ -99,6 +99,10 @@ export default {
                 value: 'required'
               },
               {
+                label: '提示',
+                value: 'alert'
+              },
+              {
                 label: '自定义',
                 value: 'custom'
               }

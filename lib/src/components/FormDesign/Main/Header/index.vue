@@ -46,12 +46,17 @@
       >
     </div>
     <Json v-model="JsonVisible" />
-    <Preview v-model="PreviewVisible" :schema-context="designInstance.schemaContext" />
+    <Preview
+      v-model="PreviewVisible"
+      :schema="previewSchema"
+      :schema-context="designInstance.schemaContext"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ElMessageBox } from 'element-plus'
+import { cloneDeep } from 'lodash'
 import { ref } from 'vue'
 import { Icon } from '@/components'
 import { useDesignInstance } from '@/hooks'
@@ -73,14 +78,18 @@ const JsonVisible = ref(false)
 
 const PreviewVisible = ref(false)
 
+const previewSchema = ref({})
+
 const btnSize = 'small'
 
 const rightActions: PreviewAction[] = [
   {
     label: '预览',
     btnType: 'default',
+    name: 'preview-design',
     icon: 'eye',
     onClick: () => {
+      previewSchema.value = cloneDeep(designInstance.getSchema())
       PreviewVisible.value = true
     }
   },

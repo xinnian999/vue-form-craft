@@ -50,13 +50,22 @@ export const copyItems = (list: FormItemType[], id: string): FormItemType[] => {
   }, [])
 }
 
-export const repirNode = ({ label, name, component, props, designKey, ...rest }: FormItemType) => {
+export const repirNode = ({
+  label,
+  name,
+  component,
+  props,
+  designKey,
+  alert,
+  ...rest
+}: FormItemType) => {
   const newNode: FormItemType = {
     label,
     name: name || generateName(),
+    designKey: designKey || generateDesignKey(),
+    alert,
     component,
     props,
-    designKey: designKey || generateDesignKey(),
     ...rest
   }
 

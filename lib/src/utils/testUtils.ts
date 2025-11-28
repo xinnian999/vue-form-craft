@@ -11,6 +11,7 @@ export function FormDesignTest() {
   const backBtn = wrapper.find(`.el-button[name="history-back"]`)
   const forwardBtn = wrapper.find(`.el-button[name="history-forward"]`)
   const clearBtn = wrapper.find(`.el-button[name="clear-design"]`)
+  const previewBtn = wrapper.find(`.el-button[name="preview-design"]`)
 
   const schema = computed(() => wrapper.vm.getSchema())
   const items = computed(() => wrapper.vm.getSchema().items)
@@ -84,6 +85,8 @@ export function FormDesignTest() {
     centerWrapper,
     backBtn,
     forwardBtn,
+    previewBtn,
+
     schema,
     clearBtn,
     itemsLength,

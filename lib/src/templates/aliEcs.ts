@@ -7,32 +7,6 @@ export default {
   size: 'default',
   submitBtn: true,
   initialValues: {},
-  css: `
-/* 阿里云 ECS 风格样式 */
-.el-radio-button {
-  margin-right: 0 !important;
-}
-
-.el-radio-button__inner {
-  padding: 16px 24px;
-  border-radius: 4px;
-  border: 1px solid #dcdfe6;
-  background: #fff;
-  min-width: 160px;
-  text-align: left;
-  line-height: 1.5;
-}
-
-.el-radio-button__original-radio:checked + .el-radio-button__inner {
-  border-color: #409eff;
-  background-color: #ecf5ff;
-  box-shadow: 0 0 0 1px #409eff;
-}
-
-.el-radio-button:hover .el-radio-button__inner {
-  border-color: #409eff;
-}
-  `,
   items: [
     {
       name: 'form-pBQE',
@@ -52,22 +26,56 @@ export default {
             direction: 'horizontal',
             space: 16,
             options: [
-              { label: '包年包月', desc: '先付费后使用，价格优惠', value: 'year' },
-              { label: '按量付费', desc: '先使用后付费，按需开通', value: 'postpaid' },
-              { label: '抢占式实例', desc: '较按量计费最高可省90%', value: 'spot' }
+              {
+                label: '包年包月',
+                desc: '先付费后使用，价格优惠',
+                value: 'year'
+              },
+              {
+                label: '按量付费',
+                desc: '先使用后付费，按需开通',
+                value: 'postpaid'
+              },
+              {
+                label: '抢占式实例',
+                desc: '较按量计费最高可省90%',
+                value: 'spot'
+              }
             ],
             slots: {
-              // 测试 Radio -> el-radio-button 的 default 插槽透传
               default:
                 '{{({ option }) => h("div", null, [h("div", { style: "font-weight: 500;" }, option.label), option.desc ? h("div", { style: "font-size: 12px; color: #999; margin-top: 2px;" }, option.desc) : null])}}'
             }
           },
           designKey: 'design-xxxx',
-          alert: '按量付费实例不支持备案服务'
+          linkages: [
+            {
+              type: 'attr',
+              target: 'payType',
+              condition: '{{$values.payType === "postpaid"}}',
+              path: 'alert',
+              value: '按量付费实例不支持备案服务'
+            },
+            {
+              type: 'attr',
+              target: 'payType',
+              condition: '{{$values.payType === "year"}}',
+              path: 'alert'
+            },
+            {
+              type: 'attr',
+              target: 'payType',
+              condition: '{{$values.payType === "spot"}}',
+              path: 'alert',
+              value:
+                '使用须知：\n1. 您可以创建无保护期或者一小时保护期的抢占式实例，超过保护期后，当市场价格高于您的出价或资源供需关系变化时，抢占式实例会被自动释放，请做好数据备份工作\n2. 有状态应用，比如数据库，不宜使用抢占式实例，了解更多>\n3. 抢占式实例不支持备案服务'
+            }
+          ]
         }
       ]
     }
   ],
+  css: '.el-radio-button__inner {\n  padding: 16px 24px;\n  border-radius: 4px;\n  border: 1px solid #dcdfe6;\n  background: #fff;\n  min-width: 160px;\n  text-align: left;\n  line-height: 1.5;\n}',
   style: {
     backgroundColor: 'rgb(245, 245, 245)'
   }
