@@ -28,16 +28,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import Draggable from 'vuedraggable-es-fix'
 import { FormItemGroup } from '@/components'
 import { useDesignInstance, useFormInstance } from '@/hooks'
-import type { FormItemType } from '@/types'
+import type { ComponentBaseProps, FormItemType } from '@/types'
 
-const props = defineProps<{
-  children: FormItemType[]
-  defaultKey: string
-}>()
+const props = defineProps<
+  ComponentBaseProps & {
+    defaultKey: string
+  }
+>()
+
+const children = computed(() => props.formItemProps.children || [])
 
 const activeKey = ref<string>(props.defaultKey)
 
@@ -49,14 +52,14 @@ const tabsKey = ref(0)
 
 const handleAddTab = () => {
   const newTab = {
-    label: `选项卡${props.children.length + 1}`,
-    name: `name${props.children.length + 1}`,
+    label: `选项卡${children.value.length + 1}`,
+    name: `name${children.value.length + 1}`,
     component: 'TabPane',
     children: [],
-    designKey: `tab-${props.children.length + 1}`
+    designKey: `tab-${children.value.length + 1}`
   }
 
-  props.children.push(newTab)
+  children.value.push(newTab)
 
   designInstance?.recordHistory('添加标签页')
 }
@@ -71,7 +74,7 @@ const handleDragEnd = () => {
 // 仅在设计模式下监听children的变化，强制更新tabs
 if (formInstance.design) {
   watch(
-    () => props.children,
+    () => children.value,
     () => {
       tabsKey.value++
     },
@@ -86,7 +89,7 @@ if (formInstance.design) {
       // 递归查找节点属于哪个tab
       const findTabByDesignKey = (designKey: string): string | null => {
         // 遍历每个tab
-        for (const tab of props.children) {
+        for (const tab of children.value) {
           // 如果当前key就是tab本身
           if (tab.designKey === designKey) {
             return tab.name

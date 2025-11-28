@@ -1,6 +1,10 @@
 <template>
-  <el-tab-pane :label="label" :name="name" :lazy="props?.lazy">
-    <FormItemGroup :list="children" :style="designStyles" />
+  <el-tab-pane
+    :label="formItemProps.label"
+    :name="formItemProps.name"
+    :lazy="formItemProps.props?.lazy"
+  >
+    <FormItemGroup :list="formItemProps.children" :style="designStyles" />
   </el-tab-pane>
 </template>
 
@@ -8,14 +12,9 @@
 import { computed } from 'vue'
 import { FormItemGroup } from '@/components'
 import { useFormInstance } from '@/hooks'
-import type { FormItemType } from '@/types'
+import type { ComponentBaseProps } from '@/types'
 
-defineProps<{
-  label: string
-  name: string
-  children: FormItemType[]
-  props?: Record<string, any>
-}>()
+defineProps<ComponentBaseProps>()
 
 const formInstance = useFormInstance()
 

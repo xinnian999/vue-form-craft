@@ -1,13 +1,7 @@
 <template>
   <template v-if="formInstance.design || !hidden">
     <div v-if="config.type === 'layout'" :class="[ns('form-item'), props.class]" :style="style">
-      <component
-        :is="config.render"
-        v-bind="componentProps"
-        :children="props.children"
-        :label="props.label"
-        :name="props.name"
-      />
+      <RenderComponent />
     </div>
 
     <div
@@ -15,7 +9,7 @@
       :class="[ns('form-item'), props.class, `${component}-${name}`]"
       :style="style"
     >
-      <component :is="config.render" v-bind="componentProps" />
+      <RenderComponent />
     </div>
 
     <el-form-item
@@ -48,20 +42,7 @@
         </div>
       </template>
 
-      <component
-        :is="config.render"
-        :disabled="formInstance.schema.disabled"
-        v-bind="componentProps"
-        v-model:[config.modelName!]="value"
-      >
-        <template
-          v-for="(slotFn, slotName) in componentProps.slots"
-          #[slotName]="slotScope"
-          :key="slotName"
-        >
-          <component :is="slotFn" v-bind="slotScope" />
-        </template>
-      </component>
+      <RenderComponent />
 
       <el-alert
         :class="['form-item-alert']"
@@ -76,12 +57,12 @@
 </template>
 
 <script setup lang="ts">
-import { isEqual } from 'lodash'
-import { computed, onBeforeMount, watch } from 'vue'
+import { cloneDeep, isEqual } from 'lodash'
+import { computed, h, onBeforeMount, watch } from 'vue'
 import { Icon } from '@/components'
 import { useElements, useFormInstance } from '@/hooks'
 import type { FormItemType, RuleItem } from '@/types'
-import { filterExpressions, getDataByPath, ns, parseRules } from '@/utils'
+import { deepParse, filterExpressions, getDataByPath, ns, parseRules } from '@/utils'
 
 const props = defineProps<FormItemType>()
 
@@ -138,20 +119,23 @@ const config = computed(() => {
   return data
 })
 
-const componentProps = computed(() => {
-  const newProps: Record<string, any> = {
+const RenderComponent = () => {
+  const modelName = config.value.modelName || 'modelValue'
+  const propsData = cloneDeep(filterExpressions(props.props))
+  const slots = deepParse(props.props?.slots, { h })
+
+  const componentProps = {
     name: props.name,
-    designKey: props.designKey,
     formItemProps: props,
-    ...filterExpressions(props.props)
+    ...propsData,
+    [modelName]: value.value,
+    [`onUpdate:${modelName}`]: (val: any) => {
+      value.value = val
+    }
   }
 
-  if (props.children) {
-    newProps.children = props.children
-  }
-
-  return newProps
-})
+  return h(config.value.render, componentProps, slots)
+}
 
 onBeforeMount(() => {
   if (value.value === undefined && props.initialValue !== undefined && !formInstance.design) {

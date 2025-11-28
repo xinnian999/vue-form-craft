@@ -116,10 +116,10 @@ import { cloneDeep, isEqual, pickBy, set } from 'lodash'
 import { computed, h, onMounted, provide, ref, toRef, watch } from 'vue'
 import { CanvasGroup, FormItem, Icon } from '@/components'
 import { useFormInstance } from '@/hooks'
-import type { FormItemType } from '@/types'
+import type { ComponentBaseProps, FormItemType } from '@/types'
 import { deepParse } from '@/utils'
 
-interface Props {
+interface Props extends ComponentBaseProps {
   allowAdd?: boolean
   allowReduce?: boolean
   minLines?: number
@@ -128,7 +128,6 @@ interface Props {
   title?: string
   name?: string
   disabled?: boolean
-  children: FormItemType[]
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -148,7 +147,7 @@ const listSnapshot = ref<Record<string, any>[]>([])
 
 const formInstance = useFormInstance()
 
-const fields = toRef(props, 'children')
+const fields = computed(() => props.formItemProps?.children || [])
 
 const parseFields = (index: number) => {
   const currentItem = list.value[index]

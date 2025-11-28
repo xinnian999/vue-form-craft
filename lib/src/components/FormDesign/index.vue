@@ -194,7 +194,7 @@ const instance = reactive<DesignInstance>({
     emits(name, params)
   },
   handleClear: () => {
-    setSchema({ ...getSchema(), items: [] })
+    setSchema(initJsonSchema)
     setCurrentKey('root')
     recordHistory('清空表单')
   },
