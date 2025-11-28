@@ -20,6 +20,7 @@ import type { FormInstance as ElFormInstance } from 'element-plus'
 import { cloneDeep, omit } from 'lodash'
 import {
   computed,
+  h,
   onBeforeMount,
   onBeforeUnmount,
   provide,
@@ -144,7 +145,8 @@ const context = computed(() => ({
   ...props.schemaContext,
   $values: formValues.value,
   $selectData: selectData,
-  $instance: instanceAPI
+  $instance: instanceAPI,
+  h
 }))
 
 // 全局schema解析，使用模板引擎处理所有字段中的表达式

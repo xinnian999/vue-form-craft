@@ -14,7 +14,11 @@
             :value="item.value"
             :disabled="item.disabled"
             :border="optionType === 'border'"
-          />
+          >
+            <slot :option="item" :value="value">
+              {{ item.label }}
+            </slot>
+          </el-radio>
         </template>
 
         <template v-else>
@@ -25,7 +29,11 @@
             :value="item.value"
             :disabled="item.disabled"
             v-bind="$attrs"
-          />
+          >
+            <slot :option="item" :value="value">
+              {{ item.label }}
+            </slot>
+          </el-radio-button>
         </template>
       </el-space>
     </el-radio-group>

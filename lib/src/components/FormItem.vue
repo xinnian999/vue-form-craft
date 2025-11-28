@@ -53,7 +53,16 @@
         :disabled="formInstance.schema.disabled"
         v-bind="componentProps"
         v-model:[config.modelName!]="value"
-      />
+      >
+        <template
+          v-for="(slotFn, slotName) in componentProps.slots"
+          #[slotName]="slotScope"
+          :key="slotName"
+        >
+          <component :is="slotFn" v-bind="slotScope" />
+        </template>
+      </component>
+
       <el-alert
         :class="['form-item-alert']"
         :title="alert"

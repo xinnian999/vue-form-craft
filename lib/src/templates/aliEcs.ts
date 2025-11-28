@@ -55,7 +55,12 @@ export default {
               { label: '包年包月', desc: '先付费后使用，价格优惠', value: 'year' },
               { label: '按量付费', desc: '先使用后付费，按需开通', value: 'postpaid' },
               { label: '抢占式实例', desc: '较按量计费最高可省90%', value: 'spot' }
-            ]
+            ],
+            slots: {
+              // 测试 Radio -> el-radio-button 的 default 插槽透传
+              default:
+                '{{({ option }) => h("div", null, [h("div", { style: "font-weight: 500;" }, option.label), option.desc ? h("div", { style: "font-size: 12px; color: #999; margin-top: 2px;" }, option.desc) : null])}}'
+            }
           },
           designKey: 'design-xxxx',
           alert: '按量付费实例不支持备案服务'
