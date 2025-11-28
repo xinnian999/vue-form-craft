@@ -1,25 +1,16 @@
 <template>
   <template v-if="formInstance.design || !hidden">
-    <div v-if="config.type === 'layout'" :class="[ns('form-item'), props.class]" :style="style">
+    <div v-if="config.type === 'layout'" :class="classNames" :style="style">
       <RenderComponent />
     </div>
 
-    <div
-      v-else-if="config.type === 'assist'"
-      :class="[ns('form-item'), props.class, `${component}-${name}`]"
-      :style="style"
-    >
+    <div v-else-if="config.type === 'assist'" :class="classNames" :style="style">
       <RenderComponent />
     </div>
 
     <el-form-item
       v-else
-      :class="[
-        ns('form-item'),
-        props.class,
-        `${component}-${name}`,
-        { 'hide-label': labelWidth === 0 }
-      ]"
+      :class="classNames"
       :style="style"
       :key="name"
       :prop="name"
@@ -117,6 +108,15 @@ const config = computed(() => {
   }
 
   return data
+})
+
+const classNames = computed(() => {
+  return [
+    ns('form-item'),
+    props.class,
+    `${config.value.component}-${props.name}`,
+    { 'hide-label': props.labelWidth === 0 }
+  ]
 })
 
 const RenderComponent = () => {
