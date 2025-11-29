@@ -113,8 +113,8 @@
 <script setup lang="ts">
 import type { TableColumnCtx } from 'element-plus'
 import { cloneDeep, isEqual, pickBy, set } from 'lodash'
-import { computed, h, onMounted, provide, ref, toRef, watch } from 'vue'
-import { CanvasGroup, FormItem, FormItemGroup, Icon } from '@/components'
+import { computed, h, onMounted, provide, ref, watch } from 'vue'
+import { FormItem, FormItemGroup, Icon } from '@/components'
 import { useFormInstance } from '@/hooks'
 import type { ComponentBaseProps, FormItemType } from '@/types'
 import { deepParse } from '@/utils'

@@ -1,22 +1,20 @@
 <template>
-  <ElCollapse v-bind="$attrs" v-model="activeKey">
-    <FormItemGroup :list="children" group="CollapseItem" />
-  </ElCollapse>
+  <div>
+    <ElCollapse v-bind="$attrs" v-model="activeKey">
+      <FormItemGroup :list="formItemProps.children || []" group="CollapseItem" />
+    </ElCollapse>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import { FormItemGroup } from '@/components'
-import type { FormItemType } from '@/types'
+import type { ComponentBaseProps } from '@/types'
 
-const props = defineProps<{
-  children: FormItemType[]
-}>()
+const props = defineProps<ComponentBaseProps>()
 
-const activeKey = ref<string[]>([])
-
-onMounted(() => {
-  activeKey.value =
-    props.children?.filter((item) => item.props?.checked).map((item) => item.name) || []
-})
+// 直接在初始化时设置默认展开的面板
+const activeKey = ref<string[]>(
+  props.formItemProps.children?.filter((item) => item.props?.checked).map((item) => item.name) || []
+)
 </script>

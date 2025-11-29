@@ -1,6 +1,6 @@
 <template>
-  <ElCollapseItem :title="label" :name="name">
-    <FormItemGroup :list="children" :style="designStyles" />
+  <ElCollapseItem :title="formItemProps.label" :name="formItemProps.name">
+    <FormItemGroup :list="formItemProps.children || []" :style="designStyles" />
   </ElCollapseItem>
 </template>
 
@@ -8,13 +8,9 @@
 import { computed } from 'vue'
 import { FormItemGroup } from '@/components'
 import { useFormInstance } from '@/hooks'
-import type { FormItemType } from '@/types'
+import type { ComponentBaseProps } from '@/types'
 
-defineProps<{
-  label: string
-  name: string
-  children: FormItemType[]
-}>()
+defineProps<ComponentBaseProps>()
 
 const formInstance = useFormInstance()
 

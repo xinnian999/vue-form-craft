@@ -4,7 +4,7 @@
     :name="formItemProps.name"
     :lazy="formItemProps.props?.lazy"
   >
-    <FormItemGroup :list="formItemProps.children" :style="designStyles" />
+    <FormItemGroup :list="formItemProps.children || []" :style="designStyles" />
   </el-tab-pane>
 </template>
 

@@ -74,6 +74,7 @@
 </template>
 
 <script setup lang="ts">
+import { cloneDeep } from 'lodash'
 import { computed, ref } from 'vue'
 import draggable from 'vuedraggable-es-fix'
 import { ElementIcon, Icon } from '@/components'
@@ -123,7 +124,7 @@ const onClone = (source: FormElement) => {
     Object.assign(parse, source.attrSchema.initialValues)
   }
 
-  return repirNode(parse)
+  return cloneDeep(repirNode(parse))
 }
 
 const handleDbClick = (element: FormElement) => {

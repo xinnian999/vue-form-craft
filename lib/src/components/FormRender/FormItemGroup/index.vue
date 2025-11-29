@@ -7,9 +7,10 @@
 </template>
 
 <script setup lang="ts">
-import { CanvasGroup, FormItem } from '@/components'
 import { useFormInstance } from '@/hooks'
 import type { FormItemType } from '@/types'
+import CanvasGroup from './CanvasGroup.vue'
+import FormItem from './FormItem.vue'
 
 defineProps<{
   group?: string

@@ -1,26 +1,25 @@
 <template>
-  <FormItemGroup class="form-item-inline" :style="InlineStyle" :list="children || []" />
+  <FormItemGroup
+    class="form-item-inline"
+    :style="InlineStyle"
+    :list="formItemProps.children || []"
+  />
 </template>
 
 <script setup lang="ts">
 import { computed, type StyleValue } from 'vue'
 import { FormItemGroup } from '@/components'
-import type { FormItemType } from '@/types'
+import type { ComponentBaseProps } from '@/types'
 
-const props = defineProps<{
-  align: 'center' | 'flex-start' | 'flex-end' | 'space-between' | 'space-around' | 'space-evenly'
-  autoWrap: boolean
-  gap: number
-  children?: FormItemType[]
-}>()
+const props = defineProps<ComponentBaseProps>()
 
 const InlineStyle = computed<StyleValue>(() => ({
   width: '100%',
   display: 'flex',
-  'justify-content': props.align,
-  'flex-wrap': props.autoWrap ? 'wrap' : 'nowrap',
+  'justify-content': props.formItemProps.props?.align || 'flex-start',
+  'flex-wrap': props.formItemProps.props?.autoWrap ? 'wrap' : 'nowrap',
   'overflow-x': 'auto',
-  gap: `${props.gap}px`
+  gap: `${props.formItemProps.props?.gap || 10}px`
 }))
 </script>
 
