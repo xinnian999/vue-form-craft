@@ -49,19 +49,26 @@ const form = useTemplateRef<ElFormInstance>('form')
 
 const selectData = reactive<Record<string, Record<string, any>>>({})
 
-// 内部维护一份 schema
-// - 非 design 模式：深拷贝 props.schema，内部自己维护，不影响外部
-// - design 模式：通过 computed 实时追踪 props.schema 的变化（要求外部传入响应式对象）
+// ========== Schema 数据流策略 ==========
+// 【核心宗旨】
+// 1. 非 design 模式（运行模式）：
+//    - props.schema 只读，仅作为初始配置使用（setup 时深拷贝一次）
+//    - 不响应 props.schema 的后续变化
+//    - 所有运行时修改（setFieldAttr 等）只影响内部副本，不污染外部
+// 2. design 模式（设计模式）：
+//    - props.schema 双向绑定，要求外部传入响应式对象（ref/reactive）
+//    - 实时追踪 props.schema 的变化（通过 computed）
+//    - 内部修改（setFieldAttr、draggable 等）直接作用到 props.schema
 
-// 运行模式下的静态 schema 副本（只在非 design 模式下使用）
+// 运行模式下的静态 schema 副本（只在组件创建时初始化一次，后续不再更新）
 const staticSchema = props.design ? null : reactive(cloneDeep(props.schema || {}))
 
 const innerSchema = computed(() => {
   if (props.design) {
-    // 设计模式：直接返回 props.schema，实时追踪外部变化
+    // 设计模式：直接返回 props.schema，实时追踪外部变化，允许双向修改
     return props.schema
   } else {
-    // 运行模式：返回深拷贝的静态副本
+    // 运行模式：返回深拷贝的静态副本，与外部完全隔离
     return staticSchema!
   }
 })
