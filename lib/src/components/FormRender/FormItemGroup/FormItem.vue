@@ -127,11 +127,16 @@ const RenderComponent = () => {
   const componentProps = {
     name: props.name,
     formItemProps: props,
-    ...propsData,
-    [modelName]: value.value,
-    [`onUpdate:${modelName}`]: (val: any) => {
-      value.value = val
-    }
+    ...propsData
+  }
+
+  if (config.value.type === 'basic') {
+    Object.assign(componentProps, {
+      [modelName]: value.value,
+      [`onUpdate:${modelName}`]: (val: any) => {
+        value.value = val
+      }
+    })
   }
 
   return h(config.value.render, componentProps, slots)

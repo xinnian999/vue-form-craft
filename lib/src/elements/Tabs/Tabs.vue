@@ -119,6 +119,7 @@ if (formInstance.design) {
       }
 
       const targetTabName = findTabByDesignKey(currentKey)
+
       if (targetTabName && targetTabName !== activeKey.value) {
         activeKey.value = targetTabName
       }
