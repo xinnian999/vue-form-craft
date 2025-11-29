@@ -2,10 +2,10 @@
   <div class="vfc-formList">
     <div v-if="formInstance.design">
       <el-card v-if="mode === 'card'" header="自增卡片" class="card-list-container">
-        <CanvasGroup :list="fields" />
+        <FormItemGroup :list="fields" />
       </el-card>
 
-      <CanvasGroup v-else-if="mode === 'table'" :list="fields" class="layoutRender" />
+      <FormItemGroup v-else-if="mode === 'table'" :list="fields" class="layoutRender" />
     </div>
 
     <div v-else>
@@ -114,7 +114,7 @@
 import type { TableColumnCtx } from 'element-plus'
 import { cloneDeep, isEqual, pickBy, set } from 'lodash'
 import { computed, h, onMounted, provide, ref, toRef, watch } from 'vue'
-import { CanvasGroup, FormItem, Icon } from '@/components'
+import { CanvasGroup, FormItem, FormItemGroup, Icon } from '@/components'
 import { useFormInstance } from '@/hooks'
 import type { ComponentBaseProps, FormItemType } from '@/types'
 import { deepParse } from '@/utils'

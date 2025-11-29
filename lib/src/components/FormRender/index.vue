@@ -49,10 +49,27 @@ const form = useTemplateRef<ElFormInstance>('form')
 
 const selectData = reactive<Record<string, Record<string, any>>>({})
 
+// 内部维护一份 schema
+// - 非 design 模式：深拷贝 props.schema，内部自己维护，不影响外部
+// - design 模式：通过 computed 实时追踪 props.schema 的变化（要求外部传入响应式对象）
+
+// 运行模式下的静态 schema 副本（只在非 design 模式下使用）
+const staticSchema = props.design ? null : reactive(cloneDeep(props.schema || {}))
+
+const innerSchema = computed(() => {
+  if (props.design) {
+    // 设计模式：直接返回 props.schema，实时追踪外部变化
+    return props.schema
+  } else {
+    // 运行模式：返回深拷贝的静态副本
+    return staticSchema!
+  }
+})
+
 // 生成唯一的 formId（只在首次生成，后续保持不变）
 let autoFormId = `fm-form-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
 const formId = computed(() => {
-  return props.schema.formId || autoFormId
+  return innerSchema.value.formId || props.schema.formId || autoFormId
 })
 
 // 样式元素引用
@@ -62,7 +79,7 @@ const styleElement = ref<HTMLStyleElement | null>(null)
 const trigger = (eventName: keyof FormRenderEmits, ...args: any[]) => {
   ;(emits as any)(eventName, ...args)
   const schemaEventName = `on${eventName[0].toUpperCase()}${eventName.slice(1)}`
-  const handler = (parseSchema.value as any)[schemaEventName]
+  const handler = (innerSchema.value as any)[schemaEventName]
   handler?.(...args)
 }
 
@@ -122,8 +139,8 @@ const setFieldAttr: FormInstance['setFieldAttr'] = (name, path, value) => {
     return false
   }
 
-  if (props.schema.items) {
-    findAndUpdate(props.schema.items)
+  if (innerSchema.value.items) {
+    findAndUpdate(innerSchema.value.items)
   }
 }
 
@@ -153,10 +170,10 @@ const context = computed(() => ({
 const parseSchema = computed(() => {
   // 设计模式下直接返回原始schema，不进行表达式解析
   if (props.design) {
-    return props.schema
+    return innerSchema.value
   }
   // 运行模式下解析表达式
-  return deepParse(props.schema, context.value)
+  return deepParse(innerSchema.value, context.value)
 })
 
 const formAttrs = computed(() => {
@@ -174,13 +191,13 @@ const formAttrs = computed(() => {
 
   return {
     ...attrs,
-    labelPosition: props.schema.labelAlign
+    labelPosition: innerSchema.value.labelAlign
   }
 })
 
 // 监听 css 变化，实时更新样式（设计模式下可实时预览）
 watch(
-  () => props.schema.css,
+  () => innerSchema.value.css,
   (newCss) => {
     // 先清理旧的样式元素
     if (styleElement.value && styleElement.value.parentNode) {
@@ -202,8 +219,8 @@ watch(
 )
 
 onBeforeMount(() => {
-  if (props.schema.initialValues) {
-    const values = cloneDeep(props.schema.initialValues)
+  if (innerSchema.value.initialValues) {
+    const values = cloneDeep(innerSchema.value.initialValues)
 
     setValues({ ...values, ...formValues.value })
   }
