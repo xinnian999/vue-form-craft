@@ -90,7 +90,11 @@ export default {
       label: '提示',
       name: 'alert',
       component: 'TextArea',
-      designKey: 'design-alert'
+      designKey: 'design-alert',
+      props: {
+        autosize: true,
+        clearable: true
+      }
     },
     {
       label: '气泡提示',
