@@ -5,7 +5,7 @@ import Autocomplete from './Autocomplete.vue'
 export default {
   title: '自动完成',
   component: 'Autocomplete',
-  icon: 'input',
+  icon: 'autoComplete',
   type: 'basic',
   order: 5,
   attrSchema,

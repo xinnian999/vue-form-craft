@@ -4,27 +4,13 @@
 
 <script setup lang="ts">
 import { ns } from '@/utils'
-
-const modules = import.meta.glob('./icons/*.vue', { eager: true })
-
-const icons = Object.entries(modules).reduce(
-  (acc, [key, value]) => {
-    const fileName = key.split('/').pop()
-
-    const newKey = fileName?.split('.')[0]!
-
-    acc[newKey] = (value as Record<string, any>).default
-
-    return acc
-  },
-  {} as Record<string, any>
-)
+import * as icons from './icons'
 
 defineOptions({
   name: 'IconRender'
 })
 
-defineProps<{ name: string }>()
+defineProps<{ name: keyof typeof icons }>()
 </script>
 
 <style lang="scss">
