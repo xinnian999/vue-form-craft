@@ -102,7 +102,8 @@ export default {
       ]
     }
   ],
-  css: '.el-radio-button__inner {\n  padding: 12px 18px;\n  background: #fff;\n  text-align: left;\n  line-height: 1.5;\n\n  .desc{\n    color:#999\n  }\n}\n\n.is-active{\n  .desc{\n    color:#eee\n  }\n}\n\n.form-item-alert{\n  white-space: pre-wrap;\n}',
+  styleBlock:
+    '.el-radio-button__inner {\n  padding: 12px 18px;\n  background: #fff;\n  text-align: left;\n  line-height: 1.5;\n\n  .desc{\n    color:#999\n  }\n}\n\n.is-active{\n  .desc{\n    color:#eee\n  }\n}\n\n.form-item-alert{\n  white-space: pre-wrap;\n}',
   style: {
     backgroundColor: 'rgba(0, 0, 0, 0)'
   }

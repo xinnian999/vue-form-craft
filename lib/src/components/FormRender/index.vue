@@ -213,10 +213,10 @@ const formAttrs = computed(() => {
   }
 })
 
-// 监听 css 变化，实时更新样式（设计模式下可实时预览）
+// 监听 styleBlock 变化，实时更新样式（设计模式下可实时预览）
 watch(
-  () => innerSchema.value.css,
-  (newCss) => {
+  () => innerSchema.value.styleBlock,
+  (newStyleBlock) => {
     // 先清理旧的样式元素
     if (styleElement.value && styleElement.value.parentNode) {
       styleElement.value.parentNode.removeChild(styleElement.value)
@@ -224,11 +224,11 @@ watch(
     }
 
     // 如果有新样式，注入
-    if (newCss) {
+    if (newStyleBlock) {
       styleElement.value = document.createElement('style')
       styleElement.value.setAttribute('data-form-style', formId.value)
       // 自动包裹作用域选择器，用户不需要手动写 [data-form-id]
-      const cssText = `[data-form-id="${formId.value}"] {\n${newCss}\n}`
+      const cssText = `[data-form-id="${formId.value}"] {\n${newStyleBlock}\n}`
       styleElement.value.textContent = cssText
       document.head.appendChild(styleElement.value)
     }

@@ -102,7 +102,7 @@ export default {
             },
             {
               label: '全局样式',
-              name: 'css',
+              name: 'styleBlock',
               component: 'Custom',
               props: {
                 componentName: 'FormDesign-GlobalStyle'
