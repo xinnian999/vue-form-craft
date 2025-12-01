@@ -2,7 +2,6 @@ export { default as FormRender } from './FormRender/index.vue'
 export { default as FormDesign } from './FormDesign/index.vue'
 // FormItemGroup、CanvasGroup、CanvasItem 已改为 FormRender 内部组件，通过 useFormItemGroup hook 使用
 export { default as CodeHighLight } from './CodeHighLight.vue'
-export { default as Markdown } from './Markdown.vue'
 export { default as JsonEditor } from './JsonEditor.vue'
 export { default as AI } from './AI/index.vue'
 export { default as ElementIcon } from './ElementIcon'

@@ -1,8 +1,9 @@
 <template>
-  <component :class="ns('icon-render')" :is="icons[name]" v-bind="$attrs" />
+  <component :class="ns('icon-render')" :is="iconComponent" v-bind="$attrs" />
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { ns } from '@/utils'
 import * as icons from './icons'
 
@@ -10,7 +11,9 @@ defineOptions({
   name: 'IconRender'
 })
 
-defineProps<{ name: keyof typeof icons }>()
+const props = defineProps<{ name: string }>()
+
+const iconComponent = computed(() => (icons as Record<string, any>)[props.name])
 </script>
 
 <style lang="scss">

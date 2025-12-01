@@ -51,31 +51,17 @@
         </template>
         <CodeHighLight style="height: 70vh" :code="jsVue(json)" language="vue" />
       </el-tab-pane>
-      <el-tab-pane name="help" lazy>
-        <template #label>
-          <Icon name="help" style="margin-right: 5px" />
-          <span>帮助</span>
-        </template>
-        <Markdown
-          v-model="help"
-          read
-          :code-foldable="false"
-          previewStyle="height: 70vh; overflow-y: auto"
-        />
-      </el-tab-pane>
     </el-tabs>
   </el-dialog>
 </template>
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { CodeHighLight, Icon, Markdown } from '@/components'
+import { CodeHighLight, Icon } from '@/components'
 import { useDesignInstance } from '@/hooks'
-import { jsJsonSchema, jsVue, tsJsonSchema, tsVue } from './config'
-import help from './help.md?raw'
-import 'md-editor-v3/lib/style.css'
 import type { FormSchema } from '@/types'
 import { repirJsonSchema } from '@/utils'
+import { jsJsonSchema, jsVue, tsJsonSchema, tsVue } from './config'
 import ImportJsonSchema from './Import.vue'
 import JsonSchemaEdit from './JsonSchemaEdit/index.vue'
 
