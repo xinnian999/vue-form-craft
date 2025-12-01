@@ -18,7 +18,6 @@
     "axios": "^1.6.2",
     "element-plus": "^2.11.4",
     "formora": "workspace:*",
-    "jsoneditor": "^10.3.0",
     "lodash": "^4.17.21",
     "md-editor-v3": "^6.0.1",
     "monaco-editor": "^0.54.0",

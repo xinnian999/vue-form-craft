@@ -32,16 +32,16 @@
       </el-tab-pane>
 
       <el-tab-pane label="联动变量" name="context">
-        <p>实时预览的联动变量，在JsonSchema中可以通过双大括号模版语法使用，用于触发各种联动</p>
-        <JsonEditor v-model="context" readonly style="height: 60vh" :key="tabKey" />
+        <VueMonacoEditor v-model:value="context" language="json" style="height: 60vh" />
       </el-tab-pane>
     </el-tabs>
   </el-dialog>
 </template>
 
 <script setup lang="ts">
+import { VueMonacoEditor } from '@guolao/vue-monaco-editor'
 import { computed, ref } from 'vue'
-import { FormRender, JsonEditor } from '@/components'
+import { FormRender } from '@/components'
 import { useDesignInstance } from '@/hooks'
 import type { FormInstance } from '@/types'
 
@@ -55,7 +55,7 @@ const formValues = ref({})
 
 const visible = defineModel<boolean>()
 
-const context = computed(() => formRef.value?.context)
+const context = computed(() => JSON.stringify(formRef.value?.context, null, 2))
 
 const previewStyle = {
   minHeight: '200px',

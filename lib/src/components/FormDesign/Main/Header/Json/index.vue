@@ -62,8 +62,8 @@ import { useDesignInstance } from '@/hooks'
 import type { FormSchema } from '@/types'
 import { repirJsonSchema } from '@/utils'
 import { jsJsonSchema, jsVue, tsJsonSchema, tsVue } from './config'
+import JsonSchemaEdit from './Edit.vue'
 import ImportJsonSchema from './Import.vue'
-import JsonSchemaEdit from './JsonSchemaEdit/index.vue'
 
 const visible = defineModel<boolean>()
 
