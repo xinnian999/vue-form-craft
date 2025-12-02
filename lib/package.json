@@ -11,7 +11,8 @@
   },
   "peerDependencies": {
     "vue": "^3.5.0",
-    "element-plus": "^2.11.0"
+    "element-plus": "^2.11.0",
+    "@guolao/vue-monaco-editor": "^1.5.2"
   },
   "files": [
     "dist",

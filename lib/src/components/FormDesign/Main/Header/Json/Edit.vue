@@ -1,12 +1,11 @@
 <template>
   <div :class="ns('save-json-edit')">
-    <CodeEditor v-model="jsonString" language="json" :options="editorOptions" />
-    <!-- <VueMonacoEditor
+    <VueMonacoEditor
       v-model:value="jsonString"
       language="json"
       :options="editorOptions"
       :style="{ height: '400px' }"
-    /> -->
+    />
     <div class="footer">
       <el-button @click="handleSave" type="primary">保存更改</el-button>
       <el-button @click="handleReset">重置</el-button>
@@ -15,10 +14,10 @@
 </template>
 
 <script setup lang="ts">
+import { VueMonacoEditor } from '@guolao/vue-monaco-editor'
 import { ElMessage } from 'element-plus'
 import { cloneDeep } from 'lodash'
 import { onMounted, ref } from 'vue'
-import CodeEditor from '@/components/CodeEditor.vue'
 import type { FormSchema } from '@/types'
 import { ns } from '@/utils'
 
