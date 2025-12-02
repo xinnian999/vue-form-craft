@@ -47,7 +47,12 @@ const elements = useElements()
 
 const config = computed(() => {
   // if (!props.data.component) return {}
-  return elements[props.data.component]
+  return (
+    elements[props.data.component] || {
+      title: '未知组件',
+      icon: 'help'
+    }
+  )
 })
 
 const canvasItemClass = computed(() => {

@@ -77,5 +77,6 @@ const onSave = (json: FormSchema) => {
   const repirJson = repirJsonSchema(json)
   designInstance.setSchema(repirJson)
   designInstance.recordHistory('编辑JSON')
+  visible.value = false
 }
 </script>

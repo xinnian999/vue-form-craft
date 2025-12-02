@@ -93,170 +93,13 @@ export default {
           designKey: 'tab-7',
           children: [
             {
-              label: '数据模式',
-              labelAlign: 'top',
-              name: 'props.mode',
-              component: 'Radio',
+              name: '.',
+              component: 'Custom',
               props: {
-                mode: 'static',
-                options: [
-                  {
-                    label: '静态',
-                    value: 'static'
-                  },
-                  {
-                    label: '远程',
-                    value: 'remote'
-                  }
-                ],
-                optionType: 'button',
-                space: 0
+                componentName: 'FormDesign-Options'
               },
-              designKey: 'design-o5tb'
-            },
-            {
-              label: '静态选项',
-              labelAlign: 'top',
-              name: 'props.options',
-              component: 'FormList',
-              props: {
-                mode: 'table',
-                title: '选项'
-              },
-              designKey: 'design-GFpA',
-              hidden: '{{$values.props.mode!=="static"}}',
-              children: [
-                {
-                  label: '选项名',
-                  name: 'label',
-                  component: 'Input',
-                  props: {
-                    placeholder: '请输入...'
-                  },
-                  designKey: 'design-fMNm',
-                  initialValue: '{{ "选项" + ($index + 1) }}'
-                },
-                {
-                  label: '选项值',
-                  name: 'value',
-                  component: 'Input',
-                  designKey: 'design-sQhP',
-                  initialValue: '{{ "value" + ($index + 1) }}'
-                },
-                {
-                  label: '是否禁用',
-                  name: 'disabled',
-                  component: 'Switch',
-                  designKey: 'design-FYkF'
-                }
-              ]
-            },
-            {
-              name: 'form-6vzT',
-              component: 'Card',
-              props: {},
-              labelAlign: 'top',
-              designKey: 'design-F2xe',
-              hidden: '{{$values.props.mode==="static"}}',
-              children: [
-                {
-                  name: 'form-Vf2D',
-                  component: 'Divider',
-                  props: {
-                    title: '请求'
-                  },
-                  designKey: 'design-dN3f'
-                },
-                {
-                  label: 'url',
-                  labelAlign: 'top',
-                  name: 'props.api.url',
-                  component: 'Input',
-                  designKey: 'design-GlX5',
-                  initialValue: 'https://apifoxmock.com/m1/5213940-4880280-default/options/test'
-                },
-                {
-                  label: '请求方式',
-                  labelAlign: 'top',
-                  name: 'props.api.method',
-                  component: 'Radio',
-                  props: {
-                    mode: 'static',
-                    options: [
-                      {
-                        label: 'GET',
-                        value: 'GET'
-                      },
-                      {
-                        label: 'POST',
-                        value: 'POST'
-                      },
-                      {
-                        label: 'PUT',
-                        value: 'PUT'
-                      },
-                      {
-                        label: 'DELETE',
-                        value: 'DELETE'
-                      }
-                    ],
-                    optionType: 'button',
-                    space: 0
-                  },
-                  designKey: 'design-zvMl',
-                  initialValue: 'GET'
-                },
-                {
-                  label: '请求参数',
-                  labelAlign: 'top',
-                  name: 'props.api.params',
-                  component: 'JsonEditor',
-                  props: {
-                    toolBar: false
-                  },
-                  designKey: 'design-qD5K'
-                },
-                {
-                  name: 'form-Vf2D111',
-                  component: 'Divider',
-                  props: {
-                    title: '响应'
-                  },
-                  designKey: 'design-WgIP'
-                },
-                {
-                  label: '数据路径',
-                  labelAlign: 'top',
-                  name: 'props.api.dataPath',
-                  component: 'Input',
-                  designKey: 'design-xhhV',
-                  initialValue: 'data'
-                },
-                {
-                  label: '标签key',
-                  labelAlign: 'top',
-                  name: 'props.api.labelKey',
-                  component: 'Input',
-                  designKey: 'design-AZqq',
-                  initialValue: 'label'
-                },
-                {
-                  label: '值Key',
-                  labelAlign: 'top',
-                  name: 'props.api.valueKey',
-                  component: 'Input',
-                  designKey: 'design-ksqH',
-                  initialValue: 'value'
-                },
-                {
-                  label: '禁用Key',
-                  labelAlign: 'top',
-                  name: 'props.api.disabledKey',
-                  component: 'Input',
-                  designKey: 'design-tHNq',
-                  initialValue: 'disabled'
-                }
-              ]
+              designKey: 'design-FormDesign-Options',
+              labelWidth: 0
             }
           ]
         },
@@ -275,7 +118,7 @@ export default {
               props: {
                 componentName: 'FormDesign-Rules'
               },
-              designKey: 'design-KaWx11',
+              designKey: 'design-FormDesign-Rules',
               labelWidth: 0
             }
           ]
@@ -295,7 +138,7 @@ export default {
               props: {
                 componentName: 'FormDesign-Linkages'
               },
-              designKey: 'design-linkages-custom',
+              designKey: 'design-FormDesign-Linkages',
               labelWidth: 0
             }
           ]

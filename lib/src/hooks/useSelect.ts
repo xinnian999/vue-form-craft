@@ -25,11 +25,23 @@ const useSelect = (props: SelectProps) => {
 
     loading.value = true
 
+    let parseParams: Record<string, any> | undefined
+
+    if (typeof params === 'string') {
+      try {
+        parseParams = JSON.parse(params)
+      } catch (error) {
+        console.error('解析params失败', error)
+      }
+    } else {
+      parseParams = params
+    }
+
     try {
       const res = await request({
         url,
         method,
-        params
+        params: parseParams
       })
       const resData = getDataByPath(res, dataPath) || []
 

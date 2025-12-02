@@ -86,7 +86,7 @@ export type TemplateData = { name: string; schema: FormSchema; id?: string }[]
 export type SchemaApi = {
   url: string
   method: 'GET' | 'POST'
-  params?: Record<string, any>
+  params?: Record<string, any> | string
   dataPath?: string
   labelKey?: string
   valueKey?: string

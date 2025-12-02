@@ -1,3 +1,4 @@
+import optionsSchema from '@/components/customComponents/Options/schema'
 import rulesSchema from '@/components/customComponents/Rules/schema'
 import { formAttrSchema } from '@/config'
 import * as elements from '@/elements'
@@ -154,8 +155,13 @@ export default [
         description: ''
       },
       {
-        label: '校验规则配置',
+        label: '通用-校验规则配置',
         schema: rulesSchema,
+        description: ''
+      },
+      {
+        label: '通用-选项配置',
+        schema: optionsSchema,
         description: ''
       },
       ...elementConfigs

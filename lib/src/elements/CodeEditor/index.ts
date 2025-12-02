@@ -7,7 +7,7 @@ export default {
   component: 'CodeEditor',
   icon: 'code',
   type: 'basic',
-  order: 3,
+  order: 29,
   attrSchema,
   render: CodeEditor
 } satisfies FormElement

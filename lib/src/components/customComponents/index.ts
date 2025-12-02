@@ -3,6 +3,7 @@ import GlobalStyle from './GlobalStyle.vue'
 import InitialValues from './InitialValues.vue'
 import JsExpr from './JsExpr.vue'
 import Linkages from './Linkages/Linkages.vue'
+import Options from './Options/index.vue'
 import Rules from './Rules/Rules.vue'
 import StyleEditor from './StyleEditor/index.vue'
 
@@ -14,4 +15,5 @@ export default (app: any) => {
   app.component('FormDesign-Rules', Rules)
   app.component('FormDesign-Linkages', Linkages)
   app.component('FormDesign-Basic', Basic)
+  app.component('FormDesign-Options', Options)
 }
