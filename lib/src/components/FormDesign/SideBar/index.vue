@@ -29,9 +29,9 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { AI, Icon } from '@/components'
-import { useGlobals } from '@/hooks'
+import { Icon } from '@/components'
 import { ns } from '@/utils'
+import AI from './AI/index.vue'
 import History from './History.vue'
 import List from './List.vue'
 import Outline from './Outline.vue'
@@ -44,8 +44,6 @@ const visible = ref(true)
 const activeData = computed(() => {
   return menus.find((menu) => menu.key === activeKey.value)!
 })
-
-const { ai } = useGlobals()
 
 const menus = [
   {
@@ -75,18 +73,15 @@ const menus = [
     icon: 'template',
     desc: '快速切换和配置表单。',
     render: Template
-  }
-]
-
-if (ai) {
-  menus.push({
+  },
+  {
     title: 'AI表单助手',
     key: 'ai',
     icon: 'ai',
     desc: '',
     render: AI
-  })
-}
+  }
+]
 
 const handleClick = (key: string) => {
   activeKey.value = key
