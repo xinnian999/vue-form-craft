@@ -30,27 +30,32 @@ export type FormLinkage = {
 }
 
 export interface FormItemType {
+  // A. 表单项“通用语义配置”（跟 UI 库无关）
   label?: string
   labelWidth?: number
   labelAlign?: 'top' | 'left' | 'right'
   size?: 'default' | 'small' | 'large'
   name: string
-  component: string
   required?: boolean
-  props?: Record<string, any>
   initialValue?: any
   help?: string
   alert?: string
   children?: FormItemType[]
   hidden?: boolean | string
   hideLabel?: boolean
-  designKey?: string
   rules?: FormRules
   class?: any
   style?: any
   linkages?: FormLinkage[]
   dialog?: boolean
   width?: number
+
+  // B. 渲染层（跟 UI 组件强相关）
+  component: string
+  props?: Record<string, any>
+
+  // C. 设计器内部用的
+  designKey?: string
 }
 
 export type FormSchema = {
