@@ -6,7 +6,6 @@ export default {
   items: [
     { label: '唯一标识', component: 'Input', name: 'name' },
     { label: '隐藏字段', component: 'Switch', name: 'hidden' },
-    { label: '隐藏标签', component: 'Switch', name: 'hideLabel', initialValue: true },
     { label: '标题', component: 'Input', name: 'props.title', initialValue: '提示信息' },
     {
       label: '描述',

@@ -213,7 +213,6 @@ interface FormItemType {
   help?: string // 气泡提示
   children?: FormItemType[] // 子项（布局组件用）
   hidden?: boolean | string // 隐藏（支持表达式）
-  hideLabel?: boolean // 隐藏标签
   designKey?: string // 设计器唯一标识
   rules?: FormRules // 校验规则
   linkages?: FormLinkage[] // 联动规则

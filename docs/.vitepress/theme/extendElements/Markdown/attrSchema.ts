@@ -16,7 +16,7 @@ export default {
     {
       label: '占位提示',
       component: 'Input',
-      name: 'props.placeholder',
+      name: 'props.placeholder'
     },
     { label: '初始值', component: 'Input', name: 'initialValue' },
     {
@@ -25,18 +25,14 @@ export default {
         { label: '是否必填', component: 'Switch', name: 'required' },
         { label: '是否只读', component: 'Switch', name: 'props.readonly' },
         { label: '是否禁用', component: 'Switch', name: 'props.disabled' },
-        { label: '隐藏字段', component: 'Switch', name: 'hidden' },
-        { label: '隐藏标签', component: 'Switch', name: 'hideLabel' }
+        { label: '隐藏字段', component: 'Switch', name: 'hidden' }
       ],
       props: {
         columns: 3,
         'row-gap': 20,
         'column-gap': 20
       },
-      name: 'cNmCuu',
-
-    },
-
-
+      name: 'cNmCuu'
+    }
   ]
 } as FormSchema

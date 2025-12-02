@@ -42,7 +42,6 @@ export interface FormItemType {
   alert?: string
   children?: FormItemType[]
   hidden?: boolean | string
-  hideLabel?: boolean
   rules?: FormRules
   class?: any
   style?: any

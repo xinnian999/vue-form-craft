@@ -28,16 +28,14 @@ export default {
       children: [
         { label: '是否必填', component: 'Switch', name: 'required' },
         { label: '是否禁用', component: 'Switch', name: 'props.disabled' },
-        { label: '隐藏字段', component: 'Switch', name: 'hidden' },
-        { label: '隐藏标签', component: 'Switch', name: 'hideLabel' }
+        { label: '隐藏字段', component: 'Switch', name: 'hidden' }
       ],
       props: {
         columns: 3,
         'row-gap': 20,
         'column-gap': 20
       },
-      name: 'cNmCuu',
-
+      name: 'cNmCuu'
     },
     { label: '画板宽度(px)', component: 'InputNumber', name: 'props.width' },
     { label: '画板高度(px)', component: 'InputNumber', name: 'props.height' },
@@ -68,7 +66,7 @@ export default {
             value: 'image/webp'
           }
         ]
-      },
+      }
     }
   ]
 } satisfies FormSchema

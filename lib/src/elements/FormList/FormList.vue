@@ -18,7 +18,6 @@
                 v-bind="field"
                 :key="field.label"
                 :name="`${name}.${index}.${field.name}`"
-                hideLabel
               />
             </el-space>
 
@@ -222,7 +221,6 @@ const formatter = (row: any, column: TableColumnCtx<any>, cellValue: any, index:
 
   return h(FormItem, {
     ...field,
-    hideLabel: true,
     labelWidth: 0,
     label: '',
     style: { marginBottom: 0 },

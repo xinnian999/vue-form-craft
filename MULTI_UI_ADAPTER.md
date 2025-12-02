@@ -4,23 +4,21 @@
 
 - **解耦 UI 库**：核心能力（schema、联动、校验、设计器）不绑定 Element Plus。
 - **支持多 UI**：支持 Element / Arco / Ant Design Vue / Naive UI 等，甚至自定义组件库。
-- **保持单库发布**：继续使用一个 npm 包 `vue-form-craft`，UI 库由用户自行安装。
+- **保持单库发布**：继续使用一个 npm 包 `formora`，UI 库由用户自行安装。
 - **渐进迁移**：兼容现有“以 Element 为主”的 schema，逐步演进为 UI 无关的抽象协议。
 
 ---
 
 ## 一、整体架构概览
 
-分三层：
+分三层（概念层面），不强制要求物理上拆 core 包或 core 目录：
 
-1. **Core 层（UI 无关）**
-   - 位置建议：`lib/src/core/*`
-   - 能力：schema 定义、表单状态管理、校验、联动、渲染调度（不直接 import `ElInput` 等）。
-   - 只认识：
-     - `FormSchema` / `FormItemType`
-     - 逻辑组件名：`Input` / `Select` / `DatePicker` 等。
+1. **协议 & 核心能力层**
+   - 协议：`FormSchema` / `FormItemType` 以及联动、设计器相关配置。
+   - 能力：schema 解析、表单状态管理、校验、联动、渲染调度等（现有实现中已经包含）。
+   - 特点：不直接绑定具体 UI 库的组件名，只依赖 Formora 自己的协议。
 
-2. **UI Adapter 层（多 UI 适配）**
+2. **多 UI 映射层（UI Adapter / 映射函数）**
    - 位置建议：`lib/src/ui/{element, arco, antd, naive}/*`
    - 能力：
      - 逻辑组件名 → 具体 UI 库组件映射（`Input` → `ElInput` / `AInput`）。
@@ -33,6 +31,23 @@
 3. **应用层 / 使用方式**
    - 使用者自行安装 UI 库（Element / Arco / AntD 等）。
    - 通过 `createFormCraft({ ui: xxxPreset() })` 或 `provide('formora-ui', xxxPreset())` 指定当前使用的 UI。
+
+---
+
+## 一点现实背景说明：Formora 协议 vs Element Plus
+
+- 当前实现虽然绑定 Element Plus 组件进行渲染，但 **Formora 的 Schema 协议并不是对 Element Plus 的 1:1 映射**。
+  - 例如：`hidden`、`linkages`、`dialog`、`width` 等字段，以及联动、设计器相关配置，都是 Formora 自己定义的能力，而非 Element 官方 API。
+  - `props` 中也包含大量“中性化”的字段（如 `placeholder`、`clearable` 等），并非严格跟随 Element 命名。
+- 因此：
+  - **协议层的中心是“Formora 协议”本身，而不是 Element Plus**；
+  - 多 UI 适配的本质，是从 **Formora 协议 → 各个 UI 库的实际组件 & props** 的映射；
+  - Element Plus 目前只是默认实现最完善的一个 UI preset，其它 UI preset（Arco / AntD / Naive / 自定义）会在相同的 Formora 协议之上工作。
+
+这意味着后续演进时：
+
+- 不需要把 Schema 协议强行改造成“完全仿 Element”；
+- 可以继续结合实际需求，扩展 / 调整 Formora 协议，然后通过各自的 UI 映射函数去适配不同组件库。
 
 ---
 
@@ -56,7 +71,6 @@ export interface FormItemType {
   alert?: string
   children?: FormItemType[]
   hidden?: boolean | string
-  hideLabel?: boolean
   rules?: FormRules
   class?: any
   style?: any
@@ -182,8 +196,8 @@ function renderFormItem(item: FormItemType, ui: UIRegistry) {
 
 ```ts
 import ElementPlus from 'element-plus'
+import { elementPreset } from 'formora'
 import { createApp } from 'vue'
-import { elementPreset } from 'vue-form-craft'
 import App from './App.vue'
 
 const app = createApp(App)
@@ -209,7 +223,7 @@ const ui = inject('formora-ui')
 或通过工厂函数包一层：
 
 ```ts
-import { createFormCraft, elementPreset } from 'vue-form-craft'
+import { createFormCraft, elementPreset } from 'formora'
 
 const formCraft = createFormCraft({
   ui: elementPreset()
@@ -239,10 +253,10 @@ export default formCraft
 
 ## 七、单库多 UI preset 的选择理由
 
-- UI 库全部外部化为 peerDependencies，`vue-form-craft` 不会因为支持多 UI 而变得臃肿。
-- 使用者只需安装一个主库：`vue-form-craft`，再选择性安装自己需要的 UI 库。
+- UI 库全部外部化为 peerDependencies，`formora` 不会因为支持多 UI 而变得臃肿。
+- 使用者只需安装一个主库：`formora`，再选择性安装自己需要的 UI 库。
 - 内部结构按 `core/` + `ui/` 分层，未来如有需要，可以平滑拆分为：
-  - `@vue-form-craft/core`
-  - `@vue-form-craft/element`
-  - `@vue-form-craft/arco`
+  - `@formora/core`
+  - `@formora/element`
+  - `@formora/arco`
 - 当前阶段由核心仓库统一维护多 UI preset，降低版本管理和文档成本。

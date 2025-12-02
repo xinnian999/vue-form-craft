@@ -41,7 +41,6 @@ interface FormItemType {
   help?: string // Help information
   children?: FormItemType[] // Configuration for nested components
   hidden?: boolean | string // Whether it is hidden
-  hideLabel?: boolean // Hide label
   designKey?: string // Key used by the designer, automatically generated
   rules?: FormRule[] // Validation rules, specific to the input component
   class?: any // Field class

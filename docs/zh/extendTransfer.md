@@ -132,8 +132,7 @@ export default {
       children: [
         { label: '是否必填', component: 'Switch', name: 'required' },
         { label: '是否禁用', component: 'Switch', name: 'props.disabled' },
-        { label: '隐藏字段', component: 'Switch', name: 'hidden' },
-        { label: '隐藏标签', component: 'Switch', name: 'hideLabel' }
+        { label: '隐藏字段', component: 'Switch', name: 'hidden' }
       ],
       props: {
         columns: 3,

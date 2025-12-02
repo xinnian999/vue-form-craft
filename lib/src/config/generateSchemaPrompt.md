@@ -121,7 +121,6 @@
 - **initialValue**: `any`，初始值
 - **help**: `string`，提示信息
 - **hidden**: `boolean`，默认 `false`，是否隐藏
-- **hideLabel**: `boolean`，默认 `false`，是否隐藏标签
 - **rules**: `RuleItem[]`，自定义校验规则
 - **children**: `FormItemType[]`，子表单项，用于嵌套组件（如卡片、栅格、自增容器）
 - **linkages**: `FormLinkage[]`，联动配置
