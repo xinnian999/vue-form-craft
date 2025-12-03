@@ -1,4 +1,4 @@
-import { ElInput } from 'element-plus'
+import { ElCard, ElInput } from 'element-plus'
 import { defineComponent, h } from 'vue'
 import type { UIAdapter } from '@/types/uiAdapter'
 
@@ -8,6 +8,14 @@ import type { UIAdapter } from '@/types/uiAdapter'
 const ElementPlusAdapter: UIAdapter = {
   Input: defineComponent((_, { slots, attrs }) => {
     return () => h(ElInput, attrs, slots)
+  }),
+
+  Textarea: defineComponent((_, { slots, attrs }) => {
+    return () => h(ElInput, { ...attrs, type: 'textarea' }, slots)
+  }),
+
+  Card: defineComponent((_, { slots, attrs }) => {
+    return () => h(ElCard, attrs, slots)
   })
 }
 

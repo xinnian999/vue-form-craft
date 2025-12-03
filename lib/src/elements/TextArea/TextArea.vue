@@ -1,10 +1,12 @@
 <template>
   <div v-if="formInstance.read">{{ value }}</div>
-  <el-input v-else v-bind="$attrs" v-model="value" type="textarea" />
+  <Textarea v-else v-bind="$attrs" v-model="value" />
 </template>
 
 <script setup lang="ts">
-import { useFormInstance } from '@/hooks'
+import { useFormInstance, useUI } from '@/hooks'
+
+const { Textarea } = useUI()
 
 const value = defineModel<string>()
 

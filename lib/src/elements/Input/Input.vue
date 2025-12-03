@@ -31,11 +31,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Icon } from '@/components'
-import { useAi, useFormInstance } from '@/hooks'
-import { AntdAdapter } from '@/uiAdapter'
+import { useAi, useFormInstance, useUI } from '@/hooks'
 import { ns } from '@/utils'
 
-const { Input } = AntdAdapter
+const { Input } = useUI()
 
 const value = defineModel<string>()
 

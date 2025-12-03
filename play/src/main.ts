@@ -1,5 +1,5 @@
 import ElementPlus from 'element-plus'
-import VueFormCraft from 'formora/dev'
+import VueFormCraft, { AntdAdapter } from 'formora/dev'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
@@ -12,7 +12,8 @@ const app = createApp(App)
 app.use(router)
 
 app.use(VueFormCraft, {
-  ai: cozeAiFunction
+  ai: cozeAiFunction,
+  ui: AntdAdapter
 })
 
 app.use(ElementPlus, {

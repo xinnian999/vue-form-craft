@@ -1,5 +1,6 @@
 import type { FormValidationResult } from 'element-plus'
 import type { Component, Ref, ToRefs, VNode } from 'vue'
+import type { UIAdapter } from './uiAdapter'
 
 export type RuleType =
   | 'required'
@@ -137,6 +138,7 @@ export type Options = {
   }) => Promise<any>
   extendElements?: Record<string, FormElement>
   ai?: AiGenerateFunction // 改为函数类型
+  ui?: UIAdapter // UI 适配器
 }
 
 export interface Globals extends Options {
