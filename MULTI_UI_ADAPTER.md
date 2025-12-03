@@ -14,21 +14,21 @@
 
 ---
 
-## 实现方案
+## 适配进度
 
-### 1. 提炼组件协议
-
-当前使用的每个`Element-Plus`组件，根据使用场景，提炼出一个`Protocol`接口。包含props、slots（emits通过on开头的驼峰函数整合进props），后续扩展其他UI库都要兼容这套协议。
-
-#### 提炼优先级
+**已完成: 3 / 38**
 
 **第一优先级：高频表单组件**
 
-- Input（输入框）
-- Select（选择器）
-- SelectOption（选择器选项）
+- Form（表单容器）
+- FormItem（表单项）
+- ✅ Input（输入框）- 已适配
+- ✅ Textarea（多行文本）- 已适配
+- ✅ Select（选择器）- 已适配
+- Option（选择器选项）
 - Radio（单选框）
 - RadioGroup（单选框组）
+- RadioButton（单选按钮）
 - Checkbox（多选框）
 - CheckboxGroup（多选框组）
 - DatePicker（日期选择器）
@@ -38,20 +38,37 @@
 - Rate（评分）
 - ColorPicker（颜色选择器）
 - Upload（上传）
+- InputNumber（数字输入框）
+- Cascader（级联选择器）
+- Autocomplete（自动补全）
 
 **第二优先级：布局组件**
 
-- Form（表单容器）
-- FormItem（表单项）
+- ✅ Card（卡片）- 已适配
+- Space（间距）
+- Divider（分割线）
+- Collapse（折叠面板）
+- CollapseItem（折叠面板项）
 
 **第三优先级：设计器工具组件**
 
 - Button（按钮）
 - Dialog（对话框）
-- Tabs / TabPane（标签页）
-- Collapse / CollapseItem（折叠面板）
-- Tooltip（文字提示）
-- Popover（气泡卡片）
+- Tabs（标签页）
+- TabPane（标签页面板）
+- Tag（标签）
+- Table（表格）
+- TableColumn（表格列）
+- Message（消息提示）
+- MessageBox（消息弹框）
+
+---
+
+## 实现方案
+
+### 1. 提炼组件协议
+
+当前使用的每个`Element-Plus`组件，根据使用场景，提炼出一个`Protocol`接口。包含props、slots（emits通过on开头的驼峰函数整合进props），后续扩展其他UI库都要兼容这套协议。
 
 #### 提炼规则
 
