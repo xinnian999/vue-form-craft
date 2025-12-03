@@ -15,6 +15,7 @@
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.2",
     "@guolao/vue-monaco-editor": "^1.6.0",
+    "ant-design-vue": "^4.2.6",
     "axios": "^1.6.2",
     "element-plus": "^2.11.4",
     "formora": "workspace:*",

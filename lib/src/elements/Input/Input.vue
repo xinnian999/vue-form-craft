@@ -1,22 +1,41 @@
 <template>
   <span v-if="formInstance.read">{{ value }}</span>
-  <el-input v-else v-bind="$attrs" v-model="value">
-    <template #suffix>
-      <Icon
-        v-if="aiPrompt && isAvailable"
-        name="magic"
-        :class="[ns('input-ai-icon'), { 'is-loading': aiLoading }]"
-        @click="handleAiClick"
-      />
+  <Input v-else v-bind="$attrs" v-model="value">
+    <!-- 手动透传所有 slots -->
+    <template v-if="$slots.prefix" #prefix>
+      <slot name="prefix" />
     </template>
-  </el-input>
+
+    <template #suffix>
+      <slot name="suffix">
+        <!-- 默认内容: AI 图标 -->
+        <Icon
+          v-if="aiPrompt && isAvailable"
+          name="magic"
+          :class="[ns('input-ai-icon'), { 'is-loading': aiLoading }]"
+          @click="handleAiClick"
+        />
+      </slot>
+    </template>
+
+    <template v-if="$slots.prepend" #prepend>
+      <slot name="prepend" />
+    </template>
+
+    <template v-if="$slots.append" #append>
+      <slot name="append" />
+    </template>
+  </Input>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Icon } from '@/components'
 import { useAi, useFormInstance } from '@/hooks'
+import { AntdAdapter } from '@/uiAdapter'
 import { ns } from '@/utils'
+
+const { Input } = AntdAdapter
 
 const value = defineModel<string>()
 

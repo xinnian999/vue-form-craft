@@ -45,11 +45,11 @@ export default {
                 desc: '较按量计费最高可省90%',
                 value: 'spot'
               }
-            ],
-            slots: {
-              default:
-                '{{ ({ option }) => {\n  return h("div", null, [h("div", { style: "font-weight: 500;" }, option.label), option.desc ? h("div", { style: "font-size: 12px; margin-top: 2px;",class:\'desc\' }, option.desc) : null])\n} }}'
-            }
+            ]
+          },
+          slots: {
+            default:
+              '{{ ({ option }) => {\n  return h("div", null, [h("div", { style: "font-weight: 500;" }, option.label), option.desc ? h("div", { style: "font-size: 12px; margin-top: 2px;",class:\'desc\' }, option.desc) : null])\n} }}'
           },
           linkages: [
             {

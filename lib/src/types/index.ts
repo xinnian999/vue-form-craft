@@ -52,6 +52,7 @@ export interface FormItemType {
   // B. 渲染层（跟 UI 组件强相关）
   component: string
   props?: Record<string, any>
+  slots?: Record<string, any>
 
   // C. 设计器内部用的
   designKey?: string

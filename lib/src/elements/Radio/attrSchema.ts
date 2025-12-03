@@ -238,7 +238,7 @@ export default {
           children: [
             {
               label: '选项内容',
-              name: 'props.slots.default',
+              name: 'slots.default',
               designKey: 'design-1W4w',
               component: 'FunctionEditor'
             }

@@ -122,7 +122,7 @@ const classNames = computed(() => {
 const RenderComponent = () => {
   const modelName = config.value.modelName || 'modelValue'
   const propsData = cloneDeep(filterExpressions(props.props))
-  const slots = deepParse(props.props?.slots, { h })
+  const slots = deepParse(props.slots, { h })
 
   const componentProps = {
     name: props.name,
