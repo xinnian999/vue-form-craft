@@ -8,7 +8,7 @@
       <RenderComponent />
     </div>
 
-    <el-form-item
+    <FormItem
       v-else
       :class="classNames"
       :style="style"
@@ -43,7 +43,7 @@
         :closable="false"
         v-if="alert"
       />
-    </el-form-item>
+    </FormItem>
   </template>
 </template>
 
@@ -51,9 +51,11 @@
 import { cloneDeep, isEqual } from 'lodash'
 import { computed, h, onBeforeMount, watch } from 'vue'
 import { Icon } from '@/components'
-import { useElements, useFormInstance } from '@/hooks'
+import { useElements, useFormInstance, useUI } from '@/hooks'
 import type { FormItemType, RuleItem } from '@/types'
 import { deepParse, filterExpressions, getDataByPath, ns, parseRules } from '@/utils'
+
+const { FormItem } = useUI()
 
 const props = defineProps<FormItemType>()
 

@@ -10,7 +10,7 @@
 
     <div v-else>
       <template v-if="mode === 'inline'">
-        <el-form-item v-for="(item, index) in list" :key="item.key" class="list-item">
+        <component :is="UIFormItem" v-for="(item, index) in list" :key="item.key" class="list-item">
           <div class="list-item-content">
             <el-space>
               <form-item
@@ -33,7 +33,7 @@
               <template #icon> <Icon name="reduce" color="#fff" /> </template
             ></el-button>
           </div>
-        </el-form-item>
+        </component>
       </template>
 
       <template v-if="mode === 'card'">
@@ -114,9 +114,11 @@ import type { TableColumnCtx } from 'element-plus'
 import { cloneDeep, isEqual, pickBy, set } from 'lodash'
 import { computed, h, onMounted, provide, ref, watch } from 'vue'
 import { FormItem, FormItemGroup, Icon } from '@/components'
-import { useFormInstance } from '@/hooks'
+import { useFormInstance, useUI } from '@/hooks'
 import type { ComponentBaseProps, FormItemType } from '@/types'
 import { deepParse } from '@/utils'
+
+const { FormItem: UIFormItem } = useUI()
 
 interface Props extends ComponentBaseProps {
   allowAdd?: boolean

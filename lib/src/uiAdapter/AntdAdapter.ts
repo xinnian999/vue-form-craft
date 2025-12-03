@@ -1,8 +1,16 @@
-import { Card, Input } from 'ant-design-vue'
+import { Card, Form, Input } from 'ant-design-vue'
 import { defineComponent, h } from 'vue'
-import type { CardProtocol, InputProtocol, TextareaProtocol, UIAdapter } from '@/types/uiAdapter'
+import type {
+  CardProtocol,
+  FormItemProtocol,
+  FormProtocol,
+  InputProtocol,
+  TextareaProtocol,
+  UIAdapter
+} from '@/types/uiAdapter'
 
 const { TextArea } = Input
+const { Item: FormItem } = Form
 
 /**
  * Ant Design Vue UI适配器
@@ -58,6 +66,58 @@ const AntdAdapter: UIAdapter = {
           title: propsAttrs.header,
           hoverable: propsAttrs.shadow === 'hover',
           bodyStyle: propsAttrs.bodyStyle
+        },
+        slots
+      )
+  }),
+
+  Form: defineComponent((_, { slots, attrs }) => {
+    const propsAttrs = attrs as FormProtocol['props']
+
+    return () =>
+      h(
+        Form,
+        {
+          ...attrs,
+          layout: propsAttrs.inline
+            ? 'inline'
+            : propsAttrs.labelAlign === 'top'
+              ? 'vertical'
+              : 'horizontal',
+          labelCol: propsAttrs.labelWidth
+            ? {
+                style: {
+                  width:
+                    typeof propsAttrs.labelWidth === 'number'
+                      ? `${propsAttrs.labelWidth}px`
+                      : propsAttrs.labelWidth
+                }
+              }
+            : undefined
+        },
+        slots
+      )
+  }),
+
+  FormItem: defineComponent((_, { slots, attrs }) => {
+    const propsAttrs = attrs as FormItemProtocol['props']
+
+    return () =>
+      h(
+        FormItem,
+        {
+          ...attrs,
+          name: propsAttrs.prop,
+          labelCol: propsAttrs.labelWidth
+            ? {
+                style: {
+                  width:
+                    typeof propsAttrs.labelWidth === 'number'
+                      ? `${propsAttrs.labelWidth}px`
+                      : propsAttrs.labelWidth
+                }
+              }
+            : undefined
         },
         slots
       )

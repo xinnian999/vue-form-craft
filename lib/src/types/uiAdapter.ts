@@ -68,6 +68,49 @@ export interface CardProtocol {
 }
 
 /**
+ * Form 组件协议
+ */
+export interface FormProtocol {
+  props: {
+    model?: Record<string, any>
+    rules?: Record<string, any>
+    labelWidth?: string | number
+    labelAlign?: 'left' | 'right' | 'top'
+    inline?: boolean
+    disabled?: boolean
+    size?: 'large' | 'default' | 'small'
+    validateOnRuleChange?: boolean
+    hideRequiredAsterisk?: boolean
+    scrollToError?: boolean
+  }
+  slots: {
+    default?: () => VNode
+  }
+}
+
+/**
+ * FormItem 组件协议
+ */
+export interface FormItemProtocol {
+  props: {
+    prop?: string
+    label?: string
+    labelWidth?: string | number
+    labelPosition?: 'left' | 'right' | 'top'
+    required?: boolean
+    rules?: any | any[]
+    error?: string
+    showMessage?: boolean
+    size?: 'large' | 'default' | 'small'
+  }
+  slots: {
+    default?: () => VNode
+    label?: () => VNode
+    error?: () => VNode
+  }
+}
+
+/**
  * UI适配器 - 包含所有组件的适配器
  */
 export interface UIAdapter {
@@ -76,4 +119,6 @@ export interface UIAdapter {
   Textarea: Component<TextareaProtocol['props']>
   // 布局组件
   Card: Component<CardProtocol['props']>
+  Form: Component<FormProtocol['props']>
+  FormItem: Component<FormItemProtocol['props']>
 }

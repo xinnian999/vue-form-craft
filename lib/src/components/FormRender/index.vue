@@ -1,18 +1,18 @@
 <template>
-  <el-form :model="formValues" ref="form" v-bind="formAttrs" :data-form-id="formId">
+  <Form :model="formValues" ref="form" v-bind="formAttrs" :data-form-id="formId">
     <slot />
 
     <FormItemGroup :list="parseSchema.items" />
 
-    <el-form-item v-if="!design && !read">
+    <FormItem v-if="!design && !read">
       <el-button v-if="schema.submitBtn" type="primary" @click="instance.submit" name="submit-btn">
         提交
       </el-button>
       <el-button v-if="schema.resetBtn" @click="() => instance.resetFields()" name="reset-btn">
         重置
       </el-button>
-    </el-form-item>
-  </el-form>
+    </FormItem>
+  </Form>
 </template>
 
 <script setup lang="ts">
@@ -31,10 +31,13 @@ import {
   useTemplateRef,
   watch
 } from 'vue'
+import { useUI } from '@/hooks'
 import { $formInstance } from '@/symbol'
 import type { FormInstance, FormRenderEmits, FormRenderProps } from '@/types'
 import { deepParse, getDataByPath, setDataByPath } from '@/utils'
 import FormItemGroup from './FormItemGroup/index.vue'
+
+const { Form, FormItem } = useUI()
 
 const props = withDefaults(defineProps<FormRenderProps>(), {
   schema: () => ({})
@@ -201,16 +204,12 @@ const formAttrs = computed(() => {
     'submitBtn',
     'resetBtn',
     'initialValues',
-    'labelAlign',
     'labelSuffix',
     'onFieldChange',
     'onChange'
   ])
 
-  return {
-    ...attrs,
-    labelPosition: innerSchema.value.labelAlign
-  }
+  return attrs
 })
 
 // 监听 styleBlock 变化，实时更新样式（设计模式下可实时预览）

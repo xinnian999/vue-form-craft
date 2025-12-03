@@ -1,6 +1,6 @@
-import { ElCard, ElInput } from 'element-plus'
+import { ElCard, ElForm, ElFormItem, ElInput } from 'element-plus'
 import { defineComponent, h } from 'vue'
-import type { UIAdapter } from '@/types/uiAdapter'
+import type { FormProtocol, UIAdapter } from '@/types/uiAdapter'
 
 /**
  * Element-Plus UI适配器
@@ -16,6 +16,25 @@ const ElementPlusAdapter: UIAdapter = {
 
   Card: defineComponent((_, { slots, attrs }) => {
     return () => h(ElCard, attrs, slots)
+  }),
+
+  Form: defineComponent((_, { slots, attrs }) => {
+    const propsAttrs = attrs as FormProtocol['props']
+
+    return () =>
+      h(
+        ElForm,
+        {
+          ...attrs,
+          // labelAlign -> labelPosition (Element-Plus 使用 labelPosition)
+          labelPosition: propsAttrs.labelAlign
+        },
+        slots
+      )
+  }),
+
+  FormItem: defineComponent((_, { slots, attrs }) => {
+    return () => h(ElFormItem, attrs, slots)
   })
 }
 
