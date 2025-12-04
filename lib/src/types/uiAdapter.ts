@@ -30,7 +30,7 @@ export interface FormItemProtocol {
     prop?: string
     label?: string
     labelWidth?: string | number
-    labelPosition?: 'left' | 'right' | 'top'
+    labelAlign?: 'left' | 'right' | 'top'
     required?: boolean
     rules?: any | any[]
     error?: string

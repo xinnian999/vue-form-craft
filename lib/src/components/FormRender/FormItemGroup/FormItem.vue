@@ -16,7 +16,7 @@
       :prop="name"
       :rules="computeRules"
       :labelWidth="labelWidth"
-      :labelPosition="labelAlign"
+      :labelAlign="labelAlign"
       :size="size"
     >
       <template #label>
@@ -115,7 +115,8 @@ const classNames = computed(() => {
     ns('form-item'),
     props.class,
     `${config.value.component}-${props.name}`,
-    { 'hide-label': props.labelWidth === 0 }
+    { 'hide-label': props.labelWidth === 0 },
+    props.labelAlign && `label-align-${props.labelAlign}`
   ]
 })
 

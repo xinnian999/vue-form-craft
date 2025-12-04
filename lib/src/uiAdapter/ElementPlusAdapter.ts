@@ -1,32 +1,11 @@
 import { ElButton, ElCard, ElDialog, ElForm, ElFormItem, ElInput } from 'element-plus'
 import { defineComponent, h } from 'vue'
-import type { FormProtocol, UIAdapter } from '@/types/uiAdapter'
+import type { FormItemProtocol, FormProtocol, UIAdapter } from '@/types/uiAdapter'
 
 /**
  * Element-Plus UI适配器
  */
 const ElementPlusAdapter: UIAdapter = {
-  Input: defineComponent(
-    (_, { slots, attrs }) => {
-      return () => h(ElInput, attrs, slots)
-    },
-    { inheritAttrs: false }
-  ),
-
-  Textarea: defineComponent(
-    (_, { slots, attrs }) => {
-      return () => h(ElInput, { ...attrs, type: 'textarea' }, slots)
-    },
-    { inheritAttrs: false }
-  ),
-
-  Card: defineComponent(
-    (_, { slots, attrs }) => {
-      return () => h(ElCard, attrs, slots)
-    },
-    { inheritAttrs: false }
-  ),
-
   Form: defineComponent(
     (_, { slots, attrs }) => {
       const propsAttrs = attrs as FormProtocol['props']
@@ -47,7 +26,37 @@ const ElementPlusAdapter: UIAdapter = {
 
   FormItem: defineComponent(
     (_, { slots, attrs }) => {
-      return () => h(ElFormItem, attrs, slots)
+      const propsAttrs = attrs as FormItemProtocol['props']
+
+      return () =>
+        h(
+          ElFormItem,
+          {
+            ...attrs,
+            labelPosition: propsAttrs.labelAlign
+          },
+          slots
+        )
+    },
+    { inheritAttrs: false }
+  ),
+  Input: defineComponent(
+    (_, { slots, attrs }) => {
+      return () => h(ElInput, attrs, slots)
+    },
+    { inheritAttrs: false }
+  ),
+
+  Textarea: defineComponent(
+    (_, { slots, attrs }) => {
+      return () => h(ElInput, { ...attrs, type: 'textarea' }, slots)
+    },
+    { inheritAttrs: false }
+  ),
+
+  Card: defineComponent(
+    (_, { slots, attrs }) => {
+      return () => h(ElCard, attrs, slots)
     },
     { inheritAttrs: false }
   ),

@@ -18,70 +18,6 @@ const { Item: FormItem } = Form
  * Ant Design Vue UI适配器
  */
 const AntdAdapter: UIAdapter = {
-  Input: defineComponent(
-    (_, { slots, attrs }) => {
-      const propsAttrs = attrs as InputProtocol['props']
-
-      return () =>
-        h(
-          Input,
-          {
-            ...attrs,
-            value: propsAttrs.modelValue,
-            'onUpdate:value': (value: string) => {
-              propsAttrs['onUpdate:modelValue']?.(value)
-            },
-            allowClear: propsAttrs.clearable
-          },
-          slots
-        )
-    },
-    { inheritAttrs: false }
-  ),
-
-  Textarea: defineComponent(
-    (_, { slots, attrs }) => {
-      const propsAttrs = attrs as TextareaProtocol['props']
-
-      return () =>
-        h(
-          TextArea,
-          {
-            ...attrs,
-            value: propsAttrs.modelValue,
-            'onUpdate:value': (value: string) => {
-              propsAttrs['onUpdate:modelValue']?.(value)
-            },
-            allowClear: propsAttrs.clearable,
-            showCount: propsAttrs.showWordLimit,
-            maxLength: propsAttrs.maxlength,
-            autoSize: propsAttrs.autosize
-          },
-          slots
-        )
-    },
-    { inheritAttrs: false }
-  ),
-
-  Card: defineComponent(
-    (_, { slots, attrs }) => {
-      const propsAttrs = attrs as CardProtocol['props']
-
-      return () =>
-        h(
-          Card,
-          {
-            ...attrs,
-            title: propsAttrs.header,
-            hoverable: propsAttrs.shadow === 'hover',
-            bodyStyle: propsAttrs.bodyStyle
-          },
-          slots
-        )
-    },
-    { inheritAttrs: false }
-  ),
-
   Form: defineComponent(
     (_, { slots, attrs }) => {
       const propsAttrs = attrs as FormProtocol['props']
@@ -142,6 +78,69 @@ const AntdAdapter: UIAdapter = {
           slots
         )
       }
+    },
+    { inheritAttrs: false }
+  ),
+  Input: defineComponent(
+    (_, { slots, attrs }) => {
+      const propsAttrs = attrs as InputProtocol['props']
+
+      return () =>
+        h(
+          Input,
+          {
+            ...attrs,
+            value: propsAttrs.modelValue,
+            'onUpdate:value': (value: string) => {
+              propsAttrs['onUpdate:modelValue']?.(value)
+            },
+            allowClear: propsAttrs.clearable
+          },
+          slots
+        )
+    },
+    { inheritAttrs: false }
+  ),
+
+  Textarea: defineComponent(
+    (_, { slots, attrs }) => {
+      const propsAttrs = attrs as TextareaProtocol['props']
+
+      return () =>
+        h(
+          TextArea,
+          {
+            ...attrs,
+            value: propsAttrs.modelValue,
+            'onUpdate:value': (value: string) => {
+              propsAttrs['onUpdate:modelValue']?.(value)
+            },
+            allowClear: propsAttrs.clearable,
+            showCount: propsAttrs.showWordLimit,
+            maxLength: propsAttrs.maxlength,
+            autoSize: propsAttrs.autosize
+          },
+          slots
+        )
+    },
+    { inheritAttrs: false }
+  ),
+
+  Card: defineComponent(
+    (_, { slots, attrs }) => {
+      const propsAttrs = attrs as CardProtocol['props']
+
+      return () =>
+        h(
+          Card,
+          {
+            ...attrs,
+            title: propsAttrs.header,
+            hoverable: propsAttrs.shadow === 'hover',
+            bodyStyle: propsAttrs.bodyStyle
+          },
+          slots
+        )
     },
     { inheritAttrs: false }
   ),

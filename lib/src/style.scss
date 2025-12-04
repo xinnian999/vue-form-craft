@@ -24,6 +24,28 @@ $primaryColor: $themeColor;
   }
 }
 
+// FormItem 组件
+@include ns('form-item') {
+  &.hide-label > .el-form-item__label {
+    display: none;
+  }
+
+  // labelAlign 为 top 时，标签在上方
+  &.label-align-top {
+    .ant-form-item-label {
+      width: 100% !important;
+      text-align: left;
+    }
+    .ant-form-item-row {
+      flex-direction: column;
+      gap: 5px;
+    }
+    .ant-form-item-control {
+      flex: auto;
+    }
+  }
+}
+
 // UI 库穿透样式集合
 @include ns('form-design') {
   .el-button + .el-button {
@@ -122,12 +144,5 @@ $primaryColor: $themeColor;
     .el-bubble-footer {
       margin-top: 5px;
     }
-  }
-}
-
-// FormItem 组件
-@include ns('form-item') {
-  &.hide-label > .el-form-item__label {
-    display: none;
   }
 }
