@@ -82,6 +82,12 @@ const setHoverKey = (key: string) => {
   hoverKey.value = key
 }
 
+const repirSchema = () => {
+  const schema = repirJsonSchema(getSchema())
+
+  setSchema(schema)
+}
+
 // 记录历史。
 const recordHistory = debounce((description: string = '修改') => {
   if (historyIndex.value < history.value.length - 1) {
@@ -188,6 +194,7 @@ const instance = reactive<DesignInstance>({
   historyIndex,
   getSchema,
   setSchema,
+  repirSchema,
   setCurrentKey,
   setHoverKey,
   handleEmit: (name, params) => {

@@ -61,7 +61,18 @@ const ElementPlusAdapter: UIAdapter = {
 
   Modal: defineComponent(
     (_, { slots, attrs }) => {
-      return () => h(ElDialog, attrs, slots)
+      const propsAttrs = attrs as any
+
+      return () =>
+        h(
+          ElDialog,
+          {
+            ...attrs,
+            // to 参数映射到 ElDialog 的 appendTo
+            appendTo: propsAttrs.to || 'body'
+          },
+          slots
+        )
     },
     { inheritAttrs: false }
   )

@@ -1,41 +1,44 @@
 <template>
-  <Modal
-    v-model="visible"
-    title="预览"
-    width="70%"
-    center
-    destroy-on-close
-    top="10vh"
-    @close="formValues = {}"
-  >
-    <el-tabs v-model="tabKey">
-      <el-tab-pane label="编辑模式" name="edit">
-        <div :style="previewStyle">
-          <FormRender
-            v-model="formValues"
-            class="preview-FormRender"
-            :schema="designInstance.getSchema()"
-            ref="formRef"
-            @finish="handleFinish"
-          />
-        </div>
-      </el-tab-pane>
+  <div class="formDesign-preview">
+    <Modal
+      v-model="visible"
+      title="预览"
+      width="70%"
+      center
+      destroy-on-close
+      to=".formDesign-preview"
+      top="10vh"
+      @close="formValues = {}"
+    >
+      <el-tabs v-model="tabKey">
+        <el-tab-pane label="编辑模式" name="edit">
+          <div :style="previewStyle">
+            <FormRender
+              v-model="formValues"
+              class="preview-FormRender"
+              :schema="designInstance.getSchema()"
+              ref="formRef"
+              @finish="handleFinish"
+            />
+          </div>
+        </el-tab-pane>
 
-      <el-tab-pane label="阅读模式" name="read" lazy>
-        <div :style="previewStyle">
-          <FormRender
-            v-model="formValues"
-            :schema="{ ...designInstance.getSchema(), colon: true }"
-            read
-          />
-        </div>
-      </el-tab-pane>
+        <el-tab-pane label="阅读模式" name="read" lazy>
+          <div :style="previewStyle">
+            <FormRender
+              v-model="formValues"
+              :schema="{ ...designInstance.getSchema(), colon: true }"
+              read
+            />
+          </div>
+        </el-tab-pane>
 
-      <el-tab-pane label="联动变量" name="context">
-        <VueMonacoEditor v-model:value="context" language="json" style="height: 60vh" />
-      </el-tab-pane>
-    </el-tabs>
-  </Modal>
+        <el-tab-pane label="联动变量" name="context">
+          <VueMonacoEditor v-model:value="context" language="json" style="height: 60vh" />
+        </el-tab-pane>
+      </el-tabs>
+    </Modal>
+  </div>
 </template>
 
 <script setup lang="ts">

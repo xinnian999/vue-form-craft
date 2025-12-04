@@ -185,8 +185,20 @@ const AntdAdapter: UIAdapter = {
     (_, { slots, attrs }) => {
       const propsAttrs = attrs as ModalProtocol['props']
 
-      return () =>
-        h(
+      return () => {
+        // 处理 to 参数：优先使用 to，默认为 body
+        let getContainer: (() => HTMLElement) | undefined
+        if (propsAttrs.to) {
+          if (typeof propsAttrs.to === 'string') {
+            getContainer = () => document.querySelector(propsAttrs.to as string) || document.body
+          } else {
+            getContainer = () => propsAttrs.to as HTMLElement
+          }
+        } else {
+          getContainer = () => document.body
+        }
+
+        return h(
           Modal,
           {
             ...attrs,
@@ -197,7 +209,7 @@ const AntdAdapter: UIAdapter = {
             centered: propsAttrs.center,
             maskClosable: propsAttrs.closeOnClickModal,
             keyboard: propsAttrs.closeOnPressEscape,
-            getContainer: propsAttrs.appendToBody ? () => document.body : undefined,
+            getContainer,
             destroyOnClose: propsAttrs.destroyOnClose,
             // 如果没有传递 footer 插槽，设置 footer: null 隐藏默认 footer，保持与 Element Plus 行为一致
             footer: slots.footer ? undefined : null,
@@ -206,6 +218,7 @@ const AntdAdapter: UIAdapter = {
           },
           slots
         )
+      }
     },
     { inheritAttrs: false }
   )

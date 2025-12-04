@@ -78,6 +78,7 @@ const rightActions: PreviewAction[] = [
     name: 'preview-design',
     icon: 'eye',
     onClick: () => {
+      designInstance.repirSchema()
       PreviewVisible.value = true
     }
   },

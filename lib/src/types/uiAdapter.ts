@@ -145,7 +145,7 @@ export interface ModalProtocol {
     fullscreen?: boolean
     top?: string
     modal?: boolean
-    appendToBody?: boolean
+    to?: string | HTMLElement // Modal 挂载位置，默认为 body
     lockScroll?: boolean
     closeOnClickModal?: boolean
     closeOnPressEscape?: boolean
