@@ -27,11 +27,5 @@ const InlineStyle = computed<StyleValue>(() => ({
 .form-item-inline {
   width: 100%;
   background-color: #f4f3f3;
-  .el-form-item {
-    margin-bottom: 0;
-  }
-  .el-form-item__content {
-    align-items: start;
-  }
 }
 </style>

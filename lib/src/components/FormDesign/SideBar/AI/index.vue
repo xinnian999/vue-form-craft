@@ -189,13 +189,6 @@ const handleClear = () => {
   .bubble-list {
     max-height: 100%;
     padding-bottom: 50px;
-    .el-bubble-end .el-bubble-content {
-      background-color: $lightThemeColor;
-    }
-
-    .el-bubble-start .el-bubble-content {
-      background-color: $lightSuccessColor;
-    }
 
     .loading {
       display: flex;
@@ -287,10 +280,6 @@ const handleClear = () => {
             -0.5em -1em rgba(233, 169, 32, 0.75);
         }
       }
-    }
-
-    .el-bubble-footer {
-      margin-top: 5px;
     }
 
     .footer {

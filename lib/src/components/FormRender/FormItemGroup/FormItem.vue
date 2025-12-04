@@ -253,10 +253,6 @@ watch(
     }
   }
 
-  &.hide-label > .el-form-item__label {
-    display: none;
-  }
-
   .form-item-alert {
     margin-top: 10px;
   }

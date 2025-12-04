@@ -196,10 +196,6 @@ watch(
 
   .vfc-unit-input__number {
     flex: 1;
-
-    :deep(.el-input__wrapper) {
-      padding: 1px 11px;
-    }
   }
 
   .vfc-unit-input__unit-btn {

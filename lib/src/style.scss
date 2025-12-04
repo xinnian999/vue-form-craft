@@ -1,19 +1,20 @@
-$namespace: 'vfc' !default;
-$themeColor: var(--el-color-primary, #409eff) !default;
-$lightThemeColor: var(--el-color-primary-light-9, rgb(235.9, 245.3, 255)) !default;
-$dangerColor: var(--el-color-danger, #f56c6c) !default;
-$bgColor: var(--el-bg-color, #fff) !default;
-$bgColor2: var(--el-fill-color-blank, #fff) !default;
-$bgColor3: var(--el-fill-color-light, #f5f7fa) !default;
-$successColor: var(--el-color-success, #67c23a) !default;
-$lightSuccessColor: var(--el-color-success-light-9, rgb(240, 249, 235)) !default;
-$warningColor: var(--el-color-warning, #e6a23c) !default;
-$borderColor: var(--el-border-color, #dcdfe6) !default;
-$fillColorLight: var(--el-fill-color-light, #f5f7fa) !default;
-$textColorSecondary: var(--el-text-color-secondary, #909399) !default;
-$textColor1: var(--el-text-color-primary, #303133) !default;
-$textColor3: var(--el-text-color-regular, #606266) !default;
-$primaryColor: var(--el-color-primary, #409eff) !default;
+$namespace: 'vfc';
+
+$themeColor: var(--#{$namespace}-color-primary, #409eff);
+$lightThemeColor: var(--#{$namespace}-color-primary-light, #ecf5ff);
+$dangerColor: var(--#{$namespace}-color-danger, #f56c6c);
+$bgColor: var(--#{$namespace}-color-bg, #ffffff);
+$bgColor2: var(--#{$namespace}-color-bg-secondary, #ffffff);
+$bgColor3: var(--#{$namespace}-color-bg-soft, #f5f7fa);
+$successColor: var(--#{$namespace}-color-success, #67c23a);
+$lightSuccessColor: var(--#{$namespace}-color-success-light, #f0f9eb);
+$warningColor: var(--#{$namespace}-color-warning, #e6a23c);
+$borderColor: var(--#{$namespace}-color-border, #dcdfe6);
+$fillColorLight: var(--#{$namespace}-color-fill-light, #f5f7fa);
+$textColorSecondary: var(--#{$namespace}-color-text-secondary, #909399);
+$textColor1: var(--#{$namespace}-color-text-primary, #303133);
+$textColor3: var(--#{$namespace}-color-text-regular, #606266);
+$primaryColor: $themeColor;
 
 @mixin ns($cls) {
   $NS: $namespace + '-' + $cls;
@@ -23,6 +24,104 @@ $primaryColor: var(--el-color-primary, #409eff) !default;
   }
 }
 
-:root {
-  --#{$namespace}-danger-color: #{$dangerColor};
+// UI 库穿透样式集合
+@include ns('outline') {
+  .el-tree {
+    background-color: transparent;
+
+    .el-tree-node__content {
+      height: 36px;
+      border-radius: 4px;
+      margin-bottom: 2px;
+
+      &:hover {
+        background-color: #f5f7fa;
+      }
+    }
+
+    .el-tree-node.is-current > .el-tree-node__content {
+      background-color: $themeColor;
+      color: #fff;
+
+      .node-icon {
+        color: #fff;
+      }
+    }
+  }
+}
+
+@include ns('template-list') {
+  .el-tree-node__content {
+    height: auto;
+    padding: 5px;
+    margin-bottom: 5px;
+    overflow: hidden;
+  }
+}
+
+@include ns('style-editor') {
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+
+  .el-divider__text {
+    font-weight: bold;
+    color: $textColor1;
+  }
+
+  .el-form-item {
+    margin-bottom: 16px;
+  }
+
+  .el-color-picker {
+    width: 100%;
+  }
+
+  .el-input-number {
+    width: 100%;
+  }
+}
+
+// Inline 表单项
+.form-item-inline {
+  .el-form-item {
+    margin-bottom: 0;
+  }
+
+  .el-form-item__content {
+    align-items: start;
+  }
+}
+
+// UnitInput 组件
+@include ns('unit-input') {
+  .vfc-unit-input__number {
+    .el-input__wrapper {
+      padding: 1px 11px;
+    }
+  }
+}
+
+// AI 对话气泡
+@include ns('ai') {
+  .bubble-list {
+    .el-bubble-end .el-bubble-content {
+      background-color: $lightThemeColor;
+    }
+
+    .el-bubble-start .el-bubble-content {
+      background-color: $lightSuccessColor;
+    }
+
+    .el-bubble-footer {
+      margin-top: 5px;
+    }
+  }
+}
+
+// FormItem 组件
+@include ns('form-item') {
+  &.hide-label > .el-form-item__label {
+    display: none;
+  }
 }

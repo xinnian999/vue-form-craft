@@ -249,21 +249,5 @@ defineExpose(instance)
     border-radius: 10px;
     background-color: #ccc;
   }
-
-  &-tabs {
-    border: none;
-    height: 100%;
-    box-sizing: border-box;
-    .el-tabs__content {
-      padding: 0 !important;
-    }
-    .el-tab-pane {
-      height: 100%;
-      overflow-y: auto;
-      overflow-x: visible;
-      padding: 10px;
-      box-sizing: border-box;
-    }
-  }
 }
 </style>

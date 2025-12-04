@@ -12,8 +12,8 @@ const app = createApp(App)
 app.use(router)
 
 app.use(VueFormCraft, {
-  ai: cozeAiFunction,
-  ui: AntdAdapter
+  ai: cozeAiFunction
+  // ui: AntdAdapter
 })
 
 app.use(ElementPlus, {

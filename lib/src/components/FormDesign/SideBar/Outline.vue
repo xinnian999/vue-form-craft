@@ -89,29 +89,6 @@ const handleNodeClick = (data: any) => {
   height: 100%;
   overflow-y: auto;
 
-  :deep(.el-tree) {
-    background-color: transparent;
-
-    .el-tree-node__content {
-      height: 36px;
-      border-radius: 4px;
-      margin-bottom: 2px;
-
-      &:hover {
-        background-color: #f5f7fa;
-      }
-    }
-
-    .el-tree-node.is-current > .el-tree-node__content {
-      background-color: $themeColor;
-      color: #fff;
-
-      .node-icon {
-        color: #fff;
-      }
-    }
-  }
-
   .tree-node {
     display: flex;
     align-items: center;

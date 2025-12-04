@@ -53,13 +53,6 @@ const useTemplate = (template: any) => {
     margin-bottom: 20px;
   }
 
-  .el-tree-node__content {
-    height: auto;
-    padding: 5px;
-    margin-bottom: 5px;
-    overflow: hidden;
-  }
-
   .catalog {
     display: flex;
     align-items: center;

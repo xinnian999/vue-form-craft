@@ -314,22 +314,5 @@ watch(
   overflow-y: auto;
   overflow-x: hidden;
   width: 100%;
-
-  :deep(.el-divider__text) {
-    font-weight: bold;
-    color: $textColor1;
-  }
-
-  :deep(.el-form-item) {
-    margin-bottom: 16px;
-  }
-
-  :deep(.el-color-picker) {
-    width: 100%;
-  }
-
-  :deep(.el-input-number) {
-    width: 100%;
-  }
 }
 </style>
