@@ -25,7 +25,7 @@
         <div :style="previewStyle">
           <FormRender
             v-model="formValues"
-            :schema="{ ...designInstance.getSchema(), labelSuffix: ':' }"
+            :schema="{ ...designInstance.getSchema(), colon: true }"
             read
           />
         </div>

@@ -1,3 +1,4 @@
+import basicSchema from '@/components/customComponents/Basic/schema'
 import optionsSchema from '@/components/customComponents/Options/schema'
 import rulesSchema from '@/components/customComponents/Rules/schema'
 import { formAttrSchema } from '@/config'
@@ -152,6 +153,11 @@ export default [
       {
         label: '表单配置',
         schema: formAttrSchema,
+        description: ''
+      },
+      {
+        label: '通用-基础配置',
+        schema: basicSchema,
         description: ''
       },
       {

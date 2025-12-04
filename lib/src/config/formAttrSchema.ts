@@ -63,9 +63,9 @@ export default {
               designKey: 'design-YJOL'
             },
             {
-              label: 'label后缀',
-              name: 'labelSuffix',
-              component: 'Input',
+              label: '显示冒号',
+              name: 'colon',
+              component: 'Switch',
               designKey: 'design-OQec'
             },
             {

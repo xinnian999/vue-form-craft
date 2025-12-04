@@ -62,7 +62,7 @@ export interface FormItemType {
 export type FormSchema = {
   labelWidth?: number
   labelAlign?: 'top' | 'left' | 'right'
-  labelSuffix?: string
+  colon?: boolean
   size?: 'default' | 'small' | 'large'
   disabled?: boolean
   hideRequiredAsterisk?: boolean

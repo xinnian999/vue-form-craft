@@ -27,9 +27,7 @@
           <el-tooltip effect="dark" :content="help" raw-content v-if="help">
             <Icon name="help" />
           </el-tooltip>
-          <div :class="ns('form-item-label-suffix')" v-if="formInstance.schema.labelSuffix">
-            {{ formInstance.schema.labelSuffix }}
-          </div>
+          <div :class="ns('form-item-label-suffix')" v-if="formInstance.schema.colon">:</div>
         </div>
       </template>
 

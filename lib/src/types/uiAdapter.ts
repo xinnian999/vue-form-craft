@@ -1,6 +1,50 @@
 import type { Component, VNode } from 'vue'
 
 /**
+ * Form 组件协议
+ */
+export interface FormProtocol {
+  props: {
+    model?: Record<string, any>
+    rules?: Record<string, any>
+    labelWidth?: string | number
+    labelAlign?: 'left' | 'right' | 'top'
+    inline?: boolean
+    disabled?: boolean
+    size?: 'large' | 'default' | 'small'
+    validateOnRuleChange?: boolean
+    hideRequiredAsterisk?: boolean
+    scrollToError?: boolean
+    colon?: boolean
+  }
+  slots: {
+    default?: () => VNode
+  }
+}
+
+/**
+ * FormItem 组件协议
+ */
+export interface FormItemProtocol {
+  props: {
+    prop?: string
+    label?: string
+    labelWidth?: string | number
+    labelPosition?: 'left' | 'right' | 'top'
+    required?: boolean
+    rules?: any | any[]
+    error?: string
+    showMessage?: boolean
+    size?: 'large' | 'default' | 'small'
+  }
+  slots: {
+    default?: () => VNode
+    label?: () => VNode
+    error?: () => VNode
+  }
+}
+
+/**
  * Input 组件协议
  */
 export interface InputProtocol {
@@ -64,49 +108,6 @@ export interface CardProtocol {
   slots: {
     default?: () => VNode
     header?: () => VNode
-  }
-}
-
-/**
- * Form 组件协议
- */
-export interface FormProtocol {
-  props: {
-    model?: Record<string, any>
-    rules?: Record<string, any>
-    labelWidth?: string | number
-    labelAlign?: 'left' | 'right' | 'top'
-    inline?: boolean
-    disabled?: boolean
-    size?: 'large' | 'default' | 'small'
-    validateOnRuleChange?: boolean
-    hideRequiredAsterisk?: boolean
-    scrollToError?: boolean
-  }
-  slots: {
-    default?: () => VNode
-  }
-}
-
-/**
- * FormItem 组件协议
- */
-export interface FormItemProtocol {
-  props: {
-    prop?: string
-    label?: string
-    labelWidth?: string | number
-    labelPosition?: 'left' | 'right' | 'top'
-    required?: boolean
-    rules?: any | any[]
-    error?: string
-    showMessage?: boolean
-    size?: 'large' | 'default' | 'small'
-  }
-  slots: {
-    default?: () => VNode
-    label?: () => VNode
-    error?: () => VNode
   }
 }
 

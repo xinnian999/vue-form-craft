@@ -204,7 +204,7 @@ const formAttrs = computed(() => {
     'submitBtn',
     'resetBtn',
     'initialValues',
-    'labelSuffix',
+    'colon',
     'onFieldChange',
     'onChange'
   ])

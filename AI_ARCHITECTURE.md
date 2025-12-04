@@ -185,7 +185,7 @@ export const $designInstance = Symbol() // 设计器实例
 type FormSchema = {
   labelWidth?: number // label宽度
   labelAlign?: 'top' | 'left' | 'right' // label对齐
-  labelSuffix?: string // label后缀
+  colon?: boolean // 显示冒号
   size?: 'default' | 'small' | 'large' // 组件尺寸
   disabled?: boolean // 禁用整个表单
   hideRequiredAsterisk?: boolean // 隐藏必填星号

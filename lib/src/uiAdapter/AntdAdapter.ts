@@ -79,6 +79,7 @@ const AntdAdapter: UIAdapter = {
         Form,
         {
           ...attrs,
+          colon: false,
           layout: propsAttrs.inline
             ? 'inline'
             : propsAttrs.labelAlign === 'top'
@@ -102,25 +103,30 @@ const AntdAdapter: UIAdapter = {
   FormItem: defineComponent((_, { slots, attrs }) => {
     const propsAttrs = attrs as FormItemProtocol['props']
 
-    return () =>
-      h(
+    return () => {
+      const { labelWidth } = propsAttrs
+
+      // 计算 labelCol 配置
+      let labelCol
+      if (labelWidth && labelWidth !== 0) {
+        const width = typeof labelWidth === 'number' ? `${labelWidth}px` : labelWidth
+        labelCol = { style: { width } }
+      }
+      if (labelWidth === 0) {
+        labelCol = { style: { width: 0 } }
+      }
+
+      return h(
         FormItem,
         {
           ...attrs,
+          colon: false,
           name: propsAttrs.prop,
-          labelCol: propsAttrs.labelWidth
-            ? {
-                style: {
-                  width:
-                    typeof propsAttrs.labelWidth === 'number'
-                      ? `${propsAttrs.labelWidth}px`
-                      : propsAttrs.labelWidth
-                }
-              }
-            : undefined
+          labelCol
         },
         slots
       )
+    }
   })
 }
 
