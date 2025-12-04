@@ -1,5 +1,5 @@
 <template>
-  <el-dialog
+  <Modal
     v-model="visible"
     title="预览"
     width="70%"
@@ -35,15 +35,17 @@
         <VueMonacoEditor v-model:value="context" language="json" style="height: 60vh" />
       </el-tab-pane>
     </el-tabs>
-  </el-dialog>
+  </Modal>
 </template>
 
 <script setup lang="ts">
 import { VueMonacoEditor } from '@guolao/vue-monaco-editor'
 import { computed, ref } from 'vue'
 import { FormRender } from '@/components'
-import { useDesignInstance } from '@/hooks'
+import { useDesignInstance, useUI } from '@/hooks'
 import type { FormInstance } from '@/types'
+
+const { Modal } = useUI()
 
 const designInstance = useDesignInstance()!
 

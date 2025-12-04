@@ -74,7 +74,9 @@ onMounted(() => {
   gap: 10px;
 
   .footer {
-    text-align: center;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <el-dialog
+  <Modal
     v-model="visible"
     title="JsonSchema"
     width="75%"
@@ -52,18 +52,20 @@
         <CodeHighLight style="height: 70vh" :code="jsVue(json)" language="vue" />
       </el-tab-pane>
     </el-tabs>
-  </el-dialog>
+  </Modal>
 </template>
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { CodeHighLight, Icon } from '@/components'
-import { useDesignInstance } from '@/hooks'
+import { useDesignInstance, useUI } from '@/hooks'
 import type { FormSchema } from '@/types'
 import { repirJsonSchema } from '@/utils'
 import { jsJsonSchema, jsVue, tsJsonSchema, tsVue } from './config'
 import JsonSchemaEdit from './Edit.vue'
 import ImportJsonSchema from './Import.vue'
+
+const { Modal } = useUI()
 
 const visible = defineModel<boolean>()
 

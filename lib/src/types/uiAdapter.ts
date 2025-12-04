@@ -135,6 +135,38 @@ export interface ButtonProtocol {
 }
 
 /**
+ * Modal 组件协议
+ */
+export interface ModalProtocol {
+  props: {
+    modelValue?: boolean
+    title?: string
+    width?: string | number
+    fullscreen?: boolean
+    top?: string
+    modal?: boolean
+    appendToBody?: boolean
+    lockScroll?: boolean
+    closeOnClickModal?: boolean
+    closeOnPressEscape?: boolean
+    showClose?: boolean
+    center?: boolean
+    destroyOnClose?: boolean
+    draggable?: boolean
+    'onUpdate:modelValue'?: (value: boolean) => void
+    onOpen?: () => void
+    onOpened?: () => void
+    onClose?: () => void
+    onClosed?: () => void
+  }
+  slots: {
+    default?: () => VNode
+    header?: () => VNode
+    footer?: () => VNode
+  }
+}
+
+/**
  * UI适配器 - 包含所有组件的适配器
  */
 export interface UIAdapter {
@@ -147,4 +179,5 @@ export interface UIAdapter {
   FormItem: Component<FormItemProtocol['props']>
   // 工具组件
   Button: Component<ButtonProtocol['props']>
+  Modal: Component<ModalProtocol['props']>
 }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <Button type="primary" plain size="small" @click="visible = true">JS表达式</Button>
-    <el-dialog
+    <Modal
       v-model="visible"
       title="JS表达式"
       append-to-body
@@ -46,7 +46,7 @@
         <Button @click="visible = false">取消</Button>
         <Button type="primary" @click="handleSave">保存</Button>
       </template>
-    </el-dialog>
+    </Modal>
   </div>
 </template>
 
@@ -57,7 +57,7 @@ import { onMounted, ref } from 'vue'
 import { useAi, useDesignInstance, useUI } from '@/hooks'
 import { ns } from '@/utils'
 
-const { Button } = useUI()
+const { Button, Modal } = useUI()
 
 const modelValue = defineModel<string>()
 

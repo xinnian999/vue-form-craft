@@ -1,7 +1,7 @@
 <template>
   <div>
     <Button type="primary" plain size="small" @click="visible = true">编辑</Button>
-    <el-dialog
+    <Modal
       v-model="visible"
       title="表单初始值"
       append-to-body
@@ -16,7 +16,7 @@
         <Button @click="visible = false">取消</Button>
         <Button type="primary" @click="handleSave">保存</Button>
       </template>
-    </el-dialog>
+    </Modal>
   </div>
 </template>
 
@@ -25,7 +25,7 @@ import { onMounted, ref } from 'vue'
 import { FormRender } from '@/components'
 import { useDesignInstance, useUI } from '@/hooks'
 
-const { Button } = useUI()
+const { Button, Modal } = useUI()
 
 const modelValue = defineModel()
 

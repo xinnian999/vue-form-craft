@@ -1,4 +1,4 @@
-import { Button, Card, Form, Input } from 'ant-design-vue'
+import { Button, Card, Form, Input, Modal } from 'ant-design-vue'
 import { defineComponent, h } from 'vue'
 import type {
   ButtonProtocol,
@@ -6,6 +6,7 @@ import type {
   FormItemProtocol,
   FormProtocol,
   InputProtocol,
+  ModalProtocol,
   TextareaProtocol,
   UIAdapter
 } from '@/types/uiAdapter'
@@ -172,10 +173,39 @@ const AntdAdapter: UIAdapter = {
           },
           {
             ...slots,
-            icon: () => h('span', { class: 'anticon' }, slots.icon?.())
+            icon: () => h('span', { class: slots.icon && 'anticon' }, slots.icon?.())
           }
         )
       }
+    },
+    { inheritAttrs: false }
+  ),
+
+  Modal: defineComponent(
+    (_, { slots, attrs }) => {
+      const propsAttrs = attrs as ModalProtocol['props']
+
+      return () =>
+        h(
+          Modal,
+          {
+            ...attrs,
+            open: propsAttrs.modelValue,
+            'onUpdate:open': (value: boolean) => {
+              propsAttrs['onUpdate:modelValue']?.(value)
+            },
+            centered: propsAttrs.center,
+            maskClosable: propsAttrs.closeOnClickModal,
+            keyboard: propsAttrs.closeOnPressEscape,
+            getContainer: propsAttrs.appendToBody ? () => document.body : undefined,
+            destroyOnClose: propsAttrs.destroyOnClose,
+            // 如果没有传递 footer 插槽，设置 footer: null 隐藏默认 footer，保持与 Element Plus 行为一致
+            footer: slots.footer ? undefined : null,
+            onOk: propsAttrs.onClose,
+            onCancel: propsAttrs.onClose
+          },
+          slots
+        )
     },
     { inheritAttrs: false }
   )

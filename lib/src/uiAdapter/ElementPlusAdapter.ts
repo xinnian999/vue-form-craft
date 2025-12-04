@@ -1,4 +1,4 @@
-import { ElButton, ElCard, ElForm, ElFormItem, ElInput } from 'element-plus'
+import { ElButton, ElCard, ElDialog, ElForm, ElFormItem, ElInput } from 'element-plus'
 import { defineComponent, h } from 'vue'
 import type { FormProtocol, UIAdapter } from '@/types/uiAdapter'
 
@@ -55,6 +55,13 @@ const ElementPlusAdapter: UIAdapter = {
   Button: defineComponent(
     (_, { slots, attrs }) => {
       return () => h(ElButton, attrs, slots)
+    },
+    { inheritAttrs: false }
+  ),
+
+  Modal: defineComponent(
+    (_, { slots, attrs }) => {
+      return () => h(ElDialog, attrs, slots)
     },
     { inheritAttrs: false }
   )

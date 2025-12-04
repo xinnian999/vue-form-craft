@@ -10,7 +10,7 @@
       <span v-if="hasValue" class="status-dot"></span>
     </div>
 
-    <el-dialog
+    <Modal
       v-model="dialogVisible"
       :title="formItemProps.label"
       width="800px"
@@ -47,7 +47,7 @@
         <Button @click="handleCancel">取消</Button>
         <Button type="primary" @click="handleSave">保存</Button>
       </template>
-    </el-dialog>
+    </Modal>
   </div>
 </template>
 
@@ -60,7 +60,7 @@ import { useUI } from '@/hooks'
 import type { ComponentBaseProps } from '@/types'
 import { ns } from '@/utils'
 
-const { Button } = useUI()
+const { Button, Modal } = useUI()
 
 const modelValue = defineModel<string>()
 

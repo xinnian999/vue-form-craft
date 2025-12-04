@@ -4,7 +4,7 @@
 
     <FormItemGroup :list="parseSchema.items" />
 
-    <FormItem v-if="!design && !read">
+    <FormItem v-if="!design && !read" label=" ">
       <Button v-if="schema.submitBtn" type="primary" @click="instance.submit" name="submit-btn">
         提交
       </Button>
