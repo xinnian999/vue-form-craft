@@ -1,13 +1,13 @@
 <template>
   <div :class="ns('unit-input')">
     <!-- 当前是预设值模式 -->
-    <el-button
+    <Button
       v-if="currentMode === 'preset'"
       :class="ns('unit-input__preset-btn')"
       @click="switchMode"
     >
       {{ currentValue }}
-    </el-button>
+    </Button>
 
     <!-- 当前是单位模式 -->
     <div v-else :class="ns('unit-input__unit-mode')">
@@ -17,16 +17,19 @@
         @change="handleNumberChange"
         controlsPosition="right"
       />
-      <el-button :class="ns('unit-input__unit-btn')" @click="switchMode">
+      <Button :class="ns('unit-input__unit-btn')" @click="switchMode">
         {{ currentUnit }}
-      </el-button>
+      </Button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
+import { useUI } from '@/hooks'
 import { ns } from '@/utils'
+
+const { Button } = useUI()
 
 defineOptions({
   name: 'UnitInput'

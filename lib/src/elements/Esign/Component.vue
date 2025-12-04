@@ -2,9 +2,7 @@
   <template v-if="formInstance.read || value">
     <div>
       <div class="vfc-esign-preview"><img :src="value" alt="未签名" /></div>
-      <el-button v-if="!formInstance.read" :disabled @click="handleClear" type="primary"
-        >重写</el-button
-      >
+      <Button v-if="!formInstance.read" :disabled @click="handleClear" type="primary">重写</Button>
     </div>
   </template>
 
@@ -24,11 +22,9 @@
     />
 
     <div>
-      <el-button v-if="oldValue" :disabled @click="value = oldValue" plain type="primary"
-        >取消</el-button
-      >
-      <el-button :disabled @click="handleReset" plain type="primary">清空</el-button>
-      <el-button :disabled @click="handleGenerate" type="primary">保存</el-button>
+      <Button v-if="oldValue" :disabled @click="value = oldValue" plain type="primary">取消</Button>
+      <Button :disabled @click="handleReset" plain type="primary">清空</Button>
+      <Button :disabled @click="handleGenerate" type="primary">保存</Button>
     </div>
   </div>
 </template>
@@ -36,9 +32,11 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { FormRender } from '@/components'
-import { useFormInstance } from '@/hooks'
+import { useFormInstance, useUI } from '@/hooks'
 import type { FormSchema } from '@/types'
 import VueEsign from './VueEsign.vue'
+
+const { Button } = useUI()
 
 interface Props {
   lineWidth?: number

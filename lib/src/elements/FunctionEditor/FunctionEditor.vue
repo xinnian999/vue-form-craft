@@ -1,12 +1,12 @@
 <template>
   <div :class="ns('function-editor')">
     <div class="button-wrapper">
-      <el-button type="primary" @click="openDialog" size="small">
+      <Button type="primary" @click="openDialog" size="small">
         <template #icon>
           <Icon name="code" />
         </template>
         <span> 编辑函数</span>
-      </el-button>
+      </Button>
       <span v-if="hasValue" class="status-dot"></span>
     </div>
 
@@ -44,8 +44,8 @@
       </div>
 
       <template #footer>
-        <el-button @click="handleCancel">取消</el-button>
-        <el-button type="primary" @click="handleSave">保存</el-button>
+        <Button @click="handleCancel">取消</Button>
+        <Button type="primary" @click="handleSave">保存</Button>
       </template>
     </el-dialog>
   </div>
@@ -56,8 +56,11 @@ import { VueMonacoEditor } from '@guolao/vue-monaco-editor'
 import { ElMessage } from 'element-plus'
 import { computed, ref, shallowRef, watch } from 'vue'
 import { Icon } from '@/components'
+import { useUI } from '@/hooks'
 import type { ComponentBaseProps } from '@/types'
 import { ns } from '@/utils'
+
+const { Button } = useUI()
 
 const modelValue = defineModel<string>()
 

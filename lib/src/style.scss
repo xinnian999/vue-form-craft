@@ -25,6 +25,12 @@ $primaryColor: $themeColor;
 }
 
 // UI 库穿透样式集合
+@include ns('form-design') {
+  .el-button + .el-button {
+    margin-left: 0;
+  }
+}
+
 @include ns('outline') {
   .el-tree {
     background-color: transparent;

@@ -21,7 +21,7 @@
               />
             </el-space>
 
-            <el-button
+            <Button
               v-if="allowReduce && !isMin"
               @click="handleReduceItem(index)"
               circle
@@ -31,7 +31,7 @@
               size="small"
             >
               <template #icon> <Icon name="reduce" color="#fff" /> </template
-            ></el-button>
+            ></Button>
           </div>
         </component>
       </template>
@@ -41,7 +41,7 @@
           <template #header>
             <div class="card-header">
               <span>{{ title + (index + 1) }}</span>
-              <el-button
+              <Button
                 v-if="allowReduce && !isMin"
                 @click="handleReduceItem(index)"
                 circle
@@ -51,7 +51,7 @@
                 size="small"
               >
                 <template #icon> <Icon name="reduce" color="#fff" /> </template>
-              </el-button>
+              </Button>
             </div>
           </template>
           <form-item
@@ -75,7 +75,7 @@
         />
         <el-table-column fixed="right" min-width="60">
           <template #default="record">
-            <el-button
+            <Button
               v-if="allowReduce && !isMin"
               @click="handleReduceItem(record.$index)"
               circle
@@ -86,13 +86,13 @@
               plain
             >
               <template #icon> <Icon name="reduce" /> </template
-            ></el-button>
+            ></Button>
           </template>
         </el-table-column>
       </el-table>
 
       <div style="margin-top: 5px">
-        <el-button
+        <Button
           v-if="allowAdd && !isMax"
           @click="handleAddItem"
           type="primary"
@@ -103,7 +103,7 @@
         >
           <template #icon> <Icon name="add" /></template>
           {{ title }}
-        </el-button>
+        </Button>
       </div>
     </div>
   </div>
@@ -117,6 +117,8 @@ import { FormItem, FormItemGroup, Icon } from '@/components'
 import { useFormInstance, useUI } from '@/hooks'
 import type { ComponentBaseProps, FormItemType } from '@/types'
 import { deepParse } from '@/utils'
+
+const { Button } = useUI()
 
 const { FormItem: UIFormItem } = useUI()
 

@@ -112,6 +112,29 @@ export interface CardProtocol {
 }
 
 /**
+ * Button 组件协议
+ */
+export interface ButtonProtocol {
+  props: {
+    type?: 'default' | 'primary' | 'success' | 'warning' | 'info' | 'danger' | 'text'
+    size?: 'large' | 'default' | 'small'
+    disabled?: boolean
+    loading?: boolean
+    plain?: boolean
+    round?: boolean
+    circle?: boolean
+    text?: boolean
+    link?: boolean
+    name?: string
+    onClick?: (e: Event) => void
+  }
+  slots: {
+    default?: () => VNode
+    icon?: () => VNode
+  }
+}
+
+/**
  * UI适配器 - 包含所有组件的适配器
  */
 export interface UIAdapter {
@@ -122,4 +145,6 @@ export interface UIAdapter {
   Card: Component<CardProtocol['props']>
   Form: Component<FormProtocol['props']>
   FormItem: Component<FormItemProtocol['props']>
+  // 工具组件
+  Button: Component<ButtonProtocol['props']>
 }

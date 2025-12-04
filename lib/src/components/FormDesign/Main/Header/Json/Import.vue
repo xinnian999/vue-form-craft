@@ -8,8 +8,8 @@
     />
 
     <div class="footer">
-      <el-button @click="handleClear"> 清空 </el-button>
-      <el-button type="primary" @click="handleConfirm" :disabled="!isValidSchema"> 导入 </el-button>
+      <Button @click="handleClear"> 清空 </Button>
+      <Button type="primary" @click="handleConfirm" :disabled="!isValidSchema"> 导入 </Button>
     </div>
   </div>
 </template>
@@ -17,9 +17,11 @@
 <script setup lang="ts">
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { ref } from 'vue'
-import { useDesignInstance } from '@/hooks'
+import { useDesignInstance, useUI } from '@/hooks'
 import type { FormSchema } from '@/types'
 import { ns, repirJsonSchema } from '@/utils'
+
+const { Button } = useUI()
 
 const designInstance = useDesignInstance()!
 

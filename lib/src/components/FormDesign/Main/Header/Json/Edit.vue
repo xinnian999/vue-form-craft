@@ -7,8 +7,8 @@
       :style="{ height: '400px' }"
     />
     <div class="footer">
-      <el-button @click="handleSave" type="primary">保存更改</el-button>
-      <el-button @click="handleReset">重置</el-button>
+      <Button @click="handleSave" type="primary">保存更改</Button>
+      <Button @click="handleReset">重置</Button>
     </div>
   </div>
 </template>
@@ -18,8 +18,11 @@ import { VueMonacoEditor } from '@guolao/vue-monaco-editor'
 import { ElMessage } from 'element-plus'
 import { cloneDeep } from 'lodash'
 import { onMounted, ref } from 'vue'
+import { useUI } from '@/hooks'
 import type { FormSchema } from '@/types'
 import { ns } from '@/utils'
+
+const { Button } = useUI()
 
 const props = defineProps<{
   json: FormSchema

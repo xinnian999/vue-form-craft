@@ -5,12 +5,12 @@
     <FormItemGroup :list="parseSchema.items" />
 
     <FormItem v-if="!design && !read">
-      <el-button v-if="schema.submitBtn" type="primary" @click="instance.submit" name="submit-btn">
+      <Button v-if="schema.submitBtn" type="primary" @click="instance.submit" name="submit-btn">
         提交
-      </el-button>
-      <el-button v-if="schema.resetBtn" @click="() => instance.resetFields()" name="reset-btn">
+      </Button>
+      <Button v-if="schema.resetBtn" @click="() => instance.resetFields()" name="reset-btn">
         重置
-      </el-button>
+      </Button>
     </FormItem>
   </Form>
 </template>
@@ -37,7 +37,7 @@ import type { FormInstance, FormRenderEmits, FormRenderProps } from '@/types'
 import { deepParse, getDataByPath, setDataByPath } from '@/utils'
 import FormItemGroup from './FormItemGroup/index.vue'
 
-const { Form, FormItem } = useUI()
+const { Form, FormItem, Button } = useUI()
 
 const props = withDefaults(defineProps<FormRenderProps>(), {
   schema: () => ({})

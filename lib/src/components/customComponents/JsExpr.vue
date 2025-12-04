@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-button type="primary" plain size="small" @click="visible = true">JS表达式</el-button>
+    <Button type="primary" plain size="small" @click="visible = true">JS表达式</Button>
     <el-dialog
       v-model="visible"
       title="JS表达式"
@@ -19,14 +19,14 @@
               clearable
             >
               <template #append>
-                <el-button
+                <Button
                   type="primary"
                   :icon="MagicStick"
                   @click="handleAiGenerate"
                   :loading="aiLoading"
                 >
                   AI生成
-                </el-button>
+                </Button>
               </template>
             </el-input>
           </div>
@@ -43,8 +43,8 @@
         </div>
       </div>
       <template #footer>
-        <el-button @click="visible = false">取消</el-button>
-        <el-button type="primary" @click="handleSave">保存</el-button>
+        <Button @click="visible = false">取消</Button>
+        <Button type="primary" @click="handleSave">保存</Button>
       </template>
     </el-dialog>
   </div>
@@ -54,8 +54,10 @@
 import { MagicStick } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 import { onMounted, ref } from 'vue'
-import { useAi, useDesignInstance } from '@/hooks'
+import { useAi, useDesignInstance, useUI } from '@/hooks'
 import { ns } from '@/utils'
+
+const { Button } = useUI()
 
 const modelValue = defineModel<string>()
 

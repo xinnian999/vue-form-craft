@@ -2,7 +2,7 @@
   <div :class="ns('margin-input')">
     <!-- 统一边距 -->
     <div :class="ns('margin-input__unified')">
-      <el-button
+      <Button
         text
         :icon="expanded ? ArrowDown : ArrowRight"
         :class="ns('margin-input__toggle')"
@@ -82,8 +82,11 @@
 <script setup lang="ts">
 import { ArrowDown, ArrowRight } from '@element-plus/icons-vue'
 import { ref, watch } from 'vue'
+import { useUI } from '@/hooks'
 import { ns } from '@/utils'
 import UnitInput from './UnitInput.vue'
+
+const { Button } = useUI()
 
 defineOptions({
   name: 'MarginInput'

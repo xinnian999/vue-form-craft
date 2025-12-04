@@ -16,7 +16,7 @@
 
 ## 适配进度
 
-**已完成: 5 / 38**
+**已完成: 6 / 38**
 
 **第一优先级：高频表单组件**
 
@@ -52,7 +52,7 @@
 
 **第三优先级：设计器工具组件**
 
-- Button（按钮）
+- ✅ Button（按钮）- 已适配
 - Dialog（对话框）
 - Tabs（标签页）
 - TabPane（标签页面板）
@@ -183,9 +183,9 @@ export default ElementPlusAdapter
 
 ```typescript
 // uiAdapter/AntdAdapter.ts
-import { Input, Select } from 'ant-design-vue'
+import { Button, Input, Select } from 'ant-design-vue'
 import { defineComponent, h } from 'vue'
-import type { InputProtocol, SelectProtocol, UIAdapter } from '@/types/uiAdapter'
+import type { ButtonProtocol, InputProtocol, SelectProtocol, UIAdapter } from '@/types/uiAdapter'
 
 const AntdAdapter: UIAdapter = {
   // Ant Design Vue 的 Input 需要适配属性名称
@@ -231,6 +231,36 @@ const AntdAdapter: UIAdapter = {
         },
         slots
       )
+  }),
+
+  // Button 组件适配
+  Button: defineComponent((_, { slots, attrs }) => {
+    const props = attrs as ButtonProtocol['props']
+
+    return () => {
+      // type 适配: text -> link, warning/info -> default (Ant Design Vue 不支持 warning 和 info)
+      let buttonType: 'primary' | 'dashed' | 'link' | 'text' | 'default' | undefined
+      if (props.type === 'text') {
+        buttonType = 'link'
+      } else if (props.type === 'warning' || props.type === 'info') {
+        buttonType = 'default'
+      } else if (props.type === 'default') {
+        buttonType = undefined
+      } else {
+        buttonType = props.type
+      }
+
+      return h(
+        Button,
+        {
+          ...attrs,
+          type: buttonType,
+          danger: props.type === 'danger',
+          shape: props.circle ? 'circle' : props.round ? 'round' : undefined
+        },
+        slots
+      )
+    }
   })
 }
 

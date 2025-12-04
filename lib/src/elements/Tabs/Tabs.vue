@@ -4,7 +4,7 @@
   </el-tabs>
 
   <div class="action" v-if="formInstance.design">
-    <el-button type="primary" @click="handleAddTab">添加标签页</el-button>
+    <Button type="primary" @click="handleAddTab">添加标签页</Button>
 
     <!-- 拖拽排序胶囊 -->
     <div class="drag-sort-capsule" v-if="children.length > 0">
@@ -31,8 +31,10 @@
 import { computed, ref, watch } from 'vue'
 import Draggable from 'vuedraggable-es-fix'
 import { FormItemGroup } from '@/components'
-import { useDesignInstance, useFormInstance } from '@/hooks'
+import { useDesignInstance, useFormInstance, useUI } from '@/hooks'
 import type { ComponentBaseProps, FormItemType } from '@/types'
+
+const { Button } = useUI()
 
 const props = defineProps<
   ComponentBaseProps & {

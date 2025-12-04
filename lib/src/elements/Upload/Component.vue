@@ -23,7 +23,7 @@
         </div>
       </template>
 
-      <el-button v-else type="primary">{{ btnText }}</el-button>
+      <Button v-else type="primary">{{ btnText }}</Button>
     </template>
 
     <template v-if="listType === 'picture-card'">
@@ -39,6 +39,9 @@
 import { ElMessage, ElMessageBox } from 'element-plus'
 import type { UploadProps, UploadUserFile } from 'element-plus'
 import { Icon } from '@/components'
+import { useUI } from '@/hooks'
+
+const { Button } = useUI()
 
 interface Props {
   action: string

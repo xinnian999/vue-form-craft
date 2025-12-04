@@ -1,40 +1,34 @@
 <template>
   <div :class="ns('form-design-header')">
     <div class="left">
-      <el-button-group>
-        <el-button
-          :disabled="designInstance.historyIndex === -1"
-          name="history-back"
-          :size="btnSize"
-          @click="designInstance.handleHistoryBack"
-        >
-          <template #icon><Icon name="back" /></template>
-        </el-button>
-        <el-button
-          name="history-forward"
-          :disabled="
-            designInstance.historyIndex === designInstance.history.length - 1 ||
-            designInstance.history.length === 0
-          "
-          :size="btnSize"
-          @click="designInstance.handleHistoryForward"
-        >
-          <template #icon><Icon name="forward" /></template>
-        </el-button>
-      </el-button-group>
-      <el-button
+      <Button
+        :disabled="designInstance.historyIndex === -1"
+        name="history-back"
         :size="btnSize"
-        @click="designInstance.handleToggleFullScreen"
-        style="margin-left: 12px"
+        @click="designInstance.handleHistoryBack"
       >
+        <template #icon><Icon name="back" /></template>
+      </Button>
+      <Button
+        name="history-forward"
+        :disabled="
+          designInstance.historyIndex === designInstance.history.length - 1 ||
+          designInstance.history.length === 0
+        "
+        :size="btnSize"
+        @click="designInstance.handleHistoryForward"
+      >
+        <template #icon><Icon name="forward" /></template>
+      </Button>
+      <Button :size="btnSize" @click="designInstance.handleToggleFullScreen">
         <template #icon>
           <Icon :name="designInstance.fullScreen ? 'cancelFullScreen' : 'fullScreen'" />
         </template>
-      </el-button>
+      </Button>
     </div>
 
     <div class="right">
-      <el-button
+      <Button
         v-for="{ label, btnType, icon, name, onClick } in rightActions"
         :key="label"
         :type="btnType"
@@ -42,7 +36,7 @@
         :size="btnSize"
         @click="onClick"
       >
-        <template #icon v-if="icon"> <Icon :name="icon" /> </template>{{ label }}</el-button
+        <template #icon v-if="icon"> <Icon :name="icon" /> </template>{{ label }}</Button
       >
     </div>
     <Json v-model="JsonVisible" />
@@ -54,10 +48,12 @@
 import { ElMessageBox } from 'element-plus'
 import { ref } from 'vue'
 import { Icon } from '@/components'
-import { useDesignInstance } from '@/hooks'
+import { useDesignInstance, useUI } from '@/hooks'
 import { ns } from '@/utils'
 import Json from './Json/index.vue'
 import Preview from './Preview.vue'
+
+const { Button } = useUI()
 
 type PreviewAction = {
   label: string
@@ -138,11 +134,13 @@ const rightActions: PreviewAction[] = [
   .left {
     display: flex;
     align-items: center;
+    gap: 12px;
   }
 
   .right {
     margin-left: auto;
     display: flex;
+    gap: 12px;
   }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-button type="primary" plain size="small" @click="handleEdit">编辑</el-button>
+    <Button type="primary" plain size="small" @click="handleEdit">编辑</Button>
     <el-dialog v-model="visible" title="全局样式配置" append-to-body destroy-on-close width="800px">
       <div
         class="monaco-editor-wrapper"
@@ -15,8 +15,8 @@
       </div>
 
       <template #footer>
-        <el-button @click="visible = false">取消</el-button>
-        <el-button type="primary" @click="handleSave">保存</el-button>
+        <Button @click="visible = false">取消</Button>
+        <Button type="primary" @click="handleSave">保存</Button>
       </template>
     </el-dialog>
   </div>
@@ -25,6 +25,9 @@
 <script setup lang="ts">
 import { VueMonacoEditor } from '@guolao/vue-monaco-editor'
 import { ref } from 'vue'
+import { useUI } from '@/hooks'
+
+const { Button } = useUI()
 
 const modelValue = defineModel<string>()
 
