@@ -8,7 +8,7 @@ type Params = {
 export default ({ elements, omits }: Params) => {
   const getChildren = (type: string) => {
     return Object.values(elements)
-      .filter((item) => item.type === type && item.order < 10000 && !omits.includes(item.component))
+      .filter((item) => item.type === type && !omits.includes(item.component))
       .sort((a, b) => {
         return a.order - b.order
       })
