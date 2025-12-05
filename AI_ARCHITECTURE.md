@@ -895,9 +895,144 @@ console.log(formItems.value)
 
 ---
 
-## 十二、未来规划
+## 十二、多UI适配系统
 
-### 12.1 进行中的任务
+### 12.1 架构设计
+
+Vue Form Craft 支持多UI库适配，通过协议层抽象实现UI库无关。核心思想是：
+
+1. **协议层**：定义统一的组件协议（Protocol）
+2. **适配层**：为每个UI库实现适配器（Adapter）
+3. **注入层**：通过 provide/inject 全局注入适配器
+4. **使用层**：组件通过 useUI() 获取适配后的组件
+
+### 12.2 协议定义
+
+**位置**: `/src/types/uiAdapter.ts`
+
+每个组件都有对应的 Protocol 接口，定义了 props 和 slots：
+
+```typescript
+// Tabs 组件协议
+export interface TabsProtocol {
+  props: {
+    modelValue?: string | number
+    type?: 'card' | 'border-card' | ''
+    closable?: boolean
+    addable?: boolean
+    editable?: boolean
+    tabPosition?: 'top' | 'right' | 'bottom' | 'left'
+    stretch?: boolean
+    'onUpdate:modelValue'?: (value: string | number) => void
+    onTabClick?: (pane: any, event: Event) => void
+    onTabChange?: (name: string | number) => void
+    onTabRemove?: (name: string | number) => void
+    onTabAdd?: () => void
+  }
+  slots: {
+    default?: () => VNode
+  }
+}
+
+// UI适配器接口
+export interface UIAdapter {
+  Input: Component<InputProtocol['props']>
+  Textarea: Component<TextareaProtocol['props']>
+  Card: Component<CardProtocol['props']>
+  Tabs: Component<TabsProtocol['props']>
+  TabPane: Component<TabPaneProtocol['props']>
+  Form: Component<FormProtocol['props']>
+  FormItem: Component<FormItemProtocol['props']>
+  Button: Component<ButtonProtocol['props']>
+  Modal: Component<ModalProtocol['props']>
+}
+```
+
+### 12.3 适配器实现
+
+**位置**: `/src/uiAdapter/ElementPlusAdapter.ts`
+
+使用 `defineComponent` 和 `h` 函数实现适配：
+
+```typescript
+import { ElTabPane, ElTabs } from 'element-plus'
+import { defineComponent, h } from 'vue'
+
+const ElementPlusAdapter: UIAdapter = {
+  // Element-Plus 的 Tabs 组件与协议完全兼容，直接透传
+  Tabs: defineComponent(
+    (_, { slots, attrs }) => {
+      return () => h(ElTabs, attrs, slots)
+    },
+    { inheritAttrs: false }
+  ),
+
+  TabPane: defineComponent(
+    (_, { slots, attrs }) => {
+      return () => h(ElTabPane, attrs, slots)
+    },
+    { inheritAttrs: false }
+  )
+}
+```
+
+### 12.4 使用方式
+
+**在组件中使用**:
+
+```vue
+<template>
+  <Tabs v-model="activeKey">
+    <TabPane label="标签1" name="tab1"> 内容1 </TabPane>
+    <TabPane label="标签2" name="tab2"> 内容2 </TabPane>
+  </Tabs>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import { useUI } from '@/hooks'
+
+const { Tabs, TabPane } = useUI()
+const activeKey = ref('tab1')
+</script>
+```
+
+### 12.5 已适配组件
+
+当前已完成适配的组件（8/36）：
+
+**表单组件**:
+
+- ✅ Form（表单容器）
+- ✅ FormItem（表单项）
+- ✅ Input（输入框）
+- ✅ Textarea（多行文本）
+
+**布局组件**:
+
+- ✅ Card（卡片）
+- ✅ Tabs（标签页）
+
+**工具组件**:
+
+- ✅ Button（按钮）
+- ✅ Modal（对话框）
+
+详细适配进度和方案请参考 `/MULTI_UI_ADAPTER.md`。
+
+### 12.6 适配规范
+
+1. **协议优先**：先定义协议，再实现适配
+2. **直接透传**：如果UI库API与协议一致，直接透传
+3. **属性映射**：如果属性名不同，在适配器中转换
+4. **禁止嵌套三目**：保持代码可维护性
+5. **全局替换**：完成适配后，搜索项目中所有使用该组件的地方并替换
+
+---
+
+## 十三、未来规划
+
+### 13.1 进行中的任务
 
 1. **重构输入类组件配置表单**: 统一支持属性、校验、联动、布局、事件
 2. **自增组件联动教程文档**
@@ -907,7 +1042,7 @@ console.log(formItems.value)
    - AI生成校验规则
    - AI接口改为用户全局注入
 
-### 12.2 技术债务
+### 13.2 技术债务
 
 - 多UI库适配（Arco Design等）
 - 事件系统完善
@@ -915,9 +1050,9 @@ console.log(formItems.value)
 
 ---
 
-## 十三、关键API速查
+## 十四、关键API速查
 
-### 13.1 FormRender Props
+### 14.1 FormRender Props
 
 ```typescript
 {
@@ -928,7 +1063,7 @@ console.log(formItems.value)
 }
 ```
 
-### 13.2 FormDesign Props
+### 14.2 FormDesign Props
 
 ```typescript
 {
@@ -938,7 +1073,7 @@ console.log(formItems.value)
 }
 ```
 
-### 13.3 Hooks
+### 14.3 Hooks
 
 ```typescript
 useFormInstance() // 获取表单实例
@@ -951,7 +1086,7 @@ useChildrenModel(props) // 子组件模型
 
 ---
 
-## 十四、总结
+## 十五、总结
 
 Vue Form Craft 是一个功能完善、架构清晰的低代码表单解决方案。核心设计理念：
 

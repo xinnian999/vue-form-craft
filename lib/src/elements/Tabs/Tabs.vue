@@ -1,9 +1,9 @@
 <template>
-  <el-tabs v-bind="$attrs" v-model="activeKey" :key="tabsKey">
-    <el-tab-pane v-for="tab in children" :key="tab.name" :label="tab.label" :name="tab.name">
+  <Tabs v-bind="$attrs" v-model="activeKey" :key="tabsKey">
+    <TabPane v-for="tab in children" :key="tab.name" :label="tab.label" :name="tab.name">
       <FormItemGroup :list="tab.children!" />
-    </el-tab-pane>
-  </el-tabs>
+    </TabPane>
+  </Tabs>
 
   <div class="action" v-if="formInstance.design">
     <!-- 拖拽排序胶囊 -->
@@ -31,8 +31,10 @@
 import { computed, ref, watch } from 'vue'
 import Draggable from 'vuedraggable-es-fix'
 import { FormItemGroup } from '@/components'
-import { useDesignInstance, useFormInstance } from '@/hooks'
+import { useDesignInstance, useFormInstance, useUI } from '@/hooks'
 import type { ComponentBaseProps, FormItemType } from '@/types'
+
+const { Tabs, TabPane } = useUI()
 
 const props = defineProps<
   ComponentBaseProps & {

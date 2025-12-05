@@ -1,4 +1,4 @@
-import { Button, Card, Form, Input, Modal } from 'ant-design-vue'
+import { Button, Card, Form, Input, Modal, Tabs } from 'ant-design-vue'
 import { defineComponent, h } from 'vue'
 import type {
   ButtonProtocol,
@@ -7,12 +7,15 @@ import type {
   FormProtocol,
   InputProtocol,
   ModalProtocol,
+  TabPaneProtocol,
+  TabsProtocol,
   TextareaProtocol,
   UIAdapter
 } from '@/types/uiAdapter'
 
 const { TextArea } = Input
 const { Item: FormItem } = Form
+const { TabPane } = Tabs
 
 /**
  * Ant Design Vue UI适配器
@@ -141,6 +144,62 @@ const AntdAdapter: UIAdapter = {
           },
           slots
         )
+    },
+    { inheritAttrs: false }
+  ),
+
+  Tabs: defineComponent(
+    (_, { slots, attrs }) => {
+      const propsAttrs = attrs as TabsProtocol['props']
+
+      return () =>
+        h(
+          Tabs as any,
+          {
+            activeKey: propsAttrs.modelValue,
+            'onUpdate:activeKey': (value: string | number) => {
+              propsAttrs['onUpdate:modelValue']?.(value)
+            },
+            type: propsAttrs.type === 'border-card' ? 'card' : propsAttrs.type,
+            tabPosition: propsAttrs.tabPosition,
+            onChange: (activeKey: string | number) => {
+              propsAttrs.onTabChange?.(activeKey)
+            }
+          },
+          {
+            default: () => {
+              const nodes = slots.default?.() as any
+
+              const parseNodeProps = (node: any) => {
+                node.props.tab = node.props.label
+                node.props.key = node.props.name
+              }
+
+              nodes?.forEach((node: any) => {
+                if (node.props) {
+                  parseNodeProps(node)
+                } else {
+                  node.children?.forEach((child: any) => {
+                    if (child.props) {
+                      parseNodeProps(child)
+                    }
+                  })
+                }
+              })
+
+              return nodes
+            }
+          }
+        )
+    },
+    { inheritAttrs: false }
+  ),
+
+  TabPane: defineComponent(
+    (_, { slots, attrs }) => {
+      const propsAttrs = attrs as TabPaneProtocol['props']
+
+      return () => h(TabPane as any, propsAttrs, slots)
     },
     { inheritAttrs: false }
   ),

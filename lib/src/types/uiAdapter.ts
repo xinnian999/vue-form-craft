@@ -167,6 +167,46 @@ export interface ModalProtocol {
 }
 
 /**
+ * Tabs 组件协议
+ */
+export interface TabsProtocol {
+  props: {
+    modelValue?: string | number
+    type?: 'card' | 'border-card' | ''
+    closable?: boolean
+    addable?: boolean
+    editable?: boolean
+    tabPosition?: 'top' | 'right' | 'bottom' | 'left'
+    stretch?: boolean
+    'onUpdate:modelValue'?: (value: string | number) => void
+    onTabClick?: (pane: any, event: Event) => void
+    onTabChange?: (name: string | number) => void
+    onTabRemove?: (name: string | number) => void
+    onTabAdd?: () => void
+  }
+  slots: {
+    default?: () => VNode
+  }
+}
+
+/**
+ * TabPane 组件协议
+ */
+export interface TabPaneProtocol {
+  props: {
+    label?: string
+    name?: string | number
+    disabled?: boolean
+    closable?: boolean
+    lazy?: boolean
+  }
+  slots: {
+    default?: () => VNode
+    label?: () => VNode
+  }
+}
+
+/**
  * UI适配器 - 包含所有组件的适配器
  */
 export interface UIAdapter {
@@ -175,6 +215,8 @@ export interface UIAdapter {
   Textarea: Component<TextareaProtocol['props']>
   // 布局组件
   Card: Component<CardProtocol['props']>
+  Tabs: Component<TabsProtocol['props']>
+  TabPane: Component<TabPaneProtocol['props']>
   Form: Component<FormProtocol['props']>
   FormItem: Component<FormItemProtocol['props']>
   // 工具组件

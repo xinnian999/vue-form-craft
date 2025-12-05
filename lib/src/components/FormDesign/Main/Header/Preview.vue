@@ -10,8 +10,8 @@
       top="10vh"
       @close="formValues = {}"
     >
-      <el-tabs v-model="tabKey">
-        <el-tab-pane label="编辑模式" name="edit">
+      <Tabs v-model="tabKey">
+        <TabPane label="编辑模式" name="edit">
           <div :style="previewStyle">
             <FormRender
               v-model="formValues"
@@ -21,9 +21,9 @@
               @finish="handleFinish"
             />
           </div>
-        </el-tab-pane>
+        </TabPane>
 
-        <el-tab-pane label="阅读模式" name="read" lazy>
+        <TabPane label="阅读模式" name="read" lazy>
           <div :style="previewStyle">
             <FormRender
               v-model="formValues"
@@ -31,12 +31,12 @@
               read
             />
           </div>
-        </el-tab-pane>
+        </TabPane>
 
-        <el-tab-pane label="联动变量" name="context">
+        <TabPane label="联动变量" name="context">
           <VueMonacoEditor v-model:value="context" language="json" style="height: 60vh" />
-        </el-tab-pane>
-      </el-tabs>
+        </TabPane>
+      </Tabs>
     </Modal>
   </div>
 </template>
@@ -48,7 +48,7 @@ import { FormRender } from '@/components'
 import { useDesignInstance, useUI } from '@/hooks'
 import type { FormInstance } from '@/types'
 
-const { Modal } = useUI()
+const { Modal, Tabs, TabPane } = useUI()
 
 const designInstance = useDesignInstance()!
 
