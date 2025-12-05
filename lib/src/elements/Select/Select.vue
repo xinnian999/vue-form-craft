@@ -11,32 +11,25 @@
     <div v-else>{{ currentOptions.find((item) => item.value === value)?.label }}</div>
   </div>
 
-  <el-select
+  <Select
     v-model="value"
     v-bind="$attrs"
     @change="selectChange"
     :multiple="multiple"
+    :options="currentOptions"
     clearable
     filterable
-    v-loading="loading"
+    :loading="loading"
     v-else
-  >
-    <el-option
-      v-for="item in currentOptions"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value"
-      :disabled="item.disabled"
-    >
-      {{ item.label }}
-    </el-option>
-  </el-select>
+  />
 </template>
 
 <script setup lang="ts">
 import { watch } from 'vue'
-import { useFormInstance, useSelect } from '@/hooks'
+import { useFormInstance, useSelect, useUI } from '@/hooks'
 import type { SelectProps, SelectValue } from '@/types'
+
+const { Select } = useUI()
 
 const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],

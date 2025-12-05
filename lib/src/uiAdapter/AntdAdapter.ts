@@ -1,4 +1,4 @@
-import { Button, Card, Collapse, Form, Input, Modal, Tabs } from 'ant-design-vue'
+import { Button, Card, Collapse, Form, Input, Modal, Select, Tabs } from 'ant-design-vue'
 import { defineComponent, h } from 'vue'
 import type {
   ButtonProtocol,
@@ -9,6 +9,7 @@ import type {
   FormProtocol,
   InputProtocol,
   ModalProtocol,
+  SelectProtocol,
   TabPaneProtocol,
   TabsProtocol,
   TextareaProtocol,
@@ -19,6 +20,7 @@ const { TextArea } = Input
 const { Item: FormItem } = Form
 const { TabPane } = Tabs
 const { Panel: CollapsePanel } = Collapse
+const { Option: SelectOption } = Select
 
 /**
  * Ant Design Vue UI适配器
@@ -127,6 +129,43 @@ const AntdAdapter: UIAdapter = {
             autoSize: propsAttrs.autosize
           },
           slots
+        )
+    },
+    { inheritAttrs: false }
+  ),
+
+  Select: defineComponent(
+    (_, { slots, attrs }) => {
+      const propsAttrs = attrs as SelectProtocol['props']
+
+      return () =>
+        h(
+          Select as any,
+          {
+            ...attrs,
+            value: propsAttrs.modelValue,
+            'onUpdate:value': (value: any) => {
+              propsAttrs['onUpdate:modelValue']?.(value)
+            },
+            allowClear: propsAttrs.clearable,
+            showSearch: propsAttrs.filterable,
+            mode: propsAttrs.multiple ? 'multiple' : undefined,
+            loading: propsAttrs.loading
+          },
+          propsAttrs.options
+            ? {
+                default: () =>
+                  propsAttrs.options!.map((option) =>
+                    h(SelectOption as any, {
+                      key: option.value,
+                      value: option.value,
+                      disabled: option.disabled,
+                      label: option.label
+                    })
+                  ),
+                ...slots
+              }
+            : slots
         )
     },
     { inheritAttrs: false }

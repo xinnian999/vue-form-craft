@@ -97,6 +97,32 @@ export interface TextareaProtocol {
 }
 
 /**
+ * Select 组件协议
+ */
+export interface SelectProtocol {
+  props: {
+    modelValue: any
+    options?: Array<{ label: string; value: any; disabled?: boolean }>
+    placeholder?: string
+    disabled?: boolean
+    clearable?: boolean
+    multiple?: boolean
+    filterable?: boolean
+    size?: 'large' | 'default' | 'small'
+    loading?: boolean
+    'onUpdate:modelValue'?: (value: any) => void
+    onChange?: (value: any) => void
+    onClear?: () => void
+    onBlur?: (e: Event) => void
+    onFocus?: (e: Event) => void
+  }
+  slots: {
+    prefix?: () => VNode
+    empty?: () => VNode
+  }
+}
+
+/**
  * Card 组件协议
  */
 export interface CardProtocol {
@@ -243,6 +269,7 @@ export interface UIAdapter {
   // 表单组件
   Input: Component<InputProtocol['props']>
   Textarea: Component<TextareaProtocol['props']>
+  Select: Component<SelectProtocol['props']>
   // 布局组件
   Card: Component<CardProtocol['props']>
   Tabs: Component<TabsProtocol['props']>

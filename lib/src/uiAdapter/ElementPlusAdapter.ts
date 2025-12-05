@@ -7,6 +7,8 @@ import {
   ElForm,
   ElFormItem,
   ElInput,
+  ElOption,
+  ElSelect,
   ElTabPane,
   ElTabs
 } from 'element-plus'
@@ -61,6 +63,33 @@ const ElementPlusAdapter: UIAdapter = {
   Textarea: defineComponent(
     (_, { slots, attrs }) => {
       return () => h(ElInput, { ...attrs, type: 'textarea' }, slots)
+    },
+    { inheritAttrs: false }
+  ),
+
+  Select: defineComponent(
+    (_, { slots, attrs }) => {
+      const propsAttrs = attrs as any
+
+      return () =>
+        h(
+          ElSelect,
+          attrs,
+          propsAttrs.options
+            ? {
+                default: () =>
+                  propsAttrs.options.map((option: any) =>
+                    h(ElOption, {
+                      key: option.value,
+                      label: option.label,
+                      value: option.value,
+                      disabled: option.disabled
+                    })
+                  ),
+                ...slots
+              }
+            : slots
+        )
     },
     { inheritAttrs: false }
   ),
