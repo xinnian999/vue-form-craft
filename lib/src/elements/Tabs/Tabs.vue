@@ -6,8 +6,6 @@
   </el-tabs>
 
   <div class="action" v-if="formInstance.design">
-    <Button type="primary" @click="handleAddTab">添加标签页</Button>
-
     <!-- 拖拽排序胶囊 -->
     <div class="drag-sort-capsule" v-if="children.length > 0">
       <div class="capsule-title">拖拽排序</div>
@@ -33,10 +31,8 @@
 import { computed, ref, watch } from 'vue'
 import Draggable from 'vuedraggable-es-fix'
 import { FormItemGroup } from '@/components'
-import { useDesignInstance, useFormInstance, useUI } from '@/hooks'
+import { useDesignInstance, useFormInstance } from '@/hooks'
 import type { ComponentBaseProps, FormItemType } from '@/types'
-
-const { Button } = useUI()
 
 const props = defineProps<
   ComponentBaseProps & {
@@ -53,20 +49,6 @@ const formInstance = useFormInstance()
 const designInstance = useDesignInstance()
 
 const tabsKey = ref(0)
-
-const handleAddTab = () => {
-  const newTab = {
-    label: `选项卡${children.value.length + 1}`,
-    name: `name${children.value.length + 1}`,
-    component: 'TabPane',
-    children: [],
-    designKey: `tab-${children.value.length + 1}`
-  }
-
-  children.value.push(newTab)
-
-  designInstance?.recordHistory('添加标签页')
-}
 
 const handleDragEnd = () => {
   // 拖拽结束后更新key，强制重新渲染tabs
