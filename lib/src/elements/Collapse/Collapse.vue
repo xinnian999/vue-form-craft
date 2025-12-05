@@ -1,7 +1,14 @@
 <template>
   <div>
     <ElCollapse v-bind="$attrs" v-model="activeKey">
-      <FormItemGroup :list="formItemProps.children || []" group="CollapseItem" />
+      <ElCollapseItem
+        v-for="item in formItemProps.children"
+        :key="item.name"
+        :title="item.label"
+        :name="item.name"
+      >
+        <FormItemGroup :list="item.children!" />
+      </ElCollapseItem>
     </ElCollapse>
   </div>
 </template>

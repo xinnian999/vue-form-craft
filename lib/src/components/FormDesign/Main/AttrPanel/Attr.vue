@@ -74,7 +74,20 @@ const attrSchema = computed<FormSchema>(() => {
     }
   }
 
-  return { size: 'small', labelAlign: 'top', items: [] } satisfies FormSchema
+  return {
+    size: 'small',
+    labelAlign: 'top',
+    items: [
+      {
+        name: 'text',
+        labelWidth: 0,
+        component: 'Text',
+        props: {
+          text: '此节点不支持配置'
+        }
+      }
+    ]
+  } satisfies FormSchema
 })
 
 const onRootFieldChange = () => {

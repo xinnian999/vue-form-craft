@@ -30,6 +30,37 @@ export default {
         }
       ]
     },
-    items: [{ label: '唯一标识', component: 'Input', name: 'name' }]
+    items: [
+      { label: '唯一标识', component: 'Input', name: 'name' },
+      {
+        label: '子面板配置',
+        component: 'FormList',
+        children: [
+          {
+            label: '标题',
+            component: 'Input',
+            props: {
+              placeholder: '请输入标题'
+            },
+            name: 'label',
+            initialValue: '{{ "面板" + ($index + 1) }}'
+          },
+          {
+            label: '唯一标识',
+            component: 'Input',
+            props: {
+              placeholder: '请输入唯一标识'
+            },
+            name: 'name',
+            initialValue: '{{ "name" + ($index + 1) }}'
+          }
+        ],
+        props: {
+          mode: 'card',
+          title: '折叠面板'
+        },
+        name: 'children'
+      }
+    ]
   }
 } satisfies FormElement

@@ -1,6 +1,8 @@
 <template>
   <el-tabs v-bind="$attrs" v-model="activeKey" :key="tabsKey">
-    <FormItemGroup :list="children" group="TabItem" />
+    <el-tab-pane v-for="tab in children" :key="tab.name" :label="tab.label" :name="tab.name">
+      <FormItemGroup :list="tab.children!" />
+    </el-tab-pane>
   </el-tabs>
 
   <div class="action" v-if="formInstance.design">

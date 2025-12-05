@@ -67,14 +67,14 @@ $primaryColor: $themeColor;
       }
     }
 
-    .el-tree-node.is-current > .el-tree-node__content {
-      background-color: $themeColor;
-      color: #fff;
+    // .el-tree-node.is-current > .el-tree-node__content {
+    //   background-color: $themeColor;
+    //   color: #fff;
 
-      .node-icon {
-        color: #fff;
-      }
-    }
+    //   .node-icon {
+    //     color: #fff;
+    //   }
+    // }
   }
 }
 
