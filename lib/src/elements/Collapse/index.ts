@@ -53,6 +53,11 @@ export default {
             },
             name: 'name',
             initialValue: '{{ "name" + ($index + 1) }}'
+          },
+          {
+            label: '默认展开',
+            component: 'Switch',
+            name: 'props.checked'
           }
         ],
         props: {

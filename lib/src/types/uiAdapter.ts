@@ -207,6 +207,36 @@ export interface TabPaneProtocol {
 }
 
 /**
+ * Collapse 组件协议
+ */
+export interface CollapseProtocol {
+  props: {
+    modelValue?: string | number | Array<string | number>
+    accordion?: boolean
+    'onUpdate:modelValue'?: (value: string | number | Array<string | number>) => void
+    onChange?: (value: string | number | Array<string | number>) => void
+  }
+  slots: {
+    default?: () => VNode
+  }
+}
+
+/**
+ * CollapseItem 组件协议
+ */
+export interface CollapseItemProtocol {
+  props: {
+    name?: string | number
+    title?: string
+    disabled?: boolean
+  }
+  slots: {
+    default?: () => VNode
+    title?: () => VNode
+  }
+}
+
+/**
  * UI适配器 - 包含所有组件的适配器
  */
 export interface UIAdapter {
@@ -217,6 +247,8 @@ export interface UIAdapter {
   Card: Component<CardProtocol['props']>
   Tabs: Component<TabsProtocol['props']>
   TabPane: Component<TabPaneProtocol['props']>
+  Collapse: Component<CollapseProtocol['props']>
+  CollapseItem: Component<CollapseItemProtocol['props']>
   Form: Component<FormProtocol['props']>
   FormItem: Component<FormItemProtocol['props']>
   // 工具组件

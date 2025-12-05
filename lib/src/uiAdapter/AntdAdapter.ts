@@ -1,8 +1,10 @@
-import { Button, Card, Form, Input, Modal, Tabs } from 'ant-design-vue'
+import { Button, Card, Collapse, Form, Input, Modal, Tabs } from 'ant-design-vue'
 import { defineComponent, h } from 'vue'
 import type {
   ButtonProtocol,
   CardProtocol,
+  CollapseItemProtocol,
+  CollapseProtocol,
   FormItemProtocol,
   FormProtocol,
   InputProtocol,
@@ -16,6 +18,7 @@ import type {
 const { TextArea } = Input
 const { Item: FormItem } = Form
 const { TabPane } = Tabs
+const { Panel: CollapsePanel } = Collapse
 
 /**
  * Ant Design Vue UI适配器
@@ -200,6 +203,61 @@ const AntdAdapter: UIAdapter = {
       const propsAttrs = attrs as TabPaneProtocol['props']
 
       return () => h(TabPane as any, propsAttrs, slots)
+    },
+    { inheritAttrs: false }
+  ),
+
+  Collapse: defineComponent(
+    (_, { slots, attrs }) => {
+      const propsAttrs = attrs as CollapseProtocol['props']
+
+      return () =>
+        h(
+          Collapse as any,
+          {
+            activeKey: propsAttrs.modelValue,
+            'onUpdate:activeKey': (value: string | number | Array<string | number>) => {
+              propsAttrs['onUpdate:modelValue']?.(value)
+            },
+            accordion: propsAttrs.accordion,
+            onChange: (value: string | number | Array<string | number>) => {
+              propsAttrs.onChange?.(value)
+            }
+          },
+          {
+            default: () => {
+              const nodes = slots.default?.() as any
+
+              const parseNodeProps = (node: any) => {
+                node.props.header = node.props.title
+                node.props.key = node.props.name
+              }
+
+              nodes?.forEach((node: any) => {
+                if (node.props) {
+                  parseNodeProps(node)
+                } else {
+                  node.children?.forEach((child: any) => {
+                    if (child.props) {
+                      parseNodeProps(child)
+                    }
+                  })
+                }
+              })
+
+              return nodes
+            }
+          }
+        )
+    },
+    { inheritAttrs: false }
+  ),
+
+  CollapseItem: defineComponent(
+    (_, { slots, attrs }) => {
+      const propsAttrs = attrs as CollapseItemProtocol['props']
+
+      return () => h(CollapsePanel as any, propsAttrs, slots)
     },
     { inheritAttrs: false }
   ),

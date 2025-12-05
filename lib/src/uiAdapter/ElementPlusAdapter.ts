@@ -1,6 +1,8 @@
 import {
   ElButton,
   ElCard,
+  ElCollapse,
+  ElCollapseItem,
   ElDialog,
   ElForm,
   ElFormItem,
@@ -80,6 +82,20 @@ const ElementPlusAdapter: UIAdapter = {
   TabPane: defineComponent(
     (_, { slots, attrs }) => {
       return () => h(ElTabPane, attrs, slots)
+    },
+    { inheritAttrs: false }
+  ),
+
+  Collapse: defineComponent(
+    (_, { slots, attrs }) => {
+      return () => h(ElCollapse, attrs, slots)
+    },
+    { inheritAttrs: false }
+  ),
+
+  CollapseItem: defineComponent(
+    (_, { slots, attrs }) => {
+      return () => h(ElCollapseItem, attrs, slots)
     },
     { inheritAttrs: false }
   ),
