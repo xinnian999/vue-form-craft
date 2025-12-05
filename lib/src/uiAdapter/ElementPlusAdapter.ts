@@ -12,7 +12,7 @@ import {
   ElTabPane,
   ElTabs
 } from 'element-plus'
-import { defineComponent, h } from 'vue'
+import { defineComponent, h, ref } from 'vue'
 import type { FormItemProtocol, FormProtocol, UIAdapter } from '@/types/uiAdapter'
 
 /**
@@ -20,13 +20,24 @@ import type { FormItemProtocol, FormProtocol, UIAdapter } from '@/types/uiAdapte
  */
 const ElementPlusAdapter: UIAdapter = {
   Form: defineComponent(
-    (_, { slots, attrs }) => {
+    (_, { slots, attrs, expose }) => {
       const propsAttrs = attrs as FormProtocol['props']
+      const formRef = ref()
+
+      // 暴露底层 ElForm 的所有方法
+      expose({
+        validate: (...args: any[]) => formRef.value?.validate(...args),
+        validateField: (...args: any[]) => formRef.value?.validateField(...args),
+        resetFields: (...args: any[]) => formRef.value?.resetFields(...args),
+        scrollToField: (...args: any[]) => formRef.value?.scrollToField(...args),
+        clearValidate: (...args: any[]) => formRef.value?.clearValidate(...args)
+      })
 
       return () =>
         h(
           ElForm,
           {
+            ref: formRef,
             ...attrs,
             // labelAlign -> labelPosition (Element-Plus 使用 labelPosition)
             labelPosition: propsAttrs.labelAlign
@@ -146,7 +157,7 @@ const ElementPlusAdapter: UIAdapter = {
           {
             ...attrs,
             // to 参数映射到 ElDialog 的 appendTo
-            appendTo: propsAttrs.to || 'body'
+            appendTo: document.querySelector(propsAttrs.to) || 'body'
           },
           slots
         )

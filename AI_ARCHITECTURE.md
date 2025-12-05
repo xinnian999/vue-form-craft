@@ -1025,8 +1025,39 @@ const activeKey = ref('tab1')
 1. **协议优先**：先定义协议，再实现适配
 2. **直接透传**：如果UI库API与协议一致，直接透传
 3. **属性映射**：如果属性名不同，在适配器中转换
-4. **禁止嵌套三目**：保持代码可维护性
-5. **全局替换**：完成适配后，搜索项目中所有使用该组件的地方并替换
+4. **实例方法暴露**：对于有实例方法的组件（如 Form），必须通过 ref + expose 暴露底层组件的方法
+5. **禁止嵌套三目**：保持代码可维护性
+6. **全局替换**：完成适配后，搜索项目中所有使用该组件的地方并替换
+
+**实例方法暴露示例**：
+
+````typescript
+Form: defineComponent(
+  (_, { slots, attrs, expose }) => {
+    const formRef = ref()
+
+    // 暴露底层组件的所有实例方法
+    expose({
+      validate: (...args: any[]) => formRef.value?.validate(...args),
+      validateField: (...args: any[]) => formRef.value?.validateField(...args),
+      resetFields: (...args: any[]) => formRef.value?.resetFields(...args),
+      scrollToField: (...args: any[]) => formRef.value?.scrollToField(...args),
+      clearValidate: (...args: any[]) => formRef.value?.clearValidate(...args)
+    })
+
+    return () =>
+      h(
+        ElForm,
+        {
+          ref: formRef,
+          ...attrs,
+          labelPosition: (attrs as any).labelAlign
+        },
+        slots
+      )
+  },
+  { inheritAttrs: false }
+)
 
 ---
 
@@ -1061,7 +1092,7 @@ const activeKey = ref('tab1')
   design?: boolean             // 设计模式
   read?: boolean               // 只读模式
 }
-```
+````
 
 ### 14.2 FormDesign Props
 

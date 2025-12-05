@@ -158,20 +158,54 @@ export interface UIAdapter {
 
 ```typescript
 // uiAdapter/ElementPlusAdapter.ts
-import { ElInput, ElSelect } from 'element-plus'
-import { defineComponent, h } from 'vue'
+import { ElForm, ElInput, ElSelect } from 'element-plus'
+import { defineComponent, h, ref } from 'vue'
 import type { UIAdapter } from '@/types/uiAdapter'
 
 const ElementPlusAdapter: UIAdapter = {
+  // Form 组件需要暴露实例方法
+  Form: defineComponent(
+    (_, { slots, attrs, expose }) => {
+      const formRef = ref()
+
+      // 暴露底层 ElForm 的所有方法
+      expose({
+        validate: (...args: any[]) => formRef.value?.validate(...args),
+        validateField: (...args: any[]) => formRef.value?.validateField(...args),
+        resetFields: (...args: any[]) => formRef.value?.resetFields(...args),
+        scrollToField: (...args: any[]) => formRef.value?.scrollToField(...args),
+        clearValidate: (...args: any[]) => formRef.value?.clearValidate(...args)
+      })
+
+      return () =>
+        h(
+          ElForm,
+          {
+            ref: formRef,
+            ...attrs,
+            labelPosition: (attrs as any).labelAlign
+          },
+          slots
+        )
+    },
+    { inheritAttrs: false }
+  ),
+
   // Element-Plus 的 Input 组件与协议完全兼容，直接透传
-  Input: defineComponent((_, { slots, attrs }) => {
-    return () => h(ElInput, attrs, slots)
-  }),
+  Input: defineComponent(
+    (_, { slots, attrs }) => {
+      return () => h(ElInput, attrs, slots)
+    },
+    { inheritAttrs: false }
+  ),
 
   // Select 组件同样直接透传
-  Select: defineComponent((_, { slots, attrs }) => {
-    return () => h(ElSelect, attrs, slots)
-  })
+  Select: defineComponent(
+    (_, { slots, attrs }) => {
+      return () => h(ElSelect, attrs, slots)
+    },
+    { inheritAttrs: false }
+  )
 }
 
 export default ElementPlusAdapter
@@ -181,85 +215,133 @@ export default ElementPlusAdapter
 
 ```typescript
 // uiAdapter/AntdAdapter.ts
-import { Button, Input, Select } from 'ant-design-vue'
-import { defineComponent, h } from 'vue'
-import type { ButtonProtocol, InputProtocol, SelectProtocol, UIAdapter } from '@/types/uiAdapter'
+import { Button, Form, Input, Select } from 'ant-design-vue'
+import { defineComponent, h, ref } from 'vue'
+import type {
+  ButtonProtocol,
+  FormProtocol,
+  InputProtocol,
+  SelectProtocol,
+  UIAdapter
+} from '@/types/uiAdapter'
 
 const AntdAdapter: UIAdapter = {
-  // Ant Design Vue 的 Input 需要适配属性名称
-  Input: defineComponent((_, { slots, attrs }) => {
-    const props = attrs as InputProtocol['props']
+  // Form 组件需要暴露实例方法
+  Form: defineComponent(
+    (_, { slots, attrs, expose }) => {
+      const propsAttrs = attrs as FormProtocol['props']
+      const formRef = ref()
 
-    return () =>
-      h(
-        Input,
-        {
-          ...attrs,
-          // modelValue -> value
-          value: props.modelValue,
-          'onUpdate:value': (value: string) => {
-            props['onUpdate:modelValue']?.(value)
+      // 暴露底层 Ant Design Vue Form 的所有方法
+      expose({
+        validate: (...args: any[]) => formRef.value?.validate(...args),
+        validateFields: (...args: any[]) => formRef.value?.validateFields(...args),
+        resetFields: (...args: any[]) => formRef.value?.resetFields(...args),
+        scrollToField: (...args: any[]) => formRef.value?.scrollToField(...args),
+        clearValidate: (...args: any[]) => formRef.value?.clearValidate(...args)
+      })
+
+      return () =>
+        h(
+          Form,
+          {
+            ref: formRef,
+            ...attrs,
+            layout: propsAttrs.inline
+              ? 'inline'
+              : propsAttrs.labelAlign === 'top'
+                ? 'vertical'
+                : 'horizontal'
           },
-          // clearable -> allowClear
-          allowClear: props.clearable,
-          // showWordLimit -> showCount
-          showCount: props.showWordLimit,
-          maxLength: props.maxlength
-        },
-        slots
-      )
-  }),
+          slots
+        )
+    },
+    { inheritAttrs: false }
+  ),
+
+  // Ant Design Vue 的 Input 需要适配属性名称
+  Input: defineComponent(
+    (_, { slots, attrs }) => {
+      const props = attrs as InputProtocol['props']
+
+      return () =>
+        h(
+          Input,
+          {
+            ...attrs,
+            // modelValue -> value
+            value: props.modelValue,
+            'onUpdate:value': (value: string) => {
+              props['onUpdate:modelValue']?.(value)
+            },
+            // clearable -> allowClear
+            allowClear: props.clearable,
+            // showWordLimit -> showCount
+            showCount: props.showWordLimit,
+            maxLength: props.maxlength
+          },
+          slots
+        )
+    },
+    { inheritAttrs: false }
+  ),
 
   // Select 组件适配
-  Select: defineComponent((_, { slots, attrs }) => {
-    const props = attrs as SelectProtocol['props']
+  Select: defineComponent(
+    (_, { slots, attrs }) => {
+      const props = attrs as SelectProtocol['props']
 
-    return () =>
-      h(
-        Select,
-        {
-          ...attrs,
-          value: props.modelValue,
-          'onUpdate:value': (value: any) => {
-            props['onUpdate:modelValue']?.(value)
+      return () =>
+        h(
+          Select,
+          {
+            ...attrs,
+            value: props.modelValue,
+            'onUpdate:value': (value: any) => {
+              props['onUpdate:modelValue']?.(value)
+            },
+            allowClear: props.clearable,
+            showSearch: props.filterable,
+            mode: props.multiple ? 'multiple' : undefined
           },
-          allowClear: props.clearable,
-          showSearch: props.filterable,
-          mode: props.multiple ? 'multiple' : undefined
-        },
-        slots
-      )
-  }),
+          slots
+        )
+    },
+    { inheritAttrs: false }
+  ),
 
   // Button 组件适配
-  Button: defineComponent((_, { slots, attrs }) => {
-    const props = attrs as ButtonProtocol['props']
+  Button: defineComponent(
+    (_, { slots, attrs }) => {
+      const props = attrs as ButtonProtocol['props']
 
-    return () => {
-      // type 适配: text -> link, warning/info -> default (Ant Design Vue 不支持 warning 和 info)
-      let buttonType: 'primary' | 'dashed' | 'link' | 'text' | 'default' | undefined
-      if (props.type === 'text') {
-        buttonType = 'link'
-      } else if (props.type === 'warning' || props.type === 'info') {
-        buttonType = 'default'
-      } else if (props.type === 'default') {
-        buttonType = undefined
-      } else {
-        buttonType = props.type
+      return () => {
+        // type 适配: text -> link, warning/info -> default (Ant Design Vue 不支持 warning 和 info)
+        let buttonType: 'primary' | 'dashed' | 'link' | 'text' | 'default' | undefined
+        if (props.type === 'text') {
+          buttonType = 'link'
+        } else if (props.type === 'warning' || props.type === 'info') {
+          buttonType = 'default'
+        } else if (props.type === 'default') {
+          buttonType = undefined
+        } else {
+          buttonType = props.type
+        }
+
+        return h(
+          Button,
+          {
+            ...attrs,
+            type: buttonType,
+            danger: props.type === 'danger',
+            shape: props.circle ? 'circle' : props.round ? 'round' : undefined
+          },
+          slots
+        )
       }
-
-      return h(
-        Button,
-        {
-          ...attrs,
-          type: buttonType,
-          danger: props.type === 'danger',
-          shape: props.circle ? 'circle' : props.round ? 'round' : undefined
-        },
-        slots
-      )
-    }
-  })
+    },
+    { inheritAttrs: false }
+  )
 }
 
 export default AntdAdapter
@@ -501,10 +583,11 @@ app.mount('#app')
 3. 所有组件必须通过 `useUI()` 获取，不能直接导入 UI 库组件
 4. 适配器中的属性映射必须准确，确保不同 UI 库的行为一致
 5. 对于不支持的属性，应该提供合理的降级方案
-6. **Ant Design Vue 的 Tabs 组件特殊处理**：Tabs 会直接读取子节点 VNode 的 props，而不是等子组件渲染。因此需要在 Tabs 适配器的 slots.default 中手动修改子节点的 props，将 `label` 转换为 `tab`
-7. **类型提示**: 使用 TypeScript 时,切换 UI 库后类型提示保持一致
-8. **插槽适配**: 不同 UI 库的插槽名称可能不同,需要在适配器中进行映射
-9. **事件适配**: 事件名称和参数可能不同,需要在适配器中统一转换为协议定义的格式
-10. **外部化依赖**: formora 将所有 UI 库设置为 peerDependencies,不会打包进库中
-11. 部分组件的样式适配，需要在src/style.scss中进行穿透，注意不要使用deep选择器。
-12. 适配的时候，不要使用嵌套的三目运算，因为不好维护。
+6. **实例方法暴露**：对于有实例方法的组件（如 Form、Table 等），必须通过 `ref` + `expose` 暴露底层组件的所有实例方法，确保外部可以调用这些方法
+7. **Ant Design Vue 的 Tabs 组件特殊处理**：Tabs 会直接读取子节点 VNode 的 props，而不是等子组件渲染。因此需要在 Tabs 适配器的 slots.default 中手动修改子节点的 props，将 `label` 转换为 `tab`
+8. **类型提示**: 使用 TypeScript 时,切换 UI 库后类型提示保持一致
+9. **插槽适配**: 不同 UI 库的插槽名称可能不同,需要在适配器中进行映射
+10. **事件适配**: 事件名称和参数可能不同,需要在适配器中统一转换为协议定义的格式
+11. **外部化依赖**: formora 将所有 UI 库设置为 peerDependencies,不会打包进库中
+12. 部分组件的样式适配，需要在src/style.scss中进行穿透，注意不要使用deep选择器。
+13. 适配的时候，不要使用嵌套的三目运算，因为不好维护。

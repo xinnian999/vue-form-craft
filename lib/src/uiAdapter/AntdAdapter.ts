@@ -1,5 +1,5 @@
 import { Button, Card, Collapse, Form, Input, Modal, Select, Tabs } from 'ant-design-vue'
-import { defineComponent, h } from 'vue'
+import { defineComponent, h, ref } from 'vue'
 import type {
   ButtonProtocol,
   CardProtocol,
@@ -27,13 +27,24 @@ const { Option: SelectOption } = Select
  */
 const AntdAdapter: UIAdapter = {
   Form: defineComponent(
-    (_, { slots, attrs }) => {
+    (_, { slots, attrs, expose }) => {
       const propsAttrs = attrs as FormProtocol['props']
+      const formRef = ref()
+
+      // 暴露底层 Ant Design Vue Form 的所有方法
+      expose({
+        validate: (...args: any[]) => formRef.value?.validate(...args),
+        validateFields: (...args: any[]) => formRef.value?.validateFields(...args),
+        resetFields: (...args: any[]) => formRef.value?.resetFields(...args),
+        scrollToField: (...args: any[]) => formRef.value?.scrollToField(...args),
+        clearValidate: (...args: any[]) => formRef.value?.clearValidate(...args)
+      })
 
       return () =>
         h(
           Form,
           {
+            ref: formRef,
             ...attrs,
             colon: false,
             layout: propsAttrs.inline
