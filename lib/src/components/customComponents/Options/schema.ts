@@ -42,9 +42,7 @@ export default {
             label: '远程',
             value: 'remote'
           }
-        ],
-        optionType: 'button',
-        space: 0
+        ]
       },
       labelAlign: 'top'
     },
@@ -134,7 +132,7 @@ export default {
                 value: 'DELETE'
               }
             ],
-            optionType: 'button',
+            type: 'button',
             space: 0
           },
           labelAlign: 'top',

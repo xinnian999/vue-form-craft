@@ -26,9 +26,7 @@ export default {
           component: 'Radio',
           props: {
             mode: 'static',
-            optionType: 'button',
-            direction: 'horizontal',
-            space: 16,
+            type: 'button',
             options: [
               {
                 label: '包年包月',
@@ -94,9 +92,7 @@ export default {
                 value: 'value2'
               }
             ],
-            optionType: 'button',
-            direction: 'horizontal',
-            space: 20
+            type: 'button'
           }
         }
       ]

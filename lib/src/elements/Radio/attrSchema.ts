@@ -23,10 +23,7 @@ export default {
           label: '选项3',
           value: 'value3'
         }
-      ],
-      optionType: 'circle',
-      direction: 'horizontal',
-      space: 20
+      ]
     }
   },
   items: [
@@ -77,61 +74,10 @@ export default {
               }
             },
             {
-              label: '选项样式',
-              name: 'props.optionType',
-              designKey: 'design-optionType',
-              component: 'Radio',
-              props: {
-                mode: 'static',
-                options: [
-                  {
-                    label: '无边框',
-                    value: 'circle'
-                  },
-                  {
-                    label: '边框',
-                    value: 'border'
-                  },
-                  {
-                    label: '按钮',
-                    value: 'button'
-                  }
-                ],
-                optionType: 'button',
-                space: 0
-              }
-            },
-            {
-              label: '排列方向',
-              name: 'props.direction',
-              designKey: 'design-direction',
-              component: 'Radio',
-              props: {
-                mode: 'static',
-                options: [
-                  {
-                    label: '水平',
-                    value: 'horizontal'
-                  },
-                  {
-                    label: '垂直',
-                    value: 'vertical'
-                  }
-                ],
-                optionType: 'button',
-                space: 0
-              }
-            },
-            {
-              label: '选项间距',
-              name: 'props.space',
-              designKey: 'design-space',
-              component: 'InputNumber',
-              props: {
-                unit: 'px',
-                step: 5,
-                controlsPosition: ''
-              }
+              label: '按钮形式',
+              name: 'props.isButtonOption',
+              designKey: 'design-isButtonOption',
+              component: 'Switch'
             }
           ]
         },

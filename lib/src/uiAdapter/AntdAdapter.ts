@@ -1,15 +1,31 @@
-import { Button, Card, Collapse, Form, Input, Modal, Select, Tabs } from 'ant-design-vue'
+import {
+  Button,
+  Card,
+  Checkbox,
+  Collapse,
+  Form,
+  Input,
+  Modal,
+  Radio,
+  Select,
+  Switch,
+  Tabs
+} from 'ant-design-vue'
+import { omit } from 'lodash'
 import { defineComponent, h, ref } from 'vue'
 import type {
   ButtonProtocol,
   CardProtocol,
+  CheckboxGroupProtocol,
   CollapseItemProtocol,
   CollapseProtocol,
   FormItemProtocol,
   FormProtocol,
   InputProtocol,
   ModalProtocol,
+  RadioGroupProtocol,
   SelectProtocol,
+  SwitchProtocol,
   TabPaneProtocol,
   TabsProtocol,
   TextareaProtocol,
@@ -21,6 +37,8 @@ const { Item: FormItem } = Form
 const { TabPane } = Tabs
 const { Panel: CollapsePanel } = Collapse
 const { Option: SelectOption } = Select
+const { Group: RadioGroup, Button: RadioButton } = Radio
+const { Group: CheckboxGroup, Button: CheckboxButton } = Checkbox
 
 /**
  * Ant Design Vue UI适配器
@@ -45,8 +63,9 @@ const AntdAdapter: UIAdapter = {
           Form,
           {
             ref: formRef,
-            ...attrs,
+            ...omit(attrs, ['scrollToError', 'labelWidth']),
             colon: false,
+            scrollToFirstError: propsAttrs.scrollToError,
             layout: propsAttrs.inline
               ? 'inline'
               : propsAttrs.labelAlign === 'top'
@@ -385,6 +404,68 @@ const AntdAdapter: UIAdapter = {
           slots
         )
       }
+    },
+    { inheritAttrs: false }
+  ),
+
+  RadioGroup: defineComponent(
+    (_, { slots, attrs }) => {
+      const propsAttrs = attrs as RadioGroupProtocol['props']
+
+      return () =>
+        h(
+          RadioGroup as any,
+          {
+            ...attrs,
+            value: propsAttrs.modelValue,
+            optionType: attrs.isButtonOption ? 'button' : 'default',
+            'onUpdate:value': (value: any) => {
+              propsAttrs['onUpdate:modelValue']?.(value)
+            }
+          },
+          slots
+        )
+    },
+    { inheritAttrs: false }
+  ),
+
+  CheckboxGroup: defineComponent(
+    (_, { slots, attrs }) => {
+      const propsAttrs = attrs as CheckboxGroupProtocol['props']
+
+      return () =>
+        h(
+          CheckboxGroup as any,
+          {
+            ...attrs,
+            optionType: attrs.isButtonOption ? 'button' : 'default',
+            value: propsAttrs.modelValue,
+            'onUpdate:value': (value: any[]) => {
+              propsAttrs['onUpdate:modelValue']?.(value)
+            }
+          },
+          slots
+        )
+    },
+    { inheritAttrs: false }
+  ),
+
+  Switch: defineComponent(
+    (_, { slots, attrs }) => {
+      const propsAttrs = attrs as SwitchProtocol['props']
+
+      return () =>
+        h(Switch as any, {
+          ...attrs,
+          checked: propsAttrs.modelValue,
+          'onUpdate:checked': (value: boolean | string | number) => {
+            propsAttrs['onUpdate:modelValue']?.(value)
+          },
+          checkedChildren: propsAttrs.activeText,
+          unCheckedChildren: propsAttrs.inactiveText,
+          checkedValue: propsAttrs.activeValue,
+          unCheckedValue: propsAttrs.inactiveValue
+        })
     },
     { inheritAttrs: false }
   )

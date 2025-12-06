@@ -48,7 +48,7 @@ export default {
           component: 'Radio',
           props: {
             mode: 'static',
-            optionType: 'button',
+            type: 'button',
             options: [
               {
                 label: '修改属性',

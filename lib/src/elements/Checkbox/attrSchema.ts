@@ -14,10 +14,7 @@ export default {
         { label: '选项1', value: 'value1' },
         { label: '选项2', value: 'value2' },
         { label: '选项3', value: 'value3' }
-      ],
-      optionType: 'circle',
-      direction: 'horizontal',
-      space: 20
+      ]
     }
   },
   items: [
@@ -68,46 +65,10 @@ export default {
               designKey: 'design-disabled'
             },
             {
-              label: '选项样式',
-              name: 'props.optionType',
-              component: 'Radio',
-              props: {
-                mode: 'static',
-                options: [
-                  { label: '无边框', value: 'circle' },
-                  { label: '边框', value: 'border' },
-                  { label: '按钮', value: 'button' }
-                ],
-                optionType: 'button',
-                space: 0
-              },
-              designKey: 'design-optionType'
-            },
-            {
-              label: '排列方向',
-              name: 'props.direction',
-              component: 'Radio',
-              props: {
-                mode: 'static',
-                options: [
-                  { label: '水平', value: 'horizontal' },
-                  { label: '垂直', value: 'vertical' }
-                ],
-                optionType: 'button',
-                space: 0
-              },
-              designKey: 'design-direction'
-            },
-            {
-              label: '选项间距',
-              name: 'props.space',
-              component: 'InputNumber',
-              props: {
-                unit: 'px',
-                step: 5,
-                controlsPosition: ''
-              },
-              designKey: 'design-space'
+              label: '按钮形式',
+              name: 'props.isButtonOption',
+              designKey: 'design-isButtonOption',
+              component: 'Switch'
             }
           ]
         },

@@ -263,6 +263,59 @@ export interface CollapseItemProtocol {
 }
 
 /**
+ * RadioGroup 组件协议
+ */
+export interface RadioGroupProtocol {
+  props: {
+    modelValue: any
+    disabled?: boolean
+    options?: Array<{ label: string; value: any; disabled?: boolean }>
+    isButtonOption?: boolean
+    'onUpdate:modelValue'?: (value: any) => void
+    onChange?: (value: any) => void
+  }
+  slots: {
+    default?: () => VNode
+  }
+}
+
+/**
+ * CheckboxGroup 组件协议
+ */
+export interface CheckboxGroupProtocol {
+  props: {
+    modelValue: any[]
+    disabled?: boolean
+    options?: Array<{ label: string; value: any; disabled?: boolean }>
+    isButtonOption?: boolean
+    'onUpdate:modelValue'?: (value: any[]) => void
+    onChange?: (value: any[]) => void
+  }
+  slots: {
+    default?: () => VNode
+  }
+}
+
+/**
+ * Switch 组件协议
+ */
+export interface SwitchProtocol {
+  props: {
+    modelValue: boolean | string | number
+    disabled?: boolean
+    loading?: boolean
+    size?: 'large' | 'default' | 'small'
+    activeText?: string
+    inactiveText?: string
+    activeValue?: boolean | string | number
+    inactiveValue?: boolean | string | number
+    'onUpdate:modelValue'?: (value: boolean | string | number) => void
+    onChange?: (value: boolean | string | number) => void
+  }
+  slots: Record<string, never>
+}
+
+/**
  * UI适配器 - 包含所有组件的适配器
  */
 export interface UIAdapter {
@@ -270,6 +323,9 @@ export interface UIAdapter {
   Input: Component<InputProtocol['props']>
   Textarea: Component<TextareaProtocol['props']>
   Select: Component<SelectProtocol['props']>
+  RadioGroup: Component<RadioGroupProtocol['props']>
+  CheckboxGroup: Component<CheckboxGroupProtocol['props']>
+  Switch: Component<SwitchProtocol['props']>
   // 布局组件
   Card: Component<CardProtocol['props']>
   Tabs: Component<TabsProtocol['props']>

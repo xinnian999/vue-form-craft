@@ -99,8 +99,6 @@ export type SchemaApi = {
   disabledKey?: string
 }
 
-export type OptionType = 'circle' | 'border' | 'button'
-
 export type Direction = 'horizontal' | 'vertical'
 
 export interface SelectProps {

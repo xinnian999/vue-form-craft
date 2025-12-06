@@ -16,7 +16,7 @@
 
 ## 适配进度
 
-**已完成: 10 / 36**
+**已完成: 17 / 36**
 
 **第一优先级：高频表单组件**
 
@@ -26,14 +26,15 @@
 - ✅ Textarea（多行文本）- 已适配
 - ✅ Select（选择器）- 已适配
 - Option（选择器选项）
-- Radio（单选框）
-- RadioGroup（单选框组）
-- RadioButton（单选按钮）
-- Checkbox（多选框）
-- CheckboxGroup（多选框组）
+- ✅ Radio（单选框）- 已适配
+- ✅ RadioGroup（单选框组）- 已适配
+- ✅ RadioButton（单选按钮）- 已适配
+- ✅ Checkbox（多选框）- 已适配
+- ✅ CheckboxGroup（多选框组）- 已适配
+- ✅ CheckboxButton（多选按钮）- 已适配
 - DatePicker（日期选择器）
 - TimePicker（时间选择器）
-- Switch（开关）
+- ✅ Switch（开关）- 已适配
 - Slider（滑块）
 - Rate（评分）
 - ColorPicker（颜色选择器）
@@ -45,7 +46,6 @@
 **第二优先级：布局组件**
 
 - ✅ Card（卡片）- 已适配
-- Space（间距）
 - Divider（分割线）
 - ✅ Tabs（标签页）- 已适配
 - ✅ Collapse（折叠面板）- 已适配

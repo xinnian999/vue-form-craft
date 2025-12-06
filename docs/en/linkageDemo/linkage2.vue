@@ -30,7 +30,7 @@ const schema = {
         ],
         labelKey: 'name',
         valueKey: 'name',
-        optionType: 'button',
+        type: 'button',
         api: {
           url: '/current/query/category',
           params: {},
@@ -38,9 +38,7 @@ const schema = {
           dataPath: 'data',
           method: 'GET'
         },
-        autoSelectedFirst: true,
-        direction: 'horizontal',
-        space: 0
+        autoSelectedFirst: true
       },
       name: 'category',
       required: true
@@ -65,10 +63,8 @@ const schema = {
           dataPath: 'data',
           method: 'GET'
         },
-        optionType: 'circle',
-        autoSelectedFirst: true,
-        direction: 'vertical',
-        space: 0
+        type: 'circle',
+        autoSelectedFirst: true
       },
       name: 'article',
       required: true,

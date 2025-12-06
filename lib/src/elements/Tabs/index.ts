@@ -53,8 +53,7 @@ export default {
         name: 'props.tabPosition',
         props: {
           mode: 'static',
-          optionType: 'button',
-          space: 0,
+          type: 'button',
           options: [
             { label: '上', value: 'top' },
             { label: '右', value: 'right' },

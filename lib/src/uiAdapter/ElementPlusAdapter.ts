@@ -1,6 +1,7 @@
 import {
   ElButton,
   ElCard,
+  ElCheckboxGroup,
   ElCollapse,
   ElCollapseItem,
   ElDialog,
@@ -8,7 +9,9 @@ import {
   ElFormItem,
   ElInput,
   ElOption,
+  ElRadioGroup,
   ElSelect,
+  ElSwitch,
   ElTabPane,
   ElTabs
 } from 'element-plus'
@@ -161,6 +164,29 @@ const ElementPlusAdapter: UIAdapter = {
           },
           slots
         )
+    },
+    { inheritAttrs: false }
+  ),
+
+  RadioGroup: defineComponent(
+    (_, { slots, attrs }) => {
+      return () =>
+        h(ElRadioGroup, { ...attrs, type: attrs.isButtonOption ? 'button' : 'radio' }, slots)
+    },
+    { inheritAttrs: false }
+  ),
+
+  CheckboxGroup: defineComponent(
+    (_, { slots, attrs }) => {
+      return () =>
+        h(ElCheckboxGroup, { ...attrs, type: attrs.isButtonOption ? 'button' : 'checkbox' }, slots)
+    },
+    { inheritAttrs: false }
+  ),
+
+  Switch: defineComponent(
+    (_, { slots, attrs }) => {
+      return () => h(ElSwitch, attrs)
     },
     { inheritAttrs: false }
   )

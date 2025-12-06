@@ -37,9 +37,7 @@ const schema: FormSchema = {
         ],
         labelKey: 'label',
         valueKey: 'value',
-        optionType: 'circle',
-        direction: 'horizontal',
-        space: 20
+        type: 'circle'
       },
       name: 'gneder',
       required: true,
