@@ -3,12 +3,12 @@
     <FormRender v-model="formValues" :schema="schema" @finish="onFinish" />
 
     <div style="margin-top: 12px">
-      <el-space wrap size="large">
+      <div style="display: flex">
         <el-button type="primary" @click="fillDemo">填充示例数据</el-button>
         <el-button @click="changeUsername">修改用户名</el-button>
         <el-button @click="toggleSubscribe">切换是否订阅</el-button>
         <el-button type="danger" @click="clearAll">清空</el-button>
-      </el-space>
+      </div>
     </div>
 
     <div style="margin-top: 16px">

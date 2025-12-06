@@ -9,33 +9,6 @@
     </div>
 
     <div v-else>
-      <template v-if="mode === 'inline'">
-        <component :is="UIFormItem" v-for="(item, index) in list" :key="item.key" class="list-item">
-          <div class="list-item-content">
-            <el-space>
-              <form-item
-                v-for="field in parseFields(index)"
-                v-bind="field"
-                :key="field.label"
-                :name="`${name}.${index}.${field.name}`"
-              />
-            </el-space>
-
-            <Button
-              v-if="allowReduce && !isMin"
-              @click="handleReduceItem(index)"
-              circle
-              type="primary"
-              class="list-btn reduceBtn"
-              :disabled="disabled"
-              size="small"
-            >
-              <template #icon> <Icon name="reduce" color="#fff" /> </template
-            ></Button>
-          </div>
-        </component>
-      </template>
-
       <template v-if="mode === 'card'">
         <el-card v-for="(item, index) in list" :key="item.key" class="list-card">
           <template #header>
@@ -119,8 +92,6 @@ import type { ComponentBaseProps, FormItemType } from '@/types'
 import { deepParse } from '@/utils'
 
 const { Button } = useUI()
-
-const { FormItem: UIFormItem } = useUI()
 
 interface Props extends ComponentBaseProps {
   allowAdd?: boolean

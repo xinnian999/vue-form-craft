@@ -51,8 +51,7 @@ export default {
         mode: 'static',
         options: [
           { label: '表格', value: 'table' },
-          { label: '卡片', value: 'card' },
-          { label: '行内', value: 'inline' }
+          { label: '卡片', value: 'card' }
         ]
       }
     },
