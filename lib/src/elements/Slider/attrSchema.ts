@@ -47,27 +47,18 @@ export default {
               label: '隐藏',
               name: 'hidden',
               component: 'Switch',
-              props: {
-                'inline-prompt': false
-              },
               designKey: 'design-hidden'
             },
             {
               label: '禁用',
               name: 'props.disabled',
               component: 'Switch',
-              props: {
-                'inline-prompt': false
-              },
               designKey: 'design-disabled'
             },
             {
               label: '范围选择',
               name: 'props.range',
               component: 'Switch',
-              props: {
-                'inline-prompt': false
-              },
               designKey: 'design-range',
               help: '是否为范围选择'
             },
@@ -103,9 +94,6 @@ export default {
               label: '显示输入框',
               name: 'props.show-input',
               component: 'Switch',
-              props: {
-                'inline-prompt': false
-              },
               designKey: 'design-show-input',
               help: '是否显示输入框'
             },
@@ -113,9 +101,6 @@ export default {
               label: '显示标记',
               name: 'props.show-stops',
               component: 'Switch',
-              props: {
-                'inline-prompt': false
-              },
               designKey: 'design-show-stops',
               help: '是否显示间断点'
             }

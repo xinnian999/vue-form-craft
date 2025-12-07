@@ -60,18 +60,12 @@ export default {
               label: '隐藏',
               name: 'hidden',
               component: 'Switch',
-              props: {
-                'inline-prompt': false
-              },
               designKey: 'design-C5Qj'
             },
             {
               label: '禁用',
               name: 'props.disabled',
               component: 'Switch',
-              props: {
-                'inline-prompt': false
-              },
               designKey: 'design-VnLN'
             },
             {

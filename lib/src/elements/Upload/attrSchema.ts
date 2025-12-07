@@ -52,18 +52,12 @@ export default {
               label: '隐藏',
               name: 'hidden',
               component: 'Switch',
-              props: {
-                'inline-prompt': false
-              },
               designKey: 'design-hidden'
             },
             {
               label: '禁用',
               name: 'props.disabled',
               component: 'Switch',
-              props: {
-                'inline-prompt': false
-              },
               designKey: 'design-disabled'
             },
             {
@@ -111,9 +105,6 @@ export default {
               label: '携带Cookie',
               name: 'props.withCredentials',
               component: 'Switch',
-              props: {
-                'inline-prompt': false
-              },
               designKey: 'design-withCredentials',
               help: '上传时是否携带cookie'
             },
@@ -121,9 +112,6 @@ export default {
               label: '支持多选',
               name: 'props.multiple',
               component: 'Switch',
-              props: {
-                'inline-prompt': false
-              },
               designKey: 'design-multiple'
             },
             {
@@ -159,18 +147,12 @@ export default {
               label: '拖拽上传',
               name: 'props.drag',
               component: 'Switch',
-              props: {
-                'inline-prompt': false
-              },
               designKey: 'design-drag'
             },
             {
               label: '显示文件列表',
               name: 'props.showFileList',
               component: 'Switch',
-              props: {
-                'inline-prompt': false
-              },
               designKey: 'design-showFileList'
             },
             {

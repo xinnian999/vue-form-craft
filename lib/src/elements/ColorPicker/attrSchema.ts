@@ -43,27 +43,18 @@ export default {
               label: '隐藏',
               name: 'hidden',
               component: 'Switch',
-              props: {
-                'inline-prompt': false
-              },
               designKey: 'design-hidden'
             },
             {
               label: '禁用',
               name: 'props.disabled',
               component: 'Switch',
-              props: {
-                'inline-prompt': false
-              },
               designKey: 'design-disabled'
             },
             {
               label: '显示Alpha通道',
               name: 'props.showAlpha',
               component: 'Switch',
-              props: {
-                'inline-prompt': false
-              },
               designKey: 'design-showAlpha',
               help: '是否支持透明度选择'
             },

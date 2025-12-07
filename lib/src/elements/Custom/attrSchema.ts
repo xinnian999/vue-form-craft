@@ -42,9 +42,6 @@ export default {
               label: '隐藏',
               name: 'hidden',
               component: 'Switch',
-              props: {
-                'inline-prompt': false
-              },
               designKey: 'design-C5Qj'
             },
             {

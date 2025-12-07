@@ -88,18 +88,12 @@ export default {
               label: '隐藏',
               name: 'hidden',
               component: 'Switch',
-              props: {
-                'inline-prompt': false
-              },
               designKey: 'design-hidden'
             },
             {
               label: '禁用',
               name: 'props.disabled',
               component: 'Switch',
-              props: {
-                'inline-prompt': false
-              },
               designKey: 'design-disabled'
             },
             {
@@ -116,9 +110,6 @@ export default {
               label: '显示完整路径',
               name: 'props.showAllLevels',
               component: 'Switch',
-              props: {
-                'inline-prompt': false
-              },
               designKey: 'design-showAllLevels',
               help: '是否显示选中值的完整路径'
             },
@@ -126,9 +117,6 @@ export default {
               label: '显示清除按钮',
               name: 'props.clearable',
               component: 'Switch',
-              props: {
-                'inline-prompt': false
-              },
               designKey: 'design-clearable'
             }
           ]

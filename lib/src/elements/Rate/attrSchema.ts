@@ -45,18 +45,12 @@ export default {
               label: '隐藏',
               name: 'hidden',
               component: 'Switch',
-              props: {
-                'inline-prompt': false
-              },
               designKey: 'design-hidden'
             },
             {
               label: '禁用',
               name: 'props.disabled',
               component: 'Switch',
-              props: {
-                'inline-prompt': false
-              },
               designKey: 'design-disabled'
             },
             {
@@ -74,27 +68,18 @@ export default {
               label: '允许半选',
               name: 'props.allow-half',
               component: 'Switch',
-              props: {
-                'inline-prompt': false
-              },
               designKey: 'design-allow-half'
             },
             {
               label: '显示分数',
               name: 'props.show-score',
               component: 'Switch',
-              props: {
-                'inline-prompt': false
-              },
               designKey: 'design-show-score'
             },
             {
               label: '显示文本',
               name: 'props.show-text',
               component: 'Switch',
-              props: {
-                'inline-prompt': false
-              },
               designKey: 'design-show-text'
             }
           ]
