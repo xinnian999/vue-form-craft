@@ -1,6 +1,34 @@
 import type { Component, VNode } from 'vue'
 
 /**
+ * UI适配器 - 包含所有组件的适配器
+ */
+export interface UIAdapter {
+  // 表单组件
+  Input: Component<InputProtocol['props']>
+  Textarea: Component<TextareaProtocol['props']>
+  Select: Component<SelectProtocol['props']>
+  RadioGroup: Component<RadioGroupProtocol['props']>
+  CheckboxGroup: Component<CheckboxGroupProtocol['props']>
+  Switch: Component<SwitchProtocol['props']>
+  InputNumber: Component<InputNumberProtocol['props']>
+  Slider: Component<SliderProtocol['props']>
+  Rate: Component<RateProtocol['props']>
+  ColorPicker: Component<ColorPickerProtocol['props']>
+  // 布局组件
+  Card: Component<CardProtocol['props']>
+  Tabs: Component<TabsProtocol['props']>
+  TabPane: Component<TabPaneProtocol['props']>
+  Collapse: Component<CollapseProtocol['props']>
+  CollapseItem: Component<CollapseItemProtocol['props']>
+  Form: Component<FormProtocol['props']>
+  FormItem: Component<FormItemProtocol['props']>
+  // 工具组件
+  Button: Component<ButtonProtocol['props']>
+  Modal: Component<ModalProtocol['props']>
+}
+
+/**
  * Form 组件协议
  */
 export interface FormProtocol {
@@ -331,26 +359,51 @@ export interface InputNumberProtocol {
 }
 
 /**
- * UI适配器 - 包含所有组件的适配器
+ * Slider 组件协议
  */
-export interface UIAdapter {
-  // 表单组件
-  Input: Component<InputProtocol['props']>
-  Textarea: Component<TextareaProtocol['props']>
-  Select: Component<SelectProtocol['props']>
-  RadioGroup: Component<RadioGroupProtocol['props']>
-  CheckboxGroup: Component<CheckboxGroupProtocol['props']>
-  Switch: Component<SwitchProtocol['props']>
-  InputNumber: Component<InputNumberProtocol['props']>
-  // 布局组件
-  Card: Component<CardProtocol['props']>
-  Tabs: Component<TabsProtocol['props']>
-  TabPane: Component<TabPaneProtocol['props']>
-  Collapse: Component<CollapseProtocol['props']>
-  CollapseItem: Component<CollapseItemProtocol['props']>
-  Form: Component<FormProtocol['props']>
-  FormItem: Component<FormItemProtocol['props']>
-  // 工具组件
-  Button: Component<ButtonProtocol['props']>
-  Modal: Component<ModalProtocol['props']>
+export interface SliderProtocol {
+  props: {
+    modelValue: number | [number, number] | undefined
+    min?: number
+    max?: number
+    step?: number
+    disabled?: boolean
+    range?: boolean
+    'onUpdate:modelValue'?: (value: number | [number, number]) => void
+    onChange?: (value: number | [number, number]) => void
+  }
+  slots: Record<string, never>
+}
+
+/**
+ * Rate 组件协议
+ */
+export interface RateProtocol {
+  props: {
+    modelValue: number | undefined
+    max?: number
+    disabled?: boolean
+    allowHalf?: boolean
+    showScore?: boolean
+    showText?: boolean
+    'onUpdate:modelValue'?: (value: number) => void
+    onChange?: (value: number) => void
+  }
+  slots: Record<string, never>
+}
+
+/**
+ * ColorPicker 组件协议
+ */
+export interface ColorPickerProtocol {
+  props: {
+    modelValue: string | undefined
+    disabled?: boolean
+    showAlpha?: boolean
+    colorFormat?: 'hex' | 'rgb' | 'hsl' | 'hsv'
+    'onUpdate:modelValue'?: (value: string) => void
+    onChange?: (value: string) => void
+    onActiveChange?: (value: string) => void
+  }
+  slots: Record<string, never>
 }

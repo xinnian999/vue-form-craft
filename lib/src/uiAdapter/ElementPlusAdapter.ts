@@ -4,6 +4,7 @@ import {
   ElCheckboxGroup,
   ElCollapse,
   ElCollapseItem,
+  ElColorPicker,
   ElDialog,
   ElForm,
   ElFormItem,
@@ -11,7 +12,9 @@ import {
   ElInputNumber,
   ElOption,
   ElRadioGroup,
+  ElRate,
   ElSelect,
+  ElSlider,
   ElSwitch,
   ElTabPane,
   ElTabs
@@ -195,6 +198,27 @@ const ElementPlusAdapter: UIAdapter = {
   InputNumber: defineComponent(
     (_, { attrs }) => {
       return () => h(ElInputNumber, { ...attrs, controlsPosition: 'right' })
+    },
+    { inheritAttrs: false }
+  ),
+
+  Slider: defineComponent(
+    (_, { attrs }) => {
+      return () => h(ElSlider, attrs)
+    },
+    { inheritAttrs: false }
+  ),
+
+  Rate: defineComponent(
+    (_, { attrs }) => {
+      return () => h(ElRate, attrs)
+    },
+    { inheritAttrs: false }
+  ),
+
+  ColorPicker: defineComponent(
+    (_, { attrs }) => {
+      return () => h(ElColorPicker, attrs)
     },
     { inheritAttrs: false }
   )

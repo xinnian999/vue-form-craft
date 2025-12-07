@@ -82,20 +82,6 @@ export default {
                 min: 0
               },
               designKey: 'design-step'
-            },
-            {
-              label: '显示输入框',
-              name: 'props.show-input',
-              component: 'Switch',
-              designKey: 'design-show-input',
-              help: '是否显示输入框'
-            },
-            {
-              label: '显示标记',
-              name: 'props.show-stops',
-              component: 'Switch',
-              designKey: 'design-show-stops',
-              help: '是否显示间断点'
             }
           ]
         },

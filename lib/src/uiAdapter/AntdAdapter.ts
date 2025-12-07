@@ -8,7 +8,9 @@ import {
   InputNumber,
   Modal,
   Radio,
+  Rate,
   Select,
+  Slider,
   Switch,
   Tabs
 } from 'ant-design-vue'
@@ -20,13 +22,16 @@ import type {
   CheckboxGroupProtocol,
   CollapseItemProtocol,
   CollapseProtocol,
+  ColorPickerProtocol,
   FormItemProtocol,
   FormProtocol,
   InputNumberProtocol,
   InputProtocol,
   ModalProtocol,
   RadioGroupProtocol,
+  RateProtocol,
   SelectProtocol,
+  SliderProtocol,
   SwitchProtocol,
   TabPaneProtocol,
   TabsProtocol,
@@ -485,6 +490,67 @@ const AntdAdapter: UIAdapter = {
             propsAttrs['onUpdate:modelValue']?.(value)
           }
         })
+    },
+    { inheritAttrs: false }
+  ),
+
+  Slider: defineComponent(
+    (_, { attrs }) => {
+      const propsAttrs = attrs as SliderProtocol['props']
+
+      return () =>
+        h(Slider as any, {
+          ...attrs,
+          value: propsAttrs.modelValue,
+          'onUpdate:value': (value: number | [number, number]) => {
+            propsAttrs['onUpdate:modelValue']?.(value)
+          }
+        })
+    },
+    { inheritAttrs: false }
+  ),
+
+  Rate: defineComponent(
+    (_, { attrs }) => {
+      const propsAttrs = attrs as RateProtocol['props']
+
+      return () =>
+        h(Rate as any, {
+          ...attrs,
+          value: propsAttrs.modelValue,
+          'onUpdate:value': (value: number) => {
+            propsAttrs['onUpdate:modelValue']?.(value)
+          },
+          count: propsAttrs.max
+        })
+    },
+    { inheritAttrs: false }
+  ),
+
+  ColorPicker: defineComponent(
+    (_, { attrs }) => {
+      const propsAttrs = attrs as ColorPickerProtocol['props']
+
+      return () =>
+        h('div', { style: 'color: #999; font-size: 12px;' }, [
+          h('input', {
+            type: 'color',
+            value: propsAttrs.modelValue || '#000000',
+            disabled: propsAttrs.disabled,
+            onInput: (e: Event) => {
+              const value = (e.target as HTMLInputElement).value
+              propsAttrs['onUpdate:modelValue']?.(value)
+              propsAttrs.onChange?.(value)
+            },
+            style:
+              'width: 40px; height: 32px; border: 1px solid #d9d9d9; border-radius: 2px; cursor: pointer;'
+          }),
+          h(
+            'span',
+            { style: 'margin-left: 8px; font-size: 12px;' },
+            '(Ant Design Vue 不支持 ColorPicker，使用原生 input[type=color])'
+          )
+        ])
     },
     { inheritAttrs: false }
   )

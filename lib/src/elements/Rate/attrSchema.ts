@@ -65,21 +65,9 @@ export default {
             },
             {
               label: '允许半选',
-              name: 'props.allow-half',
+              name: 'props.allowHalf',
               component: 'Switch',
               designKey: 'design-allow-half'
-            },
-            {
-              label: '显示分数',
-              name: 'props.show-score',
-              component: 'Switch',
-              designKey: 'design-show-score'
-            },
-            {
-              label: '显示文本',
-              name: 'props.show-text',
-              component: 'Switch',
-              designKey: 'design-show-text'
             }
           ]
         },
