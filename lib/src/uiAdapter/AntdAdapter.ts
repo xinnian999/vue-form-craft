@@ -3,6 +3,7 @@ import {
   Card,
   Checkbox,
   Collapse,
+  DatePicker,
   Form,
   Input,
   InputNumber,
@@ -23,6 +24,7 @@ import type {
   CollapseItemProtocol,
   CollapseProtocol,
   ColorPickerProtocol,
+  DatePickerProtocol,
   FormItemProtocol,
   FormProtocol,
   InputNumberProtocol,
@@ -551,6 +553,48 @@ const AntdAdapter: UIAdapter = {
             '(Ant Design Vue 不支持 ColorPicker，使用原生 input[type=color])'
           )
         ])
+    },
+    { inheritAttrs: false }
+  ),
+
+  DatePicker: defineComponent(
+    (_, { attrs }) => {
+      const propsAttrs = attrs as DatePickerProtocol['props']
+
+      return () => {
+        const isRangePicker =
+          propsAttrs.type === 'daterange' ||
+          propsAttrs.type === 'monthrange' ||
+          propsAttrs.type === 'datetimerange'
+
+        const DatePickerComponent = isRangePicker ? DatePicker.RangePicker : DatePicker
+
+        let picker: 'date' | 'week' | 'month' | 'quarter' | 'year' | undefined
+        if (propsAttrs.type === 'year') {
+          picker = 'year'
+        } else if (propsAttrs.type === 'month' || propsAttrs.type === 'monthrange') {
+          picker = 'month'
+        } else if (propsAttrs.type === 'week') {
+          picker = 'week'
+        }
+
+        const showTime = propsAttrs.type === 'datetime' || propsAttrs.type === 'datetimerange'
+
+        return h(DatePickerComponent as any, {
+          ...attrs,
+          value: propsAttrs.modelValue,
+          'onUpdate:value': (value: any) => {
+            propsAttrs['onUpdate:modelValue']?.(value)
+          },
+          picker,
+          showTime,
+          format: propsAttrs.format,
+          valueFormat: propsAttrs.valueFormat,
+          placeholder: propsAttrs.type?.includes('range')
+            ? [propsAttrs.startPlaceholder, propsAttrs.endPlaceholder]
+            : propsAttrs.placeholder
+        })
+      }
     },
     { inheritAttrs: false }
   )

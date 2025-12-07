@@ -16,7 +16,7 @@
 
 ## 适配进度
 
-**已完成: 21 / 33**
+**已完成: 22 / 33**
 
 **第一优先级：高频表单组件**
 
@@ -27,7 +27,7 @@
 - ✅ Select（选择器）- 已适配
 - ✅ RadioGroup（单选框组）- 已适配
 - ✅ CheckboxGroup（多选框组）- 已适配
-- DatePicker（日期选择器）
+- ✅ DatePicker（日期选择器）- 已适配
 - TimePicker（时间选择器）
 - ✅ Switch（开关）- 已适配
 - ✅ Slider（滑块）- 已适配

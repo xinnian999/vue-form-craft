@@ -5,6 +5,7 @@ import {
   ElCollapse,
   ElCollapseItem,
   ElColorPicker,
+  ElDatePicker,
   ElDialog,
   ElForm,
   ElFormItem,
@@ -219,6 +220,13 @@ const ElementPlusAdapter: UIAdapter = {
   ColorPicker: defineComponent(
     (_, { attrs }) => {
       return () => h(ElColorPicker, attrs)
+    },
+    { inheritAttrs: false }
+  ),
+
+  DatePicker: defineComponent(
+    (_, { attrs }) => {
+      return () => h(ElDatePicker, attrs)
     },
     { inheritAttrs: false }
   )

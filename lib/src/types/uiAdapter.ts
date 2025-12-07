@@ -17,6 +17,7 @@ export interface UIAdapter {
   Slider: Component<SliderProtocol['props']>
   Rate: Component<RateProtocol['props']>
   ColorPicker: Component<ColorPickerProtocol['props']>
+  DatePicker: Component<DatePickerProtocol['props']>
   // 布局组件
   Card: Component<CardProtocol['props']>
   Tabs: Component<TabsProtocol['props']>
@@ -404,6 +405,34 @@ export interface ColorPickerProtocol {
     'onUpdate:modelValue'?: (value: string) => void
     onChange?: (value: string) => void
     onActiveChange?: (value: string) => void
+  }
+  slots: Record<string, never>
+}
+
+/**
+ * DatePicker 组件协议
+ */
+export interface DatePickerProtocol {
+  props: {
+    modelValue: string | Date | [string, string] | [Date, Date] | undefined
+    type?:
+      | 'date'
+      | 'datetime'
+      | 'year'
+      | 'month'
+      | 'week'
+      | 'daterange'
+      | 'monthrange'
+      | 'datetimerange'
+    placeholder?: string
+    startPlaceholder?: string
+    endPlaceholder?: string
+    disabled?: boolean
+    clearable?: boolean
+    format?: string
+    valueFormat?: string
+    'onUpdate:modelValue'?: (value: string | Date | [string, string] | [Date, Date]) => void
+    onChange?: (value: string | Date | [string, string] | [Date, Date]) => void
   }
   slots: Record<string, never>
 }

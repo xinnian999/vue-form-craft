@@ -9,9 +9,7 @@ export default {
   initialValues: {
     label: '日期选择器',
     props: {
-      type: 'datetime',
-      placeholder: '请选择日期',
-      clearable: true
+      type: 'date'
     }
   },
   items: [
@@ -44,19 +42,32 @@ export default {
               labelWidth: 0
             },
             {
-              label: '占位提示',
-              name: 'props.placeholder',
-              component: 'Input',
-              props: {
-                autocomplete: 'new-password'
-              },
-              designKey: 'design-placeholder'
-            },
-            {
               label: '禁用',
               name: 'props.disabled',
               component: 'Switch',
               designKey: 'design-disabled'
+            },
+            {
+              label: '占位提示',
+              name: 'props.placeholder',
+              component: 'Input',
+              designKey: 'design-placeholder'
+            },
+            {
+              label: '开始时间-占位提示',
+              labelAlign: 'top',
+              name: 'props.startPlaceholder',
+              component: 'Input',
+              hidden: '{{ !$values.props.type.includes("range") }}',
+              designKey: 'design-start-placeholder'
+            },
+            {
+              label: '结束时间-占位提示',
+              labelAlign: 'top',
+              name: 'props.endPlaceholder',
+              component: 'Input',
+              hidden: '{{ !$values.props.type.includes("range") }}',
+              designKey: 'design-end-placeholder'
             },
             {
               label: '显示清除按钮',
