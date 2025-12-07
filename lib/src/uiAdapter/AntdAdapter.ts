@@ -243,8 +243,11 @@ const AntdAdapter: UIAdapter = {
               const nodes = slots.default?.() as any
 
               const parseNodeProps = (node: any) => {
+                console.log(node)
+
                 node.props.tab = node.props.label
                 node.props.key = node.props.name
+                node.children.tab = node.children.label
               }
 
               nodes?.forEach((node: any) => {

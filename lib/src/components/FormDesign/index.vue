@@ -236,6 +236,7 @@ defineExpose(instance)
   background-color: $bgColor;
   position: relative;
   flex-direction: row;
+  border-top: 1px solid #eee;
 
   ::-webkit-scrollbar {
     /*滚动条整体样式*/
