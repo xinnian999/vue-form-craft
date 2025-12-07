@@ -25,7 +25,6 @@
 - ✅ Input（输入框）- 已适配
 - ✅ Textarea（多行文本）- 已适配
 - ✅ Select（选择器）- 已适配
-- Option（选择器选项）
 - ✅ Radio（单选框）- 已适配
 - ✅ RadioGroup（单选框组）- 已适配
 - ✅ RadioButton（单选按钮）- 已适配

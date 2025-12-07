@@ -79,8 +79,8 @@ export default {
               name: 'props.multiple',
               component: 'Switch',
               props: {
-                'active-text': '多选',
-                'inactive-text': '单选'
+                activeText: '多选',
+                inactiveText: '单选'
               },
               designKey: 'design-6Tga'
             }

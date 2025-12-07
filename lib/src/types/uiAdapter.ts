@@ -301,16 +301,13 @@ export interface CheckboxGroupProtocol {
  */
 export interface SwitchProtocol {
   props: {
-    modelValue: boolean | string | number
+    modelValue: boolean
     disabled?: boolean
     loading?: boolean
-    size?: 'large' | 'default' | 'small'
     activeText?: string
     inactiveText?: string
-    activeValue?: boolean | string | number
-    inactiveValue?: boolean | string | number
-    'onUpdate:modelValue'?: (value: boolean | string | number) => void
-    onChange?: (value: boolean | string | number) => void
+    'onUpdate:modelValue'?: (value: boolean) => void
+    onChange?: (value: boolean) => void
   }
   slots: Record<string, never>
 }

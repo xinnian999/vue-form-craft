@@ -61,7 +61,7 @@ export default {
             },
             {
               label: '打开时描述',
-              name: 'props.active-text',
+              name: 'props.activeText',
               component: 'Input',
               props: {
                 clearable: true
@@ -70,31 +70,12 @@ export default {
             },
             {
               label: '关闭时描述',
-              name: 'props.inactive-text',
+              name: 'props.inactiveText',
               component: 'Input',
               props: {
                 clearable: true
               },
               designKey: 'design-inactive-text'
-            },
-            {
-              label: '描述显示位置',
-              name: 'props.inline-prompt',
-              component: 'Radio',
-              props: {
-                mode: 'static',
-                options: [
-                  {
-                    label: '外部',
-                    value: false
-                  },
-                  {
-                    label: '内部',
-                    value: true
-                  }
-                ]
-              },
-              designKey: 'design-inline-prompt'
             }
           ]
         },

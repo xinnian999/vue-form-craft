@@ -461,13 +461,11 @@ const AntdAdapter: UIAdapter = {
         h(Switch as any, {
           ...attrs,
           checked: propsAttrs.modelValue,
-          'onUpdate:checked': (value: boolean | string | number) => {
+          'onUpdate:checked': (value: boolean) => {
             propsAttrs['onUpdate:modelValue']?.(value)
           },
           checkedChildren: propsAttrs.activeText,
-          unCheckedChildren: propsAttrs.inactiveText,
-          checkedValue: propsAttrs.activeValue,
-          unCheckedValue: propsAttrs.inactiveValue
+          unCheckedChildren: propsAttrs.inactiveText
         })
     },
     { inheritAttrs: false }
