@@ -7,7 +7,6 @@ export default {
   size: 'small',
   submitBtn: false,
   initialValues: {
-    label: '多行输入框',
     props: {
       placeholder: '请输入...',
       autosize: {

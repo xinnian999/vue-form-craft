@@ -7,7 +7,6 @@ export default {
   size: 'small',
   submitBtn: false,
   initialValues: {
-    label: '单选框组',
     props: {
       mode: 'static',
       options: [

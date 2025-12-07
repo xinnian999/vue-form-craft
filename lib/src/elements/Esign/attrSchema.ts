@@ -4,7 +4,6 @@ export default {
   size: 'small',
   labelAlign: 'top',
   initialValues: {
-    label: '电子签名',
     props: {
       width: 700,
       height: 300,

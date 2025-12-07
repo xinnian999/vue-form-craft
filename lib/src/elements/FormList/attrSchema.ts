@@ -4,7 +4,6 @@ export default {
   size: 'small',
   labelAlign: 'top',
   initialValues: {
-    label: '自增容器',
     children: [],
     props: {
       mode: 'table',

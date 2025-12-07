@@ -7,7 +7,6 @@ export default {
   size: 'small',
   submitBtn: false,
   initialValues: {
-    label: '日期选择器',
     props: {
       type: 'date'
     }

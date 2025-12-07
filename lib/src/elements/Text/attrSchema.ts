@@ -4,7 +4,6 @@ export default {
   size: 'small',
   labelAlign: 'top',
   initialValues: {
-    label: '文本',
     props: {
       text: '这是一段文本'
     }

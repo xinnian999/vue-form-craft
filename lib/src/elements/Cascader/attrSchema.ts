@@ -7,7 +7,6 @@ export default {
   size: 'small',
   submitBtn: false,
   initialValues: {
-    label: '级联选择器',
     props: {
       placeholder: '请选择...',
       mode: 'static',

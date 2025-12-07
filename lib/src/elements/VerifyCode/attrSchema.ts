@@ -7,7 +7,6 @@ export default {
   size: 'small',
   submitBtn: false,
   initialValues: {
-    label: '验证码',
     required: true,
     props: {
       placeholder: '请输入验证码'

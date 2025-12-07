@@ -7,7 +7,6 @@ export default {
   size: 'small',
   submitBtn: false,
   initialValues: {
-    label: '下拉选择框',
     props: {
       mode: 'static',
       options: [

@@ -6,10 +6,6 @@ export default {
   scrollToError: true,
   size: 'small',
   submitBtn: false,
-  initialValues: {
-    label: '颜色选择器',
-    component: 'ColorPicker'
-  },
   items: [
     {
       name: 'form-tabs',

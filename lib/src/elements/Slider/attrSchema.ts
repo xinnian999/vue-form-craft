@@ -7,7 +7,6 @@ export default {
   size: 'small',
   submitBtn: false,
   initialValues: {
-    label: '滑块',
     props: {
       step: 1,
       min: 0,

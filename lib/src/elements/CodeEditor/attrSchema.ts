@@ -6,9 +6,7 @@ export default {
   scrollToError: true,
   size: 'small',
   submitBtn: false,
-  initialValues: {
-    label: '代码编辑器'
-  },
+  initialValues: {},
   items: [
     {
       name: 'form-code-editor',

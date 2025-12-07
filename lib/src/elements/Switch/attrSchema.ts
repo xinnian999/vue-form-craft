@@ -7,7 +7,6 @@ export default {
   size: 'small',
   submitBtn: false,
   initialValues: {
-    label: '开关',
     props: {
       'inline-prompt': false
     }
