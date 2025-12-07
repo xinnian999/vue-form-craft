@@ -7,7 +7,7 @@ export default {
   size: 'small',
   submitBtn: false,
   initialValues: {
-    label: '计数器',
+    label: '数字输入框',
     props: {
       min: 1,
       max: 999,

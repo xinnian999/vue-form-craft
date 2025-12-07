@@ -8,6 +8,6 @@ export default {
   render: Password,
   icon: 'password',
   type: 'basic',
-  order: 3,
+  order: 2.5,
   attrSchema: inputAttrSchema
 } satisfies FormElement

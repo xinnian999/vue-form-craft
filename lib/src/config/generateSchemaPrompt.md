@@ -23,10 +23,10 @@
 
 **基础组件**:
 
-- `Input`: 单行文本输入
-- `TextArea`: 多行文本输入
-- `Password`: 密码输入
-- `InputNumber`: 数字输入
+- `Input`: 单行输入框输入
+- `TextArea`: 多行输入框输入
+- `Password`: 密码输入框
+- `InputNumber`: 数字输入框
 - `Select`: 下拉选择
 - `Radio`: 单选框
 - `Checkbox`: 多选框

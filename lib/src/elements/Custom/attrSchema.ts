@@ -6,9 +6,6 @@ export default {
   scrollToError: true,
   size: 'small',
   submitBtn: false,
-  initialValues: {
-    label: '单行文本'
-  },
   items: [
     {
       name: 'form-2DaW',

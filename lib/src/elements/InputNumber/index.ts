@@ -3,10 +3,10 @@ import attrSchema from './attrSchema'
 import Component from './Component.vue'
 
 export default {
-  title: '计数器',
+  title: '数字输入框',
   icon: 'inputNumber',
   type: 'basic',
-  order: 5,
+  order: 2.9,
   component: 'InputNumber',
   render: Component,
   attrSchema

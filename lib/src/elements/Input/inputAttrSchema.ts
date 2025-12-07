@@ -7,7 +7,7 @@ export default {
   size: 'small',
   submitBtn: false,
   initialValues: {
-    label: '单行文本'
+    label: '单行输入框'
   },
   items: [
     {

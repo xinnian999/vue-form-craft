@@ -1,4 +1,4 @@
-import type { FormSchema } from "@/types";
+import type { FormSchema } from '@/types'
 
 export default {
   labelWidth: 150,
@@ -18,16 +18,16 @@ export default {
       ]
     },
     {
-      label: '禁用所有密码输入',
+      label: '禁用所有密码输入框',
       name: 'disableAllPassword',
       component: 'Switch',
       props: { 'inline-prompt': false },
       designKey: 'design-disable-all-password',
       linkages: [
         // attr联动: 批量禁用/启用所有行的 password 字段
-        { 
-          target: 'users.*.password', 
-          type: 'attr', 
+        {
+          target: 'users.*.password',
+          type: 'attr',
           path: 'props.disabled',
           value: '{{ $values.disableAllPassword }}'
         }
@@ -54,7 +54,7 @@ export default {
               value: 1
             },
             {
-              // attr联动: 当用户名长度 < 3 时,禁用当前行的密码输入
+              // attr联动: 当用户名长度 < 3 时,禁用当前行的密码输入框
               target: 'users.[].password',
               type: 'attr',
               path: 'props.disabled',
@@ -62,7 +62,7 @@ export default {
               value: true
             },
             {
-              // attr联动: 当用户名长度 >= 3 时,启用当前行的密码输入
+              // attr联动: 当用户名长度 >= 3 时,启用当前行的密码输入框
               target: 'users.[].password',
               type: 'attr',
               path: 'props.disabled',

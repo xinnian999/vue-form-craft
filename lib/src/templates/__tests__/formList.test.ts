@@ -95,7 +95,7 @@ describe('template formList', async () => {
     // 初始状态: 密码输入框应该是启用的
     const password0 = wrapper.find('.Input-users\\.0\\.password input')
     const password1 = wrapper.find('.Input-users\\.1\\.password input')
-    
+
     expect((password0.element as HTMLInputElement).disabled).toBe(false)
     expect((password1.element as HTMLInputElement).disabled).toBe(false)
 
