@@ -57,12 +57,6 @@ export default {
               designKey: 'design-JTMu'
             },
             {
-              label: '隐藏',
-              name: 'hidden',
-              component: 'Switch',
-              designKey: 'design-C5Qj'
-            },
-            {
               label: '禁用',
               name: 'props.disabled',
               component: 'Switch',

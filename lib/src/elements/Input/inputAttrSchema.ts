@@ -58,12 +58,6 @@ export default {
               designKey: 'design-aiPrompt'
             },
             {
-              label: '隐藏',
-              name: 'hidden',
-              component: 'Switch',
-              designKey: 'design-C5Qj'
-            },
-            {
               label: '禁用',
               name: 'props.disabled',
               component: 'Switch',

@@ -36,12 +36,6 @@ export default {
               labelWidth: 0
             },
             {
-              label: '隐藏',
-              name: 'hidden',
-              component: 'Switch',
-              designKey: 'design-C5Qj'
-            },
-            {
               label: '自定义组件名称',
               component: 'Input',
               name: 'props.componentName',

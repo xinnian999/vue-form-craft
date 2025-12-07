@@ -40,12 +40,6 @@ export default {
               labelWidth: 0
             },
             {
-              label: '隐藏',
-              name: 'hidden',
-              component: 'Switch',
-              designKey: 'design-hidden'
-            },
-            {
               label: '禁用',
               name: 'props.disabled',
               component: 'Switch',

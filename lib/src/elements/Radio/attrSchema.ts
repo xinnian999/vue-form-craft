@@ -56,15 +56,6 @@ export default {
               labelWidth: 0
             },
             {
-              label: '隐藏',
-              name: 'hidden',
-              designKey: 'design-hidden',
-              component: 'Switch',
-              props: {
-                'inline-prompt': false
-              }
-            },
-            {
               label: '禁用',
               name: 'props.disabled',
               designKey: 'design-disabled',

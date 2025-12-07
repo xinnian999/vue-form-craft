@@ -150,12 +150,6 @@ export default {
               designKey: 'design-code-editor-minimap'
             },
             {
-              label: '隐藏',
-              name: 'hidden',
-              component: 'Switch',
-              designKey: 'design-code-editor-hidden'
-            },
-            {
               label: '只读',
               name: 'props.readOnly',
               component: 'Switch',

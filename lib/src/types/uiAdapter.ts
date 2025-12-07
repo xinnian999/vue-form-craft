@@ -5,6 +5,8 @@ import type { Component, VNode } from 'vue'
  */
 export interface UIAdapter {
   // 表单组件
+  Form: Component<FormProtocol['props']>
+  FormItem: Component<FormItemProtocol['props']>
   Input: Component<InputProtocol['props']>
   Textarea: Component<TextareaProtocol['props']>
   Select: Component<SelectProtocol['props']>
@@ -21,8 +23,6 @@ export interface UIAdapter {
   TabPane: Component<TabPaneProtocol['props']>
   Collapse: Component<CollapseProtocol['props']>
   CollapseItem: Component<CollapseItemProtocol['props']>
-  Form: Component<FormProtocol['props']>
-  FormItem: Component<FormItemProtocol['props']>
   // 工具组件
   Button: Component<ButtonProtocol['props']>
   Modal: Component<ModalProtocol['props']>

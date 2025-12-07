@@ -108,6 +108,12 @@ export default {
         clearable: true
       },
       designKey: 'design-Qh45'
+    },
+    {
+      label: '隐藏',
+      name: 'hidden',
+      component: 'Switch',
+      designKey: 'design-C5Qj'
     }
   ]
 } satisfies FormSchema
