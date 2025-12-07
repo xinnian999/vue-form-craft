@@ -45,7 +45,6 @@
 </template>
 
 <script setup lang="ts">
-import { ElMessageBox } from 'element-plus'
 import { ref } from 'vue'
 import { Icon } from '@/components'
 import { useDesignInstance, useUI } from '@/hooks'
@@ -53,7 +52,7 @@ import { ns } from '@/utils'
 import Json from './Json/index.vue'
 import Preview from './Preview.vue'
 
-const { Button } = useUI()
+const { Button, Message } = useUI()
 
 type PreviewAction = {
   label: string
@@ -96,7 +95,7 @@ const rightActions: PreviewAction[] = [
     icon: 'trash',
     name: 'clear-design',
     onClick: async () => {
-      await ElMessageBox.confirm('确认清空当前设计吗？')
+      await Message.confirm('确认清空当前设计吗？')
       designInstance.handleClear()
     }
   },

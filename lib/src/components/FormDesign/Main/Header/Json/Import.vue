@@ -15,13 +15,12 @@
 </template>
 
 <script setup lang="ts">
-import { ElMessage, ElMessageBox } from 'element-plus'
 import { ref } from 'vue'
 import { useDesignInstance, useUI } from '@/hooks'
 import type { FormSchema } from '@/types'
 import { ns, repirJsonSchema } from '@/utils'
 
-const { Button } = useUI()
+const { Button, Message } = useUI()
 
 const designInstance = useDesignInstance()!
 
@@ -129,12 +128,12 @@ const handleConfirm = async () => {
     const importSchema = extractJSON(value.value)
 
     if (!importSchema || typeof importSchema !== 'object') {
-      ElMessage.error('无法识别有效的 JsonSchema，请检查格式')
+      Message.error('无法识别有效的 JsonSchema，请检查格式')
       return
     }
 
     // 二次确认
-    await ElMessageBox.confirm('导入操作将覆盖当前的表单设计内容，是否继续？', '确认导入', {
+    await Message.confirm('导入操作将覆盖当前的表单设计内容，是否继续？', '确认导入', {
       confirmButtonText: '确定',
       cancelButtonText: '取消',
       type: 'warning'
@@ -145,11 +144,11 @@ const handleConfirm = async () => {
     designInstance.setSchema(repairedSchema)
     designInstance.recordHistory('导入JSON')
 
-    ElMessage.success('导入成功')
+    Message.success('导入成功')
   } catch (error) {
     if (error !== 'cancel') {
       console.error('导入失败:', error)
-      ElMessage.error('导入失败，请检查 JsonSchema 格式')
+      Message.error('导入失败，请检查 JsonSchema 格式')
     }
   }
 }

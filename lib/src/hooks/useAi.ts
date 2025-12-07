@@ -1,10 +1,11 @@
-import { ElMessage } from 'element-plus'
 import { ref } from 'vue'
 import type { AiGenerateFunction } from '@/types'
 import useGlobals from './useGlobals'
+import useUI from './useUI'
 
 export default function useAi() {
   const { ai } = useGlobals()
+  const { Message } = useUI()
 
   const controller = ref<AbortController | null>(null)
 
@@ -14,7 +15,7 @@ export default function useAi() {
     const aiFunction = ai as AiGenerateFunction | undefined
 
     if (!aiFunction) {
-      ElMessage.error('AI功能未配置,请在app.use时注入ai函数')
+      Message.error('AI功能未配置,请在app.use时注入ai函数')
       return
     }
 
@@ -38,7 +39,7 @@ export default function useAi() {
         return
       }
 
-      ElMessage.error(error?.message || 'AI生成失败')
+      Message.error(error?.message || 'AI生成失败')
       return
     } finally {
       controller.value = null

@@ -52,12 +52,11 @@
 
 <script setup lang="ts">
 import { MagicStick } from '@element-plus/icons-vue'
-import { ElMessage } from 'element-plus'
 import { onMounted, ref } from 'vue'
 import { useAi, useDesignInstance, useUI } from '@/hooks'
 import { ns } from '@/utils'
 
-const { Button, Modal } = useUI()
+const { Button, Modal, Message } = useUI()
 
 const modelValue = defineModel<string>()
 
@@ -105,7 +104,7 @@ const extractFieldNames = (items: any[]): string[] => {
 // AI生成JS表达式
 const handleAiGenerate = async () => {
   if (!aiPrompt.value.trim()) {
-    ElMessage.warning('请输入生成需求')
+    Message.warning('请输入生成需求')
     return
   }
 
@@ -151,11 +150,11 @@ ${aiPrompt.value}
       const generatedExpr = typeof result === 'string' ? result.trim() : JSON.stringify(result)
       expr.value = generatedExpr
       aiPrompt.value = ''
-      ElMessage.success('AI生成成功')
+      Message.success('AI生成成功')
     }
   } catch (error: any) {
     console.error('AI生成失败:', error)
-    ElMessage.error(error?.message || 'AI生成失败')
+    Message.error(error?.message || 'AI生成失败')
   } finally {
     aiLoading.value = false
   }

@@ -8,6 +8,6 @@ export default {
   render: Component,
   icon: 'upload',
   type: 'basic',
-  order: 10,
+  order: 12.5,
   attrSchema
 } satisfies FormElement

@@ -15,14 +15,13 @@
 
 <script setup lang="ts">
 import { VueMonacoEditor } from '@guolao/vue-monaco-editor'
-import { ElMessage } from 'element-plus'
 import { cloneDeep } from 'lodash'
 import { onMounted, ref } from 'vue'
 import { useUI } from '@/hooks'
 import type { FormSchema } from '@/types'
 import { ns } from '@/utils'
 
-const { Button } = useUI()
+const { Button, Message } = useUI()
 
 const props = defineProps<{
   json: FormSchema
@@ -50,9 +49,9 @@ const handleSave = () => {
   try {
     const parsedJson = JSON.parse(jsonString.value)
     emits('save', cloneDeep(parsedJson))
-    ElMessage.success('保存成功')
+    Message.success('保存成功')
   } catch (error) {
-    ElMessage.error('JSON格式错误，请检查后重试')
+    Message.error('JSON格式错误，请检查后重试')
   }
 }
 

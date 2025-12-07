@@ -11,6 +11,8 @@ import {
   ElFormItem,
   ElInput,
   ElInputNumber,
+  ElMessage,
+  ElMessageBox,
   ElOption,
   ElRadioGroup,
   ElRate,
@@ -21,7 +23,13 @@ import {
   ElTabs
 } from 'element-plus'
 import { defineComponent, h, ref } from 'vue'
-import type { FormItemProtocol, FormProtocol, UIAdapter } from '@/types/uiAdapter'
+import type {
+  FormItemProtocol,
+  FormProtocol,
+  MessageBoxOptions,
+  MessageOptions,
+  UIAdapter
+} from '@/types/uiAdapter'
 
 /**
  * Element-Plus UI适配器
@@ -229,7 +237,57 @@ const ElementPlusAdapter: UIAdapter = {
       return () => h(ElDatePicker, attrs)
     },
     { inheritAttrs: false }
-  )
+  ),
+
+  Message: {
+    success: (message: string, options?: MessageOptions) => {
+      ElMessage.success({
+        message,
+        ...options
+      })
+    },
+    warning: (message: string, options?: MessageOptions) => {
+      ElMessage.warning({
+        message,
+        ...options
+      })
+    },
+    info: (message: string, options?: MessageOptions) => {
+      ElMessage.info({
+        message,
+        ...options
+      })
+    },
+    error: (message: string | MessageOptions, options?: MessageOptions) => {
+      if (typeof message === 'string') {
+        ElMessage.error({
+          message,
+          ...options
+        })
+      } else {
+        ElMessage.error(message)
+      }
+    },
+    confirm: async (
+      message: string,
+      title?: string,
+      options?: MessageBoxOptions
+    ): Promise<void> => {
+      await ElMessageBox.confirm(message, title || '提示', {
+        confirmButtonText: options?.confirmButtonText || '确定',
+        cancelButtonText: options?.cancelButtonText || '取消',
+        type: options?.type || 'warning',
+        ...options
+      })
+    },
+    alert: async (message: string, title?: string, options?: MessageBoxOptions): Promise<void> => {
+      await ElMessageBox.alert(message, title || '提示', {
+        confirmButtonText: options?.confirmButtonText || '确定',
+        type: options?.type || 'info',
+        ...options
+      })
+    }
+  }
 }
 
 export default ElementPlusAdapter

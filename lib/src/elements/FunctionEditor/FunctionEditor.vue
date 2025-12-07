@@ -53,14 +53,13 @@
 
 <script setup lang="ts">
 import { VueMonacoEditor } from '@guolao/vue-monaco-editor'
-import { ElMessage } from 'element-plus'
 import { computed, ref, shallowRef, watch } from 'vue'
 import { Icon } from '@/components'
 import { useUI } from '@/hooks'
 import type { ComponentBaseProps } from '@/types'
 import { ns } from '@/utils'
 
-const { Button, Modal } = useUI()
+const { Button, Modal, Message } = useUI()
 
 const modelValue = defineModel<string>()
 
@@ -297,8 +296,7 @@ const handleSave = async () => {
   if (code) {
     const validation = validateFunction(code)
     if (!validation.valid) {
-      ElMessage.error({
-        message: validation.error || '函数验证失败',
+      Message.error(validation.error || '函数验证失败', {
         duration: 4000
       })
       return // 验证失败，不关闭对话框

@@ -1,4 +1,5 @@
 import {
+  Modal as AntModal,
   Button,
   Card,
   Checkbox,
@@ -7,6 +8,7 @@ import {
   Form,
   Input,
   InputNumber,
+  message,
   Modal,
   Radio,
   Rate,
@@ -29,6 +31,8 @@ import type {
   FormProtocol,
   InputNumberProtocol,
   InputProtocol,
+  MessageBoxOptions,
+  MessageOptions,
   ModalProtocol,
   RadioGroupProtocol,
   RateProtocol,
@@ -46,8 +50,8 @@ const { Item: FormItem } = Form
 const { TabPane } = Tabs
 const { Panel: CollapsePanel } = Collapse
 const { Option: SelectOption } = Select
-const { Group: RadioGroup, Button: RadioButton } = Radio
-const { Group: CheckboxGroup, Button: CheckboxButton } = Checkbox
+const { Group: RadioGroup } = Radio
+const { Group: CheckboxGroup } = Checkbox
 
 /**
  * Ant Design Vue UI适配器
@@ -597,7 +601,71 @@ const AntdAdapter: UIAdapter = {
       }
     },
     { inheritAttrs: false }
-  )
+  ),
+
+  Message: {
+    success: (msg: string, options?: MessageOptions) => {
+      message.success({
+        content: msg,
+        duration: options?.duration ? options.duration / 1000 : 3
+      })
+    },
+    warning: (msg: string, options?: MessageOptions) => {
+      message.warning({
+        content: msg,
+        duration: options?.duration ? options.duration / 1000 : 3
+      })
+    },
+    info: (msg: string, options?: MessageOptions) => {
+      message.info({
+        content: msg,
+        duration: options?.duration ? options.duration / 1000 : 3
+      })
+    },
+    error: (msg: string | MessageOptions, options?: MessageOptions) => {
+      if (typeof msg === 'string') {
+        message.error({
+          content: msg,
+          duration: options?.duration ? options.duration / 1000 : 4.5
+        })
+      } else {
+        message.error({
+          content: msg.message || '',
+          duration: msg.duration ? msg.duration / 1000 : 4.5
+        })
+      }
+    },
+    confirm: async (msg: string, title?: string, options?: MessageBoxOptions): Promise<void> => {
+      return new Promise((resolve, reject) => {
+        AntModal.confirm({
+          title: title || '提示',
+          content: msg,
+          okText: options?.confirmButtonText || '确定',
+          cancelText: options?.cancelButtonText || '取消',
+          centered: options?.center,
+          onOk: () => {
+            resolve()
+          },
+          onCancel: () => {
+            reject('cancel')
+          }
+        })
+      })
+    },
+    alert: async (msg: string, title?: string, options?: MessageBoxOptions): Promise<void> => {
+      return new Promise((resolve) => {
+        AntModal.info({
+          title: title || '提示',
+          content: msg,
+          okText: options?.confirmButtonText || '确定',
+          centered: options?.center,
+          onOk: () => {
+            resolve()
+          }
+        })
+      })
+    }
+  }
 }
 
 export default AntdAdapter

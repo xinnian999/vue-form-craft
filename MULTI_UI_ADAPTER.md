@@ -51,8 +51,7 @@
 - Tag（标签）
 - Table（表格）
 - TableColumn（表格列）
-- Message（消息提示）
-- MessageBox（消息弹框）
+- ✅ Message（消息）- 已适配（包含消息提示和确认框）
 
 ---
 
@@ -64,10 +63,9 @@
 
 #### 提炼规则
 
-- 首先提炼elements下基于El二次封装的组件，目前大部分组件都是直接透传参数给el原组件,提炼的话首先应该根据attrSchema支持props配置生成。
-- 其次提炼Form、FormItem，可基于FormRender里的使用场景。
-- 提炼其他设计器使用到的工具组件，如Button、Dialog
+- 首先提炼elements下基于El二次封装的组件，目前大部分组件都是直接透传参数给el原组件,提炼的话首先应该根据attrSchema支持props配置生成，注意提炼出的参数，必须两个ui库都支持。
 - 提炼出的每个组件`Protocol`，需要放到总的`UIAdapter`里，作为内置组件库的类型。 这个`UIAdapter`与UI库解耦，其他UI库需要往这个接口适配
+- 对于方法调用类组件（如 Message、MessageBox），应该合并为一个对象，便于统一管理和调用
 
 #### Protocol 示例
 
@@ -444,6 +442,50 @@ import { useUI } from '@/hooks'
 const { Input } = useUI()
 const value = ref('')
 </script>
+```
+
+#### Message 使用示例（消息提示和确认框）
+
+```typescript
+// 原来直接使用 Element-Plus
+import { ElMessage, ElMessageBox } from 'element-plus'
+
+// 消息提示
+ElMessage.success('操作成功')
+ElMessage.error({ message: '操作失败', duration: 4000 })
+
+// 确认框
+await ElMessageBox.confirm('确认删除吗？', '提示', {
+  confirmButtonText: '确定',
+  cancelButtonText: '取消',
+  type: 'warning'
+})
+```
+
+```typescript
+// 现在使用 useUI 获取适配后的 Message
+import { useUI } from '@/hooks'
+
+const { Message } = useUI()
+
+// 消息提示
+Message.success('操作成功')
+Message.error('操作失败', { duration: 4000 })
+Message.warning('警告信息')
+Message.info('提示信息')
+
+// 确认框
+await Message.confirm('确认删除吗？', '提示', {
+  confirmButtonText: '确定',
+  cancelButtonText: '取消',
+  type: 'warning'
+})
+
+// 提示框
+await Message.alert('操作成功', '提示', {
+  confirmButtonText: '知道了',
+  type: 'success'
+})
 ```
 
 ## 切换UI方式

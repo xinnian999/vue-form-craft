@@ -27,6 +27,8 @@ export interface UIAdapter {
   // 工具组件
   Button: Component<ButtonProtocol['props']>
   Modal: Component<ModalProtocol['props']>
+  // 消息组件
+  Message: MessageProtocol
 }
 
 /**
@@ -435,4 +437,39 @@ export interface DatePickerProtocol {
     onChange?: (value: string | Date | [string, string] | [Date, Date]) => void
   }
   slots: Record<string, never>
+}
+
+/**
+ * Message 协议 - 包含消息提示和确认框
+ */
+export interface MessageProtocol {
+  success: (message: string, options?: MessageOptions) => void
+  warning: (message: string, options?: MessageOptions) => void
+  info: (message: string, options?: MessageOptions) => void
+  error: (message: string | MessageOptions, options?: MessageOptions) => void
+  confirm: (message: string, title?: string, options?: MessageBoxOptions) => Promise<void>
+  alert: (message: string, title?: string, options?: MessageBoxOptions) => Promise<void>
+}
+
+/**
+ * Message 选项
+ */
+export interface MessageOptions {
+  message?: string
+  duration?: number
+  showClose?: boolean
+  center?: boolean
+  offset?: number
+}
+
+/**
+ * MessageBox 选项
+ */
+export interface MessageBoxOptions {
+  confirmButtonText?: string
+  cancelButtonText?: string
+  type?: 'success' | 'info' | 'warning' | 'error'
+  showCancelButton?: boolean
+  showConfirmButton?: boolean
+  center?: boolean
 }

@@ -36,12 +36,11 @@
   </el-upload>
 </template>
 <script lang="ts" setup>
-import { ElMessage, ElMessageBox } from 'element-plus'
 import type { UploadProps, UploadUserFile } from 'element-plus'
 import { Icon } from '@/components'
 import { useUI } from '@/hooks'
 
-const { Button } = useUI()
+const { Button, Message } = useUI()
 
 interface Props {
   action: string
@@ -74,7 +73,7 @@ const handlePreview: UploadProps['onPreview'] = (uploadFile) => {
 }
 
 const handleExceed: UploadProps['onExceed'] = (files, uploadFiles) => {
-  ElMessage.warning(
+  Message.warning(
     `The limit is 3, you selected ${files.length} files this time, add up to ${
       files.length + uploadFiles.length
     } totally`
@@ -82,7 +81,7 @@ const handleExceed: UploadProps['onExceed'] = (files, uploadFiles) => {
 }
 
 const beforeRemove: UploadProps['beforeRemove'] = (uploadFile, uploadFiles) => {
-  return ElMessageBox.confirm(`Cancel the transfer of ${uploadFile.name} ?`).then(
+  return Message.confirm(`Cancel the transfer of ${uploadFile.name} ?`).then(
     () => true,
     () => false
   )

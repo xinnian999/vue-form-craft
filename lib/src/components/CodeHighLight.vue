@@ -8,7 +8,6 @@
 </template>
 
 <script setup lang="ts">
-import { ElMessage } from 'element-plus'
 import { createHighlighterCore } from 'shiki/core'
 import javascript from 'shiki/langs/javascript.mjs'
 import json from 'shiki/langs/json.mjs'
@@ -19,6 +18,9 @@ import githubLight from 'shiki/themes/github-light.mjs'
 import getWasm from 'shiki/wasm'
 import { onMounted, ref } from 'vue'
 import { Icon } from '@/components'
+import { useUI } from '@/hooks'
+
+const { Message } = useUI()
 
 const props = withDefaults(
   defineProps<{
@@ -46,7 +48,7 @@ const handleCopy = async () => {
   // 移除 textarea 元素
   document.body.removeChild(textarea)
 
-  ElMessage.success('已成功复制到剪贴板')
+  Message.success('已成功复制到剪贴板')
 }
 
 const html = ref('')
