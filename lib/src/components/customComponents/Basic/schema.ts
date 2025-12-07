@@ -30,7 +30,7 @@ export default {
       designKey: 'design-gfim'
     },
     {
-      label: '标签宽度',
+      label: '标签宽度（px）',
       name: 'labelWidth',
       component: 'InputNumber',
       props: {

@@ -28,10 +28,9 @@ export default {
           designKey: 'tab-1',
           children: [
             {
-              label: 'label宽度',
+              label: '标签宽度（px）',
               name: 'labelWidth',
               component: 'InputNumber',
-              help: 'px',
               props: {
                 min: 60,
                 step: 10

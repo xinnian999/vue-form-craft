@@ -8,6 +8,6 @@ export default {
   render: Component,
   icon: 'esign',
   type: 'basic',
-  order: 11,
+  order: 19,
   attrSchema
 } satisfies FormElement
