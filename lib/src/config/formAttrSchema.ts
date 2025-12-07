@@ -31,11 +31,10 @@ export default {
               label: 'label宽度',
               name: 'labelWidth',
               component: 'InputNumber',
+              help: 'px',
               props: {
                 min: 60,
-                unit: 'px',
-                step: 10,
-                controlsPosition: ''
+                step: 10
               },
               designKey: 'design-cOkn'
             },

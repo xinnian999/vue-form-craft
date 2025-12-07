@@ -5,6 +5,7 @@ import {
   Collapse,
   Form,
   Input,
+  InputNumber,
   Modal,
   Radio,
   Select,
@@ -21,6 +22,7 @@ import type {
   CollapseProtocol,
   FormItemProtocol,
   FormProtocol,
+  InputNumberProtocol,
   InputProtocol,
   ModalProtocol,
   RadioGroupProtocol,
@@ -454,7 +456,7 @@ const AntdAdapter: UIAdapter = {
   ),
 
   Switch: defineComponent(
-    (_, { slots, attrs }) => {
+    (_, { attrs }) => {
       const propsAttrs = attrs as SwitchProtocol['props']
 
       return () =>
@@ -466,6 +468,22 @@ const AntdAdapter: UIAdapter = {
           },
           checkedChildren: propsAttrs.activeText,
           unCheckedChildren: propsAttrs.inactiveText
+        })
+    },
+    { inheritAttrs: false }
+  ),
+
+  InputNumber: defineComponent(
+    (_, { attrs }) => {
+      const propsAttrs = attrs as InputNumberProtocol['props']
+
+      return () =>
+        h(InputNumber as any, {
+          ...attrs,
+          value: propsAttrs.modelValue,
+          'onUpdate:value': (value: number | undefined) => {
+            propsAttrs['onUpdate:modelValue']?.(value)
+          }
         })
     },
     { inheritAttrs: false }

@@ -59,8 +59,7 @@ export default {
               component: 'InputNumber',
               props: {
                 min: 1,
-                max: 10,
-                controlsPosition: ''
+                max: 10
               },
               designKey: 'design-max'
             },
@@ -161,9 +160,7 @@ export default {
                   name: 'value',
                   component: 'InputNumber',
                   props: {
-                    placeholder: '请输入最小值',
-                    min: 0,
-                    controlsPosition: ''
+                    min: 0
                   },
                   designKey: 'design-rule-min',
                   hidden: "{{ $item.type !== 'min' }}"
@@ -173,9 +170,7 @@ export default {
                   name: 'value',
                   component: 'InputNumber',
                   props: {
-                    placeholder: '请输入最大值',
-                    min: 0,
-                    controlsPosition: ''
+                    min: 0
                   },
                   designKey: 'design-rule-max',
                   hidden: "{{ $item.type !== 'max' }}"

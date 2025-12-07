@@ -313,6 +313,24 @@ export interface SwitchProtocol {
 }
 
 /**
+ * InputNumber 组件协议
+ */
+export interface InputNumberProtocol {
+  props: {
+    modelValue: number | undefined
+    min?: number
+    max?: number
+    step?: number
+    disabled?: boolean
+    'onUpdate:modelValue'?: (value: number | undefined) => void
+    onChange?: (value: number | undefined) => void
+    onBlur?: (e: Event) => void
+    onFocus?: (e: Event) => void
+  }
+  slots: Record<string, never>
+}
+
+/**
  * UI适配器 - 包含所有组件的适配器
  */
 export interface UIAdapter {
@@ -323,6 +341,7 @@ export interface UIAdapter {
   RadioGroup: Component<RadioGroupProtocol['props']>
   CheckboxGroup: Component<CheckboxGroupProtocol['props']>
   Switch: Component<SwitchProtocol['props']>
+  InputNumber: Component<InputNumberProtocol['props']>
   // 布局组件
   Card: Component<CardProtocol['props']>
   Tabs: Component<TabsProtocol['props']>

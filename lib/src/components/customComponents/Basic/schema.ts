@@ -35,8 +35,7 @@ export default {
       component: 'InputNumber',
       props: {
         unit: 'px',
-        step: 10,
-        controlsPosition: ''
+        step: 10
       },
       designKey: 'design-UcmF'
     },

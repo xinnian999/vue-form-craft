@@ -83,9 +83,7 @@ export default {
           name: 'value',
           component: 'InputNumber',
           props: {
-            placeholder: '请输入最小长度',
-            min: 0,
-            controlsPosition: ''
+            min: 0
           },
           designKey: 'design-rule-min',
           hidden: "{{ $item.type !== 'min' }}"

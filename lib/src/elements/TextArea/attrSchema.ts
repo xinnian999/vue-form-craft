@@ -83,8 +83,7 @@ export default {
               name: 'props.maxlength',
               component: 'InputNumber',
               props: {
-                min: 0,
-                controlsPosition: ''
+                min: 0
               },
               designKey: 'design-maxlength'
             },
@@ -99,8 +98,7 @@ export default {
               name: 'props.autosize.minRows',
               component: 'InputNumber',
               props: {
-                min: 1,
-                controlsPosition: ''
+                min: 1
               },
               designKey: 'design-minRows'
             },
@@ -109,8 +107,7 @@ export default {
               name: 'props.autosize.maxRows',
               component: 'InputNumber',
               props: {
-                min: 1,
-                controlsPosition: ''
+                min: 1
               },
               designKey: 'design-maxRows'
             }

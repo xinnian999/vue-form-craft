@@ -11,8 +11,7 @@ export default {
     props: {
       min: 1,
       max: 999,
-      step: 1,
-      controlsPosition: ''
+      step: 1
     }
   },
   items: [
@@ -45,15 +44,6 @@ export default {
               labelWidth: 0
             },
             {
-              label: '占位提示',
-              name: 'props.placeholder',
-              component: 'Input',
-              props: {
-                autocomplete: 'new-password'
-              },
-              designKey: 'design-placeholder'
-            },
-            {
               label: '隐藏',
               name: 'hidden',
               component: 'Switch',
@@ -72,35 +62,15 @@ export default {
               designKey: 'design-readonly'
             },
             {
-              label: '按钮位置',
-              name: 'props.controlsPosition',
-              component: 'Radio',
-              props: {
-                mode: 'static',
-                options: [
-                  { label: '两侧', value: '' },
-                  { label: '内部', value: 'right' }
-                ]
-              },
-              initialValue: '',
-              designKey: 'design-controlsPosition'
-            },
-            {
               label: '最小值',
               name: 'props.min',
               component: 'InputNumber',
-              props: {
-                controlsPosition: ''
-              },
               designKey: 'design-min'
             },
             {
               label: '最大值',
               name: 'props.max',
               component: 'InputNumber',
-              props: {
-                controlsPosition: ''
-              },
               designKey: 'design-max'
             },
             {
@@ -108,21 +78,9 @@ export default {
               name: 'props.step',
               component: 'InputNumber',
               props: {
-                min: 1,
-                controlsPosition: ''
+                min: 1
               },
               designKey: 'design-step'
-            },
-            {
-              label: '精度',
-              name: 'props.precision',
-              component: 'InputNumber',
-              props: {
-                min: 0,
-                controlsPosition: ''
-              },
-              designKey: 'design-precision',
-              help: '数值精度，小数点后保留几位'
             }
           ]
         },

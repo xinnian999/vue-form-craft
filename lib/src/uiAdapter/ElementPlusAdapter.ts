@@ -8,6 +8,7 @@ import {
   ElForm,
   ElFormItem,
   ElInput,
+  ElInputNumber,
   ElOption,
   ElRadioGroup,
   ElSelect,
@@ -185,8 +186,15 @@ const ElementPlusAdapter: UIAdapter = {
   ),
 
   Switch: defineComponent(
-    (_, { slots, attrs }) => {
+    (_, { attrs }) => {
       return () => h(ElSwitch, attrs)
+    },
+    { inheritAttrs: false }
+  ),
+
+  InputNumber: defineComponent(
+    (_, { attrs }) => {
+      return () => h(ElInputNumber, { ...attrs, controlsPosition: 'right' })
     },
     { inheritAttrs: false }
   )

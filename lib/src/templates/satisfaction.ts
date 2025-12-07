@@ -41,10 +41,8 @@ export default {
       label: '您的年龄',
       component: 'InputNumber',
       props: {
-        placeholder: '',
         min: 1,
-        max: 120,
-        controlsPosition: 'right'
+        max: 120
       },
       name: 'age',
       required: true

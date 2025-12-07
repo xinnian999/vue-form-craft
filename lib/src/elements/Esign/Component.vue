@@ -76,10 +76,7 @@ const actionSchema: FormSchema = {
         {
           label: '画笔粗细',
           component: 'InputNumber',
-          name: 'lineWidth',
-          props: {
-            controlsPosition: 'right'
-          }
+          name: 'lineWidth'
         },
         { label: '画笔颜色', component: 'ColorPicker', name: 'lineColor' },
         { label: '画板背景色', component: 'ColorPicker', name: 'bgColor' }

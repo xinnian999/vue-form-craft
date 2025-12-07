@@ -137,8 +137,7 @@ export default {
               name: 'props.limit',
               component: 'InputNumber',
               props: {
-                min: 0,
-                controlsPosition: ''
+                min: 0
               },
               designKey: 'design-limit',
               help: '最大允许上传个数'

@@ -16,7 +16,7 @@
 
 ## 适配进度
 
-**已完成: 17 / 36**
+**已完成: 18 / 36**
 
 **第一优先级：高频表单组件**
 
@@ -38,7 +38,7 @@
 - Rate（评分）
 - ColorPicker（颜色选择器）
 - Upload（上传）
-- InputNumber（数字输入框）
+- ✅ InputNumber（数字输入框）- 已适配
 - Cascader（级联选择器）
 - Autocomplete（自动补全）
 

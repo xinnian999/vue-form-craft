@@ -66,18 +66,12 @@ export default {
               label: '最小值',
               name: 'props.min',
               component: 'InputNumber',
-              props: {
-                controlsPosition: ''
-              },
               designKey: 'design-min'
             },
             {
               label: '最大值',
               name: 'props.max',
               component: 'InputNumber',
-              props: {
-                controlsPosition: ''
-              },
               designKey: 'design-max'
             },
             {
@@ -85,8 +79,7 @@ export default {
               name: 'props.step',
               component: 'InputNumber',
               props: {
-                min: 0,
-                controlsPosition: ''
+                min: 0
               },
               designKey: 'design-step'
             },
