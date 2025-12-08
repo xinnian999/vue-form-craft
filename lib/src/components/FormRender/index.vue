@@ -5,12 +5,14 @@
     <FormItemGroup :list="parseSchema.items" />
 
     <FormItem v-if="!design && !read && (schema.submitBtn || schema.resetBtn)" label=" ">
-      <Button v-if="schema.submitBtn" type="primary" @click="instance.submit" name="submit-btn">
-        提交
-      </Button>
-      <Button v-if="schema.resetBtn" @click="() => instance.resetFields()" name="reset-btn">
-        重置
-      </Button>
+      <div style="display: flex; gap: 15px">
+        <Button v-if="schema.submitBtn" type="primary" @click="instance.submit" name="submit-btn">
+          提交
+        </Button>
+        <Button v-if="schema.resetBtn" @click="() => instance.resetFields()" name="reset-btn">
+          重置
+        </Button>
+      </div>
     </FormItem>
   </Form>
 </template>
