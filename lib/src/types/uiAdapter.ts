@@ -4,6 +4,8 @@ import type { Component, VNode } from 'vue'
  * UI适配器 - 包含所有组件的适配器
  */
 export interface UIAdapter {
+  // UI 相关样式变量注入
+  injectCssVars?: () => void
   // 表单组件
   Form: Component<FormProtocol['props']>
   FormItem: Component<FormItemProtocol['props']>
@@ -27,10 +29,9 @@ export interface UIAdapter {
   // 工具组件
   Button: Component<ButtonProtocol['props']>
   Modal: Component<ModalProtocol['props']>
+  Alert: Component<AlertProtocol['props']>
   // 消息组件
   Message: MessageProtocol
-  // UI 相关样式变量注入
-  injectCssVars?: () => void
 }
 
 /**
@@ -125,6 +126,21 @@ export interface TextareaProtocol {
     onChange?: (value: string) => void
     onInput?: (value: string) => void
     onClear?: () => void
+  }
+  slots: Record<string, never>
+}
+
+/**
+ * Alert 组件协议
+ */
+export interface AlertProtocol {
+  props: {
+    title?: string
+    description?: string
+    type?: 'success' | 'info' | 'warning' | 'error'
+    closable?: boolean
+    showIcon?: boolean
+    onClose?: () => void
   }
   slots: Record<string, never>
 }

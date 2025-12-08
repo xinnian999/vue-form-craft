@@ -26,7 +26,7 @@ export default {
           component: 'Radio',
           props: {
             mode: 'static',
-            type: 'button',
+            isButtonOption: true,
             options: [
               {
                 label: '包年包月',
@@ -92,7 +92,7 @@ export default {
                 value: 'value2'
               }
             ],
-            type: 'button'
+            isButtonOption: true
           }
         }
       ]

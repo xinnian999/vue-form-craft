@@ -33,14 +33,7 @@
 
       <RenderComponent />
 
-      <el-alert
-        :class="['form-item-alert']"
-        :title="alert"
-        type="primary"
-        show-icon
-        :closable="false"
-        v-if="alert"
-      />
+      <Alert :class="['form-item-alert']" :title="alert" show-icon :closable="false" v-if="alert" />
     </FormItem>
   </template>
 </template>
@@ -53,7 +46,7 @@ import { useElements, useFormInstance, useUI } from '@/hooks'
 import type { FormItemType, RuleItem } from '@/types'
 import { deepParse, filterExpressions, getDataByPath, ns, parseRules } from '@/utils'
 
-const { FormItem } = useUI()
+const { FormItem, Alert } = useUI()
 
 const props = defineProps<FormItemType>()
 
@@ -257,9 +250,5 @@ watch(
   .form-item-alert {
     margin-top: 10px;
   }
-}
-
-@include ns('form-item-layout') {
-  margin-bottom: 18px;
 }
 </style>

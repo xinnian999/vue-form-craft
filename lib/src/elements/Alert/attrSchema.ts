@@ -29,19 +29,6 @@ export default {
         ]
       },
       initialValue: 'info'
-    },
-    {
-      label: '主题',
-      component: 'Radio',
-      name: 'props.effect',
-      props: {
-        mode: 'static',
-        options: [
-          { label: '浅色', value: 'light' },
-          { label: '深色', value: 'dark' }
-        ]
-      },
-      initialValue: 'light'
     }
   ]
 } satisfies FormSchema

@@ -1,4 +1,5 @@
 import {
+  Alert as AntAlert,
   Modal as AntModal,
   Button,
   Card,
@@ -20,6 +21,7 @@ import {
 import { omit } from 'lodash'
 import { defineComponent, h, ref } from 'vue'
 import type {
+  AlertProtocol,
   ButtonProtocol,
   CardProtocol,
   CheckboxGroupProtocol,
@@ -627,6 +629,19 @@ const AntdAdapter: UIAdapter = {
             : propsAttrs.placeholder
         })
       }
+    },
+    { inheritAttrs: false }
+  ),
+
+  Alert: defineComponent(
+    (_, { attrs }) => {
+      const propsAttrs = attrs as AlertProtocol['props']
+
+      return () =>
+        h(AntAlert, {
+          ...attrs,
+          message: propsAttrs.title
+        })
     },
     { inheritAttrs: false }
   ),

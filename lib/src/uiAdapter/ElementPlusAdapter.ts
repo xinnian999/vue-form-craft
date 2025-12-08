@@ -1,4 +1,5 @@
 import {
+  ElAlert,
   ElButton,
   ElCard,
   ElCheckboxGroup,
@@ -24,6 +25,7 @@ import {
 } from 'element-plus'
 import { defineComponent, h, ref } from 'vue'
 import type {
+  AlertProtocol,
   FormItemProtocol,
   FormProtocol,
   MessageBoxOptions,
@@ -81,6 +83,24 @@ const ElementPlusAdapter: UIAdapter = {
           },
           slots
         )
+    },
+    { inheritAttrs: false }
+  ),
+
+  Alert: defineComponent(
+    (_, { attrs, slots }) => {
+      const propsAttrs = attrs as AlertProtocol['props']
+
+      return () => {
+        let type: 'error' | 'success' | 'info' | 'warning' | 'primary' =
+          propsAttrs.type || 'primary'
+
+        if (propsAttrs.type === 'info') {
+          type = 'primary'
+        }
+
+        return h(ElAlert, { ...attrs, type }, slots)
+      }
     },
     { inheritAttrs: false }
   ),
@@ -298,6 +318,13 @@ const ElementPlusAdapter: UIAdapter = {
         confirmButtonText: options?.confirmButtonText || '确定',
         cancelButtonText: options?.cancelButtonText || '取消',
         type: options?.type || 'warning',
+        ...options
+      })
+    },
+    alert: async (message: string, title?: string, options?: MessageBoxOptions): Promise<void> => {
+      await ElMessageBox.alert(message, title || '提示', {
+        confirmButtonText: options?.confirmButtonText || '确定',
+        type: options?.type || 'info',
         ...options
       })
     }
