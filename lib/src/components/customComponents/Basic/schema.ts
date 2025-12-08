@@ -37,7 +37,8 @@ export default {
         unit: 'px',
         step: 10
       },
-      designKey: 'design-UcmF'
+      designKey: 'design-UcmF',
+      defaultValue: 110
     },
     {
       label: '标签位置',

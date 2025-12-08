@@ -21,6 +21,31 @@ export default {
         component: 'Input',
         name: 'name',
         help: "既是唯一标识，也是数据路径。比如输入【props.name】，数据就会保存为 { props: { name:'xxx' } }"
+      },
+      {
+        label: '参数提示',
+        name: 'props.paramTips',
+        component: 'FormList',
+        labelAlign: 'top',
+        props: {
+          mode: 'table',
+          title: '参数提示'
+        },
+        designKey: 'design-paramTips',
+        children: [
+          {
+            label: '参数名',
+            name: 'name',
+            component: 'Input',
+            designKey: 'design-paramTips-target'
+          },
+          {
+            label: '描述',
+            name: 'description',
+            component: 'TextArea',
+            designKey: 'design-paramTips-description'
+          }
+        ]
       }
     ]
   }

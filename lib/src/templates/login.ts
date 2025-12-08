@@ -6,6 +6,9 @@ export default {
   size: 'default',
   scrollToError: true,
   submitBtn: true,
+  initialValues: {
+    remember: false
+  },
   items: [
     {
       label: '用户名',
@@ -14,7 +17,7 @@ export default {
       props: {
         placeholder: '请输入用户名'
       },
-      required: true,
+      required: true
     },
     {
       label: '密码',
@@ -31,7 +34,7 @@ export default {
           message: '密码长度必须为6-20位',
           trigger: 'blur'
         }
-      ],
+      ]
     },
     {
       label: '记住我',
@@ -39,8 +42,7 @@ export default {
       component: 'Switch',
       props: {
         'inline-prompt': false
-      },
-      initialValue: false,
+      }
     }
   ]
 } satisfies FormSchema

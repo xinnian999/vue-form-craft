@@ -31,8 +31,7 @@ export default {
             { label: '居中', value: 'center' },
             { label: '右对齐', value: 'right' }
           ]
-        },
-        initialValue: 'left'
+        }
       },
       { label: '间距大小', component: 'InputNumber', name: 'props.gap', props: { unit: 'px' } },
       { label: '自动换行', component: 'Switch', name: 'props.autoWrap' }

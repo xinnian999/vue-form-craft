@@ -107,6 +107,7 @@ interface Props extends ComponentBaseProps {
   title?: string
   name?: string
   disabled?: boolean
+  getNewItem?: (index: number) => Record<string, any>
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -187,7 +188,10 @@ const handleAddItem = () => {
   if (isMax.value) {
     return
   }
-  list.value = [...list.value, {}]
+
+  const newItem = props.getNewItem?.(list.value.length + 1) || {}
+
+  list.value = [...list.value, newItem]
 }
 
 const handleReduceItem = (index: number) => {

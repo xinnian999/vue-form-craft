@@ -1,4 +1,4 @@
-import type { FormSchema } from "@/types";
+import type { FormSchema } from '@/types'
 
 export default {
   size: 'small',
@@ -33,7 +33,7 @@ export default {
           }
         ]
       },
-      initialValue: 'center',
+      defaultValue: 'center'
     }
   ]
 } satisfies FormSchema

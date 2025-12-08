@@ -6,6 +6,10 @@ export default {
   size: 'default',
   scrollToError: true,
   submitBtn: true,
+  initialValues: {
+    quantity: 1,
+    paymentMethod: 'alipay'
+  },
   items: [
     {
       label: '商品选择',
@@ -42,8 +46,7 @@ export default {
         min: 1
       },
       required: true,
-      designKey: 'design-vJQN',
-      initialValue: 1
+      designKey: 'design-vJQN'
     },
     {
       label: '收货地址',
@@ -86,8 +89,7 @@ export default {
         mode: 'static'
       },
       required: true,
-      designKey: 'design-vXx2',
-      initialValue: 'alipay'
+      designKey: 'design-vXx2'
     },
     {
       label: '商品单价',

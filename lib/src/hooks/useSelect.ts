@@ -21,7 +21,15 @@ const useSelect = (props: SelectProps) => {
     if (!request) return
     if (!props.api) return
 
-    const { url, method, params, dataPath, labelKey, valueKey, disabledKey } = props.api
+    const {
+      url = '/',
+      method = 'GET',
+      params,
+      dataPath = 'data',
+      labelKey = 'label',
+      valueKey = 'value',
+      disabledKey = 'disabled'
+    } = props.api
 
     loading.value = true
 
@@ -45,19 +53,15 @@ const useSelect = (props: SelectProps) => {
       })
       const resData = getDataByPath(res, dataPath) || []
 
-      const lKey = labelKey || 'label'
-      const vKey = valueKey || 'value'
-      const dKey = disabledKey || 'disabled'
-
       const resDataParse: Option[] = resData.map((item: any) => {
         if (!isPlainObject(item)) {
           return { label: item, value: item, disabled: false }
         }
 
         return {
-          label: item[lKey],
-          value: item[vKey],
-          disabled: item[dKey]
+          label: item[labelKey],
+          value: item[valueKey],
+          disabled: item[disabledKey]
         }
       })
 

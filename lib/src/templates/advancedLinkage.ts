@@ -5,6 +5,9 @@ export default {
   labelAlign: 'right',
   size: 'default',
   submitBtn: true,
+  initialValues: {
+    hasDiscount: false
+  },
   items: [
     {
       label: '商品类型',
@@ -83,7 +86,6 @@ export default {
       label: '是否打折',
       name: 'hasDiscount',
       component: 'Switch',
-      initialValue: false,
       linkages: [
         {
           target: 'discount',

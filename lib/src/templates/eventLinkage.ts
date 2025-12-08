@@ -5,6 +5,7 @@ export default {
   labelAlign: 'right',
   size: 'default',
   submitBtn: true,
+  initialValues: {},
   items: [
     {
       label: '用户名',
@@ -175,7 +176,6 @@ export default {
   $instance.setFieldValue('total', total)
 } }}`
       },
-      initialValue: 1,
       designKey: 'design-quantity'
     },
     {

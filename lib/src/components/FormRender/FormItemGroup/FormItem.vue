@@ -56,7 +56,7 @@ const elements = useElements()
 
 const value = computed({
   get() {
-    return formInstance.getFieldValue(props.name)
+    return formInstance.getFieldValue(props.name) ?? props.defaultValue
   },
   set(val) {
     formInstance.setFieldValue(props.name, val)
@@ -136,12 +136,6 @@ const RenderComponent = () => {
   return h(config.value.render, componentProps, slots)
 }
 
-onBeforeMount(() => {
-  if (value.value === undefined && props.initialValue !== undefined && !formInstance.design) {
-    formInstance.setFieldValue(props.name, props.initialValue)
-  }
-})
-
 // linkages 联动：可修改数据和 schema
 // 性能优化：缓存formValues引用，避免重复调用getValues()
 watch(
@@ -151,6 +145,11 @@ watch(
 
     // 提前返回，避免不必要的计算
     if (!linkages || linkages.length === 0 || formInstance.design) return
+
+    if (newVal === undefined) {
+      return
+    }
+
     if (isEqual(newVal, oldVal)) return
 
     // 缓存formValues，避免多次调用getValues()

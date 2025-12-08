@@ -241,6 +241,8 @@ onBeforeMount(() => {
 
     setValues({ ...values, ...formValues.value })
   }
+
+  console.log(formValues.value)
 })
 
 onBeforeUnmount(() => {

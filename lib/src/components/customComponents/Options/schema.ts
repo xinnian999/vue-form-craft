@@ -1,28 +1,18 @@
-import type { FormSchema } from '@/types'
+import type { FormSchema } from 'formora'
 
 export default {
   labelWidth: 110,
   labelAlign: 'left',
   scrollToError: true,
   size: 'small',
-  submitBtn: false,
+  submitBtn: true,
   initialValues: {
     props: {
-      mode: 'static',
-      options: [
-        {
-          label: '选项1',
-          value: 'value1'
-        },
-        {
-          label: '选项2',
-          value: 'value2'
-        },
-        {
-          label: '选项3',
-          value: 'value3'
-        }
-      ]
+      mode: 'remote',
+      api: {
+        url: '999999',
+        method: 'POST'
+      }
     }
   },
   items: [
@@ -42,12 +32,33 @@ export default {
             label: '远程',
             value: 'remote'
           }
-        ],
-        style: {
-          marginBottom: '18px'
-        }
+        ]
       },
-      labelAlign: 'top'
+      labelAlign: 'top',
+      linkages: [
+        {
+          type: 'data',
+          target: 'props.api.url',
+          condition: "{{ $values.props.mode === 'remote' && !$values.props.api.url}}",
+          value: 'https://apifoxmock.com/m1/5213940-4880280-default/options/test'
+        },
+        {
+          type: 'data',
+          target: 'props.api.method',
+          condition: "{{ $values.props.mode === 'remote' && !$values.props.api.method}}",
+          value: 'GET'
+        },
+        {
+          type: 'data',
+          target: 'props.api',
+          condition: "{{ $values.props.mode === 'static' }}"
+        },
+        {
+          type: 'data',
+          target: 'props.options',
+          condition: "{{ $values.props.mode === 'remote' }}"
+        }
+      ]
     },
     {
       label: '静态选项',
@@ -56,7 +67,9 @@ export default {
       component: 'FormList',
       props: {
         mode: 'table',
-        title: '选项'
+        title: '选项',
+        getNewItem:
+          '{{ (index) => {\n  return { label: `选项${index}`,value:`value${index}` }\n} }}'
       },
       labelAlign: 'top',
       hidden: '{{$values.props.mode!=="static"}}',
@@ -68,15 +81,13 @@ export default {
           component: 'Input',
           props: {
             placeholder: '请输入...'
-          },
-          initialValue: '{{ "选项" + ($index + 1) }}'
+          }
         },
         {
           label: '选项值',
           name: 'value',
           designKey: 'design-option-value',
-          component: 'Input',
-          initialValue: '{{ "value" + ($index + 1) }}'
+          component: 'Input'
         },
         {
           label: '是否禁用',
@@ -99,7 +110,8 @@ export default {
           designKey: 'design-divider-request',
           component: 'Divider',
           props: {
-            title: '请求'
+            title: '请求',
+            contentPosition: 'center'
           }
         },
         {
@@ -107,8 +119,7 @@ export default {
           name: 'props.api.url',
           designKey: 'design-api-url',
           component: 'Input',
-          labelAlign: 'top',
-          initialValue: 'https://apifoxmock.com/m1/5213940-4880280-default/options/test'
+          labelAlign: 'top'
         },
         {
           label: '请求方式',
@@ -134,12 +145,9 @@ export default {
                 label: 'DELETE',
                 value: 'DELETE'
               }
-            ],
-            type: 'button',
-            space: 0
+            ]
           },
-          labelAlign: 'top',
-          initialValue: 'GET'
+          labelAlign: 'top'
         },
         {
           label: '请求参数',
@@ -168,7 +176,7 @@ export default {
           designKey: 'design-api-dataPath',
           component: 'Input',
           labelAlign: 'top',
-          initialValue: 'data'
+          defaultValue: 'data'
         },
         {
           label: '标签key',
@@ -176,7 +184,7 @@ export default {
           designKey: 'design-api-labelKey',
           component: 'Input',
           labelAlign: 'top',
-          initialValue: 'label'
+          defaultValue: 'label'
         },
         {
           label: '值Key',
@@ -184,7 +192,7 @@ export default {
           designKey: 'design-api-valueKey',
           component: 'Input',
           labelAlign: 'top',
-          initialValue: 'value'
+          defaultValue: 'value'
         },
         {
           label: '禁用Key',
@@ -192,7 +200,7 @@ export default {
           designKey: 'design-api-disabledKey',
           component: 'Input',
           labelAlign: 'top',
-          initialValue: 'disabled'
+          defaultValue: 'disabled'
         }
       ]
     }

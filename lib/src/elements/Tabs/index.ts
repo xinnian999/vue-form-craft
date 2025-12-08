@@ -72,8 +72,7 @@ export default {
             props: {
               placeholder: '请输入标题'
             },
-            name: 'label',
-            initialValue: '{{ "选项卡" + ($index + 1) }}'
+            name: 'label'
           },
           {
             label: '唯一标识',
@@ -81,8 +80,7 @@ export default {
             props: {
               placeholder: '请输入唯一标识'
             },
-            name: 'name',
-            initialValue: '{{ "name" + ($index + 1) }}'
+            name: 'name'
           },
           {
             label: '禁用',
@@ -103,7 +101,9 @@ export default {
         ],
         props: {
           mode: 'card',
-          title: '选项卡'
+          title: '选项卡',
+          getNewItem:
+            '{{ (index) => { return { label: "选项卡" + index, name: "name" + index } } }}'
         },
         name: 'children'
       }

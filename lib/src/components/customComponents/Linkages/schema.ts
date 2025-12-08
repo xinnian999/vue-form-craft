@@ -13,7 +13,8 @@ export default {
       component: 'FormList',
       props: {
         mode: 'card',
-        title: '联动规则'
+        title: '联动规则',
+        getNewItem: '{{ () => { return { type: "attr"} } }}'
       },
       designKey: 'design-linkages',
       labelAlign: 'top',
@@ -61,7 +62,6 @@ export default {
             ]
           },
           designKey: 'design-link-type',
-          initialValue: 'attr',
           linkages: [
             {
               target: 'path',

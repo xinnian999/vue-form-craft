@@ -13,8 +13,10 @@
         :schema="{ ...designInstance.getSchema(), submitBtn: false, resetBtn: false }"
       ></FormRender>
       <template #footer>
-        <Button @click="visible = false">取消</Button>
-        <Button type="primary" @click="handleSave">保存</Button>
+        <div style="display: flex; justify-content: center">
+          <Button @click="handleClear">清空</Button>
+          <Button type="primary" @click="handleSave">保存</Button>
+        </div>
       </template>
     </Modal>
   </div>
@@ -46,5 +48,9 @@ const handleSave = () => {
 
 const handleClose = () => {
   initialValues.value = modelValue.value
+}
+
+const handleClear = () => {
+  initialValues.value = {}
 }
 </script>

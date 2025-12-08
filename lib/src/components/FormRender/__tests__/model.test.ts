@@ -180,18 +180,20 @@ describe('《表单渲染器》v-model 双向绑定测试', () => {
 
   it('初始值设置后的双向绑定', async () => {
     const schemaWithInitial: FormSchema = {
+      initialValues: {
+        username: 'default_user',
+        age: 18
+      },
       items: [
         {
           label: '用户名',
           component: 'Input',
-          name: 'username',
-          initialValue: 'default_user'
+          name: 'username'
         },
         {
           label: '年龄',
           component: 'InputNumber',
-          name: 'age',
-          initialValue: 18
+          name: 'age'
         }
       ]
     }

@@ -42,8 +42,7 @@ export default {
             props: {
               placeholder: '请输入标题'
             },
-            name: 'label',
-            initialValue: '{{ "面板" + ($index + 1) }}'
+            name: 'label'
           },
           {
             label: '唯一标识',
@@ -51,8 +50,7 @@ export default {
             props: {
               placeholder: '请输入唯一标识'
             },
-            name: 'name',
-            initialValue: '{{ "name" + ($index + 1) }}'
+            name: 'name'
           },
           {
             label: '默认展开',
@@ -62,7 +60,9 @@ export default {
         ],
         props: {
           mode: 'card',
-          title: '折叠面板'
+          title: '折叠面板',
+          getNewItem:
+            '{{ (index) => { return { label: "面板" + index, name: "name" + index, props: { checked: false } } } }}'
         },
         name: 'children'
       }

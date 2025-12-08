@@ -21,7 +21,7 @@ export default {
     },
     items: [
       { label: '唯一标识', component: 'Input', name: 'name' },
-      { label: '列数', component: 'InputNumber', name: 'props.columns', initialValue: 2 },
+      { label: '列数', component: 'InputNumber', name: 'props.columns' },
       {
         label: '列间距',
         component: 'InputNumber',

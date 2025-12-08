@@ -38,7 +38,6 @@ export interface FormItemType {
   size?: 'default' | 'small' | 'large'
   name: string
   required?: boolean
-  initialValue?: any
   help?: string
   alert?: string
   children?: FormItemType[]
@@ -55,7 +54,12 @@ export interface FormItemType {
   props?: Record<string, any>
   slots?: Record<string, any>
 
-  // C. 设计器内部用的
+  // C. 组件内建默认值
+  // 仅影响组件【显示层】的默认值：value === undefined/null 时用于渲染，不会自动 set 到 formValues。
+  // 推荐用于【属性配置表单】展示组件内建默认值；业务表单的初始值请统一使用 FormSchema.initialValues。
+  defaultValue?: any
+
+  // D. 设计器内部用的
   designKey?: string
 }
 
