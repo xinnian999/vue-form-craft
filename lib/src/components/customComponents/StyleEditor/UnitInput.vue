@@ -180,14 +180,14 @@ watch(
   .vfc-unit-input__preset-btn {
     flex: 1;
     width: 100%;
-    color: $primaryColor;
-    border-color: $primaryColor;
+    color: $themeColor;
+    border-color: $themeColor;
     background: transparent;
 
     &:hover {
-      color: $primaryColor;
-      border-color: $primaryColor;
-      background: rgba($primaryColor, 0.1);
+      color: $themeColor;
+      border-color: $themeColor;
+      background: rgba($themeColor, 0.1);
     }
   }
 
@@ -203,14 +203,14 @@ watch(
 
   .vfc-unit-input__unit-btn {
     min-width: 48px;
-    color: $primaryColor;
-    border-color: $primaryColor;
+    color: $themeColor;
+    border-color: $themeColor;
     background: transparent;
 
     &:hover {
-      color: $primaryColor;
-      border-color: $primaryColor;
-      background: rgba($primaryColor, 0.1);
+      color: $themeColor;
+      border-color: $themeColor;
+      background: rgba($themeColor, 0.1);
     }
   }
 }

@@ -29,6 +29,8 @@ export interface UIAdapter {
   Modal: Component<ModalProtocol['props']>
   // 消息组件
   Message: MessageProtocol
+  // UI 相关样式变量注入
+  injectCssVars?: () => void
 }
 
 /**

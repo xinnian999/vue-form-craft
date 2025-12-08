@@ -20,6 +20,9 @@ export default (app: App<Element>, options: Options = {}) => {
   const uiAdapter = options.ui || ElementPlusAdapter
   app.provide($uiAdapter, uiAdapter)
 
+  // 注入与当前 UI 库对应的 CSS 变量
+  uiAdapter.injectCssVars?.()
+
   customComponents(app)
 
   app.component('FormRender', FormRender)

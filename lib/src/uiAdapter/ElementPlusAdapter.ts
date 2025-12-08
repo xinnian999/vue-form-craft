@@ -30,11 +30,32 @@ import type {
   MessageOptions,
   UIAdapter
 } from '@/types/uiAdapter'
+import ns from '@/utils/ns'
 
 /**
  * Element-Plus UI适配器
  */
 const ElementPlusAdapter: UIAdapter = {
+  injectCssVars: () => {
+    const el = document.documentElement
+    const style = el.style
+
+    style.setProperty(`--${ns('color-primary')}`, 'var(--el-color-primary)')
+    style.setProperty(`--${ns('color-primary-light')}`, 'var(--el-color-primary-light-9)')
+    style.setProperty(`--${ns('color-danger')}`, 'var(--el-color-danger)')
+    style.setProperty(`--${ns('color-bg')}`, '#ffffff')
+    style.setProperty(`--${ns('color-bg-secondary')}`, '#ffffff')
+    style.setProperty(`--${ns('color-bg-soft')}`, '#f5f7fa')
+    style.setProperty(`--${ns('color-success')}`, 'var(--el-color-success)')
+    style.setProperty(`--${ns('color-success-light')}`, 'var(--el-color-success-light-9)')
+    style.setProperty(`--${ns('color-warning')}`, 'var(--el-color-warning)')
+    style.setProperty(`--${ns('color-border')}`, 'var(--el-border-color)')
+    style.setProperty(`--${ns('color-fill-light')}`, 'var(--el-fill-color-light)')
+    style.setProperty(`--${ns('color-text-secondary')}`, 'var(--el-text-color-secondary)')
+    style.setProperty(`--${ns('color-text-primary')}`, 'var(--el-text-color-primary)')
+    style.setProperty(`--${ns('color-text-regular')}`, 'var(--el-text-color-regular)')
+  },
+
   Form: defineComponent(
     (_, { slots, attrs, expose }) => {
       const propsAttrs = attrs as FormProtocol['props']
@@ -277,13 +298,6 @@ const ElementPlusAdapter: UIAdapter = {
         confirmButtonText: options?.confirmButtonText || '确定',
         cancelButtonText: options?.cancelButtonText || '取消',
         type: options?.type || 'warning',
-        ...options
-      })
-    },
-    alert: async (message: string, title?: string, options?: MessageBoxOptions): Promise<void> => {
-      await ElMessageBox.alert(message, title || '提示', {
-        confirmButtonText: options?.confirmButtonText || '确定',
-        type: options?.type || 'info',
         ...options
       })
     }

@@ -14,7 +14,6 @@ $fillColorLight: var(--#{$namespace}-color-fill-light, #f5f7fa);
 $textColorSecondary: var(--#{$namespace}-color-text-secondary, #909399);
 $textColor1: var(--#{$namespace}-color-text-primary, #303133);
 $textColor3: var(--#{$namespace}-color-text-regular, #606266);
-$primaryColor: $themeColor;
 
 @mixin ns($cls) {
   $NS: $namespace + '-' + $cls;

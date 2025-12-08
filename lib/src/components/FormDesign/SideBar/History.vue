@@ -77,8 +77,8 @@ const handleJumpTo = (index: number) => {
     }
 
     &.active {
-      border-color: $primaryColor;
-      background-color: rgba($primaryColor, 0.1);
+      border-color: $themeColor;
+      background-color: rgba($themeColor, 0.1);
     }
 
     .description {

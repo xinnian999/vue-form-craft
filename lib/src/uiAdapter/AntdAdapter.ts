@@ -44,6 +44,7 @@ import type {
   TextareaProtocol,
   UIAdapter
 } from '@/types/uiAdapter'
+import ns from '@/utils/ns'
 
 const { TextArea } = Input
 const { Item: FormItem } = Form
@@ -57,6 +58,33 @@ const { Group: CheckboxGroup } = Checkbox
  * Ant Design Vue UI适配器
  */
 const AntdAdapter: UIAdapter = {
+  injectCssVars: () => {
+    const el = document.documentElement
+    const style = el.style
+
+    // 主色
+    style.setProperty(`--${ns('color-primary')}`, '#1677ff')
+    style.setProperty(`--${ns('color-primary-light')}`, '#e6f4ff')
+
+    // 语义色
+    style.setProperty(`--${ns('color-success')}`, '#52c41a')
+    style.setProperty(`--${ns('color-success-light')}`, '#f6ffed')
+    style.setProperty(`--${ns('color-warning')}`, '#faad14')
+    style.setProperty(`--${ns('color-danger')}`, '#ff4d4f')
+
+    // 背景 / 边框
+    style.setProperty(`--${ns('color-bg')}`, '#ffffff')
+    style.setProperty(`--${ns('color-bg-secondary')}`, '#ffffff')
+    style.setProperty(`--${ns('color-bg-soft')}`, '#f5f5f5')
+    style.setProperty(`--${ns('color-border')}`, '#d9d9d9')
+    style.setProperty(`--${ns('color-fill-light')}`, '#f5f5f5')
+
+    // 文本
+    style.setProperty(`--${ns('color-text-primary')}`, 'rgba(0, 0, 0, 0.88)')
+    style.setProperty(`--${ns('color-text-regular')}`, 'rgba(0, 0, 0, 0.65)')
+    style.setProperty(`--${ns('color-text-secondary')}`, 'rgba(0, 0, 0, 0.45)')
+  },
+
   Form: defineComponent(
     (_, { slots, attrs, expose }) => {
       const propsAttrs = attrs as FormProtocol['props']
