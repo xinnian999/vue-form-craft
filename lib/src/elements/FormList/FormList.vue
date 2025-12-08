@@ -1,11 +1,11 @@
 <template>
-  <div class="vfc-formList">
+  <div :class="ns('formList')">
     <div v-if="formInstance.design">
       <el-card v-if="mode === 'card'" header="自增卡片" class="card-list-container">
         <FormItemGroup :list="fields" />
       </el-card>
 
-      <FormItemGroup v-else-if="mode === 'table'" :list="fields" class="layoutRender" />
+      <FormItemGroup v-else-if="mode === 'table'" :list="fields" class="table-list-design" />
     </div>
 
     <div v-else>
@@ -37,7 +37,12 @@
         </el-card>
       </template>
 
-      <el-table v-if="mode === 'table' && list.length" :data="list" style="width: 100%">
+      <el-table
+        v-if="mode === 'table' && list.length"
+        :data="list"
+        style="width: 100%"
+        class="table-list-render"
+      >
         <el-table-column
           :prop="item.name"
           :label="item.label"
@@ -89,7 +94,7 @@ import { computed, h, onMounted, provide, ref, watch } from 'vue'
 import { FormItem, FormItemGroup, Icon } from '@/components'
 import { useFormInstance, useUI } from '@/hooks'
 import type { ComponentBaseProps, FormItemType } from '@/types'
-import { deepParse } from '@/utils'
+import { deepParse, ns } from '@/utils'
 
 const { Button } = useUI()
 
@@ -239,7 +244,7 @@ provide(
 <style lang="scss">
 @import '@/style';
 
-.vfc-formList {
+@include ns('formList') {
   position: relative;
   width: 100%;
   .list-item {
@@ -272,12 +277,18 @@ provide(
     }
   }
 
-  .layoutRender {
+  .table-list-design {
     padding: 10px;
     border-radius: 5px;
     border: 1px solid $borderColor;
     @include ns('form-item') {
       margin-bottom: 18px;
+    }
+  }
+
+  .table-list-render {
+    @include ns('form-item') {
+      margin-bottom: 0;
     }
   }
 }

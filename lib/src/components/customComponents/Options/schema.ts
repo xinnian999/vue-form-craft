@@ -1,4 +1,4 @@
-import type { FormSchema } from 'formora'
+import type { FormSchema } from '@/types'
 
 export default {
   labelWidth: 110,
@@ -42,7 +42,10 @@ export default {
             label: '远程',
             value: 'remote'
           }
-        ]
+        ],
+        style: {
+          marginBottom: '18px'
+        }
       },
       labelAlign: 'top'
     },

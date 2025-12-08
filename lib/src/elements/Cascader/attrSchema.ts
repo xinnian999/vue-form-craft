@@ -8,7 +8,6 @@ export default {
   submitBtn: false,
   initialValues: {
     props: {
-      placeholder: '请选择...',
       mode: 'static',
       options: [
         {
@@ -39,10 +38,7 @@ export default {
             }
           ]
         }
-      ],
-      labelKey: 'label',
-      valueKey: 'value',
-      showAllLevels: true
+      ]
     }
   },
   items: [

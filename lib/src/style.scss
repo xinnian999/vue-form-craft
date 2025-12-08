@@ -29,6 +29,10 @@ $textColor3: var(--#{$namespace}-color-text-regular, #606266);
     display: none;
   }
 
+  &.hide-label > .ant-form-item-row > .ant-form-item-label {
+    display: none;
+  }
+
   // labelAlign 为 top 时，标签在上方
   &.label-align-top {
     .ant-form-item-label {
