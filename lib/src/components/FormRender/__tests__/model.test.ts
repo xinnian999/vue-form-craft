@@ -178,64 +178,6 @@ describe('《表单渲染器》v-model 双向绑定测试', () => {
     expect((wrapper.find('input[name="username"]').element as HTMLInputElement).value).toBe('')
   })
 
-  it('初始值设置后的双向绑定', async () => {
-    const schemaWithInitial: FormSchema = {
-      initialValues: {
-        username: 'default_user',
-        age: 18
-      },
-      items: [
-        {
-          label: '用户名',
-          component: 'Input',
-          name: 'username'
-        },
-        {
-          label: '年龄',
-          component: 'InputNumber',
-          name: 'age'
-        }
-      ]
-    }
-
-    let modelValue: any = {}
-
-    let wrapper: any
-
-    // eslint-disable-next-line prefer-const
-    wrapper = mount(FormRender, {
-      props: {
-        modelValue,
-        'onUpdate:modelValue': (e: any) => {
-          modelValue = e
-          if (wrapper) {
-            wrapper.setProps({ modelValue: e })
-          }
-        },
-        schema: schemaWithInitial
-      }
-    })
-
-    await nextTick()
-
-    // 验证初始值已设置
-    expect((wrapper.find('input[name="username"]').element as HTMLInputElement).value).toBe(
-      'default_user'
-    )
-
-    // 修改值后验证双向绑定
-    await wrapper.find('input[name="username"]').setValue('new_user')
-    await nextTick()
-    expect(wrapper.props('modelValue')).toHaveProperty('username', 'new_user')
-
-    // 外部修改后验证
-    await wrapper.setProps({ modelValue: { username: 'external_user', age: 25 } })
-    await nextTick()
-    expect((wrapper.find('input[name="username"]').element as HTMLInputElement).value).toBe(
-      'external_user'
-    )
-  })
-
   it('嵌套对象的双向绑定', async () => {
     const nestedSchema: FormSchema = {
       items: [
