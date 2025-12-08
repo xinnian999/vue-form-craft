@@ -8,15 +8,16 @@ import 'element-plus/dist/index.css'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import { uiConfig } from './uiConfig'
 
+const ui =
+  (new URLSearchParams(window.location.search).get('ui') as keyof typeof uiConfig) || 'elementPlus'
+
 const app = createApp(App)
 
 app.use(router)
 
-const searchParams = new URLSearchParams(window.location.search)
-
 app.use(Formora, {
   ai: cozeAiFunction,
-  ui: uiConfig[searchParams.get('ui') as keyof typeof uiConfig].adapter
+  ui: uiConfig[ui].adapter
 })
 
 app.use(ElementPlus, {
