@@ -1,5 +1,10 @@
 <template>
-  <FormItemGroup class="form-item-grid" :style="gridStyle" :list="formItemProps.children || []" />
+  <FormItemGroup
+    class="form-item-grid"
+    :style="gridStyle"
+    :list="formItemProps.children || []"
+    :designKey="formItemProps.designKey!"
+  />
 </template>
 
 <script setup lang="ts">

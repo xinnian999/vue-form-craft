@@ -17,7 +17,7 @@
 
     <draggable
       :list="list"
-      :group="group"
+      group="formDesign"
       itemKey="name"
       :ghost-class="ns('canvas-group-ghost')"
       :class="[ns('canvas-group-draggable'), props.class]"
@@ -52,7 +52,6 @@ const props = withDefaults(
   defineProps<{
     style?: any
     class?: string
-    group?: string
     emptyText?: string
     emptySize?: number
     list: FormItemType[]
@@ -60,7 +59,6 @@ const props = withDefaults(
   {
     emptyText: '请拖入子字段',
     emptySize: 12,
-    group: 'formDesign',
     list: () => []
   }
 )

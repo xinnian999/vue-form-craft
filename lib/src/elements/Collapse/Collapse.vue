@@ -7,7 +7,7 @@
         :title="item.label"
         :name="item.name"
       >
-        <FormItemGroup :list="item.children!" />
+        <FormItemGroup :list="item.children!" :designKey="item.designKey!" />
       </CollapseItem>
     </Collapse>
   </div>

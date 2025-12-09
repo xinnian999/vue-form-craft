@@ -2,10 +2,15 @@
   <div :class="ns('formList')">
     <div v-if="formInstance.design">
       <el-card v-if="mode === 'card'" header="自增卡片" class="card-list-container">
-        <FormItemGroup :list="fields" />
+        <FormItemGroup :list="fields" :designKey="formItemProps.designKey!" />
       </el-card>
 
-      <FormItemGroup v-else-if="mode === 'table'" :list="fields" class="table-list-design" />
+      <FormItemGroup
+        v-else-if="mode === 'table'"
+        :list="fields"
+        :designKey="formItemProps.designKey!"
+        class="table-list-design"
+      />
     </div>
 
     <div v-else>

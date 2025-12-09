@@ -2,7 +2,7 @@
   <Form :model="formValues" ref="form" v-bind="formAttrs" :data-form-id="formId">
     <slot />
 
-    <FormItemGroup :list="parseSchema.items" />
+    <FormItemGroup :list="parseSchema.items" designKey="root" />
 
     <FormItem v-if="!design && !read && (schema.submitBtn || schema.resetBtn)" label=" ">
       <div style="display: flex; gap: 15px">

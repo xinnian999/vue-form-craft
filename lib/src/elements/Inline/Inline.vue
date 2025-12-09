@@ -3,6 +3,7 @@
     class="form-item-inline"
     :style="InlineStyle"
     :list="formItemProps.children || []"
+    :designKey="formItemProps.designKey!"
   />
 </template>
 

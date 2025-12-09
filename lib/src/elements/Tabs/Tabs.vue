@@ -1,7 +1,7 @@
 <template>
   <Tabs v-bind="$attrs" v-model="activeKey" :key="tabsKey">
     <TabPane v-for="tab in children" :key="tab.name" :label="tab.label" :name="tab.name">
-      <FormItemGroup :list="tab.children!" />
+      <FormItemGroup :list="tab.children!" :designKey="tab.designKey!" />
     </TabPane>
   </Tabs>
 

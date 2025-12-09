@@ -1,6 +1,10 @@
 <template>
   <Card v-bind="$attrs">
-    <FormItemGroup style="min-height: 150px" :list="formItemProps.children || []" />
+    <FormItemGroup
+      style="min-height: 150px"
+      :list="formItemProps.children || []"
+      :designKey="formItemProps.designKey!"
+    />
   </Card>
 </template>
 
