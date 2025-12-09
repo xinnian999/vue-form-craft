@@ -35,6 +35,7 @@ export default {
                 min: 60,
                 step: 10
               },
+              defaultValue: 150,
               designKey: 'design-cOkn'
             },
             {
@@ -58,13 +59,8 @@ export default {
                   }
                 ]
               },
+              defaultValue: 'right',
               designKey: 'design-YJOL'
-            },
-            {
-              label: '显示冒号',
-              name: 'colon',
-              component: 'Switch',
-              designKey: 'design-OQec'
             },
             {
               label: '表单组件尺寸',
@@ -87,6 +83,7 @@ export default {
                   }
                 ]
               },
+              defaultValue: 'default',
               designKey: 'design-d74u'
             },
             {
@@ -114,6 +111,12 @@ export default {
               designKey: 'design-jItQ'
             },
             {
+              label: '显示冒号',
+              name: 'colon',
+              component: 'Switch',
+              designKey: 'design-OQec'
+            },
+            {
               label: '隐藏必填星号',
               name: 'hideRequiredAsterisk',
               component: 'Switch',
@@ -123,6 +126,7 @@ export default {
               label: '自动滚动到校验失败的第一项',
               name: 'scrollToError',
               component: 'Switch',
+              defaultValue: true,
               designKey: 'design-6meZ',
               labelAlign: 'top'
             },
@@ -130,6 +134,7 @@ export default {
               label: '表单提交按钮',
               name: 'submitBtn',
               component: 'Switch',
+              defaultValue: true,
               designKey: 'design-sHY1'
             },
             {

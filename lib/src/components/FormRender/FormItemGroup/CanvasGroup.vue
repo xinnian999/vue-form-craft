@@ -92,11 +92,11 @@ const simulateAdd = (item: FormItemType) => {
   props.list.push(item)
 
   // 如果list是根items，需要通过setSchema触发更新
-  const schema = designInstance.getSchema()
-  if (props.list === schema.items) {
-    // 根画布：通过setSchema触发响应式更新
-    designInstance.setSchema({ ...schema, items: [...props.list] })
-  }
+  // const schema = designInstance.getSchema()
+  // if (props.list === schema.items) {
+  //   // 根画布：通过setSchema触发响应式更新
+  //   designInstance.setSchema({ ...schema, items: [...props.list] })
+  // }
 
   // 触发拖拽后的副作用（和onAdd回调一样）
   designInstance.setCurrentKey(item.designKey!)

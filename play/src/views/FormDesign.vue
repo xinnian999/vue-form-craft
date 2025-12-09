@@ -19,14 +19,7 @@ import uiToggle from '../components/uiToggle.vue'
 
 const formDesignRef = ref()
 
-const schema = ref<FormSchema>({
-  labelWidth: 150,
-  labelAlign: 'right',
-  scrollToError: true,
-  size: 'default',
-  submitBtn: true,
-  items: []
-})
+const schema = ref<FormSchema>({})
 
 const onSave = () => {
   localStorage.setItem('schema', JSON.stringify(schema.value))

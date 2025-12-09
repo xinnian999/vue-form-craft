@@ -22,10 +22,24 @@ const formInstance = useFormInstance()
 
 const designInstance = useDesignInstance()
 
+// 设计模式时，桥接对应list数据，避免直接修改props
 const designList = computed(() => {
+  if (!designInstance) return []
+
   if (props.designKey === 'root') {
-    return designInstance?.getSchema().items || []
+    const rootList = designInstance.getSchema().items
+
+    // 补充items数据
+    if (!rootList) {
+      designInstance.setSchema({
+        ...designInstance.getSchema(),
+        items: []
+      })
+      designInstance.recordHistory('补充items数据')
+    }
+
+    return rootList || []
   }
-  return designInstance?.getNodeByKey(props.designKey)?.children || []
+  return designInstance.getNodeByKey(props.designKey)?.children || []
 })
 </script>

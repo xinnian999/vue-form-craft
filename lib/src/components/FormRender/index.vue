@@ -175,16 +175,26 @@ const parseSchema = computed(() => {
 })
 
 const formAttrs = computed(() => {
-  const attrs = omit(parseSchema.value, [
-    'model',
-    'items',
-    'submitBtn',
-    'resetBtn',
-    'initialValues',
-    'colon',
-    'onFieldChange',
-    'onChange'
-  ])
+  const attrs = omit(
+    {
+      labelWidth: 150,
+      labelAlign: 'right',
+      scrollToError: true,
+      size: 'default',
+      submitBtn: true,
+      ...parseSchema.value
+    },
+    [
+      'model',
+      'items',
+      'submitBtn',
+      'resetBtn',
+      'initialValues',
+      'colon',
+      'onFieldChange',
+      'onChange'
+    ]
+  )
 
   return attrs
 })

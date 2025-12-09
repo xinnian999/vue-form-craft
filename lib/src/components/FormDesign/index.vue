@@ -6,9 +6,7 @@
 </template>
 
 <script lang="ts">
-import { initSchema } from '@/config'
-
-let initJsonSchema: FormSchema = initSchema
+let initJsonSchema: FormSchema = {}
 </script>
 
 <script setup lang="ts">
@@ -201,7 +199,7 @@ const instance = reactive<DesignInstance>({
     emits(name, params)
   },
   handleClear: () => {
-    setSchema(cloneDeep(initJsonSchema))
+    setSchema({ items: [] })
     setCurrentKey('root')
     recordHistory('清空表单')
   },

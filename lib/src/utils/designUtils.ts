@@ -1,5 +1,4 @@
 import { cloneDeep } from 'lodash'
-import { initSchema } from '@/config'
 import type { FormItemType, FormSchema } from '@/types'
 import getRandomId from './getRandomId'
 
@@ -73,7 +72,7 @@ export const repirNode = ({
 }
 
 export const repirJsonSchema = (schema: FormSchema) => {
-  const newSchema: FormSchema = { ...initSchema, ...schema }
+  const newSchema: FormSchema = schema
 
   const repirItems = (items: FormItemType[]) => {
     return items.map((item) => {
