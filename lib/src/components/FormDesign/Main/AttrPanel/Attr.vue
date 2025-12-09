@@ -98,16 +98,3 @@ const onNodeFieldChange = () => {
   designInstance.recordHistory(`修改节点属性`)
 }
 </script>
-
-<style lang="scss" scoped>
-@import '@/style';
-
-@include ns('attr') {
-  .label {
-    cursor: pointer;
-    &:hover {
-      color: var(--el-color-primary);
-    }
-  }
-}
-</style>

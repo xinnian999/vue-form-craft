@@ -54,40 +54,14 @@ const form = useTemplateRef<ElFormInstance>('form')
 
 const selectData = reactive<Record<string, Record<string, any>>>({})
 
-// ========== Schema 数据流策略 ==========
-// 【核心宗旨】
-// 1. 非 design 模式（运行模式）：
-//    - props.schema 响应式更新，支持动态切换表单
-//    - 内部维护深拷贝副本，所有运行时修改（setFieldAttr 等）只影响内部副本，不污染外部
-//    - 当 props.schema 变化时，重新深拷贝并更新内部副本
-// 2. design 模式（设计模式）：
-//    - props.schema 双向绑定，要求外部传入响应式对象（ref/reactive）
-//    - 实时追踪 props.schema 的变化（通过 computed）
-//    - 内部修改（setFieldAttr、draggable 等）直接作用到 props.schema
+const innerSchema = ref(cloneDeep(props.schema || {}))
 
-// 运行模式下的 schema 副本（响应 props.schema 变化）
-const staticSchema = props.design ? null : ref(cloneDeep(props.schema || {}))
-
-// 运行模式下监听 props.schema 变化，重新深拷贝
-// 注意：不需要 deep 监听，因为切换表单时一般是整个替换 schema 引用
-if (!props.design) {
-  watch(
-    () => props.schema,
-    (newSchema) => {
-      staticSchema!.value = cloneDeep(newSchema || {})
-    }
-  )
-}
-
-const innerSchema = computed(() => {
-  if (props.design) {
-    // 设计模式：直接返回 props.schema，实时追踪外部变化，允许双向修改
-    return props.schema
-  } else {
-    // 运行模式：返回深拷贝的副本，与外部隔离但响应外部变化
-    return staticSchema!.value
+watch(
+  () => props.schema,
+  (newSchema) => {
+    innerSchema.value = cloneDeep(newSchema || {})
   }
-})
+)
 
 // 生成唯一的 formId（只在首次生成，后续保持不变）
 let autoFormId = `fm-form-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
@@ -116,6 +90,7 @@ const setValues: FormInstance['setValues'] = (values) => {
 
 const getFieldValue: FormInstance['getFieldValue'] = (path) => getDataByPath(getValues(), path)
 
+// 直接修改 formValues
 const setFieldValue: FormInstance['setFieldValue'] = async (path, value) => {
   setDataByPath(getValues(), path, value)
   // 再次赋值确保v-model响应式更新
@@ -243,8 +218,6 @@ onBeforeMount(() => {
 
     setValues({ ...values, ...formValues.value })
   }
-
-  console.log(formValues.value)
 })
 
 onBeforeUnmount(() => {
