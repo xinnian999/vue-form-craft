@@ -56,6 +56,7 @@ const selectData = reactive<Record<string, Record<string, any>>>({})
 
 const innerSchema = ref(cloneDeep(props.schema || {}))
 
+// TODO：待优化，为了响应schema顶层配置变化，但导致选中表单项卡顿
 watch(
   () => props.schema,
   (newSchema) => {

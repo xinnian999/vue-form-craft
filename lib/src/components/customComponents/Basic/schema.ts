@@ -38,7 +38,7 @@ export default {
         step: 10
       },
       designKey: 'design-UcmF',
-      defaultValue: 110
+      defaultValue: '{{ rootSchema.labelWidth }}'
     },
     {
       label: '标签位置',
@@ -61,6 +61,7 @@ export default {
           }
         ]
       },
+      defaultValue: '{{ rootSchema.labelAlign }}',
       designKey: 'design-EiOs'
     },
     {
@@ -84,6 +85,7 @@ export default {
           }
         ]
       },
+      defaultValue: '{{ rootSchema.size }}',
       designKey: 'design-yaZ4'
     },
     {
