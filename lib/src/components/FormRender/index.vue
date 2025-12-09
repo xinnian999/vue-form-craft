@@ -174,15 +174,14 @@ const parseSchema = computed(() => {
   return deepParse(innerSchema.value, context.value)
 })
 
+const designInstance = useDesignInstance()
+
 const formAttrs = computed(() => {
-  let schema: FormSchema
+  let schema: FormSchema = parseSchema.value
 
   if (props.design) {
     // 设计模式下，与设计Schema桥接
-    const designInstance = useDesignInstance()
     schema = designInstance!.getSchema()
-  } else {
-    schema = parseSchema.value
   }
 
   const attrs = omit(
