@@ -21,7 +21,8 @@ import {
   ElSlider,
   ElSwitch,
   ElTabPane,
-  ElTabs
+  ElTabs,
+  type FormInstance
 } from 'element-plus'
 import { defineComponent, h, ref } from 'vue'
 import type {
@@ -61,16 +62,26 @@ const ElementPlusAdapter: UIAdapter = {
   Form: defineComponent(
     (_, { slots, attrs, expose }) => {
       const propsAttrs = attrs as FormProtocol['props']
-      const formRef = ref()
+      const formRef = ref<FormInstance>()
 
-      // 暴露底层 ElForm 的所有方法
+      // 暴露底层 ElForm 的所有方法，符合 FormProtocol['expose'] 类型
       expose({
-        validate: (...args: any[]) => formRef.value?.validate(...args),
-        validateField: (...args: any[]) => formRef.value?.validateField(...args),
-        resetFields: (...args: any[]) => formRef.value?.resetFields(...args),
-        scrollToField: (...args: any[]) => formRef.value?.scrollToField(...args),
-        clearValidate: (...args: any[]) => formRef.value?.clearValidate(...args)
-      })
+        validate: async (callback?: (valid: boolean, fields?: Record<string, any>) => void) => {
+          return formRef.value!.validate(callback as any)
+        },
+        validateField: async (props: string | string[]) => {
+          return formRef.value!.validateField(props)
+        },
+        resetFields: (props?: string | string[]) => {
+          formRef.value?.resetFields(props as any)
+        },
+        scrollToField: (prop: string) => {
+          formRef.value?.scrollToField(prop)
+        },
+        clearValidate: (props?: string | string[]) => {
+          formRef.value?.clearValidate(props as any)
+        }
+      } satisfies FormProtocol['expose'])
 
       return () =>
         h(

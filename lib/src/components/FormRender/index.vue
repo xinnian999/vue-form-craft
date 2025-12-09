@@ -4,12 +4,17 @@
 
     <FormItemGroup :list="parseSchema.items" designKey="root" />
 
-    <FormItem v-if="!design && !read && (schema.submitBtn || schema.resetBtn)" label=" ">
+    <FormItem v-if="!design && !read && (formAttrs.submitBtn || formAttrs.resetBtn)" label=" ">
       <div style="display: flex; gap: 15px">
-        <Button v-if="schema.submitBtn" type="primary" @click="instance.submit" name="submit-btn">
+        <Button
+          v-if="formAttrs.submitBtn"
+          type="primary"
+          @click="instance.submit"
+          name="submit-btn"
+        >
           提交
         </Button>
-        <Button v-if="schema.resetBtn" @click="() => instance.resetFields()" name="reset-btn">
+        <Button v-if="formAttrs.resetBtn" @click="() => instance.resetFields()" name="reset-btn">
           重置
         </Button>
       </div>
@@ -18,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import type { FormInstance as ElFormInstance } from 'element-plus'
+import type { FormSchema } from 'dist'
 import { cloneDeep, omit } from 'lodash'
 import {
   computed,
@@ -33,9 +38,10 @@ import {
   useTemplateRef,
   watch
 } from 'vue'
-import { useUI } from '@/hooks'
+import { useDesignInstance, useUI } from '@/hooks'
 import { $formInstance } from '@/symbol'
 import type { FormInstance, FormRenderEmits, FormRenderProps } from '@/types'
+import type { FormProtocol } from '@/types/uiAdapter'
 import { deepParse, getDataByPath, setDataByPath } from '@/utils'
 import FormItemGroup from './FormItemGroup/index.vue'
 
@@ -50,19 +56,12 @@ const emits = defineEmits<FormRenderEmits>()
 // 注意：默认值必须使用工厂函数返回新对象，避免跨实例共享
 const formValues = defineModel<Record<string, any>>({ default: () => reactive({}) })
 
-const form = useTemplateRef<ElFormInstance>('form')
+const form = useTemplateRef<FormProtocol['expose']>('form')
 
 const selectData = reactive<Record<string, Record<string, any>>>({})
 
+// 复制schema，避免直接修改props
 const innerSchema = ref(cloneDeep(props.schema || {}))
-
-// TODO：待优化，为了响应schema顶层配置变化，但导致选中表单项卡顿
-watch(
-  () => props.schema,
-  (newSchema) => {
-    innerSchema.value = cloneDeep(newSchema || {})
-  }
-)
 
 // 生成唯一的 formId（只在首次生成，后续保持不变）
 let autoFormId = `fm-form-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
@@ -176,6 +175,16 @@ const parseSchema = computed(() => {
 })
 
 const formAttrs = computed(() => {
+  let schema: FormSchema
+
+  if (props.design) {
+    // 设计模式下，与设计Schema桥接
+    const designInstance = useDesignInstance()
+    schema = designInstance!.getSchema()
+  } else {
+    schema = parseSchema.value
+  }
+
   const attrs = omit(
     {
       labelWidth: 150,
@@ -183,18 +192,9 @@ const formAttrs = computed(() => {
       scrollToError: true,
       size: 'default',
       submitBtn: true,
-      ...parseSchema.value
+      ...schema
     },
-    [
-      'model',
-      'items',
-      'submitBtn',
-      'resetBtn',
-      'initialValues',
-      'colon',
-      'onFieldChange',
-      'onChange'
-    ]
+    ['model', 'items', 'initialValues', 'colon', 'onFieldChange', 'onChange']
   )
 
   return attrs

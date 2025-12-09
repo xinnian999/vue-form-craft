@@ -54,6 +54,13 @@ export interface FormProtocol {
   slots: {
     default?: () => VNode
   }
+  expose: {
+    validate: () => Promise<boolean>
+    validateField: (props: string | string[]) => Promise<boolean>
+    resetFields: (props?: string | string[]) => void
+    scrollToField: (prop: string) => void
+    clearValidate: (props?: string | string[]) => void
+  }
 }
 
 /**
