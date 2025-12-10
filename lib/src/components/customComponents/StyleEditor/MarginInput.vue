@@ -1,14 +1,11 @@
 <template>
   <div :class="ns('margin-input')">
     <!-- 统一边距 -->
-    <div :class="ns('margin-input__unified')">
-      <Button
-        text
-        :icon="expanded ? ArrowDown : ArrowRight"
-        :class="ns('margin-input__toggle')"
-        @click="toggleExpand"
-      />
-      <span :class="ns('margin-input__label')">{{ label }}</span>
+    <div class="margin-input__unified">
+      <div class="margin-input__toggle" @click="toggleExpand">
+        <Icon name="arrowDown" :class="['margin-input__arrow', { 'is-expanded': expanded }]" />
+      </div>
+      <span class="margin-input__label">{{ label }}</span>
       <UnitInput
         v-model="unifiedValue"
         :presets="presets"
@@ -16,16 +13,16 @@
         :default-mode="defaultMode"
         :default-value="defaultValue"
         :default-unit="defaultUnit"
-        :class="ns('margin-input__unified-input')"
+        class="margin-input__unified-input"
         @update:model-value="handleUnifiedChange"
       />
     </div>
 
     <!-- 四个方向的子边距 -->
-    <div v-if="expanded" :class="ns('margin-input__details')">
-      <div :class="ns('margin-input__row')">
-        <div :class="ns('margin-input__item')">
-          <span :class="ns('margin-input__icon')">↑</span>
+    <div v-if="expanded" class="margin-input__details">
+      <div class="margin-input__row">
+        <div class="margin-input__item">
+          <span class="margin-input__icon">↑</span>
           <UnitInput
             v-model="topValue"
             :presets="presets"
@@ -36,8 +33,8 @@
             @update:model-value="handleChildChange"
           />
         </div>
-        <div :class="ns('margin-input__item')">
-          <span :class="ns('margin-input__icon')">→</span>
+        <div class="margin-input__item">
+          <span class="margin-input__icon">→</span>
           <UnitInput
             v-model="rightValue"
             :presets="presets"
@@ -49,9 +46,9 @@
           />
         </div>
       </div>
-      <div :class="ns('margin-input__row')">
-        <div :class="ns('margin-input__item')">
-          <span :class="ns('margin-input__icon')">↓</span>
+      <div class="margin-input__row">
+        <div class="margin-input__item">
+          <span class="margin-input__icon">↓</span>
           <UnitInput
             v-model="bottomValue"
             :presets="presets"
@@ -62,8 +59,8 @@
             @update:model-value="handleChildChange"
           />
         </div>
-        <div :class="ns('margin-input__item')">
-          <span :class="ns('margin-input__icon')">←</span>
+        <div class="margin-input__item">
+          <span class="margin-input__icon">←</span>
           <UnitInput
             v-model="leftValue"
             :presets="presets"
@@ -80,8 +77,8 @@
 </template>
 
 <script setup lang="ts">
-import { ArrowDown, ArrowRight } from '@element-plus/icons-vue'
 import { ref, watch } from 'vue'
+import { Icon } from '@/components'
 import { useUI } from '@/hooks'
 import { ns } from '@/utils'
 import UnitInput from './UnitInput.vue'
@@ -255,36 +252,50 @@ watch(
 @include ns('margin-input') {
   margin-bottom: 16px;
   font-size: 12px;
-  .vfc-margin-input__unified {
+
+  .margin-input__unified {
     display: flex;
     align-items: center;
     gap: 8px;
   }
 
-  .vfc-margin-input__toggle {
+  .margin-input__toggle {
     padding: 4px;
     min-width: auto;
     height: auto;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .vfc-margin-input__label {
+  .margin-input__label {
     min-width: 84px;
     color: $textColor1;
     font-size: 12px;
   }
 
-  .vfc-margin-input__unified-input {
+  .margin-input__unified-input {
     flex: 1;
   }
 
-  .vfc-margin-input__details {
+  .margin-input__arrow {
+    transition: transform 0.2s ease;
+    transform: rotate(-90deg);
+  }
+
+  .margin-input__arrow.is-expanded {
+    transform: rotate(0);
+  }
+
+  .margin-input__details {
     margin-top: 12px;
     padding: 12px;
     background: $bgColor3;
     border-radius: 4px;
   }
 
-  .vfc-margin-input__row {
+  .margin-input__row {
     display: flex;
     gap: 12px;
 
@@ -293,14 +304,14 @@ watch(
     }
   }
 
-  .vfc-margin-input__item {
+  .margin-input__item {
     flex: 1;
     display: flex;
     align-items: center;
     gap: 8px;
   }
 
-  .vfc-margin-input__icon {
+  .margin-input__icon {
     display: flex;
     align-items: center;
     justify-content: center;

@@ -1,23 +1,14 @@
 <template>
   <div :class="ns('unit-input')">
     <!-- 当前是预设值模式 -->
-    <Button
-      v-if="currentMode === 'preset'"
-      :class="ns('unit-input__preset-btn')"
-      @click="switchMode"
-    >
+    <Button v-if="currentMode === 'preset'" class="unit-input__preset-btn" @click="switchMode">
       {{ currentValue }}
     </Button>
 
     <!-- 当前是单位模式 -->
-    <div v-else :class="ns('unit-input__unit-mode')">
-      <el-input-number
-        v-model="numericValue"
-        :class="ns('unit-input__number')"
-        @change="handleNumberChange"
-        controlsPosition="right"
-      />
-      <Button :class="ns('unit-input__unit-btn')" @click="switchMode">
+    <div v-else class="unit-input__unit-mode">
+      <InputNumber v-model="numericValue" class="unit-input__number" @change="handleNumberChange" />
+      <Button class="unit-input__unit-btn" @click="switchMode">
         {{ currentUnit }}
       </Button>
     </div>
@@ -29,7 +20,7 @@ import { computed, ref, watch } from 'vue'
 import { useUI } from '@/hooks'
 import { ns } from '@/utils'
 
-const { Button } = useUI()
+const { Button, InputNumber } = useUI()
 
 defineOptions({
   name: 'UnitInput'
@@ -177,7 +168,7 @@ watch(
   display: flex;
   width: 100%;
 
-  .vfc-unit-input__preset-btn {
+  .unit-input__preset-btn {
     flex: 1;
     width: 100%;
     color: $themeColor;
@@ -191,17 +182,17 @@ watch(
     }
   }
 
-  .vfc-unit-input__unit-mode {
+  .unit-input__unit-mode {
     display: flex;
     width: 100%;
     gap: 8px;
   }
 
-  .vfc-unit-input__number {
+  .unit-input__number {
     flex: 1;
   }
 
-  .vfc-unit-input__unit-btn {
+  .unit-input__unit-btn {
     min-width: 48px;
     color: $themeColor;
     border-color: $themeColor;
