@@ -205,9 +205,8 @@ const formAttrs = computed(() => {
 
 // 监听 styleBlock 变化，实时更新样式（设计模式下可实时预览）
 watch(
-  () => innerSchema.value.styleBlock,
+  () => parseSchema.value.styleBlock,
   (newStyleBlock) => {
-    // console.log('newStyleBlock', newStyleBlock, innerSchema.value) // TODO
     // 先清理旧的样式元素
     if (styleElement.value && styleElement.value.parentNode) {
       styleElement.value.parentNode.removeChild(styleElement.value)
