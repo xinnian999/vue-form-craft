@@ -96,7 +96,7 @@ export default {
             props: {
               'inline-prompt': false
             },
-            name: 'lazy'
+            name: 'props.lazy'
           }
         ],
         props: {

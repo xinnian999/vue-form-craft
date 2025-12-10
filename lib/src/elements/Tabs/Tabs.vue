@@ -1,6 +1,12 @@
 <template>
   <Tabs v-bind="$attrs" v-model="activeKey" :key="tabsKey">
-    <TabPane v-for="tab in children" :key="tab.name" :label="tab.label" :name="tab.name">
+    <TabPane
+      v-for="tab in children"
+      :key="tab.name"
+      :label="tab.label"
+      :name="tab.name"
+      :lazy="tab.props?.lazy"
+    >
       <FormItemGroup :list="tab.children!" :designKey="tab.designKey!" />
     </TabPane>
   </Tabs>
