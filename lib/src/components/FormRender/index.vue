@@ -4,17 +4,17 @@
 
     <FormItemGroup :list="parseSchema.items" designKey="root" />
 
-    <FormItem v-if="!design && !read && (formAttrs.submitBtn || formAttrs.resetBtn)" label=" ">
+    <FormItem v-if="!design && !read && (parseSchema.submitBtn || parseSchema.resetBtn)" label=" ">
       <div style="display: flex; gap: 15px">
         <Button
-          v-if="formAttrs.submitBtn"
+          v-if="parseSchema.submitBtn"
           type="primary"
           @click="instance.submit"
           name="submit-btn"
         >
           提交
         </Button>
-        <Button v-if="formAttrs.resetBtn" @click="() => instance.resetFields()" name="reset-btn">
+        <Button v-if="parseSchema.resetBtn" @click="() => instance.resetFields()" name="reset-btn">
           重置
         </Button>
       </div>
@@ -52,6 +52,8 @@ const props = withDefaults(defineProps<FormRenderProps>(), {
 })
 
 const emits = defineEmits<FormRenderEmits>()
+
+const designInstance = useDesignInstance()
 
 // 注意：默认值必须使用工厂函数返回新对象，避免跨实例共享
 const formValues = defineModel<Record<string, any>>({ default: () => reactive({}) })
@@ -164,37 +166,39 @@ const context = computed(() => ({
   h
 }))
 
-// 全局schema解析，使用模板引擎处理所有字段中的表达式
+// 全局schema解析
 const parseSchema = computed(() => {
-  // 设计模式下直接返回原始schema，不进行表达式解析
-  if (props.design) {
-    return innerSchema.value
+  let schema: FormSchema = {
+    labelWidth: 150,
+    labelAlign: 'right',
+    scrollToError: true,
+    size: 'default',
+    submitBtn: true,
+    ...innerSchema.value
   }
+
+  if (props.design) {
+    // 设计模式下，与设计Schema桥接，且无需解析表达式
+    return { ...schema, ...designInstance!.getSchema() }
+  }
+
   // 运行模式下解析表达式
-  return deepParse(innerSchema.value, context.value)
+  return deepParse(schema, context.value)
 })
 
-const designInstance = useDesignInstance()
-
+// 提取表单UI需要的属性
 const formAttrs = computed(() => {
-  let schema: FormSchema = parseSchema.value
-
-  if (props.design) {
-    // 设计模式下，与设计Schema桥接
-    schema = designInstance!.getSchema()
-  }
-
-  const attrs = omit(
-    {
-      labelWidth: 150,
-      labelAlign: 'right',
-      scrollToError: true,
-      size: 'default',
-      submitBtn: true,
-      ...schema
-    },
-    ['model', 'items', 'initialValues', 'colon', 'onFieldChange', 'onChange']
-  )
+  const attrs = omit(parseSchema.value, [
+    'model',
+    'items',
+    'initialValues',
+    'colon',
+    'onFieldChange',
+    'onChange',
+    'submitBtn',
+    'resetBtn'
+    // 'styleBlock'
+  ])
 
   return attrs
 })
@@ -203,6 +207,7 @@ const formAttrs = computed(() => {
 watch(
   () => innerSchema.value.styleBlock,
   (newStyleBlock) => {
+    // console.log('newStyleBlock', newStyleBlock, innerSchema.value) // TODO
     // 先清理旧的样式元素
     if (styleElement.value && styleElement.value.parentNode) {
       styleElement.value.parentNode.removeChild(styleElement.value)
