@@ -65,6 +65,12 @@ const selectData = reactive<Record<string, Record<string, any>>>({})
 // 复制schema，避免直接修改props
 const innerSchema = ref(cloneDeep(props.schema || {}))
 
+watch(
+  () => props.schema,
+  (newSchema) => {
+    innerSchema.value = cloneDeep(newSchema)
+  }
+)
 // 生成唯一的 formId（只在首次生成，后续保持不变）
 let autoFormId = `fm-form-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
 const formId = computed(() => {
