@@ -38,6 +38,7 @@ import {
   useTemplateRef,
   watch
 } from 'vue'
+import { initSchema } from '@/config'
 import { useDesignInstance, useUI } from '@/hooks'
 import { $formInstance } from '@/symbol'
 import type { FormInstance, FormRenderEmits, FormRenderProps } from '@/types'
@@ -175,11 +176,7 @@ const context = computed(() => ({
 // 全局schema解析
 const parseSchema = computed(() => {
   let schema: FormSchema = {
-    labelWidth: 150,
-    labelAlign: 'right',
-    scrollToError: true,
-    size: 'default',
-    submitBtn: true,
+    ...cloneDeep(initSchema),
     ...innerSchema.value
   }
 

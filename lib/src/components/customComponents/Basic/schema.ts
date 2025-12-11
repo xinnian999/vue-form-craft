@@ -7,6 +7,12 @@ export default {
   size: 'small',
   submitBtn: false,
   items: [
+    // {
+    //   label: '组件',
+    //   name: 'component',
+    //   component: 'Tag',
+    //   designKey: 'design-component'
+    // },
     {
       label: '字段标识',
       name: 'name',
@@ -16,6 +22,7 @@ export default {
         autocomplete: 'new-password',
         clearable: true
       },
+      help: '对应表单数据对象中的 key，支持点路径（如：user.name、user.address.city）',
       designKey: 'design-njXF'
     },
     {
@@ -117,6 +124,14 @@ export default {
       name: 'hidden',
       component: 'Switch',
       designKey: 'design-C5Qj'
+    },
+    {
+      label: '默认值',
+      name: 'defaultValue',
+      component: '{{ currentNode.component }}',
+      props: '{{currentNode.props}}' as unknown as Record<string, any>,
+      help: '此默认值只是视图层的默认值，不会影响表单数据',
+      designKey: 'design-defaultValue'
     }
   ]
 } satisfies FormSchema

@@ -3,6 +3,8 @@ import type { AiGenerateFunction } from 'formora/dev'
 
 const token = import.meta.env.VITE_COZE_TOKEN
 
+console.log(token)
+
 const botId = '7574355537379885056'
 
 // 创建请求实例
