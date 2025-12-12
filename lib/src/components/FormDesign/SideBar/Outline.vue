@@ -1,39 +1,32 @@
 <template>
   <div :class="ns('outline')">
-    <el-tree
+    <Tree
       :data="treeData"
-      :props="treeProps"
       node-key="designKey"
-      :current-node-key="currentNodeKey"
-      :highlight-current="true"
+      :current-key="currentNodeKey"
+      :default-expand-all="true"
       :expand-on-click-node="false"
-      default-expand-all
       @node-click="handleNodeClick"
     >
-      <template #default="{ node, data }">
+      <template #default="{ data }">
         <div class="tree-node">
           <ElementIcon :icon="data.icon" class="node-icon" />
-          <span class="node-label">{{ node.label }}</span>
+          <span class="node-label">{{ data.label }}</span>
         </div>
       </template>
-    </el-tree>
+    </Tree>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, h } from 'vue'
-import { ElementIcon, Icon } from '@/components'
+import { ElementIcon, Icon, Tree } from '@/components'
 import { useDesignInstance, useElements } from '@/hooks'
 import type { FormItemType } from '@/types'
 import { ns } from '@/utils'
 
 const designInstance = useDesignInstance()
 const elements = useElements()
-
-const treeProps = {
-  children: 'children',
-  label: 'label'
-}
 
 // 递归构建树形数据
 const buildTreeData = (items: FormItemType[] = []): any[] => {

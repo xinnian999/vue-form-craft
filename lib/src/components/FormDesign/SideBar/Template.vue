@@ -1,6 +1,6 @@
 <template>
   <div :class="ns('template-list')">
-    <el-tree style="max-width: 600px" :data="templates">
+    <Tree :data="templates" :default-expand-all="true" node-key="label">
       <template #default="{ data }">
         <div class="catalog" v-if="data.children">
           <Icon name="catalog" />
@@ -17,12 +17,12 @@
           </div>
         </div>
       </template>
-    </el-tree>
+    </Tree>
   </div>
 </template>
 
 <script setup lang="ts">
-import { Icon } from '@/components'
+import { Icon, Tree } from '@/components'
 import { useDesignInstance } from '@/hooks'
 import templates from '@/templates'
 import { ns, repirJsonSchema } from '@/utils'
