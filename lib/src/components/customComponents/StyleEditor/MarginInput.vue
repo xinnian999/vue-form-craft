@@ -79,11 +79,8 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { Icon } from '@/components'
-import { useUI } from '@/hooks'
 import { ns } from '@/utils'
 import UnitInput from './UnitInput.vue'
-
-const { Button } = useUI()
 
 defineOptions({
   name: 'MarginInput'

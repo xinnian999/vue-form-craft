@@ -22,6 +22,7 @@ export interface UIAdapter {
   DatePicker: Component<DatePickerProtocol['props']>
   // 布局组件
   Card: Component<CardProtocol['props']>
+  Divider: Component<DividerProtocol['props']>
   Tabs: Component<TabsProtocol['props']>
   TabPane: Component<TabPaneProtocol['props']>
   Collapse: Component<CollapseProtocol['props']>
@@ -190,6 +191,20 @@ export interface CardProtocol {
   slots: {
     default?: () => VNode
     header?: () => VNode
+  }
+}
+
+/**
+ * Divider 组件协议
+ */
+export interface DividerProtocol {
+  props: {
+    direction?: 'horizontal' | 'vertical'
+    contentPosition?: 'left' | 'center' | 'right'
+    borderStyle?: 'solid' | 'dashed' | 'dotted'
+  }
+  slots: {
+    default?: () => VNode
   }
 }
 

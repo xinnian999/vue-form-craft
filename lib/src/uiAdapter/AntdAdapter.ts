@@ -6,6 +6,7 @@ import {
   Checkbox,
   Collapse,
   DatePicker,
+  Divider,
   Form,
   Input,
   InputNumber,
@@ -29,6 +30,7 @@ import type {
   CollapseProtocol,
   ColorPickerProtocol,
   DatePickerProtocol,
+  DividerProtocol,
   FormItemProtocol,
   FormProtocol,
   InputNumberProtocol,
@@ -256,6 +258,25 @@ const AntdAdapter: UIAdapter = {
             title: propsAttrs.header,
             hoverable: propsAttrs.shadow === 'hover',
             bodyStyle: propsAttrs.bodyStyle
+          },
+          slots
+        )
+    },
+    { inheritAttrs: false }
+  ),
+
+  Divider: defineComponent(
+    (_, { slots, attrs }) => {
+      const propsAttrs = attrs as DividerProtocol['props']
+
+      return () =>
+        h(
+          Divider,
+          {
+            ...attrs,
+            type: propsAttrs.direction === 'vertical' ? 'vertical' : 'horizontal',
+            orientation: propsAttrs.contentPosition,
+            dashed: propsAttrs.borderStyle === 'dashed'
           },
           slots
         )
@@ -578,12 +599,7 @@ const AntdAdapter: UIAdapter = {
             },
             style:
               'width: 40px; height: 32px; border: 1px solid #d9d9d9; border-radius: 2px; cursor: pointer;'
-          }),
-          h(
-            'span',
-            { style: 'margin-left: 8px; font-size: 12px;' },
-            '(Ant Design Vue 不支持 ColorPicker，使用原生 input[type=color])'
-          )
+          })
         ])
     },
     { inheritAttrs: false }

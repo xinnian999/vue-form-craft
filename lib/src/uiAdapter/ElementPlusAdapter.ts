@@ -8,6 +8,7 @@ import {
   ElColorPicker,
   ElDatePicker,
   ElDialog,
+  ElDivider,
   ElForm,
   ElFormItem,
   ElInput,
@@ -176,6 +177,13 @@ const ElementPlusAdapter: UIAdapter = {
   Card: defineComponent(
     (_, { slots, attrs }) => {
       return () => h(ElCard, attrs, slots)
+    },
+    { inheritAttrs: false }
+  ),
+
+  Divider: defineComponent(
+    (_, { slots, attrs }) => {
+      return () => h(ElDivider, attrs, slots)
     },
     { inheritAttrs: false }
   ),

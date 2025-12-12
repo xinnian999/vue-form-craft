@@ -7,15 +7,15 @@ export default {
   size: 'small',
   submitBtn: false,
   items: [
-    {
-      label: '组件',
-      name: 'component',
-      component: 'Tag',
-      props: {
-        text: '{{ currentElement.title }}'
-      },
-      designKey: 'design-component'
-    },
+    // {
+    //   label: '组件',
+    //   name: 'component',
+    //   component: 'Tag',
+    //   props: {
+    //     text: '{{ currentElement.title }}'
+    //   },
+    //   designKey: 'design-component'
+    // },
     {
       label: '字段标识',
       name: 'name',
