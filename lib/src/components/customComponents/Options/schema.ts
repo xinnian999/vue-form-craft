@@ -5,7 +5,6 @@ export default {
   labelAlign: 'left',
   scrollToError: true,
   size: 'small',
-  submitBtn: true,
   initialValues: {
     props: {
       mode: 'remote',

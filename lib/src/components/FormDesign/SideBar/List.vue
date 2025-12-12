@@ -135,8 +135,14 @@ const handleDbClick = (element: FormElement) => {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '@/style';
+
+@include ns('components') {
+  .responsive-input {
+    margin-bottom: 10px;
+  }
+}
 
 @include ns('search-result') {
   padding: 10px 0;
