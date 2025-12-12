@@ -46,8 +46,6 @@ export interface FormItemType {
   class?: any
   style?: any
   linkages?: FormLinkage[]
-  dialog?: boolean
-  width?: number
 
   // B. 渲染层（跟 UI 组件强相关）
   component: string

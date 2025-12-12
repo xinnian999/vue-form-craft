@@ -8,14 +8,3 @@ import schema from './schema'
 
 const value = defineModel()
 </script>
-
-<style lang="scss">
-@import '@/style';
-
-@include ns('design-linkages-config') {
-  width: 100%;
-  @include ns('form-item') {
-    margin-bottom: 18px !important;
-  }
-}
-</style>

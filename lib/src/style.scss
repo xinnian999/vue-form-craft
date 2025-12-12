@@ -54,6 +54,10 @@ $textColor3: var(--#{$namespace}-color-text-regular, #606266);
   .el-button + .el-button {
     margin-left: 0;
   }
+
+  .el-form-item .el-form-item {
+    margin-bottom: 18px;
+  }
 }
 
 @include ns('outline') {

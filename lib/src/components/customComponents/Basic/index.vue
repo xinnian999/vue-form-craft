@@ -34,14 +34,3 @@ const currentElement = computed(() => {
   return elements[node!.component]
 })
 </script>
-
-<style lang="scss">
-@import '@/style';
-
-@include ns('design-basic-config') {
-  width: 100%;
-  @include ns('form-item') {
-    margin-bottom: 18px !important;
-  }
-}
-</style>

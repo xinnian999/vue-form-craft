@@ -134,7 +134,6 @@ export default {
               label: '表单提交按钮',
               name: 'submitBtn',
               component: 'Switch',
-              defaultValue: true,
               designKey: 'design-sHY1'
             },
             {

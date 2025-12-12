@@ -12,14 +12,3 @@ const value = defineModel<FormSchema>()
 
 const schemaData = schema
 </script>
-
-<style lang="scss">
-@import '@/style';
-
-@include ns('design-options-config') {
-  width: 100%;
-  @include ns('form-item') {
-    margin-bottom: 18px;
-  }
-}
-</style>

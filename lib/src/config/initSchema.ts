@@ -5,7 +5,6 @@ export default {
   labelAlign: 'right',
   scrollToError: true,
   size: 'default',
-  submitBtn: true,
   initialValues: {},
   items: []
 } satisfies FormSchema

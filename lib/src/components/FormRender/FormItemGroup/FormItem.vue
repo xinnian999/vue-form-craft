@@ -1,10 +1,6 @@
 <template>
   <template v-if="formInstance.design || !hidden">
-    <div v-if="config.type === 'layout'" :class="classNames" :style="style">
-      <RenderComponent />
-    </div>
-
-    <div v-else-if="config.type === 'assist'" :class="classNames" :style="style">
+    <div v-if="config.type !== 'basic'" :class="classNames" :style="style">
       <RenderComponent />
     </div>
 
@@ -40,7 +36,7 @@
 
 <script setup lang="ts">
 import { cloneDeep, isEqual } from 'lodash'
-import { computed, h, onBeforeMount, watch } from 'vue'
+import { computed, h, watch } from 'vue'
 import { Icon } from '@/components'
 import { useElements, useFormInstance, useUI } from '@/hooks'
 import type { FormItemType, RuleItem } from '@/types'
@@ -114,7 +110,6 @@ const classNames = computed(() => {
 })
 
 const RenderComponent = () => {
-  const modelName = config.value.modelName || 'modelValue'
   const propsData = cloneDeep(filterExpressions(props.props))
   const slots = deepParse(props.slots, { h })
 
@@ -125,6 +120,8 @@ const RenderComponent = () => {
   }
 
   if (config.value.type === 'basic') {
+    const modelName = config.value.modelName || 'modelValue'
+
     Object.assign(componentProps, {
       [modelName]: value.value,
       [`onUpdate:${modelName}`]: (val: any) => {
