@@ -1,24 +1,23 @@
 <template>
   <div :class="ns('form-design-right')">
     <div class="breadcrumb">
-      <el-breadcrumb separator=">" style="line-height: 25px">
-        <el-breadcrumb-item
-          class="breadcrumb-item"
-          @click="designInstance.setCurrentKey('root')"
-          @mousemove="designInstance.setHoverKey('root')"
-        >
-          表单
-        </el-breadcrumb-item>
-        <el-breadcrumb-item
-          v-for="node in breadcrumbPath"
-          :key="node.designKey"
+      <span
+        class="breadcrumb-item"
+        @click="designInstance.setCurrentKey('root')"
+        @mousemove="designInstance.setHoverKey('root')"
+      >
+        表单
+      </span>
+      <template v-for="node in breadcrumbPath" :key="node.designKey">
+        <span class="breadcrumb-separator">></span>
+        <span
           class="breadcrumb-item"
           @click="designInstance.setCurrentKey(node.designKey!)"
           @mousemove="designInstance.setHoverKey(node.designKey!)"
         >
           {{ node.label || node.name }}
-        </el-breadcrumb-item>
-      </el-breadcrumb>
+        </span>
+      </template>
     </div>
     <AttrEdit />
   </div>
@@ -84,9 +83,25 @@ const breadcrumbPath = computed(() => {
     padding: 5px 10px;
     font-size: 12px;
     border-bottom: 1px solid #e5e2e2;
+    line-height: 25px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: wrap;
 
     .breadcrumb-item {
       cursor: pointer;
+      font-size: 12px;
+      color: #606266;
+      transition: color 0.2s;
+
+      &:hover {
+        color: $themeColor;
+      }
+    }
+
+    .breadcrumb-separator {
+      color: #c0c4cc;
       font-size: 12px;
     }
   }

@@ -31,6 +31,6 @@ const currentNode = computed(() => {
 
 const currentElement = computed(() => {
   const node = designInstance.getNodeByKey(designInstance.currentKey)
-  return elements[node!.component]
+  return node ? elements[node.component] : null
 })
 </script>
