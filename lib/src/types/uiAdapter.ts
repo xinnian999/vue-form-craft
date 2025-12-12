@@ -20,6 +20,7 @@ export interface UIAdapter {
   Rate: Component<RateProtocol['props']>
   ColorPicker: Component<ColorPickerProtocol['props']>
   DatePicker: Component<DatePickerProtocol['props']>
+  Cascader: Component<CascaderProtocol['props']>
   // 布局组件
   Card: Component<CardProtocol['props']>
   Divider: Component<DividerProtocol['props']>
@@ -202,6 +203,37 @@ export interface TagProtocol {
   }
   slots: {
     default?: () => VNode
+  }
+}
+
+/**
+ * Cascader 组件协议
+ */
+export interface CascaderProtocol {
+  props: {
+    modelValue: any
+    options?: Array<{
+      label: string
+      value: any
+      disabled?: boolean
+      children?: any[]
+    }>
+    placeholder?: string
+    disabled?: boolean
+    clearable?: boolean
+    filterable?: boolean
+    multiple?: boolean
+    size?: 'large' | 'default' | 'small'
+    loading?: boolean
+    'onUpdate:modelValue'?: (value: any) => void
+    onChange?: (value: any) => void
+    onClear?: () => void
+    onBlur?: (e: Event) => void
+    onFocus?: (e: Event) => void
+  }
+  slots: {
+    default?: () => VNode
+    empty?: () => VNode
   }
 }
 

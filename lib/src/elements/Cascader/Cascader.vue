@@ -1,20 +1,19 @@
 <template>
-  <el-cascader
+  <Cascader
     v-model="value"
     :options="currentOptions"
     :loading="loading"
-    :props="{
-      multiple
-    }"
+    :multiple="multiple"
     v-bind="$attrs"
     @change="selectChange"
   />
 </template>
 
 <script setup lang="ts">
-import { type CascaderValue } from 'element-plus'
-import { useSelect } from '@/hooks'
+import { useSelect, useUI } from '@/hooks'
 import type { SelectProps } from '@/types'
+
+const { Cascader } = useUI()
 
 const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],
@@ -23,7 +22,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   name: ''
 })
 
-const value = defineModel<CascaderValue>()
+const value = defineModel<any>()
 
 const { currentOptions, selectChange, loading } = useSelect(props)
 </script>

@@ -100,6 +100,7 @@ export default {
               name: 'props.showAllLevels',
               component: 'Switch',
               designKey: 'design-showAllLevels',
+              defaultValue: true,
               help: '是否显示选中值的完整路径'
             },
             {

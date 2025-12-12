@@ -13,7 +13,7 @@
 
 ## 适配进度
 
-**已完成: 26 / 34**
+**已完成: 27 / 34**
 
 **第一优先级：高频表单组件**
 
@@ -32,7 +32,7 @@
 - ✅ ColorPicker（颜色选择器）- 已适配（Ant Design Vue 使用原生 input[type=color] 降级）
 - Upload（上传）
 - ✅ InputNumber（数字输入框）- 已适配
-- Cascader（级联选择器）
+- ✅ Cascader（级联选择器）- 已适配
 
 **第二优先级：布局组件**
 

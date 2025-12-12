@@ -4,7 +4,8 @@
     title="JsonSchema"
     width="75%"
     center
-    destroy-on-close
+    destroyOnClose
+    :to="`.${ns('form-design')}`"
     top="5vh"
     @close="formValues = {}"
   >
@@ -60,7 +61,7 @@ import { computed, ref } from 'vue'
 import { CodeHighLight, Icon } from '@/components'
 import { useDesignInstance, useUI } from '@/hooks'
 import type { FormSchema } from '@/types'
-import { repirJsonSchema } from '@/utils'
+import { ns, repirJsonSchema } from '@/utils'
 import { jsJsonSchema, jsVue, tsJsonSchema, tsVue } from './config'
 import JsonSchemaEdit from './Edit.vue'
 import ImportJsonSchema from './Import.vue'

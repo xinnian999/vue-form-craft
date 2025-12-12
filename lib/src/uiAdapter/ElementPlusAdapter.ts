@@ -2,6 +2,7 @@ import {
   ElAlert,
   ElButton,
   ElCard,
+  ElCascader,
   ElCheckboxGroup,
   ElCollapse,
   ElCollapseItem,
@@ -30,6 +31,7 @@ import {
 import { defineComponent, h, ref } from 'vue'
 import type {
   AlertProtocol,
+  CascaderProtocol,
   FormItemProtocol,
   FormProtocol,
   MessageBoxOptions,
@@ -311,6 +313,26 @@ const ElementPlusAdapter: UIAdapter = {
   DatePicker: defineComponent(
     (_, { attrs }) => {
       return () => h(ElDatePicker, attrs)
+    },
+    { inheritAttrs: false }
+  ),
+
+  Cascader: defineComponent(
+    (_, { attrs, slots }) => {
+      return () => {
+        const propsAttrs = attrs as CascaderProtocol['props']
+
+        return h(
+          ElCascader,
+          {
+            ...attrs,
+            props: {
+              multiple: propsAttrs.multiple
+            }
+          },
+          slots
+        )
+      }
     },
     { inheritAttrs: false }
   ),

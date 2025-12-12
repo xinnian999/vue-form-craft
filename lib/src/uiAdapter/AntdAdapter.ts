@@ -3,6 +3,7 @@ import {
   Modal as AntModal,
   Button,
   Card,
+  Cascader,
   Checkbox,
   Collapse,
   DatePicker,
@@ -650,6 +651,29 @@ const AntdAdapter: UIAdapter = {
             : propsAttrs.placeholder
         })
       }
+    },
+    { inheritAttrs: false }
+  ),
+
+  Cascader: defineComponent(
+    (_, { attrs, slots }) => {
+      const propsAttrs = attrs as any
+
+      return () =>
+        h(
+          Cascader,
+          {
+            ...attrs,
+            value: propsAttrs.modelValue,
+            'onUpdate:value': (value: any) => {
+              propsAttrs['onUpdate:modelValue']?.(value)
+            },
+            allowClear: propsAttrs.clearable,
+            showSearch: propsAttrs.filterable,
+            multiple: propsAttrs.multiple
+          },
+          slots
+        )
     },
     { inheritAttrs: false }
   ),
