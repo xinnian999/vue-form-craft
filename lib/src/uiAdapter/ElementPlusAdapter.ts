@@ -23,6 +23,8 @@ import {
   ElSwitch,
   ElTabPane,
   ElTabs,
+  ElTag,
+  ElTooltip,
   type FormInstance
 } from 'element-plus'
 import { defineComponent, h, ref } from 'vue'
@@ -113,6 +115,20 @@ const ElementPlusAdapter: UIAdapter = {
 
         return h(ElAlert, { ...attrs, type }, slots)
       }
+    },
+    { inheritAttrs: false }
+  ),
+
+  Tooltip: defineComponent(
+    (_, { slots, attrs }) => {
+      return () => h(ElTooltip, attrs, slots)
+    },
+    { inheritAttrs: false }
+  ),
+
+  Tag: defineComponent(
+    (_, { slots, attrs }) => {
+      return () => h(ElTag, attrs, slots)
     },
     { inheritAttrs: false }
   ),

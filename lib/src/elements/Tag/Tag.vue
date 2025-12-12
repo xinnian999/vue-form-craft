@@ -1,8 +1,11 @@
 <template>
-  <el-tag :type="type">{{ text }}</el-tag>
+  <Tag :type="type">{{ text }}</Tag>
 </template>
 
 <script setup lang="ts">
+import { useUI } from '@/hooks'
+
+const { Tag } = useUI()
 
 withDefaults(
   defineProps<{ text?: string; type?: 'primary' | 'success' | 'info' | 'warning' | 'danger' }>(),

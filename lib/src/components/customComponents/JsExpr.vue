@@ -13,7 +13,7 @@
         <!-- AI生成区域 -->
         <div v-if="isAiAvailable" class="ai-section">
           <div class="ai-input-wrapper">
-            <el-input
+            <Input
               v-model="aiPrompt"
               placeholder="描述你想要的JS表达式功能，例如：判断年龄是否大于18岁"
               clearable
@@ -28,15 +28,14 @@
                   AI生成
                 </Button>
               </template>
-            </el-input>
+            </Input>
           </div>
         </div>
 
         <!-- 表达式输入区域 -->
         <div class="expr-section">
-          <el-input
+          <Textarea
             v-model="expr"
-            type="textarea"
             :rows="8"
             placeholder="请输入JS表达式，例如：{{ $values.age > 18 }}"
           />
@@ -56,7 +55,7 @@ import { onMounted, ref } from 'vue'
 import { useAi, useDesignInstance, useUI } from '@/hooks'
 import { ns } from '@/utils'
 
-const { Button, Modal, Message } = useUI()
+const { Button, Modal, Message, Input, Textarea } = useUI()
 
 const modelValue = defineModel<string>()
 

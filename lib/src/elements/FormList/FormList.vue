@@ -1,9 +1,9 @@
 <template>
   <div :class="ns('formList')">
     <div v-if="formInstance.design">
-      <el-card v-if="mode === 'card'" header="自增卡片" class="card-list-container">
+      <Card v-if="mode === 'card'" header="自增卡片" class="card-list-container">
         <FormItemGroup :list="fields" :designKey="formItemProps.designKey!" />
-      </el-card>
+      </Card>
 
       <FormItemGroup
         v-else-if="mode === 'table'"
@@ -15,7 +15,7 @@
 
     <div v-else>
       <template v-if="mode === 'card'">
-        <el-card v-for="(item, index) in list" :key="item.key" class="list-card">
+        <Card v-for="(item, index) in list" :key="item.key" class="list-card">
           <template #header>
             <div class="card-header">
               <span>{{ title + (index + 1) }}</span>
@@ -39,7 +39,7 @@
             class="list-card-item"
             :name="`${name}.${index}.${field.name}`"
           />
-        </el-card>
+        </Card>
       </template>
 
       <el-table
@@ -101,7 +101,7 @@ import { useFormInstance, useUI } from '@/hooks'
 import type { ComponentBaseProps, FormItemType } from '@/types'
 import { deepParse, ns } from '@/utils'
 
-const { Button } = useUI()
+const { Button, Card } = useUI()
 
 interface Props extends ComponentBaseProps {
   allowAdd?: boolean

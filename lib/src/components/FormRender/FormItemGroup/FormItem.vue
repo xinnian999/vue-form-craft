@@ -20,9 +20,9 @@
           <div>
             {{ label }}
           </div>
-          <el-tooltip effect="dark" :content="help" raw-content v-if="help">
+          <Tooltip effect="dark" :content="help" v-if="help">
             <Icon name="help" />
-          </el-tooltip>
+          </Tooltip>
           <div :class="ns('form-item-label-suffix')" v-if="formInstance.schema.colon">:</div>
         </div>
       </template>
@@ -42,7 +42,7 @@ import { useElements, useFormInstance, useUI } from '@/hooks'
 import type { FormItemType, RuleItem } from '@/types'
 import { deepParse, filterExpressions, getDataByPath, ns, parseRules } from '@/utils'
 
-const { FormItem, Alert } = useUI()
+const { FormItem, Alert, Tooltip } = useUI()
 
 const props = defineProps<FormItemType>()
 

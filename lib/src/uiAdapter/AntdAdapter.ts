@@ -17,7 +17,9 @@ import {
   Select,
   Slider,
   Switch,
-  Tabs
+  Tabs,
+  Tag,
+  Tooltip
 } from 'ant-design-vue'
 import { omit } from 'lodash'
 import { defineComponent, h, ref } from 'vue'
@@ -45,7 +47,9 @@ import type {
   SwitchProtocol,
   TabPaneProtocol,
   TabsProtocol,
+  TagProtocol,
   TextareaProtocol,
+  TooltipProtocol,
   UIAdapter
 } from '@/types/uiAdapter'
 import ns from '@/utils/ns'
@@ -259,7 +263,10 @@ const AntdAdapter: UIAdapter = {
             hoverable: propsAttrs.shadow === 'hover',
             bodyStyle: propsAttrs.bodyStyle
           },
-          slots
+          {
+            ...slots,
+            title: slots.header
+          }
         )
     },
     { inheritAttrs: false }
@@ -656,6 +663,57 @@ const AntdAdapter: UIAdapter = {
           ...attrs,
           message: propsAttrs.title
         })
+    },
+    { inheritAttrs: false }
+  ),
+
+  Tooltip: defineComponent(
+    (_, { slots, attrs }) => {
+      const propsAttrs = attrs as TooltipProtocol['props']
+
+      return () =>
+        h(
+          Tooltip,
+          {
+            ...attrs,
+            title: propsAttrs.content,
+            arrow: propsAttrs.showArrow !== false
+          },
+          slots
+        )
+    },
+    { inheritAttrs: false }
+  ),
+
+  Tag: defineComponent(
+    (_, { slots, attrs }) => {
+      const propsAttrs = attrs as TagProtocol['props']
+
+      return () => {
+        let tagColor = propsAttrs.color
+        if (!tagColor && propsAttrs.type) {
+          const colorMap: Record<string, string> = {
+            success: 'success',
+            info: 'default',
+            warning: 'warning',
+            danger: 'error',
+            primary: 'blue',
+            default: 'default'
+          }
+          tagColor = colorMap[propsAttrs.type] || 'default'
+        }
+
+        return h(
+          Tag,
+          {
+            ...attrs,
+            color: tagColor,
+            closable: propsAttrs.closable,
+            onClose: propsAttrs.onClose
+          },
+          slots
+        )
+      }
     },
     { inheritAttrs: false }
   ),

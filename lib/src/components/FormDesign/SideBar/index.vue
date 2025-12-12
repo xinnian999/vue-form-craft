@@ -1,7 +1,7 @@
 <template>
   <div :class="ns('form-design-left')">
     <div class="sidebar">
-      <el-tooltip v-for="menu in menus" :key="menu.key" :content="menu.title" placement="right">
+      <Tooltip v-for="menu in menus" :key="menu.key" :content="menu.title" placement="right">
         <div
           :class="['item', { active: activeKey === menu.key }]"
           :key="menu.key"
@@ -9,7 +9,7 @@
         >
           <Icon :name="menu.icon" />
         </div>
-      </el-tooltip>
+      </Tooltip>
     </div>
     <div class="content" v-if="visible">
       <div class="topbar">
@@ -30,12 +30,15 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { Icon } from '@/components'
+import { useUI } from '@/hooks'
 import { ns } from '@/utils'
 import AI from './AI/index.vue'
 import History from './History.vue'
 import List from './List.vue'
 import Outline from './Outline.vue'
 import Template from './Template.vue'
+
+const { Tooltip } = useUI()
 
 const activeKey = ref('component')
 

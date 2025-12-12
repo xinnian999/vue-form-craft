@@ -1,13 +1,16 @@
 <template>
   <div class="vfc-verify-code">
-    <el-input v-model="input" class="verify-input" :placeholder="placeholder" @blur="onBlur" />
+    <Input v-model="input" class="verify-input" :placeholder="placeholder" @blur="onBlur" />
     <div class="verify-code" ref="codeEl"></div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
+import { useUI } from '@/hooks'
 import GVerify from './gVerify'
+
+const { Input } = useUI()
 
 defineProps<{
   placeholder: string

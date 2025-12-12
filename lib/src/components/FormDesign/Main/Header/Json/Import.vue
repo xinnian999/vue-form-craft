@@ -1,7 +1,6 @@
 <template>
   <div :class="ns('import')">
-    <el-input
-      type="textarea"
+    <Textarea
       v-model="value"
       :rows="20"
       placeholder="请粘贴 JsonSchema 或包含 JsonSchema 的代码片段"
@@ -20,7 +19,7 @@ import { useDesignInstance, useUI } from '@/hooks'
 import type { FormSchema } from '@/types'
 import { ns, repirJsonSchema } from '@/utils'
 
-const { Button, Message } = useUI()
+const { Button, Message, Textarea } = useUI()
 
 const designInstance = useDesignInstance()!
 

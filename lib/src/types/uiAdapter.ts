@@ -31,6 +31,8 @@ export interface UIAdapter {
   Button: Component<ButtonProtocol['props']>
   Modal: Component<ModalProtocol['props']>
   Alert: Component<AlertProtocol['props']>
+  Tooltip: Component<TooltipProtocol['props']>
+  Tag: Component<TagProtocol['props']>
   // 消息组件
   Message: MessageProtocol
 }
@@ -151,6 +153,56 @@ export interface AlertProtocol {
     onClose?: () => void
   }
   slots: Record<string, never>
+}
+
+/**
+ * Tooltip 组件协议
+ */
+export interface TooltipProtocol {
+  props: {
+    content?: string
+    placement?:
+      | 'top'
+      | 'bottom'
+      | 'left'
+      | 'right'
+      | 'top-start'
+      | 'top-end'
+      | 'bottom-start'
+      | 'bottom-end'
+      | 'left-start'
+      | 'left-end'
+      | 'right-start'
+      | 'right-end'
+    disabled?: boolean
+    visible?: boolean
+    effect?: 'dark' | 'light'
+    offset?: number
+    showArrow?: boolean
+    trigger?: 'hover' | 'click' | 'focus' | 'contextmenu'
+  }
+  slots: {
+    default?: () => VNode
+    content?: () => VNode
+  }
+}
+
+/**
+ * Tag 组件协议
+ */
+export interface TagProtocol {
+  props: {
+    type?: 'success' | 'info' | 'warning' | 'danger' | 'primary' | 'default'
+    closable?: boolean
+    size?: 'large' | 'default' | 'small'
+    effect?: 'dark' | 'light' | 'plain'
+    round?: boolean
+    color?: string
+    onClose?: () => void
+  }
+  slots: {
+    default?: () => VNode
+  }
 }
 
 /**

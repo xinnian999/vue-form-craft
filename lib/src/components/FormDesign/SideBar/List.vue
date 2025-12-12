@@ -1,10 +1,10 @@
 <template>
   <div :class="ns('components')">
-    <el-input v-model="q" class="responsive-input" placeholder="搜索组件" clearable>
+    <Input v-model="q" class="responsive-input" placeholder="搜索组件" clearable>
       <template #prefix>
         <Icon name="search" />
       </template>
-    </el-input>
+    </Input>
     <!-- 搜索结果直接展示 -->
     <div v-if="q.trim()" :class="ns('search-result')">
       <draggable
@@ -36,13 +36,8 @@
       <div v-else :class="ns('no-result')">暂无匹配的组件</div>
     </div>
     <!-- 无搜索时使用折叠面板 -->
-    <el-collapse v-else v-model="active">
-      <el-collapse-item
-        v-for="{ title, children } in menus"
-        :key="title"
-        :title="title"
-        :name="title"
-      >
+    <Collapse v-else v-model="active">
+      <CollapseItem v-for="{ title, children } in menus" :key="title" :title="title" :name="title">
         <draggable
           :class="ns('menu-list')"
           :list="children"
@@ -68,8 +63,8 @@
             </li>
           </template>
         </draggable>
-      </el-collapse-item>
-    </el-collapse>
+      </CollapseItem>
+    </Collapse>
   </div>
 </template>
 
@@ -78,10 +73,12 @@ import { cloneDeep } from 'lodash'
 import { computed, ref } from 'vue'
 import draggable from 'vuedraggable-es-fix'
 import { ElementIcon, Icon } from '@/components'
-import { useDesignInstance, useElements } from '@/hooks'
+import { useDesignInstance, useElements, useUI } from '@/hooks'
 import type { FormElement, FormItemType } from '@/types'
 import { generateDesignKey, generateName, ns, repirNode } from '@/utils'
 import parseMenus from './menus'
+
+const { Input, Collapse, CollapseItem } = useUI()
 
 const designInstance = useDesignInstance()!
 
