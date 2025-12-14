@@ -17,6 +17,7 @@
       center
       :close-on-click-modal="false"
       destroy-on-close
+      :to="ns('function-editor')"
     >
       <div class="function-editor-content">
         <div class="editor-tips">
@@ -44,8 +45,10 @@
       </div>
 
       <template #footer>
-        <Button @click="handleCancel">取消</Button>
-        <Button type="primary" @click="handleSave">保存</Button>
+        <div class="function-editor-footer">
+          <Button @click="handleCancel">取消</Button>
+          <Button type="primary" @click="handleSave">保存</Button>
+        </div>
       </template>
     </Modal>
   </div>
@@ -367,6 +370,12 @@ watch(modelValue, (newVal) => {
     border: 1px solid $borderColor;
     border-radius: 4px;
     overflow: hidden;
+  }
+
+  .function-editor-footer {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
   }
 }
 </style>

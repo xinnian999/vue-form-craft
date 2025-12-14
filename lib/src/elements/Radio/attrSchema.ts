@@ -166,20 +166,6 @@ export default {
               labelWidth: 0
             }
           ]
-        },
-        {
-          label: '插槽',
-          name: 'slots',
-          component: 'TabPane',
-          children: [
-            {
-              label: '选项内容',
-              name: 'slots.default',
-              designKey: 'design-1W4w',
-              component: 'FunctionEditor'
-            }
-          ],
-          designKey: 'tab-7'
         }
       ]
     }

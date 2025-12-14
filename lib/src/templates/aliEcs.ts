@@ -45,10 +45,6 @@ export default {
               }
             ]
           },
-          slots: {
-            default:
-              '{{ ({ option }) => {\n  return h("div", null, [h("div", { style: "font-weight: 500;" }, option.label), option.desc ? h("div", { style: "font-size: 12px; margin-top: 2px;",class:\'desc\' }, option.desc) : null])\n} }}'
-          },
           linkages: [
             {
               type: 'attr',
@@ -98,8 +94,6 @@ export default {
       ]
     }
   ],
-  styleBlock:
-    '.el-radio-button__inner {\n  padding: 12px 18px;\n  background: #fff;\n  text-align: left;\n  line-height: 1.5;\n\n  .desc{\n    color:#999\n  }\n}\n\n.is-active{\n  .desc{\n    color:#eee\n  }\n}\n\n.form-item-alert{\n  white-space: pre-wrap;\n}',
   style: {
     backgroundColor: 'rgba(0, 0, 0, 0)'
   }

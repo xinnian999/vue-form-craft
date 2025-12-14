@@ -180,26 +180,6 @@ export default {
               labelWidth: 0
             }
           ]
-        },
-        {
-          label: '插槽',
-          name: 'slots',
-          component: 'TabPane',
-          children: [
-            {
-              label: '前置内容',
-              name: 'slots.prefix',
-              designKey: 'design-1W4w',
-              component: 'FunctionEditor'
-            },
-            {
-              label: '后置内容',
-              name: 'slots.suffix',
-              designKey: 'design-suffix',
-              component: 'FunctionEditor'
-            }
-          ],
-          designKey: 'tab-7'
         }
       ]
     }

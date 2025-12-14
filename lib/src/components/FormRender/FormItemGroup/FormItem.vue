@@ -111,7 +111,6 @@ const classNames = computed(() => {
 
 const RenderComponent = () => {
   const propsData = cloneDeep(filterExpressions(props.props))
-  const slots = deepParse(props.slots, { h })
 
   const componentProps = {
     name: props.name,
@@ -130,7 +129,7 @@ const RenderComponent = () => {
     })
   }
 
-  return h(config.value.render, componentProps, slots)
+  return h(config.value.render, componentProps)
 }
 
 // linkages 联动：可修改数据和 schema

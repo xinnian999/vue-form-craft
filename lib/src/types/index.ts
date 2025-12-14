@@ -50,7 +50,6 @@ export interface FormItemType {
   // B. 渲染层（跟 UI 组件强相关）
   component: string
   props?: Record<string, any>
-  slots?: Record<string, any>
 
   // C. 组件内建默认值
   // 仅影响组件【显示层】的默认值：value === undefined/null 时用于渲染，不会自动 set 到 formValues。
