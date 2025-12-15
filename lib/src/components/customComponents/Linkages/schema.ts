@@ -22,10 +22,11 @@ export default {
         {
           label: '目标字段',
           name: 'target',
-          component: 'Input',
+          component: 'Select',
           props: {
-            placeholder: '目标字段的 name',
-            clearable: true
+            clearable: true,
+            mode: 'static',
+            options: '{{ nodeOptions }}'
           },
           designKey: 'design-link-target'
         },
