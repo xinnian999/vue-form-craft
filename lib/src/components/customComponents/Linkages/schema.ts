@@ -96,6 +96,10 @@ export default {
                 value: 'hidden'
               },
               {
+                label: '可见状态',
+                value: 'show'
+              },
+              {
                 label: '必填状态',
                 value: 'required'
               },
@@ -133,7 +137,86 @@ export default {
             },
             clearable: true
           },
+          hidden: "{{ $item.type !== 'data' }}",
           designKey: 'design-link-config-value'
+        },
+        {
+          label: '隐藏状态',
+          name: 'value',
+          component: 'Radio',
+          props: {
+            options: [
+              { label: '隐藏', value: true },
+              { label: '不隐藏', value: false }
+            ]
+          },
+          hidden: "{{ $item.path !== 'hidden' }}",
+          designKey: 'design-link-hidden-value'
+        },
+        {
+          label: '可见状态',
+          name: 'value',
+          component: 'Radio',
+          props: {
+            options: [
+              { label: '可见', value: true },
+              { label: '不可见', value: false }
+            ]
+          },
+          hidden: '{{ $item.path !== "show" }}',
+          designKey: 'design-link-12121324234'
+        },
+        {
+          label: '禁用状态',
+          name: 'value',
+          component: 'Radio',
+          props: {
+            options: [
+              { label: '禁用', value: true },
+              { label: '不禁用', value: false }
+            ]
+          },
+          hidden: '{{ $item.path !== "props.disabled" }}',
+          designKey: 'design-link-2235677888'
+        },
+        {
+          label: '必填状态',
+          name: 'value',
+          component: 'Radio',
+          props: {
+            options: [
+              { label: '必填', value: true },
+              { label: '非必填', value: false }
+            ]
+          },
+          hidden: "{{ $item.path !== 'required' }}",
+          designKey: 'design-link-required-value'
+        },
+        {
+          label: '提示',
+          name: 'value',
+          component: 'TextArea',
+          props: {
+            clearable: true,
+            autosize: true
+          },
+          hidden: "{{ $item.path !== 'alert' }}",
+          designKey: 'design-link-alert-value'
+        },
+        {
+          label: '值',
+          name: 'value',
+          component: 'TextArea',
+          props: {
+            autosize: {
+              minRows: 2,
+              maxRows: 4
+            },
+            clearable: true
+          },
+          hidden:
+            "{{ $item.path === 'show' || $item.path === 'hidden' || $item.path === 'required' || $item.path === 'alert' || $item.path === 'props.disabled' || $item.type !== 'attr' }}",
+          designKey: 'design-link-attr-value'
         }
       ]
     }

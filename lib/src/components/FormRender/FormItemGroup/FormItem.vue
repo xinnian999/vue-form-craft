@@ -1,11 +1,10 @@
 <template>
   <template v-if="formInstance.design || !hidden">
-    <div v-if="config.type !== 'basic'" :class="classNames" :style="style">
-      <RenderComponent />
-    </div>
+    <RenderComponent v-if="isLayout" v-show="formInstance.design || show" />
 
     <FormItem
       v-else
+      v-show="formInstance.design || show"
       :class="classNames"
       :style="style"
       :key="name"
@@ -40,11 +39,14 @@ import { computed, h, watch } from 'vue'
 import { Icon } from '@/components'
 import { useElements, useFormInstance, useUI } from '@/hooks'
 import type { FormItemType, RuleItem } from '@/types'
-import { deepParse, filterExpressions, getDataByPath, ns, parseRules } from '@/utils'
+import { filterExpressions, getDataByPath, ns, parseRules } from '@/utils'
 
 const { FormItem, Alert, Tooltip } = useUI()
 
-const props = defineProps<FormItemType>()
+const props = withDefaults(defineProps<FormItemType>(), {
+  show: true,
+  hidden: false
+})
 
 const formInstance = useFormInstance()
 
@@ -60,7 +62,11 @@ const value = computed({
 })
 
 const computeRules = computed(() => {
-  const { rules = [], required } = props
+  const { rules = [], required, hidden, show } = props as FormItemType
+
+  if (!formInstance.design && (hidden || !show)) {
+    return []
+  }
 
   // rules中的配置优先级更高，如果已配置必填规则，直接使用rules
   const hasRequiredInRules = rules.some((rule) => rule.type === 'required')
@@ -99,12 +105,14 @@ const config = computed(() => {
   return data
 })
 
+const isLayout = computed(() => config.value.type === 'layout')
+
 const classNames = computed(() => {
   return [
     ns('form-item'),
     props.class,
     `${config.value.component}-${props.name}`,
-    { 'hide-label': props.labelWidth === 0 },
+    { 'hide-label': props.labelWidth === 0 || !props.label },
     props.labelAlign && `label-align-${props.labelAlign}`
   ]
 })

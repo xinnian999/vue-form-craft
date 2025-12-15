@@ -1,5 +1,5 @@
 <template>
-  <Tabs v-bind="$attrs" v-model="activeKey" :key="tabsKey">
+  <Tabs v-bind="$attrs" v-model="activeKey" :key="tabsKey" :class="ns('tabs')">
     <TabPane
       v-for="tab in children"
       :key="tab.name"
@@ -39,6 +39,7 @@ import Draggable from 'vuedraggable-es-fix'
 import { FormItemGroup } from '@/components'
 import { useDesignInstance, useFormInstance, useUI } from '@/hooks'
 import type { ComponentBaseProps, FormItemType } from '@/types'
+import { ns } from '@/utils'
 
 const { Tabs, TabPane } = useUI()
 
@@ -122,7 +123,13 @@ if (formInstance.design) {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '@/style';
+
+@include ns('tabs') {
+  overflow: hidden;
+}
+
 .action {
   margin: 10px 0;
   text-align: center;
