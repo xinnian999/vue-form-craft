@@ -41,8 +41,8 @@ export interface FormItemType {
   help?: string
   alert?: string
   children?: FormItemType[]
-  hidden?: boolean
-  show?: boolean
+  hidden?: boolean | string
+  show?: boolean | string
   rules?: FormRules
   class?: any
   style?: any

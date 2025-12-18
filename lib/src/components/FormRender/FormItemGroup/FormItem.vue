@@ -1,9 +1,7 @@
 <template>
   <template v-if="formInstance.design || !hidden">
-    <RenderComponent v-if="isLayout" v-show="formInstance.design || show" />
-
     <FormItem
-      v-else
+      v-if="config.type === 'basic'"
       v-show="formInstance.design || show"
       :class="classNames"
       :style="style"
@@ -30,6 +28,8 @@
 
       <Alert :class="['form-item-alert']" :title="alert" show-icon :closable="false" v-if="alert" />
     </FormItem>
+
+    <RenderComponent v-else v-show="formInstance.design || show" />
   </template>
 </template>
 
@@ -105,8 +105,6 @@ const config = computed(() => {
   return data
 })
 
-const isLayout = computed(() => config.value.type === 'layout')
-
 const classNames = computed(() => {
   return [
     ns('form-item'),
@@ -127,11 +125,9 @@ const RenderComponent = () => {
   }
 
   if (config.value.type === 'basic') {
-    const modelName = config.value.modelName || 'modelValue'
-
     Object.assign(componentProps, {
-      [modelName]: value.value,
-      [`onUpdate:${modelName}`]: (val: any) => {
+      modelValue: value.value,
+      'onUpdate:modelValue': (val: any) => {
         value.value = val
       }
     })

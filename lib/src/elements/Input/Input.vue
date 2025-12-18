@@ -1,14 +1,8 @@
 <template>
   <span v-if="formInstance.read">{{ value }}</span>
   <Input v-else v-bind="$attrs" v-model="value">
-    <!-- 手动透传所有 slots -->
-    <template v-if="$slots.prefix" #prefix>
-      <slot name="prefix" />
-    </template>
-
     <template #suffix>
       <slot name="suffix">
-        <!-- 默认内容: AI 图标 -->
         <Icon
           v-if="aiPrompt && isAvailable"
           name="magic"
@@ -16,14 +10,6 @@
           @click="handleAiClick"
         />
       </slot>
-    </template>
-
-    <template v-if="$slots.prepend" #prepend>
-      <slot name="prepend" />
-    </template>
-
-    <template v-if="$slots.append" #append>
-      <slot name="append" />
     </template>
   </Input>
 </template>
