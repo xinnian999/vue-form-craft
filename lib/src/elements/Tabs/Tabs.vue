@@ -1,34 +1,36 @@
 <template>
-  <Tabs v-bind="$attrs" v-model="activeKey" :key="tabsKey" :class="ns('tabs')">
-    <TabPane
-      v-for="tab in children"
-      :key="tab.name"
-      :label="tab.label"
-      :name="tab.name"
-      :lazy="tab.props?.lazy"
-    >
-      <FormItemGroup :list="tab.children!" :designKey="tab.designKey!" />
-    </TabPane>
-  </Tabs>
-
-  <div class="action" v-if="formInstance.design">
-    <!-- 拖拽排序胶囊 -->
-    <div class="drag-sort-capsule" v-if="children.length > 0">
-      <div class="capsule-title">拖拽排序</div>
-      <draggable
-        :list="children"
-        @end="handleDragEnd"
-        item-key="designKey"
-        class="drag-list"
-        :animation="200"
+  <div :class="ns('tabs')">
+    <Tabs v-bind="$attrs" v-model="activeKey" :key="tabsKey">
+      <TabPane
+        v-for="tab in children"
+        :key="tab.name"
+        :label="tab.label"
+        :name="tab.name"
+        :lazy="tab.props?.lazy"
       >
-        <template #item="{ element }">
-          <div class="drag-item">
-            <span class="drag-handle">⋮⋮</span>
-            <span class="tab-label">{{ element.label }}</span>
-          </div>
-        </template>
-      </draggable>
+        <FormItemGroup :list="tab.children!" :designKey="tab.designKey!" />
+      </TabPane>
+    </Tabs>
+
+    <div class="action" v-if="formInstance.design">
+      <!-- 拖拽排序胶囊 -->
+      <div class="drag-sort-capsule" v-if="children.length > 0">
+        <div class="capsule-title">拖拽排序</div>
+        <draggable
+          :list="children"
+          @end="handleDragEnd"
+          item-key="designKey"
+          class="drag-list"
+          :animation="200"
+        >
+          <template #item="{ element }">
+            <div class="drag-item">
+              <span class="drag-handle">⋮⋮</span>
+              <span class="tab-label">{{ element.label }}</span>
+            </div>
+          </template>
+        </draggable>
+      </div>
     </div>
   </div>
 </template>
