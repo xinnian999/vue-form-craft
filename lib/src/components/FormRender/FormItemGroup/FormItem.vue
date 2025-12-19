@@ -6,7 +6,7 @@
       :class="classNames"
       :style="style"
       :key="name"
-      :prop="name"
+      :name="name"
       :rules="computeRules"
       :labelWidth="labelWidth"
       :labelAlign="labelAlign"

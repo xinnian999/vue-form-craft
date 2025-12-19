@@ -72,7 +72,7 @@ export interface FormProtocol {
  */
 export interface FormItemProtocol {
   props: {
-    prop?: string
+    name?: string
     label?: string
     labelWidth?: string | number
     labelAlign?: 'left' | 'right' | 'top'

@@ -160,7 +160,6 @@ const AntdAdapter: UIAdapter = {
           {
             ...attrs,
             colon: false,
-            name: propsAttrs.prop,
             labelCol
           },
           slots

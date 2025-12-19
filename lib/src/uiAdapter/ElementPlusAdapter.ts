@@ -103,6 +103,24 @@ const ElementPlusAdapter: UIAdapter = {
     { inheritAttrs: false }
   ),
 
+  FormItem: defineComponent(
+    (_, { slots, attrs }) => {
+      const propsAttrs = attrs as FormItemProtocol['props']
+
+      return () =>
+        h(
+          ElFormItem,
+          {
+            ...attrs,
+            labelPosition: propsAttrs.labelAlign,
+            prop: propsAttrs.name
+          },
+          slots
+        )
+    },
+    { inheritAttrs: false }
+  ),
+
   Alert: defineComponent(
     (_, { attrs, slots }) => {
       const propsAttrs = attrs as AlertProtocol['props']
@@ -135,22 +153,6 @@ const ElementPlusAdapter: UIAdapter = {
     { inheritAttrs: false }
   ),
 
-  FormItem: defineComponent(
-    (_, { slots, attrs }) => {
-      const propsAttrs = attrs as FormItemProtocol['props']
-
-      return () =>
-        h(
-          ElFormItem,
-          {
-            ...attrs,
-            labelPosition: propsAttrs.labelAlign
-          },
-          slots
-        )
-    },
-    { inheritAttrs: false }
-  ),
   Input: defineComponent(
     (_, { slots, attrs }) => {
       return () => h(ElInput, attrs, slots)
