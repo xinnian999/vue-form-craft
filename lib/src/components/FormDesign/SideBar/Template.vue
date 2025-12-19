@@ -1,6 +1,6 @@
 <template>
   <div :class="ns('template-list')">
-    <Tree :data="templates" :default-expand-all="true" node-key="label">
+    <Tree :data="templates" node-key="label">
       <template #default="{ data }">
         <div class="catalog" v-if="data.children">
           <Icon name="catalog" />
@@ -57,9 +57,11 @@ const useTemplate = (template: any) => {
     display: flex;
     align-items: center;
     gap: 5px;
+    margin-left: 5px;
   }
   .form {
     padding: 5px 0;
+    padding-left: 1em;
     width: 100%;
     .form-header {
       display: flex;

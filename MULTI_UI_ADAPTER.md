@@ -30,7 +30,6 @@
 - ✅ Slider（滑块）- 已适配
 - ✅ Rate（评分）- 已适配
 - ✅ ColorPicker（颜色选择器）- 已适配（Ant Design Vue 使用原生 input[type=color] 降级）
-- Upload（上传）
 - ✅ InputNumber（数字输入框）- 已适配
 - ✅ Cascader（级联选择器）- 已适配
 
