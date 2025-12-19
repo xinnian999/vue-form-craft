@@ -48,8 +48,6 @@
 - ✅ Alert（警告提示）- 已适配
 - ✅ Tooltip（文字提示）- 已适配
 - ✅ Tag（标签）- 已适配
-- Table（表格）
-- TableColumn（表格列）
 - ✅ Message（消息）- 已适配（包含消息提示和确认框）
 
 ---
