@@ -42,37 +42,40 @@
         </Card>
       </template>
 
-      <el-table
-        v-if="mode === 'table' && list.length"
-        :data="list"
-        style="width: 100%"
-        class="table-list-render"
-      >
-        <el-table-column
-          :prop="item.name"
-          :label="item.label"
-          :key="item.name"
-          v-for="item in fields"
-          v-bind="pickBy(item, Boolean)"
-          :formatter="formatter"
-        />
-        <el-table-column fixed="right" min-width="60">
-          <template #default="record">
-            <Button
-              v-if="allowReduce && !isMin"
-              @click="handleReduceItem(record.$index)"
-              circle
-              type="primary"
-              class="list-btn reduceBtn"
-              :disabled="disabled"
-              size="small"
-              plain
-            >
-              <template #icon> <Icon name="reduce" /> </template
-            ></Button>
-          </template>
-        </el-table-column>
-      </el-table>
+      <table v-if="mode === 'table' && list.length" class="table-list-render">
+        <thead>
+          <tr>
+            <th v-for="item in fields" :key="item.name">{{ item.label }}</th>
+            <th class="action-col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(row, rowIndex) in list" :key="rowIndex">
+            <td v-for="field in parseFields(rowIndex)" :key="field.name">
+              <FormItem
+                v-bind="field"
+                label=""
+                style="margin-bottom: 0"
+                :name="`${name}.${rowIndex}.${field.name}`"
+              />
+            </td>
+            <td class="action-col">
+              <Button
+                v-if="allowReduce && !isMin"
+                @click="handleReduceItem(rowIndex)"
+                circle
+                type="primary"
+                class="list-btn reduceBtn"
+                :disabled="disabled"
+                size="small"
+                plain
+              >
+                <template #icon><Icon name="reduce" /></template>
+              </Button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
       <div style="margin-top: 5px">
         <Button
@@ -93,9 +96,8 @@
 </template>
 
 <script setup lang="ts">
-import type { TableColumnCtx } from 'element-plus'
-import { cloneDeep, isEqual, pickBy, set } from 'lodash'
-import { computed, h, onMounted, provide, ref, watch } from 'vue'
+import { cloneDeep, isEqual, set } from 'lodash'
+import { computed, onMounted, provide, ref, watch } from 'vue'
 import { FormItem, FormItemGroup, Icon } from '@/components'
 import { useFormInstance, useUI } from '@/hooks'
 import type { ComponentBaseProps, FormItemType } from '@/types'
@@ -204,19 +206,6 @@ const handleReduceItem = (index: number) => {
   list.value = newData
 }
 
-const formatter = (row: any, column: TableColumnCtx<any>, cellValue: any, index: number) => {
-  const colIndex = column.no
-  const field = parseFields(index)[colIndex]
-
-  return h(FormItem, {
-    ...field,
-    labelWidth: 0,
-    label: '',
-    style: { marginBottom: 0 },
-    name: `${props.name}.${index}.${field.name}`
-  })
-}
-
 // 追踪当前操作的行索引
 watch(
   list,
@@ -243,11 +232,6 @@ onMounted(() => {
     list.value = Array.from({ length: props.minLines }, () => ({}))
   }
 })
-
-provide(
-  '$objGroupBase',
-  computed(() => `${props.name}.${cIndex.value}`)
-)
 </script>
 
 <style lang="scss">
@@ -296,6 +280,26 @@ provide(
   }
 
   .table-list-render {
+    width: 100%;
+    border-collapse: collapse;
+
+    th,
+    td {
+      padding: 8px 12px;
+      border-bottom: 1px solid $borderColor;
+      text-align: left;
+    }
+
+    th {
+      background-color: $fillColorLight;
+      font-weight: 500;
+    }
+
+    .action-col {
+      width: 60px;
+      text-align: center;
+    }
+
     @include ns('form-item') {
       margin-bottom: 0;
     }

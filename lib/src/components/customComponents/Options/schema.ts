@@ -89,7 +89,7 @@ export default {
           component: 'Input'
         },
         {
-          label: '是否禁用',
+          label: '禁用',
           name: 'disabled',
           designKey: 'design-option-disabled',
           component: 'Switch'

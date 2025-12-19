@@ -4,7 +4,7 @@
       v-model:value="jsonString"
       language="json"
       :options="editorOptions"
-      :style="{ height: '400px' }"
+      :style="{ height: '500px' }"
     />
     <div class="footer">
       <Button @click="handleSave" type="primary">保存更改</Button>
