@@ -39,7 +39,7 @@ import {
   watch
 } from 'vue'
 import { initSchema } from '@/config'
-import { useDesignInstance, useUI } from '@/hooks'
+import { useUI } from '@/hooks'
 import { $formInstance } from '@/symbol'
 import type { FormInstance, FormRenderEmits, FormRenderProps } from '@/types'
 import type { FormProtocol } from '@/types/uiAdapter'
@@ -54,8 +54,6 @@ const props = withDefaults(defineProps<FormRenderProps>(), {
 
 const emits = defineEmits<FormRenderEmits>()
 
-const designInstance = useDesignInstance()
-
 // 注意：默认值必须使用工厂函数返回新对象，避免跨实例共享
 const formValues = defineModel<Record<string, any>>({ default: () => reactive({}) })
 
@@ -66,20 +64,13 @@ const selectData = reactive<Record<string, Record<string, any>>>({})
 // 复制schema，避免直接修改props
 const innerSchema = ref(cloneDeep(props.schema || {}))
 
+// 响应schema的变化
 watch(
   () => props.schema,
   (newSchema) => {
     innerSchema.value = cloneDeep(newSchema)
   }
 )
-// 生成唯一的 formId（只在首次生成，后续保持不变）
-let autoFormId = `fm-form-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
-const formId = computed(() => {
-  return innerSchema.value.formId || props.schema.formId || autoFormId
-})
-
-// 样式元素引用
-const styleElement = ref<HTMLStyleElement | null>(null)
 
 // 统一的事件触发器：同时触发 emits 和 schema 事件
 const trigger = (eventName: keyof FormRenderEmits, ...args: any[]) => {
@@ -169,8 +160,7 @@ const context = computed(() => ({
   ...props.schemaContext,
   $values: formValues.value,
   $selectData: selectData,
-  $instance: instanceAPI,
-  h
+  $instance: instanceAPI
 }))
 
 // 全局schema解析
@@ -181,8 +171,8 @@ const parseSchema = computed(() => {
   }
 
   if (props.design) {
-    // 设计模式下，与设计Schema桥接，且无需解析表达式
-    return { ...schema, ...designInstance!.getSchema() }
+    // 设计模式下，无需解析表达式
+    return schema
   }
 
   // 运行模式下解析表达式
@@ -205,6 +195,15 @@ const formAttrs = computed(() => {
 
   return attrs
 })
+
+// 生成唯一的 formId（只在首次生成，后续保持不变）
+let autoFormId = `fm-form-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
+const formId = computed(() => {
+  return innerSchema.value.formId || props.schema.formId || autoFormId
+})
+
+// 样式元素引用
+const styleElement = ref<HTMLStyleElement | null>(null)
 
 // 监听 styleBlock 变化，实时更新样式（设计模式下可实时预览）
 watch(

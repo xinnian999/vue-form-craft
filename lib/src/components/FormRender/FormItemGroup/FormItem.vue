@@ -29,7 +29,7 @@
       <Alert :class="['form-item-alert']" :title="alert" show-icon :closable="false" v-if="alert" />
     </FormItem>
 
-    <RenderComponent v-else v-show="formInstance.design || show" />
+    <RenderComponent v-else v-show="formInstance.design || show" :class="classNames" />
   </template>
 </template>
 
