@@ -55,8 +55,8 @@ describe('FormRender Attrs', () => {
       }
     })
 
-    await wrapper.find('[name="username"]').setValue('hyl')
-    await wrapper.find('[name="password"]').setValue('991015')
+    await wrapper.find('.Input-username input').setValue('hyl')
+    await wrapper.find('.Password-password input').setValue('991015')
     expect(wrapper.props('modelValue')).toStrictEqual({ username: 'hyl', password: '991015' })
   })
 
