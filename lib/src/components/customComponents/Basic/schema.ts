@@ -26,7 +26,7 @@ export default {
         clearable: true
       },
       help: '对应表单数据对象中的 key，支持点路径（如：user.name、user.address.city）'
-      },
+    },
     {
       label: '标签',
       name: 'label',
@@ -36,7 +36,7 @@ export default {
         autocomplete: 'new-password',
         clearable: true
       }
-      },
+    },
     {
       label: '标签宽度（px）',
       name: 'labelWidth',
@@ -69,7 +69,7 @@ export default {
         ]
       },
       defaultValue: '{{ rootSchema.labelAlign }}'
-      },
+    },
     {
       label: '尺寸',
       name: 'size',
@@ -92,7 +92,7 @@ export default {
         ]
       },
       defaultValue: '{{ rootSchema.size }}'
-      },
+    },
     {
       label: '提示',
       name: 'alert',
@@ -114,17 +114,27 @@ export default {
         },
         clearable: true
       }
-      },
+    },
     {
       label: '隐藏',
       name: 'hidden',
       component: 'Switch'
-      },
+    },
     {
       label: '可见',
       name: 'show',
       component: 'Switch',
       defaultValue: '{{ true }}'
+    },
+    {
+      label: 'class',
+      name: 'props.class',
+      component: 'Input'
+    },
+    {
+      label: 'ID',
+      name: 'props.id',
+      component: 'Input'
     }
   ]
 } satisfies FormSchema

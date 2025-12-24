@@ -15,7 +15,7 @@ import FormItem from './FormItem.vue'
 
 const props = defineProps<{
   list: FormItemType[]
-  designKey: string
+  designKey?: string
 }>()
 
 const formInstance = useFormInstance()
@@ -24,7 +24,7 @@ const designInstance = useDesignInstance()
 
 // 设计模式时，桥接对应list数据，避免直接修改props
 const designList = computed(() => {
-  if (!designInstance) return []
+  if (!designInstance || !props.designKey) return []
 
   if (props.designKey === 'root') {
     const rootList = designInstance.getSchema().items
