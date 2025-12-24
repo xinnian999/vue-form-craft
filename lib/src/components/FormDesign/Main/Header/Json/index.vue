@@ -71,7 +71,6 @@ const formValues = ref({})
 const onSave = (json: FormSchema) => {
   designInstance.setSchema(json)
   designInstance.recordHistory('编辑JSON')
-  designInstance.setCurrentKey('root')
   visible.value = false
 }
 </script>

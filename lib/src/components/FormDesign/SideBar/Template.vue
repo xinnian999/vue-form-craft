@@ -31,7 +31,6 @@ const designInstance = useDesignInstance()!
 
 const useTemplate = (template: any) => {
   designInstance.setSchema(template.schema)
-  designInstance.setCurrentKey('root')
   designInstance.recordHistory(`使用模板-${template.label}`)
 }
 </script>

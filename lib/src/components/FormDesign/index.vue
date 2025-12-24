@@ -70,6 +70,13 @@ const jsonState = reactive({
 // schema的唯一修改入口
 const setSchema = (schema: FormSchema) => {
   modelValue.value = repirJsonSchema(schema)
+
+  // 由于 repirJsonSchema 会重新生成所有 designKey，导致之前的 currentKey 找不到对应节点
+  // 因此每次 setSchema 后重置为 root，避免找不到节点的问题
+  // 性能：O(1)，比全局监听性能更好
+  if (currentKey.value !== 'root') {
+    currentKey.value = 'root'
+  }
 }
 
 const setCurrentKey = (key: string) => {

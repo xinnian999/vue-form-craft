@@ -100,7 +100,6 @@ const rightBottomActions = [
       const schema = designInstance.getSchema()
       const newList = recursionDelete(schema.items!, (item) => item.designKey !== element.designKey)
       designInstance.setSchema({ ...schema, items: newList })
-      designInstance.setCurrentKey('root')
       designInstance.recordHistory(`删除表单项-${element.label || element.name}`)
     }
   }
