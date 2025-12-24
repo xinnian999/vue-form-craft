@@ -32,8 +32,25 @@ export default {
               props: {
                 componentName: 'FormDesign-Basic'
               },
-              designKey: 'design-KaWx111111',
-              labelWidth: 0
+              designKey: 'design-KaWx111111'
+            },
+            {
+              label: '禁用',
+              name: 'props.disabled',
+              component: 'Switch',
+              designKey: 'design-VnLN'
+            },
+            {
+              label: '只读',
+              name: 'props.readonly',
+              component: 'Switch',
+              designKey: 'design-XgeW'
+            },
+            {
+              label: '清除按钮',
+              name: 'props.clearable',
+              component: 'Switch',
+              designKey: 'design-8sk2'
             },
             {
               label: '占位提示',
@@ -53,24 +70,6 @@ export default {
                 autosize: true
               },
               designKey: 'design-aiPrompt'
-            },
-            {
-              label: '禁用',
-              name: 'props.disabled',
-              component: 'Switch',
-              designKey: 'design-VnLN'
-            },
-            {
-              label: '只读',
-              name: 'props.readonly',
-              component: 'Switch',
-              designKey: 'design-XgeW'
-            },
-            {
-              label: '清除按钮',
-              name: 'props.clearable',
-              component: 'Switch',
-              designKey: 'design-8sk2'
             }
           ]
         },

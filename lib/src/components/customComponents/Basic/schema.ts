@@ -127,14 +127,13 @@ export default {
       name: 'hidden',
       component: 'Switch',
       designKey: 'design-C5Qj'
+    },
+    {
+      label: '可见',
+      name: 'show',
+      component: 'Switch',
+      designKey: 'design-show',
+      defaultValue: '{{ true }}'
     }
-    // {
-    //   label: '默认值',
-    //   name: 'defaultValue',
-    //   component: '{{ currentNode.component }}',
-    //   props: '{{currentNode.props}}' as unknown as Record<string, any>,
-    //   help: '此默认值只是视图层的默认值，不会影响表单数据',
-    //   designKey: 'design-defaultValue'
-    // }
   ]
 } satisfies FormSchema

@@ -17,17 +17,9 @@ const request = axios.create({
  * 使用Coze AI的实现
  * 配置参数直接在函数内部定义
  */
-export const cozeAiFunction: AiGenerateFunction = async ({ prompt, context, signal }) => {
+export const cozeAiFunction: AiGenerateFunction = async ({ prompt, signal }) => {
   // 构建消息
   const messages = []
-
-  if (context) {
-    messages.push({
-      role: 'user',
-      content: JSON.stringify(context),
-      content_type: 'text'
-    })
-  }
 
   messages.push({
     role: 'user',

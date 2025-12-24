@@ -13,7 +13,7 @@ import { ref } from 'vue'
 const searchParams = new URLSearchParams(window.location.search)
 
 const currentUI = ref<keyof typeof uiConfig>(
-  (searchParams.get('ui') as keyof typeof uiConfig) || 'elementPlus'
+  (searchParams.get('ui') as keyof typeof uiConfig) || 'el'
 )
 
 const onChangeUI = (val: any) => {

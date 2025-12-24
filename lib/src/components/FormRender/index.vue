@@ -27,7 +27,6 @@ import type { FormSchema } from 'dist'
 import { cloneDeep, omit } from 'lodash'
 import {
   computed,
-  h,
   onBeforeMount,
   onBeforeUnmount,
   provide,

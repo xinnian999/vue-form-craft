@@ -122,7 +122,6 @@ export type HistoryRecord = {
 // AI生成参数
 export type AiGenerateParams = {
   prompt: string // 提示词
-  context?: Record<string, any> // 上下文数据
   signal?: AbortSignal // 取消信号
 }
 
