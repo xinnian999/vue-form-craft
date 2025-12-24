@@ -35,9 +35,8 @@ export default {
           }
         ]
       },
-      required: true,
-      designKey: 'design-uMUF'
-    },
+      required: true
+      },
     {
       label: '购买数量',
       name: 'quantity',
@@ -45,9 +44,8 @@ export default {
       props: {
         min: 1
       },
-      required: true,
-      designKey: 'design-vJQN'
-    },
+      required: true
+      },
     {
       label: '收货地址',
       name: 'address',
@@ -55,9 +53,8 @@ export default {
       props: {
         placeholder: '请输入收货地址'
       },
-      required: true,
-      designKey: 'design-dzhz'
-    },
+      required: true
+      },
     {
       label: '付款方式',
       name: 'paymentMethod',
@@ -88,17 +85,15 @@ export default {
         disabledKey: 'disabled',
         mode: 'static'
       },
-      required: true,
-      designKey: 'design-vXx2'
-    },
+      required: true
+      },
     {
       label: '商品单价',
       name: 'price',
       component: 'Text',
       props: {
         text: "{{ $selectData.product ? $selectData.product?.price + '元' : '请选择商品' }}"
-      },
-      designKey: 'design-0oHv'
-    }
+      }
+      }
   ]
 } satisfies FormSchema

@@ -13,7 +13,6 @@ export default {
   items: [
     {
       name: 'form-pBQE',
-      designKey: 'design-2QJZ',
       component: 'Card',
       props: {
         header: ''
@@ -22,7 +21,6 @@ export default {
         {
           label: '付费类型',
           name: 'payType',
-          designKey: 'design-xxxx',
           component: 'Radio',
           props: {
             mode: 'static',
@@ -72,7 +70,6 @@ export default {
         {
           label: '地域',
           name: 'region',
-          designKey: 'design-XXsU',
           alert:
             '实例创建之后地域将无法更改，不同地域的实例之间内网互不相通；距离实例所在地域越近，对实例访问速度越快',
           component: 'Radio',

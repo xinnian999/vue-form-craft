@@ -13,7 +13,6 @@ export default {
         placeholder: '请输入...'
       },
       name: 'item1',
-      designKey: 'design-item1',
       linkages: [
         {
           target: 'item2',
@@ -33,17 +32,15 @@ export default {
       props: {
         placeholder: '请输入...'
       },
-      name: 'item2',
-      designKey: 'design-item2'
-    },
+      name: 'item2'
+      },
     {
       label: '字段3',
       component: 'Input',
       props: {
         placeholder: '请输入...'
       },
-      name: 'item3',
-      designKey: 'design-item3'
-    }
+      name: 'item3'
+      }
   ]
 } satisfies FormSchema

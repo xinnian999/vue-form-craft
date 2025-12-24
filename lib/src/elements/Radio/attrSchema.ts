@@ -28,7 +28,6 @@ export default {
   items: [
     {
       name: 'form-tabs',
-      designKey: 'design-tabs',
       component: 'Tabs',
       props: {
         defaultKey: 'attrs',
@@ -39,7 +38,6 @@ export default {
         {
           label: '属性',
           name: 'attrs',
-          designKey: 'tab-attrs',
           component: 'TabPane',
           props: {
             lazy: true
@@ -47,7 +45,6 @@ export default {
           children: [
             {
               name: '.',
-              designKey: 'design-basic',
               component: 'Custom',
               props: {
                 componentName: 'FormDesign-Basic'
@@ -57,7 +54,6 @@ export default {
             {
               label: '禁用',
               name: 'props.disabled',
-              designKey: 'design-disabled',
               component: 'Switch',
               props: {
                 'inline-prompt': false
@@ -66,7 +62,6 @@ export default {
             {
               label: '按钮形式',
               name: 'props.isButtonOption',
-              designKey: 'design-isButtonOption',
               component: 'Switch'
             }
           ]
@@ -74,7 +69,6 @@ export default {
         {
           label: '选项',
           name: 'optionSetting',
-          designKey: 'tab-options',
           component: 'TabPane',
           children: [
             {
@@ -83,7 +77,6 @@ export default {
               props: {
                 componentName: 'FormDesign-Options'
               },
-              designKey: 'design-FormDesign-Options',
               labelWidth: 0
             }
           ]
@@ -91,7 +84,6 @@ export default {
         {
           label: '校验',
           name: 'rules',
-          designKey: 'tab-rules',
           component: 'TabPane',
           props: {
             lazy: true
@@ -99,7 +91,6 @@ export default {
           children: [
             {
               name: '.',
-              designKey: 'design-KaWx11',
               component: 'Custom',
               props: {
                 componentName: 'FormDesign-Rules'
@@ -111,7 +102,6 @@ export default {
         {
           label: '联动',
           name: 'linkages',
-          designKey: 'tab-linkages',
           component: 'TabPane',
           props: {
             lazy: true
@@ -119,7 +109,6 @@ export default {
           children: [
             {
               name: '.',
-              designKey: 'design-linkages-custom',
               component: 'Custom',
               props: {
                 componentName: 'FormDesign-Linkages'
@@ -131,7 +120,6 @@ export default {
         {
           label: '事件',
           name: 'events',
-          designKey: 'tab-events',
           component: 'TabPane',
           props: {
             lazy: true
@@ -140,7 +128,6 @@ export default {
             {
               label: '数据改变时 (change)',
               name: 'props.onChange',
-              designKey: 'design-event-change',
               component: 'FunctionEditor',
               labelAlign: 'top'
             }
@@ -149,7 +136,6 @@ export default {
         {
           label: '样式',
           name: 'style',
-          designKey: 'tab-style',
           component: 'TabPane',
           props: {
             lazy: true
@@ -158,7 +144,6 @@ export default {
             {
               label: '',
               name: 'props.style',
-              designKey: 'design-style',
               component: 'Custom',
               props: {
                 componentName: 'FormDesign-StyleEditor'

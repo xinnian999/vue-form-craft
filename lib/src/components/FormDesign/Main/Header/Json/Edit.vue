@@ -19,7 +19,7 @@ import { cloneDeep } from 'lodash'
 import { onMounted, ref } from 'vue'
 import { useUI } from '@/hooks'
 import type { FormSchema } from '@/types'
-import { ns } from '@/utils'
+import { ns, removeDesignKeys } from '@/utils'
 
 const { Button, Message } = useUI()
 
@@ -56,7 +56,9 @@ const handleSave = () => {
 }
 
 const handleReset = () => {
-  jsonString.value = JSON.stringify(props.json, null, 2)
+  // 移除 designKey 后再显示，因为 designKey 是设计器内部使用的，用户无需关心
+  const jsonWithoutDesignKey = removeDesignKeys(cloneDeep(props.json))
+  jsonString.value = JSON.stringify(jsonWithoutDesignKey, null, 2)
 }
 
 onMounted(() => {

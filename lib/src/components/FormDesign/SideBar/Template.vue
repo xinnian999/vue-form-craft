@@ -25,13 +25,12 @@
 import { Icon, Tree } from '@/components'
 import { useDesignInstance } from '@/hooks'
 import templates from '@/templates'
-import { ns, repirJsonSchema } from '@/utils'
+import { ns } from '@/utils'
 
 const designInstance = useDesignInstance()!
 
 const useTemplate = (template: any) => {
-  const schema = repirJsonSchema(template.schema)
-  designInstance.setSchema(schema)
+  designInstance.setSchema(template.schema)
   designInstance.setCurrentKey('root')
   designInstance.recordHistory(`使用模板-${template.label}`)
 }

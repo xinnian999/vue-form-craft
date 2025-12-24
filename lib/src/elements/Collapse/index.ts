@@ -18,16 +18,14 @@ export default {
           name: 'name1',
           component: 'CollapseItem',
           props: { checked: true },
-          children: [],
-          designKey: 'name1'
-        },
+          children: []
+      },
         {
           label: '面板2',
           name: 'name2',
           component: 'CollapseItem',
-          children: [],
-          designKey: 'name2'
-        }
+          children: []
+      }
       ]
     },
     items: [

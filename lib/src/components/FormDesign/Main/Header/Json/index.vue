@@ -17,13 +17,6 @@
         </template>
         <JsonSchemaEdit :json="json" @save="onSave" />
       </TabPane>
-      <TabPane name="import" lazy>
-        <template #label>
-          <Icon name="import" style="margin-right: 5px" />
-          <span>导入</span>
-        </template>
-        <ImportJsonSchema />
-      </TabPane>
       <TabPane name="ts" lazy>
         <template #label>
           <Icon name="ts" style="margin-right: 5px" />
@@ -61,10 +54,9 @@ import { computed, ref } from 'vue'
 import { CodeHighLight, Icon } from '@/components'
 import { useDesignInstance, useUI } from '@/hooks'
 import type { FormSchema } from '@/types'
-import { ns, repirJsonSchema } from '@/utils'
+import { ns } from '@/utils'
 import { jsJsonSchema, jsVue, tsJsonSchema, tsVue } from './config'
 import JsonSchemaEdit from './Edit.vue'
-import ImportJsonSchema from './Import.vue'
 
 const { Modal, Tabs, TabPane } = useUI()
 
@@ -77,9 +69,9 @@ const json = computed(() => designInstance.getSchema())
 const formValues = ref({})
 
 const onSave = (json: FormSchema) => {
-  const repirJson = repirJsonSchema(json)
-  designInstance.setSchema(repirJson)
+  designInstance.setSchema(json)
   designInstance.recordHistory('编辑JSON')
+  designInstance.setCurrentKey('root')
   visible.value = false
 }
 </script>

@@ -27,7 +27,6 @@ export default {
         tabPosition: 'top',
         type: 'card'
       },
-      designKey: 'design-tabs',
       children: [
         {
           label: '属性',
@@ -36,7 +35,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-attrs',
           children: [
             {
               name: '.',
@@ -44,24 +42,21 @@ export default {
               props: {
                 componentName: 'FormDesign-Basic'
               },
-              designKey: 'design-basic',
               labelWidth: 0
             },
             {
               label: '禁用',
               name: 'props.disabled',
-              component: 'Switch',
-              designKey: 'design-disabled'
-            },
+              component: 'Switch'
+      },
             {
               label: '上传地址',
               name: 'props.action',
               component: 'Input',
               props: {
                 placeholder: '上传文件的接口地址'
-              },
-              designKey: 'design-action'
-            },
+              }
+      },
             {
               label: '文件字段名',
               name: 'props.name',
@@ -69,7 +64,6 @@ export default {
               props: {
                 placeholder: '上传的文件字段名'
               },
-              designKey: 'design-name-field',
               help: '上传时文件对应的字段名'
             },
             {
@@ -79,7 +73,6 @@ export default {
               props: {
                 toolBar: false
               },
-              designKey: 'design-headers',
               labelAlign: 'top',
               help: '上传时的请求头'
             },
@@ -90,7 +83,6 @@ export default {
               props: {
                 toolBar: false
               },
-              designKey: 'design-data',
               labelAlign: 'top',
               help: '上传时附带的额外参数'
             },
@@ -98,33 +90,29 @@ export default {
               label: '携带Cookie',
               name: 'props.withCredentials',
               component: 'Switch',
-              designKey: 'design-withCredentials',
               help: '上传时是否携带cookie'
             },
             {
               label: '支持多选',
               name: 'props.multiple',
-              component: 'Switch',
-              designKey: 'design-multiple'
-            },
+              component: 'Switch'
+      },
             {
               label: '按钮文本',
               name: 'props.btnText',
               component: 'Input',
               props: {
                 placeholder: '点击上传'
-              },
-              designKey: 'design-btnText'
-            },
+              }
+      },
             {
               label: '上传提示',
               name: 'props.tip',
               component: 'Input',
               props: {
                 placeholder: '提示文字'
-              },
-              designKey: 'design-tip'
-            },
+              }
+      },
             {
               label: '最大数量',
               name: 'props.limit',
@@ -132,21 +120,18 @@ export default {
               props: {
                 min: 0
               },
-              designKey: 'design-limit',
               help: '最大允许上传个数'
             },
             {
               label: '拖拽上传',
               name: 'props.drag',
-              component: 'Switch',
-              designKey: 'design-drag'
-            },
+              component: 'Switch'
+      },
             {
               label: '显示文件列表',
               name: 'props.showFileList',
-              component: 'Switch',
-              designKey: 'design-showFileList'
-            },
+              component: 'Switch'
+      },
             {
               label: '列表类型',
               name: 'props.listType',
@@ -158,9 +143,8 @@ export default {
                   { label: '图片', value: 'picture' },
                   { label: '图片墙', value: 'picture-card' }
                 ]
-              },
-              designKey: 'design-listType'
-            }
+              }
+      }
           ]
         },
         {
@@ -170,7 +154,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-rules',
           children: [
             {
               name: '.',
@@ -178,7 +161,6 @@ export default {
               props: {
                 componentName: 'FormDesign-Rules'
               },
-              designKey: 'design-KaWx11',
               labelWidth: 0
             }
           ]
@@ -190,7 +172,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-linkages',
           children: [
             {
               name: '.',
@@ -198,7 +179,6 @@ export default {
               props: {
                 componentName: 'FormDesign-Linkages'
               },
-              designKey: 'design-linkages-custom',
               labelWidth: 0
             }
           ]
@@ -210,13 +190,11 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-events',
           children: [
             {
               label: '数据改变时 (change)',
               name: 'props.onChange',
               component: 'FunctionEditor',
-              designKey: 'design-event-change',
               labelAlign: 'top'
             }
           ]
@@ -228,7 +206,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-style',
           children: [
             {
               label: '',
@@ -237,7 +214,6 @@ export default {
               props: {
                 componentName: 'FormDesign-StyleEditor'
               },
-              designKey: 'design-style',
               labelWidth: 0
             }
           ]

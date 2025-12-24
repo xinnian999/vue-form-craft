@@ -22,7 +22,6 @@ export default {
         tabPosition: 'top',
         type: 'card'
       },
-      designKey: 'design-tabs',
       children: [
         {
           label: '属性',
@@ -31,7 +30,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-attrs',
           children: [
             {
               name: '.',
@@ -39,43 +37,37 @@ export default {
               props: {
                 componentName: 'FormDesign-Basic'
               },
-              designKey: 'design-basic',
               labelWidth: 0
             },
             {
               label: '禁用',
               name: 'props.disabled',
-              component: 'Switch',
-              designKey: 'design-disabled'
-            },
+              component: 'Switch'
+      },
             {
               label: '范围选择',
               name: 'props.range',
               component: 'Switch',
-              designKey: 'design-range',
               help: '是否为范围选择'
             },
             {
               label: '最小值',
               name: 'props.min',
-              component: 'InputNumber',
-              designKey: 'design-min'
-            },
+              component: 'InputNumber'
+      },
             {
               label: '最大值',
               name: 'props.max',
-              component: 'InputNumber',
-              designKey: 'design-max'
-            },
+              component: 'InputNumber'
+      },
             {
               label: '步长',
               name: 'props.step',
               component: 'InputNumber',
               props: {
                 min: 0
-              },
-              designKey: 'design-step'
-            }
+              }
+      }
           ]
         },
         {
@@ -85,7 +77,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-rules',
           children: [
             {
               name: '.',
@@ -93,7 +84,6 @@ export default {
               props: {
                 componentName: 'FormDesign-Rules'
               },
-              designKey: 'design-KaWx11',
               labelWidth: 0
             }
           ]
@@ -105,7 +95,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-linkages',
           children: [
             {
               name: '.',
@@ -113,7 +102,6 @@ export default {
               props: {
                 componentName: 'FormDesign-Linkages'
               },
-              designKey: 'design-linkages-custom',
               labelWidth: 0
             }
           ]
@@ -125,13 +113,11 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-events',
           children: [
             {
               label: '数据改变时 (change)',
               name: 'props.onChange',
               component: 'FunctionEditor',
-              designKey: 'design-event-change',
               labelAlign: 'top'
             }
           ]
@@ -143,7 +129,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-style',
           children: [
             {
               label: '',
@@ -152,7 +137,6 @@ export default {
               props: {
                 componentName: 'FormDesign-StyleEditor'
               },
-              designKey: 'design-style',
               labelWidth: 0
             }
           ]

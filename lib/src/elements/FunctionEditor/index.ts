@@ -31,20 +31,17 @@ export default {
           mode: 'table',
           title: '参数提示'
         },
-        designKey: 'design-paramTips',
         children: [
           {
             label: '参数名',
             name: 'name',
-            component: 'Input',
-            designKey: 'design-paramTips-target'
-          },
+            component: 'Input'
+      },
           {
             label: '描述',
             name: 'description',
-            component: 'TextArea',
-            designKey: 'design-paramTips-description'
-          }
+            component: 'TextArea'
+      }
         ]
       }
     ]

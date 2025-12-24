@@ -25,9 +25,8 @@ export default {
         autocomplete: 'new-password',
         clearable: true
       },
-      help: '对应表单数据对象中的 key，支持点路径（如：user.name、user.address.city）',
-      designKey: 'design-njXF'
-    },
+      help: '对应表单数据对象中的 key，支持点路径（如：user.name、user.address.city）'
+      },
     {
       label: '标签',
       name: 'label',
@@ -36,9 +35,8 @@ export default {
         placeholder: '',
         autocomplete: 'new-password',
         clearable: true
+      }
       },
-      designKey: 'design-gfim'
-    },
     {
       label: '标签宽度（px）',
       name: 'labelWidth',
@@ -47,7 +45,6 @@ export default {
         unit: 'px',
         step: 10
       },
-      designKey: 'design-UcmF',
       defaultValue: '{{ rootSchema.labelWidth }}'
     },
     {
@@ -71,9 +68,8 @@ export default {
           }
         ]
       },
-      defaultValue: '{{ rootSchema.labelAlign }}',
-      designKey: 'design-EiOs'
-    },
+      defaultValue: '{{ rootSchema.labelAlign }}'
+      },
     {
       label: '尺寸',
       name: 'size',
@@ -95,14 +91,12 @@ export default {
           }
         ]
       },
-      defaultValue: '{{ rootSchema.size }}',
-      designKey: 'design-yaZ4'
-    },
+      defaultValue: '{{ rootSchema.size }}'
+      },
     {
       label: '提示',
       name: 'alert',
       component: 'TextArea',
-      designKey: 'design-alert',
       props: {
         autosize: true,
         clearable: true
@@ -119,20 +113,17 @@ export default {
           maxRows: 999
         },
         clearable: true
+      }
       },
-      designKey: 'design-Qh45'
-    },
     {
       label: '隐藏',
       name: 'hidden',
-      component: 'Switch',
-      designKey: 'design-C5Qj'
-    },
+      component: 'Switch'
+      },
     {
       label: '可见',
       name: 'show',
       component: 'Switch',
-      designKey: 'design-show',
       defaultValue: '{{ true }}'
     }
   ]

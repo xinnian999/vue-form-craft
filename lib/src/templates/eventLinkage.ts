@@ -25,9 +25,8 @@ export default {
   }
 } }}`
       },
-      required: true,
-      designKey: 'design-username'
-    },
+      required: true
+      },
     {
       label: '验证状态',
       name: 'usernameValid',
@@ -36,9 +35,8 @@ export default {
         disabled: true,
         activeText: '可用',
         inactiveText: '不可用'
+      }
       },
-      designKey: 'design-valid'
-    },
     {
       label: '提示信息',
       name: 'tip',
@@ -46,9 +44,8 @@ export default {
       props: {
         disabled: true,
         placeholder: '这里会显示验证提示'
+      }
       },
-      designKey: 'design-tip'
-    },
     {
       label: '省份',
       name: 'province',
@@ -94,9 +91,8 @@ export default {
   $instance.setFieldValue('district', '')
 } }}`
       },
-      required: true,
-      designKey: 'design-province'
-    },
+      required: true
+      },
     {
       label: '城市',
       name: 'city',
@@ -131,9 +127,8 @@ export default {
   // 清空区县选择
   $instance.setFieldValue('district', '')
 } }}`
+      }
       },
-      designKey: 'design-city'
-    },
     {
       label: '区县',
       name: 'district',
@@ -142,9 +137,8 @@ export default {
         placeholder: '请先选择城市',
         mode: 'static',
         options: []
+      }
       },
-      designKey: 'design-district'
-    },
     {
       label: '单价',
       name: 'price',
@@ -159,9 +153,8 @@ export default {
   const total = (price * quantity).toFixed(2)
   $instance.setFieldValue('total', total)
 } }}`
+      }
       },
-      designKey: 'design-price'
-    },
     {
       label: '数量',
       name: 'quantity',
@@ -175,9 +168,8 @@ export default {
   const total = (price * quantity).toFixed(2)
   $instance.setFieldValue('total', total)
 } }}`
+      }
       },
-      designKey: 'design-quantity'
-    },
     {
       label: '总价',
       name: 'total',
@@ -186,9 +178,8 @@ export default {
         disabled: true,
         precision: 2,
         placeholder: '自动计算'
+      }
       },
-      designKey: 'design-total'
-    },
     {
       label: '备注',
       name: 'remark',
@@ -211,9 +202,8 @@ export default {
     $instance.setFieldValue('remarkTip', '')
   }
 } }}`
+      }
       },
-      designKey: 'design-remark'
-    },
     {
       label: '备注提示',
       name: 'remarkTip',
@@ -221,8 +211,7 @@ export default {
       props: {
         disabled: true,
         placeholder: '根据备注长度自动提示'
-      },
-      designKey: 'design-remark-tip'
-    }
+      }
+      }
   ]
 } satisfies FormSchema

@@ -15,7 +15,6 @@ export default {
         tabPosition: 'top',
         type: 'card'
       },
-      designKey: 'design-wUHG',
       children: [
         {
           label: '属性',
@@ -24,7 +23,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-1',
           children: [
             {
               name: '.',
@@ -32,16 +30,14 @@ export default {
               props: {
                 componentName: 'FormDesign-Basic'
               },
-              designKey: 'design-basic',
               labelWidth: 0
             },
             {
               label: '自定义组件名称',
               component: 'Input',
               name: 'props.componentName',
-              props: { placeholder: '全局组件名称' },
-              designKey: 'design-component-name'
-            }
+              props: { placeholder: '全局组件名称' }
+      }
           ]
         },
         {
@@ -51,7 +47,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-2',
           children: [
             {
               name: '.',
@@ -59,7 +54,6 @@ export default {
               props: {
                 componentName: 'FormDesign-Rules'
               },
-              designKey: 'design-KaWx11',
               labelWidth: 0
             }
           ]
@@ -71,7 +65,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-3',
           children: [
             {
               name: '.',
@@ -79,7 +72,6 @@ export default {
               props: {
                 componentName: 'FormDesign-Linkages'
               },
-              designKey: 'design-linkages-custom',
               labelWidth: 0
             }
           ]

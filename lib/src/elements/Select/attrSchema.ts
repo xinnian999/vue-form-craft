@@ -26,7 +26,6 @@ export default {
         tabPosition: 'top',
         type: 'card'
       },
-      designKey: 'design-wUHG',
       children: [
         {
           label: '属性',
@@ -35,7 +34,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-1',
           children: [
             {
               name: '.',
@@ -43,7 +41,6 @@ export default {
               props: {
                 componentName: 'FormDesign-Basic'
               },
-              designKey: 'design-basic',
               labelWidth: 0
             },
             {
@@ -52,15 +49,13 @@ export default {
               component: 'Input',
               props: {
                 autocomplete: 'new-password'
-              },
-              designKey: 'design-JTMu'
-            },
+              }
+      },
             {
               label: '禁用',
               name: 'props.disabled',
-              component: 'Switch',
-              designKey: 'design-VnLN'
-            },
+              component: 'Switch'
+      },
             {
               label: '选择模式',
               name: 'props.multiple',
@@ -68,16 +63,14 @@ export default {
               props: {
                 activeText: '多选',
                 inactiveText: '单选'
-              },
-              designKey: 'design-6Tga'
-            }
+              }
+      }
           ]
         },
         {
           label: '选项',
           name: 'optionSetting',
           component: 'TabPane',
-          designKey: 'tab-7',
           children: [
             {
               name: '.',
@@ -85,7 +78,6 @@ export default {
               props: {
                 componentName: 'FormDesign-Options'
               },
-              designKey: 'design-FormDesign-Options',
               labelWidth: 0
             }
           ]
@@ -97,7 +89,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-2',
           children: [
             {
               name: '.',
@@ -105,7 +96,6 @@ export default {
               props: {
                 componentName: 'FormDesign-Rules'
               },
-              designKey: 'design-FormDesign-Rules',
               labelWidth: 0
             }
           ]
@@ -117,7 +107,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-3',
           children: [
             {
               name: '.',
@@ -125,7 +114,6 @@ export default {
               props: {
                 componentName: 'FormDesign-Linkages'
               },
-              designKey: 'design-FormDesign-Linkages',
               labelWidth: 0
             }
           ]
@@ -137,41 +125,35 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-5',
           children: [
             {
               label: '数据改变时 (change)',
               name: 'props.onChange',
               component: 'FunctionEditor',
-              designKey: 'design-event-change',
               labelAlign: 'top'
             },
             {
               label: '失去焦点时 (blur)',
               name: 'props.onBlur',
               component: 'FunctionEditor',
-              designKey: 'design-event-blur',
               labelAlign: 'top'
             },
             {
               label: '获得焦点时 (focus)',
               name: 'props.onFocus',
               component: 'FunctionEditor',
-              designKey: 'design-event-focus',
               labelAlign: 'top'
             },
             {
               label: '输入时 (input)',
               name: 'props.onInput',
               component: 'FunctionEditor',
-              designKey: 'design-event-input',
               labelAlign: 'top'
             },
             {
               label: '清空时 (clear)',
               name: 'props.onClear',
               component: 'FunctionEditor',
-              designKey: 'design-event-clear',
               labelAlign: 'top'
             }
           ]
@@ -183,7 +165,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-6',
           children: [
             {
               label: '',
@@ -192,7 +173,6 @@ export default {
               props: {
                 componentName: 'FormDesign-StyleEditor'
               },
-              designKey: 'design-KaWx',
               labelWidth: 0
             }
           ]

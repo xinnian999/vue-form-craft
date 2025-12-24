@@ -13,9 +13,8 @@ export default {
       component: 'Switch',
       props: {
         'inline-prompt': false
+      }
       },
-      designKey: 'design-TA5Q'
-    },
     {
       label: '校验规则',
       name: 'rules',
@@ -24,7 +23,6 @@ export default {
         mode: 'card',
         title: '规则'
       },
-      designKey: 'design-rules',
       labelAlign: 'top',
       children: [
         {
@@ -69,7 +67,6 @@ export default {
               }
             ]
           },
-          designKey: 'design-rule-type',
           linkages: [
             {
               target: 'rules.*.value',
@@ -85,7 +82,6 @@ export default {
           props: {
             min: 0
           },
-          designKey: 'design-rule-min',
           hidden: "{{ $item.type !== 'min' }}"
         },
         {
@@ -96,7 +92,6 @@ export default {
             placeholder: '请输入最大长度',
             min: 0
           },
-          designKey: 'design-rule-max',
           hidden: "{{ $item.type !== 'max' }}"
         },
         {
@@ -108,7 +103,6 @@ export default {
             aiPrompt:
               '根据字段「{{$item.message || $values.label || "该字段"}}」的含义，生成一个合适的 JS 正则表达式字符串，不要加 / 包裹，只返回纯正则字符串。'
           },
-          designKey: 'design-rule-pattern',
           labelAlign: 'top',
           hidden: "{{ $item.type !== 'pattern' }}",
           help: '输入正则表达式字符串，不需要包含斜杠'
@@ -183,7 +177,6 @@ export default {
               }
             ]
           },
-          designKey: 'design-rule-builtin',
           hidden: "{{ $item.type !== 'builtin' }}",
           help: '使用 async-validator 内置类型校验'
         },
@@ -198,7 +191,6 @@ export default {
               maxRows: 6
             }
           },
-          designKey: 'design-rule-enum',
           hidden: "{{ $item.type !== 'enum' }}",
           help: '每行输入一个可选值'
         },
@@ -214,7 +206,6 @@ export default {
               maxRows: 10
             }
           },
-          designKey: 'design-rule-custom',
           hidden: "{{ $item.type !== 'custom' }}",
           help: '函数参数：rule, value, callback'
         },
@@ -228,7 +219,6 @@ export default {
               maxRows: 6
             }
           },
-          designKey: 'design-rule-jsexpr',
           hidden: "{{ $item.type !== 'jsExpr' }}",
           help: '使用 {{ }} 包裹表达式，返回布尔值'
         },
@@ -238,9 +228,8 @@ export default {
           component: 'Input',
           props: {
             placeholder: '请输入校验失败时的提示信息'
-          },
-          designKey: 'design-rule-message'
-        },
+          }
+      },
         {
           label: '触发时机',
           name: 'trigger',
@@ -257,9 +246,8 @@ export default {
                 value: 'change'
               }
             ]
-          },
-          designKey: 'design-rule-trigger'
-        }
+          }
+      }
       ]
     }
   ]

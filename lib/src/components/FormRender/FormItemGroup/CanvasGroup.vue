@@ -84,53 +84,6 @@ const onAdd = (e: Record<string, any>) => {
 const onUpdate = () => {
   designInstance.recordHistory('调整组件顺序')
 }
-
-// 暴露方法供测试使用：模拟拖拽添加
-const simulateAdd = (item: FormItemType) => {
-  // 先直接修改list（模拟draggable的行为）
-  // eslint-disable-next-line vue/no-mutating-props
-  props.list.push(item)
-
-  // 如果list是根items，需要通过setSchema触发更新
-  // const schema = designInstance.getSchema()
-  // if (props.list === schema.items) {
-  //   // 根画布：通过setSchema触发响应式更新
-  //   designInstance.setSchema({ ...schema, items: [...props.list] })
-  // }
-
-  // 触发拖拽后的副作用（和onAdd回调一样）
-  designInstance.setCurrentKey(item.designKey!)
-  designInstance.setHoverKey(item.designKey!)
-  designInstance.handleEmit('add', item)
-  designInstance.recordHistory('拖拽组件')
-}
-
-// 暴露方法供测试使用：模拟拖拽移除
-const simulateRemove = (designKey: string) => {
-  // 找到要移除的项的索引
-  const index = props.list.findIndex((item) => item.designKey === designKey)
-  if (index === -1) {
-    throw new Error(`未找到designKey为 ${designKey} 的组件`)
-  }
-
-  // 直接修改list（模拟draggable的行为）
-  // eslint-disable-next-line vue/no-mutating-props
-  const removed = props.list.splice(index, 1)[0]
-
-  // 如果list是根items，需要通过setSchema触发更新
-  const schema = designInstance.getSchema()
-  if (props.list === schema.items) {
-    // 根画布：通过setSchema触发响应式更新
-    designInstance.setSchema({ ...schema, items: [...props.list] })
-  }
-
-  return removed
-}
-
-defineExpose({
-  simulateAdd,
-  simulateRemove
-})
 </script>
 
 <style lang="scss">

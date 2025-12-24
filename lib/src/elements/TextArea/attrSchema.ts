@@ -24,7 +24,6 @@ export default {
         tabPosition: 'top',
         type: 'card'
       },
-      designKey: 'design-tabs',
       children: [
         {
           label: '属性',
@@ -33,7 +32,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-attrs',
           children: [
             {
               name: '.',
@@ -41,7 +39,6 @@ export default {
               props: {
                 componentName: 'FormDesign-Basic'
               },
-              designKey: 'design-basic',
               labelWidth: 0
             },
             {
@@ -50,60 +47,52 @@ export default {
               component: 'Input',
               props: {
                 autocomplete: 'new-password'
-              },
-              designKey: 'design-placeholder'
-            },
+              }
+      },
             {
               label: '禁用',
               name: 'props.disabled',
-              component: 'Switch',
-              designKey: 'design-disabled'
-            },
+              component: 'Switch'
+      },
             {
               label: '只读',
               name: 'props.readonly',
-              component: 'Switch',
-              designKey: 'design-readonly'
-            },
+              component: 'Switch'
+      },
             {
               label: '清除按钮',
               name: 'props.clearable',
-              component: 'Switch',
-              designKey: 'design-clearable'
-            },
+              component: 'Switch'
+      },
             {
               label: '最长字数',
               name: 'props.maxlength',
               component: 'InputNumber',
               props: {
                 min: 0
-              },
-              designKey: 'design-maxlength'
-            },
+              }
+      },
             {
               label: '自适应文本行数',
               name: 'props.autosize',
-              component: 'Switch',
-              designKey: 'design-autosize'
-            },
+              component: 'Switch'
+      },
             {
               label: '最小行数',
               name: 'props.autosize.minRows',
               component: 'InputNumber',
               props: {
                 min: 1
-              },
-              designKey: 'design-minRows'
-            },
+              }
+      },
             {
               label: '最大行数',
               name: 'props.autosize.maxRows',
               component: 'InputNumber',
               props: {
                 min: 1
-              },
-              designKey: 'design-maxRows'
-            }
+              }
+      }
           ]
         },
         {
@@ -113,7 +102,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-rules',
           children: [
             {
               name: '.',
@@ -121,7 +109,6 @@ export default {
               props: {
                 componentName: 'FormDesign-Rules'
               },
-              designKey: 'design-KaWx11',
               labelWidth: 0
             }
           ]
@@ -133,7 +120,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-linkages',
           children: [
             {
               name: '.',
@@ -141,7 +127,6 @@ export default {
               props: {
                 componentName: 'FormDesign-Linkages'
               },
-              designKey: 'design-linkages-custom',
               labelWidth: 0
             }
           ]
@@ -153,43 +138,37 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-events',
           children: [
             {
               label: '数据改变时 (change)',
               labelAlign: 'top',
               name: 'props.onChange',
-              component: 'FunctionEditor',
-              designKey: 'design-event-change'
-            },
+              component: 'FunctionEditor'
+      },
             {
               label: '失去焦点时 (blur)',
               labelAlign: 'top',
               name: 'props.onBlur',
-              component: 'FunctionEditor',
-              designKey: 'design-event-blur'
-            },
+              component: 'FunctionEditor'
+      },
             {
               label: '获得焦点时 (focus)',
               labelAlign: 'top',
               name: 'props.onFocus',
-              component: 'FunctionEditor',
-              designKey: 'design-event-focus'
-            },
+              component: 'FunctionEditor'
+      },
             {
               label: '输入时 (input)',
               labelAlign: 'top',
               name: 'props.onInput',
-              component: 'FunctionEditor',
-              designKey: 'design-event-input'
-            },
+              component: 'FunctionEditor'
+      },
             {
               label: '清空时 (clear)',
               labelAlign: 'top',
               name: 'props.onClear',
-              component: 'FunctionEditor',
-              designKey: 'design-event-clear'
-            }
+              component: 'FunctionEditor'
+      }
           ]
         },
         {
@@ -199,7 +178,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-style',
           children: [
             {
               label: '',
@@ -208,7 +186,6 @@ export default {
               props: {
                 componentName: 'FormDesign-StyleEditor'
               },
-              designKey: 'design-style',
               labelWidth: 0
             }
           ]

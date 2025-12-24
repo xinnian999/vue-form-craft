@@ -18,7 +18,6 @@ export default {
     {
       label: '数据模式',
       name: 'props.mode',
-      designKey: 'design-mode',
       component: 'Radio',
       props: {
         mode: 'static',
@@ -62,7 +61,6 @@ export default {
     {
       label: '静态选项',
       name: 'props.options',
-      designKey: 'design-options',
       component: 'FormList',
       props: {
         mode: 'table',
@@ -76,7 +74,6 @@ export default {
         {
           label: '选项名',
           name: 'label',
-          designKey: 'design-option-label',
           component: 'Input',
           props: {
             placeholder: '请输入...'
@@ -85,20 +82,17 @@ export default {
         {
           label: '选项值',
           name: 'value',
-          designKey: 'design-option-value',
           component: 'Input'
         },
         {
           label: '禁用',
           name: 'disabled',
-          designKey: 'design-option-disabled',
           component: 'Switch'
         }
       ]
     },
     {
       name: 'form-remote',
-      designKey: 'design-remote-card',
       component: 'Card',
       props: {},
       labelAlign: 'top',
@@ -106,7 +100,6 @@ export default {
       children: [
         {
           name: 'form-divider-request',
-          designKey: 'design-divider-request',
           component: 'Divider',
           props: {
             title: '请求',
@@ -116,14 +109,12 @@ export default {
         {
           label: 'url',
           name: 'props.api.url',
-          designKey: 'design-api-url',
           component: 'Input',
           labelAlign: 'top'
         },
         {
           label: '请求方式',
           name: 'props.api.method',
-          designKey: 'design-api-method',
           component: 'Radio',
           props: {
             mode: 'static',
@@ -151,7 +142,6 @@ export default {
         {
           label: '请求参数',
           name: 'props.api.params',
-          designKey: 'design-api-params',
           component: 'CodeEditor',
           props: {
             height: '150px',
@@ -162,7 +152,6 @@ export default {
         },
         {
           name: 'form-divider-response',
-          designKey: 'design-divider-response',
           component: 'Divider',
           props: {
             title: '响应',
@@ -172,7 +161,6 @@ export default {
         {
           label: '数据路径',
           name: 'props.api.dataPath',
-          designKey: 'design-api-dataPath',
           component: 'Input',
           labelAlign: 'top',
           defaultValue: 'data'
@@ -180,7 +168,6 @@ export default {
         {
           label: '标签key',
           name: 'props.api.labelKey',
-          designKey: 'design-api-labelKey',
           component: 'Input',
           labelAlign: 'top',
           defaultValue: 'label'
@@ -188,7 +175,6 @@ export default {
         {
           label: '值Key',
           name: 'props.api.valueKey',
-          designKey: 'design-api-valueKey',
           component: 'Input',
           labelAlign: 'top',
           defaultValue: 'value'
@@ -196,7 +182,6 @@ export default {
         {
           label: '禁用Key',
           name: 'props.api.disabledKey',
-          designKey: 'design-api-disabledKey',
           component: 'Input',
           labelAlign: 'top',
           defaultValue: 'disabled'

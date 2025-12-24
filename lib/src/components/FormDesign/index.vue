@@ -69,7 +69,7 @@ const jsonState = reactive({
 
 // schema的唯一修改入口
 const setSchema = (schema: FormSchema) => {
-  modelValue.value = schema
+  modelValue.value = repirJsonSchema(schema)
 }
 
 const setCurrentKey = (key: string) => {
@@ -78,12 +78,6 @@ const setCurrentKey = (key: string) => {
 
 const setHoverKey = (key: string) => {
   hoverKey.value = key
-}
-
-const repirSchema = () => {
-  const schema = repirJsonSchema(getSchema())
-
-  setSchema(schema)
 }
 
 // 记录历史。
@@ -192,7 +186,6 @@ const instance = reactive<DesignInstance>({
   historyIndex,
   getSchema,
   setSchema,
-  repirSchema,
   setCurrentKey,
   setHoverKey,
   handleEmit: (name, params) => {

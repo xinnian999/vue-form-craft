@@ -11,7 +11,6 @@ export default {
       name: 'vip',
       component: 'Switch',
       props: { 'inline-prompt': false },
-      designKey: 'design-vip',
       linkages: [
         // 数据联动: 批量设置所有行的 vip 值
         { target: 'users.*.vip', type: 'data', condition: '{{ $values.vip }}', value: 1 }
@@ -22,7 +21,6 @@ export default {
       name: 'disableAllPassword',
       component: 'Switch',
       props: { 'inline-prompt': false },
-      designKey: 'design-disable-all-password',
       linkages: [
         // attr联动: 批量禁用/启用所有行的 password 字段
         {
@@ -44,7 +42,6 @@ export default {
             placeholder: '请输入文本'
           },
           name: 'username',
-          designKey: 'design-username',
           linkages: [
             {
               // 数据联动: 当用户名包含 admin 时,设置当前行的 vip 为 1
@@ -77,9 +74,8 @@ export default {
           props: {
             placeholder: '请输入密码'
           },
-          name: 'password',
-          designKey: 'design-password'
-        },
+          name: 'password'
+      },
         {
           label: '设为管理员',
           component: 'Switch',

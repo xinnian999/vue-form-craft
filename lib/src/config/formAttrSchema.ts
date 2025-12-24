@@ -16,7 +16,6 @@ export default {
         tabPosition: 'top',
         type: 'card'
       },
-      designKey: 'design-wUHG',
       children: [
         {
           label: '属性',
@@ -25,7 +24,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-1',
           children: [
             {
               label: '标签宽度（px）',
@@ -35,9 +33,8 @@ export default {
                 min: 60,
                 step: 10
               },
-              defaultValue: 150,
-              designKey: 'design-cOkn'
-            },
+              defaultValue: 150
+      },
             {
               label: 'label对齐方式',
               name: 'labelAlign',
@@ -59,9 +56,8 @@ export default {
                   }
                 ]
               },
-              defaultValue: 'right',
-              designKey: 'design-YJOL'
-            },
+              defaultValue: 'right'
+      },
             {
               label: '表单组件尺寸',
               name: 'size',
@@ -83,65 +79,56 @@ export default {
                   }
                 ]
               },
-              defaultValue: 'default',
-              designKey: 'design-d74u'
-            },
+              defaultValue: 'default'
+      },
             {
               label: '表单初始值',
               name: 'initialValues',
               component: 'Custom',
               props: {
                 componentName: 'FormDesign-InitialValues'
-              },
-              designKey: 'design-2Saj'
-            },
+              }
+      },
             {
               label: '全局样式',
               name: 'styleBlock',
               component: 'Custom',
               props: {
                 componentName: 'FormDesign-GlobalStyle'
-              },
-              designKey: 'design-globalStyle'
-            },
+              }
+      },
             {
               label: '禁用表单',
               name: 'disabled',
-              component: 'Switch',
-              designKey: 'design-jItQ'
-            },
+              component: 'Switch'
+      },
             {
               label: '显示冒号',
               name: 'colon',
-              component: 'Switch',
-              designKey: 'design-OQec'
-            },
+              component: 'Switch'
+      },
             {
               label: '隐藏必填星号',
               name: 'hideRequiredAsterisk',
-              component: 'Switch',
-              designKey: 'design-Ys1j'
-            },
+              component: 'Switch'
+      },
             {
               label: '自动滚动到校验失败的第一项',
               name: 'scrollToError',
               component: 'Switch',
               defaultValue: true,
-              designKey: 'design-6meZ',
               labelAlign: 'top'
             },
             {
               label: '表单提交按钮',
               name: 'submitBtn',
-              component: 'Switch',
-              designKey: 'design-sHY1'
-            },
+              component: 'Switch'
+      },
             {
               label: '表单重置按钮',
               name: 'resetBtn',
-              component: 'Switch',
-              designKey: 'design-1weX'
-            }
+              component: 'Switch'
+      }
           ]
         },
         {
@@ -151,7 +138,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-5',
           children: [
             {
               label: '表单数据变化时（change）',
@@ -160,9 +146,8 @@ export default {
               labelAlign: 'top',
               props: {
                 paramTips: [{ name: 'values', description: '当前表单数据' }]
-              },
-              designKey: 'design-event-change'
-            },
+              }
+      },
             {
               label: '表单提交成功时（finish）',
               name: 'onFinish',
@@ -170,9 +155,8 @@ export default {
               labelAlign: 'top',
               props: {
                 paramTips: [{ name: 'values', description: '提交成功时的表单数据' }]
-              },
-              designKey: 'design-event-finish'
-            },
+              }
+      },
             {
               label: '表单提交失败时（failed）',
               name: 'onFailed',
@@ -180,9 +164,8 @@ export default {
               labelAlign: 'top',
               props: {
                 paramTips: [{ name: 'error', description: '校验失败的错误对象' }]
-              },
-              designKey: 'design-event-failed'
-            },
+              }
+      },
             {
               label: '表单重置时（reset）',
               name: 'onReset',
@@ -190,9 +173,8 @@ export default {
               labelAlign: 'top',
               props: {
                 paramTips: []
-              },
-              designKey: 'design-event-reset'
-            },
+              }
+      },
             {
               label: '字段数据改变时（fieldChange）',
               name: 'onFieldChange',
@@ -203,9 +185,8 @@ export default {
                   { name: 'path', description: '字段路径' },
                   { name: 'value', description: '字段新值' }
                 ]
-              },
-              designKey: 'design-event-field-change'
-            },
+              }
+      },
             {
               label: '表单验证时（validate）',
               name: 'onValidate',
@@ -217,9 +198,8 @@ export default {
                   { name: 'isValid', description: '该项是否校验通过' },
                   { name: 'message', description: '校验消息' }
                 ]
-              },
-              designKey: 'design-event-validate'
-            }
+              }
+      }
           ]
         },
         {
@@ -229,7 +209,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-6',
           children: [
             {
               label: '',
@@ -238,7 +217,6 @@ export default {
               props: {
                 componentName: 'FormDesign-StyleEditor'
               },
-              designKey: 'design-KaWx',
               labelWidth: 0
             }
           ]

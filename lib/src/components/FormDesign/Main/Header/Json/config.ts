@@ -1,7 +1,10 @@
+import { cloneDeep } from 'lodash'
 import type { FormSchema } from '@/types'
+import { removeDesignKeys } from '@/utils'
 
 export const tsVue = (schema: FormSchema) => {
-  const str = JSON.stringify(schema, null, 2)
+  const schemaWithoutDesignKey = removeDesignKeys(cloneDeep(schema))
+  const str = JSON.stringify(schemaWithoutDesignKey, null, 2)
 
   return `<template>
   <FormRender :schema="schema" @finish="onFinish" />
@@ -20,7 +23,8 @@ const onFinish = (values: Record<string, any>) => {
 }
 
 export const jsVue = (schema: FormSchema) => {
-  const str = JSON.stringify(schema, null, 2)
+  const schemaWithoutDesignKey = removeDesignKeys(cloneDeep(schema))
+  const str = JSON.stringify(schemaWithoutDesignKey, null, 2)
 
   return `<template>
   <FormRender :schema="schema" @finish="onFinish" />
@@ -37,7 +41,8 @@ const onFinish = (values) => {
 }
 
 export const tsJsonSchema = (schema: FormSchema) => {
-  const str = JSON.stringify(schema, null, 2)
+  const schemaWithoutDesignKey = removeDesignKeys(cloneDeep(schema))
+  const str = JSON.stringify(schemaWithoutDesignKey, null, 2)
 
   return `import type { FormSchema } from "formora";
 
@@ -45,7 +50,8 @@ export default ${str} satisfies FormSchema`
 }
 
 export const jsJsonSchema = (schema: FormSchema) => {
-  const str = JSON.stringify(schema, null, 2)
+  const schemaWithoutDesignKey = removeDesignKeys(cloneDeep(schema))
+  const str = JSON.stringify(schemaWithoutDesignKey, null, 2)
 
   return `export default ${str}`
 }

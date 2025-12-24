@@ -16,7 +16,6 @@ export default {
         title: '联动规则',
         getNewItem: '{{ () => { return { type: "attr"} } }}'
       },
-      designKey: 'design-linkages',
       labelAlign: 'top',
       children: [
         {
@@ -27,9 +26,8 @@ export default {
             clearable: true,
             mode: 'static',
             options: '{{ nodeOptions }}'
-          },
-          designKey: 'design-link-target'
-        },
+          }
+      },
         {
           label: '触发条件',
           name: 'condition',
@@ -41,7 +39,6 @@ export default {
             },
             clearable: true
           },
-          designKey: 'design-link-condition',
           help: '请输入 JS 表达式，当结果为 true 时才触发联动。<br/> 不设置会一直触发'
         },
         {
@@ -62,7 +59,6 @@ export default {
               }
             ]
           },
-          designKey: 'design-link-type',
           linkages: [
             {
               target: 'path',
@@ -113,7 +109,6 @@ export default {
               }
             ]
           },
-          designKey: 'design-link-config-attr',
           hidden: "{{ $item.type !== 'attr' }}"
         },
         {
@@ -123,7 +118,6 @@ export default {
           props: {
             clearable: true
           },
-          designKey: 'design-link-custom-path',
           hidden: "{{  $item.path !== 'custom' }}"
         },
         {
@@ -137,9 +131,8 @@ export default {
             },
             clearable: true
           },
-          hidden: "{{ $item.type !== 'data' }}",
-          designKey: 'design-link-config-value'
-        },
+          hidden: "{{ $item.type !== 'data' }}"
+      },
         {
           label: '隐藏状态',
           name: 'value',
@@ -150,9 +143,8 @@ export default {
               { label: '不隐藏', value: false }
             ]
           },
-          hidden: "{{ $item.path !== 'hidden' }}",
-          designKey: 'design-link-hidden-value'
-        },
+          hidden: "{{ $item.path !== 'hidden' }}"
+      },
         {
           label: '可见状态',
           name: 'value',
@@ -163,9 +155,8 @@ export default {
               { label: '不可见', value: false }
             ]
           },
-          hidden: '{{ $item.path !== "show" }}',
-          designKey: 'design-link-12121324234'
-        },
+          hidden: '{{ $item.path !== "show" }}'
+      },
         {
           label: '禁用状态',
           name: 'value',
@@ -176,9 +167,8 @@ export default {
               { label: '不禁用', value: false }
             ]
           },
-          hidden: '{{ $item.path !== "props.disabled" }}',
-          designKey: 'design-link-2235677888'
-        },
+          hidden: '{{ $item.path !== "props.disabled" }}'
+      },
         {
           label: '必填状态',
           name: 'value',
@@ -189,9 +179,8 @@ export default {
               { label: '非必填', value: false }
             ]
           },
-          hidden: "{{ $item.path !== 'required' }}",
-          designKey: 'design-link-required-value'
-        },
+          hidden: "{{ $item.path !== 'required' }}"
+      },
         {
           label: '提示',
           name: 'value',
@@ -200,9 +189,8 @@ export default {
             clearable: true,
             autosize: true
           },
-          hidden: "{{ $item.path !== 'alert' }}",
-          designKey: 'design-link-alert-value'
-        },
+          hidden: "{{ $item.path !== 'alert' }}"
+      },
         {
           label: '值',
           name: 'value',
@@ -215,9 +203,8 @@ export default {
             clearable: true
           },
           hidden:
-            "{{ $item.path === 'show' || $item.path === 'hidden' || $item.path === 'required' || $item.path === 'alert' || $item.path === 'props.disabled' || $item.type !== 'attr' }}",
-          designKey: 'design-link-attr-value'
-        }
+            "{{ $item.path === 'show' || $item.path === 'hidden' || $item.path === 'required' || $item.path === 'alert' || $item.path === 'props.disabled' || $item.type !== 'attr' }}"
+      }
       ]
     }
   ]

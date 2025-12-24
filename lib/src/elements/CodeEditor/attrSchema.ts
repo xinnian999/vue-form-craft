@@ -16,7 +16,6 @@ export default {
         tabPosition: 'top',
         type: 'card'
       },
-      designKey: 'design-code-editor-tabs',
       children: [
         {
           label: '属性',
@@ -25,7 +24,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-code-editor-attrs',
           children: [
             {
               name: '.',
@@ -33,7 +31,6 @@ export default {
               props: {
                 componentName: 'FormDesign-Basic'
               },
-              designKey: 'design-code-editor-basic',
               labelWidth: 0
             },
             {
@@ -62,9 +59,8 @@ export default {
                   { label: 'XML', value: 'xml' },
                   { label: 'YAML', value: 'yaml' }
                 ]
-              },
-              designKey: 'design-code-editor-language'
-            },
+              }
+      },
             {
               label: '主题',
               name: 'props.theme',
@@ -77,18 +73,16 @@ export default {
                   { label: 'VS Dark', value: 'vs-dark' },
                   { label: 'High Contrast', value: 'hc-black' }
                 ]
-              },
-              designKey: 'design-code-editor-theme'
-            },
+              }
+      },
             {
               label: '高度',
               name: 'props.height',
               component: 'Input',
               props: {
                 placeholder: '例如: 300px 或 300'
-              },
-              designKey: 'design-code-editor-height'
-            },
+              }
+      },
             {
               label: '字体大小',
               name: 'props.fontSize',
@@ -97,9 +91,8 @@ export default {
                 min: 12,
                 max: 30,
                 step: 1
-              },
-              designKey: 'design-code-editor-fontSize'
-            },
+              }
+      },
             {
               label: 'Tab大小',
               name: 'props.tabSize',
@@ -108,9 +101,8 @@ export default {
                 min: 2,
                 max: 8,
                 step: 1
-              },
-              designKey: 'design-code-editor-tabSize'
-            },
+              }
+      },
             {
               label: '行号',
               name: 'props.lineNumbers',
@@ -123,9 +115,8 @@ export default {
                   { label: '相对行号', value: 'relative' },
                   { label: '间隔显示', value: 'interval' }
                 ]
-              },
-              designKey: 'design-code-editor-lineNumbers'
-            },
+              }
+      },
             {
               label: '自动换行',
               name: 'props.wordWrap',
@@ -138,21 +129,18 @@ export default {
                   { label: '按列换行', value: 'wordWrapColumn' },
                   { label: '限制换行', value: 'bounded' }
                 ]
-              },
-              designKey: 'design-code-editor-wordWrap'
-            },
+              }
+      },
             {
               label: '显示小地图',
               name: 'props.minimap',
-              component: 'Switch',
-              designKey: 'design-code-editor-minimap'
-            },
+              component: 'Switch'
+      },
             {
               label: '只读',
               name: 'props.readOnly',
-              component: 'Switch',
-              designKey: 'design-code-editor-readOnly'
-            }
+              component: 'Switch'
+      }
           ]
         },
         {
@@ -162,7 +150,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-code-editor-rules',
           children: [
             {
               name: '.',
@@ -170,7 +157,6 @@ export default {
               props: {
                 componentName: 'FormDesign-Rules'
               },
-              designKey: 'design-code-editor-rules-custom',
               labelWidth: 0
             }
           ]
@@ -182,7 +168,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-code-editor-linkages',
           children: [
             {
               name: '.',
@@ -190,7 +175,6 @@ export default {
               props: {
                 componentName: 'FormDesign-Linkages'
               },
-              designKey: 'design-code-editor-linkages-custom',
               labelWidth: 0
             }
           ]
@@ -202,13 +186,11 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-code-editor-events',
           children: [
             {
               label: '编辑器挂载时 (mount)',
               name: 'props.onMount',
               component: 'FunctionEditor',
-              designKey: 'design-code-editor-event-mount',
               labelAlign: 'top'
             }
           ]
@@ -220,7 +202,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-code-editor-style',
           children: [
             {
               label: '',
@@ -229,7 +210,6 @@ export default {
               props: {
                 componentName: 'FormDesign-StyleEditor'
               },
-              designKey: 'design-code-editor-style-custom',
               labelWidth: 0
             }
           ]

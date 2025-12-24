@@ -25,7 +25,6 @@ export default {
         tabPosition: 'top',
         type: 'card'
       },
-      designKey: 'design-tabs',
       children: [
         {
           label: '属性',
@@ -34,7 +33,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-attrs',
           children: [
             {
               name: '.',
@@ -42,19 +40,16 @@ export default {
               props: {
                 componentName: 'FormDesign-Basic'
               },
-              designKey: 'design-basic',
               labelWidth: 0
             },
             {
               label: '禁用',
               name: 'props.disabled',
-              component: 'Switch',
-              designKey: 'design-disabled'
-            },
+              component: 'Switch'
+      },
             {
               label: '按钮形式',
               name: 'props.isButtonOption',
-              designKey: 'design-isButtonOption',
               component: 'Switch'
             }
           ]
@@ -63,7 +58,6 @@ export default {
           label: '选项',
           name: 'optionSetting',
           component: 'TabPane',
-          designKey: 'tab-options',
           children: [
             {
               name: '.',
@@ -71,7 +65,6 @@ export default {
               props: {
                 componentName: 'FormDesign-Options'
               },
-              designKey: 'design-FormDesign-Options',
               labelWidth: 0
             }
           ]
@@ -83,7 +76,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-rules',
           children: [
             {
               name: '.',
@@ -91,7 +83,6 @@ export default {
               props: {
                 componentName: 'FormDesign-Rules'
               },
-              designKey: 'design-KaWx11',
               labelWidth: 0
             }
           ]
@@ -103,7 +94,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-linkages',
           children: [
             {
               name: '.',
@@ -111,7 +101,6 @@ export default {
               props: {
                 componentName: 'FormDesign-Linkages'
               },
-              designKey: 'design-linkages-custom',
               labelWidth: 0
             }
           ]
@@ -123,13 +112,11 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-events',
           children: [
             {
               label: '数据改变时 (change)',
               name: 'props.onChange',
               component: 'FunctionEditor',
-              designKey: 'design-event-change',
               labelAlign: 'top'
             }
           ]
@@ -141,7 +128,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-style',
           children: [
             {
               label: '',
@@ -150,7 +136,6 @@ export default {
               props: {
                 componentName: 'FormDesign-StyleEditor'
               },
-              designKey: 'design-style',
               labelWidth: 0
             }
           ]

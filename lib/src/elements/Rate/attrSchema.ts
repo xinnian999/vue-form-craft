@@ -20,7 +20,6 @@ export default {
         tabPosition: 'top',
         type: 'card'
       },
-      designKey: 'design-tabs',
       children: [
         {
           label: '属性',
@@ -29,7 +28,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-attrs',
           children: [
             {
               name: '.',
@@ -37,15 +35,13 @@ export default {
               props: {
                 componentName: 'FormDesign-Basic'
               },
-              designKey: 'design-basic',
               labelWidth: 0
             },
             {
               label: '禁用',
               name: 'props.disabled',
-              component: 'Switch',
-              designKey: 'design-disabled'
-            },
+              component: 'Switch'
+      },
             {
               label: '最大分值',
               name: 'props.max',
@@ -53,15 +49,13 @@ export default {
               props: {
                 min: 1,
                 max: 10
-              },
-              designKey: 'design-max'
-            },
+              }
+      },
             {
               label: '允许半选',
               name: 'props.allowHalf',
-              component: 'Switch',
-              designKey: 'design-allow-half'
-            }
+              component: 'Switch'
+      }
           ]
         },
         {
@@ -71,7 +65,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-rules',
           children: [
             {
               name: '.',
@@ -79,7 +72,6 @@ export default {
               props: {
                 componentName: 'FormDesign-Rules'
               },
-              designKey: 'design-KaWx11',
               labelWidth: 0
             }
           ]
@@ -91,7 +83,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-linkages',
           children: [
             {
               label: '联动规则',
@@ -101,7 +92,6 @@ export default {
                 mode: 'card',
                 title: '规则'
               },
-              designKey: 'design-rules',
               labelAlign: 'top',
               children: [
                 {
@@ -133,9 +123,8 @@ export default {
                         value: 'jsExpr'
                       }
                     ]
-                  },
-                  designKey: 'design-rule-type'
-                },
+                  }
+      },
                 {
                   label: '最小值',
                   name: 'value',
@@ -143,7 +132,6 @@ export default {
                   props: {
                     min: 0
                   },
-                  designKey: 'design-rule-min',
                   hidden: "{{ $item.type !== 'min' }}"
                 },
                 {
@@ -153,7 +141,6 @@ export default {
                   props: {
                     min: 0
                   },
-                  designKey: 'design-rule-max',
                   hidden: "{{ $item.type !== 'max' }}"
                 },
                 {
@@ -168,7 +155,6 @@ export default {
                       maxRows: 10
                     }
                   },
-                  designKey: 'design-rule-custom',
                   hidden: "{{ $item.type !== 'custom' }}",
                   help: '函数参数：rule, value, callback'
                 },
@@ -182,7 +168,6 @@ export default {
                       maxRows: 6
                     }
                   },
-                  designKey: 'design-rule-jsexpr',
                   hidden: "{{ $item.type !== 'jsExpr' }}",
                   help: '使用 {{ }} 包裹表达式，返回布尔值'
                 },
@@ -192,9 +177,8 @@ export default {
                   component: 'Input',
                   props: {
                     placeholder: '请输入校验失败时的提示信息'
-                  },
-                  designKey: 'design-rule-message'
-                },
+                  }
+      },
                 {
                   label: '触发时机',
                   name: 'trigger',
@@ -211,9 +195,8 @@ export default {
                         value: 'change'
                       }
                     ]
-                  },
-                  designKey: 'design-rule-trigger'
-                }
+                  }
+      }
               ]
             }
           ]
@@ -225,7 +208,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-linkages',
           children: [
             {
               name: '.',
@@ -233,7 +215,6 @@ export default {
               props: {
                 componentName: 'FormDesign-Linkages'
               },
-              designKey: 'design-linkages-custom',
               labelWidth: 0
             }
           ]
@@ -245,13 +226,11 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-events',
           children: [
             {
               label: '数据改变时 (change)',
               name: 'props.onChange',
               component: 'FunctionEditor',
-              designKey: 'design-event-change',
               labelAlign: 'top'
             }
           ]
@@ -263,7 +242,6 @@ export default {
           props: {
             lazy: true
           },
-          designKey: 'tab-style',
           children: [
             {
               label: '',
@@ -272,7 +250,6 @@ export default {
               props: {
                 componentName: 'FormDesign-StyleEditor'
               },
-              designKey: 'design-style',
               labelWidth: 0
             }
           ]

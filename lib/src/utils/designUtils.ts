@@ -90,3 +90,26 @@ export const repirJsonSchema = (schema: FormSchema) => {
 
   return newSchema
 }
+
+/**
+ * 移除 schema 中所有的 designKey（用于 JSON 编辑时展示，隐藏设计器内部字段）
+ */
+export const removeDesignKeys = (schema: FormSchema): FormSchema => {
+  const removeFromItems = (items: FormItemType[]): FormItemType[] => {
+    return items.map((item) => {
+      const { designKey, ...rest } = item
+      const newItem: FormItemType = { ...rest }
+
+      if (newItem.children) {
+        newItem.children = removeFromItems(newItem.children)
+      }
+
+      return newItem
+    })
+  }
+
+  return {
+    ...schema,
+    items: removeFromItems(schema.items || [])
+  }
+}
