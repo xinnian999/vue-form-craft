@@ -147,6 +147,13 @@ const getNodeByKey = (designKey: string): FormItemType | null => {
   return getNode(schema.items, designKey)
 }
 
+const setNodeByKey = (designKey: string, node: FormItemType) => {
+  const oldNode = getNodeByKey(designKey)
+  if (oldNode) {
+    Object.assign(oldNode, node)
+  }
+}
+
 const addItem = (item: FormItemType) => {
   const schema = getSchema()
 
@@ -220,6 +227,7 @@ const instance: DesignInstance = {
     fullScreen.value = !fullScreen.value
   },
   getNodeByKey,
+  setNodeByKey,
   addItem
 }
 

@@ -225,8 +225,8 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, watch } from 'vue'
-import { useUI } from '@/hooks'
+import { computed, reactive, watch } from 'vue'
+import { useDesignInstance, useUI } from '@/hooks'
 import { ns } from '@/utils'
 import MarginInput from './MarginInput.vue'
 import UnitInput from './UnitInput.vue'
@@ -235,29 +235,40 @@ defineOptions({
   name: 'StyleEditor'
 })
 
-const { Form, FormItem, Input, Select, ColorPicker, InputNumber, Slider, Divider } = useUI()
+const { Form, FormItem, Select, ColorPicker, InputNumber, Slider, Divider } = useUI()
 
-const modelValue = defineModel()
+const designInstance = useDesignInstance()!
 
-// 内部维护响应式对象
-const styleForm = reactive<Record<string, any>>({})
+const currentKey = computed(() => designInstance.getCurrentKey())
 
-// 初始化：modelValue -> styleForm
-watch(
-  () => modelValue.value,
-  (newVal) => {
-    if (newVal) {
-      Object.assign(styleForm, newVal)
-    }
-  },
-  { immediate: true, deep: true }
-)
+const currentNode = computed(() => designInstance.getNodeByKey(currentKey.value))
 
-// 深度监听styleForm变化，实时同步到modelValue
+const currentStyle = computed(() => {
+  if (currentKey.value === 'root') {
+    return designInstance.getSchema().style || {}
+  }
+  return currentNode.value?.props?.style || {}
+})
+
+const styleForm = reactive<Record<string, any>>(currentStyle.value || {})
+
 watch(
   styleForm,
   (newVal) => {
-    modelValue.value = { ...newVal }
+    if (currentKey.value === 'root') {
+      designInstance.setSchema({
+        ...designInstance.getSchema(),
+        style: { ...newVal }
+      })
+      return
+    }
+
+    designInstance.setNodeByKey(currentKey.value, {
+      props: {
+        ...currentNode.value?.props,
+        style: { ...newVal }
+      }
+    })
   },
   { deep: true }
 )

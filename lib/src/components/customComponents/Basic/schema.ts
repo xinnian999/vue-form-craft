@@ -3,7 +3,6 @@ import type { FormSchema } from 'formora'
 export default {
   labelWidth: 110,
   labelAlign: 'left',
-  scrollToError: true,
   size: 'small',
   submitBtn: false,
   items: [
