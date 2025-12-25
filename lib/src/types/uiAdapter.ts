@@ -307,11 +307,11 @@ export interface ButtonProtocol {
     text?: boolean
     link?: boolean
     name?: string
+    icon?: string
     onClick?: (e: Event) => void
   }
   slots: {
     default?: () => VNode
-    icon?: () => VNode
   }
 }
 

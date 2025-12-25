@@ -28,9 +28,12 @@ import {
   ElTooltip,
   type FormInstance
 } from 'element-plus'
+import { omit } from 'lodash'
 import { defineComponent, h, ref } from 'vue'
+import { Icon } from '@/components'
 import type {
   AlertProtocol,
+  ButtonProtocol,
   CascaderProtocol,
   FormItemProtocol,
   FormProtocol,
@@ -238,7 +241,13 @@ const ElementPlusAdapter: UIAdapter = {
 
   Button: defineComponent(
     (_, { slots, attrs }) => {
-      return () => h(ElButton, attrs, slots)
+      const propsAttrs = attrs as ButtonProtocol['props']
+
+      return () =>
+        h(ElButton, omit(propsAttrs, 'icon'), {
+          ...slots,
+          icon: propsAttrs.icon ? () => h(Icon, { name: propsAttrs.icon! }) : undefined
+        })
     },
     { inheritAttrs: false }
   ),

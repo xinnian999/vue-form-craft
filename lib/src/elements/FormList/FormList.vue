@@ -27,9 +27,8 @@
                 class="list-btn reduceBtn"
                 :disabled="disabled"
                 size="small"
-              >
-                <template #icon> <Icon name="reduce" color="#fff" /> </template>
-              </Button>
+                icon="reduce"
+              />
             </div>
           </template>
           <form-item
@@ -69,9 +68,8 @@
                 :disabled="disabled"
                 size="small"
                 plain
-              >
-                <template #icon><Icon name="reduce" /></template>
-              </Button>
+                icon="reduce"
+              />
             </td>
           </tr>
         </tbody>
@@ -86,8 +84,8 @@
           :disabled="disabled"
           size="small"
           plain
+          icon="add"
         >
-          <template #icon> <Icon name="add" /></template>
           {{ title }}
         </Button>
       </div>
@@ -97,8 +95,8 @@
 
 <script setup lang="ts">
 import { cloneDeep, isEqual, set } from 'lodash'
-import { computed, onMounted, provide, ref, watch } from 'vue'
-import { FormItem, FormItemGroup, Icon } from '@/components'
+import { computed, onMounted, ref, watch } from 'vue'
+import { FormItem, FormItemGroup } from '@/components'
 import { useFormInstance, useUI } from '@/hooks'
 import type { ComponentBaseProps, FormItemType } from '@/types'
 import { deepParse, ns } from '@/utils'

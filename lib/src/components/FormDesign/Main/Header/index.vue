@@ -5,14 +5,14 @@
         :disabled="historyIndex === -1"
         name="history-back"
         :size="btnSize"
+        icon="back"
         @click="designInstance.handleHistoryBack"
-      >
-        <template #icon><Icon name="back" /></template>
-      </Button>
+      />
       <Button
         name="history-forward"
         :disabled="historyIndex === history.length - 1 || history.length === 0"
         :size="btnSize"
+        icon="forward"
         @click="designInstance.handleHistoryForward"
       >
         <template #icon><Icon name="forward" /></template>
@@ -31,10 +31,11 @@
         :type="btnType"
         :name="name"
         :size="btnSize"
+        :icon="icon"
         @click="onClick"
       >
-        <template #icon v-if="icon"> <Icon :name="icon" /> </template>{{ label }}</Button
-      >
+        {{ label }}
+      </Button>
     </div>
     <Json v-model="JsonVisible" />
     <Preview v-model="PreviewVisible" />
