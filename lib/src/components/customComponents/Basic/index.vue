@@ -21,16 +21,19 @@ const designInstance = useDesignInstance()!
 
 const elements = useElements()
 
+// 使用 computed 包装 getter 方法，保持响应式
+const currentKey = computed(() => designInstance.getCurrentKey())
+
 const rootSchema = computed(() => {
   return { ...cloneDeep(initSchema), ...designInstance.getSchema() }
 })
 
 const currentNode = computed(() => {
-  return designInstance.getNodeByKey(designInstance.currentKey)
+  return designInstance.getNodeByKey(currentKey.value)
 })
 
 const currentElement = computed(() => {
-  const node = designInstance.getNodeByKey(designInstance.currentKey)
+  const node = designInstance.getNodeByKey(currentKey.value)
   return node ? elements[node.component] : null
 })
 </script>

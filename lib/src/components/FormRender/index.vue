@@ -31,9 +31,7 @@ import {
   onBeforeUnmount,
   provide,
   reactive,
-  readonly,
   ref,
-  toRefs,
   useTemplateRef,
   watch
 } from 'vue'
@@ -242,10 +240,18 @@ onBeforeUnmount(() => {
   }
 })
 
-const instance = readonly({
-  ...toRefs(props),
-  selectData,
-  context,
+const instance: FormInstance = {
+  // Props Getter 方法
+  getSchema: () => innerSchema.value,
+  getSchemaContext: () => props.schemaContext,
+  getDesign: () => props.design,
+  getRead: () => props.read,
+
+  // State Getter 方法
+  getSelectData: () => selectData,
+  getContext: () => context.value,
+
+  // API 方法
   getValues,
   setValues,
   getFieldValue,
@@ -255,7 +261,7 @@ const instance = readonly({
   validate,
   resetFields,
   submit
-})
+}
 
 provide($formInstance, instance)
 

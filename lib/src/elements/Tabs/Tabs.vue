@@ -12,7 +12,7 @@
       </TabPane>
     </Tabs>
 
-    <div class="action" v-if="formInstance.design">
+    <div class="action" v-if="design">
       <!-- 拖拽排序胶囊 -->
       <div class="drag-sort-capsule" v-if="children.length > 0">
         <div class="capsule-title">拖拽排序</div>
@@ -59,6 +59,9 @@ const formInstance = useFormInstance()
 
 const designInstance = useDesignInstance()
 
+// 使用 computed 包装 getter 方法，保持响应式
+const design = computed(() => formInstance?.getDesign() ?? false)
+
 const tabsKey = ref(0)
 
 const handleDragEnd = () => {
@@ -69,7 +72,7 @@ const handleDragEnd = () => {
 }
 
 // 仅在设计模式下监听children的变化，强制更新tabs
-if (formInstance.design) {
+if (design.value) {
   watch(
     () => children.value,
     () => {

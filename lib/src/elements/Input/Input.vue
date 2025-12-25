@@ -1,5 +1,5 @@
 <template>
-  <span v-if="formInstance.read">{{ value }}</span>
+  <span v-if="read">{{ value }}</span>
   <Input v-else v-bind="$attrs" v-model="value">
     <template #suffix>
       <slot name="suffix">
@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { Icon } from '@/components'
 import { useAi, useFormInstance, useUI } from '@/hooks'
 import { ns } from '@/utils'
@@ -25,6 +25,9 @@ const { Input } = useUI()
 const value = defineModel<string>()
 
 const formInstance = useFormInstance()
+
+// 使用 computed 包装 getter 方法，保持响应式
+const read = computed(() => formInstance?.getRead() ?? false)
 
 const props = defineProps<{
   aiPrompt?: string

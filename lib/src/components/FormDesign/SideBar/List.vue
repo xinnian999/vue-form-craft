@@ -88,7 +88,7 @@ const active = ref(['基础组件', '布局组件'])
 
 const q = ref('')
 
-const menus = computed(() => parseMenus({ elements, omits: designInstance.omitMenus || [] }))
+const menus = computed(() => parseMenus({ elements, omits: designInstance.getOmitMenus() }))
 
 // 搜索过滤后的组件列表
 const filteredComponents = computed(() => {

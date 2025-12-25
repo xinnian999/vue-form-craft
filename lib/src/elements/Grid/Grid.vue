@@ -23,6 +23,9 @@ const props = defineProps<
 
 const formInstance = useFormInstance()
 
+// 使用 computed 包装 getter 方法，保持响应式
+const design = computed(() => formInstance?.getDesign() ?? false)
+
 const gridStyle = computed(() => {
   const { columns, rowGap, columnGap } = props
 
@@ -33,7 +36,7 @@ const gridStyle = computed(() => {
     'column-gap': `${columnGap}px`
   }
 
-  if (formInstance.design) {
+  if (design.value) {
     style.background = '#f4f3f3'
     style.padding = '10px'
   }

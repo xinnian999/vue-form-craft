@@ -32,9 +32,12 @@ import AttrEdit from './Attr.vue'
 
 const designInstance = useDesignInstance()!
 
+// 使用 computed 包装 getter 方法，保持响应式
+const currentKey = computed(() => designInstance.getCurrentKey())
+
 // 获取从根节点到当前节点的路径
 const breadcrumbPath = computed(() => {
-  if (designInstance.currentKey === 'root') {
+  if (currentKey.value === 'root') {
     return []
   }
 
@@ -65,7 +68,7 @@ const breadcrumbPath = computed(() => {
   }
 
   if (schema.items) {
-    findPath(schema.items, designInstance.currentKey, [])
+    findPath(schema.items, currentKey.value, [])
   }
 
   return path

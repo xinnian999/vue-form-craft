@@ -45,6 +45,10 @@ const designInstance = useDesignInstance()!
 
 const elements = useElements()
 
+// 使用 computed 包装 getter 方法，保持响应式
+const currentKey = computed(() => designInstance.getCurrentKey())
+const hoverKey = computed(() => designInstance.getHoverKey())
+
 const config = computed(() => {
   // if (!props.data.component) return {}
   return (
@@ -58,9 +62,9 @@ const config = computed(() => {
 const canvasItemClass = computed(() => {
   return {
     [ns('canvas-item')]: true,
-    active: props.data.designKey === designInstance.currentKey,
-    hover: props.data.designKey === designInstance.hoverKey,
-    mask: props.data.designKey === designInstance.hoverKey && !props.data.children
+    active: props.data.designKey === currentKey.value,
+    hover: props.data.designKey === hoverKey.value,
+    mask: props.data.designKey === hoverKey.value && !props.data.children
   }
 })
 

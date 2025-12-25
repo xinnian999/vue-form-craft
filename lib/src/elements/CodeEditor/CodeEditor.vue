@@ -1,5 +1,5 @@
 <template>
-  <div v-if="formInstance.read" :class="ns('code-editor-read')">
+  <div v-if="read" :class="ns('code-editor-read')">
     <pre>{{ value }}</pre>
   </div>
   <div v-else :class="ns('code-editor-wrapper')">
@@ -23,6 +23,9 @@ import { ns } from '@/utils'
 const value = defineModel<string>()
 
 const formInstance = useFormInstance()
+
+// 使用 computed 包装 getter 方法，保持响应式
+const read = computed(() => formInstance?.getRead() ?? false)
 
 const props = withDefaults(
   defineProps<{

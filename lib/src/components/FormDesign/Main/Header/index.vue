@@ -2,7 +2,7 @@
   <div :class="ns('form-design-header')">
     <div class="left">
       <Button
-        :disabled="designInstance.historyIndex === -1"
+        :disabled="historyIndex === -1"
         name="history-back"
         :size="btnSize"
         @click="designInstance.handleHistoryBack"
@@ -11,10 +11,7 @@
       </Button>
       <Button
         name="history-forward"
-        :disabled="
-          designInstance.historyIndex === designInstance.history.length - 1 ||
-          designInstance.history.length === 0
-        "
+        :disabled="historyIndex === history.length - 1 || history.length === 0"
         :size="btnSize"
         @click="designInstance.handleHistoryForward"
       >
@@ -22,7 +19,7 @@
       </Button>
       <Button :size="btnSize" @click="designInstance.handleToggleFullScreen">
         <template #icon>
-          <Icon :name="designInstance.fullScreen ? 'cancelFullScreen' : 'fullScreen'" />
+          <Icon :name="fullScreen ? 'cancelFullScreen' : 'fullScreen'" />
         </template>
       </Button>
     </div>
@@ -45,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { Icon } from '@/components'
 import { useDesignInstance, useUI } from '@/hooks'
 import { ns } from '@/utils'
@@ -63,6 +60,11 @@ type PreviewAction = {
 }
 
 const designInstance = useDesignInstance()!
+
+// 使用 computed 包装 getter 方法，保持响应式
+const historyIndex = computed(() => designInstance.getHistoryIndex())
+const history = computed(() => designInstance.getHistory())
+const fullScreen = computed(() => designInstance.getFullScreen())
 
 const JsonVisible = ref(false)
 

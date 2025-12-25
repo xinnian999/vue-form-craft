@@ -1,5 +1,5 @@
 import type { FormValidationResult } from 'element-plus'
-import type { Component, Ref, ToRefs, VNode } from 'vue'
+import type { Component, VNode } from 'vue'
 import type { UIAdapter } from './uiAdapter'
 
 export type RuleType =
@@ -165,9 +165,18 @@ export interface FormRenderEmits {
   fieldChange: [path: string, value: any]
 }
 
-export interface FormInstance extends FormRenderProps {
-  selectData: Record<string, Record<string, any>>
-  context: Record<string, any>
+export interface FormInstance {
+  // Props Getter 方法
+  getSchema: () => FormSchema
+  getSchemaContext: () => Record<string, any> | undefined
+  getDesign: () => boolean | undefined
+  getRead: () => boolean | undefined
+
+  // State Getter 方法
+  getSelectData: () => Record<string, Record<string, any>>
+  getContext: () => Record<string, any>
+
+  // API 方法
   getValues: () => Record<string, any>
   setValues: (values: Record<string, any>) => void
   getFieldValue: (path: string) => any
@@ -185,16 +194,27 @@ export interface FormDesignProps {
   omitMenus?: string[]
 }
 
-export interface DesignInstance extends Required<ToRefs<FormDesignProps>> {
-  currentKey: Ref<string>
-  hoverKey: Ref<string>
-  fullScreen: Ref<boolean>
-  history: Ref<HistoryRecord[]>
-  historyIndex: Ref<number>
+export interface DesignInstance {
+  // Props Getter 方法
+  getSchemaContext: () => Record<string, any>
+  getTemplates: () => TemplateData | undefined
+  getOmitMenus: () => string[]
+
+  // State Getter 方法
+  getCurrentKey: () => string
+  getHoverKey: () => string
+  getFullScreen: () => boolean
+  getHistory: () => HistoryRecord[]
+  getHistoryIndex: () => number
   getSchema: () => FormSchema
+
+  // Setter 方法
   setSchema: (schema: FormSchema) => void
   setCurrentKey: (key: string) => void
   setHoverKey: (key: string) => void
+  setHistoryIndex: (index: number) => void
+
+  // 其他方法
   handleClear: () => void
   handleEmit: (event: any, ...args: any[]) => void
   handleHistoryBack: () => void

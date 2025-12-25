@@ -1,8 +1,8 @@
 <template>
-  <template v-if="formInstance.design || !hidden">
+  <template v-if="design || !hidden">
     <FormItem
       v-if="config.type === 'basic'"
-      v-show="formInstance.design || show"
+      v-show="design || show"
       :class="classNames"
       :style="style"
       :key="name"
@@ -20,7 +20,7 @@
           <Tooltip effect="dark" :content="help" v-if="help">
             <Icon name="help" />
           </Tooltip>
-          <div :class="ns('form-item-label-suffix')" v-if="formInstance.schema.colon">:</div>
+          <div :class="ns('form-item-label-suffix')" v-if="schema.colon">:</div>
         </div>
       </template>
 
@@ -29,7 +29,7 @@
       <Alert :class="['form-item-alert']" :title="alert" show-icon :closable="false" v-if="alert" />
     </FormItem>
 
-    <RenderComponent v-else v-show="formInstance.design || show" :class="classNames" />
+    <RenderComponent v-else v-show="design || show" :class="classNames" />
   </template>
 </template>
 
@@ -52,6 +52,10 @@ const formInstance = useFormInstance()
 
 const elements = useElements()
 
+// 使用 computed 包装 getter 方法，保持响应式
+const design = computed(() => formInstance?.getDesign() ?? false)
+const schema = computed(() => formInstance?.getSchema() ?? {})
+
 const value = computed({
   get() {
     return formInstance.getFieldValue(props.name) ?? props.defaultValue
@@ -64,7 +68,7 @@ const value = computed({
 const computeRules = computed(() => {
   const { rules = [], required, hidden, show } = props as FormItemType
 
-  if (!formInstance.design && (hidden || !show)) {
+  if (!design.value && (hidden || !show)) {
     return []
   }
 
@@ -144,7 +148,7 @@ watch(
     const linkages = props.linkages
 
     // 提前返回，避免不必要的计算
-    if (!linkages || linkages.length === 0 || formInstance.design) return
+    if (!linkages || linkages.length === 0 || design.value) return
 
     if (newVal === undefined) {
       return

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="formInstance.read">
+  <div v-if="read">
     <div v-if="multiple">
       {{
         value &&
@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { watch } from 'vue'
+import { computed, watch } from 'vue'
 import { useFormInstance, useSelect, useUI } from '@/hooks'
 import type { SelectProps, SelectValue } from '@/types'
 
@@ -41,6 +41,9 @@ const props = withDefaults(defineProps<SelectProps>(), {
 const value = defineModel<SelectValue | SelectValue[]>()
 
 const formInstance = useFormInstance()
+
+// 使用 computed 包装 getter 方法，保持响应式
+const read = computed(() => formInstance?.getRead() ?? false)
 
 const { currentOptions, selectChange, loading } = useSelect(props)
 

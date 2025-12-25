@@ -17,7 +17,7 @@ const useSelect = (props: SelectProps) => {
   const loading = ref(false)
 
   const fetchData = debounce(async () => {
-    if (formInstance.design) return
+    if (formInstance?.getDesign()) return
     if (!request) return
     if (!props.api) return
 
@@ -130,7 +130,7 @@ const useSelect = (props: SelectProps) => {
     }
 
     //如果接到了selectData，给顶级组件保存当前值对应得数据源
-    if (formInstance.selectData && name) {
+    if (formInstance?.getSelectData() && name) {
       formInstance.updateSelectData(name, valueData)
     }
   }

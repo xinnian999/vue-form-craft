@@ -1,5 +1,5 @@
 <template>
-  <div v-if="formInstance.read">
+  <div v-if="read">
     {{ currentOptions.find((item) => item.value === value)?.label }}
   </div>
   <template v-else>
@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { watch } from 'vue'
+import { computed, watch } from 'vue'
 import { useFormInstance, useSelect, useUI } from '@/hooks'
 import type { ComponentBaseProps, SelectProps, SelectValue } from '@/types'
 
@@ -37,6 +37,9 @@ const props = withDefaults(defineProps<Props>(), {
 const value = defineModel<SelectValue>({ default: '' })
 
 const formInstance = useFormInstance()
+
+// 使用 computed 包装 getter 方法，保持响应式
+const read = computed(() => formInstance?.getRead() ?? false)
 
 const { currentOptions, selectChange, loading } = useSelect(props)
 

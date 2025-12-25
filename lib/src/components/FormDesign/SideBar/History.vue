@@ -21,8 +21,9 @@ import { ns } from '@/utils'
 
 const designInstance = useDesignInstance()!
 
-const history = computed(() => designInstance.history)
-const historyIndex = computed(() => designInstance.historyIndex)
+// 使用 computed 包装 getter 方法，保持响应式
+const history = computed(() => designInstance.getHistory())
+const historyIndex = computed(() => designInstance.getHistoryIndex())
 
 // 格式化时间
 const formatTime = (timestamp: number) => {
@@ -40,7 +41,7 @@ const formatTime = (timestamp: number) => {
 const handleJumpTo = (index: number) => {
   if (index === historyIndex.value) return
 
-  designInstance.historyIndex = index
+  designInstance.setHistoryIndex(index)
   const record = history.value[index]
   if (record) {
     designInstance.setSchema(cloneDeep(record.schema))

@@ -1,5 +1,5 @@
 <template>
-  <CanvasGroup v-if="formInstance.design" :list="designList" />
+  <CanvasGroup v-if="design" :list="designList" />
 
   <div v-else>
     <FormItem v-for="item in list" :key="item.name" v-bind="item" />
@@ -21,6 +21,9 @@ const props = defineProps<{
 const formInstance = useFormInstance()
 
 const designInstance = useDesignInstance()
+
+// 使用 computed 包装 getter 方法，保持响应式
+const design = computed(() => formInstance?.getDesign() ?? false)
 
 // 设计模式时，桥接对应list数据，避免直接修改props
 const designList = computed(() => {

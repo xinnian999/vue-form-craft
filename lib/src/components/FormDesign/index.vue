@@ -11,16 +11,7 @@ let initJsonSchema: FormSchema = {}
 
 <script setup lang="ts">
 import { cloneDeep, debounce, isEqual } from 'lodash'
-import {
-  onBeforeMount,
-  onBeforeUnmount,
-  provide,
-  reactive,
-  ref,
-  toRefs,
-  useTemplateRef,
-  watch
-} from 'vue'
+import { onBeforeMount, onBeforeUnmount, provide, reactive, ref, useTemplateRef, watch } from 'vue'
 import { $designInstance } from '@/symbol'
 import type {
   DesignInstance,
@@ -73,7 +64,6 @@ const setSchema = (schema: FormSchema) => {
 
   // 由于 repirJsonSchema 会重新生成所有 designKey，导致之前的 currentKey 找不到对应节点
   // 因此每次 setSchema 后重置为 root，避免找不到节点的问题
-  // 性能：O(1)，比全局监听性能更好
   if (currentKey.value !== 'root') {
     currentKey.value = 'root'
   }
@@ -85,6 +75,15 @@ const setCurrentKey = (key: string) => {
 
 const setHoverKey = (key: string) => {
   hoverKey.value = key
+}
+
+const setHistoryIndex = (index: number) => {
+  // 添加边界检查
+  if (index < -1 || index >= history.value.length) {
+    console.warn('Invalid history index:', index)
+    return
+  }
+  historyIndex.value = index
 }
 
 // 记录历史。
@@ -100,8 +99,6 @@ const recordHistory = debounce((description: string = '修改') => {
   })
   historyIndex.value = history.value.length - 1
 }, 700)
-
-// 防抖记录历史
 
 const handleHistoryBack = () => {
   if (historyIndex.value > -1) {
@@ -183,18 +180,28 @@ onBeforeUnmount(() => {
   document.removeEventListener('fullscreenchange', handleFullscreenChange)
 })
 
-const instance = reactive<DesignInstance>({
-  ...toRefs(props),
-  currentKey,
-  hoverKey,
-  recordHistory,
-  fullScreen,
-  history,
-  historyIndex,
+const instance: DesignInstance = {
+  // Props Getter 方法
+  getSchemaContext: () => props.schemaContext || {},
+  getTemplates: () => props.templates,
+  getOmitMenus: () => props.omitMenus || [],
+
+  // State Getter 方法
+  getCurrentKey: () => currentKey.value,
+  getHoverKey: () => hoverKey.value,
+  getFullScreen: () => fullScreen.value,
+  getHistory: () => history.value,
+  getHistoryIndex: () => historyIndex.value,
   getSchema,
+
+  // Setter 方法
   setSchema,
   setCurrentKey,
   setHoverKey,
+  setHistoryIndex,
+
+  // 其他方法
+  recordHistory,
   handleEmit: (name, params) => {
     emits(name, params)
   },
@@ -216,7 +223,7 @@ const instance = reactive<DesignInstance>({
     }, 100)
   },
   addItem
-})
+}
 
 provide($designInstance, instance)
 

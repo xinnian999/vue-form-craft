@@ -7,9 +7,9 @@
       @click="handleCanvasClick"
     >
       <div
-        v-if="designInstance.currentKey === 'root' || designInstance.hoverKey === 'root'"
+        v-if="currentKey === 'root' || hoverKey === 'root'"
         class="fd-form-title"
-        :style="{ opacity: designInstance.currentKey === 'root' ? 1 : 0.5 }"
+        :style="{ opacity: currentKey === 'root' ? 1 : 0.5 }"
       >
         <Icon name="form" /> 表单
       </div>
@@ -17,8 +17,8 @@
         :class="[
           'fd-form',
           {
-            hover: designInstance.hoverKey === 'root',
-            active: designInstance.currentKey === 'root'
+            hover: hoverKey === 'root',
+            active: currentKey === 'root'
           }
         ]"
         :schema="designInstance.getSchema()"
@@ -29,11 +29,16 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { FormRender, Icon } from '@/components'
 import { useDesignInstance } from '@/hooks'
 import { ns } from '@/utils'
 
 const designInstance = useDesignInstance()!
+
+// 使用 computed 包装 getter 方法，保持响应式
+const currentKey = computed(() => designInstance.getCurrentKey())
+const hoverKey = computed(() => designInstance.getHoverKey())
 
 const handleCanvasMouseMove = () => {
   designInstance.setHoverKey('root')

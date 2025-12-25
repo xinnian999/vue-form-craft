@@ -1,6 +1,6 @@
 <template>
   <div :class="ns('formList')">
-    <div v-if="formInstance.design">
+    <div v-if="design">
       <Card v-if="mode === 'card'" header="自增卡片" class="card-list-container">
         <FormItemGroup :list="fields" :designKey="formItemProps.designKey!" />
       </Card>
@@ -133,6 +133,9 @@ const cIndex = ref(0)
 const listSnapshot = ref<Record<string, any>[]>([])
 
 const formInstance = useFormInstance()
+
+// 使用 computed 包装 getter 方法，保持响应式
+const design = computed(() => formInstance?.getDesign() ?? false)
 
 const fields = computed(() => props.formItemProps?.children || [])
 

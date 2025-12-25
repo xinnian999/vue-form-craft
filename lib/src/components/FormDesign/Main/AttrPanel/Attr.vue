@@ -1,7 +1,7 @@
 <template>
   <div :class="ns('attr')">
     <FormRender
-      v-if="designInstance.currentKey == 'root'"
+      v-if="currentKey == 'root'"
       v-model="schemaModel"
       :schema="formAttrSchema"
       @fieldChange="onRootFieldChange"
@@ -22,6 +22,9 @@ const designInstance = useDesignInstance()!
 
 const elements = useElements()
 
+// 使用 computed 包装 getter 方法，保持响应式
+const currentKey = computed(() => designInstance.getCurrentKey())
+
 const schemaModel = computed({
   get() {
     return designInstance.getSchema()
@@ -34,10 +37,10 @@ const schemaModel = computed({
 
 const nodeModel = computed({
   get() {
-    return designInstance.getNodeByKey(designInstance.currentKey)
+    return designInstance.getNodeByKey(currentKey.value)
   },
   set(node) {
-    const oldNode = designInstance.getNodeByKey(designInstance.currentKey)
+    const oldNode = designInstance.getNodeByKey(currentKey.value)
     if (oldNode) {
       Object.assign(oldNode, node)
     }

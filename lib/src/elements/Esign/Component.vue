@@ -1,8 +1,8 @@
 <template>
-  <template v-if="formInstance.read || value">
+  <template v-if="read || value">
     <div>
       <div class="vfc-esign-preview"><img :src="value" alt="未签名" /></div>
-      <Button v-if="!formInstance.read" :disabled @click="handleClear" type="primary">重写</Button>
+      <Button v-if="!read" :disabled @click="handleClear" type="primary">重写</Button>
     </div>
   </template>
 
@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { FormRender } from '@/components'
 import { useFormInstance, useUI } from '@/hooks'
 import type { FormSchema } from '@/types'
@@ -63,6 +63,9 @@ const props = withDefaults(defineProps<Props>(), {
 const esign = ref()
 
 const formInstance = useFormInstance()
+
+// 使用 computed 包装 getter 方法，保持响应式
+const read = computed(() => formInstance?.getRead() ?? false)
 
 const value = defineModel<string>()
 

@@ -1,9 +1,10 @@
 <template>
-  <div v-if="formInstance.read">{{ value }}</div>
+  <div v-if="read">{{ value }}</div>
   <ColorPicker v-else v-bind="$attrs" v-model="value" />
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { useFormInstance, useUI } from '@/hooks'
 
 const { ColorPicker } = useUI()
@@ -11,4 +12,7 @@ const { ColorPicker } = useUI()
 const value = defineModel<string>()
 
 const formInstance = useFormInstance()
+
+// 使用 computed 包装 getter 方法，保持响应式
+const read = computed(() => formInstance?.getRead() ?? false)
 </script>
