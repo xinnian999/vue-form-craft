@@ -19,12 +19,7 @@
               clearable
             >
               <template #append>
-                <Button
-                  type="primary"
-                  :icon="MagicStick"
-                  @click="handleAiGenerate"
-                  :loading="aiLoading"
-                >
+                <Button type="primary" icon="magic" @click="handleAiGenerate" :loading="aiLoading">
                   AI生成
                 </Button>
               </template>
@@ -50,8 +45,8 @@
 </template>
 
 <script setup lang="ts">
-import { MagicStick } from '@element-plus/icons-vue'
 import { onMounted, ref } from 'vue'
+import { Icon } from '@/components'
 import { useAi, useDesignInstance, useUI } from '@/hooks'
 import { ns } from '@/utils'
 

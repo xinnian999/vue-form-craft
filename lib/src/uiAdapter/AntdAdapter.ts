@@ -24,6 +24,7 @@ import {
 } from 'ant-design-vue'
 import { omit } from 'lodash'
 import { defineComponent, h, ref } from 'vue'
+import { Icon } from '@/components'
 import type {
   AlertProtocol,
   ButtonProtocol,
@@ -423,14 +424,16 @@ const AntdAdapter: UIAdapter = {
         return h(
           Button,
           {
-            ...attrs,
+            ...omit(attrs, 'icon'),
             type: buttonType,
             danger: propsAttrs.type === 'danger',
             shape: propsAttrs.circle ? 'circle' : propsAttrs.round ? 'round' : undefined
           },
           {
             ...slots,
-            icon: () => h('span', { class: slots.icon && 'anticon' }, slots.icon?.())
+            icon: propsAttrs.icon
+              ? () => h('span', { class: 'anticon' }, h(Icon, { name: propsAttrs.icon! }))
+              : undefined
           }
         )
       }

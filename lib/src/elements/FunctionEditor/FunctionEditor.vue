@@ -1,10 +1,7 @@
 <template>
   <div :class="ns('function-editor')">
     <div class="button-wrapper">
-      <Button type="primary" @click="openDialog" size="small">
-        <template #icon>
-          <Icon name="code" />
-        </template>
+      <Button type="primary" icon="code" @click="openDialog" size="small">
         <span> 编辑函数</span>
       </Button>
       <span v-if="hasValue" class="status-dot"></span>

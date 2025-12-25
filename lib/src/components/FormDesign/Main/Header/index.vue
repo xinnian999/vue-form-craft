@@ -5,10 +5,9 @@
         :disabled="designInstance.historyIndex === -1"
         name="history-back"
         :size="btnSize"
+        icon="back"
         @click="designInstance.handleHistoryBack"
-      >
-        <template #icon><Icon name="back" /></template>
-      </Button>
+      />
       <Button
         name="history-forward"
         :disabled="
@@ -16,15 +15,14 @@
           designInstance.history.length === 0
         "
         :size="btnSize"
+        icon="forward"
         @click="designInstance.handleHistoryForward"
-      >
-        <template #icon><Icon name="forward" /></template>
-      </Button>
-      <Button :size="btnSize" @click="designInstance.handleToggleFullScreen">
-        <template #icon>
-          <Icon :name="designInstance.fullScreen ? 'cancelFullScreen' : 'fullScreen'" />
-        </template>
-      </Button>
+      />
+      <Button
+        :size="btnSize"
+        :icon="designInstance.fullScreen ? 'cancelFullScreen' : 'fullScreen'"
+        @click="designInstance.handleToggleFullScreen"
+      />
     </div>
 
     <div class="right">
@@ -34,10 +32,11 @@
         :type="btnType"
         :name="name"
         :size="btnSize"
+        :icon="icon"
         @click="onClick"
       >
-        <template #icon v-if="icon"> <Icon :name="icon" /> </template>{{ label }}</Button
-      >
+        {{ label }}
+      </Button>
     </div>
     <Json v-model="JsonVisible" />
     <Preview v-model="PreviewVisible" />
@@ -46,7 +45,6 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Icon } from '@/components'
 import { useDesignInstance, useUI } from '@/hooks'
 import { ns } from '@/utils'
 import Json from './Json/index.vue'
