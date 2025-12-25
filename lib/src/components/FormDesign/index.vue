@@ -52,11 +52,8 @@ const history = ref<HistoryRecord[]>([])
 const historyIndex = ref(-1)
 
 const getSchema = () => modelValue.value
-
-const jsonState = reactive({
-  visible: false,
-  target: ''
-})
+const getHistory = () => history.value
+const getHistoryIndex = () => historyIndex.value
 
 // schema的唯一修改入口
 const setSchema = (schema: FormSchema) => {
@@ -79,7 +76,7 @@ const setHoverKey = (key: string) => {
 
 const setHistoryIndex = (index: number) => {
   // 添加边界检查
-  if (index < -1 || index >= history.value.length) {
+  if (index < -1 || index >= getHistory().length) {
     console.warn('Invalid history index:', index)
     return
   }
@@ -88,9 +85,12 @@ const setHistoryIndex = (index: number) => {
 
 // 记录历史。
 const recordHistory = debounce((description: string = '修改') => {
-  if (historyIndex.value < history.value.length - 1) {
+  const currentHistoryIndex = getHistoryIndex()
+  const currentHistory = getHistory()
+
+  if (currentHistoryIndex < currentHistory.length - 1) {
     // 如果改动的是历史，将截断之后的记录
-    history.value = history.value.slice(0, historyIndex.value + 1)
+    history.value = currentHistory.slice(0, currentHistoryIndex + 1)
   }
   history.value.push({
     schema: cloneDeep(getSchema()),
@@ -101,18 +101,22 @@ const recordHistory = debounce((description: string = '修改') => {
 }, 700)
 
 const handleHistoryBack = () => {
-  if (historyIndex.value > -1) {
+  const currentHistoryIndex = getHistoryIndex()
+  if (currentHistoryIndex > -1) {
     historyIndex.value--
-    const record = history.value[historyIndex.value]
+    const record = getHistory()[historyIndex.value]
     const newSchema = record ? record.schema : initJsonSchema
     setSchema(cloneDeep(newSchema))
   }
 }
 
 const handleHistoryForward = () => {
-  if (historyIndex.value < history.value.length - 1) {
+  const currentHistoryIndex = getHistoryIndex()
+  const currentHistory = getHistory()
+
+  if (currentHistoryIndex < currentHistory.length - 1) {
     historyIndex.value++
-    setSchema(cloneDeep(history.value[historyIndex.value].schema))
+    setSchema(cloneDeep(currentHistory[historyIndex.value].schema))
   }
 }
 
@@ -186,12 +190,12 @@ const instance: DesignInstance = {
   getTemplates: () => props.templates,
   getOmitMenus: () => props.omitMenus || [],
 
-  // State Getter 方法
+  // State Getter 方法（简单状态直接在 instance 中定义）
   getCurrentKey: () => currentKey.value,
   getHoverKey: () => hoverKey.value,
   getFullScreen: () => fullScreen.value,
-  getHistory: () => history.value,
-  getHistoryIndex: () => historyIndex.value,
+  getHistory,
+  getHistoryIndex,
   getSchema,
 
   // Setter 方法
@@ -216,12 +220,6 @@ const instance: DesignInstance = {
     fullScreen.value = !fullScreen.value
   },
   getNodeByKey,
-  handleJson(target?: string) {
-    setTimeout(() => {
-      jsonState.visible = true
-      jsonState.target = target || ''
-    }, 100)
-  },
   addItem
 }
 

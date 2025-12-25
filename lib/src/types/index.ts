@@ -221,7 +221,6 @@ export interface DesignInstance {
   handleHistoryForward: () => void
   handleToggleFullScreen: () => void
   getNodeByKey: (key: string) => FormItemType | null
-  handleJson: (target?: string) => void
   addItem: (item: FormItemType) => void
   recordHistory: (description?: string) => void
 }
