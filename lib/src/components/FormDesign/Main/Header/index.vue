@@ -17,10 +17,11 @@
       >
         <template #icon><Icon name="forward" /></template>
       </Button>
-      <Button :size="btnSize" @click="designInstance.handleToggleFullScreen">
-        <template #icon>
-          <Icon :name="fullScreen ? 'cancelFullScreen' : 'fullScreen'" />
-        </template>
+      <Button
+        :icon="fullScreen ? 'cancelFullScreen' : 'fullScreen'"
+        :size="btnSize"
+        @click="designInstance.handleToggleFullScreen"
+      >
       </Button>
     </div>
 

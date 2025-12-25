@@ -40,32 +40,51 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import Draggable from 'vuedraggable-es-fix'
 import { Icon } from '@/components'
 import { useDesignInstance } from '@/hooks'
-import type { FormItemType } from '@/types'
 import { ns } from '@/utils'
 import CanvasItem from './CanvasItem.vue'
 
 const props = withDefaults(
   defineProps<{
+    designKey?: string
     style?: any
     class?: string
     emptyText?: string
     emptySize?: number
-    list: FormItemType[]
   }>(),
   {
     emptyText: '请拖入子字段',
-    emptySize: 12,
-    list: () => []
+    emptySize: 12
   }
 )
 
 const scrollContainer = ref<HTMLElement>()
 
 const designInstance = useDesignInstance()!
+
+// 根据designKey桥接对应list数据
+const list = computed(() => {
+  if (!designInstance || !props.designKey) return []
+
+  if (props.designKey === 'root') {
+    const rootList = designInstance.getSchema().items || []
+
+    // 补充items数据
+    if (!rootList) {
+      designInstance.setSchema({
+        ...designInstance.getSchema(),
+        items: []
+      })
+      designInstance.recordHistory('补充items数据')
+    }
+
+    return rootList || []
+  }
+  return designInstance.getNodeByKey(props.designKey)?.children || []
+})
 
 // 拖入后回调
 const onAdd = (e: Record<string, any>) => {
