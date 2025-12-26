@@ -69,7 +69,7 @@ export default {
           '{{ (index) => {\n  return { label: `选项${index}`,value:`value${index}` }\n} }}'
       },
       labelAlign: 'top',
-      hidden: '{{$values.props.mode!=="static"}}',
+      when: '{{$values.props.mode==="static"}}',
       children: [
         {
           label: '选项名',
@@ -96,7 +96,7 @@ export default {
       component: 'Card',
       props: {},
       labelAlign: 'top',
-      hidden: '{{$values.props.mode==="static"}}',
+      when: '{{$values.props.mode!=="static"}}',
       children: [
         {
           name: 'form-divider-request',

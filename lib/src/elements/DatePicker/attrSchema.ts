@@ -41,31 +41,31 @@ export default {
               label: '禁用',
               name: 'props.disabled',
               component: 'Switch'
-      },
+            },
             {
               label: '占位提示',
               name: 'props.placeholder',
               component: 'Input'
-      },
+            },
             {
               label: '开始时间-占位提示',
               labelAlign: 'top',
               name: 'props.startPlaceholder',
               component: 'Input',
-              hidden: '{{ !$values.props.type.includes("range") }}'
-      },
+              when: '{{ $values.props.type.includes("range") }}'
+            },
             {
               label: '结束时间-占位提示',
               labelAlign: 'top',
               name: 'props.endPlaceholder',
               component: 'Input',
-              hidden: '{{ !$values.props.type.includes("range") }}'
-      },
+              when: '{{ $values.props.type.includes("range") }}'
+            },
             {
               label: '显示清除按钮',
               name: 'props.clearable',
               component: 'Switch'
-      },
+            },
             {
               label: '类型',
               name: 'props.type',
@@ -83,7 +83,7 @@ export default {
                   { label: '日期时间范围', value: 'datetimerange' }
                 ]
               }
-      },
+            },
             {
               label: '值格式',
               name: 'props.value-format',

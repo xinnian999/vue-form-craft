@@ -115,9 +115,10 @@ export default {
       }
     },
     {
-      label: '隐藏',
-      name: 'hidden',
-      component: 'Switch'
+      label: '渲染',
+      name: 'when',
+      component: 'Switch',
+      defaultValue: '{{ true }}'
     },
     {
       label: '可见',

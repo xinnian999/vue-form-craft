@@ -59,9 +59,10 @@ export default {
           component: 'Switch'
         },
         {
-          label: '隐藏字段',
-          name: 'hidden',
-          component: 'Switch'
+          label: '渲染字段',
+          name: 'when',
+          component: 'Switch',
+          defaultValue: '{{ true }}'
         }
       ]
     },

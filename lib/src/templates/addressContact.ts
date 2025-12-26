@@ -44,7 +44,7 @@ export default {
         clearable: true,
         disabled: "{{ !$values.province }}"
       },
-      hidden: "{{ !$values.province }}",
+      when: "{{ $values.province }}",
       required: true,
     },
     {

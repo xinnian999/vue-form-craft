@@ -137,7 +137,7 @@ export default [
         label: '高级联动',
         schema: advancedLinkage,
         description:
-          '高级联动：不仅可以修改数据,还可以动态修改字段的 schema 配置（如 label、props、hidden、required 等）'
+          '高级联动：不仅可以修改数据,还可以动态修改字段的 schema 配置（如 label、props、when、required 等）'
       },
       {
         label: '事件函数联动',

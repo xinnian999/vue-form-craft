@@ -120,7 +120,7 @@
 - **required**: `boolean`，默认 `false`，是否必填
 - **initialValue**: `any`，初始值
 - **help**: `string`，提示信息
-- **hidden**: `boolean`，默认 `false`，是否隐藏
+- **when**: `boolean`，默认 `true`，是否渲染（v-if）
 - **rules**: `RuleItem[]`，自定义校验规则
 - **children**: `FormItemType[]`，子表单项，用于嵌套组件（如卡片、栅格、自增容器）
 - **linkages**: `FormLinkage[]`，联动配置
@@ -133,7 +133,7 @@
 ### 方式一：JS表达式（属性动态计算）
 
 - 使用 `{{ }}` 包裹 JS 表达式。
-- 仅能用于 **配置属性的动态计算**，例如：hidden、disabled、placeholder、help 等。
+- 仅能用于 **配置属性的动态计算**，例如：when、disabled、placeholder、help 等。
 - 表达式内可以访问 `$values`（表单数据对象）、`$selectData`（选择器数据）、`$instance`（表单实例）等全局变量。
 
 **全局变量说明**：
@@ -155,7 +155,7 @@
     "placeholder": "{{ $values.name ? $values.name + '的简介' : '请输入简介' }}",
     "disabled": "{{ !$values.name }}"
   },
-  "hidden": "{{ $values.userType !== 'admin' }}",
+  "when": "{{ $values.userType === 'admin' }}",
   "designKey": "design-1001"
 }
 ```
@@ -172,7 +172,7 @@
 
 - **target**: 目标字段的 name（必填）
 - **type**: 'attr'（必填）
-- **path**: 要修改的属性路径（必填），如 'hidden'、'props.disabled'
+- **path**: 要修改的属性路径（必填），如 'when'、'props.disabled'
 - **condition**: 触发条件（可选，支持表达式，不填则总是触发）
 - **value**: 修改的值（可选，支持表达式）
 
@@ -194,8 +194,8 @@
     {
       "target": "password",
       "type": "attr",
-      "path": "hidden",
-      "value": "{{ $values.userType !== 'admin' }}",
+      "path": "when",
+      "value": "{{ $values.userType === 'admin' }}"
       "condition": true
     }
   ]
@@ -271,8 +271,8 @@
         {
           "target": "users.[].password",
           "type": "attr",
-          "path": "hidden",
-          "value": "{{ $item.type !== 'admin' }}"
+          "path": "when",
+          "value": "{{ $item.type === 'admin' }}"
         }
       ]
     },

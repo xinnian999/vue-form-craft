@@ -43,14 +43,14 @@ export default {
       name: 'companyName',
       component: 'Input',
       props: { placeholder: '请输入公司名称' },
-      hidden: "{{ $values.invoiceType !== 'company' }}"
+      when: "{{ $values.invoiceType === 'company' }}"
     },
     {
       label: '纳税人识别号',
       name: 'taxpayerNo',
       component: 'Input',
       props: { placeholder: '请输入纳税人识别号' },
-      hidden: "{{ $values.invoiceType !== 'company' }}",
+      when: "{{ $values.invoiceType === 'company' }}",
       rules: [
         {
           type: 'pattern',

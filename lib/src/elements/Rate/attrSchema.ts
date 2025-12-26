@@ -132,7 +132,7 @@ export default {
                   props: {
                     min: 0
                   },
-                  hidden: "{{ $item.type !== 'min' }}"
+                  when: "{{ $item.type === 'min' }}"
                 },
                 {
                   label: '最大值',
@@ -141,7 +141,7 @@ export default {
                   props: {
                     min: 0
                   },
-                  hidden: "{{ $item.type !== 'max' }}"
+                  when: "{{ $item.type === 'max' }}"
                 },
                 {
                   label: '自定义函数体',
@@ -155,7 +155,7 @@ export default {
                       maxRows: 10
                     }
                   },
-                  hidden: "{{ $item.type !== 'custom' }}",
+                  when: "{{ $item.type === 'custom' }}",
                   help: '函数参数：rule, value, callback'
                 },
                 {
@@ -168,7 +168,7 @@ export default {
                       maxRows: 6
                     }
                   },
-                  hidden: "{{ $item.type !== 'jsExpr' }}",
+                  when: "{{ $item.type === 'jsExpr' }}",
                   help: '使用 {{ }} 包裹表达式，返回布尔值'
                 },
                 {

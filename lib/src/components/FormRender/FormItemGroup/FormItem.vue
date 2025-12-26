@@ -1,5 +1,5 @@
 <template>
-  <template v-if="design || !hidden">
+  <template v-if="design || when">
     <FormItem
       v-if="config.type === 'basic' || config.type === 'high'"
       v-show="design || show"
@@ -45,7 +45,7 @@ const { FormItem, Alert, Tooltip } = useUI()
 
 const props = withDefaults(defineProps<FormItemType>(), {
   show: true,
-  hidden: false
+  when: true
 })
 
 const formInstance = useFormInstance()
@@ -66,9 +66,9 @@ const value = computed({
 })
 
 const computeRules = computed(() => {
-  const { rules = [], required, hidden, show } = props as FormItemType
+  const { rules = [], required, show, when } = props as FormItemType
 
-  if (!design.value && (hidden || !show)) {
+  if (!design.value && (!when || !show)) {
     return []
   }
 

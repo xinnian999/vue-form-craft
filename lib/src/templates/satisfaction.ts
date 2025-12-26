@@ -94,7 +94,7 @@ export default {
         placeholder: '请留下您的建议'
       },
       name: 'improvementSuggestions',
-      hidden: '{{ !$values.satisfaction || $values.satisfaction > 3 }}'
+      when: '{{ $values.satisfaction && $values.satisfaction <= 3 }}'
     },
     {
       label: '联系方式',

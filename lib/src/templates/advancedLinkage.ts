@@ -40,15 +40,15 @@ export default {
         },
         {
           target: 'specs',
-          path: 'hidden',
+          path: 'when',
           type: 'attr',
-          value: '{{ !$values.productType }}'
+          value: '{{ $values.productType }}'
         },
         {
           target: 'warranty',
-          path: 'hidden',
+          path: 'when',
           type: 'attr',
-          value: "{{ $values.productType !== 'electronics' }}"
+          value: "{{ $values.productType === 'electronics' }}"
         }
       ]
     },
@@ -68,7 +68,7 @@ export default {
       props: {
         placeholder: '请输入规格'
       },
-      hidden: true
+      when: false
     },
     {
       label: '保修期(月)',
@@ -79,7 +79,7 @@ export default {
         max: 60,
         placeholder: '请输入保修期'
       },
-      hidden: true,
+      when: false,
       help: '仅电子产品需要填写'
     },
     {
@@ -89,9 +89,9 @@ export default {
       linkages: [
         {
           target: 'discount',
-          path: 'hidden',
+          path: 'when',
           type: 'attr',
-          value: '{{ !$values.hasDiscount }}'
+          value: '{{ $values.hasDiscount }}'
         },
         {
           target: 'discount',
@@ -116,7 +116,7 @@ export default {
         max: 99,
         placeholder: '请输入折扣'
       },
-      hidden: true
+      when: false
     },
     {
       label: '原价',

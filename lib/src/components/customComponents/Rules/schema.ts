@@ -82,7 +82,7 @@ export default {
           props: {
             min: 0
           },
-          hidden: "{{ $item.type !== 'min' }}"
+          when: "{{ $item.type === 'min' }}"
         },
         {
           label: '最大值',
@@ -92,7 +92,7 @@ export default {
             placeholder: '请输入最大长度',
             min: 0
           },
-          hidden: "{{ $item.type !== 'max' }}"
+          when: "{{ $item.type === 'max' }}"
         },
         {
           label: '正则表达式',
@@ -104,7 +104,7 @@ export default {
               '根据字段「{{$item.message || $values.label || "该字段"}}」的含义，生成一个合适的 JS 正则表达式字符串，不要加 / 包裹，只返回纯正则字符串。'
           },
           labelAlign: 'top',
-          hidden: "{{ $item.type !== 'pattern' }}",
+          when: "{{ $item.type === 'pattern' }}",
           help: '输入正则表达式字符串，不需要包含斜杠'
         },
         {
@@ -177,7 +177,7 @@ export default {
               }
             ]
           },
-          hidden: "{{ $item.type !== 'builtin' }}",
+          when: "{{ $item.type === 'builtin' }}",
           help: '使用 async-validator 内置类型校验'
         },
         {
@@ -191,7 +191,7 @@ export default {
               maxRows: 6
             }
           },
-          hidden: "{{ $item.type !== 'enum' }}",
+          when: "{{ $item.type === 'enum' }}",
           help: '每行输入一个可选值'
         },
         {
@@ -206,7 +206,7 @@ export default {
               maxRows: 10
             }
           },
-          hidden: "{{ $item.type !== 'custom' }}",
+          when: "{{ $item.type === 'custom' }}",
           help: '函数参数：rule, value, callback'
         },
         {
@@ -219,7 +219,7 @@ export default {
               maxRows: 6
             }
           },
-          hidden: "{{ $item.type !== 'jsExpr' }}",
+          when: "{{ $item.type === 'jsExpr' }}",
           help: '使用 {{ }} 包裹表达式，返回布尔值'
         },
         {

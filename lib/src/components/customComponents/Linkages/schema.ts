@@ -27,7 +27,7 @@ export default {
             mode: 'static',
             options: '{{ nodeOptions }}'
           }
-      },
+        },
         {
           label: '触发条件',
           name: 'condition',
@@ -88,8 +88,8 @@ export default {
                 value: 'props.disabled'
               },
               {
-                label: '隐藏状态',
-                value: 'hidden'
+                label: '渲染状态',
+                value: 'when'
               },
               {
                 label: '可见状态',
@@ -109,7 +109,7 @@ export default {
               }
             ]
           },
-          hidden: "{{ $item.type !== 'attr' }}"
+          when: "{{ $item.type === 'attr' }}"
         },
         {
           label: '自定义属性',
@@ -118,7 +118,7 @@ export default {
           props: {
             clearable: true
           },
-          hidden: "{{  $item.path !== 'custom' }}"
+          when: "{{  $item.path === 'custom' }}"
         },
         {
           label: '值',
@@ -131,20 +131,20 @@ export default {
             },
             clearable: true
           },
-          hidden: "{{ $item.type !== 'data' }}"
-      },
+          when: "{{ $item.type === 'data' }}"
+        },
         {
-          label: '隐藏状态',
+          label: '渲染状态',
           name: 'value',
           component: 'Radio',
           props: {
             options: [
-              { label: '隐藏', value: true },
-              { label: '不隐藏', value: false }
+              { label: '渲染', value: true },
+              { label: '不渲染', value: false }
             ]
           },
-          hidden: "{{ $item.path !== 'hidden' }}"
-      },
+          when: "{{ $item.path === 'when' }}"
+        },
         {
           label: '可见状态',
           name: 'value',
@@ -155,8 +155,8 @@ export default {
               { label: '不可见', value: false }
             ]
           },
-          hidden: '{{ $item.path !== "show" }}'
-      },
+          when: '{{ $item.path === "show" }}'
+        },
         {
           label: '禁用状态',
           name: 'value',
@@ -167,8 +167,8 @@ export default {
               { label: '不禁用', value: false }
             ]
           },
-          hidden: '{{ $item.path !== "props.disabled" }}'
-      },
+          when: '{{ $item.path === "props.disabled" }}'
+        },
         {
           label: '必填状态',
           name: 'value',
@@ -179,8 +179,8 @@ export default {
               { label: '非必填', value: false }
             ]
           },
-          hidden: "{{ $item.path !== 'required' }}"
-      },
+          when: "{{ $item.path === 'required' }}"
+        },
         {
           label: '提示',
           name: 'value',
@@ -189,8 +189,8 @@ export default {
             clearable: true,
             autosize: true
           },
-          hidden: "{{ $item.path !== 'alert' }}"
-      },
+          when: "{{ $item.path === 'alert' }}"
+        },
         {
           label: '值',
           name: 'value',
@@ -202,9 +202,8 @@ export default {
             },
             clearable: true
           },
-          hidden:
-            "{{ $item.path === 'show' || $item.path === 'hidden' || $item.path === 'required' || $item.path === 'alert' || $item.path === 'props.disabled' || $item.type !== 'attr' }}"
-      }
+          when: "{{ $item.path !== 'show' && $item.path !== 'when' && $item.path !== 'required' && $item.path !== 'alert' && $item.path !== 'props.disabled' && $item.type === 'attr' }}"
+        }
       ]
     }
   ]
