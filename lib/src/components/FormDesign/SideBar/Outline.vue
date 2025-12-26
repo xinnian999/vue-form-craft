@@ -65,7 +65,7 @@ const treeData = computed(() => {
 })
 
 const currentNodeKey = computed(() => {
-  return designInstance?.currentKey || 'root'
+  return designInstance?.getCurrentKey() || 'root'
 })
 
 const handleNodeClick = (data: any) => {

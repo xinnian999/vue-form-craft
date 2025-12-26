@@ -60,6 +60,10 @@ const props = defineProps<{
 
 const emit = defineEmits(['node-click'])
 
+defineSlots<{
+  default(props: { node: any; data: any }): any
+}>()
+
 const expanded = ref(props.defaultExpandAll)
 
 const hasChildren = computed(() => {

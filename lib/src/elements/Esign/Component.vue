@@ -84,7 +84,7 @@ const actionSchema: FormSchema = {
         { label: '画笔颜色', component: 'ColorPicker', name: 'lineColor' },
         { label: '画板背景色', component: 'ColorPicker', name: 'bgColor' }
       ],
-      props: {
+      componentProps: {
         align: 'left',
         gap: 20
       },
