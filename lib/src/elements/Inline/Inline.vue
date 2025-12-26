@@ -2,7 +2,7 @@
   <FormItemGroup
     class="form-item-inline"
     :style="InlineStyle"
-    :list="formItemProps.children || []"
+    :list="formItemProps.items || []"
     :designKey="formItemProps.designKey!"
   />
 </template>

@@ -12,18 +12,18 @@ export default {
     size: 'small',
     labelAlign: 'top',
     initialValues: {
-      children: [
+      items: [
         {
           label: '选项卡1',
           name: 'name1',
           component: 'TabPane',
-          children: []
+          items: []
         },
         {
           label: '选项卡2',
           name: 'name2',
           component: 'TabPane',
-          children: []
+          items: []
         }
       ],
       componentProps: {
@@ -39,7 +39,7 @@ export default {
         name: 'componentProps.defaultKey',
         componentProps: {
           mode: 'static',
-          options: '{{$values.children}}',
+          options: '{{$values.items}}',
           labelKey: 'label',
           valueKey: 'name'
         }
@@ -75,7 +75,7 @@ export default {
       {
         label: '子选项卡配置',
         component: 'FormList',
-        children: [
+        items: [
           {
             label: '标题',
             component: 'Input',
@@ -115,7 +115,7 @@ export default {
           getNewItem:
             '{{ (index) => { return { label: "选项卡" + index, name: "name" + index } } }}'
         },
-        name: 'children'
+        name: 'items'
       }
     ]
   }

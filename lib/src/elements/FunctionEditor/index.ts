@@ -31,7 +31,7 @@ export default {
           mode: 'table',
           title: '参数提示'
         },
-        children: [
+        items: [
           {
             label: '参数名',
             name: 'name',

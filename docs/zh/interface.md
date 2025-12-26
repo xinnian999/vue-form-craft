@@ -39,7 +39,7 @@ interface FormItemType {
   required?: boolean // 是否必填
   initialValue?: any // 默认值
   help?: string // 提示信息
-  children?: FormItemType[] // 子项配置，嵌套组件专用
+  items?: FormItemType[] // 子项配置，嵌套组件专用
   hidden?: boolean | string // 是否隐藏
   designKey?: string // 设计器用的key，会自动生成
   rules?: FormRule[] // 校验规则，input组件专用

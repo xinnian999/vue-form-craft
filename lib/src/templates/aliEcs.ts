@@ -17,7 +17,7 @@ export default {
       componentProps: {
         header: ''
       },
-      children: [
+      items: [
         {
           label: '付费类型',
           name: 'payType',

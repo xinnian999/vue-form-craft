@@ -24,7 +24,7 @@ export default {
     { label: '字段说明', component: 'TextArea', name: 'help' },
     {
       component: 'Grid',
-      children: [
+      items: [
         { label: '是否必填', component: 'Switch', name: 'required' },
         { label: '是否禁用', component: 'Switch', name: 'componentProps.disabled' },
         { label: '渲染字段', component: 'Switch', name: 'when', defaultValue: '{{ true }}' }

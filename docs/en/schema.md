@@ -67,5 +67,5 @@ After understanding the simple example above, here are all the optional configur
 | help         | `string`         | -       | Help information for the form item                                                 |
 | hidden       | `boolean`        | false   | Whether to hide the form item                                                      |
 | rules        | `FormRule[]`     | -       | Validation rules for the form item, specific to the Input component                |
-| children     | `FormItemType[]` | -       | Data for nested form items, used for containers, cards, grids, etc.                |
+| items     | `FormItemType[]` | -       | Data for nested form items, used for containers, cards, grids, etc.                |
 | change       | `FormChange[]`   | -       | Configuration for triggering actions when the value of the form item changes       |

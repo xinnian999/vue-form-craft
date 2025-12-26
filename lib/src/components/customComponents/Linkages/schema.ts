@@ -17,7 +17,7 @@ export default {
         getNewItem: '{{ () => { return { type: "attr"} } }}'
       },
       labelAlign: 'top',
-      children: [
+      items: [
         {
           label: '目标字段',
           name: 'target',

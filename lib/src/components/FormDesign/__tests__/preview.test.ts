@@ -74,7 +74,7 @@ describe('《表单设计器》预览功能测试', async () => {
     expect(JSON.stringify(currentSchema)).toBe(JSON.stringify(originalSchema))
 
     // 验证原始schema中的payType字段没有alert属性（初始状态）
-    const payTypeItem = currentSchema.items?.[0]?.children?.[0]
+    const payTypeItem = currentSchema.items?.[0]?.items?.[0]
     expect(payTypeItem?.name).toBe('payType')
     expect(payTypeItem?.alert).toBeUndefined()
   })

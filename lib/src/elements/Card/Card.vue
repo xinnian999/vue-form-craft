@@ -2,7 +2,7 @@
   <Card v-bind="$attrs">
     <FormItemGroup
       style="min-height: 150px"
-      :list="formItemProps.children || []"
+      :list="formItemProps.items || []"
       :designKey="formItemProps.designKey!"
     />
   </Card>

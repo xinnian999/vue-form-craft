@@ -10,12 +10,12 @@ export const generateName = () => {
   return `form-${getRandomId(4)}`
 }
 
-const copyChildren = (children: FormItemType[]) => {
-  return children.map((child) => {
-    const data = { ...cloneDeep(child), designKey: `form-${getRandomId(4)}`, name: getRandomId(8) }
+const copyItemsRecursive = (items: FormItemType[]) => {
+  return items.map((item) => {
+    const data = { ...cloneDeep(item), designKey: `form-${getRandomId(4)}`, name: getRandomId(8) }
 
-    if (child.children) {
-      data.children = copyChildren(child.children)
+    if (item.items) {
+      data.items = copyItemsRecursive(item.items)
     }
 
     return data
@@ -24,8 +24,8 @@ const copyChildren = (children: FormItemType[]) => {
 
 export const copyItems = (list: FormItemType[], id: string): FormItemType[] => {
   return list.reduce<FormItemType[]>((all, current) => {
-    if (current.children) {
-      all.push({ ...current, children: copyItems(current.children, id) })
+    if (current.items) {
+      all.push({ ...current, items: copyItems(current.items, id) })
     } else {
       all.push(current)
     }
@@ -36,8 +36,8 @@ export const copyItems = (list: FormItemType[], id: string): FormItemType[] => {
         designKey: generateDesignKey(),
         name: generateName()
       }
-      if (current.children) {
-        newItem.children = copyChildren(current.children)
+      if (current.items) {
+        newItem.items = copyItemsRecursive(current.items)
       }
       if (current.label && !newItem.label?.includes('copy')) {
         newItem.label = newItem.label + ' copy'
@@ -78,8 +78,8 @@ export const repirJsonSchema = (schema: FormSchema) => {
     return items.map((item) => {
       const node: FormItemType = repirNode(item)
 
-      if (node.children) {
-        node.children = repirItems(node.children)
+      if (node.items) {
+        node.items = repirItems(node.items)
       }
 
       return node
@@ -100,8 +100,8 @@ export const removeDesignKeys = (schema: FormSchema): FormSchema => {
       const { designKey, ...rest } = item
       const newItem: FormItemType = { ...rest }
 
-      if (newItem.children) {
-        newItem.children = removeFromItems(newItem.children)
+      if (newItem.items) {
+        newItem.items = removeFromItems(newItem.items)
       }
 
       return newItem

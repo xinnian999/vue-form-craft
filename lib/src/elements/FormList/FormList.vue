@@ -135,7 +135,7 @@ const formInstance = useFormInstance()
 // 使用 computed 包装 getter 方法，保持响应式
 const design = computed(() => formInstance?.getDesign() ?? false)
 
-const fields = computed(() => props.formItemProps?.children || [])
+const fields = computed(() => props.formItemProps?.items || [])
 
 const parseFields = (index: number) => {
   const currentItem = list.value[index]

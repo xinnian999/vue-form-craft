@@ -15,7 +15,7 @@ export default {
       componentProps: {
         header: '卡片'
       },
-      children: []
+      items: []
     },
     items: [
       { label: '唯一标识', component: 'Input', name: 'name' },

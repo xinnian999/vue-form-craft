@@ -129,7 +129,7 @@ export default {
     { label: '初始值', component: 'Input', name: 'initialValue' },
     {
       component: 'Grid',
-      children: [
+      items: [
         { label: '是否必填', component: 'Switch', name: 'required' },
         { label: '是否禁用', component: 'Switch', name: 'componentProps.disabled' },
         { label: '隐藏字段', component: 'Switch', name: 'hidden' }
@@ -157,7 +157,7 @@ export default {
       label: '静态选项',
       name: 'componentProps.data',
       component: 'FormList',
-      children: [
+      items: [
         {
           label: '选项名',
           name: 'label',

@@ -18,12 +18,12 @@ describe('getDataByPath 和 setDataByPath 数组索引支持', () => {
     it('应该支持嵌套数组', () => {
       const obj = {
         items: [
-          { children: [{ name: 'a' }, { name: 'b' }] },
-          { children: [{ name: 'c' }] }
+          { items: [{ name: 'a' }, { name: 'b' }] },
+          { items: [{ name: 'c' }] }
         ]
       }
-      expect(getDataByPath(obj, 'items[0].children[1].name')).toBe('b')
-      expect(getDataByPath(obj, 'items[1].children[0].name')).toBe('c')
+      expect(getDataByPath(obj, 'items[0].items[1].name')).toBe('b')
+      expect(getDataByPath(obj, 'items[1].items[0].name')).toBe('c')
     })
 
     it('应该在路径无效时返回 undefined', () => {
@@ -65,11 +65,11 @@ describe('getDataByPath 和 setDataByPath 数组索引支持', () => {
     it('应该支持嵌套数组', () => {
       const obj = {
         items: [
-          { children: [{ name: 'a' }] }
+          { items: [{ name: 'a' }] }
         ]
       }
-      const result = setDataByPath(obj, 'items[0].children[1].name', 'b')
-      expect(result.items[0].children[1].name).toBe('b')
+      const result = setDataByPath(obj, 'items[0].items[1].name', 'b')
+      expect(result.items[0].items[1].name).toBe('b')
     })
 
     it('应该自动创建不存在的数组和对象', () => {

@@ -7,7 +7,7 @@ export default {
   size: 'small',
   submitBtn: true,
   initialValues: {
-    children: [],
+    items: [],
     componentProps: {
       mode: 'table',
       title: '数据',
@@ -47,7 +47,7 @@ export default {
         'row-gap': 20,
         'column-gap': 20
       },
-      children: [
+      items: [
         {
           label: '是否必填',
           name: 'required',

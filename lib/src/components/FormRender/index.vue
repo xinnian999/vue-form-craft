@@ -127,7 +127,7 @@ const setFieldAttr: FormInstance['setFieldAttr'] = (name, path, value) => {
         Object.assign(item, updated)
         return true
       }
-      if (item.children && findAndUpdate(item.children)) {
+      if (item.items && findAndUpdate(item.items)) {
         return true
       }
     }

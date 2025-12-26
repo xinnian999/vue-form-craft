@@ -58,8 +58,8 @@ const breadcrumbPath = computed(() => {
         return true
       }
 
-      if (item.children && item.children.length > 0) {
-        if (findPath(item.children, targetKey, newPath)) {
+      if (item.items && item.items.length > 0) {
+        if (findPath(item.items, targetKey, newPath)) {
           return true
         }
       }

@@ -122,7 +122,7 @@
 - **help**: `string`，提示信息
 - **when**: `boolean`，默认 `true`，是否渲染（v-if）
 - **rules**: `RuleItem[]`，自定义校验规则
-- **children**: `FormItemType[]`，子表单项，用于嵌套组件（如卡片、栅格、自增容器）
+- **items**: `FormItemType[]`，子表单项，用于嵌套组件（如卡片、栅格、自增容器）
 - **linkages**: `FormLinkage[]`，联动配置
 - **designKey**: `string`，表单设计器的标识 key，自动生成
 
@@ -256,7 +256,7 @@
     "mode": "card",
     "title": "用户列表"
   },
-  "children": [
+  "items": [
     {
       "label": "用户类型",
       "component": "Select",

@@ -34,7 +34,7 @@ export default {
     {
       label: '增添用户',
       component: 'FormList',
-      children: [
+      items: [
         {
           label: '用户名',
           component: 'Input',

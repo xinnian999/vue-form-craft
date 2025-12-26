@@ -40,8 +40,8 @@ const buildTreeData = (items: FormItemType[] = []): any[] => {
     }
 
     // 如果有子节点,递归处理
-    if (item.children && item.children.length > 0) {
-      node.children = buildTreeData(item.children)
+    if (item.items && item.items.length > 0) {
+      node.children = buildTreeData(item.items)
     }
 
     return node

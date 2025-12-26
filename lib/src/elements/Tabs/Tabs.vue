@@ -8,7 +8,7 @@
         :name="tab.name"
         :lazy="tab.componentProps?.lazy"
       >
-        <FormItemGroup :list="tab.children!" :designKey="tab.designKey!" />
+        <FormItemGroup :list="tab.items!" :designKey="tab.designKey!" />
       </TabPane>
     </Tabs>
 
@@ -51,7 +51,7 @@ const props = defineProps<
   }
 >()
 
-const children = computed(() => props.formItemProps.children || [])
+const children = computed(() => props.formItemProps.items || [])
 
 const activeKey = ref<string>(props.defaultKey)
 
@@ -95,14 +95,14 @@ if (design.value) {
             return tab.name
           }
 
-          // 递归查找tab的children
-          const findInChildren = (children: FormItemType[]): boolean => {
-            for (const child of children) {
-              if (child.designKey === designKey) {
+          // 递归查找tab的items
+          const findInItems = (items: FormItemType[]): boolean => {
+            for (const item of items) {
+              if (item.designKey === designKey) {
                 return true
               }
-              if (child.children && child.children.length > 0) {
-                if (findInChildren(child.children)) {
+              if (item.items && item.items.length > 0) {
+                if (findInItems(item.items)) {
                   return true
                 }
               }
@@ -110,8 +110,8 @@ if (design.value) {
             return false
           }
 
-          // 如果在当前tab的children中找到了
-          if (tab.children && findInChildren(tab.children)) {
+          // 如果在当前tab的items中找到了
+          if (tab.items && findInItems(tab.items)) {
             return tab.name
           }
         }

@@ -16,7 +16,7 @@ export default {
         tabPosition: 'top',
         type: 'card'
       },
-      children: [
+      items: [
         {
           label: '属性',
           name: 'attrs',
@@ -24,7 +24,7 @@ export default {
           componentProps: {
             lazy: true
           },
-          children: [
+          items: [
             {
               label: '标签宽度（px）',
               name: 'labelWidth',
@@ -34,7 +34,7 @@ export default {
                 step: 10
               },
               defaultValue: 150
-      },
+            },
             {
               label: 'label对齐方式',
               name: 'labelAlign',
@@ -57,7 +57,7 @@ export default {
                 ]
               },
               defaultValue: 'right'
-      },
+            },
             {
               label: '表单组件尺寸',
               name: 'size',
@@ -80,7 +80,7 @@ export default {
                 ]
               },
               defaultValue: 'default'
-      },
+            },
             {
               label: '表单初始值',
               name: 'initialValues',
@@ -88,7 +88,7 @@ export default {
               componentProps: {
                 componentName: 'FormDesign-InitialValues'
               }
-      },
+            },
             {
               label: '全局样式',
               name: 'styleBlock',
@@ -96,22 +96,22 @@ export default {
               componentProps: {
                 componentName: 'FormDesign-GlobalStyle'
               }
-      },
+            },
             {
               label: '禁用表单',
               name: 'disabled',
               component: 'Switch'
-      },
+            },
             {
               label: '显示冒号',
               name: 'colon',
               component: 'Switch'
-      },
+            },
             {
               label: '隐藏必填星号',
               name: 'hideRequiredAsterisk',
               component: 'Switch'
-      },
+            },
             {
               label: '自动滚动到校验失败的第一项',
               name: 'scrollToError',
@@ -123,12 +123,12 @@ export default {
               label: '表单提交按钮',
               name: 'submitBtn',
               component: 'Switch'
-      },
+            },
             {
               label: '表单重置按钮',
               name: 'resetBtn',
               component: 'Switch'
-      }
+            }
           ]
         },
         {
@@ -138,7 +138,7 @@ export default {
           componentProps: {
             lazy: true
           },
-          children: [
+          items: [
             {
               label: '表单数据变化时（change）',
               name: 'onChange',
@@ -147,7 +147,7 @@ export default {
               componentProps: {
                 paramTips: [{ name: 'values', description: '当前表单数据' }]
               }
-      },
+            },
             {
               label: '表单提交成功时（finish）',
               name: 'onFinish',
@@ -156,7 +156,7 @@ export default {
               componentProps: {
                 paramTips: [{ name: 'values', description: '提交成功时的表单数据' }]
               }
-      },
+            },
             {
               label: '表单提交失败时（failed）',
               name: 'onFailed',
@@ -165,7 +165,7 @@ export default {
               componentProps: {
                 paramTips: [{ name: 'error', description: '校验失败的错误对象' }]
               }
-      },
+            },
             {
               label: '表单重置时（reset）',
               name: 'onReset',
@@ -174,7 +174,7 @@ export default {
               componentProps: {
                 paramTips: []
               }
-      },
+            },
             {
               label: '字段数据改变时（fieldChange）',
               name: 'onFieldChange',
@@ -186,7 +186,7 @@ export default {
                   { name: 'value', description: '字段新值' }
                 ]
               }
-      },
+            },
             {
               label: '表单验证时（validate）',
               name: 'onValidate',
@@ -199,7 +199,7 @@ export default {
                   { name: 'message', description: '校验消息' }
                 ]
               }
-      }
+            }
           ]
         },
         {
@@ -209,7 +209,7 @@ export default {
           componentProps: {
             lazy: true
           },
-          children: [
+          items: [
             {
               label: '',
               name: 'style',

@@ -24,7 +24,7 @@ export default {
         title: '校验规则'
       },
       // labelAlign: 'top',
-      children: [
+      items: [
         {
           label: '规则类型',
           name: 'type',

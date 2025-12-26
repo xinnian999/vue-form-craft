@@ -75,7 +75,7 @@ const actionSchema: FormSchema = {
   items: [
     {
       component: 'Inline',
-      children: [
+      items: [
         {
           label: '画笔粗细',
           component: 'InputNumber',

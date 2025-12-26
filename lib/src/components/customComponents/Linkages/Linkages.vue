@@ -32,8 +32,8 @@ const nodeOptions = computed(() => {
         value: node.name
       })
 
-      if (node.children) {
-        getNodes(node.children)
+      if (node.items) {
+        getNodes(node.items)
       }
     })
   }

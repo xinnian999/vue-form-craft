@@ -109,7 +109,7 @@ export default {
     { label: '初始值', component: 'Input', name: 'initialValue' },
     {
       component: 'Grid',
-      children: [
+      items: [
         { label: '是否必填', component: 'Switch', name: 'required' },
         { label: '是否只读', component: 'Switch', name: 'componentProps.readonly' },
         { label: '是否禁用', component: 'Switch', name: 'componentProps.disabled' },

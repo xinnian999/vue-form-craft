@@ -84,7 +84,7 @@ const list = computed(() => {
     return rootList || []
   }
   console.log(props, designInstance.getSchema())
-  return designInstance.getNodeByKey(props.designKey)?.children || []
+  return designInstance.getNodeByKey(props.designKey)?.items || []
 })
 
 // 拖入后回调

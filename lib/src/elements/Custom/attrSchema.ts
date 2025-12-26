@@ -15,7 +15,7 @@ export default {
         tabPosition: 'top',
         type: 'card'
       },
-      children: [
+      items: [
         {
           label: '属性',
           name: 'attrs',
@@ -23,7 +23,7 @@ export default {
           componentProps: {
             lazy: true
           },
-          children: [
+          items: [
             {
               name: '.',
               component: 'Custom',
@@ -47,7 +47,7 @@ export default {
           componentProps: {
             lazy: true
           },
-          children: [
+          items: [
             {
               name: '.',
               component: 'Custom',
@@ -65,7 +65,7 @@ export default {
           componentProps: {
             lazy: true
           },
-          children: [
+          items: [
             {
               name: '.',
               component: 'Custom',

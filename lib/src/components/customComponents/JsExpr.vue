@@ -86,8 +86,8 @@ const extractFieldNames = (items: any[]): string[] => {
       if (item.name) {
         names.push(item.name)
       }
-      if (item.children && Array.isArray(item.children)) {
-        traverse(item.children)
+      if (item.items && Array.isArray(item.items)) {
+        traverse(item.items)
       }
     })
   }

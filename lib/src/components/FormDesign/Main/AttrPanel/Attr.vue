@@ -67,7 +67,7 @@ const attrSchema = computed<FormSchema>(() => {
                 componentName: 'FormDesign-JsExpr'
               }
             : item.componentProps,
-          children: item.children && parseItems(item.children)
+          items: item.items && parseItems(item.items)
         }
       })
     }

@@ -2,12 +2,12 @@
   <div>
     <Collapse v-bind="$attrs" v-model="activeKey">
       <CollapseItem
-        v-for="item in formItemProps.children"
+        v-for="item in formItemProps.items"
         :key="item.name"
         :title="item.label"
         :name="item.name"
       >
-        <FormItemGroup :list="item.children!" :designKey="item.designKey!" />
+        <FormItemGroup :list="item.items!" :designKey="item.designKey!" />
       </CollapseItem>
     </Collapse>
   </div>
@@ -25,7 +25,7 @@ const props = defineProps<ComponentBaseProps>()
 
 // 直接在初始化时设置默认展开的面板
 const activeKey = ref<string[]>(
-  props.formItemProps.children
+  props.formItemProps.items
     ?.filter((item) => item.componentProps?.checked)
     .map((item) => item.name) || []
 )

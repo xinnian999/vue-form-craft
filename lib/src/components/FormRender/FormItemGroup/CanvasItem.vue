@@ -64,7 +64,7 @@ const canvasItemClass = computed(() => {
     [ns('canvas-item')]: true,
     active: props.data.designKey === currentKey.value,
     hover: props.data.designKey === hoverKey.value,
-    mask: props.data.designKey === hoverKey.value && !props.data.children
+    mask: props.data.designKey === hoverKey.value && !props.data.items
   }
 })
 

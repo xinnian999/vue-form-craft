@@ -40,7 +40,7 @@ export interface FormItemType {
   required?: boolean
   help?: string
   alert?: string
-  children?: FormItemType[]
+  items?: FormItemType[]
   when?: boolean | string
   show?: boolean | string
   rules?: FormRules

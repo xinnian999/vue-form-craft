@@ -7,10 +7,10 @@ const recursionDelete = (
   const data = items.filter(callback)
 
   return data.map((item) => {
-    if (item.children) {
+    if (item.items) {
       return {
         ...item,
-        children: recursionDelete(item.children, callback)
+        items: recursionDelete(item.items, callback)
       }
     }
     return item

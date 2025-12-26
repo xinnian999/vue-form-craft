@@ -12,19 +12,19 @@ export default {
     size: 'small',
     labelAlign: 'top',
     initialValues: {
-      children: [
+      items: [
         {
           label: '面板1',
           name: 'name1',
           component: 'CollapseItem',
           componentProps: { checked: true },
-          children: []
+          items: []
       },
         {
           label: '面板2',
           name: 'name2',
           component: 'CollapseItem',
-          children: []
+          items: []
       }
       ]
     },
@@ -33,7 +33,7 @@ export default {
       {
         label: '子面板配置',
         component: 'FormList',
-        children: [
+        items: [
           {
             label: '标题',
             component: 'Input',
@@ -62,7 +62,7 @@ export default {
           getNewItem:
             '{{ (index) => { return { label: "面板" + index, name: "name" + index, componentProps: { checked: false } } } }}'
         },
-        name: 'children'
+        name: 'items'
       }
     ]
   }

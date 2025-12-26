@@ -70,7 +70,7 @@ export default {
       },
       labelAlign: 'top',
       when: '{{$values.componentProps.mode==="static"}}',
-      children: [
+      items: [
         {
           label: '选项名',
           name: 'label',
@@ -97,7 +97,7 @@ export default {
       componentProps: {},
       labelAlign: 'top',
       when: '{{$values.componentProps.mode!=="static"}}',
-      children: [
+      items: [
         {
           name: 'form-divider-request',
           component: 'Divider',

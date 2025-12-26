@@ -130,8 +130,8 @@ const getNode = (items: FormItemType[], designKey: string): FormItemType | null 
     if (cur.designKey === designKey) {
       return cur
     }
-    if (cur.children) {
-      const res = getNode(cur.children, designKey)
+    if (cur.items) {
+      const res = getNode(cur.items, designKey)
       if (res) return res
     }
 

@@ -50,7 +50,7 @@ export default {
         tabPosition: 'top',
         type: 'card'
       },
-      children: [
+      items: [
         {
           label: '属性',
           name: 'attrs',
@@ -58,7 +58,7 @@ export default {
           componentProps: {
             lazy: true
           },
-          children: [
+          items: [
             {
               name: '.',
               component: 'Custom',
@@ -74,12 +74,12 @@ export default {
               componentProps: {
                 autocomplete: 'new-password'
               }
-      },
+            },
             {
               label: '禁用',
               name: 'componentProps.disabled',
               component: 'Switch'
-      },
+            },
             {
               label: '选择模式',
               name: 'componentProps.multiple',
@@ -88,7 +88,7 @@ export default {
                 activeText: '多选',
                 inactiveText: '单选'
               }
-      },
+            },
             {
               label: '显示完整路径',
               name: 'componentProps.showAllLevels',
@@ -100,14 +100,14 @@ export default {
               label: '显示清除按钮',
               name: 'componentProps.clearable',
               component: 'Switch'
-      }
+            }
           ]
         },
         {
           label: '选项',
           name: 'optionSetting',
           component: 'TabPane',
-          children: [
+          items: [
             {
               name: '.',
               component: 'Custom',
@@ -125,7 +125,7 @@ export default {
           componentProps: {
             lazy: true
           },
-          children: [
+          items: [
             {
               name: '.',
               component: 'Custom',
@@ -143,7 +143,7 @@ export default {
           componentProps: {
             lazy: true
           },
-          children: [
+          items: [
             {
               name: '.',
               component: 'Custom',
@@ -161,7 +161,7 @@ export default {
           componentProps: {
             lazy: true
           },
-          children: [
+          items: [
             {
               label: '数据改变时 (change)',
               name: 'componentProps.onChange',
@@ -177,7 +177,7 @@ export default {
           componentProps: {
             lazy: true
           },
-          children: [
+          items: [
             {
               label: '',
               name: 'componentProps.style',
