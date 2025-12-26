@@ -6,7 +6,7 @@ export default {
   component: 'FunctionEditor',
   render: FunctionEditor,
   icon: 'code',
-  type: 'basic',
+  type: 'high',
   order: 30,
   attrSchema: {
     labelWidth: 110,
@@ -36,12 +36,12 @@ export default {
             label: '参数名',
             name: 'name',
             component: 'Input'
-      },
+          },
           {
             label: '描述',
             name: 'description',
             component: 'TextArea'
-      }
+          }
         ]
       }
     ]

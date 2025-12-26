@@ -7,7 +7,7 @@ export default {
   component: 'FormList',
   render: FormList,
   icon: 'formList',
-  type: 'basic',
-  order: 20,
+  type: 'high',
+  order: 1,
   attrSchema
 } satisfies FormElement

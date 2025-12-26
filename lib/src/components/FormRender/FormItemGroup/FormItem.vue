@@ -1,7 +1,7 @@
 <template>
   <template v-if="design || !hidden">
     <FormItem
-      v-if="config.type === 'basic'"
+      v-if="config.type === 'basic' || config.type === 'high'"
       v-show="design || show"
       :class="classNames"
       :style="style"
@@ -125,16 +125,11 @@ const RenderComponent = () => {
   const componentProps = {
     name: props.name,
     formItemProps: props,
+    modelValue: value.value,
+    'onUpdate:modelValue': (val: any) => {
+      value.value = val
+    },
     ...propsData
-  }
-
-  if (config.value.type === 'basic') {
-    Object.assign(componentProps, {
-      modelValue: value.value,
-      'onUpdate:modelValue': (val: any) => {
-        value.value = val
-      }
-    })
   }
 
   return h(config.value.render, componentProps)

@@ -7,7 +7,7 @@ export default {
   component: 'Custom',
   render: Custom,
   icon: 'custom',
-  type: 'basic',
+  type: 'high',
   order: 99,
   attrSchema
 } satisfies FormElement

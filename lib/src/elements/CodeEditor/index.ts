@@ -6,7 +6,7 @@ export default {
   title: '代码编辑器',
   component: 'CodeEditor',
   icon: 'code',
-  type: 'basic',
+  type: 'high',
   order: 29,
   attrSchema,
   render: CodeEditor

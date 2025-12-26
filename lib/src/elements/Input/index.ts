@@ -3,7 +3,7 @@ import Input from './Input.vue'
 import attrSchema from './inputAttrSchema'
 
 export default {
-  title: '单行输入框',
+  title: '输入框',
   component: 'Input',
   icon: 'input',
   type: 'basic',

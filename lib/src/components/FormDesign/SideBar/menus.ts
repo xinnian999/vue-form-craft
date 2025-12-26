@@ -24,6 +24,10 @@ export default ({ elements, omits }: Params) => {
       children: getChildren('basic')
     },
     {
+      title: '高级组件',
+      children: getChildren('high')
+    },
+    {
       title: '辅助组件',
       children: getChildren('assist')
     }

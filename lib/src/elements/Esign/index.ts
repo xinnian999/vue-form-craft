@@ -7,7 +7,7 @@ export default {
   component: 'Esign',
   render: Component,
   icon: 'esign',
-  type: 'basic',
+  type: 'high',
   order: 19,
   attrSchema
 } satisfies FormElement

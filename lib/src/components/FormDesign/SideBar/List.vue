@@ -36,8 +36,9 @@
       <div v-else :class="ns('no-result')">暂无匹配的组件</div>
     </div>
     <!-- 无搜索时使用折叠面板 -->
-    <Collapse v-else v-model="active">
-      <CollapseItem v-for="{ title, children } in menus" :key="title" :title="title" :name="title">
+    <div v-else>
+      <div v-for="{ title, children } in menus" :key="title" :title="title" :name="title">
+        <div :class="ns('menu-list-title')">{{ title }}</div>
         <draggable
           :class="ns('menu-list')"
           :list="children"
@@ -63,8 +64,8 @@
             </li>
           </template>
         </draggable>
-      </CollapseItem>
-    </Collapse>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -161,8 +162,14 @@ const handleDbClick = (element: FormElement) => {
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
     width: 100%;
-    padding: 5px;
+    // padding: 5px;
     box-sizing: border-box;
+
+    &-title {
+      font-size: 12px;
+      margin: 15px 0px 10px;
+      color: #999;
+    }
 
     &-ghost,
     &-fallback,

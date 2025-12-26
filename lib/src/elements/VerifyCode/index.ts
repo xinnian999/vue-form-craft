@@ -7,7 +7,7 @@ export default {
   component: 'VerifyCode',
   render: Component,
   icon: 'verifyCode',
-  type: 'basic',
+  type: 'high',
   order: 18,
   attrSchema
 } satisfies FormElement
