@@ -26,7 +26,7 @@
       </div>
     </div>
 
-    <FormItem v-bind="data" :props="data.props" />
+    <FormItem v-bind="data" :componentProps="data.componentProps" />
   </div>
 </template>
 

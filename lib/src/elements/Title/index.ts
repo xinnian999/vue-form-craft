@@ -12,7 +12,7 @@ export default {
     size: 'small',
     labelAlign: 'top',
     initialValues: {
-      props: {
+      componentProps: {
         title: '标题',
         type: 'h3'
       }
@@ -20,12 +20,12 @@ export default {
     items: [
       { label: '唯一标识', component: 'Input', name: 'name' },
       { label: '渲染字段', component: 'Switch', name: 'when', defaultValue: '{{ true }}' },
-      { label: '标题内容', component: 'Input', name: 'props.title' },
+      { label: '标题内容', component: 'Input', name: 'componentProps.title' },
       {
         label: '类型',
         component: 'Radio',
-        name: 'props.type',
-        props: {
+        name: 'componentProps.type',
+        componentProps: {
           mode: 'static',
           options: [
             { label: '一级标题', value: 'h1' },
@@ -36,7 +36,7 @@ export default {
           ]
         }
       },
-      { label: '字体倾斜', component: 'Switch', name: 'props.italic' }
+      { label: '字体倾斜', component: 'Switch', name: 'componentProps.italic' }
     ]
   }
 } satisfies FormElement

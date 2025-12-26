@@ -12,14 +12,14 @@ export default {
     size: 'small',
     labelAlign: 'top',
     initialValues: {
-      props: {
+      componentProps: {
         header: '卡片'
       },
       children: []
     },
     items: [
       { label: '唯一标识', component: 'Input', name: 'name' },
-      { label: '卡片标题', component: 'Input', name: 'props.header' }
+      { label: '卡片标题', component: 'Input', name: 'componentProps.header' }
     ]
   }
 } satisfies FormElement

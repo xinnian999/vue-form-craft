@@ -21,7 +21,7 @@ export const futureDatePickerSchema: FormSchema = {
       label: '预约日期',
       component: 'DatePicker',
       name: 'appointmentDate',
-      props: {
+      componentProps: {
         type: 'date',
         placeholder: '只能选择未来日期',
         valueFormat: 'YYYY-MM-DD',

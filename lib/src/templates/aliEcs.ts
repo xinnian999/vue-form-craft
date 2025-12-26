@@ -14,7 +14,7 @@ export default {
     {
       name: 'form-pBQE',
       component: 'Card',
-      props: {
+      componentProps: {
         header: ''
       },
       children: [
@@ -22,7 +22,7 @@ export default {
           label: '付费类型',
           name: 'payType',
           component: 'Radio',
-          props: {
+          componentProps: {
             mode: 'static',
             isButtonOption: true,
             options: [
@@ -73,7 +73,7 @@ export default {
           alert:
             '实例创建之后地域将无法更改，不同地域的实例之间内网互不相通；距离实例所在地域越近，对实例访问速度越快',
           component: 'Radio',
-          props: {
+          componentProps: {
             mode: 'static',
             options: [
               {

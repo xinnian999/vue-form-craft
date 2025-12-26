@@ -20,14 +20,14 @@ export default {
         label: '唯一标识',
         component: 'Input',
         name: 'name',
-        help: "既是唯一标识，也是数据路径。比如输入【props.name】，数据就会保存为 { props: { name:'xxx' } }"
+        help: "既是唯一标识，也是数据路径。比如输入【componentProps.name】，数据就会保存为 { componentProps: { name:'xxx' } }"
       },
       {
         label: '参数提示',
-        name: 'props.paramTips',
+        name: 'componentProps.paramTips',
         component: 'FormList',
         labelAlign: 'top',
-        props: {
+        componentProps: {
           mode: 'table',
           title: '参数提示'
         },

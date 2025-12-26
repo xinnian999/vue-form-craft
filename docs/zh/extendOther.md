@@ -81,15 +81,15 @@ export default {
     {
       label: '占位提示',
       component: 'Input',
-      name: 'props.placeholder'
+      name: 'componentProps.placeholder'
     },
     { label: '初始值', component: 'Input', name: 'initialValue' },
     {
       component: 'Grid',
       children: [
         { label: '是否必填', component: 'Switch', name: 'required' },
-        { label: '是否只读', component: 'Switch', name: 'props.readonly' },
-        { label: '是否禁用', component: 'Switch', name: 'props.disabled' },
+        { label: '是否只读', component: 'Switch', name: 'componentProps.readonly' },
+        { label: '是否禁用', component: 'Switch', name: 'componentProps.disabled' },
         { label: '隐藏字段', component: 'Switch', name: 'hidden' }
       ],
       props: {
@@ -182,11 +182,11 @@ export default {
         title: '校验规则'
       }
     },
-    { label: '显示清除按钮', component: 'Switch', name: 'props.clearable' },
+    { label: '显示清除按钮', component: 'Switch', name: 'componentProps.clearable' },
     {
       label: '最长字数',
       component: 'InputNumber',
-      name: 'props.maxlength'
+      name: 'componentProps.maxlength'
     }
   ]
 } satisfies FormSchema

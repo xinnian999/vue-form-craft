@@ -19,7 +19,7 @@ export default {
       label: '字段标识',
       name: 'name',
       component: 'Input',
-      props: {
+      componentProps: {
         placeholder: '',
         autocomplete: 'new-password',
         clearable: true
@@ -30,7 +30,7 @@ export default {
       label: '标签',
       name: 'label',
       component: 'Input',
-      props: {
+      componentProps: {
         placeholder: '',
         autocomplete: 'new-password',
         clearable: true
@@ -40,7 +40,7 @@ export default {
       label: '标签宽度（px）',
       name: 'labelWidth',
       component: 'InputNumber',
-      props: {
+      componentProps: {
         unit: 'px',
         step: 10
       },
@@ -50,7 +50,7 @@ export default {
       label: '标签位置',
       name: 'labelAlign',
       component: 'Radio',
-      props: {
+      componentProps: {
         mode: 'static',
         options: [
           {
@@ -73,7 +73,7 @@ export default {
       label: '尺寸',
       name: 'size',
       component: 'Radio',
-      props: {
+      componentProps: {
         mode: 'static',
         options: [
           {
@@ -96,7 +96,7 @@ export default {
       label: '提示',
       name: 'alert',
       component: 'TextArea',
-      props: {
+      componentProps: {
         autosize: true,
         clearable: true
       }
@@ -105,7 +105,7 @@ export default {
       label: '气泡提示',
       name: 'help',
       component: 'TextArea',
-      props: {
+      componentProps: {
         placeholder: '',
         autosize: {
           minRows: 2,
@@ -128,12 +128,12 @@ export default {
     },
     {
       label: 'class',
-      name: 'props.class',
+      name: 'componentProps.class',
       component: 'Input'
     },
     {
       label: 'ID',
-      name: 'props.id',
+      name: 'componentProps.id',
       component: 'Input'
     }
   ]

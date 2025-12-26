@@ -16,7 +16,7 @@ describe('FormRender Schema Test', () => {
         {
           label: '用户名',
           component: 'Input',
-          props: {
+          componentProps: {
             placeholder: '请输入用户名',
             clearable: true
           },
@@ -25,7 +25,7 @@ describe('FormRender Schema Test', () => {
         {
           label: '密码',
           component: 'Password',
-          props: {
+          componentProps: {
             placeholder: '请输入密码'
           },
           name: 'password'
@@ -54,7 +54,7 @@ describe('FormRender Schema Test', () => {
         {
           label: '用户名',
           component: 'Input',
-          props: {
+          componentProps: {
             placeholder: '请输入用户名',
             clearable: true
           },
@@ -64,7 +64,7 @@ describe('FormRender Schema Test', () => {
         {
           label: '密码',
           component: 'Password',
-          props: {
+          componentProps: {
             placeholder: '请输入密码'
           },
           name: 'password',
@@ -96,7 +96,7 @@ describe('FormRender Schema Test', () => {
         {
           label: '用户名',
           component: 'Input',
-          props: {
+          componentProps: {
             placeholder: '请输入用户名',
             clearable: true
           },
@@ -106,7 +106,7 @@ describe('FormRender Schema Test', () => {
         {
           label: '密码',
           component: 'Password',
-          props: {
+          componentProps: {
             placeholder: '请输入密码'
           },
           name: 'password',

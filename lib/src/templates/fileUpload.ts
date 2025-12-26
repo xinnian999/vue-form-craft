@@ -10,7 +10,7 @@ export default {
       label: '附件上传',
       name: 'files',
       component: 'Upload',
-      props: {
+      componentProps: {
         action: 'https://jsonplaceholder.typicode.com/posts/',
         multiple: true,
         limit: 3,
@@ -24,7 +24,7 @@ export default {
       label: '说明',
       name: 'desc',
       component: 'TextArea',
-      props: { placeholder: '请填写上传说明（可选）' },
+      componentProps: { placeholder: '请填写上传说明（可选）' },
     }
   ]
 } satisfies FormSchema

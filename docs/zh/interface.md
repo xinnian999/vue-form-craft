@@ -35,7 +35,7 @@ interface FormItemType {
   label?: string // 字段标签
   name: string // 字段唯一标识
   component: string // 使用什么组件
-  props?: object // 传给这个组件的参数
+  componentProps?: object // 传给这个组件的参数
   required?: boolean // 是否必填
   initialValue?: any // 默认值
   help?: string // 提示信息

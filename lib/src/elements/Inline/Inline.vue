@@ -17,10 +17,10 @@ const props = defineProps<ComponentBaseProps>()
 const InlineStyle = computed<StyleValue>(() => ({
   width: '100%',
   display: 'flex',
-  'justify-content': props.formItemProps.props?.align || 'flex-start',
-  'flex-wrap': props.formItemProps.props?.autoWrap ? 'wrap' : 'nowrap',
+  'justify-content': props.formItemProps.componentProps?.align || 'flex-start',
+  'flex-wrap': props.formItemProps.componentProps?.autoWrap ? 'wrap' : 'nowrap',
   'overflow-x': 'auto',
-  gap: `${props.formItemProps.props?.gap || 10}px`
+  gap: `${props.formItemProps.componentProps?.gap || 10}px`
 }))
 </script>
 

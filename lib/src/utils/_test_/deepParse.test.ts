@@ -109,14 +109,14 @@ describe('deepParse - 对象解析', () => {
 
   test('解析嵌套对象', () => {
     const obj = {
-      props: {
+      componentProps: {
         placeholder: '{{ $values.name }}',
         disabled: '{{ $values.age < 18 }}'
       }
     }
     const result = deepParse(obj, { $values: { name: '张三', age: 20 } })
-    expect(result.props.placeholder).toBe('张三')
-    expect(result.props.disabled).toBe(false)
+    expect(result.componentProps.placeholder).toBe('张三')
+    expect(result.componentProps.disabled).toBe(false)
   })
 })
 
@@ -234,7 +234,7 @@ describe('deepParse - 复杂场景', () => {
           label: '姓名',
           name: 'name',
           component: 'Input',
-          props: {
+          componentProps: {
             placeholder: '{{ $values.type === "edit" ? "请修改姓名" : "请输入姓名" }}',
             disabled: '{{ $values.readonly }}'
           },
@@ -251,8 +251,8 @@ describe('deepParse - 复杂场景', () => {
     const result = deepParse(formConfig, context)
 
     expect(result.labelWidth).toBe(150)
-    expect(result.items[0].props.placeholder).toBe('请修改姓名')
-    expect(result.items[0].props.disabled).toBe(false)
+    expect(result.items[0].componentProps.placeholder).toBe('请修改姓名')
+    expect(result.items[0].componentProps.disabled).toBe(false)
     expect(typeof result.items[0].onChange).toBe('function')
     expect(result.items[0].onChange()).toBe('validated')
   })

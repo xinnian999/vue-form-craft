@@ -12,7 +12,7 @@ export default {
     size: 'small',
     labelAlign: 'top',
     initialValues: {
-      props: {
+      componentProps: {
         columns: 2,
         columnGap: 20,
         rowGap: 20
@@ -21,14 +21,14 @@ export default {
     },
     items: [
       { label: '唯一标识', component: 'Input', name: 'name' },
-      { label: '列数', component: 'InputNumber', name: 'props.columns' },
+      { label: '列数', component: 'InputNumber', name: 'componentProps.columns' },
       {
         label: '列间距',
         component: 'InputNumber',
-        name: 'props.columnGap',
-        props: { unit: 'px' }
+        name: 'componentProps.columnGap',
+        componentProps: { unit: 'px' }
       },
-      { label: '行间距', component: 'InputNumber', name: 'props.rowGap', props: { unit: 'px' } }
+      { label: '行间距', component: 'InputNumber', name: 'componentProps.rowGap', componentProps: { unit: 'px' } }
     ]
   }
 } satisfies FormElement

@@ -11,7 +11,7 @@ export default {
       label: '用户名',
       name: 'username',
       component: 'Input',
-      props: {
+      componentProps: {
         placeholder: '请输入用户名',
         maxlength: 20,
         onBlur: `{{ () => {
@@ -31,7 +31,7 @@ export default {
       label: '验证状态',
       name: 'usernameValid',
       component: 'Switch',
-      props: {
+      componentProps: {
         disabled: true,
         activeText: '可用',
         inactiveText: '不可用'
@@ -41,7 +41,7 @@ export default {
       label: '提示信息',
       name: 'tip',
       component: 'Input',
-      props: {
+      componentProps: {
         disabled: true,
         placeholder: '这里会显示验证提示'
       }
@@ -50,7 +50,7 @@ export default {
       label: '省份',
       name: 'province',
       component: 'Select',
-      props: {
+      componentProps: {
         placeholder: '请选择省份',
         mode: 'static',
         options: [
@@ -97,7 +97,7 @@ export default {
       label: '城市',
       name: 'city',
       component: 'Select',
-      props: {
+      componentProps: {
         placeholder: '请先选择省份',
         mode: 'static',
         options: [],
@@ -133,7 +133,7 @@ export default {
       label: '区县',
       name: 'district',
       component: 'Select',
-      props: {
+      componentProps: {
         placeholder: '请先选择城市',
         mode: 'static',
         options: []
@@ -143,7 +143,7 @@ export default {
       label: '单价',
       name: 'price',
       component: 'InputNumber',
-      props: {
+      componentProps: {
         min: 0,
         precision: 2,
         placeholder: '请输入单价',
@@ -159,7 +159,7 @@ export default {
       label: '数量',
       name: 'quantity',
       component: 'InputNumber',
-      props: {
+      componentProps: {
         min: 1,
         placeholder: '请输入数量',
         onChange: `{{ () => {
@@ -174,7 +174,7 @@ export default {
       label: '总价',
       name: 'total',
       component: 'InputNumber',
-      props: {
+      componentProps: {
         disabled: true,
         precision: 2,
         placeholder: '自动计算'
@@ -184,7 +184,7 @@ export default {
       label: '备注',
       name: 'remark',
       component: 'TextArea',
-      props: {
+      componentProps: {
         placeholder: '请输入备注',
         maxlength: 200,
         showWordLimit: true,
@@ -208,7 +208,7 @@ export default {
       label: '备注提示',
       name: 'remarkTip',
       component: 'Input',
-      props: {
+      componentProps: {
         disabled: true,
         placeholder: '根据备注长度自动提示'
       }

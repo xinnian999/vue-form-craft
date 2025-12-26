@@ -17,7 +17,7 @@ export default {
           label: '面板1',
           name: 'name1',
           component: 'CollapseItem',
-          props: { checked: true },
+          componentProps: { checked: true },
           children: []
       },
         {
@@ -37,7 +37,7 @@ export default {
           {
             label: '标题',
             component: 'Input',
-            props: {
+            componentProps: {
               placeholder: '请输入标题'
             },
             name: 'label'
@@ -45,7 +45,7 @@ export default {
           {
             label: '唯一标识',
             component: 'Input',
-            props: {
+            componentProps: {
               placeholder: '请输入唯一标识'
             },
             name: 'name'
@@ -53,14 +53,14 @@ export default {
           {
             label: '默认展开',
             component: 'Switch',
-            name: 'props.checked'
+            name: 'componentProps.checked'
           }
         ],
-        props: {
+        componentProps: {
           mode: 'card',
           title: '折叠面板',
           getNewItem:
-            '{{ (index) => { return { label: "面板" + index, name: "name" + index, props: { checked: false } } } }}'
+            '{{ (index) => { return { label: "面板" + index, name: "name" + index, componentProps: { checked: false } } } }}'
         },
         name: 'children'
       }

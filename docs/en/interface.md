@@ -35,7 +35,7 @@ interface FormItemType {
   label?: string // Field label
   name: string // Unique field identifier
   component: string // Component to use
-  props?: object // Parameters passed to the component
+  componentProps?: object // Parameters passed to the component
   required?: boolean // Whether it is required
   initialValue?: any // Default value
   help?: string // Help information

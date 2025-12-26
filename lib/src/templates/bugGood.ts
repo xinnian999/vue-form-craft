@@ -15,7 +15,7 @@ export default {
       label: '商品选择',
       name: 'product',
       component: 'Radio',
-      props: {
+      componentProps: {
         placeholder: '请选择商品',
         options: [
           {
@@ -41,7 +41,7 @@ export default {
       label: '购买数量',
       name: 'quantity',
       component: 'InputNumber',
-      props: {
+      componentProps: {
         min: 1
       },
       required: true
@@ -50,7 +50,7 @@ export default {
       label: '收货地址',
       name: 'address',
       component: 'Input',
-      props: {
+      componentProps: {
         placeholder: '请输入收货地址'
       },
       required: true
@@ -59,7 +59,7 @@ export default {
       label: '付款方式',
       name: 'paymentMethod',
       component: 'Radio',
-      props: {
+      componentProps: {
         options: [
           {
             label: '支付宝',
@@ -91,7 +91,7 @@ export default {
       label: '商品单价',
       name: 'price',
       component: 'Text',
-      props: {
+      componentProps: {
         text: "{{ $selectData.product ? $selectData.product?.price + '元' : '请选择商品' }}"
       }
       }

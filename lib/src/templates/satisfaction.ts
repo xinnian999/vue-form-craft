@@ -10,7 +10,7 @@ export default {
     {
       label: '您的姓名',
       component: 'Input',
-      props: {
+      componentProps: {
         placeholder: '请输入您的姓名'
       },
       name: 'name',
@@ -19,7 +19,7 @@ export default {
     {
       label: '您的性别',
       component: 'Radio',
-      props: {
+      componentProps: {
         options: [
           {
             label: '男',
@@ -40,7 +40,7 @@ export default {
     {
       label: '您的年龄',
       component: 'InputNumber',
-      props: {
+      componentProps: {
         min: 1,
         max: 120
       },
@@ -50,7 +50,7 @@ export default {
     {
       label: '您对我们的服务满意吗？',
       component: 'Radio',
-      props: {
+      componentProps: {
         options: [
           {
             label: '非常满意',
@@ -90,7 +90,7 @@ export default {
     {
       label: '改进建议',
       component: 'TextArea',
-      props: {
+      componentProps: {
         placeholder: '请留下您的建议'
       },
       name: 'improvementSuggestions',
@@ -99,7 +99,7 @@ export default {
     {
       label: '联系方式',
       component: 'Input',
-      props: {
+      componentProps: {
         placeholder: '请输入您的邮箱或电话'
       },
       name: 'contact',

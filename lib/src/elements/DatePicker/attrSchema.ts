@@ -7,7 +7,7 @@ export default {
   size: 'small',
   submitBtn: false,
   initialValues: {
-    props: {
+    componentProps: {
       type: 'date'
     }
   },
@@ -15,7 +15,7 @@ export default {
     {
       name: 'form-tabs',
       component: 'Tabs',
-      props: {
+      componentProps: {
         defaultKey: 'attrs',
         tabPosition: 'top',
         type: 'card'
@@ -25,52 +25,52 @@ export default {
           label: '属性',
           name: 'attrs',
           component: 'TabPane',
-          props: {
+          componentProps: {
             lazy: true
           },
           children: [
             {
               name: '.',
               component: 'Custom',
-              props: {
+              componentProps: {
                 componentName: 'FormDesign-Basic'
               },
               labelWidth: 0
             },
             {
               label: '禁用',
-              name: 'props.disabled',
+              name: 'componentProps.disabled',
               component: 'Switch'
             },
             {
               label: '占位提示',
-              name: 'props.placeholder',
+              name: 'componentProps.placeholder',
               component: 'Input'
             },
             {
               label: '开始时间-占位提示',
               labelAlign: 'top',
-              name: 'props.startPlaceholder',
+              name: 'componentProps.startPlaceholder',
               component: 'Input',
-              when: '{{ $values.props.type.includes("range") }}'
+              when: '{{ $values.componentProps.type.includes("range") }}'
             },
             {
               label: '结束时间-占位提示',
               labelAlign: 'top',
-              name: 'props.endPlaceholder',
+              name: 'componentProps.endPlaceholder',
               component: 'Input',
-              when: '{{ $values.props.type.includes("range") }}'
+              when: '{{ $values.componentProps.type.includes("range") }}'
             },
             {
               label: '显示清除按钮',
-              name: 'props.clearable',
+              name: 'componentProps.clearable',
               component: 'Switch'
             },
             {
               label: '类型',
-              name: 'props.type',
+              name: 'componentProps.type',
               component: 'Select',
-              props: {
+              componentProps: {
                 mode: 'static',
                 options: [
                   { label: '日期时间', value: 'datetime' },
@@ -86,18 +86,18 @@ export default {
             },
             {
               label: '值格式',
-              name: 'props.value-format',
+              name: 'componentProps.value-format',
               component: 'Input',
-              props: {
+              componentProps: {
                 placeholder: 'YYYY-MM-DD HH:mm:ss'
               },
               help: '绑定值的格式，不指定则绑定值为 Date 对象'
             },
             {
               label: '显示格式',
-              name: 'props.format',
+              name: 'componentProps.format',
               component: 'Input',
-              props: {
+              componentProps: {
                 placeholder: 'YYYY-MM-DD HH:mm:ss'
               },
               help: '显示在输入框中的格式'
@@ -108,14 +108,14 @@ export default {
           label: '校验',
           name: 'rules',
           component: 'TabPane',
-          props: {
+          componentProps: {
             lazy: true
           },
           children: [
             {
               name: '.',
               component: 'Custom',
-              props: {
+              componentProps: {
                 componentName: 'FormDesign-Rules'
               },
               labelWidth: 0
@@ -126,14 +126,14 @@ export default {
           label: '联动',
           name: 'linkages',
           component: 'TabPane',
-          props: {
+          componentProps: {
             lazy: true
           },
           children: [
             {
               name: '.',
               component: 'Custom',
-              props: {
+              componentProps: {
                 componentName: 'FormDesign-Linkages'
               },
               labelWidth: 0
@@ -144,13 +144,13 @@ export default {
           label: '事件',
           name: 'events',
           component: 'TabPane',
-          props: {
+          componentProps: {
             lazy: true
           },
           children: [
             {
               label: '数据改变时 (change)',
-              name: 'props.onChange',
+              name: 'componentProps.onChange',
               component: 'FunctionEditor',
               labelAlign: 'top'
             }
@@ -160,15 +160,15 @@ export default {
           label: '样式',
           name: 'style',
           component: 'TabPane',
-          props: {
+          componentProps: {
             lazy: true
           },
           children: [
             {
               label: '',
-              name: 'props.style',
+              name: 'componentProps.style',
               component: 'Custom',
-              props: {
+              componentProps: {
                 componentName: 'FormDesign-StyleEditor'
               },
               labelWidth: 0

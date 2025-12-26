@@ -6,7 +6,7 @@ export default {
   scrollToError: true,
   size: 'small',
   initialValues: {
-    props: {
+    componentProps: {
       mode: 'remote',
       api: {
         url: '999999',
@@ -17,9 +17,9 @@ export default {
   items: [
     {
       label: '数据模式',
-      name: 'props.mode',
+      name: 'componentProps.mode',
       component: 'Radio',
-      props: {
+      componentProps: {
         mode: 'static',
         options: [
           {
@@ -36,46 +36,46 @@ export default {
       linkages: [
         {
           type: 'data',
-          target: 'props.api.url',
-          condition: "{{ $values.props.mode === 'remote' && !$values.props.api.url}}",
+          target: 'componentProps.api.url',
+          condition: "{{ $values.componentProps.mode === 'remote' && !$values.componentProps.api.url}}",
           value: 'https://apifoxmock.com/m1/5213940-4880280-default/options/test'
         },
         {
           type: 'data',
-          target: 'props.api.method',
-          condition: "{{ $values.props.mode === 'remote' && !$values.props.api.method}}",
+          target: 'componentProps.api.method',
+          condition: "{{ $values.componentProps.mode === 'remote' && !$values.componentProps.api.method}}",
           value: 'GET'
         },
         {
           type: 'data',
-          target: 'props.api',
-          condition: "{{ $values.props.mode === 'static' }}"
+          target: 'componentProps.api',
+          condition: "{{ $values.componentProps.mode === 'static' }}"
         },
         {
           type: 'data',
-          target: 'props.options',
-          condition: "{{ $values.props.mode === 'remote' }}"
+          target: 'componentProps.options',
+          condition: "{{ $values.componentProps.mode === 'remote' }}"
         }
       ]
     },
     {
       label: '静态选项',
-      name: 'props.options',
+      name: 'componentProps.options',
       component: 'FormList',
-      props: {
+      componentProps: {
         mode: 'table',
         title: '选项',
         getNewItem:
           '{{ (index) => {\n  return { label: `选项${index}`,value:`value${index}` }\n} }}'
       },
       labelAlign: 'top',
-      when: '{{$values.props.mode==="static"}}',
+      when: '{{$values.componentProps.mode==="static"}}',
       children: [
         {
           label: '选项名',
           name: 'label',
           component: 'Input',
-          props: {
+          componentProps: {
             placeholder: '请输入...'
           }
         },
@@ -94,29 +94,29 @@ export default {
     {
       name: 'form-remote',
       component: 'Card',
-      props: {},
+      componentProps: {},
       labelAlign: 'top',
-      when: '{{$values.props.mode!=="static"}}',
+      when: '{{$values.componentProps.mode!=="static"}}',
       children: [
         {
           name: 'form-divider-request',
           component: 'Divider',
-          props: {
+          componentProps: {
             title: '请求',
             contentPosition: 'center'
           }
         },
         {
           label: 'url',
-          name: 'props.api.url',
+          name: 'componentProps.api.url',
           component: 'Input',
           labelAlign: 'top'
         },
         {
           label: '请求方式',
-          name: 'props.api.method',
+          name: 'componentProps.api.method',
           component: 'Radio',
-          props: {
+          componentProps: {
             mode: 'static',
             options: [
               {
@@ -141,9 +141,9 @@ export default {
         },
         {
           label: '请求参数',
-          name: 'props.api.params',
+          name: 'componentProps.api.params',
           component: 'CodeEditor',
-          props: {
+          componentProps: {
             height: '150px',
             theme: 'vs-dark',
             language: 'json'
@@ -153,35 +153,35 @@ export default {
         {
           name: 'form-divider-response',
           component: 'Divider',
-          props: {
+          componentProps: {
             title: '响应',
             contentPosition: 'center'
           }
         },
         {
           label: '数据路径',
-          name: 'props.api.dataPath',
+          name: 'componentProps.api.dataPath',
           component: 'Input',
           labelAlign: 'top',
           defaultValue: 'data'
         },
         {
           label: '标签key',
-          name: 'props.api.labelKey',
+          name: 'componentProps.api.labelKey',
           component: 'Input',
           labelAlign: 'top',
           defaultValue: 'label'
         },
         {
           label: '值Key',
-          name: 'props.api.valueKey',
+          name: 'componentProps.api.valueKey',
           component: 'Input',
           labelAlign: 'top',
           defaultValue: 'value'
         },
         {
           label: '禁用Key',
-          name: 'props.api.disabledKey',
+          name: 'componentProps.api.disabledKey',
           component: 'Input',
           labelAlign: 'top',
           defaultValue: 'disabled'

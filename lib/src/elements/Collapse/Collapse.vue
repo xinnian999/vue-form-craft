@@ -25,6 +25,8 @@ const props = defineProps<ComponentBaseProps>()
 
 // 直接在初始化时设置默认展开的面板
 const activeKey = ref<string[]>(
-  props.formItemProps.children?.filter((item) => item.props?.checked).map((item) => item.name) || []
+  props.formItemProps.children
+    ?.filter((item) => item.componentProps?.checked)
+    .map((item) => item.name) || []
 )
 </script>

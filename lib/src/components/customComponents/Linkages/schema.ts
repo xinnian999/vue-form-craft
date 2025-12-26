@@ -11,7 +11,7 @@ export default {
       label: '联动规则',
       name: 'linkages',
       component: 'FormList',
-      props: {
+      componentProps: {
         mode: 'card',
         title: '联动规则',
         getNewItem: '{{ () => { return { type: "attr"} } }}'
@@ -22,7 +22,7 @@ export default {
           label: '目标字段',
           name: 'target',
           component: 'Select',
-          props: {
+          componentProps: {
             clearable: true,
             mode: 'static',
             options: '{{ nodeOptions }}'
@@ -32,7 +32,7 @@ export default {
           label: '触发条件',
           name: 'condition',
           component: 'TextArea',
-          props: {
+          componentProps: {
             autosize: {
               minRows: 2,
               maxRows: 4
@@ -45,7 +45,7 @@ export default {
           label: '修改类型',
           name: 'type',
           component: 'Radio',
-          props: {
+          componentProps: {
             mode: 'static',
             type: 'button',
             options: [
@@ -78,7 +78,7 @@ export default {
           label: '属性',
           name: 'path',
           component: 'Select',
-          props: {
+          componentProps: {
             placeholder: '请选择要修改的配置属性',
             clearable: true,
             mode: 'static',
@@ -115,7 +115,7 @@ export default {
           label: '自定义属性',
           name: 'customPath',
           component: 'Input',
-          props: {
+          componentProps: {
             clearable: true
           },
           when: "{{  $item.path === 'custom' }}"
@@ -124,7 +124,7 @@ export default {
           label: '值',
           name: 'value',
           component: 'TextArea',
-          props: {
+          componentProps: {
             autosize: {
               minRows: 2,
               maxRows: 4
@@ -137,7 +137,7 @@ export default {
           label: '渲染状态',
           name: 'value',
           component: 'Radio',
-          props: {
+          componentProps: {
             options: [
               { label: '渲染', value: true },
               { label: '不渲染', value: false }
@@ -149,7 +149,7 @@ export default {
           label: '可见状态',
           name: 'value',
           component: 'Radio',
-          props: {
+          componentProps: {
             options: [
               { label: '可见', value: true },
               { label: '不可见', value: false }
@@ -161,7 +161,7 @@ export default {
           label: '禁用状态',
           name: 'value',
           component: 'Radio',
-          props: {
+          componentProps: {
             options: [
               { label: '禁用', value: true },
               { label: '不禁用', value: false }
@@ -173,7 +173,7 @@ export default {
           label: '必填状态',
           name: 'value',
           component: 'Radio',
-          props: {
+          componentProps: {
             options: [
               { label: '必填', value: true },
               { label: '非必填', value: false }
@@ -185,7 +185,7 @@ export default {
           label: '提示',
           name: 'value',
           component: 'TextArea',
-          props: {
+          componentProps: {
             clearable: true,
             autosize: true
           },
@@ -195,7 +195,7 @@ export default {
           label: '值',
           name: 'value',
           component: 'TextArea',
-          props: {
+          componentProps: {
             autosize: {
               minRows: 2,
               maxRows: 4

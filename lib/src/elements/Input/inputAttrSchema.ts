@@ -10,7 +10,7 @@ export default {
     {
       name: 'form-2DaW',
       component: 'Tabs',
-      props: {
+      componentProps: {
         defaultKey: 'attrs',
         tabPosition: 'top',
         type: 'card'
@@ -20,45 +20,45 @@ export default {
           label: '属性',
           name: 'attrs',
           component: 'TabPane',
-          props: {
+          componentProps: {
             lazy: true
           },
           children: [
             {
               name: '.',
               component: 'Custom',
-              props: {
+              componentProps: {
                 componentName: 'FormDesign-Basic'
               }
             },
             {
               label: '禁用',
-              name: 'props.disabled',
+              name: 'componentProps.disabled',
               component: 'Switch'
             },
             {
               label: '只读',
-              name: 'props.readonly',
+              name: 'componentProps.readonly',
               component: 'Switch'
             },
             {
               label: '清除按钮',
-              name: 'props.clearable',
+              name: 'componentProps.clearable',
               component: 'Switch'
             },
             {
               label: '占位提示',
-              name: 'props.placeholder',
+              name: 'componentProps.placeholder',
               component: 'Input',
-              props: {
+              componentProps: {
                 autocomplete: 'new-password'
               }
             },
             {
               label: 'AI生成',
-              name: 'props.aiPrompt',
+              name: 'componentProps.aiPrompt',
               component: 'TextArea',
-              props: {
+              componentProps: {
                 placeholder: '请输入AI生成提示词',
                 autosize: true
               }
@@ -69,14 +69,14 @@ export default {
           label: '校验',
           name: 'rules',
           component: 'TabPane',
-          props: {
+          componentProps: {
             lazy: true
           },
           children: [
             {
               name: '.',
               component: 'Custom',
-              props: {
+              componentProps: {
                 componentName: 'FormDesign-Rules'
               },
               labelWidth: 0
@@ -87,14 +87,14 @@ export default {
           label: '联动',
           name: 'linkages',
           component: 'TabPane',
-          props: {
+          componentProps: {
             lazy: true
           },
           children: [
             {
               name: '.',
               component: 'Custom',
-              props: {
+              componentProps: {
                 componentName: 'FormDesign-Linkages'
               },
               labelWidth: 0
@@ -105,37 +105,37 @@ export default {
           label: '事件',
           name: 'events',
           component: 'TabPane',
-          props: {
+          componentProps: {
             lazy: true
           },
           children: [
             {
               label: '数据改变时 (change)',
-              name: 'props.onChange',
+              name: 'componentProps.onChange',
               component: 'FunctionEditor',
               labelAlign: 'top'
             },
             {
               label: '失去焦点时 (blur)',
-              name: 'props.onBlur',
+              name: 'componentProps.onBlur',
               component: 'FunctionEditor',
               labelAlign: 'top'
             },
             {
               label: '获得焦点时 (focus)',
-              name: 'props.onFocus',
+              name: 'componentProps.onFocus',
               component: 'FunctionEditor',
               labelAlign: 'top'
             },
             {
               label: '输入时 (input)',
-              name: 'props.onInput',
+              name: 'componentProps.onInput',
               component: 'FunctionEditor',
               labelAlign: 'top'
             },
             {
               label: '清空时 (clear)',
-              name: 'props.onClear',
+              name: 'componentProps.onClear',
               component: 'FunctionEditor',
               labelAlign: 'top'
             }
@@ -145,15 +145,15 @@ export default {
           label: '样式',
           name: 'style',
           component: 'TabPane',
-          props: {
+          componentProps: {
             lazy: true
           },
           children: [
             {
               label: '',
-              name: 'props.style',
+              name: 'componentProps.style',
               component: 'Custom',
-              props: {
+              componentProps: {
                 componentName: 'FormDesign-StyleEditor'
               },
               labelWidth: 0

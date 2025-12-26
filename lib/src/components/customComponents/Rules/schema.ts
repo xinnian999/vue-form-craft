@@ -11,7 +11,7 @@ export default {
       label: '必填',
       name: 'required',
       component: 'Switch',
-      props: {
+      componentProps: {
         'inline-prompt': false
       }
     },
@@ -19,7 +19,7 @@ export default {
       // label: '校验规则',
       name: 'rules',
       component: 'FormList',
-      props: {
+      componentProps: {
         mode: 'card',
         title: '校验规则'
       },
@@ -29,7 +29,7 @@ export default {
           label: '规则类型',
           name: 'type',
           component: 'Select',
-          props: {
+          componentProps: {
             placeholder: '请选择规则类型',
             mode: 'static',
             options: [
@@ -79,7 +79,7 @@ export default {
           label: '最小值',
           name: 'value',
           component: 'InputNumber',
-          props: {
+          componentProps: {
             min: 0
           },
           when: "{{ $item.type === 'min' }}"
@@ -88,7 +88,7 @@ export default {
           label: '最大值',
           name: 'value',
           component: 'InputNumber',
-          props: {
+          componentProps: {
             placeholder: '请输入最大长度',
             min: 0
           },
@@ -98,7 +98,7 @@ export default {
           label: '正则表达式',
           name: 'value',
           component: 'Input',
-          props: {
+          componentProps: {
             placeholder: '可根据【错误提示】ai生成',
             aiPrompt:
               '根据字段「{{$item.message || $values.label || "该字段"}}」的含义，生成一个合适的 JS 正则表达式字符串，不要加 / 包裹，只返回纯正则字符串。'
@@ -111,7 +111,7 @@ export default {
           label: '内置类型',
           name: 'value',
           component: 'Select',
-          props: {
+          componentProps: {
             placeholder: '请选择内置类型',
             mode: 'static',
             options: [
@@ -184,7 +184,7 @@ export default {
           label: '枚举值',
           name: 'value',
           component: 'TextArea',
-          props: {
+          componentProps: {
             placeholder: '请输入枚举值，每行一个',
             autosize: {
               minRows: 3,
@@ -198,7 +198,7 @@ export default {
           label: '自定义函数体',
           name: 'value',
           component: 'TextArea',
-          props: {
+          componentProps: {
             placeholder:
               'if (value.length < 6) {\n  callback(new Error("长度不足"));\n} else {\n  callback();\n}',
             autosize: {
@@ -213,7 +213,7 @@ export default {
           label: 'JS表达式',
           name: 'value',
           component: 'TextArea',
-          props: {
+          componentProps: {
             autosize: {
               minRows: 2,
               maxRows: 6
@@ -226,7 +226,7 @@ export default {
           label: '错误提示',
           name: 'message',
           component: 'Input',
-          props: {
+          componentProps: {
             placeholder: '请输入校验失败时的提示信息'
           }
         },
@@ -234,7 +234,7 @@ export default {
           label: '触发时机',
           name: 'trigger',
           component: 'Radio',
-          props: {
+          componentProps: {
             mode: 'static',
             options: [
               {

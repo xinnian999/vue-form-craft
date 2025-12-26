@@ -4,7 +4,7 @@ export default {
   size: 'small',
   labelAlign: 'top',
   initialValues: {
-    props: {
+    componentProps: {
       type: 'info',
       title: '提示信息',
       description: '这是一个描述',
@@ -15,19 +15,19 @@ export default {
   items: [
     { label: '唯一标识', component: 'Input', name: 'name' },
     { label: '渲染字段', component: 'Switch', name: 'when', defaultValue: '{{ true }}' },
-    { label: '标题', component: 'Input', name: 'props.title' },
+    { label: '标题', component: 'Input', name: 'componentProps.title' },
     {
       label: '描述',
       component: 'TextArea',
-      name: 'props.description'
+      name: 'componentProps.description'
     },
-    { label: '是否可关闭', component: 'Switch', name: 'props.closable' },
-    { label: '显示图标', component: 'Switch', name: 'props.show-icon' },
+    { label: '是否可关闭', component: 'Switch', name: 'componentProps.closable' },
+    { label: '显示图标', component: 'Switch', name: 'componentProps.show-icon' },
     {
       label: '类型',
       component: 'Radio',
-      name: 'props.type',
-      props: {
+      name: 'componentProps.type',
+      componentProps: {
         mode: 'static',
         options: [
           { label: '成功', value: 'success' },

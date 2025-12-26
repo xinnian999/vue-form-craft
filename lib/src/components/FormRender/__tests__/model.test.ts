@@ -13,7 +13,7 @@ const schema: FormSchema = {
       label: '用户名',
       component: 'Input',
       name: 'username',
-      props: {
+      componentProps: {
         placeholder: '请输入用户名'
       }
     },
@@ -21,7 +21,7 @@ const schema: FormSchema = {
       label: '年龄',
       component: 'InputNumber',
       name: 'age',
-      props: {
+      componentProps: {
         min: 0,
         max: 150
       }
@@ -30,7 +30,7 @@ const schema: FormSchema = {
       label: '性别',
       component: 'Radio',
       name: 'gender',
-      props: {
+      componentProps: {
         options: [
           { label: '男', value: 'male' },
           { label: '女', value: 'female' }
@@ -41,7 +41,7 @@ const schema: FormSchema = {
       label: '爱好',
       component: 'Checkbox',
       name: 'hobbies',
-      props: {
+      componentProps: {
         options: [
           { label: '篮球', value: 'basketball' },
           { label: '足球', value: 'football' },

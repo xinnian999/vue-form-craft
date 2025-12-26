@@ -62,11 +62,11 @@ const attrSchema = computed<FormSchema>(() => {
         return {
           ...item,
           component: isTemplate ? 'Custom' : item.component,
-          props: isTemplate
+          componentProps: isTemplate
             ? {
                 componentName: 'FormDesign-JsExpr'
               }
-            : item.props,
+            : item.componentProps,
           children: item.children && parseItems(item.children)
         }
       })
@@ -85,7 +85,7 @@ const attrSchema = computed<FormSchema>(() => {
         name: 'text',
         labelWidth: 0,
         component: 'Text',
-        props: {
+        componentProps: {
           text: '此节点不支持配置'
         }
       }

@@ -11,7 +11,7 @@ export default {
     {
       name: 'form-code-editor',
       component: 'Tabs',
-      props: {
+      componentProps: {
         defaultKey: 'attrs',
         tabPosition: 'top',
         type: 'card'
@@ -21,23 +21,23 @@ export default {
           label: '属性',
           name: 'attrs',
           component: 'TabPane',
-          props: {
+          componentProps: {
             lazy: true
           },
           children: [
             {
               name: '.',
               component: 'Custom',
-              props: {
+              componentProps: {
                 componentName: 'FormDesign-Basic'
               },
               labelWidth: 0
             },
             {
               label: '编程语言',
-              name: 'props.language',
+              name: 'componentProps.language',
               component: 'Select',
-              props: {
+              componentProps: {
                 placeholder: '请选择编程语言',
                 clearable: true,
                 options: [
@@ -63,9 +63,9 @@ export default {
       },
             {
               label: '主题',
-              name: 'props.theme',
+              name: 'componentProps.theme',
               component: 'Select',
-              props: {
+              componentProps: {
                 placeholder: '请选择主题',
                 clearable: true,
                 options: [
@@ -77,17 +77,17 @@ export default {
       },
             {
               label: '高度',
-              name: 'props.height',
+              name: 'componentProps.height',
               component: 'Input',
-              props: {
+              componentProps: {
                 placeholder: '例如: 300px 或 300'
               }
       },
             {
               label: '字体大小',
-              name: 'props.fontSize',
+              name: 'componentProps.fontSize',
               component: 'InputNumber',
-              props: {
+              componentProps: {
                 min: 12,
                 max: 30,
                 step: 1
@@ -95,9 +95,9 @@ export default {
       },
             {
               label: 'Tab大小',
-              name: 'props.tabSize',
+              name: 'componentProps.tabSize',
               component: 'InputNumber',
-              props: {
+              componentProps: {
                 min: 2,
                 max: 8,
                 step: 1
@@ -105,9 +105,9 @@ export default {
       },
             {
               label: '行号',
-              name: 'props.lineNumbers',
+              name: 'componentProps.lineNumbers',
               component: 'Select',
-              props: {
+              componentProps: {
                 placeholder: '请选择行号显示方式',
                 options: [
                   { label: '显示', value: 'on' },
@@ -119,9 +119,9 @@ export default {
       },
             {
               label: '自动换行',
-              name: 'props.wordWrap',
+              name: 'componentProps.wordWrap',
               component: 'Select',
-              props: {
+              componentProps: {
                 placeholder: '请选择换行方式',
                 options: [
                   { label: '开启', value: 'on' },
@@ -133,12 +133,12 @@ export default {
       },
             {
               label: '显示小地图',
-              name: 'props.minimap',
+              name: 'componentProps.minimap',
               component: 'Switch'
       },
             {
               label: '只读',
-              name: 'props.readOnly',
+              name: 'componentProps.readOnly',
               component: 'Switch'
       }
           ]
@@ -147,14 +147,14 @@ export default {
           label: '校验',
           name: 'rules',
           component: 'TabPane',
-          props: {
+          componentProps: {
             lazy: true
           },
           children: [
             {
               name: '.',
               component: 'Custom',
-              props: {
+              componentProps: {
                 componentName: 'FormDesign-Rules'
               },
               labelWidth: 0
@@ -165,14 +165,14 @@ export default {
           label: '联动',
           name: 'linkages',
           component: 'TabPane',
-          props: {
+          componentProps: {
             lazy: true
           },
           children: [
             {
               name: '.',
               component: 'Custom',
-              props: {
+              componentProps: {
                 componentName: 'FormDesign-Linkages'
               },
               labelWidth: 0
@@ -183,13 +183,13 @@ export default {
           label: '事件',
           name: 'events',
           component: 'TabPane',
-          props: {
+          componentProps: {
             lazy: true
           },
           children: [
             {
               label: '编辑器挂载时 (mount)',
-              name: 'props.onMount',
+              name: 'componentProps.onMount',
               component: 'FunctionEditor',
               labelAlign: 'top'
             }
@@ -199,15 +199,15 @@ export default {
           label: '样式',
           name: 'style',
           component: 'TabPane',
-          props: {
+          componentProps: {
             lazy: true
           },
           children: [
             {
               label: '',
-              name: 'props.style',
+              name: 'componentProps.style',
               component: 'Custom',
-              props: {
+              componentProps: {
                 componentName: 'FormDesign-StyleEditor'
               },
               labelWidth: 0

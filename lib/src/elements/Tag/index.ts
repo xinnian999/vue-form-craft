@@ -12,7 +12,7 @@ export default {
     size: 'small',
     labelAlign: 'top',
     initialValues: {
-      props: {
+      componentProps: {
         text: 'Tag',
         type: 'primary'
       }
@@ -20,12 +20,12 @@ export default {
     items: [
       { label: '唯一标识', component: 'Input', name: 'name' },
       { label: '渲染字段', component: 'Switch', name: 'when', defaultValue: '{{ true }}' },
-      { label: '内容', component: 'Input', name: 'props.text' },
+      { label: '内容', component: 'Input', name: 'componentProps.text' },
       {
         label: '类型',
         component: 'Radio',
-        name: 'props.type',
-        props: {
+        name: 'componentProps.type',
+        componentProps: {
           mode: 'static',
           options: [
             { label: '主题色', value: 'primary' },

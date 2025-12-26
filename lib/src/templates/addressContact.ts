@@ -10,7 +10,7 @@ export default {
       label: '省份',
       name: 'province',
       component: 'Select',
-      props: {
+      componentProps: {
         placeholder: '请选择省份',
         options: [
           { label: '浙江省', value: 'zhejiang' },
@@ -28,7 +28,7 @@ export default {
       label: '城市',
       name: 'city',
       component: 'Select',
-      props: {
+      componentProps: {
         placeholder: '请选择城市',
         options: [
           { label: '杭州', value: 'hangzhou', province: 'zhejiang' },
@@ -51,21 +51,21 @@ export default {
       label: '详细地址',
       name: 'address',
       component: 'Input',
-      props: { placeholder: '{{ $values.city ? "请输入\u8BE6\u7EC6\u5730\u5740" : "请先选择省份/城市" }}' },
+      componentProps: { placeholder: '{{ $values.city ? "请输入\u8BE6\u7EC6\u5730\u5740" : "请先选择省份/城市" }}' },
       required: true,
     },
     {
       label: '联系人',
       name: 'contact',
       component: 'Input',
-      props: { placeholder: '请输入联系人姓名' },
+      componentProps: { placeholder: '请输入联系人姓名' },
       required: true,
     },
     {
       label: '联系电话',
       name: 'phone',
       component: 'Input',
-      props: { placeholder: '请输入联系方式', maxlength: 11 },
+      componentProps: { placeholder: '请输入联系方式', maxlength: 11 },
       rules: [
         { type: 'pattern', value: '^1[3-9]\\d{9}$', message: '请输入有效的手机号', trigger: 'blur' }
       ],

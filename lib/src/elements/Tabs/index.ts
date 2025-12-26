@@ -16,7 +16,7 @@ export default {
         { label: '选项卡1', name: 'name1', component: 'TabPane', children: [] },
         { label: '选项卡2', name: 'name2', component: 'TabPane', children: [] }
       ],
-      props: {
+      componentProps: {
         defaultKey: 'name1',
         tabPosition: 'top'
       }
@@ -26,8 +26,8 @@ export default {
       {
         label: '默认选项卡',
         component: 'Select',
-        name: 'props.defaultKey',
-        props: {
+        name: 'componentProps.defaultKey',
+        componentProps: {
           mode: 'static',
           options: '{{$values.children}}',
           labelKey: 'label',
@@ -37,8 +37,8 @@ export default {
       {
         label: '选项卡风格',
         component: 'Radio',
-        name: 'props.type',
-        props: {
+        name: 'componentProps.type',
+        componentProps: {
           mode: 'static',
           options: [
             { label: '风格1', value: '' },
@@ -50,8 +50,8 @@ export default {
       {
         label: '选项卡所在位置',
         component: 'Radio',
-        name: 'props.tabPosition',
-        props: {
+        name: 'componentProps.tabPosition',
+        componentProps: {
           mode: 'static',
           type: 'button',
           options: [
@@ -69,7 +69,7 @@ export default {
           {
             label: '标题',
             component: 'Input',
-            props: {
+            componentProps: {
               placeholder: '请输入标题'
             },
             name: 'label'
@@ -77,7 +77,7 @@ export default {
           {
             label: '唯一标识',
             component: 'Input',
-            props: {
+            componentProps: {
               placeholder: '请输入唯一标识'
             },
             name: 'name'
@@ -85,7 +85,7 @@ export default {
           {
             label: '禁用',
             component: 'Switch',
-            props: {
+            componentProps: {
               'inline-prompt': false
             },
             name: 'disabled'
@@ -93,13 +93,13 @@ export default {
           {
             label: '懒加载',
             component: 'Switch',
-            props: {
+            componentProps: {
               'inline-prompt': false
             },
-            name: 'props.lazy'
+            name: 'componentProps.lazy'
           }
         ],
-        props: {
+        componentProps: {
           mode: 'card',
           title: '选项卡',
           getNewItem:

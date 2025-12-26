@@ -8,7 +8,7 @@ export default {
   submitBtn: true,
   initialValues: {
     children: [],
-    props: {
+    componentProps: {
       mode: 'table',
       title: '数据',
       minLines: 0,
@@ -27,7 +27,7 @@ export default {
       label: '唯一标识',
       name: 'name',
       component: 'Input',
-      help: "既是唯一标识，也是数据路径。比如输入【props.name】，数据就会保存为 { props: { name:'xxx' } }"
+      help: "既是唯一标识，也是数据路径。比如输入【componentProps.name】，数据就会保存为 { componentProps: { name:'xxx' } }"
     },
     {
       label: '字段说明',
@@ -36,13 +36,13 @@ export default {
     },
     {
       label: '占位提示',
-      name: 'props.placeholder',
+      name: 'componentProps.placeholder',
       component: 'Input'
     },
     {
       name: 'cNmCuu',
       component: 'Grid',
-      props: {
+      componentProps: {
         columns: 3,
         'row-gap': 20,
         'column-gap': 20
@@ -55,7 +55,7 @@ export default {
         },
         {
           label: '是否禁用',
-          name: 'props.disabled',
+          name: 'componentProps.disabled',
           component: 'Switch'
         },
         {
@@ -68,9 +68,9 @@ export default {
     },
     {
       label: '显示模式',
-      name: 'props.mode',
+      name: 'componentProps.mode',
       component: 'Radio',
-      props: {
+      componentProps: {
         mode: 'static',
         options: [
           {
@@ -86,34 +86,34 @@ export default {
     },
     {
       label: '自增前缀',
-      name: 'props.title',
+      name: 'componentProps.title',
       component: 'Input'
     },
     {
       label: '最小行数',
-      name: 'props.minLines',
+      name: 'componentProps.minLines',
       component: 'InputNumber'
     },
     {
       label: '最大行数',
-      name: 'props.maxLines',
+      name: 'componentProps.maxLines',
       component: 'InputNumber'
     },
     {
       label: '允许新增行',
-      name: 'props.allowAdd',
+      name: 'componentProps.allowAdd',
       component: 'Switch'
     },
     {
       label: '允许删除行',
-      name: 'props.allowReduce',
+      name: 'componentProps.allowReduce',
       component: 'Switch'
     },
     {
       label: '新增行的初始数据',
-      name: 'props.getNewItem',
+      name: 'componentProps.getNewItem',
       component: 'FunctionEditor',
-      props: {
+      componentProps: {
         paramTips: [
           {
             name: 'index',

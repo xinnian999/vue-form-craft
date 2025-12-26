@@ -53,7 +53,7 @@ export const repirNode = ({
   label,
   name,
   component,
-  props,
+  componentProps,
   designKey,
   alert,
   ...rest
@@ -64,7 +64,7 @@ export const repirNode = ({
     designKey: designKey || generateDesignKey(),
     alert,
     component,
-    props,
+    componentProps,
     ...rest
   }
 

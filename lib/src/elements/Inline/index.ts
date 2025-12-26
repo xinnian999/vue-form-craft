@@ -12,7 +12,7 @@ export default {
     size: 'small',
     labelAlign: 'top',
     initialValues: {
-      props: {
+      componentProps: {
         align: 'left',
         gap: 20
       },
@@ -23,8 +23,8 @@ export default {
       {
         label: '对齐方式',
         component: 'Radio',
-        name: 'props.align',
-        props: {
+        name: 'componentProps.align',
+        componentProps: {
           mode: 'static',
           options: [
             { label: '左对齐', value: 'left' },
@@ -33,8 +33,8 @@ export default {
           ]
         }
       },
-      { label: '间距大小', component: 'InputNumber', name: 'props.gap', props: { unit: 'px' } },
-      { label: '自动换行', component: 'Switch', name: 'props.autoWrap' }
+      { label: '间距大小', component: 'InputNumber', name: 'componentProps.gap', componentProps: { unit: 'px' } },
+      { label: '自动换行', component: 'Switch', name: 'componentProps.autoWrap' }
     ]
   }
 } satisfies FormElement

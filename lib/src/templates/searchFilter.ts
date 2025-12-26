@@ -10,13 +10,13 @@ export default {
       label: '关键词',
       name: 'keyword',
       component: 'Input',
-      props: { placeholder: '请输入关键词' },
+      componentProps: { placeholder: '请输入关键词' },
     },
     {
       label: '分类',
       name: 'category',
       component: 'Select',
-      props: {
+      componentProps: {
         placeholder: '请选择分类',
         options: [
           { label: '全部', value: '' },
@@ -34,7 +34,7 @@ export default {
       label: '时间范围',
       name: 'dateRange',
       component: 'DatePicker',
-      props: {
+      componentProps: {
         type: 'daterange',
         'start-placeholder': '开始日期',
         'end-placeholder': '结束日期',
@@ -45,7 +45,7 @@ export default {
       label: '状态',
       name: 'status',
       component: 'Select',
-      props: {
+      componentProps: {
         placeholder: '请选择状态',
         options: [
           { label: '全部', value: '' },

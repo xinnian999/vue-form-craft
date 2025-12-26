@@ -13,14 +13,14 @@ export default {
       label: '预约人',
       name: 'guestName',
       component: 'Input',
-      props: { placeholder: '请输入预约人姓名' },
+      componentProps: { placeholder: '请输入预约人姓名' },
       required: true
     },
     {
       label: '预约时间',
       name: 'reserveRange',
       component: 'DatePicker',
-      props: {
+      componentProps: {
         type: 'datetimerange',
         'start-placeholder': '开始时间',
         'end-placeholder': '结束时间',
@@ -32,13 +32,13 @@ export default {
       label: '人数',
       name: 'people',
       component: 'InputNumber',
-      props: { min: 1, 'controls-position': 'right' }
+      componentProps: { min: 1, 'controls-position': 'right' }
     },
     {
       label: '备注',
       name: 'note',
       component: 'TextArea',
-      props: {
+      componentProps: {
         placeholder:
           "{{ $values.guestName ? '填写给 ' + $values.guestName + ' 的备注' : '填写备注信息' }}"
       }

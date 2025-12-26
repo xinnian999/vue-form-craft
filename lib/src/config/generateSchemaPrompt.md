@@ -80,7 +80,7 @@
     {
       "label": "用户名",
       "component": "Input",
-      "props": {
+      "componentProps": {
         "placeholder": "请输入用户名"
       },
       "name": "username"，
@@ -89,7 +89,7 @@
     {
       "label": "密码",
       "component": "Password",
-      "props": {
+      "componentProps": {
         "placeholder": "请输入密码"
       },
       "name": "password",
@@ -151,7 +151,7 @@
   "label": "简介",
   "component": "TextArea",
   "name": "desc",
-  "props": {
+  "componentProps": {
     "placeholder": "{{ $values.name ? $values.name + '的简介' : '请输入简介' }}",
     "disabled": "{{ !$values.name }}"
   },
@@ -172,7 +172,7 @@
 
 - **target**: 目标字段的 name（必填）
 - **type**: 'attr'（必填）
-- **path**: 要修改的属性路径（必填），如 'when'、'props.disabled'
+- **path**: 要修改的属性路径（必填），如 'when'、'componentProps.disabled'
 - **condition**: 触发条件（可选，支持表达式，不填则总是触发）
 - **value**: 修改的值（可选，支持表达式）
 
@@ -183,7 +183,7 @@
   "label": "用户类型",
   "component": "Select",
   "name": "userType",
-  "props": {
+  "componentProps": {
     "options": [
       { "label": "管理员", "value": "admin" },
       { "label": "普通用户", "value": "user" }
@@ -221,7 +221,7 @@
   "component": "Input",
   "name": "item1",
   "designKey": "design-NASi",
-  "props": {
+  "componentProps": {
     "placeholder": "请输入..."
   },
   "linkages": [
@@ -252,7 +252,7 @@
 {
   "component": "FormList",
   "name": "users",
-  "props": {
+  "componentProps": {
     "mode": "card",
     "title": "用户列表"
   },
@@ -261,7 +261,7 @@
       "label": "用户类型",
       "component": "Select",
       "name": "type",
-      "props": {
+      "componentProps": {
         "options": [
           { "label": "管理员", "value": "admin" },
           { "label": "普通用户", "value": "user" }
@@ -312,7 +312,7 @@
   "label": "预约日期",
   "name": "appointmentDate",
   "component": "DatePicker",
-  "props": {
+  "componentProps": {
     "placeholder": "请选择日期",
     "disabledDate": "{{ (time) => time.getTime() < Date.now() - 86400000 }}"
   },
@@ -327,7 +327,7 @@
   "label": "单价",
   "name": "price",
   "component": "InputNumber",
-  "props": {
+  "componentProps": {
     "placeholder": "请输入单价",
     "onChange": "{{ () => { const price = $values.price || 0; const quantity = $values.quantity || 0; $instance.setFieldValue('total', price * quantity) } }}"
   },
@@ -342,7 +342,7 @@
   "label": "用户名",
   "name": "username",
   "component": "Input",
-  "props": {
+  "componentProps": {
     "placeholder": "请输入用户名",
     "onBlur": "{{ () => { const username = $values.username; if (username && username.length < 3) { $instance.setFieldValue('tip', '用户名至少3个字符') } else if (username) { $instance.setFieldValue('tip', '用户名可用') } } }}"
   },
@@ -357,7 +357,7 @@
   "label": "省份",
   "name": "province",
   "component": "Select",
-  "props": {
+  "componentProps": {
     "options": [
       { "label": "广东省", "value": "guangdong" },
       { "label": "北京市", "value": "beijing" }
@@ -434,7 +434,7 @@ type RuleItem = {
       "label": "用户名",
       "name": "username",
       "component": "Input",
-      "props": {
+      "componentProps": {
         "placeholder": "请输入用户名"
       },
       "required": true,
@@ -445,7 +445,7 @@ type RuleItem = {
       "name": "password",
       "component": "Password",
       "required": true,
-      "props": {
+      "componentProps": {
         "placeholder": "请输入密码"
       },
       "rules": [
@@ -472,7 +472,7 @@ type RuleItem = {
     },
     {
       "label": "确认密码",
-      "props": {
+      "componentProps": {
         "placeholder": "请再次输入密码"
       },
       "name": "confirmPassword",
@@ -492,7 +492,7 @@ type RuleItem = {
       "label": "手机号",
       "name": "phone",
       "component": "Input",
-      "props": {
+      "componentProps": {
         "placeholder": "请输入手机号",
         "maxlength": 11
       },
@@ -511,7 +511,7 @@ type RuleItem = {
       "label": "邮箱",
       "name": "email",
       "component": "Input",
-      "props": {
+      "componentProps": {
         "placeholder": "请输入邮箱"
       },
       "rules": [

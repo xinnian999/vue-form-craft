@@ -6,7 +6,7 @@
         :key="tab.name"
         :label="tab.label"
         :name="tab.name"
-        :lazy="tab.props?.lazy"
+        :lazy="tab.componentProps?.lazy"
       >
         <FormItemGroup :list="tab.children!" :designKey="tab.designKey!" />
       </TabPane>

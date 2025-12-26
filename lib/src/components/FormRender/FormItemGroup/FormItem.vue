@@ -120,7 +120,7 @@ const classNames = computed(() => {
 })
 
 const RenderComponent = () => {
-  const propsData = cloneDeep(filterExpressions(props.props))
+  const propsData = cloneDeep(filterExpressions(props.componentProps))
 
   const componentProps = {
     name: props.name,

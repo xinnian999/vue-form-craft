@@ -7,7 +7,7 @@ export default {
   size: 'small',
   submitBtn: false,
   initialValues: {
-    props: {
+    componentProps: {
       action: 'https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15',
       name: 'file',
       multiple: true,
@@ -22,7 +22,7 @@ export default {
     {
       name: 'form-tabs',
       component: 'Tabs',
-      props: {
+      componentProps: {
         defaultKey: 'attrs',
         tabPosition: 'top',
         type: 'card'
@@ -32,45 +32,45 @@ export default {
           label: '属性',
           name: 'attrs',
           component: 'TabPane',
-          props: {
+          componentProps: {
             lazy: true
           },
           children: [
             {
               name: '.',
               component: 'Custom',
-              props: {
+              componentProps: {
                 componentName: 'FormDesign-Basic'
               },
               labelWidth: 0
             },
             {
               label: '禁用',
-              name: 'props.disabled',
+              name: 'componentProps.disabled',
               component: 'Switch'
       },
             {
               label: '上传地址',
-              name: 'props.action',
+              name: 'componentProps.action',
               component: 'Input',
-              props: {
+              componentProps: {
                 placeholder: '上传文件的接口地址'
               }
       },
             {
               label: '文件字段名',
-              name: 'props.name',
+              name: 'componentProps.name',
               component: 'Input',
-              props: {
+              componentProps: {
                 placeholder: '上传的文件字段名'
               },
               help: '上传时文件对应的字段名'
             },
             {
               label: '请求头',
-              name: 'props.headers',
+              name: 'componentProps.headers',
               component: 'JsonEditor',
-              props: {
+              componentProps: {
                 toolBar: false
               },
               labelAlign: 'top',
@@ -78,9 +78,9 @@ export default {
             },
             {
               label: '额外数据',
-              name: 'props.data',
+              name: 'componentProps.data',
               component: 'JsonEditor',
-              props: {
+              componentProps: {
                 toolBar: false
               },
               labelAlign: 'top',
@@ -88,55 +88,55 @@ export default {
             },
             {
               label: '携带Cookie',
-              name: 'props.withCredentials',
+              name: 'componentProps.withCredentials',
               component: 'Switch',
               help: '上传时是否携带cookie'
             },
             {
               label: '支持多选',
-              name: 'props.multiple',
+              name: 'componentProps.multiple',
               component: 'Switch'
       },
             {
               label: '按钮文本',
-              name: 'props.btnText',
+              name: 'componentProps.btnText',
               component: 'Input',
-              props: {
+              componentProps: {
                 placeholder: '点击上传'
               }
       },
             {
               label: '上传提示',
-              name: 'props.tip',
+              name: 'componentProps.tip',
               component: 'Input',
-              props: {
+              componentProps: {
                 placeholder: '提示文字'
               }
       },
             {
               label: '最大数量',
-              name: 'props.limit',
+              name: 'componentProps.limit',
               component: 'InputNumber',
-              props: {
+              componentProps: {
                 min: 0
               },
               help: '最大允许上传个数'
             },
             {
               label: '拖拽上传',
-              name: 'props.drag',
+              name: 'componentProps.drag',
               component: 'Switch'
       },
             {
               label: '显示文件列表',
-              name: 'props.showFileList',
+              name: 'componentProps.showFileList',
               component: 'Switch'
       },
             {
               label: '列表类型',
-              name: 'props.listType',
+              name: 'componentProps.listType',
               component: 'Radio',
-              props: {
+              componentProps: {
                 mode: 'static',
                 options: [
                   { label: '文本', value: 'text' },
@@ -151,14 +151,14 @@ export default {
           label: '校验',
           name: 'rules',
           component: 'TabPane',
-          props: {
+          componentProps: {
             lazy: true
           },
           children: [
             {
               name: '.',
               component: 'Custom',
-              props: {
+              componentProps: {
                 componentName: 'FormDesign-Rules'
               },
               labelWidth: 0
@@ -169,14 +169,14 @@ export default {
           label: '联动',
           name: 'linkages',
           component: 'TabPane',
-          props: {
+          componentProps: {
             lazy: true
           },
           children: [
             {
               name: '.',
               component: 'Custom',
-              props: {
+              componentProps: {
                 componentName: 'FormDesign-Linkages'
               },
               labelWidth: 0
@@ -187,13 +187,13 @@ export default {
           label: '事件',
           name: 'events',
           component: 'TabPane',
-          props: {
+          componentProps: {
             lazy: true
           },
           children: [
             {
               label: '数据改变时 (change)',
-              name: 'props.onChange',
+              name: 'componentProps.onChange',
               component: 'FunctionEditor',
               labelAlign: 'top'
             }
@@ -203,15 +203,15 @@ export default {
           label: '样式',
           name: 'style',
           component: 'TabPane',
-          props: {
+          componentProps: {
             lazy: true
           },
           children: [
             {
               label: '',
-              name: 'props.style',
+              name: 'componentProps.style',
               component: 'Custom',
-              props: {
+              componentProps: {
                 componentName: 'FormDesign-StyleEditor'
               },
               labelWidth: 0

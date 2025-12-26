@@ -11,7 +11,7 @@ export default {
     {
       name: 'form-2DaW',
       component: 'Tabs',
-      props: {
+      componentProps: {
         defaultKey: 'attrs',
         tabPosition: 'top',
         type: 'card'
@@ -21,7 +21,7 @@ export default {
           label: '属性',
           name: 'attrs',
           component: 'TabPane',
-          props: {
+          componentProps: {
             lazy: true
           },
           children: [
@@ -29,7 +29,7 @@ export default {
               label: '标签宽度（px）',
               name: 'labelWidth',
               component: 'InputNumber',
-              props: {
+              componentProps: {
                 min: 60,
                 step: 10
               },
@@ -39,7 +39,7 @@ export default {
               label: 'label对齐方式',
               name: 'labelAlign',
               component: 'Radio',
-              props: {
+              componentProps: {
                 mode: 'static',
                 options: [
                   {
@@ -62,7 +62,7 @@ export default {
               label: '表单组件尺寸',
               name: 'size',
               component: 'Radio',
-              props: {
+              componentProps: {
                 mode: 'static',
                 options: [
                   {
@@ -85,7 +85,7 @@ export default {
               label: '表单初始值',
               name: 'initialValues',
               component: 'Custom',
-              props: {
+              componentProps: {
                 componentName: 'FormDesign-InitialValues'
               }
       },
@@ -93,7 +93,7 @@ export default {
               label: '全局样式',
               name: 'styleBlock',
               component: 'Custom',
-              props: {
+              componentProps: {
                 componentName: 'FormDesign-GlobalStyle'
               }
       },
@@ -135,7 +135,7 @@ export default {
           label: '事件',
           name: 'events',
           component: 'TabPane',
-          props: {
+          componentProps: {
             lazy: true
           },
           children: [
@@ -144,7 +144,7 @@ export default {
               name: 'onChange',
               component: 'FunctionEditor',
               labelAlign: 'top',
-              props: {
+              componentProps: {
                 paramTips: [{ name: 'values', description: '当前表单数据' }]
               }
       },
@@ -153,7 +153,7 @@ export default {
               name: 'onFinish',
               component: 'FunctionEditor',
               labelAlign: 'top',
-              props: {
+              componentProps: {
                 paramTips: [{ name: 'values', description: '提交成功时的表单数据' }]
               }
       },
@@ -162,7 +162,7 @@ export default {
               name: 'onFailed',
               component: 'FunctionEditor',
               labelAlign: 'top',
-              props: {
+              componentProps: {
                 paramTips: [{ name: 'error', description: '校验失败的错误对象' }]
               }
       },
@@ -171,7 +171,7 @@ export default {
               name: 'onReset',
               component: 'FunctionEditor',
               labelAlign: 'top',
-              props: {
+              componentProps: {
                 paramTips: []
               }
       },
@@ -180,7 +180,7 @@ export default {
               name: 'onFieldChange',
               component: 'FunctionEditor',
               labelAlign: 'top',
-              props: {
+              componentProps: {
                 paramTips: [
                   { name: 'path', description: '字段路径' },
                   { name: 'value', description: '字段新值' }
@@ -192,7 +192,7 @@ export default {
               name: 'onValidate',
               component: 'FunctionEditor',
               labelAlign: 'top',
-              props: {
+              componentProps: {
                 paramTips: [
                   { name: 'prop', description: '被校验的表单项字段名' },
                   { name: 'isValid', description: '该项是否校验通过' },
@@ -206,7 +206,7 @@ export default {
           label: '样式',
           name: 'style',
           component: 'TabPane',
-          props: {
+          componentProps: {
             lazy: true
           },
           children: [
@@ -214,7 +214,7 @@ export default {
               label: '',
               name: 'style',
               component: 'Custom',
-              props: {
+              componentProps: {
                 componentName: 'FormDesign-StyleEditor'
               },
               labelWidth: 0

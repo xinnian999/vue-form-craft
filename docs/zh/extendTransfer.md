@@ -124,14 +124,14 @@ export default {
     {
       label: '占位提示',
       component: 'Input',
-      name: 'props.placeholder'
+      name: 'componentProps.placeholder'
     },
     { label: '初始值', component: 'Input', name: 'initialValue' },
     {
       component: 'Grid',
       children: [
         { label: '是否必填', component: 'Switch', name: 'required' },
-        { label: '是否禁用', component: 'Switch', name: 'props.disabled' },
+        { label: '是否禁用', component: 'Switch', name: 'componentProps.disabled' },
         { label: '隐藏字段', component: 'Switch', name: 'hidden' }
       ],
       props: {
@@ -155,7 +155,7 @@ export default {
     },
     {
       label: '静态选项',
-      name: 'props.data',
+      name: 'componentProps.data',
       component: 'FormList',
       children: [
         {

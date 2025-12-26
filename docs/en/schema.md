@@ -22,8 +22,8 @@ The `component` property indicates which component should be used for the form i
     {
       "label": "Username", // Label of the form item
       "component": "input", // Component used for the form item
-      "props": {
-        // Props passed to the component, supporting all the props of the element-plus component
+      "componentProps": {
+        // ComponentProps passed to the component, supporting all the componentProps of the element-plus component
         "placeholder": "Please enter your username"
       },
       "name": "username" // Unique identifier, i.e., the value key
@@ -31,7 +31,7 @@ The `component` property indicates which component should be used for the form i
     {
       "label": "Password",
       "component": "password",
-      "props": {
+      "componentProps": {
         "placeholder": "Please enter your password"
       },
       "name": "password"

@@ -13,21 +13,21 @@ export default {
       label: '订单号',
       name: 'orderNo',
       component: 'Input',
-      props: { placeholder: '请输入订单号' },
+      componentProps: { placeholder: '请输入订单号' },
       required: true
     },
     {
       label: '订单金额(元)',
       name: 'amount',
       component: 'InputNumber',
-      props: { min: 0, 'controls-position': 'right', placeholder: '' },
+      componentProps: { min: 0, 'controls-position': 'right', placeholder: '' },
       required: true
     },
     {
       label: '发票类型',
       name: 'invoiceType',
       component: 'Radio',
-      props: {
+      componentProps: {
         options: [
           { label: '个人', value: 'personal' },
           { label: '公司', value: 'company' }
@@ -42,14 +42,14 @@ export default {
       label: '公司名称',
       name: 'companyName',
       component: 'Input',
-      props: { placeholder: '请输入公司名称' },
+      componentProps: { placeholder: '请输入公司名称' },
       when: "{{ $values.invoiceType === 'company' }}"
     },
     {
       label: '纳税人识别号',
       name: 'taxpayerNo',
       component: 'Input',
-      props: { placeholder: '请输入纳税人识别号' },
+      componentProps: { placeholder: '请输入纳税人识别号' },
       when: "{{ $values.invoiceType === 'company' }}",
       rules: [
         {
@@ -64,7 +64,7 @@ export default {
       label: '备注',
       name: 'remark',
       component: 'TextArea',
-      props: { placeholder: '可填写备注信息' }
+      componentProps: { placeholder: '可填写备注信息' }
     }
   ]
 } satisfies FormSchema
