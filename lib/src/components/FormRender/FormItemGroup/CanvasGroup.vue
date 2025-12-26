@@ -83,6 +83,7 @@ const list = computed(() => {
 
     return rootList || []
   }
+  console.log(props, designInstance.getSchema())
   return designInstance.getNodeByKey(props.designKey)?.children || []
 })
 
@@ -94,6 +95,8 @@ const onAdd = (e: Record<string, any>) => {
   designInstance.setCurrentKey(source.designKey)
 
   designInstance.setHoverKey(source.designKey)
+
+  designInstance.setSchema()
 
   designInstance.handleEmit('add', source)
 

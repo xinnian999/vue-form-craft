@@ -82,7 +82,7 @@ if (design.value) {
   )
 
   watch(
-    () => designInstance?.currentKey,
+    () => designInstance?.getCurrentKey(),
     (currentKey) => {
       if (!currentKey) return
 

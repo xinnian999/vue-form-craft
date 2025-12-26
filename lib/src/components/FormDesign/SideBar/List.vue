@@ -79,13 +79,11 @@ import type { FormElement, FormItemType } from '@/types'
 import { generateDesignKey, generateName, ns, repirNode } from '@/utils'
 import parseMenus from './menus'
 
-const { Input, Collapse, CollapseItem } = useUI()
+const { Input } = useUI()
 
 const designInstance = useDesignInstance()!
 
 const elements = useElements()
-
-const active = ref(['基础组件', '布局组件'])
 
 const q = ref('')
 

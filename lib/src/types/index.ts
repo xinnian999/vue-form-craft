@@ -209,7 +209,7 @@ export interface DesignInstance {
   getSchema: () => FormSchema
 
   // Setter 方法
-  setSchema: (schema: FormSchema) => void
+  setSchema: (schema?: FormSchema) => void
   setCurrentKey: (key: string) => void
   setHoverKey: (key: string) => void
   setHistoryIndex: (index: number) => void

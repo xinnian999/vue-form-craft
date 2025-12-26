@@ -13,8 +13,18 @@ export default {
     labelAlign: 'top',
     initialValues: {
       children: [
-        { label: '选项卡1', name: 'name1', component: 'TabPane', children: [] },
-        { label: '选项卡2', name: 'name2', component: 'TabPane', children: [] }
+        {
+          label: '选项卡1',
+          name: 'name1',
+          component: 'TabPane',
+          children: []
+        },
+        {
+          label: '选项卡2',
+          name: 'name2',
+          component: 'TabPane',
+          children: []
+        }
       ],
       componentProps: {
         defaultKey: 'name1',

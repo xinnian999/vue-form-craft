@@ -56,7 +56,7 @@ const getHistory = () => history.value
 const getHistoryIndex = () => historyIndex.value
 
 // schema的唯一修改入口
-const setSchema = (schema: FormSchema) => {
+const setSchema: DesignInstance['setSchema'] = (schema = getSchema()) => {
   modelValue.value = repirJsonSchema(schema)
 
   // 由于 repirJsonSchema 会重新生成所有 designKey，导致之前的 currentKey 找不到对应节点
@@ -147,7 +147,7 @@ const getNodeByKey = (designKey: string): FormItemType | null => {
   return getNode(schema.items, designKey)
 }
 
-const setNodeByKey = (designKey: string, node: FormItemType) => {
+const setNodeByKey: DesignInstance['setNodeByKey'] = (designKey, node) => {
   const oldNode = getNodeByKey(designKey)
   if (oldNode) {
     Object.assign(oldNode, node)
