@@ -14,16 +14,16 @@ export default {
       props: {
         'inline-prompt': false
       }
-      },
+    },
     {
-      label: '校验规则',
+      // label: '校验规则',
       name: 'rules',
       component: 'FormList',
       props: {
         mode: 'card',
-        title: '规则'
+        title: '校验规则'
       },
-      labelAlign: 'top',
+      // labelAlign: 'top',
       children: [
         {
           label: '规则类型',
@@ -229,7 +229,7 @@ export default {
           props: {
             placeholder: '请输入校验失败时的提示信息'
           }
-      },
+        },
         {
           label: '触发时机',
           name: 'trigger',
@@ -247,7 +247,7 @@ export default {
               }
             ]
           }
-      }
+        }
       ]
     }
   ]
