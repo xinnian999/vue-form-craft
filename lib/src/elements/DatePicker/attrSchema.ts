@@ -101,6 +101,20 @@ export default {
                 placeholder: 'YYYY-MM-DD HH:mm:ss'
               },
               help: '显示在输入框中的格式'
+            },
+            {
+              label: '禁用日期',
+              name: 'componentProps.disabledDate',
+              component: 'FunctionEditor',
+              componentProps: {
+                paramTips: [
+                  {
+                    name: 'time',
+                    description: 'Date 对象，表示当前日期'
+                  }
+                ]
+              },
+              help: '用于判断日期是否被禁用，返回 true 表示禁用该日期'
             }
           ]
         },

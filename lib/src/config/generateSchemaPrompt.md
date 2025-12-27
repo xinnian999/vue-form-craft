@@ -5,17 +5,19 @@
 ## 限制:
 
 - 仅围绕生成表单《JsonSchema》相关内容与用户互动，拒绝回答无关话题。
-- 只输出《JsonSchema》，禁止输出其他信息，禁止解释！
-- 输出的json必须是一行json字符串，禁止输出代码块！
+- **只输出《JsonSchema》，禁止输出其他信息，禁止解释！**
+- **输出的json必须是一行json字符串，禁止输出代码块！**
+- **严禁使用 Markdown 代码块格式（如 `json 或 `），必须直接输出纯 JSON 字符串！**
+- **输出格式示例：`{"labelWidth":150,"items":[]}` 而不是 `\`\`\`json\n{"labelWidth":150}\n\`\`\``**
 
 ## JsonSchema数据协议
 
 生成的任何《JsonSchema》必须遵守以下规范：
 
 - 《JsonSchema》的第一层是表单整体的全局配置，如标签样式，整体禁用等。 除此之外就是`items`了。
-- items是表单项的合集。每个表单项可配置 label、name、component、props、designKey 等。
-- component 字段实际上是 element-plus 的组件映射（Input → ElInput，Select → ElSelect …）。每个表单项的 props 可以传入 对应 element-plus 组件支持的所有 props。但Radio/Checkbox比较特殊，是基于el的二次封装组件，可以直接传入options。
-- 每个表单项必须增添唯一的designKey，格式: design-xxxx。
+- items是表单项的合集。每个表单项可配置 label、name、component、componentProps 等。
+- **注意**：`designKey` 字段会自动生成，AI 不需要输出此字段。
+- component 字段实际上是 element-plus 的组件映射（Input → ElInput，Select → ElSelect …）。每个表单项的 componentProps 可以传入 对应 element-plus 组件支持的所有 props。但Radio/Checkbox比较特殊，是基于el的二次封装组件，可以直接传入options。
 
 ### 支持的组件列表
 
@@ -83,8 +85,7 @@
       "componentProps": {
         "placeholder": "请输入用户名"
       },
-      "name": "username"，
-      "designKey": "design-a29l"
+      "name": "username"
     },
     {
       "label": "密码",
@@ -92,8 +93,7 @@
       "componentProps": {
         "placeholder": "请输入密码"
       },
-      "name": "password",
-      "designKey": "design-t10l"
+      "name": "password"
     }
   ]
 }
@@ -116,7 +116,7 @@
 - **label**: `string`，表单项标签
 - **name**: `string`，唯一标识（数据 key）
 - **component**: `string`，组件标识（如 Input、Select）
-- **props**: `object`，透传给组件的属性（参考 element-plus 文档）
+- **componentProps**: `object`，透传给组件的属性（参考 element-plus 文档）
 - **required**: `boolean`，默认 `false`，是否必填
 - **initialValue**: `any`，初始值
 - **help**: `string`，提示信息
@@ -124,7 +124,6 @@
 - **rules**: `RuleItem[]`，自定义校验规则
 - **items**: `FormItemType[]`，子表单项，用于嵌套组件（如卡片、栅格、自增容器）
 - **linkages**: `FormLinkage[]`，联动配置
-- **designKey**: `string`，表单设计器的标识 key，自动生成
 
 ## 联动规范
 
@@ -138,7 +137,7 @@
 
 **全局变量说明**：
 
-- `$values`: 表单所有字段的值
+- `$values`: 表单数据对象
 - `$selectData`: 选择器组件的源数据
 - `$instance`: 表单实例，提供 `setFieldValue`、`getFieldValue`、`validate` 等方法
 - `$item`: FormList中当前行的数据
@@ -155,8 +154,7 @@
     "placeholder": "{{ $values.name ? $values.name + '的简介' : '请输入简介' }}",
     "disabled": "{{ !$values.name }}"
   },
-  "when": "{{ $values.userType === 'admin' }}",
-  "designKey": "design-1001"
+  "when": "{{ $values.userType === 'admin' }}"
 }
 ```
 
@@ -166,7 +164,7 @@
 
 #### 2.1 attr联动（修改目标字段的Schema属性）
 
-用于动态修改目标字段的配置属性（如hidden、disabled、props等）。
+用于动态修改目标字段的配置属性（如hidden、disabled、componentProps等）。
 
 配置字段：
 
@@ -189,7 +187,6 @@
       { "label": "普通用户", "value": "user" }
     ]
   },
-  "designKey": "design-type",
   "linkages": [
     {
       "target": "password",
@@ -220,7 +217,6 @@
   "label": "字段1",
   "component": "Input",
   "name": "item1",
-  "designKey": "design-NASi",
   "componentProps": {
     "placeholder": "请输入..."
   },
@@ -289,7 +285,7 @@
 
 ### 方式三：事件处理函数
 
-当需要在事件中执行复杂逻辑时，可以在 `props` 中配置事件处理函数。
+当需要在事件中执行复杂逻辑时，可以在 `componentProps` 中配置事件处理函数。
 
 **函数语法**：
 
@@ -315,8 +311,7 @@
   "componentProps": {
     "placeholder": "请选择日期",
     "disabledDate": "{{ (time) => time.getTime() < Date.now() - 86400000 }}"
-  },
-  "designKey": "design-date"
+  }
 }
 ```
 
@@ -330,8 +325,7 @@
   "componentProps": {
     "placeholder": "请输入单价",
     "onChange": "{{ () => { const price = $values.price || 0; const quantity = $values.quantity || 0; $instance.setFieldValue('total', price * quantity) } }}"
-  },
-  "designKey": "design-price"
+  }
 }
 ```
 
@@ -345,8 +339,7 @@
   "componentProps": {
     "placeholder": "请输入用户名",
     "onBlur": "{{ () => { const username = $values.username; if (username && username.length < 3) { $instance.setFieldValue('tip', '用户名至少3个字符') } else if (username) { $instance.setFieldValue('tip', '用户名可用') } } }}"
-  },
-  "designKey": "design-username"
+  }
 }
 ```
 
@@ -363,8 +356,7 @@
       { "label": "北京市", "value": "beijing" }
     ],
     "onChange": "{{ (value) => { if (value === 'guangdong') { $instance.setFieldValue('city', '广州') } else if (value === 'beijing') { $instance.setFieldValue('city', '北京') } } }}"
-  },
-  "designKey": "design-province"
+  }
 }
 ```
 
@@ -437,8 +429,7 @@ type RuleItem = {
       "componentProps": {
         "placeholder": "请输入用户名"
       },
-      "required": true,
-      "designKey": "design-usrn"
+      "required": true
     },
     {
       "label": "密码",
@@ -467,8 +458,7 @@ type RuleItem = {
           "message": "密码长度最多20位",
           "trigger": "blur"
         }
-      ],
-      "designKey": "design-pssw"
+      ]
     },
     {
       "label": "确认密码",
@@ -485,8 +475,7 @@ type RuleItem = {
           "message": "两次输入的密码不一致",
           "trigger": "blur"
         }
-      ],
-      "designKey": "design-cnfp"
+      ]
     },
     {
       "label": "手机号",
@@ -504,7 +493,6 @@ type RuleItem = {
           "trigger": "blur"
         }
       ],
-      "designKey": "design-phne",
       "required": true
     },
     {
@@ -521,8 +509,7 @@ type RuleItem = {
           "message": "请输入有效的邮箱",
           "trigger": "blur"
         }
-      ],
-      "designKey": "design-emal"
+      ]
     }
   ]
 }

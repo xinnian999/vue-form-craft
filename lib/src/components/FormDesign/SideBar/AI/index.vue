@@ -59,6 +59,28 @@ const designInstance = useDesignInstance()!
 
 const { isAvailable, request, cancel } = useAi()
 
+// 提取 JSON 内容（去除 Markdown 代码块标记）
+const extractJson = (content: string): string => {
+  if (typeof content !== 'string') {
+    return content
+  }
+
+  // 去除首尾空白
+  let text = content.trim()
+
+  // 如果包含 Markdown 代码块标记，提取其中的 JSON
+  const codeBlockRegex = /^```(?:json)?\s*\n?([\s\S]*?)\n?```$/m
+  const match = text.match(codeBlockRegex)
+  if (match) {
+    text = match[1].trim()
+  }
+
+  // 如果还有代码块标记（嵌套情况），继续清理
+  text = text.replace(/^```(?:json)?\s*\n?/gm, '').replace(/\n?```$/gm, '').trim()
+
+  return text
+}
+
 // AI生成表单
 const startSSE = async () => {
   if (input.value === '') {
@@ -120,13 +142,15 @@ const startSSE = async () => {
     }
 
     try {
-      const json = typeof result === 'string' ? JSON.parse(result) : result
+      // 提取 JSON 内容（自动处理 Markdown 代码块）
+      const jsonString = typeof result === 'string' ? extractJson(result) : JSON.stringify(result)
+      const json = JSON.parse(jsonString)
       current.content = '✓ 已为您修改表单'
       designInstance.setSchema(json)
       designInstance.recordHistory('AI生成表单')
     } catch (e) {
       console.error('AI生成错误:', { error: e, rawContent: result })
-      current.content = 'AI生成错误'
+      current.content = 'AI生成错误，请检查输出格式'
     }
   } finally {
     inputLoading.value = false

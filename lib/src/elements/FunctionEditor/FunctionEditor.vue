@@ -53,11 +53,11 @@
 
 <script setup lang="ts">
 import { VueMonacoEditor } from '@guolao/vue-monaco-editor'
-import { computed, ref, shallowRef, watch } from 'vue'
-import { Icon } from '@/components'
+import { computed, nextTick, ref, shallowRef, watch } from 'vue'
 import { useUI } from '@/hooks'
 import type { ComponentBaseProps } from '@/types'
 import { ns } from '@/utils'
+import { formatCode } from './formatCode'
 
 const { Button, Modal, Message } = useUI()
 
@@ -102,7 +102,7 @@ const editorOptions = {
 }
 
 // 编辑器挂载时的回调
-const handleEditorMount = (editor: any) => {
+const handleEditorMount = async (editor: any) => {
   editorRef.value = editor
 
   // 添加自定义的智能提示
@@ -187,6 +187,13 @@ declare const $index: number;
 
     // 同时为 TypeScript 添加
     monaco.languages.typescript.typescriptDefaults.addExtraLib(libSource, 'ts:filename/params.d.ts')
+
+    // 配置格式化选项
+    monaco.languages.typescript.javascriptDefaults.setCompilerOptions({
+      ...monaco.languages.typescript.javascriptDefaults.getCompilerOptions(),
+      formatOnPaste: true,
+      formatOnType: false
+    })
   }
 }
 
@@ -253,6 +260,33 @@ const validateFunction = (code: string): { valid: boolean; error?: string } => {
   }
 }
 
+// 格式化编辑器代码（直接使用手动格式化）
+const formatEditorCode = async () => {
+  if (!editorRef.value) return
+
+  try {
+    const model = editorRef.value.getModel()
+    if (!model) return
+
+    // 获取当前代码
+    const currentCode = model.getValue()
+
+    // 直接使用手动格式化
+    const formatted = formatCode(currentCode)
+    if (formatted !== currentCode) {
+      // 使用编辑操作来替换代码，这样可以撤销
+      editorRef.value.executeEdits('format', [
+        {
+          range: model.getFullModelRange(),
+          text: formatted
+        }
+      ])
+    }
+  } catch (e) {
+    console.warn('格式化失败', e)
+  }
+}
+
 const openDialog = async () => {
   // 回显时移除 {{ }} 并添加默认模板
   const code = removeBraces(modelValue.value || '')
@@ -261,25 +295,20 @@ const openDialog = async () => {
   const isNewTemplate = !code
   dialogVisible.value = true
 
-  // 等待编辑器挂载后再格式化
-  await new Promise((resolve) => setTimeout(resolve, 100))
+  // 如果是新建的模板，等待格式化完成后再定位光标
+  if (isNewTemplate) {
+    await nextTick()
+    await new Promise((resolve) => setTimeout(resolve, 300))
 
-  if (editorRef.value && editingCode.value) {
-    try {
-      // 使用 Monaco Editor 的格式化功能美化代码
-      await editorRef.value.getAction('editor.action.formatDocument')?.run()
-
-      // 如果是新建的模板，将光标定位到函数体内
-      if (isNewTemplate) {
-        const model = editorRef.value.getModel()
-        if (model) {
-          // 定位到第3行第3列（函数体内）
-          editorRef.value.setPosition({ lineNumber: 3, column: 3 })
-          editorRef.value.focus()
-        }
+    if (editorRef.value) {
+      const model = editorRef.value.getModel()
+      if (model) {
+        // 定位到函数体内（通常是第2行或第3行）
+        const lineCount = model.getLineCount()
+        const targetLine = Math.min(3, lineCount)
+        editorRef.value.setPosition({ lineNumber: targetLine, column: 3 })
+        editorRef.value.focus()
       }
-    } catch (e) {
-      console.warn('格式化失败', e)
     }
   }
 }
@@ -316,6 +345,20 @@ const handleCancel = () => {
 watch(modelValue, (newVal) => {
   if (!dialogVisible.value) {
     editingCode.value = removeBraces(newVal || '')
+  }
+})
+
+// 监听对话框打开，自动格式化代码
+watch(dialogVisible, async (isOpen) => {
+  if (isOpen) {
+    // 等待编辑器完全加载和内容更新
+    await nextTick()
+    // 增加等待时间，确保编辑器内容已更新
+    await new Promise((resolve) => setTimeout(resolve, 300))
+
+    if (editorRef.value && editingCode.value) {
+      await formatEditorCode()
+    }
   }
 })
 </script>

@@ -56,6 +56,7 @@ export const repirNode = ({
   componentProps,
   designKey,
   alert,
+  items,
   ...rest
 }: FormItemType) => {
   const newNode: FormItemType = {
@@ -65,28 +66,36 @@ export const repirNode = ({
     alert,
     component,
     componentProps,
-    ...rest
+    ...rest,
+    ...(items !== undefined && { items })
   }
 
   return newNode
 }
 
 export const repirJsonSchema = (schema: FormSchema) => {
-  const newSchema: FormSchema = schema
+  const { items, ...rest } = schema
 
-  const repirItems = (items: FormItemType[]) => {
+  const repirItems = (items: FormItemType[]): FormItemType[] => {
     return items.map((item) => {
       const node: FormItemType = repirNode(item)
 
       if (node.items) {
-        node.items = repirItems(node.items)
+        const { items: nodeItems, ...nodeRest } = node
+        return {
+          ...nodeRest,
+          items: repirItems(nodeItems)
+        }
       }
 
       return node
     })
   }
 
-  newSchema.items = repirItems(newSchema.items || [])
+  const newSchema: FormSchema = {
+    ...rest,
+    items: repirItems(items || [])
+  }
 
   return newSchema
 }
@@ -97,6 +106,7 @@ export const repirJsonSchema = (schema: FormSchema) => {
 export const removeDesignKeys = (schema: FormSchema): FormSchema => {
   const removeFromItems = (items: FormItemType[]): FormItemType[] => {
     return items.map((item) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { designKey, ...rest } = item
       const newItem: FormItemType = { ...rest }
 

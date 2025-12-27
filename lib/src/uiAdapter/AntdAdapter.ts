@@ -124,13 +124,13 @@ const AntdAdapter: UIAdapter = {
                 : 'horizontal',
             labelCol: propsAttrs.labelWidth
               ? {
-                  style: {
-                    width:
-                      typeof propsAttrs.labelWidth === 'number'
-                        ? `${propsAttrs.labelWidth}px`
-                        : propsAttrs.labelWidth
-                  }
+                style: {
+                  width:
+                    typeof propsAttrs.labelWidth === 'number'
+                      ? `${propsAttrs.labelWidth}px`
+                      : propsAttrs.labelWidth
                 }
+              }
               : undefined
           },
           slots
@@ -234,17 +234,17 @@ const AntdAdapter: UIAdapter = {
           },
           propsAttrs.options
             ? {
-                default: () =>
-                  propsAttrs.options!.map((option) =>
-                    h(SelectOption as any, {
-                      key: option.value,
-                      value: option.value,
-                      disabled: option.disabled,
-                      label: option.label
-                    })
-                  ),
-                ...slots
-              }
+              default: () =>
+                propsAttrs.options!.map((option) =>
+                  h(SelectOption as any, {
+                    key: option.value,
+                    value: option.value,
+                    disabled: option.disabled,
+                    label: option.label
+                  })
+                ),
+              ...slots
+            }
             : slots
         )
     },
@@ -638,6 +638,17 @@ const AntdAdapter: UIAdapter = {
 
         const showTime = propsAttrs.type === 'datetime' || propsAttrs.type === 'datetimerange'
 
+        // 适配 disabledDate：Element Plus 接收 Date 对象，Ant Design Vue 接收 dayjs 对象
+        let adaptedDisabledDate: ((date: any) => boolean) | undefined
+        if (propsAttrs.disabledDate) {
+          adaptedDisabledDate = (dayjsDate: any) => {
+            // 将 dayjs 对象转换为 Date 对象，以兼容 Element Plus 的用法
+            // dayjs 对象有 toDate 方法，如果没有则假设已经是 Date 对象
+            const date = dayjsDate && typeof dayjsDate.toDate === 'function' ? dayjsDate.toDate() : dayjsDate
+            return propsAttrs.disabledDate!(date)
+          }
+        }
+
         return h(DatePickerComponent as any, {
           ...attrs,
           value: propsAttrs.modelValue,
@@ -650,7 +661,8 @@ const AntdAdapter: UIAdapter = {
           valueFormat: propsAttrs.valueFormat,
           placeholder: propsAttrs.type?.includes('range')
             ? [propsAttrs.startPlaceholder, propsAttrs.endPlaceholder]
-            : propsAttrs.placeholder
+            : propsAttrs.placeholder,
+          disabledDate: adaptedDisabledDate
         })
       }
     },

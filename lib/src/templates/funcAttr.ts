@@ -13,19 +13,16 @@ import type { FormSchema } from '@/types'
  * 使用场景：预约系统、活动报名等需要选择未来日期的场景
  */
 export const futureDatePickerSchema: FormSchema = {
-  labelWidth: 120,
-  labelAlign: 'right',
-  size: 'default',
+  submitBtn: true,
   items: [
     {
       label: '预约日期',
-      component: 'DatePicker',
       name: 'appointmentDate',
+      component: 'DatePicker',
       componentProps: {
         type: 'date',
         placeholder: '只能选择未来日期',
         valueFormat: 'YYYY-MM-DD',
-        // 使用 JS 表达式语法传递函数
         disabledDate:
           '{{ (time) => { const today = new Date(); today.setHours(0, 0, 0, 0); return time.getTime() < today.getTime(); } }}'
       }
