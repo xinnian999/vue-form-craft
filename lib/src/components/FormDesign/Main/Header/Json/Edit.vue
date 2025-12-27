@@ -7,8 +7,9 @@
       :style="{ height: '500px' }"
     />
     <div class="footer">
-      <Button @click="handleSave" type="primary">保存更改</Button>
+      <Button @click="handleClear">清空</Button>
       <Button @click="handleReset">重置</Button>
+      <Button @click="handleSave" type="primary">保存</Button>
     </div>
   </div>
 </template>
@@ -61,6 +62,10 @@ const handleReset = () => {
   jsonString.value = JSON.stringify(jsonWithoutDesignKey, null, 2)
 }
 
+const handleClear = () => {
+  jsonString.value = ''
+}
+
 onMounted(() => {
   handleReset()
 })
@@ -72,12 +77,13 @@ onMounted(() => {
 @include ns('save-json-edit') {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
 
   .footer {
     display: flex;
     gap: 10px;
-    justify-content: center;
+    padding: 0 10px;
+    justify-content: right;
   }
 }
 </style>
