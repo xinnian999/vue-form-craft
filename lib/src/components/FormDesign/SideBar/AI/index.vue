@@ -41,7 +41,7 @@ import type { BubbleListItemProps } from 'vue-element-plus-x/types/BubbleList'
 import { Icon } from '@/components'
 import generateSchemaPrompt from '@/config/generateSchemaPrompt.md?raw'
 import { useAi, useDesignInstance } from '@/hooks'
-import { ns } from '@/utils'
+import { ns, removeDesignKeys } from '@/utils'
 import Welcome from './Welcome.vue'
 
 type BubbleItem = BubbleListItemProps & {
@@ -130,8 +130,9 @@ const startSSE = async () => {
   const current = list.value.at(-1)!
 
   try {
+    const schema = removeDesignKeys(designInstance.getSchema())
     const prompt = `${generateSchemaPrompt}\n\n请基于当前表单Schema:${JSON.stringify(
-      designInstance.getSchema()
+      schema
     )},生成新的表单Schema。\n\n要求:${userInput}`
 
     const result = await request(prompt)
