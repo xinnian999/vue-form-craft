@@ -33,17 +33,20 @@ export default {
         ]
       },
       labelAlign: 'top',
+      defaultValue: 'static',
       linkages: [
         {
           type: 'data',
           target: 'componentProps.api.url',
-          condition: "{{ $values.componentProps.mode === 'remote' && !$values.componentProps.api.url}}",
+          condition:
+            "{{ $values.componentProps.mode === 'remote' && !$values.componentProps.api.url}}",
           value: 'https://apifoxmock.com/m1/5213940-4880280-default/options/test'
         },
         {
           type: 'data',
           target: 'componentProps.api.method',
-          condition: "{{ $values.componentProps.mode === 'remote' && !$values.componentProps.api.method}}",
+          condition:
+            "{{ $values.componentProps.mode === 'remote' && !$values.componentProps.api.method}}",
           value: 'GET'
         },
         {
@@ -69,7 +72,7 @@ export default {
           '{{ (index) => {\n  return { label: `选项${index}`,value:`value${index}` }\n} }}'
       },
       labelAlign: 'top',
-      when: '{{$values.componentProps.mode==="static"}}',
+      when: '{{$values.componentProps.mode!=="remote"}}',
       items: [
         {
           label: '选项名',
@@ -96,7 +99,7 @@ export default {
       component: 'Card',
       componentProps: {},
       labelAlign: 'top',
-      when: '{{$values.componentProps.mode!=="static"}}',
+      when: '{{$values.componentProps.mode==="remote"}}',
       items: [
         {
           name: 'form-divider-request',

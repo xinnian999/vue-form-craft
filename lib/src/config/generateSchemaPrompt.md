@@ -8,7 +8,6 @@
 - **只输出《JsonSchema》，禁止输出其他信息，禁止解释！**
 - **输出的json必须是一行json字符串，禁止输出代码块！**
 - **严禁使用 Markdown 代码块格式（如 `json 或 `），必须直接输出纯 JSON 字符串！**
-- **输出格式示例：`{"labelWidth":150,"items":[]}` 而不是 `\`\`\`json\n{"labelWidth":150}\n\`\`\``**
 
 ## JsonSchema数据协议
 
@@ -16,60 +15,6 @@
 
 - 《JsonSchema》的第一层是表单整体的全局配置，如标签样式，整体禁用等。 除此之外就是`items`了。
 - items是表单项的合集。每个表单项可配置 label、name、component、componentProps 等。
-- **注意**：`designKey` 字段会自动生成，AI 不需要输出此字段。
-- component 字段实际上是 element-plus 的组件映射（Input → ElInput，Select → ElSelect …）。每个表单项的 componentProps 可以传入 对应 element-plus 组件支持的所有 props。但Radio/Checkbox比较特殊，是基于el的二次封装组件，可以直接传入options。
-
-### 支持的组件列表
-
-**重要**: 只能使用以下组件，禁止使用不在列表中的组件！
-
-**基础组件**:
-
-- `Input`: 单行输入框输入
-- `TextArea`: 多行输入框输入
-- `Password`: 密码输入框
-- `InputNumber`: 数字输入框
-- `Select`: 下拉选择
-- `Radio`: 单选框
-- `Checkbox`: 多选框
-- `Switch`: 开关
-- `Slider`: 滑块
-- `Rate`: 评分
-- `ColorPicker`: 颜色选择器
-- `DatePicker`: 日期选择器
-- `Cascader`: 级联选择器
-- `Autocomplete`: 自动补全输入
-
-**高级组件**:
-
-- `Upload`: 文件上传
-- `FormList`: 自增容器（数组数据收集）
-- `SelectInput`: 选择输入组合
-- `ColorInput`: 颜色输入
-- `VerifyCode`: 验证码输入
-- `Esign`: 电子签名
-- `Markdown`: Markdown编辑器
-- `JsonEdit`: JSON编辑器
-- `Custom`: 自定义组件
-
-**布局组件**:
-
-- `Grid`: 栅格布局
-- `Tabs`: 标签页
-- `TabPane`: 标签页面板
-- `Card`: 卡片
-- `Collapse`: 折叠面板
-- `CollapseItem`: 折叠面板项
-- `Inline`: 行内布局
-- `ObjGroup`: 对象分组
-
-**辅助组件**:
-
-- `Title`: 标题
-- `Text`: 文本
-- `Divider`: 分割线
-- `Alert`: 提示
-- `Tag`: 标签
 
 ### 示例：
 
@@ -116,34 +61,84 @@
 - **label**: `string`，表单项标签
 - **name**: `string`，唯一标识（数据 key）
 - **component**: `string`，组件标识（如 Input、Select）
-- **componentProps**: `object`，透传给组件的属性（参考 element-plus 文档）
+- **componentProps**: `object`，透传给组件的属性
 - **required**: `boolean`，默认 `false`，是否必填
-- **initialValue**: `any`，初始值
 - **help**: `string`，提示信息
 - **when**: `boolean`，默认 `true`，是否渲染（v-if）
 - **rules**: `RuleItem[]`，自定义校验规则
-- **items**: `FormItemType[]`，子表单项，用于嵌套组件（如卡片、栅格、自增容器）
 - **linkages**: `FormLinkage[]`，联动配置
+- **items**: `FormItemType[]`，子表单项，用于嵌套组件（如卡片、栅格、自增容器）
+
+### 支持的组件列表
+
+**重要**: 只能使用以下组件，禁止使用不在列表中的组件！
+
+**基础组件**:
+
+- `Input`: 单行输入框输入
+- `TextArea`: 多行输入框输入
+- `Password`: 密码输入框
+- `InputNumber`: 数字输入框
+- `Select`: 下拉选择
+- `Radio`: 单选框
+- `Checkbox`: 多选框
+- `Switch`: 开关
+- `Slider`: 滑块
+- `Rate`: 评分
+- `ColorPicker`: 颜色选择器
+- `DatePicker`: 日期选择器
+- `Cascader`: 级联选择器
+- `Autocomplete`: 自动补全输入
+
+- `Upload`: 文件上传
+- `FormList`: 自增容器（数组数据收集）
+- `SelectInput`: 选择输入组合
+- `ColorInput`: 颜色输入
+- `VerifyCode`: 验证码输入
+- `Esign`: 电子签名
+- `Custom`: 自定义组件
+
+**布局组件**:
+
+- `Grid`: 栅格布局
+- `Tabs`: 标签页
+- `Card`: 卡片
+- `Collapse`: 折叠面板
+- `Inline`: 行内布局
+- `ObjGroup`: 对象分组
+
+**辅助组件**:
+
+- `Title`: 标题
+- `Text`: 文本
+- `Divider`: 分割线
+- `Alert`: 提示
+- `Tag`: 标签
+
+### JS表达式核心特性（最重要！）
+
+**JS表达式**为字符串格式，以双花括号 `"{{ ... }}"` 为语法特征。
+
+在JsonSchema中，被双花括号包裹的字符串一律会被**动态解析**为 **js表达式并返回结果**。
+
+> JS表达式 可以使用的联动变量：
+
+| 变量名      | 类型   | 描述                                 |
+| ----------- | ------ | ------------------------------------ |
+| $values     | Object | 整个表单的值                         |
+| $selectData | Object | 【选择类字段】选中项数据集           |
+| $item       | Object | 【FormList】子字段可用，单行的数据集 |
+| $index      | Object | 【FormList】子字段可用，单行的下标   |
+
+**JsonSchema 所有协议字段都支持JS表达式。** 这意味着你可以动态的控制表单的任何细粒度的配置，实现各种复杂的联动效果！
 
 ## 联动规范
 
-联动分为两种方式，必须严格区分使用场景：
+### 方式一：JS表达式
 
-### 方式一：JS表达式（属性动态计算）
+当需要动态设置某个属性时，优先考虑使用《JS表达式》
 
-- 使用 `{{ }}` 包裹 JS 表达式。
-- 仅能用于 **配置属性的动态计算**，例如：when、disabled、placeholder、help 等。
-- 表达式内可以访问 `$values`（表单数据对象）、`$selectData`（选择器数据）、`$instance`（表单实例）等全局变量。
-
-**全局变量说明**：
-
-- `$values`: 表单数据对象
-- `$selectData`: 选择器组件的源数据
-- `$instance`: 表单实例，提供 `setFieldValue`、`getFieldValue`、`validate` 等方法
-- `$item`: FormList中当前行的数据
-- `$index`: FormList中当前行的索引
-
-示例：
+#### 示例：
 
 ```json
 {
@@ -153,18 +148,19 @@
   "componentProps": {
     "placeholder": "{{ $values.name ? $values.name + '的简介' : '请输入简介' }}",
     "disabled": "{{ !$values.name }}"
-  },
-  "when": "{{ $values.userType === 'admin' }}"
+  }
 }
 ```
 
 ### 方式二：联动配置（linkages）
 
-当需要监听某个表单项数据变化时触发联动，必须使用 `linkages` 数组配置。联动分为两种类型：
+当表单项的值发生改变时，会触发`linkages`。
+
+适合监听字段A变化，影响字段B的属性或值。
 
 #### 2.1 attr联动（修改目标字段的Schema属性）
 
-用于动态修改目标字段的配置属性（如hidden、disabled、componentProps等）。
+**使用规则**：用于动态修改目标字段的配置属性（如when、disabled、componentProps等）。仅在JS表达式无法满足的复杂场景使用（如FormList批量联动、需要复杂条件判断等）。
 
 配置字段：
 
@@ -192,7 +188,7 @@
       "target": "password",
       "type": "attr",
       "path": "when",
-      "value": "{{ $values.userType === 'admin' }}"
+      "value": "{{ $values.userType === 'admin' }}",
       "condition": true
     }
   ]
@@ -201,7 +197,7 @@
 
 #### 2.2 data联动（修改目标字段的值）
 
-用于动态修改目标字段的数据值。
+**使用规则**：用于动态修改目标字段的数据值。当字段A变化时，自动计算并设置字段B的值时使用。
 
 配置字段：
 
@@ -281,25 +277,17 @@
 }
 ```
 
-如果用户需求涉及交互或联动，必须遵循以上联动规则
+## 函数传递
 
-### 方式三：事件处理函数
-
-当需要在事件中执行复杂逻辑时，可以在 `componentProps` 中配置事件处理函数。
+得益于《JS表达式》的特性，我们可以直接传递字符串函数。
 
 **函数语法**：
 
 - 使用 `{{ }}` 包裹箭头函数或普通函数
-- 函数内可直接访问全局变量（`$values`、`$instance` 等）
-- 事件参数直接作为函数参数传入
+- 函数内可直接访问联动变量（`$values`、`$instance` 等）
+- 事件参数可直接作为函数参数传入
 
-**常用事件**：
-
-- `onChange`: 值改变时触发
-- `onBlur`: 失去焦点时触发
-- `onInput`: 输入时触发
-- `onClick`: 点击时触发
-- `disabledDate`: 日期禁用判断（DatePicker组件）
+### 示例
 
 示例1（普通函数 - 日期选择限制）：
 
@@ -315,21 +303,7 @@
 }
 ```
 
-示例2（onChange事件 - 联动计算）：
-
-```json
-{
-  "label": "单价",
-  "name": "price",
-  "component": "InputNumber",
-  "componentProps": {
-    "placeholder": "请输入单价",
-    "onChange": "{{ () => { const price = $values.price || 0; const quantity = $values.quantity || 0; $instance.setFieldValue('total', price * quantity) } }}"
-  }
-}
-```
-
-示例2（onBlur事件 - 验证提示）：
+示例2（onBlur事件）：
 
 ```json
 {
@@ -338,24 +312,7 @@
   "component": "Input",
   "componentProps": {
     "placeholder": "请输入用户名",
-    "onBlur": "{{ () => { const username = $values.username; if (username && username.length < 3) { $instance.setFieldValue('tip', '用户名至少3个字符') } else if (username) { $instance.setFieldValue('tip', '用户名可用') } } }}"
-  }
-}
-```
-
-示例3（带参数的事件处理）：
-
-```json
-{
-  "label": "省份",
-  "name": "province",
-  "component": "Select",
-  "componentProps": {
-    "options": [
-      { "label": "广东省", "value": "guangdong" },
-      { "label": "北京市", "value": "beijing" }
-    ],
-    "onChange": "{{ (value) => { if (value === 'guangdong') { $instance.setFieldValue('city', '广州') } else if (value === 'beijing') { $instance.setFieldValue('city', '北京') } } }}"
+    "onBlur": "{{ e => { alert("你输入了：" + e.target.value) } }}"
   }
 }
 ```
@@ -380,25 +337,18 @@
 
 当字段需要更复杂的校验，如邮箱、URL、手机号时，使用 `rules`。
 
+基于`async-validator`扩展了'custom' | 'jsExpr'
+
 > `RuleItem` 类型定义
 
 ```ts
 type RuleType = 'required' | 'min' | 'max' | 'pattern' | 'builtin' | 'enum' | 'custom' | 'jsExpr'
 
 type RuleItem = {
-  // 校验类型
   type: RuleType
-  // 校验值（根据type不同而不同）
-  // - pattern: 正则表达式字符串（需要转义\）
-  // - jsExpr: JS表达式字符串（返回布尔值）
-  // - min/max: 数字
-  // - builtin: 'email' | 'url' | 'number' 等
-  // - enum: 枚举值数组
   value?: any
-  // 校验失败提示
   message?: string
-  // 校验触发时机
-  trigger?: 'blur' | 'change' | ('blur' | 'change')[]
+  trigger?: 'blur' | 'change'
 }
 ```
 

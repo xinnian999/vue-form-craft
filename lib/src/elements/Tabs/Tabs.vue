@@ -1,6 +1,6 @@
 <template>
   <div :class="ns('tabs')">
-    <Tabs v-bind="$attrs" v-model="activeKey" :key="tabsKey">
+    <Tabs v-model="activeKey" :key="tabsKey" :type="type" :tabPosition="tabPosition">
       <TabPane
         v-for="tab in children"
         :key="tab.name"
@@ -48,6 +48,8 @@ const { Tabs, TabPane } = useUI()
 const props = defineProps<
   ComponentBaseProps & {
     defaultKey: string
+    type?: 'card' | 'border-card' | ''
+    tabPosition?: 'top' | 'right' | 'bottom' | 'left'
   }
 >()
 
