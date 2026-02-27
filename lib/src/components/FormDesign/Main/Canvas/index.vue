@@ -59,10 +59,10 @@ const handleCanvasClick = () => {
 @include ns('form-design-center') {
   flex: 1;
   overflow: hidden;
-  border-right: 1px solid #eee;
+  border-right: 1px solid $borderColor;
   display: flex;
   flex-direction: column;
-  background-color: #eee;
+  background-color: $bgColorLight;
 
   .form-design-canvas {
     flex: 1;
@@ -86,7 +86,7 @@ const handleCanvasClick = () => {
     }
 
     .fd-form {
-      background-color: #fff;
+      background-color: $bgColor;
       border-radius: 5px;
       padding: 20px;
       box-sizing: border-box;

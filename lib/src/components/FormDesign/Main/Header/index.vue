@@ -120,9 +120,9 @@ const rightActions: PreviewAction[] = [
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  background-color: #fff;
+  background-color: $bgColor;
   padding: 10px 15px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid $borderColor;
   gap: 12px;
 
   .logo {

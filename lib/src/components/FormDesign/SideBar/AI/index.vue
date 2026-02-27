@@ -337,10 +337,10 @@ const handleClear = () => {
       left: 0;
       // transform: translateX(50%);
       top: -35px;
-      border: 1px solid #ccc;
+      border: 1px solid $borderColor;
       cursor: pointer;
       z-index: 10;
-      background-color: #fff;
+      background-color: $bgColor;
       padding: 5px;
       font-size: 16px;
       border-radius: 50%;

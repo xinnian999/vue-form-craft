@@ -56,7 +56,7 @@ onMounted(() => {
 
 .welcome {
   padding: 10px;
-  border: 1px solid #ececec;
+  border: 1px solid $borderColor;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -92,11 +92,11 @@ onMounted(() => {
     gap: 10px;
     .prompt-item {
       cursor: pointer;
-      background-color: #f5f5f5;
+      background-color: $bgColorLight;
       padding: 5px 10px;
       border-radius: 5px;
       &:hover {
-        background-color: #e5e5e5;
+        opacity: 0.7;
       }
     }
   }

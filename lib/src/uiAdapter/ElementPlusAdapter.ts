@@ -54,7 +54,8 @@ const ElementPlusAdapter: UIAdapter = {
     style.setProperty(`--${ns('color-primary')}`, 'var(--el-color-primary)')
     style.setProperty(`--${ns('color-primary-light')}`, 'var(--el-color-primary-light-9)')
     style.setProperty(`--${ns('color-danger')}`, 'var(--el-color-danger)')
-    style.setProperty(`--${ns('color-bg')}`, '#ffffff')
+    style.setProperty(`--${ns('color-bg')}`, 'var(--el-bg-color)')
+    style.setProperty(`--${ns('color-bg-light')}`, 'var(--el-fill-color-light)')
     style.setProperty(`--${ns('color-bg-secondary')}`, '#ffffff')
     style.setProperty(`--${ns('color-bg-soft')}`, '#f5f7fa')
     style.setProperty(`--${ns('color-success')}`, 'var(--el-color-success)')
@@ -180,17 +181,17 @@ const ElementPlusAdapter: UIAdapter = {
           attrs,
           propsAttrs.options
             ? {
-                default: () =>
-                  propsAttrs.options.map((option: any) =>
-                    h(ElOption, {
-                      key: option.value,
-                      label: option.label,
-                      value: option.value,
-                      disabled: option.disabled
-                    })
-                  ),
-                ...slots
-              }
+              default: () =>
+                propsAttrs.options.map((option: any) =>
+                  h(ElOption, {
+                    key: option.value,
+                    label: option.label,
+                    value: option.value,
+                    disabled: option.disabled
+                  })
+                ),
+              ...slots
+            }
             : slots
         )
     },

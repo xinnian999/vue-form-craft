@@ -67,7 +67,7 @@ const handleJumpTo = (index: number) => {
   .history-item {
     padding: 12px;
     margin-bottom: 8px;
-    background-color: $bgColor2;
+    background-color: $bgColorLight;
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.2s;

@@ -103,17 +103,16 @@ const handleClose = () => {
   position: relative;
   overflow: hidden;
   display: flex;
-  background-color: #fff;
 
   .sidebar {
     height: 100%;
     padding: 5px;
     box-sizing: border-box;
-    border-right: 1px solid #eee;
+    border-right: 1px solid $borderColor;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    background-color: #fff;
+    // background-color: #fff;
 
     .item {
       width: 50px;
@@ -125,13 +124,13 @@ const handleClose = () => {
       cursor: pointer;
       font-size: 20px;
       &:hover {
-        background-color: #eee;
+        background-color: $bgColorLight;
       }
     }
 
     .item.active {
       color: $themeColor;
-      background-color: #eee;
+      background-color: $bgColorLight;
     }
   }
 
@@ -141,14 +140,14 @@ const handleClose = () => {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    border-right: 1px solid #eee;
+    border-right: 1px solid $borderColor;
 
     .topbar {
       padding: 12px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid $borderColor;
       .desc {
         font-size: 12px;
         color: #999;

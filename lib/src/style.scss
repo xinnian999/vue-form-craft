@@ -1,9 +1,10 @@
-$namespace: 'vue-form-craft';
+$namespace: 'vfc';
 
 $themeColor: var(--#{$namespace}-color-primary, #409eff);
 $lightThemeColor: var(--#{$namespace}-color-primary-light, #ecf5ff);
 $dangerColor: var(--#{$namespace}-color-danger, #f56c6c);
 $bgColor: var(--#{$namespace}-color-bg, #ffffff);
+$bgColorLight: var(--#{$namespace}-color-bg-light, #f5f7fa);
 $bgColor2: var(--#{$namespace}-color-bg-secondary, #ffffff);
 $bgColor3: var(--#{$namespace}-color-bg-soft, #f5f7fa);
 $successColor: var(--#{$namespace}-color-success, #67c23a);
@@ -25,11 +26,11 @@ $textColor3: var(--#{$namespace}-color-text-regular, #606266);
 
 // FormItem 组件
 @include ns('form-item') {
-  &.hide-label > .el-form-item__label {
+  &.hide-label>.el-form-item__label {
     display: none;
   }
 
-  &.hide-label > .ant-form-item-row > .ant-form-item-label {
+  &.hide-label>.ant-form-item-row>.ant-form-item-label {
     display: none;
   }
 
@@ -39,10 +40,12 @@ $textColor3: var(--#{$namespace}-color-text-regular, #606266);
       width: 100% !important;
       text-align: left;
     }
+
     .ant-form-item-row {
       flex-direction: column;
       gap: 5px;
     }
+
     .ant-form-item-control {
       flex: auto;
     }
@@ -51,7 +54,7 @@ $textColor3: var(--#{$namespace}-color-text-regular, #606266);
 
 // UI 库穿透样式集合
 @include ns('form-design') {
-  .el-button + .el-button {
+  .el-button+.el-button {
     margin-left: 0;
   }
 
