@@ -33,7 +33,7 @@ const schema = {
         placeholder: '请输入...'
       },
       name: 'reason',
-      hidden: '{{ $values.rate>=3 || !$values.rate }}' // 评分未选中 或 评分<3时隐藏差评原因
+      when: '{{ $values.rate<3 && $values.rate>0 }}' // 评分<3时可输入差评原因
     }
   ]
 }

@@ -16,24 +16,22 @@ const schema = {
         mode: 'static',
         options: [
           {
-            name: '商品1',
-            id: '1',
+            label: '商品1',
+            value: '1',
             price: 25
           },
           {
-            name: '商品2',
-            id: '2',
+            label: '商品2',
+            value: '2',
             price: 65
           },
           {
-            name: '商品3',
-            id: '3',
+            label: '商品3',
+            value: '3',
             price: 100
           }
         ],
-        placeholder: '请选择...',
-        labelKey: 'name',
-        valueKey: 'id'
+        placeholder: '请选择...'
       },
       name: 'commodity',
       designKey: 'design-commodity',
@@ -46,7 +44,7 @@ const schema = {
       ]
     },
     {
-      label: '价格',
+      label: '价格(元)',
       component: 'InputNumber',
       name: 'price',
       componentProps: {

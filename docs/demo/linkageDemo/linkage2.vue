@@ -70,7 +70,7 @@ const schema = {
       },
       name: 'article',
       required: true,
-      hidden: '{{!$values.category}}'
+      when: '{{!$values.category}}'
     }
   ]
 }

@@ -35,13 +35,10 @@ const schema: FormSchema = {
             value: 'women'
           }
         ],
-        labelKey: 'label',
-        valueKey: 'value',
         type: 'circle'
       },
       name: 'gneder',
       required: true,
-      initialValue: 'man',
       designKey: 'design-gneder',
       linkages: [
         {
@@ -64,7 +61,7 @@ const schema: FormSchema = {
       },
       name: 'isHy',
       required: true,
-      hidden: " {{ $values.gneder === 'man' }} "
+      when: " {{ $values.gneder === 'women' }} "
     },
     {
       label: '怀孕周期',
@@ -76,7 +73,7 @@ const schema: FormSchema = {
         controlsPosition: 'right'
       },
       name: 'hyWeek',
-      hidden: '{{ !$values.isHy }}'
+      when: '{{ !!$values.isHy }}'
     }
   ]
 }
