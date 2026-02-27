@@ -1,11 +1,11 @@
-# Formora
+# VueFormCraft
 
 基于 [vue](https://github.com/vuejs/vue) 和 [element-plus](https://github.com/ElemeFE/element) 实现的表单设计器 + 渲染器
 
 使用了最新的前端技术栈，可以让你免去vue项目中表单的烦恼。
 
-- [在线预览](https://xinnian999.github.io/formora/zh/form-design)
-- [官方文档](https://xinnian999.github.io/formora/zh/)
+- [在线预览](https://xinnian999.github.io/vue-form-craft/zh/form-design)
+- [官方文档](https://xinnian999.github.io/vue-form-craft/zh/)
 - 作者：Elin
 - 联系方式：17803000829
 
@@ -25,7 +25,7 @@
 
 - vuedraggable
 - element-plus
-- formora
+- vue-form-craft
 - lodash
 
 ## 使用
@@ -37,18 +37,18 @@ vue@3.x
 ### 安装
 
 ```js
-npm i formora
+npm i vue-form-craft
 //或
-yarn add formora
+yarn add vue-form-craft
 //或
-pnpm i formora
+pnpm i vue-form-craft
 ```
 
 ### 全局注册
 
 ```js
 import ElementPlus from 'element-plus'
-import VueFormCraft from 'formora'
+import VueFormCraft from 'vue-form-craft'
 import { createApp } from 'vue'
 import 'element-plus/dist/index.css'
 import App from './App.vue'
@@ -81,7 +81,7 @@ app.mount('#app')
 </template>
 
 <script setup lang="ts">
-import type { FormInstance, FormSchema } from 'formora'
+import type { FormInstance, FormSchema } from 'vue-form-craft'
 import { ref } from 'vue'
 
 const formRef = ref<FormInstance>()
@@ -121,9 +121,9 @@ const handleSubmit = async () => {
 </script>
 ```
 
-## 捐赠 formora 的开发
+## 捐赠 vue-form-craft 的开发
 
-`formora` 的文档和代码完全开源，如果该项目有帮助到你的开发工作，你可以捐赠`formora`的研发工作，捐赠无门槛，哪怕是一杯可乐也好。
+`vue-form-craft` 的文档和代码完全开源，如果该项目有帮助到你的开发工作，你可以捐赠`vue-form-craft`的研发工作，捐赠无门槛，哪怕是一杯可乐也好。
 
 <div style="display:flex;gap:15px">
 <img src="./docs/assets/wechat.png" style="height:400px" />

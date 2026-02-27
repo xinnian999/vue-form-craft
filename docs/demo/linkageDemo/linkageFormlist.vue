@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import type { FormSchema } from 'formora'
+import type { FormSchema } from 'vue-form-craft'
 
 const schema: FormSchema = {
   labelWidth: 150,

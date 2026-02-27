@@ -22,4 +22,4 @@ pnpm dev
 pnpm build
 ```
 
-`packages/formora/dist/formora.js`就是依赖入口！
+`packages/vue-form-craft/dist/vue-form-craft.js`就是依赖入口！

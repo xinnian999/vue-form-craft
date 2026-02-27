@@ -1,6 +1,6 @@
 # AI 助手
 
-《Form Craft》内置了 **AI 助手**，基于 [扣子平台](https://www.coze.cn/) 搭建，用户可以 **免费使用**。
+《Vue Form Craft》内置了 **AI 助手**，基于 [扣子平台](https://www.coze.cn/) 搭建，用户可以 **免费使用**。
 
 ## 获取 Token
 
@@ -18,7 +18,7 @@
 
 ```ts
 import ElementPlus from 'element-plus'
-import VueFormCraft from 'formora'
+import VueFormCraft from 'vue-form-craft'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'

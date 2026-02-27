@@ -18,7 +18,7 @@
     "ant-design-vue": "^4.2.6",
     "axios": "^1.6.2",
     "element-plus": "^2.11.4",
-    "formora": "workspace:*",
+    "vue-form-craft": "workspace:*",
     "lodash": "^4.17.21",
     "shiki": "^1.21.0",
     "vue": "^3.5.8",

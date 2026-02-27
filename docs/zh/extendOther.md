@@ -1,6 +1,6 @@
 # 扩展其他组件库
 
-可能你的项目用的是其他组件库的组件，那么你也可以选择`formora`。因为你可以根据下面的示例，来扩展任意组件库到表单设计器里。
+可能你的项目用的是其他组件库的组件，那么你也可以选择`vue-form-craft`。因为你可以根据下面的示例，来扩展任意组件库到表单设计器里。
 
 下面以扩展`Arce-design`的`Input`为例
 
@@ -64,7 +64,7 @@ src
 
 ```ts
 // src/extendElements/AInput/attrSchema.ts
-import type { FormSchema } from 'formora'
+import type { FormSchema } from 'vue-form-craft'
 
 export default {
   size: 'small',
@@ -201,7 +201,7 @@ export default {
 ```ts
 // src/extendElements/Transfer/index.ts
 import { Input } from '@arco-design/web-vue'
-import type { FormElement } from 'formora'
+import type { FormElement } from 'vue-form-craft'
 import attrSchema from './attrSchema'
 import icon from './Icon.vue'
 
@@ -245,7 +245,7 @@ import App from './App.vue'
 import 'element-plus/dist/index.css'
 import ArcoVue from '@arco-design/web-vue'
 import '@arco-design/web-vue/dist/arco.css'
-import VueFormCraft from 'formora'
+import VueFormCraft from 'vue-form-craft'
 import extendElements from './extendElements'
 
 const app = createApp(App)

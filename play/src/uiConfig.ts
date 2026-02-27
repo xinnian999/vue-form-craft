@@ -1,4 +1,4 @@
-import { AntdAdapter, ElementPlusAdapter } from 'formora/dev'
+import { AntdAdapter, ElementPlusAdapter } from 'vue-form-craft/dev'
 
 export type uiConfig = 'elementPlus' | 'antd'
 

@@ -3,16 +3,16 @@ import { mdVueDemoPlugin } from 'vitepress-vue-demo'
 
 export default defineConfig({
   lang: 'zh',
-  title: 'Formora',
+  title: 'VueFormCraft',
   description: '基于vue3的一个开箱即用低代码表单方案',
-  base: '/formora/',
+  base: '/vue-form-craft/',
   vite: {
     server: {
       port: 9999,
       host: true
     }
   },
-  head: [['link', { rel: 'icon', href: '/formora/favicon.svg' }]],
+  head: [['link', { rel: 'icon', href: '/vue-form-craft/favicon.svg' }]],
   markdown: {
     config: (md) => {
       md.use(mdVueDemoPlugin, { root: './' })
@@ -22,7 +22,7 @@ export default defineConfig({
     search: {
       provider: 'local'
     },
-    socialLinks: [{ icon: 'github', link: 'https://github.com/xinnian999/formora' }]
+    socialLinks: [{ icon: 'github', link: 'https://github.com/xinnian999/vue-form-craft' }]
   },
   locales: {
     root: {

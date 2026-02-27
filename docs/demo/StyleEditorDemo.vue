@@ -48,8 +48,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { FormRender } from '../../../formora/src'
-import type { FormSchema } from '../../../formora/src/types'
+import { FormRender } from '../../../vue-form-craft/src'
+import type { FormSchema } from '../../../vue-form-craft/src/types'
 
 const formData = ref({
   customStyle: {

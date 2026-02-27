@@ -1,5 +1,5 @@
 {
-  "name": "formora",
+  "name": "vue-form-craft",
   "version": "5.0.0",
   "private": false,
   "type": "module",
@@ -23,6 +23,7 @@
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
+    "./global": "./global.d.ts",
     "./dev": "./src/index.ts"
   },
   "keywords": [

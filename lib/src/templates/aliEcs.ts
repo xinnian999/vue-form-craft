@@ -1,4 +1,4 @@
-import type { FormSchema } from 'formora'
+import type { FormSchema } from 'vue-form-craft'
 
 export default {
   labelWidth: 150,

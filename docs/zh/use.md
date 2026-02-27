@@ -3,7 +3,7 @@
 ## 安装
 
 ```sh
-$ npm i formora
+$ npm i vue-form-craft
 ```
 
 ## 全局注册
@@ -15,7 +15,7 @@ $ npm i formora
 ```ts
 import ElementPlus from 'element-plus'
 import { createApp } from 'vue'
-import VueFormCraft from 'formora'
+import VueFormCraft from 'vue-form-craft'
 import 'element-plus/dist/index.css'
 import App from './App.vue'
 
@@ -35,7 +35,7 @@ app.mount('#app')
 {
   "compilerOptions": {
     // ...
-    "types": ["formora/global"]
+    "types": ["vue-form-craft/global"]
   }
 }
 ```
@@ -67,7 +67,7 @@ app.mount('#app')
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { FormSchema } from 'formora'
+import type { FormSchema } from 'vue-form-craft'
 
 const formValues = ref({})
 

@@ -1,4 +1,4 @@
-# Formora 多 UI 适配方案
+# VueFormCraft 多 UI 适配方案
 
 为当前表单设计器抽离出一套统一的组件协议，然后开发一套组件适配器，可扩展适配多套UI库。
 
@@ -6,7 +6,7 @@
 
 - **支持多 UI**：支持 Element-Plus / Arco / Ant Design Vue / Naive UI 等，甚至自定义组件库。
 - 同一套JsonSchema协议，可以适配多套UI库，一键切换。
-- **保持单库发布**：继续使用一个 npm 包 `formora`，UI 库由用户自行安装。
+- **保持单库发布**：继续使用一个 npm 包 `vue-form-craft`，UI 库由用户自行安装。
 - **渐进迁移**：兼容现有“以 element-plus 为主”的 schema，逐步演进为 UI 无关的抽象协议。
 
 ---
@@ -258,7 +258,7 @@ export default AntdAdapter
 
 ```typescript
 // main.ts
-import Formora, { AntdAdapter, ElementPlusAdapter } from 'formora'
+import VueFormCraft, { AntdAdapter, ElementPlusAdapter } from 'vue-form-craft'
 import { createApp } from 'vue'
 import App from './App.vue'
 // 方式3: 自定义适配器
@@ -267,14 +267,14 @@ import MyCustomAdapter from './MyCustomAdapter'
 const app = createApp(App)
 
 // 方式1: 使用默认的 Element-Plus (不传 ui 参数)
-app.use(Formora)
+app.use(VueFormCraft)
 
 // 方式2: 使用 Ant Design Vue
-app.use(Formora, {
+app.use(VueFormCraft, {
   ui: AntdAdapter
 })
 
-app.use(Formora, {
+app.use(VueFormCraft, {
   ui: MyCustomAdapter
 })
 
@@ -291,11 +291,11 @@ import ElementPlusAdapter from '@/uiAdapter/ElementPlusAdapter'
 
 export const UI_ADAPTER_KEY = Symbol('UI_ADAPTER')
 
-export interface FormoraOptions {
+export interface VueFormCraftOptions {
   ui?: UIAdapter
 }
 
-export function install(app: App, options: FormoraOptions = {}) {
+export function install(app: App, options: VueFormCraftOptions = {}) {
   const uiAdapter = options.ui || ElementPlusAdapter
 
   // 全局注入 UI 适配器
@@ -357,6 +357,6 @@ const value = ref('')
 - **类型提示**: 使用 TypeScript 时,切换 UI 库后类型提示保持一致
 - **插槽适配**: 不同 UI 库的插槽名称可能不同,需要在适配器中进行映射
 - **事件适配**: 事件名称和参数可能不同,需要在适配器中统一转换为协议定义的格式
-- **外部化依赖**: formora 将所有 UI 库设置为 peerDependencies,不会打包进库中
+- **外部化依赖**: vue-form-craft 将所有 UI 库设置为 peerDependencies,不会打包进库中
 - 部分组件的样式适配，需要在src/style.scss中进行穿透，注意不要使用deep选择器。
 - 适配的时候，不要使用嵌套的三目运算，因为不好维护。

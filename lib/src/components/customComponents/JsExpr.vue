@@ -111,7 +111,7 @@ const handleAiGenerate = async () => {
       ? `\n## 当前表单Schema信息：\n${JSON.stringify(schema, null, 2)}\n\n根据以上Schema，$values对象中包含的字段有：${extractFieldNames(schema.items || []).join(', ')}`
       : ''
 
-    const prompt = `你是一个JS表达式生成助手。请根据用户需求生成一个符合Vue Form Craft模板语法的JS表达式。
+    const prompt = `你是一个JS表达式生成助手。请根据用户需求生成一个符合Vue Vue Form Craft模板语法的JS表达式。
 
 ## 模板语法规则：
 1. 表达式必须用 {{ }} 包裹

@@ -3,12 +3,12 @@
 layout: home
 
 hero:
-  name: 'Form Craft'
+  name: 'Vue Form Craft'
   text: 'VUE form quick generation tool'
   tagline: 'Get rid of the hassle of forms in your Vue projects'
   image:
     src: /favicon.svg
-    alt: Form Craft
+    alt: Vue Form Craft
   actions:
     - theme: brand
       text: 'Get Started'

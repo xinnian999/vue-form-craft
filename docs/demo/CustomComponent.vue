@@ -4,7 +4,7 @@
 </template>
 
 <script setup lang="ts">
-import type { FormInstance, FormSchema } from 'formora'
+import type { FormInstance, FormSchema } from 'vue-form-craft'
 import { ref } from 'vue'
 
 const formRef = ref<FormInstance>()

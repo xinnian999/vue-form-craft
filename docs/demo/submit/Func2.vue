@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import type { FormSchema } from 'formora'
+import type { FormSchema } from 'vue-form-craft'
 
 // 通过函数生成快捷日期
 const getTomorrow = () => {

@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import type { FormSchema } from 'formora'
+import type { FormSchema } from 'vue-form-craft'
 import { computed, ref } from 'vue'
 
 // v-model 绑定对象：演示回显（初始给部分值）

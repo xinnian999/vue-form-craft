@@ -1,5 +1,5 @@
 import ElementPlus from 'element-plus'
-import Formora from 'formora/dev'
+import VueFormCraft from 'vue-form-craft/dev'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
@@ -15,7 +15,7 @@ const app = createApp(App)
 
 app.use(router)
 
-app.use(Formora, {
+app.use(VueFormCraft, {
   ai: cozeAiFunction,
   ui: uiConfig[ui].adapter
 })

@@ -11,7 +11,7 @@ export const tsVue = (schema: FormSchema) => {
 </template>
 
 <script setup lang="ts">
-import type { FormSchema } from 'formora'
+import type { FormSchema } from 'vue-form-craft'
 
 const schema = ${str} satisfies FormSchema
 
@@ -44,7 +44,7 @@ export const tsJsonSchema = (schema: FormSchema) => {
   const schemaWithoutDesignKey = removeDesignKeys(cloneDeep(schema))
   const str = JSON.stringify(schemaWithoutDesignKey, null, 2)
 
-  return `import type { FormSchema } from "formora";
+  return `import type { FormSchema } from "vue-form-craft";
 
 export default ${str} satisfies FormSchema`
 }

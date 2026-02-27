@@ -1,5 +1,5 @@
 {
-  "name": "@formora/docs",
+  "name": "@vue-form-craft/docs",
   "version": "4.6.0",
   "private": false,
   "type": "module",

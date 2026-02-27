@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 import { ElMessage } from 'element-plus'
-import type { FormElement, FormSchema } from 'formora'
+import type { FormElement, FormSchema } from 'vue-form-craft'
 import { onMounted, ref } from 'vue'
 import uiToggle from '../components/uiToggle.vue'
 

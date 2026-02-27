@@ -44,7 +44,7 @@ src/
 
 <script setup lang="ts">
 import type { TransferDataItem, TransferKey } from 'element-plus'
-import { useFormInstance } from 'formora'
+import { useFormInstance } from 'vue-form-craft'
 
 const props = defineProps<{ name: string; data: TransferDataItem[] }>()
 
@@ -97,7 +97,7 @@ const onChange = (value: TransferKey[]) => {
 
 ```ts
 // src/extendElements/Transfer/attrSchema.ts
-import type { FormSchema } from 'formora'
+import type { FormSchema } from 'vue-form-craft'
 
 export default {
   size: 'small',
@@ -189,7 +189,7 @@ export default {
 `src/extendElements/Transfer/index.ts`
 
 ```ts
-import type { FormElement } from 'formora'
+import type { FormElement } from 'vue-form-craft'
 import attrSchema from './attrSchema'
 import icon from './Icon.vue'
 import render from './Render.vue'
@@ -224,7 +224,7 @@ import ElementPlus from 'element-plus'
 import { createApp } from 'vue'
 import App from './App.vue'
 import 'element-plus/dist/index.css'
-import VueFormCraft from 'formora'
+import VueFormCraft from 'vue-form-craft'
 import extendElements from './extendElements'
 
 const app = createApp(App)

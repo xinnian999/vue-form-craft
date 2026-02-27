@@ -1,5 +1,5 @@
 import axios from 'axios'
-import type { AiGenerateFunction, AiGenerateParams } from 'formora/dev'
+import type { AiGenerateFunction, AiGenerateParams } from 'vue-form-craft/dev'
 
 // Ollama服务配置
 const OLLAMA_BASE_URL = import.meta.env.VITE_OLLAMA_BASE_URL || 'http://localhost:11434'

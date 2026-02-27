@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import type { FormSchema } from 'formora'
+import type { FormSchema } from 'vue-form-craft'
 import { ref } from 'vue'
 
 const formValues = ref({})

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-FormRender is the rendering component of formora.
+FormRender is the rendering component of vue-form-craft.
 
 ::: demo expand
 

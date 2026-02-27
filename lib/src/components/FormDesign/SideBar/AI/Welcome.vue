@@ -1,6 +1,6 @@
 <template>
   <div class="welcome">
-    <div class="title">Form Craft 表单助手</div>
+    <div class="title">Vue Form Craft 表单助手</div>
     <div class="desc">
       您好！我是智能表单助手。我可以帮你快速生成 or 修改表单。祝您高效完成表单设计！
     </div>

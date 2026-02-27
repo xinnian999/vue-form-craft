@@ -1,5 +1,5 @@
 import axios from 'axios'
-import type { AiGenerateFunction } from 'formora/dev'
+import type { AiGenerateFunction } from 'vue-form-craft/dev'
 
 const token = import.meta.env.VITE_COZE_TOKEN
 
