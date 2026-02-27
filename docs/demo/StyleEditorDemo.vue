@@ -38,7 +38,7 @@
   label: '自定义样式',
   component: 'Custom',
   name: 'style',
-  props: {
+  componentProps: {
     componentName: 'FormDesign-StyleEditor'
   }
 }</code></pre>
@@ -48,8 +48,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { FormRender } from '../../../vue-form-craft/src'
-import type { FormSchema } from '../../../vue-form-craft/src/types'
+import { FormRender } from 'vue-form-craft'
+import type { FormSchema } from 'vue-form-craft'
 
 const formData = ref({
   customStyle: {
@@ -73,7 +73,7 @@ const schema: FormSchema = {
       label: '自定义样式',
       component: 'Custom',
       name: 'customStyle',
-      props: {
+      componentProps: {
         componentName: 'FormDesign-StyleEditor'
       }
     }

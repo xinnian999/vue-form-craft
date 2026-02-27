@@ -12,7 +12,7 @@ const schema = {
     {
       label: '字段1',
       component: 'Input',
-      props: {
+      componentProps: {
         placeholder: '请输入...'
       },
       name: 'item1',
@@ -33,7 +33,7 @@ const schema = {
     {
       label: '字段2',
       component: 'Input',
-      props: {
+      componentProps: {
         placeholder: '请输入...'
       },
       name: 'item2'
@@ -41,7 +41,7 @@ const schema = {
     {
       label: '字段3',
       component: 'Input',
-      props: {
+      componentProps: {
         placeholder: '请输入...'
       },
       name: 'item3'

@@ -14,7 +14,7 @@ const schema: FormSchema = {
     {
       label: '姓名',
       component: 'Input',
-      props: {
+      componentProps: {
         placeholder: '请输入姓名'
       },
       name: 'name',
@@ -23,7 +23,7 @@ const schema: FormSchema = {
     {
       label: '性别',
       component: 'Radio',
-      props: {
+      componentProps: {
         mode: 'static',
         options: [
           {
@@ -59,7 +59,7 @@ const schema: FormSchema = {
     {
       label: '是否怀孕',
       component: 'Switch',
-      props: {
+      componentProps: {
         'inline-prompt': false
       },
       name: 'isHy',
@@ -69,7 +69,7 @@ const schema: FormSchema = {
     {
       label: '怀孕周期',
       component: 'InputNumber',
-      props: {
+      componentProps: {
         min: 1,
         max: 999,
         step: 1,

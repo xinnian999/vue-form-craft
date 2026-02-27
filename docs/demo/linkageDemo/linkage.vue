@@ -15,7 +15,7 @@ const schema: FormSchema = {
       label: '姓名',
       component: 'Input',
       name: 'name',
-      props: {
+      componentProps: {
         placeholder: '请输入姓名'
       }
     },
@@ -23,7 +23,7 @@ const schema: FormSchema = {
       label: '简介',
       component: 'TextArea',
       name: 'desc',
-      props: {
+      componentProps: {
         placeholder: "{{ $values.name ? $values.name + '的简介' : '请输入简介' }}",
         disabled: '{{ !$values.name }}'
       }

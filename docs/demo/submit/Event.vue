@@ -15,7 +15,7 @@ const schema: FormSchema = {
       component: 'Input',
       name: 'name',
       required: true,
-      props: {
+      componentProps: {
         placeholder: '请输入姓名',
         onBlur: '{{ e => { alert("你输入了：" + e.target.value) } }}'
       }

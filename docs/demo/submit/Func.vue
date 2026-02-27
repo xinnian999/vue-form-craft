@@ -15,7 +15,7 @@ const schema: FormSchema = {
       label: '选择日期',
       name: 'date',
       component: 'DatePicker',
-      props: {
+      componentProps: {
         type: 'date',
         placeholder: '请选择日期',
         disabledDate: '{{ (time) => time.getTime() < new Date().setHours(0, 0, 0, 0) }}'

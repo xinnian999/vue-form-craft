@@ -15,7 +15,7 @@ const schema: FormSchema = {
       label: '批量设置密码',
       name: 'batchPassword',
       component: 'Password',
-      props: {
+      componentProps: {
         'show-password': true
       },
       designKey: 'design-batchPassword',
@@ -34,7 +34,7 @@ const schema: FormSchema = {
         {
           label: '用户名',
           component: 'Input',
-          props: {
+          componentProps: {
             placeholder: '请输入文本',
             clearable: true
           },
@@ -52,14 +52,14 @@ const schema: FormSchema = {
         {
           label: '密码',
           component: 'Password',
-          props: {
+          componentProps: {
             placeholder: '请输入密码',
             'show-password': true
           },
           name: 'password'
         }
       ],
-      props: {
+      componentProps: {
         mode: 'table'
       },
       initialValue: [{}, {}],

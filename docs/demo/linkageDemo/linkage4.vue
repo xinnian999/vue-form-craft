@@ -12,7 +12,7 @@ const schema = {
     {
       label: '选择商品',
       component: 'Select',
-      props: {
+      componentProps: {
         mode: 'static',
         options: [
           {
@@ -49,7 +49,7 @@ const schema = {
       label: '价格',
       component: 'InputNumber',
       name: 'price',
-      props: {
+      componentProps: {
         min: 1,
         max: 9999,
         step: 1,

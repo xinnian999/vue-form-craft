@@ -12,7 +12,7 @@ const schema = {
     {
       label: '评分',
       component: 'Rate',
-      props: {
+      componentProps: {
         max: 5,
         'allow-half': true
       },
@@ -22,7 +22,7 @@ const schema = {
     {
       label: '差评原因',
       component: 'TextArea',
-      props: {
+      componentProps: {
         autocomplete: 'off',
         showWordLimit: true,
         type: 'textarea',

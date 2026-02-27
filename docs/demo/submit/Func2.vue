@@ -32,7 +32,7 @@ const schema: FormSchema = {
       label: '选择日期',
       name: 'date',
       component: 'DatePicker',
-      props: {
+      componentProps: {
         type: 'date',
         placeholder: '请选择日期',
         shortcuts: [

@@ -12,7 +12,7 @@ const schema = {
     {
       label: '分类',
       component: 'Radio',
-      props: {
+      componentProps: {
         mode: 'remote',
         options: [
           {
@@ -47,7 +47,7 @@ const schema = {
     {
       label: '文章',
       component: 'Radio',
-      props: {
+      componentProps: {
         mode: 'remote',
         options: [],
         placeholder: '请选择文章',

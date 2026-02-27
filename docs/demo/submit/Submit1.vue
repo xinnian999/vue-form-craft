@@ -16,7 +16,7 @@ const schema: FormSchema = {
       component: 'Input',
       name: 'username',
       required: true,
-      props: {
+      componentProps: {
         placeholder: '请输入用户名'
       }
     },
@@ -25,7 +25,7 @@ const schema: FormSchema = {
       component: 'Password',
       name: 'password',
       required: true,
-      props: {
+      componentProps: {
         placeholder: '请输入密码'
       }
     }

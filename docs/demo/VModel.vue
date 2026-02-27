@@ -22,8 +22,8 @@
 </template>
 
 <script setup lang="ts">
-import type { FormSchema } from 'vue-form-craft'
 import { computed, ref } from 'vue'
+import type { FormSchema } from 'vue-form-craft'
 
 // v-model 绑定对象：演示回显（初始给部分值）
 const formValues = ref({
@@ -46,7 +46,7 @@ const schema: FormSchema = {
       name: 'username',
       component: 'Input',
       required: true,
-      props: {
+      componentProps: {
         placeholder: '请输入用户名'
       }
     },
@@ -56,7 +56,7 @@ const schema: FormSchema = {
       component: 'Radio',
       required: true,
       // Radio/Checkbox 在本库中可直接通过 options 配置
-      props: {
+      componentProps: {
         options: [
           { label: '男', value: 'male' },
           { label: '女', value: 'female' }
@@ -68,7 +68,7 @@ const schema: FormSchema = {
       name: 'level',
       component: 'Select',
       required: true,
-      props: {
+      componentProps: {
         placeholder: '请选择会员等级',
         options: [
           { label: '普通', value: 'basic' },
@@ -81,7 +81,7 @@ const schema: FormSchema = {
       label: '是否订阅',
       name: 'subscribe',
       component: 'Switch',
-      props: {
+      componentProps: {
         activeText: '订阅',
         inactiveText: '未订阅'
       }
@@ -90,7 +90,7 @@ const schema: FormSchema = {
       label: '年龄',
       name: 'age',
       component: 'InputNumber',
-      props: {
+      componentProps: {
         min: 0,
         max: 120,
         placeholder: '请输入年龄'
@@ -100,7 +100,7 @@ const schema: FormSchema = {
       label: '个人简介',
       name: 'desc',
       component: 'TextArea',
-      props: {
+      componentProps: {
         rows: 3,
         placeholder:
           "{{  $values.username ? $values.username + ' 的简介（根据用户名动态变化）' : '请输入简介'  }}"

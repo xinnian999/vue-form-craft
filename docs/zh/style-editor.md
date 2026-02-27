@@ -14,7 +14,7 @@
 
 :::demo
 
-demo/StyleEditorDemo
+demo/StyleEditorDemo.vue
 
 :::
 

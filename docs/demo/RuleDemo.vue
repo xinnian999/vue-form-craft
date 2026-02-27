@@ -3,8 +3,8 @@
 </template>
 
 <script setup lang="ts">
-import type { FormSchema } from 'vue-form-craft'
 import { ref } from 'vue'
+import type { FormSchema } from 'vue-form-craft'
 
 const formValues = ref({})
 
@@ -18,7 +18,7 @@ const schema: FormSchema = {
       label: '用户名',
       name: 'username',
       component: 'Input',
-      props: {
+      componentProps: {
         placeholder: '请输入用户名'
       },
       required: true
@@ -28,7 +28,7 @@ const schema: FormSchema = {
       name: 'password',
       component: 'Password',
       required: true,
-      props: {
+      componentProps: {
         placeholder: '请输入密码'
       },
       rules: [
@@ -46,7 +46,7 @@ const schema: FormSchema = {
     },
     {
       label: '确认密码',
-      props: {
+      componentProps: {
         placeholder: '请再次输入密码'
       },
       name: 'confirmPassword',
@@ -64,7 +64,7 @@ const schema: FormSchema = {
       label: '手机号',
       name: 'phone',
       component: 'Input',
-      props: {
+      componentProps: {
         placeholder: '请输入手机号',
         maxlength: 11
       },
@@ -81,7 +81,7 @@ const schema: FormSchema = {
       label: '邮箱',
       name: 'email',
       component: 'Input',
-      props: {
+      componentProps: {
         placeholder: '请输入邮箱'
       },
       rules: [
