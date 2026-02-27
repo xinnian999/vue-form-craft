@@ -23,7 +23,9 @@
     "shiki": "^1.21.0",
     "vue": "^3.5.8",
     "vue-element-plus-x": "^1.3.7",
-    "vuedraggable-es-fix": "^1.0.1"
+    "vuedraggable-es-fix": "^1.0.1",
+    "@langchain/core": "^1.1.29",
+    "@langchain/openai": "^1.2.11"
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.6.2",

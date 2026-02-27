@@ -1,10 +1,9 @@
 import ElementPlus from 'element-plus'
-import VueFormCraft from 'vue-form-craft/dev'
 import { createApp } from 'vue'
+import VueFormCraft from 'vue-form-craft/dev'
 import App from './App.vue'
 import router from './router'
-import { cozeAiFunction } from './utils/cozeAi'
-import { localAiFunction } from './utils/localAi'
+import { ai } from './utils/ai'
 import 'element-plus/dist/index.css'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import { uiConfig } from './uiConfig'
@@ -16,7 +15,7 @@ const app = createApp(App)
 app.use(router)
 
 app.use(VueFormCraft, {
-  ai: cozeAiFunction,
+  ai,
   ui: uiConfig[ui].adapter
 })
 
