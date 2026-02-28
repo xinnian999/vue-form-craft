@@ -122,7 +122,8 @@ export default {
             {
               label: '表单提交按钮',
               name: 'submitBtn',
-              component: 'Switch'
+              component: 'Switch',
+              defaultValue: true
             },
             {
               label: '表单重置按钮',
