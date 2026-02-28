@@ -16,26 +16,39 @@
 
 ### 复杂校验
 
-当字段需要更复杂的校验，如邮箱、URL、手机号时，使用 `rules`。
+当字段需要更复杂的校验时，使用 `rules`。
 
 > `FormRules` 类型定义
 
 ```ts
-type TriggerType = 'blur' | 'change'
+type RuleType =
+  | 'required'
+  | 'min'
+  | 'max'
+  | 'pattern'
+  | 'builtin'
+  | 'enum'
+  | 'custom'
+  | 'jsExpr'
 
-type FormRule = {
-  // 校验表达式，可设置为字符串格式的【正则表达式】或【JS表达式】。
-  // 【正则表达式】应该将\转义，【JS表达式】应该返回一个布尔值。
-  expr: string
-  // 校验失败提示
+type RuleItem = {
+  type?: RuleType
+  value?: any
   message?: string
-  // 校验触发时机
-  trigger?: TriggerType | TriggerType[]
+  trigger?: 'blur' | 'change'
 }
 
-type FormRules = FormRule[]
+type FormRules = RuleItem[]
 ```
 
+常见规则写法：
+
+```json
+[
+  { "type": "min", "value": 6, "message": "长度不能小于6位", "trigger": "blur" },
+  { "type": "pattern", "value": "^[a-zA-Z0-9_]+$", "message": "只能输入字母数字下划线" }
+]
+```
 
 示例：下面是一个注册表单，每一项都使用了`rules`校验。
 

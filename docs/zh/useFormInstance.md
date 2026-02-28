@@ -6,13 +6,13 @@
 
 这里演示二次封装一个el的穿梭框组件：
 
-- 通过`formInstance.read`判断表单处于阅读模式时的展示效果
+- 通过`formInstance.getRead()`判断表单处于阅读模式时的展示效果
 
-- 在选中项的同时，调用`formInstance.updateSelectData`保存选中项的数据源，用于其他组件联动时使用
+- 在选中项变化时，调用`formInstance.updateSelectData`保存选中项数据，用于其他组件联动
 
 ```vue
 <template>
-  <div v-if="formInstance.read">
+  <div v-if="formInstance.getRead()">
     {{ value?.map((val) => data.find((v) => v.key === val)?.label).join('、') }}
   </div>
   <el-transfer v-else v-bind="$attrs" :data="data" @change="onChange" v-model="value" />
@@ -39,19 +39,22 @@ const onChange = (value: TransferKey[]) => {
 
 ## Form实例属性
 
-> 注意：所有实例属性都是只读的，不可直接修改。 不可通过解构赋值访问，否则部分属性会失去响应式
+> 说明：实例以方法形式暴露能力，按需调用即可。
 
-| 属性名              | 类型                                                | 描述                                                                              |
-| ------------------- | --------------------------------------------------- | --------------------------------------------------------------------------------- |
-| schema              | `FormSchema`                                        | 表单Schema配置，纯JSON，用于描述表单结构                                          |
-| schemaContext       | `object`                                            | Schema自定义的 [联动变量](/zh/linkage)                                            |
-| read                | `boolean`                                           | 是否处于阅读模式                                                                  |
-| formValues          | `object`                                            | 表单值                                                                            |
-| selectData          | `object`                                            | 选择类组件的数据源                                                                |
-| initialValues       | `object`                                            | 表单初始值                                                                        |
-| context             | `object`                                            | 表单联动变量                                                                      |
-| updateSelectData    | `(key: string, value: Record<string, any>) => void` | 更新**选择类组件的数据源**的方法                                                  |
-| updateInitialValues | ` (values: Record<string, any>) => void`            | 更新**表单初始值**的方法                                                          |
-| validate            | ` () => Promise<boolean>`                           | 校验表单                                                                          |
-| resetFields         | `name[] => void`                                    | 接收一个name数组，例如`['name','age']` 来重置一组字段为初始值，不传会重置所有字段 |
-| submit              | `() => void`                                        | 校验表单，校验通过后会触发`finish`事件                                            |
+| 属性名           | 类型                                                | 描述 |
+| ---------------- | --------------------------------------------------- | ---- |
+| getSchema        | `() => FormSchema`                                  | 获取当前 Schema |
+| getSchemaContext | `() => Record<string, any> \| undefined`            | 获取 Schema 上下文 |
+| getDesign        | `() => boolean \| undefined`                        | 获取是否设计模式 |
+| getRead          | `() => boolean \| undefined`                        | 获取是否阅读模式 |
+| getSelectData    | `() => Record<string, Record<string, any>>`         | 获取选择类组件选中项数据 |
+| getContext       | `() => Record<string, any>`                         | 获取联动运行上下文 |
+| getValues        | `() => Record<string, any>`                         | 获取当前表单值 |
+| setValues        | `(values: Record<string, any>) => void`             | 批量设置表单值 |
+| getFieldValue    | `(path: string) => any`                             | 获取单字段值 |
+| setFieldValue    | `(path: string, value: any) => void`                | 设置单字段值 |
+| updateSelectData | `(key: string, value: Record<string, any>) => void` | 更新选择类组件选中项数据 |
+| setFieldAttr     | `(name: string, path: string, value: any) => void`  | 动态设置字段属性 |
+| validate         | `() => FormValidationResult \| undefined`           | 执行校验 |
+| resetFields      | `(names?: string[]) => void`                        | 重置字段（不传则重置全部） |
+| submit           | `() => void`                                        | 触发提交流程 |

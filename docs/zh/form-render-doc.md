@@ -21,24 +21,30 @@ demo/FormRender.vue
 
 ## Event
 
-| 参数名 | 类型               | 描述                           |
-| ------ | ------------------ | ------------------------------ |
-| finish | `(values) => void` | 点击提交按钮，且校验通过时触发 |
-| failed | `(values) => void` | 点击提交按钮，且校验失败时触发 |
+| 参数名      | 类型                                  | 描述 |
+| ----------- | ------------------------------------- | ---- |
+| change      | `(values) => void`                    | 表单值变化时触发 |
+| finish      | `(values) => void`                    | 点击提交且校验通过时触发 |
+| failed      | `(errors) => void`                    | 点击提交且校验失败时触发 |
+| reset       | `() => void`                          | 点击重置按钮后触发 |
+| fieldChange | `(path: string, value: any) => void`  | 单字段变化时触发 |
 
 ## Exposes
 
-| 名称                | 类型                                                | 描述                                                                              |
-| ------------------- | --------------------------------------------------- | --------------------------------------------------------------------------------- |
-| schema              | `FormSchema`                                        | 表单Schema配置，纯JSON，用于描述表单结构                                          |
-| schemaContext       | `object`                                            | Schema自定义的 [联动变量](/zh/linkage)                                            |
-| read                | `boolean`                                           | 是否处于阅读模式                                                                  |
-| formValues          | `object`                                            | 表单值                                                                            |
-| selectData          | `object`                                            | 选择类组件的数据源                                                                |
-| initialValues       | `object`                                            | 表单初始值                                                                        |
-| context             | `object`                                            | 表单联动变量                                                                      |
-| updateSelectData    | `(key: string, value: Record<string, any>) => void` | 更新**选择类组件的数据源**的方法                                                  |
-| updateInitialValues | ` (values: Record<string, any>) => void`            | 更新**表单初始值**的方法                                                          |
-| validate            | ` () => Promise<boolean>`                           | 校验表单                                                                          |
-| resetFields         | `name[] => void`                                    | 接收一个name数组，例如`['name','age']` 来重置一组字段为初始值，不传会重置所有字段 |
-| submit              | `() => void`                                        | 手动提交表单，触发校验，校验通过后会触发`finish`事件                              |
+| 名称             | 类型                                                | 描述 |
+| ---------------- | --------------------------------------------------- | ---- |
+| getSchema        | `() => FormSchema`                                  | 获取当前 Schema |
+| getSchemaContext | `() => Record<string, any> \| undefined`            | 获取联动上下文 |
+| getDesign        | `() => boolean \| undefined`                        | 获取是否设计模式 |
+| getRead          | `() => boolean \| undefined`                        | 获取是否阅读模式 |
+| getSelectData    | `() => Record<string, Record<string, any>>`         | 获取选择类组件选中项数据 |
+| getContext       | `() => Record<string, any>`                         | 获取联动上下文（运行态） |
+| getValues        | `() => Record<string, any>`                         | 获取表单值 |
+| setValues        | `(values: Record<string, any>) => void`             | 批量设置表单值 |
+| getFieldValue    | `(path: string) => any`                             | 获取单字段值 |
+| setFieldValue    | `(path: string, value: any) => void`                | 设置单字段值 |
+| updateSelectData | `(key: string, value: Record<string, any>) => void` | 更新选择类组件选中项数据 |
+| setFieldAttr     | `(name: string, path: string, value: any) => void`  | 动态设置字段属性 |
+| validate         | `() => FormValidationResult \| undefined`           | 执行校验 |
+| resetFields      | `(names?: string[]) => void`                        | 重置字段（不传则重置全部） |
+| submit           | `() => void`                                        | 触发提交流程 |

@@ -163,18 +163,18 @@ export interface TooltipProtocol {
   props: {
     content?: string
     placement?:
-    | 'top'
-    | 'bottom'
-    | 'left'
-    | 'right'
-    | 'top-start'
-    | 'top-end'
-    | 'bottom-start'
-    | 'bottom-end'
-    | 'left-start'
-    | 'left-end'
-    | 'right-start'
-    | 'right-end'
+      | 'top'
+      | 'bottom'
+      | 'left'
+      | 'right'
+      | 'top-start'
+      | 'top-end'
+      | 'bottom-start'
+      | 'bottom-end'
+      | 'left-start'
+      | 'left-end'
+      | 'right-start'
+      | 'right-end'
     disabled?: boolean
     visible?: boolean
     effect?: 'dark' | 'light'
@@ -542,14 +542,14 @@ export interface DatePickerProtocol {
   props: {
     modelValue: string | Date | [string, string] | [Date, Date] | undefined
     type?:
-    | 'date'
-    | 'datetime'
-    | 'year'
-    | 'month'
-    | 'week'
-    | 'daterange'
-    | 'monthrange'
-    | 'datetimerange'
+      | 'date'
+      | 'datetime'
+      | 'year'
+      | 'month'
+      | 'week'
+      | 'daterange'
+      | 'monthrange'
+      | 'datetimerange'
     placeholder?: string
     startPlaceholder?: string
     endPlaceholder?: string

@@ -41,11 +41,17 @@ demo/linkageDemo/linkage.vue
 
 ## 数据联动
 
-当需要监听某个表单项数据变化时，触发联动，可以配置`change`来实现。
+当需要监听某个表单项数据变化并触发联动时，可以配置 `linkages`。
 
-`change`是一个数组，可以同时联动多个字段。
+`linkages` 是一个数组，可以同时联动多个字段。
 
-**target为目标字段（必传），condition是触发条件（不传默认会一直触发）， value是修改的值（不传默认会将字段值清掉）。**
+常用字段：
+
+- `target`：目标字段（必传）
+- `type`：联动类型，`'data'`（改值）或 `'attr'`（改属性）
+- `condition`：触发条件（不传默认持续触发）
+- `value`：写入值（不传时常用于清空）
+- `path/customPath`：属性联动时的目标路径
 
 ::: demo expand
 
