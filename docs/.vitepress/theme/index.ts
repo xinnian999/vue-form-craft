@@ -10,6 +10,7 @@ import components from './components/index'
 import Layout from './Layout.vue'
 import '@arco-design/web-vue/dist/arco.css'
 import './custom.css'
+import { ai } from './ai'
 
 const modules = import.meta.glob<Component>('../../demo/**/*', { eager: true, import: 'default' })
 
@@ -23,17 +24,12 @@ export default {
       const { default: request } = await import('./request')
       const { default: extendElements } = await import('./extendElements')
 
-      const mode = import.meta.env.MODE
-      const cozeToken = import.meta.env.VITE_COZE_TOKEN
-
       app.use(ElementPlus)
       app.use(ArcoVue)
       app.use(VueFormCraft, {
         request,
         extendElements,
-        ai: {
-          token: mode === 'production' ? null : cozeToken
-        }
+        ai
       })
       app.use(components)
 

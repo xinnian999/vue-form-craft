@@ -46,8 +46,8 @@ export default defineConfig({
           items: [
             { text: '表单联动', link: '/linkage' },
             { text: '数据校验', link: '/rules' },
-            { text: 'AI助手', link: '/ai' },
-            { text: '自定义组件', link: '/custom-component' }
+            { text: '自定义组件', link: '/custom-component' },
+            { text: 'AI 能力', link: '/ai' }
           ]
         },
         {
