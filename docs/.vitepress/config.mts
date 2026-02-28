@@ -3,7 +3,7 @@ import { mdVueDemoPlugin } from 'vitepress-vue-demo'
 
 export default defineConfig({
   lang: 'zh',
-  srcDir: 'zh',
+  srcDir: 'src',
   title: 'VueFormCraft',
   description: '基于vue3的一个开箱即用低代码表单方案',
   base: '/vue-form-craft/',
