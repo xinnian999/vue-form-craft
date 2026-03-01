@@ -19,7 +19,7 @@ FormDesign 是 vue-form-craft 的可视化表单设计器组件。
 | 参数名        | 类型         | 默认值 | 描述                                       |
 | ------------- | ------------ | ------ | ------------------------------------------ |
 | v-model       | `FormSchema` | -      | 设计器的JsonSchema数据，双向绑定           |
-| schemaContext | `object`     | -      | JsonSchema自定义的 [联动变量](/zh/linkage) |
+| schemaContext | `object`     | -      | JsonSchema自定义的 [联动变量](/linkage) |
 | omitMenus     | `string[]`   | []     | 隐藏左侧组件key数组                        |
 
 ## Events

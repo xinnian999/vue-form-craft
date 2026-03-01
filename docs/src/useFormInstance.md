@@ -35,7 +35,7 @@ const onChange = (value: TransferKey[]) => {
 </script>
 ```
 
-完整示例：[例：扩展穿梭框](/zh/extendTransfer)
+完整示例：[例：扩展穿梭框](/extendTransfer)
 
 ## Form实例属性
 

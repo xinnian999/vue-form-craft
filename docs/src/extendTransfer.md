@@ -4,7 +4,7 @@
 
 ## 创建目录
 
-和上一篇 [例：扩展markdown输入框](/zh/extendMd.html) 差不多，与`/Markdown`同级，创建目录
+和上一篇 [例：扩展markdown输入框](/extendMd) 差不多，与`/Markdown`同级，创建目录
 
 ```
 src/

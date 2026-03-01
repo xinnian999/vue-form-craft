@@ -16,7 +16,7 @@ demo/FormRender.vue
 | ------------- | ------------ | ------ | ---------------------------------------------- |
 | v-model       | `object`     | {}     | 表单数据对象，双向绑定                         |
 | schema        | `FormSchema` | —      | 表单JsonSchema配置                             |
-| schemaContext | `object`     | {}     | 传递给JsonSchema额外的 [联动变量](/zh/linkage) |
+| schemaContext | `object`     | {}     | 传递给JsonSchema额外的 [联动变量](/linkage) |
 | read          | `boolean`    | false  | 阅读模式                                       |
 
 ## Event
