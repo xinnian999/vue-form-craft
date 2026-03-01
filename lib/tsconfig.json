@@ -1,0 +1,12 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "types": ["vite/client", "element-plus/global"],
+    "lib": ["es2021", "dom"]
+  },
+  "include": ["src", "vite.config.ts", "vitest.setup.ts"]
+}

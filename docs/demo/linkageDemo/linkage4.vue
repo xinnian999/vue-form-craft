@@ -1,54 +1,53 @@
 <template>
-  <FormRender :schema="schema" footer @finish="finish" style="max-width: 600px" />
+  <FormRender :schema="schema" @finish="finish" />
 </template>
 
 <script setup lang="ts">
 const schema = {
   labelWidth: 150,
   labelAlign: 'right',
+  submitBtn: true,
   size: 'default',
   items: [
     {
       label: '选择商品',
       component: 'Select',
-      props: {
+      componentProps: {
         mode: 'static',
         options: [
           {
-            name: '商品1',
-            id: '1',
+            label: '商品1',
+            value: '1',
             price: 25
           },
           {
-            name: '商品2',
-            id: '2',
+            label: '商品2',
+            value: '2',
             price: 65
           },
           {
-            name: '商品3',
-            id: '3',
+            label: '商品3',
+            value: '3',
             price: 100
           }
         ],
-        placeholder: '请选择...',
-        labelKey: 'name',
-        valueKey: 'id'
+        placeholder: '请选择...'
       },
-      designKey: 'form-2Rtu',
       name: 'commodity',
-      change: [
+      designKey: 'design-commodity',
+      linkages: [
         {
           target: 'price',
+          type: 'data',
           value: '{{ $selectData.commodity.price }}'
         }
       ]
     },
     {
-      label: '价格',
+      label: '价格(元)',
       component: 'InputNumber',
-      designKey: 'form-rS3W',
       name: 'price',
-      props: {
+      componentProps: {
         min: 1,
         max: 9999,
         step: 1,
@@ -60,7 +59,9 @@ const schema = {
   ]
 }
 
-const finish = (values) => {
-  alert(JSON.stringify(values, null, 2))
+const finish = (values: Record<string, any>) => {
+  const data = JSON.stringify(values, null, 2)
+
+  alert(data)
 }
 </script>

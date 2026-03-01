@@ -1,12 +1,18 @@
-Dockerfile
-.dockerignore
-npm-debug.log
-README.md
-.next
+# Node / build outputs
+**/node_modules
+**/dist
+.next/
+docs/.vitepress/cache
+
+# Logs
+*.log
+
+# Git / IDE / configs
 .git
-node_modules
-dist
-.vscode
 .github
+.vscode
+.DS_Store
+
+# Misc
+.cache
 .changeset
-cache

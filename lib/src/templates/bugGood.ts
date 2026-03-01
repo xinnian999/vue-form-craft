@@ -1,0 +1,99 @@
+import type { FormSchema } from '@/types'
+
+export default {
+  labelWidth: 150,
+  labelAlign: 'right',
+  size: 'default',
+  scrollToError: true,
+  submitBtn: true,
+  initialValues: {
+    quantity: 1,
+    paymentMethod: 'alipay'
+  },
+  items: [
+    {
+      label: '商品选择',
+      name: 'product',
+      component: 'Radio',
+      componentProps: {
+        placeholder: '请选择商品',
+        options: [
+          {
+            label: '商品A',
+            value: 'productA',
+            price: 25
+          },
+          {
+            label: '商品B',
+            value: 'productB',
+            price: 15
+          },
+          {
+            label: '商品C',
+            value: 'productC',
+            price: 100
+          }
+        ]
+      },
+      required: true
+      },
+    {
+      label: '购买数量',
+      name: 'quantity',
+      component: 'InputNumber',
+      componentProps: {
+        min: 1
+      },
+      required: true
+      },
+    {
+      label: '收货地址',
+      name: 'address',
+      component: 'Input',
+      componentProps: {
+        placeholder: '请输入收货地址'
+      },
+      required: true
+      },
+    {
+      label: '付款方式',
+      name: 'paymentMethod',
+      component: 'Radio',
+      componentProps: {
+        options: [
+          {
+            label: '支付宝',
+            value: 'alipay'
+          },
+          {
+            label: '微信支付',
+            value: 'wechat'
+          },
+          {
+            label: '信用卡',
+            value: 'creditCard'
+          }
+        ],
+        api: {
+          url: 'https://apifoxmock.com/m1/5213940-4880280-default/options/test',
+          method: 'GET',
+          params: {},
+          dataPath: 'data'
+        },
+        labelKey: 'label',
+        valueKey: 'value',
+        disabledKey: 'disabled',
+        mode: 'static'
+      },
+      required: true
+      },
+    {
+      label: '商品单价',
+      name: 'price',
+      component: 'Text',
+      componentProps: {
+        text: "{{ $selectData.product ? $selectData.product?.price + '元' : '请选择商品' }}"
+      }
+      }
+  ]
+} satisfies FormSchema

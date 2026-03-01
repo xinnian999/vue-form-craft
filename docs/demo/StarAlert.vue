@@ -5,12 +5,19 @@
       或者 Gitee(码云) 帮我点个star ⭐ ，这将是对我极大的鼓励。
     </div>
     <p class="vfc-docs-star">
-      <img @click="goGithub" src="https://img.shields.io/github/stars/xinnian999/vue-form-craft" alt="github star" />
+      <img
+        @click="goGithub"
+        src="https://img.shields.io/github/stars/xinnian999/vue-form-craft"
+        alt="github star"
+      />
     </p>
     <p class="vfc-docs-star">
-      <img @click="goGitee" src="https://gitee.com/mind251314/vue-form-craft/badge/star.svg?theme=dark" alt="gitee star" />
+      <img
+        @click="goGitee"
+        src="https://gitee.com/mind251314/vue-form-craft/badge/star.svg?theme=dark"
+        alt="gitee star"
+      />
     </p>
-    
   </el-alert>
 </template>
 

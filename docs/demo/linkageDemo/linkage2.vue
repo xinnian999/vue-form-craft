@@ -1,17 +1,18 @@
 <template>
-  <FormRender :schema="schema" footer @finish="finish"  />
+  <FormRender :schema="schema" @finish="finish" />
 </template>
 
 <script setup lang="ts">
 const schema = {
   labelWidth: 150,
   labelAlign: 'right',
+  submitBtn: true,
   size: 'default',
   items: [
     {
       label: '分类',
       component: 'Radio',
-      props: {
+      componentProps: {
         mode: 'remote',
         options: [
           {
@@ -29,7 +30,7 @@ const schema = {
         ],
         labelKey: 'name',
         valueKey: 'name',
-        optionType: 'button',
+        type: 'button',
         api: {
           url: '/current/query/category',
           params: {},
@@ -38,17 +39,15 @@ const schema = {
           method: 'GET'
         },
         autoSelectedFirst: true,
-        direction: 'horizontal',
-        space: 0
+        direction: 'horizontal'
       },
-      designKey: 'design-oGXW',
       name: 'category',
       required: true
     },
     {
       label: '文章',
       component: 'Radio',
-      props: {
+      componentProps: {
         mode: 'remote',
         options: [],
         placeholder: '请选择文章',
@@ -65,20 +64,20 @@ const schema = {
           dataPath: 'data',
           method: 'GET'
         },
-        optionType: 'circle',
+        type: 'circle',
         autoSelectedFirst: true,
-        direction: 'vertical',
-        space: 0
+        direction: 'vertical'
       },
-      designKey: 'design-ojMx',
       name: 'article',
       required: true,
-      hidden: '{{!$values.category}}'
+      when: '{{!$values.category}}'
     }
   ]
 }
 
-const finish = (values) => {
-  alert(JSON.stringify(values, null, 2))
+const finish = (values: Record<string, any>) => {
+  const data = JSON.stringify(values, null, 2)
+
+  alert(data)
 }
 </script>

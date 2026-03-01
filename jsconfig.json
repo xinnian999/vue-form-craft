@@ -1,8 +1,0 @@
-{
-  "compilerOptions": {
-    "paths": {
-      // "@vue-form-craft/*": ["./packages/*"]
-    }
-  },
-  "exclude": ["node_modules", "dist"]
-}

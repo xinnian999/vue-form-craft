@@ -1,4 +1,4 @@
 packages:
-  - 'packages/*'
-  - 'docs'
+  - 'lib'
   - 'play'
+  - 'docs'

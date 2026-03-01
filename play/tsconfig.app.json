@@ -5,10 +5,10 @@
   "compilerOptions": {
     "composite": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
-     "types": ["vue-form-craft/global"],
+    "types": ["vue-form-craft/global", "element-plus/global"],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "~/*": ["./src/*"]
     }
   }
 }

@@ -1,35 +1,29 @@
 <template>
-  <FormRender v-model="formValues" :schema="schema" ref="formRef" />
-  <el-button @click="handleSubmit" style="margin-left: 150px;">提交</el-button>
+  <FormRender :schema="schema" @finish="finish" />
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import type { FormSchema, FormInstance } from 'vue-form-craft'
-
-const formRef = ref<FormInstance>()
-
-const formValues = ref({})
+import type { FormSchema } from 'vue-form-craft'
 
 const schema: FormSchema = {
   labelWidth: 150,
   labelAlign: 'right',
   size: 'default',
+  submitBtn: true,
   items: [
     {
       label: '姓名',
       component: 'Input',
-      props: {
+      componentProps: {
         placeholder: '请输入姓名'
       },
-      designKey: 'design-Oqsp',
       name: 'name',
       required: true
     },
     {
       label: '性别',
       component: 'Radio',
-      props: {
+      componentProps: {
         mode: 'static',
         options: [
           {
@@ -41,54 +35,52 @@ const schema: FormSchema = {
             value: 'women'
           }
         ],
-        labelKey: 'label',
-        valueKey: 'value',
-        optionType: 'circle',
-        direction: 'horizontal',
-        space: 20
+        type: 'circle'
       },
-      designKey: 'design-47M1',
       name: 'gneder',
       required: true,
-      initialValue: 'man',
-      change: [
+      designKey: 'design-gneder',
+      linkages: [
         {
-          target: 'isHy'
+          target: 'isHy',
+          type: 'data',
+          value: undefined
         },
         {
-          target: 'hyWeek'
+          target: 'hyWeek',
+          type: 'data',
+          value: undefined
         }
       ]
     },
     {
       label: '是否怀孕',
       component: 'Switch',
-      props: {
+      componentProps: {
         'inline-prompt': false
       },
-      designKey: 'design-cGIx',
       name: 'isHy',
       required: true,
-      hidden: " {{ $values.gneder === 'man' }} "
+      when: " {{ $values.gneder === 'women' }} "
     },
     {
       label: '怀孕周期',
       component: 'InputNumber',
-      props: {
+      componentProps: {
         min: 1,
         max: 999,
         step: 1,
         controlsPosition: 'right'
       },
-      designKey: 'design-0q9f',
       name: 'hyWeek',
-      hidden: '{{ !$values.isHy }}'
+      when: '{{ !!$values.isHy }}'
     }
   ]
 }
 
-const handleSubmit = async () => {
-  await formRef.value?.validate()
-  alert(JSON.stringify(formValues.value, null, 2))
+const finish = (values: Record<string, any>) => {
+  const data = JSON.stringify(values, null, 2)
+
+  alert(data)
 }
 </script>
