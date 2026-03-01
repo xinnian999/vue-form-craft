@@ -39,3 +39,21 @@
 比如name是【info.basic.name】，数据就会保存为` { info: { basic:{ name:'xxx' } } }`
 
 无论数据层级保存的多深，都能准确追踪，且能精准校验
+
+## 示例
+
+::: demo
+
+demo/teach/deepName.vue
+
+:::
+
+这个示例包含 5 个字段：
+
+- `id`
+- `info.basic.name`
+- `info.basic.desc`
+- `info.basic.age`
+- `info.tag`
+
+你会看到表单是扁平配置的，但实时输出的数据会自动合并成深层对象结构。

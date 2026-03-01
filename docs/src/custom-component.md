@@ -12,7 +12,7 @@ componentName是一个你项目里的全局组件的名称，`vue-form-craft`会
 
 > 也可以通过设计器快速生成
 
-<img src="../assets/custom-component.png" style="height:300px" />
+<img src="./assets/custom-component.png" style="height:300px" />
 
 ## 示例
 

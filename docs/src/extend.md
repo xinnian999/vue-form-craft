@@ -56,7 +56,7 @@ interface FormElement {
 
 组件名称
 
-<img src="../assets/name.png" style="height:150px" />
+<img src="./assets/name.png" style="height:150px" />
 
 ### icon
 
@@ -64,7 +64,7 @@ interface FormElement {
 
 icon格式为vue的SFC组件
 
-<img src="../assets/icon.png" style="height:150px" />
+<img src="./assets/icon.png" style="height:150px" />
 
 ### component
 
@@ -94,4 +94,4 @@ icon格式为vue的SFC组件
 
 当选中某个表单项时，在右侧可以编辑该表单项的各种配置，实际上这个右侧也是用`FormRender`渲染的！ 所以，建议用设计器去拖拽生成，然后copy过来！
 
-![alt text](../assets/attr.png)
+![alt text](./assets/attr.png)

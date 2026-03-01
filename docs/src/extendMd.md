@@ -175,4 +175,4 @@ app.use(VueFormCraft, { extendElements })
 app.mount('#app')
 ```
 
-![md](../assets/extendMd-use.png)
+![md](./assets/extendMd-use.png)

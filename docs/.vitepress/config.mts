@@ -109,7 +109,7 @@ export default defineConfig({
             { text: '提交表单', link: '/teach/submit' },
             { text: '函数传递', link: '/teach/func' },
             { text: '事件传递', link: '/teach/event' },
-            { text: '深层数据绑定', link: '/deepName' }
+            { text: '深层数据绑定', link: '/teach/deepName' }
           ]
         }
       ]

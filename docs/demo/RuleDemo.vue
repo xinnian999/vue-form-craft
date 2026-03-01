@@ -33,12 +33,14 @@ const schema: FormSchema = {
       },
       rules: [
         {
-          expr: '/^(?=(?:.*[a-z]){0,})(?=(?:.*[A-Z]){0,})(?=(?:.*\\d){0,})(?=(?:.*[^a-zA-Z\\d]){0,})(?:(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)|(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z\\d])|(?=.*[a-z])(?=.*\\d)(?=.*[^a-zA-Z\\d])|(?=.*[A-Z])(?=.*\\d)(?=.*[^a-zA-Z\\d]))/',
+          type: 'pattern',
+          value: '^(?=(?:.*[a-z]){0,})(?=(?:.*[A-Z]){0,})(?=(?:.*\\d){0,})(?=(?:.*[^a-zA-Z\\d]){0,})(?:(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)|(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z\\d])|(?=.*[a-z])(?=.*\\d)(?=.*[^a-zA-Z\\d])|(?=.*[A-Z])(?=.*\\d)(?=.*[^a-zA-Z\\d]))',
           message: '密码至少包含大小写字母、数字、特殊符号中的三种',
           trigger: 'blur'
         },
         {
-          expr: '/^.{8,20}$/',
+          type: 'pattern',
+          value: '^.{8,20}$',
           message: '密码长度必须为8-20位',
           trigger: 'blur'
         }
@@ -54,7 +56,8 @@ const schema: FormSchema = {
       required: true,
       rules: [
         {
-          expr: '{{ $values.password === $values.confirmPassword }}',
+          type: 'jsExpr',
+          value: '{{ $values.password === $values.confirmPassword }}',
           message: '两次输入的密码不一致',
           trigger: 'blur'
         }
@@ -70,7 +73,8 @@ const schema: FormSchema = {
       },
       rules: [
         {
-          expr: '/^1[3-9]\\d{9}$/',
+          type: 'pattern',
+          value: '^1[3-9]\\d{9}$',
           message: '请输入有效的手机号',
           trigger: 'blur'
         }
@@ -86,7 +90,8 @@ const schema: FormSchema = {
       },
       rules: [
         {
-          expr: '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$/',
+          type: 'pattern',
+          value: '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$',
           message: '请输入有效的邮箱',
           trigger: 'blur'
         }

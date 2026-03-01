@@ -266,4 +266,4 @@ app.mount('#app')
 </template>
 ```
 
-![md](../assets/ArcoIuput.png)
+![md](./assets/ArcoIuput.png)

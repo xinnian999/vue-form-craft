@@ -12,7 +12,7 @@
 
 ::: demo
 
-demo/submit/Submit1.vue
+demo/teach/Submit1.vue
 
 :::
 
@@ -26,6 +26,6 @@ demo/submit/Submit1.vue
 
 ::: demo
 
-demo/submit/Submit2.vue
+demo/teach/Submit2.vue
 
 :::

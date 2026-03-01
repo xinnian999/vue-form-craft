@@ -12,7 +12,7 @@
 
 ::: demo
 
-demo/submit/Func.vue
+demo/teach/Func.vue
 
 :::
 
@@ -26,6 +26,6 @@ demo/submit/Func.vue
 
 ::: demo
 
-demo/submit/Func2.vue
+demo/teach/Func2.vue
 
 :::

@@ -8,6 +8,6 @@
 
 ::: demo
 
-demo/submit/Event.vue
+demo/teach/Event.vue
 
 :::

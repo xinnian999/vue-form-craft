@@ -8,6 +8,6 @@
 
 ::: demo
 
-demo/VModel.vue
+demo/teach/VModel.vue
 
 :::
