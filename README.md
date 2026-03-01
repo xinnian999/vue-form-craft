@@ -5,8 +5,6 @@ AI 驱动的 Vue3 表单工具，核心由 `FormDesign`（可视化设计器） 
 - 在线体验: https://xinnian999.github.io/vue-form-craft/form-design
 - 官方文档: https://xinnian999.github.io/vue-form-craft/
 
-![ui](./ui.png)
-
 ## 核心能力
 
 - 可视化拖拽生成表单 `JsonSchema`
