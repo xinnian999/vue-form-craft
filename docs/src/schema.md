@@ -81,13 +81,10 @@ FormSchema
   "scrollToError": true,
   "submitBtn": true,
   "resetBtn": true,
-  "initialValues": {
-    "account.remember": true
-  },
   "items": [
     {
       "label": "用户名",
-      "name": "account.username",
+      "name": "username",
       "component": "Input",
       "required": true,
       "componentProps": {
@@ -96,7 +93,7 @@ FormSchema
     },
     {
       "label": "密码",
-      "name": "account.password",
+      "name": "password",
       "component": "Password",
       "required": true,
       "componentProps": {
@@ -105,12 +102,16 @@ FormSchema
     },
     {
       "label": "确认密码",
-      "name": "account.rePassword",
+      "name": "confirmPassword",
       "component": "Password",
-      "show": "{{ $values.account?.password }}",
+      "show": "{{ $values.password }}",
+      "componentProps": {
+        "placeholder": "请再次输入密码"
+      },
       "rules": [
         {
-          "type": "custom",
+          "type": "jsExpr",
+          "value": "{{ $values.password === $values.confirmPassword }}",
           "message": "两次密码不一致"
         }
       ]

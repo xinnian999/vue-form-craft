@@ -3,7 +3,7 @@
 AI 驱动的 Vue3 表单工具，核心由 `FormDesign`（可视化设计器） + `FormRender`（Schema 渲染器）组成。
 
 - 在线体验: https://xinnian999.github.io/vue-form-craft/form-design
-- 官方文档: https://xinnian999.github.io/vue-form-craft/
+- 文档: https://xinnian999.github.io/vue-form-craft/
 
 ## 核心能力
 
@@ -153,10 +153,3 @@ pnpm test
 pnpm docs:dev
 pnpm docs:build
 ```
-
-## 文档入口
-
-- 快速开始: https://xinnian999.github.io/vue-form-craft/zh/use
-- Schema 协议: https://xinnian999.github.io/vue-form-craft/zh/schema
-- 表单联动: https://xinnian999.github.io/vue-form-craft/zh/linkage
-- AI 能力: https://xinnian999.github.io/vue-form-craft/zh/ai
