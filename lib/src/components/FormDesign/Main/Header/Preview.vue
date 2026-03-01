@@ -13,7 +13,6 @@
       v-model="formValues"
       class="preview-FormRender"
       :schema="designInstance.getSchema()"
-      ref="formRef"
       @finish="handleFinish"
     />
   </Modal>
@@ -30,13 +29,13 @@ const { Modal } = useUI()
 
 const designInstance = useDesignInstance()!
 
-const formRef = ref<FormInstance>()
 
 const formValues = ref({})
 
 const visible = defineModel<boolean>()
 
 const handleFinish = async () => {
+  console.log(formValues.value)
   alert(JSON.stringify(formValues.value, null, 2))
 }
 </script>

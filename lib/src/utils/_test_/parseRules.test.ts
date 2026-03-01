@@ -1,6 +1,23 @@
 import { describe, expect, it } from 'vitest'
 import { parseRules } from '../parseRules'
 
+const executeValidator = (validator: any) =>
+  new Promise<void>((resolve, reject) => {
+    validator?.(
+      {} as any,
+      undefined,
+      (error?: string | Error) => {
+        if (error) {
+          reject(error)
+          return
+        }
+        resolve()
+      },
+      {} as any,
+      {} as any
+    )
+  })
+
 describe('parseRules', () => {
   it('应该返回空数组当没有规则时', () => {
     expect(parseRules()).toEqual([])
@@ -68,5 +85,32 @@ describe('parseRules', () => {
     const rules = [{ type: 'required' as const, message: '必填' }]
     const result = parseRules(rules)
     expect(result[0].trigger).toEqual('blur')
+  })
+
+  it('custom 缺少 value 时应返回配置错误 validator', async () => {
+    const rules = [{ type: 'custom' as const, message: '自定义校验失败' }]
+    const result = parseRules(rules, 'contact')
+    expect(result[0].validator).toBeDefined()
+    await expect(executeValidator(result[0].validator)).rejects.toThrow('[规则配置错误]')
+  })
+
+  it('custom 使用 validator 字段时应返回配置错误 validator', async () => {
+    const rules = [
+      {
+        type: 'custom' as const,
+        message: '自定义校验失败',
+        validator: '{{ true }}'
+      } as any
+    ]
+    const result = parseRules(rules, 'contact')
+    expect(result[0].validator).toBeDefined()
+    await expect(executeValidator(result[0].validator)).rejects.toThrow('不支持 validator 字段')
+  })
+
+  it('jsExpr 不是 boolean 时应返回配置错误 validator', async () => {
+    const rules = [{ type: 'jsExpr' as const, value: '{{ true }}', message: '表达式校验失败' } as any]
+    const result = parseRules(rules, 'contact')
+    expect(result[0].validator).toBeDefined()
+    await expect(executeValidator(result[0].validator)).rejects.toThrow('type=jsExpr')
   })
 })

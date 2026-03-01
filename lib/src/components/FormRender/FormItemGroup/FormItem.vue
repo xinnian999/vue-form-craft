@@ -75,7 +75,7 @@ const computeRules = computed(() => {
   // rules中的配置优先级更高，如果已配置必填规则，直接使用rules
   const hasRequiredInRules = rules.some((rule) => rule.type === 'required')
   if (hasRequiredInRules) {
-    return parseRules(rules)
+    return parseRules(rules, props.name)
   }
 
   // rules中没有必填规则时，根据required属性决定是否添加默认必填规则
@@ -85,10 +85,10 @@ const computeRules = computed(() => {
       message: '该字段是必填字段',
       trigger: 'blur'
     }
-    return parseRules([defaultRequiredRule, ...rules])
+    return parseRules([defaultRequiredRule, ...rules], props.name)
   }
 
-  return parseRules(rules)
+  return parseRules(rules, props.name)
 })
 
 const config = computed(() => {

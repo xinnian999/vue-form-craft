@@ -131,9 +131,11 @@ const startSSE = async () => {
 
   try {
     const schema = removeDesignKeys(designInstance.getSchema())
-    const prompt = `${generateSchemaPrompt}\n\n请基于当前表单Schema:${JSON.stringify(
-      schema
-    )},生成新的表单Schema。\n\n要求:${userInput}`
+    const promptPayload = {
+      currentSchema: schema,
+      requirement: userInput
+    }
+    const prompt = `${generateSchemaPrompt}\n\n输入上下文(JSON):${JSON.stringify(promptPayload)}`
 
     const result = await request(prompt)
 
