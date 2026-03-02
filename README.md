@@ -2,8 +2,8 @@
 
 AI 驱动的 Vue3 表单工具，核心由 `FormDesign`（可视化设计器） + `FormRender`（Schema 渲染器）组成。
 
-- 在线体验: https://xinnian999.github.io/vue-form-craft/form-design
-- 文档: https://xinnian999.github.io/vue-form-craft/
+- 在线体验: https://elin521.cn:3006/form-design
+- 文档: https://elin521.cn:3006/
 
 ## 核心能力
 

@@ -22,10 +22,9 @@ RUN pnpm docs:build
 FROM crpi-a7p27yxlrmekg1a3.cn-beijing.personal.cr.aliyuncs.com/elin-common/nginx AS deploy
 
 # 将构建好的静态文件复制到 nginx 默认路径
-COPY --from=build /app/docs/.vitepress/dist /usr/share/nginx/html/vue-form-craft
+COPY --from=build /app/docs/.vitepress/dist /usr/share/nginx/html
 
 # 暴露 80 端口
 EXPOSE 80
 
-# 启动 nginx，访问localhost:9999/vue-form-craft/zh
 CMD ["nginx", "-g", "daemon off;"]

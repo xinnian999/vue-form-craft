@@ -11,7 +11,6 @@ export default defineConfig({
   srcDir: 'src',
   title: 'VueFormCraft',
   description: '基于vue3的一个开箱即用低代码表单方案',
-  base: '/vue-form-craft/',
   vite: {
     server: {
       port: 9999,
@@ -33,7 +32,7 @@ export default defineConfig({
       }
     }
   },
-  head: [['link', { rel: 'icon', href: '/vue-form-craft/favicon.svg' }]],
+  head: [['link', { rel: 'icon', href: '/favicon.svg' }]],
   markdown: {
     config: (md) => {
       md.use(mdVueDemoPlugin, { root: './' })
