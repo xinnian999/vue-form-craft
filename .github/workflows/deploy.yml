@@ -40,6 +40,8 @@ jobs:
       - name: Build 
         run: pnpm build
       - name: Build with VitePress
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: pnpm docs:build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

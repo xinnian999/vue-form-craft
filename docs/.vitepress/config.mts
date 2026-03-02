@@ -1,5 +1,10 @@
+import type { ProxyOptions } from 'vite'
+import { loadEnv } from 'vite'
 import { defineConfig } from 'vitepress'
 import { mdVueDemoPlugin } from 'vitepress-vue-demo'
+
+const env = loadEnv(process.env.NODE_ENV || 'development', process.cwd(), '')
+const openAiApiKey = env.OPENAI_API_KEY || process.env.OPENAI_API_KEY
 
 export default defineConfig({
   lang: 'zh',
@@ -10,7 +15,22 @@ export default defineConfig({
   vite: {
     server: {
       port: 9999,
-      host: true
+      host: true,
+      proxy: {
+        '/api/ai': {
+          target: 'https://elin521.cn:3002',
+          changeOrigin: true,
+          secure: false,
+          rewrite: (path) => path.replace(/^\/api\/ai/, ''),
+          configure: (proxy) => {
+            proxy.on('proxyReq', (proxyReq) => {
+              if (openAiApiKey) {
+                proxyReq.setHeader('Authorization', `Bearer ${openAiApiKey}`)
+              }
+            })
+          }
+        } satisfies ProxyOptions
+      }
     }
   },
   head: [['link', { rel: 'icon', href: '/vue-form-craft/favicon.svg' }]],
