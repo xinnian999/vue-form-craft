@@ -6,6 +6,10 @@ WORKDIR /app
 # 安装 pnpm
 RUN npm install -g pnpm
 
+# 切换 npm/pnpm 源到淘宝镜像，降低 install 失败率
+RUN npm config set registry https://registry.npmmirror.com
+RUN pnpm config set registry https://registry.npmmirror.com
+
 # 复制文件到工作目录
 COPY . .
 
@@ -25,4 +29,3 @@ EXPOSE 80
 
 # 启动 nginx，访问localhost:9999/vue-form-craft/zh
 CMD ["nginx", "-g", "daemon off;"]
-
