@@ -120,18 +120,30 @@ const onFinish = () => {
 通过 `app.use(VueFormCraft, { ai })` 注入一个通用函数即可：
 
 ```ts
+import axios from 'axios'
 import VueFormCraft from 'vue-form-craft'
-import type { AiGenerateFunction } from 'vue-form-craft'
 
-const ai: AiGenerateFunction = async ({ prompt, signal }) => {
-  const resp = await fetch('/api/ai/generate-schema', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ prompt }),
-    signal
-  })
-  const data = await resp.json()
-  return data.content
+const ai = async ({ prompt, signal }) => {
+  try {
+    const res = await axios.post(
+      '/api/ai/v1/chat/completions', // nginx代理实际请求地址，防止暴露apiKey
+      {
+        model: 'deepseek-chat',
+        messages: [{ role: 'user', content: prompt }],
+        temperature: 0.2
+      },
+      {
+        signal
+      }
+    )
+
+    const content = res?.data?.choices?.[0]?.message?.content
+
+    // 原样返回AI生成的文本内容
+    return content
+  } catch (error) {
+    throw new Error('AI生成失败')
+  }
 }
 
 app.use(VueFormCraft, { ai })
