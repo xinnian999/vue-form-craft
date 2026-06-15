@@ -1,0 +1,30 @@
+# VueFormCraft 文档站的 Caddy 站点配置。
+#
+# 这台服务器（8.141.0.39）用容器化 Caddy 做统一 HTTPS 入口，
+# 主配置 /root/caddy/Caddyfile 只有一行 `import sites/*.caddy`，一站一文件。
+# 本文件即对应服务器上的 /root/caddy/sites/form.caddy。
+#
+# 配套：
+#   - 静态文件挂载在容器 /srv（宿主机 /root/caddy/www），由 scripts/deploy-docs.sh 推送
+#   - 密钥经 /root/caddy/.env 注入容器环境（OPENAI_API_KEY），不写进本文件
+#   - 改完热加载：docker exec caddy caddy reload --config /etc/caddy/Caddyfile
+#   - 前置：DNS 需有 A 记录 form.elin521.cn -> 8.141.0.39，Caddy 才能自动签证书
+
+form.elin521.cn {
+	encode zstd gzip
+
+	# AI 代理：/api/ai/* -> https://code0.ai/v1/...，服务端注入密钥（不下发浏览器）
+	handle_path /api/ai/* {
+		reverse_proxy https://code0.ai {
+			header_up Host code0.ai
+			header_up Authorization "Bearer {env.OPENAI_API_KEY}"
+		}
+	}
+
+	# 静态文档（VitePress 未开 cleanUrls，需回退 .html）
+	handle {
+		root * /srv/vue-form-craft
+		try_files {path} {path}.html {path}/ /404.html
+		file_server
+	}
+}

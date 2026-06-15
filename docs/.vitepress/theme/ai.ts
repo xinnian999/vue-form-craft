@@ -6,7 +6,7 @@ export const ai: AiGenerateFunction = async ({ prompt, signal }: AiGenerateParam
     const res = await axios.post(
       '/api/ai/v1/chat/completions',
       {
-        model: 'deepseek-ai/DeepSeek-V3.2',
+        model: 'qwen3-coder-next',
         messages: [{ role: 'user', content: prompt }],
         temperature: 0.2
       },

@@ -9,7 +9,7 @@
     "docs:dev": "pnpm -C docs dev",
     "docs:build": "pnpm -C docs build",
     "docs:preview": "pnpm -C docs preview",
-    "docs:release": "node releaseDocs.js",
+    "docs:release": "bash scripts/deploy-docs.sh",
     "clear": "find . -type d -name 'node_modules' -exec rm -rf {} \\;"
   },
   "dependencies": {

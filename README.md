@@ -2,8 +2,8 @@
 
 AI 驱动的 Vue3 表单工具，核心由 `FormDesign`（可视化设计器） + `FormRender`（Schema 渲染器）组成。
 
-- 在线体验: https://elin521.cn:3006/form-design.html
-- 文档: https://elin521.cn:3006/
+- 在线体验: https://form.elin521.cn/form-design.html
+- 文档: https://form.elin521.cn/
 
 ## 核心能力
 
@@ -165,3 +165,19 @@ pnpm test
 pnpm docs:dev
 pnpm docs:build
 ```
+
+## 文档部署
+
+文档站托管在服务器（`8.141.0.39`）上，由容器化 Caddy 直接静态托管并自动签发 HTTPS 证书，线上地址 https://form.elin521.cn 。
+
+一键构建并推送（无需登录服务器）：
+
+```bash
+pnpm docs:release
+```
+
+该命令会构建库与文档，再用 `rsync` 把 `docs/.vitepress/dist` 同步到服务器静态目录（推完即生效）。相关配置：
+
+- `scripts/deploy-docs.sh`：构建 + 推送脚本（可用 `DEPLOY_SERVER` / `DEPLOY_PATH` 覆盖默认值）
+- `deploy/form.caddy`：站点的 Caddy 配置（对应服务器 `/root/caddy/sites/form.caddy`），含 `/api/ai/*` → `code0.ai` 的反向代理
+- AI 密钥在服务器 Caddy 进程的环境变量 `OPENAI_API_KEY` 中注入，不下发浏览器、不进仓库

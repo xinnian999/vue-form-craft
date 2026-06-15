@@ -17,7 +17,7 @@ export default defineConfig({
       host: true,
       proxy: {
         '/api/ai': {
-          target: 'https://elin521.cn:3002',
+          target: 'https://code0.ai',
           changeOrigin: true,
           secure: false,
           rewrite: (path) => path.replace(/^\/api\/ai/, ''),
