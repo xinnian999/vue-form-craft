@@ -28,3 +28,7 @@
 | onInput | `(value: any) => void` | 输入事件 |
 | onClear | `() => void` | 清空 |
 | style | `Record<string, any>` | 自定义样式 |
+
+## 远程模式与鉴权
+
+远程模式默认走内置 `fetch`，**不会携带 token，也不走项目的请求 baseURL / 拦截器**。若后端接口需要鉴权（如若依 RuoYi），请在全局注册时注入 `request`，复用项目已封装好的 axios 实例。详见 [快速开始 → 远程数据源与鉴权](/use#远程数据源与鉴权-request)。
