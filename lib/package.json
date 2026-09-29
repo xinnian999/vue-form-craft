@@ -1,8 +1,19 @@
 {
   "name": "vue-form-craft",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "private": false,
   "type": "module",
+  "license": "MIT",
+  "author": "xinnian999 (https://github.com/xinnian999)",
+  "homepage": "https://form.elin521.cn/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xinnian999/vue-form-craft.git",
+    "directory": "lib"
+  },
+  "bugs": {
+    "url": "https://github.com/xinnian999/vue-form-craft/issues"
+  },
   "scripts": {
     "build": "vite build",
     "test": "vitest",
